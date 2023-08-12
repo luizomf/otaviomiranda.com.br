@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <title>Funções recursivas com Python - Otávio Miranda</title>
+    <meta
+      name="description"
+      content="Funções recursivas com Python (ou qualquer linguagem de programação) são funções que chamam a si mesmas de maneira direta ou indireta. "
+    />
+    <link rel="icon" type="image/webp" href="../../imgs/favicon-1.webp" />
+  </head>
+  <body>
+    <header class="main-header">
+      <h1>
+        <a class="logo-link" href="/" title="Cursos - Otávio Miranda">
+          <img
+            loading="lazy"
+            src="../../imgs/otaviomirandalogo-2.webp"
+            alt="Logo - Otávio Miranda"
+            class="logo"
+            width="64"
+            height="64"
+          />
+        </a>
+      </h1>
+    </header>
+
+    <div class="section-separator"></div>
+
+    <section class="section-wrapper">
+      <div class="section-content">
+        <div class="profile-text">
+          <h1 class="profile-title">
+            <a href="./">Funções recursivas com Python</a>
+          </h1>
+
+          <div class="post-metadata">4 de abril de 2020 por Otávio Miranda</div>
+
+          <div class="profile-description">
+            <!-- START CONTENT -->
+
+            <p>
+              Fun&ccedil;&otilde;es recursivas com Python (ou qualquer linguagem
+              de programa&ccedil;&atilde;o) s&atilde;o fun&ccedil;&otilde;es que
+              chamam a si mesmas de maneira direta ou indireta. Infelizmente,
+              n&atilde;o h&aacute; nenhum benef&iacute;cio em termos de
+              desempenho ao usar fun&ccedil;&otilde;es recursivas em
+              <a
+                href="https://www.otaviomiranda.com.br/2017/cursos-de-python-e-javascript-com-desconto/"
+                >Python</a
+              >, j&aacute; que la&ccedil;os podem resolver o problema com mais
+              efici&ecirc;ncia. Por&eacute;m, fun&ccedil;&otilde;es recursivas
+              podem ser mais intuitivas para o programador quando um problema
+              pode ser dividido em problemas menores de mesmo tipo.
+            </p>
+
+            <p>
+              Considere o conceito de
+              <a href="https://www.todamateria.com.br/fatorial/"
+                >fatorial da matem&aacute;tica</a
+              >: o fatorial de um n&uacute;mero &eacute; calculado pela
+              multiplica&ccedil;&atilde;o desse n&uacute;mero por todos os seus
+              antecessores at&eacute; chegar ao n&uacute;mero 1.
+            </p>
+
+            <p>
+              Esse &eacute; um problema extremamente simples para ser resolvido
+              com recurs&atilde;o por dois fatores:
+            </p>
+
+            <ul>
+              <li>
+                &Eacute; um problema que pode ser dividido em sub-problemas
+                menores e de mesmo tipo (multiplicar um n&uacute;mero pelos seus
+                antecessores)
+              </li>
+              <li>
+                Temos um <em>caso-base</em> para parar a recurs&atilde;o,
+                retornar um valor real e resolver as equa&ccedil;&otilde;es
+                (quando chegarmos em 1)
+              </li>
+            </ul>
+
+            <pre>
+def fatorial(n: int) -> int:
+    if n == 1 or n == 0:
+        return 1
+    return n * fatorial(n - 1)
+
+
+if __name__ == "__main__":
+    fat5 = fatorial(5)
+    print(fat5)
+</pre
+            >
+
+            <p>O resultado da execução da função acima será 120.</p>
+
+            <pre>
+5 * 4 * 3 * 2 * 1 = 120
+            </pre>
+
+            <p>
+              <strong>Observa&ccedil;&atilde;o:</strong> voc&ecirc; poderia
+              escrever uma condi&ccedil;&atilde;o mais concisa eliminando o
+              <code>or</code> da express&atilde;o com &ldquo;<code
+                >if n &lt; 2</code
+              >&rdquo; ao inv&eacute;s de &ldquo;<code>if n == 1 or n == 0</code
+              >&ldquo;.
+            </p>
+            <h2>Caso-base e caso recursivo</h2>
+
+            <p>
+              &Eacute; muito f&aacute;cil escrever uma fun&ccedil;&atilde;o
+              recursiva incorretamente e cair em uma recurs&atilde;o infinita.
+              Veja isso no c&oacute;digo a seguir:
+            </p>
+
+            <pre>
+def recursao_infinita(numero: int = 100) -> int:
+    return recursao_infinita(numero - 1)
+
+
+if __name__ == "__main__":
+    recursao_infinita()
+            </pre>
+
+            <p>
+              O Python não vai permitir que este código execute infinitamente,
+              então você deverá ver uma exceção:
+            </p>
+
+            <p>
+              <code>RecursionError: maximum recursion depth exceeded </code>
+            </p>
+
+            <p>
+              Isso ocorre porque nunca dissemos para a fun&ccedil;&atilde;o
+              quando parar a recurs&atilde;o, mais especificamente, n&atilde;o
+              adicionamos um
+              <a href="https://pt.wikipedia.org/wiki/Caso_base"
+                >caso-base na fun&ccedil;&atilde;o</a
+              >.
+            </p>
+
+            <p>
+              Toda fun&ccedil;&atilde;o recursiva &eacute; composta de, pelo
+              menos, duas partes: caso-base e caso recursivo. O caso-base
+              &eacute; quando a fun&ccedil;&atilde;o <em>N&Atilde;O</em> chama a
+              si mesma, mas retorna um valor real; j&aacute; o caso recursivo,
+              como o pr&oacute;prio nome indica, &eacute; onde a recursividade
+              ocorre (a fun&ccedil;&atilde;o chama a si mesma).
+            </p>
+
+            <p>
+              Veja uma nova fun&ccedil;&atilde;o recursiva, por&eacute;m com
+              ambos os casos: caso-base e caso recursivo.
+            </p>
+
+            <pre>
+def contagem_regressiva_recursiva(comeca_em: int = 10, termina_em: int = 0) -> int:
+    """
+    Contagem regressiva iniciando em 'comeca_em' e terminando em 'termina_em'
+    """
+    print(comeca_em)
+
+    # Caso-base
+    if comeca_em <= termina_em:
+        # Perceba que aqui um valor real é retornado
+        # e não há mais recursão
+        return comeca_em
+
+    # Caso recursivo
+    # Esse código será executado sempre, até
+    # 'comeca_em' se tornar menor ou igual a 'termina_em'
+    return contagem_regressiva_recursiva(comeca_em - 1)
+
+
+if __name__ == "__main__":
+    contagem_regressiva_recursiva()
+</pre
+            >
+
+            <h2>Call stack</h2>
+
+            <p>
+              Sempre que invocamos uma fun&ccedil;&atilde;o, dados do seu escopo
+              interno (como vari&aacute;veis e par&acirc;metros) precisam ser
+              salvos em algum local. Al&eacute;m disso, tamb&eacute;m precisamos
+              saber quando a fun&ccedil;&atilde;o retorna um valor para que o
+              programa continue a seguir o seu fluxo. Tudo isso &eacute;
+              gerenciado pela <em>Call Stack</em> (pilha de chamada ou pilha de
+              execu&ccedil;&atilde;o).
+            </p>
+
+            <h3>Como funciona a Call Stack</h3>
+
+            <p>
+              De forma simples e direta, funciona assim: quando meu programa
+              est&aacute; em execu&ccedil;&atilde;o e encontra uma chamada de
+              fun&ccedil;&atilde;o, ele pausa temporariamente o que estava
+              fazendo e vai at&eacute; o c&oacute;digo interno da
+              fun&ccedil;&atilde;o para realizar sua execu&ccedil;&atilde;o.
+              Ap&oacute;s a execu&ccedil;&atilde;o, a fun&ccedil;&atilde;o
+              precisa saber como retornar o programa para o local onde ele parou
+              antes da chamada para a execu&ccedil;&atilde;o. Ent&atilde;o,
+              ap&oacute;s o retorno da fun&ccedil;&atilde;o, o programa sabe
+              como resumir o c&oacute;digo partindo exatamente de onde a
+              fun&ccedil;&atilde;o retornou.
+            </p>
+
+            <h3>Exemplo de funcionamento da Call Stack</h3>
+
+            <p>
+              Veja um exemplo no gif abaixo como o fluxo do programa muda quando
+              existe uma chamada para fun&ccedil;&atilde;o:
+            </p>
+
+            <p>
+              <img src="imgs/recursion-1.gif" alt="Exemplo de recursão" />
+            </p>
+
+            <p>
+              No trecho simples de c&oacute;digo acima, existe uma
+              defini&ccedil;&atilde;o de fun&ccedil;&atilde;o (linha 1),
+              defini&ccedil;&atilde;o de vari&aacute;vel (linha 5), uma chamada
+              para fun&ccedil;&atilde;o (linha 8) e em seguida um
+              &ldquo;print&rdquo; em uma vari&aacute;vel (linha 11). Eu marquei
+              breakpoints nas linhas 2, 5, 8 e 11, mas n&atilde;o &eacute; essa
+              a ordem de execu&ccedil;&atilde;o. Ao executar o programa, a ordem
+              dos breakpoints n&atilde;o &eacute; a mesma. Ela &eacute; alterada
+              para 5, 8, 2 e 11. Isso porque existe uma chamada para
+              fun&ccedil;&atilde;o na linha 8. Ent&atilde;o enquanto o
+              interpretador n&atilde;o conferir o que a fun&ccedil;&atilde;o da
+              linha 8 retorna, ele n&atilde;o tem como continuar a
+              execu&ccedil;&atilde;o.
+            </p>
+
+            <p>
+              Al&eacute;m disso, perceba que, na lateral esquerda do gif, a
+              &ldquo;Call Stack&rdquo; est&aacute; aberta. Nela, existe o que
+              est&aacute; sendo executado no momento (stack frames). Nesse caso
+              em espec&iacute;fico, come&ccedil;amos com o m&oacute;dulo que
+              est&aacute; sendo executado (<code>&lt;module&gt;</code>). Tudo o
+              que estiver definido dentro do m&oacute;dulo, ser&aacute; exibido
+              na Call Stack dele. Por&eacute;m, ao chamar a
+              fun&ccedil;&atilde;o, algo novo &eacute; adicionado ali, a chamada
+              para fun&ccedil;&atilde;o &ldquo;<code>funcao</code>&ldquo;. Isso
+              ocorre ap&oacute;s a execu&ccedil;&atilde;o da linha 8 (chamada da
+              fun&ccedil;&atilde;o) e termina ap&oacute;s o retorno da
+              fun&ccedil;&atilde;o.
+            </p>
+
+            <h3>Locals</h3>
+
+            <p>
+              Vamos observar o que existe dentro da chamada de
+              fun&ccedil;&atilde;o (ap&oacute;s a execu&ccedil;&atilde;o da
+              linha 8).
+            </p>
+
+            <p><img src="imgs/rec-2.png" alt="Exemplo no VS Code" /></p>
+
+            <p>
+              Ap&oacute;s a chamada para a fun&ccedil;&atilde;o, a
+              execu&ccedil;&atilde;o do m&oacute;dulo &eacute; pausada
+              temporariamente at&eacute; que o interpretador verifique o que a
+              fun&ccedil;&atilde;o retorna. Nesse momento, ela &eacute;
+              adicionada na &ldquo;Call Stack&rdquo;, seus dados internos
+              s&atilde;o salvos at&eacute; que ela decida retornar um valor.
+              Perceba que o argumento enviado ao par&acirc;metro
+              &ldquo;<code>nome</code>&rdquo; est&aacute; em
+              &ldquo;<code>Variables</code>&rdquo; como locals dessa
+              fun&ccedil;&atilde;o, essas s&atilde;o suas vari&aacute;veis
+              locais.
+            </p>
+
+            <p>
+              Assim que o retorno for conclu&iacute;do, a execu&ccedil;&atilde;o
+              do m&oacute;dulo continuar&aacute; a seguir seu fluxo e a chamada
+              para a fun&ccedil;&atilde;o ser&aacute; eliminada da &ldquo;Call
+              stack&rdquo;.
+            </p>
+
+            <p><img src="imgs/rec-3.png" alt="Exemplo 3" /></p>
+
+            <p>
+              Ap&oacute;s o retorno da fun&ccedil;&atilde;o, ela &eacute;
+              eliminada da Call Stack e o m&oacute;dulo pode prosseguir com sua
+              execu&ccedil;&atilde;o. Ali&aacute;s, tamb&eacute;m preciso
+              mencionar que capturei o valor do seu retorno em uma
+              vari&aacute;vel <code>frase</code> para fazer algo ela
+              posteriormente (como dar um simples print no terminal).
+            </p>
+
+            <p>
+              Ent&atilde;o, podemos resumir que &ldquo;Call Stack&rdquo;
+              &eacute; exatamente o que sua tradu&ccedil;&atilde;o descreve, uma
+              <em>pilha de chamadas</em>. Assim como existe uma pilha de livros
+              na prateleira, existe uma pilha de chamadas de
+              fun&ccedil;&otilde;es no seu programa. Cada elemento na call stack
+              cont&eacute;m os dados do momento em que a fun&ccedil;&otilde;es
+              foram chamadas.
+            </p>
+
+            <h3>Fun&ccedil;&otilde;es dentro de fun&ccedil;&otilde;es</h3>
+
+            <p>
+              Assim como acontece com fun&ccedil;&otilde;es chamadas diretamente
+              dentro de um m&oacute;dulo, tamb&eacute;m ocorre com
+              fun&ccedil;&otilde;es chamadas dentro de outras
+              fun&ccedil;&otilde;es. Nesse caso, a pilha de chamadas fica ainda
+              maior, porque se existir outra chamada para fun&ccedil;&atilde;o
+              dentro de uma fun&ccedil;&atilde;o existente, o interpretador
+              tamb&eacute;m precisar&aacute; checar o retorno dessa outra
+              fun&ccedil;&atilde;o.
+            </p>
+
+            <p>
+              Considere o mesmo c&oacute;digo anterior, por&eacute;m com uma
+              chamada dentro da fun&ccedil;&atilde;o j&aacute; criada.
+            </p>
+
+            <p><img src="imgs/rec4.png" alt="Exemplo 4" /></p>
+            <p>
+              Agora os passos s&atilde;o um pouco diferentes. Mas, se voc&ecirc;
+              me acompanhou at&eacute; aqui, n&atilde;o ter&aacute; dificuldade
+              nenhuma para entender o que ocorreu.
+            </p>
+
+            <p>
+              Lembra que eu te disse que quando h&aacute; uma chamada de
+              fun&ccedil;&atilde;o, o interpretador precisa verificar o que essa
+              chamada retorna? Ent&atilde;o, n&atilde;o &eacute; diferente aqui!
+            </p>
+
+            <p>
+              Quando estamos dentro de uma <code>funcao_um</code> realizando uma
+              chamada para uma <code>funcao_dois</code>, o que ocorre &eacute;
+              que a <code>funcao_um</code> precisa pausar sua
+              execu&ccedil;&atilde;o para saber o que a
+              <code>funcao_dois</code> retorna. S&oacute; ap&oacute;s isso, a
+              <code>funcao_um</code> poder&aacute; continuar sua
+              execu&ccedil;&atilde;o normal.
+            </p>
+
+            <p>
+              Mas n&atilde;o termina aqui, isso tudo &eacute; registrado pela
+              &ldquo;Call Stack&rdquo; (chamarei de <em>pilha</em> daqui em
+              diante). Ent&atilde;o, quanto mais chamadas de
+              fun&ccedil;&otilde;es dentro de fun&ccedil;&otilde;es, mais coisas
+              existem acontecendo na pilha.
+            </p>
+
+            <p>
+              <a
+                href="https://gist.github.com/luizomf/83c8f286a83ad6ddb1e7094aedabbef5"
+                >No c&oacute;digo da imagem anterior</a
+              >, temos uma chamada para fun&ccedil;&atilde;o na linha 19,
+              ent&atilde;o sabemos que o interpretador vai conferir o retorno
+              para essa chamada. Por&eacute;m, ao acessar o c&oacute;digo da
+              fun&ccedil;&atilde;o, o interpretador encontra uma nova chamada
+              para fun&ccedil;&atilde;o na linha 13, ent&atilde;o ele
+              tamb&eacute;m vai conferir o que essa outra fun&ccedil;&atilde;o
+              retorna.
+            </p>
+
+            <p>Veja na imagem, que a pilha agora tem o seguinte:</p>
+
+            <ul>
+              <li><code>nova_funcao</code></li>
+              <li><code>funcao_anterior</code></li>
+              <li><code>&lt;module&gt;</code></li>
+            </ul>
+
+            <p>
+              Cada elemento na pilha tem suas pr&oacute;prias vari&aacute;veis
+              locais salvas em mem&oacute;ria.
+            </p>
+
+            <p>
+              Portanto, para resolver essa pilha o interpretador precisa voltar
+              resolvendo todos os retornos de cima para baixo. Ou seja, o
+              resultado final ser&aacute;: retorno da <code>nova_funcao</code> +
+              retorno da <code>funcao_anterior</code> + continua executando o
+              m&oacute;dulo. Como a <code>funcao_anterior</code> retorna a
+              <code>nova_funcao</code>, o retorno final ser&aacute; o que a
+              <code>nova_funcao</code> retornar.
+            </p>
+
+            <h2>Fun&ccedil;&otilde;es recursivas com Python</h2>
+
+            <p>
+              As fun&ccedil;&otilde;es recursivas com Python ou com qualquer
+              outra linguagem de programa&ccedil;&atilde;o, funcionam exatamente
+              como outras fun&ccedil;&otilde;es, por&eacute;m, ao chamarem a si
+              mesmas dentro do seu c&oacute;digo, a cada nova chamada um novo
+              elemento &eacute; adicionado na pilha (Call Stack, lembra?)
+              contendo as vari&aacute;veis locais daquele ponto na
+              execu&ccedil;&atilde;o.
+            </p>
+
+            <p>
+              Considere a fun&ccedil;&atilde;o fatorial, que te mostrei mais
+              acima nesse post:
+            </p>
+
+            <pre>
+def fatorial(n: int) -> int:
+  if n == 1 or n == 0:
+      return 1
+  return n * fatorial(n - 1)
+
+
+if __name__ == "__main__":
+  fat5 = fatorial(5)
+  print(fat5)
+</pre
+            >
+
+            <p>
+              A chamada dessa função (iniciando na linha 8) desencadeará mais 4
+              chamadas para ela mesma (somando 5 no total) até atingir meu
+              caso-base, que é quando n for igual a 1.
+            </p>
+
+            <p><img src="imgs/rec5.png" alt="Exemplo 5" /></p>
+
+            <p>Essas chamadas ocorreram na seguinte ordem:</p>
+
+            <p>
+              <code
+                >fatorial(5) * fatorial(4) * fatorial(3) * fatorial(2) *
+                fatorial(1)
+              </code>
+            </p>
+
+            <p>
+              Isso tudo está na pilha de chamadas e agora o interpretador
+              precisa voltar resolvendo todas as chamadas de cima para baixo (ou
+              de trás pra frente).
+            </p>
+
+            <p>Dessa maneira (vou mostrar apenas os retornos):</p>
+
+            <pre>
+1 = 1
+2 * 1 = 2
+3 * 2 = 6
+4 * 6 = 24
+5 * 24 = 120
+</pre
+            >
+
+            <p>
+              O trecho descrito acima é exatamente como a pilha foi resolvida.
+            </p>
+
+            <p><img src="imgs/6.png" alt="Exemplo 6" /></p>
+            <p>
+              Perceba que ap&oacute;s retornar todos os valores e a pilha
+              terminar de ser resolvida, todas as chamadas e suas
+              vari&aacute;veis locais agora foram eliminadas da mem&oacute;ria e
+              temos apenas o valor de retorno de toda a pilha.
+            </p>
+
+            <p>
+              &Eacute; assim que as Fun&ccedil;&otilde;es recursivas com Python
+              (ou qualquer outra linguagem de programa&ccedil;&atilde;o)
+              funcionam. Exatamente como descrito em todo este artigo.
+            </p>
+
+            <h2>
+              Problemas que podemos encontrar com Fun&ccedil;&otilde;es
+              recursivas
+            </h2>
+
+            <p>
+              Como voc&ecirc; p&ocirc;de perceber no texto que seguiu, cada
+              chamada para fun&ccedil;&atilde;o dentro de uma
+              fun&ccedil;&atilde;o recursiva &eacute; adicionada &agrave; pilha
+              (cada elemento na pilha, cujo retorno ainda n&atilde;o foi
+              finalizado, &eacute; chamado de <em>stack frame</em>). Isso pode
+              ser um problema quando temos muitas recurs&otilde;es ocorrendo
+              dentro de um programa.
+            </p>
+
+            <p>
+              Imagine que eu pe&ccedil;a o fatorial de 998, isso significa que a
+              minha recurs&atilde;o ocorreria 997 vezes at&eacute; atingir o
+              caso base (somando 998 chamadas). Isso tamb&eacute;m significa que
+              eu teria 998 elementos na minha pilha de chamadas (sem contar
+              qualquer outra chamada para fun&ccedil;&otilde;es no m&oacute;dulo
+              e a chamada do m&oacute;dulo em si). Talvez, se o custo de
+              execu&ccedil;&atilde;o da fun&ccedil;&atilde;o consumir muita
+              mem&oacute;ria, eu poderia esgotar os recursos do computador
+              facilmente apenas chamando uma fun&ccedil;&atilde;o recursiva.
+            </p>
+
+            <p>
+              Existe uma t&eacute;cnica chamada de
+              <em>Tail Call Optimization</em> (ou
+              <em>Tail Recursion Elimination</em> em casos recursivos) que
+              resolveria este problema. Por&eacute;m, Guido van Rossum, criador
+              do Python, foi um contra a adi&ccedil;&atilde;o disso no Python
+              alegando ser &ldquo;N&atilde;o Pyth&ocirc;nico&rdquo;.
+            </p>
+
+            <blockquote>
+              <p>
+                <em
+                  >I recently posted an entry in my Python History blog on the
+                  origins of Python&rsquo;s functional features. A side remark
+                  about not supporting tail recursion elimination (TRE)
+                  immediately sparked several comments about what a pity it is
+                  that Python doesn&rsquo;t do this, including links to recent
+                  blog entries by others trying to &ldquo;prove&rdquo; that TRE
+                  can be added to Python easily. So let me defend my position
+                  (which is that I don&rsquo;t want TRE in the language). If you
+                  want a short answer, it&rsquo;s simply unpythonic.
+                  Here&rsquo;s the long answer.</em
+                >
+              </p>
+              <a
+                href="https://neopythonic.blogspot.com/2009/04/tail-recursion-elimination.html"
+                >Por Guido van Rossum, em 22/04/2009, em Neopythonic</a
+              >
+            </blockquote>
+
+            <p>Tradu&ccedil;&atilde;o Livre:</p>
+
+            <blockquote>
+              <p>
+                <em
+                  >Recentemente, publiquei um post em meu blog Python History,
+                  sobre as origens dos recursos funcionais do Python. Uma
+                  observa&ccedil;&atilde;o simples sobre n&atilde;o suportar
+                  Tail Recursion Elimination (TRE) imediatamente provocou
+                  v&aacute;rios coment&aacute;rios sobre ser uma pena Python
+                  suportar isso, incluindo links para posts recentes de blogs de
+                  outros que tentaram &ldquo;provar&rdquo; que TRE pode ser
+                  adicionado ao Python facilmente. Ent&atilde;o, deixe-me
+                  defender minha posi&ccedil;&atilde;o (que n&atilde;o quero TRE
+                  na linguagem). Se voc&ecirc; quer uma resposta curta,
+                  simplesmente n&atilde;o &eacute; Pyth&ocirc;nico. Aqui
+                  est&aacute; a resposta longa.</em
+                >
+              </p>
+              <a
+                href="https://neopythonic.blogspot.com/2009/04/tail-recursion-elimination.html"
+                >Por Guido van Rossum, em 22/04/2009, em Neopythonic</a
+              >
+            </blockquote>
+
+            <p>
+              Se o pr&oacute;prio criador do Python mencionou isso, n&atilde;o
+              iremos discutir isso por aqui =).
+            </p>
+
+            <h2>
+              RecursionError: maximum recursion depth exceeded in comparison
+            </h2>
+
+            <p>
+              Esse erro apareceu pra voc&ecirc;? Isso quer dizer que a pilha de
+              elementos no seu call stack passou de 1000 (limite padr&atilde;o
+              em Python).
+            </p>
+
+            <p>
+              Voc&ecirc; pode fazer tr&ecirc;s coisas para resolver este
+              problema:
+            </p>
+
+            <ul>
+              <li>
+                Checar se voc&ecirc; realmente queria fazer mais de 1000
+                chamadas recursivas. Geralmente, quando criamos
+                fun&ccedil;&otilde;es recursivas incorretamente, s&atilde;o
+                realizadas mais recurs&otilde;es do que gostar&iacute;amos;
+              </li>
+              <li>
+                Trocar por um la&ccedil;o <code>for</code>. Como Python
+                n&atilde;o tem <em>Tail Recursion Elimination</em> (pelo menos
+                at&eacute; o momento da escrita deste post), talvez voc&ecirc;
+                poderia reescrever o c&oacute;digo usando <code>for</code> ou
+                at&eacute; <code>while</code>;
+              </li>
+              <li>Por fim, um hack (aumentar o limite de recurs&atilde;o).</li>
+            </ul>
+
+            <p>Para aumentar o limite de recurs&atilde;o, use:</p>
+
+            <pre>
+<code>import sys
+sys.setrecursionlimit(5000)
+print(sys.getrecursionlimit())  # 5000</code></pre>
+
+            <p>
+              O padr&atilde;o s&atilde;o 1000 recurs&otilde;es, no trecho acima
+              aumentei para 5000.
+            </p>
+
+            <h2>Algoritmos usando recurs&atilde;o</h2>
+
+            <p>
+              Como vimos anteriormente, o algoritmo mais clich&ecirc; que
+              &eacute; implementado com recurs&atilde;o, seria o fatorial, que
+              vimos ao longo de todo o post. No entanto, h&aacute; uma gama
+              enorme de algoritmos que podem se beneficiar da recurs&atilde;o.
+            </p>
+
+            <p>
+              Eu n&atilde;o pretendo detalhar o que todos eles fazem (talvez
+              fique pra um pr&oacute;ximo post), mas seguem alguns:
+            </p>
+
+            <h3>Sequ&ecirc;ncia Fibonacci</h3>
+
+            <script src="https://gist.github.com/luizomf/2a44f26d91f25a755420cb2d3bf085e1.js"></script>
+            <p>
+              A
+              <a
+                href="https://pt.wikipedia.org/wiki/Sequ%C3%AAncia_de_Fibonacci"
+                >Sequ&ecirc;ncia Fibonacci</a
+              >
+              pode se beneficiar da
+              <a href="https://en.wikipedia.org/wiki/Memoization"
+                >memoization</a
+              >
+              (cache) de fun&ccedil;&otilde;es executadas anteriormente. O
+              Python inclui
+              <a
+                href="https://docs.python.org/3/library/functools.html#functools.lru_cache"
+                >lru_cache</a
+              >
+              no m&oacute;dulo
+              <a href="https://docs.python.org/3/library/functools.html"
+                >functools</a
+              >
+              que serve justamente para isso.
+            </p>
+
+            <p>
+              Adapta&ccedil;&atilde;o do Livro
+              <a href="https://amzn.to/2QXcx8W"
+                >Estruturas de dados e algoritmos com JavaScript (por Loiane
+                Groner)</a
+              >
+            </p>
+
+            <h3>Quicksort</h3>
+
+            <script src="https://gist.github.com/luizomf/afcd473af1ecdb8210e508511e6005f3.js"></script>
+
+            <p>
+              Adapta&ccedil;&atilde;o do Livro
+              <a href="https://amzn.to/39v5jPV"
+                >Entendendo Algoritmos (por Aditya Bhargava)</a
+              >
+            </p>
+
+            <h3>Um código personalizado</h3>
+
+            <pre>
+from typing import List
+
+
+  class Caixa:
+      def __init__(self, tem_chave=False) -> None:
+          self.tem_chave = tem_chave
+
+      def __repr__(self) -> str:
+          return f'Caixa({self.tem_chave})'
+
+
+  def encontra_chave(caixas: List[Caixa], index: int = 0) -> Caixa:
+      if len(caixas) &lt;= index:
+          return Caixa()
+
+      caixa = caixas[index]
+      print(f'Procurando chave na caixa do índice {index} -> {caixa}')
+
+      if caixa.tem_chave:
+          return caixa
+
+      index += 1
+      return encontra_chave(caixas, index)
+
+
+  if __name__ == "__main__":
+      caixas: List[Caixa] = [
+          Caixa(True), Caixa(), Caixa(), Caixa(),
+          Caixa(), Caixa(), Caixa(), Caixa(),
+          Caixa(), Caixa(), Caixa(), Caixa(),
+      ]
+
+      print(encontra_chave(caixas))
+</pre
+            >
+
+            <p>Meu código mesmo.</p>
+
+            <h3>Torre de Hanoi</h3>
+
+            <p>
+              Adapta&ccedil;&atilde;o do Livro
+              <a href="https://amzn.to/2Jn18Lc"
+                >O melhor do JavaScript (Por Douglas Crockford)</a
+              >
+            </p>
+
+            <pre>
+# Torre de Hanói
+def hanoi(disco: int, origem: str, auxiliar: str, destino: str) -> None:
+    if disco &lt;= 0:
+        return
+    hanoi(disco - 1, origem, destino, auxiliar)
+    print(f'Movendo disco {disco} de {origem} para {destino}')
+    hanoi(disco - 1, auxiliar, origem, destino)
+
+
+if __name__ == "__main__":
+    hanoi(3, 'Origem', 'Auxiliar', 'Destino')
+</pre
+            >
+
+            <p>
+              Adapta&ccedil;&atilde;o do Livro
+              <a href="https://amzn.to/2Jn18Lc"
+                >O melhor do JavaScript (Por Douglas Crockford)</a
+              >
+            </p>
+
+            <h2>Em v&iacute;deo</h2>
+
+            <p>
+              Tamb&eacute;m criei um v&iacute;deo sobre este conte&uacute;do em
+              meu canal do Youtube, segue abaixo:
+            </p>
+
+            <p>
+              Link do vídeo no YouTube:
+              <a href="https://youtu.be/0PwFwqiNfAI"
+                >https://youtu.be/0PwFwqiNfAI
+              </a>
+            </p>
+
+            <h2>Super resumo do resumo</h2>
+
+            <p>
+              Fun&ccedil;&otilde;es recursivas com Python (ou qualquer linguagem
+              de programa&ccedil;&atilde;o) s&atilde;o fun&ccedil;&otilde;es que
+              chamam a si mesmas de maneira direta ou indireta.
+            </p>
+
+            <!-- END CONTENT -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator"></div>
+    <div class="section-separator"></div>
+
+    <footer class="main-footer">
+      <a class="copyright-link" href="./">© Copyright - Otávio Miranda</a>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <title>Filas em Python com deque (queue) - Otávio Miranda</title>
+    <meta
+      name="description"
+      content="Filas em Python podem ser implementadas utilizando a estrutura de dados deque (do módulo collections) para garantirmos complexidade de tempo constante para inserção e remoção de elementos em qualquer uma das pontas, cabeça (head) ou cauda (tail)."
+    />
+    <link rel="icon" type="image/webp" href="../../imgs/favicon-1.webp" />
+  </head>
+  <body>
+    <header class="main-header">
+      <h1>
+        <a class="logo-link" href="/" title="Cursos - Otávio Miranda">
+          <img
+            loading="lazy"
+            src="../../imgs/otaviomirandalogo-2.webp"
+            alt="Logo - Otávio Miranda"
+            class="logo"
+            width="64"
+            height="64"
+          />
+        </a>
+      </h1>
+    </header>
+
+    <div class="section-separator"></div>
+
+    <section class="section-wrapper">
+      <div class="section-content">
+        <div class="profile-text">
+          <h1 class="profile-title">
+            <a href="./">Filas em Python com deque (queue) </a>
+          </h1>
+          <div class="profile-description">
+            <!-- START CONTENT -->
+
+            <p>
+              Filas em Python podem ser implementadas utilizando a estrutura de
+              dados <code>deque</code> (do m&oacute;dulo
+              <a
+                href="https://docs.python.org/pt-br/3.9/library/collections.html"
+                >collections</a
+              >) para garantirmos complexidade de tempo constante para
+              inser&ccedil;&atilde;o e remo&ccedil;&atilde;o de elementos em
+              qualquer uma das pontas, cabe&ccedil;a (head) ou cauda (tail).
+              <strong>Deque</strong> &ndash; abrevia&ccedil;&atilde;o de
+              <em>Double Ended Queue</em> (ou Fila de duas pontas) &ndash; pode
+              ser usada para implementar filas FIFO (que veremos a seguir) e
+              <a
+                href="https://www.otaviomiranda.com.br/2020/pilhas-em-python-com-listas-stack/"
+                >pilhas LIFO</a
+              >.
+            </p>
+
+            <h2>O que s&atilde;o filas?</h2>
+
+            <p>
+              Quando falamos em filas, estamos tratando de uma estrutura de
+              dados abstrata que se comporta exatamente como uma fila na vida
+              real. Elementos s&atilde;o adicionados &agrave; cauda (tail) e
+              removidos da frente (head).
+            </p>
+
+            <p>
+              Por&eacute;m, remover elementos da frente (com &iacute;ndice 0)
+              pode ser problem&aacute;tico do ponto de vista de desempenho do
+              programa. Por exemplo, poder&iacute;amos usar listas para criar
+              filas (<a
+                href="https://www.otaviomiranda.com.br/2020/pilhas-em-python-com-listas-stack/"
+                >como fizemos com as pilhas</a
+              >), por&eacute;m elas n&atilde;o s&atilde;o otimizadas para isso e
+              acabam movendo os &iacute;ndices de todos os elementos posteriores
+              ao elemento removido. Infelizmente, isso nos d&aacute; uma
+              complexidade de tempo linear O(n), ou seja, ao remover um item do
+              come&ccedil;o da lista, o interpretador precisa navegar em todos
+              os seus elementos, reajustando os &iacute;ndices dos elementos
+              restantes.
+            </p>
+
+            <p>
+              No entanto, isso n&atilde;o ocorre com <code>deque</code>. Segundo
+              a
+              <a
+                href="https://docs.python.org/pt-br/3.9/library/collections.html#collections.deque"
+                >documenta&ccedil;&atilde;o oficial do Python</a
+              >, <code>deque</code> adiciona e remove em ambas as
+              dire&ccedil;&otilde;es com complexidade de tempo de
+              aproximadamente O(1). Isso quer dizer que requer aproximadamente
+              uma opera&ccedil;&atilde;o para a adi&ccedil;&atilde;o e
+              remo&ccedil;&atilde;o de elementos.
+            </p>
+
+            <p>
+              De forma resumida, <code>deque</code> &eacute; mais r&aacute;pido
+              para inserir e remover elementos da frente da fila (no
+              &iacute;ndice 0).
+            </p>
+
+            <h2>Filas s&atilde;o FIFO</h2>
+
+            <p>
+              Na programa&ccedil;&atilde;o, o comportamento de uma fila &eacute;
+              conhecido como
+              <a href="https://pt.wikipedia.org/wiki/FIFO">FIFO</a> (First In
+              First Out), ou seja, o primeiro que entrar ser&aacute; o primeiro
+              a sair. Isso &eacute; exatamente o que acontece em uma fila da
+              vida real, a primeira pessoa a entrar na fila, ser&aacute; a
+              primeira a ser atendida. &Eacute; claro, se ningu&eacute;m furar a
+              fila!
+            </p>
+
+            <p>Imagine uma fila de letras: A, B, C.</p>
+
+            <p>
+              Agora, suponha que eu quero adicionar um novo elemento, o D. Para
+              as filas, esse elemento deve ser adicionado na cauda, como mostra
+              o diagrama a seguir:
+            </p>
+
+            <p>
+              <img src="imgs/Queues-1.png" alt="Queues em Python - Exemplo 1" />
+            </p>
+
+            <p>
+              Mas, se eu precisasse remover um elemento da fila anterior, o
+              elemento removido deveria sair na cabeça (head).
+            </p>
+
+            <p>Este elemento é representado pelo A na imagem a seguir:</p>
+
+            <p>
+              <img
+                src="imgs/Queues-2-1.png"
+                alt="Queues em Python - Exemplo 2"
+              />
+            </p>
+
+            <p>
+              Al&eacute;m disso, perceba que agora, al&eacute;m da minha fila
+              n&atilde;o ter mais o elemento A, os &iacute;ndices foram
+              reorganizados. B passou a ter o &iacute;ndice 0, C, &iacute;ndice
+              1 e D, &iacute;ndice 2. Lembre-se que <code>deque</code> &eacute;
+              otimizada para isso.
+            </p>
+
+            <p>
+              Outra informa&ccedil;&atilde;o que voc&ecirc; deve ter percebido,
+              &eacute; que a cabe&ccedil;a (head) e a cauda (tail) da minha fila
+              tamb&eacute;m mudaram. B &eacute; a cabe&ccedil;a e D a cauda.
+            </p>
+
+            <h2>Filas em Python com deque</h2>
+
+            <p>
+              Se fossemos representar a fila apresentada nas imagens anteriores
+              com os elementos A, B e C, em seguida acrescentar o elemento D, o
+              c&oacute;digo ficaria da seguinte maneira:
+            </p>
+
+            <pre>
+from collections import deque
+
+fila = deque(['A', 'B', 'C'])
+
+# Inserindo o elemento D
+fila.append('D')
+
+
+# deque(['A', 'B', 'C', 'D'])
+print(fila)
+</pre
+            >
+
+            <p>
+              Perceba que <code>deque</code> tem quase os mesmos m&eacute;todos
+              de uma lista normal no Python (por isso podemos us&aacute;-las
+              como
+              <a
+                href="https://www.otaviomiranda.com.br/2020/pilhas-em-python-com-listas-stack/"
+                >pilhas</a
+              >
+              se quisermos). Ent&atilde;o, para inserir um novo elemento na
+              cauda da fila, basta usarmos o m&eacute;todo <code>append</code>.
+            </p>
+
+            <p>
+              Para a remo&ccedil;&atilde;o do elemento A (como fizemos na
+              se&ccedil;&atilde;o anterior desse post), poder&iacute;amos
+              utilizar o m&eacute;todo <code>popleft</code> (remover da
+              esquerda).
+            </p>
+
+            <pre>
+from collections import deque
+
+fila = deque(['A', 'B', 'C'])
+
+# Inserindo o elemento D
+fila.append('D')
+
+# Removendo A
+fila.popleft()
+
+# deque(['B', 'C', 'D'])
+print(fila)</pre
+            >
+            <p>&Eacute; bem simples, n&atilde;o &eacute; mesmo?</p>
+
+            <h2>popleft retorna o elemento removido</h2>
+
+            <p>
+              Um comportamento padr&atilde;o sempre que usamos m&eacute;todos
+              &ldquo;<code>pop</code>&rdquo; (de remo&ccedil;&atilde;o) &eacute;
+              que o elemento removido &eacute; retornado por essa
+              fun&ccedil;&atilde;o. Isso n&atilde;o &eacute; diferente como
+              <code>popleft</code>.
+            </p>
+
+            <p>
+              Por exemplo, se eu estou removendo um elemento da minha fila,
+              &eacute; natural querer us&aacute;-lo em algum momento do meu
+              c&oacute;digo. Ent&atilde;o, eu poderia usar uma vari&aacute;vel
+              para isso.
+            </p>
+
+            <pre>
+from collections import deque
+
+fila = deque(['A', 'B', 'C'])
+
+# Inserindo o elemento D
+fila.append('D')
+
+# Removendo A e usando seu valor
+head = fila.popleft()
+
+# A
+print(head)
+
+# deque(['B', 'C', 'D'])
+print(fila)</pre
+            >
+
+            <p>
+              Perceba que no c&oacute;digo acima (linha 9),
+              <code>popleft</code> faz duas coisas:
+            </p>
+
+            <ol>
+              <li>Remove o primeiro elemento da fila (cabe&ccedil;a);</li>
+              <li>
+                Retorna o valor do elemento removido para a vari&aacute;vel
+                <code>head</code> (A).
+              </li>
+            </ol>
+
+            <p>
+              Assim, &eacute; poss&iacute;vel utilizar o valor removido conforme
+              preferir no seu c&oacute;digo.
+            </p>
+
+            <h2>Criando uma filas em Python</h2>
+
+            <p>
+              Assim como fizemos com as pilhas (no
+              <a
+                href="https://www.otaviomiranda.com.br/2020/pilhas-em-python-com-listas-stack/"
+                >artigo anterior</a
+              >), podemos encapsular <code>deque</code> em uma classe para
+              manter o controle sobre os m&eacute;todos que dever&atilde;o ser
+              utilizados para manter o comportamento <strong>FIFO</strong> das
+              filas. Afinal, <code>deque</code> n&atilde;o tem apenas os
+              m&eacute;todos <code>append</code> e <code>popleft</code>. De
+              fato, se voc&ecirc; conferir a
+              <a
+                href="https://docs.python.org/3.9/library/collections.html#collections.deque"
+                >documenta&ccedil;&atilde;o oficial</a
+              >, vai ver que existem v&aacute;rios outros m&eacute;todos
+              poss&iacute;veis para <code>deque</code>, incluindo os que quebram
+              o princ&iacute;pio <strong>FIFO</strong>, removendo elementos da
+              cauda ou inserindo na cabe&ccedil;a, por exemplo.
+            </p>
+
+            <pre>
+from typing import Deque, Any
+from collections import deque
+
+
+class Queue:
+    """Uma classe representando uma fila"""
+
+    def __init__(self, maxlen=None) -> None:
+        # Deque permite enviar maxlen
+        # para criar um tamanho máximo para
+        # a fila
+        self.__items: Deque[Any] = deque(maxlen=maxlen)
+
+    def enqueue(self, *items: Any) -> None:
+        """Enqueue (enfileirar) é o mesmo que append"""
+        for item in items:
+            self.__items.append(item)
+
+    def dequeue(self) -> Any:
+        """Dequeue (desenfileirar) é o mesmo que popleft"""
+        if not self:
+            raise IndexError('pop from empty queue')
+
+        return self.__items.popleft()
+
+    def __repr__(self) -> str:
+        return str(self.__items)
+
+    def __bool__(self) -> bool:
+        return bool(self.__items)
+
+    def __len__(self) -> int:
+        return len(self.__items)</pre
+            >
+
+            <p>
+              Na classe anterior, criei apenas os m&eacute;todos que precisava
+              para minha fila. Nesse sentido, tamb&eacute;m mudei o nome de
+              algumas coisas: <code>append</code> passou a ser
+              <code>enqueue</code> (enfileirar); <code>popleft</code> passou a
+              ser <code>dequeue</code> (desenfileirar). Contudo, eles continuam
+              fazendo o mesmo trabalho.
+            </p>
+
+            <p>
+              Tamb&eacute;m permiti adicionar o argumento
+              &ldquo;<code>maxlen</code>&rdquo; de <code>deque</code>, para
+              fixar um tamanho m&aacute;ximo para nossa fila.
+            </p>
+
+            <p>
+              Al&eacute;m disso, n&oacute;s precisamos saber de tr&ecirc;s
+              coisas muito importantes:
+            </p>
+
+            <ul>
+              <li>
+                Quais valores est&atilde;o na fila? Por isso o m&eacute;todo
+                <code>__repr__</code>;
+              </li>
+              <li>
+                Existem valores na minha fila? Por isso o m&eacute;todo
+                <code>__bool__</code>;
+              </li>
+              <li>
+                Quantos valores tem na minha fila? Por isso o m&eacute;todo
+                <code>__len__</code>.
+              </li>
+            </ul>
+
+            <p>
+              Voc&ecirc; pode enfeitar essa classe com os m&eacute;todos que
+              preferir. Aqui eu quis manter as coisas o mais simples que foi
+              poss&iacute;vel.
+            </p>
+
+            <p>Agora podemos usar a classe:</p>
+
+            <pre>
+if __name__ == "__main__":
+# Instanciando
+fila = Queue()
+
+# Enfileirando A, B e C
+fila.enqueue('A', 'B', 'C')
+
+# Enfileirando D
+fila.enqueue('D')
+
+# Recuperando A
+head = fila.dequeue()
+print(head)
+
+# Mostrando a fila
+print(fila)
+
+"""
+Resultado:
+
+A
+deque(['B', 'C', 'D'])
+"""
+</pre
+            >
+
+            <h3>Indo al&eacute;m do b&aacute;sico</h3>
+
+            <p>
+              Em algum momento, voc&ecirc; pode querer iterar sobre a sua fila
+              ou ent&atilde;o obter um item diretamente. Pra isso podemos
+              repassar o m&eacute;todo <code>__iter__</code> da nossa classe
+              para o m&eacute;todo <code>__iter__</code> do
+              <code>deque</code> da mesma (<code>__items</code>). Veja a
+              implementa&ccedil;&atilde;o do m&eacute;todo
+              <code>__iter__</code> por si s&oacute;.
+            </p>
+
+            <p>
+              Este m&eacute;todo deve estar dentro da classe, &eacute; claro
+              (n&atilde;o se preocupe, vou mostrar o c&oacute;digo completo logo
+              abaixo).
+            </p>
+
+            <pre>
+def __iter__(self) -> Iterator:
+    return self.__items.__iter__()
+          </pre
+            >
+
+            <p>
+              Por fim, se você quiser permitir que um item da fila seja obtido
+              pelo seu índice, também pode implementar o método __getitem__,
+              dessa maneira:
+            </p>
+
+            <pre>
+def __getitem__(self, index: int) -> Any:
+    return self.__items[index]
+            </pre>
+
+            <p>Veja como ficou nossa classe completa:</p>
+
+            <pre>
+from typing import Deque, Any, Iterator
+from collections import deque
+
+
+class Queue:
+    """Uma classe representando uma fila"""
+
+    def __init__(self, maxlen=None) -> None:
+        # Deque permite enviar maxlen
+        # para criar um tamanho máximo para
+        # a fila
+        self.__items: Deque[Any] = deque(maxlen=maxlen)
+
+    def enqueue(self, *items: Any) -> None:
+        """Enqueue (enfileirar) é o mesmo que append"""
+        for item in items:
+            self.__items.append(item)
+
+    def dequeue(self) -> Any:
+        """Dequeue (desenfileirar) é o mesmo que popleft"""
+        if not self:
+            raise IndexError('pop from empty queue')
+
+        return self.__items.popleft()
+
+    def __repr__(self) -> str:
+        return str(self.__items)
+
+    def __bool__(self) -> bool:
+        return bool(self.__items)
+
+    def __len__(self) -> int:
+        return len(self.__items)
+
+    def __iter__(self) -> Iterator:
+        return self.__items.__iter__()
+
+    def __getitem__(self, index: int) -> Any:
+        return self.__items[index]
+            </pre>
+
+            <p>
+              Perceba que agora temos os métodos __iter__ e __getitem__. Isso
+              nos permite iterar sobre nossa fila e também obter itens por
+              índice, veja:
+            </p>
+
+            <pre>
+if __name__ == "__main__":
+# Instanciando
+fila = Queue()
+
+# Enfileirando A, B, C e D
+fila.enqueue('A', 'B', 'C', 'D')
+
+# Obtendo o elemento com índice 1 (B)
+print('Item com índice 1:', fila[1], end='\n\n')
+
+# Iterando com for em nossa fila
+for item in fila:
+    print('Iteração:', item)
+
+"""
+Resultado:
+
+Item com índice 1: B
+
+Iteração: A
+Iteração: B
+Iteração: C
+Iteração: D
+"""
+            </pre>
+
+            <p>
+              Nossa classe ficou assim, simples mas &uacute;til e eficaz.
+              Todavia, voc&ecirc; pode adicionar os m&eacute;todos que preferir.
+              Apenas adicionei m&eacute;todos que acho que podem ser
+              &uacute;teis.
+            </p>
+
+            <h2>Resumo</h2>
+
+            <p>
+              Em conclus&atilde;o, voc&ecirc; viu o seguinte ao decorrer desse
+              post:
+            </p>
+
+            <ul>
+              <li>
+                Filas em Python podem ser implementadas utilizando
+                <code>deque</code>;
+              </li>
+              <li>
+                Filas t&ecirc;m o comportamento <strong>FIFO</strong> (First In
+                First Out), assim como na vida real;
+              </li>
+              <li><code>append</code> adiciona elementos na cauda (tail);</li>
+              <li>
+                <code>popleft</code> remove elementos da cabe&ccedil;a (head);
+              </li>
+              <li>
+                <code>deque</code> &eacute; muito gen&eacute;rica, por isso
+                criamos nossa pr&oacute;pria classe para permitir apenas os
+                m&eacute;todos que queremos.
+              </li>
+            </ul>
+
+            <p>
+              Como resultado, agora voc&ecirc; j&aacute; sabe criar filas em
+              Python. Al&eacute;m disso, tamb&eacute;m sabe usar
+              <code>deque</code>, que &eacute; outra estrutura de dados abstrata
+              conhecida em programa&ccedil;&atilde;o.
+            </p>
+
+            <p>Te vejo no pr&oacute;ximo post!</p>
+
+            <!-- END CONTENT -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator"></div>
+    <div class="section-separator"></div>
+
+    <footer class="main-footer">
+      <a class="copyright-link" href="./">© Copyright - Otávio Miranda</a>
+    </footer>
+  </body>
+</html>

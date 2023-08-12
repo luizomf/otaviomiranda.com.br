@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <title>SSH keys: chaves de autenticação SSH - Otávio Miranda</title>
+    <meta name="description" content="SSH keys: chaves de autenticação SSH" />
+    <link rel="icon" type="image/webp" href="../../imgs/favicon-1.webp" />
+  </head>
+  <body>
+    <header class="main-header">
+      <h1>
+        <a class="logo-link" href="/" title="Cursos - Otávio Miranda">
+          <img
+            loading="lazy"
+            src="../../imgs/otaviomirandalogo-2.webp"
+            alt="Logo - Otávio Miranda"
+            class="logo"
+            width="64"
+            height="64"
+          />
+        </a>
+      </h1>
+    </header>
+
+    <div class="section-separator"></div>
+
+    <section class="section-wrapper">
+      <div class="section-content">
+        <div class="profile-text">
+          <h1 class="profile-title">
+            <a href="./">SSH keys: chaves de autenticação SSH</a>
+          </h1>
+
+          <div class="post-metadata">4 de abril de 2018 por Otávio Miranda</div>
+
+          <div class="profile-description">
+            <!-- START CONTENT -->
+
+            <p>
+              SSH keys s&atilde;o chaves de autentica&ccedil;&atilde;o SSH para
+              aprimorar a seguran&ccedil;a do servidor remoto. Nesse artigo
+              voc&ecirc; vai aprender a configurar o par de chaves
+              p&uacute;blica/privada no seu computador local (com Linux ou
+              Windows) e no servidor remoto.
+            </p>
+
+            <p>
+              Se voc&ecirc; administra um servidor e este funciona
+              constantemente online, provavelmente faz acesso a ele via SSH
+              (Secure Shell). E, se j&aacute; faz algum tempo que esse seu
+              servidor est&aacute; online, &eacute; certo que j&aacute; deve ter
+              visto algumas coisas estranhas nos logs, como tentativas de login
+              no seu arquivo <strong>/var/log/auth.log</strong> vindas de
+              v&aacute;rios IPs diferentes. Isso, provavelmente, pode ser
+              algu&eacute;m tentando fazer brute force no seu servidor.
+            </p>
+
+            <p>
+              Existem v&aacute;rias maneiras de prevenir
+              <a
+                href="https://www.profissionaisti.com.br/2011/11/o-que-e-brute-force-nada-alem-de-forca-bruta/"
+                >brute force</a
+              >, e v&aacute;rios outros ataques, apenas manipulando regras de
+              firewall. Um bom exemplo disso &eacute; a
+              <a href="https://cloud.google.com/">Google Cloud</a>, que permite
+              liberar portas espec&iacute;ficas nas VMs apenas para sua rede,
+              por&eacute;m, n&atilde;o s&atilde;o todos os provedores que
+              permitem tal configura&ccedil;&atilde;o.
+            </p>
+
+            <p>
+              Outra forma muito eficaz para aumentar a seguran&ccedil;a do seu
+              servidor e ainda prevenir brute force &eacute; usar as SSH Keys
+              (chaves de autentica&ccedil;&atilde;o SSH) e eliminar a
+              possibilidade de login por senha.
+            </p>
+
+            <p>
+              As SSH Keys funcionam no modo chave p&uacute;blica e chave privada
+              (sempre em pares), onde a conex&atilde;o SFTP/SSH s&oacute;
+              &eacute; autorizada se a <strong>chave privada</strong> do
+              usu&aacute;rio do computador cliente bater com a
+              <strong>chave p&uacute;blica</strong> do usu&aacute;rio do
+              servidor.
+            </p>
+
+            <p>
+              Soa um tanto complexo, n&eacute;? Mas voc&ecirc; vai entender
+              direitinho ao terminar esse artigo.
+            </p>
+
+            <h2>Antes de continuar</h2>
+
+            <p>
+              Ser&aacute; necess&aacute;rio um servidor com OpenSSH instalado e
+              um usu&aacute;rio com acesso
+              <a
+                href="https://www.todoespacoonline.com/w/2015/10/su-sudo-e-sudoers-no-linux/"
+                >sudo</a
+              >
+              nesse servidor.
+            </p>
+
+            <p>
+              <strong>Aten&ccedil;&atilde;o:</strong> se voc&ecirc; est&aacute;
+              fazendo isso em um servidor de produ&ccedil;&atilde;o, n&atilde;o
+              feche sua conex&atilde;o SSH antes de criar uma nova
+              conex&atilde;o e conseguir se conectar com sucesso. Do
+              contr&aacute;rio, pode ser que voc&ecirc; perca acesso SSH e SFTP
+              ao servidor. Al&eacute;m disso, preste bastante
+              aten&ccedil;&atilde;o no que est&aacute; fazendo para conseguir
+              voltar as configura&ccedil;&otilde;es anteriores caso
+              necess&aacute;rio.
+            </p>
+
+            <h2>Diverg&ecirc;ncia de usu&aacute;rios</h2>
+
+            <p>
+              &Eacute; importante que voc&ecirc; saiba que n&atilde;o &eacute;
+              necess&aacute;rio que os usu&aacute;rios do computador local e do
+              servidor remoto tenham o mesmo nome, ou seja, voc&ecirc; pode
+              criar uma chave para um usu&aacute;rio chamado
+              &ldquo;Jo&atilde;ozinho&rdquo; no computador local, por&eacute;m
+              ele vai se conectar no usu&aacute;rio &ldquo;Z&eacute;zinho&rdquo;
+              no servidor remoto.
+            </p>
+
+            <p>
+              Por&eacute;m, a chave privada do usu&aacute;rio Jo&atilde;ozinho
+              precisa bater com a chave p&uacute;blica do usu&aacute;rio
+              Z&eacute;zinho no servidor.
+            </p>
+
+            <h2>Criando SSH Keys no Linux</h2>
+
+            <p>
+              Se o seu computador local tem o Linux com OpenSSH instalados,
+              basta digitar o seguinte:
+            </p>
+
+            <pre>
+<code>ssh-keygen -t rsa</code></pre>
+
+            <p>
+              Ao pressionar &ldquo;Enter&rdquo; voc&ecirc; ver&aacute; algo
+              parecido com:
+            </p>
+
+            <pre>
+<code>Generating public/private rsa key pair.
+Enter file in which to save the key (/home/joaozinho/.ssh/id_rsa):
+Created directory '/home/joaozinho/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/joaozinho/.ssh/id_rsa.
+Your public key has been saved in /home/joaozinho/.ssh/id_rsa.pub.
+...</code></pre>
+
+            <p>
+              Na primeira linha &eacute; requisitado que voc&ecirc; especifique
+              onde deseja gerar a chave. N&atilde;o &eacute; necess&aacute;rio
+              alterar este local, ela ser&aacute; gerada na sua
+              <strong>pasta local</strong> dentro de uma pasta oculta chamada
+              <strong>.ssh</strong>.
+            </p>
+
+            <p>
+              <strong>Aten&ccedil;&atilde;o:</strong> em &ldquo;Enter
+              passphrase&rdquo;, digite uma senha forte e que voc&ecirc; se
+              lembre posteriormente. Essa senha sempre ser&aacute; utilizada
+              para realizar a primeira conex&atilde;o SSH com o servidor. Assim,
+              se voc&ecirc; perder ou algu&eacute;m roubar sua chave, n&atilde;o
+              conseguir&aacute; acesso ao servidor sem saber sua &ldquo;senha
+              forte&rdquo;. Ser&aacute; necess&aacute;rio repetir essa senha na
+              linha &ldquo;Enter same passphrase again&rdquo;.
+            </p>
+
+            <h2>Criando uma SSH Key para outro usu&aacute;rio no Linux</h2>
+
+            <p>
+              Apesar de ser algo privado de um usu&aacute;rio e ele mesmo
+              deveria criar e guardar sua pr&oacute;pria chave, voc&ecirc; pode
+              gerar uma chave para outro usu&aacute;rio apenas alterando o
+              caminho onde ela &eacute; salva no comando explicado
+              anteriormente.
+            </p>
+
+            <p>
+              Mas, se voc&ecirc; tem acesso sudo no computador, pode digitar o
+              seguinte:
+            </p>
+
+            <pre>
+<code>sudo -u joaozinho ssh-keygen -t rsa</code></pre>
+
+            <p>
+              Apenas altere &ldquo;joaozinho&rdquo; para o nome de
+              usu&aacute;rio que deseja criar a chave. Se voc&ecirc; n&atilde;o
+              alterar nada, as chaves p&uacute;blica e privada ser&atilde;o
+              geradas na pasta .ssh dentro da home do usu&aacute;rio
+              &ldquo;joaozinho&rdquo;.
+            </p>
+
+            <h2>Como ver a chave p&uacute;blica</h2>
+
+            <p>
+              Como &eacute; a chave p&uacute;blica que ser&aacute; copiada para
+              o servidor, voc&ecirc; s&oacute; vai precisar copiar ela. Para
+              isso, digite:
+            </p>
+
+            <pre>
+<code>cat /home/joaozinho/.ssh/id_rsa.pub</code></pre>
+
+            <p>
+              Apenas altere &ldquo;joaozinho&rdquo; para o seu usu&aacute;rio ou
+              nome de usu&aacute;rio que deseja copiar a chave.
+            </p>
+
+            <p>
+              Lembre-se que as permiss&otilde;es desse arquivo s&atilde;o
+              voltadas para o usu&aacute;rio do arquivo, se voc&ecirc; estiver
+              criando para outro usu&aacute;rio, precisar&aacute; usar sudo para
+              executar esse comando.
+            </p>
+
+            <pre>
+<code>sudo cat /home/joaozinho/.ssh/id_rsa.pub</code></pre>
+
+            <p>
+              Voc&ecirc; vai ver muitos caracteres, come&ccedil;ando com
+              &ldquo;ssh-rsa&rdquo;. Selecione e copie todos os dados dessa
+              linha. Essa &eacute; a chave p&uacute;blica do seu usu&aacute;rio
+              que ser&aacute; copiada para o servidor posteriormente nesse
+              artigo.
+            </p>
+
+            <h2>Criando SSH Keys no Windows</h2>
+
+            <p>
+              No Windows voc&ecirc; vai precisar do Putty para gerar seu par de
+              chaves p&uacute;blica e privada. Baixe o no link a seguir:
+            </p>
+
+            <ul>
+              <li>
+                <a
+                  href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html"
+                  >Baixar Putty</a
+                >
+              </li>
+            </ul>
+
+            <p>
+              Baixe o instalador com extens&atilde;o <strong>.msi</strong> e
+              instale no seu computador.
+            </p>
+
+            <p>
+              Depois de instalado, pressione simultaneamente as teclas
+              &ldquo;Windows&rdquo; + &ldquo;R&rdquo; e digite:
+            </p>
+
+            <pre>
+<code>%programfiles%\Putty</code></pre>
+
+            <p>E pressione &ldquo;Enter&rdquo;.</p>
+
+            <p>
+              Dentro da pasta do PuTTY, abra o arquivo
+              <strong>puttygen.exe</strong>. Clique em &ldquo;Generate&rdquo; e
+              mova o mouse pr&oacute;ximo a barrinha de carregamento at&eacute;
+              terminar.
+            </p>
+
+            <p>
+              Na imagem abaixo detalho o que voc&ecirc; precisa fazer dentro do
+              puttygen:
+            </p>
+
+            <p><img src="imgs/1.jpg" alt="Exemplo 1" /></p>
+
+            <p>
+              Copie sua chave p&uacute;blica para o servidor, como explico na
+              pr&oacute;xima etapa.
+            </p>
+
+            <p>
+              N&atilde;o se esque&ccedil;a que, para se conectar ao servidor
+              remoto, voc&ecirc; primeiro precisa carregar sua chave privada.
+            </p>
+
+            <h2>Adicione chave p&uacute;blica no servidor remoto</h2>
+
+            <p>
+              Depois de criar suas chaves, voc&ecirc; vai precisar copiar sua
+              chave p&uacute;blica para o servidor. Para isso, basta criar um
+              arquivo chamado &ldquo;authorized_keys&rdquo; dentro da pasta
+              <strong>.ssh</strong> do usu&aacute;rio desejado dentro do
+              servidor.
+            </p>
+
+            <p>
+              Por exemplo: suponhamos que eu queira dar
+              autoriza&ccedil;&atilde;o para o usu&aacute;rio
+              &ldquo;Jo&atilde;ozinho&rdquo; (usado no linux anteriormente) para
+              acessar o servidor remoto como o usu&aacute;rio
+              &ldquo;Z&eacute;zinho&rdquo;. Ent&atilde;o eu digitaria o seguinte
+              no servidor remoto:
+            </p>
+
+            <pre>
+<code>sudo mkdir --mode=600 /home/zezinho/.ssh/
+sudo nano /home/zezinho/.ssh/authorized_keys</code></pre>
+
+            <p>
+              E colocaria a chave p&uacute;blica do
+              &ldquo;Jo&atilde;ozinho&rdquo; dentro do arquivo
+              &ldquo;authorized_keys&rdquo; do &ldquo;Z&eacute;zinho&rdquo;.
+            </p>
+
+            <p>
+              Agora cole os dados da sua chave p&uacute;blica dentro desse
+              arquivo e pressione &ldquo;CTRL&rdquo; + &ldquo;O&rdquo; para
+              salvar, &ldquo;CTRL&rdquo; + &ldquo;X&rdquo; para sair.
+            </p>
+
+            <p>
+              Se v&aacute;rios usu&aacute;rios poder&atilde;o se conectar usando
+              o usu&aacute;rio do servidor remoto, adicione uma chave
+              p&uacute;blica por linha no <strong>authorized_keys</strong>.
+            </p>
+
+            <p>
+              Pronto, configuramos os usu&aacute;rios, agora vamos configurar o
+              OpenSSH.
+            </p>
+
+            <h2>Configurando o OpenSSH</h2>
+
+            <p>Dentro do servidor remoto, digite o seguinte:</p>
+
+            <pre>
+<code>sudo nano /etc/ssh/sshd_config</code></pre>
+
+            <p>E altere as linhas:</p>
+
+            <pre>
+<code># ...
+PermitRootLogin no
+# ...
+PubkeyAuthentication yes
+# ...
+PasswordAuthentication no
+# ...</code></pre>
+
+            <p>
+              <strong>PermitRootLogin</strong> remove completamente o acesso do
+              root ao servidor SSH,
+              <strong>PubkeyAuthentication</strong> permite o acesso via chave
+              p&uacute;blica e <strong>PasswordAuthentication</strong> remove o
+              acesso via senhas de texto.
+            </p>
+
+            <p>
+              Pressione &ldquo;CTRL&rdquo;+&rdquo;O&rdquo; para salvar e
+              reinicie o servidor SSH:
+            </p>
+
+            <pre>
+<code>sudo service ssh restart</code></pre>
+
+            <p>
+              <strong>Aten&ccedil;&atilde;o:</strong> n&atilde;o feche sua
+              conex&atilde;o SSH atual. Para testar, abra uma nova
+              conex&atilde;o SSH, se der errado voc&ecirc; n&atilde;o
+              perder&aacute; sua conex&atilde;o atual.
+            </p>
+
+            <p>&Eacute; isso, se tiver d&uacute;vidas comenta a&iacute;.</p>
+
+            <!-- END CONTENT -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator"></div>
+    <div class="section-separator"></div>
+
+    <footer class="main-footer">
+      <a class="copyright-link" href="./">© Copyright - Otávio Miranda</a>
+    </footer>
+  </body>
+</html>

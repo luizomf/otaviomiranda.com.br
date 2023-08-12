@@ -1,0 +1,489 @@
+:root {
+  --clr-primary: #38b5ad;
+}
+
+/* @docs
+label: Core Remedies
+version: 0.1.0-beta.2
+
+note: |
+  These remedies are recommended
+  as a starter for any project.
+
+category: file
+*/
+
+/* @docs
+label: Box Sizing
+
+note: |
+  Use border-box by default, globally.
+
+category: global
+*/
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/* @docs
+label: Line Sizing
+
+note: |
+  Consistent line-spacing,
+  even when inline elements have different line-heights.
+
+links:
+  - https://drafts.csswg.org/css-inline-3/#line-sizing-property
+
+category: global
+*/
+/* html {
+  line-sizing: normal;
+} */
+
+/* @docs
+label: Body Margins
+
+note: |
+  Remove the tiny space around the edge of the page.
+
+category: global
+*/
+body {
+  margin: 0;
+}
+
+/* @docs
+label: Hidden Attribute
+
+note: |
+  Maintain `hidden` behaviour when overriding `display` values.
+
+  category: global
+*/
+[hidden] {
+  display: none;
+}
+
+/* @docs
+label: Heading Sizes
+
+note: |
+  Switch to rem units for headings
+
+category: typography
+*/
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.5rem;
+}
+h3 {
+  font-size: 1.17rem;
+}
+h4 {
+  font-size: 1rem;
+}
+h5 {
+  font-size: 0.83rem;
+}
+h6 {
+  font-size: 0.67rem;
+}
+
+/* @docs
+label: H1 Margins
+
+note: |
+  Keep h1 margins consistent, even when nested.
+
+category: typography
+*/
+h1 {
+  margin: 0.67em 0;
+}
+
+/* @docs
+label: Pre Wrapping
+
+note: |
+  Overflow by default is bad...
+
+category: typography
+*/
+/* pre {
+  white-space: pre-wrap;
+} */
+
+/* @docs
+label: Horizontal Rule
+
+note: |
+  1. Solid, thin horizontal rules
+  2. Remove Firefox `color: gray`
+  3. Remove default `1px` height, and common `overflow: hidden`
+
+category: typography
+*/
+hr {
+  border-style: solid;
+  border-width: 1px 0 0;
+  color: inherit;
+  height: 0;
+  overflow: visible;
+}
+
+/* @docs
+label: Responsive Embeds
+
+note: |
+  1. Block display is usually what we want
+  2. The `vertical-align` removes strange space-below in case authors overwrite the display value
+  3. Responsive by default
+  4. Audio without `[controls]` remains hidden by default
+
+category: embedded elements
+*/
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  /* vertical-align: middle; */
+  max-width: 100%;
+}
+audio:not([controls]) {
+  display: none;
+}
+
+/* @docs
+label: Responsive Images
+
+note: |
+  These new elements display inline by default,
+  but that's not the expected behavior for either one.
+  This can interfere with proper layout and aspect-ratio handling.
+
+  1. Remove the unnecessary wrapping `picture`, while maintaining contents
+  2. Source elements have nothing to display, so we hide them entirely
+
+category: embedded elements
+*/
+picture {
+  display: contents;
+}
+source {
+  display: none;
+}
+
+/* @docs
+label: Aspect Ratios
+
+note: |
+  Maintain intrinsic aspect ratios when `max-width` is applied.
+  `iframe`, `embed`, and `object` are also embedded,
+  but have no intrinsic ratio,
+  so their `height` needs to be set explicitly.
+
+category: embedded elements
+*/
+img,
+svg,
+video,
+canvas {
+  height: auto;
+}
+
+/* @docs
+label: Audio Width
+
+note: |
+  There is no good reason elements default to 300px,
+  and audio files are unlikely to come with a width attribute.
+
+category: embedded elements
+*/
+audio {
+  width: 100%;
+}
+
+/* @docs
+label: Image Borders
+
+note: |
+  Remove the border on images inside links in IE 10 and earlier.
+
+category: legacy browsers
+*/
+img {
+  border-style: none;
+}
+
+/* @docs
+label: SVG Overflow
+
+note: |
+  Hide the overflow in IE 10 and earlier.
+
+category: legacy browsers
+*/
+svg {
+  overflow: hidden;
+}
+
+/* @docs
+label: HTML5 Elements
+
+note: |
+  Default block display on HTML5 elements.
+  For oldIE to apply this styling one needs to add some JS as well (i.e. `document.createElement("main")`)
+
+links:
+  - https://www.sitepoint.com/html5-older-browsers-and-the-shiv/
+
+category: legacy browsers
+*/
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section {
+  display: block;
+}
+
+/* @docs
+label: Checkbox & Radio Inputs
+
+note: |
+  1. Add the correct box sizing in IE 10
+  2. Remove the padding in IE 10
+
+category: legacy browsers
+*/
+[type='checkbox'],
+[type='radio'] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.8rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+pre {
+  max-width: 100%;
+  overflow-x: auto;
+  font-size: 1.6rem;
+  background-color: #222;
+  padding: 1.5rem;
+  color: #fff;
+}
+
+pre,
+code {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+p img {
+  margin-inline: auto;
+}
+
+.main-header {
+  background-color: var(--clr-primary);
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.main-header h1 {
+  margin: 0;
+}
+
+h1 {
+  font-size: 2.8rem;
+}
+
+h2 {
+  font-size: 2.6rem;
+}
+
+h3 {
+  font-size: 2.4rem;
+}
+
+h4 {
+  font-size: 2.2rem;
+}
+
+h5 {
+  font-size: 2rem;
+}
+
+h6 {
+  font-size: 1.8rem;
+}
+
+.img-description {
+  color: #999;
+  text-align: center;
+  display: block;
+  font-style: italic;
+}
+
+.logo {
+  max-width: 6.4rem;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+}
+
+.section-wrapper {
+  margin: 3rem 0;
+}
+
+.section-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-inline: 3rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
+  gap: 3rem;
+}
+
+.profile-link {
+  display: block;
+  overflow: hidden;
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+}
+
+.profile-image {
+  width: 180px;
+  height: 180px;
+  aspect-ratio: 1/1;
+}
+
+.profile-text {
+  text-align: left;
+}
+
+.profile-text p {
+  margin: 1.5rem 0;
+}
+
+.profile-title,
+.profile-description {
+  margin-bottom: 1.5rem;
+}
+
+.profile-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.center {
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  color: #000;
+  background: var(--clr-primary);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  transition: filter 300ms ease-in-out;
+  text-align: center;
+}
+
+.btn:hover {
+  filter: brightness(90%);
+}
+
+.section-separator {
+  height: 3rem;
+}
+
+.course {
+  text-align: left;
+}
+
+.course-cover {
+  transition: filter 300ms ease-in-out;
+  height: auto;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.course-cover:hover {
+  filter: brightness(70%);
+}
+
+.course-title {
+  margin: 1.5rem 0;
+  margin-top: 3rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+.course-paragraph {
+  margin: 1.5rem 0;
+}
+
+.course-link-wrapper {
+  text-align: center;
+}
+
+.main-footer {
+  background-color: var(--clr-primary);
+  text-align: center;
+  padding: 1.5rem;
+  color: #fff;
+}
+
+.copyright-link {
+  text-decoration: none;
+  color: #000;
+}
+
+.profile-btn {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
+  gap: 3rem;
+}
+
+.post-metadata {
+  font-size: 1.6rem;
+  color: #666;
+  font-style: italic;
+}
+
+.video {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+}

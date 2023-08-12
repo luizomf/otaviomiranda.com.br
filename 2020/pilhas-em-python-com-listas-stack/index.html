@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <title>Pilhas em Python com listas (stack) - Otávio Miranda</title>
+    <meta
+      name="description"
+      content="Pilhas em Python são comumente criadas usando listas, porque estamos interessados em manipular apenas a extremidade do topo da estrutura (o final da lista)."
+    />
+    <link rel="icon" type="image/webp" href="../../imgs/favicon-1.webp" />
+  </head>
+  <body>
+    <header class="main-header">
+      <h1>
+        <a class="logo-link" href="/" title="Cursos - Otávio Miranda">
+          <img
+            loading="lazy"
+            src="../../imgs/otaviomirandalogo-2.webp"
+            alt="Logo - Otávio Miranda"
+            class="logo"
+            width="64"
+            height="64"
+          />
+        </a>
+      </h1>
+    </header>
+
+    <div class="section-separator"></div>
+
+    <section class="section-wrapper">
+      <div class="section-content">
+        <div class="profile-text">
+          <h1 class="profile-title">
+            <a href="./">Pilhas em Python com listas (stack)</a>
+          </h1>
+          <div class="post-metadata">4 de abril de 2020 por Otávio Miranda</div>
+
+          <div class="profile-description">
+            <!-- START CONTENT -->
+
+            <p>
+              Pilhas em Python s&atilde;o comumente criadas usando
+              <a
+                href="https://docs.python.org/pt-br/3.8/tutorial/datastructures.html"
+                >listas</a
+              >, porque estamos interessados em manipular apenas a extremidade
+              do topo da estrutura (o final da lista). Isso nos garante
+              <a href="https://wiki.python.org/moin/TimeComplexity"
+                >complexidade de tempo O(1)</a
+              >
+              (tempo constante) com m&eacute;todos <code>append</code> e
+              <code>pop</code>.
+            </p>
+
+            <p>
+              Uma pilha &eacute; uma cole&ccedil;&atilde;o de itens que segue o
+              princ&iacute;pio <strong>LIFO</strong> (<strong>L</strong>ast
+              <strong>I</strong>n <strong>F</strong>irst <strong>O</strong>ut) ,
+              ou seja, o &uacute;ltimo item a entrar, ser&aacute; o primeiro a
+              sair. A adi&ccedil;&atilde;o e remo&ccedil;&atilde;o de novos
+              itens ocorre sempre na mesma ponta da pilha, o final da lista. O
+              final da lista (&uacute;ltimo &iacute;ndice), representa o topo da
+              pilha, o come&ccedil;o da lista (&iacute;ndice 0) representa a
+              base da pilha.
+            </p>
+
+            <p>
+              Itens mais novos s&atilde;o sempre adicionados no topo da pilha e
+              se tornam mais antigos a medida que adicionamos outros itens.
+              Quanto maior o &iacute;ndice na lista, mais novo &eacute; o item e
+              mais cedo ele ser&aacute; removido da pilha.
+            </p>
+
+            <p>
+              Pilhas s&atilde;o estruturas de dados muito simples, mas podem ser
+              usadas para representar v&aacute;rias coisas no mundo real, por
+              exemplo: uma pilha de pratos, uma pilha de livros ou qualquer
+              coisa que voc&ecirc; coloque uma sobre a outra formando uma pilha.
+              Al&eacute;m disso, programas tamb&eacute;m usam pilhas, como a
+              <a
+                href="https://www.otaviomiranda.com.br/2020/funcoes-recursivas-com-python/#Call_stack"
+                >pilha de chamadas</a
+              >
+              para fun&ccedil;&otilde;es que j&aacute; vimos anteriormente nesse
+              blog.
+            </p>
+            <h2>Listas s&atilde;o pilhas muito gen&eacute;ricas em Python</h2>
+
+            <p>
+              Como pilhas s&oacute; precisam de m&eacute;todos para adicionar e
+              remover itens do seu topo, as listas do Python j&aacute; fazem
+              esse trabalho com excel&ecirc;ncia e complexidade de tempo O(1),
+              ou tempo constante. Ent&atilde;o, &eacute; super r&aacute;pido.
+            </p>
+
+            <p>
+              Por&eacute;m, ou voc&ecirc; s&oacute; usa esses dois
+              m&eacute;todos (<code>append</code> e <code>pop</code>), ou
+              voc&ecirc; cria sua pr&oacute;pria estrutura de dados chamada de
+              <code>Stack</code> (uma classe que voc&ecirc; ver&aacute; ao final
+              desse post) para outros desenvolvedores n&atilde;o usarem sua
+              pilha de maneira gen&eacute;rica (como filas, por exemplo).
+            </p>
+
+            <p>
+              Se voc&ecirc; quiser trabalhar diretamente com as listas, pode
+              fazer o seguinte:
+            </p>
+
+            <pre>
+# Para Type annotation
+from typing import List
+
+# Pilha de livros com type annotation
+stack_of_books: List[str] = []  # {1}
+
+# Adicionando livros no topo da pilha
+stack_of_books.append('Livro 1')  # {2}
+stack_of_books.append('Livro 2')  # {2}
+stack_of_books.append('Livro 3')  # {2}
+
+# Obtendo o elemento mais novo
+book = stack_of_books.pop()  # {3}
+
+print(book)  # Livro 3 {4}</pre
+            >
+
+            <p>
+              Perceba que no c&oacute;digo acima, criei uma pilha de livros
+              (<code>stack_of_books</code>) como uma lista vazia {1}. Quando
+              precisei adicionar livros na pilha, usei o m&eacute;todo
+              <code>append</code>, que &eacute; padr&atilde;o de listas em
+              Python para adicionar itens ao final da lista {2}. Al&eacute;m
+              disso, quando precisei obter o livro mais novo (do topo da pilha),
+              usei o m&eacute;todo <code>pop</code>, que tamb&eacute;m &eacute;
+              padr&atilde;o de listas em Python para obter o &uacute;ltimo item
+              da lista (ou o elemento do topo da pilha) {3}.
+            </p>
+
+            <p>
+              Na verdade, o m&eacute;todo <code>pop</code> faz duas coisas.
+              Al&eacute;m de remover o item do topo da pilha, ele tamb&eacute;m
+              retorna este valor. Ent&atilde;o, Isso me permitiu fazer duas
+              coisas em {3}: remover o item do topo da pilha e coletar seu valor
+              em uma vari&aacute;vel.
+            </p>
+
+            <p>
+              Por fim {4}, imprimimos o valor de book, que foi o &ldquo;Livro
+              3&rdquo;.
+            </p>
+            <h3>Cuidados com pop</h3>
+
+            <p>
+              Note que, a cada execu&ccedil;&atilde;o do m&eacute;todo
+              <code>pop</code>, o item mais novo ser&aacute; removido da pilha.
+              Em algum momento, sua pilha poder&aacute; estar vazia e esse
+              m&eacute;todo levantar&aacute; a exce&ccedil;&atilde;o
+              &ldquo;<code>IndexError: pop from empty list</code>&ldquo;, ou
+              &ldquo;<em>Erro de &iacute;ndice: pop de uma lista vazia</em
+              >&rdquo; (em tradu&ccedil;&atilde;o livre).
+            </p>
+
+            <pre>
+# Para Type annotation
+from typing import List
+
+# Pilha de livros com type annotation
+stack_of_books: List[str] = []  # {1}
+
+# Adicionando livros no topo da pilha
+stack_of_books.append('Livro 1')  # {2}
+stack_of_books.append('Livro 2')  # {2}
+stack_of_books.append('Livro 3')  # {2}
+
+# Obtendo o elemento mais novo
+book_1 = stack_of_books.pop()  # Livro 3 {3}
+book_2 = stack_of_books.pop()  # Livro 2 {3}
+book_3 = stack_of_books.pop()  # Livro 1 {3}
+
+# IndexError: pop from empty list
+book = stack_of_books.pop()  # Não há mais livros {4}
+</pre
+            >
+
+            <p>
+              Isso ocorre porque n&atilde;o h&aacute; mais valores para serem
+              removidos e recuperados da sua pilha {4}.
+            </p>
+
+            <p>
+              Para prevenir esse tipo de situa&ccedil;&atilde;o, podemos
+              envolver nosso c&oacute;digo em um bloco <code>try</code> e
+              <code>except</code>, tratando a exce&ccedil;&atilde;o
+              &ldquo;<code>IndexError</code>&ldquo;. Veja:
+            </p>
+
+            <pre>
+# Para Type annotation
+from typing import List
+
+# Pilha de livros com type annotation
+stack_of_books: List[str] = []  # {1}
+
+# Adicionando livros no topo da pilha
+stack_of_books.append('Livro 1')  # {2}
+stack_of_books.append('Livro 2')  # {2}
+stack_of_books.append('Livro 3')  # {2}
+
+try:
+    # Obtendo o elemento mais novo
+    book_1 = stack_of_books.pop()  # Livro 3 {3}
+    print(book_1)  # Livro 3
+
+    book_2 = stack_of_books.pop()  # Livro 2 {3}
+    print(book_2)  # Livro 2
+
+    book_3 = stack_of_books.pop()  # Livro 1 {3}
+    print(book_3)  # Livro 1
+
+    # IndexError: pop from empty list
+    book = stack_of_books.pop()  # Não há mais livros {4}
+    print(book)  # Seu código não chegará aqui
+except IndexError:
+    print('Trate o erro como preferir aqui.')
+</pre
+            >
+
+            <p>
+              Assim, a partir do momento que a exceção ocorrer {4}, seu código
+              pulará imediatamente para o bloco except. Se não houver exceções,
+              seu código não executará o bloco except.
+            </p>
+            <h3>N&atilde;o use listas como filas</h3>
+
+            <p>
+              Al&eacute;m das pilhas, outra estrutura de dados muito usada em
+              programa&ccedil;&atilde;o s&atilde;o as filas (falamos sobre elas
+              em outro artigo). Basicamente, filas trabalham no lado oposto das
+              pilhas. Ent&atilde;o, se nas pilhas voc&ecirc; trabalha na
+              extremidade final (adicionando e removendo itens do topo), nas
+              filas voc&ecirc; trabalha nas duas extremidades, enfileirando
+              itens no final (topo) e desenfileirando itens do in&iacute;cio
+              (base).
+            </p>
+
+            <p>
+              As listas podem ser usadas para filas tamb&eacute;m, por&eacute;m,
+              n&atilde;o &eacute; recomend&aacute;vel. Isso torna sua
+              complexidade de tempo O(n), ou tempo linear, o que torna as listas
+              mais lentas para isso.
+            </p>
+
+            <p>
+              O m&eacute;todo pop, pode receber o &iacute;ndice que voc&ecirc;
+              pretende remover da pilha, por exemplo (mas n&atilde;o fa&ccedil;a
+              isso):
+            </p>
+
+            <pre>
+# Para Type annotation
+from typing import List
+
+# Pilha de livros com type annotation
+stack_of_books: List[str] = []  # {1}
+
+# Adicionando livros no topo da pilha
+stack_of_books.append('Livro 1')  # {2}
+stack_of_books.append('Livro 2')  # {2}
+stack_of_books.append('Livro 3')  # {2}
+
+book_1 = stack_of_books.pop(0)  # {3} Livro 1
+
+print(book_1)  # Livro 1
+            </pre>
+
+            <p>
+              Perceba que, no c&oacute;digo acima, eu consigo passar um
+              &iacute;ndice para <code>pop</code> descrevendo qual livro quero
+              remover da pilha {3}. Assim, isso me permite remover o item da
+              base da minha pilha (&iacute;ndice 0). Mas, o problema ao fazer
+              algo assim, &eacute; que como as listas n&atilde;o foram
+              otimizadas para tal, todos os outros itens da lista agora precisam
+              ter seus &iacute;ndices alterados. O que tinha &iacute;ndice 1,
+              passa a ter &iacute;ndice 0, o que tinha &iacute;ndice 2, passa a
+              ter &iacute;ndice 1 e assim por diante.
+            </p>
+
+            <p>
+              A complexidade de tempo O(n) significa que, na pior das
+              hip&oacute;teses, quando eu removo um item da base da minha pilha
+              (como nas filas), todos os outros items agora precisam ser
+              modificados, e eu assumo que n&atilde;o era essa a sua
+              inten&ccedil;&atilde;o.
+            </p>
+
+            <p>
+              N&oacute;s j&aacute; falamos sobre filas aqui, mas para resumir,
+              use
+              <a
+                href="https://docs.python.org/pt-br/3.8/library/collections.html#collections.deque"
+                >collections.deque</a
+              >
+              para filas e listas para pilhas.
+            </p>
+
+            <h2>Iterando pilhas</h2>
+
+            <p>
+              Em Python a itera&ccedil;&atilde;o dos iter&aacute;veis &eacute;
+              feita com <code>for</code>. Se voc&ecirc; n&atilde;o quer remover
+              nenhum elemento, mas apenas iterar sobre toda a pilha, fa&ccedil;a
+              o seguinte:
+            </p>
+
+            <pre>
+# Para Type annotation
+from typing import List
+
+# Pilha de livros com type annotation
+stack_of_books: List[str] = []  # {1}
+
+# Adicionando livros no topo da pilha
+stack_of_books.append('Livro 1')  # {2}
+stack_of_books.append('Livro 2')  # {2}
+stack_of_books.append('Livro 3')  # {2}
+
+# Laço for
+for book in stack_of_books[::-1]:
+    # Faça o que preferir com o Livro
+    print(book)
+
+"""
+Saída:
+Livro 3
+Livro 2
+Livro 1
+"""
+</pre
+            >
+            <p>
+              Perceba que no c&oacute;digo acima, na linha 13, temos um
+              la&ccedil;o for que vai iterar em todos os elementos da lista.
+              Ent&atilde;o eu posso fazer o que preferir com a vari&aacute;vel
+              <code>book</code>.
+            </p>
+
+            <p>
+              <strong>Detalhe importante:</strong> para manter a ordem da pilha
+              (do topo para a base), eu preciso fazer uma itera&ccedil;&atilde;o
+              em ordem reversa na pilha quando uso <code>for</code>. Por isso
+              adicionei <code>[::-1] </code>em <code>stack_of_books</code>. Isso
+              inverte a ordem de listas em Python.
+            </p>
+
+            <p>
+              Um outro tipo de itera&ccedil;&atilde;o sobre pilha, seria
+              removendo os elementos da pilha ao mesmo tempo que itero sobre
+              eles. Podemos fazer isso com o la&ccedil;o <code>while</code>:
+            </p>
+
+            <pre>
+# Para Type annotation
+from typing import List
+
+# Pilha de livros com type annotation
+stack_of_books: List[str] = []  # {1}
+
+# Adicionando livros no topo da pilha
+stack_of_books.append('Livro 1')  # {2}
+stack_of_books.append('Livro 2')  # {2}
+stack_of_books.append('Livro 3')  # {2}
+
+# Laço while
+while stack_of_books:
+    book = stack_of_books.pop()
+    print(book)
+
+"""
+Saída:
+Livro 3
+Livro 2
+Livro 1
+"""
+            </pre>
+
+            <p>
+              Perceba que usando o la&ccedil;o <code>while</code> com o
+              m&eacute;todo <code>pop</code>, a ordem &eacute; mantida.
+              Por&eacute;m, &eacute; importante saber que estou removendo cada
+              um dos elementos da minha pilha.
+            </p>
+
+            <h2>Copiando pilhas</h2>
+
+            <p>
+              Trabalhar com dados mut&aacute;veis, como as listas, pode ser
+              perigoso em qualquer linguagem de programa&ccedil;&atilde;o porque
+              manipulamos o dado diretamente. Ent&atilde;o, &eacute; uma boa
+              ideia manter uma c&oacute;pia do dado original sempre que o
+              manipulamos (se for poss&iacute;vel, &eacute; claro). Por outro
+              lado, pode ser caro manter c&oacute;pia de dados que s&atilde;o
+              muito grandes, ent&atilde;o voc&ecirc; precisa ponderar as duas
+              coisas: seguran&ccedil;a e peso.
+            </p>
+
+            <p>
+              Manter a c&oacute;pia de uma lista, pode ter uma complexidade de
+              tempo linear O(n) se voc&ecirc; fizer uma c&oacute;pia rasa
+              (shallow copy) ou mais do que isso se voc&ecirc; mantiver uma
+              c&oacute;pia profunda (deep copy).
+            </p>
+
+            <h3>Shallow copy:</h3>
+
+            <p>
+              Esse tipo de c&oacute;pia &eacute; um clone superficial dos itens
+              da pilha. Ela tem complexidade de tempo linear &ndash; O(n)
+              &ndash; o que significa que &eacute; necess&aacute;rio passar por
+              todos os itens para realizar a c&oacute;pia destes. A parte
+              interessante desse tipo de c&oacute;pia &eacute; que dados
+              imut&aacute;veis (como str, int, float e bool) ser&atilde;o
+              realmente copiados para uma nova pilha. Por&eacute;m, dados
+              mut&aacute;veis (como outras listas, dicion&aacute;rios e sets)
+              n&atilde;o ser&atilde;o copiados, a nova pilha ter&aacute; apenas
+              uma refer&ecirc;ncia para os dados mut&aacute;veis da pilha
+              original.
+            </p>
+
+            <p>
+              Para realizar uma c&oacute;pia do tipo shallow copy da sua pilha,
+              fa&ccedil;a o seguinte:
+            </p>
+
+            <pre>
+# Para Type annotation
+from typing import List
+
+# Pilha de livros com type annotation
+stack_of_books: List[str] = []  # {1}
+
+# Adicionando livros no topo da pilha
+stack_of_books.append('Livro 1')  # {2}
+stack_of_books.append('Livro 2')  # {2}
+stack_of_books.append('Livro 3')  # {2}
+
+# A cópia (shallow copy)
+stack_of_books_copy = stack_of_books.copy()
+
+# Agora não estou mais alterando os dados
+# da pilha original.
+while stack_of_books_copy:
+    print(stack_of_books_copy.pop())
+
+# A original continua intacta
+print(stack_of_books)  # ['Livro 1', 'Livro 2', 'Livro 3']
+            </pre>
+            <h3>Deep copy</h3>
+
+            <p>
+              Quando falamos em pilhas que cont&eacute;m dados mut&aacute;veis,
+              como por exemplo, outras listas dentro da nossa pilha. &Eacute;
+              preciso tomar cuidado com a shallow copy, porque ela n&atilde;o
+              vai copiar esses elementos, vai fazer apenas uma refer&ecirc;ncia
+              apontando para os dados da lista original. Isso significa que meus
+              dados ainda continuar&atilde;o mut&aacute;veis internamente, mesmo
+              na c&oacute;pia.
+            </p>
+
+            <p>
+              A complexidade de tempo de uma deep copy vai depender da
+              profundidade dos itens mut&aacute;veis da sua pilha, quanto maior
+              a profundidade, maior a complexidade (mais tempo leva).
+            </p>
+
+            <p>Imagine essa estrutura de dados:</p>
+
+            <pre>
+# Para Type annotation
+from typing import List
+
+# Pilha de listas
+stack_of_lists: List[List[str]] = []
+
+# Adicionando elementos
+stack_of_lists.append(['A', 'B'])
+stack_of_lists.append(['C', 'D'])
+stack_of_lists.append(['E', 'F'])
+            </pre>
+
+            <p>
+              Esse é um tipo de estrutura que devo tomar cuidado, porque existem
+              listas dentro da minha pilha.
+            </p>
+
+            <p>Veja o problema:</p>
+
+            <pre>
+# Para Type annotation
+from typing import List
+
+# Pilha de listas
+stack_of_lists: List[List[str]] = []
+
+# Adicionando elementos
+stack_of_lists.append(['A', 'B'])
+stack_of_lists.append(['C', 'D'])
+stack_of_lists.append(['E', 'F'])
+
+# Shallow copy
+stack_of_lists_clone = stack_of_lists.copy()
+
+# Obtendo o elemento do topo da pilha
+# Isso não altera a lista original
+item = stack_of_lists_clone.pop()
+
+# Mas isso sim
+item[0] = 'ALTERANDO O DADO'
+
+# Veja o resultado na lista original
+print(stack_of_lists)
+
+"""
+Saída:
+[['A', 'B'], ['C', 'D'], ['ALTERANDO O DADO', 'F']]
+"""
+            </pre>
+
+            <p>
+              Os coment&aacute;rios do c&oacute;digo acima, explicam o que
+              ocorre em cada trecho. Mas, aqui vai uma breve
+              explica&ccedil;&atilde;o:
+            </p>
+
+            <ul>
+              <li>
+                Linha 13 &ndash; Fa&ccedil;o uma shallow copy da minha pilha.
+                Como te descrevi anteriormente, dados mut&aacute;veis N&Atilde;O
+                s&atilde;o copiados de dentro da pilha original, eles passados
+                apenas como refer&ecirc;ncia. Isso significa que a lista
+                c&oacute;pia ter&aacute; uma refer&ecirc;ncia desses dados
+                (voc&ecirc; consegue acess&aacute;-los por ela) mas eles ainda
+                s&atilde;o os dados da lista original e n&atilde;o uma
+                c&oacute;pia real;
+              </li>
+              <li>
+                Linha 17 &ndash; Obt&eacute;m o item do topo da lista (esse
+                ainda &eacute; o dado da lista original);
+              </li>
+              <li>
+                Linha 20 &ndash; Altero o item. Por&eacute;m, como esse item
+                &eacute; uma refer&ecirc;ncia ao item da lista original, quem
+                ser&aacute; alterado efetivamente ser&aacute; o item da lista
+                original;
+              </li>
+              <li>Linha 23 &ndash; Percebo a besteira que fiz.</li>
+            </ul>
+
+            <p>
+              Para solucionar esse tipo de coisa, usamos a deep copy, que
+              &eacute; um tipo de c&oacute;pia recursiva. Com isso, todos os
+              dados, mut&aacute;veis e imut&aacute;veis ser&atilde;o copiados
+              para a lista c&oacute;pia.
+            </p>
+
+            <p>Veja:</p>
+
+            <pre>
+# Para Type annotation
+from typing import List
+
+# Preciso importar deepcopy
+from copy import deepcopy
+
+# Pilha de listas
+stack_of_lists: List[List[str]] = []
+
+# Adicionando elementos
+stack_of_lists.append(['A', 'B'])
+stack_of_lists.append(['C', 'D'])
+stack_of_lists.append(['E', 'F'])
+
+# Deep copy
+stack_of_lists_clone = deepcopy(stack_of_lists)
+
+# Obtendo o elemento do topo da pilha
+# Isso não altera a lista original
+item = stack_of_lists_clone.pop()
+
+# Mas isso sim
+item[0] = 'ALTERANDO O DADO'
+
+# Veja o resultado na lista original
+print(stack_of_lists)
+
+"""
+Saída:
+[['A', 'B'], ['C', 'D'], ['E', 'F']]
+"""
+</pre
+            >
+
+            <p>
+              Veja que as &uacute;nicas coisas alteradas foram na linha 5,
+              porque eu preciso importar &ldquo;deepcopy&rdquo; do m&oacute;dulo
+              &ldquo;copy&rdquo;. E a linha 16, porque ao inv&eacute;s de
+              &ldquo;shallow copy&rdquo;, agora estou fazendo uma &ldquo;deep
+              copy&rdquo;.
+            </p>
+
+            <h2>Classe Stack</h2>
+
+            <p>
+              A maneira mais segura e correta de se trabalhar com listas como
+              pilhas em Python, &eacute; proteger o c&oacute;digo para que os
+              m&eacute;todos gen&eacute;ricos das listas n&atilde;o possam ser
+              chamados diretamente. Assim protegeremos o nosso c&oacute;digo
+              para que outros desenvolvedores n&atilde;o possam chamar um
+              <code>pop(0)</code> na nossa pilha, dentre v&aacute;rios outros.
+            </p>
+
+            <p>
+              Criando uma classe, podemos adicionar exclusivamente os
+              m&eacute;todos que queremos. Como append, pop e alguns
+              m&eacute;todos m&aacute;gicos para itera&ccedil;&atilde;o e
+              visualiza&ccedil;&atilde;o de dados.
+            </p>
+
+            <pre>
+from typing import List, Any
+from copy import deepcopy
+
+
+class Stack:
+    """Uma classe representando uma pilha"""
+
+    def __init__(self) -> None:
+        # Essa stack é genérica, por isso
+        # a lista poderá receber qualquer
+        # tipo de dados
+        self.__data: List[Any] = []
+
+        # Representa o índice para iterações
+        # com for
+        self.__index = 0
+
+    def append(self, item: Any) -> None:
+        """Representa o append da lista"""
+        self.__data.append(item)
+
+    def pop(self) -> Any:
+        """Representa o pop da lista sem parâmetros"""
+        if not self.__data:
+            return
+
+        return self.__data.pop()
+
+    def peek(self) -> Any:
+        """Mostra o último elemento adicionado à pilha"""
+        if not self.__data:
+            return
+
+        return self.__data[-1]
+
+    def __repr__(self) -> str:
+        """Representação dos dados"""
+        return str(self.__data)
+
+    def __iter__(self):
+        """Para iteração com for"""
+        self.__index = len(self.__data)
+        return self
+
+    def __next__(self):
+        """Para iteração com for (next item)"""
+        if self.__index == 0:
+            raise StopIteration
+
+        self.__index -= 1
+        return self.__data[self.__index]
+
+    def __bool__(self):
+        """Para iteração com while"""
+        return bool(self.__data)
+
+
+if __name__ == "__main__":
+    stack = Stack()
+
+    stack.append('A')
+    stack.append('B')
+    stack.append('C')
+
+    print('FOR:')
+    for item in stack:
+        print(item)
+    print()
+
+    print('POP:')
+    last_item = stack.pop()
+    print(stack, last_item)
+    print()
+
+    print('WHILE:')
+    stack_copy = deepcopy(stack)
+    while stack_copy:
+        print(stack_copy.pop())
+    print()
+
+    print('ORIGINAL STACK:')
+    print(stack)
+</pre
+            >
+
+            <h2>Resumo</h2>
+
+            <p>
+              Em Python, usamos as listas como pilhas (nunca como filas). Elas
+              s&atilde;o estruturas de dados bem simples que precisam de apenas
+              dois m&eacute;todos para funcionarem corretamente. Um
+              m&eacute;todo de inser&ccedil;&atilde;o e outro de
+              remo&ccedil;&atilde;o de valores (<code>append</code> e
+              <code>pop</code>). Geralmente, o m&eacute;todo de
+              remo&ccedil;&atilde;o (pop) tamb&eacute;m retorna o valor removido
+              e voc&ecirc; pode us&aacute;-lo com o que preferir.
+            </p>
+
+            <p>
+              As pilhas trabalham apenas na extremidade final da lista, por isso
+              t&ecirc;m comportamento LIFO (Last In First Out), ou, o
+              &uacute;ltimo a entrar &eacute; o primeiro a sair. O &uacute;ltimo
+              elemento adicionado &eacute; considerado o elemento do topo da
+              pilha; o primeiro elemento adicionado &eacute; o elemento da base
+              da pilha.
+            </p>
+
+            <p>
+              Podemos iterar sobre pilhas usando la&ccedil;os
+              <code>for</code> (invertendo seus valores) ou la&ccedil;o
+              <code>while</code> combinado com <code>pop</code>.
+            </p>
+
+            <p>
+              &Eacute; poss&iacute;vel copiar listas utilizando shallow copy ou
+              deep copy.
+            </p>
+
+            <p>
+              &Eacute; s&oacute; isso&hellip; Te vejo no pr&oacute;ximo artigo.
+            </p>
+
+            <!-- END CONTENT -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator"></div>
+    <div class="section-separator"></div>
+
+    <footer class="main-footer">
+      <a class="copyright-link" href="./">© Copyright - Otávio Miranda</a>
+    </footer>
+  </body>
+</html>

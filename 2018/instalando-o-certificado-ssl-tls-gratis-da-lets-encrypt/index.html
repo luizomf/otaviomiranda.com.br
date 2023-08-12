@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <title>
+      Instalando o certificado SSL-TLS grátis da Let’s Encrypt - Otávio Miranda
+    </title>
+    <meta
+      name="description"
+      content="Instalando o certificado SSL-TLS grátis da Let’s Encrypt"
+    />
+    <link rel="icon" type="image/webp" href="../../imgs/favicon-1.webp" />
+  </head>
+  <body>
+    <header class="main-header">
+      <h1>
+        <a class="logo-link" href="/" title="Cursos - Otávio Miranda">
+          <img
+            loading="lazy"
+            src="../../imgs/otaviomirandalogo-2.webp"
+            alt="Logo - Otávio Miranda"
+            class="logo"
+            width="64"
+            height="64"
+          />
+        </a>
+      </h1>
+    </header>
+
+    <div class="section-separator"></div>
+
+    <section class="section-wrapper">
+      <div class="section-content">
+        <div class="profile-text">
+          <h1 class="profile-title">
+            <a href="./"
+              >Instalando o certificado SSL-TLS grátis da Let’s Encrypt</a
+            >
+          </h1>
+
+          <div class="post-metadata">4 de abril de 2018 por Otávio Miranda</div>
+
+          <div class="profile-description">
+            <!-- START CONTENT -->
+
+            <p>
+              Nesse artigo voc&ecirc; vai aprender a instalar e configurar o
+              certificado SSL-TLS gr&aacute;tis da Let&rsquo;s Encrypt em
+              quantos dom&iacute;nios preferir. &Eacute; HTTPS gratuito para
+              todos os seus sites.
+            </p>
+
+            <p>
+              Quando falamos em com&eacute;rcio eletr&ocirc;nico, estamos
+              falando em duas coisas extremamente importantes e
+              sens&iacute;veis: dados pessoais e dinheiro. Portanto, a
+              seguran&ccedil;a &eacute; primordial para que todos os dados
+              passem atrav&eacute;s de conex&otilde;es seguras.
+            </p>
+
+            <p>
+              Certamente, voc&ecirc; j&aacute; deve ter ouvido algum
+              especialista em
+              <a href="https://www.otaviomiranda.com.br/categoria/seguranca/"
+                >seguran&ccedil;a online</a
+              >
+              explicando que, uma das primeiras coisas a se verificar para saber
+              se um e-commerce qualquer &eacute; seguro, &eacute; verificar se
+              ele possui &ldquo;aquele cadeado&rdquo; falando que a
+              conex&atilde;o &eacute; segura (ou, ao inv&eacute;s de usar
+              <strong>HTTP</strong> no in&iacute;cio do
+              <a
+                href="https://www.otaviomiranda.com.br/2018/dominio-e-hospedagem-guia-para-leigos/"
+                >dom&iacute;nio</a
+              >, usar <strong>HTTPS</strong>).
+            </p>
+
+            <p>
+              Na verdade, todos os sites que utilizam
+              <a
+                href="https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure"
+                >HTTPS</a
+              >
+              (<em>Hyper Text Transfer Protocol Secure</em>) t&ecirc;m uma
+              camada adicional de seguran&ccedil;a que usa o protocolo
+              <a href="https://pt.wikipedia.org/wiki/Transport_Layer_Security"
+                >SSL-TLS</a
+              >. Essa camada de seguran&ccedil;a permite que dados sejam
+              transmitidos por uma conex&atilde;o criptografada que verifica a
+              autenticidade do servidor e do computador cliente usando
+              certificados SSL-TLS. A porta TCP usada pelo HTTPS &eacute; a 443.
+            </p>
+
+            <p>
+              Falando em modo superficial, qualquer dado pessoal que o cliente
+              digitar em um site com HTTPS, s&oacute; poder&aacute; ser lido no
+              servidor para o qual ele foi enviado. Se, por algum motivo, algum
+              hacker consiga capturar os dados no meio do caminho, esses dados
+              estar&atilde;o fortemente criptografados e seria quase
+              imposs&iacute;vel l&ecirc;-los (digo &ldquo;quase&rdquo;, porque
+              nunca se sabe, n&eacute;?).
+            </p>
+
+            <p>
+              Al&eacute;m disso, se voc&ecirc; se preocupa com
+              <a href="https://marketingdeconteudo.com/o-que-e-seo/">SEO</a>
+              (aparecer primeiro nas buscas), HTTPS tamb&eacute;m dever&aacute;
+              ajudar
+              <a
+                href="https://imasters.com.br/devsecops/o-impacto-ssl-e-o-https-ranking-em-seo"
+                >seu site a se posicionar melhor</a
+              >
+              no google, por exemplo.
+            </p>
+
+            <p>
+              A
+              <a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a>
+              &eacute; uma autoridade de certifica&ccedil;&atilde;o
+              lan&ccedil;ada em 12 de abril de 2016, que fornece certificados
+              SSL-TLS gr&aacute;tis atrav&eacute;s de um processo automatizado,
+              criado para eliminar a complexidade dos processos atuais de
+              cria&ccedil;&atilde;o, valida&ccedil;&atilde;o,
+              instala&ccedil;&atilde;o e renova&ccedil;&atilde;o de certificados
+              para sites seguros. Sua inten&ccedil;&atilde;o &eacute; fazer com
+              que toda a Internet use HTTPS por uma web mais segura.
+            </p>
+
+            <p>
+              Com poucos comandos voc&ecirc; conseguir&aacute; instalar e
+              configurar seu certificado SSL-TLS, habilitando assim HTTPS para
+              seu site.
+            </p>
+
+            <p>
+              Ent&atilde;o vamos &agrave;s configura&ccedil;&otilde;es. Bora
+              l&aacute;!
+            </p>
+
+            <h2>Antes de come&ccedil;ar</h2>
+
+            <p>
+              Este tutorial &eacute; voltado para a instala&ccedil;&atilde;o do
+              certificado SSL-TLS gr&aacute;tis da Let&rsquo;s Encrypt
+              diretamente no servidor, sendo, assim, n&atilde;o vou me atentar
+              para
+              <a
+                href="https://www.otaviomiranda.com.br/2018/dominio-e-hospedagem-guia-para-leigos/"
+                >hospedagens</a
+              >
+              que ofere&ccedil;am este recurso em seus respectivos
+              pain&eacute;is. Se a sua hospedagem oferece certificado SSL
+              gratuito (certamente, &eacute; da Let&rsquo;s Encrypt), por favor,
+              utilize o pr&oacute;prio painel da hospedagem para habilitar HTTPS
+              no seu site, certamente, eles t&ecirc;m um tutorial explicando
+              como realizar tal procedimento.
+            </p>
+
+            <p>
+              No momento da cria&ccedil;&atilde;o deste tutorial, estou usando o
+              Debian 9. Este tutorial dever&aacute; funcionar perfeitamente em
+              qualquer vers&atilde;o baseada em Debian (Ubuntu, Linux Mint e
+              assim por diante).
+            </p>
+
+            <p>
+              Vou explicar como instalar e configurar o certificado.
+              Posteriormente no artigo, explicar como configurar um server block
+              para <strong>Nginx</strong> e como configurar um Virtualhost para
+              <strong>Apache</strong>.
+            </p>
+
+            <p>
+              Se voc&ecirc; ainda n&atilde;o instalou nem configurou nenhum
+              desses servidores Web, siga um dos tutoriais abaixo:
+            </p>
+
+            <ul>
+              <li>
+                <a
+                  href="https://www.otaviomiranda.com.br/2018/nginx-php-fpm-no-linux/"
+                  >nginx + php-fpm no Linux (Debian ou Ubuntu)</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.otaviomiranda.com.br/2018/apache2-php-fpm-ubuntu-debian/"
+                  >Como instalar e configurar o Apache2 e o PHP-FPM no Ubuntu ou
+                  Debian</a
+                >
+              </li>
+            </ul>
+
+            <p>
+              Feito isso, agora &eacute; s&oacute; prosseguir com o tutorial.
+            </p>
+
+            <h2>Instalando o certbot</h2>
+
+            <p>
+              <strong>certbot</strong> &eacute; o cliente que vai buscar os
+              certificados da Let&rsquo;s Encrypt. Muito f&aacute;cil de usar e
+              instalar.
+            </p>
+
+            <p>Para instalar basta digitar:</p>
+
+            <pre>
+<code>sudo apt-get install certbot</code></pre>
+
+            <p>No seu terminal.</p>
+
+            <h2>Instalando o certificado SSL-TLS</h2>
+
+            <p>
+              Ap&oacute;s a instala&ccedil;&atilde;o do certbot, voc&ecirc;
+              precisa parar os servi&ccedil;os que rodam na porta 80 (apache ou
+              nginx). Para isso basta digitar:
+            </p>
+
+            <pre>
+<code># Para o nginx
+service nginx stop
+# Para o apache2
+service apache2 stop</code></pre>
+
+            <p>E para instalar o certificado SSL-TLS digite:</p>
+
+            <pre>
+<code>sudo certbot certonly --standalone -d meudominio.com.br -d www.meudominio.com.br</code></pre>
+
+            <p>
+              A &uacute;nica coisa que voc&ecirc; precisa alterar s&atilde;o os
+              dom&iacute;nios. Geralmente, um dom&iacute;nio tem duas
+              vers&otilde;es:
+            </p>
+
+            <ul>
+              <li>meudominio.com.br</li>
+              <li>www.meudominio.com.br</li>
+            </ul>
+
+            <p>
+              Ambas apontando para o mesmo local, se esse for o seu caso, no
+              comando acima altere apenas a parte
+              &ldquo;meudominio.com.br&rdquo; para o seu dom&iacute;nio nos dois
+              locais.
+            </p>
+
+            <p>
+              Se o seu dom&iacute;nio tem apenas uma vers&atilde;o, use o
+              seguinte comando:
+            </p>
+
+            <pre>
+<code>sudo certbot certonly --standalone -d meudominio.com.br</code></pre>
+
+            <p>
+              Voc&ecirc; dever&aacute; receber uma mensagem dizendo que
+              est&aacute; tudo OK, por exemplo:
+            </p>
+
+            <pre>
+<code>IMPORTANT NOTES:
+- Congratulations! Your certificate and chain have been saved at
+  /etc/letsencrypt/live/meudominio.com.br/fullchain.pem.
+  Your cert will expire on 2018-11-23. To obtain a new or tweaked
+  version of this certificate in the future, simply run certbot
+  again. To non-interactively renew *all* of your certificates, run
+  "certbot renew"
+- If you like Certbot, please consider supporting our work by:
+
+  Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+  Donating to EFF:                    https://eff.org/donate-le</code></pre>
+
+            <p>
+              Isso quer dizer que seu certificado SSL-TLS foi salvo em
+              /etc/letsencrypt/live/meudominio.com.br/.
+            </p>
+
+            <p>
+              Para cada dom&iacute;nio voc&ecirc; ter&aacute; uma pasta com o
+              nome do dom&iacute;nio em quest&atilde;o. Portanto, se voc&ecirc;
+              tem mais de um dom&iacute;nio, siga os mesmos passos para gerar um
+              certificado SSL-TLS para cada um deles.
+            </p>
+
+            <h2>Configurando um Server Block no nginx</h2>
+
+            <p>
+              Depois de criar seu certificado SSL-TLS, agora voc&ecirc; precisa
+              falar para o nginx as configura&ccedil;&otilde;es SSL. Para isso
+              acesse o server block do seu site em
+              /etc/nginx/sites-enabled/meudominio.com.br (ou o nome que
+              voc&ecirc; deu para o server block do seu site).
+            </p>
+
+            <pre>
+<code>sudo nano /etc/nginx/sites-enabled/meudominio.com.br</code></pre>
+
+            <p>E adicione as linhas a seguir em vermelho:</p>
+
+            <pre>
+<code>server {
+	listen 80;
+	listen [::]:80;
+
+	listen 443 ssl http2;
+	listen [::]:443 ssl http2;
+
+	ssl_certificate /etc/letsencrypt/live/meudominio.com.br/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/meudominio.com.br/privkey.pem;
+	ssl_trusted_certificate /etc/letsencrypt/live/meudominio.com.br/chain.pem;
+
+	ssl_session_cache shared:SSL:10m;
+	ssl_session_timeout 5m;
+
+	ssl_prefer_server_ciphers on;
+	ssl_ciphers ECDH+AESGCM:ECDH+AES256:ECDH+AES128:DH+3DES:!ADH:!AECDH:!MD5;
+
+	# Desativa SSLv3
+	ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+	# Diffie-Hellman
+	# $ sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+	ssl_dhparam /etc/ssl/certs/dhparam.pem;
+
+	# Ativa HSTS
+	add_header Strict-Transport-Security "max-age=63072000; includeSubdomains";
+
+	# Ativa OCSP stapling
+	ssl_stapling on;
+	ssl_stapling_verify on;
+	resolver 8.8.8.8 8.8.4.4 valid=300s;
+	resolver_timeout 5s;
+
+	root /var/www/meudominio.com.br/public_html/;
+
+	# Add index.php to the list if you are using PHP
+	index index.html index.htm index.nginx-debian.html index.php;
+
+	server_name meudominio.com.br www.meudominio.com.br;
+
+	location / {
+		try_files $uri $uri/ =404;
+
+		# Para WordPress
+		# try_files $uri $uri/ /index.php?q=$uri&amp;$args;
+	}
+
+	# Passa scripts PHP para o servidor FastCGI (PHP-FPM)
+	#
+	location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+		fastcgi_intercept_errors on;
+
+		#fastcgi_index index.php;
+		if (!-f $realpath_root$fastcgi_script_name) {
+			return 404;
+		}
+
+		fastcgi_buffers 16 16k;
+		fastcgi_buffer_size 32k;
+
+		include /etc/nginx/fastcgi_params;
+		fastcgi_pass 127.0.0.1:9010;
+	}
+
+	location ~ /\. {
+		access_log off;
+		log_not_found off;
+		deny all;
+	}
+
+	access_log off;
+	error_log   /var/log/nginx/meudominio.com.br-error.log;
+}</code></pre>
+
+            <p>
+              As linhas em vermelho no trecho do server block acima configuram
+              SSL no seu nginx.
+            </p>
+
+            <p>
+              Mais uma coisinha: voc&ecirc; precisa executar mais um comando
+              para prevenir
+              <a href="https://www.kryptus.com/diffie-hellman-no-openssl/"
+                >ataque contra chaves Diffie-Hellman</a
+              >
+              no OpenSSL.
+            </p>
+
+            <p>Para isso digite:</p>
+
+            <pre>
+<code>sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096</code></pre>
+
+            <p>
+              <strong>Aten&ccedil;&atilde;o:</strong> isso vai demorar
+              mmmmmmmmmmmuuuuuuuuuuuiiiiiiiiitooo.
+            </p>
+
+            <p>
+              Por fim, n&atilde;o se esque&ccedil;a de iniciar o nginx
+              novamente.
+            </p>
+
+            <pre>
+<code>sudo service nginx start</code></pre>
+
+            <p>
+              Em caso de erros, provavelmente s&atilde;o os caminhos dos
+              arquivos, verifique se est&atilde;o todos em seus devidos locais.
+            </p>
+
+            <h2>Configurando um Virtualhost no Apache</h2>
+
+            <p>Se voc&ecirc; usa apache, altere seu virtualhost digitando:</p>
+
+            <pre>
+<code>sudo nano /etc/apache2/sites-enabled/meudominio.com.br.conf</code></pre>
+
+            <p>
+              Claro, voc&ecirc; precisa alterar o comando acima para o nome do
+              seu virtualhost.conf.
+            </p>
+
+            <p>
+              Eu criei um virtualhost simples aqui no apache na porta 80 que
+              ficou assim:
+            </p>
+
+            <pre>
+<code>&lt;VirtualHost *:80&gt;
+    ServerAdmin webmaster@meudominio.com.br
+    DocumentRoot /var/www/meudominio.com.br/public_html
+    ServerName meudominio.com.br
+    ServerAlias www.meudominio.com.br
+
+    CustomLog /var/log/apache2/access-meudominio.com.br.br.log combined
+    ErrorLog /var/log/apache2/error-meudominio.com.br.br.log
+
+    &lt;FilesMatch "\.php$"&gt;
+        &lt;If "-f %{SCRIPT_FILENAME}"&gt;
+            SetHandler "proxy:fcgi://127.0.0.1:9010"
+        &lt;/If&gt;
+    &lt;/FilesMatch&gt;
+
+    &lt;Directory "/var/www/meudominio.com.br/public_html"&gt;
+        Options FollowSymLinks MultiViews
+        AllowOverride All
+        Order allow,deny
+        allow from all
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;</code></pre>
+
+            <p>
+              Um virtualhost bem b&aacute;sico com
+              <a
+                href="https://www.otaviomiranda.com.br/2018/apache2-php-fpm-ubuntu-debian/"
+                >PHP-FPM</a
+              >.
+            </p>
+
+            <p>
+              Para certificado SSL-TLS, vou clonar esse virtualhost,
+              por&eacute;m adicionando algumas coisinhas, veja:
+            </p>
+
+            <pre>
+<code>&lt;VirtualHost *:443&gt;
+    ServerAdmin webmaster@meudominio.com.br
+    DocumentRoot /var/www/meudominio.com.br/public_html
+    ServerName meudominio.com.br
+    ServerAlias www.meudominio.com.br
+
+    &lt;FilesMatch "\.php$"&gt;
+        &lt;If "-f %{SCRIPT_FILENAME}"&gt;
+            SetHandler "proxy:fcgi://127.0.0.1:9010"
+            #SetHandler "proxy:unix:/var/run/php/php7.2-fpm-om.sock|fcgi://127.0.0.1:9010/"
+        &lt;/If&gt;
+    &lt;/FilesMatch&gt;
+
+    &lt;Directory "/var/www/meudominio.com.br/public_html"&gt;
+        Options FollowSymLinks MultiViews
+        AllowOverride All
+        Order allow,deny
+        allow from all
+    &lt;/Directory&gt;
+
+    CustomLog /var/log/apache2/access-meudominio.com.br.br.log combined
+    ErrorLog /var/log/apache2/error-meudominio.com.br.br.log
+
+    SSLEngine on
+
+    SSLProtocol             all -SSLv2 -SSLv3
+    SSLCipherSuite          ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS
+    SSLHonorCipherOrder     on
+    SSLCompression          off
+
+    SSLOptions +StrictRequire
+
+    SSLCertificateFile /etc/letsencrypt/live/meudominio.com.br/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/meudominio.com.br/privkey.pem
+&lt;/VirtualHost&gt;</code></pre>
+
+            <p>
+              As partes em vermelho do c&oacute;digo s&atilde;o as partes que
+              adicionei para o certificado SSL-TLS.
+            </p>
+
+            <p>
+              Voc&ecirc; tamb&eacute;m precisa ativar o m&oacute;dulo SSL do
+              apache2, para isso digite:
+            </p>
+
+            <pre>
+<code>sudo a2enmod ssl</code></pre>
+
+            <p>
+              Lembre-se tamb&eacute;m que, no apache, voc&ecirc; precisa ter os
+              dois virtualhosts, o da porta 80 e o da porta 443.
+            </p>
+
+            <p>Para finalizar, inicie o apache:</p>
+
+            <pre>
+<code>service apache2 start</code></pre>
+
+            <p>Prontinho, s&oacute; testar.</p>
+
+            <p>At&eacute; a pr&oacute;xima!</p>
+
+            <!-- END CONTENT -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator"></div>
+    <div class="section-separator"></div>
+
+    <footer class="main-footer">
+      <a class="copyright-link" href="./">© Copyright - Otávio Miranda</a>
+    </footer>
+  </body>
+</html>
