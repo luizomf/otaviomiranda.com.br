@@ -2,54 +2,60 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.otaviomiranda.com.br/</loc>
-    <lastmod>2023-08-12</lastmod>
+    <lastmod>2023-08-13</lastmod>
   </url>
   <url>
     <loc
       >https://www.otaviomiranda.com.br/2018/ssh-keys-chaves-de-autenticacao-ssh/</loc
     >
-    <lastmod>2023-08-12</lastmod>
+    <lastmod>2023-08-13</lastmod>
   </url>
   <url>
     <loc
       >https://www.otaviomiranda.com.br/2018/instalando-o-certificado-ssl-tls-gratis-da-lets-encrypt/</loc
     >
-    <lastmod>2023-08-12</lastmod>
+    <lastmod>2023-08-13</lastmod>
   </url>
   <url>
     <loc
       >https://www.otaviomiranda.com.br/2020/typescript-uma-longa-introducao/</loc
     >
-    <lastmod>2023-08-12</lastmod>
+    <lastmod>2023-08-13</lastmod>
   </url>
   <url>
     <loc
       >https://www.otaviomiranda.com.br/2020/pilhas-em-python-com-listas-stack/</loc
     >
-    <lastmod>2023-08-12</lastmod>
+    <lastmod>2023-08-13</lastmod>
   </url>
   <url>
     <loc
       >https://www.otaviomiranda.com.br/2020/normalizacao-unicode-em-python/</loc
     >
-    <lastmod>2023-08-12</lastmod>
+    <lastmod>2023-08-13</lastmod>
   </url>
   <url>
     <loc
       >https://www.otaviomiranda.com.br/2020/funcoes-recursivas-com-python/</loc
     >
-    <lastmod>2023-08-12</lastmod>
+    <lastmod>2023-08-13</lastmod>
   </url>
   <url>
     <loc
       >https://www.otaviomiranda.com.br/2020/filas-em-python-com-deque-queue/</loc
     >
-    <lastmod>2023-08-12</lastmod>
+    <lastmod>2023-08-13</lastmod>
   </url>
   <url>
     <loc
       >https://www.otaviomiranda.com.br/2018/instalando-o-certificado-ssl-tls-gratis-da-lets-encrypt/</loc
     >
-    <lastmod>2023-08-12</lastmod>
+    <lastmod>2023-08-13</lastmod>
+  </url>
+  <url>
+    <loc
+      >https://www.otaviomiranda.com.br/2018/dominio-e-hospedagem-guia-para-leigos/</loc
+    >
+    <lastmod>2023-08-13</lastmod>
   </url>
 </urlset>

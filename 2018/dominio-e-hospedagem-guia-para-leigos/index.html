@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <title>Domínio e hospedagem: guia para leigos - Otávio Miranda</title>
+    <meta name="description" content="Domínio e hospedagem: guia para leigos" />
+    <link rel="icon" type="image/webp" href="../../imgs/favicon-1.webp" />
+  </head>
+  <body>
+    <header class="main-header">
+      <h1>
+        <a class="logo-link" href="/" title="Cursos - Otávio Miranda">
+          <img
+            loading="lazy"
+            src="../../imgs/otaviomirandalogo-2.webp"
+            alt="Logo - Otávio Miranda"
+            class="logo"
+            width="64"
+            height="64"
+          />
+        </a>
+      </h1>
+    </header>
+
+    <div class="section-separator"></div>
+
+    <section class="section-wrapper">
+      <div class="section-content">
+        <div class="profile-text">
+          <h1 class="profile-title">
+            <a href="./">Domínio e hospedagem: guia para leigos</a>
+          </h1>
+
+          <div class="post-metadata">4 de abril de 2018 por Otávio Miranda</div>
+
+          <div class="profile-description">
+            <!-- START CONTENT -->
+
+            <p>
+              Dom&iacute;nio e hospedagem s&atilde;o duas coisas que caminham de
+              m&atilde;os dadas, mas n&atilde;o s&atilde;o a mesma coisa. Nesse
+              t&oacute;pico, vou deixar claro o que s&atilde;o e como configurar
+              ambos em algumas hospedagens diferentes. Ao final, voc&ecirc;
+              poder&aacute; configurar seu pr&oacute;prio dom&iacute;nio e
+              hospedagem sem precisar pagar um profissional para isso.
+            </p>
+
+            <p>
+              Se voc&ecirc; precisa de um site, seja para vender, ter um blog ou
+              qualquer outro fim, vai precisar de duas coisas em seu nome ou da
+              sua empresa: dom&iacute;nio e hospedagem. O dom&iacute;nio
+              &eacute; o nome (endere&ccedil;o) do site; a hospedagem &eacute; o
+              local onde os arquivos e configura&ccedil;&otilde;es do site
+              est&atilde;o.
+            </p>
+
+            <p>
+              Ambos est&atilde;o ligados porque o dom&iacute;nio aponta para o
+              IP do servidor de hospedagem, onde os arquivos do site
+              est&atilde;o. Desse modo, pessoas que digitarem o dom&iacute;nio
+              do seu site no navegador, ser&atilde;o redirecionadas
+              automaticamente para o servidor de hospedagem.
+            </p>
+
+            <p>
+              Geralmente, empresas especializadas em hospedagem de sites
+              t&ecirc;m planos que trazem ambos os servi&ccedil;os em um mesmo
+              pacote. Vamos falar sobre essas empresas posteriormente nesse
+              artigo.
+            </p>
+
+            <h2>Dom&iacute;nio: o endere&ccedil;o do site</h2>
+
+            <p>
+              O dom&iacute;nio &eacute; o endere&ccedil;o do site em si. Aquele
+              que, geralmente, inicia-se com &ldquo;www&rdquo; e termina com
+              &ldquo;.com&rdquo; ou &ldquo;.com.br&rdquo;. Como
+              <a href="https://www.otaviomiranda.com.br/"
+                >www.otaviomiranda.com.br</a
+              >
+              por exemplo.
+            </p>
+
+            <p>
+              Contudo, aqui cabem alguns adendos: n&atilde;o &eacute;
+              necess&aacute;rio que um dom&iacute;nio inicie com
+              &ldquo;www&rdquo;, mas &eacute; recomendado. As partes
+              &ldquo;.com&rdquo; e &ldquo;.br&rdquo; s&atilde;o
+              <a href="https://pt.wikipedia.org/wiki/Dom%C3%ADnio_de_topo"
+                >dom&iacute;nios de topo</a
+              >
+              e ambos podem ser totalmente diferentes para cada dom&iacute;nio.
+            </p>
+
+            <p>
+              Vamos ver, na pr&aacute;tica, o que acontece quando o seu
+              dom&iacute;nio &eacute; usado no navegador de Internet:
+            </p>
+
+            <ul>
+              <li>
+                O internauta digita o endere&ccedil;o (dom&iacute;nio) do seu
+                site no navegador;
+              </li>
+              <li>
+                O navegador busca as configura&ccedil;&otilde;es do seu
+                dom&iacute;nio no servidor de DNS;
+              </li>
+              <li>
+                O servidor de DNS diz para o navegador qual o IP da sua
+                hospedagem;
+              </li>
+              <li>
+                Sua hospedagem diz pro navegador em qual pasta do servidor seu
+                site est&aacute;;
+              </li>
+              <li>
+                O navegador faz o download do conte&uacute;do da pasta do seu
+                site na hospedagem para o internauta e mostra na tela.
+              </li>
+            </ul>
+
+            <p>
+              Assim, para que um dom&iacute;nio funcione corretamente ele
+              precisa de servidores de DNS. Geralmente, esses servidores
+              ser&atilde;o configurados pelo pr&oacute;prio provedor no qual
+              voc&ecirc; o contratou e n&atilde;o precisam ser modificados,
+              por&eacute;m, &eacute; bom que voc&ecirc; entenda como eles
+              funcionam.
+            </p>
+
+            <p>
+              Um servidor de DNS &eacute; quem vai receber a
+              requisi&ccedil;&atilde;o do navegador de internet e direcionar o
+              Internauta para o local onde seu site est&aacute; hospedado
+              (hospedagem) de acordo com as configura&ccedil;&otilde;es da Zona
+              de DNS.
+            </p>
+
+            <p>
+              A n&atilde;o ser em casos muito espec&iacute;ficos, como a
+              configura&ccedil;&atilde;o de uma rede de
+              distribui&ccedil;&atilde;o de conte&uacute;do (<a
+                href="https://www.gocache.com.br/cdn/"
+                >CDN</a
+              >), voc&ecirc;
+              <strong>n&atilde;o precisa alterar os servidores de DNS</strong>
+              do seu dom&iacute;nio. Mas, se precisar, &eacute; s&oacute; ir no
+              painel do provedor onde voc&ecirc; contratou o dom&iacute;nio,
+              acessar a parte de <strong>dom&iacute;nios</strong> (ou meus
+              dom&iacute;nios) e acessar as configura&ccedil;&otilde;es do
+              dom&iacute;nio desejado. Certamente, a op&ccedil;&atilde;o vai se
+              chamar algo similar a &ldquo;Configurar servidores DNS&rdquo;,
+              &ldquo;Alterar Nameservers&rdquo; ou algo parecido com isso. Ainda
+              assim, vou mostrar como fazer isso em duas hospedagens diferentes
+              mais abaixo.
+            </p>
+
+            <p>
+              <strong>Dica importante:</strong> A &ldquo;Zona de DNS&rdquo; tem
+              configura&ccedil;&otilde;es
+              <strong>dentro do servidor de DNS</strong>. Portanto, voc&ecirc;
+              n&atilde;o precisa alterar o servidor de DNS para configurar um
+              registro dentro da zona de DNS.
+            </p>
+
+            <h3>Como modificar os Servidores de DNS</h3>
+
+            <p>
+              Conforme mencionei anteriormente nesse artigo, s&atilde;o poucos
+              os casos em que voc&ecirc; precisa alterar os servidores de DNS do
+              seu provedor, mas caso precise, veja como faz&ecirc;-lo na Uolhost
+              e Hostgator.
+            </p>
+
+            <h4>Na uolhost</h4>
+
+            <ol>
+              <li>
+                Acesse o
+                <a href="https://painelhost.uol.com.br/myProducts.html"
+                  >painel da uolhost</a
+                >;
+              </li>
+              <li>Entre com seus dados de usu&aacute;rio e senha;</li>
+              <li>Acesse o menu &ldquo;Dom&iacute;nios&rdquo;;</li>
+              <li>
+                Role a p&aacute;gina at&eacute; encontrar &ldquo;Seus
+                dom&iacute;nios&rdquo;;
+              </li>
+              <li>
+                Em &ldquo;Gerenciar&rdquo;, clique no menu suspenso e acesse a
+                op&ccedil;&atilde;o &ldquo;Configurar Servidores DNS&rdquo;;
+              </li>
+            </ol>
+
+            <p>
+              Nessa p&aacute;gina, voc&ecirc; ver&aacute; 3 op&ccedil;&otilde;es
+              de servidores &ldquo;Master&rdquo;, &ldquo;Slave 1&rdquo; e
+              &ldquo;Slave 2&rdquo;. Os servidores padr&atilde;o da Uolhost
+              s&atilde;o:
+            </p>
+
+            <ul>
+              <li>ns1.dominios.uol.com.br</li>
+              <li>ns2.dominios.uol.com.br</li>
+              <li>ns3.dominios.uol.com.br</li>
+            </ul>
+
+            <p>Troque esses servidores de DNS para os desejados.</p>
+
+            <p>
+              <strong>Nota:</strong> A princ&iacute;pio, voc&ecirc; n&atilde;o
+              precisa preencher todos os campos, o servidor &ldquo;Master&rdquo;
+              &eacute; o principal, &ldquo;Slave 1&rdquo; e &ldquo;Slave
+              2&rdquo; s&atilde;o servidores secund&aacute;rios. Caso o
+              &ldquo;Master&rdquo; n&atilde;o funcione por algum motivo, os
+              servidores secund&aacute;rios ser&atilde;o acionados, entretanto,
+              como o &ldquo;Master&rdquo; &eacute; o mais importante, geralmente
+              todas as requisi&ccedil;&otilde;es v&atilde;o pra ele.
+            </p>
+
+            <p>
+              Finalmente, clique em &ldquo;Salvar&rdquo; ap&oacute;s a
+              configura&ccedil;&atilde;o.
+            </p>
+
+            <h4>Na hostgator</h4>
+
+            <ol>
+              <li>
+                Acesse a
+                <a href="https://financeiro.hostgator.com.br/"
+                  >&aacute;rea do cliente</a
+                >;
+              </li>
+              <li>Entre com seu usu&aacute;rio e senha;</li>
+              <li>
+                No menu superior v&aacute; em &ldquo;Dom&iacute;nios&rdquo; &gt;
+                &ldquo;Meus dom&iacute;nios&rdquo;;
+              </li>
+              <li>
+                No menu suspenso ao lado do dom&iacute;nio desejado, clique em
+                &ldquo;Alterar Nameserver &ndash; DNS&rdquo;;
+              </li>
+            </ol>
+
+            <p>
+              A hostgator te d&aacute; op&ccedil;&atilde;o para adicionar 5
+              servidores de DNS, mas voc&ecirc; n&atilde;o precisa usar todos
+              caso n&atilde;o tenha milhares de servidores de DNS. O primeiro
+              &eacute; o &ldquo;Master&rdquo; e o restante secund&aacute;rios.
+            </p>
+
+            <p>
+              Configure como quiser e clique em &ldquo;Alterar Nameserver
+              &ndash; DNS&rdquo;.
+            </p>
+
+            <h3>Zona de DNS</h3>
+
+            <p>
+              A zona de DNS armazena registros que especificam os
+              endere&ccedil;os dos servi&ccedil;os do seu site, como ip da
+              hospedagem, servidores de e-mail, subdom&iacute;nios, entre outros
+              dados espec&iacute;ficos do seu dom&iacute;nio.
+            </p>
+
+            <p>
+              Existem v&aacute;rios tipos de registros que podem ser
+              configurados na Zona de DNS do seu dom&iacute;nio, dentre eles:
+            </p>
+
+            <ul>
+              <li>
+                <strong>Tipo A</strong> &ndash; Registro que associa um
+                dom&iacute;nio ao endere&ccedil;o IP de um servidor. O valor
+                sempre ser&aacute; um endere&ccedil;o de IP. Geralmente, o IP da
+                sua hospedagem, mas pode ser outro IP em alguns casos;
+              </li>
+              <li>
+                <strong>CNAME</strong> &ndash; &Eacute; um tipo de registro que
+                mapeia um nome de alias para um nome de dom&iacute;nio.
+                Certamente, s&atilde;o muito usados para criar
+                subdom&iacute;nios ao seu dom&iacute;nio. Por exemplo:
+                suponhamos que voc&ecirc; venda um curso online e que esse curso
+                seja uma p&aacute;gina separada do restante do seu site.
+                Voc&ecirc; pode criar o subdom&iacute;nio
+                &ldquo;curso.seudominio.com.br&rdquo; e mapear isso com um
+                registro CNAME. Contudo, vale lembrar que dentro da hospedagem
+                precisa existir uma pasta espec&iacute;fica para esse
+                subdom&iacute;nio. Sozinho, o registro CNAME n&atilde;o
+                far&aacute; nada. Provavelmente, no painel da sua hospedagem
+                existe uma op&ccedil;&atilde;o para configura&ccedil;&atilde;o
+                de subdom&iacute;nios e ela ir&aacute; criar o registro CNAME,
+                portanto, use-a ao inv&eacute;s de alterar os registros CNAME.
+              </li>
+              <li>
+                <strong>TXT</strong> &ndash; Registros que podem conter um
+                texto. Normalmente s&atilde;o usados para
+                verifica&ccedil;&atilde;o de dom&iacute;nio. Por exemplo:
+                recentemente adicionei o &ldquo;Search console&rdquo; da Google
+                em um site e eles me pediram para verificar a autoridade do
+                dom&iacute;nio com um registro de DNS do tipo TXT.
+              </li>
+              <li>
+                <strong>MX</strong> &ndash; Registros que tem como destino o
+                servidor respons&aacute;vel por receber os e-mails do
+                dom&iacute;nio. O campo &ldquo;Prioridade&rdquo; &eacute; usado
+                para definir a prioridade dos servidores (quanto menor o
+                n&uacute;mero, maior a prioridade).
+              </li>
+            </ul>
+
+            <p>
+              Antes que voc&ecirc; me pergunte, esses n&atilde;o s&atilde;o
+              todos os tipos de registros de DNS. Caso tenha interesse, veja
+              mais alguns tipos
+              <a
+                href="https://wiki.dialhost.com.br/o-que-sao-tipos-de-registro/"
+                >aqui</a
+              >.
+            </p>
+
+            <p>
+              Se voc&ecirc; contratou dom&iacute;nio e hospedagem no mesmo
+              pacote de uma empresa de hospedagem, certamente n&atilde;o vai
+              precisar se preocupar com essas configura&ccedil;&otilde;es. Sem
+              d&uacute;vida, o pessoal das empresas de hospedagens j&aacute;
+              deixam o dom&iacute;nio contratado apontando para a hospedagem, de
+              modo que &eacute; s&oacute; enviar os arquivos do site pelo
+              servidor FTP (vamos falar sobre isso tamb&eacute;m mais adiante) e
+              acess&aacute;-los pelo dom&iacute;nio contratado. Afinal, isso
+              &eacute; interessante pra eles!
+            </p>
+
+            <p>
+              Caso tenha interesse em alterar a zona de DNS, fa&ccedil;a o
+              seguinte:
+            </p>
+
+            <h4>Na uolhost</h4>
+
+            <ol>
+              <li>
+                <a href="https://painelhost.uol.com.br/myProducts.html"
+                  >Acesse o painel</a
+                >;
+              </li>
+              <li>Entre com seus dados de usu&aacute;rio e senha;</li>
+              <li>
+                Acesse a op&ccedil;&atilde;o &ldquo;Dom&iacute;nios&rdquo;;
+              </li>
+              <li>
+                No menu suspenso do dom&iacute;nio desejado, clique em
+                &ldquo;Alterar Zona de DNS&rdquo;;
+              </li>
+              <li>
+                Em &ldquo;Zona de DNS&rdquo;, clique em &ldquo;Gerenciar&rdquo;;
+              </li>
+              <li>Crie os registros dos tipos desejados e salve.</li>
+            </ol>
+
+            <h4>Na hostgator</h4>
+
+            <p>
+              Dependendo do seu tipo de hospedagem, pode ser que seja
+              necess&aacute;rio usar o cPanel. Portanto, vou mostrar como
+              encontrar as op&ccedil;&otilde;es para gerenciar a zona de DNS do
+              seu dom&iacute;nio por ele.
+            </p>
+
+            <ol>
+              <li>
+                <a href="https://financeiro.hostgator.com.br/clientarea.php"
+                  >Entre no seu painel</a
+                >;
+              </li>
+              <li>Na sua hospedagem, clique em cPanel;</li>
+              <li>
+                Role a p&aacute;gina at&eacute; a sess&atilde;o
+                &ldquo;Dom&iacute;nios&rdquo;;
+              </li>
+              <li>
+                Voc&ecirc; pode usar tanto o &ldquo;Simple Zone Editor&rdquo; ou
+                o &ldquo;Advanced Zone Editor&rdquo;. No &ldquo;Simple Zone
+                Editor&rdquo; voc&ecirc; tem algo mais simples e direto, basta
+                escolher o tipo de registro, nome e o valor. Por&eacute;m, para
+                o &ldquo;Advanced Zone Editor&rdquo; &eacute; necess&aacute;rio
+                que voc&ecirc; entenda o que est&aacute; fazendo, j&aacute; que
+                tem todas as op&ccedil;&otilde;es dispon&iacute;veis pra
+                voc&ecirc; configurar um registro de DNS;
+              </li>
+            </ol>
+
+            <p>
+              Vale lembrar que o cPanel possui uma &aacute;rea espec&iacute;fica
+              para a cria&ccedil;&atilde;o de subdom&iacute;nios, portanto,
+              n&atilde;o &eacute; necess&aacute;rio criar um registro CNAME para
+              um subdom&iacute;nio, ele far&aacute; isso automaticamente.
+              Ali&aacute;s, se voc&ecirc; criar uma entrada CNAME e tentar criar
+              um subdom&iacute;nio, ser&aacute; apresentado um erro na tela.
+            </p>
+
+            <p>
+              Mas, ainda assim, &eacute; bom que voc&ecirc; saiba como realizar
+              tais configura&ccedil;&otilde;es.
+            </p>
+
+            <h3>Whois &ndash; Informa&ccedil;&otilde;es de contato</h3>
+
+            <p>
+              O <strong>whois </strong>serve para identificar o
+              propriet&aacute;rio de um site. Assim, ele &eacute; alimentado
+              pela pr&oacute;pria empresa de hospedagem e re&uacute;ne todas as
+              informa&ccedil;&otilde;es pertencentes a uma p&aacute;gina.
+              incluindo CNPJ ou CPF de quem o registrou. Al&eacute;m disso,
+              essas informa&ccedil;&otilde;es s&atilde;o p&uacute;blicas, ou
+              seja, se voc&ecirc; registrou um dom&iacute;nio em seu nome,
+              eventualmente, alguns dos seus dados ser&atilde;o disponibilizados
+              publicamente online para quem olhar o whois do seu dom&iacute;nio.
+            </p>
+
+            <p>
+              S&atilde;o tr&ecirc;s setores de contato dispon&iacute;veis no
+              whois: o contato administrativo, o contato t&eacute;cnico e o
+              contato de cobran&ccedil;a. Muitos servi&ccedil;os de hospedagem
+              v&atilde;o usar o contato do propriet&aacute;rio para todos os
+              setores de contato, todavia, voc&ecirc; pode mudar isso no painel
+              da sua hospedagem.
+            </p>
+
+            <p>
+              Se voc&ecirc; quiser ver o whois de um site, acesse
+              <a href="https://who.is/">who.is</a> e digite o dom&iacute;nio
+              desejado. Ent&atilde;o veja a m&aacute;gica!
+            </p>
+
+            <h2>Hospedagem: o local onde seu site est&aacute;</h2>
+
+            <p>
+              Agora que voc&ecirc; j&aacute; est&aacute; fera em
+              dom&iacute;nios, vejamos o que &eacute; uma hospedagem.
+            </p>
+
+            <p>
+              Embora pare&ccedil;a complicado, uma hospedagem nada mais &eacute;
+              do que um espa&ccedil;o que voc&ecirc; est&aacute; alugando para
+              os arquivos e configura&ccedil;&otilde;es do seu site em um ou
+              v&aacute;rios servidores.
+            </p>
+
+            <p>
+              Um servidor pode ser um ou v&aacute;rios computadores que as
+              empresas de hospedagem mant&eacute;m sempre ligados para que seu
+              site esteja sempre online.
+            </p>
+
+            <p>
+              Existem v&aacute;rios tipos de hospedagem que voc&ecirc; pode
+              contratar, cada um com seus pr&oacute;s e contras. Mas isso vai
+              depender do n&iacute;vel no qual o seu site est&aacute;. Quando eu
+              digo n&iacute;vel, estou me referindo a quantidade de acessos e
+              quais servi&ccedil;os ser&atilde;o utilizados.
+            </p>
+
+            <p>
+              Embora pare&ccedil;a complexo de in&iacute;cio, se voc&ecirc;
+              est&aacute; iniciando e sabe que seu site vai come&ccedil;ar a
+              receber visitas neste momento, provavelmente a mais barata
+              ir&aacute; lhe servir bem, mas &eacute; sempre bom verificar se a
+              sua hospedagem oferece upgrade do seu plano, ou seja, se seu site
+              crescer, ser&aacute; f&aacute;cil pagar um pouco mais para que
+              eles liberem mais recursos do servidor para seu site a medida que
+              precise.
+            </p>
+
+            <p>
+              Em uma analogia, seria como se a sua hospedagem fosse um cano,
+              desses que passam &aacute;gua, e os visitantes do site a
+              &aacute;gua. Se a quantidade de &aacute;gua que passar for menor
+              que o di&acirc;metro do cano, tudo funciona muito bem, mas, se a
+              quantidade de &aacute;gua for maior, ela ser&aacute; limitada pelo
+              di&acirc;metro do cano. Assim, se seu site receber mais visitar do
+              que a hospedagem pode suportar, alguns clientes poder&atilde;o ver
+              p&aacute;ginas de erros do servidor, outros n&atilde;o conseguiram
+              acessar e, certamente, tudo vai ficar muito lento.
+            </p>
+
+            <h3>Tipos de hospedagem</h3>
+
+            <p>
+              Separei alguns tipos de hospedagem encontrados comumente nos
+              provedores.
+            </p>
+
+            <h4>Hospedagem compartilhada</h4>
+
+            <p>
+              Geralmente, trata-se do pacote mais barato dos provedores. Uma
+              solu&ccedil;&atilde;o excelente para quem est&aacute;
+              come&ccedil;ando e sabe que n&atilde;o ter&aacute; um
+              turbilh&atilde;o de visitas de in&iacute;cio.
+            </p>
+
+            <p>
+              Os provedores conseguem um pre&ccedil;o t&atilde;o em conta porque
+              compartilham os recursos de apenas um servidor com outros sites.
+              Ou melhor, CPU, mem&oacute;ria, espa&ccedil;o em disco, tudo isso
+              &eacute; compartilhado.
+            </p>
+
+            <p>
+              Al&eacute;m disso, esse plano vem todo configurado, portanto
+              voc&ecirc; n&atilde;o precisar&aacute; modificar praticamente
+              nada, nem mesmo as configura&ccedil;&otilde;es de dom&iacute;nio
+              que mencionei anteriormente nesse artigo.
+            </p>
+
+            <p>
+              Contudo, nem tudo s&atilde;o flores. Voc&ecirc; n&atilde;o
+              ter&aacute; praticamente nenhum controle sobre as
+              configura&ccedil;&otilde;es do seu servidor e, provavelmente,
+              tamb&eacute;m n&atilde;o ter&aacute; acesso SSH. Al&eacute;m
+              disso, se algum dos sites do servidor tiver algum pico de visitas
+              ou receber ataques, o desempenho do seu, certamente, ser&aacute;
+              afetado.
+            </p>
+
+            <p>
+              Ainda assim, continua sendo um dos melhores e mais populares
+              planos para sites que est&atilde;o come&ccedil;ando ou que recebem
+              poucas visitas.
+            </p>
+
+            <h4>Hospedagem VPS (Virtual Private Server)</h4>
+
+            <p>
+              Na hospedagem VPS, apesar de voc&ecirc; ainda continuar
+              compartilhando um servidor com outros sites, nesse caso recursos
+              s&atilde;o alocados especificamente para seu site, s&oacute; que
+              picos em outros sites podem n&atilde;o afetar o desempenho do seu.
+            </p>
+
+            <p>
+              Seu provedor vai alocar uma parti&ccedil;&atilde;o do servidor e
+              recursos (CPU e mem&oacute;ria) exclusivos para o seu site com
+              possibilidade de expans&atilde;o caso necess&aacute;rio.
+            </p>
+
+            <p>
+              Apesar de mais cara do que a hospedagem compartilhada, pode valer
+              a pena para sites que t&ecirc;m grande prospec&ccedil;&atilde;o
+              para expans&atilde;o. Al&eacute;m disso, a empresa tamb&eacute;m
+              vai te passar dados para que voc&ecirc; acesse e altere
+              configura&ccedil;&otilde;es via SSH, ou seja, voc&ecirc; tem
+              acesso e autonomia para configurar determinados servi&ccedil;os
+              dentro do seu &ldquo;servidor virtual&rdquo;.
+            </p>
+
+            <p>
+              Como nem tudo &eacute; um mar de rosas, pode ser necess&aacute;rio
+              conhecimento adicional para trabalhar com hospedagens VPS.
+            </p>
+
+            <h4>Hospedagem Cloud</h4>
+
+            <p>
+              Atualmente, a maioria dos provedores oferecem hospedagem
+              &ldquo;Cloud&rdquo; (na nuvem). Nesse tipo de hospedagem seu site
+              n&atilde;o estar&aacute; em um servidor, muito menos compartilhado
+              com outros sites, ele estar&aacute; alocado em um cluster de
+              servidores (v&aacute;rios servidores). Isso quer dizer que, se
+              algum dos servidores parar de funcionar por algum motivo seu site
+              ser&aacute; realocado para outro servidor e continuar&aacute;
+              funcionando normalmente.
+            </p>
+
+            <p>
+              O fornecimento de recursos tamb&eacute;m pode ser de acordo com a
+              demanda, ou seja, voc&ecirc; pode pagar mais para receber mais
+              recursos. Particularmente, j&aacute; vi casos em que voc&ecirc;
+              paga um valor fixo mensal, mas tamb&eacute;m j&aacute; vi casos em
+              que voc&ecirc; paga pelo que utiliza.
+            </p>
+
+            <p>
+              Aqui voc&ecirc; tamb&eacute;m vai precisar de muito conhecimento
+              adicional. Me lembro quando contratei o primeiro plano cloud para
+              um site em que est&aacute;vamos trabalhando, o provedor me mandou
+              o IP de um servidor com o Ubuntu Server instalado e usu&aacute;rio
+              e senha, ponto. N&atilde;o tinha absolutamente nada configurado
+              nesse servidor.
+            </p>
+
+            <h4>Hospedagem WordPress</h4>
+
+            <p>
+              Como o pr&oacute;prio nome j&aacute; diz, &eacute; um tipo de
+              hospedagem espec&iacute;fica para sites feitos com o WordPress.
+              J&aacute; vem at&eacute; com alguns plugins de seguran&ccedil;a e
+              cache configurados. Por&eacute;m, como &eacute; uma hospedagem
+              espec&iacute;fica, o site vai performar bem melhor nela pela
+              otimiza&ccedil;&atilde;o j&aacute; realizada pelo provedor.
+            </p>
+
+            <p>
+              Os benef&iacute;cios disso &eacute; que &eacute; uma hospedagem
+              mais em conta e que n&atilde;o demanda conhecimento. Talvez
+              voc&ecirc; nem precise ter conhecimento sobre WordPress em si.
+            </p>
+
+            <p>
+              Vale lembrar que se seu site n&atilde;o usa o WordPress,
+              n&atilde;o vale a pena investir nessa hospedagem.
+            </p>
+
+            <h4>Hospedagem dedicada</h4>
+
+            <p>
+              Na hospedagem dedicada voc&ecirc; tem seu pr&oacute;prio servidor
+              e pode fazer o que quiser com ele, at&eacute; mudar o sistema
+              operacional, alterar configura&ccedil;&otilde;es de acordo com
+              suas necessidades ou desligar o servidor quando quiser (dependendo
+              do provedor).
+            </p>
+
+            <p>
+              Por&eacute;m, al&eacute;m de um enorme conhecimento, voc&ecirc;
+              vai precisar de grana. &Eacute; um tipo de hospedagem bem caro.
+            </p>
+
+            <h4>Minha hospedagem preferida</h4>
+
+            <p>
+              De todos os planos que j&aacute; utilizei em v&aacute;rios
+              provedores, pra mim o que mais gostei foi a hospedagem cloud (na
+              nuvem). Al&eacute;m da flexibilidade, nunca vi o servi&ccedil;o
+              fora do ar por nem um segundo em anos.
+            </p>
+
+            <h3>O que voc&ecirc; precisa saber sobre a sua hospedagem?</h3>
+
+            <p>
+              Quando se contrata uma hospedagem voc&ecirc; precisar&aacute;
+              saber algumas coisas sobre ela para realizar
+              configura&ccedil;&otilde;es, dentre elas est&atilde;o o
+              gerenciamento do banco de dados e contas FTP, j&aacute; que a
+              maioria dos sites que voc&ecirc; vai configurar v&atilde;o
+              utilizar pelo menos um banco de dados e uma conta FTP.
+            </p>
+
+            <p>
+              Se a sua hospedagem oferecer o cPanel gratuitamente, tudo fica bem
+              mais simples, porque voc&ecirc; n&atilde;o precisar&aacute; de
+              tanto conhecimento para realizar tais configura&ccedil;&otilde;es.
+            </p>
+
+            <p>
+              Vou mostrar como criar um usu&aacute;rio do banco de dados e um
+              banco de dados para este usu&aacute;rio no cPanel de maneira
+              r&aacute;pida.
+            </p>
+
+            <h4>Como criar usu&aacute;rio MySQL e banco de dados no cPanel</h4>
+
+            <p>
+              <strong>Passo 1:</strong> Abra o cPanel e acesse &ldquo;MySQL
+              remoto&reg;&rdquo;;
+            </p>
+
+            <p>
+              <strong>Passo 2:</strong> Em &ldquo;Host (o coringa % &eacute;
+              permitido)&rdquo; adicione o &ldquo;%&rdquo; (sem aspas) e clique
+              em &ldquo;Adicionar host&rdquo;;
+            </p>
+
+            <p>
+              <strong>Dica:</strong> vale lembrar que aqui voc&ecirc;
+              est&aacute; adicionando quais IPs podem acessar seu servidor
+              MySQL. O coringa significa &ldquo;todos&rdquo;.
+            </p>
+
+            <p>
+              <strong>Passo 3:</strong> no menu da lateral esquerda, clique
+              novamente em &ldquo;Banco de dados&rdquo; e agora acesse a
+              configura&ccedil;&atilde;o &ldquo;Bancos de dados
+              MySQL&reg;&rdquo;;
+            </p>
+
+            <p>
+              <strong>Passo 4:</strong> em &ldquo;Criar novo banco de
+              dados&rdquo; adicione o nome do seu banco de dados e clique em
+              &ldquo;Criar banco de dados&rdquo;;
+            </p>
+
+            <p>
+              <strong>Dica:</strong> onde adicionei o ret&acirc;ngulo vermelho,
+              vai existir um prefixo que a pr&oacute;pria hospedagem lhe
+              fornece, isso n&atilde;o &eacute; edit&aacute;vel, por&eacute;m
+              faz parte do nome do seu banco de dados.
+            </p>
+
+            <p>
+              <strong>Passo 5:</strong> clique em voltar e role a p&aacute;gina
+              at&eacute; &ldquo;Adicionar novo usu&aacute;rio&rdquo;; Preencha
+              os campos &ldquo;Nome de usu&aacute;rio&rdquo; (depois do
+              prefixo), &ldquo;Senha&rdquo; e &ldquo;Senha (novamente)&rdquo;.
+              Por fim, clique em &ldquo;Criar usu&aacute;rio&rdquo;;
+            </p>
+
+            <p>
+              <strong>Passo 6:</strong> Clique em &ldquo;Voltar&rdquo; e navegue
+              at&eacute; &ldquo;Adicionar usu&aacute;rio ao banco de
+              dados&rdquo;; Em &ldquo;Usu&aacute;rio&rdquo;, selecione o
+              usu&aacute;rio que acabou de criar; Em &ldquo;Banco de
+              dados&rdquo;, selecione o banco de dados que criamos
+              anteriormente; Por fim, clique em &ldquo;Adicionar&rdquo;;
+            </p>
+
+            <p>
+              Na nova janela que abriu, clique em &ldquo;Todos os
+              privil&eacute;gios&rdquo; e para finalizar &ldquo;Fazer
+              altera&ccedil;&otilde;es&rdquo;;
+            </p>
+
+            <p>
+              Pronto, agora se voc&ecirc; precisar dos dados para criar qualquer
+              site, os dados ser&atilde;o:
+            </p>
+
+            <ul>
+              <li>
+                <strong>Servidor MySQL (host):</strong> seudominio.com.br;
+              </li>
+              <li>
+                <strong>Usu&aacute;rio do Banco de dados:</strong> O
+                usu&aacute;rio que voc&ecirc; acabou de criar;
+              </li>
+              <li>
+                <strong>Senha:</strong> A senha que voc&ecirc; deu para o
+                usu&aacute;rio anteriormente;
+              </li>
+              <li>
+                <strong>Banco de dados:</strong> O nome do banco de dados que
+                voc&ecirc; acabou de criar.
+              </li>
+            </ul>
+
+            <p>Vamos ver como criar uma conta FTP a seguir.</p>
+
+            <h4>Como criar uma conta FTP no cPanel</h4>
+
+            <p>
+              Contas FTP ser&atilde;o necess&aacute;rias para que qualquer
+              desenvolvedor envie arquivos pra dentro do seu site. Al&eacute;m
+              disso, voc&ecirc; tamb&eacute;m pode querer ter uma pasta virtual
+              dentro do seu servidor, para fazer backup dos seus arquivos ou
+              coisas do tipo.
+            </p>
+
+            <p>
+              Nesse caso, vamos criar uma conta FTP para adicionar arquivos
+              diretamente dentro da pasta do nosso site. Veja como:
+            </p>
+
+            <p>
+              <strong>Passo 1:</strong> Na p&aacute;gina inicial do cPanel, em
+              &ldquo;Arquivos&rdquo;, clique em &ldquo;Contas FTP&rdquo;;
+            </p>
+
+            <p>
+              <strong>Passo 2:</strong> Em &ldquo;Adicionar conta de FTP&rdquo;
+              digite o &ldquo;Fazer login&rdquo; (nome do usu&aacute;rio),
+              &ldquo;Senha&rdquo; e &ldquo;Senha (novamente)&rdquo;; Em
+              &ldquo;Diret&oacute;rio&rdquo;, adicione apenas
+              &ldquo;public_html&rdquo; (que &eacute; a pasta onde o site deve
+              estar). Clique em &ldquo;Criar conta de FTP&rdquo;.
+            </p>
+
+            <p>
+              <strong>Passo 3:</strong> Para ver os dados de acesso do
+              usu&aacute;rio, role a p&aacute;gina um pouco para baixo, encontre
+              o nome de usu&aacute;rio que acabou de criar e clique em
+              &ldquo;Configurar cliente FTP&rdquo;;
+            </p>
+
+            <p>Ser&atilde;o exibidos os seguintes dados:</p>
+
+            <ul>
+              <li>Nome de usu&aacute;rio do FTP</li>
+              <li>Servidor FTP (Host)</li>
+              <li>FTP &amp; porta FTPS expl&iacute;cita (A porta)</li>
+            </ul>
+
+            <p>
+              A senha, certamente n&atilde;o ser&aacute; exibida, mas &eacute;
+              aquela que voc&ecirc; configurou anteriormente ao criar a conta
+              FTP.
+            </p>
+
+            <h2>Dom&iacute;nio e hospedagem: conclus&atilde;o</h2>
+
+            <p>
+              Dom&iacute;nio e hospedagem caminham de m&atilde;os dadas, mas
+              n&atilde;o s&atilde;o a mesma coisa. Conforme expliquei amplamente
+              anteriormente, dom&iacute;nio trata-se do nome do site e &eacute;
+              que encaminha o usu&aacute;rio para o local correto na hospedagem.
+            </p>
+
+            <p>
+              A hospedagem em si &eacute; um espa&ccedil;o no servidor onde os
+              arquivos e configura&ccedil;&otilde;es do site est&atilde;o.
+            </p>
+
+            <p>
+              Apesar de n&atilde;o serem a mesma coisa, um depende muito do
+              outro para o bom funcionamento de tudo o que &eacute; online
+              atualmente.
+            </p>
+
+            <h2>Dicas de nomes de dom&iacute;nio</h2>
+
+            <p>
+              Pra finalizar, algumas dicas para n&atilde;o errar na hora de
+              criar seu dom&iacute;nio:
+            </p>
+
+            <ul>
+              <li>
+                Tente usar uma ou duas palavras apenas (sempre que
+                poss&iacute;vel) pra ficar f&aacute;cil de lembrar;
+              </li>
+              <li>
+                Se o dom&iacute;nio em nome de sua empresa j&aacute; existir,
+                tente colocar termos antes do nome da empresa. Por exemplo: para
+                um e-commerce, pode adicionar &ldquo;loja&rdquo; +
+                &ldquo;nomedaempresa&rdquo;;
+              </li>
+              <li>
+                Se n&atilde;o conseguir mesmo assim, pegue o contato do
+                propriet&aacute;rio do dom&iacute;nio pelo registro whois
+                (expliquei anteriormente nesse artigo);
+              </li>
+              <li>
+                N&atilde;o utilize nomes que n&atilde;o sejam relacionado com a
+                sua empresa. Os e-mails do seu dom&iacute;nio ter&atilde;o o
+                nome do seu dom&iacute;nio ao final, exemplo:
+                meuemail@meudominio.com.br;
+              </li>
+              <li>
+                Voc&ecirc; n&atilde;o precisa utilizar os famosos
+                &ldquo;.com&rdquo; ou &ldquo;.com.br&rdquo;, existem milhares de
+                extens&otilde;es de dom&iacute;nio poss&iacute;veis. Exemplo:
+                .net, .tv, .website, .biz e assim por diante.
+              </li>
+            </ul>
+
+            <p>
+              Caso tenha ficado alguma d&uacute;vida, n&atilde;o hesite em
+              comentar nesse artigo.
+            </p>
+
+            <p>At&eacute; a pr&oacute;xima!</p>
+
+            <!-- END CONTENT -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator"></div>
+    <div class="section-separator"></div>
+
+    <footer class="main-footer">
+      <a class="copyright-link" href="./">© Copyright - Otávio Miranda</a>
+    </footer>
+  </body>
+</html>
