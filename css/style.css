@@ -292,6 +292,18 @@ body {
   line-height: 1.5;
 }
 
+a {
+  text-decoration: none;
+  color: #24827c;
+}
+
+a:hover,
+a:active {
+  filter: brightness(80%);
+  color: #000;
+  text-decoration: underline;
+}
+
 pre {
   max-width: 100%;
   overflow-x: auto;
@@ -345,7 +357,7 @@ h6 {
 }
 
 .img-description {
-  color: #999;
+  color: #666;
   text-align: center;
   display: block;
   font-style: italic;
@@ -417,12 +429,17 @@ h6 {
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: 0.4rem;
-  transition: filter 300ms ease-in-out;
   text-align: center;
 }
 
-.btn:hover {
-  filter: brightness(90%);
+.btn:hover,
+.btn:focus {
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 0 5px var(--clr-primary);
+  outline: 2px solid var(--clr-primary);
+  background-color: #24827c;
+  filter: none;
 }
 
 .section-separator {
