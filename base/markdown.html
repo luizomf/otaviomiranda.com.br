@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>_____CHANGE_ME_____ - Otávio Miranda</title>
+    <meta name="description" content="_____CHANGE_ME_____" />
+
+    <link rel="stylesheet" href="../../css/markdown.css" />
+
+    <link rel="icon" type="image/webp" href="../../imgs/favicon-1.webp" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  </head>
+  <body>
+    <nav class="breadcrumb-nav">
+      <a href="/">&larr; ir para início</a>
+    </nav>
+
+    <article class="markdown-body" id="content"></article>
+
+<script type="text/markdown" id="markdown-source">
+
+# MARKDOWN AQUI
+
+**OBS**: Cuidado com o `format_on_save` dos editores, vão tentar corrigir
+o markdown e vai atrapalhar tudo. Use `CTRL` + `SHIFT` + `i` para formatar.
+Porém, você terá que ajustar o texto do markdown manualmente.
+
+</script>
+
+    <script>
+      const markdownContent =
+        document.getElementById('markdown-source').textContent;
+      const contentDiv = document.getElementById('content');
+      contentDiv.innerHTML = marked.parse(markdownContent);
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+      // Ativa o realce de sintaxe em todos os blocos de código
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>
