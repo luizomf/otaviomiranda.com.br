@@ -40,12 +40,16 @@
 
 
 
-
 # sussu(rro): CLI educacional com OpenAI Whisper
 
 > Ferramenta de linha de comando focada em educação e IA offline. Usa o
 > poder do Whisper da OpenAI para transcrever áudios e vídeos de forma
 > simples.
+
+Estou tentando manter este README sincronizado com o link abaixo. Caso não
+encontre o que procura aqui, acesse:
+
+- [Transcreva áudio com Python: Sussu CLI + OpenAI Whisper](https://www.otaviomiranda.com.br/2025/python-sussu-cli-openai-whisper/)
 
 Ao rodar este projeto, uma das primeiras coisas que você vai querer fazer
 é usar o comando `whisper` para fazer a transcrição inicial de algum vídeo
@@ -53,6 +57,7 @@ ou áudio. Essa transcrição é um ótimo jeito de ver na prática como o
 **Whisper** trabalha e o que esperar dos resultados.
 
 - [Repositório oficial do `whisper`](https://github.com/openai/whisper)
+- [Repositório do `sussu`](https://github.com/luizomf/sussu)
 
 Por isso, vamos começar pela **instalação** do projeto, o que vai
 disponibilizar os comandos `sussu` e `whisper` no terminal.
@@ -74,7 +79,13 @@ gerenciamento geral (pacotes, versão do Python, etc.).
 Para instalar tudo, basta rodar o comando:
 
 ```sh
-uv sync  # é só isso mesmo 😅
+# Se ainda não clonou o repositório
+git clone https://github.com/luizomf/sussu.git
+# Acesse a pasta do projeto
+cd sussu
+# Sincronizando
+uv sync
+# é só isso mesmo 😅
 ```
 
 `uv sync` é suficiente para:
