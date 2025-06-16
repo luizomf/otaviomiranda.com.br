@@ -40,16 +40,51 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 # sussu(rro): CLI educacional com OpenAI Whisper
 
-> Ferramenta de linha de comando focada em educação e IA offline. Usa o
-> poder do Whisper da OpenAI para transcrever áudios e vídeos de forma
-> simples.
+> Ferramenta de linha de comando focada em educação e IA offline. \
+> Usa o poder do Whisper da OpenAI para transcrever áudios e vídeos de
+> forma simples.
 
-Estou tentando manter este README sincronizado com o link abaixo. Caso não
-encontre o que procura aqui, acesse:
+---
+
+## Sobre o Whisper e a OpenAI
+
+Estava curioso para saber se a OpenAI usa o Whisper em seus próprios
+produtos, então questionei o ChatGPT...
+
+> **Eu:** A OpenAI usa o Whisper internamente em algum recurso que as
+> pessoas consomem? \
+> **ChatGPT:** Sim, a OpenAI usa o Whisper como base para recursos de
+> transcrição e compreensão de áudio em produtos como o ChatGPT com
+> entrada de voz. Ele também é utilizado em APIs que envolvem
+> reconhecimento de fala, como a `speech-to-text` da OpenAI.
+
+---
+
+## Sobre este documento:
+
+Estou tentando manter este documento (`README.md`) sincronizado com o link
+abaixo. Caso não encontre o que procura aqui, acesse:
 
 - [Transcreva áudio com Python: Sussu CLI + OpenAI Whisper](https://www.otaviomiranda.com.br/2025/python-sussu-cli-openai-whisper/)
+
+---
+
+## Introdução geral
 
 Ao rodar este projeto, uma das primeiras coisas que você vai querer fazer
 é usar o comando `whisper` para fazer a transcrição inicial de algum vídeo
@@ -59,8 +94,10 @@ ou áudio. Essa transcrição é um ótimo jeito de ver na prática como o
 - [Repositório oficial do `whisper`](https://github.com/openai/whisper)
 - [Repositório do `sussu`](https://github.com/luizomf/sussu)
 
-Por isso, vamos começar pela **instalação** do projeto, o que vai
-disponibilizar os comandos `sussu` e `whisper` no terminal.
+Vamos começar pela **instalação** do projeto, isso já coloca os comandos
+`sussu` e `whisper` funcionando direto no seu terminal.
+
+---
 
 ## Instalação do `sussu`
 
@@ -252,10 +289,14 @@ whisper /caminho/do/seu/arquivo.mp4 --model large-v2 --device cpu
 transcrições serão salvas**. Por padrão, os arquivos serão salvos na raiz
 do projeto (`.`).
 
+---
+
 **`--output_format` ou `-f`**: Permite que você escolha o **formato da
 transcrição ou legenda** gerada. As opções disponíveis são: `txt`, `vtt`,
 `srt`, `tsv`, `json` e `all` (que gera todos os formatos). O padrão é
 `all`.
+
+---
 
 **Exemplo:**
 
@@ -286,6 +327,8 @@ falado no áudio ou vídeo**. Existem muitas opções de idiomas disponíveis.
 Se você não informar esse argumento, o `whisper` é inteligente o
 suficiente para detectar automaticamente o idioma do conteúdo.
 
+---
+
 Forma curta (language code):
 
 ```python
@@ -300,6 +343,8 @@ Forma curta (language code):
 ```
 
 - Exemplo para português do Brasil: `--language pt`
+
+---
 
 Forma longa (language name):
 
@@ -347,17 +392,25 @@ whisper /caminho/do/seu/arquivo.mp4 --language pt
 próximos tokens. Esse parâmetro interage com `--beam_size`, `--patience` e
 `--best_of`.
 
+---
+
 **`--beam_size`:** número de hipóteses que o modelo mantém em paralelo.
 Pensa como se ele testasse vários caminhos ao mesmo tempo e no fim
 escolhesse o melhor. O padrão é `5` e **só funciona se
 `--temperature == 0.0`**.
 
+---
+
 **`--patience`:** fator de tolerância que faz o modelo continuar
 explorando novas hipóteses mesmo depois de achar uma aceitável. Requer
 `--temperature == 0.0` e `--beam_size > 1`.
 
+---
+
 **`--best_of`:** número de amostras diferentes geradas antes de escolher a
 melhor. Funciona apenas quando `--temperature > 0.0`.
+
+---
 
 **Cola rápida:**
 
@@ -416,6 +469,8 @@ whisper /caminho/do/seu/arquivo.mp4 --temperature 0.0 --beam_size 3
 whisper /caminho/do/seu/arquivo.mp4 --temperature 0.7 --best_of 5
 ```
 
+---
+
 **`--temperature_increment_on_fallback`**: Este argumento permite que você
 **aumente a temperatura do modelo em casos de falha na transcrição**. Se o
 modelo encontrar dificuldades na temperatura `0.0`, ele fará um "fallback"
@@ -435,11 +490,15 @@ particularmente, costumo usar `45` para uma melhor legibilidade.
 **Importante:** Se este argumento for utilizado, ele anula o
 `--max_words_per_line`. **Requer `--word_timestamps True`**.
 
+---
+
 **`--max_line_count`**: Controla a **quantidade máxima de linhas por
 legenda** (ou "bloco" de texto). Eu uso o valor `2`, mas, nos meus testes,
 percebi que isso força todas as legendas a terem sempre duas linhas. Para
 mim, não é um problema, mas vale a pena você testar para ver como se
 adapta ao seu caso. **Requer `--word_timestamps True`**.
+
+---
 
 **`--max_words_per_line`**: Determina a **quantidade máxima de palavras
 por linha** na legenda. O padrão também é um valor alto, `1000` (também
@@ -448,10 +507,14 @@ acredito que `5` palavras por linha pode resultar em uma leitura mais
 confortável. **Atenção:** Será anulado por `--max_line_width` caso você
 use ambos no mesmo comando. **Requer `--word_timestamps True`**.
 
+---
+
 **`--highlight_words`**: Este é o argumento responsável por criar o
 **efeito de "karaokê"** na sua transcrição. Ele faz com que cada palavra
 falada seja sublinhada no momento exato em que é pronunciada. **Requer
 `--word_timestamps True`**.
+
+---
 
 **`--word_timestamps`**: Este argumento é a **chave** para ativar os
 recursos de sincronização detalhada. Ao defini-lo como `True`, o modelo
@@ -460,6 +523,8 @@ blocos de frase. Isso pode, sim, aumentar consideravelmente o tempo de
 transcrição, mas é um requisito fundamental para que vários outros
 argumentos (como os de formatação de linha e destaque de palavras)
 funcionem. O valor padrão é `False`.
+
+---
 
 **Exemplo Completo de Transcrição Detalhada**
 
@@ -507,11 +572,12 @@ anteriormente, se a opção `--condition_on_previous_text` estiver como
 
 **Analogia para Entender Melhor:**
 
-> Imagine que é como dizer para um cantor, antes de ele subir no palco:
-> "Tem 300 mil pessoas te esperando, detona lá!" Ele vai subir já no clima
-> certo, mas o resto da performance dependerá do show em si. Da mesma
-> forma, o modelo continua a transcrição com base no que "ouviu" e
-> transcreveu depois do prompt inicial.
+> Imagine que é como dizer para um cantor, antes de ele subir no palco: \
+> "Tem 300 mil pessoas te esperando, detona lá!" \
+> Ele vai subir já no clima certo, mas o resto da performance dependerá do
+> show em si. \
+> Da mesma forma, o modelo continua a transcrição com base no que "ouviu"
+> e transcreveu depois do prompt inicial.
 
 **Cuidados com o `--initial_prompt`**:
 
@@ -571,10 +637,11 @@ usado como contexto** para ajudar a transcrever a próxima "janela" do
   **evitar "loops de erro"**, onde o modelo fica repetindo frases ou
   palavras indefinidamente.
 
-> _Exemplo de Uso:_ Se a transcrição começar a errar e ficar repetindo,
-> por exemplo, `"Olá, pessoal, hoje vamos falar sobre..."` em loop,
-> desativar este argumento (`--condition_on_previous_text=False`) pode
-> quebrar esse ciclo vicioso.
+> _Exemplo de Uso:_ \
+> Se a transcrição começar a errar e ficar repetindo, por exemplo,
+> `"Olá, pessoal, hoje vamos falar sobre..."` em loop, desativar este
+> argumento (`--condition_on_previous_text=False`) pode quebrar esse ciclo
+> vicioso.
 
 ---
 
@@ -593,22 +660,27 @@ Para otimizar suas transcrições, considere as seguintes dicas:
 
 ---
 
-### Parâmetros que não usei 🫣 (mas parecem interessantes):
+### Parâmetros que não usei (ou quase não usei 🫣):
 
-Esses parâmetros aí de baixo **eu não testei quase nada**. Só li a
-documentação, pesquei uma ideia geral e traduzi pra você não precisar
-sofrer. Se quiser fuçar, fuce, mas vai por sua conta e risco. Pode ser que
-melhore algo, pode ser que não mude nada. Vai depender do áudio, da fase
-da lua e do humor do modelo 😅.
+Esses parâmetros aí de baixo **eu não testei quase nada** (apenas alguns).
+Só li a documentação, pesquei uma ideia geral e traduzi pra você não
+precisar sofrer. Se quiser fuçar, fuce, mas vai por sua conta e risco.
+Pode ser que melhore algo, pode ser que não mude nada. Vai depender do
+áudio, da fase da lua e do humor do modelo 😅.
 
 Se eu começar a usar alguma dessas opções nas minhas transcrições, prometo
-que volto aqui e atualizo esse trecho.
+que volto aqui e atualizo esse trecho. Alguns deles eu cheguei a testar de
+forma supercifical (explico nos argumentos).
+
+---
 
 **`--length_penalty`**
 
 Controla a penalização para _sequências longas_. Valor típico: entre `0.6`
 e `1.0`. Se você notar que a transcrição tá muito curta ou longa, pode
-brincar com isso.
+brincar com isso. Eu não toquei neste argumento.
+
+---
 
 **`--suppress_tokens`**
 
@@ -616,18 +688,57 @@ Permite suprimir tokens pelo ID. O valor `-1` (padrão) já suprime símbolos
 esquisitos e só mantém pontuações comuns. Deixa assim, a menos que você
 saiba o que está fazendo.
 
+Exemplo:
+
+```sh
+# Isso aqui vai cortar algumas coisas úteis (só exemplo).
+# Seu texto não terá: 'Olá', 'pessoal', ',', 'este', 'é', 'meu', 'texto', '.'
+# Obs: texto sem ponto e vírgula fica horrível
+whisper /caminho/do/seu/arquivo.mp4 \
+    --model turbo \
+    --language pt \
+    --suppress_tokens=38056,842,24811,11,4065,1136,9230,35503,13
+```
+
 _Quer saber o ID de um token específico?_
 
-Dá pra descobrir com um script usando o
-`tokenizer.encode("seu texto aqui")`, mas sinceramente... se chegou nesse
-ponto, você já tá no nível "mexendo no motor com o carro ligado" 😂
-(talvez nem estaria lendo esse texto).
+Seguinte, se você que descobrir algum token para suprimir ou para qualquer
+outra coisa, veja um exemplo:
+
+```python
+>>> from whisper.tokenizer import get_tokenizer
+# get_tokenizer -> multilingual, num_languages=99, language='pt', task='transcribe'
+#                  True,         99                Qual idioma    Qual task
+>>> tokenizer = get_tokenizer(True, num_languages=99, language='pt', task='transcribe')
+# tokenizer.encode você passa o 'valor' e recebe os tokens List[int]
+>>> tokenizer.encode('Olá pessoal, este é meu texto.')
+[38056, 842, 24811, 11, 4065, 1136, 9230, 35503, 13]
+# tokenizer.decode você passa os tokens List[int] e recebe o 'valor'
+>>> tokenizer.decode([38056, 842, 24811, 11, 4065, 1136, 9230, 35503, 13])
+'Olá pessoal, este é meu texto.'
+>>>
+```
+
+---
 
 **`--fp16`**
 
-Usa precisão _float16_ pra acelerar em GPU. No CPU, pode causar erro ou
-queda de performance. Se estiver no Mac M1/M2, provavelmente tem que
-desativar (`--fp16 False`).
+Usa precisão _float16_ para acelerar em GPU.
+
+No Mac M1, por exemplo, eu sempre uso `--fp16 False`, assim ele não fica
+mostrando warning de que trocou pra _float32_. Essa troca acontece
+automaticamente se o seu hardware **não** suportar _float16_, então:
+
+- **Se suportar:** passa direto com _float16_.
+- **Se não suportar:** ele mostra um aviso e troca para _float32_ sozinho.
+
+Exemplo do warning:
+
+```
+FP16 is not supported on CPU; using FP32 instead
+```
+
+---
 
 **`--compression_ratio_threshold`**
 
@@ -635,17 +746,100 @@ Se a razão de compressão (gzip) do texto for muito alta, ele assume que
 houve erro (textos muito repetitivos). Valor padrão é `2.4`. Útil pra
 detectar _loop de repetição_.
 
+**Como funciona a ideia:**
+
+O Whisper pega o texto, compacta com gzip e compara o **tamanho original**
+com o **tamanho compactado** para calcular a **razão de compressão**.
+Textos repetitivos geram compressões mais eficientes, ou seja, **razão
+mais alta**.
+
+- `"Olá, olá, olá, olá, olá..."` → compacta muito → **alta razão**
+- `"O rato roeu a roupa do rei de Roma."` → mais diversidade → **menor
+  razão**
+
+Se a razão ultrapassar o limite definido (padrão: `2.4`), o Whisper
+**descarta o trecho** por considerá-lo problemático (repetitivo, bugado
+etc).
+
+Se sua transcrição estiver falhando **sem motivo claro**, esse filtro pode
+ser o culpado. Teste com `--compression_ratio_threshold 0` e veja se
+melhora.
+
+---
+
 **`--logprob_threshold`**
 
-Se a média de log-probs dos tokens estiver abaixo disso, ele trata como
-erro. Padrão: `-1.0`. Deixa isso quieto a menos que esteja debugando
-problemas muito específicos.
+Se a média do logaritmo da probabilidade (logprob) dos tokens estiver
+abaixo disso, ele trata como erro. Padrão: `-1.0`. Você consegue ver
+`avg_logprob` (média do logaritmo da probabilidade) das frases transcritas
+pelo Whisper no arquivo `.json` final gerado. Este arquivo contém algo
+similar a isso:
+
+```json
+{
+  "id": 102,
+  "seek": 27632,
+  "start": 293.8,
+  "end": 294.66,
+  "text": " primeiro os imports",
+  "tokens": [51240, 18314, 3003, 41596, 51283],
+  "temperature": 0.0,
+  "avg_logprob": -0.08265516709308235,
+  "compression_ratio": 1.7523364485981308,
+  "no_speech_prob": 1.1688144375965326e-11,
+  "words": [
+    {
+      "word": " primeiro",
+      "start": 293.8,
+      "end": 294.06,
+      "probability": 0.7435079216957092
+    },
+    {
+      "word": " os",
+      "start": 294.06,
+      "end": 294.24,
+      "probability": 0.9965941309928894
+    },
+    {
+      "word": " imports",
+      "start": 294.24,
+      "end": 294.66,
+      "probability": 0.990346372127533
+    }
+  ]
+}
+```
+
+Aqui `avg_logprob` é `-0.08265516709308235`. Quanto mais próximo de `0`,
+mais confiante está o modelo.
+
+Suponha que o modelo está descartando coisas na transcrição. Você poderia
+testar `--logprob_threshold=-2.0` ou até `--logprob_threshold=-1000` (não
+descarta nada).
+
+Isso pode gerar muito ruído aleatório na transcrição, mas pode fazer ele
+detectar o que você quer.
+
+O contrário também é verdadeiro. Se usar `--logprob_threshold=-0.1` (por
+exemplo), o modelo vai pegar praticamente só o que tem certeza absoluta
+que tá certo. Isso não é uma coisa boa ou ruim, depende do contexto e do
+seu objetivo. Na dúvida, manter o padrão costuma ser uma escolha segura.
+
+Quanto mais rigoroso, mais lento, porque ele vai tentar gerar várias
+hipóteses até alcançar esse nível de confiança. No fim das contas, ele vai
+te entregar um texto de qualquer jeito, mas pode demorar bem mais e talvez
+nem seja tão diferente assim.
+
+---
 
 **`--no_speech_threshold`**
 
-Se ele acha que é silêncio (prob. alta de `<|nospeech|>`), e a
-decodificação falhou (`logprob_threshold`), considera o trecho como
-silêncio. Ajuda a cortar "respiro vazio".
+Se o modelo acredita que é silêncio (probabilidade alta de `<|nospeech|>`)
+**e** a decodificação falha (`logprob_threshold`), ele descarta o trecho
+como sendo silêncio. Isso ajuda a cortar "respiros vazios" da transcrição.
+
+Essa funcionalidade me encanta, e tenho planos futuros pra ela. Quem sabe
+a gente não volta a falar disso mais pra frente?
 
 ---
 
@@ -745,12 +939,21 @@ ignorou os duplicados, mostrando só o que fazia sentido cronológico
 Funciona junto com `--word_timestamps True`.
 
 Ele tenta detectar trechos de silêncio longos que o modelo pode ter
-“alucinado” (inventado texto).
+"alucinado" (inventado texto).
 
 Se você passar `--hallucination_silence_threshold 1.5`, ele vai **ignorar
-silêncios maiores que 1.5s que geraram texto suspeito**.
+silêncios maiores que 1.5s que geraram texto suspeito**. Não toquei nesse
+argumento.
 
 ---
+
+
+
+
+
+
+
+
 
 
 
