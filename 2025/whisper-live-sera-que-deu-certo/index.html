@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Tentei usar o whisper live via microfone - Otávio Miranda</title>
+    <meta
+      name="description"
+      content="Criei essa página para documentar minhas tentativas de usar o whisper live via microfone. Já quero deixar claro que isso não funcionou conforme eu esperava e cabem mais testes."
+    />
+
+    <link rel="stylesheet" href="../../css/markdown.css" />
+
+    <link rel="icon" type="image/webp" href="../../imgs/favicon-1.webp" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  </head>
+  <body>
+    <nav class="breadcrumb-nav">
+      <a href="/">&larr; ir para início</a>
+    </nav>
+
+    <article class="markdown-body" id="content"></article>
+
+    <script type="text/markdown" id="markdown-source">
+
+
+
+
+# (🚫 FAILED) `whisper` live via microfone
+
+Criei esse arquivo para ir documentando minhas tentativas de montar um
+`whisper` live pegando o áudio direto do meu microfone. Já quero **deixar
+claro que isso não funcionou** conforme eu esperava e cabem mais testes.
+
+Ao meu ver, precisaríamos trabalhar diretamente com o modelo do `whisper`
+sem usar o código oficial da OpenAI, porque a janela de 30 segundos pode
+ter me atrapalhado. Pode até ser necessário refinar o modelo para
+trabalhos `live`. Isso é apenas um pensamento, visto que não pude ir além
+do que descrevo à seguir porque preciso ver se esse conteúdo será atrativo
+para meu público.
+
+---
+
+## (🚫 FAILED) Captura do microfone via `ffmpeg`
+
+Minha primeira tentativa será capturar o áudio do computador usando o
+`ffmpeg`. Para constar, estou usando o ChatGPT e o Gemini para me ajudar
+com as partes que eu tenho pouco conhecimento relacionado a áudio. Além
+disso, estou usando o seguinte hardware (não sei se será relevante, mas
+cabe informar):
+
+- MacBook Pro 2021
+- Chip Apple M1 Max
+- Memória 32 GB RAM
+- Disco 1 TB
+- Sistema Operacional Sequoia 15.5
+
+---
+
+### Listando os dispositivos de áudio
+
+**Observação:** só estou testando no macOS.
+
+```sh
+# macOS
+ffmpeg -hide_banner -f avfoundation -list_devices true -i ""
+
+# Linux
+ffmpeg -hide_banner -f alsa -list_devices true -i ""
+# ou (talvez mais confiável)
+arecord -l
+# ou
+arecord --list-devices
+
+# Windows
+ffmpeg -hide_banner -list_devices true -f dshow -i dummy
+```
+
+Para mim, a saída foi mais ou menos como mostro abaixo. Só ajustei um
+pouco a saída e removi alguns dispositivos irrelevantes, como fones,
+smartphones, etc. Também removi o trechinho inicial do ffmpeg.
+
+```txt
+➜  Desktop
+ffmpeg -hide_banner -f avfoundation -list_devices true -i "" 2>&1
+
+2025-06-18 09:15:21.567 ffmpeg[37312:1839628] WARNING:
+Add NSCameraUseContinuityCameraDeviceType to your Info.plist to use AVCaptureDeviceTypeContinuityCamera.
+
+2025-06-18 09:15:21.708 ffmpeg[37312:1839628] WARNING:
+AVCaptureDeviceTypeExternal is deprecated for Continuity Cameras.
+
+Please use AVCaptureDeviceTypeContinuityCamera and add NSCameraUseContinuityCameraDeviceType to your Info.plist.
+
+[AVFoundation indev @ 0x153706960] AVFoundation video devices:
+[AVFoundation indev @ 0x153706960] [0] Câmera FaceTime HD
+[AVFoundation indev @ 0x153706960] [5] Capture screen 0
+[AVFoundation indev @ 0x153706960] [6] Capture screen 1
+[AVFoundation indev @ 0x153706960] AVFoundation audio devices:
+[AVFoundation indev @ 0x153706960] [0] MOTIV Mix Virtual
+[AVFoundation indev @ 0x153706960] [1] JBL TUNE125BT FOREBA
+[AVFoundation indev @ 0x153706960] [2] Microfone (MacBook Pro)
+
+[in#0 @ 0x600001f5c600] Error opening input: Input/output error
+
+Error opening input file .
+Error opening input files: Input/output error
+```
+
+A parte importante é sabermos duas coisas: `[ID] NOME DO DISPOSITIVO`. Por
+exemplo, quero usar o **Microfone (MacBook Pro)**, isso significa que o
+dispositivo de áudio que quero usar é o `2`.
+
+---
+
+### (🚫 FAILED) Testando a captura de áudio em um `.wav`
+
+Só para garantir que tudo está funcionando perfeitamente, vamos fazer uma
+captura de áudio para um arquivo `.wav`. Ainda não é a versão final do
+nosso comando, mas só queremos ver se está tudo funcionando.
+
+```sh
+# Lembra do meu [2] Microfone (MacBook Pro) -> ID 2
+# No comando abaixo ":2" é o dispositivo que estou usando
+# Saída: out.wav de 10 segundos com a captura do dispositivo escolhido
+ffmpeg -f avfoundation -i ":2" -t 10 -ac 1 -ar 16000 out.wav
+```
+
+Ou seja, para capturar apenas o **\[2] Microfone (MacBook Pro)**, basta
+passar `:2` no argumento `-i`.
+
+Se fosse necessário capturar **vídeo e áudio simultaneamente**, o formato
+seria `V:A`, onde `V` é o ID do vídeo e `A` o do áudio.
+
+Por exemplo:
+
+```sh
+# Captura da Câmera FaceTime HD (ID 0) e Microfone (MacBook Pro) (ID 2)
+# Saída: out.mp4 de 10 segundos com a captura de vídeo e áudio de 0 e 2
+ffmpeg -f avfoundation -framerate 30 -i "0:2" -t 10 out.mp4
+```
+
+### (🚫 FAILED) O que houve com o `ffmpeg`?
+
+No meu caso o `ffmpeg` não funcionou conforme eu gostaria. O que aconteceu
+aqui foi que o áudio ficou picotando de modo muito estranho. A partir
+daqui, fiquei praticamente o dia inteiro tentando testar coisas como:
+trocar o sample rate do áudio, o codec, o microfone, a fonte (testei
+várias fontes, até mesmo o áudio direto do computador). Nada!
+
+Cheguei na conclusão que o `avfoundation` no meu macOS não está
+funcionando perfeitamente. Exemplos de testes que fiz:
+
+```sh
+ffmpeg \
+    -thread_queue_size 512 \
+    -loglevel debug \
+    -f avfoundation \
+    -i ":2" \
+    -c:a copy \
+    -t 10 \
+    out.wav \
+    -y
+```
+
+Esse `copy` do codec de áudio foi um dos últimos testes que fiz (depois de
+trocar várias outras coisas) e isso revelou que o ffmpeg detecta meu áudio
+com essas características:
+
+```
+Stream #0:0, 1, 1/1000000: Audio: pcm_f32le, 48000 Hz, mono, flt, 1536 kb/s
+```
+
+Eu já havia testado pcm_f32le e 48000 Hz, antes, então sem novidades aqui.
+
+Enfim, deixo isso documentado aqui, porque se isso ocorrer com você, não
+vi nenhuma solução possível. A solução para este problema de áudio tremido
+ou picotando foi **usar o `sox`**.
+
+---
+
+## (✅ SUCCESS) `sox` para capturar o áudio
+
+Na primeira tentativa com `sox` já obtive sucesso com **zero esforço**.
+
+```sh
+sox \
+    -b 32 \
+    -e float \
+    -r 16000 \
+    -c 1 \
+    -d \
+    --buffer $((16000*4*10)) \
+    out.wav \
+    trim 0 10 \
+    fade t 1 -0 1
+```
+
+Este comendo foi gerado pelo Gemini, apenas solicitei um comando que
+gravasse um áudio de 10s com fade-in e fade-out (apenas para testes).
+
+Depois testei um monte de coisas. O comando que vou usar com o `whisper`
+será o que mostro abaixo (🚫 não execute isso, a saída está indo para o
+`stdout`, não para um arquivo).
+
+```sh
+# 🚫 não execute isso ainda
+sox -t \
+    coreaudio "Microfone (MacBook Pro)" \
+    -b 16 \
+    -e signed-integer \
+    -r 16000 -c 1 \
+    -t raw\
+    -
+```
+
+Eu não entendo muito sobre o `sox`, mas usei o `ffmpeg` (descrito acima)
+para listar o nome dos dispositivos. Ao invés de trabalhar com o ID (como
+no `ffmpeg`), usamos o nome aqui.
+
+---
+
+## (🤔 SUCCESS?) `whisper` live - ou quase!
+
+Aqui é onde eu penso que posso ter que refinar o modelo ou usar o modelo
+"cru", sem o código da OpenAI (do `whisper`).
+
+Fiz um código extremamente desleixado apenas para **ver se iria
+funcionar**. Se tudo desse certo, meu plano era refinar bastante tudo o
+que você verá a seguir. Considere um "MVP" `0.0.0alpha`.
+
+```python
+# pyright: basic
+import asyncio
+
+import numpy as np
+import whisper
+from scipy.io import wavfile
+
+MODEL = whisper.load_model("turbo")
+
+
+async def recorder(queue, counter, buffer, chunk_size, sr=16000, duration=5):
+    print("🗣️ Recording started")
+
+    proc = await asyncio.create_subprocess_exec(
+        "sox",
+        "-t",
+        "coreaudio",
+        "Microfone (MacBook Pro)",
+        "-b",
+        "16",
+        "-e",
+        "signed-integer",
+        "-r",
+        "16000",
+        "-c",
+        "1",
+        "-t",
+        "raw",
+        "-",  # raw para facilitar o corte
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.DEVNULL,
+    )
+
+    while True:
+        data = await proc.stdout.read(chunk_size)
+        if not data:
+            break
+        buffer += data
+
+        chunk_byte_size = sr * 2 * duration
+
+        if len(buffer) >= chunk_byte_size:
+            audio_chunk = buffer[:chunk_byte_size]
+            buffer = buffer[chunk_byte_size:]
+
+            audio_np = np.frombuffer(audio_chunk, np.int16).astype(np.float32) / 32768.0
+            await queue.put(audio_np)
+
+            wavfile.write(
+                f"media/debug_{counter}.wav",
+                16000,
+                audio_np,
+            )
+
+            print(f"🗣️ Chunk {counter} ends \n")
+            counter += 1
+
+
+async def transcriber(queue):
+    prefix = ""
+    while True:
+        print("💬 Whisper started")
+
+        audio = await queue.get()
+        audio = whisper.pad_or_trim(audio)
+
+        mel = whisper.log_mel_spectrogram(audio, n_mels=MODEL.dims.n_mels).to(
+            MODEL.device
+        )
+
+        options = whisper.DecodingOptions(
+            language="en",
+            temperature=0,
+            beam_size=1,
+            patience=0,
+            without_timestamps=True,
+            prompt=None,
+            prefix=None,
+        )
+        result = whisper.decode(
+            MODEL,
+            mel,
+            options,
+        )
+
+        prefix = result.text
+        print("💬", result.text, "\n")
+        queue.task_done()
+
+
+async def main():
+    from pathlib import Path
+    from shutil import rmtree
+
+    media = Path("media")
+    rmtree(media)
+    media.mkdir(exist_ok=True)
+
+    queue = asyncio.Queue()
+    counter = 0
+    buffer = b""
+    chunk_size = 4096
+
+    await asyncio.gather(
+        recorder(queue, counter, buffer, chunk_size, 16000, 30), transcriber(queue)
+    )
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+Nesse código eu uso `asyncio` para não parar para esperar o `whisper`
+transcrever o áudio. Além disso, também uso `scipy.io.wavfile` para salvar
+o áudio em `chunks` da mesma maneira que o `whisper` recebe para debug.
+Depois eu faço a junção desses arquivos e ouço como ficou.
+
+A função `recorder` inicia o `sox` com o meu microfone e um loop que
+analisa a quantidade de bytes (`chunk_byte_size`) que gerariam
+aproximadamente o tempo informado em `duration`.
+
+```python
+# Sample rate (16000) * Sample Width (2) * duration (5)
+chunk_byte_size = sr * 2 * duration
+```
+
+Quando o tamanho do `buffer` bate com o tamanho do `chunk_byte_size`,
+capturamos o `buffer` até aquele ponto. Esses são os bytes brutos do
+trecho de áudio. Também mudamos o `buffer` para começar de onde parou e
+pegar qualquer byte que vier no final para uso posterior.
+
+```python
+while True:
+    # captura o que vem do sox
+    data = await proc.stdout.read(chunk_size)
+    if not data:
+        break
+    # Joga no buffer
+    buffer += data
+
+    # calcula quantos bytes daria a duration
+    chunk_byte_size = sr * 2 * duration
+
+    # chegou na duration
+    if len(buffer) >= chunk_byte_size:
+        # pegamos o trecho de áudio
+        audio_chunk = buffer[:chunk_byte_size]
+        # mudamos o buffer pra pegar algo que venha depois
+        buffer = buffer[chunk_byte_size:]
+```
+
+Agora é só converter o buffer do trecho de áudio para um formato que o
+`whisper` vai entender e jogar isso na queue para o `whisper` pegar
+depois:
+
+```python
+audio_np = np.frombuffer(audio_chunk, np.int16).astype(np.float32) / 32768.0
+await queue.put(audio_np)
+```
+
+Como eu queria ver exatamente o que o `whisper` também "estava vendo",
+salvei o áudio usando:
+
+```python
+wavfile.write(
+    f"media/debug_{counter}.wav",
+    16000,
+    audio_np,
+)
+```
+
+Tem um contador aí também só pra eu criar arquivos: `dubug_0.wav`,
+`dubug_1.wav`, `dubug_2.wav`, etc.
+
+Depois eu junto os áudios com o ffmpeg:
+
+```sh
+ffmpeg -f concat -safe 0 -i input.txt -c copy out.wav
+```
+
+O arquivo `input.txt` fica assim:
+
+```
+file 'dubug_0.wav'
+file 'dubug_1.wav'
+file 'dubug_2.wav'
+```
+
+Até aqui tá tudo indo lindamente. Enquanto estava testando essas coisas,
+para mim tudo iria fluir perfeitamente. Mas o resultado foi bem mais ou
+menos.
+
+---
+
+### (🤔 SUCCESS?) os problemas!
+
+Essa é a parte que entra o `whisper`. Aqui eu testei um monte de coisas
+para tentar ser o mais rápido possível e também ter precisão na
+transcrição.
+
+Dá uma conferida nos comentários que adicionei no código. Depois vou
+explicar outras coisas a seguir.
+
+```python
+async def transcriber(queue):
+    prefix = "" # USEI ISSO DE DUAS FORMAS DIFERENTES, SEM SUCESSO
+    while True:
+        print("💬 Whisper started")
+
+        # Vamos pegar o áudio bruto da queue
+        audio = await queue.get()
+
+        # Isso é um saco, porque independente da duração do áudio,
+        # isso sempre vai gerar aproximadamente 30s.
+        # Se o áudio for menor do que 30s, ele preenche o resto com zeros até
+        # chegar em 30s. Isso gera silêncio no final do áudio.
+        # Se o áudio for maior do que 30s, ele faz o trim (corta) para 30s.
+        # IMPORTANTE: você não conseguirá enviar um áudio de duração diferente
+        # de 30s usando o código da OpenAI porque o whisper foi treinado com 30s.
+        audio = whisper.pad_or_trim(audio)
+
+        # Já expliquei isso em outro vídeo: o whisper não ouve o áudio, ele
+        # ve uma representação gráfica do áudio. Dá uma olhada sobre:
+        # Espectrograma Mel logarítmico (log-Mel spectrogram).
+        # É facinho de entender 🫠😳😵‍💫
+        mel = whisper.log_mel_spectrogram(audio, n_mels=MODEL.dims.n_mels).to(
+            MODEL.device
+        )
+
+        options = whisper.DecodingOptions(
+            # Esse foi meu último teste: en (english)
+            # 90% dos meus testes foram feitos com pt (portuguese) usando
+            # vídeos do YouTube com pessoas falando claramente, bom áudio,
+            # sem gírias ou termos difíceis.
+            language="en",
+
+            # Para deixar o modelo mais rápido, tentei usar o modo "greedy"
+            # também já expliquei isso no outro vídeo
+            temperature=0,
+            beam_size=1,
+            patience=0, # isso não faz nada, só desespero mesmo
+
+            # tentei desativar os timestamps para deixar o modelo livre apenas
+            # para transcrever o que ouvia
+            without_timestamps=True,
+
+            # Aquele `prefix` lá em cima, eu usei nessas duas opções. Isso
+            # faz o model entrar em loop várias vezes. Por isso desistir de usar.
+            prompt=None,
+            prefix=None,
+        )
+
+        # Abaixo é só resultado
+        result = whisper.decode(
+            MODEL,
+            mel,
+            options,
+        )
+
+        prefix = result.text
+        print("💬", result.text, "\n")
+        queue.task_done()
+```
+
+Eu tentei detalhar bastante nos comentários do código acima. Mas vamos
+olhar outras coisas relevantes.
+
+Não consegui usar nenhum modelo acima do `medium`. Isso porque o tempo de
+transcrição do `whisper` ficava maior do que a janela de duração
+escolhida. Por exemplo, com modelo `turbo` e uma janela de 2 segundos, o
+whisper levava uns 10 segundos ou mais para transcrever. Ou seja, não dava
+tempo e nem tinha como ser "tempo real". Pode ser meu hardware também.
+
+Os modelos que funcionaram melhor para "tempo real" foram: `tiny` e `base`
+(ambos imprecisos). Se fosse escolher, ficaria com o `base`. O `tiny`
+entra em loop com uma facilidade extrema.
+
+Sobre os tempos, testei com uma variação enorme de tempos:
+
+- ⚠️ 1s, 2s, 3s, 4s: sem chance! O modelo quase não acerta e em pouco
+  tempo entra em loop
+- ⚠️ 5s, 6s, 7s, 8s, 9s: até funciona, mas o modelo continua entrando em
+  loop em alguns momentos
+- ✅ 10s até 30s: foi a melhor janela de tempo que encontrei.
+
+Percebeu que eu queria algo em tempo real e as coisas só funcionaram bem a
+partir dos 10s? Por isso que eu disse lá em cima que talvez seja
+necessário refinar o modelo e usar código próprio. Todos os meus testes
+foram feitos em cima do código do `whisper`.
+
+---
+
+## Conclusão geral
+
+Dessa maneira que detalhei acima, ao meu ver, não tem como fazer o
+`whisper` funcionar de maneira precisa em tempo real. Pelo menos foi o que
+concluí disso tudo.
+
+Foi uma excelente experiência. Aprendi muitas coisas que não sabia,
+principalmente sobre áudio, e também me diverti bastante brincando com
+esse modelo. Deixo documentado tudo que fiz, talvez te ajude a ir mais
+fundo no modelo e código do `whisper` para chegar a um objetivo melhor que
+o meu. Outra opção seria usar whisper.cpp (implementação C++ do Whisper)
+ou faster-whisper (uma versão otimizada em Python baseada no CTranslate2),
+o que eu não fiz.
+
+Valeu!!!
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+    <script>
+      const markdownContent =
+        document.getElementById('markdown-source').textContent;
+      const contentDiv = document.getElementById('content');
+      contentDiv.innerHTML = marked.parse(markdownContent);
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+      // Ativa o realce de sintaxe em todos os blocos de código
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>
