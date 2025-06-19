@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
@@ -29,10 +29,32 @@
         method="get"
         target="_blank"
       >
-        <input type="hidden" name="q" value="site:otaviomiranda.com.br " />
         <input type="search" name="q" placeholder="Buscar no site via Google" />
         <button type="submit">Buscar</button>
       </form>
+
+      <script>
+        (function () {
+          const form = document.getElementById('main-search');
+          const prepend = 'site:otaviomiranda.com.br';
+
+          if (!form) return;
+
+          const input = form.querySelector('input[name="q"]');
+
+          form.addEventListener('submit', (e) => {
+            const original = input.value;
+            input.value = `${prepend} ${original}`;
+
+            setTimeout(() => {
+              form.submit();
+              input.value = original;
+            }, 0);
+
+            e.preventDefault();
+          });
+        })();
+      </script>
     </header>
 
     <div class="section-separator"></div>
