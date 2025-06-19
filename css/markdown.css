@@ -6,6 +6,7 @@ body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 /* A única customização que precisamos é centralizar o corpo do artigo */
@@ -20,6 +21,49 @@ body {
 
 .breadcrumb-nav {
   padding: 24px 15px 0 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#main-search {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+#main-search input[type='search'],
+#main-search button[type='submit'] {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1.6rem;
+  padding: 8px 16px;
+  background: #eee;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  transition: all 300ms ease-in-out;
+}
+
+#main-search button[type='submit'] {
+  cursor: pointer;
+  background: #ccc;
+}
+
+#main-search button[type='submit']:hover,
+#main-search button[type='submit']:active,
+#main-search button[type='submit']:focus {
+  background: #eee;
+}
+
+#main-search input[type='search'] {
+  min-width: 300px;
 }
 
 .breadcrumb-nav a {
@@ -29,6 +73,7 @@ body {
   margin-bottom: 24px;
   display: inline-block;
 }
+
 .breadcrumb-nav a:hover {
   text-decoration: underline;
 }
@@ -41,5 +86,32 @@ body {
 
   #content {
     font-size: 1.8rem;
+  }
+
+  .breadcrumb-nav {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #main-search input[type='search'] {
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 320px) {
+  #main-search {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #main-search input[type='search'],
+  #main-search button[type='submit'] {
+    min-width: auto;
+    width: 100%;
   }
 }
