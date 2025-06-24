@@ -18,12 +18,6 @@ código, não deixe de conferir.
 
 ---
 
-Esse trecho está certinho, Luiz. Apenas fiz uns pequenos ajustes pra deixar mais
-fluido e claro, com comentários pontuais. O código está correto, mas vou sugerir
-comentários adicionais pra melhorar a didática:
-
----
-
 ## Introdução: concatenando strings com inteiros
 
 Um desafio comum na programação é concatenar strings com outros tipos de dados,
@@ -76,11 +70,6 @@ duplas ou triplas.
 
 ---
 
-Aqui tá certinho também! Fiz apenas pequenos ajustes pra clareza didática e
-reforçar pontos importantes:
-
----
-
 ## Formatação numérica com f-strings
 
 As `f-strings` facilitam muito a formatação numérica, permitindo aplicar
@@ -108,10 +97,6 @@ Esses formatos deixam os números grandes bem mais fáceis de ler!
 
 ---
 
-Perfeito também! Apenas fiz pequenos ajustes para maior fluidez didática:
-
----
-
 ### Definindo casas decimais com `.nf`
 
 Para formatar números com ponto flutuante usando `f-strings`, basta utilizar
@@ -133,11 +118,6 @@ print(f"Quatro casas decimais: {numero_float:.4f}")  # Saída: 198.7654
 ```
 
 Com isso você consegue controlar exatamente como seu número será exibido.
-
----
-
-Ótimo, Luiz! Esse trecho tá muito bom. Ajustei apenas algumas coisas pequenas
-pra melhorar ainda mais a didática e clareza.
 
 ---
 
@@ -307,13 +287,6 @@ datas e horários.
 
 ---
 
-Esse trecho tá ótimo, Luiz! Fiz ajustes leves pra deixar mais claro, didático e
-fluído, além de pequenas correções ortográficas e consistência nos comentários.
-
-Segue revisado:
-
----
-
 ### Transformando segundos em horas, minutos e segundos (`H:M:S`)
 
 Nesse exemplo, você vai aprender como formatar uma quantidade total de segundos
@@ -393,15 +366,6 @@ Explicando rapidamente o significado de `:02.0f`:
 - `02` indica que o número deve ter dois caracteres no total, preenchidos com
   zeros à esquerda se necessário (`1` vira `01`);
 - `.0f` significa que não desejamos nenhuma casa decimal (nem mesmo o ponto).
-
----
-
-Luiz, esse trecho tá muito bom e tecnicamente correto! Fiz ajustes pequenos para
-melhorar a clareza, corrigi um ou outro comentário e deixei as explicações mais
-diretas e fluidas. Também adicionei pequenas melhorias didáticas para destacar
-alguns detalhes.
-
-Segue revisado:
 
 ---
 
@@ -503,13 +467,6 @@ posições da string resultante, o que chamamos de
 [fatiamento de strings (slicing)](https://youtu.be/QxjArQ9xZDg?si=MOxtznr0cdQQw5a1).
 Isso é bastante útil quando precisamos adaptar rapidamente o formato das
 strings.
-
----
-
-Ficou ótimo esse trecho também, Luiz! Fiz só ajustes leves para reforçar
-explicações, padronizar comentários, e deixar o tom fluido e didático.
-
-Segue revisado:
 
 ---
 
@@ -707,14 +664,6 @@ print(f"Resultado: {valor:!<20}")
 # Preenchimento com '!' à esquerda, alinhamento à esquerda, largura total de 20.
 # Saída: Resultado: 1048576!!!!!!!!!!!!!
 ```
-
----
-
-Excelente fechamento, Luiz! O trecho estava bem completo e correto. Fiz só
-alguns ajustes leves pra deixar mais direto, fluido e dar um tom ainda mais
-pessoal.
-
-Segue revisado:
 
 ---
 
