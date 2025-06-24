@@ -13,7 +13,7 @@ Mas atenção: o texto não é idêntico ao vídeo. Incluí novos exemplos de c�
 explicações alternativas e detalhei melhor alguns tópicos que achei
 interessantes. Espero que você goste!
 
-**Dica importante:** coloquei MUITA coisa bacana nos comentários dos exemplos de
+**Dica importante:** coloquei **MUITA** coisa bacana nos comentários dos exemplos de
 código, não deixe de conferir.
 
 ---
