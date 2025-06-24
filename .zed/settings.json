@@ -5,6 +5,28 @@
 {
   "languages": {
     "HTML": {
+      "auto_indent_on_paste": false,
+      "format_on_save": "off",
+      "prettier": {
+        "allowed": true
+      }
+    },
+    "JavaScript": {
+      "auto_indent_on_paste": false,
+      "format_on_save": "off",
+      "prettier": {
+        "allowed": true
+      }
+    },
+    "Markdown": {
+      "auto_indent_on_paste": false,
+      "format_on_save": "off",
+      "prettier": {
+        "allowed": true
+      }
+    },
+    "Markdown-Inline": {
+      "auto_indent_on_paste": false,
       "format_on_save": "off",
       "prettier": {
         "allowed": true

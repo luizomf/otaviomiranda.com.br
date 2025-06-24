@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      f-strings em Python: coisas que você não sabia - Otávio Miranda
+    </title>
+    <meta
+      name="description"
+      content="Uso avançado de f-strings para formatação de strings em Python, cobrindo conceitos como concatenação, formatação numérica e representação em diferentes bases numéricas."
+    />
+
+    <link rel="stylesheet" href="../../css/markdown.css" />
+
+    <link rel="icon" type="image/webp" href="../../imgs/favicon-1.webp" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  </head>
+  <body>
+    <nav class="breadcrumb-nav">
+      <a href="/">&larr; ir para início</a>
+
+      <form
+        id="main-search"
+        action="https://www.google.com/search"
+        method="get"
+        target="_blank"
+      >
+        <input type="search" name="q" placeholder="Buscar no site via Google" />
+        <button type="submit">Buscar</button>
+      </form>
+    </nav>
+
+    <article class="markdown-body" id="content"></article>
+
+    <!-- prettier-ignore -->
+    <script type="text/markdown" id="markdown-source">
+
+
+# f-strings em Python: coisas que você não sabia
+
+Este texto detalha o uso avançado de f-strings para formatação de strings em
+Python, cobrindo conceitos como concatenação, formatação numérica e
+representação em diferentes bases numéricas e muito mais.
+
+Eu usei como base a transcrição do meu vídeo original disponível em:
+
+- <a href="https://youtu.be/yt2wPLGMAA0" target="_blank" rel="noopener noreferrer">📺
+  f-strings em Python: coisas que você não sabia ↗</a>
+
+O texto aqui não é exatamente idêntico ao do vídeo. Eu coloquei alguns códigos
+adicionais, exemplos diferentes e aprofundei um pouco mais em algumas coisas que
+acho interessantes. Espero que goste.
+
+**Dica:** descrevo MUITAS coisas interessantes nos comentários dos códigos de
+exemplo, não deixe de ler.
+
+---
+
+## Introdução: concatenação de Strings e Inteiros
+
+Um desafio comum em programação é concatenar strings com outros tipos de dados,
+como inteiros. Em Python, tentar concatenar diretamente uma string com um
+inteiro resulta em um erro de tipo:
+
+```python
+numero = 123456789
+texto = "Número: "
+
+# Erro: TypeError: can only concatenate str (not "int") to str
+print(texto + numero)
+```
+
+Para resolver isso, podemos converter o inteiro para string usando a função
+`str()`:
+
+```python
+numero = 123456789
+texto = "Número: "
+
+print(texto + str(numero))
+# Saída: Número: 123456789
+```
+
+No entanto, as `f-strings` oferecem uma solução mais elegante, legível e
+eficiente para esse tipo de formatação. Vamos ver o que podemos fazer com
+`f-strings` no Python.
+
+---
+
+## Introdução às `f-strings`
+
+As `f-strings` (formatação de string com prefixo `f`) oferecem uma sintaxe
+concisa e poderosa para incorporar expressões Python diretamente dentro de uma
+string (`str`). Para utilizá-las, basta prefixar a string com `f` e envolver a
+expressão desejada entre chaves `{}`.
+
+Exemplo básico:
+
+```python
+numero = 123456789
+texto = f"Número: {numero}"
+print(texto) # Saída: Número: 123456789
+```
+
+Esse método funciona com strings de uma ou várias linhas, com aspas simples,
+duplas ou triplas.
+
+---
+
+## Formatação Numérica com f-strings
+
+As `f-strings` permitem formatar números de forma clara e flexível. É possível
+aplicar separadores de milhares e controlar o número de casas decimais com
+extrema facilidade.
+
+---
+
+### Separadores de milhares
+
+Podemos usar **underscores (`_`)** ou **vírgulas (`,`)** após os dois pontos
+(`:`) dentro das chaves:
+
+```python
+numero = 123456789
+
+print(f"Número com underscores: {numero:_}") # Saída: 123_456_789
+print(f"Número com vírgulas: {numero:,}") # Saída: 123,456,789
+```
+
+---
+
+### Casas decimais com `.nf`
+
+Para números de ponto flutuante, usamos `.nf`, onde `n` representa o número de
+casas decimais desejado:
+
+```python
+numero_float = 198.7654321
+
+print(f"Duas casas decimais: {numero_float:.2f}") # Saída: 198.77
+print(f"Sem casas decimais: {numero_float:.0f}") # Saída: 199
+print(f"Quatro casas decimais: {numero_float:.4f}") # Saída: 198.7654
+```
+
+---
+
+### Combinando separador de milhar e casas decimais
+
+Também é possível aplicar as duas formatações simultaneamente:
+
+```python
+numero_float = 19876.54321
+
+print(f"Formatado: {numero_float:,.2f}") # Saída: 19,876.54
+```
+
+Essa abordagem torna a exibição de valores numéricos mais legível. Ideal para
+dashboards, relatórios ou qualquer interface voltada ao usuário.
+
+---
+
+### Sinais de Mais e Menos (positivo e negativo)
+
+É possível exibir explicitamente os sinais de números positivos e negativos.
+Para isso, usamos `+` para forçar o sinal do número:
+
+```python
+numero_positivo = 10
+numero_negativo = -10
+
+print(f"Número positivo: {numero_positivo:+d}") # Saída: +10
+print(f"Número negativo: {numero_negativo:d}") # Saída: -10
+```
+
+> Obs: o `+` exibe o sinal também para números positivos. Para negativos, o
+> sinal já aparece por padrão.
+
+---
+
+### Porcentagem
+
+Para representar um número como porcentagem, usamos o especificador `%`, junto
+com a definição de casas decimais:
+
+```python
+porcentagem = 0.98
+
+print(f"Porcentagem: {porcentagem:.2%}") # Saída: 98.00%
+```
+
+---
+
+### Conversão entre: `bytes`, `int`, `str` e `hex`
+
+É possível formatar dados e os converter em string, inteiro, float, hexadecimal,
+octal, ascii, binário, e mais, usando funções built-in do próprio Python e
+adicionar o poder das `f-strings` no meio do caminho para ampliar, e muito,
+muito as possibilidades.
+
+Também podemos usar `!r` para exibir a representação do objeto na saída, ou
+seja, chamar `repr()` diretamente de dentro de uma `f-string`.
+
+**Lembre-se:** ao usar `f-strings`, estamos automaticamente convertendo um
+objeto em `str`. As strings tem um método `encode` que vai converter o valor
+bytes. O método `decode` converte bytes de volta em string. Eu falo bastante
+sobre isso nesse artigo:
+
+- [Normalização Unicode em Python](https://www.otaviomiranda.com.br/2020/normalizacao-unicode-em-python/)
+
+Vamos ver como fazer um inteiro virar hexadecimal, depois bytes, string e, por
+fim, voltar a ser inteiro. Vamos fazer isso só para você ver a combinação de
+coisas de strings, built-ins do Python e `f-strings` (um grande poder nas suas
+mãos).
+
+```python
+# Um número inteiro normal
+num = 255 # 255
+# O número inteiro convertido em hexadecimal com f-string
+int_to_hex = f'{num:x}' # 'ff'
+# O hexadecimal convertido em bytes
+hex_to_bytes = int_to_hex.encode('utf-8') # b'ff'
+# Bytes convertido em str de volta
+bytes_str = hex_to_bytes.decode('utf-8') # 'ff'
+# Voltamos a string para int
+hex_to_int = int(bytes_str, 16) # 255
+
+print(f"{num = !r}") # num = 255
+print(f"{int_to_hex = !r}") # int_to_hex = 'ff'
+print(f"{hex_to_bytes = !r}") # hex_to_bytes = b'ff'
+print(f"{bytes_str = !r}") # bytes_str = 'ff'
+print(f"{hex_to_int = !r}") # hex_to_int = 255
+
+# Mais :o, :b, :x e :X
+print(f"Inteiro: {num = !r}") # Inteiro: num = 255
+print(f"Octal: {num = :o}") # Octal: num = 377
+print(f'Binário: {num = :b}') # Binário: num = 11111111
+print(f"hexadecimal: {num = :x}") # hexadecimal: num = ff
+print(f"HEXADECIMAL: {num = :X}") # HEXADECIMAL: num = FF
+```
+
+- `:o` exibe o valor em octal.
+- `:b` exibe o valor em binário
+- `:x` exibe o valor em hexadecimal (minúsculo).
+- `:X` exibe o valor em hexadecimal em maiúsculo.
+- `!r` chama o `repr()` no objeto
+- `=` exibe o código que foi executado dentro das chaves (`num = valor_de_num`)
+
+Muita coisa nova aqui né? Vou detalhar tudo mais abaixo!
+
+---
+
+## O Operador Walrus (`:=`) em f-strings
+
+O operador walrus (`:=`) permite atribuir valores diretamente dentro de
+expressões, e isso também funciona dentro de f-strings.
+
+Com ele, é possível fazer uma atribuição inline e reutilizar o valor calculado
+imediatamente, sem precisar declarar a variável antes do print.
+
+No exemplo abaixo, temos uma sequência de bytes que representa a palavra
+"Otávio" codificada em UTF-8. Primeiro fazemos a decodificação para string e, em
+seguida, usamos o operador walrus dentro da f-string para atribuir esse valor a
+uma variável mais curta (`v`), que pode ser reutilizada.
+
+```python
+# bytes que viram "Otávio"
+my_name = b'\x4f\x74\xc3\xa1\x76\x69\x6f'
+
+# Variável super longa que precisa ser reutilizada
+variavel_longa_e_chata = my_name.decode('utf-8')
+# resultado: "Otávio"
+
+# Atribuindo a variável à `v` diretamente dentro da f-string
+print(f"Saída: {(v := variavel_longa_e_chata) = }")
+# Saída: (v := variavel_longa_e_chata) = 'Otávio'
+
+# Agora `v` já existe e pode ser reutilizada normalmente
+print(f"Reutilizando `v`: {v} foi muito legal. {v}")
+# Saída: Reutilizando `v`: Otávio foi muito legal. Otávio
+```
+
+O trecho `{(v := variavel_longa_e_chata) = }` dentro da f-string faz com que o
+Python exiba tanto o código quanto o valor atribuído. Isso é especialmente útil
+para debug, logs ou para mostrar valores intermediários sem precisar criar
+variáveis em linhas separadas.
+
+> Observação: a sequência `\x4f\x74\xc3\xa1\x76\x69\x6f`, quando decodificada em
+> UTF-8, resulta na string "Otávio".
+
+---
+
+## Trabalhando datas e horas com `f-strings`
+
+Vou te mostrar vários exemplos para trabalhar com datas, horas, minutos,
+segundos, milissegundos e microsegundos. Isso é útil para praticamente todos os
+casos que trabalham com datas e horas no mundo da programação (praticamente
+tudo).
+
+---
+
+### Transformando segundos em H:M:S
+
+O exemplo a seguir demonstra a formatação de segundos em horas, minutos e
+segundos usando o formato `H:M:S`.
+
+Primeiro, vamos criar uma função para facilitar as contas:
+
+```python
+def calcula_segundos_para_horas(segundos: int) -> tuple[int, int, int]:
+    """
+    Converte uma quantidade total de segundos em horas, minutos e segundos. Retorna uma tupla com (int, int, int)
+    que podemos pegar com:
+    h, min, seg = calcula_segundos_para_horas(31989)
+    """
+    horas = segundos // 60 // 60
+    minutos = segundos // 60 % 60
+    segundos = segundos % 60
+
+    return horas, minutos, segundos
+```
+
+Agora vamos brincar com `f-strings`:
+
+```python
+# 8 horas, 53 minutos, 9 segundos
+# Queremos: 08:53:09
+total_de_segundos = 31989
+horas, minutos, segundos = calcula_segundos_para_horas(total_de_segundos)
+
+# Sem formatação
+print(f"Tempo: {horas}:{minutos}:{segundos}")
+# Saída incorreta: Tempo: 8:53:9
+
+# Aqui podemos usar pad (mais abaixo falamos mais sobre isso)
+print(f"Tempo: {horas:02}:{minutos:02}:{segundos:02}")
+# Saída correta: Tempo: 08:53:09
+```
+
+Também podemos exibir o trecho de código acima de outras formas. Vamos ver mais
+exemplos a seguir:
+
+```python
+# Podemos brincar com isso assim:
+print(f"{horas} horas, {minutos} minutos e {segundos} segundos")
+# Saída: 8 horas, 53 minutos, 9 segundos
+```
+
+Você pode até fazer if dentro de f-string se quiser. Eu acho isso meio feio,
+confuso e até bagunçado em alguns casos. Mas dependendo do que for fazer, pode
+ser útil:
+
+```python
+# Tirei os 9 segundos do tempo total para os segundos ficarem zerados
+total_de_segundos = 31980
+horas, minutos, segundos = calcula_segundos_para_horas(total_de_segundos)
+
+# Essa variável será usada para exibir os segundos
+texto_segundos = f', {segundos} segundos'
+# Só exibimos os segundos se segundos > 0
+print(f"{horas} horas, {minutos} minutos{texto_segundos if segundos > 0 else ''}")
+# Saída: 8 horas, 53 minutos
+```
+
+O ideal mesmo, seria criar uma função para a formatação. Assim, ficaria mais
+fácil fazer algumas condicionais, por exemplo: `1 sugundos` ficaria bem feio,
+mas nada que uma condicional não resolveria.
+
+Se você mudar as contas de uma forma que elas retornem números de ponto
+flutuante (`float`), pode fazer algo assim para omitir os valores decimais.
+
+```python
+print(f"Tempo: {horas:02.0f}:{minutos:02.0f}:{segundos:02.0f}")
+```
+
+Esse `:02.0f` significa o seguinte:
+
+- `:` - inicia a formatação.
+- `02` - O `0` é o valor de preenchimento (padding à esquerda); o `2` é quantos
+  caracteres devem existir no total, contando com o valor real mais o `0`. Ex.:
+  `1` se torna `01`; `32` continua sendo `32`.
+- `.0f` - indica que não quero nenhuma casa decimal (nem o ponto).
+
+---
+
+### Manipulação de horas usando `f-string`, `datetime` e `timedelta`
+
+Vamos gerar uma data base. Não estamos preocupados com a data neste momento, só
+queremos as horas. Por isso vou usar `datetime(1, 1, 1, 8, 23, 1)`. Isso
+representa a hora `08:23:01`.
+
+```python
+from datetime import datetime
+
+hora = datetime(1, 1, 1, 8, 23, 1)
+print(f"Hora: {hora.strftime('%H:%M:%S')}")
+# Saída: Hora: 08:23:01
+```
+
+**Dica:** os valores `%H`, `%M` e `%S` representam horas, minutos e segundos com
+zero à esquerda. Você pode ver todas as possibilidades
+[na documentação do Python](https://docs.python.org/3/library/datetime.html#format-codes).
+
+Você também pode usar `timedelta` para somar ou subtrair o tempo desejado da
+data. Isso funcionaria com uma data inteira, mas como estou focando nas horas,
+vamos trabalhar somente em horas, minutos, segundos, etc...
+
+```python
+from datetime import datetime, timedelta
+
+# Hora antiga: 00:00:00
+hora_antiga = datetime(1, 1, 1, 0, 0, 0)
+# Vamos somar 10:07:10 na hora antiga
+tempo_adicional = timedelta(hours=10, minutes=7, seconds=10)
+nova_hora = hora_antiga + tempo_adicional
+
+# Perceba que aqui eu estou usando a própria data
+# para formatar. No próximo exemplo, vou usar `f-string`
+# apenas.
+print(f"Nova hora: {nova_hora.strftime('%H:%M:%S')}")
+# Saída: Nova hora: 10:07:10
+
+# Vamos adicionar mais 10 segundos?
+nova_hora += timedelta(seconds=10)
+
+# f-strings também podem formatar data
+print(f"Nova hora: {nova_hora:%H:%M:%S}")
+# Saída: Nova hora: 10:07:20
+```
+
+### Microssegundos em Milissegundos com `f-string`
+
+Como faço vários vídeos diariamente, trabalho bastante com frações de segundos
+muito pequenas para alinhar legendas e transcrições com o que é falado do vídeo.
+O formato de tempo usado em legendas SRT (SubRip) é `00:00:00,000`, onde o final
+`,000` são milissegundos.
+
+A ideia é a mesma do que descrevi no tópico anteriore desse texto:
+
+```python
+from datetime import datetime
+
+# 00:02:23
+tempo_do_video = datetime(1, 1, 1, 0, 2, 23)
+
+# O formato anterior era:
+# %H:%M:%S
+# Agora vamos adicionar os microsegundos (%f):
+# %H:%M:%S,%f
+print(f"{tempo_do_video:%H:%M:%S}")
+# Saída: 00:02:23
+```
+
+Os microsegundos são as 3 últimas casas decimais, os milissegundos são as 3
+primeiras casas decimais. Vamos conferir com `timedelta`.
+
+```python
+from datetime import datetime, timedelta
+
+# 00:02:23
+tempo_do_video = datetime(1, 1, 1, 0, 2, 23)
+
+# Os microssegundos 111 devem aparecer nos 3 últimos dígitos
+# depois da vírgula
+tempo_do_video += timedelta(microseconds=111)
+print(f"{tempo_do_video:%H:%M:%S,%f}")
+# Saída: 00:02:23,000111
+
+# 00:02:23 (isso é só pra voltar a data ao valor inicial)
+tempo_do_video = datetime(1, 1, 1, 0, 2, 23)
+
+# Os milissegundos 222 devem aparecer nos 3 primeiros dígitos
+# depois da vírgula
+tempo_do_video += timedelta(milliseconds=111)
+print(f"{tempo_do_video:%H:%M:%S,%f}")
+# Saída: 00:02:23,111000
+
+# Ok, eu só quero milissegundos, portanto
+print(f"{tempo_do_video:%H:%M:%S,%f}"[:-3])
+# Saída: 00:02:23,111
+```
+
+O `[:-3]`significa que eu não quero os 3 últimos dígitos da string. Isso é
+chamado de
+[fatiamento de strings, falei sobre isso aqui](https://youtu.be/QxjArQ9xZDg?si=MOxtznr0cdQQw5a1).
+
+---
+
+### Manipulação de datas usando `f-string`, `datetime` e `timedelta`
+
+Só para constar, se você tem uma data inteira, é exatamente da mesma forma que
+vimos antes para formatar com `f-strings`.
+
+```python
+import locale
+from datetime import datetime
+
+# Isso serve para configurar os padrões culturais do país:
+# idioma, timezone, moeda, etc.
+# pt_BR = Português do Brasil
+locale.setlocale(locale.LC_ALL, 'pt_BR')
+
+# 02/12/1987 10:59:23
+nascimento_joaozinho = datetime(1987, 12, 2, 10, 59, 23)
+
+# Exemplo
+print(f"{nascimento_joaozinho:%d de %B de %Y às %H:%M:%S}")
+# Saída: 02 de Dezembro de 1987 às 10:59:23
+
+# Outra exemplo
+print(
+    f"Joãozinho nasceu no ano de {nascimento_joaozinho:%y}. "
+    f"Estávamos no mês de {nascimento_joaozinho:%B}, "
+    f"dia {nascimento_joaozinho:%d}. "
+    f"Era um dia chuvoso. No relógio marcava "
+    f"{nascimento_joaozinho:%H horas e %M minutos}."
+)
+# Joãozinho nasceu no ano de 87.
+# Estávamos no mês de Dezembro, dia 02.
+# Era um dia chuvoso.
+# No relógio marcava 10 horas e 59 minutos.
+```
+
+Tá, exagerei no último exemplo. Sorry! Mas acho que é isso aí que você vai usar
+no dia a dia.
+
+---
+
+## Representação de Objetos com f-strings: `!r`, `!s`, `!a`
+
+Dentro de uma f-string é possível exibir a representação de um objeto usando os
+sufixos `!s`, `!r` ou `!a`. Eles chamam, respectivamente, as funções internas
+`str()`, `repr()` e `ascii()` sobre o valor mostrado.
+
+Para entender melhor, vamos usar uma classe simples e observar quais métodos são
+invocados pelo Python.
+
+```python
+class Pessoa:
+    def __init__(self, nome: str, sobrenome: str, idade: int) -> None:
+        self.nome = nome
+        self.sobrenome = sobrenome
+        self.idade = idade
+
+    def __repr__(self) -> str:
+        cls_name = self.__class__.__name__
+        attrs = ", ".join(
+            f"{chave}={valor!r}" for chave, valor in self.__dict__.items()
+        )
+        return f"{cls_name}({attrs})"
+
+    def __str__(self) -> str:
+        return f"{self.nome} {self.sobrenome}"
+```
+
+### `!s` — exibe o resultado de `str()`
+
+```python
+pessoa = Pessoa("Luiz Otávio", "Miranda", 30)
+
+print(f"{pessoa}")      # Saída: Luiz Otávio Miranda
+print(f"{pessoa!s}")    # Mesma saída; !s é sinônimo de str()
+```
+
+O Python chama o método `__str__`, convertendo o objeto em uma forma pensada
+para leitura humana.
+
+### `!r` — exibe o resultado de `repr()`
+
+```python
+print(f"{pessoa!r}")
+# Saída: Pessoa(nome='Luiz Otávio', sobrenome='Miranda', idade=30)
+```
+
+Aqui o método `__repr__` é usado: ele deve gerar uma string precisa e,
+idealmente, que possa recriar o objeto.
+
+### `!a` — exibe o resultado de `ascii()`
+
+`ascii()` se comporta como `repr()`, mas escapa todos os caracteres fora da
+tabela ASCII básica usando `\x`, `\u` ou `\U`.
+
+```python
+print(f"{pessoa!a}")
+# Saída: Pessoa(nome='Luiz Ot\xe1vio', sobrenome='Miranda', idade=30)
+```
+
+Note que o caractere “á” (código 225) foi escapado como `\xe1`.
+
+---
+
+### Explorando escapes: de `á` para `\xe1` e de volta
+
+```python
+valor = "á"
+
+print("\xe1")        # '\x' + e1 → á
+print("\u00e1")      # '\u' + 00e1 → á
+print("\U000000e1")  # '\U' + 000000e1 → á
+
+# De caractere para hexadecimal:
+valor_hex = hex(ord(valor))   # '0xe1'
+
+# De hexadecimal para caractere:
+print(chr(int(valor_hex, 16)))  # á
+```
+
+Os primeiros 128 códigos Unicode coincidem com os 128 caracteres ASCII
+originais. Como “á” fica no ponto de código 225, ele está fora desse intervalo —
+por isso é escapado.
+
+Para mergulhar mais fundo nesse assunto, confira o artigo **Normalização Unicode
+em Python**
+([https://www.otaviomiranda.com.br/2020/normalizacao-unicode-em-python/](https://www.otaviomiranda.com.br/2020/normalizacao-unicode-em-python/)).
+
+---
+
+## Padding e Alinhamento de Strings e Números com f-strings
+
+F-strings oferecem controle preciso sobre o preenchimento (padding) e o
+alinhamento do texto dentro de um espaço definido. Isso é feito utilizando
+especificadores de formatação dentro das chaves `{}`, após os dois pontos `:`.
+
+A sintaxe geral de formatação é `:{fill}{align}{width}`, onde:
+
+- `fill` (opcional): O caractere a ser usado para preencher o espaço. Se
+  omitido, o padrão é espaço (` `).
+- `align` (opcional): O tipo de alinhamento.
+  - `<`: Alinha o texto à esquerda (padrão para strings).
+  - `>`: Alinha o texto à direita (padrão para números).
+  - `^`: Centraliza o texto.
+- `width`: A largura total mínima do campo. O texto será preenchido até atingir
+  essa largura.
+
+Vamos ver alguns exemplos práticos de como aplicar esses especificadores:
+
+```python
+nome = "Python" # Alterado para "Python" para um exemplo mais genérico
+
+# --- Alinhamento com Espaços (padding padrão) ---
+print(f"'{nome:<15}'") # Aspas para visualizar o padding
+# Alinhamento à esquerda (padrão para strings), preenchido com espaços até 15 caracteres.
+# Saída: 'Python         '
+
+print(f"'{nome:>15}'")
+# Alinhamento à direita, preenchido com espaços até 15 caracteres.
+# Saída: '         Python'
+
+print(f"'{nome:^15}'")
+# Alinhamento ao centro, preenchido com espaços até 15 caracteres.
+# Saída: '    Python     '
+
+# Para números, o preenchimento com '0' à esquerda é comum
+numero_item = 7
+print(f"{numero_item:03}")
+# Preenchimento com '0' à esquerda até 3 caracteres (útil para numeração).
+# Saída: 007
+
+# Você pode usar qualquer caractere para preencher. O caractere de preenchimento vem ANTES do alinhamento.
+produto_id = "ABC"
+print(f"ID: {produto_id:x<10}") # Preenche com 'x' e alinha à esquerda
+# Saída: ID: ABCxxxxxxx
+
+preco = 123.45
+print(f"Preço: {preco:*>12.2f}") # Preenche com '*' e alinha à direita, 2 casas decimais
+# Saída: Preço: ******123.45
+
+# --- Aplicação em Cenários Reais ---
+
+# Numeração de arquivos com zeros à esquerda (ex: 000001.mp4)
+for i in range(3):
+    print(f"{i:06}.mp4")
+# Saída:
+# 000000.mp4
+# 000001.mp4
+# 000002.mp4
+
+# Alinhamento e preenchimento combinado para um formato específico
+valor = 1048576
+print(f"Resultado: {valor:!<20}")
+# Preenchimento com '!' à esquerda, alinhamento à esquerda, largura total de 20.
+# Saída: Resultado: 1048576!!!!!!!!!!!!!
+```
+
+---
+
+## Inserção de Expressões e Sinais de Igual em f-strings
+
+F-strings permitem a avaliação direta de expressões Python e a inclusão do
+operador de atribuição / sinal de igual (`=`) para _debugar_ o código ou para
+uma apresentação mais legível, mostrando tanto a expressão quanto seu resultado.
+
+Ao invés de fazer debug assim: `f'variavel = {variavel}'` para receber
+`'variavel = valor'`, basta fazer assim `f'{variavel = }'` e terá o mesmo
+resultado.
+
+Vou te mostrar vários exemplos no trecho abaixo (leia os comentários).
+
+```python
+x = 3.55
+y = 7.12
+
+# Esse é o modo que você faria isso (ANTES DO =)
+print(f"{x} + {y} = {x + y}") # Saída: 3.55 + 7.12 = 10.67
+
+# Agora com uso do sinal de igual (=) para exibir a expressão e o resultado
+# O = dentro da chave imprime "variavel=valor"
+print(f"{x = }, {y = }, {x + y = }")
+# Saída: x = 3.55, y = 7.12, x + y = 10.67
+
+# Expressões com literais (ANTES DO =)
+print(f"5 * 2 = {5 * 2}") # Saída: 5 * 2 = 10
+
+# Inserção de variáveis em strings (ANTES DO =)
+firstName = "Luiz Otávio"
+print(f"{firstName}")
+# Saída: Luiz Otávio
+
+# Sinal de igual
+print(f"{firstName = }")
+# Saída: firstName = 'Luiz Otávio'
+```
+
+---
+
+### Conclusão
+
+Este artigo explorou as diversas capacidades de formatação de strings em Python
+utilizando f-strings. Vimos desde a concatenação básica e formatação numérica
+com controle de casas decimais e separadores de milhares, até o alinhamento,
+preenchimento e a poderosa avaliação de expressões diretamente nas strings. O
+domínio das f-strings é uma ferramenta essencial para qualquer programador
+Python que busca escrever código mais limpo, legível e eficiente na manipulação
+de texto e dados.
+
+Se você leu isso até aqui, espero que tenha aprendido muita coisa nova. Mesmo
+trabalhando há anos com Python e programação em geral, ainda assim aprendo muito
+escrevendo esses textos e gravando meus vídeos.
+
+Até o próximo!!! ✌️
+
+---
+
+
+    </script>
+    <!-- prettier-ignore -->
+
+    <script>
+      const markdownContent =
+        document.getElementById('markdown-source').textContent;
+      const contentDiv = document.getElementById('content');
+      contentDiv.innerHTML = marked.parse(markdownContent);
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+      // Ativa o realce de sintaxe em todos os blocos de código
+      hljs.highlightAll();
+    </script>
+
+    <script src="../../js/scripts.js"></script>
+  </body>
+</html>
