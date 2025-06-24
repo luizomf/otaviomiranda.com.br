@@ -8,8 +8,8 @@ fi
 echo "\n"
 echo "⚙️ Executando \`git add .\`"
 git add .
-echo "⚙️ Executando \`git commit -m {$1}\`"
-git commit -m \"$1\"
+echo "⚙️ Executando \`git commit -m \"$1\"\`"
+git commit -m "$1"
 echo "⚙️ Executando \`git add .\`"
 git add .
 echo "⚙️ Executando \`git commit --amend --no-edit\`"
