@@ -15,4 +15,5 @@ git add .
 echo "⚙️ Executando \`git commit --amend --no-edit\`"
 git commit --amend --no-edit
 echo "✅ Executando \`git push\`"
+git push
 echo "\n"
