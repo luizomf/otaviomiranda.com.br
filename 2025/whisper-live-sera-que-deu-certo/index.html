@@ -14,37 +14,39 @@
 
     <link rel="icon" type="image/webp" href="../../imgs/favicon-1.webp" />
 
+    <!-- Estilo escuro para markdown (GitHub dark) -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-dark.min.css"
     />
 
+    <!-- Tema dark do highlight.js -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css"
     />
 
+    <!-- Markdown parser -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   </head>
   <body>
-      <nav class="breadcrumb-nav">
-        <a href="/">&larr; ir para início</a>
+    <nav class="breadcrumb-nav">
+      <a href="/">&larr; ir para início</a>
 
-
-        <form
-          id="main-search"
-          action="https://www.google.com/search"
-          method="get"
-          target="_blank"
-        >
-          <input type="search" name="q" placeholder="Buscar no site via Google" />
-          <button type="submit">Buscar</button>
-        </form>
-
-      </nav>
+      <form
+        id="main-search"
+        action="https://www.google.com/search"
+        method="get"
+        target="_blank"
+      >
+        <input type="search" name="q" placeholder="Buscar no site via Google" />
+        <button type="submit">Buscar</button>
+      </form>
+    </nav>
 
     <article class="markdown-body" id="content"></article>
 
+    <!-- prettier-ignore -->
     <script type="text/markdown" id="markdown-source">
 
 
@@ -64,6 +66,12 @@ rodar liso num esquema _live_.
 Mas enfim... isso é só uma ideia. Não fui muito além do que tá descrito aqui
 porque quero ver primeiro se esse tipo de conteúdo realmente chama atenção do
 pessoal pra eu focar mais tempo pra gerar conteúdo (vídeos, posts, aulas, etc).
+
+<p>
+  <img src="images/whisper-failed-1.webp" alt="Figura humanoide futurista feita de circuitos, sussurrando em um microfone, triste." />
+  <em>Imagem: Reprodução / IA</em>
+</p>
+
 
 ---
 
@@ -616,6 +624,7 @@ Bye 👋!!!
 
 
     </script>
+    <!-- prettier-ignore -->
 
     <script>
       const markdownContent =
@@ -629,7 +638,6 @@ Bye 👋!!!
       // Ativa o realce de sintaxe em todos os blocos de código
       hljs.highlightAll();
     </script>
-
 
     <script src="../../js/scripts.js"></script>
   </body>

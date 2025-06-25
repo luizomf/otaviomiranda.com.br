@@ -1,22 +1,91 @@
 html {
-  font-size: 62.5%;
+  font-size: 62.5%; /* 1rem = 10px */
 }
 
 body {
-  font-family: sans-serif;
+  font-family: system-ui, sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background: #0d1117;
 }
 
-/* A única customização que precisamos é centralizar o corpo do artigo */
 #content {
   box-sizing: border-box;
-  min-width: 200px;
-  max-width: 980px;
+  min-width: 20rem;
+  max-width: 98rem;
   margin: 0 auto;
-  padding: 45px;
-  font-size: 2rem;
+  padding: 4rem 2rem;
+  font-size: 2rem; /* 18px */
+  line-height: 1.75;
+}
+
+#content a {
+  color: #79c0ff;
+}
+
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5,
+#content h6 {
+  border: none;
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+  font-weight: 600;
+  color: #fff;
+}
+
+#content p,
+#content ul,
+#content ol,
+#content pre,
+#content blockquote {
+  margin-bottom: 2.4rem;
+}
+
+#content pre {
+  margin-bottom: 2.4rem;
+  line-height: 1.6;
+  padding: 1.2rem 1rem 1.6rem 1rem;
+  border-left: 4px solid #58a6ff;
+}
+
+#content pre code {
+  padding: 1.2rem 1rem 1.6rem 1rem;
+}
+
+#content hr {
+  margin: 5rem 0;
+  border: none;
+  background: #151b23;
+}
+
+#content blockquote {
+  padding: 1.6rem 2rem;
+  border-left: 4px solid #58a6ff;
+  background: #151b23;
+  border-radius: 6px;
+  color: #8b949e;
+}
+
+#content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+#content p img,
+#content img {
+  margin: 0 auto;
+  display: block;
+  max-width: 100%;
+  margin-bottom: 1rem;
+}
+
+#content p:has(img) {
+  text-align: center;
+  font-size: 1.6rem;
 }
 
 .breadcrumb-nav {
@@ -39,10 +108,6 @@ body {
 
 #main-search input[type='search'],
 #main-search button[type='submit'] {
-  background: none;
-  border: none;
-  margin: 0;
-  padding: 0;
   font-size: 1.6rem;
   padding: 8px 16px;
   background: #eee;
@@ -51,23 +116,21 @@ body {
   transition: all 300ms ease-in-out;
 }
 
+#main-search input[type='search'] {
+  min-width: 300px;
+}
+
 #main-search button[type='submit'] {
   cursor: pointer;
   background: #ccc;
 }
 
-#main-search button[type='submit']:hover,
-#main-search button[type='submit']:active,
-#main-search button[type='submit']:focus {
+#main-search button[type='submit']:hover {
   background: #eee;
 }
 
-#main-search input[type='search'] {
-  min-width: 300px;
-}
-
 .breadcrumb-nav a {
-  color: #0969da; /* Azul padrão do GitHub para links */
+  color: #58a6ff;
   text-decoration: none;
   font-size: 2rem;
   margin-bottom: 24px;
@@ -78,14 +141,10 @@ body {
   text-decoration: underline;
 }
 
-/* Ajuste para mobile */
 @media (max-width: 767px) {
   #content {
-    padding: 15px;
-  }
-
-  #content {
-    font-size: 1.8rem;
+    padding: 2.4rem;
+    font-size: 1.6rem;
   }
 
   .breadcrumb-nav {
@@ -101,17 +160,11 @@ body {
 
 @media (max-width: 320px) {
   #main-search {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 24px;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
 
   #main-search input[type='search'],
   #main-search button[type='submit'] {
-    min-width: auto;
     width: 100%;
   }
 }

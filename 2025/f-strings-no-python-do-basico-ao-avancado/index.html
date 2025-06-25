@@ -16,16 +16,19 @@
 
     <link rel="icon" type="image/webp" href="../../imgs/favicon-1.webp" />
 
+    <!-- Estilo escuro para markdown (GitHub dark) -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-dark.min.css"
     />
 
+    <!-- Tema dark do highlight.js -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css"
     />
 
+    <!-- Markdown parser -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   </head>
   <body>
@@ -797,15 +800,16 @@ Até o próximo artigo! ✌️
     <!-- prettier-ignore -->
 
     <script>
+      // Converte o markdown para HTML
       const markdownContent =
         document.getElementById('markdown-source').textContent;
       const contentDiv = document.getElementById('content');
       contentDiv.innerHTML = marked.parse(markdownContent);
     </script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- Highlight.js (realce de código) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
     <script>
-      // Ativa o realce de sintaxe em todos os blocos de código
       hljs.highlightAll();
     </script>
 
