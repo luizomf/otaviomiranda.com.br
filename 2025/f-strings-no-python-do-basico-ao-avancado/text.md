@@ -13,8 +13,13 @@ Mas atenção: o texto não é idêntico ao vídeo. Incluí novos exemplos de c�
 explicações alternativas e detalhei melhor alguns tópicos que achei
 interessantes. Espero que você goste!
 
-**Dica importante:** coloquei **MUITA** coisa bacana nos comentários dos exemplos de
+**Dica importante:** coloquei MUITA coisa bacana nos comentários dos exemplos de
 código, não deixe de conferir.
+
+> ℹ️ Baseado [no meu vídeo original](https://youtu.be/yt2wPLGMAA0), este texto
+> foi gerado inicialmente com o apoio de Inteligência Artificial e da
+> transcrição do vídeo feita pelo [Whisper](https://youtu.be/y15070biffg).
+> Posteriormente, reescrevi o conteúdo para garantir clareza e precisão.
 
 ---
 
