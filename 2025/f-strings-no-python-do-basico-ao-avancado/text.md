@@ -6,8 +6,22 @@ outras técnicas que talvez você não conheça.
 
 Eu me baseei na transcrição do meu vídeo original, que você pode assistir aqui:
 
-- <a href="https://youtu.be/yt2wPLGMAA0" target="_blank" rel="noopener noreferrer">📺
-  f-strings em Python: coisas que você não sabia ↗</a>
+<p>
+    <a
+        href="https://youtu.be/yt2wPLGMAA0"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        <img
+            src="images/f-strings-em-python.webp"
+            alt="Luiz Otávio Miranda do lado esquerdo e o texto f-strings além do básico do lado direito."
+        />
+        <em
+            >Vídeo: f-strings em Python: coisas que você (provavelmente) não
+            sabia!</em
+        >
+    </a>
+</p>
 
 Mas atenção: o texto não é idêntico ao vídeo. Incluí novos exemplos de código,
 explicações alternativas e detalhei melhor alguns tópicos que achei
