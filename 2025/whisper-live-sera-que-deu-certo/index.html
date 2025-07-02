@@ -25,9 +25,6 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css"
     />
-
-    <!-- Markdown parser -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   </head>
   <body>
     <nav class="breadcrumb-nav">
@@ -626,19 +623,20 @@ Bye 👋!!!
     </script>
     <!-- prettier-ignore -->
 
-    <script>
-      const markdownContent =
-        document.getElementById('markdown-source').textContent;
-      const contentDiv = document.getElementById('content');
-      contentDiv.innerHTML = marked.parse(markdownContent);
-    </script>
+    <!-- Markdown parser -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/marked-gfm-heading-id/lib/index.umd.js"
+    ></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>
-      // Ativa o realce de sintaxe em todos os blocos de código
-      hljs.highlightAll();
-    </script>
-
-    <script src="../../js/scripts.js"></script>
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
+    ></script>
+    <script defer src="../../js/scripts.js"></script>
   </body>
 </html>
