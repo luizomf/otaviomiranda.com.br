@@ -18,14 +18,6 @@
     e.preventDefault();
   });
 
-  const options = {
-    prefix: '',
-  };
-
-  if (typeof markedGfmHeadingId !== 'undefined') {
-    marked.use(markedGfmHeadingId.gfmHeadingId({ prefix: '' }));
-  }
-
   const markdownContent =
     document.getElementById('markdown-source').textContent;
   const contentDiv = document.getElementById('content');
