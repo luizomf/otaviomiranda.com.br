@@ -1,0 +1,357 @@
+<h1 id="logging-no-python-pare-de-usar-print-no-lugar-errado">
+  <a href="#logging-no-python-pare-de-usar-print-no-lugar-errado">
+    `logging` no Python: Pare de usar `print` no lugar errado
+  </a>
+</h1>
+
+> **Publicado em** 05 de julho de 2025 | **Por**
+> [Luiz Otávio Miranda](https://www.otaviomiranda.com.br/)
+
+O `logging` é o módulo oficial do Python para lidar com logs de forma
+estruturada, profissional e extensível. Além disso, ele serve como uma
+alternativa muito mais poderosa ao velho e conhecido `print()` para debug rápido
+durante o desenvolvimento.
+
+Enquanto o `print()` é ótimo pra exibir algo na tela, o `logging` te dá controle
+total sobre o evento que vai ser registrado, **como** vai ser formatado e **pra
+onde** essa informação vai (terminal, arquivo, socket, banco, etc). São funções
+diferentes entre `print` e `logging`, mas esse comparativo sempre aparece quando
+falamos de `logging`.
+
+Ele também trabalha com níveis de severidade (`DEBUG`, `INFO`, `WARNING`,
+`ERROR`, `CRITICAL`), suporta múltiplos formatos, múltiplos destinos (handlers),
+hierarquia de loggers e configuração via código ou arquivos externos.
+
+Em outras palavras: ele foi feito pra `log` em aplicações reais. São registros
+de eventos categorizados para aplicações de gente grande, que sabe o que está
+fazendo e sabe que vai precisar debugar e refatorar o código em algum momento.
+
+O melhor é que já vem com o Python. Sem dependência. Sem gambiarra.
+
+<h2 id="como-o-logging-funciona-por-dentro">
+  <a href="#como-o-logging-funciona-por-dentro">
+    Como o `logging` funciona por dentro
+  </a>
+</h2>
+
+O sistema de logging do Python é organizado como uma estrutura hierárquica (em
+forma de árvore), onde cada _logger_ é um objeto único identificado por um nome
+textual (por exemplo: `meuapp`, `meuapp.api`, etc). Essa hierarquia é definida
+simplesmente pelo nome, usando pontos (`.`) para indicar níveis diferentes.
+
+Exemplo de loggers:
+
+- `app`
+- `app.database`
+- `app.http`
+- `app.http.requests`
+
+Visualmente, a estrutura ficaria assim:
+
+```text
+root
+└── app
+    ├── database
+    └── http
+        └── requests
+```
+
+Essa hierarquia permite algo muito poderoso: a **propagação** dos logs. Por
+padrão, quando um logger emite um log, essa mensagem sobe na hierarquia até
+chegar ao logger pai e, eventualmente, ao logger raiz (`root`).
+
+Na prática, isso significa que você pode configurar todos os handlers (por
+exemplo: imprimir no terminal, gravar em arquivos, enviar logs para serviços
+externos) diretamente no logger raiz. Assim, todos os loggers filhos
+automaticamente reutilizam esses handlers, sem precisar configurá-los
+individualmente toda vez.
+
+Só tem um detalhe importante aqui: algumas bibliotecas também usam loggers
+internamente, seguindo essa mesma hierarquia de nomes. Por isso, os logs
+emitidos por essas libs podem acabar sendo capturados pelos seus handlers
+globais também—desde que o nível configurado permita isso, é claro.
+
+> **Nota:** Se seu app não for grande e cheio de partes independentes, não
+> precisa complicar criando múltiplos loggers e uma hierarquia extensa. Na
+> maioria dos casos, um único logger já resolve tudo.
+
+Nos exemplos a seguir, vamos ver tudo isso funcionando claramente na prática.
+
+---
+
+<h2 id="conceitos-principais-loggers-handlers-formatters-e-filters">
+  <a href="#conceitos-principais-loggers-handlers-formatters-e-filters">
+    Conceitos principais: Loggers, Handlers, Formatters e Filters
+  </a>
+</h2>
+
+O `logging` é formado por 4 blocos principais:
+
+- **Logger:** é quem dispara a mensagem (ex: `logger.info("oi")`).
+- **Handler:** define **pra onde** a mensagem vai (terminal, arquivo, e-mail
+  etc).
+- **Formatter:** define **como** a mensagem vai aparecer (formato da string).
+- **Filter (opcional):** permite **filtrar** o que será logado.
+
+Esses blocos funcionam como peças de LEGO: você encaixa e combina como quiser.
+
+Pode ter um logger que salva tudo em um arquivo `.json`, outro que só mostra
+`ERROR` no terminal com cor, outro que manda `INFO` pro Telegram (por que não?).
+
+Tudo isso é configurável via código ou por arquivos `.ini`, `.yaml`, `.json`,
+como preferir.
+
+---
+
+<h2 id="niveis-de-severidade-level">
+  <a href="#niveis-de-severidade-level">
+    Níveis de severidade: `level`
+  </a>
+</h2>
+
+O nível de severidade (`level`) aparece em dois momentos distintos:
+
+1. Na configuração do logger e/ou handler.
+2. Na emissão do log.
+
+A primeira define o que será aceito ou descartado. A segunda define qual a
+severidade de um log específico.
+
+```python
+# 1. Configuração: esse logger aceita logs de WARNING pra cima
+logger.setLevel(logging.WARNING)
+
+# ...
+
+# 2. Emissão: esse log será emitido com nível DEBUG
+logger.debug("sou um debug")
+```
+
+---
+
+<h3 id="como-o-level-funciona">
+  <a href="#como-o-level-funciona">
+    Como o `level` funciona
+  </a>
+</h3>
+
+Tanto loggers quanto handlers possuem um `level`. Esse valor determina se uma
+mensagem será processada ou descartada, com base em sua severidade.
+
+Os níveis disponíveis são:
+
+- `NOTSET` ou `0` – sem configuração explícita.
+- `DEBUG` ou `10` – detalhes técnicos para depuração (tipo `print()`).
+- `INFO` ou `20` – informações gerais da execução.
+- `WARNING` ou `30` – algo inesperado aconteceu, mas foi contornado.
+- `ERROR` ou `40` – erro durante a execução.
+- `CRITICAL` ou `50` – erro grave. A aplicação pode parar ou já parou.
+
+Você pode usar os nomes (`DEBUG`, `INFO`...) ou os números diretamente.
+
+> O valor numérico importa porque a regra é: **um log só será processado se o
+> `level` desse log for maior ou igual ao `level` do logger e do handler.**
+
+---
+
+**Exemplo prático usando `level`**
+
+```python
+logger.setLevel(logging.ERROR)
+
+logger.debug("DEBUG")     # ignorado
+logger.warning("WARNING") # ignorado
+logger.error("ERROR")     # processado
+logger.critical("CRITICAL") # processado
+```
+
+---
+
+<h3 id="emissao-de-um-log-em-um-level-especifico">
+  <a href="#emissao-de-um-log-em-um-level-especifico">
+    Emissão de um log em um `level` específico
+  </a>
+</h3>
+
+Para emitir um log, usamos os métodos do logger que correspondem ao nível de
+severidade desejado:
+
+- `logger.debug(...)`
+- `logger.info(...)`
+- `logger.warning(...)`
+- `logger.error(...)`
+- `logger.critical(...)`
+
+Exemplo:
+
+```python
+# Isso emite um log com nível WARNING (30)
+logger.warning("mensagem do meu log")
+```
+
+Neste caso, estamos emitindo uma mensagem com nível 30 (`WARNING`). Ela será
+avaliada pelo logger e por cada handler configurado, e só será processada se
+passar pelos filtros de `level`.
+
+---
+
+<h2 id="basicconfig-iniciando-com-logging-no-codigo">
+  <a href="#basicconfig-iniciando-com-logging-no-codigo">
+    `basicConfig`: iniciando com `logging` no código
+  </a>
+</h2>
+
+`basicConfig` é uma função do módulo `logging`, feita para configurar o `root`
+logger de forma simples e rápida. Geralmente, ela será usada em scripts menores
+para facilitar a configuração rápida do `logging`.
+
+Dependendo de quais argumentos forem usados, ela pode configurar handlers
+diferentes no `root logger`.
+
+---
+
+<h3 id="streamhandler-saida-para-stderr-ou-stdout">
+  <a href="#streamhandler-saida-para-stderr-ou-stdout">
+    `StreamHandler`: saída para `stderr` ou `stdout`
+  </a>
+</h3>
+
+Se você não enviar o argumento `filename` para `basicConfig`, o handler padrão
+usado será um `StreamHandler`.
+
+O termo _stream_ se refere a objetos semelhantes a arquivos, ou seja, objetos
+que possuem métodos como `.write()` e `.flush()`. Tanto `sys.stdout` quanto
+`sys.stderr` são exemplos desses objetos.
+
+Por padrão, o `StreamHandler` escreve no `stderr`. Já o `print()` padrão do
+Python escreve no `stdout`. Ou seja: ambos "printam", mas vão pra fluxos
+diferentes.
+
+> **Nota:** É possível trocar o stream da classe `StreamHandler`, passando um
+> argumento como `sys.stdout`, mas isso foge do nosso foco aqui.
+
+---
+
+**Código: `basicConfig` + `StreamHandler`**
+
+Primeiro, importamos o módulo `logging` e definimos o formato de cada linha de
+log:
+
+```python
+import logging
+
+# Formato do log - veja todos os atributos disponíveis em:
+# https://docs.python.org/3/library/logging.html#logrecord-attributes
+simple_format = "%(levelname)s|%(name)s|%(asctime)s|%(message)s|%(filename)s|%(lineno)d"
+
+# Isso configura o root logger conforme explico a seguir.
+logging.basicConfig(format=simple_format)
+```
+
+O trecho acima faz o seguinte:
+
+- Cria um `StreamHandler` que envia os logs para o `stderr`;
+- Aplica um `Formatter` com o formato definido;
+- Adiciona esse handler ao _root logger_;
+- Define o nível do _root logger_ como `WARNING` (padrão do Python, caso não
+  seja especificado).
+
+Com isso, o _root logger_ já está pronto pra uso. Basta fazer:
+
+```python
+# Logando com o root (não vamos usar isso, só exemplo)
+logging.warning("Oi!")
+```
+
+> **Nota:** O `basicConfig` aceita vários outros argumentos, como `level`,
+> `filename`, `filemode`, `handlers`, `stream` e mais. Se você quiser, pode
+> definir o nível diretamente, por exemplo: `level=logging.DEBUG`.
+
+---
+
+**`getLogger()` cria ou acessa nosso próprio logger**
+
+Com o _root logger_ configurado, a gente pode usar a função `getLogger()` para
+criar (ou acessar) nossos próprios loggers. Essa função tem três comportamentos
+distintos, dependendo do argumento:
+
+- `logging.getLogger()`: sem argumento, retorna o _root logger_.
+- `logging.getLogger("meuapp")`: com um nome, cria um novo logger se ainda não
+  existir.
+- `logging.getLogger("meuapp")`: nas próximas chamadas com o mesmo nome, retorna
+  o mesmo logger criado anteriormente (singleton por nome).
+
+Depois de criado, você pode definir o **nível de severidade** que esse logger
+vai aceitar:
+
+```python
+logger = logging.getLogger("meuapp")
+logger.setLevel(logging.DEBUG)
+```
+
+Feito isso, já pode começar a mandar logs e ver tudo aparecendo no terminal:
+
+```python
+# Exibe logs com StreamHandler via stderr
+# debug info warning error critical
+logger.debug("mensagem de log")
+logger.info("mensagem de log")
+logger.warning("mensagem de log")
+logger.error("mensagem de log")
+logger.critical("mensagem de log")
+
+# Exception
+try:
+    print(1 / 0)
+except ZeroDivisionError:
+    logger.exception("dividiu por zero aí")
+```
+
+Saída esperada:
+
+```
+DEBUG|meuapp|2025-06-29 17:36:09,226|mensagem de log|main.py|24
+INFO|meuapp|2025-06-29 17:36:09,226|mensagem de log|main.py|25
+WARNING|meuapp|2025-06-29 17:36:09,226|mensagem de log|main.py|26
+ERROR|meuapp|2025-06-29 17:36:09,226|mensagem de log|main.py|27
+CRITICAL|meuapp|2025-06-29 17:36:09,226|mensagem de log|main.py|28
+ERROR|meuapp|2025-06-29 17:36:09,226|dividiu por zero aí|main.py|34
+Traceback (most recent call last):
+  File "main.py", line 32, in <module>
+    print(1 / 0)
+          ~~^~~
+ZeroDivisionError: division by zero
+```
+
+---
+
+**Código completo para `basicConfig` e `StreamHandler`**
+
+O código completo ficou assim:
+
+```python
+import logging
+
+# Formato para o Formatter
+# Veja os atributos disponíveis em:
+# https://docs.python.org/3/library/logging.html#logrecord-attributes
+simple_format = "%(levelname)s|%(name)s|%(asctime)s|%(message)s|%(filename)s|%(lineno)d"
+logging.basicConfig(format=simple_format)
+
+# cria o meu logger "meuapp"
+logger = logging.getLogger("meuapp")
+logger.setLevel(logging.DEBUG)
+
+logger.debug("mensagem de log")
+logger.info("mensagem de log")
+logger.warning("mensagem de log")
+logger.error("mensagem de log")
+logger.critical("mensagem de log")
+
+try:
+    print(1 / 0)
+except ZeroDivisionError:
+    logger.exception("Alguém tentou dividir por zero aí.")
+```
+
+---
