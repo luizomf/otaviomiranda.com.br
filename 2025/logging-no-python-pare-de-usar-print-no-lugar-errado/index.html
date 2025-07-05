@@ -509,6 +509,7 @@ Você poderia ter quantos handlers e formatters quisesse, todos pendurados no
 
 ```python
 import logging
+import sys
 
 format1 = "%(levelname)s|%(name)s|%(asctime)s|%(message)s|%(filename)s|%(lineno)d"
 
@@ -518,10 +519,12 @@ file_handler = logging.FileHandler(
     mode="a",
     encoding="utf-8",
 )
-stream_handler = logging.StreamHandler()
+stream_handler = logging.StreamHandler(sys.stdout)
 
 # Nossos handlers precisam de um formatter
 main_formatter = logging.Formatter(fmt=format1)
+
+# A configuração do formatter pode ser reutilizada.
 file_handler.setFormatter(main_formatter)
 stream_handler.setFormatter(main_formatter)
 
@@ -533,7 +536,7 @@ logger = logging.getLogger("meuapp")
 # define o nível do meu log
 logger.setLevel(logging.DEBUG)
 
-# Exibe logs com StreamHandler via stderr
+# Saída nos dois handlers
 logger.debug("mensagem de log")
 logger.info("mensagem de log")
 logger.warning("mensagem de log")
@@ -551,15 +554,14 @@ A saída do código acima fica como mostro abaixo tanto no console quando no
 terminal.
 
 ```text
-DEBUG|meuapp|2025-07-05 10:12:30,311|Isso deve aparecer no arquivo log.log|lesson01.py|20
-DEBUG|meuapp|2025-07-05 10:16:21,917|mensagem de log|lesson01.py|27
-INFO|meuapp|2025-07-05 10:16:21,917|mensagem de log|lesson01.py|28
-WARNING|meuapp|2025-07-05 10:16:21,917|mensagem de log|lesson01.py|29
-ERROR|meuapp|2025-07-05 10:16:21,917|mensagem de log|lesson01.py|30
-CRITICAL|meuapp|2025-07-05 10:16:21,917|mensagem de log|lesson01.py|31
-ERROR|meuapp|2025-07-05 10:16:21,917|Alguém tentou dividir por zero aí.|lesson01.py|37
+DEBUG|meuapp|2025-07-05 10:59:37,842|mensagem de log|lesson05_01.py|41
+INFO|meuapp|2025-07-05 10:59:37,842|mensagem de log|lesson05_01.py|42
+WARNING|meuapp|2025-07-05 10:59:37,842|mensagem de log|lesson05_01.py|43
+ERROR|meuapp|2025-07-05 10:59:37,842|mensagem de log|lesson05_01.py|44
+CRITICAL|meuapp|2025-07-05 10:59:37,842|mensagem de log|lesson05_01.py|45
+ERROR|meuapp|2025-07-05 10:59:37,843|Alguém tentou dividir por zero aí.|lesson05_01.py|51
 Traceback (most recent call last):
-  File "/Users/luizotavio/Desktop/tutoriais_e_cursos/learn_logging/src/learn_logging/lesson01.py", line 35, in <module>
+  File "/Users/luizotavio/Desktop/tutoriais_e_cursos/logging_course_yt/src/logging_course/lesson05_01.py", line 49, in <module>
     print(1 / 0)
           ~~^~~
 ZeroDivisionError: division by zero
@@ -692,6 +694,225 @@ Se fosse pra resumir num post-it:
 >
 > Se o logger emissor não aceitar o log, **acabou o jogo ali**. Nada é
 > publicado.
+
+---
+
+<h2 id="loggers-de-terceiros-podem-entrar-no-seu-log">
+  <a href="#loggers-de-terceiros-podem-entrar-no-seu-log">
+    Loggers de terceiros podem entrar no seu log
+  </a>
+</h2>
+
+Uma coisa que acontece com frequência, e não só comigo, mas com todo mundo que
+usa o `root` logger como central dos handlers, é o seguinte: **libs de terceiros
+começam a cuspir log no seu log 🫠**.
+
+Esse comportamento pode até ser desejado em alguns contextos (monitoramento
+completo, por exemplo). Mas na maioria das vezes, você quer ver **apenas os logs
+da sua aplicação**, sem ruído de dependência externa.
+
+Bora ver isso na prática.
+
+---
+
+<h3 id="rich-logs-mais-bonitos-no-console">
+  <a href="#rich-logs-mais-bonitos-no-console">
+    `rich`: logs mais bonitos no console
+  </a>
+</h3>
+
+Vamos usar a biblioteca `rich` pra deixar os logs do console mais agradáveis de
+ler, com cor, syntax highlight e outros agrados visuais.
+
+Instale com o gerenciador que preferir:
+
+```bash
+# Usando uv
+uv add rich
+
+# Ou com pip
+pip install rich
+```
+
+---
+
+<h3 id="exemplo-pratico-logs-de-terceiros-poluindo-sua-saida">
+  <a href="#exemplo-pratico-logs-de-terceiros-poluindo-sua-saida">
+    Exemplo prático: logs de terceiros poluindo sua saída
+  </a>
+</h3>
+
+Vamos configurar o `logging` novamente, do zero:
+
+```python
+import logging
+
+simple_format = "%(levelname)s|%(name)s|%(asctime)s|%(message)s|%(filename)s|%(lineno)d"
+
+# Configura o root logger com:
+# - StreamHandler (stderr)
+# - Formatter customizado
+# - Level DEBUG
+logging.basicConfig(format=simple_format, level=logging.DEBUG)
+
+# Cria o nosso logger, mas sem handlers próprios
+logger = logging.getLogger("meuapp")
+logger.setLevel(logging.DEBUG)
+
+# Apenas um teste
+logger.warning("Isso é um teste")
+
+# Saída esperada:
+# WARNING|meuapp|2025-07-01 19:44:54,566|Isso é um teste|main.py|14
+```
+
+Agora, vamos simular o uso do `rich`, que é uma lib que **também usa o módulo
+`logging` internamente**. Suponha que você queira imprimir um markdown no
+terminal:
+
+```python
+from rich import print as rprint
+from rich.markdown import Markdown
+
+md = Markdown("# Nos Handlers de `A`")
+rprint(md)
+```
+
+Se algum código interno do `rich` emitir logs, mesmo que você não peça, esses
+logs vão aparecer, porque o `root` logger está **aberto no nível `DEBUG`** e
+**todos os handlers estão lá**.
+
+Esse é o tipo de poluição que você pode querer evitar.
+
+Isso era só pra ser um código normal, simulando algo dentro da minha aplicação.
+Mas olha só o que apareceu no log:
+
+> **Nota:** eu cortei bastante texto do log abaixo, mas dependendo do que você
+> estiver fazendo, pode ficar **absurdamente longo**. Em alguns casos, aparecem
+> **tantos logs** que sua aplicação (ou até seu computador) pode travar.
+
+```text
+WARNING|meuapp|2025-07-01 20:02:21,221|Isso é um teste|main.py|14
+DEBUG|markdown_it.rules_block.code|2025-07-01 20:02:21,271...
+DEBUG|markdown_it.rules_block.fence|2025-07-01 20:02:21,271...
+DEBUG|markdown_it.rules_block.blockquote|2025-07-01 20:02:21,271...
+DEBUG|markdown_it.rules_block.hr|2025-07-01 20:02:21,271...
+DEBUG|markdown_it.rules_block.list|2025-07-01 20:02:21,271...
+DEBUG|markdown_it.rules_block.reference|2025-07-01 20:02:21,271...
+DEBUG|markdown_it.rules_block.html_block|2025-07-01 20:02:21,271...
+DEBUG|markdown_it.rules_block.heading|2025-07-01 20:02:21,271...
+```
+
+Qual o problema aqui? Nenhum, **se for intencional**.
+
+Só aconteceu que a sua aplicação e o `rich` decidiram seguir a mesma estratégia:
+**usar o `root` logger pra tudo**.
+
+Quando você configura o `root` com um nível permissivo (tipo `DEBUG`), qualquer
+lib que use o sistema de logging do Python pode ter suas mensagens **publicadas
+nos seus handlers**, inclusive aquelas que você nunca pediu pra logar.
+
+Isso pode ser um **problema grave** dependendo da situação. Imagine que você
+adiciona um handler que envia logs por e-mail. Se uma lib como o `rich` começar
+a vomitar `DEBUG` o tempo inteiro... adeus caixa de entrada (e olá fatura do
+SendGrid 😅).
+
+Mas se você entendeu tudo até aqui, talvez já consiga resolver sozinho. E se não
+entendeu, tá tudo certo também. A gente vai resolver isso **passo a passo**.
+
+---
+
+<h3 id="solucoes-possiveis-para-log-de-libs-de-terceiros">
+  <a href="#solucoes-possiveis-para-log-de-libs-de-terceiros">
+    Soluções possíveis para log de libs de terceiros
+  </a>
+</h3>
+
+Tem várias coisas que a gente pode fazer, mas duas bem simples e eficientes são:
+
+- Subir o `level` do logger que está causando problema
+- Isolar o seu logger do `root`
+
+---
+
+**Como subir o `level` de logs com `getLogger`?**
+
+No próprio log, a **segunda coluna** mostra o nome do logger: `markdown_it`!
+
+Muita gente configura seus loggers assim:
+
+```python
+logger = logging.getLogger(__name__)
+```
+
+Isso cria (ou acessa) um logger com o nome do módulo onde está sendo executado.
+Exemplo: se você está num pacote chamado `learn_logging`, e o módulo se chama
+`config_logger.py`, o nome do logger será:
+
+- `__main__` se executar direto
+- `learn_logging.config_logger` se importar de outro lugar
+
+Mas voltando ao problema: se o spam vem de `markdown_it`, basta fazer:
+
+```python
+logging.getLogger("markdown_it").setLevel(logging.INFO)
+```
+
+Funcionou? Beleza. Mas se continuar brotando log de todos os locais, talvez seja
+melhor **isolar completamente** o seu logger do `root`.
+
+---
+
+<h4 id="meus-handlers-nos-meus-loggers">
+  <a href="#meus-handlers-nos-meus-loggers">
+    Meus handlers nos meus loggers
+  </a>
+</h4>
+
+Pra isso, você precisa configurar os **handlers no seu próprio logger**. Como
+estamos usando `basicConfig`, os handlers estavam indo pro `root`. Agora vamos
+fazer de outro modo:
+
+```python
+import logging
+
+# Cria um handler só nosso
+stream_handler = logging.StreamHandler()
+stream_handler.setLevel(logging.DEBUG)
+
+# Cria um formatter
+simple_format = "%(levelname)s|%(name)s|%(asctime)s|%(message)s|%(filename)s|%(lineno)d"
+main_formatter = logging.Formatter(fmt=simple_format)
+stream_handler.setFormatter(main_formatter)
+
+# CADÊ O ROOT??? sumiu 😎
+
+logger = logging.getLogger("meuapp")
+logger.setLevel(logging.DEBUG)
+logger.addHandler(stream_handler)
+
+logger.info("mensagem de log")
+```
+
+Pronto. Agora você não verá mais logs do `rich` ou de qualquer lib de terceiro.
+**Não porque bloqueamos eles**, mas porque **não estamos mais ouvindo o
+`root`**. E como essas libs usam o `root`, seus logs vão pra lugar nenhum 😅
+
+Ou seja: antes estávamos usando o `root` só porque é padrão. Mas se ele começar
+a te atrapalhar, **larga o root e vai com o seu próprio logger.**
+
+Se quiser comprovar que o `root` ainda existe, mas está sem handler:
+
+```python
+root = logging.getLogger()
+
+print(f"{root = !r}")
+# root = <RootLogger root (WARNING)>
+print(f"{root.hasHandlers() = !r}")
+# root.hasHandlers() = False
+```
+
+E tá tudo certo com isso. Agora é você quem manda nos logs.
 
 ---
 
