@@ -703,28 +703,30 @@ Se fosse pra resumir num post-it:
   </a>
 </h2>
 
-Uma coisa que acontece com frequência, e não só comigo, mas com todo mundo que
-usa o `root` logger como central dos handlers, é o seguinte: **libs de terceiros
-começam a cuspir log no seu log 🫠**.
+Se você usar o `logging` de forma incorreta: tipo deixando o `level` do `root`
+em `DEBUG` ou usando o `root` como logger principal por algum motivo. Uma coisa
+muito comum que costuma ocorrer é você começar a ver logs de `DEBUG` de
+aplicações de terceiros no seu log.
 
-Esse comportamento pode até ser desejado em alguns contextos (monitoramento
-completo, por exemplo). Mas na maioria das vezes, você quer ver **apenas os logs
-da sua aplicação**, sem ruído de dependência externa.
+Geralmente queremos logs de libs de terceiros no nosso log, mas não um milhão de
+`DEBUGs`. Talvez apenas de `WARNING` para cima, ou até de `ERROR` para cima.
 
-Bora ver isso na prática.
+Vamos simular e corrigir isso a seguir.
 
 ---
 
 <h3 id="rich-logs-mais-bonitos-no-console">
   <a href="#rich-logs-mais-bonitos-no-console">
-    `rich`: logs mais bonitos no console
+    `rich`: cobaia e nossos logs mais bonitos no console
   </a>
 </h3>
 
 Vamos usar a biblioteca `rich` pra deixar os logs do console mais agradáveis de
-ler, com cor, syntax highlight e outros agrados visuais.
+ler, com cor, syntax highlight e outros agrados visuais. Só que vamos usar essa
+lib bem mais adiante no texto.
 
-Instale com o gerenciador que preferir:
+Mesmo assim, instale-a com o gerenciador que preferir e vamos usar ela mesmo
+como exemplo de log de terceiros:
 
 ```bash
 # Usando uv
@@ -738,11 +740,12 @@ pip install rich
 
 <h3 id="exemplo-pratico-logs-de-terceiros-poluindo-sua-saida">
   <a href="#exemplo-pratico-logs-de-terceiros-poluindo-sua-saida">
-    Exemplo prático: logs de terceiros poluindo sua saída
+    Exemplo prático: logs de terceiros no seu log com rich
   </a>
 </h3>
 
-Vamos configurar o `logging` novamente, do zero:
+Vamos configurar o `logging` novamente, do zero, só que com `root` configurado
+em `level` `DEBUG` (Não recomendado):
 
 ```python
 import logging
@@ -812,13 +815,9 @@ Quando você configura o `root` com um nível permissivo (tipo `DEBUG`), qualque
 lib que use o sistema de logging do Python pode ter suas mensagens **publicadas
 nos seus handlers**, inclusive aquelas que você nunca pediu pra logar.
 
-Isso pode ser um **problema grave** dependendo da situação. Imagine que você
-adiciona um handler que envia logs por e-mail. Se uma lib como o `rich` começar
-a vomitar `DEBUG` o tempo inteiro... adeus caixa de entrada (e olá fatura do
-SendGrid 😅).
-
-Mas se você entendeu tudo até aqui, talvez já consiga resolver sozinho. E se não
-entendeu, tá tudo certo também. A gente vai resolver isso **passo a passo**.
+Como mencionei antes, é normal querermos logs de libs de terceiros no nosso log.
+Elas fazem parte da nossa aplicação, porém, em um nível interessante, como
+`WARNING` ou `ERROR`, e acima.
 
 ---
 
@@ -828,38 +827,45 @@ entendeu, tá tudo certo também. A gente vai resolver isso **passo a passo**.
   </a>
 </h3>
 
-Tem várias coisas que a gente pode fazer, mas duas bem simples e eficientes são:
+Tem várias coisas que a gente pode fazer:
 
 - Subir o `level` do logger que está causando problema
-- Isolar o seu logger do `root`
+- Configurar o `root` adequadamente (de `WARNING` para cima)
+- Nunca usar o `root` logger diretamente como logger da sua aplicação
+- Isolar o seu logger do `root` (não recomendado, mas pode ser útil se está
+  criando uma lib para outras pessoas)
 
 ---
 
-**Como subir o `level` de logs com `getLogger`?**
+**Como subir o `level` de logs de terceiros com `getLogger`?**
 
-No próprio log, a **segunda coluna** mostra o nome do logger: `markdown_it`!
+No próprio log que poluiu meu console e arquivo, a **segunda coluna** mostra o
+nome do logger: `markdown_it`!
 
-Muita gente configura seus loggers assim:
+Muita gente configura seus loggers como mostro a seguir. Isso é até uma
+recomendação da documentação se eu não estiver enganado:
 
 ```python
 logger = logging.getLogger(__name__)
 ```
 
 Isso cria (ou acessa) um logger com o nome do módulo onde está sendo executado.
-Exemplo: se você está num pacote chamado `learn_logging`, e o módulo se chama
+Exemplo: se você está em um pacote chamado `learn_logging`, e o módulo se chama
 `config_logger.py`, o nome do logger será:
 
 - `__main__` se executar direto
 - `learn_logging.config_logger` se importar de outro lugar
 
-Mas voltando ao problema: se o spam vem de `markdown_it`, basta fazer:
+Mas voltando ao problema: se o log vem de `markdown_it`, basta fazer:
 
 ```python
 logging.getLogger("markdown_it").setLevel(logging.INFO)
 ```
 
-Funcionou? Beleza. Mas se continuar brotando log de todos os locais, talvez seja
-melhor **isolar completamente** o seu logger do `root`.
+Geralmente isso silencia o `logger` que está jogando um monte de mensagens no
+seu logger. Mas e se forem muitos? E se forem todas as 10 libs externas que você
+está usando num código só? E se as 10 libs que você instalou também usam outras
+100 libs? Fica impraticável.
 
 ---
 
@@ -869,9 +875,9 @@ melhor **isolar completamente** o seu logger do `root`.
   </a>
 </h4>
 
-Pra isso, você precisa configurar os **handlers no seu próprio logger**. Como
-estamos usando `basicConfig`, os handlers estavam indo pro `root`. Agora vamos
-fazer de outro modo:
+Você pode configurar os **handlers no seu próprio logger**. Como estamos usando
+`basicConfig`, os handlers estavam indo pro `root`. Agora vamos fazer de outro
+modo. Só um exemplo:
 
 ```python
 import logging
@@ -896,23 +902,20 @@ logger.info("mensagem de log")
 
 Pronto. Agora você não verá mais logs do `rich` ou de qualquer lib de terceiro.
 **Não porque bloqueamos eles**, mas porque **não estamos mais ouvindo o
-`root`**. E como essas libs usam o `root`, seus logs vão pra lugar nenhum 😅
+`root`**. E como essas libs usam o `root`, seus logs vão pra lugar nenhum.
 
-Ou seja: antes estávamos usando o `root` só porque é padrão. Mas se ele começar
-a te atrapalhar, **larga o root e vai com o seu próprio logger.**
-
-Se quiser comprovar que o `root` ainda existe, mas está sem handler:
-
-```python
-root = logging.getLogger()
-
-print(f"{root = !r}")
-# root = <RootLogger root (WARNING)>
-print(f"{root.hasHandlers() = !r}")
-# root.hasHandlers() = False
-```
-
-E tá tudo certo com isso. Agora é você quem manda nos logs.
+> **Nota:** isso pode ser um problema, visto que libs de terceiros fazem parte
+> da nossa aplicação. \
+> \
+> Omitir logs de libs de terceiros é como omitir logs de uma parte do código que
+> realmente vai para produção. \
+> \
+> O que eu faria nesse caso, seria manter um handler menos importante no meu
+> próprio logger com level `DEBUG` (vejo tudo no meu handler), mas colocaria os
+> handlers importantes, com níveis de `WARNING` para cima, no `root` para
+> continuar tendo acesso aos logs de libs de terceiros. \
+> \
+> Cada caso é um caso a ser estudado.
 
 ---
 
