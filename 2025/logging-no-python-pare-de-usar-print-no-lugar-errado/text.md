@@ -2443,8 +2443,10 @@ if __name__ == "__main__":
     print("Podem aparecer aleatóriamente no topo, meio ou final dos logs.")
 ```
 
-### Tudo pronto, agora recapitulando
+### Tudo pronto
 
 Agora é só sair usando `logging` para todo lado na sua aplicação.
+
+Se quiser, esse texto está em markdown e [pode ser baixado aqui](text.md).
 
 ---
