@@ -2447,6 +2447,8 @@ if __name__ == "__main__":
 
 Agora é só sair usando `logging` para todo lado na sua aplicação.
 
-Se quiser, esse texto está em markdown e [pode ser baixado aqui](text.md).
+Se quiser, esse texto está em markdown e [pode ser baixado aqui](text.md). Você
+também rolou bastante essa página né? [Volte para o topo](./) ou simplesmente vá
+para [nossa página inicial](/).
 
 ---
