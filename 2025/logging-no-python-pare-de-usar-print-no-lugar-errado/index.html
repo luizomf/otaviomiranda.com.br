@@ -2497,9 +2497,364 @@ if __name__ == "__main__":
     print("Podem aparecer aleatóriamente no topo, meio ou final dos logs.")
 ```
 
-### Tudo pronto
+---
 
-Agora é só sair usando `logging` para todo lado na sua aplicação.
+<h2 id="boas-praticas-no-logging-do-python">
+  <a href="#boas-praticas-no-logging-do-python">
+    Boas Práticas no Logging do Python: e agora? - Aula 13
+  </a>
+</h2>
+
+Parabéns!
+[Você chegou ao final do nosso curso](https://www.youtube.com/playlist?list=PLbIBj8vQhvm28qR-yvWP3JELGelWxsxaI)
+(e do texto, se estiver apenas lendo). A gente poderia continuar falando sobre
+logging por horas, mas agora você já deixou o `print()` pra trás, entendeu
+Handlers, Formatters, Filtros, `dictConfig`, JSON e até logging assíncrono com
+`QueueHandler`.
+
+Você tem um poder enorme nas mãos. Mas agora vem as perguntas mais importantes:
+**Onde e como usar esse poder?** **O que vale a pena registrar?** **Como
+escrever uma mensagem de log que ainda faça sentido daqui a 6 meses, às 3 da
+manhã, quando um bug crítico estourar em produção?**
+
+Nesta última aula, o foco muda um pouco. Vamos falar menos sobre _como
+configurar_ e mais sobre _por que logar, o que logar e quando usar cada nível_.
+Vamos explorar as boas práticas que separam um log amador de um log
+profissional, e que podem realmente salvar sua pele quando tudo estiver pegando
+fogo.
+
+Ah, e vale lembrar: isso aqui não tem fim. Sempre tem mais pra aprender.
+[Erros em logs acontecem até nas maiores empresas do mundo](https://medium.com/@joecrobak/seven-best-practices-for-keeping-sensitive-data-out-of-logs-3d7bbd12904),
+então continue estudando, melhorando, revisando seus logs... e evitando que eles
+virem uma armadilha.
+
+---
+
+### Para Quem Você Está Escrevendo o Log?
+
+Antes de mais nada: **log não é só pra você, desenvolvedor.** Na verdade, o que
+deve ser registrado em log geralmente **não é decidido apenas pelos devs**. Em
+ambientes profissionais, outros setores também dependem desses dados.
+
+Claro, como dev, você provavelmente vai usar `debug`, `info`, `warning`,`error`,
+`critical` e `exception` para entender o comportamento do seu código. Mas a
+empresa como um todo precisa de muito mais:
+
+- O usuário criou uma conta
+- O usuário fez login
+- Visualizou o produto X
+- Comprou o produto Y
+- Pesquisou por "banana orgânica"
+
+Tudo isso pode parecer irrelevante para debugging técnico, mas para outras
+áreas, esses logs são **ouro em forma de texto**. Gente de marketing, produto,
+segurança, auditoria... todos querem (e precisam) ver esses eventos.
+
+Então, **antes de sair logando tudo no `debug`**, entenda o **propósito** do
+log. Você está logando para debug ou para outro setor? Se é para outro setor,
+quais dados eles precisam? Esses dados podem ser salvos? São sensíveis?
+
+Veja alguns exemplos genéricos:
+
+- **Logs para Desenvolvedores (Você do Futuro):** Foco em debugging. Informações
+  que ajudam a entender o fluxo da aplicação, o estado de variáveis e a causa de
+  um bug (não é só debug, todos os níveis de log podem ser relevantes aqui).
+
+- **Logs para SysAdmins / SRE / DevOps (Monitoramento):** Foco em saúde do
+  sistema. Logs sobre falhas, lentidão, uso de recursos, quedas de serviço, etc.
+
+- **Logs para o Negócio / Auditoria (Análise):** Foco em rastrear ações
+  importantes do ponto de vista do negócio. Exemplo: "Usuário X comprou produto
+  Y", "Relatório Z foi gerado" (claro, você precisa se comunicar com outros
+  setores para saber o que logar).
+
+- **Logs para fins legais?** Se um usuário da sua aplicação fizer algo ilegal,
+  talvez a justiça queira saber o que aconteceu. Aqui entra outro tipo de
+  responsabilidade: retenção de logs, dados sensíveis, LGPD, etc. **Consulte um
+  advogado** (ou o jurídico da empresa) para saber o que pode ou não ser
+  armazenado.
+
+---
+
+### Decifrando os Níveis de Severidade na Prática
+
+Agora sim: **vamos entender quando usar cada nível de log na prática.**
+
+Abaixo você encontra a descrição de cada nível com exemplos concretos, tanto de
+situações quanto de código.
+
+---
+
+#### `DEBUG`: "Esse é nosso (dos devs)"
+
+- **Quando usar:** Para diagnóstico detalhado durante o desenvolvimento ou
+  debugging intenso.
+- **O que logar:** Variáveis internas, payloads de API, queries SQL, entrada e
+  saída de funções complexas.
+- **Regra:** Geralmente desativado em produção para evitar excesso de ruído (e
+  vazamento de dados sensíveis da aplicação).
+
+```python
+# Cuidado com isso, payload pode conter dados sensíveis da aplicação
+# e do usuário
+logger.debug("Iniciando função de login com payload: %s", payload)
+# Cuidado novamente (nem preciso falar de novo né?)
+logger.debug("Consulta SQL gerada: %s", query)
+```
+
+---
+
+#### `INFO`: Aconteceu algo certo
+
+- **Quando usar:** Para registrar eventos normais e esperados no fluxo da
+  aplicação.
+- **O que logar:** Login de usuário, criação de conta, execução bem-sucedida de
+  uma tarefa.
+
+```python
+# Sem senhas, pelo amor de Deus
+logger.info("Usuário %s logou com sucesso", username)
+logger.info("Relatório gerado e enviado por email")
+```
+
+---
+
+#### `WARNING`: Atenção, algo inesperado aconteceu
+
+- **Quando usar:** Quando algo não saiu como o esperado, mas a aplicação
+  conseguiu se recuperar.
+- **O que logar:** Funcionalidades obsoletas, API lenta, falha com fallback,
+  tentativa de reconexão, muitas tentativas de login, etc...
+
+```python
+logger.warning("API externa demorou %d segundos para responder", elapsed)
+logger.warning("Configuração 'X' está obsoleta. Use 'Y' no lugar.")
+```
+
+---
+
+#### `ERROR`: Uma operação falhou
+
+- **Quando usar:** Quando uma tarefa específica não pôde ser concluída, mas a
+  aplicação continua rodando.
+- **O que logar:** Falha de validação, erro ao salvar no banco, exceção tratada
+  que impediu o sucesso da operação, etc.
+
+```python
+logger.error("Erro ao salvar usuário no banco: %s", user_id)
+logger.error("Falha ao processar pagamento: %s", str(error))
+```
+
+---
+
+#### `CRITICAL`: O navio está afundando!
+
+- **Quando usar:** Para falhas graves que impedem o funcionamento da aplicação.
+- **O que logar:** Perda de conexão com o banco após várias tentativas, falha na
+  inicialização de componente essencial, falha na rede interna, etc.
+
+```python
+logger.critical("Banco de dados inacessível após 5 tentativas. Encerrando aplicação.")
+logger.critical("Arquivo de configuração principal está corrompido.")
+```
+
+---
+
+#### Menção honrosa: `logger.exception()`
+
+- **Quando usar:** Sempre que você estiver dentro de um bloco `try...except` é
+  interessante logar a exceção na maioria dos casos.
+- **Vantagem:** Além de logar como `error`, ele inclui automaticamente o
+  **traceback**. Isso é ouro puro para debugging.
+
+```python
+try:
+    resultado = processar_pagamento()
+except Exception as e:
+    logger.exception("Erro inesperado ao processar pagamento")
+```
+
+---
+
+Com esses exemplos em mente, você já consegue diferenciar claramente o papel de
+cada nível de severidade e aplicar isso com consciência. O importante é manter
+consistência, clareza e foco em quem vai ler o log depois, muitas vezes, esse
+alguém vai ser você mesmo (só que com sono e pressa).
+
+Além disso, como o que aprendemos sobre `loggers`, `handlers` e `filters`, você
+conseguirá separar bem os logs por pacote, módulo, por setor da empresa, ou como
+preferir. Também conseguirá filtrar dados desnecessários em logs específicos.
+
+---
+
+### As Regras de Ouro de uma Boa Mensagem de Log
+
+Depois de tudo que aprendemos sobre configuração e níveis de log, chegou a hora
+da pergunta mais importante:
+
+**Como escrever uma mensagem de log que realmente ajuda?**
+
+Aqui vão 3 regras de ouro, simples, mas poderosas, que separam logs descartáveis
+de logs profissionais e confiáveis.
+
+---
+
+#### **Regra 1: Escreva logs para máquinas também, não só para humanos**
+
+Sim, logs precisam ser legíveis. Mas eles também devem ser **estruturados e
+processáveis** por ferramentas de observabilidade, buscas e alertas.
+
+Evite logs "misteriosos" e difíceis de analisar com código.
+
+```python
+#🚫 Ruim:
+logger.error("Erro no usuário 123")
+
+# ✅ Bom:
+logger.error("Falha na atualização do perfil", extra={
+    "user_id": 123,
+    "reason": "email_invalido"
+})
+```
+
+Com logs estruturados (em JSON, como fizemos), você pode **filtrar todos os
+erros por `reason=email_invalido`**, ou agrupar por `user_id`. Isso é impossível
+com strings soltas e mal formatadas.
+
+---
+
+#### **Regra 2: Contexto é rei**
+
+A mensagem "`Falhou`" pode ser verdade, mas não ajuda em nada.
+
+Um bom log responde: **Quem? O quê? Onde? Quando? Por quê?**
+
+Inclua IDs relevantes (de usuário, pedido, transação, etc). Quanto mais contexto
+você der, mais rápido será o diagnóstico, inclusive por outras pessoas do time
+(ou você no futuro, com pressa e sem paciência). Evite também colocar coisas
+desnecessárias no log (falo disso adiante).
+
+```python
+# 🚫 Ruim:
+logger.error("Pagamento não foi processado")
+
+# ✅ Bom:
+logger.error("Erro ao processar pagamento", extra={
+    "user_id": 42,
+    "order_id": 101,
+    "gateway": "Stripe",
+    "error_code": "card_declined"
+})
+```
+
+---
+
+#### **Regra 3: NUNCA logue informações sensíveis**
+
+Isso é mais do que uma boa prática: é uma questão legal e de segurança.
+
+O que **nunca** deve aparecer em logs:
+
+- Senhas (óbvio, né?)
+- Tokens de autenticação ou sessão
+- Chaves de API
+- Números de cartão de crédito
+- Documentos como CPF, RG, etc.
+- Endereços físicos de clientes, colaboradores, fornecedores, etc.
+- Dados médicos ou sensíveis (LGPD/GDPR)
+
+_Dica técnica:_ Se você precisa logar objetos que podem conter dados sensíveis
+(ex: um `User` ou um `Request`), crie uma função de serialização segura, ou use
+um **Filter** para limpar ou mascarar os dados antes de enviar ao log.
+
+---
+
+#### **Regra 4: Contexto é bom… até virar poluição**
+
+Sim, na **Regra 2** eu disse que _contexto é rei_. Mas cuidado pra não
+transformar o seu log num **romance de 800 páginas com final inconclusivo**.
+
+Logar dados demais é tão ruim quanto logar de menos.
+
+- Vai deixar os arquivos gigantes
+- Vai dificultar buscas e análise
+- Pode até esconder o que realmente importa
+- Vai ficar caro
+- Tem mais coisa ruim que não lembrei...
+
+**Ruído esconde o sinal.**
+
+Veja um exemplo de poluição:
+
+```python
+# 🚫 Ruim:
+logger.debug("Resposta completa da API: %s", response.text)  # 1000 linhas de HTML
+logger.info("Usuário fez login", extra={
+    "user_id": 1,
+    "nome": "Fulano",
+    "email": "fulano@email.com", # dado sensível
+    "cpf": "123.456.789-00", # dado sensível
+    "endereco": "Rua tal, nº tal, bairro tal", # dado sensível
+    "navegador": "Chrome 126",
+    "sistema": "macOS",
+    "resolução": "1920x1080",
+    "timestamp": "2025-07-10T15:34:21Z"
+})
+```
+
+Melhor seria algo como:
+
+```python
+# ✅ melhor - é o mesmo log, mas eu consigo usar o ID do usuário para fazer
+# buscas internas no sistema.
+logger.info("Login realizado com sucesso", extra={
+    "user_id": 1 # Com o ID do usuário você consegue buscar outros dados
+})
+```
+
+**Regra prática:** Logue _apenas_ o que alguém precisa saber para **agir**. Se o
+dado não ajuda a entender, resolver ou monitorar o problema, talvez ele não
+precise estar ali. Geralmente, IDs que identificam algo são suficientes para
+fazer uma busca interna no sistema sem expor dados sensíveis em logs.
+
+Lembre-se que quando você não precisa de logs, eles são "lixo" e até
+inconvenientes. Em algum momento alguém pode esquecer algo e vazar logs da sua
+aplicação. Se isso acontecer, torça muito para não ter nenhum dado sensível no
+meio dos dados vazados.
+
+---
+
+### Concluindo
+
+Se você chegou até aqui, parabéns. De verdade.
+
+Você saiu do `print()` e agora tem um **arsenal completo de logging
+profissional** nas mãos: Handlers, Formatters, Filters, JSON, `dictConfig`, logs
+assíncronos com `QueueHandler`, e, mais importante, **boas práticas de uso**.
+
+Você entendeu que logging não é só sobre escrever mensagens no console. É sobre
+**observabilidade**, **diagnóstico rápido**, **comunicação entre times**,
+**segurança** e até **compliance legal**. Ou seja: logging bem feito salva seu
+código, sua sanidade e, às vezes, até o faturamento da empresa.
+
+**E agora, o que fazer com esse conhecimento?**
+
+Use. Refatore seus projetos. Melhore os logs do seu time. Mostre esse curso pra
+alguém que ainda vive no `print()`.
+
+E quando for criar algo novo… lembra disso: **um bom log não é ruído. É música
+pros ouvidos de quem tá tentando resolver um bug às 3 da manhã.**
+
+Valeu demais por acompanhar até aqui! Se você curtiu, compartilha, vai lá no
+vídeo e comenta, salva, manda pra galera. E se quiser aprender mais Python
+moderno, CLI, automações, ou IA aplicada ao mundo real, dá uma olhada nas outras
+playlists do canal ou nos cursos completos.
+
+Nos vemos nos próximos vídeos ou textos.
+
+Abraço!
+
+---
 
 Se quiser, esse texto está em markdown e [pode ser baixado aqui](text.md). Você
 também rolou bastante essa página né? [Volte para o topo](./) ou simplesmente vá
