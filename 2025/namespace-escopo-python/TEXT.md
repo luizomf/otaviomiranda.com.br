@@ -4,6 +4,9 @@ Escopo e Namespace em Python
 </a>
 </h1>
 
+> **Publicado em** 26 de julho de 2025 | **Por**
+> [Luiz Otávio Miranda](https://www.otaviomiranda.com.br/)
+
 Em Python, **escopo** é o contexto onde um **nome** pode ser usado. Ele define a
 região do código, o tempo de vida e os limites de acesso desses nomes.
 
