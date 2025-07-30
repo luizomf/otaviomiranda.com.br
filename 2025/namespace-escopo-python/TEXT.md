@@ -31,6 +31,17 @@ também vários outros temas relacionados. Ao final, você terá aprendido:
 
 ---
 
+## Em vídeo
+
+Eu falo sobre escopo e namespace no Python (tudo o que falo neste artigo) em
+dois vídeos no meu canal do Youtube. Caso prefira, assista abaixo:
+
+- Vídeo 1 - [Escopo e Namespace em Python](https://youtu.be/GkgbSIYSHUg)
+- Vídeo 2 -
+  [Entenda a regra LEGB e Enclosing no Python](https://youtu.be/U8oF5WWpEGk)
+
+---
+
 <h2 id="o-que-e-escopo">
 <a href="#o-que-e-escopo">
 O que é escopo?
