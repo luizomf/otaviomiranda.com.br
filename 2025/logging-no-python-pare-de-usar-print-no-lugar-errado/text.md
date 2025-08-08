@@ -37,7 +37,7 @@ O melhor é que já vem com o Python. Sem dependência. Sem gambiarra.
 </h2>
 
 Se você caiu nesse artigo de paraquedas, ele é apenas parte de um conteúdo BEM
-MAIOR. Temos todo esse texto em vídeo no Youtube e também um repositório com
+MAIOR. Temos todo esse texto em vídeo no YouTube e também um repositório com
 todo o código, segue:
 
 - [Logging no Python - Curso completo](https://www.youtube.com/playlist?list=PLbIBj8vQhvm28qR-yvWP3JELGelWxsxaI)
@@ -216,7 +216,7 @@ passar pelos filtros de `level`.
 
 <h2 id="basicconfig-iniciando-com-logging-no-codigo">
   <a href="#basicconfig-iniciando-com-logging-no-codigo">
-    `basicConfig`: iniciando com `logging` no código
+    basicConfig: iniciando com `logging` no código
   </a>
 </h2>
 
@@ -243,7 +243,7 @@ que possuem métodos como `.write()` e `.flush()`. Tanto `sys.stdout` quanto
 `sys.stderr` são exemplos desses objetos.
 
 Por padrão, o `StreamHandler` escreve no `stderr`. Já o `print()` padrão do
-Python escreve no `stdout`. Ou seja: ambos "printam", mas vão pra fluxos
+Python escreve no `stdout`. Ou seja: ambos fazem `print`, mas vão pra fluxos
 diferentes.
 
 > **Nota:** É possível trocar o stream da classe `StreamHandler`, passando um
@@ -311,7 +311,7 @@ logger.setLevel(logging.DEBUG)
 Feito isso, já pode começar a mandar logs e ver tudo aparecendo no terminal:
 
 ```python
-# Exibe logs com StreamHandler via stderr
+# Exibe logs com StreamHandler
 # debug info warning error critical
 logger.debug("mensagem de log")
 logger.info("mensagem de log")
@@ -1004,8 +1004,8 @@ está criando variáveis, nem está passando atributos, muito menos instanciando
 nada. Você só está informando o que você quer e o `logging` com a `dictConfig`
 que se virem. A nata da programação declarativa.
 
-Eu vou te passar muitas configurações direntes ao longo do texto, mas se estiver
-com pressa, vai lá na
+Eu vou te passar muitas configurações diferentes ao longo do texto, mas se
+estiver com pressa, vai lá na
 [documentação do Python](https://docs.python.org/3/library/logging.config.html#dictionary-schema-details)
 para mais detalhes sobre o `Dictionary Schema Details`.
 
@@ -1362,8 +1362,8 @@ Vamos criar um filtro customizado simples. Estou criando outro módulo chamado
 
 Para criar o filter, vou criar uma classe que herda de `logging.Filter`. O
 método `filter` retorna `True` se aquele log é permitido ou `False` se é para
-destarcar. Estranhamente, não é necessário herdar de `logging.Filter`, mas é
-mais semântico. Qualquer classe que tenha o método `filter` vai funcionar. Além
+destacar. Estranhamente, não é necessário herdar de `logging.Filter`, mas é mais
+semântico. Qualquer classe que tenha o método `filter` vai funcionar. Além
 disso, o filter também pode alterar o log e retornar um `LogRecord`
 completamente diferente.
 
@@ -1543,10 +1543,10 @@ logging.config.dictConfig(config)
 
 **Observações:**
 
-É meio óbvio, mas JSON não é Python (óhhhh, descobriu agora?). Mas sério,
-algumas coisas não funcionam exatamente como no Python. Um exemplo: eu estava
-usando uma cor com `\033[31m` e `\033[0m` (vermelho e reset). Na hora que o JSON
-é carregado, isso tudo é string normal, ou seja, vai aparecer como texto no seu
+É meio óbvio, mas JSON não é Python (wow, descobriu agora?). Mas sério, algumas
+coisas não funcionam exatamente como no Python. Um exemplo: eu estava usando uma
+cor com `\033[31m` e `\033[0m` (vermelho e reset). Na hora que o JSON é
+carregado, isso tudo é string normal, ou seja, vai aparecer como texto no seu
 `stdout` ou `stderr`.
 
 Tem como corrigir? Sim, já que você tocou no assunto, vamos criar nosso próprio
@@ -1735,7 +1735,7 @@ Só de fazer isso, meu log ficou como mostro na imagem a seguir. Por padrão o
 </p>
 
 Se quiser, pode manter o `rich` para o seu `debug`. E daqui em diante, toda vez
-que pensar em ver o valor de uma variávei ou algo semelhante, use o log. Deixa o
+que pensar em ver o valor de uma variável ou algo semelhante, use o log. Deixa o
 `print` para coisas que realmente precisam de print, como exibir algo par ao
 usuário mesmo.
 
@@ -1815,7 +1815,7 @@ def setup(logger_name: str) -> logging.Logger:
     return logging.getLogger(logger_name)
 ```
 
-A única diferença do que fizemos anterioremente é que agora você tem uma função
+A única diferença do que fizemos anteriormente é que agora você tem uma função
 encapsulando tudo. Além disso, quero jogar os arquivos de log na pasta `logs`
 para evitar ficar poluindo a raiz do meu projeto. Se essa pasta não existir,
 isso vai parar a aplicação logo quando `logging` for tentar salvar o arquivo de
