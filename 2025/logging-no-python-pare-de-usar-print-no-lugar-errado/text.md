@@ -7,24 +7,22 @@
 > **Publicado em** 05 de julho de 2025 | **Por**
 > [Luiz Otávio Miranda](https://www.otaviomiranda.com.br/)
 
-O `logging` é o módulo oficial do Python para lidar com logs de forma
-estruturada, profissional e extensível. Além disso, ele serve como uma
-alternativa muito mais poderosa ao velho e conhecido `print()` para debug rápido
-durante o desenvolvimento.
+O `logging` é o módulo oficial do Python para lidar com logs de forma estruturada, profissional e
+extensível. Além disso, ele serve como uma alternativa muito mais poderosa ao velho e conhecido
+`print()` para debug rápido durante o desenvolvimento.
 
-Enquanto o `print()` é ótimo pra exibir algo na tela, o `logging` te dá controle
-total sobre o evento que vai ser registrado, **como** vai ser formatado e **pra
-onde** essa informação vai (terminal, arquivo, socket, banco, etc). São funções
-diferentes entre `print` e `logging`, mas esse comparativo sempre aparece quando
-falamos de `logging`.
+Enquanto o `print()` é ótimo pra exibir algo na tela, o `logging` te dá controle total sobre o
+evento que vai ser registrado, **como** vai ser formatado e **pra onde** essa informação vai
+(terminal, arquivo, socket, banco, etc). São funções diferentes entre `print` e `logging`, mas
+esse comparativo sempre aparece quando falamos de `logging`.
 
-Ele também trabalha com níveis de severidade (`DEBUG`, `INFO`, `WARNING`,
-`ERROR`, `CRITICAL`), suporta múltiplos formatos, múltiplos destinos (handlers),
-hierarquia de loggers e configuração via código ou arquivos externos.
+Ele também trabalha com níveis de severidade (`DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`),
+suporta múltiplos formatos, múltiplos destinos (handlers), hierarquia de loggers e configuração
+via código ou arquivos externos.
 
-Em outras palavras: ele foi feito pra `log` em aplicações reais. São registros
-de eventos categorizados para aplicações de gente grande, que sabe o que está
-fazendo e sabe que vai precisar debugar e refatorar o código em algum momento.
+Em outras palavras: ele foi feito pra `log` em aplicações reais. São registros de eventos
+categorizados para aplicações de gente grande, que sabe o que está fazendo e sabe que vai precisar
+debugar e refatorar o código em algum momento.
 
 O melhor é que já vem com o Python. Sem dependência. Sem gambiarra.
 
@@ -36,9 +34,8 @@ O melhor é que já vem com o Python. Sem dependência. Sem gambiarra.
   </a>
 </h2>
 
-Se você caiu nesse artigo de paraquedas, ele é apenas parte de um conteúdo BEM
-MAIOR. Temos todo esse texto em vídeo no YouTube e também um repositório com
-todo o código, segue:
+Se você caiu nesse artigo de paraquedas, ele é apenas parte de um conteúdo BEM MAIOR. Temos todo
+esse texto em vídeo no YouTube e também um repositório com todo o código, segue:
 
 - [Logging no Python - Curso completo](https://www.youtube.com/playlist?list=PLbIBj8vQhvm28qR-yvWP3JELGelWxsxaI)
 - [Repositório do curso](https://github.com/luizomf/logging_course_yt)
@@ -53,10 +50,10 @@ Então vamos continuar...
   </a>
 </h2>
 
-O sistema de logging do Python é organizado como uma estrutura hierárquica (em
-forma de árvore), onde cada _logger_ é um objeto único identificado por um nome
-textual (por exemplo: `meuapp`, `meuapp.api`, etc). Essa hierarquia é definida
-simplesmente pelo nome, usando pontos (`.`) para indicar níveis diferentes.
+O sistema de logging do Python é organizado como uma estrutura hierárquica (em forma de árvore),
+onde cada _logger_ é um objeto único identificado por um nome textual (por exemplo: `meuapp`,
+`meuapp.api`, etc). Essa hierarquia é definida simplesmente pelo nome, usando pontos (`.`) para
+indicar níveis diferentes.
 
 Exemplo de loggers:
 
@@ -75,24 +72,22 @@ root
         └── requests
 ```
 
-Essa hierarquia permite algo muito poderoso: a **propagação** dos logs. Por
-padrão, quando um logger emite um log, essa mensagem sobe na hierarquia até
-chegar ao logger pai e, eventualmente, ao logger raiz (`root`).
+Essa hierarquia permite algo muito poderoso: a **propagação** dos logs. Por padrão, quando um
+logger emite um log, essa mensagem sobe na hierarquia até chegar ao logger pai e, eventualmente,
+ao logger raiz (`root`).
 
-Na prática, isso significa que você pode configurar todos os handlers (por
-exemplo: imprimir no terminal, gravar em arquivos, enviar logs para serviços
-externos) diretamente no logger raiz. Assim, todos os loggers filhos
-automaticamente reutilizam esses handlers, sem precisar configurá-los
-individualmente toda vez.
+Na prática, isso significa que você pode configurar todos os handlers (por exemplo: imprimir no
+terminal, gravar em arquivos, enviar logs para serviços externos) diretamente no logger raiz.
+Assim, todos os loggers filhos automaticamente reutilizam esses handlers, sem precisar
+configurá-los individualmente toda vez.
 
-Só tem um detalhe importante aqui: algumas bibliotecas também usam loggers
-internamente, seguindo essa mesma hierarquia de nomes. Por isso, os logs
-emitidos por essas libs podem acabar sendo capturados pelos seus handlers
-globais também—desde que o nível configurado permita isso, é claro.
+Só tem um detalhe importante aqui: algumas bibliotecas também usam loggers internamente, seguindo
+essa mesma hierarquia de nomes. Por isso, os logs emitidos por essas libs podem acabar sendo
+capturados pelos seus handlers globais também—desde que o nível configurado permita isso, é claro.
 
-> **Nota:** Se seu app não for grande e cheio de partes independentes, não
-> precisa complicar criando múltiplos loggers e uma hierarquia extensa. Na
-> maioria dos casos, um único logger já resolve tudo.
+> **Nota:** Se seu app não for grande e cheio de partes independentes, não precisa complicar
+> criando múltiplos loggers e uma hierarquia extensa. Na maioria dos casos, um único logger já
+> resolve tudo.
 
 Nos exemplos a seguir, vamos ver tudo isso funcionando claramente na prática.
 
@@ -107,18 +102,16 @@ Nos exemplos a seguir, vamos ver tudo isso funcionando claramente na prática.
 O `logging` é formado por 4 blocos principais:
 
 - **Logger:** é quem dispara a mensagem (ex: `logger.info("oi")`).
-- **Handler:** define **pra onde** a mensagem vai (terminal, arquivo, e-mail
-  etc).
+- **Handler:** define **pra onde** a mensagem vai (terminal, arquivo, e-mail etc).
 - **Formatter:** define **como** a mensagem vai aparecer (formato da string).
 - **Filter (opcional):** permite **filtrar** o que será logado.
 
 Esses blocos funcionam como peças de LEGO: você encaixa e combina como quiser.
 
-Pode ter um logger que salva tudo em um arquivo `.json`, outro que só mostra
-`ERROR` no terminal com cor, outro que manda `INFO` pro Telegram (por que não?).
+Pode ter um logger que salva tudo em um arquivo `.json`, outro que só mostra `ERROR` no terminal
+com cor, outro que manda `INFO` pro Telegram (por que não?).
 
-Tudo isso é configurável via código ou por arquivos `.ini`, `.yaml`, `.json`,
-como preferir.
+Tudo isso é configurável via código ou por arquivos `.ini`, `.yaml`, `.json`, como preferir.
 
 ---
 
@@ -133,8 +126,8 @@ O nível de severidade (`level`) aparece em dois momentos distintos:
 1. Na configuração do logger e/ou handler.
 2. Na emissão do log.
 
-A primeira define o que será aceito ou descartado. A segunda define qual a
-severidade de um log específico.
+A primeira define o que será aceito ou descartado. A segunda define qual a severidade de um log
+específico.
 
 ```python
 # 1. Configuração: esse logger aceita logs de WARNING pra cima
@@ -154,8 +147,8 @@ logger.debug("sou um debug")
   </a>
 </h3>
 
-Tanto loggers quanto handlers possuem um `level`. Esse valor determina se uma
-mensagem será processada ou descartada, com base em sua severidade.
+Tanto loggers quanto handlers possuem um `level`. Esse valor determina se uma mensagem será
+processada ou descartada, com base em sua severidade.
 
 Os níveis disponíveis são:
 
@@ -168,8 +161,8 @@ Os níveis disponíveis são:
 
 Você pode usar os nomes (`DEBUG`, `INFO`...) ou os números diretamente.
 
-> O valor numérico importa porque a regra é: **um log só será processado se o
-> `level` desse log for maior ou igual ao `level` do logger e do handler.**
+> O valor numérico importa porque a regra é: **um log só será processado se o `level` desse log
+> for maior ou igual ao `level` do logger e do handler.**
 
 ---
 
@@ -192,8 +185,7 @@ logger.critical("CRITICAL") # processado
   </a>
 </h3>
 
-Para emitir um log, usamos os métodos do logger que correspondem ao nível de
-severidade desejado:
+Para emitir um log, usamos os métodos do logger que correspondem ao nível de severidade desejado:
 
 - `logger.debug(...)`
 - `logger.info(...)`
@@ -208,9 +200,8 @@ Exemplo:
 logger.warning("mensagem do meu log")
 ```
 
-Neste caso, estamos emitindo uma mensagem com nível 30 (`WARNING`). Ela será
-avaliada pelo logger e por cada handler configurado, e só será processada se
-passar pelos filtros de `level`.
+Neste caso, estamos emitindo uma mensagem com nível 30 (`WARNING`). Ela será avaliada pelo logger
+e por cada handler configurado, e só será processada se passar pelos filtros de `level`.
 
 ---
 
@@ -220,12 +211,12 @@ passar pelos filtros de `level`.
   </a>
 </h2>
 
-`basicConfig` é uma função do módulo `logging`, feita para configurar o `root`
-logger de forma simples e rápida. Geralmente, ela será usada em scripts menores
-para facilitar a configuração rápida do `logging`.
+`basicConfig` é uma função do módulo `logging`, feita para configurar o `root` logger de forma
+simples e rápida. Geralmente, ela será usada em scripts menores para facilitar a configuração
+rápida do `logging`.
 
-Dependendo de quais argumentos forem usados, ela pode configurar handlers
-diferentes no `root logger`.
+Dependendo de quais argumentos forem usados, ela pode configurar handlers diferentes no
+`root logger`.
 
 ---
 
@@ -235,26 +226,23 @@ diferentes no `root logger`.
   </a>
 </h3>
 
-Se você não enviar o argumento `filename` para `basicConfig`, o handler padrão
-usado será um `StreamHandler`.
+Se você não enviar o argumento `filename` para `basicConfig`, o handler padrão usado será um
+`StreamHandler`.
 
-O termo _stream_ se refere a objetos semelhantes a arquivos, ou seja, objetos
-que possuem métodos como `.write()` e `.flush()`. Tanto `sys.stdout` quanto
-`sys.stderr` são exemplos desses objetos.
+O termo _stream_ se refere a objetos semelhantes a arquivos, ou seja, objetos que possuem métodos
+como `.write()` e `.flush()`. Tanto `sys.stdout` quanto `sys.stderr` são exemplos desses objetos.
 
-Por padrão, o `StreamHandler` escreve no `stderr`. Já o `print()` padrão do
-Python escreve no `stdout`. Ou seja: ambos fazem `print`, mas vão pra fluxos
-diferentes.
+Por padrão, o `StreamHandler` escreve no `stderr`. Já o `print()` padrão do Python escreve no
+`stdout`. Ou seja: ambos fazem `print`, mas vão pra fluxos diferentes.
 
-> **Nota:** É possível trocar o stream da classe `StreamHandler`, passando um
-> argumento como `sys.stdout`, mas isso foge do nosso foco aqui.
+> **Nota:** É possível trocar o stream da classe `StreamHandler`, passando um argumento como
+> `sys.stdout`, mas isso foge do nosso foco aqui.
 
 ---
 
 **Código: `basicConfig` + `StreamHandler`**
 
-Primeiro, importamos o módulo `logging` e definimos o formato de cada linha de
-log:
+Primeiro, importamos o módulo `logging` e definimos o formato de cada linha de log:
 
 ```python
 import logging
@@ -272,8 +260,7 @@ O trecho acima faz o seguinte:
 - Cria um `StreamHandler` que envia os logs para o `stderr`;
 - Aplica um `Formatter` com o formato definido;
 - Adiciona esse handler ao _root logger_;
-- Define o nível do _root logger_ como `WARNING` (padrão do Python, caso não
-  seja especificado).
+- Define o nível do _root logger_ como `WARNING` (padrão do Python, caso não seja especificado).
 
 Com isso, o _root logger_ já está pronto pra uso. Basta fazer:
 
@@ -282,26 +269,23 @@ Com isso, o _root logger_ já está pronto pra uso. Basta fazer:
 logging.warning("Oi!")
 ```
 
-> **Nota:** O `basicConfig` aceita vários outros argumentos, como `level`,
-> `filename`, `filemode`, `handlers`, `stream` e mais. Se você quiser, pode
-> definir o nível diretamente, por exemplo: `level=logging.DEBUG`.
+> **Nota:** O `basicConfig` aceita vários outros argumentos, como `level`, `filename`, `filemode`,
+> `handlers`, `stream` e mais. Se você quiser, pode definir o nível diretamente, por exemplo:
+> `level=logging.DEBUG`.
 
 ---
 
 **`getLogger()` cria ou acessa nosso próprio logger**
 
-Com o _root logger_ configurado, a gente pode usar a função `getLogger()` para
-criar (ou acessar) nossos próprios loggers. Essa função tem três comportamentos
-distintos, dependendo do argumento:
+Com o _root logger_ configurado, a gente pode usar a função `getLogger()` para criar (ou acessar)
+nossos próprios loggers. Essa função tem três comportamentos distintos, dependendo do argumento:
 
 - `logging.getLogger()`: sem argumento, retorna o _root logger_.
-- `logging.getLogger("meuapp")`: com um nome, cria um novo logger se ainda não
-  existir.
-- `logging.getLogger("meuapp")`: nas próximas chamadas com o mesmo nome, retorna
-  o mesmo logger criado anteriormente (singleton por nome).
+- `logging.getLogger("meuapp")`: com um nome, cria um novo logger se ainda não existir.
+- `logging.getLogger("meuapp")`: nas próximas chamadas com o mesmo nome, retorna o mesmo logger
+  criado anteriormente (singleton por nome).
 
-Depois de criado, você pode definir o **nível de severidade** que esse logger
-vai aceitar:
+Depois de criado, você pode definir o **nível de severidade** que esse logger vai aceitar:
 
 ```python
 logger = logging.getLogger("meuapp")
@@ -381,12 +365,11 @@ except ZeroDivisionError:
   </a>
 </h3>
 
-`basicConfig` também é capaz de escrever logs em arquivos mudando levemente os
-argumentos. Precisamos passar o caminho do arquivo de log e o modo de abertura
-desejado para esse arquivo.
+`basicConfig` também é capaz de escrever logs em arquivos mudando levemente os argumentos.
+Precisamos passar o caminho do arquivo de log e o modo de abertura desejado para esse arquivo.
 
-> **Nota:** Se você mudar a pasta onde o arquivo deverá ser salvo, essa pasta
-> precisa existir, do contrário terá um erro.
+> **Nota:** Se você mudar a pasta onde o arquivo deverá ser salvo, essa pasta precisa existir, do
+> contrário terá um erro.
 
 Peguei só o trecho que precisa de modificação no código anterior:
 
@@ -414,14 +397,13 @@ logger.debug("Isso deve aparecer no arquivo log.log")
 # DEBUG|meuapp|2025-07-05 10:12:30,311|Isso deve aparecer no arquivo log.log|lesson01.py|20
 ```
 
-Ao fazer essa configuração, em vez de usar o `StreamHandler` que vimos
-anteriormente, agora ele usa o `FileHandler`. Para esse handler, precisamos do
-caminho do arquivo (`filename`), do modo de abertura (`filemode`) e do
-`encoding`.
+Ao fazer essa configuração, em vez de usar o `StreamHandler` que vimos anteriormente, agora ele
+usa o `FileHandler`. Para esse handler, precisamos do caminho do arquivo (`filename`), do modo de
+abertura (`filemode`) e do `encoding`.
 
-Um ponto importante aqui é que você **não verá mais nada no terminal**, porque o
-nosso handler agora envia apenas para o arquivo, e não para `stderr` ou
-`stdout`. Para ver ambos, precisamos de mais de um handler.
+Um ponto importante aqui é que você **não verá mais nada no terminal**, porque o nosso handler
+agora envia apenas para o arquivo, e não para `stderr` ou `stdout`. Para ver ambos, precisamos de
+mais de um handler.
 
 O `filemode` pode ser qualquer um dos modos de escrita, por exemplo:
 
@@ -434,24 +416,22 @@ O `filemode` pode ser qualquer um dos modos de escrita, por exemplo:
   </a>
 </h3>
 
-Que tal a gente combinar tudo isso e adicionar dois handlers de uma vez? Bora
-ver como usar `FileHandler` e `StreamHandler` junto com a função `basicConfig`.
+Que tal a gente combinar tudo isso e adicionar dois handlers de uma vez? Bora ver como usar
+`FileHandler` e `StreamHandler` junto com a função `basicConfig`.
 
 Vou mandar o código completo pra ficar mais fácil de entender.
 
-No exemplo abaixo, a gente cria os dois handlers manualmente e adiciona eles no
-logger `root` via `basicConfig`. O resto continua o padrão de sempre.
+No exemplo abaixo, a gente cria os dois handlers manualmente e adiciona eles no logger `root` via
+`basicConfig`. O resto continua o padrão de sempre.
 
-A propagação (`propagate = True`) já fica ativa por padrão. Isso quer dizer que,
-quando chamamos algo no nosso logger (que não tem handler nenhum), o log é
-**propagado** para o logger acima dele, no caso, o `root`.
+A propagação (`propagate = True`) já fica ativa por padrão. Isso quer dizer que, quando chamamos
+algo no nosso logger (que não tem handler nenhum), o log é **propagado** para o logger acima dele,
+no caso, o `root`.
 
-Como o `root` agora tem dois handlers, **os dois são executados** quando o nível
-de severidade bate. O resultado? Log no terminal **e** no arquivo ao mesmo
-tempo.
+Como o `root` agora tem dois handlers, **os dois são executados** quando o nível de severidade
+bate. O resultado? Log no terminal **e** no arquivo ao mesmo tempo.
 
-Você poderia ter quantos handlers e formatters quisesse, todos pendurados no
-`root`.
+Você poderia ter quantos handlers e formatters quisesse, todos pendurados no `root`.
 
 ```python
 import logging
@@ -496,8 +476,7 @@ except ZeroDivisionError:
     logger.exception("Alguém tentou dividir por zero aí.")
 ```
 
-A saída do código acima fica como mostro abaixo tanto no console quando no
-terminal.
+A saída do código acima fica como mostro abaixo tanto no console quando no terminal.
 
 ```text
 DEBUG|meuapp|2025-07-05 10:59:37,842|mensagem de log|lesson05_01.py|41
@@ -521,54 +500,49 @@ ZeroDivisionError: division by zero
   </a>
 </h3>
 
-Para unir a teoria à prática que exploramos, e para evitar as armadilhas mais
-comuns, vamos entender com precisão o que acontece no sistema de `logging` do
-Python:
+Para unir a teoria à prática que exploramos, e para evitar as armadilhas mais comuns, vamos
+entender com precisão o que acontece no sistema de `logging` do Python:
 
 **Pontos Fundamentais para Lembrar:**
 
-1. **`basicConfig()`**: É a função de conveniência que configura o `root` logger
-   (o "pai" de todos). Por padrão, ele adiciona um `StreamHandler` (para o
-   console), um `Formatter` básico e define o `level` do `root` para `WARNING`.
-   Em sistemas menores, é tranquilo usar, mas em sistemas maiores usaremos
-   `dictConfig` que falaremos adiante.
+1. **`basicConfig()`**: É a função de conveniência que configura o `root` logger (o "pai" de
+   todos). Por padrão, ele adiciona um `StreamHandler` (para o console), um `Formatter` básico e
+   define o `level` do `root` para `WARNING`. Em sistemas menores, é tranquilo usar, mas em
+   sistemas maiores usaremos `dictConfig` que falaremos adiante.
 
-2. **`getLogger('nome')`**: Cria (ou obtém) um `Logger` nomeado, que é filho do
-   `root` logger (ou de outro logger se o nome tiver pontos, como `app.modulo`).
+2. **`getLogger('nome')`**: Cria (ou obtém) um `Logger` nomeado, que é filho do `root` logger (ou
+   de outro logger se o nome tiver pontos, como `app.modulo`).
 
-3. **`setLevel()`**: Usado para definir o nível mínimo de mensagens que um
-   `Logger` ou um `Handler` irá processar.
+3. **`setLevel()`**: Usado para definir o nível mínimo de mensagens que um `Logger` ou um
+   `Handler` irá processar.
 
-4. **Métodos de Log**: `debug()`, `info()`, `warning()`, `error()` e
-   `critical()` são os métodos que você usa em um `Logger` para emitir mensagens
-   com um nível de gravidade específico.
+4. **Métodos de Log**: `debug()`, `info()`, `warning()`, `error()` e `critical()` são os métodos
+   que você usa em um `Logger` para emitir mensagens com um nível de gravidade específico.
 
 ---
 
 **A Grande Sacada: A Propagação e a Filtragem**
 
-Esta é a parte crucial e onde a maioria dos materiais simplifica demais. Preste
-muita atenção aqui!
+Esta é a parte crucial e onde a maioria dos materiais simplifica demais. Preste muita atenção
+aqui!
 
-1. **Múltiplos Handlers:** Um `Logger` pode ter um ou vários `Handlers` anexados
-   a ele.
+1. **Múltiplos Handlers:** Um `Logger` pode ter um ou vários `Handlers` anexados a ele.
 
-2. **Handlers e Formatters:** Cada `Handler` é responsável por direcionar o log
-   para um destino (console, arquivo, etc.) e sempre usará um único `Formatter`
-   para definir como a mensagem será exibida. Ele também pode ter `Filters` (que
-   veremos depois) para um controle ainda mais fino.
+2. **Handlers e Formatters:** Cada `Handler` é responsável por direcionar o log para um destino
+   (console, arquivo, etc.) e sempre usará um único `Formatter` para definir como a mensagem será
+   exibida. Ele também pode ter `Filters` (que veremos depois) para um controle ainda mais fino.
 
-3. **Níveis Duplos:** Tanto o `Logger` (o coletor de logs) quanto o `Handler` (o
-   publicador de logs) possuem seu próprio `level`. Esta é a fonte de possíveis
-   problemas e pode te deixar debugando o próprio `logging` por horas.
+3. **Níveis Duplos:** Tanto o `Logger` (o coletor de logs) quanto o `Handler` (o publicador de
+   logs) possuem seu próprio `level`. Esta é a fonte de possíveis problemas e pode te deixar
+   debugando o próprio `logging` por horas.
 
 ---
 
 **A Propagação: O Caminho Real do Log (e o Papel dos Handlers)**
 
-Quando um log é emitido por um `Logger` nomeado, ele percorre uma jornada pela
-hierarquia. Esse "caminho" pode ser confuso, porque não é apenas o `Logger` que
-está filtrando, os `Handlers` também entram no jogo.
+Quando um log é emitido por um `Logger` nomeado, ele percorre uma jornada pela hierarquia. Esse
+"caminho" pode ser confuso, porque não é apenas o `Logger` que está filtrando, os `Handlers`
+também entram no jogo.
 
 Imagine a hierarquia de loggers assim:
 
@@ -578,8 +552,7 @@ root           [root_handler_1, root_handler_2]
     └── A.B    [B_handler_1, B_handler_2, B_handler_3]
 ```
 
-Vamos supor que o `level` de `A.B` foi configurado como `INFO` (20) e que
-emitimos:
+Vamos supor que o `level` de `A.B` foi configurado como `INFO` (20) e que emitimos:
 
 ```python
 A.B.warning("Mensagem de Exemplo")
@@ -587,33 +560,32 @@ A.B.warning("Mensagem de Exemplo")
 
 **No `Logger` `A.B` (o emissor do log)**
 
-A primeira filtragem acontece aqui. O log tem `level` `WARNING` (30), e o logger
-`A.B` aceita logs com `INFO` (20) ou superior. Então a verificação é simples:
+A primeira filtragem acontece aqui. O log tem `level` `WARNING` (30), e o logger `A.B` aceita logs
+com `INFO` (20) ou superior. Então a verificação é simples:
 
 ```text
 level do log >= level do logger → ok
 ```
 
-Se passar aqui, segue adiante. Se **não** passar, o log morre aqui, **não chega
-em nenhum handler**.
+Se passar aqui, segue adiante. Se **não** passar, o log morre aqui, **não chega em nenhum
+handler**.
 
 **Nos Handlers de `A.B`**
 
-Agora o log chega nos `Handlers` do logger `A.B`, no exemplo: `B_handler_1`,
-`B_handler_2` e `B_handler_3`.
+Agora o log chega nos `Handlers` do logger `A.B`, no exemplo: `B_handler_1`, `B_handler_2` e
+`B_handler_3`.
 
-Cada handler faz **sua própria checagem de level**. Se o log for aceito, é
-publicado por aquele handler. Se não, é ignorado por ele (mas ainda pode ser
-aceito pelos outros handlers ou loggers superiores).
+Cada handler faz **sua própria checagem de level**. Se o log for aceito, é publicado por aquele
+handler. Se não, é ignorado por ele (mas ainda pode ser aceito pelos outros handlers ou loggers
+superiores).
 
 **No Logger `A` (pai de `A.B`)**
 
-Se a propriedade `propagate` estiver `True` (valor padrão), o log **sobe na
-hierarquia** e chega ao logger `A`.
+Se a propriedade `propagate` estiver `True` (valor padrão), o log **sobe na hierarquia** e chega
+ao logger `A`.
 
-Mas aqui vem a **pegadinha**: o `level` do logger `A` **não importa mais**. Ele
-**não é checado**. A partir daqui, só os `handlers` dos loggers pais é que
-decidem o que fazer.
+Mas aqui vem a **pegadinha**: o `level` do logger `A` **não importa mais**. Ele **não é checado**.
+A partir daqui, só os `handlers` dos loggers pais é que decidem o que fazer.
 
 **Nos Handlers de `A`**
 
@@ -622,24 +594,22 @@ Cada handler de `A` (ex: `A_handler_1`) faz a mesma checagem de sempre:
 
 **No Logger `root` (e seus handlers)**
 
-Mais do mesmo: o log chega no logger `root`, ignora o `level` dele, e é
-analisado apenas pelos handlers `root_handler_1` e `root_handler_2`.
+Mais do mesmo: o log chega no logger `root`, ignora o `level` dele, e é analisado apenas pelos
+handlers `root_handler_1` e `root_handler_2`.
 
 ---
 
-Essa explicação é importante porque muita gente pensa que os loggers pais têm o
-poder de **interromper** ou **descartar** um log que subiu pela propagação. Mas
-não têm. O único logger com poder de barrar a mensagem é **o que emitiu o log**.
+Essa explicação é importante porque muita gente pensa que os loggers pais têm o poder de
+**interromper** ou **descartar** um log que subiu pela propagação. Mas não têm. O único logger com
+poder de barrar a mensagem é **o que emitiu o log**.
 
 Se fosse pra resumir num post-it:
 
-> O log é verificado **no logger que o emitiu**. Se passar, é entregue aos seus
-> `handlers` e, com `propagate = True`, sobe para os loggers pais. Mas a partir
-> daí, **apenas os `handlers` desses loggers superiores** fazem checagem. Os
-> loggers pais **não barram** mais nada.
+> O log é verificado **no logger que o emitiu**. Se passar, é entregue aos seus `handlers` e, com
+> `propagate = True`, sobe para os loggers pais. Mas a partir daí, **apenas os `handlers` desses
+> loggers superiores** fazem checagem. Os loggers pais **não barram** mais nada.
 >
-> Se o logger emissor não aceitar o log, **acabou o jogo ali**. Nada é
-> publicado.
+> Se o logger emissor não aceitar o log, **acabou o jogo ali**. Nada é publicado.
 
 ---
 
@@ -649,13 +619,12 @@ Se fosse pra resumir num post-it:
   </a>
 </h2>
 
-Se você usar o `logging` de forma incorreta: tipo deixando o `level` do `root`
-em `DEBUG` ou usando o `root` como logger principal por algum motivo. Uma coisa
-muito comum que costuma ocorrer é você começar a ver logs de `DEBUG` de
-aplicações de terceiros no seu log.
+Se você usar o `logging` de forma incorreta: tipo deixando o `level` do `root` em `DEBUG` ou
+usando o `root` como logger principal por algum motivo. Uma coisa muito comum que costuma ocorrer
+é você começar a ver logs de `DEBUG` de aplicações de terceiros no seu log.
 
-Geralmente queremos logs de libs de terceiros no nosso log, mas não um milhão de
-`DEBUGs`. Talvez apenas de `WARNING` para cima, ou até de `ERROR` para cima.
+Geralmente queremos logs de libs de terceiros no nosso log, mas não um milhão de `DEBUGs`. Talvez
+apenas de `WARNING` para cima, ou até de `ERROR` para cima.
 
 Vamos simular e corrigir isso a seguir.
 
@@ -667,12 +636,11 @@ Vamos simular e corrigir isso a seguir.
   </a>
 </h3>
 
-Vamos usar a biblioteca `rich` pra deixar os logs do console mais agradáveis de
-ler, com cor, syntax highlight e outros agrados visuais. Só que vamos usar essa
-lib bem mais adiante no texto.
+Vamos usar a biblioteca `rich` pra deixar os logs do console mais agradáveis de ler, com cor,
+syntax highlight e outros agrados visuais. Só que vamos usar essa lib bem mais adiante no texto.
 
-Mesmo assim, instale-a com o gerenciador que preferir e vamos usar ela mesmo
-como exemplo de log de terceiros:
+Mesmo assim, instale-a com o gerenciador que preferir e vamos usar ela mesmo como exemplo de log
+de terceiros:
 
 ```bash
 # Usando uv
@@ -690,8 +658,8 @@ pip install rich
   </a>
 </h3>
 
-Vamos configurar o `logging` novamente, do zero, só que com `root` configurado
-em `level` `DEBUG` (Não recomendado):
+Vamos configurar o `logging` novamente, do zero, só que com `root` configurado em `level` `DEBUG`
+(Não recomendado):
 
 ```python
 import logging
@@ -715,9 +683,8 @@ logger.warning("Isso é um teste")
 # WARNING|meuapp|2025-07-01 19:44:54,566|Isso é um teste|main.py|14
 ```
 
-Agora, vamos simular o uso do `rich`, que é uma lib que **também usa o módulo
-`logging` internamente**. Suponha que você queira imprimir um markdown no
-terminal:
+Agora, vamos simular o uso do `rich`, que é uma lib que **também usa o módulo `logging`
+internamente**. Suponha que você queira imprimir um markdown no terminal:
 
 ```python
 from rich import print as rprint
@@ -727,18 +694,17 @@ md = Markdown("# Nos Handlers de `A`")
 rprint(md)
 ```
 
-Se algum código interno do `rich` emitir logs, mesmo que você não peça, esses
-logs vão aparecer, porque o `root` logger está **aberto no nível `DEBUG`** e
-**todos os handlers estão lá**.
+Se algum código interno do `rich` emitir logs, mesmo que você não peça, esses logs vão aparecer,
+porque o `root` logger está **aberto no nível `DEBUG`** e **todos os handlers estão lá**.
 
 Esse é o tipo de poluição que você pode querer evitar.
 
-Isso era só pra ser um código normal, simulando algo dentro da minha aplicação.
-Mas olha só o que apareceu no log:
+Isso era só pra ser um código normal, simulando algo dentro da minha aplicação. Mas olha só o que
+apareceu no log:
 
-> **Nota:** eu cortei bastante texto do log abaixo, mas dependendo do que você
-> estiver fazendo, pode ficar **absurdamente longo**. Em alguns casos, aparecem
-> **tantos logs** que sua aplicação (ou até seu computador) pode travar.
+> **Nota:** eu cortei bastante texto do log abaixo, mas dependendo do que você estiver fazendo,
+> pode ficar **absurdamente longo**. Em alguns casos, aparecem **tantos logs** que sua aplicação
+> (ou até seu computador) pode travar.
 
 ```text
 WARNING|meuapp|2025-07-01 20:02:21,221|Isso é um teste|main.py|14
@@ -754,16 +720,15 @@ DEBUG|markdown_it.rules_block.heading|2025-07-01 20:02:21,271...
 
 Qual o problema aqui? Nenhum, **se for intencional**.
 
-Só aconteceu que a sua aplicação e o `rich` decidiram seguir a mesma estratégia:
-**usar o `root` logger pra tudo**.
+Só aconteceu que a sua aplicação e o `rich` decidiram seguir a mesma estratégia: **usar o `root`
+logger pra tudo**.
 
-Quando você configura o `root` com um nível permissivo (tipo `DEBUG`), qualquer
-lib que use o sistema de logging do Python pode ter suas mensagens **publicadas
-nos seus handlers**, inclusive aquelas que você nunca pediu pra logar.
+Quando você configura o `root` com um nível permissivo (tipo `DEBUG`), qualquer lib que use o
+sistema de logging do Python pode ter suas mensagens **publicadas nos seus handlers**, inclusive
+aquelas que você nunca pediu pra logar.
 
-Como mencionei antes, é normal querermos logs de libs de terceiros no nosso log.
-Elas fazem parte da nossa aplicação, porém, em um nível interessante, como
-`WARNING` ou `ERROR`, e acima.
+Como mencionei antes, é normal querermos logs de libs de terceiros no nosso log. Elas fazem parte
+da nossa aplicação, porém, em um nível interessante, como `WARNING` ou `ERROR`, e acima.
 
 ---
 
@@ -778,26 +743,26 @@ Tem várias coisas que a gente pode fazer:
 - Subir o `level` do logger que está causando problema
 - Configurar o `root` adequadamente (de `WARNING` para cima)
 - Nunca usar o `root` logger diretamente como logger da sua aplicação
-- Isolar o seu logger do `root` (não recomendado, mas pode ser útil se está
-  criando uma lib para outras pessoas)
+- Isolar o seu logger do `root` (não recomendado, mas pode ser útil se está criando uma lib para
+  outras pessoas)
 
 ---
 
 **Como subir o `level` de logs de terceiros com `getLogger`?**
 
-No próprio log que poluiu meu console e arquivo, a **segunda coluna** mostra o
-nome do logger: `markdown_it`!
+No próprio log que poluiu meu console e arquivo, a **segunda coluna** mostra o nome do logger:
+`markdown_it`!
 
-Muita gente configura seus loggers como mostro a seguir. Isso é até uma
-recomendação da documentação se eu não estiver enganado:
+Muita gente configura seus loggers como mostro a seguir. Isso é até uma recomendação da
+documentação se eu não estiver enganado:
 
 ```python
 logger = logging.getLogger(__name__)
 ```
 
-Isso cria (ou acessa) um logger com o nome do módulo onde está sendo executado.
-Exemplo: se você está em um pacote chamado `learn_logging`, e o módulo se chama
-`config_logger.py`, o nome do logger será:
+Isso cria (ou acessa) um logger com o nome do módulo onde está sendo executado. Exemplo: se você
+está em um pacote chamado `learn_logging`, e o módulo se chama `config_logger.py`, o nome do
+logger será:
 
 - `__main__` se executar direto
 - `learn_logging.config_logger` se importar de outro lugar
@@ -808,10 +773,9 @@ Mas voltando ao problema: se o log vem de `markdown_it`, basta fazer:
 logging.getLogger("markdown_it").setLevel(logging.INFO)
 ```
 
-Geralmente isso silencia o `logger` que está jogando um monte de mensagens no
-seu logger. Mas e se forem muitos? E se forem todas as 10 libs externas que você
-está usando num código só? E se as 10 libs que você instalou também usam outras
-100 libs? Fica impraticável.
+Geralmente isso silencia o `logger` que está jogando um monte de mensagens no seu logger. Mas e se
+forem muitos? E se forem todas as 10 libs externas que você está usando num código só? E se as 10
+libs que você instalou também usam outras 100 libs? Fica impraticável.
 
 ---
 
@@ -821,9 +785,8 @@ está usando num código só? E se as 10 libs que você instalou também usam ou
   </a>
 </h4>
 
-Você pode configurar os **handlers no seu próprio logger**. Como estamos usando
-`basicConfig`, os handlers estavam indo pro `root`. Agora vamos fazer de outro
-modo. Só um exemplo:
+Você pode configurar os **handlers no seu próprio logger**. Como estamos usando `basicConfig`, os
+handlers estavam indo pro `root`. Agora vamos fazer de outro modo. Só um exemplo:
 
 ```python
 import logging
@@ -846,20 +809,19 @@ logger.addHandler(stream_handler)
 logger.info("mensagem de log")
 ```
 
-Pronto. Agora você não verá mais logs do `rich` ou de qualquer lib de terceiro.
-**Não porque bloqueamos eles**, mas porque **não estamos mais ouvindo o
-`root`**. E como essas libs usam o `root`, seus logs vão pra lugar nenhum.
+Pronto. Agora você não verá mais logs do `rich` ou de qualquer lib de terceiro. **Não porque
+bloqueamos eles**, mas porque **não estamos mais ouvindo o `root`**. E como essas libs usam o
+`root`, seus logs vão pra lugar nenhum.
 
-> **Nota:** isso pode ser um problema, visto que libs de terceiros fazem parte
-> da nossa aplicação. \
+> **Nota:** isso pode ser um problema, visto que libs de terceiros fazem parte da nossa aplicação.
 > \
-> Omitir logs de libs de terceiros é como omitir logs de uma parte do código que
-> realmente vai para produção. \
 > \
-> O que eu faria nesse caso, seria manter um handler menos importante no meu
-> próprio logger com level `DEBUG` (vejo tudo no meu handler), mas colocaria os
-> handlers importantes, com níveis de `WARNING` para cima, no `root` para
-> continuar tendo acesso aos logs de libs de terceiros. \
+> Omitir logs de libs de terceiros é como omitir logs de uma parte do código que realmente vai
+> para produção. \
+> \
+> O que eu faria nesse caso, seria manter um handler menos importante no meu próprio logger com
+> level `DEBUG` (vejo tudo no meu handler), mas colocaria os handlers importantes, com níveis de
+> `WARNING` para cima, no `root` para continuar tendo acesso aos logs de libs de terceiros. \
 > \
 > Cada caso é um caso a ser estudado.
 
@@ -871,18 +833,16 @@ Pronto. Agora você não verá mais logs do `rich` ou de qualquer lib de terceir
   </a>
 </h2>
 
-Como mencionei quando comecei o trecho sobre `basicConfig`, ela é realmente
-básica. E o que é mais contraditório nisso tudo, é que se a sua configuração for
-levemente mais complexa, ela se torna extremamente complexa também.
+Como mencionei quando comecei o trecho sobre `basicConfig`, ela é realmente básica. E o que é mais
+contraditório nisso tudo, é que se a sua configuração for levemente mais complexa, ela se torna
+extremamente complexa também.
 
-A forma mais completa (e moderna) de configurar o `logging` no Python é usando
-`dictConfig`.
+A forma mais completa (e moderna) de configurar o `logging` no Python é usando `dictConfig`.
 
-Como o próprio nome indica, ao invés de ficar configurando tudo solto como
-quando usamos `basicConfig`, com `dictConfig` podemos montar toda a configuração
-usando um único dicionário. Isso te permite, inclusive, criar arquivos de
-configuração em outros formatos como JSON ou YAML, e carregar esse arquivo ao
-subir a aplicação.
+Como o próprio nome indica, ao invés de ficar configurando tudo solto como quando usamos
+`basicConfig`, com `dictConfig` podemos montar toda a configuração usando um único dicionário.
+Isso te permite, inclusive, criar arquivos de configuração em outros formatos como JSON ou YAML, e
+carregar esse arquivo ao subir a aplicação.
 
 Vamos migrar essa configuração para `dictConfig`:
 
@@ -995,17 +955,15 @@ LOGGING_CONFIG: dict[str, Any] = {
 }
 ```
 
-As duas primeiras chaves você nem precisa mexer, é sempre o mesmo valor. O
-restante são palavras que falamos algumas centenas de vezes ao longo desse
-artigo.
+As duas primeiras chaves você nem precisa mexer, é sempre o mesmo valor. O restante são palavras
+que falamos algumas centenas de vezes ao longo desse artigo.
 
-A única coisa que pode soar estranho aqui é a estrutura, porque aqui você não
-está criando variáveis, nem está passando atributos, muito menos instanciando
-nada. Você só está informando o que você quer e o `logging` com a `dictConfig`
-que se virem. A nata da programação declarativa.
+A única coisa que pode soar estranho aqui é a estrutura, porque aqui você não está criando
+variáveis, nem está passando atributos, muito menos instanciando nada. Você só está informando o
+que você quer e o `logging` com a `dictConfig` que se virem. A nata da programação declarativa.
 
-Eu vou te passar muitas configurações diferentes ao longo do texto, mas se
-estiver com pressa, vai lá na
+Eu vou te passar muitas configurações diferentes ao longo do texto, mas se estiver com pressa, vai
+lá na
 [documentação do Python](https://docs.python.org/3/library/logging.config.html#dictionary-schema-details)
 para mais detalhes sobre o `Dictionary Schema Details`.
 
@@ -1017,83 +975,80 @@ para mais detalhes sobre o `Dictionary Schema Details`.
   </a>
 </h2>
 
-Caso precise de outros tipos de handlers para SMTP, SOCKET, HTTP e demais, antes
-de sair escrevendo suas classes aí, saiba todos handlers que temos disponíveis
-em `logging.handlers` (também alguns outros espalhados fora desse módulo).
+Caso precise de outros tipos de handlers para SMTP, SOCKET, HTTP e demais, antes de sair
+escrevendo suas classes aí, saiba todos handlers que temos disponíveis em `logging.handlers`
+(também alguns outros espalhados fora desse módulo).
 
-É bem provável que você não precise escrever seu handler do zero. A documentação
-desses handlers está em
+É bem provável que você não precise escrever seu handler do zero. A documentação desses handlers
+está em
 [Python - logging.handlers - Logging handlers](https://docs.python.org/3/library/logging.handlers.html#module-logging.handlers).
 
 **Breve resumo de cada handler:**
 
-- **BaseRotatingHandler** É a classe base para handlers que fazem rotação
-  automática de arquivos de log. Você geralmente não usa diretamente, só herda
-  dela pra criar novos handlers que rotacionam logs.
+- **BaseRotatingHandler** É a classe base para handlers que fazem rotação automática de arquivos
+  de log. Você geralmente não usa diretamente, só herda dela pra criar novos handlers que
+  rotacionam logs.
 
-- **RotatingFileHandler** Grava logs num arquivo e automaticamente cria arquivos
-  novos quando atingem um tamanho definido (por exemplo: 5 MB por arquivo).
+- **RotatingFileHandler** Grava logs num arquivo e automaticamente cria arquivos novos quando
+  atingem um tamanho definido (por exemplo: 5 MB por arquivo).
 
-- **TimedRotatingFileHandler** Similar ao anterior, mas aqui a rotação ocorre
-  baseada em intervalos de tempo (ex: diário, semanal, mensal).
+- **TimedRotatingFileHandler** Similar ao anterior, mas aqui a rotação ocorre baseada em
+  intervalos de tempo (ex: diário, semanal, mensal).
 
-- **WatchedFileHandler** _(Unix/Linux)_ Observa o arquivo de log e, se o arquivo
-  for movido, deletado ou recriado por um processo externo (ex: logrotate), o
-  handler percebe e reabre automaticamente.
+- **WatchedFileHandler** _(Unix/Linux)_ Observa o arquivo de log e, se o arquivo for movido,
+  deletado ou recriado por um processo externo (ex: logrotate), o handler percebe e reabre
+  automaticamente.
 
-- **SocketHandler** Envia logs via rede usando sockets TCP para um servidor
-  remoto de logs.
+- **SocketHandler** Envia logs via rede usando sockets TCP para um servidor remoto de logs.
 
-- **DatagramHandler** Semelhante ao SocketHandler, mas usa UDP em vez de TCP.
-  Isso significa que o envio dos logs é mais rápido, porém não confiável.
+- **DatagramHandler** Semelhante ao SocketHandler, mas usa UDP em vez de TCP. Isso significa que o
+  envio dos logs é mais rápido, porém não confiável.
 
-- **SysLogHandler** _(Linux/macOS)_ Envia logs diretamente para o syslog do
-  sistema operacional, integrando facilmente com o sistema operacional ou outros
-  serviços que escutam o syslog.
+- **SysLogHandler** _(Linux/macOS)_ Envia logs diretamente para o syslog do sistema operacional,
+  integrando facilmente com o sistema operacional ou outros serviços que escutam o syslog.
 
-- **SMTPHandler** Envia logs por e-mail usando SMTP. Comumente usado pra logs
-  críticos (ex: erros inesperados em produção).
+- **SMTPHandler** Envia logs por e-mail usando SMTP. Comumente usado pra logs críticos (ex: erros
+  inesperados em produção).
 
-- **NTEventLogHandler** _(Windows)_ Registra logs no Event Viewer (Visualizador
-  de Eventos) do Windows.
+- **NTEventLogHandler** _(Windows)_ Registra logs no Event Viewer (Visualizador de Eventos) do
+  Windows.
 
-- **HTTPHandler** Envia logs via requisições HTTP para um servidor web externo,
-  útil em integração com APIs ou serviços de log em nuvem.
+- **HTTPHandler** Envia logs via requisições HTTP para um servidor web externo, útil em integração
+  com APIs ou serviços de log em nuvem.
 
-- **BufferingHandler** Acumula logs na memória, e só os libera quando o buffer
-  atinge um limite definido. Normalmente não usado diretamente, serve como base
-  para handlers que implementam buffering.
+- **BufferingHandler** Acumula logs na memória, e só os libera quando o buffer atinge um limite
+  definido. Normalmente não usado diretamente, serve como base para handlers que implementam
+  buffering.
 
-- **MemoryHandler** Derivado do BufferingHandler, guarda logs na memória até que
-  uma condição (nível crítico ou quantidade máxima) seja atingida. Nesse
-  momento, os logs são repassados para outro handler configurado.
+- **MemoryHandler** Derivado do BufferingHandler, guarda logs na memória até que uma condição
+  (nível crítico ou quantidade máxima) seja atingida. Nesse momento, os logs são repassados para
+  outro handler configurado.
 
-- **QueueHandler** Envia logs para uma fila (`queue.Queue`). Ideal para
-  processamento assíncrono de logs, melhorando o desempenho do app principal.
+- **QueueHandler** Envia logs para uma fila (`queue.Queue`). Ideal para processamento assíncrono
+  de logs, melhorando o desempenho do app principal.
 
-- **QueueListener** Complemento do QueueHandler, escuta logs em uma fila e os
-  despacha para outros handlers configurados. Facilita a implementação de
-  logging assíncrono em aplicações concorrentes.
+- **QueueListener** Complemento do QueueHandler, escuta logs em uma fila e os despacha para outros
+  handlers configurados. Facilita a implementação de logging assíncrono em aplicações
+  concorrentes.
 
 ---
 
 **Handlers diretamente em `logging` (fora de `logging.handlers`):**
 
-Além desses do módulo `logging.handlers`, tem alguns handlers no módulo
-principal (`logging`):
+Além desses do módulo `logging.handlers`, tem alguns handlers no módulo principal (`logging`):
 
 - **StreamHandler**: Escreve no terminal (`stderr` ou `stdout`).
 
 - **FileHandler**: Escreve logs diretamente num arquivo sem rotação automática.
 
-- **NullHandler**: Ignora completamente os logs recebidos, útil pra evitar
-  avisos se nenhum handler tiver configurado.
+- **NullHandler**: Ignora completamente os logs recebidos, útil pra evitar avisos se nenhum
+  handler tiver configurado.
 
 ---
 
-Não tenho nem como falar sobre todos esses handlers nesse artigo, mas creio que
-com o que você está aprendendo aqui, não terá dificuldade em implementar nenhum
-deles para seu caso de uso específico.
+Não tenho nem como falar sobre todos esses handlers nesse artigo, mas creio que com o que você
+está aprendendo aqui, não terá dificuldade em implementar nenhum deles para seu caso de uso
+específico.
 
 ---
 
@@ -1103,21 +1058,19 @@ deles para seu caso de uso específico.
   </a>
 </h2>
 
-Para adicionar um pouquinho mais de complexidade (e utilidade prática!) na nossa
-configuração, vamos fazer o seguinte:
+Para adicionar um pouquinho mais de complexidade (e utilidade prática!) na nossa configuração,
+vamos fazer o seguinte:
 
-- Substituir o `FileHandler` pelo `RotatingFileHandler` (que rotaciona arquivos
-  automaticamente);
-- Criar um `StreamHandler` que envia logs de níveis `DEBUG` e `INFO` para o
-  `stdout`;
-- Criar outro `StreamHandler` que envia logs mais críticos (`WARNING`, `ERROR` e
-  `CRITICAL`) para o `stderr`.
-- Também vou criar um formatter para cada handlers. Não há necessidade real para
-  isso, mas quero distinção nos três logs, então preciso de três formatters.
+- Substituir o `FileHandler` pelo `RotatingFileHandler` (que rotaciona arquivos automaticamente);
+- Criar um `StreamHandler` que envia logs de níveis `DEBUG` e `INFO` para o `stdout`;
+- Criar outro `StreamHandler` que envia logs mais críticos (`WARNING`, `ERROR` e `CRITICAL`) para
+  o `stderr`.
+- Também vou criar um formatter para cada handlers. Não há necessidade real para isso, mas quero
+  distinção nos três logs, então preciso de três formatters.
 
-Vou quebrar o dicionário em partes porque está ficando extremamente grande.
-Vamos trabalhar com as chaves de primeiro nível do `dict`: `formatters`,
-`handlers`, `loggers`, `filters`, `root`, etc. Só o que mudar.
+Vou quebrar o dicionário em partes porque está ficando extremamente grande. Vamos trabalhar com as
+chaves de primeiro nível do `dict`: `formatters`, `handlers`, `loggers`, `filters`, `root`, etc.
+Só o que mudar.
 
 ---
 
@@ -1153,9 +1106,8 @@ Vamos trabalhar com as chaves de primeiro nível do `dict`: `formatters`,
 }
 ```
 
-Certo, é bem verboso, mas isso são 3 formatters, do mesmo modo que fizemos
-antes, porém em `dict`. Os nomes desses formatters são as chaves do dicionário:
-`file`, `stdout` e `stderr`.
+Certo, é bem verboso, mas isso são 3 formatters, do mesmo modo que fizemos antes, porém em `dict`.
+Os nomes desses formatters são as chaves do dicionário: `file`, `stdout` e `stderr`.
 
 ---
 
@@ -1190,9 +1142,8 @@ antes, porém em `dict`. Os nomes desses formatters são as chaves do dicionári
 },
 ```
 
-Os nomes dos handlers são as chaves do dicionário: `file`, `stdout` e `stderr`.
-Estou usando o mesmo nome para `handlers` e `formatters`, o que facilita a
-organização.
+Os nomes dos handlers são as chaves do dicionário: `file`, `stdout` e `stderr`. Estou usando o
+mesmo nome para `handlers` e `formatters`, o que facilita a organização.
 
 ---
 
@@ -1223,8 +1174,7 @@ Pronto, agora foi só adicionar os handlers no logger e finalizamos.
   </a>
 </h3>
 
-Isso fica extremamente verboso, mas depois vamos mover esse dicionário para um
-arquivo JSON.
+Isso fica extremamente verboso, mas depois vamos mover esse dicionário para um arquivo JSON.
 
 ```python
 import logging
@@ -1293,8 +1243,7 @@ logger.error("mensagem de log")
 logger.critical("mensagem de log")
 ```
 
-Eu estava esperando uma saída diferente, mas perceba que os logs estão
-**duplicados**:
+Eu estava esperando uma saída diferente, mas perceba que os logs estão **duplicados**:
 
 ```text
 OUT: [DEBUG] mensagem de log
@@ -1307,25 +1256,23 @@ OUT: [CRITICAL] mensagem de log                 ### <- `critical` está no stdou
 ERR: [CRITICAL] mensagem de log - main.py|62
 ```
 
-Lembra que a ideia era: `DEBUG` e `INFO` vão para o `stdout`, e `WARNING`,
-`ERROR`, `CRITICAL` vão para o `stderr`?
+Lembra que a ideia era: `DEBUG` e `INFO` vão para o `stdout`, e `WARNING`, `ERROR`, `CRITICAL` vão
+para o `stderr`?
 
-O problema está nos níveis configurados. Quando colocamos o handler `stdout` com
-nível `DEBUG`, isso significa:
+O problema está nos níveis configurados. Quando colocamos o handler `stdout` com nível `DEBUG`,
+isso significa:
 
 > **"Aceite logs de `DEBUG` para cima"**
 
-Ou seja, ele aceita **todos os níveis** (`DEBUG`, `INFO`, `WARNING`, `ERROR`,
-`CRITICAL`). Por isso estamos vendo os logs mais graves saindo tanto no `stdout`
-quanto no `stderr`.
+Ou seja, ele aceita **todos os níveis** (`DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`). Por
+isso estamos vendo os logs mais graves saindo tanto no `stdout` quanto no `stderr`.
 
-Pra resolver isso, vamos precisar de **filters**, assim conseguimos controlar
-**com mais precisão** quais mensagens vão pra cada handler.
+Pra resolver isso, vamos precisar de **filters**, assim conseguimos controlar **com mais
+precisão** quais mensagens vão pra cada handler.
 
 ---
 
-Claro, bora terminar essa parte com estilo e clareza. Aqui vai a continuação
-ideal pra essa seção:
+Claro, bora terminar essa parte com estilo e clareza. Aqui vai a continuação ideal pra essa seção:
 
 ---
 
@@ -1335,19 +1282,17 @@ ideal pra essa seção:
   </a>
 </h2>
 
-`filters` são adicionados nos handlers ou loggers para controlar melhor quais
-mensagens de log devem ser processadas por cada um. Eles funcionam como um
-**filtro extra**, além do nível mínimo (`level`). De forma simplista, é só você
-imaginar que o `level` é um filter que veio pronto, porém é limitado.
+`filters` são adicionados nos handlers ou loggers para controlar melhor quais mensagens de log
+devem ser processadas por cada um. Eles funcionam como um **filtro extra**, além do nível mínimo
+(`level`). De forma simplista, é só você imaginar que o `level` é um filter que veio pronto, porém
+é limitado.
 
-O nosso caso anterior é um exemplo clássico: Queríamos que o handler do `stdout`
-exibisse apenas `DEBUG` e `INFO`. Mas como ele estava com nível `DEBUG`, ele
-acabou aceitando **todos os níveis acima também**, e por isso vimos `WARNING`,
-`ERROR` e `CRITICAL` aparecendo duas vezes (uma vez no `stdout` e outra no
-`stderr`).
+O nosso caso anterior é um exemplo clássico: Queríamos que o handler do `stdout` exibisse apenas
+`DEBUG` e `INFO`. Mas como ele estava com nível `DEBUG`, ele acabou aceitando **todos os níveis
+acima também**, e por isso vimos `WARNING`, `ERROR` e `CRITICAL` aparecendo duas vezes (uma vez no
+`stdout` e outra no `stderr`).
 
-A solução é aplicar um `filter` que **bloqueie tudo acima de `INFO`** no handler
-do `stdout`.
+A solução é aplicar um `filter` que **bloqueie tudo acima de `INFO`** no handler do `stdout`.
 
 ---
 
@@ -1357,20 +1302,18 @@ do `stdout`.
   </a>
 </h3>
 
-Vamos criar um filtro customizado simples. Estou criando outro módulo chamado
-`filters.py` no pacote em que estou (`logging_course`).
+Vamos criar um filtro customizado simples. Estou criando outro módulo chamado `filters.py` no
+pacote em que estou (`logging_course`).
 
-Para criar o filter, vou criar uma classe que herda de `logging.Filter`. O
-método `filter` retorna `True` se aquele log é permitido ou `False` se é para
-destacar. Estranhamente, não é necessário herdar de `logging.Filter`, mas é mais
-semântico. Qualquer classe que tenha o método `filter` vai funcionar. Além
-disso, o filter também pode alterar o log e retornar um `LogRecord`
-completamente diferente.
+Para criar o filter, vou criar uma classe que herda de `logging.Filter`. O método `filter` retorna
+`True` se aquele log é permitido ou `False` se é para descartar. Estranhamente, não é necessário
+herdar de `logging.Filter`, mas é mais semântico. Qualquer classe que tenha o método `filter` vai
+funcionar. Além disso, o filter também pode alterar o log e retornar um `LogRecord` completamente
+diferente.
 
-> **Nota:** `LogRecord` é o objeto de log com todas as informações daquele log
-> em específico. Toda vez que você emite um log, sua mensagem gera um novo
-> `LogRecord` que vai ter a data, o módulo, o número da linha, o nível do log,
-> etc.
+> **Nota:** `LogRecord` é o objeto de log com todas as informações daquele log em específico. Toda
+> vez que você emite um log, sua mensagem gera um novo `LogRecord` que vai ter a data, o módulo, o
+> número da linha, o nível do log, etc.
 
 ```python
 import logging
@@ -1393,8 +1336,8 @@ class MaxLevelFilter(logging.Filter):
         return record.levelno <= self.max_level
 ```
 
-Esse filtro aceita apenas mensagens **até o nível informado**. Se passarmos
-`logging.INFO`, ele permite `DEBUG` e `INFO`, e bloqueia o resto.
+Esse filtro aceita apenas mensagens **até o nível informado**. Se passarmos `logging.INFO`, ele
+permite `DEBUG` e `INFO`, e bloqueia o resto.
 
 ---
 
@@ -1478,14 +1421,13 @@ Agora sim, `stdout` correto, `stderr` correto.
   </a>
 </h2>
 
-Apesar de ser comum externalizar a configuração do `logging` usando arquivos
-`.json`, nesse artigo vou manter tudo em Python para facilitar a vida, mas em um
-cenário real, é uma maravilha poder configurar tudo via "JSON".
+Apesar de ser comum externalizar a configuração do `logging` usando arquivos `.json`, nesse artigo
+vou manter tudo em Python para facilitar a vida, mas em um cenário real, é uma maravilha poder
+configurar tudo via "JSON".
 
-Eu estou usando JSON como exemplo, mas você pode usar qualquer formato que
-quiser. JSON, YAML, TOML são bem populares. Outra coisa importante é que o
-próprio `logging` também tem uma configuração chamada
-`logging.config.fileConfig` caso prefira, está tudo na
+Eu estou usando JSON como exemplo, mas você pode usar qualquer formato que quiser. JSON, YAML,
+TOML são bem populares. Outra coisa importante é que o próprio `logging` também tem uma
+configuração chamada `logging.config.fileConfig` caso prefira, está tudo na
 [documentação oficial do Python](https://docs.python.org/3/library/logging.config.html#logging.config.fileConfig).
 
 ---
@@ -1496,10 +1438,9 @@ próprio `logging` também tem uma configuração chamada
   </a>
 </h3>
 
-Vamos criar um arquivo chamado `logging.json` na raiz do projeto. Estou criando
-outra configuração nesse exemplo para encurtar um pouco o texto (essa não é a
-melhor configuração, como vimos antes, mas vai servir). Também vou jogar o único
-handler que criei dentro do `root`.
+Vamos criar um arquivo chamado `logging.json` na raiz do projeto. Estou criando outra configuração
+nesse exemplo para encurtar um pouco o texto (essa não é a melhor configuração, como vimos antes,
+mas vai servir). Também vou jogar o único handler que criei dentro do `root`.
 
 ```json
 {
@@ -1543,14 +1484,12 @@ logging.config.dictConfig(config)
 
 **Observações:**
 
-É meio óbvio, mas JSON não é Python (wow, descobriu agora?). Mas sério, algumas
-coisas não funcionam exatamente como no Python. Um exemplo: eu estava usando uma
-cor com `\033[31m` e `\033[0m` (vermelho e reset). Na hora que o JSON é
-carregado, isso tudo é string normal, ou seja, vai aparecer como texto no seu
-`stdout` ou `stderr`.
+É meio óbvio, mas JSON não é Python (wow, descobriu agora?). Mas sério, algumas coisas não
+funcionam exatamente como no Python. Um exemplo: eu estava usando uma cor com `\033[31m` e
+`\033[0m` (vermelho e reset). Na hora que o JSON é carregado, isso tudo é string normal, ou seja,
+vai aparecer como texto no seu `stdout` ou `stderr`.
 
-Tem como corrigir? Sim, já que você tocou no assunto, vamos criar nosso próprio
-formatter.
+Tem como corrigir? Sim, já que você tocou no assunto, vamos criar nosso próprio formatter.
 
 ---
 
@@ -1560,9 +1499,8 @@ formatter.
   </a>
 </h2>
 
-Vamos lá, vou criar um formatter só como exemplo para você entender como
-funciona. Mas para deixar o nosso `console` mais bonito, vou usar o `rich` no
-final das contas.
+Vamos lá, vou criar um formatter só como exemplo para você entender como funciona. Mas para deixar
+o nosso `console` mais bonito, vou usar o `rich` no final das contas.
 
 Assim como fiz com `filters`, vou criar outro arquivo chamado `formatters.py`.
 
@@ -1592,9 +1530,8 @@ class ColorFormatter(logging.Formatter):
 
 ### Como usar no JSON com `dictConfig`
 
-Agora vou voltar a usar a configuração que estou usando enquanto escrevo o
-artigo só pra te mostrar o tamanho que está ficando meu JSON e também para você
-ver como ficaria num cenário real.
+Agora vou voltar a usar a configuração que estou usando enquanto escrevo o artigo só pra te
+mostrar o tamanho que está ficando meu JSON e também para você ver como ficaria num cenário real.
 
 Esse é o meu JSON nesse momento:
 
@@ -1660,13 +1597,11 @@ Esse é o meu JSON nesse momento:
 
 ---
 
-Se você pegou o jeito da coisa, é a mesma ideia que vimos em `filters` (na
-verdade é a mesma ideia para quase tudo). Sempre que eu tenho uma classe com
-interface diferente das classes padrão do `dictConfig`, preciso informar o
-caminho completo dessa classe no dicionário (ou onde quer quer estiver sua
-configuração, JSON no nosso caso). Além disso, tenho que usar `()` na chave,
-assim as chaves que vierem a seguir no JSON serão passadas para sua classe para
-configuração.
+Se você pegou o jeito da coisa, é a mesma ideia que vimos em `filters` (na verdade é a mesma ideia
+para quase tudo). Sempre que eu tenho uma classe com interface diferente das classes padrão do
+`dictConfig`, preciso informar o caminho completo dessa classe no dicionário (ou onde quer quer
+estiver sua configuração, JSON no nosso caso). Além disso, tenho que usar `()` na chave, assim as
+chaves que vierem a seguir no JSON serão passadas para sua classe para configuração.
 
 **Resultado:**
 
@@ -1678,10 +1613,9 @@ configuração.
 [CRITICAL] mensagem de log    <- fundo vermelho
 ```
 
-Se quiser deixar isso ainda mais modular depois, pode mover os códigos ANSI pra
-uma constante global ou até gerar dinamicamente por tema. Mas isso é suficiente
-por agora, porque nem vamos usar isso, usaremos o `rich`. Como falei isso umas
-30 vezes no texto, vamos ver como fazer isso.
+Se quiser deixar isso ainda mais modular depois, pode mover os códigos ANSI pra uma constante
+global ou até gerar dinamicamente por tema. Mas isso é suficiente por agora, porque nem vamos usar
+isso, usaremos o `rich`. Como falei isso umas 30 vezes no texto, vamos ver como fazer isso.
 
 ---
 
@@ -1691,13 +1625,12 @@ por agora, porque nem vamos usar isso, usaremos o `rich`. Como falei isso umas
   </a>
 </h2>
 
-`rich` tem sido extensivamente usado com o Python para aplicações de terminal
-mais elegantes, coloridas e bonitas. E não é por menos: tem praticamente tudo o
-que você precisaria em termos de componentes visuais para terminal,
+`rich` tem sido extensivamente usado com o Python para aplicações de terminal mais elegantes,
+coloridas e bonitas. E não é por menos: tem praticamente tudo o que você precisaria em termos de
+componentes visuais para terminal,
 [incluindo um handler para logging](https://rich.readthedocs.io/en/stable/logging.html).
 
-Para usar, basta fazer o seguinte na no seu arquivo de configuração JSON ou no
-dicionário mesmo.
+Para usar, basta fazer o seguinte na no seu arquivo de configuração JSON ou no dicionário mesmo.
 
 ```json
 {
@@ -1727,17 +1660,16 @@ dicionário mesmo.
 }
 ```
 
-Só de fazer isso, meu log ficou como mostro na imagem a seguir. Por padrão o
-`RichHandler` emit os logs para `stdout`.
+Só de fazer isso, meu log ficou como mostro na imagem a seguir. Por padrão o `RichHandler` emit os
+logs para `stdout`.
 
 <p>
     <img src="images/rich_log_exemple.webp" alt="Exemplo de log do rich, uma tabela com os logs coloridos por nível de severidade." />
 </p>
 
-Se quiser, pode manter o `rich` para o seu `debug`. E daqui em diante, toda vez
-que pensar em ver o valor de uma variável ou algo semelhante, use o log. Deixa o
-`print` para coisas que realmente precisam de print, como exibir algo par ao
-usuário mesmo.
+Se quiser, pode manter o `rich` para o seu `debug`. E daqui em diante, toda vez que pensar em ver
+o valor de uma variável ou algo semelhante, use o log. Deixa o `print` para coisas que realmente
+precisam de print, como exibir algo par ao usuário mesmo.
 
 ---
 
@@ -1747,29 +1679,28 @@ usuário mesmo.
   </a>
 </h2>
 
-Só pra constar: você também pode criar seu próprio formatter e mudar o formato
-de saída para o que achar melhor. Vamos fazer isso em JSON porque é um dos
-formatos mais usados, mas você decide qual usar. A ideia é sempre a mesma.
+Só pra constar: você também pode criar seu próprio formatter e mudar o formato de saída para o que
+achar melhor. Vamos fazer isso em JSON porque é um dos formatos mais usados, mas você decide qual
+usar. A ideia é sempre a mesma.
 
 Na real, em vez do JSON tradicional, vamos usar uma variação chamada
-[JSON Lines](https://jsonlines.org/) (ou NDJSON, Newline Delimited JSON). Nesse
-formato, cada linha é um objeto JSON independente.
+[JSON Lines](https://jsonlines.org/) (ou NDJSON, Newline Delimited JSON). Nesse formato, cada
+linha é um objeto JSON independente.
 
-O motivo é simples: eficiência. Quando a gente cria um JSON comum, você precisa
-guardar tudo num único objeto (ou array). A cada novo log, teria que carregar
-esse JSON, adicionar o novo item, e depois salvar tudo de novo.
+O motivo é simples: eficiência. Quando a gente cria um JSON comum, você precisa guardar tudo num
+único objeto (ou array). A cada novo log, teria que carregar esse JSON, adicionar o novo item, e
+depois salvar tudo de novo.
 
-Com JSONL, não. Podemos simplesmente dar um `append` (`a`) no final do arquivo,
-sem precisar mexer em nada que já estava lá.
+Com JSONL, não. Podemos simplesmente dar um `append` (`a`) no final do arquivo, sem precisar mexer
+em nada que já estava lá.
 
-E o melhor: fazer `parse` disso é fácil. Basta ler o arquivo linha por linha e
-interpretar cada uma como um JSON separado.
+E o melhor: fazer `parse` disso é fácil. Basta ler o arquivo linha por linha e interpretar cada
+uma como um JSON separado.
 
-Até porque, convenhamos: não é todo dia que você vai fazer parse de logs. Mas
-gravar logs... isso sim, é todo dia.
+Até porque, convenhamos: não é todo dia que você vai fazer parse de logs. Mas gravar logs... isso
+sim, é todo dia.
 
-Também vamos melhorar o nosso `setup` de leve até chegarmos a uma configuração
-final pronta.
+Também vamos melhorar o nosso `setup` de leve até chegarmos a uma configuração final pronta.
 
 ---
 
@@ -1779,9 +1710,8 @@ final pronta.
   </a>
 </h3>
 
-Até o momento, temos trabalhado com uma configuração toda solta. O ideal é
-movermos as partes da nossa configuração para uma função. Então vamos fazer o
-seguinte (veja nos comentários de código):
+Até o momento, temos trabalhado com uma configuração toda solta. O ideal é movermos as partes da
+nossa configuração para uma função. Então vamos fazer o seguinte (veja nos comentários de código):
 
 ```python
 # Criei uma arquivo separado apenas para configurações
@@ -1815,12 +1745,11 @@ def setup(logger_name: str) -> logging.Logger:
     return logging.getLogger(logger_name)
 ```
 
-A única diferença do que fizemos anteriormente é que agora você tem uma função
-encapsulando tudo. Além disso, quero jogar os arquivos de log na pasta `logs`
-para evitar ficar poluindo a raiz do meu projeto. Se essa pasta não existir,
-isso vai parar a aplicação logo quando `logging` for tentar salvar o arquivo de
-log. Se quiser tirar esse trecho de código da nossa função, não tem problema,
-basta criar a pasta `logs` manualmente.
+A única diferença do que fizemos anteriormente é que agora você tem uma função encapsulando tudo.
+Além disso, quero jogar os arquivos de log na pasta `logs` para evitar ficar poluindo a raiz do
+meu projeto. Se essa pasta não existir, isso vai parar a aplicação logo quando `logging` for
+tentar salvar o arquivo de log. Se quiser tirar esse trecho de código da nossa função, não tem
+problema, basta criar a pasta `logs` manualmente.
 
 ---
 
@@ -1830,8 +1759,8 @@ basta criar a pasta `logs` manualmente.
   </a>
 </h3>
 
-Existem libs prontas para isso, mas como estamos aqui para aprender, vamos criar
-nosso próprio logger.
+Existem libs prontas para isso, mas como estamos aqui para aprender, vamos criar nosso próprio
+logger.
 
 ```python
 # src/logging_course/formatters.py
@@ -1947,17 +1876,15 @@ class JSONLogFormatter(logging.Formatter):
         return date.isoformat()
 ```
 
-Não deixe de ler os comentários que deixei nos códigos. Eu estou deixando de
-escrever texto puro aqui para comentar nas linhas onde as coisas realmente
-acontece para você entender melhor.
+Não deixe de ler os comentários que deixei nos códigos. Eu estou deixando de escrever texto puro
+aqui para comentar nas linhas onde as coisas realmente acontece para você entender melhor.
 
-Agora só falta configurarmos o nosso `logging.json` ou o seu dicionário do
-`dictConfig`.
+Agora só falta configurarmos o nosso `logging.json` ou o seu dicionário do `dictConfig`.
 
 ### Configuração atual do nosso `logging.json` do `dictConfig`
 
-Agora vamos usar dois handlers que aprendemos antes, o `RichHandler` para o
-nosso `console` e o `RotatingFileHandler` para o `JSONLogFormatter`.
+Agora vamos usar dois handlers que aprendemos antes, o `RichHandler` para o nosso `console` e o
+`RotatingFileHandler` para o `JSONLogFormatter`.
 
 Você sabe fazer isso, vamos lá:
 
@@ -2023,8 +1950,8 @@ Você sabe fazer isso, vamos lá:
 }
 ```
 
-Pronto, agora temos dois logs prontos para uso em uma tacada só. Sai no seu
-terminal e vai para o arquivo `.jsonl`.
+Pronto, agora temos dois logs prontos para uso em uma tacada só. Sai no seu terminal e vai para o
+arquivo `.jsonl`.
 
 ### Bônus: um parser simples para JSONL
 
@@ -2056,8 +1983,7 @@ if __name__ == "__main__":
         p(log)
 ```
 
-Estamos acabando. Vamos ver só mais uma coisa que eu acho que você vai achar
-interessante.
+Estamos acabando. Vamos ver só mais uma coisa que eu acho que você vai achar interessante.
 
 ---
 
@@ -2067,8 +1993,8 @@ interessante.
   </a>
 </h2>
 
-Às vezes, o seu logger pode virar um gargalo na aplicação. Isso mesmo. A função
-que deveria te ajudar a debugar começa a **travar tudo**. Por quê?
+Às vezes, o seu logger pode virar um gargalo na aplicação. Isso mesmo. A função que deveria te
+ajudar a debugar começa a **travar tudo**. Por quê?
 
 Imagine isso:
 
@@ -2084,9 +2010,8 @@ Parece inocente, mas se esse log for:
 - Enviado para múltiplos `handlers` ao mesmo tempo
 - Enviando por e-mail, HTTP, Socket, etc
 
-... então essa linha pode virar **um mini-freio** toda vez que roda. E se sua
-app roda centenas ou milhares de logs por segundo (ex: scraping, filas, web,
-workers), esse tempo se acumula.
+... então essa linha pode virar **um mini-freio** toda vez que roda. E se sua app roda centenas ou
+milhares de logs por segundo (ex: scraping, filas, web, workers), esse tempo se acumula.
 
 ---
 
@@ -2094,45 +2019,42 @@ workers), esse tempo se acumula.
 
 É exatamente isso que `QueueHandler` e `QueueListener` fazem.
 
-> Você passa a **responsabilidade de processar e gravar o log para outra
-> thread**, usando uma `Queue` (fila).
+> Você passa a **responsabilidade de processar e gravar o log para outra thread**, usando uma
+> `Queue` (fila).
 
 Assim, sua aplicação:
 
 - Só coloca o log na fila (`QueueHandler` faz isso)
 - E continua rodando normal, sem esperar
-- Enquanto isso, outra thread (`QueueListener`) fica escutando essa fila e
-  processa os logs em segundo plano.
+- Enquanto isso, outra thread (`QueueListener`) fica escutando essa fila e processa os logs em
+  segundo plano.
 
 ---
 
 ### Por que isso funciona tão bem?
 
-Porque `queue.Queue()` em Python é **thread-safe e super leve**. Você consegue
-colocar o log na fila em microssegundos. A thread que escuta a fila
-(`QueueListener`) processa os logs no tempo que precisar, totalmente separada da
-thread principal da sua aplicação.
+Porque `queue.Queue()` em Python é **thread-safe e super leve**. Você consegue colocar o log na
+fila em microssegundos. A thread que escuta a fila (`QueueListener`) processa os logs no tempo que
+precisar, totalmente separada da thread principal da sua aplicação.
 
 ---
 
 ### Exemplo prático com nosso JSON de `dictConfig`
 
-Para implementar isso, vamos adicionar uma nova seção ou entrada no seu
-`dictConfig`. Ao configurar um `QueueHandler`, você também informará quais são
-os "handlers reais" que o `QueueListener` (que funcionará em uma thread
-separada) deve usar para processar as mensagens de log retiradas da fila.
+Para implementar isso, vamos adicionar uma nova seção ou entrada no seu `dictConfig`. Ao
+configurar um `QueueHandler`, você também informará quais são os "handlers reais" que o
+`QueueListener` (que funcionará em uma thread separada) deve usar para processar as mensagens de
+log retiradas da fila.
 
 Basicamente:
 
 1. Definimos um `QueueHandler` que será o ponto de entrada dos logs na fila.
 2. Dentro da configuração desse `QueueHandler` no `dictConfig` (ou em uma seção
-   `queue_listeners`), você indica os `handlers` para onde o `QueueListener`
-   deve enviar os logs.
-3. Então, qualquer `logger` que você queira que se beneficie do processamento
-   assíncrono, você o associa a este `QueueHandler`. Por exemplo, você pode
-   mover os handlers que estavam no `root` logger (ou em qualquer outro logger
-   específico) para serem manipulados pelo seu `QueueHandler`. No meu caso, vou
-   usar no `root` logger.
+   `queue_listeners`), você indica os `handlers` para onde o `QueueListener` deve enviar os logs.
+3. Então, qualquer `logger` que você queira que se beneficie do processamento assíncrono, você o
+   associa a este `QueueHandler`. Por exemplo, você pode mover os handlers que estavam no `root`
+   logger (ou em qualquer outro logger específico) para serem manipulados pelo seu `QueueHandler`.
+   No meu caso, vou usar no `root` logger.
 
 ```json
 {
@@ -2201,28 +2123,25 @@ Basicamente:
 }
 ```
 
-Certo, a configuração está pronta, mas se você executou o código, provavelmente
-percebeu que os logs pararam de funcionar. Isso acontece porque, embora tenhamos
-configurado o `QueueHandler` para _colocar_ os logs na fila, **ninguém está
-lendo essa fila ainda!**
+Certo, a configuração está pronta, mas se você executou o código, provavelmente percebeu que os
+logs pararam de funcionar. Isso acontece porque, embora tenhamos configurado o `QueueHandler` para
+_colocar_ os logs na fila, **ninguém está lendo essa fila ainda!**
 
-Lembra que o nosso objetivo é ter o `QueueHandler` para **enfileirar** os logs
-(tirando o peso da sua aplicação) e, em paralelo, o `QueueListener` para
-**processar** esses logs em outra thread. A configuração do `dictConfig` que
-acabamos de ver define o `QueueHandler` e informa para onde o `QueueListener`
-deve enviar os logs.
+Lembra que o nosso objetivo é ter o `QueueHandler` para **enfileirar** os logs (tirando o peso da
+sua aplicação) e, em paralelo, o `QueueListener` para **processar** esses logs em outra thread. A
+configuração do `dictConfig` que acabamos de ver define o `QueueHandler` e informa para onde o
+`QueueListener` deve enviar os logs.
 
-Agora, precisamos explicitamente iniciar o `QueueListener` para que ele comece a
-consumir as mensagens da fila e as encaminhe para os handlers `"file"` e
-`"console"`.
+Agora, precisamos explicitamente iniciar o `QueueListener` para que ele comece a consumir as
+mensagens da fila e as encaminhe para os handlers `"file"` e `"console"`.
 
-Para que o sistema de log baseado em filas realmente funcione, precisamos dar a
-partida no `QueueListener`. Lembre-se, o `QueueHandler` apenas coloca os logs na
-fila; o `QueueListener` é quem lê e processa.
+Para que o sistema de log baseado em filas realmente funcione, precisamos dar a partida no
+`QueueListener`. Lembre-se, o `QueueHandler` apenas coloca os logs na fila; o `QueueListener` é
+quem lê e processa.
 
-Precisamos fazer isso programaticamente, após aplicar a configuração do
-`dictConfig`. Geralmente, este código é adicionado logo após a chamada para
-`logging.config.dictConfig()` (ou `fileConfig()`).
+Precisamos fazer isso programaticamente, após aplicar a configuração do `dictConfig`. Geralmente,
+este código é adicionado logo após a chamada para `logging.config.dictConfig()` (ou
+`fileConfig()`).
 
 **Exemplo para iniciar o `QueueListener`:**
 
@@ -2251,19 +2170,17 @@ if queue_handler is not None:
   </a>
 </h2>
 
-Fizemos muitas coisas ao longo desse artigo, mas temos que finalizar em algum
-lugar, concorda? Então vou te passar como ficou a minha configuração final com
-alguns ajustes que fiz. Sinta-se à vontade para usar e modificar como quiser.
+Fizemos muitas coisas ao longo desse artigo, mas temos que finalizar em algum lugar, concorda?
+Então vou te passar como ficou a minha configuração final com alguns ajustes que fiz. Sinta-se à
+vontade para usar e modificar como quiser.
 
-Para amarrar tudo, aqui está a versão final da sua função `setup` no módulo
-`config_logger` (na verdade, estou mandando o módulo inteiro, então tem mais do
-que só `setup` aí). Mudei ela levemente para incluir a lógica de inicialização e
-desligamento do `QueueListener`.
+Para amarrar tudo, aqui está a versão final da sua função `setup` no módulo `config_logger` (na
+verdade, estou mandando o módulo inteiro, então tem mais do que só `setup` aí). Mudei ela
+levemente para incluir a lógica de inicialização e desligamento do `QueueListener`.
 
-Note que esta função `setup` agora é apenas para **configurar** o logger, sem
-criar ou retornar instâncias de logger. Você precisará usar
-`logging.getLogger('nome')` em outras partes da sua aplicação para obter e usar
-os loggers configurados.
+Note que esta função `setup` agora é apenas para **configurar** o logger, sem criar ou retornar
+instâncias de logger. Você precisará usar `logging.getLogger('nome')` em outras partes da sua
+aplicação para obter e usar os loggers configurados.
 
 ```python
 import atexit
@@ -2328,8 +2245,8 @@ if __name__ == "__main__":
         p(log)
 ```
 
-O nosso JSON que funciona como configuração principal da `dictConfig` ficou
-dessa forma (não devo ter mudado nada nele):
+O nosso JSON que funciona como configuração principal da `dictConfig` ficou dessa forma (não devo
+ter mudado nada nele):
 
 ```json
 {
@@ -2398,8 +2315,7 @@ dessa forma (não devo ter mudado nada nele):
 }
 ```
 
-Em qualquer parte da aplicação, eu estava testando as nossas configurações com o
-seguinte código:
+Em qualquer parte da aplicação, eu estava testando as nossas configurações com o seguinte código:
 
 ```python
 import logging
@@ -2453,38 +2369,35 @@ if __name__ == "__main__":
 
 Parabéns!
 [Você chegou ao final do nosso curso](https://www.youtube.com/playlist?list=PLbIBj8vQhvm28qR-yvWP3JELGelWxsxaI)
-(e do texto, se estiver apenas lendo). A gente poderia continuar falando sobre
-logging por horas, mas agora você já deixou o `print()` pra trás, entendeu
-Handlers, Formatters, Filtros, `dictConfig`, JSON e até logging assíncrono com
-`QueueHandler`.
+(e do texto, se estiver apenas lendo). A gente poderia continuar falando sobre logging por horas,
+mas agora você já deixou o `print()` pra trás, entendeu Handlers, Formatters, Filtros,
+`dictConfig`, JSON e até logging assíncrono com `QueueHandler`.
 
-Você tem um poder enorme nas mãos. Mas agora vem as perguntas mais importantes:
-**Onde e como usar esse poder?** **O que vale a pena registrar?** **Como
-escrever uma mensagem de log que ainda faça sentido daqui a 6 meses, às 3 da
-manhã, quando um bug crítico estourar em produção?**
+Você tem um poder enorme nas mãos. Mas agora vem as perguntas mais importantes: **Onde e como usar
+esse poder?** **O que vale a pena registrar?** **Como escrever uma mensagem de log que ainda faça
+sentido daqui a 6 meses, às 3 da manhã, quando um bug crítico estourar em produção?**
 
-Nesta última aula, o foco muda um pouco. Vamos falar menos sobre _como
-configurar_ e mais sobre _por que logar, o que logar e quando usar cada nível_.
-Vamos explorar as boas práticas que separam um log amador de um log
-profissional, e que podem realmente salvar sua pele quando tudo estiver pegando
-fogo.
+Nesta última aula, o foco muda um pouco. Vamos falar menos sobre _como configurar_ e mais sobre
+_por que logar, o que logar e quando usar cada nível_. Vamos explorar as boas práticas que separam
+um log amador de um log profissional, e que podem realmente salvar sua pele quando tudo estiver
+pegando fogo.
 
 Ah, e vale lembrar: isso aqui não tem fim. Sempre tem mais pra aprender.
 [Erros em logs acontecem até nas maiores empresas do mundo](https://medium.com/@joecrobak/seven-best-practices-for-keeping-sensitive-data-out-of-logs-3d7bbd12904),
-então continue estudando, melhorando, revisando seus logs... e evitando que eles
-virem uma armadilha.
+então continue estudando, melhorando, revisando seus logs... e evitando que eles virem uma
+armadilha.
 
 ---
 
 ### Para Quem Você Está Escrevendo o Log?
 
-Antes de mais nada: **log não é só pra você, desenvolvedor.** Na verdade, o que
-deve ser registrado em log geralmente **não é decidido apenas pelos devs**. Em
-ambientes profissionais, outros setores também dependem desses dados.
+Antes de mais nada: **log não é só pra você, desenvolvedor.** Na verdade, o que deve ser
+registrado em log geralmente **não é decidido apenas pelos devs**. Em ambientes profissionais,
+outros setores também dependem desses dados.
 
-Claro, como dev, você provavelmente vai usar `debug`, `info`, `warning`,`error`,
-`critical` e `exception` para entender o comportamento do seu código. Mas a
-empresa como um todo precisa de muito mais:
+Claro, como dev, você provavelmente vai usar `debug`, `info`, `warning`,`error`, `critical` e
+`exception` para entender o comportamento do seu código. Mas a empresa como um todo precisa de
+muito mais:
 
 - O usuário criou uma conta
 - O usuário fez login
@@ -2492,33 +2405,31 @@ empresa como um todo precisa de muito mais:
 - Comprou o produto Y
 - Pesquisou por "banana orgânica"
 
-Tudo isso pode parecer irrelevante para debugging técnico, mas para outras
-áreas, esses logs são **ouro em forma de texto**. Gente de marketing, produto,
-segurança, auditoria... todos querem (e precisam) ver esses eventos.
+Tudo isso pode parecer irrelevante para debugging técnico, mas para outras áreas, esses logs são
+**ouro em forma de texto**. Gente de marketing, produto, segurança, auditoria... todos querem (e
+precisam) ver esses eventos.
 
-Então, **antes de sair logando tudo no `debug`**, entenda o **propósito** do
-log. Você está logando para debug ou para outro setor? Se é para outro setor,
-quais dados eles precisam? Esses dados podem ser salvos? São sensíveis?
+Então, **antes de sair logando tudo no `debug`**, entenda o **propósito** do log. Você está
+logando para debug ou para outro setor? Se é para outro setor, quais dados eles precisam? Esses
+dados podem ser salvos? São sensíveis?
 
 Veja alguns exemplos genéricos:
 
-- **Logs para Desenvolvedores (Você do Futuro):** Foco em debugging. Informações
-  que ajudam a entender o fluxo da aplicação, o estado de variáveis e a causa de
-  um bug (não é só debug, todos os níveis de log podem ser relevantes aqui).
+- **Logs para Desenvolvedores (Você do Futuro):** Foco em debugging. Informações que ajudam a
+  entender o fluxo da aplicação, o estado de variáveis e a causa de um bug (não é só debug, todos
+  os níveis de log podem ser relevantes aqui).
 
-- **Logs para SysAdmins / SRE / DevOps (Monitoramento):** Foco em saúde do
-  sistema. Logs sobre falhas, lentidão, uso de recursos, quedas de serviço, etc.
+- **Logs para SysAdmins / SRE / DevOps (Monitoramento):** Foco em saúde do sistema. Logs sobre
+  falhas, lentidão, uso de recursos, quedas de serviço, etc.
 
-- **Logs para o Negócio / Auditoria (Análise):** Foco em rastrear ações
-  importantes do ponto de vista do negócio. Exemplo: "Usuário X comprou produto
-  Y", "Relatório Z foi gerado" (claro, você precisa se comunicar com outros
-  setores para saber o que logar).
+- **Logs para o Negócio / Auditoria (Análise):** Foco em rastrear ações importantes do ponto de
+  vista do negócio. Exemplo: "Usuário X comprou produto Y", "Relatório Z foi gerado" (claro, você
+  precisa se comunicar com outros setores para saber o que logar).
 
-- **Logs para fins legais?** Se um usuário da sua aplicação fizer algo ilegal,
-  talvez a justiça queira saber o que aconteceu. Aqui entra outro tipo de
-  responsabilidade: retenção de logs, dados sensíveis, LGPD, etc. **Consulte um
-  advogado** (ou o jurídico da empresa) para saber o que pode ou não ser
-  armazenado.
+- **Logs para fins legais?** Se um usuário da sua aplicação fizer algo ilegal, talvez a justiça
+  queira saber o que aconteceu. Aqui entra outro tipo de responsabilidade: retenção de logs, dados
+  sensíveis, LGPD, etc. **Consulte um advogado** (ou o jurídico da empresa) para saber o que pode
+  ou não ser armazenado.
 
 ---
 
@@ -2526,19 +2437,18 @@ Veja alguns exemplos genéricos:
 
 Agora sim: **vamos entender quando usar cada nível de log na prática.**
 
-Abaixo você encontra a descrição de cada nível com exemplos concretos, tanto de
-situações quanto de código.
+Abaixo você encontra a descrição de cada nível com exemplos concretos, tanto de situações quanto
+de código.
 
 ---
 
 #### `DEBUG`: "Esse é nosso (dos devs)"
 
-- **Quando usar:** Para diagnóstico detalhado durante o desenvolvimento ou
-  debugging intenso.
-- **O que logar:** Variáveis internas, payloads de API, queries SQL, entrada e
-  saída de funções complexas.
-- **Regra:** Geralmente desativado em produção para evitar excesso de ruído (e
-  vazamento de dados sensíveis da aplicação).
+- **Quando usar:** Para diagnóstico detalhado durante o desenvolvimento ou debugging intenso.
+- **O que logar:** Variáveis internas, payloads de API, queries SQL, entrada e saída de funções
+  complexas.
+- **Regra:** Geralmente desativado em produção para evitar excesso de ruído (e vazamento de dados
+  sensíveis da aplicação).
 
 ```python
 # Cuidado com isso, payload pode conter dados sensíveis da aplicação
@@ -2552,10 +2462,8 @@ logger.debug("Consulta SQL gerada: %s", query)
 
 #### `INFO`: Aconteceu algo certo
 
-- **Quando usar:** Para registrar eventos normais e esperados no fluxo da
-  aplicação.
-- **O que logar:** Login de usuário, criação de conta, execução bem-sucedida de
-  uma tarefa.
+- **Quando usar:** Para registrar eventos normais e esperados no fluxo da aplicação.
+- **O que logar:** Login de usuário, criação de conta, execução bem-sucedida de uma tarefa.
 
 ```python
 # Sem senhas, pelo amor de Deus
@@ -2567,10 +2475,9 @@ logger.info("Relatório gerado e enviado por email")
 
 #### `WARNING`: Atenção, algo inesperado aconteceu
 
-- **Quando usar:** Quando algo não saiu como o esperado, mas a aplicação
-  conseguiu se recuperar.
-- **O que logar:** Funcionalidades obsoletas, API lenta, falha com fallback,
-  tentativa de reconexão, muitas tentativas de login, etc...
+- **Quando usar:** Quando algo não saiu como o esperado, mas a aplicação conseguiu se recuperar.
+- **O que logar:** Funcionalidades obsoletas, API lenta, falha com fallback, tentativa de
+  reconexão, muitas tentativas de login, etc...
 
 ```python
 logger.warning("API externa demorou %d segundos para responder", elapsed)
@@ -2581,10 +2488,10 @@ logger.warning("Configuração 'X' está obsoleta. Use 'Y' no lugar.")
 
 #### `ERROR`: Uma operação falhou
 
-- **Quando usar:** Quando uma tarefa específica não pôde ser concluída, mas a
-  aplicação continua rodando.
-- **O que logar:** Falha de validação, erro ao salvar no banco, exceção tratada
-  que impediu o sucesso da operação, etc.
+- **Quando usar:** Quando uma tarefa específica não pôde ser concluída, mas a aplicação continua
+  rodando.
+- **O que logar:** Falha de validação, erro ao salvar no banco, exceção tratada que impediu o
+  sucesso da operação, etc.
 
 ```python
 logger.error("Erro ao salvar usuário no banco: %s", user_id)
@@ -2596,8 +2503,8 @@ logger.error("Falha ao processar pagamento: %s", str(error))
 #### `CRITICAL`: O navio está afundando!
 
 - **Quando usar:** Para falhas graves que impedem o funcionamento da aplicação.
-- **O que logar:** Perda de conexão com o banco após várias tentativas, falha na
-  inicialização de componente essencial, falha na rede interna, etc.
+- **O que logar:** Perda de conexão com o banco após várias tentativas, falha na inicialização de
+  componente essencial, falha na rede interna, etc.
 
 ```python
 logger.critical("Banco de dados inacessível após 5 tentativas. Encerrando aplicação.")
@@ -2608,10 +2515,10 @@ logger.critical("Arquivo de configuração principal está corrompido.")
 
 #### Menção honrosa: `logger.exception()`
 
-- **Quando usar:** Sempre que você estiver dentro de um bloco `try...except` é
-  interessante logar a exceção na maioria dos casos.
-- **Vantagem:** Além de logar como `error`, ele inclui automaticamente o
-  **traceback**. Isso é ouro puro para debugging.
+- **Quando usar:** Sempre que você estiver dentro de um bloco `try...except` é interessante logar
+  a exceção na maioria dos casos.
+- **Vantagem:** Além de logar como `error`, ele inclui automaticamente o **traceback**. Isso é
+  ouro puro para debugging.
 
 ```python
 try:
@@ -2622,33 +2529,33 @@ except Exception as e:
 
 ---
 
-Com esses exemplos em mente, você já consegue diferenciar claramente o papel de
-cada nível de severidade e aplicar isso com consciência. O importante é manter
-consistência, clareza e foco em quem vai ler o log depois, muitas vezes, esse
-alguém vai ser você mesmo (só que com sono e pressa).
+Com esses exemplos em mente, você já consegue diferenciar claramente o papel de cada nível de
+severidade e aplicar isso com consciência. O importante é manter consistência, clareza e foco em
+quem vai ler o log depois, muitas vezes, esse alguém vai ser você mesmo (só que com sono e
+pressa).
 
-Além disso, como o que aprendemos sobre `loggers`, `handlers` e `filters`, você
-conseguirá separar bem os logs por pacote, módulo, por setor da empresa, ou como
-preferir. Também conseguirá filtrar dados desnecessários em logs específicos.
+Além disso, como o que aprendemos sobre `loggers`, `handlers` e `filters`, você conseguirá separar
+bem os logs por pacote, módulo, por setor da empresa, ou como preferir. Também conseguirá filtrar
+dados desnecessários em logs específicos.
 
 ---
 
 ### As Regras de Ouro de uma Boa Mensagem de Log
 
-Depois de tudo que aprendemos sobre configuração e níveis de log, chegou a hora
-da pergunta mais importante:
+Depois de tudo que aprendemos sobre configuração e níveis de log, chegou a hora da pergunta mais
+importante:
 
 **Como escrever uma mensagem de log que realmente ajuda?**
 
-Aqui vão 3 regras de ouro, simples, mas poderosas, que separam logs descartáveis
-de logs profissionais e confiáveis.
+Aqui vão 3 regras de ouro, simples, mas poderosas, que separam logs descartáveis de logs
+profissionais e confiáveis.
 
 ---
 
 #### **Regra 1: Escreva logs para máquinas também, não só para humanos**
 
-Sim, logs precisam ser legíveis. Mas eles também devem ser **estruturados e
-processáveis** por ferramentas de observabilidade, buscas e alertas.
+Sim, logs precisam ser legíveis. Mas eles também devem ser **estruturados e processáveis** por
+ferramentas de observabilidade, buscas e alertas.
 
 Evite logs "misteriosos" e difíceis de analisar com código.
 
@@ -2663,9 +2570,9 @@ logger.error("Falha na atualização do perfil", extra={
 })
 ```
 
-Com logs estruturados (em JSON, como fizemos), você pode **filtrar todos os
-erros por `reason=email_invalido`**, ou agrupar por `user_id`. Isso é impossível
-com strings soltas e mal formatadas.
+Com logs estruturados (em JSON, como fizemos), você pode **filtrar todos os erros por
+`reason=email_invalido`**, ou agrupar por `user_id`. Isso é impossível com strings soltas e mal
+formatadas.
 
 ---
 
@@ -2675,10 +2582,9 @@ A mensagem "`Falhou`" pode ser verdade, mas não ajuda em nada.
 
 Um bom log responde: **Quem? O quê? Onde? Quando? Por quê?**
 
-Inclua IDs relevantes (de usuário, pedido, transação, etc). Quanto mais contexto
-você der, mais rápido será o diagnóstico, inclusive por outras pessoas do time
-(ou você no futuro, com pressa e sem paciência). Evite também colocar coisas
-desnecessárias no log (falo disso adiante).
+Inclua IDs relevantes (de usuário, pedido, transação, etc). Quanto mais contexto você der, mais
+rápido será o diagnóstico, inclusive por outras pessoas do time (ou você no futuro, com pressa e
+sem paciência). Evite também colocar coisas desnecessárias no log (falo disso adiante).
 
 ```python
 # 🚫 Ruim:
@@ -2709,16 +2615,16 @@ O que **nunca** deve aparecer em logs:
 - Endereços físicos de clientes, colaboradores, fornecedores, etc.
 - Dados médicos ou sensíveis (LGPD/GDPR)
 
-_Dica técnica:_ Se você precisa logar objetos que podem conter dados sensíveis
-(ex: um `User` ou um `Request`), crie uma função de serialização segura, ou use
-um **Filter** para limpar ou mascarar os dados antes de enviar ao log.
+_Dica técnica:_ Se você precisa logar objetos que podem conter dados sensíveis (ex: um `User` ou
+um `Request`), crie uma função de serialização segura, ou use um **Filter** para limpar ou
+mascarar os dados antes de enviar ao log.
 
 ---
 
 #### **Regra 4: Contexto é bom… até virar poluição**
 
-Sim, na **Regra 2** eu disse que _contexto é rei_. Mas cuidado pra não
-transformar o seu log num **romance de 800 páginas com final inconclusivo**.
+Sim, na **Regra 2** eu disse que _contexto é rei_. Mas cuidado pra não transformar o seu log num
+**romance de 800 páginas com final inconclusivo**.
 
 Logar dados demais é tão ruim quanto logar de menos.
 
@@ -2758,15 +2664,14 @@ logger.info("Login realizado com sucesso", extra={
 })
 ```
 
-**Regra prática:** Logue _apenas_ o que alguém precisa saber para **agir**. Se o
-dado não ajuda a entender, resolver ou monitorar o problema, talvez ele não
-precise estar ali. Geralmente, IDs que identificam algo são suficientes para
-fazer uma busca interna no sistema sem expor dados sensíveis em logs.
+**Regra prática:** Logue _apenas_ o que alguém precisa saber para **agir**. Se o dado não ajuda a
+entender, resolver ou monitorar o problema, talvez ele não precise estar ali. Geralmente, IDs que
+identificam algo são suficientes para fazer uma busca interna no sistema sem expor dados sensíveis
+em logs.
 
-Lembre-se que quando você não precisa de logs, eles são "lixo" e até
-inconvenientes. Em algum momento alguém pode esquecer algo e vazar logs da sua
-aplicação. Se isso acontecer, torça muito para não ter nenhum dado sensível no
-meio dos dados vazados.
+Lembre-se que quando você não precisa de logs, eles são "lixo" e até inconvenientes. Em algum
+momento alguém pode esquecer algo e vazar logs da sua aplicação. Se isso acontecer, torça muito
+para não ter nenhum dado sensível no meio dos dados vazados.
 
 ---
 
@@ -2774,27 +2679,26 @@ meio dos dados vazados.
 
 Se você chegou até aqui, parabéns. De verdade.
 
-Você saiu do `print()` e agora tem um **arsenal completo de logging
-profissional** nas mãos: Handlers, Formatters, Filters, JSON, `dictConfig`, logs
-assíncronos com `QueueHandler`, e, mais importante, **boas práticas de uso**.
+Você saiu do `print()` e agora tem um **arsenal completo de logging profissional** nas mãos:
+Handlers, Formatters, Filters, JSON, `dictConfig`, logs assíncronos com `QueueHandler`, e, mais
+importante, **boas práticas de uso**.
 
 Você entendeu que logging não é só sobre escrever mensagens no console. É sobre
-**observabilidade**, **diagnóstico rápido**, **comunicação entre times**,
-**segurança** e até **compliance legal**. Ou seja: logging bem feito salva seu
-código, sua sanidade e, às vezes, até o faturamento da empresa.
+**observabilidade**, **diagnóstico rápido**, **comunicação entre times**, **segurança** e até
+**compliance legal**. Ou seja: logging bem feito salva seu código, sua sanidade e, às vezes, até o
+faturamento da empresa.
 
 **E agora, o que fazer com esse conhecimento?**
 
-Use. Refatore seus projetos. Melhore os logs do seu time. Mostre esse curso pra
-alguém que ainda vive no `print()`.
+Use. Refatore seus projetos. Melhore os logs do seu time. Mostre esse curso pra alguém que ainda
+vive no `print()`.
 
-E quando for criar algo novo… lembra disso: **um bom log não é ruído. É música
-pros ouvidos de quem tá tentando resolver um bug às 3 da manhã.**
+E quando for criar algo novo… lembra disso: **um bom log não é ruído. É música pros ouvidos de
+quem tá tentando resolver um bug às 3 da manhã.**
 
-Valeu demais por acompanhar até aqui! Se você curtiu, compartilha, vai lá no
-vídeo e comenta, salva, manda pra galera. E se quiser aprender mais Python
-moderno, CLI, automações, ou IA aplicada ao mundo real, dá uma olhada nas outras
-playlists do canal ou nos cursos completos.
+Valeu demais por acompanhar até aqui! Se você curtiu, compartilha, vai lá no vídeo e comenta,
+salva, manda pra galera. E se quiser aprender mais Python moderno, CLI, automações, ou IA aplicada
+ao mundo real, dá uma olhada nas outras playlists do canal ou nos cursos completos.
 
 Nos vemos nos próximos vídeos ou textos.
 
@@ -2802,8 +2706,8 @@ Abraço!
 
 ---
 
-Se quiser, esse texto está em markdown e [pode ser baixado aqui](text.md). Você
-também rolou bastante essa página né? [Volte para o topo](./) ou simplesmente vá
-para [nossa página inicial](/).
+Se quiser, esse texto está em markdown e [pode ser baixado aqui](text.md). Você também rolou
+bastante essa página né? [Volte para o topo](./) ou simplesmente vá para
+[nossa página inicial](/).
 
 ---
