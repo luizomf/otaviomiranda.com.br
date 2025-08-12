@@ -161,7 +161,8 @@ Pode parecer sutil, pode funcionar agora, mas em algum momento isso vai quebrar.
 
 ### Pós-condições (retorno / output)
 
-**Regra:** O subtipo **não pode** entregar menos do que o tipo base prometeu.
+**Regra:** O subtipo **não pode** entregar menos do que o tipo base, ou seja, não pode enfraquecer
+as condições do tipo base.
 
 **Exemplos:**
 
