@@ -18,8 +18,11 @@
     e.preventDefault();
   });
 
-  const markdownContent =
-    document.getElementById('markdown-source').textContent;
+  const markdownSource = document.getElementById('markdown-source');
+
+  if (!markdownSource) return;
+
+  const markdownContent = markdownSource.textContent;
   const contentDiv = document.getElementById('content');
   contentDiv.innerHTML = marked.parse(markdownContent);
 
