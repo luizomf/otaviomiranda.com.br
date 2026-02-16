@@ -29,6 +29,7 @@
       <aside class="nav">
         <a class="copyright-link" href="/">Otávio Miranda</a>
         <a
+          target="_blank"
           href="https://beacons.ai/otaviomiranda"
           rel="nofollow noopener noreferrer"
           >Contatos</a
@@ -233,35 +234,39 @@
         <hr />
         <h3>Exemplo concreto para pré-condições (inputs / parâmetros)</h3>
         <p>Vejamos um exemplo onde o subtipo viola uma pré-condição do LSP:</p>
-        <pre>
-class Tags:
-    def __init__(self, tags: set[str]) -&gt; None:
-        self._tags = tags
+        <pre
+          class="shiki aurora-x"
+          style="background-color: #07090f; color: #bbbbbb"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#C792EA">class</span><span style="color:#FFCB6B"> Tags</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#C792EA">    def</span><span style="color:#82AAFF"> __init__</span><span style="color:#89DDFF">(</span><span style="color:#F78C6C">self</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> tags</span><span style="color:#89DDFF">:</span><span style="color:#BBBBBB"> set</span><span style="color:#89DDFF">[</span><span style="color:#B2CCD6">str</span><span style="color:#89DDFF">])</span><span style="color:#89DDFF"> -&gt;</span><span style="color:#F78C6C"> None</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#FF5370;font-style:italic">        self</span><span style="color:#89DDFF">.</span><span style="color:#BBBBBB">_tags </span><span style="color:#C792EA">=</span><span style="color:#BBBBBB"> tags</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#546E7A;font-style:italic">    # Contrato amplo: aceita qualquer objeto</span></span>
+<span class="line"><span style="color:#C792EA">    def</span><span style="color:#82AAFF"> __contains__</span><span style="color:#89DDFF">(</span><span style="color:#F78C6C">self</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> item</span><span style="color:#89DDFF">:</span><span style="color:#B2CCD6"> object</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -&gt;</span><span style="color:#B2CCD6"> bool</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#89DDFF">        return</span><span style="color:#BBBBBB"> item </span><span style="color:#C792EA">in</span><span style="color:#FF5370;font-style:italic"> self</span><span style="color:#89DDFF">.</span><span style="color:#BBBBBB">_tags  </span><span style="color:#546E7A;font-style:italic"># Para tipo "errado", retorna False</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">class</span><span style="color:#FFCB6B"> StrictTags</span><span style="color:#89DDFF">(</span><span style="color:#C3E88D">Tags</span><span style="color:#89DDFF">):</span></span>
+<span class="line"><span style="color:#546E7A;font-style:italic">    # 🚫 Pré-condição mais restritiva: agora só aceita str</span></span>
+<span class="line"><span style="color:#C792EA">    def</span><span style="color:#82AAFF"> __contains__</span><span style="color:#89DDFF">(</span><span style="color:#F78C6C">self</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> item</span><span style="color:#89DDFF">:</span><span style="color:#B2CCD6"> object</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -&gt;</span><span style="color:#B2CCD6"> bool</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#89DDFF">        if</span><span style="color:#C792EA"> not</span><span style="color:#82AAFF"> isinstance</span><span style="color:#89DDFF">(</span><span style="color:#82AAFF">item</span><span style="color:#89DDFF">,</span><span style="color:#B2CCD6"> str</span><span style="color:#89DDFF">):</span></span>
+<span class="line"><span style="color:#89DDFF">            raise</span><span style="color:#B2CCD6"> TypeError</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">item must be str</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#89DDFF">        return</span><span style="color:#BBBBBB"> item </span><span style="color:#C792EA">in</span><span style="color:#FF5370;font-style:italic"> self</span><span style="color:#89DDFF">.</span><span style="color:#BBBBBB">_tags</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#546E7A;font-style:italic"># Cliente escrito para o tipo base:</span></span>
+<span class="line"><span style="color:#C792EA">def</span><span style="color:#82AAFF"> has_tag</span><span style="color:#89DDFF">(</span><span style="color:#F78C6C">t</span><span style="color:#89DDFF">:</span><span style="color:#BBBBBB"> Tags</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> q</span><span style="color:#89DDFF">:</span><span style="color:#B2CCD6"> object</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -&gt;</span><span style="color:#B2CCD6"> bool</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#89DDFF">    return</span><span style="color:#BBBBBB"> q </span><span style="color:#C792EA">in</span><span style="color:#BBBBBB"> t</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BBBBBB">t1 </span><span style="color:#C792EA">=</span><span style="color:#82AAFF"> Tags</span><span style="color:#89DDFF">({</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">python</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">types</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">})</span></span>
+<span class="line"><span style="color:#BBBBBB">t2 </span><span style="color:#C792EA">=</span><span style="color:#82AAFF"> StrictTags</span><span style="color:#89DDFF">({</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">python</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#C3E88D">types</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">})</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#82AAFF">print</span><span style="color:#89DDFF">(</span><span style="color:#82AAFF">has_tag</span><span style="color:#89DDFF">(</span><span style="color:#82AAFF">t1</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> 123</span><span style="color:#89DDFF">))</span><span style="color:#546E7A;font-style:italic">  # False (ok no contrato do base)</span></span>
+<span class="line"><span style="color:#82AAFF">print</span><span style="color:#89DDFF">(</span><span style="color:#82AAFF">has_tag</span><span style="color:#89DDFF">(</span><span style="color:#82AAFF">t2</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> 123</span><span style="color:#89DDFF">))</span><span style="color:#546E7A;font-style:italic">  # 💥 TypeError, subtipo ficou mais restritivo:)")</span></span>
+<span class="line"></span></code></pre>
 
-    # Contrato amplo: aceita qualquer objeto
-    def __contains__(self, item: object) -&gt; bool:
-        return item in self._tags  # Para tipo "errado", retorna False
-
-
-class StrictTags(Tags):
-    # 🚫 Pré-condição mais restritiva: agora só aceita str
-    def __contains__(self, item: object) -&gt; bool:
-        if not isinstance(item, str):
-            raise TypeError("item must be str")
-        return item in self._tags
-
-
-# Cliente escrito para o tipo base:
-def has_tag(t: Tags, q: object) -&gt; bool:
-    return q in t
-
-
-t1 = Tags({"python", "types"})
-t2 = StrictTags({"python", "types"})
-
-print(has_tag(t1, 123))  # False (ok no contrato do base)
-print(has_tag(t2, 123))  # 💥 TypeError, subtipo ficou mais restritivo</pre
-        >
         <p>
           No código acima, Tags aceita que qualquer object seja utilizado com
           __contains__ (in e not in). Mas StrictTags impõe que apenas str pode
@@ -333,23 +338,25 @@ print(has_tag(t2, 123))  # 💥 TypeError, subtipo ficou mais restritivo</pre
           no container. Ou o container está vazio (0 itens) ou tem elementos.
           Ele nunca terá uma quantidade negativa de itens.
         </p>
-        <pre>
-# Tipagem perfeita, mas pós-condição violada
-class SizedProtocol:
-    def __init__(self, data: list[int]) -&gt; None:
-        self._data = data
-
-    def __len__(self) -&gt; int:
-        return len(self._data)  # Sempre &gt;= 0 (contrato implícito do Python)
-
-class BadSized(SizedProtocol):
-    def __len__(self) -&gt; int:
-        return len(self._data) - 1  # 🚫 Pode gerar valor negativo (sutil)
-
-
-bad_sized = BadSized([])  # Vazio, então seria zero, mas será -1
-size = len(bad_sized)     # ValueError: __len__() should return &gt;= 0</pre
-        >
+        <pre
+          class="shiki aurora-x"
+          style="background-color: #07090f; color: #bbbbbb"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#546E7A;font-style:italic"># Tipagem perfeita, mas pós-condição violada</span></span>
+<span class="line"><span style="color:#C792EA">class</span><span style="color:#FFCB6B"> SizedProtocol</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#C792EA">    def</span><span style="color:#82AAFF"> __init__</span><span style="color:#89DDFF">(</span><span style="color:#F78C6C">self</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> data</span><span style="color:#89DDFF">:</span><span style="color:#BBBBBB"> list</span><span style="color:#89DDFF">[</span><span style="color:#B2CCD6">int</span><span style="color:#89DDFF">])</span><span style="color:#89DDFF"> -&gt;</span><span style="color:#F78C6C"> None</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#FF5370;font-style:italic">        self</span><span style="color:#89DDFF">.</span><span style="color:#BBBBBB">_data </span><span style="color:#C792EA">=</span><span style="color:#BBBBBB"> data</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">    def</span><span style="color:#82AAFF"> __len__</span><span style="color:#89DDFF">(</span><span style="color:#F78C6C">self</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -&gt;</span><span style="color:#B2CCD6"> int</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#89DDFF">        return</span><span style="color:#82AAFF"> len</span><span style="color:#89DDFF">(</span><span style="color:#FF5370;font-style:italic">self</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">_data</span><span style="color:#89DDFF">)</span><span style="color:#546E7A;font-style:italic">  # Sempre &gt;= 0 (contrato implícito do Python)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">class</span><span style="color:#FFCB6B"> BadSized</span><span style="color:#89DDFF">(</span><span style="color:#C3E88D">SizedProtocol</span><span style="color:#89DDFF">):</span></span>
+<span class="line"><span style="color:#C792EA">    def</span><span style="color:#82AAFF"> __len__</span><span style="color:#89DDFF">(</span><span style="color:#F78C6C">self</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -&gt;</span><span style="color:#B2CCD6"> int</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#89DDFF">        return</span><span style="color:#82AAFF"> len</span><span style="color:#89DDFF">(</span><span style="color:#FF5370;font-style:italic">self</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">_data</span><span style="color:#89DDFF">)</span><span style="color:#C792EA"> -</span><span style="color:#F78C6C"> 1</span><span style="color:#546E7A;font-style:italic">  # 🚫 Pode gerar valor negativo (sutil)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BBBBBB">bad_sized </span><span style="color:#C792EA">=</span><span style="color:#82AAFF"> BadSized</span><span style="color:#89DDFF">([])</span><span style="color:#546E7A;font-style:italic">  # Vazio, então seria zero, mas será -1</span></span>
+<span class="line"><span style="color:#BBBBBB">size </span><span style="color:#C792EA">=</span><span style="color:#82AAFF"> len</span><span style="color:#89DDFF">(</span><span style="color:#82AAFF">bad_sized</span><span style="color:#89DDFF">)</span><span style="color:#546E7A;font-style:italic">     # ValueError: __len__() should return &gt;= 0</span></span></code></pre>
         <p>
           Esse exemplo já quebrou antes de nascer, bastou passar um objeto vazio
           e pedir quantos itens ele tem.
@@ -427,36 +434,39 @@ size = len(bad_sized)     # ValueError: __len__() should return &gt;= 0</pre
           Para ilustrar um caso diferente do clássico retângulo/quadrado, veja o
           código abaixo:
         </p>
-        <pre>
-class DatabaseConfig:
-    def __init__(self, dsn: str) -&gt; None:
-        self._dsn = dsn
+        <pre
+          class="shiki aurora-x"
+          style="background-color: #07090f; color: #bbbbbb"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#C792EA">class</span><span style="color:#FFCB6B"> DatabaseConfig</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#C792EA">    def</span><span style="color:#82AAFF"> __init__</span><span style="color:#89DDFF">(</span><span style="color:#F78C6C">self</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> dsn</span><span style="color:#89DDFF">:</span><span style="color:#B2CCD6"> str</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -&gt;</span><span style="color:#F78C6C"> None</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#FF5370;font-style:italic">        self</span><span style="color:#89DDFF">.</span><span style="color:#BBBBBB">_dsn </span><span style="color:#C792EA">=</span><span style="color:#BBBBBB"> dsn</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89DDFF">    @</span><span style="color:#B2CCD6">property</span></span>
+<span class="line"><span style="color:#C792EA">    def</span><span style="color:#82AAFF"> dsn</span><span style="color:#89DDFF">(</span><span style="color:#F78C6C">self</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -&gt;</span><span style="color:#B2CCD6"> str</span><span style="color:#89DDFF">:</span><span style="color:#546E7A;font-style:italic"> # uma invariância</span></span>
+<span class="line"><span style="color:#89DDFF">        return</span><span style="color:#FF5370;font-style:italic"> self</span><span style="color:#89DDFF">.</span><span style="color:#BBBBBB">_dsn</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">class</span><span style="color:#FFCB6B"> MySqlDatabaseConfig</span><span style="color:#89DDFF">(</span><span style="color:#C3E88D">DatabaseConfig</span><span style="color:#89DDFF">):</span></span>
+<span class="line"><span style="color:#C792EA">    def</span><span style="color:#82AAFF"> __init__</span><span style="color:#89DDFF">(</span><span style="color:#F78C6C">self</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> host</span><span style="color:#89DDFF">:</span><span style="color:#B2CCD6"> str</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> user</span><span style="color:#89DDFF">:</span><span style="color:#B2CCD6"> str</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> password</span><span style="color:#89DDFF">:</span><span style="color:#B2CCD6"> str</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> db</span><span style="color:#89DDFF">:</span><span style="color:#B2CCD6"> str</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -&gt;</span><span style="color:#F78C6C"> None</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#546E7A;font-style:italic">        # Não tem DSN, mas força herança para "reaproveitar" métodos</span></span>
+<span class="line"><span style="color:#FF5370;font-style:italic">        self</span><span style="color:#89DDFF">.</span><span style="color:#BBBBBB">host </span><span style="color:#C792EA">=</span><span style="color:#BBBBBB"> host</span></span>
+<span class="line"><span style="color:#FF5370;font-style:italic">        self</span><span style="color:#89DDFF">.</span><span style="color:#BBBBBB">user </span><span style="color:#C792EA">=</span><span style="color:#BBBBBB"> user</span></span>
+<span class="line"><span style="color:#FF5370;font-style:italic">        self</span><span style="color:#89DDFF">.</span><span style="color:#BBBBBB">password </span><span style="color:#C792EA">=</span><span style="color:#BBBBBB"> password</span></span>
+<span class="line"><span style="color:#FF5370;font-style:italic">        self</span><span style="color:#89DDFF">.</span><span style="color:#BBBBBB">db </span><span style="color:#C792EA">=</span><span style="color:#BBBBBB"> db</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#546E7A;font-style:italic">        # Apenas inicializa a base com valor vazio (quebrando a invariante)</span></span>
+<span class="line"><span style="color:#B2CCD6">        super</span><span style="color:#89DDFF">().</span><span style="color:#82AAFF">__init__</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">""</span><span style="color:#89DDFF">)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C792EA">def</span><span style="color:#82AAFF"> connect</span><span style="color:#89DDFF">(</span><span style="color:#F78C6C">cfg</span><span style="color:#89DDFF">:</span><span style="color:#BBBBBB"> DatabaseConfig</span><span style="color:#89DDFF">)</span><span style="color:#89DDFF"> -&gt;</span><span style="color:#F78C6C"> None</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#546E7A;font-style:italic">    # Cliente depende da invariante DatabaseConfig.dsn</span></span>
+<span class="line"><span style="color:#82AAFF">    print</span><span style="color:#89DDFF">(</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">Connecting to:</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#82AAFF"> cfg</span><span style="color:#89DDFF">.</span><span style="color:#82AAFF">dsn</span><span style="color:#89DDFF">)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BBBBBB">cfg_bad </span><span style="color:#C792EA">=</span><span style="color:#82AAFF"> MySqlDatabaseConfig</span><span style="color:#89DDFF">(</span><span style="color:#F78C6C">host</span><span style="color:#C792EA">=</span><span style="color:#89DDFF">""</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> user</span><span style="color:#C792EA">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">root</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> password</span><span style="color:#C792EA">=</span><span style="color:#89DDFF">""</span><span style="color:#89DDFF">,</span><span style="color:#F78C6C"> db</span><span style="color:#C792EA">=</span><span style="color:#89DDFF">"</span><span style="color:#C3E88D">app</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">)</span></span>
+<span class="line"><span style="color:#82AAFF">connect</span><span style="color:#89DDFF">(</span><span style="color:#82AAFF">cfg_bad</span><span style="color:#89DDFF">)</span><span style="color:#546E7A;font-style:italic">  # ❌ imprime DSN vazio; quebra a invariante</span></span></code></pre>
 
-    @property
-    def dsn(self) -&gt; str: # uma invariância
-        return self._dsn
-
-
-class MySqlDatabaseConfig(DatabaseConfig):
-    def __init__(self, host: str, user: str, password: str, db: str) -&gt; None:
-        # Não tem DSN, mas força herança para "reaproveitar" métodos
-        self.host = host
-        self.user = user
-        self.password = password
-        self.db = db
-
-        # Apenas inicializa a base com valor vazio (quebrando a invariante)
-        super().__init__("")
-
-
-def connect(cfg: DatabaseConfig) -&gt; None:
-    # Cliente depende da invariante DatabaseConfig.dsn
-    print("Connecting to:", cfg.dsn)
-
-
-cfg_bad = MySqlDatabaseConfig(host="", user="root", password="", db="app")
-connect(cfg_bad)  # ❌ imprime DSN vazio; quebra a invariante</pre
-        >
         <p>
           No exemplo acima, DatabaseConfig foi projetada para trabalhar com dsn
           como parte obrigatória. O subtipo herda a classe mas ignora essa
