@@ -54,7 +54,7 @@
   --bg-surface-default: #f1f1f1;
 
   --fg-default: #101015;
-  --fg-default-muted: #aaaaaf;
+  --fg-default-muted: #303045;
 }
 
 /* ===============================
@@ -65,8 +65,8 @@
   --bg-default: #101015;
   --bg-surface-default: #151520;
 
-  --fg-default: #f1f1ff;
-  --fg-default-muted: #555567;
+  --fg-default: #eeeeff;
+  --fg-default-muted: #ccccff;
 }
 
 /* ===============================
