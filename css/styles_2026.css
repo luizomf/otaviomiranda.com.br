@@ -1,0 +1,323 @@
+/* ===============================
+   DESIGN TOKENS
+================================ */
+
+:root {
+  --main-width: 96rem;
+
+  /* fonts */
+  --font-default: 'Poppins', sans-serif;
+  --font-monospace:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* font sizes */
+  --font-xxsm: 1.4rem;
+  --font-xsm: 1.6rem;
+  --font-sm: 1.8rem;
+  --font-me: 2rem;
+  --font-lg: 2.2rem;
+  --font-xlg: 2.4rem;
+  --font-xxlg: 2.8rem;
+
+  /* headings */
+  --font-heading-xxsm: 2.4rem;
+  --font-heading-xsm: 2.8rem;
+  --font-heading-sm: 3.2rem;
+  --font-heading-me: 3.6rem;
+  --font-heading-lg: 4rem;
+  --font-heading-xlg: 4.4rem;
+  --font-heading-xxlg: 4.8rem;
+  --font-heading-xxxlg: 7.8rem;
+
+  /* weights */
+  --font-bold: 800;
+  --font-regular: 400;
+
+  /* line height */
+  --line-height-me: 1.8;
+  --line-height-heading: 1.15;
+
+  /* spacing */
+  --sm-spacing-xxsm: 1.6rem;
+  --sm-spacing-xsm: 2rem;
+  --sm-spacing-sm: 2.4rem;
+  --sm-spacing-me: 2.8rem;
+  --sm-spacing-lg: 3.2rem;
+  --sm-spacing-xlg: 4rem;
+  --sm-spacing-xxlg: 4.4rem;
+
+  /* radius */
+  --border-radius-me: 8px;
+
+  /* colors (LIGHT) */
+  --bg-default: #ffffff;
+  --bg-surface-default: #f1f1f1;
+
+  --fg-default: #101015;
+  --fg-default-muted: #aaaaaf;
+}
+
+/* ===============================
+   DARK MODE
+================================ */
+
+.dark-mode {
+  --bg-default: #101015;
+  --bg-surface-default: #151520;
+
+  --fg-default: #f1f1ff;
+  --fg-default-muted: #555567;
+}
+
+/* ===============================
+   RESET
+================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+/* ===============================
+   THEME TOGGLE
+================================ */
+
+#theme-mode {
+  position: fixed;
+  right: clamp(1rem, 2.5vw, 3rem);
+  top: clamp(1rem, 2.5vw, 3rem);
+  appearance: none;
+  opacity: 0.3;
+  transition: opacity 300ms ease-in-out;
+}
+
+#theme-mode:hover {
+  opacity: 1;
+}
+
+#theme-mode::before {
+  content: '🌑';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 3rem;
+  width: 3rem;
+  height: 3rem;
+}
+
+#theme-mode:checked::before {
+  content: '☀️';
+}
+
+/* ===============================
+   LAYOUT
+================================ */
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: calc(var(--sm-spacing-me) * 2)
+    clamp(var(--sm-spacing-sm), 5vw, var(--sm-spacing-xlg));
+  font-family: var(--font-default);
+  color: var(--fg-default);
+  font-size: var(--font-me);
+  line-height: var(--line-height-me);
+  background: var(--bg-default);
+  min-height: 100vh;
+}
+
+.article {
+  width: 100%;
+  max-width: var(--main-width);
+  font-size: clamp(var(--font-sm), 4vw, var(--font-xlg));
+  display: flow-root;
+}
+
+/* ===============================
+   VERTICAL RHYTHM (MAGIA)
+================================ */
+
+.article > * + * {
+  margin-top: var(--sm-spacing-xlg);
+}
+
+.article h1 + *,
+.article h2 + *,
+.article h3 + * {
+  margin-top: calc(var(--sm-spacing-xlg) * 0.6);
+}
+
+/* ===============================
+   HEADINGS
+================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: var(--line-height-heading);
+  font-weight: var(--font-bold);
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(var(--font-heading-me), 10vw, var(--font-heading-xxxlg));
+  margin: calc(var(--sm-spacing-xlg) * 2) 0;
+}
+
+h2 {
+  font-size: clamp(var(--font-heading-sm), 8vw, var(--font-heading-xxlg));
+}
+
+h3 {
+  font-size: clamp(var(--font-heading-xsm), 7vw, var(--font-heading-xlg));
+}
+
+h4 {
+  font-size: clamp(var(--font-heading-xxsm), 6vw, var(--font-heading-lg));
+}
+
+h5 {
+  font-size: clamp(var(--font-heading-xxsm), 5vw, var(--font-heading-me));
+}
+
+h6 {
+  font-size: clamp(var(--font-heading-xxsm), 5vw, var(--font-heading-xsm));
+}
+
+/* ===============================
+   TEXT
+================================ */
+
+.article p {
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--fg-default);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ===============================
+   CODE
+================================ */
+
+p code {
+  padding: 0.4rem 1rem;
+  background: var(--bg-surface-default);
+  border-radius: var(--border-radius-me);
+  font-family: var(--font-monospace);
+  font-size: var(--font-sm);
+}
+
+.author {
+  font-size: var(--font-xsm);
+  color: var(--fg-default-muted);
+
+  a {
+    color: var(--fg-default-muted);
+  }
+}
+
+pre {
+  padding: var(--sm-spacing-me);
+  background: var(--bg-surface-default);
+  border-radius: var(--border-radius-me);
+  overflow-x: auto;
+  font-family: var(--font-monospace);
+  font-size: var(--font-sm);
+  line-height: var(--line-height-me);
+  color: var(--fg-default);
+}
+
+pre code {
+  display: block;
+  white-space: pre;
+}
+
+/* ===============================
+   BLOCKQUOTE
+================================ */
+
+blockquote {
+  margin-left: 0;
+  margin-right: 0;
+  background: var(--bg-surface-default);
+  color: var(--fg-default-muted);
+  padding: var(--sm-spacing-me);
+  border-radius: var(--border-radius-me);
+  font-size: var(--font-sm);
+}
+
+blockquote a {
+  color: var(--fg-default-muted);
+}
+
+blockquote p:first-child {
+  margin-top: 0;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* ===============================
+   LISTS / MEDIA
+================================ */
+
+ul,
+ol {
+  padding-left: 4rem;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+/* ===============================
+   Footer
+================================ */
+.nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--sm-spacing-me);
+  width: 100%;
+  max-width: var(--main-width);
+  margin-top: var(--sm-spacing-xlg);
+  font-size: var(--font-xsm);
+  color: var(--fg-default-muted);
+
+  a {
+    color: var(--fg-default-muted);
+  }
+}
