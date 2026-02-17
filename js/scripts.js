@@ -2,21 +2,21 @@
   const form = document.getElementById('main-search');
   const prepend = 'site:otaviomiranda.com.br';
 
-  if (!form) return;
+  if (form) {
+    const input = form.querySelector('input[name="q"]');
 
-  const input = form.querySelector('input[name="q"]');
+    form.addEventListener('submit', e => {
+      const original = input.value;
+      input.value = `${prepend} ${original}`;
 
-  form.addEventListener('submit', e => {
-    const original = input.value;
-    input.value = `${prepend} ${original}`;
+      setTimeout(() => {
+        form.submit();
+        input.value = original;
+      }, 0);
 
-    setTimeout(() => {
-      form.submit();
-      input.value = original;
-    }, 0);
-
-    e.preventDefault();
-  });
+      e.preventDefault();
+    });
+  }
 
   const markdownSource = document.getElementById('markdown-source');
 
