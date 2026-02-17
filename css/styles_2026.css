@@ -67,6 +67,8 @@
   --fg-brand-disabled: #777788;
   --fg-brand-secondary: #eeeeff;
   --fg-brand-secondary-hover: #ffffff;
+
+  --fg-neutral-400: #80809980;
 }
 
 /* ===============================
@@ -274,6 +276,11 @@ pre code {
   white-space: pre;
 }
 
+hr {
+  border: none;
+  border-bottom: 1px solid var(--fg-neutral-400);
+}
+
 /* ===============================
    BLOCKQUOTE
 ================================ */
@@ -315,8 +322,22 @@ img {
   margin: 0 auto;
 }
 
-.p-img {
-  background: red;
+.img-card {
+  max-width: 100%;
+  display: block;
+}
+
+.img-card a {
+  display: block;
+  transform-style: preserve-3d;
+  perspective: 4000px;
+}
+
+.img-card img {
+  display: block;
+  transition: all 300ms ease-in-out;
+  transform: scale(1) rotateY(0) rotateX(0);
+  border-radius: var(--border-radius-me);
 }
 
 /* ===============================
