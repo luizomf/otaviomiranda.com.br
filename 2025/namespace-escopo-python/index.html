@@ -10,821 +10,1207 @@
       content="Em Python, o escopo determina a visibilidade e o tempo de vida dos nomes do seu programa, já o namespace é o local onde os nomes estão salvos."
     />
 
-    <link rel="stylesheet" href="../../css/markdown.css" />
+    <link rel="stylesheet" href="../../css/styles_2026.css" />
 
     <link rel="icon" type="image/webp" href="../../imgs/favicon-1.webp" />
 
-    <!-- Estilo escuro para markdown (GitHub dark) -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-dark.min.css"
-    />
+    <!-- conexão antecipada -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Tema dark do highlight.js -->
+    <!-- fonte -->
     <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css"
     />
   </head>
+
   <body>
-    <nav class="breadcrumb-nav">
-      <a href="/">&larr; ir para início</a>
-
-      <form
-        id="main-search"
-        action="https://www.google.com/search"
-        method="get"
-        target="_blank"
-      >
-        <input type="search" name="q" placeholder="Buscar no site via Google" />
-        <button type="submit">Buscar</button>
-      </form>
-    </nav>
-
-    <article class="markdown-body" id="content"></article>
-
-    <!-- prettier-ignore -->
-    <script type="text/markdown" id="markdown-source">
-
-
-
-
-
-
-
-<h1 id="namespace-escopo-python">
-<a href="#namespace-escopo-python">
-Escopo e Namespace em Python
-</a>
-</h1>
-
-> **Publicado em** 26 de julho de 2025 | **Por**
-> [Luiz Otávio Miranda](https://www.otaviomiranda.com.br/)
-
-Em Python, **escopo** é o contexto onde um **nome** pode ser usado. Ele define a
-região do código, o tempo de vida e os limites de acesso desses nomes.
-
-Durante a execução do seu programa, um ou mais **escopos** estarão ativos. Isso
-determina quais nomes estão visíveis naquele momento e quais resultarão em um
-`NameError` se você tentar acessá-los.
-
-Os nomes definidos dentro de um **escopo** são armazenados em um objeto chamado
-**namespace**. Ele atua como um dicionário, onde a **chave** é o nome (ou
-rótulo) de um objeto e o **valor** é o objeto referenciado.
-
-Neste artigo, vamos explorar não apenas o que são **escopo e namespace**, mas
-também vários outros temas relacionados. Ao final, você terá aprendido:
-
-- O que é **escopo**
-- O que é **namespace**
-- Os tipos de escopo: **Local**, **Enclosing**, **Global** e **Built-in**
-- A regra LEGB: a ordem de busca por nomes
-- Como usar as palavras-chave `global` e `nonlocal` de forma consciente
-- Como usar funções como `globals()`, `locals()`, `vars()` e `dir()` para
-  inspecionar e acessar namespaces
-
----
-
-## Em vídeo
-
-Eu falo sobre escopo e namespace no Python (tudo o que falo neste artigo) em
-dois vídeos no meu canal do Youtube. Caso prefira, assista abaixo:
-
-- Vídeo 1 - [Escopo e Namespace em Python](https://youtu.be/GkgbSIYSHUg)
-- Vídeo 2 -
-  [Entenda a regra LEGB e Enclosing no Python](https://youtu.be/U8oF5WWpEGk)
-
----
-
-<h2 id="o-que-e-escopo">
-<a href="#o-que-e-escopo">
-O que é escopo?
-</a>
-</h2>
-
-Quando você cria um nome em seu código, como uma **variável**, uma **função** ou
-uma **classe**, ele só pode ser usado **dentro de um certo contexto**. Esse
-contexto é o que chamamos de **escopo**.
-
-Em termos práticos, **escopo é a região do seu código onde um nome está
-diretamente acessível**. Ou seja, é onde o Python vai "procurar" por aquele nome
-quando você tenta utilizá-lo. Se você conseguir acessar o nome solicitado,
-falamos que ele está **no escopo**, do contrário ele estará **fora do escopo**.
-
-> **Nota:**: sempre que eu usar a palavra "**nome**", estou me referindo a
-> identificadores como variáveis, classes, funções, módulos ou qualquer coisa
-> que pode receber um **nome** em Python.
-
-Vamos para um exemplo (sempre leia os comentários de código):
-
-```python
-x = 10  # Variável 'x' no escopo global
-
-def mostrar():
-    print(x)  # Acessa 'x' do escopo global
-
-mostrar()
-```
-
-Nesse código, a variável `x` foi definida no **escopo global**, fora de qualquer
-função. Quando `print(x)` é chamado dentro da função `mostrar()`, o Python
-primeiramente busca `x` no escopo local da função. Como não o encontra lá, ele
-"sobe" para o escopo global, onde `x` está disponível.
-
-Mas onde o Python guarda esse nome `x` com o valor `10`?
-
-É nesse ponto que os **namespaces** entram em cena: **todo escopo possui seu
-próprio "espaço de nomes"**, um local onde os nomes e seus respectivos objetos
-são armazenados. Vamos explorar isso em detalhes a seguir.
-
----
-
-<h2 id="o-que-e-namespace">
-<a href="#o-que-e-namespace">
-O que é namespace?
-</a>
-</h2>
-
-Um **namespace** é, essencialmente, uma **estrutura que mapeia nomes a
-objetos**. Você pode pensar nele como um dicionário onde cada **chave** é o nome
-que você define (como o nome de uma variável, função ou classe) e o **valor** é
-o objeto correspondente no seu código.
-
-Sempre que você cria um nome em Python, essa associação é guardada dentro de um
-namespace. Algumas das formas mais comuns de criar nomes incluem:
-
-- **Atribuição:** `variavel = valor`
-- **Importação:** `import modulo` ou `from modulo import objeto`
-- **Definição de funções:** `def minha_funcao(): ...`
-- **Argumentos de funções:** `def outra_funcao(arg1, arg2): ...`
-- **Definição de classes:** `class MinhaClasse: ...`
-
-> **Nota:** existem diferenças entre operações de atribuição (criar ou modificar
-> um valor) e operações de acesso (apenas ler um valor). Vamos falar sobre isso
-> nesse artigo na seção
-> "[global e nonlocal - alterando nomes fora do escopo](#global-nonlocal-324)".
-
-Todos esses exemplos resultam na criação de nomes dentro do **namespace** ativo
-no momento da sua definição.
-
-Cada namespace está diretamente ligado a um **escopo**, que determina onde e
-quando aquele nome estará disponível durante a execução do seu código.
-
-Embora você possa inspecionar namespaces usando funções como `globals()` e
-`locals()` (que retornam representações em dicionário), isso é mais comum para
-introspecção de código ou fins didáticos do que para o uso diário.
-
-Existem diferentes tipos de namespaces em Python, cada um com sua finalidade:
-
-- **Global:** Cada módulo Python possui um namespace global, que armazena os
-  nomes definidos diretamente na sua raiz, fora de funções ou classes.
-- **Local:** Cada vez que uma função é chamada, um namespace local é criado para
-  ela. Ele existe apenas enquanto a função está em execução e contém as
-  variáveis e argumentos definidos dentro dela.
-- **Built-in:** Este namespace contém os nomes de todas as funções e exceções
-  nativas do Python, como `print()`, `len()`, `str()`, etc. Ele é carregado
-  automaticamente.
-- **Enclosing (Não-local):** Quando uma função é definida dentro de outra, a
-  função interna pode acessar os nomes do namespace da função externa. Este atua
-  como um escopo "intermediário" entre o local e o global.
-- **Classes:** O corpo de uma classe também forma seu próprio namespace, onde os
-  atributos e métodos da classe são definidos. É por isso que você acessa
-  membros da classe usando a notação de ponto (`objeto.atributo`).
-
-É importante notar que os namespaces de funções (Local e Enclosing) são criados
-dinamicamente no momento da execução. Quando uma função é chamada, o
-interpretador Python gera um **Frame de Execução** (ou Stack Frame) que
-encapsula as variáveis locais, parâmetros e outras informações necessárias para
-aquela chamada específica. A função `locals()` pode ser usada dentro de uma
-função para acessar seu namespace local.
-
-Uma característica fundamental é que **todos os namespaces são independentes
-entre si**. Por exemplo, você pode ter uma função chamada `processar()` em dois
-módulos diferentes (`modulo1.py` e `modulo2.py`). Não haverá conflito, pois cada
-uma reside em seu próprio namespace. Para acessá-las, basta prefixar com o nome
-do módulo: `modulo1.processar()` e `modulo2.processar()`.
-
----
-
-### `globals()` e `locals()` para inspeção de namespaces
-
-As funções `globals()` e `locals()` são ferramentas valiosas para inspecionar
-namespaces em tempo de execução:
-
-- [`globals()`](https://docs.python.org/3/library/functions.html#globals):
-  Retorna um dicionário que representa o **namespace global** do módulo atual.
-  Isso inclui todos os nomes definidos na raiz do arquivo.
-- [`locals()`](https://docs.python.org/3/library/functions.html#locals): Retorna
-  um dicionário com os nomes definidos no **escopo local** onde a função está
-  sendo executada. **Importante**: ela só inclui nomes que já foram definidos
-  _antes_ da sua chamada, então geralmente é melhor chamá-la no final do bloco.
-
-Vejamos um exemplo prático:
-
-```python
-# Escopo global
-
-def show_namespace() -> None:
-    # Escopo local
-    module_namespace = globals()
-    print("Conteúdo de globals():", module_namespace)
-
-    # Note que 'function_namespace' não aparecerá no locals() se chamado antes dela
-    function_namespace = locals()
-    print("Conteúdo de locals():", function_namespace)
-
-
-if __name__ == "__main__":
-    show_namespace()
-```
-
-A saída de `globals()` será algo parecido com:
-
-```python
-{
-    '__name__': '__main__',
-    '__doc__': None,
-    # ... outras chaves padrão do módulo
-    '__builtins__': <module 'builtins' (built-in)>,
-    'show_namespace': <function show_namespace at 0x...> # Nossa função
-}
-```
-
-Já a saída de `locals()` mostrará:
-
-```python
-{
-    'module_namespace': {...} # O dicionário retornado por globals()
-}
-```
-
-Alguns pontos a destacar nessa saída:
-
-- `__name__`: Indica o nome do módulo. Se for o script principal, será
-  `__main__`.
-- `__builtins__`: Referência ao namespace com as funções nativas do Python.
-- `show_namespace`: O nome da nossa função, definida no escopo global.
-
----
-
-### `vars()` e `dir()` - Outras formas de inspecionar
-
-Além de `globals()` e `locals()`, `vars()` e `dir()` também permitem inspecionar
-nomes, mas com algumas diferenças importantes:
-
-- [`vars()`](https://docs.python.org/3/library/functions.html#vars): Retorna o
-  atributo `__dict__` de um objeto, que é onde seus atributos são armazenados.
-  Se chamada sem argumentos, `vars()` se comporta exatamente como `locals()`,
-  retornando o namespace local.
-- [`dir()`](https://docs.python.org/3/library/functions.html#dir): Sem
-  argumentos, `dir()` lista todos os nomes disponíveis no escopo atual. Com um
-  objeto como argumento, tenta listar todos os nomes acessíveis nele (como
-  métodos e atributos). Note que `dir()` retorna apenas os _nomes_, não os
-  objetos ou seus valores.
-
-Vamos ver com um exemplo:
-
-```python
-def ver_namespace_local():
-    var_local = "variável local"
-
-    print("\nDENTRO DA FUNÇÃO (ESCOPO LOCAL)")
-    print("Saída de vars():", vars())
-    print("Saída de dir():", dir())
-
-
-print("FORA DA FUNÇÃO (ESCOPO GLOBAL)")
-print("Saída de vars():", vars())
-print("Saída de dir():", dir())
-
-ver_namespace_local()
-```
-
-Saída de exemplo:
-
-```python
-# FORA DA FUNÇÃO (ESCOPO GLOBAL)
-# Saída de vars():
-{
-    # ... omitidos outros resultados globais
-    'ver_namespace_local': <function ver_namespace_local at 0x...>
-}
-# Saída de dir():
-[
-    '__annotations__', '__builtins__', '__cached__', '__doc__',
-    '__file__', '__loader__', '__name__', '__package__', '__spec__',
-    'ver_namespace_local' # Nossa função global
-]
-
-# DENTRO DA FUNÇÃO (ESCOPO LOCAL)
-# Saída de vars():
-{
-    'var_local': 'variável local'
-}
-# Saída de dir():
-['var_local']
-```
-
-Como pode ver, quando usadas sem argumentos, `vars()` e `dir()` se assemelham a
-`locals()` e `globals()` no que diz respeito ao escopo atual. A grande diferença
-é que **`vars()` e `dir()` são mais versáteis**, pois podem receber um objeto
-como argumento, permitindo inspecionar namespaces de módulos importados,
-instâncias de classe e outros objetos.
-
----
-
-<h2 id="regra-legb-py">
-<a href="#regra-legb-py">
-Regra LEGB - Local, Enclosing, Global e Built-In
-</a>
-</h2>
-
-Em Python, é bem comum ter um escopo dentro do outro, pense em funções dentro de
-módulos, ou até mesmo funções aninhadas dentro de outras funções.
-
-Quando isso acontece e você tenta acessar um nome (como uma variável ou função),
-o interpretador precisa de uma ordem clara para encontrá-lo, dependendo do ponto
-em que você está no código.
-
-Essa ordem é definida pela regra **LEGB**. Sempre que você referencia um nome,
-seja para leitura, escrita ou execução (tipo `x` ou `print()`), o Python o busca
-sequencialmente, do escopo mais interno para o mais externo:
-
-- **Local (L):** Primeiro, o Python procura no escopo da **função atual** onde o
-  nome está sendo referenciado. Este é o ambiente mais imediato.
-- **Enclosing (E) / Não-Local:** Se o nome não for encontrado localmente, a
-  busca avança para o escopo das **funções que envolvem a função atual** (se
-  houver). Pense nisso como o escopo "da função de fora".
-- **Global (G):** Caso o nome ainda não seja encontrado, o Python então procura
-  no **escopo do módulo atual**. Este é o nível superior do seu arquivo Python.
-- **Built-in (B):** Por último, a busca chega ao escopo `built-in`, que contém
-  todos os nomes nativos do Python, como funções (`len()`, `print()`) e exceções
-  (`NameError`).
-
-Se o nome não for encontrado em nenhum desses escopos, o Python levanta uma
-exceção `NameError`, indicando que o nome não foi definido ou não está acessível
-no contexto atual.
-
-Para visualizar como esses escopos se aninham, imagine a seguinte representação:
-
-```text
- ┌─────────────────────┐
- │ ┌───────────────┐   │
- │ │ ┌─────────┐   │   │
- │ │ │ ┌───┐   │   │   │
- │ │ │ │ L→│ → │ → │ → │ # Local (L): Onde você está agora, o mais interno
- │ │ │ └───┘   │   │   │
- │ │ │       E→│ → │ → │ # Enclosing (E): A função que envolve a sua função
- │ │ └─────────┘   │   │
- │ │             G→│ → │ # Global (G): O módulo inteiro do seu arquivo
- │ └───────────────┘   │
- │                  B→✘│ # Built-in (B): Mais externo, tudo do Python
- └─────────────────────┘
-```
-
-Se preferir, preparei uma imagem também para te ajudar a entender melhor.
-
-<p align="center"><img 
- src='images/python-legb-rule.webp'
- alt='Diagrama mostrando a regra LEGB do Python' 
-/></p>
-
-A seguir, vamos ver exemplos de código para tornar cada um desses escopos
-cristalino.
-
----
-
-### A regra LEGB em ação
-
-Para entender a **regra LEGB** na prática, vamos usar um código simples e
-observar como o Python busca os nomes em cada escopo. Usei bastante os
-comentátios do código para detalhar melhor o que está acontecendo.
-
-```python
-# Escopo do módulo: Global (G)
-var_global = "Estou no escopo global!"
-
-def funcao_externa() -> None:
-    # Escopo da função: Local (L) para esta função
-    var_local = "Estou no escopo local!"
-
-    # Busca de 'var_local':
-    # O Python encontra 'var_local' no escopo Local (L).
-    print(var_local)
-
-    # Busca de 'var_global':
-    # Não encontra 'var_global' no Local (L), então busca no Global (G).
-    print(var_global)
-
-    # Busca de 'print':
-    # Não encontra 'print' em L ou G, então busca no Built-in (B).
-    print(print) # Imprime a representação da própria função print
-
-
-if __name__ == "__main__":
-    funcao_externa()
-```
-
-Analisando o fluxo de busca de nomes nesse exemplo, o Python segue a regra LEGB
-(sempre do mais interno ao mais externo):
-
-- **`var_local`**: Encontrado diretamente no escopo **L**ocal da
-  `funcao_externa`. Trajeto: **L**.
-- **`var_global`**: Não encontrado em **L**, a busca sobe para o escopo
-  **G**lobal. Trajeto: **L → G**.
-- **`print`**: Não encontrado em **L** nem em **G**, a busca atinge o escopo
-  **B**uilt-in. Trajeto: **L → G → B**.
-
-É fundamental entender que essa busca é sempre **unidirecional: de dentro para
-fora**. Escopos mais internos conseguem "enxergar" os nomes definidos nos
-escopos mais externos (que os contêm), mas o contrário não é verdadeiro.
-
-Veja um exemplo clássico de `NameError` que prova isso:
-
-```python
-def funcao_interna():
-    mensagem = "Olá do escopo local!"
-
-# Erro! 'mensagem' só existe dentro de 'funcao_interna'
-print(mensagem)
-# Saída esperada: NameError: name 'mensagem' is not defined
-```
-
-A mensagem de erro `NameError: name 'mensagem' is not defined` ocorre porque, no
-escopo global, o Python não consegue "descer" para o escopo local de
-`funcao_interna` para encontrar `mensagem`.
-
-> **Em resumo: a regra LEGB é uma escada de subida. Você só vê os andares acima
-> ou o seu próprio. Nunca consegue ver o que está nos andares abaixo do seu.**
-
----
-
-### Keywords não seguem a LEGB!
-
-É importante diferenciar nomes de **keywords** (palavras-chave). Termos como
-`def`, `if`, `for`, `while`, `return`, `True`, `False`, `None` e `import` são
-partes da gramática do Python, não nomes.
-
-Por serem palavras reservadas, elas **não pertencem a nenhum namespace** e,
-consequentemente, **não seguem a regra LEGB**. Tentar usá-las como variáveis
-resultará em um erro de sintaxe (`SyntaxError`) no momento da análise do código,
-antes mesmo da execução:
-
-```python
-# Isso vai causar um SyntaxError!
-# Esse código nem chega a rodar
-def = 10
-```
-
-Se quiser ver a lista completa de palavras-chave reservadas, execute o comando
-abaixo no seu terminal Python:
-
-```bash
-python -c "help('keywords')"
-```
-
-Isso mostrará a lista das `keywords` do Python, como `False`, `True`, `None`,
-`and`, `as`, `assert`, `break`, `class`, etc. (Existem também as _soft
-keywords_, mas isso fica para outra conversa).
-
----
-
-<h2 id="local-enclosing-879">
-<a href="#local-enclosing-879">
-Enclosing - entenda o escopo aninhado
-</a>
-</h2>
-
-Enquanto os escopos **Global**, **Local** e **Built-in** costumam ser mais
-intuitivos, o escopo **Enclosing** gera mais dúvidas porque ele só aparece em um
-cenário específico: quando temos **funções aninhadas**, ou seja, uma função
-definida dentro de outra. Vamos focar nele agora.
-
-Considere este código:
-
-```python
-def funcao_externa():
-    # 'var_enclosing' é local para 'funcao_externa'
-    # e Enclosing para 'funcao_interna'
-    var_enclosing = "Eu sou do escopo enclosing!"
-
-    def funcao_interna():
-        # 'var_local' está no escopo Local de 'funcao_interna'
-        var_local = "Eu sou do escopo local!"
-
-        # Acessando 'var_local' (L) e 'var_enclosing' (E)
-        print(var_local, var_enclosing)
-
-    # Chamamos a função interna para executá-la
-    funcao_interna()
-
-funcao_externa()
-# Saída esperada: Eu sou do escopo local! Eu sou do escopo enclosing!
-```
-
-Como você pode ver na saída, a `funcao_interna()` consegue acessar tanto
-`var_local` (que está em seu escopo **L**ocal) quanto `var_enclosing` (que está
-no escopo **E**nclosing, da `funcao_externa`). Isso acontece exatamente por
-causa da regra **LEGB**: o Python busca os nomes de dentro para fora,
-encontrando `var_enclosing` no nível acima.
-
-Por outro lado, a `funcao_externa()` **não tem acesso direto** a `var_local`,
-pois `var_local` reside em um escopo mais interno que o dela. Da mesma forma, o
-escopo global não consegue acessar nenhuma das variáveis definidas dentro de
-`funcao_externa` ou `funcao_interna`.
-
----
-
-### Call stack e o tempo de vida dos escopos
-
-A razão para esse comportamento reside em como o Python gerencia a execução de
-funções utilizando a **call stack** (pilha de chamadas).
-
-Sempre que uma função é chamada, o Python cria um **frame de execução** (ou
-_stack frame_) para ela. Esse frame é empilhado no topo da call stack, que
-funciona no esquema LIFO (Last-In, First-Out: o último que entra é o primeiro
-que sai). Apenas o frame no topo da pilha está ativo. Quando a função termina
-sua execução, seu frame é **descartado** da pilha, e o Python retorna o controle
-para o frame anterior. É por isso que o escopo local de uma função só "existe"
-enquanto ela está em execução.
-
-<p align="center">
-<img src='images/call-stack-example.webp' alt='Exemplo da call stack do Python em execução' />
-</p>
-
-A imagem acima ilustra a call stack em ação. O ícone do Python indica a posição
-atual do interpretador. As **setas vermelhas** (`--->`) representam o **fluxo de
-execução** e a criação/remoção de frames na pilha. As **setas amarelas** (`↓`)
-mostram a **direção de busca de nomes** de acordo com a regra LEGB (do escopo
-mais interno para o mais externo).
-
-Observe o fluxo na imagem:
-
-1.  A execução inicia no `mod.py` (escopo Global).
-2.  Ao chamar `funcao_externa()`, um novo frame é empilhado. O interpretador se
-    move para dentro dela.
-3.  Dentro de `funcao_externa()`, ao chamar `funcao_interna()`, outro frame é
-    empilhado, e o interpretador se move para lá.
-4.  Quando `funcao_interna()` termina, seu frame é desempilhado, e o controle
-    retorna para `funcao_externa()`.
-5.  Finalmente, `funcao_externa()` termina, seu frame é desempilhado, e a
-    execução retorna ao `mod.py` (escopo global), concluindo o processo.
-
-Esse mecanismo é fundamental para a organização e o isolamento do código:
-
-- Você consegue acessar nomes definidos em escopos mais externos (Globais,
-  Enclosing) a partir de dentro de uma função.
-- Mas **não consegue acessar nomes definidos dentro de funções estando fora
-  delas**, porque o escopo local de uma função **deixa de existir** (é
-  descartado) assim que ela termina de executar.
-
-Para um aprofundamento sobre a call stack e funções, especialmente em cenários
-como recursão, recomendo este material:
-
-- [Funções recursivas com Python](https://www.otaviomiranda.com.br/2020/funcoes-recursivas-com-python/)
-
-Agora que entendemos o Enclosing e o que acontece por baixo dos panos, podemos
-continuar.
-
----
-
-<h2 id="global-nonlocal-324">
-<a href="#global-nonlocal-324">
-global e nonlocal - Alterando nomes fora do escopo atual
-</a>
-</h2>
-
-Nas seções anteriores, focamos em como os nomes são **acessados (lidos)** de um
-escopo em outro, um processo que tende a ser mais direto.
-
-No entanto, a tentativa de **alterar** um nome que não foi definido no escopo
-atual gera uma ambiguidade para o interpretador. Como ele saberia se você quer
-criar um **novo nome local** (com o mesmo rótulo) ou **modificar o nome
-existente** em um escopo externo? Essa é a questão.
-
-Essa ambiguidade surge justamente pela flexibilidade que o Python oferece: a
-capacidade de ter nomes iguais em escopos diferentes sem que um afete o outro, a
-menos que você explicitamente peça.
-
-Mas... antes de mergulharmos nas soluções, uma pausa para as **boas práticas**.
-
----
-
-### Devo alterar nomes fora de seu escopo imediato?
-
-A principal função do escopo e do namespace é **proteger nomes de alterações
-acidentais** e garantir o isolamento do código. Fazer alterações intencionais em
-nomes que residem fora do escopo imediato vai, em certa medida, contra essa
-ideia central.
-
-Vou listar alguns problemas que essa prática pode gerar (e a lista é bem maior):
-
-- **Dificulta o Debug:** Rastrear a origem de um bug se torna um pesadelo quando
-  variáveis são alteradas de forma "mágica" em diferentes partes do código.
-- **Dificulta Testes:** Funções que dependem ou alteram o estado global são mais
-  complexas de testar isoladamente, exigindo um setup e cleanup maiores.
-- **Reduz a Legibilidade e Manutenção:** O código fica menos intuitivo, exigindo
-  que o leitor "pule" entre escopos para entender o fluxo de dados.
-- **Aumenta o Acoplamento:** Módulos e funções se tornam mais interdependentes,
-  tornando o sistema mais rígido e difícil de refatorar.
-- **Problemas em Concorrência:** Em ambientes multi-thread ou assíncronos, a
-  alteração de estado global pode levar a _race conditions_ e bugs extremamente
-  difíceis de diagnosticar.
-- **Contraria Paradigmas Comuns:** Vai contra princípios de paradigmas como
-  programação funcional (que preza imutabilidade) e orientação a objetos (que
-  encapsula estado).
-
-Se você se encontrar na situação de precisar alterar o valor de uma variável
-fora do seu escopo imediato, **pare e reavalie a sua solução**. Quase sempre há
-uma forma mais elegante e segura de resolver o problema, como passar os valores
-via argumentos ou retornar novos valores.
-
-Ok, com essa ressalva importante em mente, agora sim vamos entender como
-`global` e `nonlocal` funcionam para alterar variáveis fora do seu escopo local.
-
----
-
-### `global` - alterando nomes no escopo global
-
-Vamos analisar o comportamento padrão quando tentamos alterar uma variável
-global dentro de uma função. Acompanhe o código e o erro que ele gera:
-
-```python
-# Escopo global (G)
-variavel = "global"
-
-def funcao():
-    # Tentativa de usar `variavel` (G)
-    print(variavel) # <-- ISSO VAI GERAR O ERRO
-
-    # Criei um novo nome `variavel` no escopo LOCAL (L)
-    # Isso fez o nome `variavel` deixar de existir no print acima
-    variavel = "local" # <-- ESSE É O MOTIVO DO ERRO
-
-    # Agora, estamos tentando usar a `variavel` LOCAL
-    print(variavel)
-
-funcao() # <-- O interpretador não passa daqui
-print(variavel)
-# A `variavel` global original permanece inalterada
-```
-
-Ao executar `funcao()`, você receberá um `UnboundLocalError`:
-
-```
-UnboundLocalError: cannot access local variable 'variavel'
-where it is not associated with a value
-```
-
-O interpretador Python é inteligente: ao ver a linha `variavel = "local"` dentro
-da função, ele assume que `variavel` será uma **variável local** para
-`funcao()`. Portanto, quando `print(variavel)` é chamado _antes_ dessa
-atribuição local, Python busca por `variavel` no escopo local, encontra uma
-referência de atribuição futura, mas percebe que ela ainda não tem um valor
-associado **dentro daquele escopo local**. Isso causa o `UnboundLocalError`.
-
-Para informar ao Python que você deseja modificar a variável `variavel` que
-reside no escopo **global**, utilizamos a palavra-chave `global`:
-
-```python
-variavel = "global"
-
-def funcao():
-    # 'global variavel' informa ao interpretador
-    # que estamos referenciando e modificando a variável global.
-    global variavel
-
-    # Agora, podemos usar a variável global ANTES de alterá-la
-    print(variavel) # Saída: global
-
-    # Esta atribuição agora modifica a variável global
-    variavel = "local"
-    print(variavel) # Saída: local
-
-funcao()
-print(variavel) # Saída: local (o valor global foi alterado com sucesso)
-```
-
-Com `global variavel`, a primeira chamada a `print(variavel)` acessa o valor
-"global". Em seguida, a linha `variavel = "local"` realmente altera a `variavel`
-do escopo global.
-
-**Importante:** A declaração `global` deve ser feita para **cada variável
-global** que você pretende alterar dentro de **cada função** onde essa alteração
-ocorrerá.
-
-Finalmente, vale ressaltar que `global` **só funciona para nomes no escopo
-global**. Se você precisar alterar um nome em um escopo `Enclosing` (não-local),
-você precisará usar outra palavra-chave do Python: `nonlocal`.
-
----
-
-### `nonlocal`: alterando nomes do escopo enclosing
-
-A palavra-chave `nonlocal` tem uma função similar a `global`, mas atua no escopo
-**Enclosing** (o `E` da regra LEGB), ou seja, em variáveis de funções externas
-que envolvem a função atual, mas que **não são o escopo global**.
-
-Isso é particularmente útil em cenários onde uma função interna precisa
-modificar uma variável definida na função que a contém.
-
-Veja o exemplo a seguir com apenas dois níveis de aninhamento:
-
-```python
-def soma_mais_um():
-    # 'numero' está no escopo Enclosing para 'incrementa'
-    numero = 0
-
-    def incrementa():
-        # 'nonlocal numero' informa que queremos modificar
-        # o 'numero' do escopo Enclosing (soma_mais_um)
-        nonlocal numero
-        numero += 1
-        print(f"Número atual (interno): {numero}")
-
-    # Até aqui, nada alterado
-    print(f"Número inicial (externo): {numero}")
-
-    incrementa() # A alteração ocorre aqui
-    print(f"Número final (externo): {numero}")
-
-soma_mais_um()
-# Saída esperada:
-# Número inicial (externo): 0
-# Número atual (interno): 1
-# Número final (externo): 1
-```
-
-Neste exemplo, a função `incrementa()` consegue modificar a variável `numero`
-que pertence à `soma_mais_um()`, no seu escopo `Enclosing`. Se `nonlocal numero`
-não fosse usado, `incrementa()` criaria sua própria variável local `numero`, sem
-afetar a de fora.
-
-**Cuidado com a complexidade:** Embora `nonlocal` seja uma ferramenta poderosa e
-frequentemente usada em padrões como _closures_ e _decorators_, o aninhamento
-excessivo de funções e o uso indiscriminado de `nonlocal` podem levar a um
-código difícil de ler e depurar. Como já mencionado na seção de boas práticas,
-sempre reavalie se há uma forma mais clara de estruturar seu código.
-
----
-
-### Concluindo - agora você passou de nível 😁
-
-E assim chegamos ao fim do nosso texto sobre os conceitos de **escopo** e
-**namespace** em Python. Embora esse assunto possa parecer muito abstrato, ele
-acaba sendo um dos pontos principais para compreender como o Python funciona. Na
-verdade, não só Python! Muitas outras linguagens funcionam de maneira muito
-similar. Você vai levar esse conhecimento para todas elas.
-
-Revisamos que:
-
-- Um **escopo** define o local do código onde um nome estará visível e
-  acessível.
-- Um **namespace** é a estrutura que armazena essas associações entre nomes e
-  objetos.
-- **Escopo** e **Namespace** são dois assuntos conectados em Python
-- A **regra LEGB** (Local, Enclosing, Global, Built-in) é a ordem pela qual o
-  Python busca por nomes, sempre de dentro para fora.
-- Vimos como as funções `globals()`, `locals()`, `vars()` e `dir()` podem nos
-  ajudar a inspecionar esses "dicionários" de nomes em tempo real.
-- E, finalmente, aprendemos sobre as palavras-chave `global` e `nonlocal`, que
-  nos permitem, quando necessário e com muita cautela, alterar nomes em escopos
-  externos ao imediato.
-
-Dominar esses conceitos não é apenas sobre "saber o que acontece", mas sobre
-**entender por que seu código se comporta como se comporta**, evitar erros
-comuns como o `UnboundLocalError`, e escrever um código mais robusto e
-previsível.
-
-Lembre-se sempre da lição sobre as **boas práticas**: alterar nomes fora do seu
-escopo imediato deve ser a exceção, não a regra. Priorize a clareza, o baixo
-acoplamento e a previsibilidade do seu código.
-
-Com essa base sólida sobre escopo e namespace, você está pronto para mergulhar
-em tópicos mais avançados do Python, como _closures_ e _decorators_, que
-dependem diretamente desse entendimento. Continue praticando e experimentando!
-
----
-
-
-
-
-
-
-
-
-    </script>
-    <!-- prettier-ignore -->
-
-    <!-- Markdown parser -->
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"
-    ></script>
-    <script
-      defer
-      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
-    ></script>
-    <script defer src="../../js/scripts.js"></script>
+    <input
+      aria-label="Tema Claro ou Escuro (Temporário)"
+      title="Tema Claro ou Escuro (Temporário)"
+      id="theme-mode"
+      type="checkbox"
+    />
+
+    <main class="main">
+      <aside class="nav">
+        <a class="copyright-link" href="/">Otávio Miranda</a>
+        <a
+          target="_blank"
+          href="https://beacons.ai/otaviomiranda"
+          rel="nofollow noopener noreferrer"
+          >Contatos</a
+        >
+      </aside>
+
+      <article class="article">
+        <h1>Escopo e Namespace em Python</h1>
+
+        <p class="author">
+          <strong>Publicado em</strong> 26 de julho de 2025 |
+          <strong>Por</strong>
+          <a href="https://www.otaviomiranda.com.br/">Luiz Otávio Miranda</a>
+        </p>
+
+        <p>
+          Em Python, <strong>escopo</strong> é o contexto onde um
+          <strong>nome</strong> pode ser usado. Ele define a região do código, o
+          tempo de vida e os limites de acesso desses nomes. Durante a execução
+          do seu programa, um ou mais <strong>escopos</strong> estarão ativos.
+          Isso determina quais nomes estão visíveis naquele momento e quais
+          resultarão em um
+
+          <code>NameError</code> se você tentar acessá-los.
+        </p>
+
+        <p>
+          Os nomes definidos dentro de um <strong>escopo</strong> são
+          armazenados em um objeto chamado <strong>namespace</strong>. Ele atua
+          como um dicionário, onde a <strong>chave</strong> é o nome (ou rótulo)
+          de um objeto e o <strong>valor</strong> é o objeto referenciado.
+        </p>
+
+        <p>
+          Neste artigo, vamos explorar não apenas o que são
+          <strong>escopo e namespace</strong>, mas também vários outros temas
+          relacionados. Ao final, você terá aprendido:
+        </p>
+
+        <ul>
+          <li>O que é <strong>escopo</strong></li>
+          <li>O que é <strong>namespace</strong></li>
+          <li>
+            Os tipos de escopo: <strong>Local</strong>,
+            <strong>Enclosing</strong>, <strong>Global</strong> e
+            <strong>Built-in</strong>
+          </li>
+          <li>A regra LEGB: a ordem de busca por nomes</li>
+          <li>
+            Como usar as palavras-chave <code>global</code> e
+            <code>nonlocal</code> de forma consciente
+          </li>
+          <li>
+            Como usar funções como <code>globals()</code>,
+            <code>locals()</code>, <code>vars()</code> e <code>dir()</code> para
+            inspecionar e acessar namespaces
+          </li>
+        </ul>
+
+        <h2 id="em-vídeo">Em vídeo</h2>
+        <p>
+          Eu falo sobre escopo e namespace no Python (tudo o que falo neste
+          artigo) em dois vídeos no meu canal do Youtube. Caso prefira, assista
+          abaixo:
+        </p>
+
+        <ul>
+          <li>
+            Vídeo 1 -
+            <a href="https://youtu.be/GkgbSIYSHUg"
+              >Escopo e Namespace em Python</a
+            >
+          </li>
+          <li>
+            Vídeo 2 -
+            <a href="https://youtu.be/U8oF5WWpEGk"
+              >Entenda a regra LEGB e Enclosing no Python</a
+            >
+          </li>
+        </ul>
+
+        <h2 id="o-que-é-escopo">O que é escopo?</h2>
+
+        <p>
+          Quando você cria um nome em seu código, como uma
+          <strong>variável</strong>, uma <strong>função</strong> ou uma
+          <strong>classe</strong>, ele só pode ser usado
+          <strong>dentro de um certo contexto</strong>. Esse contexto é o que
+          chamamos de <strong>escopo</strong>.
+        </p>
+
+        <p>
+          Em termos práticos, <em></em>escopo é a região do seu código onde um
+          nome está diretamente acessível<em></em>. Ou seja, é onde o Python vai
+          &quot;procurar&quot; por aquele nome quando você tenta utilizá-lo. Se
+          você conseguir acessar o nome solicitado, falamos que ele está
+          <strong>no escopo</strong>, do contrário ele estará
+          <strong>fora do escopo</strong>.
+        </p>
+
+        <blockquote>
+          <p>
+            <strong>Nota:</strong>: sempre que eu usar a palavra
+            &quot;<strong>nome</strong>&quot;, estou me referindo a
+            identificadores como variáveis, classes, funções, módulos ou
+            qualquer coisa que pode receber um <strong>nome</strong> em Python.
+          </p>
+        </blockquote>
+
+        <p>Vamos para um exemplo (sempre leia os comentários de código):</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CDD6F4">x </span><span style="color:#94E2D5">=</span><span style="color:#FAB387"> 10</span><span style="color:#6C7086;font-style:italic">  # Variável 'x' no escopo global</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> mostrar</span><span style="color:#9399B2">():</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">x</span><span style="color:#9399B2">)</span><span style="color:#6C7086;font-style:italic">  # Acessa 'x' do escopo global</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89B4FA">mostrar</span><span style="color:#9399B2">()</span></span></code></pre>
+
+        <p>
+          Nesse código, a variável <code>x</code> foi definida no
+          <strong>escopo global</strong>, fora de qualquer função. Quando
+          <code>print(x)</code> é chamado dentro da função
+          <code>mostrar()</code>, o Python primeiramente busca <code>x</code> no
+          escopo local da função. Como não o encontra lá, ele &quot;sobe&quot;
+          para o escopo global, onde <code>x</code> está disponível.
+        </p>
+
+        <p>
+          Mas onde o Python guarda esse nome <code>x</code> com o valor
+          <code>10</code>?
+        </p>
+
+        <p>
+          É nesse ponto que os <strong>namespaces</strong> entram em cena:
+          <em></em>todo escopo possui seu próprio &quot;espaço de nomes&quot;<em
+          ></em>, um local onde os nomes e seus respectivos objetos são
+          armazenados. Vamos explorar isso em detalhes a seguir.
+        </p>
+
+        <h2 id="o-que-é-namespace">O que é namespace?</h2>
+
+        <p>
+          Um <strong>namespace</strong> é, essencialmente, uma
+          <em></em>estrutura que mapeia nomes a objetos<strong
+            >. Você pode pensar nele como um dicionário onde cada </strong
+          >chave<em></em> é o nome que você define (como o nome de uma variável,
+          função ou classe) e o <strong>valor</strong> é o objeto correspondente
+          no seu código.
+        </p>
+
+        <p>
+          Sempre que você cria um nome em Python, essa associação é guardada
+          dentro de um namespace. Algumas das formas mais comuns de criar nomes
+          incluem:
+        </p>
+
+        <ul>
+          <li><strong>Atribuição:</strong> <code>variavel = valor</code></li>
+          <li>
+            <strong>Importação:</strong> <code>import modulo</code> ou
+            <code>from modulo import objeto</code>
+          </li>
+          <li>
+            <strong>Definição de funções:</strong>
+            <code>def minha_funcao(): ...</code>
+          </li>
+          <li>
+            <strong>Argumentos de funções:</strong>
+            <code>def outra_funcao(arg1, arg2): ...</code>
+          </li>
+          <li>
+            <strong>Definição de classes:</strong>
+            <code>class MinhaClasse: ...</code>
+          </li>
+        </ul>
+
+        <blockquote>
+          <p>
+            <strong>Nota:</strong> existem diferenças entre operações de
+            atribuição (criar ou modificar um valor) e operações de acesso
+            (apenas ler um valor). Vamos falar sobre isso nesse artigo mais
+            adiante.
+          </p>
+        </blockquote>
+
+        <p>
+          Todos esses exemplos resultam na criação de nomes dentro do
+          <strong>namespace</strong> ativo no momento da sua definição.
+        </p>
+
+        <p>
+          Cada namespace está diretamente ligado a um <strong>escopo</strong>,
+          que determina onde e quando aquele nome estará disponível durante a
+          execução do seu código.
+        </p>
+
+        <p>
+          Embora você possa inspecionar namespaces usando funções como
+          <code>globals()</code> e <code>locals()</code> (que retornam
+          representações em dicionário), isso é mais comum para introspecção de
+          código ou fins didáticos do que para o uso diário.
+        </p>
+
+        <p>
+          Existem diferentes tipos de namespaces em Python, cada um com sua
+          finalidade:
+        </p>
+
+        <ul>
+          <li>
+            <strong>Global:</strong> Cada módulo Python possui um namespace
+            global, que armazena os nomes definidos diretamente na sua raiz,
+            fora de funções ou classes.
+          </li>
+          <li>
+            <strong>Local:</strong> Cada vez que uma função é chamada, um
+            namespace local é criado para ela. Ele existe apenas enquanto a
+            função está em execução e contém as variáveis e argumentos definidos
+            dentro dela.
+          </li>
+          <li>
+            <strong>Built-in:</strong> Este namespace contém os nomes de todas
+            as funções e exceções nativas do Python, como <code>print()</code>,
+            <code>len()</code>, <code>str()</code>, etc. Ele é carregado
+            automaticamente.
+          </li>
+          <li>
+            <strong>Enclosing (Não-local):</strong> Quando uma função é definida
+            dentro de outra, a função interna pode acessar os nomes do namespace
+            da função externa. Este atua como um escopo
+            &quot;intermediário&quot; entre o local e o global.
+          </li>
+          <li>
+            <strong>Classes:</strong> O corpo de uma classe também forma seu
+            próprio namespace, onde os atributos e métodos da classe são
+            definidos. É por isso que você acessa membros da classe usando a
+            notação de ponto (<code>objeto.atributo</code>).
+          </li>
+        </ul>
+
+        <p>
+          É importante notar que os namespaces de funções (Local e Enclosing)
+          são criados dinamicamente no momento da execução. Quando uma função é
+          chamada, o interpretador Python gera um
+          <strong>Frame de Execução</strong> (ou Stack Frame) que encapsula as
+          variáveis locais, parâmetros e outras informações necessárias para
+          aquela chamada específica. A função <code>locals()</code> pode ser
+          usada dentro de uma função para acessar seu namespace local.
+        </p>
+
+        <p>
+          Uma característica fundamental é que <em></em>todos os namespaces são
+          independentes entre si<em></em>. Por exemplo, você pode ter uma função
+          chamada <code>processar()</code> em dois módulos diferentes (<code
+            >modulo1.py</code
+          >
+          e <code>modulo2.py</code>). Não haverá conflito, pois cada uma reside
+          em seu próprio namespace. Para acessá-las, basta prefixar com o nome
+          do módulo: <code>modulo1.processar()</code> e
+          <code>modulo2.processar()</code>.
+        </p>
+
+        <h3 id="globals()-e-locals()-para-inspeção-de-namespaces">
+          <code>globals()</code> e <code>locals()</code> para inspeção de
+          namespaces
+        </h3>
+
+        <p>
+          As funções <code>globals()</code> e <code>locals()</code> são
+          ferramentas valiosas para inspecionar namespaces em tempo de execução:
+        </p>
+
+        <ul>
+          <li>
+            <a href="https://docs.python.org/3/library/functions.html#globals"
+              ><code>globals()</code></a
+            >: Retorna um dicionário que representa o
+            <strong>namespace global</strong> do módulo atual. Isso inclui todos
+            os nomes definidos na raiz do arquivo.
+          </li>
+          <li>
+            <a href="https://docs.python.org/3/library/functions.html#locals"
+              ><code>locals()</code></a
+            >: Retorna um dicionário com os nomes definidos no
+            <strong>escopo local</strong> onde a função está sendo executada.
+            <strong>Importante</strong>: ela só inclui nomes que já foram
+            definidos _antes_ da sua chamada, então geralmente é melhor chamá-la
+            no final do bloco.
+          </li>
+        </ul>
+
+        <p>Vejamos um exemplo prático:</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#6C7086;font-style:italic"># Escopo global</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> show_namespace</span><span style="color:#9399B2">()</span><span style="color:#9399B2"> -></span><span style="color:#CBA6F7"> None</span><span style="color:#9399B2">:</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Escopo local</span></span>
+<span class="line"><span style="color:#CDD6F4">    module_namespace </span><span style="color:#94E2D5">=</span><span style="color:#FAB387;font-style:italic"> globals</span><span style="color:#9399B2">()</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">"Conteúdo de globals():"</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> module_namespace</span><span style="color:#9399B2">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Note que 'function_namespace' não aparecerá no locals() se chamado antes dela</span></span>
+<span class="line"><span style="color:#CDD6F4">    function_namespace </span><span style="color:#94E2D5">=</span><span style="color:#FAB387;font-style:italic"> locals</span><span style="color:#9399B2">()</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">"Conteúdo de locals():"</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> function_namespace</span><span style="color:#9399B2">)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">if</span><span style="color:#CDD6F4"> __name__ </span><span style="color:#94E2D5">==</span><span style="color:#A6E3A1"> "__main__"</span><span style="color:#9399B2">:</span></span>
+<span class="line"><span style="color:#89B4FA">    show_namespace</span><span style="color:#9399B2">()</span></span></code></pre>
+
+        <p>A saída de <code>globals()</code> será algo parecido com:</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#9399B2">{</span></span>
+<span class="line"><span style="color:#A6E3A1">    '__name__'</span><span style="color:#9399B2">:</span><span style="color:#A6E3A1"> '__main__'</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#A6E3A1">    '__doc__'</span><span style="color:#9399B2">:</span><span style="color:#CBA6F7"> None</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # ... outras chaves padrão do módulo</span></span>
+<span class="line"><span style="color:#A6E3A1">    '__builtins__'</span><span style="color:#9399B2">:</span><span style="color:#94E2D5"> &#x3C;</span><span style="color:#CDD6F4">module </span><span style="color:#A6E3A1">'builtins'</span><span style="color:#9399B2"> (</span><span style="color:#CDD6F4">built</span><span style="color:#94E2D5">-</span><span style="color:#CBA6F7">in</span><span style="color:#9399B2">)</span><span style="color:#94E2D5">></span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#A6E3A1">    'show_namespace'</span><span style="color:#9399B2">:</span><span style="color:#94E2D5"> &#x3C;</span><span style="color:#CDD6F4">function show_namespace at 0x...</span><span style="color:#94E2D5">></span><span style="color:#6C7086;font-style:italic"> # Nossa função</span></span>
+<span class="line"><span style="color:#9399B2">}</span></span></code></pre>
+
+        <p>Já a saída de <code>locals()</code> mostrará:</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#9399B2">{</span></span>
+<span class="line"><span style="color:#A6E3A1">    'module_namespace'</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {</span><span style="color:#CDD6F4">...</span><span style="color:#9399B2">}</span><span style="color:#6C7086;font-style:italic"> # O dicionário retornado por globals()</span></span>
+<span class="line"><span style="color:#9399B2">}</span></span></code></pre>
+
+        <p>Alguns pontos a destacar nessa saída:</p>
+
+        <ul>
+          <li>
+            <code>__name__</code>: Indica o nome do módulo. Se for o script
+            principal, será <code>__main__</code>.
+          </li>
+          <li>
+            <code>__builtins__</code>: Referência ao namespace com as funções
+            nativas do Python.
+          </li>
+          <li>
+            <code>show_namespace</code>: O nome da nossa função, definida no
+            escopo global.
+          </li>
+        </ul>
+
+        <h3>
+          <code>vars()</code> e <code>dir()</code> - Outras formas de
+          inspecionar
+        </h3>
+
+        <p>
+          Além de <code>globals()</code> e <code>locals()</code>,
+          <code>vars()</code> e <code>dir()</code> também permitem inspecionar
+          nomes, mas com algumas diferenças importantes:
+        </p>
+
+        <ul>
+          <li>
+            <a href="https://docs.python.org/3/library/functions.html#vars"
+              ><code>vars()</code></a
+            >: Retorna o atributo <code>__dict__</code> de um objeto, que é onde
+            seus atributos são armazenados. Se chamada sem argumentos,
+            <code>vars()</code> se comporta exatamente como
+            <code>locals()</code>, retornando o namespace local.
+          </li>
+
+          <li>
+            <a href="https://docs.python.org/3/library/functions.html#dir"
+              ><code>dir()</code></a
+            >: Sem argumentos, <code>dir()</code> lista todos os nomes
+            disponíveis no escopo atual. Com um objeto como argumento, tenta
+            listar todos os nomes acessíveis nele (como métodos e atributos).
+            Note que <code>dir()</code> retorna apenas os _nomes_, não os
+            objetos ou seus valores.
+          </li>
+        </ul>
+
+        <p>Vamos ver com um exemplo:</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> ver_namespace_local</span><span style="color:#9399B2">():</span></span>
+<span class="line"><span style="color:#CDD6F4">    var_local </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> "variável local"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">"</span><span style="color:#F5C2E7">\n</span><span style="color:#A6E3A1">DENTRO DA FUNÇÃO (ESCOPO LOCAL)"</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">"Saída de vars():"</span><span style="color:#9399B2">,</span><span style="color:#FAB387;font-style:italic"> vars</span><span style="color:#9399B2">())</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">"Saída de dir():"</span><span style="color:#9399B2">,</span><span style="color:#FAB387;font-style:italic"> dir</span><span style="color:#9399B2">())</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">print</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">"FORA DA FUNÇÃO (ESCOPO GLOBAL)"</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">print</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">"Saída de vars():"</span><span style="color:#9399B2">,</span><span style="color:#FAB387;font-style:italic"> vars</span><span style="color:#9399B2">())</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">print</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">"Saída de dir():"</span><span style="color:#9399B2">,</span><span style="color:#FAB387;font-style:italic"> dir</span><span style="color:#9399B2">())</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89B4FA">ver_namespace_local</span><span style="color:#9399B2">()</span></span></code></pre>
+
+        <p>Saída de exemplo:</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#6C7086;font-style:italic"># FORA DA FUNÇÃO (ESCOPO GLOBAL)</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># Saída de vars():</span></span>
+<span class="line"><span style="color:#9399B2">{</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # ... omitidos outros resultados globais</span></span>
+<span class="line"><span style="color:#A6E3A1">    'ver_namespace_local'</span><span style="color:#9399B2">:</span><span style="color:#94E2D5"> &#x3C;</span><span style="color:#CDD6F4">function ver_namespace_local at 0x...</span><span style="color:#94E2D5">></span></span>
+<span class="line"><span style="color:#9399B2">}</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># Saída de dir():</span></span>
+<span class="line"><span style="color:#9399B2">[</span></span>
+<span class="line"><span style="color:#A6E3A1">    '__annotations__'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> '__builtins__'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> '__cached__'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> '__doc__'</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#A6E3A1">    '__file__'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> '__loader__'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> '__name__'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> '__package__'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> '__spec__'</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#A6E3A1">    'ver_namespace_local'</span><span style="color:#6C7086;font-style:italic"> # Nossa função global</span></span>
+<span class="line"><span style="color:#9399B2">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># DENTRO DA FUNÇÃO (ESCOPO LOCAL)</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># Saída de vars():</span></span>
+<span class="line"><span style="color:#9399B2">{</span></span>
+<span class="line"><span style="color:#A6E3A1">    'var_local'</span><span style="color:#9399B2">:</span><span style="color:#A6E3A1"> 'variável local'</span></span>
+<span class="line"><span style="color:#9399B2">}</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># Saída de dir():</span></span>
+<span class="line"><span style="color:#9399B2">[</span><span style="color:#A6E3A1">'var_local'</span><span style="color:#9399B2">]</span></span></code></pre>
+
+        <p>
+          Como pode ver, quando usadas sem argumentos, <code>vars()</code> e
+          <code>dir()</code> se assemelham a <code>locals()</code> e
+          <code>globals()</code> no que diz respeito ao escopo atual. A grande
+          diferença é que
+          <strong
+            ><code>vars()</code> e <code>dir()</code> são mais versáteis</strong
+          >, pois podem receber um objeto como argumento, permitindo inspecionar
+          namespaces de módulos importados, instâncias de classe e outros
+          objetos.
+        </p>
+
+        <h2 id="regra-legb---local-enclosing-global-e-built-in">
+          Regra LEGB - Local, Enclosing, Global e Built-In
+        </h2>
+
+        <p>
+          Em Python, é bem comum ter um escopo dentro do outro, pense em funções
+          dentro de módulos, ou até mesmo funções aninhadas dentro de outras
+          funções.
+        </p>
+
+        <p>
+          Quando isso acontece e você tenta acessar um nome (como uma variável
+          ou função), o interpretador precisa de uma ordem clara para
+          encontrá-lo, dependendo do ponto em que você está no código.
+        </p>
+
+        <p>
+          Essa ordem é definida pela regra <strong>LEGB</strong>. Sempre que
+          você referencia um nome, seja para leitura, escrita ou execução (tipo
+          <code>x</code> ou <code>print()</code>), o Python o busca
+          sequencialmente, do escopo mais interno para o mais externo:
+        </p>
+
+        <ul>
+          <li>
+            <strong>Local (L):</strong> Primeiro, o Python procura no escopo da
+            <strong>função atual</strong> onde o nome está sendo referenciado.
+            Este é o ambiente mais imediato.
+          </li>
+          <li>
+            <strong>Enclosing (E) / Não-Local:</strong> Se o nome não for
+            encontrado localmente, a busca avança para o escopo das
+            <strong>funções que envolvem a função atual</strong> (se houver).
+            Pense nisso como o escopo &quot;da função de fora&quot;.
+          </li>
+          <li>
+            <strong>Global (G):</strong> Caso o nome ainda não seja encontrado,
+            o Python então procura no <strong>escopo do módulo atual</strong>.
+            Este é o nível superior do seu arquivo Python.
+          </li>
+          <li>
+            <strong>Built-in (B):</strong> Por último, a busca chega ao escopo
+            <code>built-in</code>, que contém todos os nomes nativos do Python,
+            como funções (<code>len()</code>, <code>print()</code>) e exceções
+            (<code>NameError</code>). Se o nome não for encontrado em nenhum
+            desses escopos, o Python levanta uma exceção <code>NameError</code>,
+            indicando que o nome não foi definido ou não está acessível no
+            contexto atual.
+          </li>
+        </ul>
+
+        <p>
+          Para visualizar como esses escopos se aninham, imagine a seguinte
+          representação:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span> ┌─────────────────────┐</span></span>
+<span class="line"><span> │ ┌───────────────┐   │</span></span>
+<span class="line"><span> │ │ ┌─────────┐   │   │</span></span>
+<span class="line"><span> │ │ │ ┌───┐   │   │   │</span></span>
+<span class="line"><span> │ │ │ │ L→│ → │ → │ → │ # Local (L): Onde você está agora, o mais interno</span></span>
+<span class="line"><span> │ │ │ └───┘   │   │   │</span></span>
+<span class="line"><span> │ │ │       E→│ → │ → │ # Enclosing (E): A função que envolve a sua função</span></span>
+<span class="line"><span> │ │ └─────────┘   │   │</span></span>
+<span class="line"><span> │ │             G→│ → │ # Global (G): O módulo inteiro do seu arquivo</span></span>
+<span class="line"><span> │ └───────────────┘   │</span></span>
+<span class="line"><span> │                  B→✘│ # Built-in (B): Mais externo, tudo do Python</span></span>
+<span class="line"><span> └─────────────────────┘</span></span></code></pre>
+
+        <p>
+          Se preferir, preparei uma imagem também para te ajudar a entender
+          melhor.
+        </p>
+        <p>
+          <img
+            src="images/python-legb-rule.webp"
+            alt="Diagrama mostrando a regra LEGB do Python"
+          />
+        </p>
+        <p>
+          A seguir, vamos ver exemplos de código para tornar cada um desses
+          escopos cristalino.
+        </p>
+
+        <h3 id="a-regra-legb-em-ação">A regra LEGB em ação</h3>
+
+        <p>
+          Para entender a <strong>regra LEGB</strong> na prática, vamos usar um
+          código simples e observar como o Python busca os nomes em cada escopo.
+          Usei bastante os comentários do código para detalhar melhor o que está
+          acontecendo.
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#6C7086;font-style:italic"># Escopo do módulo: Global (G)</span></span>
+<span class="line"><span style="color:#CDD6F4">var_global </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> "Estou no escopo global!"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> funcao_externa</span><span style="color:#9399B2">()</span><span style="color:#9399B2"> -></span><span style="color:#CBA6F7"> None</span><span style="color:#9399B2">:</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Escopo da função: Local (L) para esta função</span></span>
+<span class="line"><span style="color:#CDD6F4">    var_local </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> "Estou no escopo local!"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Busca de 'var_local':</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # O Python encontra 'var_local' no escopo Local (L).</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">var_local</span><span style="color:#9399B2">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Busca de 'var_global':</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Não encontra 'var_global' no Local (L), então busca no Global (G).</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">var_global</span><span style="color:#9399B2">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Busca de 'print':</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Não encontra 'print' em L ou G, então busca no Built-in (B).</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#FAB387;font-style:italic">print</span><span style="color:#9399B2">)</span><span style="color:#6C7086;font-style:italic"> # Imprime a representação da própria função print</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">if</span><span style="color:#CDD6F4"> __name__ </span><span style="color:#94E2D5">==</span><span style="color:#A6E3A1"> "__main__"</span><span style="color:#9399B2">:</span></span>
+<span class="line"><span style="color:#89B4FA">    funcao_externa</span><span style="color:#9399B2">()</span></span></code></pre>
+
+        <p>
+          Analisando o fluxo de busca de nomes nesse exemplo, o Python segue a
+          regra LEGB (sempre do mais interno ao mais externo):
+        </p>
+
+        <ul>
+          <li>
+            <strong><code>var_local</code></strong
+            >: Encontrado diretamente no escopo <strong>L</strong>ocal da
+            <code>funcao_externa</code>. Trajeto: <strong>L</strong>.
+          </li>
+          <li>
+            <strong><code>var_global</code></strong
+            >: Não encontrado em <strong>L</strong>, a busca sobe para o escopo
+            <strong>G</strong>lobal. Trajeto: <strong>L → G</strong>.
+          </li>
+          <li>
+            <strong><code>print</code></strong
+            >: Não encontrado em <strong>L</strong> nem em <strong>G</strong>, a
+            busca atinge o escopo <strong>B</strong>uilt-in. Trajeto:
+            <strong>L → G → B</strong>.
+          </li>
+        </ul>
+
+        <p>
+          É fundamental entender que essa busca é sempre <em></em>unidirecional:
+          de dentro para fora<em></em>. Escopos mais internos conseguem
+          &quot;enxergar&quot; os nomes definidos nos escopos mais externos (que
+          os contêm), mas o contrário não é verdadeiro.
+        </p>
+
+        <p>
+          Veja um exemplo clássico de <code>NameError</code> que prova isso:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> funcao_interna</span><span style="color:#9399B2">():</span></span>
+<span class="line"><span style="color:#CDD6F4">    mensagem </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> "Olá do escopo local!"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># Erro! 'mensagem' só existe dentro de 'funcao_interna'</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">print</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">mensagem</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># Saída esperada: NameError: name 'mensagem' is not defined</span></span></code></pre>
+
+        <p>
+          A mensagem de erro
+          <code>NameError: name &#x27;mensagem&#x27; is not defined</code>
+          ocorre porque, no escopo global, o Python não consegue
+          &quot;descer&quot; para o escopo local de
+          <code>funcao_interna</code> para encontrar <code>mensagem</code>.
+        </p>
+
+        <blockquote>
+          <p>
+            Em resumo: a regra LEGB é uma escada de subida. Você só vê os
+            andares acima ou o seu próprio. Nunca consegue ver o que está nos
+            andares abaixo do seu.
+          </p>
+        </blockquote>
+
+        <h3 id="keywords-não-seguem-a-legb">Keywords não seguem a LEGB!</h3>
+
+        <p>
+          É importante diferenciar nomes de
+          <strong>keywords</strong> (palavras-chave). Termos como
+          <code>def</code>, <code>if</code>, <code>for</code>,
+          <code>while</code>, <code>return</code>, <code>True</code>,
+          <code>False</code>, <code>None</code> e <code>import</code> são partes
+          da gramática do Python, não nomes.
+        </p>
+        <p>
+          Por serem palavras reservadas, elas
+          <strong>não pertencem a nenhum namespace</strong> e, consequentemente,
+          <strong>não seguem a regra LEGB</strong>. Tentar usá-las como
+          variáveis resultará em um erro de sintaxe (<code>SyntaxError</code>)
+          no momento da análise do código, antes mesmo da execução:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#6C7086;font-style:italic"># Isso vai causar um SyntaxError!</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># Esse código nem chega a rodar</span></span>
+<span class="line"><span style="color:#CBA6F7">def</span><span style="color:#94E2D5"> =</span><span style="color:#FAB387"> 10</span></span></code></pre>
+
+        <p>
+          Se quiser ver a lista completa de palavras-chave reservadas, execute o
+          comando abaixo no seu terminal Python:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#89B4FA;font-style:italic">python</span><span style="color:#A6E3A1"> -c</span><span style="color:#A6E3A1"> "help('keywords')"</span></span></code></pre>
+
+        <p>
+          Isso mostrará a lista das <code>keywords</code> do Python, como
+          <code>False</code>, <code>True</code>, <code>None</code>,
+          <code>and</code>, <code>as</code>, <code>assert</code>,
+          <code>break</code>, <code>class</code>, etc. (Existem também as _soft
+          keywords_, mas isso fica para outra conversa).
+        </p>
+
+        <h2 id="enclosing---entenda-o-escopo-aninhado">
+          Enclosing - entenda o escopo aninhado
+        </h2>
+
+        <p>
+          Enquanto os escopos <strong>Global</strong>, <strong>Local</strong> e
+          <strong>Built-in</strong> costumam ser mais intuitivos, o escopo
+          <strong>Enclosing</strong> gera mais dúvidas porque ele só aparece em
+          um cenário específico: quando temos
+          <strong>funções aninhadas</strong>, ou seja, uma função definida
+          dentro de outra. Vamos focar nele agora.
+        </p>
+
+        <p>Considere este código:</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> funcao_externa</span><span style="color:#9399B2">():</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # 'var_enclosing' é local para 'funcao_externa'</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # e Enclosing para 'funcao_interna'</span></span>
+<span class="line"><span style="color:#CDD6F4">    var_enclosing </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> "Eu sou do escopo enclosing!"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">    def</span><span style="color:#89B4FA;font-style:italic"> funcao_interna</span><span style="color:#9399B2">():</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">        # 'var_local' está no escopo Local de 'funcao_interna'</span></span>
+<span class="line"><span style="color:#CDD6F4">        var_local </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> "Eu sou do escopo local!"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">        # Acessando 'var_local' (L) e 'var_enclosing' (E)</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">        print</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">var_local</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> var_enclosing</span><span style="color:#9399B2">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Chamamos a função interna para executá-la</span></span>
+<span class="line"><span style="color:#89B4FA">    funcao_interna</span><span style="color:#9399B2">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89B4FA">funcao_externa</span><span style="color:#9399B2">()</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># Saída esperada: Eu sou do escopo local! Eu sou do escopo enclosing!</span></span></code></pre>
+
+        <p>
+          Como você pode ver na saída, a <code>funcao_interna()</code> consegue
+          acessar tanto <code>var_local</code> (que está em seu escopo
+          <strong>L</strong>ocal) quanto <code>var_enclosing</code> (que está no
+          escopo <strong>E</strong>nclosing, da <code>funcao_externa</code>).
+          Isso acontece exatamente por causa da regra <strong>LEGB</strong>: o
+          Python busca os nomes de dentro para fora, encontrando
+          <code>var_enclosing</code> no nível acima.
+        </p>
+
+        <p>
+          Por outro lado, a <code>funcao_externa()</code>
+          <strong>não tem acesso direto</strong> a <code>var_local</code>, pois
+          <code>var_local</code> reside em um escopo mais interno que o dela. Da
+          mesma forma, o escopo global não consegue acessar nenhuma das
+          variáveis definidas dentro de <code>funcao_externa</code> ou
+          <code>funcao_interna</code>.
+        </p>
+
+        <h3 id="call-stack-e-o-tempo-de-vida-dos-escopos">
+          Call stack e o tempo de vida dos escopos
+        </h3>
+
+        <p>
+          A razão para esse comportamento reside em como o Python gerencia a
+          execução de funções utilizando a <strong>call stack</strong> (pilha de
+          chamadas).
+        </p>
+
+        <p>
+          Sempre que uma função é chamada, o Python cria um
+          <strong>frame de execução</strong> (ou _stack frame_) para ela. Esse
+          frame é empilhado no topo da call stack, que funciona no esquema LIFO
+          (Last-In, First-Out: o último que entra é o primeiro que sai). Apenas
+          o frame no topo da pilha está ativo. Quando a função termina sua
+          execução, seu frame é <strong>descartado</strong> da pilha, e o Python
+          retorna o controle para o frame anterior. É por isso que o escopo
+          local de uma função só &quot;existe&quot; enquanto ela está em
+          execução.
+        </p>
+
+        <p><img src="images/call-stack-example.webp" alt="exemplo" /></p>
+
+        <p>
+          A imagem acima ilustra a call stack em ação. O ícone do Python indica
+          a posição atual do interpretador. As
+          <strong>setas vermelhas</strong> (<code>---&gt;</code>) representam o
+          <em></em>fluxo de execução<strong>
+            e a criação/remoção de frames na pilha. As </strong
+          >setas amarelas<em></em> (<code>↓</code>) mostram a
+          <strong>direção de busca de nomes</strong> de acordo com a regra LEGB
+          (do escopo mais interno para o mais externo).
+        </p>
+
+        <p>Observe o fluxo na imagem:</p>
+
+        <p>1. A execução inicia no <code>mod.py</code> (escopo Global).</p>
+
+        <p>
+          2. Ao chamar <code>funcao_externa()</code>, um novo frame é empilhado.
+          O interpretador se move para dentro dela.
+        </p>
+
+        <p>
+          3. Dentro de <code>funcao_externa()</code>, ao chamar
+          <code>funcao_interna()</code>, outro frame é empilhado, e o
+          interpretador se move para lá.
+        </p>
+
+        <p>
+          4. Quando <code>funcao_interna()</code> termina, seu frame é
+          desempilhado, e o controle retorna para <code>funcao_externa()</code>.
+        </p>
+
+        <p>
+          5. Finalmente, <code>funcao_externa()</code> termina, seu frame é
+          desempilhado, e a execução retorna ao <code>mod.py</code> (escopo
+          global), concluindo o processo.
+        </p>
+
+        <p>
+          Esse mecanismo é fundamental para a organização e o isolamento do
+          código:
+        </p>
+
+        <ul>
+          <li>
+            Você consegue acessar nomes definidos em escopos mais externos
+            (Globais, Enclosing) a partir de dentro de uma função.
+          </li>
+          <li>
+            Mas <em></em>não consegue acessar nomes definidos dentro de funções
+            estando fora delas<strong
+              >, porque o escopo local de uma função </strong
+            >deixa de existir<em></em> (é descartado) assim que ela termina de
+            executar. Para um aprofundamento sobre a call stack e funções,
+            especialmente em cenários como recursão, recomendo este material:
+
+            <a
+              href="https://www.otaviomiranda.com.br/2020/funcoes-recursivas-com-python/"
+              >Funções recursivas com Python</a
+            >
+          </li>
+        </ul>
+
+        <p>
+          Agora que entendemos o Enclosing e o que acontece por baixo dos panos,
+          podemos continuar.
+        </p>
+
+        <h2 id="global-e-nonlocal---alterando-nomes-fora-do-escopo-atual">
+          global e nonlocal - Alterando nomes fora do escopo atual
+        </h2>
+
+        <p>
+          Nas seções anteriores, focamos em como os nomes são
+          <strong>acessados (lidos)</strong> de um escopo em outro, um processo
+          que tende a ser mais direto.
+        </p>
+
+        <p>
+          No entanto, a tentativa de <strong>alterar</strong> um nome que não
+          foi definido no escopo atual gera uma ambiguidade para o
+          interpretador. Como ele saberia se você quer criar um
+          <strong>novo nome local</strong> (com o mesmo rótulo) ou
+          <em></em>modificar o nome existente<em></em> em um escopo externo?
+          Essa é a questão.
+        </p>
+
+        <p>
+          Essa ambiguidade surge justamente pela flexibilidade que o Python
+          oferece: a capacidade de ter nomes iguais em escopos diferentes sem
+          que um afete o outro, a menos que você explicitamente peça.
+        </p>
+
+        <p>
+          Mas... antes de mergulharmos nas soluções, uma pausa para as
+          <strong>boas práticas</strong>.
+        </p>
+
+        <h3 id="devo-alterar-nomes-fora-de-seu-escopo-imediato">
+          Devo alterar nomes fora de seu escopo imediato?
+        </h3>
+
+        <p>
+          A principal função do escopo e do namespace é <em></em>proteger nomes
+          de alterações acidentais<em></em> e garantir o isolamento do código.
+          Fazer alterações intencionais em nomes que residem fora do escopo
+          imediato vai, em certa medida, contra essa ideia central.
+        </p>
+
+        <p>
+          Vou listar alguns problemas que essa prática pode gerar (e a lista é
+          bem maior):
+        </p>
+
+        <ul>
+          <li>
+            <strong>Dificulta o Debug:</strong> Rastrear a origem de um bug se
+            torna um pesadelo quando variáveis são alteradas de forma
+            &quot;mágica&quot; em diferentes partes do código.
+          </li>
+          <li>
+            <strong>Dificulta Testes:</strong> Funções que dependem ou alteram o
+            estado global são mais complexas de testar isoladamente, exigindo um
+            setup e cleanup maiores.
+          </li>
+          <li>
+            <strong>Reduz a Legibilidade e Manutenção:</strong> O código fica
+            menos intuitivo, exigindo que o leitor &quot;pule&quot; entre
+            escopos para entender o fluxo de dados.
+          </li>
+          <li>
+            <strong>Aumenta o Acoplamento:</strong> Módulos e funções se tornam
+            mais interdependentes, tornando o sistema mais rígido e difícil de
+            refatorar.
+          </li>
+          <li>
+            <strong>Problemas em Concorrência:</strong> Em ambientes
+            multi-thread ou assíncronos, a alteração de estado global pode levar
+            a _race conditions_ e bugs extremamente difíceis de diagnosticar.
+          </li>
+          <li>
+            <strong>Contraria Paradigmas Comuns:</strong> Vai contra princípios
+            de paradigmas como programação funcional (que preza imutabilidade) e
+            orientação a objetos (que encapsula estado).
+          </li>
+        </ul>
+
+        <p>
+          Se você se encontrar na situação de precisar alterar o valor de uma
+          variável fora do seu escopo imediato,
+          <strong>pare e reavalie a sua solução</strong>. Quase sempre há uma
+          forma mais elegante e segura de resolver o problema, como passar os
+          valores via argumentos ou retornar novos valores.
+        </p>
+
+        <p>
+          Ok, com essa ressalva importante em mente, agora sim vamos entender
+          como
+          <code>global</code> e <code>nonlocal</code> funcionam para alterar
+          variáveis fora do seu escopo local.
+        </p>
+
+        <h3 id="global---alterando-nomes-no-escopo-global">
+          <code>global</code> - alterando nomes no escopo global
+        </h3>
+
+        <p>
+          Vamos analisar o comportamento padrão quando tentamos alterar uma
+          variável global dentro de uma função. Acompanhe o código e o erro que
+          ele gera:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#6C7086;font-style:italic"># Escopo global (G)</span></span>
+<span class="line"><span style="color:#CDD6F4">variavel </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> "global"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> funcao</span><span style="color:#9399B2">():</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Tentativa de usar `variavel` (G)</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">variavel</span><span style="color:#9399B2">)</span><span style="color:#6C7086;font-style:italic"> # &#x3C;-- ISSO VAI GERAR O ERRO</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Criei um novo nome `variavel` no escopo LOCAL (L)</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Isso fez o nome `variavel` deixar de existir no print acima</span></span>
+<span class="line"><span style="color:#CDD6F4">    variavel </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> "local"</span><span style="color:#6C7086;font-style:italic"> # &#x3C;-- ESSE É O MOTIVO DO ERRO</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Agora, estamos tentando usar a `variavel` LOCAL</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">variavel</span><span style="color:#9399B2">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89B4FA">funcao</span><span style="color:#9399B2">()</span><span style="color:#6C7086;font-style:italic"> # &#x3C;-- O interpretador não passa daqui</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">print</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">variavel</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># A `variavel` global original permanece inalterada</span></span></code></pre>
+
+        <p>
+          Ao executar <code>funcao()</code>, você receberá um
+          <code>UnboundLocalError</code>:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span>UnboundLocalError: cannot access local variable 'variavel'</span></span>
+<span class="line"><span>where it is not associated with a value</span></span></code></pre>
+
+        <p>
+          O interpretador Python é inteligente: ao ver a linha
+          <code>variavel = &quot;local&quot;</code> dentro da função, ele assume
+          que <code>variavel</code> será uma
+          <strong>variável local</strong> para <code>funcao()</code>. Portanto,
+          quando <code>print(variavel)</code> é chamado _antes_ dessa atribuição
+          local, Python busca por <code>variavel</code> no escopo local,
+          encontra uma referência de atribuição futura, mas percebe que ela
+          ainda não tem um valor associado
+          <strong>dentro daquele escopo local</strong>. Isso causa o
+          <code>UnboundLocalError</code>.
+        </p>
+
+        <p>
+          Para informar ao Python que você deseja modificar a variável
+          <code>variavel</code> que reside no escopo <strong>global</strong>,
+          utilizamos a palavra-chave <code>global</code>:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CDD6F4">variavel </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> "global"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> funcao</span><span style="color:#9399B2">():</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # 'global variavel' informa ao interpretador</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # que estamos referenciando e modificando a variável global.</span></span>
+<span class="line"><span style="color:#CBA6F7">    global</span><span style="color:#CDD6F4"> variavel</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Agora, podemos usar a variável global ANTES de alterá-la</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">variavel</span><span style="color:#9399B2">)</span><span style="color:#6C7086;font-style:italic"> # Saída: global</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Esta atribuição agora modifica a variável global</span></span>
+<span class="line"><span style="color:#CDD6F4">    variavel </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> "local"</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">variavel</span><span style="color:#9399B2">)</span><span style="color:#6C7086;font-style:italic"> # Saída: local</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89B4FA">funcao</span><span style="color:#9399B2">()</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">print</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">variavel</span><span style="color:#9399B2">)</span><span style="color:#6C7086;font-style:italic"> # Saída: local (o valor global foi alterado com sucesso)</span></span></code></pre>
+
+        <p>
+          Com <code>global variavel</code>, a primeira chamada a
+          <code>print(variavel)</code> acessa o valor &quot;global&quot;. Em
+          seguida, a linha <code>variavel = &quot;local&quot;</code> realmente
+          altera a
+          <code>variavel</code>
+          do escopo global.
+        </p>
+
+        <p>
+          <strong>Importante:</strong> A declaração <code>global</code> deve ser
+          feita para <em></em>cada variável global<strong>
+            que você pretende alterar dentro de </strong
+          >cada função<em></em> onde essa alteração ocorrerá.
+        </p>
+
+        <p>
+          Finalmente, vale ressaltar que <code>global</code> <em></em>só
+          funciona para nomes no escopo global<em></em>. Se você precisar
+          alterar um nome em um escopo <code>Enclosing</code> (não-local), você
+          precisará usar outra palavra-chave do Python: <code>nonlocal</code>.
+        </p>
+
+        <h3 id="nonlocal:-alterando-nomes-do-escopo-enclosing">
+          <code>nonlocal</code>: alterando nomes do escopo enclosing
+        </h3>
+
+        <p>
+          A palavra-chave <code>nonlocal</code> tem uma função similar a
+          <code>global</code>, mas atua no escopo <strong>Enclosing</strong> (o
+          <code>E</code> da regra LEGB), ou seja, em variáveis de funções
+          externas que envolvem a função atual, mas que
+          <strong>não são o escopo global</strong>.
+        </p>
+
+        <p>
+          Isso é particularmente útil em cenários onde uma função interna
+          precisa modificar uma variável definida na função que a contém.
+        </p>
+
+        <p>Veja o exemplo a seguir com apenas dois níveis de aninhamento:</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> soma_mais_um</span><span style="color:#9399B2">():</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # 'numero' está no escopo Enclosing para 'incrementa'</span></span>
+<span class="line"><span style="color:#CDD6F4">    numero </span><span style="color:#94E2D5">=</span><span style="color:#FAB387"> 0</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">    def</span><span style="color:#89B4FA;font-style:italic"> incrementa</span><span style="color:#9399B2">():</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">        # 'nonlocal numero' informa que queremos modificar</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">        # o 'numero' do escopo Enclosing (soma_mais_um)</span></span>
+<span class="line"><span style="color:#CBA6F7">        nonlocal</span><span style="color:#CDD6F4"> numero</span></span>
+<span class="line"><span style="color:#CDD6F4">        numero </span><span style="color:#94E2D5">+=</span><span style="color:#FAB387"> 1</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">        print</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1;font-style:italic">f</span><span style="color:#A6E3A1">"Número atual (interno): </span><span style="color:#F5C2E7">{</span><span style="color:#CDD6F4">numero</span><span style="color:#F5C2E7">}</span><span style="color:#A6E3A1">"</span><span style="color:#9399B2">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Até aqui, nada alterado</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1;font-style:italic">f</span><span style="color:#A6E3A1">"Número inicial (externo): </span><span style="color:#F5C2E7">{</span><span style="color:#CDD6F4">numero</span><span style="color:#F5C2E7">}</span><span style="color:#A6E3A1">"</span><span style="color:#9399B2">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89B4FA">    incrementa</span><span style="color:#9399B2">()</span><span style="color:#6C7086;font-style:italic"> # A alteração ocorre aqui</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1;font-style:italic">f</span><span style="color:#A6E3A1">"Número final (externo): </span><span style="color:#F5C2E7">{</span><span style="color:#CDD6F4">numero</span><span style="color:#F5C2E7">}</span><span style="color:#A6E3A1">"</span><span style="color:#9399B2">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89B4FA">soma_mais_um</span><span style="color:#9399B2">()</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># Saída esperada:</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># Número inicial (externo): 0</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># Número atual (interno): 1</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># Número final (externo): 1</span></span></code></pre>
+
+        <p>
+          Neste exemplo, a função <code>incrementa()</code> consegue modificar a
+          variável <code>numero</code> que pertence à
+          <code>soma_mais_um()</code>, no seu escopo <code>Enclosing</code>. Se
+          <code>nonlocal numero</code> não fosse usado,
+          <code>incrementa()</code> criaria sua própria variável local
+          <code>numero</code>, sem afetar a de fora.
+        </p>
+
+        <p>
+          <strong>Cuidado com a complexidade:</strong> Embora
+          <code>nonlocal</code> seja uma ferramenta poderosa e frequentemente
+          usada em padrões como _closures_ e _decorators_, o aninhamento
+          excessivo de funções e o uso indiscriminado de
+          <code>nonlocal</code> podem levar a um código difícil de ler e
+          depurar. Como já mencionado na seção de boas práticas, sempre reavalie
+          se há uma forma mais clara de estruturar seu código.
+        </p>
+
+        <h3>Concluindo - agora você passou de nível 😁</h3>
+
+        <p>
+          E assim chegamos ao fim do nosso texto sobre os conceitos de
+          <strong>escopo</strong> e <strong>namespace</strong> em Python. Embora
+          esse assunto possa parecer muito abstrato, ele acaba sendo um dos
+          pontos principais para compreender como o Python funciona. Na
+        </p>
+
+        <p>
+          verdade, não só Python! Muitas outras linguagens funcionam de maneira
+          muito similar. Você vai levar esse conhecimento para todas elas.
+        </p>
+        <p>Revisamos que:</p>
+
+        <ul>
+          <li>
+            Um <strong>escopo</strong> define o local do código onde um nome
+            estará visível e acessível.
+          </li>
+          <li>
+            Um <strong>namespace</strong> é a estrutura que armazena essas
+            associações entre nomes e objetos.
+          </li>
+          <li>
+            <strong>Escopo</strong> e <strong>Namespace</strong> são dois
+            assuntos conectados em Python
+          </li>
+          <li>
+            A <strong>regra LEGB</strong> (Local, Enclosing, Global, Built-in) é
+            a ordem pela qual o Python busca por nomes, sempre de dentro para
+            fora.
+          </li>
+          <li>
+            Vimos como as funções <code>globals()</code>, <code>locals()</code>,
+            <code>vars()</code> e <code>dir()</code> podem nos ajudar a
+            inspecionar esses &quot;dicionários&quot; de nomes em tempo real.
+          </li>
+          <li>
+            E, finalmente, aprendemos sobre as palavras-chave
+            <code>global</code> e <code>nonlocal</code>, que nos permitem,
+            quando necessário e com muita cautela, alterar nomes em escopos
+            externos ao imediato.
+          </li>
+        </ul>
+
+        <p>
+          Dominar esses conceitos não é apenas sobre &quot;saber o que
+          acontece&quot;, mas sobre
+          <strong
+            >entender por que seu código se comporta como se comporta</strong
+          >, evitar erros comuns como o <code>UnboundLocalError</code>, e
+          escrever um código mais robusto e previsível.
+        </p>
+
+        <p>
+          Lembre-se sempre da lição sobre as <strong>boas práticas</strong>:
+          alterar nomes fora do seu escopo imediato deve ser a exceção, não a
+          regra. Priorize a clareza, o baixo acoplamento e a previsibilidade do
+          seu código.
+        </p>
+
+        <p>
+          Com essa base sólida sobre escopo e namespace, você está pronto para
+          mergulhar em tópicos mais avançados do Python, como _closures_ e
+          _decorators_, que dependem diretamente desse entendimento. Continue
+          praticando e experimentando!
+        </p>
+      </article>
+
+      <footer class="nav">
+        <a class="copyright-link" href="/">Otávio Miranda</a>
+        <a
+          target="_blank"
+          href="https://beacons.ai/otaviomiranda"
+          rel="nofollow noopener noreferrer"
+          >Contatos</a
+        >
+      </footer>
+    </main>
+
+    <script defer src="../../js/scripts_2026.js"></script>
   </body>
 </html>

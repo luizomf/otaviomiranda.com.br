@@ -1,0 +1,66 @@
+[
+  {
+    "lang": "python",
+    "code": "x = 10  # Vari\u00e1vel 'x' no escopo global\n\ndef mostrar():\n    print(x)  # Acessa 'x' do escopo global\n\nmostrar()"
+  },
+  {
+    "lang": "python",
+    "code": "# Escopo global\n\ndef show_namespace() -> None:\n    # Escopo local\n    module_namespace = globals()\n    print(\"Conte\u00fado de globals():\", module_namespace)\n\n    # Note que 'function_namespace' n\u00e3o aparecer\u00e1 no locals() se chamado antes dela\n    function_namespace = locals()\n    print(\"Conte\u00fado de locals():\", function_namespace)\n\n\nif __name__ == \"__main__\":\n    show_namespace()"
+  },
+  {
+    "lang": "python",
+    "code": "{\n    '__name__': '__main__',\n    '__doc__': None,\n    # ... outras chaves padr\u00e3o do m\u00f3dulo\n    '__builtins__': <module 'builtins' (built-in)>,\n    'show_namespace': <function show_namespace at 0x...> # Nossa fun\u00e7\u00e3o\n}"
+  },
+  {
+    "lang": "python",
+    "code": "{\n    'module_namespace': {...} # O dicion\u00e1rio retornado por globals()\n}"
+  },
+  {
+    "lang": "python",
+    "code": "def ver_namespace_local():\n    var_local = \"vari\u00e1vel local\"\n\n    print(\"\\nDENTRO DA FUN\u00c7\u00c3O (ESCOPO LOCAL)\")\n    print(\"Sa\u00edda de vars():\", vars())\n    print(\"Sa\u00edda de dir():\", dir())\n\n\nprint(\"FORA DA FUN\u00c7\u00c3O (ESCOPO GLOBAL)\")\nprint(\"Sa\u00edda de vars():\", vars())\nprint(\"Sa\u00edda de dir():\", dir())\n\nver_namespace_local()"
+  },
+  {
+    "lang": "python",
+    "code": "# FORA DA FUN\u00c7\u00c3O (ESCOPO GLOBAL)\n# Sa\u00edda de vars():\n{\n    # ... omitidos outros resultados globais\n    'ver_namespace_local': <function ver_namespace_local at 0x...>\n}\n# Sa\u00edda de dir():\n[\n    '__annotations__', '__builtins__', '__cached__', '__doc__',\n    '__file__', '__loader__', '__name__', '__package__', '__spec__',\n    'ver_namespace_local' # Nossa fun\u00e7\u00e3o global\n]\n\n# DENTRO DA FUN\u00c7\u00c3O (ESCOPO LOCAL)\n# Sa\u00edda de vars():\n{\n    'var_local': 'vari\u00e1vel local'\n}\n# Sa\u00edda de dir():\n['var_local']"
+  },
+  {
+    "lang": "text",
+    "code": " \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   \u2502\n \u2502 \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   \u2502   \u2502\n \u2502 \u2502 \u2502 \u250c\u2500\u2500\u2500\u2510   \u2502   \u2502   \u2502\n \u2502 \u2502 \u2502 \u2502 L\u2192\u2502 \u2192 \u2502 \u2192 \u2502 \u2192 \u2502 # Local (L): Onde voc\u00ea est\u00e1 agora, o mais interno\n \u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500\u2518   \u2502   \u2502   \u2502\n \u2502 \u2502 \u2502       E\u2192\u2502 \u2192 \u2502 \u2192 \u2502 # Enclosing (E): A fun\u00e7\u00e3o que envolve a sua fun\u00e7\u00e3o\n \u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518   \u2502   \u2502\n \u2502 \u2502             G\u2192\u2502 \u2192 \u2502 # Global (G): O m\u00f3dulo inteiro do seu arquivo\n \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518   \u2502\n \u2502                  B\u2192\u2718\u2502 # Built-in (B): Mais externo, tudo do Python\n \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518"
+  },
+  {
+    "lang": "python",
+    "code": "# Escopo do m\u00f3dulo: Global (G)\nvar_global = \"Estou no escopo global!\"\n\ndef funcao_externa() -> None:\n    # Escopo da fun\u00e7\u00e3o: Local (L) para esta fun\u00e7\u00e3o\n    var_local = \"Estou no escopo local!\"\n\n    # Busca de 'var_local':\n    # O Python encontra 'var_local' no escopo Local (L).\n    print(var_local)\n\n    # Busca de 'var_global':\n    # N\u00e3o encontra 'var_global' no Local (L), ent\u00e3o busca no Global (G).\n    print(var_global)\n\n    # Busca de 'print':\n    # N\u00e3o encontra 'print' em L ou G, ent\u00e3o busca no Built-in (B).\n    print(print) # Imprime a representa\u00e7\u00e3o da pr\u00f3pria fun\u00e7\u00e3o print\n\n\nif __name__ == \"__main__\":\n    funcao_externa()"
+  },
+  {
+    "lang": "python",
+    "code": "def funcao_interna():\n    mensagem = \"Ol\u00e1 do escopo local!\"\n\n# Erro! 'mensagem' s\u00f3 existe dentro de 'funcao_interna'\nprint(mensagem)\n# Sa\u00edda esperada: NameError: name 'mensagem' is not defined"
+  },
+  {
+    "lang": "python",
+    "code": "# Isso vai causar um SyntaxError!\n# Esse c\u00f3digo nem chega a rodar\ndef = 10"
+  },
+  {
+    "lang": "bash",
+    "code": "python -c \"help('keywords')\""
+  },
+  {
+    "lang": "python",
+    "code": "def funcao_externa():\n    # 'var_enclosing' \u00e9 local para 'funcao_externa'\n    # e Enclosing para 'funcao_interna'\n    var_enclosing = \"Eu sou do escopo enclosing!\"\n\n    def funcao_interna():\n        # 'var_local' est\u00e1 no escopo Local de 'funcao_interna'\n        var_local = \"Eu sou do escopo local!\"\n\n        # Acessando 'var_local' (L) e 'var_enclosing' (E)\n        print(var_local, var_enclosing)\n\n    # Chamamos a fun\u00e7\u00e3o interna para execut\u00e1-la\n    funcao_interna()\n\nfuncao_externa()\n# Sa\u00edda esperada: Eu sou do escopo local! Eu sou do escopo enclosing!"
+  },
+  {
+    "lang": "python",
+    "code": "# Escopo global (G)\nvariavel = \"global\"\n\ndef funcao():\n    # Tentativa de usar `variavel` (G)\n    print(variavel) # <-- ISSO VAI GERAR O ERRO\n\n    # Criei um novo nome `variavel` no escopo LOCAL (L)\n    # Isso fez o nome `variavel` deixar de existir no print acima\n    variavel = \"local\" # <-- ESSE \u00c9 O MOTIVO DO ERRO\n\n    # Agora, estamos tentando usar a `variavel` LOCAL\n    print(variavel)\n\nfuncao() # <-- O interpretador n\u00e3o passa daqui\nprint(variavel)\n# A `variavel` global original permanece inalterada"
+  },
+  {
+    "lang": "text",
+    "code": "UnboundLocalError: cannot access local variable 'variavel'\nwhere it is not associated with a value"
+  },
+  {
+    "lang": "python",
+    "code": "variavel = \"global\"\n\ndef funcao():\n    # 'global variavel' informa ao interpretador\n    # que estamos referenciando e modificando a vari\u00e1vel global.\n    global variavel\n\n    # Agora, podemos usar a vari\u00e1vel global ANTES de alter\u00e1-la\n    print(variavel) # Sa\u00edda: global\n\n    # Esta atribui\u00e7\u00e3o agora modifica a vari\u00e1vel global\n    variavel = \"local\"\n    print(variavel) # Sa\u00edda: local\n\nfuncao()\nprint(variavel) # Sa\u00edda: local (o valor global foi alterado com sucesso)"
+  },
+  {
+    "lang": "python",
+    "code": "def soma_mais_um():\n    # 'numero' est\u00e1 no escopo Enclosing para 'incrementa'\n    numero = 0\n\n    def incrementa():\n        # 'nonlocal numero' informa que queremos modificar\n        # o 'numero' do escopo Enclosing (soma_mais_um)\n        nonlocal numero\n        numero += 1\n        print(f\"N\u00famero atual (interno): {numero}\")\n\n    # At\u00e9 aqui, nada alterado\n    print(f\"N\u00famero inicial (externo): {numero}\")\n\n    incrementa() # A altera\u00e7\u00e3o ocorre aqui\n    print(f\"N\u00famero final (externo): {numero}\")\n\nsoma_mais_um()\n# Sa\u00edda esperada:\n# N\u00famero inicial (externo): 0\n# N\u00famero atual (interno): 1\n# N\u00famero final (externo): 1"
+  }
+]
