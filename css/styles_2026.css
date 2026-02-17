@@ -162,8 +162,10 @@ body {
 .article {
   width: 100%;
   max-width: var(--main-width);
+  min-width: 0;
   font-size: clamp(var(--font-sm), 4vw, var(--font-xlg));
   display: flow-root;
+  overflow-wrap: anywhere;
 }
 
 /* ===============================
@@ -261,6 +263,9 @@ p code {
 }
 
 pre {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   padding: var(--sm-spacing-me);
   background: var(--bg-surface-default);
   border-radius: var(--border-radius-me);
@@ -274,6 +279,8 @@ pre {
 pre code {
   display: block;
   white-space: pre;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 hr {
@@ -314,6 +321,13 @@ blockquote p:last-child {
 ul,
 ol {
   padding-left: 4rem;
+}
+
+@media (max-width: 767px) {
+  ul,
+  ol {
+    padding-left: 2.6rem;
+  }
 }
 
 img {

@@ -27,3 +27,9 @@ All notable changes to this project are documented here.
 - Simplified markdown runtime by removing `highlight.js` from these pages.
 - Updated `js/scripts.js` to keep site-search behavior but also render markdown
   even when a search form is not present.
+- Improved mobile behavior in 2026 layout styles (`css/styles_2026.css`):
+  - added safer width constraints for `.article` and `pre` blocks;
+  - reduced list indentation on small screens;
+  - prevented horizontal overflow from long content in migrated post pages.
+- Ran a final mobile pass in localhost (`390x844` and `320x568`) and confirmed
+  all migrated posts are now passing without horizontal overflow.
