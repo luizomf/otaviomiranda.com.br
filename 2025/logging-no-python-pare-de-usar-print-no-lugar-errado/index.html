@@ -1298,10 +1298,9 @@
           Pronto. Agora você não verá mais logs do <code>rich</code> ou de
           qualquer lib de terceiro. Não porque bloqueamos eles<strong
             >, mas porque </strong
-          >não estamos mais ouvindo o <code>root</code>. E como essas libs
-          usam o
+          >não estamos mais ouvindo o <code>root</code>. E como essas libs usam
+          o <code>root</code>, seus logs vão pra lugar nenhum.
         </p>
-        <p><code>root</code>, seus logs vão pra lugar nenhum.</p>
 
         <blockquote>
           <p>
@@ -1910,8 +1909,8 @@
 
         <p>
           Pra resolver isso, vamos precisar de <strong>filters</strong>, assim
-          conseguimos controlar com mais precisão quais mensagens vão pra
-          cada handler.
+          conseguimos controlar com mais precisão quais mensagens vão pra cada
+          handler.
         </p>
 
         <p>
@@ -1937,8 +1936,8 @@
           O nosso caso anterior é um exemplo clássico: Queríamos que o handler
           do <code>stdout</code> exibisse apenas <code>DEBUG</code> e
           <code>INFO</code>. Mas como ele estava com nível <code>DEBUG</code>,
-          ele acabou aceitando todos os níveis acima também, e por isso
-          vimos <code>WARNING</code>, <code>ERROR</code> e
+          ele acabou aceitando todos os níveis acima também, e por isso vimos
+          <code>WARNING</code>, <code>ERROR</code> e
           <code>CRITICAL</code> aparecendo duas vezes (uma vez no
           <code>stdout</code> e outra no <code>stderr</code>).
         </p>
@@ -3269,10 +3268,10 @@
 
         <p>
           Você tem um poder enorme nas mãos. Mas agora vem as perguntas mais
-          importantes: Onde e como usar esse poder?<strong> </strong>O que
-          vale a pena registrar?<strong> </strong>Como escrever uma mensagem de
-          log que ainda faça sentido daqui a 6 meses, às 3 da manhã, quando um
-          bug crítico estourar em produção?
+          importantes: Onde e como usar esse poder?<strong> </strong>O que vale
+          a pena registrar?<strong> </strong>Como escrever uma mensagem de log
+          que ainda faça sentido daqui a 6 meses, às 3 da manhã, quando um bug
+          crítico estourar em produção?
         </p>
 
         <p>
@@ -3592,8 +3591,8 @@
 <span class="line"></span></code></pre>
 
         <p>
-          Com logs estruturados (em JSON, como fizemos), você pode filtrar
-          todos os erros por
+          Com logs estruturados (em JSON, como fizemos), você pode filtrar todos
+          os erros por
           <code>reason=email<em>invalido</em></code
           ><em>, ou agrupar por <code>user</code></em
           ><code>id</code>. Isso é impossível com strings soltas e mal
@@ -3656,13 +3655,10 @@
 
         <p>
           <em>Dica técnica:</em> Se você precisa logar objetos que podem conter
-          dados sensíveis (ex: um <code>User</code> ou
-        </p>
-
-        <p>
-          um <code>Request</code>), crie uma função de serialização segura, ou
-          use um <strong>Filter</strong> para limpar ou mascarar os dados antes
-          de enviar ao log.
+          dados sensíveis (ex: um <code>User</code> ou um <code>Request</code>),
+          crie uma função de serialização segura, ou use um
+          <strong>Filter</strong> para limpar ou mascarar os dados antes de
+          enviar ao log.
         </p>
 
         <h4 id="regra-4-contexto-é-bom-até-virar-poluição">
@@ -3765,9 +3761,8 @@
         </p>
 
         <p>
-          E quando for criar algo novo… lembra disso: um bom log não é ruído.
-          É música pros ouvidos de quem tá tentando resolver um bug às 3 da
-          manhã.
+          E quando for criar algo novo… lembra disso: um bom log não é ruído. É
+          música pros ouvidos de quem tá tentando resolver um bug às 3 da manhã.
         </p>
 
         <p>
@@ -3789,8 +3784,6 @@
           bastante essa página né? <a href="./">Volte para o topo</a> ou
           simplesmente vá para <a href="/">nossa página inicial</a>.
         </p>
-
-        <hr />
       </article>
 
       <footer class="nav">
