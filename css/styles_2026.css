@@ -169,13 +169,7 @@ body {
 ================================ */
 
 .article > * + * {
-  margin-top: var(--sm-spacing-xlg);
-}
-
-.article h1 + *,
-.article h2 + *,
-.article h3 + * {
-  margin-top: calc(var(--sm-spacing-xlg) * 0.6);
+  margin: var(--sm-spacing-xlg) 0;
 }
 
 /* ===============================
@@ -195,29 +189,34 @@ h6 {
   text-wrap: balance;
 }
 
-h1 {
+.article h1 {
   font-size: clamp(var(--font-heading-me), 10vw, var(--font-heading-xxxlg));
-  margin: calc(var(--sm-spacing-xlg) * 2) 0;
+  margin: clamp(var(--sm-spacing-xlg), 10vw, calc(var(--sm-spacing-xlg) * 3)) 0;
 }
 
-h2 {
+.article h2 {
   font-size: clamp(var(--font-heading-sm), 8vw, var(--font-heading-xxlg));
+  margin: clamp(var(--sm-spacing-lg), 8vw, calc(var(--sm-spacing-xlg) * 2)) 0;
 }
 
-h3 {
+.article h3 {
   font-size: clamp(var(--font-heading-xsm), 7vw, var(--font-heading-xlg));
+  margin: clamp(var(--sm-spacing-lg), 6vw, calc(var(--sm-spacing-xlg) * 1.8)) 0;
 }
 
-h4 {
+.article h4 {
   font-size: clamp(var(--font-heading-xxsm), 6vw, var(--font-heading-lg));
+  margin: clamp(var(--sm-spacing-lg), 6vw, calc(var(--sm-spacing-xlg) * 1.6)) 0;
 }
 
-h5 {
+.article h5 {
   font-size: clamp(var(--font-heading-xxsm), 5vw, var(--font-heading-me));
+  margin: clamp(var(--sm-spacing-lg), 5vw, calc(var(--sm-spacing-xlg) * 1.4)) 0;
 }
 
-h6 {
+.article h6 {
   font-size: clamp(var(--font-heading-xxsm), 5vw, var(--font-heading-xsm));
+  margin: clamp(var(--sm-spacing-lg), 5vw, calc(var(--sm-spacing-xlg) * 1.2)) 0;
 }
 
 /* ===============================
@@ -314,6 +313,10 @@ img {
   max-width: 100%;
   display: block;
   margin: 0 auto;
+}
+
+.p-img {
+  background: red;
 }
 
 /* ===============================

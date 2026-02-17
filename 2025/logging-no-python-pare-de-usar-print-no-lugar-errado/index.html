@@ -360,7 +360,7 @@
         </p>
 
         <h2 id="basicconfig-iniciando-com-logging-no-código">
-          basicConfig: iniciando com `logging` no código
+          basicConfig: iniciando com logging no código
         </h2>
 
         <p>
@@ -1103,7 +1103,7 @@
         ><code><span class="line"><span style="color:#CBA6F7">from</span><span style="color:#CDD6F4"> rich </span><span style="color:#CBA6F7">import</span><span style="color:#FAB387;font-style:italic"> print</span><span style="color:#CBA6F7"> as</span><span style="color:#CDD6F4"> rprint</span></span>
 <span class="line"><span style="color:#CBA6F7">from</span><span style="color:#CDD6F4"> rich</span><span style="color:#9399B2">.</span><span style="color:#CDD6F4">markdown </span><span style="color:#CBA6F7">import</span><span style="color:#CDD6F4"> Markdown</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#CDD6F4">md </span><span style="color:#94E2D5">=</span><span style="color:#89B4FA"> Markdown</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">"# Nos Handlers de `A`"</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#CDD6F4">md </span><span style="color:#94E2D5">=</span><span style="color:#89B4FA"> Markdown</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">"# Nos Handlers de A"</span><span style="color:#9399B2">)</span></span>
 <span class="line"><span style="color:#89B4FA">rprint</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">md</span><span style="color:#9399B2">)</span></span>
 <span class="line"></span></code></pre>
 
@@ -1405,7 +1405,7 @@
 <span class="line"><span style="color:#CBA6F7">from</span><span style="color:#CDD6F4"> typing </span><span style="color:#CBA6F7">import</span><span style="color:#CDD6F4"> Any</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#6C7086;font-style:italic"># Dicionário de Configuração de Logging</span></span>
-<span class="line"><span style="color:#6C7086;font-style:italic"># A configuração centralizada para o `dictConfig`.</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># A configuração centralizada para o dictConfig.</span></span>
 <span class="line"><span style="color:#CDD6F4">LOGGING_CONFIG</span><span style="color:#9399B2">:</span><span style="color:#EBA0AC;font-style:italic"> dict</span><span style="color:#9399B2">[</span><span style="color:#FAB387;font-style:italic">str</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> Any</span><span style="color:#9399B2">]</span><span style="color:#94E2D5"> =</span><span style="color:#9399B2"> {</span></span>
 <span class="line"><span style="color:#6C7086;font-style:italic">    # Versão da configuração. Sempre 1 por enquanto.</span></span>
 <span class="line"><span style="color:#A6E3A1">    "version"</span><span style="color:#9399B2">:</span><span style="color:#FAB387"> 1</span><span style="color:#9399B2">,</span></span>
@@ -1415,7 +1415,7 @@
 <span class="line"><span style="color:#A6E3A1">    "formatters"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {</span></span>
 <span class="line"><span style="color:#6C7086;font-style:italic">        # A chave é o nome que você usa para se referir a esse formatter</span></span>
 <span class="line"><span style="color:#A6E3A1">        "main_formatter"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {</span></span>
-<span class="line"><span style="color:#6C7086;font-style:italic">            # As configs são `chave`: `valor` no dicionário</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">            # As configs são chave: valor no dicionário</span></span>
 <span class="line"><span style="color:#6C7086;font-style:italic">            # Aqui está nosso formato anterior</span></span>
 <span class="line"><span style="color:#A6E3A1">            "format"</span><span style="color:#9399B2">:</span><span style="color:#A6E3A1"> "</span><span style="color:#F5C2E7">%(levelname)s</span><span style="color:#A6E3A1">|</span><span style="color:#F5C2E7">%(name)s</span><span style="color:#A6E3A1">|</span><span style="color:#F5C2E7">%(asctime)s</span><span style="color:#A6E3A1">|</span><span style="color:#F5C2E7">%(message)s</span><span style="color:#A6E3A1">|</span><span style="color:#F5C2E7">%(filename)s</span><span style="color:#A6E3A1">|</span><span style="color:#F5C2E7">%(lineno)d</span><span style="color:#A6E3A1">"</span><span style="color:#9399B2">,</span></span>
 <span class="line"><span style="color:#9399B2">        },</span></span>
@@ -1440,7 +1440,7 @@
 <span class="line"><span style="color:#9399B2">        },</span></span>
 <span class="line"><span style="color:#9399B2">    },</span></span>
 <span class="line"><span style="color:#6C7086;font-style:italic">    # Root</span></span>
-<span class="line"><span style="color:#6C7086;font-style:italic">    # Como o `root` é especial, tem uma chave só pra ele</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Como o root é especial, tem uma chave só pra ele</span></span>
 <span class="line"><span style="color:#6C7086;font-style:italic">    # Configuração do logger raiz, que captura todos os logs.</span></span>
 <span class="line"><span style="color:#A6E3A1">    "root"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {</span></span>
 <span class="line"><span style="color:#6C7086;font-style:italic">        # Novamente, estou usando as chaves criadas em handlers</span></span>
@@ -1475,7 +1475,7 @@
 <span class="line"><span style="color:#A6E3A1">    "formatters"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {},</span><span style="color:#6C7086;font-style:italic"> # aqui vem seus formatters</span></span>
 <span class="line"><span style="color:#A6E3A1">    "handlers"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {},</span><span style="color:#6C7086;font-style:italic"> # aqui os handlers</span></span>
 <span class="line"><span style="color:#A6E3A1">    "filters"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {},</span><span style="color:#6C7086;font-style:italic"> # aqui viriam os filters</span></span>
-<span class="line"><span style="color:#A6E3A1">    "root"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {},</span><span style="color:#6C7086;font-style:italic"> # aqui as configurações do `root`</span></span>
+<span class="line"><span style="color:#A6E3A1">    "root"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {},</span><span style="color:#6C7086;font-style:italic"> # aqui as configurações do root</span></span>
 <span class="line"><span style="color:#A6E3A1">    "loggers"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {},</span><span style="color:#6C7086;font-style:italic"> # aqui cada chave é um logger específico</span></span>
 <span class="line"><span style="color:#9399B2">}</span></span>
 <span class="line"></span></code></pre>
@@ -1505,7 +1505,7 @@
         </p>
 
         <h2 id="handlers-padrão-em-logginghandlers">
-          Handlers padrão em `logging.handlers`
+          Handlers padrão em logging.handlers
         </h2>
 
         <p>
@@ -1690,18 +1690,18 @@
 <span class="line"><span style="color:#A6E3A1">    "file"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {</span></span>
 <span class="line"><span style="color:#A6E3A1">        "format"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> (</span></span>
 <span class="line"><span style="color:#6C7086;font-style:italic">            # Os parenteses em strings geralmente é porque é muito longa</span></span>
-<span class="line"><span style="color:#6C7086;font-style:italic">            # Vamos usar `file` para os arquivos de log</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">            # Vamos usar file para os arquivos de log</span></span>
 <span class="line"><span style="color:#A6E3A1">            "</span><span style="color:#F5C2E7">%(levelname)s</span><span style="color:#A6E3A1">|</span><span style="color:#F5C2E7">%(name)s</span><span style="color:#A6E3A1">|</span><span style="color:#F5C2E7">%(asctime)s</span><span style="color:#A6E3A1">|</span><span style="color:#F5C2E7">%(message)s</span><span style="color:#A6E3A1">|</span><span style="color:#F5C2E7">%(filename)s</span><span style="color:#A6E3A1">|</span><span style="color:#F5C2E7">%(lineno)d</span><span style="color:#A6E3A1">"</span></span>
 <span class="line"><span style="color:#9399B2">        ),</span></span>
 <span class="line"><span style="color:#A6E3A1">        "datefmt"</span><span style="color:#9399B2">:</span><span style="color:#A6E3A1"> "%Y-%m-</span><span style="color:#F5C2E7">%d</span><span style="color:#A6E3A1">T%H:%M:%S%z"</span><span style="color:#9399B2">,</span><span style="color:#6C7086;font-style:italic">  # Muda o formato da data</span></span>
 <span class="line"><span style="color:#9399B2">    },</span></span>
 <span class="line"><span style="color:#A6E3A1">    "stdout"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {</span></span>
-<span class="line"><span style="color:#6C7086;font-style:italic">        # Coloquei um `OUT: ` aqui pra gente conseguir distinguir no log</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">        # Coloquei um OUT:  aqui pra gente conseguir distinguir no log</span></span>
 <span class="line"><span style="color:#A6E3A1">        "format"</span><span style="color:#9399B2">:</span><span style="color:#A6E3A1"> "OUT: [</span><span style="color:#F5C2E7">%(levelname)s</span><span style="color:#A6E3A1">] </span><span style="color:#F5C2E7">%(message)s</span><span style="color:#A6E3A1">"</span><span style="color:#9399B2">,</span></span>
 <span class="line"><span style="color:#9399B2">    },</span></span>
 <span class="line"><span style="color:#A6E3A1">    "stderr"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {</span></span>
 <span class="line"><span style="color:#A6E3A1">        "format"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> (</span></span>
-<span class="line"><span style="color:#6C7086;font-style:italic">            # Coloquei um `ERR: ` aqui pra gente conseguir distinguir no log</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">            # Coloquei um ERR:  aqui pra gente conseguir distinguir no log</span></span>
 <span class="line"><span style="color:#6C7086;font-style:italic">            # Também coloquei uma cor vermelha aqui.</span></span>
 <span class="line"><span style="color:#6C7086;font-style:italic">            # Isso não tem a ver com o dict, dictConfig ou o logging</span></span>
 <span class="line"><span style="color:#A6E3A1">            "</span><span style="color:#F5C2E7">\033</span><span style="color:#A6E3A1">[31mERR: [</span><span style="color:#F5C2E7">%(levelname)s</span><span style="color:#A6E3A1">] </span><span style="color:#F5C2E7">%(message)s</span><span style="color:#A6E3A1"> - "</span></span>
@@ -1869,11 +1869,11 @@
           tabindex="0"
         ><code><span class="line"><span>OUT: [DEBUG] mensagem de log</span></span>
 <span class="line"><span>OUT: [INFO] mensagem de log</span></span>
-<span class="line"><span>OUT: [WARNING] mensagem de log                  ### &lt;- `warning` está no stdout</span></span>
+<span class="line"><span>OUT: [WARNING] mensagem de log                  ### &lt;- warning está no stdout</span></span>
 <span class="line"><span>ERR: [WARNING] mensagem de log - main.py|60</span></span>
-<span class="line"><span>OUT: [ERROR] mensagem de log                    ### &lt;- `error` está no stdout</span></span>
+<span class="line"><span>OUT: [ERROR] mensagem de log                    ### &lt;- error está no stdout</span></span>
 <span class="line"><span>ERR: [ERROR] mensagem de log - main.py|61</span></span>
-<span class="line"><span>OUT: [CRITICAL] mensagem de log                 ### &lt;- `critical` está no stdout</span></span>
+<span class="line"><span>OUT: [CRITICAL] mensagem de log                 ### &lt;- critical está no stdout</span></span>
 <span class="line"><span>ERR: [CRITICAL] mensagem de log - main.py|62</span></span>
 <span class="line"><span></span></span></code></pre>
 
@@ -2020,8 +2020,8 @@
         ><code><span class="line"><span style="color:#CDD6F4">LOGGING_CONFIG</span><span style="color:#9399B2">:</span><span style="color:#EBA0AC;font-style:italic"> dict</span><span style="color:#9399B2">[</span><span style="color:#FAB387;font-style:italic">str</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> Any</span><span style="color:#9399B2">]</span><span style="color:#94E2D5"> =</span><span style="color:#9399B2"> {</span></span>
 <span class="line"><span style="color:#A6E3A1">    "version"</span><span style="color:#9399B2">:</span><span style="color:#FAB387"> 1</span><span style="color:#9399B2">,</span><span style="color:#6C7086;font-style:italic"> # mesma coisa</span></span>
 <span class="line"><span style="color:#A6E3A1">    "disable_existing_loggers"</span><span style="color:#9399B2">:</span><span style="color:#CBA6F7"> False</span><span style="color:#9399B2">,</span><span style="color:#6C7086;font-style:italic"> # mesma coisa</span></span>
-<span class="line"><span style="color:#6C7086;font-style:italic">    # `filters` é uma chave de primeiro nível,</span></span>
-<span class="line"><span style="color:#6C7086;font-style:italic">    # assim como `formatters`</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # filters é uma chave de primeiro nível,</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # assim como formatters</span></span>
 <span class="line"><span style="color:#A6E3A1">    "filters"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {</span></span>
 <span class="line"><span style="color:#6C7086;font-style:italic">        # O nome do meu filtro dentro da dictConfig é a chave</span></span>
 <span class="line"><span style="color:#A6E3A1">        "only_debug_info"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {</span></span>
@@ -2063,7 +2063,7 @@
 <span class="line"><span style="color:#9399B2">}</span></span>
 <span class="line"></span></code></pre>
 
-        <h3 id="resultado-final-com-filter">Resultado final com `filter`</h3>
+        <h3 id="resultado-final-com-filter">Resultado final com filter</h3>
 
         <p>Com isso, o comportamento será exatamente o que você queria:</p>
 
@@ -2221,7 +2221,7 @@
 <span class="line"></span></code></pre>
 
         <h3 id="como-usar-no-json-com-dictconfig">
-          Como usar no JSON com `dictConfig`
+          Como usar no JSON com dictConfig
         </h3>
 
         <p>
@@ -2555,10 +2555,10 @@
 <span class="line"><span style="color:#CDD6F4">LOG_RECORDS_EXTENDED_KEYS </span><span style="color:#94E2D5">=</span><span style="color:#9399B2"> [</span><span style="color:#94E2D5">*</span><span style="color:#CDD6F4">LOG_RECORD_KEYS</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> "message"</span><span style="color:#9399B2">]</span></span>
 <span class="line"></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6C7086;font-style:italic"># Nosso logger herda de `logging.Formatter`. Vou configurar tudo dessa super</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># Nosso logger herda de logging.Formatter. Vou configurar tudo dessa super</span></span>
 <span class="line"><span style="color:#6C7086;font-style:italic"># classe por dentro do meu __init__, ou seja, não vou receber configurações</span></span>
 <span class="line"><span style="color:#6C7086;font-style:italic"># externas.</span></span>
-<span class="line"><span style="color:#6C7086;font-style:italic"># A única coisa que adicionei aqui foi `include_keys`, que vamos poder usar para</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># A única coisa que adicionei aqui foi include_keys, que vamos poder usar para</span></span>
 <span class="line"><span style="color:#6C7086;font-style:italic"># ativar ou desativar chaves do nosso log.</span></span>
 <span class="line"><span style="color:#CBA6F7">class</span><span style="color:#F9E2AF;font-style:italic"> JSONLogFormatter</span><span style="color:#9399B2">(</span><span style="color:#F9E2AF;font-style:italic">logging</span><span style="color:#9399B2">.</span><span style="color:#F9E2AF;font-style:italic">Formatter</span><span style="color:#9399B2">):</span></span>
 <span class="line"><span style="color:#CBA6F7">    def</span><span style="color:#89DCEB;font-style:italic"> __init__</span><span style="color:#9399B2">(</span><span style="color:#F38BA8;font-style:italic">self</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> include_keys</span><span style="color:#9399B2">:</span><span style="color:#EBA0AC;font-style:italic"> list</span><span style="color:#9399B2">[</span><span style="color:#FAB387;font-style:italic">str</span><span style="color:#9399B2">]</span><span style="color:#94E2D5"> |</span><span style="color:#CBA6F7"> None</span><span style="color:#94E2D5"> =</span><span style="color:#CBA6F7"> None</span><span style="color:#9399B2">)</span><span style="color:#9399B2"> -&gt;</span><span style="color:#CBA6F7"> None</span><span style="color:#9399B2">:</span></span>
@@ -2568,7 +2568,7 @@
 <span class="line"><span style="color:#EBA0AC;font-style:italic">            style</span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1">"%"</span><span style="color:#9399B2">,</span></span>
 <span class="line"><span style="color:#EBA0AC;font-style:italic">            validate</span><span style="color:#94E2D5">=</span><span style="color:#CBA6F7">False</span><span style="color:#9399B2">,</span></span>
 <span class="line"><span style="color:#9399B2">        )</span></span>
-<span class="line"><span style="color:#6C7086;font-style:italic">        # Se você não enviar `include_keys`, todas as chaves serão adicionadas.</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">        # Se você não enviar include_keys, todas as chaves serão adicionadas.</span></span>
 <span class="line"><span style="color:#F38BA8;font-style:italic">        self</span><span style="color:#9399B2">.</span><span style="color:#CDD6F4">include_keys </span><span style="color:#94E2D5">=</span><span style="color:#9399B2"> (</span></span>
 <span class="line"><span style="color:#CDD6F4">            include_keys </span><span style="color:#CBA6F7">if</span><span style="color:#CDD6F4"> include_keys </span><span style="color:#CBA6F7">is</span><span style="color:#CBA6F7"> not</span><span style="color:#CBA6F7"> None</span><span style="color:#CBA6F7"> else</span><span style="color:#CDD6F4"> LOG_RECORDS_EXTENDED_KEYS</span></span>
 <span class="line"><span style="color:#9399B2">        )</span></span>
@@ -2576,7 +2576,7 @@
 <span class="line"><span style="color:#FAB387;font-style:italic">    @override</span></span>
 <span class="line"><span style="color:#CBA6F7">    def</span><span style="color:#FAB387;font-style:italic"> format</span><span style="color:#9399B2">(</span><span style="color:#F38BA8;font-style:italic">self</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> record</span><span style="color:#9399B2">:</span><span style="color:#EBA0AC"> logging</span><span style="color:#9399B2">.</span><span style="color:#EBA0AC">LogRecord</span><span style="color:#9399B2">)</span><span style="color:#9399B2"> -&gt;</span><span style="color:#FAB387;font-style:italic"> str</span><span style="color:#9399B2">:</span></span>
 <span class="line"><span style="color:#6C7086;font-style:italic">        # Crio um dicionário onde obtenho todas as chaves de "include_keys"</span></span>
-<span class="line"><span style="color:#6C7086;font-style:italic">        # de dentro do LogRecord (`record`). Inicialmente, os valores são</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">        # de dentro do LogRecord (record). Inicialmente, os valores são</span></span>
 <span class="line"><span style="color:#6C7086;font-style:italic">        # iguais, mas alguns desses valores não podem ser serializados para JSON.</span></span>
 <span class="line"><span style="color:#CDD6F4">        dict_record</span><span style="color:#9399B2">:</span><span style="color:#EBA0AC;font-style:italic"> dict</span><span style="color:#9399B2">[</span><span style="color:#FAB387;font-style:italic">str</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> Any</span><span style="color:#9399B2">]</span><span style="color:#94E2D5"> =</span><span style="color:#9399B2"> {</span></span>
 <span class="line"><span style="color:#CDD6F4">            key</span><span style="color:#9399B2">:</span><span style="color:#FAB387;font-style:italic"> getattr</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">record</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> key</span><span style="color:#9399B2">)</span></span>
@@ -2586,8 +2586,8 @@
 <span class="line"><span style="color:#9399B2">        }</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#CBA6F7">        if</span><span style="color:#A6E3A1"> "created"</span><span style="color:#CBA6F7"> in</span><span style="color:#CDD6F4"> dict_record</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#6C7086;font-style:italic">            # Sobrescrevi o método `formatTime` para retornar um datetime</span></span>
-<span class="line"><span style="color:#6C7086;font-style:italic">            # ao invés de `struct_time` que é o padrão. Assim consigo trabalhar</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">            # Sobrescrevi o método formatTime para retornar um datetime</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">            # ao invés de struct_time que é o padrão. Assim consigo trabalhar</span></span>
 <span class="line"><span style="color:#6C7086;font-style:italic">            # com timezone.</span></span>
 <span class="line"><span style="color:#EBA0AC;font-style:italic">            dict_record</span><span style="color:#9399B2">[</span><span style="color:#A6E3A1">"</span><span style="color:#A6E3A1;font-style:italic">created</span><span style="color:#A6E3A1">"</span><span style="color:#9399B2">]</span><span style="color:#94E2D5"> =</span><span style="color:#F38BA8;font-style:italic"> self</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">formatTime</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">record</span><span style="color:#9399B2">)</span></span>
 <span class="line"></span>
@@ -2595,8 +2595,8 @@
 <span class="line"><span style="color:#EBA0AC;font-style:italic">            dict_record</span><span style="color:#9399B2">[</span><span style="color:#A6E3A1">"</span><span style="color:#A6E3A1;font-style:italic">message</span><span style="color:#A6E3A1">"</span><span style="color:#9399B2">]</span><span style="color:#94E2D5"> =</span><span style="color:#CDD6F4"> record</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">getMessage</span><span style="color:#9399B2">()</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#CBA6F7">        if</span><span style="color:#A6E3A1"> "exc_info"</span><span style="color:#CBA6F7"> in</span><span style="color:#CDD6F4"> dict_record </span><span style="color:#CBA6F7">and</span><span style="color:#CDD6F4"> record</span><span style="color:#9399B2">.</span><span style="color:#CDD6F4">exc_info</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#6C7086;font-style:italic">            # `exc_info` traz informações sobre exceções. Precisamos formatar</span></span>
-<span class="line"><span style="color:#6C7086;font-style:italic">            # esse valor para uma string. Por sorte isso existe em `Formatter`.</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">            # exc_info traz informações sobre exceções. Precisamos formatar</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">            # esse valor para uma string. Por sorte isso existe em Formatter.</span></span>
 <span class="line"><span style="color:#EBA0AC;font-style:italic">            dict_record</span><span style="color:#9399B2">[</span><span style="color:#A6E3A1">"</span><span style="color:#A6E3A1;font-style:italic">exc_info</span><span style="color:#A6E3A1">"</span><span style="color:#9399B2">]</span><span style="color:#94E2D5"> =</span><span style="color:#F38BA8;font-style:italic"> self</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">formatException</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">record</span><span style="color:#9399B2">.</span><span style="color:#CDD6F4">exc_info</span><span style="color:#9399B2">)</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#CBA6F7">        if</span><span style="color:#A6E3A1"> "stack_info"</span><span style="color:#CBA6F7"> in</span><span style="color:#CDD6F4"> dict_record </span><span style="color:#CBA6F7">and</span><span style="color:#CDD6F4"> record</span><span style="color:#9399B2">.</span><span style="color:#CDD6F4">stack_info</span><span style="color:#9399B2">:</span></span>
@@ -2642,7 +2642,7 @@
         </p>
 
         <h3 id="configuração-atual-do-nosso-loggingjson-do-dictconfig">
-          Configuração atual do nosso `logging.json` do `dictConfig`
+          Configuração atual do nosso logging.json do dictConfig
         </h3>
 
         <p>
@@ -2850,7 +2850,7 @@
         </p>
 
         <h3 id="exemplo-prático-com-nosso-json-de-dictconfig">
-          Exemplo prático com nosso JSON de `dictConfig`
+          Exemplo prático com nosso JSON de dictConfig
         </h3>
 
         <p>
@@ -3073,7 +3073,7 @@
 <span class="line"><span style="color:#CDD6F4">LOG_CONFIG_PATH </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> ROOT_DIR </span><span style="color:#94E2D5">/</span><span style="color:#A6E3A1"> "logging.json"</span><span style="color:#6C7086;font-style:italic">  # Arquivo de configuração</span></span>
 <span class="line"></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6C7086;font-style:italic"># não preciso mais de `name` como argumento aqui</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic"># não preciso mais de name como argumento aqui</span></span>
 <span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> setup</span><span style="color:#9399B2">()</span><span style="color:#9399B2"> -&gt;</span><span style="color:#CBA6F7"> None</span><span style="color:#9399B2">:</span></span>
 <span class="line"><span style="color:#A6E3A1">    """Configura o logger principal da aplicação."""</span></span>
 <span class="line"></span>
@@ -3087,7 +3087,7 @@
 <span class="line"></span>
 <span class="line"><span style="color:#89B4FA">    dictConfig</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">logging_config</span><span style="color:#9399B2">)</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6C7086;font-style:italic">    # Aqui está o que adicionamos para iniciar e finalizar `QueueListener`</span></span>
+<span class="line"><span style="color:#6C7086;font-style:italic">    # Aqui está o que adicionamos para iniciar e finalizar QueueListener</span></span>
 <span class="line"><span style="color:#CDD6F4">    queue_handler </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> logging</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">getHandlerByName</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">"queue"</span><span style="color:#9399B2">)</span></span>
 <span class="line"><span style="color:#CBA6F7">    if</span><span style="color:#CDD6F4"> queue_handler </span><span style="color:#CBA6F7">is</span><span style="color:#CBA6F7"> not</span><span style="color:#CBA6F7"> None</span><span style="color:#9399B2">:</span></span>
 <span class="line"><span style="color:#6C7086;font-style:italic">        # pyright não reconheceu os tipos</span></span>
@@ -3380,7 +3380,7 @@
         </p>
 
         <h4 id="debug-esse-é-nosso-dos-devs">
-          `DEBUG`: "Esse é nosso (dos devs)"
+          DEBUG: "Esse é nosso (dos devs)"
         </h4>
 
         <ul>
@@ -3410,7 +3410,7 @@
 <span class="line"><span style="color:#CDD6F4">logger</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">debug</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">"Consulta SQL gerada: </span><span style="color:#F5C2E7">%s</span><span style="color:#A6E3A1">"</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> query</span><span style="color:#9399B2">)</span></span>
 <span class="line"></span></code></pre>
 
-        <h4 id="info-aconteceu-algo-certo">`INFO`: Aconteceu algo certo</h4>
+        <h4 id="info-aconteceu-algo-certo">INFO: Aconteceu algo certo</h4>
 
         <ul>
           <li>
@@ -3433,7 +3433,7 @@
 <span class="line"></span></code></pre>
 
         <h4 id="warning-atenção-algo-inesperado-aconteceu">
-          `WARNING`: Atenção, algo inesperado aconteceu
+          WARNING: Atenção, algo inesperado aconteceu
         </h4>
 
         <ul>
@@ -3456,7 +3456,7 @@
 <span class="line"><span style="color:#CDD6F4">logger</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">warning</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">"Configuração 'X' está obsoleta. Use 'Y' no lugar."</span><span style="color:#9399B2">)</span></span>
 <span class="line"></span></code></pre>
 
-        <h4 id="error-uma-operação-falhou">`ERROR`: Uma operação falhou</h4>
+        <h4 id="error-uma-operação-falhou">ERROR: Uma operação falhou</h4>
 
         <ul>
           <li>
@@ -3478,7 +3478,7 @@
 <span class="line"></span></code></pre>
 
         <h4 id="critical-o-navio-está-afundando">
-          `CRITICAL`: O navio está afundando!
+          CRITICAL: O navio está afundando!
         </h4>
 
         <ul>
@@ -3502,7 +3502,7 @@
 <span class="line"></span></code></pre>
 
         <h4 id="menção-honrosa-loggerexception">
-          Menção honrosa: `logger.exception()`
+          Menção honrosa: logger.exception()
         </h4>
 
         <ul>
