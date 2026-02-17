@@ -55,6 +55,18 @@
 
   --fg-default: #101015;
   --fg-default-muted: #303045;
+
+  --bg-brand-default: #0044dd;
+  --bg-brand-hover: #1166ff;
+  --bg-brand-disabled: #ccccdd;
+  --bg-brand-secondary: #333344;
+  --bg-brand-secondary-hover: #444455;
+
+  --fg-brand-default: #eeeeff;
+  --fg-brand-hover: #ffffff;
+  --fg-brand-disabled: #777788;
+  --fg-brand-secondary: #eeeeff;
+  --fg-brand-secondary-hover: #ffffff;
 }
 
 /* ===============================
@@ -219,6 +231,7 @@ h6 {
 a {
   color: var(--fg-default);
   text-decoration: none;
+  cursor: pointer;
 }
 
 a:hover {
@@ -320,4 +333,73 @@ img {
   a {
     color: var(--fg-default-muted);
   }
+}
+
+/* ===============================
+   Forms
+================================ */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sm-spacing-xlg);
+}
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: var(--sm-spacing-sm);
+}
+
+textarea,
+button,
+select {
+  font-size: clamp(var(--font-xsm), 4vw, var(--font-sm));
+  font-family: var(--font-monospace);
+}
+
+select {
+  width: 100%;
+  padding: var(--sm-spacing-xxsm) var(--sm-spacing-xxsm);
+  border-radius: var(--border-radius-me);
+}
+
+textarea {
+  width: 100%;
+  max-width: var(--main-width);
+  min-height: 25rem;
+  font-family: var(--font-monospace);
+  border-radius: var(--border-radius-me);
+  padding: var(--sm-spacing-sm);
+}
+
+button {
+  border: none;
+  background: var(--bg-brand-default);
+  color: var(--fg-brand-default);
+  cursor: pointer;
+  padding: var(--sm-spacing-xxsm) var(--sm-spacing-xlg);
+  border-radius: 9999px;
+  transition: all 300ms ease-in-out;
+  flex-grow: 1;
+}
+
+button:hover {
+  background: var(--bg-brand-hover);
+  color: var(--fg-brand-hover);
+}
+
+button:disabled {
+  background: var(--bg-brand-disabled);
+  color: var(--fg-brand-disabled);
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--bg-brand-secondary);
+  color: var(--fg-brand-secondary);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-brand-secondary-hover);
+  color: var(--fg-brand-secondary-hover);
 }
