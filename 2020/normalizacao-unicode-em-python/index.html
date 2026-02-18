@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Normalização Unicode em Python - Otávio Miranda</title>
-    <meta name="description" content="Além da normalização Unicode e as formas de normalização NFC, NFD, NFKC e NFKD, você vai aprender tudo o que precisa saber sobre o padrão Unicode em si e Python." />
+    <meta
+      name="description"
+      content="Além da normalização Unicode e as formas de normalização NFC, NFD, NFKC e NFKD, você vai aprender tudo o que precisa saber sobre o padrão Unicode em si e Python."
+    />
 
     <link rel="stylesheet" href="../../css/styles_2026.css" />
 
@@ -44,1348 +47,1356 @@
         <h1>Normalização Unicode em Python</h1>
 
         <p class="author">
-          <strong>Por</strong>
-          <a href="https://www.otaviomiranda.com.br/">Luiz Otávio Miranda</a>
+          <span class="meta-date">
+            <time datetime="2018-09-20">20 de agosto de 2020</time>
+          </span>
+          ·
+          <span class="meta-author">Luiz Otávio Miranda</span>
         </p>
 
-            <p>
-              Al&eacute;m da
-              <strong>normaliza&ccedil;&atilde;o Unicode</strong> e as formas de
-              normaliza&ccedil;&atilde;o NFC, NFD, NFKC e NFKD, voc&ecirc; vai
-              aprender tudo o que precisa saber sobre o padr&atilde;o Unicode em
-              si e Python.
-            </p>
+        <p>
+          Al&eacute;m da
+          <strong>normaliza&ccedil;&atilde;o Unicode</strong> e as formas de
+          normaliza&ccedil;&atilde;o NFC, NFD, NFKC e NFKD, voc&ecirc; vai
+          aprender tudo o que precisa saber sobre o padr&atilde;o Unicode em si
+          e Python.
+        </p>
 
-            <p>
-              Falando sobre a normaliza&ccedil;&atilde;o Unicode em si, que
-              provavelmente &eacute; o que te trouxe aqui: normalizar &eacute; o
-              ato de transformar strings (<a
-                href="https://pt.wikipedia.org/wiki/Unicode"
-                >textos no padr&atilde;o unicode</a
-              >) para uma forma normal onde os caracteres sempre ter&atilde;o a
-              mesma representa&ccedil;&atilde;o bin&aacute;ria em todo o seu
-              programa. Isso facilita a compara&ccedil;&atilde;o,
-              indexa&ccedil;&atilde;o e ordena&ccedil;&atilde;o de strings
-              j&aacute; que, em um sistema &ldquo;normalizado&rdquo;, essas
-              opera&ccedil;&otilde;es s&atilde;o &eacute; mais
-              confi&aacute;veis.
-            </p>
+        <p>
+          Falando sobre a normaliza&ccedil;&atilde;o Unicode em si, que
+          provavelmente &eacute; o que te trouxe aqui: normalizar &eacute; o ato
+          de transformar strings (<a
+            href="https://pt.wikipedia.org/wiki/Unicode"
+            >textos no padr&atilde;o unicode</a
+          >) para uma forma normal onde os caracteres sempre ter&atilde;o a
+          mesma representa&ccedil;&atilde;o bin&aacute;ria em todo o seu
+          programa. Isso facilita a compara&ccedil;&atilde;o,
+          indexa&ccedil;&atilde;o e ordena&ccedil;&atilde;o de strings j&aacute;
+          que, em um sistema &ldquo;normalizado&rdquo;, essas
+          opera&ccedil;&otilde;es s&atilde;o &eacute; mais confi&aacute;veis.
+        </p>
 
-            <p>
-              Frequentemente voc&ecirc; ver&aacute; emojis no meio do texto com
-              um c&oacute;digo na frete. Eu espero que voc&ecirc; entenda isso
-              ao terminar sua leitura, porque eu n&atilde;o costumo escrever
-              assim, ok? 🤐 (U+1F910).
-            </p>
+        <p>
+          Frequentemente voc&ecirc; ver&aacute; emojis no meio do texto com um
+          c&oacute;digo na frete. Eu espero que voc&ecirc; entenda isso ao
+          terminar sua leitura, porque eu n&atilde;o costumo escrever assim, ok?
+          🤐 (U+1F910).
+        </p>
 
-            <h2>Um contexto para iniciarmos</h2>
+        <h2>Um contexto para iniciarmos</h2>
 
-            <p>
-              Vamos iniciar uma jornada longa neste momento. Portanto, vou te
-              deixar um contexto para discutirmos ao longo de todo o artigo.
-              Por&eacute;m, n&atilde;o se preocupe se n&atilde;o entender nada
-              agora. Prometo que vou explicar tudo o que voc&ecirc; vai ver a
-              seguir 🙏 (U+1F64F).
-            </p>
+        <p>
+          Vamos iniciar uma jornada longa neste momento. Portanto, vou te deixar
+          um contexto para discutirmos ao longo de todo o artigo. Por&eacute;m,
+          n&atilde;o se preocupe se n&atilde;o entender nada agora. Prometo que
+          vou explicar tudo o que voc&ecirc; vai ver a seguir 🙏 (U+1F64F).
+        </p>
 
-            <h3>Porque precisamos de normaliza&ccedil;&atilde;o?</h3>
+        <h3>Porque precisamos de normaliza&ccedil;&atilde;o?</h3>
 
-            <p>
-              No padr&atilde;o Unicode, caracteres s&atilde;o representados por
-              <strong>code points</strong> (c&oacute;digos de identidade do
-              caractere). Mas, alguns desses caracteres s&atilde;o representados
-              mais de uma vez para que o padr&atilde;o Unicode mantenha
-              compatibilidade com outros padr&otilde;es que vieram antes dele.
-            </p>
+        <p>
+          No padr&atilde;o Unicode, caracteres s&atilde;o representados por
+          <strong>code points</strong> (c&oacute;digos de identidade do
+          caractere). Mas, alguns desses caracteres s&atilde;o representados
+          mais de uma vez para que o padr&atilde;o Unicode mantenha
+          compatibilidade com outros padr&otilde;es que vieram antes dele.
+        </p>
 
-            <p>
-              Por exemplo, a letra &ldquo;<code>&aacute;</code>&rdquo; (a com
-              acento agudo), representada por &ldquo;<code>U+00E1</code>&rdquo;
-              em
-              <a href="https://en.wikipedia.org/wiki/Code_point">code point</a>
-              Unicode, tamb&eacute;m pode ser representada por
-              <code>&quot;U+0061&quot;</code> (a) +
-              &ldquo;<code>U+0301</code>&rdquo; (acento agudo). Na segunda
-              representa&ccedil;&atilde;o, o acento &eacute; algo que &eacute;
-              chamado de
-              <a href="https://en.wikipedia.org/wiki/Combining_character"
-                >combining character</a
-              >, porque combinado ao &ldquo;<strong>a</strong>&ldquo;, forma
-              &ldquo;<strong>&aacute;</strong>&ldquo;. No entanto,
-              &ldquo;<code>U+00E1</code>&rdquo; (<strong>&aacute;</strong>)
-              n&atilde;o &eacute; igual a &ldquo;<code>U+0061</code>&rdquo; +
-              &ldquo;<code>U+0301</code>&rdquo; (<strong>&aacute;</strong>) do
-              ponto de vista do seu programa em Python, mesmo que visualmente o
-              caractere final seja exatamente o mesmo
-              (<strong>&aacute;</strong>).
-            </p>
+        <p>
+          Por exemplo, a letra &ldquo;<code>&aacute;</code>&rdquo; (a com acento
+          agudo), representada por &ldquo;<code>U+00E1</code>&rdquo; em
+          <a href="https://en.wikipedia.org/wiki/Code_point">code point</a>
+          Unicode, tamb&eacute;m pode ser representada por
+          <code>&quot;U+0061&quot;</code> (a) +
+          &ldquo;<code>U+0301</code>&rdquo; (acento agudo). Na segunda
+          representa&ccedil;&atilde;o, o acento &eacute; algo que &eacute;
+          chamado de
+          <a href="https://en.wikipedia.org/wiki/Combining_character"
+            >combining character</a
+          >, porque combinado ao &ldquo;<strong>a</strong>&ldquo;, forma
+          &ldquo;<strong>&aacute;</strong>&ldquo;. No entanto,
+          &ldquo;<code>U+00E1</code>&rdquo; (<strong>&aacute;</strong>)
+          n&atilde;o &eacute; igual a &ldquo;<code>U+0061</code>&rdquo; +
+          &ldquo;<code>U+0301</code>&rdquo; (<strong>&aacute;</strong>) do ponto
+          de vista do seu programa em Python, mesmo que visualmente o caractere
+          final seja exatamente o mesmo (<strong>&aacute;</strong>).
+        </p>
 
-            <pre>
->>> '\u00e1'
-'á'
->>> '\u0061\u0301'
-'á'
->>> '\u00e1' == '\u0061\u0301'
-False</pre
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#94E2D5">>>></span><span style="color:#A6E3A1"> '</span><span style="color:#F5C2E7">\u00e1</span><span style="color:#A6E3A1">'</span></span>
+<span class="line"><span style="color:#A6E3A1">'á'</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#A6E3A1"> '</span><span style="color:#F5C2E7">\u0061\u0301</span><span style="color:#A6E3A1">'</span></span>
+<span class="line"><span style="color:#A6E3A1">'á'</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#A6E3A1"> '</span><span style="color:#F5C2E7">\u00e1</span><span style="color:#A6E3A1">'</span><span style="color:#94E2D5"> ==</span><span style="color:#A6E3A1"> '</span><span style="color:#F5C2E7">\u0061\u0301</span><span style="color:#A6E3A1">'</span></span>
+<span class="line"><span style="color:#FAB387">False</span></span></code></pre>
+
+        <p>
+          A <strong>normaliza&ccedil;&atilde;o unicode</strong> vai resolver
+          este problema mantendo apenas uma forma normal dos
+          &ldquo;<strong>&aacute;</strong>s&rdquo; apresentados acima. Ou
+          &ldquo;<code>U+00E1</code>&rdquo; ou &ldquo;<code>U+0061</code>&rdquo;
+          + &ldquo;<code>U+0301</code>&ldquo;. No entanto, para entender porque
+          precisamos de normaliza&ccedil;&atilde;o unicode em nosso sistema,
+          precisamos entender o Padr&atilde;o Unicode como um todo.
+        </p>
+
+        <h2>Unicode &ndash; o b&aacute;sico do b&aacute;sico</h2>
+
+        <p>
+          O Unicode &eacute; um padr&atilde;o que permite aos computadores
+          representar e manipular texto de qualquer sistema de escrita existente
+          utilizando c&oacute;digos para caracteres individuais. Cada caractere
+          &eacute; mapeado para um c&oacute;digo espec&iacute;fico chamado de
+          &ldquo;<em>code point</em>&ldquo;.
+        </p>
+
+        <p>
+          Code Points s&atilde;o representados por um
+          <strong>U+</strong> seguido de
+          <strong>4 a 6 d&iacute;gitos hexadecimais</strong> (de 0 a 0x10FFFF).
+          Por exemplo: o code point <strong>U+0041</strong> representa a letra
+          &ldquo;<strong>A</strong>&ldquo;; o <strong>U+0042</strong>, a letra
+          &ldquo;<strong>B</strong>&ldquo;, o <strong>U+1F40D</strong>, uma
+          cobra verde &ldquo;🐍&rdquo;, e assim por diante.
+        </p>
+
+        <p>
+          Para que um sistema possa representar um
+          <strong>code point</strong> como um caractere &ldquo;normal&rdquo;,
+          ele precisa de um sistema de
+          <a
+            href="https://pt.wikipedia.org/wiki/Codifica%C3%A7%C3%A3o_de_caracteres"
+            >codifica&ccedil;&atilde;o de caracteres</a
+          >. Este sistema de codifica&ccedil;&atilde;o tamb&eacute;m &eacute;
+          provido pelo padr&atilde;o Unicode e &eacute; respons&aacute;vel por
+          representar uma sequ&ecirc;ncia de
+          <strong>code points</strong> (qualquer string no padr&atilde;o
+          Unicode) como um conjunto de <strong>code units</strong> na
+          mem&oacute;ria do computador, que ent&atilde;o s&atilde;o mapeados
+          para bytes de 8-bits.
+        </p>
+
+        <p>
+          Apesar do padr&atilde;o Unicode disponibilizar um conjunto
+          razoavelmente grande de sistemas de codifica&ccedil;&atilde;o de
+          caracteres, como UTF-7, UTF-8, UTF-EBCDIC, UTF-16 e UTF32, a
+          codifica&ccedil;&atilde;o mais usada atualmente &eacute; a
+          <strong>UTF-8</strong> (UTF sendo
+          <a href="https://pt.wikipedia.org/wiki/UTF-8"
+            >Unicode Transformation Format</a
+          >
+          e 8 sendo o n&uacute;mero de bits por c&oacute;digo). No momento da
+          escrita deste post, o site
+          <a
+            href="https://w3techs.com/technologies/history_overview/character_encoding"
+            >W3Techs &ndash; Historical trends in the usage statistics of
+            character encodings for websites</a
+          >, mostra o padr&atilde;o UTF-8 sendo usado em
+          <strong>94.7%</strong> dos sites analisados at&eacute; 15/04/2020 👀
+          (U+1F440).
+        </p>
+
+        <p>
+          &Eacute; uma boa ideia manter seu editor de c&oacute;digos ou IDE no
+          padr&atilde;o <strong>UTF-8</strong> para digitar seus c&oacute;digos
+          em Python 🤷&zwj;♂️ (U+1F937).
+        </p>
+
+        <h2>Python e Unicode</h2>
+
+        <p>
+          <strong>Dica 💡</strong> (U+1F4A1)<strong>:</strong> Boa parte do
+          trecho a seguir foi baseada na
+          <a href="https://docs.python.org/3.9/howto/unicode.html"
+            >documenta&ccedil;&atilde;o oficial do Python</a
+          >.
+        </p>
+
+        <p>
+          As strings (<code>str</code>) em Python cont&eacute;m caracteres
+          Unicode desde a vers&atilde;o 3.0. Isso quer dizer que qualquer valor
+          entre aspas simples, duplas ou triplas s&atilde;o salvas em Unicode.
+          De fato, o Python 🐍 suporta at&eacute; mesmo identificadores com
+          caracteres Unicode.
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> atenção </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> 'Um teste unicode'</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> atenção</span></span>
+<span class="line"><span style="color:#A6E3A1">'Um teste unicode'</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span></span></code></pre>
+
+        <h3>Usando caracteres unicode</h3>
+
+        <p>
+          Tamb&eacute;m existem v&aacute;rias maneiras para usar caracteres
+          Unicode dentro do c&oacute;digo 💻 (U+1F4BB).
+        </p>
+
+        <p>
+          Por exemplo, voc&ecirc; pode usar o caractere literal (como de
+          costume), mas tamb&eacute;m pode usar o nome do caractere Unicode, um
+          hexadecimal ou at&eacute; um n&uacute;mero decimal que representaria o
+          caractere usando fun&ccedil;&atilde;o
+          <a href="https://docs.python.org/3/library/functions.html#chr">chr</a
+          >:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#94E2D5">>>></span><span style="color:#A6E3A1"> 'A'</span><span style="color:#9399B2;font-style:italic"> # Caractere literal A</span></span>
+<span class="line"><span style="color:#A6E3A1">'A'</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#FAB387;font-style:italic"> chr</span><span style="color:#9399B2">(</span><span style="color:#CBA6F7">0x</span><span style="color:#FAB387">41</span><span style="color:#9399B2">)</span><span style="color:#9399B2;font-style:italic"> # Usando a função chr com hexadecimal</span></span>
+<span class="line"><span style="color:#A6E3A1">'A'</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#FAB387;font-style:italic"> chr</span><span style="color:#9399B2">(</span><span style="color:#FAB387">65</span><span style="color:#9399B2">)</span><span style="color:#9399B2;font-style:italic"> # Usando a função chr com decimal</span></span>
+<span class="line"><span style="color:#A6E3A1">'A'</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#A6E3A1"> '</span><span style="color:#F5C2E7">\N{Latin Capital Letter A}</span><span style="color:#A6E3A1">'</span><span style="color:#9399B2;font-style:italic"> # Usando o nome do caractere</span></span>
+<span class="line"><span style="color:#A6E3A1">'A'</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#A6E3A1"> '</span><span style="color:#F5C2E7">\u0041</span><span style="color:#A6E3A1">'</span><span style="color:#9399B2;font-style:italic"> # Usando um hexadecimal 16-bit</span></span>
+<span class="line"><span style="color:#A6E3A1">'A'</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#A6E3A1"> '</span><span style="color:#F5C2E7">\U00000041</span><span style="color:#A6E3A1">'</span><span style="color:#9399B2;font-style:italic"> # Usando um hexadecimal 32-bit</span></span>
+<span class="line"><span style="color:#A6E3A1">'A'</span></span></code></pre>
+
+        <p>
+          Veja acima, que representei a letra &ldquo;A&rdquo; de v&aacute;rias
+          maneiras diferentes.
+        </p>
+
+        <h3>Obtendo valores Unicode dos caracteres</h3>
+
+        <p>
+          Al&eacute;m do que descrevi anteriormente, voc&ecirc; tamb&eacute;m
+          pode fazer o inverso, ou seja, pegar os valores decimal e hexadecimal
+          que representam o caractere desejado.
+        </p>
+
+        <p>
+          Para isso, voc&ecirc; pode usar as fun&ccedil;&otilde;es
+          <a href="https://docs.python.org/3/library/functions.html#ord">ord</a>
+          e
+          <a href="https://docs.python.org/3/library/functions.html#hex">hex</a
+          >, dependendo do que deseja (talvez seja necess&aacute;rio
+          combin&aacute;-las).
+        </p>
+
+        <p>Por exemplo:</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#94E2D5">>>></span><span style="color:#FAB387;font-style:italic"> ord</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'A'</span><span style="color:#9399B2">)</span><span style="color:#9399B2;font-style:italic"> # Obtém o valor decimal que representa A</span></span>
+<span class="line"><span style="color:#FAB387">65</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#FAB387;font-style:italic"> hex</span><span style="color:#9399B2">(</span><span style="color:#FAB387;font-style:italic">ord</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'A'</span><span style="color:#9399B2">))</span><span style="color:#9399B2;font-style:italic"> # Obtém o valor hexadecimal que representa A</span></span>
+<span class="line"><span style="color:#A6E3A1">'0x41'</span></span></code></pre>
+
+        <h3>Encode (str) e Decode (bytes)</h3>
+
+        <p>
+          &Eacute; poss&iacute;vel converter uma string em bytes ou bytes em
+          string usando os m&eacute;todos <code>encode</code> da
+          <a href="https://docs.python.org/pt-br/3/library/stdtypes.html#str"
+            >string</a
+          >
+          ou <code>decode</code> de
+          <a href="https://docs.python.org/pt-br/3/library/stdtypes.html#bytes"
+            >bytes</a
+          >. Esses m&eacute;todos recebem dois argumentos. O primeiro argumento
+          especifica a codifica&ccedil;&atilde;o de caracteres desejada (<code
+            >utf-8</code
+          >
+          ou qualquer outra dispon&iacute;vel em
+          <a
+            href="https://docs.python.org/3/library/codecs.html#standard-encodings"
+            >Standard Encodings</a
+          >
+          &ndash; use <code>utf-8</code> sempre que poss&iacute;vel 🕵). O
+          segundo informa como os erros devem ser tratados (falaremos desse
+          argumento mais adiante neste post).
+        </p>
+
+        <p>
+          Por&eacute;m, &eacute; importante tomar cuidado ao converter uma
+          codifica&ccedil;&atilde;o de caracteres para outra (exemplo, de
+          <strong>ASCII</strong> para <strong>UTF-8</strong>). Pode n&atilde;o
+          ser poss&iacute;vel mapear o c&oacute;digo de um caractere para outro
+          em determinadas circunst&acirc;ncias.
+        </p>
+
+        <p>Veja exemplos a seguir.</p>
+
+        <h4>Encode (str)</h4>
+
+        <p>
+          Suponha que eu queira converter uma string
+          <strong>UTF-8</strong> para bytes <strong>UTF-8</strong>.
+        </p>
+
+        <p>Eu posso fazer isso da seguinte maneira:</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> meu_nome </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> 'Otávio'</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> meu_nome_em_bytes </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> meu_nome</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">encode</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'utf-8'</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> meu_nome_em_bytes</span></span>
+<span class="line"><span style="color:#A6E3A1;font-style:italic">b</span><span style="color:#A6E3A1">'Ot</span><span style="color:#F5C2E7">\xc3\xa1</span><span style="color:#A6E3A1">vio'</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span></span></code></pre>
+
+        <p>
+          Bytes s&atilde;o representados por
+          <code>b&#39;valores&#39;</code> em Python.
+        </p>
+
+        <p>
+          De acordo com o c&oacute;digo anterior, tudo ocorreu perfeitamente.
+          Isso porque converti uma string sabendo que ela tinha caracteres
+          <strong>UTF-8</strong> para bytes em <strong>UTF-8</strong>. Mantendo
+          a mesma codifica&ccedil;&atilde;o de caractere, n&atilde;o terei
+          problemas.
+        </p>
+
+        <p>
+          Mas, eu tamb&eacute;m poderia querer converter minha string
+          <strong>UTF-8</strong> para
+          <a href="https://pt.wikipedia.org/wiki/ASCII">ASCII</a> (um outro tipo
+          de codifica&ccedil;&atilde;o de caracteres). Dependendo do que
+          voc&ecirc; estiver convertendo, n&atilde;o ter&aacute; problemas,
+          porque o UTF-8 foi feito para ser compat&iacute;vel com outras
+          codifica&ccedil;&otilde;es de caracteres existentes. Por&eacute;m,
+          assim que um caractere sair do range suportado pelo ASCII (de 0 a 127
+          em base 10), terei um erro:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> meu_nome_em_bytes </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> meu_nome</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">encode</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'ascii'</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#89B4FA">Traceback </span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">most recent call last</span><span style="color:#9399B2">):</span></span>
+<span class="line"><span style="color:#CDD6F4">...</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">UnicodeEncodeError</span><span style="color:#9399B2">:</span><span style="color:#A6E3A1"> 'ascii'</span><span style="color:#CDD6F4"> codec can</span><span style="color:#A6E3A1">'t encode character '</span><span style="color:#9399B2">\</span><span style="color:#CDD6F4">xe1' in position 2: ordinal not in range(128)</span></span></code></pre>
+
+        <p>
+          Veja que no erro &eacute; descrito o problema. N&atilde;o foi
+          poss&iacute;vel codificar o caractere
+          <code>&#39;\xe1&#39;</code> na posi&ccedil;&atilde;o 2.
+        </p>
+
+        <p>
+          Lembra que te mostrei como exibir o caractere utilizando a
+          fun&ccedil;&atilde;o <code>chr</code>? Ent&atilde;o, o caractere
+          <code>\xe1</code> &eacute; o mesmo que <code>chr(0xe1)</code>, ou
+          &ldquo;<strong>&aacute;</strong>&rdquo; de
+          &ldquo;<strong>Ot&aacute;vio</strong>&ldquo;. Esse caractere
+          n&atilde;o faz parte da tabela <strong>ascii</strong>, portanto o
+          erro.
+        </p>
+
+        <p>
+          Logo mais veremos o segundo argumento e voc&ecirc; poder&aacute;
+          selecionar o que acontece quando um erro assim ocorrer.
+        </p>
+
+        <h4>Decode (bytes)</h4>
+
+        <p>
+          Se o m&eacute;todo <code>encode</code> &eacute; usado para converter
+          string em bytes, o m&eacute;todo <code>decode</code> &eacute; usado
+          para fazer o inverso disso, converter bytes em strings.
+        </p>
+
+        <p>
+          Por exemplo, suponha que eu tenha apenas os bytes e queira resgatar
+          seu valor para uma string <strong>UTF-8</strong>.
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> meu_nome_em_bytes </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1;font-style:italic"> b</span><span style="color:#A6E3A1">'Ot</span><span style="color:#F5C2E7">\xc3\xa1</span><span style="color:#A6E3A1">vio'</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> meu_nome_str </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> meu_nome_em_bytes</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">decode</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'utf-8'</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> meu_nome_str</span></span>
+<span class="line"><span style="color:#A6E3A1">'Otávio'</span></span></code></pre>
+
+        <p>
+          Novamente, aqui ocorreu tudo perfeitamente, porque eu sabia que a
+          codifica&ccedil;&atilde;o dos bytes era <strong>UTF-8</strong> e eu os
+          decodifiquei adequadamente. Ent&atilde;o tudo ocorreu como esperado.
+          Mas, e se eu quisesse decodificar esses bytes em
+          <strong>ASCII</strong>?
+        </p>
+
+        <p>Inicialmente, n&atilde;o tem como (😒 &ndash; U+1F612)!</p>
+
+        <p>
+          Para isso voc&ecirc; precisa saber a codifica&ccedil;&atilde;o de
+          caracteres usada na codifica&ccedil;&atilde;o para decodificar.
+        </p>
+
+        <p>
+          <strong>Dica:</strong>
+          <a href="https://pypi.org/project/chardet/">chardet</a> ajuda a tentar
+          descobrir a codifica&ccedil;&atilde;o de caracteres usada em bytes que
+          voc&ecirc; n&atilde;o saberia de outra forma. Mas a maneira mais
+          simples continua sendo: &ldquo;pergunte ao dono dos bytes qual a
+          codifica&ccedil;&atilde;o&rdquo;. <strong>UTF-8</strong> &eacute; um
+          bom chute inicial.
+        </p>
+
+        <h4>Erros de codifica&ccedil;&atilde;o em decode (bytes)</h4>
+
+        <p>
+          Imagine que eu n&atilde;o saiba a codifica&ccedil;&atilde;o usada em
+          determinados bytes e tente chutar <strong>ascii</strong>, por exemplo:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> meu_nome_str </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> meu_nome_em_bytes</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">decode</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'ascii'</span><span style="color:#9399B2">)</span><span style="color:#9399B2;font-style:italic"> # Otávio (em UTF-8)</span></span>
+<span class="line"><span style="color:#89B4FA">Traceback </span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">most recent call last</span><span style="color:#9399B2">):</span></span>
+<span class="line"><span style="color:#CDD6F4">...</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">UnicodeDecodeError</span><span style="color:#9399B2">:</span><span style="color:#A6E3A1"> 'ascii'</span><span style="color:#CDD6F4"> codec can</span><span style="color:#A6E3A1">'t decode byte 0xc3 in position 2: ordinal not in range(128)</span></span></code></pre>
+
+        <p>
+          Perceba que aqui, al&eacute;m de um erro de
+          <code>UnicodeDecodeError</code>, eu tamb&eacute;m tenho um
+          <strong>code point</strong> incorreto. Se voc&ecirc; observar,
+          <code>0xc3</code> aponta para &ldquo;<strong>&Atilde;</strong>&rdquo;
+          , que nem existia na minha string anterior.
+        </p>
+
+        <p>
+          O motivo disso &eacute; simples,
+          &ldquo;<strong>&aacute;</strong>&rdquo; da minha string anterior usa
+          dois bytes em <strong>UTF-8</strong> e o codec
+          <strong>ASCII</strong> n&atilde;o sabe disso. Ent&atilde;o ele tenta
+          decodificar byte por byte e gera esse erro estranho. Se isso passasse
+          sem erros, o resultado seria um monte de caracteres que n&atilde;o
+          fariam sentido algum. Por exemplo, se eu usasse o codec
+          <a href="https://pt.wikipedia.org/wiki/ISO/IEC_8859-1">latin1</a>
+          ao inv&eacute;s de <strong>ascii</strong>, o resultado seria
+          <strong>&lsquo;Ot&Atilde;&iexcl;vio&rsquo;</strong>.
+        </p>
+
+        <p>
+          Para contornar essa situa&ccedil;&atilde;o, eu preciso saber qual a
+          codifica&ccedil;&atilde;o de caracteres foi usada para codificar os
+          bytes anteriormente. Sabendo disso, eu deveria decodificar esses bytes
+          usando a codifica&ccedil;&atilde;o correta antes de fazer qualquer
+          outra coisa.
+        </p>
+
+        <p>
+          Depois de decodificar, eu poderia codificar novamente usando o
+          <strong>codec</strong> que eu preferir, contando que ele suporte os
+          caracteres que eu estiver usando (usa sempre <strong>UTF-8</strong>,
+          pelo amor de Deus 😬 &ndash; U+1F62C).
+        </p>
+
+        <p>
+          Por exemplo, se eu quero codificar de UTF-8 para
+          <a href="https://pt.wikipedia.org/wiki/ISO/IEC_8859-1"
+            >ISO-8859-1 (Latin1)</a
+          >, que &eacute; algo que vejo muito aqui no Brasil, principalmente em
+          sistemas p&uacute;blicos, poderia fazer assim:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> meu_nome_str </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> meu_nome_em_bytes</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">decode</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'utf8'</span><span style="color:#9399B2">)</span><span style="color:#9399B2;font-style:italic"> # Otávio</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> meu_nome_em_bytes_latin </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> meu_nome_str</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">encode</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'latin_1'</span><span style="color:#9399B2">)</span><span style="color:#9399B2;font-style:italic"> # Otávio</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> meu_nome_em_bytes_latin</span></span>
+<span class="line"><span style="color:#A6E3A1;font-style:italic">b</span><span style="color:#A6E3A1">'Ot</span><span style="color:#F5C2E7">\xe1</span><span style="color:#A6E3A1">vio'</span><span style="color:#9399B2;font-style:italic"> # Otávio</span></span></code></pre>
+
+        <p>
+          Basicamente, isso foi uma convers&atilde;o de
+          <strong>UTF-8</strong> para <strong>latin_1</strong>. Tenha
+          no&ccedil;&atilde;o de que sempre que essas convers&otilde;es ocorrem,
+          uma codifica&ccedil;&atilde;o de caracteres deve suportar a outra. O
+          Unicode foi criado para ser compat&iacute;vel com todas as
+          codifica&ccedil;&otilde;es existentes. No entanto, apenas no sentido
+          de &ldquo;qualquer codifica&ccedil;&atilde;o&rdquo; convertido para
+          &ldquo;Unicode&rdquo;. Voc&ecirc; pode ter problemas ao converter no
+          sentido contr&aacute;rio, de Unicode para &ldquo;qualquer
+          codifica&ccedil;&atilde;o&rdquo;, porque o padr&atilde;o Unicode
+          suporta muito mais caracteres do que qualquer outra
+          codifica&ccedil;&atilde;o de caracteres que voc&ecirc; quiser
+          utilizar.
+        </p>
+
+        <p>
+          No nosso exemplo, tudo funcionou perfeitamente porque todas as letras
+          de &ldquo;<strong>Ot&aacute;vio</strong>&rdquo; est&atilde;o presentes
+          na tabela
+          <a href="https://pt.wikipedia.org/wiki/ISO/IEC_8859-1"
+            >ISO-8859-1 (Latin1)</a
+          >, caso contr&aacute;rio ocorreriam erros tamb&eacute;m.
+        </p>
+
+        <h4>Dicas</h4>
+
+        <p>
+          <strong>Dica n&uacute;mero 1:</strong> Sempre que poss&iacute;vel use
+          a codifica&ccedil;&atilde;o de caracteres <strong>UTF-8</strong>, na
+          grande maioria das vezes isso &eacute; poss&iacute;vel 😅 (U+1F605).
+        </p>
+
+        <p>
+          <strong>Mais dicas:</strong> se voc&ecirc; precisa detectar a
+          codifica&ccedil;&atilde;o de caracteres de algo que n&atilde;o tem a
+          m&iacute;nima ideia como foi codificado, use
+          <a href="https://pypi.org/project/chardet/">chardet.detect</a>. Ele
+          n&atilde;o vai acertar em 100% dos casos, mas j&aacute; me salvou de
+          muitas enrascadas; Se voc&ecirc; precisa saber quais codecs de
+          codifica&ccedil;&atilde;o o Python suporta, veja
+          <a
+            href="https://docs.python.org/3.9/library/codecs.html#standard-encodings"
+            >Python Specific Encodings</a
+          >.
+        </p>
+
+        <h4>Erros em encode e decode</h4>
+
+        <p>
+          Como te contei anteriormente, <code>encode</code> e
+          <code>decode</code> recebem um argumento com a
+          codifica&ccedil;&atilde;o desejada e outro especificando como os erros
+          devem ser tratados. Para o segundo argumento voc&ecirc; pode enviar os
+          seguintes valores:
+        </p>
+
+        <ul>
+          <li>
+            <code>&#39;strict&#39;</code> &ndash; &Eacute; o padr&atilde;o. O
+            que levanta uma exce&ccedil;&atilde;o de
+            <a
+              href="https://docs.python.org/3/library/exceptions.html#UnicodeEncodeError"
+              >UnicodeEncodeError</a
             >
-
-            <p>
-              A <strong>normaliza&ccedil;&atilde;o unicode</strong> vai resolver
-              este problema mantendo apenas uma forma normal dos
-              &ldquo;<strong>&aacute;</strong>s&rdquo; apresentados acima. Ou
-              &ldquo;<code>U+00E1</code>&rdquo; ou
-              &ldquo;<code>U+0061</code>&rdquo; +
-              &ldquo;<code>U+0301</code>&ldquo;. No entanto, para entender
-              porque precisamos de normaliza&ccedil;&atilde;o unicode em nosso
-              sistema, precisamos entender o Padr&atilde;o Unicode como um todo.
-            </p>
-
-            <h2>Unicode &ndash; o b&aacute;sico do b&aacute;sico</h2>
-
-            <p>
-              O Unicode &eacute; um padr&atilde;o que permite aos computadores
-              representar e manipular texto de qualquer sistema de escrita
-              existente utilizando c&oacute;digos para caracteres individuais.
-              Cada caractere &eacute; mapeado para um c&oacute;digo
-              espec&iacute;fico chamado de &ldquo;<em>code point</em>&ldquo;.
-            </p>
-
-            <p>
-              Code Points s&atilde;o representados por um
-              <strong>U+</strong> seguido de
-              <strong>4 a 6 d&iacute;gitos hexadecimais</strong> (de 0 a
-              0x10FFFF). Por exemplo: o code point
-              <strong>U+0041</strong> representa a letra
-              &ldquo;<strong>A</strong>&ldquo;; o <strong>U+0042</strong>, a
-              letra &ldquo;<strong>B</strong>&ldquo;, o
-              <strong>U+1F40D</strong>, uma cobra verde &ldquo;🐍&rdquo;, e
-              assim por diante.
-            </p>
-
-            <p>
-              Para que um sistema possa representar um
-              <strong>code point</strong> como um caractere
-              &ldquo;normal&rdquo;, ele precisa de um sistema de
-              <a
-                href="https://pt.wikipedia.org/wiki/Codifica%C3%A7%C3%A3o_de_caracteres"
-                >codifica&ccedil;&atilde;o de caracteres</a
-              >. Este sistema de codifica&ccedil;&atilde;o tamb&eacute;m
-              &eacute; provido pelo padr&atilde;o Unicode e &eacute;
-              respons&aacute;vel por representar uma sequ&ecirc;ncia de
-              <strong>code points</strong> (qualquer string no padr&atilde;o
-              Unicode) como um conjunto de <strong>code units</strong> na
-              mem&oacute;ria do computador, que ent&atilde;o s&atilde;o mapeados
-              para bytes de 8-bits.
-            </p>
-
-            <p>
-              Apesar do padr&atilde;o Unicode disponibilizar um conjunto
-              razoavelmente grande de sistemas de codifica&ccedil;&atilde;o de
-              caracteres, como UTF-7, UTF-8, UTF-EBCDIC, UTF-16 e UTF32, a
-              codifica&ccedil;&atilde;o mais usada atualmente &eacute; a
-              <strong>UTF-8</strong> (UTF sendo
-              <a href="https://pt.wikipedia.org/wiki/UTF-8"
-                >Unicode Transformation Format</a
-              >
-              e 8 sendo o n&uacute;mero de bits por c&oacute;digo). No momento
-              da escrita deste post, o site
-              <a
-                href="https://w3techs.com/technologies/history_overview/character_encoding"
-                >W3Techs &ndash; Historical trends in the usage statistics of
-                character encodings for websites</a
-              >, mostra o padr&atilde;o UTF-8 sendo usado em
-              <strong>94.7%</strong> dos sites analisados at&eacute; 15/04/2020
-              👀 (U+1F440).
-            </p>
-
-            <p>
-              &Eacute; uma boa ideia manter seu editor de c&oacute;digos ou IDE
-              no padr&atilde;o <strong>UTF-8</strong> para digitar seus
-              c&oacute;digos em Python 🤷&zwj;♂️ (U+1F937).
-            </p>
-
-            <h2>Python e Unicode</h2>
-
-            <p>
-              <strong>Dica 💡</strong> (U+1F4A1)<strong>:</strong> Boa parte do
-              trecho a seguir foi baseada na
-              <a href="https://docs.python.org/3.9/howto/unicode.html"
-                >documenta&ccedil;&atilde;o oficial do Python</a
-              >.
-            </p>
-
-            <p>
-              As strings (<code>str</code>) em Python cont&eacute;m caracteres
-              Unicode desde a vers&atilde;o 3.0. Isso quer dizer que qualquer
-              valor entre aspas simples, duplas ou triplas s&atilde;o salvas em
-              Unicode. De fato, o Python 🐍 suporta at&eacute; mesmo
-              identificadores com caracteres Unicode.
-            </p>
-
-            <pre>
->>> atenção = 'Um teste unicode'
->>> atenção
-'Um teste unicode'
->>> </pre
+            ou
+            <a
+              href="https://docs.python.org/3/library/exceptions.html#UnicodeDecodeError"
+              >UnicodeDecodeError</a
+            >;
+          </li>
+          <li>
+            <code>&#39;replace&#39;</code> &ndash; Usa o caractere U+FFFD
+            (REPLACEMENT CHARACTER) no lugar do caractere que n&atilde;o
+            p&ocirc;de ser convertido;
+          </li>
+          <li>
+            <code>&#39;ignore&#39;</code> &ndash; Simplesmente pula o caractere
+            que n&atilde;o pode ser convertido;
+          </li>
+          <li>
+            <code>&#39;backslashreplace&#39; </code>&ndash; que insere uma
+            sequ&ecirc;ncia <code>\xNN</code> no lugar do caractere que
+            n&atilde;o pode ser convertido;
+          </li>
+          <li>
+            <code>&#39;xmlcharrefreplace&#39;</code> &ndash; que insere uma
+            refer&ecirc;ncia para um caractere
+            <a
+              href="https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references"
+              >XML</a
             >
-
-            <h3>Usando caracteres unicode</h3>
-
-            <p>
-              Tamb&eacute;m existem v&aacute;rias maneiras para usar caracteres
-              Unicode dentro do c&oacute;digo 💻 (U+1F4BB).
-            </p>
-
-            <p>
-              Por exemplo, voc&ecirc; pode usar o caractere literal (como de
-              costume), mas tamb&eacute;m pode usar o nome do caractere Unicode,
-              um hexadecimal ou at&eacute; um n&uacute;mero decimal que
-              representaria o caractere usando fun&ccedil;&atilde;o
-              <a href="https://docs.python.org/3/library/functions.html#chr"
-                >chr</a
-              >:
-            </p>
-
-            <pre>
->>> 'A' # Caractere literal A
-'A'
->>> chr(0x41) # Usando a função chr com hexadecimal
-'A'
->>> chr(65) # Usando a função chr com decimal
-'A'
->>> '\N{Latin Capital Letter A}' # Usando o nome do caractere
-'A'
->>> '\u0041' # Usando um hexadecimal 16-bit
-'A'
->>> '\U00000041' # Usando um hexadecimal 32-bit
-'A'</pre
-            >
-
-            <p>
-              Veja acima, que representei a letra &ldquo;A&rdquo; de
-              v&aacute;rias maneiras diferentes.
-            </p>
-
-            <h3>Obtendo valores Unicode dos caracteres</h3>
-
-            <p>
-              Al&eacute;m do que descrevi anteriormente, voc&ecirc;
-              tamb&eacute;m pode fazer o inverso, ou seja, pegar os valores
-              decimal e hexadecimal que representam o caractere desejado.
-            </p>
-
-            <p>
-              Para isso, voc&ecirc; pode usar as fun&ccedil;&otilde;es
-              <a href="https://docs.python.org/3/library/functions.html#ord"
-                >ord</a
-              >
-              e
-              <a href="https://docs.python.org/3/library/functions.html#hex"
-                >hex</a
-              >, dependendo do que deseja (talvez seja necess&aacute;rio
-              combin&aacute;-las).
-            </p>
-
-            <p>Por exemplo:</p>
-
-            <pre>
->>> ord('A') # Obtém o valor decimal que representa A
-65
->>> hex(ord('A')) # Obtém o valor hexadecimal que representa A
-'0x41'</pre
-            >
-
-            <h3>Encode (str) e Decode (bytes)</h3>
-
-            <p>
-              &Eacute; poss&iacute;vel converter uma string em bytes ou bytes em
-              string usando os m&eacute;todos <code>encode</code> da
-              <a
-                href="https://docs.python.org/pt-br/3/library/stdtypes.html#str"
-                >string</a
-              >
-              ou <code>decode</code> de
-              <a
-                href="https://docs.python.org/pt-br/3/library/stdtypes.html#bytes"
-                >bytes</a
-              >. Esses m&eacute;todos recebem dois argumentos. O primeiro
-              argumento especifica a codifica&ccedil;&atilde;o de caracteres
-              desejada (<code>utf-8</code> ou qualquer outra dispon&iacute;vel
-              em
-              <a
-                href="https://docs.python.org/3/library/codecs.html#standard-encodings"
-                >Standard Encodings</a
-              >
-              &ndash; use <code>utf-8</code> sempre que poss&iacute;vel 🕵). O
-              segundo informa como os erros devem ser tratados (falaremos desse
-              argumento mais adiante neste post).
-            </p>
-
-            <p>
-              Por&eacute;m, &eacute; importante tomar cuidado ao converter uma
-              codifica&ccedil;&atilde;o de caracteres para outra (exemplo, de
-              <strong>ASCII</strong> para <strong>UTF-8</strong>). Pode
-              n&atilde;o ser poss&iacute;vel mapear o c&oacute;digo de um
-              caractere para outro em determinadas circunst&acirc;ncias.
-            </p>
-
-            <p>Veja exemplos a seguir.</p>
-
-            <h4>Encode (str)</h4>
-
-            <p>
-              Suponha que eu queira converter uma string
-              <strong>UTF-8</strong> para bytes <strong>UTF-8</strong>.
-            </p>
-
-            <p>Eu posso fazer isso da seguinte maneira:</p>
-
-            <pre>
->>> meu_nome = 'Otávio'
->>> meu_nome_em_bytes = meu_nome.encode('utf-8')
->>> meu_nome_em_bytes
-b'Ot\xc3\xa1vio'
->>> </pre
-            >
-
-            <p>
-              Bytes s&atilde;o representados por
-              <code>b&#39;valores&#39;</code> em Python.
-            </p>
-
-            <p>
-              De acordo com o c&oacute;digo anterior, tudo ocorreu
-              perfeitamente. Isso porque converti uma string sabendo que ela
-              tinha caracteres <strong>UTF-8</strong> para bytes em
-              <strong>UTF-8</strong>. Mantendo a mesma codifica&ccedil;&atilde;o
-              de caractere, n&atilde;o terei problemas.
-            </p>
-
-            <p>
-              Mas, eu tamb&eacute;m poderia querer converter minha string
-              <strong>UTF-8</strong> para
-              <a href="https://pt.wikipedia.org/wiki/ASCII">ASCII</a> (um outro
-              tipo de codifica&ccedil;&atilde;o de caracteres). Dependendo do
-              que voc&ecirc; estiver convertendo, n&atilde;o ter&aacute;
-              problemas, porque o UTF-8 foi feito para ser compat&iacute;vel com
-              outras codifica&ccedil;&otilde;es de caracteres existentes.
-              Por&eacute;m, assim que um caractere sair do range suportado pelo
-              ASCII (de 0 a 127 em base 10), terei um erro:
-            </p>
-
-            <pre>
->>> meu_nome_em_bytes = meu_nome.encode('ascii')
-Traceback (most recent call last):
-...
-UnicodeEncodeError: 'ascii' codec can't encode character '\xe1' in position 2: ordinal not in range(128)</pre
-            >
-
-            <p>
-              Veja que no erro &eacute; descrito o problema. N&atilde;o foi
-              poss&iacute;vel codificar o caractere
-              <code>&#39;\xe1&#39;</code> na posi&ccedil;&atilde;o 2.
-            </p>
-
-            <p>
-              Lembra que te mostrei como exibir o caractere utilizando a
-              fun&ccedil;&atilde;o <code>chr</code>? Ent&atilde;o, o caractere
-              <code>\xe1</code> &eacute; o mesmo que <code>chr(0xe1)</code>, ou
-              &ldquo;<strong>&aacute;</strong>&rdquo; de
-              &ldquo;<strong>Ot&aacute;vio</strong>&ldquo;. Esse caractere
-              n&atilde;o faz parte da tabela <strong>ascii</strong>, portanto o
-              erro.
-            </p>
-
-            <p>
-              Logo mais veremos o segundo argumento e voc&ecirc; poder&aacute;
-              selecionar o que acontece quando um erro assim ocorrer.
-            </p>
-
-            <h4>Decode (bytes)</h4>
-
-            <p>
-              Se o m&eacute;todo <code>encode</code> &eacute; usado para
-              converter string em bytes, o m&eacute;todo
-              <code>decode</code> &eacute; usado para fazer o inverso disso,
-              converter bytes em strings.
-            </p>
-
-            <p>
-              Por exemplo, suponha que eu tenha apenas os bytes e queira
-              resgatar seu valor para uma string <strong>UTF-8</strong>.
-            </p>
-
-            <pre>
->>> meu_nome_em_bytes = b'Ot\xc3\xa1vio'
->>> meu_nome_str = meu_nome_em_bytes.decode('utf-8')
->>> meu_nome_str
-'Otávio'</pre
-            >
-
-            <p>
-              Novamente, aqui ocorreu tudo perfeitamente, porque eu sabia que a
-              codifica&ccedil;&atilde;o dos bytes era <strong>UTF-8</strong> e
-              eu os decodifiquei adequadamente. Ent&atilde;o tudo ocorreu como
-              esperado. Mas, e se eu quisesse decodificar esses bytes em
-              <strong>ASCII</strong>?
-            </p>
-
-            <p>Inicialmente, n&atilde;o tem como (😒 &ndash; U+1F612)!</p>
-
-            <p>
-              Para isso voc&ecirc; precisa saber a codifica&ccedil;&atilde;o de
-              caracteres usada na codifica&ccedil;&atilde;o para decodificar.
-            </p>
-
-            <p>
-              <strong>Dica:</strong>
-              <a href="https://pypi.org/project/chardet/">chardet</a> ajuda a
-              tentar descobrir a codifica&ccedil;&atilde;o de caracteres usada
-              em bytes que voc&ecirc; n&atilde;o saberia de outra forma. Mas a
-              maneira mais simples continua sendo: &ldquo;pergunte ao dono dos
-              bytes qual a codifica&ccedil;&atilde;o&rdquo;.
-              <strong>UTF-8</strong> &eacute; um bom chute inicial.
-            </p>
-
-            <h4>Erros de codifica&ccedil;&atilde;o em decode (bytes)</h4>
-
-            <p>
-              Imagine que eu n&atilde;o saiba a codifica&ccedil;&atilde;o usada
-              em determinados bytes e tente chutar <strong>ascii</strong>, por
-              exemplo:
-            </p>
-
-            <pre>
->>> meu_nome_str = meu_nome_em_bytes.decode('ascii') # Otávio (em UTF-8)
-Traceback (most recent call last):
-...
-UnicodeDecodeError: 'ascii' codec can't decode byte 0xc3 in position 2: ordinal not in range(128)</pre
-            >
-
-            <p>
-              Perceba que aqui, al&eacute;m de um erro de
-              <code>UnicodeDecodeError</code>, eu tamb&eacute;m tenho um
-              <strong>code point</strong> incorreto. Se voc&ecirc; observar,
-              <code>0xc3</code> aponta para
-              &ldquo;<strong>&Atilde;</strong>&rdquo; , que nem existia na minha
-              string anterior.
-            </p>
-
-            <p>
-              O motivo disso &eacute; simples,
-              &ldquo;<strong>&aacute;</strong>&rdquo; da minha string anterior
-              usa dois bytes em <strong>UTF-8</strong> e o codec
-              <strong>ASCII</strong> n&atilde;o sabe disso. Ent&atilde;o ele
-              tenta decodificar byte por byte e gera esse erro estranho. Se isso
-              passasse sem erros, o resultado seria um monte de caracteres que
-              n&atilde;o fariam sentido algum. Por exemplo, se eu usasse o codec
-              <a href="https://pt.wikipedia.org/wiki/ISO/IEC_8859-1">latin1</a>
-              ao inv&eacute;s de <strong>ascii</strong>, o resultado seria
-              <strong>&lsquo;Ot&Atilde;&iexcl;vio&rsquo;</strong>.
-            </p>
-
-            <p>
-              Para contornar essa situa&ccedil;&atilde;o, eu preciso saber qual
-              a codifica&ccedil;&atilde;o de caracteres foi usada para codificar
-              os bytes anteriormente. Sabendo disso, eu deveria decodificar
-              esses bytes usando a codifica&ccedil;&atilde;o correta antes de
-              fazer qualquer outra coisa.
-            </p>
-
-            <p>
-              Depois de decodificar, eu poderia codificar novamente usando o
-              <strong>codec</strong> que eu preferir, contando que ele suporte
-              os caracteres que eu estiver usando (usa sempre
-              <strong>UTF-8</strong>, pelo amor de Deus 😬 &ndash; U+1F62C).
-            </p>
-
-            <p>
-              Por exemplo, se eu quero codificar de UTF-8 para
-              <a href="https://pt.wikipedia.org/wiki/ISO/IEC_8859-1"
-                >ISO-8859-1 (Latin1)</a
-              >, que &eacute; algo que vejo muito aqui no Brasil, principalmente
-              em sistemas p&uacute;blicos, poderia fazer assim:
-            </p>
-
-            <pre>
->>> meu_nome_str = meu_nome_em_bytes.decode('utf8') # Otávio
->>> meu_nome_em_bytes_latin = meu_nome_str.encode('latin_1') # Otávio
->>> meu_nome_em_bytes_latin
-b'Ot\xe1vio' # Otávio</pre
-            >
-
-            <p>
-              Basicamente, isso foi uma convers&atilde;o de
-              <strong>UTF-8</strong> para <strong>latin_1</strong>. Tenha
-              no&ccedil;&atilde;o de que sempre que essas convers&otilde;es
-              ocorrem, uma codifica&ccedil;&atilde;o de caracteres deve suportar
-              a outra. O Unicode foi criado para ser compat&iacute;vel com todas
-              as codifica&ccedil;&otilde;es existentes. No entanto, apenas no
-              sentido de &ldquo;qualquer codifica&ccedil;&atilde;o&rdquo;
-              convertido para &ldquo;Unicode&rdquo;. Voc&ecirc; pode ter
-              problemas ao converter no sentido contr&aacute;rio, de Unicode
-              para &ldquo;qualquer codifica&ccedil;&atilde;o&rdquo;, porque o
-              padr&atilde;o Unicode suporta muito mais caracteres do que
-              qualquer outra codifica&ccedil;&atilde;o de caracteres que
-              voc&ecirc; quiser utilizar.
-            </p>
-
-            <p>
-              No nosso exemplo, tudo funcionou perfeitamente porque todas as
-              letras de &ldquo;<strong>Ot&aacute;vio</strong>&rdquo;
-              est&atilde;o presentes na tabela
-              <a href="https://pt.wikipedia.org/wiki/ISO/IEC_8859-1"
-                >ISO-8859-1 (Latin1)</a
-              >, caso contr&aacute;rio ocorreriam erros tamb&eacute;m.
-            </p>
-
-            <h4>Dicas</h4>
-
-            <p>
-              <strong>Dica n&uacute;mero 1:</strong> Sempre que poss&iacute;vel
-              use a codifica&ccedil;&atilde;o de caracteres
-              <strong>UTF-8</strong>, na grande maioria das vezes isso &eacute;
-              poss&iacute;vel 😅 (U+1F605).
-            </p>
-
-            <p>
-              <strong>Mais dicas:</strong> se voc&ecirc; precisa detectar a
-              codifica&ccedil;&atilde;o de caracteres de algo que n&atilde;o tem
-              a m&iacute;nima ideia como foi codificado, use
-              <a href="https://pypi.org/project/chardet/">chardet.detect</a>.
-              Ele n&atilde;o vai acertar em 100% dos casos, mas j&aacute; me
-              salvou de muitas enrascadas; Se voc&ecirc; precisa saber quais
-              codecs de codifica&ccedil;&atilde;o o Python suporta, veja
-              <a
-                href="https://docs.python.org/3.9/library/codecs.html#standard-encodings"
-                >Python Specific Encodings</a
-              >.
-            </p>
-
-            <h4>Erros em encode e decode</h4>
-
-            <p>
-              Como te contei anteriormente, <code>encode</code> e
-              <code>decode</code> recebem um argumento com a
-              codifica&ccedil;&atilde;o desejada e outro especificando como os
-              erros devem ser tratados. Para o segundo argumento voc&ecirc; pode
-              enviar os seguintes valores:
-            </p>
-
-            <ul>
-              <li>
-                <code>&#39;strict&#39;</code> &ndash; &Eacute; o padr&atilde;o.
-                O que levanta uma exce&ccedil;&atilde;o de
-                <a
-                  href="https://docs.python.org/3/library/exceptions.html#UnicodeEncodeError"
-                  >UnicodeEncodeError</a
-                >
-                ou
-                <a
-                  href="https://docs.python.org/3/library/exceptions.html#UnicodeDecodeError"
-                  >UnicodeDecodeError</a
-                >;
-              </li>
-              <li>
-                <code>&#39;replace&#39;</code> &ndash; Usa o caractere U+FFFD
-                (REPLACEMENT CHARACTER) no lugar do caractere que n&atilde;o
-                p&ocirc;de ser convertido;
-              </li>
-              <li>
-                <code>&#39;ignore&#39;</code> &ndash; Simplesmente pula o
-                caractere que n&atilde;o pode ser convertido;
-              </li>
-              <li>
-                <code>&#39;backslashreplace&#39; </code>&ndash; que insere uma
-                sequ&ecirc;ncia <code>\xNN</code> no lugar do caractere que
-                n&atilde;o pode ser convertido;
-              </li>
-              <li>
-                <code>&#39;xmlcharrefreplace&#39;</code> &ndash; que insere uma
-                refer&ecirc;ncia para um caractere
-                <a
-                  href="https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references"
-                  >XML</a
-                >
-                (isso s&oacute; funciona com <code>encode</code>).
-              </li>
-            </ul>
-
-            <pre>
->>> 'Otávio'.encode('utf-8')
-b'Ot\xc3\xa1vio'
->>> b'Ot\xc3\xa1vio'.decode('ascii', 'ignore') # aqui usei ignore
-'Otvio' # e perdi o "á"</pre
-            >
-
-            <h2>Normaliza&ccedil;&atilde;o Unicode em Python</h2>
-
-            <p>
-              N&oacute;s demos v&aacute;rias voltas at&eacute; chegar aqui, mas
-              &eacute; importante conhecer o que voc&ecirc; est&aacute; fazendo,
-              n&atilde;o &eacute; mesmo (😏 &ndash; U+1F60F)?
-            </p>
-
-            <p>Ent&atilde;o, s&oacute; pra recapitular tudo:</p>
-
-            <ul>
-              <li>Voc&ecirc; conheceu os code points do Unicode;</li>
-              <li>
-                Tamb&eacute;m sabe que Unicode foi feito pensando em
-                compatibilidade com padr&otilde;es j&aacute; existente (ascii,
-                latin, etc). Vamos voltar nesse assunto j&aacute; j&aacute;;
-              </li>
-              <li>
-                Viu que UTF-8 &eacute; uma das codifica&ccedil;&otilde;es de
-                caracteres do Unicode;
-              </li>
-              <li>
-                Est&aacute; ciente que UTF-8 &eacute;, de longe, uma das
-                codifica&ccedil;&otilde;es mais usadas no mundo;
-              </li>
-              <li>
-                E deveria estar usando UTF-8 nos seus c&oacute;digo (&eacute;
-                muito prov&aacute;vel que j&aacute; esteja).
-              </li>
-            </ul>
-
-            <p>
-              Uma coisa que eu ainda n&atilde;o te falei &eacute; sobre a
-              normaliza&ccedil;&atilde;o e o porqu&ecirc; isso existe.
-            </p>
-
-            <p>
-              Na verdade, todas as voltas foram para fazer voc&ecirc; entender o
-              que &eacute; Unicode de verdade. Se j&aacute; sabia, melhor ainda!
-            </p>
-
-            <p>
-              Ent&atilde;o agora podemos ter uma conversa mais
-              &ldquo;complexa&rdquo;.
-            </p>
-
-            <h3>Unicode e outros padr&otilde;es</h3>
-
-            <p>
-              Lembra que l&aacute; no comecinho ☝ (U+261D) te falei que eu
-              poderia escrever a letra &ldquo;<strong>&aacute;</strong>&rdquo;
-              de maneiras diferentes em Unicode?
-            </p>
-
-            <p>S&oacute; pra te lembrar:</p>
-
-            <pre>
->>> '\u00e1'
-'á'
->>> '\u0061\u0301'
-'á'</pre
-            >
-
-            <p>
-              Este pode n&atilde;o ser um problema no seu programa caso
-              n&atilde;o tenha tido a necessidade de comparar esses dois
-              &ldquo;<strong>&aacute;</strong>s&rdquo;. No entanto, em algum
-              momento este problema pode aparecer e voc&ecirc; vai demorar um
-              tempo consider&aacute;vel at&eacute; descobrir que isso
-              est&aacute; relacionado com a falta de normaliza&ccedil;&atilde;o
-              de caracteres. N&oacute;s buscamos recursos de v&aacute;rias
-              fontes externas ao nosso programa e n&atilde;o sabemos qual forma
-              normal utilizaram no sistema deles, e essa bomba pode explodir na
-              sua m&atilde;o.
-            </p>
-
-            <p>
-              O Unicode foi criado pensando em compatibilidade, por isso alguns
-              caracteres aparecem mais de uma vez. Por exemplo, se voc&ecirc;
-              olhar na tabela
-              <a href="https://pt.wikipedia.org/wiki/ASCII">ASCII</a>, vai ver
-              que a letra &ldquo;<strong>A</strong>&rdquo; &eacute; representada
-              pelo mesmo hexadecimal que o Unicode (<strong>41</strong> vs
-              <strong>U+0041</strong>). Se olhar na tabela
-              <a href="https://pt.wikipedia.org/wiki/ISO/IEC_8859-1"
-                >ISO/IEC 8859-1</a
-              >, vai ver que a letra &ldquo;<strong>&aacute;</strong>&rdquo;
-              &eacute; representada exatamente pelo mesmo hexadecimal que o
-              Unicode (<strong>00E1</strong> vs <strong>U+00E1</strong>). Isso
-              quer dizer que o range de 0 a 127 (base 10) no Unicode &eacute;
-              compat&iacute;vel com <strong>ASCII</strong>, o range de 0 a 255
-              (base 10) no Unicode &eacute; compat&iacute;vel com
-              <strong>ISO/IEC 8859-1</strong> (ou latin1) e assim por diante. O
-              Unicode tenta ser compat&iacute;vel com todos os padr&otilde;es
-              existentes.
-            </p>
-
-            <p>
-              Isso vai acabar nos levando a um problema, vai vendo 🤨 (U+1F928)!
-            </p>
-
-            <h3>Caracteres pr&eacute;-compostos e caracteres combinados</h3>
-
-            <p>
-              Pelo motivo que te expliquei anteriormente, existem caracteres que
-              s&atilde;o chamados de <strong>pr&eacute;-compostos</strong>,
-              como: <strong>&aacute;</strong>, <strong>&eacute;</strong>,
-              <strong>&Agrave;</strong>, <strong>&Aacute;</strong> e
-              v&aacute;rios outros. Esses caracteres pr&eacute;-compostos
-              existem para manter compatibilidade com padr&otilde;es que
-              j&aacute; existiam antes do Unicode.
-            </p>
-
-            <p>
-              Por outro lado, o Unicode tamb&eacute;m disp&otilde;e de um
-              sistema de combina&ccedil;&atilde;o para estender o
-              reposit&oacute;rio de caractere suportados, e isso &eacute; genial
-              (🥰 &ndash; U+1F970)!
-            </p>
-
-            <p>
-              Pensa comigo 🤓 (U+1F913), se eu posso ter um
-              &ldquo;<strong>a</strong>&rdquo; e um &ldquo;<strong
-                >acento agudo</strong
-              >&rdquo; em dois caracteres diferentes, n&atilde;o seria
-              inteligente permitir que o <strong>acento agudo</strong> pudesse
-              ser combinado com esse &ldquo;<strong>a</strong>&rdquo; ou com
-              qualquer outro caractere formando um caractere &uacute;nico?
-              Tamb&eacute;m acho!
-            </p>
-
-            <p>
-              &Eacute; exatamente esse o mecanismo que foi usado no Unicode. Ao
-              inv&eacute;s de ter um <strong>code point</strong> &uacute;nico
-              para cada caractere do planeta, fizeram um sistema de
-              combina&ccedil;&atilde;o de caracteres para formar esses
-              s&iacute;mbolos loucos que a gente acaba usando e nem percebe.
-            </p>
-
-            <p>
-              Esses caracteres que podem ser combinados com outros caracteres
-              s&atilde;o chamados de
-              <a href="https://en.wikipedia.org/wiki/Combining_character"
-                >combining character</a
-              >
-              e existem muitos deles.
-            </p>
-
-            <p>
-              Mas, como nem tudo s&atilde;o flores (🥀 &ndash; U+1F940), isso
-              gerou o problema de ter mais de um caractere representando a mesma
-              coisa. Aquela probleminha que te mostrei no in&iacute;cio, sobre
-              os &ldquo;<strong>&aacute;</strong>s&rdquo;. Te falei que ia dar
-              problema, n&atilde;o falei 😁 (U+1F601)?
-            </p>
-
-            <p>
-              &Eacute; aqui que entra a normaliza&ccedil;&atilde;o e uma outra
-              coisa que &eacute; chamada de
-              <strong>equival&ecirc;ncia can&ocirc;nica</strong>.
-            </p>
-
-            <h3>Equival&ecirc;ncia can&ocirc;nica</h3>
-
-            <p>
-              Como os criadores do Unicode s&atilde;o bem inteligentes 🧐
-              (U+1F9D0), eles criaram algo chamado de &ldquo;<strong
-                >equival&ecirc;ncia can&ocirc;nica</strong
-              >&ldquo;. Isso &eacute; s&oacute; uma maneira bonita de falar
-              &ldquo;esses dois caracteres s&atilde;o iguais&rdquo;.
-              Ent&atilde;o, na equival&ecirc;ncia can&ocirc;nica,
-              <strong>U+00E1</strong> (<strong>&aacute;</strong>
-              pr&eacute;-composto) &eacute; igual a
-              <strong>U+0041 + U+0301</strong> (<strong>a</strong> com
-              <strong>acento agudo</strong> combinados). Isso acontece com todos
-              os caracteres acentuados e mais outros milhares de caracteres que
-              podem ser combinados em v&aacute;rios idiomas diferentes.
-            </p>
-
-            <p>
-              Sabendo disso, voc&ecirc; poder utilizar mais de uma forma normal
-              em todo o seu programa: <strong>NFC</strong> e
-              <strong>NFD</strong> (tem mais duas, mas &eacute; quest&atilde;o
-              de compatibilidade, segura a&iacute; que a gente j&aacute; fala
-              sobre isso).
-            </p>
-
-            <h3>NFC &ndash; Normalization Form Canonical Composition</h3>
-
-            <p>
-              Esse tipo de normaliza&ccedil;&atilde;o Unicode visa
-              <strong>manter os caracteres pr&eacute;-compostos</strong> no seu
-              programa (sem a separa&ccedil;&atilde;o de caractere + caractere
-              combinado). Tais caracteres s&atilde;o unidos por
-              equival&ecirc;ncia can&ocirc;nica.
-            </p>
-
-            <p>
-              Lembra dos <strong>&aacute;</strong>s? Aqui eles ser&atilde;o
-              iguais, porque somente o <strong>U+00E1</strong> (<strong
-                >&aacute;</strong
-              >
-              pr&eacute;-composto) ser&aacute; mantido, os caracteres separados
-              ser&atilde;o convertidos em pr&eacute;-compostos. Por exemplo,
-              <strong>U+0061 + U+0301</strong> (<strong>a</strong> com
-              <strong>acento agudo</strong> combinados) se tornaria sempre
-              <strong>U+00E1</strong> (<strong>&aacute;</strong>
-              pr&eacute;-composto).
-            </p>
-
-            <p>Por exemplo:</p>
-
-            <pre>
->>> import unicodedata
->>> nome = 'Ot\u0061\u0301vio'
->>> nome_normalizado = unicodedata.normalize('NFC', nome)
->>> ['U+' + hex(ord(letra))[2:].zfill(4).upper() for letra in nome_normalizado]
-['U+004F', 'U+0074', 'U+00E1', 'U+0076', 'U+0069', 'U+006F']
-# O         t         á         v	      i         o</pre
-            >
-
-            <p>
-              Da pra perceber ali que a letra
-              &ldquo;<strong>&aacute;</strong>&rdquo; do meu nome, sempre
-              ser&aacute; mantida como <strong>U+00E1</strong> com esse tipo de
-              normaliza&ccedil;&atilde;o. Mesmo eu dizendo explicitamente que
-              quero a string <code>&#39;Ot\u0061\u0301vio&#39;</code>.
-            </p>
-
-            <p>
-              Resumidamente: isso n&atilde;o far&aacute; nada com caracteres
-              pr&eacute;-compostos, mas combinar&aacute; caracteres equivalentes
-              que estiverem separados em sua forma pr&eacute;-composta por
-              equival&ecirc;ncia can&ocirc;nica.
-            </p>
-
-            <h3>NFD &ndash; Normalization Form Canonical Decomposition</h3>
-
-            <p>
-              Esse tipo de normaliza&ccedil;&atilde;o unicode visa manter os
-              caracteres separados (com a separa&ccedil;&atilde;o entre
-              caractere e caractere combinado). Os caracteres ser&atilde;o
-              separados por equival&ecirc;ncia can&ocirc;nica.
-            </p>
-
-            <p>
-              Aqui os &ldquo;<strong>&aacute;</strong>s&rdquo; ser&atilde;o
-              iguais, porque somente os caracteres
-              <strong>U+0061 + U+0301</strong> (<strong>a</strong> com
-              <strong>acento agudo</strong> combinados) ser&atilde;o mantidos.
-              Os &ldquo;<strong>&aacute;</strong>s&rdquo; pr&eacute;-compostos
-              (<strong>U+00E1</strong>) ser&atilde;o convertidos em
-              <strong>U+0061 + U+0301</strong>.
-            </p>
-
-            <p>Por exemplo:</p>
-
-            <pre>
->>> import unicodedata
->>> nome = 'Ot\u00e1vio'
->>> nome_normalizado = unicodedata.normalize('NFD', nome)
->>> ['U+' + hex(ord(letra))[2:].zfill(4).upper() for letra in nome_normalizado]
-['U+004F', 'U+0074', 'U+0061', 'U+0301', 'U+0076', 'U+0069', 'U+006F']
-# O         t         a         acento    v         i         o</pre
-            >
-
-            <p>
-              Perceba que agora eu consegui manter ambos os caracteres, tanto o
-              &ldquo;<strong>a</strong>&rdquo; quanto o &ldquo;<strong
-                >acento agudo combinado</strong
-              >&ldquo;. Mesmo especificando que eu queria a string
-              <code>&#39;Ot\u00e1vio&#39;</code>.
-            </p>
-
-            <p>
-              Resumidamente: isso n&atilde;o far&aacute; nada com aqueles dois
-              caracteres combinados, por&eacute;m vai separar caracteres
-              pr&eacute;-compostos para sua forma combinada por
-              equival&ecirc;ncia can&ocirc;nica. Basicamente &eacute;
-              <strong>U+00E1</strong> (<strong>&aacute;</strong>
-              pr&eacute;-composto) se transformando em
-              <strong>U+0061 + U+0301</strong> (<strong>a</strong> com
-              <strong>acento agudo</strong> combinados).
-            </p>
-
-            <h2>
-              NFKC e NFKD &ndash; Normalization Form Compatibility
-              Composition/Decomposition
-            </h2>
-
-            <p>
-              Para complicar um pouquinho mais a sua vida na
-              normaliza&ccedil;&atilde;o unicode, tamb&eacute;m existem
-              caracteres que <strong>n&atilde;o</strong> s&atilde;o definidos
-              por <strong>equival&ecirc;ncia can&ocirc;nica</strong>, mas por
-              <strong>compatibilidade</strong>.
-            </p>
-
-            <p>
-              Por exemplo, em alguns contextos, o s&iacute;mbolo
-              <strong>TM</strong> pode ter o mesmo significado que &trade;
-              (TRADE MARK SIGN, U+2122). Nesse caso, ambos TM e &trade;
-              s&atilde;o definidos como caracteres compat&iacute;veis, mas que
-              N&Atilde;O TEM <strong>equival&ecirc;ncia can&ocirc;nica</strong>.
-            </p>
-
-            <p>
-              Isso quer dizer que nem <strong>NFC</strong>, nem
-              <strong>NFD</strong> v&atilde;o normalizar esses dois valores.
-            </p>
-
-            <p>
-              E s&oacute; pra deixar claro isso pra voc&ecirc;, caso ainda
-              n&atilde;o tenha ficado:
-            </p>
-
-            <ul>
-              <li>
-                NF &ndash; Normalization Form (formato de
-                normaliza&ccedil;&atilde;o);
-              </li>
-              <li>
-                C &ndash; Composition (composi&ccedil;&atilde;o &ndash; une);
-              </li>
-              <li>
-                D &ndash; Decomposition (decomposi&ccedil;&atilde;o &ndash;
-                separa);
-              </li>
-              <li>K &ndash; Compatibility (separa por compatibilidade).</li>
-            </ul>
-
-            <p>
-              Agora que vem a pergunta de 1 milh&atilde;o de d&oacute;lares:
-              qual a forma normal entre TM e &trade;? Depende! Em qual contexto?
-            </p>
-
-            <p>
-              Vou te dar um exemplo: n&oacute;s sabemos que seres humanos tem
-              uma pregui&ccedil;a danada de digitar as coisas corretamente,
-              certo? Imagine que a minha marca fosse
-              <strong>OM&trade;</strong> e eu quisesse que no meu sistema de
-              busca, essa marca fosse encontrada. Voc&ecirc; acha que as pessoas
-              digitariam <strong>OMTM</strong> ou <strong>OM&trade;</strong>? Eu
-              acho que OMTM (caso n&atilde;o encontrassem antes apenas digitando
-              OM). Mas podemos garantir as duas com a
-              normaliza&ccedil;&atilde;o.
-            </p>
-
-            <p>
-              Ent&atilde;o nesse caso, eu usaria a compatibilidade para
-              transformar <strong>&trade;</strong> em TM apenas para realizar
-              uma compara&ccedil;&atilde;o. Por exemplo, meu texto na base de
-              dados seria normalizado temporariamente com NFKD e o texto enviado
-              pelo usu&aacute;rio tamb&eacute;m seria normalizado para NFKD.
-              Assim eu consigo encontrar <strong>OMTM</strong> ou
-              <strong>OM&trade;</strong> independente de como isso foi digitado
-              pelo usu&aacute;rio.
-            </p>
-
-            <p>
-              Para fazer a normaliza&ccedil;&atilde;o unicode de
-              <strong>&trade;</strong> para TM, voc&ecirc; vai precisar usar
-              NF<strong>K</strong>(C ou D):
-            </p>
-
-            <pre>
->>> import unicodedata
->>> nome = 'OM™'
->>> nome_normalizado = unicodedata.normalize('NFKC', nome)
->>> ['U+' + hex(ord(letra))[2:].zfill(4).upper() for letra in nome_normalizado]
-['U+004F', 'U+004D', 'U+0054', 'U+004D']
-# O         M         T         M</pre
-            >
-
-            <p>
-              Perceba que &ldquo;<strong>C</strong>&rdquo; e
-              &ldquo;<strong>D</strong>&rdquo; aqui v&atilde;o fazer o mesmo
-              trabalho descrito anteriormente, mas o
-              &ldquo;<strong>K</strong>&rdquo; vai trabalhar na compatibilidade
-              que te falei antes.
-            </p>
-
-            <p>
-              Ent&atilde;o s&oacute; pra resumir: O <strong>K</strong> significa
-              <strong>compatibility</strong> e vai converter valores que
-              estariam em apenas um <strong>code point</strong> Unicode em
-              caracteres que seriam compat&iacute;veis (de acordo com as regras
-              deles, que eu n&atilde;o sei quais s&atilde;o). Esses caracteres
-              devem se comportar da mesma maneira em pesquisa,
-              compara&ccedil;&atilde;o, ordena&ccedil;&atilde;o e
-              indexa&ccedil;&atilde;o, mas podem mudar o significado e
-              tamb&eacute;m podem parecer visualmente diferentes em
-              v&aacute;rios contextos. Como no nosso exemplo,
-              <strong>OMTM</strong> ou <strong>OM&trade;</strong> deveria
-              retornar os mesmos valores no meu sistema de pesquisa ou
-              compara&ccedil;&atilde;o, mas eles s&atilde;o bem diferentes
-              visualmente.
-            </p>
-
-            <h3>Um ponto de aten&ccedil;&atilde;o para K</h3>
-
-            <p>
-              Tenha em mente que a partir do momento que eu separei os valores
-              por compatibilidade, n&atilde;o consigo mais uni-los novamente.
-              Por exemplo, se eu normalizar com <strong>K</strong> (NFKC ou
-              NFKD) o valor &trade; (TRADE MARK SIGN, U+2122), vou obter TM
-              (como vimos). Por&eacute;m TM n&atilde;o voltar&aacute; a ser
-              &trade;.
-            </p>
-
-            <p>
-              Por este motivo, &eacute; super importante que voc&ecirc;
-              <strong>n&atilde;o</strong> salve os valores permanentemente
-              utilizando <strong>K</strong>. Voc&ecirc; deve normalizar
-              temporariamente no momento que precisar realizar alguma
-              compara&ccedil;&atilde;o e eliminar esse valor ap&oacute;s
-              terminar o que estava fazendo. Salve os valores como eles
-              realmente s&atilde;o.
-            </p>
-
-            <h2>
-              Usando chardet para detectar a codifica&ccedil;&atilde;o de
-              caracteres
-            </h2>
-
-            <p>
-              Na grande maioria das vezes que nosso sistema gerar algum problema
-              de codifica&ccedil;&atilde;o de caracteres, esse problema
-              vir&aacute; de algum recurso externo. Portanto, para simular isso,
-              suponha que eu tenha um arquivo em
-              <strong>ISO-8859-1</strong> (latin1). Qualquer editor de textos
-              decente vai te permitir criar o mesmo texto com a mesma
-              codifica&ccedil;&atilde;o de caracteres. Por exemplo, o
-              <a href="https://code.visualstudio.com/">Visual Studio Code</a>.
-            </p>
-
-            <p>
-              <img
-                src="imgs/python-1.png"
-                alt="Exemplo de codificação no VS Code"
-              />
-            </p>
-
-            <p>
-              N&oacute;s sabemos qual a codifica&ccedil;&atilde;o de caracteres
-              foi usada neste arquivo (latin1), mas finja que n&atilde;o. Vamos
-              carregar esse arquivo pelo Python usando
-              &ldquo;<code>rb</code>&rdquo; (read bytes) e solicitar ao
-              <a href="https://pypi.org/project/chardet/">chardet</a> para
-              detectar a codifica&ccedil;&atilde;o de caracteres.
-            </p>
-
-            <p>
-              <strong>Nota:</strong> voc&ecirc; precisa instalar o chardet com
-              &ldquo;<code>pip install chardet</code>&ldquo;.
-            </p>
-
-            <pre>
->>> import chardet
->>> with open('text.txt', 'rb') as file:
-...     raw_content = file.read()
-...     encoding = chardet.detect(raw_content)
-...     encoding["encoding"]
-...
-'ISO-8859-9'</pre
-            >
-
-            <p>
-              Ele detectou como &lsquo;ISO-8859-9&rsquo;, isso seria
-              <strong>latin5</strong> e n&atilde;o <strong>latin1</strong>, mas
-              lembra que te falei que ele n&atilde;o iria acertar 100% das
-              vezes, certo? Bom, vamos tentar converter esse arquivo de
-              ISO-8859-9 (mesmo n&atilde;o sendo a codifica&ccedil;&atilde;o
-              exata do arquivo) para UTF-8 e ver o que ocorre.
-            </p>
-
-            <p>
-              Vamos abrir o arquivo novamente, decodificar com a
-              codifica&ccedil;&atilde;o que o <strong>chardet</strong> quiser
-              (no caso ISO-8859-9, latin5), depois vamos abrir um novo arquivo
-              com <code>&#39;wb&#39;</code> e salvar como UTF-8. Veja:
-            </p>
-
-            <pre>
->>> with open('text.txt', 'rb') as file:
-...     # Vamos ler apenas bytes do arquivo
-...     raw_content = file.read()
-...     # Agora a gente decodifica
-...     content_string = raw_content.decode(encoding["encoding"])
->>>
-# Perfeito, agora vamos tentar pegar o conteúdo
-# da content_string e salvar em outro arquivo
-# porém, agora vamos codificar em UTF-8
->>> with open('text2.txt', 'wb') as file:
-...     file.write(content_string.encode('utf8'))
-...
-192
->>> </pre
-            >
-
-            <p>
-              Perfeito, sem erros! Agora vamos ver como est&aacute; o nosso
-              arquivo &ldquo;<strong>text2.txt</strong>&rdquo; (o novo arquivo
-              gerado). Ser&aacute; que os caracteres se mantiveram?
-            </p>
-
-            <p>
-              <img src="imgs/python-2.png" alt="UTF-8" />
-            </p>
-
-            <p>
-              Perfeito! Viu como a aproxima&ccedil;&atilde;o que o
-              <strong>chardet</strong> encontrou me ajudou muito? Mesmo que ele
-              n&atilde;o tenha detectado com 100% de certeza qual a
-              codifica&ccedil;&atilde;o de caracteres usada no arquivo, ele me
-              passou uma que provavelmente iria funcionar.
-            </p>
-
-            <p>
-              Se voc&ecirc; fosse tentar decodificar direto com UTF-8, isso
-              ocorreria:
-            </p>
-
-            <p>
-              <code
-                >UnicodeDecodeError: &#39;utf-8&#39; codec can&#39;t decode byte
-                0xe7 in position 4: invalid continuation byte</code
-              >
-            </p>
-
-            <p>E se ignorasse os erros, seu texto ficaria assim:</p>
-
-            <p>
-              <code>Ateno Exceo Impresso Concesso Presuno</code><br />
-              <code>Voc Pur Croch Metr</code><br />
-              <code>Plstico Grfico Espcie Clebre</code><br />
-              <code>quelas s</code><br />
-              <code>Acar ACAR CABEA CAROO&#39;</code>
-            </p>
-
-            <p>Eu acho que deu pra voc&ecirc; entender, n&atilde;o &eacute;?</p>
-
-            <h2>
-              Fun&ccedil;&otilde;es interessantes com normaliza&ccedil;&atilde;o
-              unicode
-            </h2>
-
-            <p>
-              Voc&ecirc;, como programador(a), j&aacute; pode ter imaginado
-              milhares de coisas interessantes que pode fazer com a
-              normaliza&ccedil;&atilde;o unicode, n&atilde;o &eacute; mesmo? Se
-              n&atilde;o, vou te dar algumas ideias:
-            </p>
-
-            <h3>Obtendo code points Unicode</h3>
-
-            <p>
-              Suponha que eu queira obter uma lista com todos os code points de
-              uma frase. Veja que legal:
-            </p>
-
-            <pre>
-from typing import List
-from unicodedata import normalize
-
-
-def get_unicode_code_points(string: str) -> List[str]:
-    string_normalized = normalize('NFD', string)
-    code_points: List[str] = [
-        'U+' + hex(ord(letter))[2:].zfill(4).upper()
-        for letter in string_normalized
-    ]
-    return code_points
-
-
-if __name__ == "__main__":
-    text = 'Python 🐍™'
-    code_points = get_unicode_code_points(text)
-    print(code_points)
-
-    """
-    ['U+0050', 'U+0079', 'U+0074', 'U+0068',
-    'U+006F', 'U+006E', 'U+0020', 'U+1F40D',
-    'U+2122']
-    """</pre
-            >
-
-            <h3>Obtendo caracteres de code points</h3>
-
-            <p>
-              Mas, e o inverso? Dado um code point, como converto em caractere?
-              Voc&ecirc; j&aacute; viu isso ao longo do texto todo, mas aqui
-              vai.
-            </p>
-
-            <pre>
-from typing import List
-
-
-def get_char_from_code_point(code_points: List[str]) -> str:
-    chars = [chr(int(c.replace('U+', '0x'), 16)) for c in code_points]
-    return ''.join(chars)
-
-
-if __name__ == "__main__":
-    code_points = [
-        'U+0050', 'U+0079', 'U+0074', 'U+0068',
-        'U+006F', 'U+006E', 'U+0020', 'U+1F40D',
-        'U+2122'
-    ]
-
-    print(get_char_from_code_point(code_points))
-    # Python 🐍™</pre
-            >
-
-            <h3>Removendo caracteres fora da tabela ASCII</h3>
-
-            <p>
-              Em alguns casos, pode ser interessante manter apenas caracteres
-              compat&iacute;veis com a tabela &ldquo;ASCII&rdquo;. Al&eacute;m
-              disso, n&oacute;s tamb&eacute;m podemos converter caracteres que
-              seriam compat&iacute;veis se n&atilde;o fossem
-              pr&eacute;-compostos. Por exemplo,
-              &lsquo;<strong>&aacute;</strong>&lsquo;,
-              &lsquo;<strong>&atilde;</strong>&lsquo;,
-              <strong>&agrave;</strong> e <strong>&acirc;</strong> se tornariam
-              simplesmente &lsquo;<strong>a</strong>&lsquo; e assim por diante
-              para todos os caracteres. Por&eacute;m, caracteres como 🐍 e 😀
-              n&atilde;o estariam presentes, porque n&atilde;o existem na tabela
-              ASCII e tamb&eacute;m n&atilde;o existem compat&iacute;veis.
-            </p>
-
-            <p>Vamos ver como far&iacute;amos isso:</p>
-
-            <pre>
-import unicodedata
-
-
-def non_ascii_to_ascii(string: str) -> str:
-    ascii_only = unicodedata.normalize('NFKD', string)\
-        .encode('ascii', 'ignore')\
-        .decode('ascii')
-    return ascii_only
-
-
-if __name__ == "__main__":
-    string = 'Atenção 🐍 😀'
-    print(non_ascii_to_ascii(string))  # Atencao</pre
-            >
-
-            <p>
-              Perceba que caracteres como
-              &ldquo;<strong>&ccedil;</strong>&rdquo; e
-              &ldquo;<strong>&atilde;</strong>&rdquo; de
-              &ldquo;<strong>Aten&ccedil;&atilde;o</strong>&rdquo; foram
-              mantidos sem acento (porque existem na tabela ASCII), por&eacute;m
-              🐍 e 😀 foram ignorados.
-            </p>
-
-            <h3>Removendo acentos das palavras</h3>
-
-            <p>
-              Na fun&ccedil;&atilde;o anterior, a gente meio que removeu os
-              acentos, por&eacute;m tamb&eacute;m removemos outras coisas que
-              n&atilde;o quer&iacute;amos. Mas, suponha que eu queira remover
-              apenas o <strong>combining character</strong> mantendo o restante
-              (o combining character seria o acento propriamente dito).
-            </p>
-
-            <p>Isso me retornaria palavras sem acento.</p>
-
-            <p>
-              Eu posso fazer isso, como o
-              <a
-                href="https://twitter.com/ramalhoorg?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
-                >Luciano Ramalho</a
-              >
-              descreve em seu livro
-              <a href="https://amzn.to/34HdIPs">Python Fluente</a>.
-            </p>
-
-            <pre>
-import unicodedata
-
-def remove_accents(string: str) -> str:
-    normalized = unicodedata.normalize('NFKD', string)
-    return ''.join([c for c in normalized if not unicodedata.combining(c)])</pre
-            >
-
-            <p>
-              Porém, eu também posso fazer isso com expressões regulares. O que
-              funcionar melhor pra você:
-            </p>
-
-            <pre>
-import unicodedata
-import re
-
-
-def remove_accents_regex(string: str) -> str:
-    regex = re.compile(r'[\u0300-\u036F]', flags=re.DOTALL)
-    normalized = unicodedata.normalize('NFKD', string)
-    return regex.sub('', normalized)
-
-
-if __name__ == "__main__":
-    string = 'Atenção 🐍 😀'
-    print(remove_accents_regex(string))  # Atencao 🐍 😀</pre
-            >
-
-            <p>
-              Por falar nisso, eu tenho um detalhe sobre express&otilde;es
-              regulares pra te informar: eu tenho um curso inteiro e gratuito na
-              <a
-                href="https://www.udemy.com/course/expressoes-regulares-com-python-3-curso-gratuito/"
-                >Udemy</a
-              >
-              e no
-              <a
-                href="https://www.youtube.com/watch?v=wBI0yv2FG6U&amp;list=PLbIBj8vQhvm1VnTa2Np5vDzCxVtyaYLMr"
-                >Youtube</a
-              >
-              sobre isso.
-            </p>
-
-            <p>
-              Portanto, n&atilde;o h&aacute; motivos para entrarmos em detalhes
-              sobre
-              <a href="https://pt.wikipedia.org/wiki/Express%C3%A3o_regular"
-                >regex</a
-              >
-              aqui.
-            </p>
-
-            <h2>Mais sobre Unicode e Normaliza&ccedil;&atilde;o Unicode</h2>
-
-            <p>
-              Eu sei que esse assunto talvez passe despercebido para
-              v&aacute;rios desenvolvedores e desenvolvedoras mundo a fora e
-              n&atilde;o &eacute; culpa deles (ou nossa, tamb&eacute;m passei
-              por isso). Em nosso meio, a maioria dos cursos, faculdades e
-              livros que voc&ecirc; l&ecirc; para aprender a programar,
-              infelizmente n&atilde;o tratam desse assunto, ou, se tratam,
-              &eacute; de maneira superficial. Por&eacute;m, como voc&ecirc;
-              p&ocirc;de ver, eu fiz quest&atilde;o de deixar todos os links de
-              onde removi todas as informa&ccedil;&otilde;es que escrevi aqui.
-              Assim, &eacute; extremamente necess&aacute;rio que voc&ecirc; leia
-              esses links tamb&eacute;m.
-            </p>
-
-            <p>
-              Al&eacute;m disso, ainda faltaram algumas coisas que n&atilde;o
-              consegui falar neste post. Por exemplo, casefold e tratamento de
-              arquivos, foram coisas que n&atilde;o mencionei aqui, mas que
-              s&atilde;o mencionadas no
-              <a href="https://docs.python.org/3/howto/unicode.html"
-                >Unicode HOWTO oficial do Python</a
-              >. Ent&atilde;o, d&aacute; um jeito de ler esse artigo
-              tamb&eacute;m.
-            </p>
-
-            <p>
-              Ent&atilde;o &eacute; isso, te deixo aqui com um pouco mais de
-              servi&ccedil;o pela frente.
-            </p>
-
-            <p>Te espero no pr&oacute;ximo post.</p>
-
+            (isso s&oacute; funciona com <code>encode</code>).
+          </li>
+        </ul>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#94E2D5">>>></span><span style="color:#A6E3A1"> 'Otávio'</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">encode</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'utf-8'</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#A6E3A1;font-style:italic">b</span><span style="color:#A6E3A1">'Ot</span><span style="color:#F5C2E7">\xc3\xa1</span><span style="color:#A6E3A1">vio'</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#A6E3A1;font-style:italic"> b</span><span style="color:#A6E3A1">'Ot</span><span style="color:#F5C2E7">\xc3\xa1</span><span style="color:#A6E3A1">vio'</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">decode</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'ascii'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'ignore'</span><span style="color:#9399B2">)</span><span style="color:#9399B2;font-style:italic"> # aqui usei ignore</span></span>
+<span class="line"><span style="color:#A6E3A1">'Otvio'</span><span style="color:#9399B2;font-style:italic"> # e perdi o "á"</span></span></code></pre>
+
+        <h2>Normaliza&ccedil;&atilde;o Unicode em Python</h2>
+
+        <p>
+          N&oacute;s demos v&aacute;rias voltas at&eacute; chegar aqui, mas
+          &eacute; importante conhecer o que voc&ecirc; est&aacute; fazendo,
+          n&atilde;o &eacute; mesmo (😏 &ndash; U+1F60F)?
+        </p>
+
+        <p>Ent&atilde;o, s&oacute; pra recapitular tudo:</p>
+
+        <ul>
+          <li>Voc&ecirc; conheceu os code points do Unicode;</li>
+          <li>
+            Tamb&eacute;m sabe que Unicode foi feito pensando em compatibilidade
+            com padr&otilde;es j&aacute; existente (ascii, latin, etc). Vamos
+            voltar nesse assunto j&aacute; j&aacute;;
+          </li>
+          <li>
+            Viu que UTF-8 &eacute; uma das codifica&ccedil;&otilde;es de
+            caracteres do Unicode;
+          </li>
+          <li>
+            Est&aacute; ciente que UTF-8 &eacute;, de longe, uma das
+            codifica&ccedil;&otilde;es mais usadas no mundo;
+          </li>
+          <li>
+            E deveria estar usando UTF-8 nos seus c&oacute;digo (&eacute; muito
+            prov&aacute;vel que j&aacute; esteja).
+          </li>
+        </ul>
+
+        <p>
+          Uma coisa que eu ainda n&atilde;o te falei &eacute; sobre a
+          normaliza&ccedil;&atilde;o e o porqu&ecirc; isso existe.
+        </p>
+
+        <p>
+          Na verdade, todas as voltas foram para fazer voc&ecirc; entender o que
+          &eacute; Unicode de verdade. Se j&aacute; sabia, melhor ainda!
+        </p>
+
+        <p>
+          Ent&atilde;o agora podemos ter uma conversa mais
+          &ldquo;complexa&rdquo;.
+        </p>
+
+        <h3>Unicode e outros padr&otilde;es</h3>
+
+        <p>
+          Lembra que l&aacute; no comecinho ☝ (U+261D) te falei que eu poderia
+          escrever a letra &ldquo;<strong>&aacute;</strong>&rdquo; de maneiras
+          diferentes em Unicode?
+        </p>
+
+        <p>S&oacute; pra te lembrar:</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#94E2D5">>>></span><span style="color:#A6E3A1"> '</span><span style="color:#F5C2E7">\u00e1</span><span style="color:#A6E3A1">'</span></span>
+<span class="line"><span style="color:#A6E3A1">'á'</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#A6E3A1"> '</span><span style="color:#F5C2E7">\u0061\u0301</span><span style="color:#A6E3A1">'</span></span>
+<span class="line"><span style="color:#A6E3A1">'á'</span></span></code></pre>
+
+        <p>
+          Este pode n&atilde;o ser um problema no seu programa caso n&atilde;o
+          tenha tido a necessidade de comparar esses dois
+          &ldquo;<strong>&aacute;</strong>s&rdquo;. No entanto, em algum momento
+          este problema pode aparecer e voc&ecirc; vai demorar um tempo
+          consider&aacute;vel at&eacute; descobrir que isso est&aacute;
+          relacionado com a falta de normaliza&ccedil;&atilde;o de caracteres.
+          N&oacute;s buscamos recursos de v&aacute;rias fontes externas ao nosso
+          programa e n&atilde;o sabemos qual forma normal utilizaram no sistema
+          deles, e essa bomba pode explodir na sua m&atilde;o.
+        </p>
+
+        <p>
+          O Unicode foi criado pensando em compatibilidade, por isso alguns
+          caracteres aparecem mais de uma vez. Por exemplo, se voc&ecirc; olhar
+          na tabela
+          <a href="https://pt.wikipedia.org/wiki/ASCII">ASCII</a>, vai ver que a
+          letra &ldquo;<strong>A</strong>&rdquo; &eacute; representada pelo
+          mesmo hexadecimal que o Unicode (<strong>41</strong> vs
+          <strong>U+0041</strong>). Se olhar na tabela
+          <a href="https://pt.wikipedia.org/wiki/ISO/IEC_8859-1"
+            >ISO/IEC 8859-1</a
+          >, vai ver que a letra &ldquo;<strong>&aacute;</strong>&rdquo;
+          &eacute; representada exatamente pelo mesmo hexadecimal que o Unicode
+          (<strong>00E1</strong> vs <strong>U+00E1</strong>). Isso quer dizer
+          que o range de 0 a 127 (base 10) no Unicode &eacute; compat&iacute;vel
+          com <strong>ASCII</strong>, o range de 0 a 255 (base 10) no Unicode
+          &eacute; compat&iacute;vel com <strong>ISO/IEC 8859-1</strong> (ou
+          latin1) e assim por diante. O Unicode tenta ser compat&iacute;vel com
+          todos os padr&otilde;es existentes.
+        </p>
+
+        <p>
+          Isso vai acabar nos levando a um problema, vai vendo 🤨 (U+1F928)!
+        </p>
+
+        <h3>Caracteres pr&eacute;-compostos e caracteres combinados</h3>
+
+        <p>
+          Pelo motivo que te expliquei anteriormente, existem caracteres que
+          s&atilde;o chamados de <strong>pr&eacute;-compostos</strong>, como:
+          <strong>&aacute;</strong>, <strong>&eacute;</strong>,
+          <strong>&Agrave;</strong>, <strong>&Aacute;</strong> e v&aacute;rios
+          outros. Esses caracteres pr&eacute;-compostos existem para manter
+          compatibilidade com padr&otilde;es que j&aacute; existiam antes do
+          Unicode.
+        </p>
+
+        <p>
+          Por outro lado, o Unicode tamb&eacute;m disp&otilde;e de um sistema de
+          combina&ccedil;&atilde;o para estender o reposit&oacute;rio de
+          caractere suportados, e isso &eacute; genial (🥰 &ndash; U+1F970)!
+        </p>
+
+        <p>
+          Pensa comigo 🤓 (U+1F913), se eu posso ter um
+          &ldquo;<strong>a</strong>&rdquo; e um &ldquo;<strong
+            >acento agudo</strong
+          >&rdquo; em dois caracteres diferentes, n&atilde;o seria inteligente
+          permitir que o <strong>acento agudo</strong> pudesse ser combinado com
+          esse &ldquo;<strong>a</strong>&rdquo; ou com qualquer outro caractere
+          formando um caractere &uacute;nico? Tamb&eacute;m acho!
+        </p>
+
+        <p>
+          &Eacute; exatamente esse o mecanismo que foi usado no Unicode. Ao
+          inv&eacute;s de ter um <strong>code point</strong> &uacute;nico para
+          cada caractere do planeta, fizeram um sistema de
+          combina&ccedil;&atilde;o de caracteres para formar esses
+          s&iacute;mbolos loucos que a gente acaba usando e nem percebe.
+        </p>
+
+        <p>
+          Esses caracteres que podem ser combinados com outros caracteres
+          s&atilde;o chamados de
+          <a href="https://en.wikipedia.org/wiki/Combining_character"
+            >combining character</a
+          >
+          e existem muitos deles.
+        </p>
+
+        <p>
+          Mas, como nem tudo s&atilde;o flores (🥀 &ndash; U+1F940), isso gerou
+          o problema de ter mais de um caractere representando a mesma coisa.
+          Aquela probleminha que te mostrei no in&iacute;cio, sobre os
+          &ldquo;<strong>&aacute;</strong>s&rdquo;. Te falei que ia dar
+          problema, n&atilde;o falei 😁 (U+1F601)?
+        </p>
+
+        <p>
+          &Eacute; aqui que entra a normaliza&ccedil;&atilde;o e uma outra coisa
+          que &eacute; chamada de
+          <strong>equival&ecirc;ncia can&ocirc;nica</strong>.
+        </p>
+
+        <h3>Equival&ecirc;ncia can&ocirc;nica</h3>
+
+        <p>
+          Como os criadores do Unicode s&atilde;o bem inteligentes 🧐 (U+1F9D0),
+          eles criaram algo chamado de &ldquo;<strong
+            >equival&ecirc;ncia can&ocirc;nica</strong
+          >&ldquo;. Isso &eacute; s&oacute; uma maneira bonita de falar
+          &ldquo;esses dois caracteres s&atilde;o iguais&rdquo;. Ent&atilde;o,
+          na equival&ecirc;ncia can&ocirc;nica, <strong>U+00E1</strong> (<strong
+            >&aacute;</strong
+          >
+          pr&eacute;-composto) &eacute; igual a
+          <strong>U+0041 + U+0301</strong> (<strong>a</strong> com
+          <strong>acento agudo</strong> combinados). Isso acontece com todos os
+          caracteres acentuados e mais outros milhares de caracteres que podem
+          ser combinados em v&aacute;rios idiomas diferentes.
+        </p>
+
+        <p>
+          Sabendo disso, voc&ecirc; poder utilizar mais de uma forma normal em
+          todo o seu programa: <strong>NFC</strong> e <strong>NFD</strong> (tem
+          mais duas, mas &eacute; quest&atilde;o de compatibilidade, segura
+          a&iacute; que a gente j&aacute; fala sobre isso).
+        </p>
+
+        <h3>NFC &ndash; Normalization Form Canonical Composition</h3>
+
+        <p>
+          Esse tipo de normaliza&ccedil;&atilde;o Unicode visa
+          <strong>manter os caracteres pr&eacute;-compostos</strong> no seu
+          programa (sem a separa&ccedil;&atilde;o de caractere + caractere
+          combinado). Tais caracteres s&atilde;o unidos por equival&ecirc;ncia
+          can&ocirc;nica.
+        </p>
+
+        <p>
+          Lembra dos <strong>&aacute;</strong>s? Aqui eles ser&atilde;o iguais,
+          porque somente o <strong>U+00E1</strong> (<strong>&aacute;</strong>
+          pr&eacute;-composto) ser&aacute; mantido, os caracteres separados
+          ser&atilde;o convertidos em pr&eacute;-compostos. Por exemplo,
+          <strong>U+0061 + U+0301</strong> (<strong>a</strong> com
+          <strong>acento agudo</strong> combinados) se tornaria sempre
+          <strong>U+00E1</strong> (<strong>&aacute;</strong>
+          pr&eacute;-composto).
+        </p>
+
+        <p>Por exemplo:</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CBA6F7"> import</span><span style="color:#CDD6F4"> unicodedata</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> nome </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> 'Ot</span><span style="color:#F5C2E7">\u0061\u0301</span><span style="color:#A6E3A1">vio'</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> nome_normalizado </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> unicodedata</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">normalize</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'NFC'</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> nome</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#9399B2"> [</span><span style="color:#A6E3A1">'U+'</span><span style="color:#94E2D5"> +</span><span style="color:#FAB387;font-style:italic"> hex</span><span style="color:#9399B2">(</span><span style="color:#FAB387;font-style:italic">ord</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">letra</span><span style="color:#9399B2">))[</span><span style="color:#FAB387">2</span><span style="color:#9399B2">:].</span><span style="color:#89B4FA">zfill</span><span style="color:#9399B2">(</span><span style="color:#FAB387">4</span><span style="color:#9399B2">).</span><span style="color:#89B4FA">upper</span><span style="color:#9399B2">()</span><span style="color:#CBA6F7"> for</span><span style="color:#CDD6F4"> letra </span><span style="color:#CBA6F7">in</span><span style="color:#CDD6F4"> nome_normalizado</span><span style="color:#9399B2">]</span></span>
+<span class="line"><span style="color:#9399B2">[</span><span style="color:#A6E3A1">'U+004F'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+0074'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+00E1'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+0076'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+0069'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+006F'</span><span style="color:#9399B2">]</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic"># O         t         á         v	      i         o</span></span></code></pre>
+
+        <p>
+          Da pra perceber ali que a letra
+          &ldquo;<strong>&aacute;</strong>&rdquo; do meu nome, sempre
+          ser&aacute; mantida como <strong>U+00E1</strong> com esse tipo de
+          normaliza&ccedil;&atilde;o. Mesmo eu dizendo explicitamente que quero
+          a string <code>&#39;Ot\u0061\u0301vio&#39;</code>.
+        </p>
+
+        <p>
+          Resumidamente: isso n&atilde;o far&aacute; nada com caracteres
+          pr&eacute;-compostos, mas combinar&aacute; caracteres equivalentes que
+          estiverem separados em sua forma pr&eacute;-composta por
+          equival&ecirc;ncia can&ocirc;nica.
+        </p>
+
+        <h3>NFD &ndash; Normalization Form Canonical Decomposition</h3>
+
+        <p>
+          Esse tipo de normaliza&ccedil;&atilde;o unicode visa manter os
+          caracteres separados (com a separa&ccedil;&atilde;o entre caractere e
+          caractere combinado). Os caracteres ser&atilde;o separados por
+          equival&ecirc;ncia can&ocirc;nica.
+        </p>
+
+        <p>
+          Aqui os &ldquo;<strong>&aacute;</strong>s&rdquo; ser&atilde;o iguais,
+          porque somente os caracteres
+          <strong>U+0061 + U+0301</strong> (<strong>a</strong> com
+          <strong>acento agudo</strong> combinados) ser&atilde;o mantidos. Os
+          &ldquo;<strong>&aacute;</strong>s&rdquo; pr&eacute;-compostos
+          (<strong>U+00E1</strong>) ser&atilde;o convertidos em
+          <strong>U+0061 + U+0301</strong>.
+        </p>
+
+        <p>Por exemplo:</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CBA6F7"> import</span><span style="color:#CDD6F4"> unicodedata</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> nome </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> 'Ot</span><span style="color:#F5C2E7">\u00e1</span><span style="color:#A6E3A1">vio'</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> nome_normalizado </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> unicodedata</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">normalize</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'NFD'</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> nome</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#9399B2"> [</span><span style="color:#A6E3A1">'U+'</span><span style="color:#94E2D5"> +</span><span style="color:#FAB387;font-style:italic"> hex</span><span style="color:#9399B2">(</span><span style="color:#FAB387;font-style:italic">ord</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">letra</span><span style="color:#9399B2">))[</span><span style="color:#FAB387">2</span><span style="color:#9399B2">:].</span><span style="color:#89B4FA">zfill</span><span style="color:#9399B2">(</span><span style="color:#FAB387">4</span><span style="color:#9399B2">).</span><span style="color:#89B4FA">upper</span><span style="color:#9399B2">()</span><span style="color:#CBA6F7"> for</span><span style="color:#CDD6F4"> letra </span><span style="color:#CBA6F7">in</span><span style="color:#CDD6F4"> nome_normalizado</span><span style="color:#9399B2">]</span></span>
+<span class="line"><span style="color:#9399B2">[</span><span style="color:#A6E3A1">'U+004F'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+0074'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+0061'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+0301'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+0076'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+0069'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+006F'</span><span style="color:#9399B2">]</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic"># O         t         a         acento    v         i         o</span></span></code></pre>
+
+        <p>
+          Perceba que agora eu consegui manter ambos os caracteres, tanto o
+          &ldquo;<strong>a</strong>&rdquo; quanto o &ldquo;<strong
+            >acento agudo combinado</strong
+          >&ldquo;. Mesmo especificando que eu queria a string
+          <code>&#39;Ot\u00e1vio&#39;</code>.
+        </p>
+
+        <p>
+          Resumidamente: isso n&atilde;o far&aacute; nada com aqueles dois
+          caracteres combinados, por&eacute;m vai separar caracteres
+          pr&eacute;-compostos para sua forma combinada por equival&ecirc;ncia
+          can&ocirc;nica. Basicamente &eacute;
+          <strong>U+00E1</strong> (<strong>&aacute;</strong>
+          pr&eacute;-composto) se transformando em
+          <strong>U+0061 + U+0301</strong> (<strong>a</strong> com
+          <strong>acento agudo</strong> combinados).
+        </p>
+
+        <h2>
+          NFKC e NFKD &ndash; Normalization Form Compatibility
+          Composition/Decomposition
+        </h2>
+
+        <p>
+          Para complicar um pouquinho mais a sua vida na
+          normaliza&ccedil;&atilde;o unicode, tamb&eacute;m existem caracteres
+          que <strong>n&atilde;o</strong> s&atilde;o definidos por
+          <strong>equival&ecirc;ncia can&ocirc;nica</strong>, mas por
+          <strong>compatibilidade</strong>.
+        </p>
+
+        <p>
+          Por exemplo, em alguns contextos, o s&iacute;mbolo
+          <strong>TM</strong> pode ter o mesmo significado que &trade; (TRADE
+          MARK SIGN, U+2122). Nesse caso, ambos TM e &trade; s&atilde;o
+          definidos como caracteres compat&iacute;veis, mas que N&Atilde;O TEM
+          <strong>equival&ecirc;ncia can&ocirc;nica</strong>.
+        </p>
+
+        <p>
+          Isso quer dizer que nem <strong>NFC</strong>, nem
+          <strong>NFD</strong> v&atilde;o normalizar esses dois valores.
+        </p>
+
+        <p>
+          E s&oacute; pra deixar claro isso pra voc&ecirc;, caso ainda
+          n&atilde;o tenha ficado:
+        </p>
+
+        <ul>
+          <li>
+            NF &ndash; Normalization Form (formato de
+            normaliza&ccedil;&atilde;o);
+          </li>
+          <li>C &ndash; Composition (composi&ccedil;&atilde;o &ndash; une);</li>
+          <li>
+            D &ndash; Decomposition (decomposi&ccedil;&atilde;o &ndash; separa);
+          </li>
+          <li>K &ndash; Compatibility (separa por compatibilidade).</li>
+        </ul>
+
+        <p>
+          Agora que vem a pergunta de 1 milh&atilde;o de d&oacute;lares: qual a
+          forma normal entre TM e &trade;? Depende! Em qual contexto?
+        </p>
+
+        <p>
+          Vou te dar um exemplo: n&oacute;s sabemos que seres humanos tem uma
+          pregui&ccedil;a danada de digitar as coisas corretamente, certo?
+          Imagine que a minha marca fosse
+          <strong>OM&trade;</strong> e eu quisesse que no meu sistema de busca,
+          essa marca fosse encontrada. Voc&ecirc; acha que as pessoas digitariam
+          <strong>OMTM</strong> ou <strong>OM&trade;</strong>? Eu acho que OMTM
+          (caso n&atilde;o encontrassem antes apenas digitando OM). Mas podemos
+          garantir as duas com a normaliza&ccedil;&atilde;o.
+        </p>
+
+        <p>
+          Ent&atilde;o nesse caso, eu usaria a compatibilidade para transformar
+          <strong>&trade;</strong> em TM apenas para realizar uma
+          compara&ccedil;&atilde;o. Por exemplo, meu texto na base de dados
+          seria normalizado temporariamente com NFKD e o texto enviado pelo
+          usu&aacute;rio tamb&eacute;m seria normalizado para NFKD. Assim eu
+          consigo encontrar <strong>OMTM</strong> ou
+          <strong>OM&trade;</strong> independente de como isso foi digitado pelo
+          usu&aacute;rio.
+        </p>
+
+        <p>
+          Para fazer a normaliza&ccedil;&atilde;o unicode de
+          <strong>&trade;</strong> para TM, voc&ecirc; vai precisar usar
+          NF<strong>K</strong>(C ou D):
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CBA6F7"> import</span><span style="color:#CDD6F4"> unicodedata</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> nome </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> 'OM™'</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CDD6F4"> nome_normalizado </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> unicodedata</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">normalize</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'NFKC'</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> nome</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#9399B2"> [</span><span style="color:#A6E3A1">'U+'</span><span style="color:#94E2D5"> +</span><span style="color:#FAB387;font-style:italic"> hex</span><span style="color:#9399B2">(</span><span style="color:#FAB387;font-style:italic">ord</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">letra</span><span style="color:#9399B2">))[</span><span style="color:#FAB387">2</span><span style="color:#9399B2">:].</span><span style="color:#89B4FA">zfill</span><span style="color:#9399B2">(</span><span style="color:#FAB387">4</span><span style="color:#9399B2">).</span><span style="color:#89B4FA">upper</span><span style="color:#9399B2">()</span><span style="color:#CBA6F7"> for</span><span style="color:#CDD6F4"> letra </span><span style="color:#CBA6F7">in</span><span style="color:#CDD6F4"> nome_normalizado</span><span style="color:#9399B2">]</span></span>
+<span class="line"><span style="color:#9399B2">[</span><span style="color:#A6E3A1">'U+004F'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+004D'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+0054'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+004D'</span><span style="color:#9399B2">]</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic"># O         M         T         M</span></span></code></pre>
+
+        <p>
+          Perceba que &ldquo;<strong>C</strong>&rdquo; e
+          &ldquo;<strong>D</strong>&rdquo; aqui v&atilde;o fazer o mesmo
+          trabalho descrito anteriormente, mas o
+          &ldquo;<strong>K</strong>&rdquo; vai trabalhar na compatibilidade que
+          te falei antes.
+        </p>
+
+        <p>
+          Ent&atilde;o s&oacute; pra resumir: O <strong>K</strong> significa
+          <strong>compatibility</strong> e vai converter valores que estariam em
+          apenas um <strong>code point</strong> Unicode em caracteres que seriam
+          compat&iacute;veis (de acordo com as regras deles, que eu n&atilde;o
+          sei quais s&atilde;o). Esses caracteres devem se comportar da mesma
+          maneira em pesquisa, compara&ccedil;&atilde;o, ordena&ccedil;&atilde;o
+          e indexa&ccedil;&atilde;o, mas podem mudar o significado e
+          tamb&eacute;m podem parecer visualmente diferentes em v&aacute;rios
+          contextos. Como no nosso exemplo, <strong>OMTM</strong> ou
+          <strong>OM&trade;</strong> deveria retornar os mesmos valores no meu
+          sistema de pesquisa ou compara&ccedil;&atilde;o, mas eles s&atilde;o
+          bem diferentes visualmente.
+        </p>
+
+        <h3>Um ponto de aten&ccedil;&atilde;o para K</h3>
+
+        <p>
+          Tenha em mente que a partir do momento que eu separei os valores por
+          compatibilidade, n&atilde;o consigo mais uni-los novamente. Por
+          exemplo, se eu normalizar com <strong>K</strong> (NFKC ou NFKD) o
+          valor &trade; (TRADE MARK SIGN, U+2122), vou obter TM (como vimos).
+          Por&eacute;m TM n&atilde;o voltar&aacute; a ser &trade;.
+        </p>
+
+        <p>
+          Por este motivo, &eacute; super importante que voc&ecirc;
+          <strong>n&atilde;o</strong> salve os valores permanentemente
+          utilizando <strong>K</strong>. Voc&ecirc; deve normalizar
+          temporariamente no momento que precisar realizar alguma
+          compara&ccedil;&atilde;o e eliminar esse valor ap&oacute;s terminar o
+          que estava fazendo. Salve os valores como eles realmente s&atilde;o.
+        </p>
+
+        <h2>
+          Usando chardet para detectar a codifica&ccedil;&atilde;o de caracteres
+        </h2>
+
+        <p>
+          Na grande maioria das vezes que nosso sistema gerar algum problema de
+          codifica&ccedil;&atilde;o de caracteres, esse problema vir&aacute; de
+          algum recurso externo. Portanto, para simular isso, suponha que eu
+          tenha um arquivo em
+          <strong>ISO-8859-1</strong> (latin1). Qualquer editor de textos
+          decente vai te permitir criar o mesmo texto com a mesma
+          codifica&ccedil;&atilde;o de caracteres. Por exemplo, o
+          <a href="https://code.visualstudio.com/">Visual Studio Code</a>.
+        </p>
+
+        <p>
+          <img
+            src="imgs/python-1.png"
+            alt="Exemplo de codificação no VS Code"
+          />
+        </p>
+
+        <p>
+          N&oacute;s sabemos qual a codifica&ccedil;&atilde;o de caracteres foi
+          usada neste arquivo (latin1), mas finja que n&atilde;o. Vamos carregar
+          esse arquivo pelo Python usando &ldquo;<code>rb</code>&rdquo; (read
+          bytes) e solicitar ao
+          <a href="https://pypi.org/project/chardet/">chardet</a> para detectar
+          a codifica&ccedil;&atilde;o de caracteres.
+        </p>
+
+        <p>
+          <strong>Nota:</strong> voc&ecirc; precisa instalar o chardet com
+          &ldquo;<code>pip install chardet</code>&ldquo;.
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CBA6F7"> import</span><span style="color:#CDD6F4"> chardet</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CBA6F7"> with</span><span style="color:#FAB387;font-style:italic"> open</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'text.txt'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'rb'</span><span style="color:#9399B2">)</span><span style="color:#CBA6F7"> as</span><span style="color:#CDD6F4"> file</span><span style="color:#9399B2">:</span></span>
+<span class="line"><span style="color:#CDD6F4">...     raw_content </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> file</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">read</span><span style="color:#9399B2">()</span></span>
+<span class="line"><span style="color:#CDD6F4">...     encoding </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> chardet</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">detect</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">raw_content</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#CDD6F4">...     </span><span style="color:#EBA0AC;font-style:italic">encoding</span><span style="color:#9399B2">[</span><span style="color:#A6E3A1">"</span><span style="color:#A6E3A1;font-style:italic">encoding</span><span style="color:#A6E3A1">"</span><span style="color:#9399B2">]</span></span>
+<span class="line"><span style="color:#CDD6F4">...</span></span>
+<span class="line"><span style="color:#A6E3A1">'ISO-8859-9'</span></span></code></pre>
+
+        <p>
+          Ele detectou como &lsquo;ISO-8859-9&rsquo;, isso seria
+          <strong>latin5</strong> e n&atilde;o <strong>latin1</strong>, mas
+          lembra que te falei que ele n&atilde;o iria acertar 100% das vezes,
+          certo? Bom, vamos tentar converter esse arquivo de ISO-8859-9 (mesmo
+          n&atilde;o sendo a codifica&ccedil;&atilde;o exata do arquivo) para
+          UTF-8 e ver o que ocorre.
+        </p>
+
+        <p>
+          Vamos abrir o arquivo novamente, decodificar com a
+          codifica&ccedil;&atilde;o que o <strong>chardet</strong> quiser (no
+          caso ISO-8859-9, latin5), depois vamos abrir um novo arquivo com
+          <code>&#39;wb&#39;</code> e salvar como UTF-8. Veja:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CBA6F7"> with</span><span style="color:#FAB387;font-style:italic"> open</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'text.txt'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'rb'</span><span style="color:#9399B2">)</span><span style="color:#CBA6F7"> as</span><span style="color:#CDD6F4"> file</span><span style="color:#9399B2">:</span></span>
+<span class="line"><span style="color:#CDD6F4">...     </span><span style="color:#9399B2;font-style:italic"># Vamos ler apenas bytes do arquivo</span></span>
+<span class="line"><span style="color:#CDD6F4">...     raw_content </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> file</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">read</span><span style="color:#9399B2">()</span></span>
+<span class="line"><span style="color:#CDD6F4">...     </span><span style="color:#9399B2;font-style:italic"># Agora a gente decodifica</span></span>
+<span class="line"><span style="color:#CDD6F4">...     content_string </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> raw_content</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">decode</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">encoding</span><span style="color:#9399B2">[</span><span style="color:#A6E3A1">"</span><span style="color:#A6E3A1;font-style:italic">encoding</span><span style="color:#A6E3A1">"</span><span style="color:#9399B2">])</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic"># Perfeito, agora vamos tentar pegar o conteúdo</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic"># da content_string e salvar em outro arquivo</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic"># porém, agora vamos codificar em UTF-8</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span><span style="color:#CBA6F7"> with</span><span style="color:#FAB387;font-style:italic"> open</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'text2.txt'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'wb'</span><span style="color:#9399B2">)</span><span style="color:#CBA6F7"> as</span><span style="color:#CDD6F4"> file</span><span style="color:#9399B2">:</span></span>
+<span class="line"><span style="color:#CDD6F4">...     file</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">write</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">content_string</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">encode</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'utf8'</span><span style="color:#9399B2">))</span></span>
+<span class="line"><span style="color:#CDD6F4">...</span></span>
+<span class="line"><span style="color:#FAB387">192</span></span>
+<span class="line"><span style="color:#94E2D5">>>></span></span></code></pre>
+
+        <p>
+          Perfeito, sem erros! Agora vamos ver como est&aacute; o nosso arquivo
+          &ldquo;<strong>text2.txt</strong>&rdquo; (o novo arquivo gerado).
+          Ser&aacute; que os caracteres se mantiveram?
+        </p>
+
+        <p>
+          <img src="imgs/python-2.png" alt="UTF-8" />
+        </p>
+
+        <p>
+          Perfeito! Viu como a aproxima&ccedil;&atilde;o que o
+          <strong>chardet</strong> encontrou me ajudou muito? Mesmo que ele
+          n&atilde;o tenha detectado com 100% de certeza qual a
+          codifica&ccedil;&atilde;o de caracteres usada no arquivo, ele me
+          passou uma que provavelmente iria funcionar.
+        </p>
+
+        <p>
+          Se voc&ecirc; fosse tentar decodificar direto com UTF-8, isso
+          ocorreria:
+        </p>
+
+        <p>
+          <code
+            >UnicodeDecodeError: &#39;utf-8&#39; codec can&#39;t decode byte
+            0xe7 in position 4: invalid continuation byte</code
+          >
+        </p>
+
+        <p>E se ignorasse os erros, seu texto ficaria assim:</p>
+
+        <p>
+          <code>Ateno Exceo Impresso Concesso Presuno</code><br />
+          <code>Voc Pur Croch Metr</code><br />
+          <code>Plstico Grfico Espcie Clebre</code><br />
+          <code>quelas s</code><br />
+          <code>Acar ACAR CABEA CAROO&#39;</code>
+        </p>
+
+        <p>Eu acho que deu pra voc&ecirc; entender, n&atilde;o &eacute;?</p>
+
+        <h2>
+          Fun&ccedil;&otilde;es interessantes com normaliza&ccedil;&atilde;o
+          unicode
+        </h2>
+
+        <p>
+          Voc&ecirc;, como programador(a), j&aacute; pode ter imaginado milhares
+          de coisas interessantes que pode fazer com a
+          normaliza&ccedil;&atilde;o unicode, n&atilde;o &eacute; mesmo? Se
+          n&atilde;o, vou te dar algumas ideias:
+        </p>
+
+        <h3>Obtendo code points Unicode</h3>
+
+        <p>
+          Suponha que eu queira obter uma lista com todos os code points de uma
+          frase. Veja que legal:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">from</span><span style="color:#CDD6F4"> typing </span><span style="color:#CBA6F7">import</span><span style="color:#CDD6F4"> List</span></span>
+<span class="line"><span style="color:#CBA6F7">from</span><span style="color:#CDD6F4"> unicodedata </span><span style="color:#CBA6F7">import</span><span style="color:#CDD6F4"> normalize</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> get_unicode_code_points</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">string</span><span style="color:#9399B2">:</span><span style="color:#CBA6F7;font-style:italic"> str</span><span style="color:#9399B2">)</span><span style="color:#9399B2"> -></span><span style="color:#EBA0AC;font-style:italic"> List</span><span style="color:#9399B2">[</span><span style="color:#CBA6F7;font-style:italic">str</span><span style="color:#9399B2">]:</span></span>
+<span class="line"><span style="color:#CDD6F4">    string_normalized </span><span style="color:#94E2D5">=</span><span style="color:#89B4FA"> normalize</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'NFD'</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> string</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#CDD6F4">    code_points</span><span style="color:#9399B2">:</span><span style="color:#EBA0AC;font-style:italic"> List</span><span style="color:#9399B2">[</span><span style="color:#CBA6F7;font-style:italic">str</span><span style="color:#9399B2">]</span><span style="color:#94E2D5"> =</span><span style="color:#9399B2"> [</span></span>
+<span class="line"><span style="color:#A6E3A1">        'U+'</span><span style="color:#94E2D5"> +</span><span style="color:#FAB387;font-style:italic"> hex</span><span style="color:#9399B2">(</span><span style="color:#FAB387;font-style:italic">ord</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">letter</span><span style="color:#9399B2">))[</span><span style="color:#FAB387">2</span><span style="color:#9399B2">:].</span><span style="color:#89B4FA">zfill</span><span style="color:#9399B2">(</span><span style="color:#FAB387">4</span><span style="color:#9399B2">).</span><span style="color:#89B4FA">upper</span><span style="color:#9399B2">()</span></span>
+<span class="line"><span style="color:#CBA6F7">        for</span><span style="color:#CDD6F4"> letter </span><span style="color:#CBA6F7">in</span><span style="color:#CDD6F4"> string_normalized</span></span>
+<span class="line"><span style="color:#9399B2">    ]</span></span>
+<span class="line"><span style="color:#CBA6F7">    return</span><span style="color:#CDD6F4"> code_points</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">if</span><span style="color:#CDD6F4"> __name__ </span><span style="color:#94E2D5">==</span><span style="color:#A6E3A1"> "__main__"</span><span style="color:#9399B2">:</span></span>
+<span class="line"><span style="color:#CDD6F4">    text </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> 'Python 🐍™'</span></span>
+<span class="line"><span style="color:#CDD6F4">    code_points </span><span style="color:#94E2D5">=</span><span style="color:#89B4FA"> get_unicode_code_points</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">text</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">code_points</span><span style="color:#9399B2">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A6E3A1">    """</span></span>
+<span class="line"><span style="color:#A6E3A1">    ['U+0050', 'U+0079', 'U+0074', 'U+0068',</span></span>
+<span class="line"><span style="color:#A6E3A1">    'U+006F', 'U+006E', 'U+0020', 'U+1F40D',</span></span>
+<span class="line"><span style="color:#A6E3A1">    'U+2122']</span></span>
+<span class="line"><span style="color:#A6E3A1">    """</span></span></code></pre>
+
+        <h3>Obtendo caracteres de code points</h3>
+
+        <p>
+          Mas, e o inverso? Dado um code point, como converto em caractere?
+          Voc&ecirc; j&aacute; viu isso ao longo do texto todo, mas aqui vai.
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">from</span><span style="color:#CDD6F4"> typing </span><span style="color:#CBA6F7">import</span><span style="color:#CDD6F4"> List</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> get_char_from_code_point</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">code_points</span><span style="color:#9399B2">:</span><span style="color:#EBA0AC;font-style:italic"> List</span><span style="color:#9399B2">[</span><span style="color:#CBA6F7;font-style:italic">str</span><span style="color:#9399B2">])</span><span style="color:#9399B2"> -></span><span style="color:#CBA6F7;font-style:italic"> str</span><span style="color:#9399B2">:</span></span>
+<span class="line"><span style="color:#CDD6F4">    chars </span><span style="color:#94E2D5">=</span><span style="color:#9399B2"> [</span><span style="color:#FAB387;font-style:italic">chr</span><span style="color:#9399B2">(</span><span style="color:#CBA6F7;font-style:italic">int</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">c</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">replace</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'U+'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> '0x'</span><span style="color:#9399B2">),</span><span style="color:#FAB387"> 16</span><span style="color:#9399B2">))</span><span style="color:#CBA6F7"> for</span><span style="color:#CDD6F4"> c </span><span style="color:#CBA6F7">in</span><span style="color:#CDD6F4"> code_points</span><span style="color:#9399B2">]</span></span>
+<span class="line"><span style="color:#CBA6F7">    return</span><span style="color:#A6E3A1"> ''</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">join</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">chars</span><span style="color:#9399B2">)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">if</span><span style="color:#CDD6F4"> __name__ </span><span style="color:#94E2D5">==</span><span style="color:#A6E3A1"> "__main__"</span><span style="color:#9399B2">:</span></span>
+<span class="line"><span style="color:#CDD6F4">    code_points </span><span style="color:#94E2D5">=</span><span style="color:#9399B2"> [</span></span>
+<span class="line"><span style="color:#A6E3A1">        'U+0050'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+0079'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+0074'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+0068'</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#A6E3A1">        'U+006F'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+006E'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+0020'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'U+1F40D'</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#A6E3A1">        'U+2122'</span></span>
+<span class="line"><span style="color:#9399B2">    ]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#89B4FA">get_char_from_code_point</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">code_points</span><span style="color:#9399B2">))</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">    # Python 🐍™</span></span></code></pre>
+
+        <h3>Removendo caracteres fora da tabela ASCII</h3>
+
+        <p>
+          Em alguns casos, pode ser interessante manter apenas caracteres
+          compat&iacute;veis com a tabela &ldquo;ASCII&rdquo;. Al&eacute;m
+          disso, n&oacute;s tamb&eacute;m podemos converter caracteres que
+          seriam compat&iacute;veis se n&atilde;o fossem pr&eacute;-compostos.
+          Por exemplo, &lsquo;<strong>&aacute;</strong>&lsquo;,
+          &lsquo;<strong>&atilde;</strong>&lsquo;,
+          <strong>&agrave;</strong> e <strong>&acirc;</strong> se tornariam
+          simplesmente &lsquo;<strong>a</strong>&lsquo; e assim por diante para
+          todos os caracteres. Por&eacute;m, caracteres como 🐍 e 😀 n&atilde;o
+          estariam presentes, porque n&atilde;o existem na tabela ASCII e
+          tamb&eacute;m n&atilde;o existem compat&iacute;veis.
+        </p>
+
+        <p>Vamos ver como far&iacute;amos isso:</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">import</span><span style="color:#CDD6F4"> unicodedata</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> non_ascii_to_ascii</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">string</span><span style="color:#9399B2">:</span><span style="color:#CBA6F7;font-style:italic"> str</span><span style="color:#9399B2">)</span><span style="color:#9399B2"> -></span><span style="color:#CBA6F7;font-style:italic"> str</span><span style="color:#9399B2">:</span></span>
+<span class="line"><span style="color:#CDD6F4">    ascii_only </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> unicodedata</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">normalize</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'NFKD'</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> string</span><span style="color:#9399B2">)\</span></span>
+<span class="line"><span style="color:#9399B2">        .</span><span style="color:#89B4FA">encode</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'ascii'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'ignore'</span><span style="color:#9399B2">)\</span></span>
+<span class="line"><span style="color:#9399B2">        .</span><span style="color:#89B4FA">decode</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'ascii'</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#CBA6F7">    return</span><span style="color:#CDD6F4"> ascii_only</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">if</span><span style="color:#CDD6F4"> __name__ </span><span style="color:#94E2D5">==</span><span style="color:#A6E3A1"> "__main__"</span><span style="color:#9399B2">:</span></span>
+<span class="line"><span style="color:#CDD6F4">    string </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> 'Atenção 🐍 😀'</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#89B4FA">non_ascii_to_ascii</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">string</span><span style="color:#9399B2">))</span><span style="color:#9399B2;font-style:italic">  # Atencao</span></span></code></pre>
+
+        <p>
+          Perceba que caracteres como &ldquo;<strong>&ccedil;</strong>&rdquo; e
+          &ldquo;<strong>&atilde;</strong>&rdquo; de
+          &ldquo;<strong>Aten&ccedil;&atilde;o</strong>&rdquo; foram mantidos
+          sem acento (porque existem na tabela ASCII), por&eacute;m 🐍 e 😀
+          foram ignorados.
+        </p>
+
+        <h3>Removendo acentos das palavras</h3>
+
+        <p>
+          Na fun&ccedil;&atilde;o anterior, a gente meio que removeu os acentos,
+          por&eacute;m tamb&eacute;m removemos outras coisas que n&atilde;o
+          quer&iacute;amos. Mas, suponha que eu queira remover apenas o
+          <strong>combining character</strong> mantendo o restante (o combining
+          character seria o acento propriamente dito).
+        </p>
+
+        <p>Isso me retornaria palavras sem acento.</p>
+
+        <p>
+          Eu posso fazer isso, como o
+          <a
+            href="https://twitter.com/ramalhoorg?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
+            >Luciano Ramalho</a
+          >
+          descreve em seu livro
+          <a href="https://amzn.to/34HdIPs">Python Fluente</a>.
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">import</span><span style="color:#CDD6F4"> unicodedata</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> remove_accents</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">string</span><span style="color:#9399B2">:</span><span style="color:#CBA6F7;font-style:italic"> str</span><span style="color:#9399B2">)</span><span style="color:#9399B2"> -></span><span style="color:#CBA6F7;font-style:italic"> str</span><span style="color:#9399B2">:</span></span>
+<span class="line"><span style="color:#CDD6F4">    normalized </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> unicodedata</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">normalize</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'NFKD'</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> string</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#CBA6F7">    return</span><span style="color:#A6E3A1"> ''</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">join</span><span style="color:#9399B2">([</span><span style="color:#CDD6F4">c </span><span style="color:#CBA6F7">for</span><span style="color:#CDD6F4"> c </span><span style="color:#CBA6F7">in</span><span style="color:#CDD6F4"> normalized </span><span style="color:#CBA6F7">if</span><span style="color:#CBA6F7"> not</span><span style="color:#CDD6F4"> unicodedata</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">combining</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">c</span><span style="color:#9399B2">)])</span></span></code></pre>
+
+        <p>
+          Porém, eu também posso fazer isso com expressões regulares. O que
+          funcionar melhor pra você:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">import</span><span style="color:#CDD6F4"> unicodedata</span></span>
+<span class="line"><span style="color:#CBA6F7">import</span><span style="color:#CDD6F4"> re</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> remove_accents_regex</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">string</span><span style="color:#9399B2">:</span><span style="color:#CBA6F7;font-style:italic"> str</span><span style="color:#9399B2">)</span><span style="color:#9399B2"> -></span><span style="color:#CBA6F7;font-style:italic"> str</span><span style="color:#9399B2">:</span></span>
+<span class="line"><span style="color:#CDD6F4">    regex </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> re</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">compile</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1;font-style:italic">r</span><span style="color:#F5C2E7">'</span><span style="color:#9399B2">[</span><span style="color:#A6E3A1">\u0300-\u036F</span><span style="color:#9399B2">]</span><span style="color:#F5C2E7">'</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> flags</span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4">re</span><span style="color:#9399B2">.</span><span style="color:#CDD6F4">DOTALL</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#CDD6F4">    normalized </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> unicodedata</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">normalize</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">'NFKD'</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> string</span><span style="color:#9399B2">)</span></span>
+<span class="line"><span style="color:#CBA6F7">    return</span><span style="color:#CDD6F4"> regex</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">sub</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1">''</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> normalized</span><span style="color:#9399B2">)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">if</span><span style="color:#CDD6F4"> __name__ </span><span style="color:#94E2D5">==</span><span style="color:#A6E3A1"> "__main__"</span><span style="color:#9399B2">:</span></span>
+<span class="line"><span style="color:#CDD6F4">    string </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> 'Atenção 🐍 😀'</span></span>
+<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#89B4FA">remove_accents_regex</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">string</span><span style="color:#9399B2">))</span><span style="color:#9399B2;font-style:italic">  # Atencao 🐍 😀</span></span></code></pre>
+
+        <p>
+          Por falar nisso, eu tenho um detalhe sobre express&otilde;es regulares
+          pra te informar: eu tenho um curso inteiro e gratuito na
+          <a
+            href="https://www.udemy.com/course/expressoes-regulares-com-python-3-curso-gratuito/"
+            >Udemy</a
+          >
+          e no
+          <a
+            href="https://www.youtube.com/watch?v=wBI0yv2FG6U&amp;list=PLbIBj8vQhvm1VnTa2Np5vDzCxVtyaYLMr"
+            >Youtube</a
+          >
+          sobre isso.
+        </p>
+
+        <p>
+          Portanto, n&atilde;o h&aacute; motivos para entrarmos em detalhes
+          sobre
+          <a href="https://pt.wikipedia.org/wiki/Express%C3%A3o_regular"
+            >regex</a
+          >
+          aqui.
+        </p>
+
+        <h2>Mais sobre Unicode e Normaliza&ccedil;&atilde;o Unicode</h2>
+
+        <p>
+          Eu sei que esse assunto talvez passe despercebido para v&aacute;rios
+          desenvolvedores e desenvolvedoras mundo a fora e n&atilde;o &eacute;
+          culpa deles (ou nossa, tamb&eacute;m passei por isso). Em nosso meio,
+          a maioria dos cursos, faculdades e livros que voc&ecirc; l&ecirc; para
+          aprender a programar, infelizmente n&atilde;o tratam desse assunto,
+          ou, se tratam, &eacute; de maneira superficial. Por&eacute;m, como
+          voc&ecirc; p&ocirc;de ver, eu fiz quest&atilde;o de deixar todos os
+          links de onde removi todas as informa&ccedil;&otilde;es que escrevi
+          aqui. Assim, &eacute; extremamente necess&aacute;rio que voc&ecirc;
+          leia esses links tamb&eacute;m.
+        </p>
+
+        <p>
+          Al&eacute;m disso, ainda faltaram algumas coisas que n&atilde;o
+          consegui falar neste post. Por exemplo, casefold e tratamento de
+          arquivos, foram coisas que n&atilde;o mencionei aqui, mas que
+          s&atilde;o mencionadas no
+          <a href="https://docs.python.org/3/howto/unicode.html"
+            >Unicode HOWTO oficial do Python</a
+          >. Ent&atilde;o, d&aacute; um jeito de ler esse artigo tamb&eacute;m.
+        </p>
+
+        <p>
+          Ent&atilde;o &eacute; isso, te deixo aqui com um pouco mais de
+          servi&ccedil;o pela frente.
+        </p>
+
+        <p>Te espero no pr&oacute;ximo post.</p>
       </article>
 
       <footer class="nav">

@@ -44,9 +44,11 @@
         <h1>SSH keys: chaves de autenticação SSH</h1>
 
         <p class="author">
-          Publicado em 4 de abril de 2018 |
-          <strong>Por</strong>
-          <a href="https://www.otaviomiranda.com.br/">Luiz Otávio Miranda</a>
+          <span class="meta-date">
+            <time datetime="2018-04-04">4 de abril de 2018</time>
+          </span>
+          ·
+          <span class="meta-author">Luiz Otávio Miranda</span>
         </p>
 
         <p>
@@ -149,23 +151,29 @@
           digitar o seguinte:
         </p>
 
-        <pre>
-<code>ssh-keygen -t rsa</code></pre>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#89B4FA;font-style:italic">ssh-keygen</span><span style="color:#A6E3A1"> -t</span><span style="color:#A6E3A1"> rsa</span></span></code></pre>
 
         <p>
           Ao pressionar &ldquo;Enter&rdquo; voc&ecirc; ver&aacute; algo parecido
           com:
         </p>
 
-        <pre>
-<code>Generating public/private rsa key pair.
-Enter file in which to save the key (/home/joaozinho/.ssh/id_rsa):
-Created directory '/home/joaozinho/.ssh'.
-Enter passphrase (empty for no passphrase):
-Enter same passphrase again:
-Your identification has been saved in /home/joaozinho/.ssh/id_rsa.
-Your public key has been saved in /home/joaozinho/.ssh/id_rsa.pub.
-...</code></pre>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#89B4FA;font-style:italic">Generating</span><span style="color:#A6E3A1"> public/private</span><span style="color:#A6E3A1"> rsa</span><span style="color:#A6E3A1"> key</span><span style="color:#A6E3A1"> pair.</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">Enter</span><span style="color:#A6E3A1"> file</span><span style="color:#A6E3A1"> in</span><span style="color:#A6E3A1"> which</span><span style="color:#A6E3A1"> to</span><span style="color:#A6E3A1"> save</span><span style="color:#A6E3A1"> the</span><span style="color:#A6E3A1"> key</span><span style="color:#CDD6F4"> (/home/joaozinho/.ssh/id_rsa):</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">Created</span><span style="color:#A6E3A1"> directory</span><span style="color:#A6E3A1"> '/home/joaozinho/.ssh'.</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">Enter</span><span style="color:#A6E3A1"> passphrase</span><span style="color:#CDD6F4"> (empty </span><span style="color:#A6E3A1">for</span><span style="color:#A6E3A1"> no</span><span style="color:#A6E3A1"> passphrase</span><span style="color:#CDD6F4">):</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">Enter</span><span style="color:#A6E3A1"> same</span><span style="color:#A6E3A1"> passphrase</span><span style="color:#A6E3A1"> again:</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">Your</span><span style="color:#A6E3A1"> identification</span><span style="color:#A6E3A1"> has</span><span style="color:#A6E3A1"> been</span><span style="color:#A6E3A1"> saved</span><span style="color:#A6E3A1"> in</span><span style="color:#A6E3A1"> /home/joaozinho/.ssh/id_rsa.</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">Your</span><span style="color:#A6E3A1"> public</span><span style="color:#A6E3A1"> key</span><span style="color:#A6E3A1"> has</span><span style="color:#A6E3A1"> been</span><span style="color:#A6E3A1"> saved</span><span style="color:#A6E3A1"> in</span><span style="color:#A6E3A1"> /home/joaozinho/.ssh/id_rsa.pub.</span></span>
+<span class="line"><span style="color:#F38BA8;font-style:italic">...</span></span></code></pre>
 
         <p>
           Na primeira linha &eacute; requisitado que voc&ecirc; especifique onde
@@ -200,8 +208,11 @@ Your public key has been saved in /home/joaozinho/.ssh/id_rsa.pub.
           seguinte:
         </p>
 
-        <pre>
-<code>sudo -u joaozinho ssh-keygen -t rsa</code></pre>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#89B4FA;font-style:italic">sudo</span><span style="color:#A6E3A1"> -u</span><span style="color:#A6E3A1"> joaozinho</span><span style="color:#A6E3A1"> ssh-keygen</span><span style="color:#A6E3A1"> -t</span><span style="color:#A6E3A1"> rsa</span></span></code></pre>
 
         <p>
           Apenas altere &ldquo;joaozinho&rdquo; para o nome de usu&aacute;rio
@@ -218,8 +229,11 @@ Your public key has been saved in /home/joaozinho/.ssh/id_rsa.pub.
           digite:
         </p>
 
-        <pre>
-<code>cat /home/joaozinho/.ssh/id_rsa.pub</code></pre>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#89B4FA;font-style:italic">cat</span><span style="color:#A6E3A1"> /home/joaozinho/.ssh/id_rsa.pub</span></span></code></pre>
 
         <p>
           Apenas altere &ldquo;joaozinho&rdquo; para o seu usu&aacute;rio ou
@@ -233,8 +247,11 @@ Your public key has been saved in /home/joaozinho/.ssh/id_rsa.pub.
           comando.
         </p>
 
-        <pre>
-<code>sudo cat /home/joaozinho/.ssh/id_rsa.pub</code></pre>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#89B4FA;font-style:italic">sudo</span><span style="color:#A6E3A1"> cat</span><span style="color:#A6E3A1"> /home/joaozinho/.ssh/id_rsa.pub</span></span></code></pre>
 
         <p>
           Voc&ecirc; vai ver muitos caracteres, come&ccedil;ando com
@@ -269,8 +286,11 @@ Your public key has been saved in /home/joaozinho/.ssh/id_rsa.pub.
           &ldquo;Windows&rdquo; + &ldquo;R&rdquo; e digite:
         </p>
 
-        <pre>
-<code>%programfiles%\Putty</code></pre>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#89B4FA;font-style:italic">%programfiles%\Putty</span></span></code></pre>
 
         <p>E pressione &ldquo;Enter&rdquo;.</p>
 
@@ -314,9 +334,12 @@ Your public key has been saved in /home/joaozinho/.ssh/id_rsa.pub.
           servidor remoto:
         </p>
 
-        <pre>
-<code>sudo mkdir --mode=600 /home/zezinho/.ssh/
-sudo nano /home/zezinho/.ssh/authorized_keys</code></pre>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#89B4FA;font-style:italic">sudo</span><span style="color:#A6E3A1"> mkdir</span><span style="color:#A6E3A1"> --mode=600</span><span style="color:#A6E3A1"> /home/zezinho/.ssh/</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">sudo</span><span style="color:#A6E3A1"> nano</span><span style="color:#A6E3A1"> /home/zezinho/.ssh/authorized_keys</span></span></code></pre>
 
         <p>
           E colocaria a chave p&uacute;blica do &ldquo;Jo&atilde;ozinho&rdquo;
@@ -345,19 +368,25 @@ sudo nano /home/zezinho/.ssh/authorized_keys</code></pre>
 
         <p>Dentro do servidor remoto, digite o seguinte:</p>
 
-        <pre>
-<code>sudo nano /etc/ssh/sshd_config</code></pre>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#89B4FA;font-style:italic">sudo</span><span style="color:#A6E3A1"> nano</span><span style="color:#A6E3A1"> /etc/ssh/sshd_config</span></span></code></pre>
 
         <p>E altere as linhas:</p>
 
-        <pre>
-<code># ...
-PermitRootLogin no
-# ...
-PubkeyAuthentication yes
-# ...
-PasswordAuthentication no
-# ...</code></pre>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#9399B2;font-style:italic"># ...</span></span>
+<span class="line"><span style="color:#CBA6F7">PermitRootLogin</span><span style="color:#F38BA8"> no</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic"># ...</span></span>
+<span class="line"><span style="color:#CBA6F7">PubkeyAuthentication</span><span style="color:#F38BA8"> yes</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic"># ...</span></span>
+<span class="line"><span style="color:#CBA6F7">PasswordAuthentication</span><span style="color:#F38BA8"> no</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic"># ...</span></span></code></pre>
 
         <p>
           <strong>PermitRootLogin</strong> remove completamente o acesso do root
@@ -372,8 +401,11 @@ PasswordAuthentication no
           servidor SSH:
         </p>
 
-        <pre>
-<code>sudo service ssh restart</code></pre>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CDD6F4">sudo service ssh restart</span></span></code></pre>
 
         <p>
           <strong>Aten&ccedil;&atilde;o:</strong> n&atilde;o feche sua

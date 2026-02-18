@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>TypeScript - uma longa introdução - Otávio Miranda</title>
-    <meta name="description" content="Sou Luiz Otávio Miranda e trabalho com desenvolvimento de softwares desde 2009 usando várias linguagens, bibliotecas e frameworks diferentes." />
+    <meta
+      name="description"
+      content="Sou Luiz Otávio Miranda e trabalho com desenvolvimento de softwares desde 2009 usando várias linguagens, bibliotecas e frameworks diferentes."
+    />
 
     <link rel="stylesheet" href="../../css/styles_2026.css" />
 
@@ -44,1850 +47,1882 @@
         <h1>TypeScript – uma longa introdução</h1>
 
         <p class="author">
-          <strong>Por</strong>
-          <a href="https://www.otaviomiranda.com.br/">Luiz Otávio Miranda</a>
+          <span class="meta-date">
+            <time datetime="2018-09-02">2 de setembro de 2020</time>
+          </span>
+          ·
+          <span class="meta-author">Luiz Otávio Miranda</span>
         </p>
-            <p>
-              Esse post vai te ajudar a entender melhor o que &eacute; o
-              TypeScript de maneira geral. Vamos entrar um pouco mais na parte
-              conceitual sem aprofundarmos em detalhes para que voc&ecirc; saiba
-              como e quando us&aacute;-lo.
-            </p>
+        <p>
+          Esse post vai te ajudar a entender melhor o que &eacute; o TypeScript
+          de maneira geral. Vamos entrar um pouco mais na parte conceitual sem
+          aprofundarmos em detalhes para que voc&ecirc; saiba como e quando
+          us&aacute;-lo.
+        </p>
 
-            <p>
-              Aten&ccedil;&atilde;o: n&atilde;o tenho o intuito de falar sobre
-              tudo o que &eacute; poss&iacute;vel sobre o TS. Para isso, veja a
-              <a href="https://www.typescriptlang.org/docs/home.html"
-                >documenta&ccedil;&atilde;o oficial</a
-              >.
-            </p>
+        <p>
+          Aten&ccedil;&atilde;o: n&atilde;o tenho o intuito de falar sobre tudo
+          o que &eacute; poss&iacute;vel sobre o TS. Para isso, veja a
+          <a href="https://www.typescriptlang.org/docs/home.html"
+            >documenta&ccedil;&atilde;o oficial</a
+          >.
+        </p>
 
-            <h2>O que &eacute; o TypeScript?</h2>
+        <h2>O que &eacute; o TypeScript?</h2>
 
-            <p>
-              Segundo o site oficial, o
-              <em
-                >TypeScript &eacute; um superconjunto do JavaScript com tipagem
-                que &eacute; compilado para JavaScript simples</em
-              >
-              (<a href="https://www.typescriptlang.org/">texto original</a>:
-              <em
-                >TypeScript is a typed superset of JavaScript that compiles to
-                plain JavaScript</em
-              >), ou seja, algo que &eacute; adicionado sobre o JavaScript.
-            </p>
+        <p>
+          Segundo o site oficial, o
+          <em
+            >TypeScript &eacute; um superconjunto do JavaScript com tipagem que
+            &eacute; compilado para JavaScript simples</em
+          >
+          (<a href="https://www.typescriptlang.org/">texto original</a>:
+          <em
+            >TypeScript is a typed superset of JavaScript that compiles to plain
+            JavaScript</em
+          >), ou seja, algo que &eacute; adicionado sobre o JavaScript.
+        </p>
 
-            <p>
-              No entanto, como poder&iacute;amos imaginar um
-              &ldquo;superconjunto&rdquo; (<em>superset</em>)? Isso &eacute; uma
-              linguagem de programa&ccedil;&atilde;o? Uma vers&atilde;o do JS?
-              Uma quarta dimens&atilde;o? De fato, um
-              <em>superset</em> n&atilde;o explica muita coisa pra quem conhece
-              o termo (<em
-                >e eu n&atilde;o estou brincando, existe uma outra
-                dimens&atilde;o no TS, voc&ecirc; vai descobrir j&aacute;
-                j&aacute;</em
-              >).
-            </p>
+        <p>
+          No entanto, como poder&iacute;amos imaginar um
+          &ldquo;superconjunto&rdquo; (<em>superset</em>)? Isso &eacute; uma
+          linguagem de programa&ccedil;&atilde;o? Uma vers&atilde;o do JS? Uma
+          quarta dimens&atilde;o? De fato, um
+          <em>superset</em> n&atilde;o explica muita coisa pra quem conhece o
+          termo (<em
+            >e eu n&atilde;o estou brincando, existe uma outra dimens&atilde;o
+            no TS, voc&ecirc; vai descobrir j&aacute; j&aacute;</em
+          >).
+        </p>
 
-            <h3>Compara&ccedil;&atilde;o com vers&otilde;es do ECMAScript</h3>
+        <h3>Compara&ccedil;&atilde;o com vers&otilde;es do ECMAScript</h3>
 
-            <p>
-              Assim como cada vers&atilde;o do ECMAScript adiciona novos
-              recursos ao JavaScript, o TypeScript tamb&eacute;m o far&aacute;.
-            </p>
+        <p>
+          Assim como cada vers&atilde;o do ECMAScript adiciona novos recursos ao
+          JavaScript, o TypeScript tamb&eacute;m o far&aacute;.
+        </p>
 
-            <p>
-              Por exemplo, imagine as vers&otilde;es do ECMAScript (ES3, ES5,
-              ES6, &hellip;, ES2020):
-            </p>
+        <p>
+          Por exemplo, imagine as vers&otilde;es do ECMAScript (ES3, ES5, ES6,
+          &hellip;, ES2020):
+        </p>
 
-            <p>
-              <img
-                loading="lazy"
-                src="imgs/JavaScript-Versions@2x-2048x1648.png"
-                alt="Figura 1. Cada nova versão do ECMAScript adiciona novos recursos ao JavaScript."
-              />
-              <span class="img-description"
-                >Figura 1. Cada nova versão do ECMAScript adiciona novos
-                recursos ao JavaScript.</span
-              >
-            </p>
+        <p>
+          <img
+            loading="lazy"
+            src="imgs/JavaScript-Versions@2x-2048x1648.png"
+            alt="Figura 1. Cada nova versão do ECMAScript adiciona novos recursos ao JavaScript."
+          />
+          <span class="img-description"
+            >Figura 1. Cada nova versão do ECMAScript adiciona novos recursos ao
+            JavaScript.</span
+          >
+        </p>
 
-            <p>
-              Como podemos ver na <strong>Figura 1</strong>, novas
-              vers&otilde;es do ECMAScript adicionam novos recursos ao
-              JavaScript.
-            </p>
+        <p>
+          Como podemos ver na <strong>Figura 1</strong>, novas vers&otilde;es do
+          ECMAScript adicionam novos recursos ao JavaScript.
+        </p>
 
-            <p>
-              Al&eacute;m disso, cada uma das vers&otilde;es &eacute;
-              compat&iacute;vel com a vers&atilde;o anterior. Portanto,
-              voc&ecirc; pode facilmente rodar um script ES5 em ambientes ES7,
-              mas n&atilde;o o contr&aacute;rio. N&atilde;o &eacute;
-              poss&iacute;vel usar os recursos do ES7 em ambientes ES5, porque
-              tais recursos ainda n&atilde;o existem no ES5 (salvo se usarmos
-              algum
-              <a
-                href="https://developer.mozilla.org/pt-BR/docs/Glossario/Polyfill"
-                >polyfill</a
-              >).
-            </p>
+        <p>
+          Al&eacute;m disso, cada uma das vers&otilde;es &eacute;
+          compat&iacute;vel com a vers&atilde;o anterior. Portanto, voc&ecirc;
+          pode facilmente rodar um script ES5 em ambientes ES7, mas n&atilde;o o
+          contr&aacute;rio. N&atilde;o &eacute; poss&iacute;vel usar os recursos
+          do ES7 em ambientes ES5, porque tais recursos ainda n&atilde;o existem
+          no ES5 (salvo se usarmos algum
+          <a href="https://developer.mozilla.org/pt-BR/docs/Glossario/Polyfill"
+            >polyfill</a
+          >).
+        </p>
 
-            <p>
-              Mas, mesmo tendo v&aacute;rias vers&otilde;es do ECMAScript,
-              chamamos todas elas de Javascript (a menos que voc&ecirc; queira
-              falar ou usar determinada especificidade de uma vers&atilde;o).
-            </p>
+        <p>
+          Mas, mesmo tendo v&aacute;rias vers&otilde;es do ECMAScript, chamamos
+          todas elas de Javascript (a menos que voc&ecirc; queira falar ou usar
+          determinada especificidade de uma vers&atilde;o).
+        </p>
 
-            <p>
-              <em
-                ><strong>Nota:</strong> existem v&aacute;rias vers&otilde;es do
-                ECMAScript, separei apenas tr&ecirc;s para exemplo. Voc&ecirc;
-                pode ver todas elas
-                <a href="https://en.wikipedia.org/wiki/ECMAScript">aqui</a>.</em
-              >
-            </p>
+        <p>
+          <em
+            ><strong>Nota:</strong> existem v&aacute;rias vers&otilde;es do
+            ECMAScript, separei apenas tr&ecirc;s para exemplo. Voc&ecirc; pode
+            ver todas elas
+            <a href="https://en.wikipedia.org/wiki/ECMAScript">aqui</a>.</em
+          >
+        </p>
 
-            <h3>Onde o TypeScript se encaixa?</h3>
+        <h3>Onde o TypeScript se encaixa?</h3>
 
-            <p>
-              Se adicionarmos o TS como um layer, como fizemos na
-              <strong>Figura 1</strong>, esse diagrama ficaria assim:
-            </p>
+        <p>
+          Se adicionarmos o TS como um layer, como fizemos na
+          <strong>Figura 1</strong>, esse diagrama ficaria assim:
+        </p>
 
-            <p>
-              <img
-                loading="lazy"
-                src="imgs/Typescript-is-a-javascript-superset-2048x1946.png"
-                alt="Figura 2. O TypeScript é um superset do JavaScript.
+        <p>
+          <img
+            loading="lazy"
+            src="imgs/Typescript-is-a-javascript-superset-2048x1946.png"
+            alt="Figura 2. O TypeScript é um superset do JavaScript.
                 "
-              />
-              <span class="img-description"
-                >Figura 2. O TypeScript é um superset do JavaScript.
-              </span>
-            </p>
+          />
+          <span class="img-description"
+            >Figura 2. O TypeScript é um superset do JavaScript.
+          </span>
+        </p>
 
-            <p>
-              Ent&atilde;o, podemos perceber que o TS adiciona funcionalidades
-              sobre o JS simples. Portanto, &eacute; isso que o site oficial
-              quer dizer quando detalha o TypeScript como um superset do
-              JavaScript.
-            </p>
+        <p>
+          Ent&atilde;o, podemos perceber que o TS adiciona funcionalidades sobre
+          o JS simples. Portanto, &eacute; isso que o site oficial quer dizer
+          quando detalha o TypeScript como um superset do JavaScript.
+        </p>
 
-            <h3>O que realmente &eacute; o TypeScript</h3>
+        <h3>O que realmente &eacute; o TypeScript</h3>
 
-            <p>
-              Aqui segue um resum&atilde;o sobre o que eu acho que o TS
-              realmente &eacute;:
-              <strong
-                >O TypeScript &eacute; um superset do JS criado pela Microsoft.
-                Um JavaScript mais moderno e seguro, que adiciona as
-                &uacute;ltimas vers&otilde;es do ECMAScript, muitos recursos
-                pr&oacute;prios e um sistema extremamente rico para
-                tipagem</strong
-              >. Al&eacute;m disso, ele tamb&eacute;m adiciona recursos muito
-              &uacute;teis ao editor de c&oacute;digo para facilitar a vida do
-              desenvolvedor (falaremos mais sobre isso mais adiante).
-            </p>
+        <p>
+          Aqui segue um resum&atilde;o sobre o que eu acho que o TS realmente
+          &eacute;:
+          <strong
+            >O TypeScript &eacute; um superset do JS criado pela Microsoft. Um
+            JavaScript mais moderno e seguro, que adiciona as &uacute;ltimas
+            vers&otilde;es do ECMAScript, muitos recursos pr&oacute;prios e um
+            sistema extremamente rico para tipagem</strong
+          >. Al&eacute;m disso, ele tamb&eacute;m adiciona recursos muito
+          &uacute;teis ao editor de c&oacute;digo para facilitar a vida do
+          desenvolvedor (falaremos mais sobre isso mais adiante).
+        </p>
 
-            <p>
-              Por falar em tipagem, uma das partes mais importantes do
-              TypeScript s&atilde;o os tipos (<strong>types</strong>), por isso
-              o nome <strong>Type</strong>Script (acho que voc&ecirc; j&aacute;
-              tinha percebido, n&eacute;?). De fato, esse &eacute; um dos
-              fatores que costuma levar o TS para projetos de larga escala em
-              bases de c&oacute;digo gigantescas. Vamos falar mais sobre a
-              tipagem mais adiante neste post tamb&eacute;m.
-            </p>
+        <p>
+          Por falar em tipagem, uma das partes mais importantes do TypeScript
+          s&atilde;o os tipos (<strong>types</strong>), por isso o nome
+          <strong>Type</strong>Script (acho que voc&ecirc; j&aacute; tinha
+          percebido, n&eacute;?). De fato, esse &eacute; um dos fatores que
+          costuma levar o TS para projetos de larga escala em bases de
+          c&oacute;digo gigantescas. Vamos falar mais sobre a tipagem mais
+          adiante neste post tamb&eacute;m.
+        </p>
 
-            <h2>Linguagem interpretada ou linguagem compilada?</h2>
+        <h2>Linguagem interpretada ou linguagem compilada?</h2>
 
-            <p>
-              Depende do seu ponto de vista e do seu ambiente de
-              desenvolvimento!
-            </p>
+        <p>
+          Depende do seu ponto de vista e do seu ambiente de desenvolvimento!
+        </p>
 
-            <p>
-              Quando falamos em TypeScript, geralmente estamos imaginando o
-              ambiente mais comum atualmente (06/2020):
-              <a href="https://nodejs.org/en/download/">Node.js</a>.
-            </p>
+        <p>
+          Quando falamos em TypeScript, geralmente estamos imaginando o ambiente
+          mais comum atualmente (06/2020):
+          <a href="https://nodejs.org/en/download/">Node.js</a>.
+        </p>
 
-            <p>
-              Assim, se voc&ecirc; pensar neste ambiente, &eacute; meio incomum
-              falar de algo como o TS, porque ele n&atilde;o seria uma
-              <a
-                href="https://pt.wikipedia.org/wiki/Linguagem_interpretada#:~:text=Linguagem%20interpretada%20%C3%A9%20uma%20linguagem,pelo%20sistema%20operacional%20ou%20processador."
-                >linguagem interpretada</a
-              >
-              (como <a href="categoria/python/">Python</a>, Ruby, PHP&hellip;),
-              nem uma
-              <a
-                href="https://pt.wikipedia.org/wiki/Linguagem_compilada#:~:text=Linguagem%20compilada%20%C3%A9%20uma%20linguagem,linguagem%20de%20baixo%20n%C3%ADvel%2C%20como"
-                >linguagem que compila</a
-              >
-              para bytecode ou c&oacute;digo de m&aacute;quina como outras
-              linguagens de mais baixo n&iacute;vel fazem. O TS com Node.js
-              seria uma linguagem que compila diretamente para outra linguagem
-              de alto n&iacute;vel, o JavaScript.
-            </p>
+        <p>
+          Assim, se voc&ecirc; pensar neste ambiente, &eacute; meio incomum
+          falar de algo como o TS, porque ele n&atilde;o seria uma
+          <a
+            href="https://pt.wikipedia.org/wiki/Linguagem_interpretada#:~:text=Linguagem%20interpretada%20%C3%A9%20uma%20linguagem,pelo%20sistema%20operacional%20ou%20processador."
+            >linguagem interpretada</a
+          >
+          (como <a href="categoria/python/">Python</a>, Ruby, PHP&hellip;), nem
+          uma
+          <a
+            href="https://pt.wikipedia.org/wiki/Linguagem_compilada#:~:text=Linguagem%20compilada%20%C3%A9%20uma%20linguagem,linguagem%20de%20baixo%20n%C3%ADvel%2C%20como"
+            >linguagem que compila</a
+          >
+          para bytecode ou c&oacute;digo de m&aacute;quina como outras
+          linguagens de mais baixo n&iacute;vel fazem. O TS com Node.js seria
+          uma linguagem que compila diretamente para outra linguagem de alto
+          n&iacute;vel, o JavaScript.
+        </p>
 
-            <p>
-              Lembra da <strong>Figura 2</strong>? Pois &eacute;, ao terminar de
-              escrever o meu c&oacute;digo TypeScript, eu faria a
-              compila&ccedil;&atilde;o diretamente para JavaScript simples. Por
-              isso, o JavaScript gerado seria o meu c&oacute;digo de
-              produ&ccedil;&atilde;o, que ambos, Node.js e o Browser, entendem.
-              Portanto, minha aplica&ccedil;&atilde;o em produ&ccedil;&atilde;o
-              rodaria apenas JavaScript.
-            </p>
+        <p>
+          Lembra da <strong>Figura 2</strong>? Pois &eacute;, ao terminar de
+          escrever o meu c&oacute;digo TypeScript, eu faria a
+          compila&ccedil;&atilde;o diretamente para JavaScript simples. Por
+          isso, o JavaScript gerado seria o meu c&oacute;digo de
+          produ&ccedil;&atilde;o, que ambos, Node.js e o Browser, entendem.
+          Portanto, minha aplica&ccedil;&atilde;o em produ&ccedil;&atilde;o
+          rodaria apenas JavaScript.
+        </p>
 
-            <p>
-              <img
-                loading="lazy"
-                src="imgs/TypeScript-compilado-para-javascript-1-2048x1690.png"
-                alt="Figura 3. Processo de compilação do TypeScript em JavaScript usando Node.js
+        <p>
+          <img
+            loading="lazy"
+            src="imgs/TypeScript-compilado-para-javascript-1-2048x1690.png"
+            alt="Figura 3. Processo de compilação do TypeScript em JavaScript usando Node.js
 
                 "
-              />
-              <span class="img-description"
-                >Figura 3. Processo de compilação do TypeScript em JavaScript
-                usando Node.js
-              </span>
-            </p>
+          />
+          <span class="img-description"
+            >Figura 3. Processo de compilação do TypeScript em JavaScript usando
+            Node.js
+          </span>
+        </p>
 
-            <h3>Outra dimens&atilde;o?</h3>
+        <h3>Outra dimens&atilde;o?</h3>
 
-            <p>
-              Lembra da nova dimens&atilde;o que falei anteriormente?
-              Ent&atilde;o, &eacute; aqui que ela entra. Tudo o que o TypeScript
-              adiciona de recursos no momento do desenvolvimento, ser&aacute;
-              removido no c&oacute;digo final compilado. Afinal, o Javascript
-              n&atilde;o entende muitos dos recursos adicionados pelo TS, no
-              final das contas, o que a gente quer mesmo &eacute; o
-              c&oacute;digo compilado, ou seja, o JS puro.
-            </p>
+        <p>
+          Lembra da nova dimens&atilde;o que falei anteriormente? Ent&atilde;o,
+          &eacute; aqui que ela entra. Tudo o que o TypeScript adiciona de
+          recursos no momento do desenvolvimento, ser&aacute; removido no
+          c&oacute;digo final compilado. Afinal, o Javascript n&atilde;o entende
+          muitos dos recursos adicionados pelo TS, no final das contas, o que a
+          gente quer mesmo &eacute; o c&oacute;digo compilado, ou seja, o JS
+          puro.
+        </p>
 
-            <p>
-              A &ldquo;dimens&atilde;o do TypeScript&rdquo; existir&aacute;
-              apenas no seu c&oacute;digo de desenvolvimento.
-            </p>
+        <p>
+          A &ldquo;dimens&atilde;o do TypeScript&rdquo; existir&aacute; apenas
+          no seu c&oacute;digo de desenvolvimento.
+        </p>
 
-            <h3>Um cen&aacute;rio diferente</h3>
+        <h3>Um cen&aacute;rio diferente</h3>
 
-            <p>
-              Este acima seria o cen&aacute;rio Node.js, onde voc&ecirc; precisa
-              compilar o c&oacute;digo para ter o JS puro no back-end.
-              Certamente, &eacute; o cen&aacute;rio mais usado hoje em dia e
-              acho que isso ainda vai perdurar por alguns anos.
-            </p>
+        <p>
+          Este acima seria o cen&aacute;rio Node.js, onde voc&ecirc; precisa
+          compilar o c&oacute;digo para ter o JS puro no back-end. Certamente,
+          &eacute; o cen&aacute;rio mais usado hoje em dia e acho que isso ainda
+          vai perdurar por alguns anos.
+        </p>
 
-            <p>
-              Por&eacute;m, em 13 de maio de 2020, a
-              <a href="https://deno.land/v1"
-                >vers&atilde;o 1.0 do Deno foi lan&ccedil;ada</a
-              >
-              e ele interpreta TypeScript puro, sem a necessidade de
-              compila&ccedil;&atilde;o. Ent&atilde;o, olhando por este ponto de
-              vista, o
-              <strong
-                >TS seria uma linguagem de programa&ccedil;&atilde;o</strong
-              >
-              com tipagem est&aacute;tica e interpretada. Voc&ecirc; ainda
-              precisaria compilar o c&oacute;digo para o front-end, mas
-              n&atilde;o para o back-end.
-            </p>
+        <p>
+          Por&eacute;m, em 13 de maio de 2020, a
+          <a href="https://deno.land/v1"
+            >vers&atilde;o 1.0 do Deno foi lan&ccedil;ada</a
+          >
+          e ele interpreta TypeScript puro, sem a necessidade de
+          compila&ccedil;&atilde;o. Ent&atilde;o, olhando por este ponto de
+          vista, o
+          <strong>TS seria uma linguagem de programa&ccedil;&atilde;o</strong>
+          com tipagem est&aacute;tica e interpretada. Voc&ecirc; ainda
+          precisaria compilar o c&oacute;digo para o front-end, mas n&atilde;o
+          para o back-end.
+        </p>
 
-            <p>
-              Neste post, vou focar mais no lado &ldquo;Node.js&rdquo; da coisa,
-              com o processo de compila&ccedil;&atilde;o.
-            </p>
+        <p>
+          Neste post, vou focar mais no lado &ldquo;Node.js&rdquo; da coisa, com
+          o processo de compila&ccedil;&atilde;o.
+        </p>
 
-            <h2>Extens&atilde;o .ts e .tsx</h2>
+        <h2>Extens&atilde;o .ts e .tsx</h2>
 
-            <p>
-              Arquivos TypeScript tem a extens&atilde;o <code>.ts</code> ou
-              <code>.tsx</code> ao inv&eacute;s de <code>.js</code> ou
-              <code>.jsx</code> e aqui cabe uma dica interessante: converter um
-              arquivo JavaScript v&aacute;lido em TypeScript v&aacute;lido
-              &eacute; um processo relativamente simples, basta renomear a
-              extens&atilde;o de <code>.js(x)</code> para <code>.ts(x)</code>.
-              Dependendo da configura&ccedil;&atilde;o do seu ambiente, o
-              TypeScript poder&aacute; compilar o seu c&oacute;digo JavaScript
-              sem nenhum problema (talvez com alguns alertas, mas o
-              c&oacute;digo JS ser&aacute; gerado normalmente).
-            </p>
+        <p>
+          Arquivos TypeScript tem a extens&atilde;o <code>.ts</code> ou
+          <code>.tsx</code> ao inv&eacute;s de <code>.js</code> ou
+          <code>.jsx</code> e aqui cabe uma dica interessante: converter um
+          arquivo JavaScript v&aacute;lido em TypeScript v&aacute;lido &eacute;
+          um processo relativamente simples, basta renomear a extens&atilde;o de
+          <code>.js(x)</code> para <code>.ts(x)</code>. Dependendo da
+          configura&ccedil;&atilde;o do seu ambiente, o TypeScript poder&aacute;
+          compilar o seu c&oacute;digo JavaScript sem nenhum problema (talvez
+          com alguns alertas, mas o c&oacute;digo JS ser&aacute; gerado
+          normalmente).
+        </p>
 
-            <p>
-              Este &eacute; um dos muitos fatores que d&atilde;o tanta
-              popularidade ao TypeScript atualmente. Muitos desenvolvedores
-              est&atilde;o migrando suas bases de c&oacute;digo de JavaScript
-              para TypeScript por conta dessa simplicidade. Apenas configure seu
-              ambiente, renomeie um arquivo <strong>.js</strong> para
-              <strong>.ts</strong> e pronto, estar&aacute; em ambiente
-              TypeScript!
-            </p>
+        <p>
+          Este &eacute; um dos muitos fatores que d&atilde;o tanta popularidade
+          ao TypeScript atualmente. Muitos desenvolvedores est&atilde;o migrando
+          suas bases de c&oacute;digo de JavaScript para TypeScript por conta
+          dessa simplicidade. Apenas configure seu ambiente, renomeie um arquivo
+          <strong>.js</strong> para <strong>.ts</strong> e pronto, estar&aacute;
+          em ambiente TypeScript!
+        </p>
 
-            <p>Por exemplo, isso &eacute; TypeScript:</p>
+        <p>Por exemplo, isso &eacute; TypeScript:</p>
 
-            <pre>
-function greet(name) {
-  console.log(`Olá, ${name}!`);
-}
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">function</span><span style="color:#89B4FA;font-style:italic"> greet</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">name</span><span style="color:#9399B2">)</span><span style="color:#9399B2"> {</span></span>
+<span class="line"><span style="color:#CDD6F4">  console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(</span><span style="color:#A6E3A1">`Olá, </span><span style="color:#9399B2">${</span><span style="color:#CDD6F4">name</span><span style="color:#9399B2">}</span><span style="color:#A6E3A1">!`</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#9399B2">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">greet</span><span style="color:#CDD6F4">(</span><span style="color:#A6E3A1">'Otávio Miranda'</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // Olá, Otávio Miranda!</span></span></code></pre>
 
-greet('Otávio Miranda'); // Olá, Otávio Miranda!</pre
-            >
+        <p>
+          Alguma diferença com o JS que você conhece? É claro que não usei
+          nenhum recurso do TypeScript neste código, mas eu poderia facilmente
+          (e não acho que isso dificultaria seu entendimento):
+        </p>
 
-            <p>
-              Alguma diferença com o JS que você conhece? É claro que não usei
-              nenhum recurso do TypeScript neste código, mas eu poderia
-              facilmente (e não acho que isso dificultaria seu entendimento):
-            </p>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">function</span><span style="color:#89B4FA;font-style:italic"> greet</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">name</span><span style="color:#94E2D5">:</span><span style="color:#CBA6F7"> string</span><span style="color:#9399B2">)</span><span style="color:#94E2D5">:</span><span style="color:#CBA6F7"> void</span><span style="color:#9399B2"> {</span></span>
+<span class="line"><span style="color:#CDD6F4">  console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(</span><span style="color:#A6E3A1">`Olá, </span><span style="color:#9399B2">${</span><span style="color:#CDD6F4">name</span><span style="color:#9399B2">}</span><span style="color:#A6E3A1">!`</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#9399B2">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">greet</span><span style="color:#CDD6F4">(</span><span style="color:#A6E3A1">'Otávio Miranda'</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // Olá, Otávio Miranda!</span></span></code></pre>
 
-            <pre>
-function greet(name: string): void {
-  console.log(`Olá, ${name}!`);
-}
+        <p>
+          Isto s&oacute; &eacute; poss&iacute;vel, porque se observarmos nossa
+          <strong>Figura 2</strong> o
+          <strong>TypeScript &Eacute; JavaScript</strong>. Portanto, assim como
+          podemos rodar scripts ES5 em ambientes ES7 (ou superiores), o
+          compilador do TypeScript n&atilde;o ter&aacute; nenhum problema em
+          entender JavaScript puro. Por outro lado, assim como n&atilde;o
+          conseguimos usar recursos do ES7 no ES5 sem um polyfill, tamb&eacute;m
+          n&atilde;o conseguimos rodar TypeScript diretamente em ambiente
+          JavaScript. Nem o Browser, nem o Node.js entenderiam TS.
+        </p>
 
-greet('Otávio Miranda'); // Olá, Otávio Miranda!</pre
-            >
+        <p>
+          O primeiro c&oacute;digo (sem tipagem) rodaria perfeitamente tanto em
+          ambientes JavaScript quanto TypeScript; o segundo (com tipagem)
+          n&atilde;o poderia ser interpretado pelo JavaScript.
+        </p>
 
-            <p>
-              Isto s&oacute; &eacute; poss&iacute;vel, porque se observarmos
-              nossa <strong>Figura 2</strong> o
-              <strong>TypeScript &Eacute; JavaScript</strong>. Portanto, assim
-              como podemos rodar scripts ES5 em ambientes ES7 (ou superiores), o
-              compilador do TypeScript n&atilde;o ter&aacute; nenhum problema em
-              entender JavaScript puro. Por outro lado, assim como n&atilde;o
-              conseguimos usar recursos do ES7 no ES5 sem um polyfill,
-              tamb&eacute;m n&atilde;o conseguimos rodar TypeScript diretamente
-              em ambiente JavaScript. Nem o Browser, nem o Node.js entenderiam
-              TS.
-            </p>
+        <h2>Por que o TypeScript &eacute; mais seguro?</h2>
 
-            <p>
-              O primeiro c&oacute;digo (sem tipagem) rodaria perfeitamente tanto
-              em ambientes JavaScript quanto TypeScript; o segundo (com tipagem)
-              n&atilde;o poderia ser interpretado pelo JavaScript.
-            </p>
+        <p>Considere este c&oacute;digo JavaScript abaixo:</p>
 
-            <h2>Por que o TypeScript &eacute; mais seguro?</h2>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> name </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> 'Otávio Miranda'</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> upperCaseName </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> name</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">toUppercase</span><span style="color:#CDD6F4">()</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#CDD6F4">console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(upperCaseName)</span><span style="color:#9399B2">;</span></span></code></pre>
 
-            <p>Considere este c&oacute;digo JavaScript abaixo:</p>
+        <p>
+          Agora, me diga: encontrou o erro? Sim! Ele tem um erro que só seria
+          detectado no momento da execução (runtime). Porém, quase posso
+          garantir que, ao passar o olho sobre este código, você não o detectou
+          facilmente, estou certo?
+        </p>
 
-            <pre>
-const name = 'Otávio Miranda';
-const upperCaseName = name.toUppercase();
-console.log(upperCaseName);</pre
-            >
+        <p>
+          Se um código assim fosse para produção, ao ser executado seus usuários
+          veriam algo como:
+        </p>
 
-            <p>
-              Agora, me diga: encontrou o erro? Sim! Ele tem um erro que só
-              seria detectado no momento da execução (runtime). Porém, quase
-              posso garantir que, ao passar o olho sobre este código, você não o
-              detectou facilmente, estou certo?
-            </p>
+        <p>
+          <code>Uncaught TypeError: name.toUppercase is not a function</code>
+        </p>
 
-            <p>
-              Se um código assim fosse para produção, ao ser executado seus
-              usuários veriam algo como:
-            </p>
+        <p>
+          Ou, para um usuário comum, ele simplesmente veria seu programa parar
+          de funcionar sem saber o motivo.
+        </p>
 
-            <p>
-              <code
-                >Uncaught TypeError: name.toUppercase is not a function</code
-              >
-            </p>
+        <p>
+          Mas, se você colocar este código em um ambiente TypeScript, antes
+          mesmo da execução do seu código este erro seria detectado.
+        </p>
 
-            <p>
-              Ou, para um usuário comum, ele simplesmente veria seu programa
-              parar de funcionar sem saber o motivo.
-            </p>
-
-            <p>
-              Mas, se você colocar este código em um ambiente TypeScript, antes
-              mesmo da execução do seu código este erro seria detectado.
-            </p>
-
-            <p>
-              <img
-                loading="lazy"
-                src="imgs/typescript-error-1.png"
-                alt="Figura 4. O TypeScript detecta o erro antes que você possa executar seu código.
-
-                "
-              />
-              <span class="img-description"
-                >Figura 4. O TypeScript detecta o erro antes que você possa
-                executar seu código.
-              </span>
-            </p>
-
-            <h3>Conveni&ecirc;ncia da <em>Intelligent code completion</em></h3>
-
-            <p>
-              Al&eacute;m de analisar o meu c&oacute;digo enquanto eu digito sem
-              deixar o meu editor lento, a mensagem do TypeScript ainda me
-              informa qual o erro, qual o tipo da vari&aacute;vel e ainda me da
-              uma sugest&atilde;o sobre o que eu quis dizer. Nesse caso, se
-              voc&ecirc; ainda n&atilde;o detectou,
-              <code>toUppercase</code> n&atilde;o existe no tipo
-              <code>string</code>, o correto seria <code>toUpperCase</code>.
-            </p>
-
-            <p>
-              Por fim, veja esse outro c&oacute;digo (aqui o erro &eacute;
-              expl&iacute;cito)?
-            </p>
-
-            <pre>console.log([1, 2, 3] * 2); // NaN</pre>
-
-            <p>
-              Viu o erro? No entanto, o JavaScript não tem problema em permitir
-              que meu código rode assim, multiplicando um array por um número.
-            </p>
-
-            <p>Porém, veja o que acontece quando migramos para TypeScript:</p>
-
-            <pre>
-console.log([1, 2, 3] * 2); // NaN
-//          ^ The left-hand side of an
-//            arithmetic operation must
-//            be of type 'any', 'number',
-//            'bigint' or an enum
-//            type.ts(2362)</pre
-            >
-
-            <p>
-              Por isso que o TypeScript deixa nossos c&oacute;digos mais
-              seguros.
-            </p>
-
-            <p>
-              <strong>Nota: </strong>vou representar esses erros com
-              <strong>coment&aacute;rios de c&oacute;digo</strong> (se
-              necess&aacute;rio) ao inv&eacute;s de imagens pra facilitar minha
-              vida. O <code>^</code> representa onde o erro ser&aacute; exibido.
-            </p>
-
-            <p>
-              Esses erros s&atilde;o bem simples e f&aacute;ceis de encontrar e
-              corrigir. Mas, voc&ecirc; provavelmente j&aacute; sabe que um
-              ambiente de produ&ccedil;&atilde;o &eacute; muito mais complexo
-              que isso: objetos podem ser aninhados, fun&ccedil;&otilde;es,
-              classes e vari&aacute;veis podem vir de outros m&oacute;dulos,
-              bases de dados e o ambiente podem prover APIs (como a DOM, do
-              browser por exemplo), e assim por diante. Esses s&atilde;o os
-              casos onde o TypeScript brilha ainda mais.
-            </p>
-
-            <p>
-              Mas, espera a&iacute;! Como o TypeScript est&aacute; vendo erros
-              no meu c&oacute;digo sendo que eu ainda nem o compilei? Este,
-              minha amiga ou meu amigo, &eacute; trabalho do
-              <code>tsserver</code> e do Typechecker do TypeScript. Que vamos
-              falar logo a seguir.
-            </p>
-
-            <h2>TypeScript &ndash; Typechecker e tsserver</h2>
-
-            <p>
-              <strong>Nota: </strong>voc&ecirc; realmente n&atilde;o precisa
-              saber de nada disso pra programar em TypeScript ou JavaScript.
-            </p>
-
-            <p>
-              Programas s&atilde;o feitos por humanos e para humanos (<a
-                href="https://amzn.to/2B1IZlg"
-                >pelo menos alguns</a
-              >
-              rsrs), isso quer dizer que a linguagem de
-              programa&ccedil;&atilde;o que escolhemos funciona exatamente como
-              um &ldquo;Idioma&rdquo; qualquer que ser&aacute; traduzido para
-              que o dispositivo entenda e execute de alguma forma. Mas, seu
-              c&oacute;digo precisa chegar na engine do JS de alguma forma,
-              certo? Vamos ver.
-            </p>
-
-            <h3>Como seu c&oacute;digo Javascript vai parar na engine do JS</h3>
-
-            <p>
-              Este processo &eacute; feito no JavaScript seguindo os seguintes
-              passos (de forma bem resumida):
-            </p>
-
-            <ol>
-              <li>
-                Seu c&oacute;digo JavaScript &eacute; convertido em uma
-                <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree"
-                  >AST</a
-                >;
-              </li>
-              <li>
-                A AST &eacute; convertida em
-                <a href="https://pt.wikipedia.org/wiki/Bytecode">Bytecode</a>;
-              </li>
-              <li>O Bytecode &eacute; avaliado pela engine.</li>
-            </ol>
-
-            <p>
-              Perceba que entre voc&ecirc; criar seu c&oacute;digo e ele ser
-              executado pela engine do JS, nada al&eacute;m de uma
-              convers&atilde;o ocorre do seu c&oacute;digo. Se ocorrer um erro
-              (algo digitado incorretamente, por exemplo), seu c&oacute;digo vai
-              ser executado com erro e a engine vai parar no ato do erro. Por
-              isso vemos <code>Uncaught TypeError: Bla bla bla</code> por
-              n&atilde;o tratar essa exce&ccedil;&atilde;o, s&oacute; depois de
-              executar o c&oacute;digo.
-            </p>
-
-            <h3>Como seu c&oacute;digo TypeScript vai parar na engine do JS</h3>
-
-            <p>
-              Ao adicionar o TypeScript, esse processo fica bem maior, veja:
-            </p>
-
-            <ol>
-              <li>
-                <strong
-                  >Seu c&oacute;digo TypeScript &eacute; convertido em uma AST
-                  (TS)</strong
-                >
-              </li>
-              <li>
-                <strong>A AST &eacute; analisada pelo Typechecker (TS)</strong>
-              </li>
-              <li>
-                <strong
-                  >A AST &eacute; convertida em c&oacute;digo JavaScript
-                  (TS)</strong
-                >
-              </li>
-              <li>
-                O c&oacute;digo JavaScript &eacute; convertido em uma AST (JS)
-              </li>
-              <li>A AST &eacute; convertida em Bytecode (JS);</li>
-              <li>O Bytecode &eacute; avaliado pela engine (JS);</li>
-            </ol>
-
-            <p>
-              Perceba que as partes em negrito foram adicionadas ao processo.
-              Passos de 1 a 3 s&atilde;o executados pelo TypeScript; passos de 4
-              a 6 são executados pelo JavaScript. A tipagem &eacute; checada nos
-              passos 1 e 2 (do TS). Do passo 3 em diante, o TypeScript
-              n&atilde;o vai mais checar seu c&oacute;digo. Em outras palavras,
-              a &uacute;ltima coisa que o compilador do TypeScript faz &eacute;
-              compilar o seu c&oacute;digo para Javascript, toda a checagem
-              &eacute; feita antes da compila&ccedil;&atilde;o.
-            </p>
-
-            <p>
-              Por este motivo, eu posso compilar meus c&oacute;digos JavaScript
-              sem tipagem pelo TypeScript (como eu te disse, TypeScript &eacute;
-              JavaScript). Tamb&eacute;m &eacute; por este motivo, que eu posso
-              configurar o n&iacute;vel de restri&ccedil;&atilde;o do TypeScript
-              (eu poderia, por exemplo, n&atilde;o permitir a
-              compila&ccedil;&atilde;o se meu c&oacute;digo tiver algum tipo de
-              alerta ou falta de tipagem).
-            </p>
-
-            <h3>tsserver</h3>
-
-            <p>
-              Eu falei, falei e falei, e acabei n&atilde;o respondendo sua
-              pergunta:
-              <strong
-                >Como o TypeScript est&aacute; vendo erros no meu c&oacute;digo
-                sendo que eu ainda nem o compilei?</strong
-              >
-            </p>
-
-            <p>
-              Quando instalamos o TypeScript, ganhamos duas coisas: o compilador
-              (<code>tsc</code>) e um servidor que prov&ecirc; servi&ccedil;os
-              da linguagem (<code>tsserver</code>). De fato, voc&ecirc; pode ver
-              eles na pasta &ldquo;bin&rdquo; do &ldquo;node_modules&rdquo;. Em
-              nosso dia a dia como programador ou programadora, n&atilde;o nos
-              preocupamos com o <code>tsserver</code> porque ele geralmente
-              &eacute; usado pelo seu editor ou IDE. Por&eacute;m, ele &eacute;
-              super importante pra gente. &Eacute; ele que nos permite ter auto
-              completar, inspe&ccedil;&otilde;es de c&oacute;digo,
-              navega&ccedil;&atilde;o, refatora&ccedil;&atilde;o, e muito mais,
-              diretamente no editor que usamos para criar nosso c&oacute;digo.
-            </p>
-
-            <p>
-              Ent&atilde;o, respondendo a sua pergunta, o
-              <code>tsserver</code> roda em background em alguns editores de
-              c&oacute;digo fazendo essa checagem. Quando ele encontra algo que
-              n&atilde;o bate com a minha configura&ccedil;&atilde;o do
-              TypeScript, ele grifa o trecho de c&oacute;digo com aquela linha
-              vermelha ondulada dizendo o que est&aacute; incorreto. Dessa
-              forma, eu n&atilde;o preciso executar meu c&oacute;digo pra saber
-              que existe um erro nele.
-            </p>
-
-            <h3>vscode</h3>
-
-            <p>
-              Eu n&atilde;o sei qual editor de c&oacute;digos voc&ecirc; usa,
-              mas gosto bastante do
-              <a href="https://code.visualstudio.com/">VSCode</a> porque ele
-              j&aacute; vem com o <code>tsserver</code> embutido (muito editores
-              tamb&eacute;m j&aacute; fazem isso). Com isso, eu posso digitar o
-              meu c&oacute;digo tranquilamente, sabendo que enquanto o
-              sublinhado vermelho n&atilde;o aparecer, provavelmente meu
-              c&oacute;digo n&atilde;o tem nenhum erro (a n&atilde;o ser de
-              l&oacute;gica rsrs).
-            </p>
-
-            <p>
-              Outra coisa interessante &eacute; que se eu passar o mouse sobre
-              determinada vari&aacute;vel, eu sei exatamente qual o tipo dela.
-              Isso em bases de c&oacute;digo maiores &eacute; uma m&atilde;o na
-              roda.
-            </p>
-
-            <p>
-              <img
-                loading="lazy"
-                src="imgs/typescript-2.png"
-                alt="Figura 5. VSCode + tsserver exibindo o tipo de uma variável
+        <p>
+          <img
+            loading="lazy"
+            src="imgs/typescript-error-1.png"
+            alt="Figura 4. O TypeScript detecta o erro antes que você possa executar seu código.
 
                 "
-              />
-              <span class="img-description"
-                >Figura 5. VSCode + tsserver exibindo o tipo de uma variável
-              </span>
-            </p>
+          />
+          <span class="img-description"
+            >Figura 4. O TypeScript detecta o erro antes que você possa executar
+            seu código.
+          </span>
+        </p>
 
-            <h4>Fatos interessantes:</h4>
+        <h3>Conveni&ecirc;ncia da <em>Intelligent code completion</em></h3>
 
-            <p>
-              O VSCode foi criado pela Microsoft e foi escrito em TypeScript e
-              JavaScript com o
-              <a href="https://www.electronjs.org/">Electron</a>. Ele usa
-              <a href="https://github.com/DefinitelyTyped/DefinitelyTyped"
-                >type definitions</a
-              >
-              do TypeScript para a maioria das fun&ccedil;&otilde;es do seu
-              <a href="https://code.visualstudio.com/docs/editor/intellisense"
-                >IntelliSense</a
-              >
-              tanto para JavaScript quanto para TypeScript. Portanto, se
-              voc&ecirc; usa o VSCode para editar seus c&oacute;digos
-              Javascript, voc&ecirc; j&aacute; faz uso extensivo de TypeScript
-              (mesmo sem saber).
-            </p>
+        <p>
+          Al&eacute;m de analisar o meu c&oacute;digo enquanto eu digito sem
+          deixar o meu editor lento, a mensagem do TypeScript ainda me informa
+          qual o erro, qual o tipo da vari&aacute;vel e ainda me da uma
+          sugest&atilde;o sobre o que eu quis dizer. Nesse caso, se voc&ecirc;
+          ainda n&atilde;o detectou,
+          <code>toUppercase</code> n&atilde;o existe no tipo
+          <code>string</code>, o correto seria <code>toUpperCase</code>.
+        </p>
 
-            <h2>Instalando e configurando o TypeScript</h2>
+        <p>
+          Por fim, veja esse outro c&oacute;digo (aqui o erro &eacute;
+          expl&iacute;cito)?
+        </p>
 
-            <p>
-              Se voc&ecirc; chegou at&eacute; aqui, provavelmente eu j&aacute;
-              despertei seu interesse em TypeScript (ou talvez voc&ecirc;
-              j&aacute; o tinha). De qualquer forma, que bom! Na minha
-              opini&atilde;o, se voc&ecirc; come&ccedil;ar a usar o TS nos seus
-              projetos, vai ser dif&iacute;cil voltar atr&aacute;s, vai por mim.
-            </p>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CDD6F4">console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">([</span><span style="color:#FAB387">1</span><span style="color:#9399B2">,</span><span style="color:#FAB387"> 2</span><span style="color:#9399B2">,</span><span style="color:#FAB387"> 3</span><span style="color:#CDD6F4">] </span><span style="color:#94E2D5">*</span><span style="color:#FAB387"> 2</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // NaN</span></span></code></pre>
 
-            <p>
-              Contudo, isso pode ser algo desafiador em meio a tantas
-              op&ccedil;&otilde;es, n&atilde;o &eacute; mesmo? A seguir, vamos
-              ver como iniciar um projeto TypeScript do zero. Embora eu
-              n&atilde;o v&aacute; conseguir te explicar tudo o que existe sobre
-              ele em apenas um post, percebo que o mais dif&iacute;cil &eacute;
-              iniciar, o resto voc&ecirc; pode ir aprendendo com o tempo e a
-              <a
-                href="https://www.typescriptlang.org/docs/handbook/basic-types.html"
-                >documenta&ccedil;&atilde;o</a
-              >.
-            </p>
+        <p>
+          Viu o erro? No entanto, o JavaScript não tem problema em permitir que
+          meu código rode assim, multiplicando um array por um número.
+        </p>
 
-            <h3>Instala&ccedil;&atilde;o de programas</h3>
+        <p>Porém, veja o que acontece quando migramos para TypeScript:</p>
 
-            <p>
-              Eu gosto de usar algumas coisas nos meus projetos, por isso, a
-              configura&ccedil;&atilde;o que voc&ecirc; vai ver a seguir
-              ser&aacute; a mesma que utilizo em muitos dos meus projetos.
-              Entretanto, tenha em mente que isso vai variar muito de
-              desenvolvedor para desenvolvedor e de projeto para projeto. Assim,
-              &eacute; prov&aacute;vel que voc&ecirc; ver&aacute; outras
-              configura&ccedil;&otilde;es muito diferentes por a&iacute;, ou
-              talvez voc&ecirc; tenha que conversar com seu time antes de sair
-              configurando o ambiente de um projeto como um todo.
-            </p>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CDD6F4">console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">([</span><span style="color:#FAB387">1</span><span style="color:#9399B2">,</span><span style="color:#FAB387"> 2</span><span style="color:#9399B2">,</span><span style="color:#FAB387"> 3</span><span style="color:#CDD6F4">] </span><span style="color:#94E2D5">*</span><span style="color:#FAB387"> 2</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // NaN</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">//          ^ The left-hand side of an</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">//            arithmetic operation must</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">//            be of type 'any', 'number',</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">//            'bigint' or an enum</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">//            type.ts(2362)</span></span></code></pre>
 
-            <p>
-              Se voc&ecirc; tem experiencia com isso, provavelmente
-              poder&aacute; pular para &ldquo;<strong
-                ><a href="#Instalando_o_TypeScript,_tsnode_e_eslint"
-                  >Instalando o TypeScript, ts-node e eslint</a
-                ></strong
-              >&ldquo;.
-            </p>
+        <p>
+          Por isso que o TypeScript deixa nossos c&oacute;digos mais seguros.
+        </p>
 
-            <p>
-              Antes de come&ccedil;ar, voc&ecirc; vai precisar do seguinte (se
-              quiser o mesmo ambiente que o meu):
-            </p>
+        <p>
+          <strong>Nota: </strong>vou representar esses erros com
+          <strong>coment&aacute;rios de c&oacute;digo</strong> (se
+          necess&aacute;rio) ao inv&eacute;s de imagens pra facilitar minha
+          vida. O <code>^</code> representa onde o erro ser&aacute; exibido.
+        </p>
 
-            <ul>
-              <li>
-                Baixar e
-                <a href="https://nodejs.org/en/download/">instalar o Node.js</a
-                >;
-              </li>
-              <li>
-                Baixar e
-                <a href="https://code.visualstudio.com/">instalar o VSCode</a>;
-              </li>
-            </ul>
+        <p>
+          Esses erros s&atilde;o bem simples e f&aacute;ceis de encontrar e
+          corrigir. Mas, voc&ecirc; provavelmente j&aacute; sabe que um ambiente
+          de produ&ccedil;&atilde;o &eacute; muito mais complexo que isso:
+          objetos podem ser aninhados, fun&ccedil;&otilde;es, classes e
+          vari&aacute;veis podem vir de outros m&oacute;dulos, bases de dados e
+          o ambiente podem prover APIs (como a DOM, do browser por exemplo), e
+          assim por diante. Esses s&atilde;o os casos onde o TypeScript brilha
+          ainda mais.
+        </p>
 
-            <h3>Criando a pasta do projeto</h3>
+        <p>
+          Mas, espera a&iacute;! Como o TypeScript est&aacute; vendo erros no
+          meu c&oacute;digo sendo que eu ainda nem o compilei? Este, minha amiga
+          ou meu amigo, &eacute; trabalho do
+          <code>tsserver</code> e do Typechecker do TypeScript. Que vamos falar
+          logo a seguir.
+        </p>
 
-            <p>
-              No seu sistema operacional, crie uma pasta exclusiva para o seu
-              projeto com o TS. Isso &eacute; importante para termos uma pasta
-              node_modules e package.json exclusivos para este projeto.
-            </p>
+        <h2>TypeScript &ndash; Typechecker e tsserver</h2>
 
-            <p>
-              <strong>Nota:</strong> voc&ecirc; pode migrar uma base de
-              c&oacute;digo existente apenas renomeando arquivos
-              <strong>.js</strong> para <strong>.ts</strong> e fazendo as
-              configura&ccedil;&otilde;es abaixo. Nesse caso use
-              <code>strict</code> como <code>false</code> (voc&ecirc; vai ver
-              isso abaixo). Al&eacute;m disso, verifique se todos os
-              m&oacute;dulos que voc&ecirc; utiliza no projeto JS d&atilde;o
-              suporte para TS. Tenha em mente que pode ser necess&aacute;rio
-              modificar coisas complicadas para fazer essa
-              migra&ccedil;&atilde;o.
-            </p>
+        <p>
+          <strong>Nota: </strong>voc&ecirc; realmente n&atilde;o precisa saber
+          de nada disso pra programar em TypeScript ou JavaScript.
+        </p>
 
-            <p>
-              Para um projeto novo (recomend&aacute;vel), apenas abra a nova
-              pasta pasta no VSCode, indo em
-              <code>File &gt; Open Folder</code> e escolhendo a pasta que
-              voc&ecirc; acabou de criar.
-            </p>
+        <p>
+          Programas s&atilde;o feitos por humanos e para humanos (<a
+            href="https://amzn.to/2B1IZlg"
+            >pelo menos alguns</a
+          >
+          rsrs), isso quer dizer que a linguagem de programa&ccedil;&atilde;o
+          que escolhemos funciona exatamente como um &ldquo;Idioma&rdquo;
+          qualquer que ser&aacute; traduzido para que o dispositivo entenda e
+          execute de alguma forma. Mas, seu c&oacute;digo precisa chegar na
+          engine do JS de alguma forma, certo? Vamos ver.
+        </p>
 
-            <h3>Instalando o TypeScript, ts-node e eslint</h3>
+        <h3>Como seu c&oacute;digo Javascript vai parar na engine do JS</h3>
 
-            <p>
-              Abra o terminal do VSCode em <code>View &gt; Terminal</code> e
-              digite o seguinte:
-            </p>
+        <p>
+          Este processo &eacute; feito no JavaScript seguindo os seguintes
+          passos (de forma bem resumida):
+        </p>
 
-            <pre>
-npm init -y
-npm i typescript ts-node eslint @types/node -D</pre
+        <ol>
+          <li>
+            Seu c&oacute;digo JavaScript &eacute; convertido em uma
+            <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">AST</a
+            >;
+          </li>
+          <li>
+            A AST &eacute; convertida em
+            <a href="https://pt.wikipedia.org/wiki/Bytecode">Bytecode</a>;
+          </li>
+          <li>O Bytecode &eacute; avaliado pela engine.</li>
+        </ol>
+
+        <p>
+          Perceba que entre voc&ecirc; criar seu c&oacute;digo e ele ser
+          executado pela engine do JS, nada al&eacute;m de uma convers&atilde;o
+          ocorre do seu c&oacute;digo. Se ocorrer um erro (algo digitado
+          incorretamente, por exemplo), seu c&oacute;digo vai ser executado com
+          erro e a engine vai parar no ato do erro. Por isso vemos
+          <code>Uncaught TypeError: Bla bla bla</code> por n&atilde;o tratar
+          essa exce&ccedil;&atilde;o, s&oacute; depois de executar o
+          c&oacute;digo.
+        </p>
+
+        <h3>Como seu c&oacute;digo TypeScript vai parar na engine do JS</h3>
+
+        <p>Ao adicionar o TypeScript, esse processo fica bem maior, veja:</p>
+
+        <ol>
+          <li>
+            <strong
+              >Seu c&oacute;digo TypeScript &eacute; convertido em uma AST
+              (TS)</strong
             >
-            <p>Para que voc&ecirc; compreenda o que est&aacute; instalando:</p>
-
-            <ul>
-              <li>
-                <code>typescript</code> &ndash; &eacute; o pr&oacute;prio
-                TypeScript (<code>tsc</code> e <code>tsserver</code>);
-              </li>
-              <li>
-                <code>ts-node</code> &ndash; permite executar scripts do
-                TypeScript diretamente;
-              </li>
-              <li>
-                <code>eslint</code> &ndash; &Eacute; o meu
-                <a
-                  href="https://pt.stackoverflow.com/questions/330821/o-que-significa-executar-lint-no-c%C3%B3digo#:~:text=Um%20linter%20ou%20lint%20%C3%A9%20uma%20ferramenta%20de%20an%C3%A1lise%20est%C3%A1tica%20de%20c%C3%B3digo.&amp;text=Um%20linter%20ou%20lint%20se,c%C3%B3digo%2Dfonte%20em%20linguagem%20C."
-                  >linter</a
-                >
-                preferido, algumas pessoas preferem o
-                <a href="https://palantir.github.io/tslint/">tslint</a>
-                (voc&ecirc; pode conferir depois);
-              </li>
-              <li>
-                <code>@types/node</code> &ndash; S&atilde;o as
-                defini&ccedil;&otilde;es de tipo para o Node.js
-              </li>
-            </ul>
-
-            <h3>Extens&otilde;es do VSCode</h3>
-
-            <p>
-              Para uso do ESLint e do ts-node, eu gosto de duas extens&otilde;es
-              no VSCode.
-            </p>
-
-            <ul>
-              <li>
-                <a
-                  href="https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner"
-                  >Code Runner</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint"
-                  >ESLint</a
-                >
-              </li>
-            </ul>
-
-            <p>Instale ambas as extens&otilde;es no seu VSCode</p>
-
-            <p>
-              O <strong>Code Runner</strong> habilita a possibilidade executar
-              um comando apenas pressionando um bot&atilde;o de
-              &ldquo;Play&rdquo; no canto superior direito do seu VSCode. Assim,
-              ao inv&eacute;s de digitar:
-            </p>
-
-            <p><code>npx ts-node index.ts</code></p>
-
-            <p>
-              Eu posso simplesmente configurar o
-              <strong>Code Runner </strong>para executar automaticamente este
-              comando para todos os meus arquivos TypeScript assim que eu
-              pressionar o play. Isso &eacute; fant&aacute;stico para executar
-              rapidamente seus c&oacute;digo e focar no aprendizado.
-            </p>
-
-            <p>
-              O <strong>Eslint</strong> (a extens&atilde;o) faz a
-              integra&ccedil;&atilde;o do <strong>ESLint</strong> (linter) com o
-              VSCode.
-            </p>
-
-            <h3>Configurando o ESLint</h3>
-
-            <p>
-              Vamos instalar alguns plugins para que o ESLint funcione com o
-              TypeScript. Para isso, digite no terminal:
-            </p>
-
-            <p>
-              <code
-                >npm i @typescript-eslint/eslint-plugin
-                @typescript-eslint/parser -D</code
-              >
-            </p>
-
-            <p>
-              Crie um arquivo com o nome .eslintrc.js na raiz do seu projeto e
-              cole o seguinte nele:
-            </p>
-
-            <pre>
-module.exports = {
-  env: {
-    browser: true,
-    es6: true,
-    node: true,
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
-  },
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaVersion: 11,
-    sourceType: 'module',
-  },
-  plugins: ['@typescript-eslint'],
-  rules: {},
-};
-            </pre>
-
-            <p>
-              E &eacute; s&oacute;, agora voc&ecirc; j&aacute; tem o ESLint
-              integrado ao seu VSCode e configurado. No entanto, n&atilde;o
-              configurei nenhuma regra do ESLint justamente para que voc&ecirc;
-              possa fazer suas pr&oacute;prias escolhas. Seu projeto usa aspas
-              simples ou duplas? Requer ponto e v&iacute;rgula? Usa tabs ou
-              espa&ccedil;os? Quantos? Enfim, essas s&atilde;o decis&otilde;es
-              que voc&ecirc; precisa tomar.
-            </p>
-
-            <p>
-              Eu gosto de usar as regras do
-              <a href="https://prettier.io/">Prettier</a>, com ponto e
-              v&iacute;rgula, aspas simples e 2 espa&ccedil;os (vou mostrar como
-              configurar mais abaixo).
-            </p>
-
-            <h3>Configurando o Code Runner</h3>
-
-            <p>
-              No seu projeto, crie uma pasta chamada de <code>.vscode</code>.
-              Nessa pasta, crie um arquivo chamado de
-              <code>settings.json</code>.
-            </p>
-
-            <p>Cole o seguinte neste arquivo:</p>
-
-            <pre>
-{
-  "code-runner.executorMap": {
-    "typescript": "npx ts-node --files",
-  }
-}</pre
+          </li>
+          <li>
+            <strong>A AST &eacute; analisada pelo Typechecker (TS)</strong>
+          </li>
+          <li>
+            <strong
+              >A AST &eacute; convertida em c&oacute;digo JavaScript
+              (TS)</strong
             >
+          </li>
+          <li>
+            O c&oacute;digo JavaScript &eacute; convertido em uma AST (JS)
+          </li>
+          <li>A AST &eacute; convertida em Bytecode (JS);</li>
+          <li>O Bytecode &eacute; avaliado pela engine (JS);</li>
+        </ol>
+
+        <p>
+          Perceba que as partes em negrito foram adicionadas ao processo. Passos
+          de 1 a 3 s&atilde;o executados pelo TypeScript; passos de 4 a 6 são
+          executados pelo JavaScript. A tipagem &eacute; checada nos passos 1 e
+          2 (do TS). Do passo 3 em diante, o TypeScript n&atilde;o vai mais
+          checar seu c&oacute;digo. Em outras palavras, a &uacute;ltima coisa
+          que o compilador do TypeScript faz &eacute; compilar o seu
+          c&oacute;digo para Javascript, toda a checagem &eacute; feita antes da
+          compila&ccedil;&atilde;o.
+        </p>
+
+        <p>
+          Por este motivo, eu posso compilar meus c&oacute;digos JavaScript sem
+          tipagem pelo TypeScript (como eu te disse, TypeScript &eacute;
+          JavaScript). Tamb&eacute;m &eacute; por este motivo, que eu posso
+          configurar o n&iacute;vel de restri&ccedil;&atilde;o do TypeScript (eu
+          poderia, por exemplo, n&atilde;o permitir a compila&ccedil;&atilde;o
+          se meu c&oacute;digo tiver algum tipo de alerta ou falta de tipagem).
+        </p>
+
+        <h3>tsserver</h3>
+
+        <p>
+          Eu falei, falei e falei, e acabei n&atilde;o respondendo sua pergunta:
+          <strong
+            >Como o TypeScript est&aacute; vendo erros no meu c&oacute;digo
+            sendo que eu ainda nem o compilei?</strong
+          >
+        </p>
+
+        <p>
+          Quando instalamos o TypeScript, ganhamos duas coisas: o compilador
+          (<code>tsc</code>) e um servidor que prov&ecirc; servi&ccedil;os da
+          linguagem (<code>tsserver</code>). De fato, voc&ecirc; pode ver eles
+          na pasta &ldquo;bin&rdquo; do &ldquo;node_modules&rdquo;. Em nosso dia
+          a dia como programador ou programadora, n&atilde;o nos preocupamos com
+          o <code>tsserver</code> porque ele geralmente &eacute; usado pelo seu
+          editor ou IDE. Por&eacute;m, ele &eacute; super importante pra gente.
+          &Eacute; ele que nos permite ter auto completar,
+          inspe&ccedil;&otilde;es de c&oacute;digo, navega&ccedil;&atilde;o,
+          refatora&ccedil;&atilde;o, e muito mais, diretamente no editor que
+          usamos para criar nosso c&oacute;digo.
+        </p>
+
+        <p>
+          Ent&atilde;o, respondendo a sua pergunta, o
+          <code>tsserver</code> roda em background em alguns editores de
+          c&oacute;digo fazendo essa checagem. Quando ele encontra algo que
+          n&atilde;o bate com a minha configura&ccedil;&atilde;o do TypeScript,
+          ele grifa o trecho de c&oacute;digo com aquela linha vermelha ondulada
+          dizendo o que est&aacute; incorreto. Dessa forma, eu n&atilde;o
+          preciso executar meu c&oacute;digo pra saber que existe um erro nele.
+        </p>
+
+        <h3>vscode</h3>
+
+        <p>
+          Eu n&atilde;o sei qual editor de c&oacute;digos voc&ecirc; usa, mas
+          gosto bastante do
+          <a href="https://code.visualstudio.com/">VSCode</a> porque ele
+          j&aacute; vem com o <code>tsserver</code> embutido (muito editores
+          tamb&eacute;m j&aacute; fazem isso). Com isso, eu posso digitar o meu
+          c&oacute;digo tranquilamente, sabendo que enquanto o sublinhado
+          vermelho n&atilde;o aparecer, provavelmente meu c&oacute;digo
+          n&atilde;o tem nenhum erro (a n&atilde;o ser de l&oacute;gica rsrs).
+        </p>
+
+        <p>
+          Outra coisa interessante &eacute; que se eu passar o mouse sobre
+          determinada vari&aacute;vel, eu sei exatamente qual o tipo dela. Isso
+          em bases de c&oacute;digo maiores &eacute; uma m&atilde;o na roda.
+        </p>
+
+        <p>
+          <img
+            loading="lazy"
+            src="imgs/typescript-2.png"
+            alt="Figura 5. VSCode + tsserver exibindo o tipo de uma variável
 
-            <p>
-              Note que este arquivo pode já existir. Caso positivo, adicione a
-              configuração acima junto com a configuração anterior que pode já
-              estar no arquivo settings.json.
-            </p>
-
-            <p>Por exemplo:</p>
-
-            <pre>
-{
-  "window.zoomLevel": 0,
-  "code-runner.executorMap": {
-    "typescript": "npx ts-node --files",
-  }
-}
-            </pre>
-
-            <p>
-              No arquivo acima, estou simulando que j&aacute; existia a
-              configura&ccedil;&atilde;o
-              <code>&quot;window.zoomLevel&quot;</code>, ent&atilde;o adicionei
-              as configura&ccedil;&otilde;es do
-              <strong>Code Runner</strong> junto.
-            </p>
-
-            <p>
-              Agora voc&ecirc; pode clicar no &ldquo;Play&rdquo; no canto
-              superior direito sempre que quiser executar o seu arquivo
-              TypeScript.
-            </p>
-
-            <h3>tsconfig.json</h3>
-
-            <p>
-              Voc&ecirc; pode compilar seus arquivos TypeScript em JavaScript de
-              duas maneiras diferentes:
-            </p>
-
-            <ol>
-              <li>com par&acirc;metros via linha de comando</li>
-              <li>com par&acirc;metros via <code>tsconfig.json</code></li>
-            </ol>
-
-            <p>
-              No entanto, n&atilde;o recomendo o uso da primeira
-              op&ccedil;&atilde;o.
-            </p>
-
-            <p>
-              Assim, crie um arquivo chamado <code>tsconfig.json</code> na raiz
-              do seu projeto e cole o seguinte:
-            </p>
-
-            <pre>
-{
-  "compilerOptions": {
-    "lib": [
-      "es2015"
-    ],
-    "module": "commonjs",
-    "outDir": "dist",
-    "strict": true,
-    "target": "es2015",
-    "esModuleInterop": true
-  },
-  "include": [
-    "src"
-  ]
-}</pre
-            >
-
-            <p>
-              Vamos entender o que fizemos, afinal, &eacute; pra isso que
-              voc&ecirc; est&aacute; aqui:
-            </p>
-
-            <ul>
-              <li>
-                <code>lib</code> &ndash; configura o ambiente que o TSC vai
-                assumir que voc&ecirc; est&aacute; usando. Assim, es2015 assume
-                que o ambiente no qual voc&ecirc; vai rodar seu c&oacute;digo
-                &eacute; compat&iacute;vel com o ECMAScript 2015.
-              </li>
-              <li>
-                <code>module</code> &ndash; configura qual o sistema de
-                m&oacute;dulos o TSC vai usar para compilar seu c&oacute;digo.
-                Geralmente, escolho &lsquo;<code>common.js</code>&lsquo; e ativo
-                &lsquo;<code>esModuleInterop</code>&lsquo;. Isso me permite usar
-                Import/Export em qualquer ambiente. No entanto, se eu fosse usar
-                algum ambiente front-end, usaria o
-                <a href="https://webpack.js.org/">webpack</a> para fazer meu
-                <em>bundle</em>.
-              </li>
-              <li>
-                <code>outDir</code> &ndash; &Eacute; a pasta de sa&iacute;da do
-                seu c&oacute;digo. Quando voc&ecirc; compilar, a pasta de
-                sa&iacute;da ter&aacute; a mesma estrutura da pasta de entrada.
-                Ent&atilde;o, seus arquivos de produ&ccedil;&atilde;o
-                estar&atilde;o em &ldquo;dist&rdquo; ap&oacute;s a
-                compila&ccedil;&atilde;o.
-              </li>
-              <li>
-                <code>strict</code> &ndash; Esse &eacute; o modo
-                recomend&aacute;vel para uso do TS, ativa v&aacute;rias
-                <a
-                  href="https://www.typescriptlang.org/docs/handbook/compiler-options.html"
-                  >flags restritivas no TSC</a
-                >. Qualquer coisa que n&atilde;o estiver em conformidade, o
-                compilador vai reclamar. Por&eacute;m, isso s&oacute; &eacute;
-                recomend&aacute;vel se voc&ecirc; estiver iniciando um projeto
-                do zero com TS, se for migrar um c&oacute;digo antigo de JS para
-                TS, configure como <code>false</code>.
-              </li>
-              <li>
-                <code>target</code> &ndash; configura a vers&atilde;o ECMASCript
-                que o TSC vai usar para compilar seu c&oacute;digo (ES3, ES5,
-                &hellip;, ES2020, ESNext). Entretanto, o ambiente de
-                produ&ccedil;&atilde;o do seu c&oacute;digo precisar&aacute;
-                suportar a vers&atilde;o escolhida.
-              </li>
-              <li>
-                <code>esModuleInterop</code> &ndash; Ver <code>module</code>.
-              </li>
-              <li>
-                <code>include</code> &ndash; quais pastas o <code>tsc</code> vai
-                analisar para compilar.
-              </li>
-            </ul>
-
-            <h3>Testando tudo</h3>
-
-            <p>
-              Como voc&ecirc; p&ocirc;de perceber na configura&ccedil;&atilde;o
-              anterior, nossa pasta de entrada ser&aacute;
-              &ldquo;<strong>src</strong>&rdquo; e de sa&iacute;da
-              &ldquo;<strong>dist</strong>&ldquo;. Embora voc&ecirc; possa usar
-              a configura&ccedil;&atilde;o que preferir, essa &eacute; uma
-              conven&ccedil;&atilde;o muito utilizada atualmente. Ent&atilde;o,
-              prefira mant&ecirc;-la.
-            </p>
-
-            <p>
-              <strong>Nota:</strong> a pasta <strong>src</strong> precisa ser
-              criada manualmente, assim como os arquivos
-              <strong>.ts </strong>dentro dela.
-            </p>
-
-            <p>
-              Vamos criar todos os nossos arquivos com extens&otilde;es
-              <strong>.ts</strong> na pasta <strong>src</strong>. Eventualmente,
-              vamos compilar nosso c&oacute;digo simplesmente digitando
-              &ldquo;<strong>tsc</strong>&rdquo; (sem aspas) no terminal.
-            </p>
-
-            <p>
-              Voc&ecirc; ter&aacute; duas op&ccedil;&otilde;es para executar seu
-              c&oacute;digo:
-            </p>
-
-            <ol>
-              <li>Usando o ts-node</li>
-              <li>Usando o tsc</li>
-            </ol>
-
-            <h4>C&oacute;digo de exemplo</h4>
-
-            <p>
-              Embora eu ainda n&atilde;o tenha especificado como escrever
-              c&oacute;digos TS. Crie o arquivo
-              <code>src/index.ts</code> (arquivo <em>index.ts</em> dentro da
-              pasta <em>src</em>) e digite o seguinte para testar:
-            </p>
-
-            <pre>
-const name = 'Otávio Miranda';
-console.log(name);</pre
-            >
-
-            <p>
-              Conforme configuramos o <code>tsconfig.json</code> com
-              <code>strict = true</code>, voc&ecirc; n&atilde;o conseguiria
-              executar qualquer JS sem tipagem adequada (alguns sim, outros
-              n&atilde;o). No trecho acima estou usando a infer&ecirc;ncia de
-              tipos do TypeScript. Por&eacute;m, se quiser executar qualquer JS
-              normal (sem tipagem) dentro do seu script TS, modifique
-              <code>strict</code> para <code>false</code>.
-            </p>
-
-            <h4>ts-node</h4>
-
-            <p>
-              Para usar o <code>ts-node</code>, digite seu c&oacute;digo dentro
-              de um arquivo (suponha <code>index.ts</code>) ou use meu
-              c&oacute;digo de exemplo (acima) e pressione o play no canto
-              superior direito da tela. Similarmente, voc&ecirc; pode
-              simplesmente digitar:
-            </p>
-
-            <p><code>npx ts-node src/index.ts</code></p>
-
-            <p>
-              Se o arquivo <code>index.ts</code> importar qualquer outro
-              m&oacute;dulo, ele ser&aacute; compilado temporariamente apenas
-              para exibir o resultado no terminal. Embora isso n&atilde;o
-              compile c&oacute;digos reais, &eacute; super interessante para
-              execu&ccedil;&atilde;o r&aacute;pida de c&oacute;digos
-              <em
-                ><a
-                  href="https://www.mairovergara.com/on-the-fly-o-que-significa-esta-expressao/"
-                  >on the fly</a
-                ></em
-              >. Contudo, voc&ecirc; vai precisar compilar seu c&oacute;digo em
-              algum momento. Para isso, use <code>tsc</code>.
-            </p>
-
-            <h4>tsc</h4>
-
-            <p>
-              Anteriormente, vimos uma maneira simples para compilar
-              c&oacute;digos temporariamente (sem criar novos arquivos) com
-              <code>ts-node</code>. Contudo, voc&ecirc; vai precisar dos
-              arquivos para produ&ccedil;&atilde;o, afinal, o c&oacute;digo JS
-              &eacute; que ser&aacute; executado no ambiente de
-              produ&ccedil;&atilde;o. Portanto, para compilar realmente seu
-              c&oacute;digo (gerando os arquivos na pasta
-              <strong>dist</strong>), simplesmente digite no terminal:
-            </p>
-
-            <p><code>npx tsc</code></p>
-
-            <p>
-              O compilador ir&aacute; usar as configura&ccedil;&otilde;es no
-              <code>tsconfig.json</code> a fim de gerar nossos arquivos JS.
-              Al&eacute;m disso, ele criar&aacute; e atualizar&aacute; a pasta
-              &ldquo;<strong>dist</strong>&rdquo; com os arquivos de
-              sa&iacute;da. Embora n&atilde;o necess&aacute;rio, d&ecirc; uma
-              olhada nos arquivos gerados na pasta <strong>dist</strong>.
-            </p>
-
-            <p>
-              Depois que compilei o c&oacute;digo <strong>TS</strong>, meu
-              arquivo <code>dist/index.js</code> ficou assim:
-            </p>
-
-            <pre>
-"use strict";
-const name = 'Otávio Miranda';
-console.log(name);
-            </pre>
-
-            <p>
-              Ou seja, quase nenhuma diferen&ccedil;a do arquivo original.
-              Todavia, os arquivos reais de produ&ccedil;&atilde;o devem ficar
-              extremamente diferentes dos originais, vai por mim.
-            </p>
-
-            <p>
-              Uma outra forma de compila&ccedil;&atilde;o &eacute; o modo
-              &ldquo;<strong>watch</strong>&ldquo;, onde o <code>tsc</code> fica
-              &ldquo;<em>assistindo</em>&rdquo; mudan&ccedil;as no seu
-              c&oacute;digo a fim de gerar automaticamente os arquivos de
-              sa&iacute;da. Para usar o modo
-              &ldquo;<strong>watch</strong>&ldquo;, digite:
-            </p>
-
-            <p><code>npx tsc -w</code></p>
-
-            <p>
-              Voc&ecirc; vai perceber que o <code>tsc</code> vai ficar
-              assistindo modifica&ccedil;&otilde;es no seu c&oacute;digo e
-              atualizando a sa&iacute;da assim que voc&ecirc; salvar seu
-              arquivo. Para parar, pressione CTRL + C no terminal.
-            </p>
-
-            <h3>
-              Prettier e formata&ccedil;&atilde;o autom&aacute;tica (opcional)
-            </h3>
-
-            <p>
-              Como eu te disse anteriormente, gosto bastante de usar as
-              configura&ccedil;&otilde;es do &ldquo;Prettier&rdquo; e a
-              formata&ccedil;&atilde;o autom&aacute;tica em meus c&oacute;digos.
-              Embora opcional, voc&ecirc; pode fazer essa
-              configura&ccedil;&atilde;o como mostro abaixo.
-            </p>
-
-            <h4>Instalando os pacotes do Prettier</h4>
-
-            <p>Digite o seguinte no terminal:</p>
-
-            <p>
-              <code
-                >npm i prettier eslint-config-prettier eslint-plugin-prettier
-                -D</code
-              >
-            </p>
-
-            <p>
-              Não tenho muito o que te explicar sobre isso, são pacotes
-              necessários para o funcionamento do Prettier com o ESLint.
-            </p>
-
-            <p>
-              Crie um arquivo chamado .prettierrc.js na raiz do seu projeto e
-              cole o seguinte:
-            </p>
-
-            <pre>
-module.exports = {
-  semi: true,
-  trailingComma: 'all',
-  singleQuote: true,
-  printWidth: 80,
-  tabWidth: 2
-}
-            </pre>
-
-            <p>As configura&ccedil;&otilde;es s&atilde;o as seguintes:</p>
-
-            <ul>
-              <li>
-                <code>semi</code> &ndash; for&ccedil;a o uso de ponto e
-                v&iacute;rgula;
-              </li>
-              <li>
-                <code>trailingComma</code> &ndash; deixa uma v&iacute;rgula ao
-                final de arrays, objetos, etc;
-              </li>
-              <li>
-                <code>singleQuote</code> &ndash; prefere o uso de aspas simples
-              </li>
-              <li>
-                <code>printWidth</code> &ndash; tenta quebrar linhas com 80
-                caracteres ou mais;
-              </li>
-              <li>
-                <code>tabWidth</code> &ndash; usa dois espa&ccedil;os para tab;
-              </li>
-            </ul>
-
-            <h4>Configurando a formata&ccedil;&atilde;o autom&aacute;tica</h4>
-
-            <p>
-              O legal &eacute; que agora voc&ecirc; pode acessar as
-              configura&ccedil;&otilde;es do VSCode e solicitar a
-              formata&ccedil;&atilde;o autom&aacute;tica afim de formatar seu
-              arquivo assim que voc&ecirc; salv&aacute;-lo. Para isso, clique em
-              <code
-                >&quot;File&quot; &gt; &quot;Preferences&quot; &gt;
-                &quot;Settings&quot;</code
-              >. No canto superior direito da tela, clique no &iacute;cone
-              <code>&quot;Open settings (JSON)&quot;</code>. Por fim, cole o
-              seguinte nas configura&ccedil;&otilde;es:
-            </p>
-
-            <pre>
-{
-  // Configurações já existentes
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.fixAll": true
-  },
-  // Mais configurações existentes
-}
-            </pre>
-
-            <p>
-              Assim, quando voc&ecirc; salvar o seu arquivo, ele ser&aacute;
-              automaticamente formatado com o Prettier e o ESLint.
-            </p>
-
-            <h4>Ajustando o eslint</h4>
-
-            <p>
-              Agora, precisamos adicionar o <em>prettier</em> na
-              configura&ccedil;&atilde;o &ldquo;<em>extends</em>&rdquo; do seu
-              <code>.eslintrc.js</code>.
-            </p>
-
-            <p>
-              Abra o <code>.eslintrc.js</code>, que atualmente deve estar assim:
-            </p>
-
-            <pre>
-module.exports = {
-  // outras configs
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
-  // outras configs
-};
-            </pre>
-
-            <p>
-              Em extends, adicione 'plugin:prettier/recommended', dessa maneira:
-            </p>
-
-            <pre>
-module.exports = {
-  // outras configs
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-  ],
-  // outras configs
-};
-            </pre>
-
-            <p>Como na <strong>linha 7</strong> do exemplo acima.</p>
-
-            <p>
-              Se voc&ecirc; adicionou tudo corretamente, agora o
-              <em>prettier</em> e a
-              <em>formata&ccedil;&atilde;o autom&aacute;tica</em> j&aacute;
-              devem estar funcionando.
-            </p>
-
-            <h2>
-              Tipos b&aacute;sicos e infer&ecirc;ncia de tipos do TypeScript
-            </h2>
-
-            <p>
-              At&eacute; aqui voc&ecirc; leu coisas superficiais sobre o
-              TypeScript. Voc&ecirc; sabe o que &eacute;, como configurar, mas
-              ainda n&atilde;o viu uma das coisas que faz ele ser o que &eacute;
-              e ter a popularidade que tem atualmente, os
-              <strong>Tipos</strong>.
-            </p>
-
-            <h3>Um perigo: A tipagem fraca e din&acirc;mica do JS</h3>
-
-            <p>
-              O Javascript &eacute; uma linguagem de tipagem fraca e
-              din&acirc;mica. Fraca porque voc&ecirc; consegue fazer coisas como
-              <code>10 / &#39;20&#39;</code> e o JavaScript se vira de alguma
-              maneira pra retornar um <code>0.5</code>. Quem n&atilde;o conhece
-              JS pode assustar com esse resultado (mas est&aacute; certo).
-            </p>
-
-            <p>
-              Isso pode ser algo ruim do ponto de vista l&oacute;gico, quando
-              <code>10 / &#39;20&#39;</code> um seria <code>0.5</code>?
-              S&oacute; podemos presumir que isso foi uma coer&ccedil;&atilde;o
-              de tipos, portanto, entendemos um dos valores foi convertido pra
-              outro tipo automaticamente. A string 20 foi convertida em number.
-              Isso caracteriza uma linguagem de <strong>tipagem fraca</strong>.
-            </p>
-
-            <p>
-              Linguagens de tipagem forte, provavelmente levantariam uma
-              exce&ccedil;&atilde;o neste ponto do seu c&oacute;digo.
-            </p>
-
-            <p>
-              E din&acirc;mica porque voc&ecirc; n&atilde;o precisa declarar os
-              tipos com anteced&ecirc;ncia e o tipo pode mudar ao longo do
-              c&oacute;digo, uma vari&aacute;vel que muda de valor,
-              tamb&eacute;m pode mudar de tipo. Em momento algum eu preciso
-              falar que <code>10</code> &eacute; um <code>number</code>, que
-              <code>true</code> &eacute; um <code>boolean</code>, que
-              <code>&#39;Luiz&#39;</code> &eacute; uma <code>string</code>. Ele
-              faz isso automaticamente tamb&eacute;m. Isso caracteriza uma
-              linguagem de <strong>tipagem din&acirc;mica</strong>.
-            </p>
-
-            <p>
-              Essas duas coisas combinadas podem trazer um benef&iacute;cio
-              excelente, a <strong>flexibilidade</strong>. &Eacute; algo
-              extremamente simples escrever c&oacute;digos em Javascript. Mas,
-              aqui tamb&eacute;m mora um perigo iminente. Programadores precisam
-              tomar um <strong>cuidado extremo</strong> e escrever testes
-              al&eacute;m do necess&aacute;rio apenas para garantir que os tipos
-              dos valores est&atilde;o corretos. Do contr&aacute;rio, um erro
-              assim poderia chegar em produ&ccedil;&atilde;o sem que
-              soub&eacute;ssemos:
-            </p>
-
-            <p><code>10 / [20, 10] // NaN</code></p>
-
-            <h3>A tipagem forte, est&aacute;tica e inferida do TypeScript</h3>
-
-            <p>
-              Por outro lado, o TS tem tipagem forte, est&aacute;tica e inferida
-              (a infer&ecirc;ncia &eacute; muito importante aqui,
-              aten&ccedil;&atilde;o).
-            </p>
-
-            <p>
-              Se eu escrevo um c&oacute;digo assim no TypeScript, imediatamente
-              tenho um erro, veja:
-            </p>
-
-            <pre>
-let number1 = 10; // number
-let number2 = '20'; // string
-let number3 = number1 / number2;
-//                      ^
-// The right-hand side of an arithmetic
-// operation must be of type 'any',
-// 'number', 'bigint' or an enum type.ts(2363)
-            </pre>
-
-            <p>
-              Aqui o TS usa um recurso muito interessante chamado de
-              <strong>infer&ecirc;ncia de tipos</strong>. Perceba que eu deixei
-              comentado os tipos das duas primeiras vari&aacute;veis (a
-              &uacute;ltima foi um erro). Esses tipos foram inferidos
-              automaticamente pelo TypeScript, em momento algum eu disse que
-              <code>10</code> era um <code>number</code> e que
-              <code>&#39;20&#39;</code> era uma <code>string</code>. Mas
-              est&aacute; igual ao JS, tipagem din&acirc;mica? N&atilde;o!
-            </p>
-
-            <p>
-              A infer&ecirc;ncia de tipos &eacute; uma forma do TypeScript
-              modelar o comportamento do JavaScript e tamb&eacute;m de deixar o
-              seu c&oacute;digo mais limpo. Voc&ecirc; n&atilde;o precisa
-              adicionar tipagem em coisas &oacute;bvias (salvo em casos onde ele
-              n&atilde;o consegue inferir um tipo). No entanto, uma vez que o
-              tipo for inferido, ele n&atilde;o poder&aacute; mais ser alterado
-              (e aqui estamos falando em tipo, n&atilde;o em valor).
-            </p>
-
-            <pre>
-let number1 = 10; // number
-number1 = '20';
-// ^
-// Type '"20"' is not assignable to type 'number'.ts(2322)
-              </pre
-            >
-
-            <p>
-              Em conclusão, minha dica pra você que está iniciando com o TS
-              seria: só coloque tipos em coisas que não são óbvias, evite sair
-              adicionando tipo em todas as suas variáveis. Quando o TS não
-              conseguir inferir um tipo, ele vai te avisar. Use o seu editor
-              para saber qual tipo foi inferido. Geralmente basta passar o mouse
-              sobre a variável e o editor (como o VSCode) irá lhe informar o
-              tipo da variável.
-            </p>
-
-            <p>
-              <img
-                loading="lazy"
-                src="imgs/Peek-14-06-2020-17-38.gif"
-                alt="Figura 6. A inferência de tipos consegue saber o tipo de retorno da função e repassar isso para a variável.
                 "
-              />
-              <span class="img-description"
-                >Figura 6. A inferência de tipos consegue saber o tipo de
-                retorno da função e repassar isso para a variável.
-              </span>
-            </p>
+          />
+          <span class="img-description"
+            >Figura 5. VSCode + tsserver exibindo o tipo de uma variável
+          </span>
+        </p>
 
-            <h3>Tipos mais b&aacute;sicos</h3>
+        <h4>Fatos interessantes:</h4>
 
-            <p>
-              O TS suporta todos os tipos que voc&ecirc; tem o costume de usar
-              em JS, como: boolean, number, bigint, symbol, string, array, null,
-              undefined e object. Al&eacute;m disso, ele tamb&eacute;m adiciona
-              seus pr&oacute;prios tipos, como: any, tuple, void, never e Enum.
-            </p>
+        <p>
+          O VSCode foi criado pela Microsoft e foi escrito em TypeScript e
+          JavaScript com o
+          <a href="https://www.electronjs.org/">Electron</a>. Ele usa
+          <a href="https://github.com/DefinitelyTyped/DefinitelyTyped"
+            >type definitions</a
+          >
+          do TypeScript para a maioria das fun&ccedil;&otilde;es do seu
+          <a href="https://code.visualstudio.com/docs/editor/intellisense"
+            >IntelliSense</a
+          >
+          tanto para JavaScript quanto para TypeScript. Portanto, se voc&ecirc;
+          usa o VSCode para editar seus c&oacute;digos Javascript, voc&ecirc;
+          j&aacute; faz uso extensivo de TypeScript (mesmo sem saber).
+        </p>
 
-            <p>
-              A maneira que eu tenho para informar qual o tipo da minha
-              vari&aacute;vel, par&acirc;metro ou retorno de
-              fun&ccedil;&otilde;es e m&eacute;todos &eacute; com
-              <code>:</code> (dois pontos). Existem algumas outras maneiras, mas
-              vamos deixar isso de lado por enquanto.
-            </p>
+        <h2>Instalando e configurando o TypeScript</h2>
 
-            <p>
-              Por exemplo, aqui eu vou
-              <strong
-                >quebrar minha pr&oacute;pria dica (sobre
-                infer&ecirc;ncia)</strong
-              >
-              e vou adicionar os tipos em tudo o que for poss&iacute;vel
-              s&oacute; pra voc&ecirc; ver a estrutura:
-            </p>
+        <p>
+          Se voc&ecirc; chegou at&eacute; aqui, provavelmente eu j&aacute;
+          despertei seu interesse em TypeScript (ou talvez voc&ecirc; j&aacute;
+          o tinha). De qualquer forma, que bom! Na minha opini&atilde;o, se
+          voc&ecirc; come&ccedil;ar a usar o TS nos seus projetos, vai ser
+          dif&iacute;cil voltar atr&aacute;s, vai por mim.
+        </p>
 
-            <pre>
-/* eslint-disable */
-// Se você não desativar o ESLint aqui, não conseguirá
-// declarar esses tipos que seriam inferidos naturalmente
-const name: string = 'Luiz'; // string
-const age: number = 30; // number
-const birthday: Date = new Date('1990-06-14T00:00:00-03:00'); // Date
-const addresses: Array&lt;string&gt; = ['Rua 1', 'Rua 2']; // array de strings
-const parentNames: string[] = ['João', 'Maria']; // array de strings
-const isEmployed: boolean = true; // boolean
+        <p>
+          Contudo, isso pode ser algo desafiador em meio a tantas
+          op&ccedil;&otilde;es, n&atilde;o &eacute; mesmo? A seguir, vamos ver
+          como iniciar um projeto TypeScript do zero. Embora eu n&atilde;o
+          v&aacute; conseguir te explicar tudo o que existe sobre ele em apenas
+          um post, percebo que o mais dif&iacute;cil &eacute; iniciar, o resto
+          voc&ecirc; pode ir aprendendo com o tempo e a
+          <a
+            href="https://www.typescriptlang.org/docs/handbook/basic-types.html"
+            >documenta&ccedil;&atilde;o</a
+          >.
+        </p>
 
-console.log(`Meu nome é ${name} e tenho ${age} anos.`);
-console.log(`Nasci em ${birthday.toLocaleString()}, moro em ${addresses.join(', ')}.`);
-console.log(`Meus pais são ${parentNames.join(' e ')}`);
-console.log(`Eu ${isEmployed ? 'estou' : 'não estou'} empregado atualmente.`);
+        <h3>Instala&ccedil;&atilde;o de programas</h3>
 
-/*
-Saída:
-Meu nome é Luiz e tenho 30 anos.
-Nasci em 14/06/1990 00:00:00, moro em Rua 1, Rua 2.
-Meus pais são João e Maria
-Eu estou empregado atualmente.
-*/</pre
+        <p>
+          Eu gosto de usar algumas coisas nos meus projetos, por isso, a
+          configura&ccedil;&atilde;o que voc&ecirc; vai ver a seguir ser&aacute;
+          a mesma que utilizo em muitos dos meus projetos. Entretanto, tenha em
+          mente que isso vai variar muito de desenvolvedor para desenvolvedor e
+          de projeto para projeto. Assim, &eacute; prov&aacute;vel que
+          voc&ecirc; ver&aacute; outras configura&ccedil;&otilde;es muito
+          diferentes por a&iacute;, ou talvez voc&ecirc; tenha que conversar com
+          seu time antes de sair configurando o ambiente de um projeto como um
+          todo.
+        </p>
+
+        <p>
+          Se voc&ecirc; tem experiencia com isso, provavelmente poder&aacute;
+          pular para &ldquo;<strong
+            ><a href="#Instalando_o_TypeScript,_tsnode_e_eslint"
+              >Instalando o TypeScript, ts-node e eslint</a
+            ></strong
+          >&ldquo;.
+        </p>
+
+        <p>
+          Antes de come&ccedil;ar, voc&ecirc; vai precisar do seguinte (se
+          quiser o mesmo ambiente que o meu):
+        </p>
+
+        <ul>
+          <li>
+            Baixar e
+            <a href="https://nodejs.org/en/download/">instalar o Node.js</a>;
+          </li>
+          <li>
+            Baixar e
+            <a href="https://code.visualstudio.com/">instalar o VSCode</a>;
+          </li>
+        </ul>
+
+        <h3>Criando a pasta do projeto</h3>
+
+        <p>
+          No seu sistema operacional, crie uma pasta exclusiva para o seu
+          projeto com o TS. Isso &eacute; importante para termos uma pasta
+          node_modules e package.json exclusivos para este projeto.
+        </p>
+
+        <p>
+          <strong>Nota:</strong> voc&ecirc; pode migrar uma base de
+          c&oacute;digo existente apenas renomeando arquivos
+          <strong>.js</strong> para <strong>.ts</strong> e fazendo as
+          configura&ccedil;&otilde;es abaixo. Nesse caso use
+          <code>strict</code> como <code>false</code> (voc&ecirc; vai ver isso
+          abaixo). Al&eacute;m disso, verifique se todos os m&oacute;dulos que
+          voc&ecirc; utiliza no projeto JS d&atilde;o suporte para TS. Tenha em
+          mente que pode ser necess&aacute;rio modificar coisas complicadas para
+          fazer essa migra&ccedil;&atilde;o.
+        </p>
+
+        <p>
+          Para um projeto novo (recomend&aacute;vel), apenas abra a nova pasta
+          pasta no VSCode, indo em
+          <code>File &gt; Open Folder</code> e escolhendo a pasta que voc&ecirc;
+          acabou de criar.
+        </p>
+
+        <h3>Instalando o TypeScript, ts-node e eslint</h3>
+
+        <p>
+          Abra o terminal do VSCode em <code>View &gt; Terminal</code> e digite
+          o seguinte:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#89B4FA;font-style:italic">npm</span><span style="color:#A6E3A1"> init</span><span style="color:#A6E3A1"> -y</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">npm</span><span style="color:#A6E3A1"> i</span><span style="color:#A6E3A1"> typescript</span><span style="color:#A6E3A1"> ts-node</span><span style="color:#A6E3A1"> eslint</span><span style="color:#A6E3A1"> @types/node</span><span style="color:#A6E3A1"> -D</span></span></code></pre>
+        <p>Para que voc&ecirc; compreenda o que est&aacute; instalando:</p>
+
+        <ul>
+          <li>
+            <code>typescript</code> &ndash; &eacute; o pr&oacute;prio TypeScript
+            (<code>tsc</code> e <code>tsserver</code>);
+          </li>
+          <li>
+            <code>ts-node</code> &ndash; permite executar scripts do TypeScript
+            diretamente;
+          </li>
+          <li>
+            <code>eslint</code> &ndash; &Eacute; o meu
+            <a
+              href="https://pt.stackoverflow.com/questions/330821/o-que-significa-executar-lint-no-c%C3%B3digo#:~:text=Um%20linter%20ou%20lint%20%C3%A9%20uma%20ferramenta%20de%20an%C3%A1lise%20est%C3%A1tica%20de%20c%C3%B3digo.&amp;text=Um%20linter%20ou%20lint%20se,c%C3%B3digo%2Dfonte%20em%20linguagem%20C."
+              >linter</a
             >
+            preferido, algumas pessoas preferem o
+            <a href="https://palantir.github.io/tslint/">tslint</a>
+            (voc&ecirc; pode conferir depois);
+          </li>
+          <li>
+            <code>@types/node</code> &ndash; S&atilde;o as
+            defini&ccedil;&otilde;es de tipo para o Node.js
+          </li>
+        </ul>
 
-            <p>
-              Perceba que todos esses tipos seriam inferidos naturalmente por
-              serem óbvios, basta o TS olhar o valor para saber o tipo. Então,
-              eu poderia limpar drasticamente meu código os removendo.
-            </p>
+        <h3>Extens&otilde;es do VSCode</h3>
 
-            <pre>
-const name = 'Luiz'; // string
-const age = 30; // number
-const birthday = new Date('1990-06-14T00:00:00-03:00'); // Date
-const addresses = ['Rua 1', 'Rua 2']; // array de strings
-const parentNames = ['João', 'Maria']; // array de strings
-const isEmployed = true; // boolean</pre
+        <p>
+          Para uso do ESLint e do ts-node, eu gosto de duas extens&otilde;es no
+          VSCode.
+        </p>
+
+        <ul>
+          <li>
+            <a
+              href="https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner"
+              >Code Runner</a
             >
-
-            <p>
-              Menos em objetos um pouco mais complexos, como array e date, o
-              TypeScript foi capaz de inferir os tipos.
-            </p>
-
-            <p>
-              O ideal seria você adicionar tipos em coisas onde o tipo não é tão
-              óbvio assim. Por exemplo, os parâmetros de uma função não são
-              óbvios, eu poderia passar literalmente qualquer coisa sem que o JS
-              reclamasse. Esses parâmetros devem ter tipos em TypeScript.
-            </p>
-
-            <pre>
-// Essa função precisa receber um array de números
-// posso representar isso com number[] ou Array&lt;number&gt;
-const sumNumbers = (arrayOfNumbers: number[]) => {
-return arrayOfNumbers.reduce((s, v) => s + v);
-};
-
-const result = sumNumbers([1, 2, 3]); // number
-console.log(result); // 6</pre
+          </li>
+          <li>
+            <a
+              href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint"
+              >ESLint</a
             >
+          </li>
+        </ul>
 
-            <p>
-              Al&eacute;m disso, eu tamb&eacute;m poderia representar isso com o
-              <a
-                href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Functions/rest_parameters"
-                >rest operator (&hellip;)</a
-              >.
-            </p>
+        <p>Instale ambas as extens&otilde;es no seu VSCode</p>
 
-            <pre>
-// Agora qualquer parâmetro dessa função deve
-// ser um número
-const sumNumbers = (...nums: number[]) => {
-  return nums.reduce((s, v) => s + v);
-};
+        <p>
+          O <strong>Code Runner</strong> habilita a possibilidade executar um
+          comando apenas pressionando um bot&atilde;o de &ldquo;Play&rdquo; no
+          canto superior direito do seu VSCode. Assim, ao inv&eacute;s de
+          digitar:
+        </p>
 
-const result = sumNumbers(1, 2, 3); // number
-console.log(result); // 6</pre
-            >
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#89B4FA;font-style:italic">npx</span><span style="color:#A6E3A1"> ts-node</span><span style="color:#A6E3A1"> index.ts</span></span></code></pre>
 
-            <p>
-              Conforme voc&ecirc; tamb&eacute;m p&ocirc;de notar nos
-              c&oacute;digos anteriores, a maioria dos tipos b&aacute;sicos
-              s&atilde;o adicionados com letra min&uacute;scula: boolean,
-              number, bigint, symbol, string, array, null, undefined e object.
-            </p>
+        <p>
+          Eu posso simplesmente configurar o
+          <strong>Code Runner </strong>para executar automaticamente este
+          comando para todos os meus arquivos TypeScript assim que eu pressionar
+          o play. Isso &eacute; fant&aacute;stico para executar rapidamente seus
+          c&oacute;digo e focar no aprendizado.
+        </p>
 
-            <h3>Tipos b&aacute;sicos que existem apenas no TypeScript</h3>
+        <p>
+          O <strong>Eslint</strong> (a extens&atilde;o) faz a
+          integra&ccedil;&atilde;o do <strong>ESLint</strong> (linter) com o
+          VSCode.
+        </p>
 
-            <p>
-              Alguns dos tipos que indiquei anteriormente, existem apenas no
-              TypeScript, como any, tuple, void, never e Enum. Ent&atilde;o
-              vamos ver quando us&aacute;-los:
-            </p>
+        <h3>Configurando o ESLint</h3>
 
-            <h4>any</h4>
+        <p>
+          Vamos instalar alguns plugins para que o ESLint funcione com o
+          TypeScript. Para isso, digite no terminal:
+        </p>
 
-            <p>
-              Esse &eacute; um tipo que voc&ecirc; n&atilde;o gostaria de ter no
-              seu c&oacute;digo (a n&atilde;o ser que n&atilde;o tenha outra
-              op&ccedil;&atilde;o). Significa a mesma coisa que &ldquo;qualquer
-              coisa&rdquo; (assim como no JS).
-            </p>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#89B4FA;font-style:italic">npm</span><span style="color:#A6E3A1"> i</span><span style="color:#A6E3A1"> @typescript-eslint/eslint-plugin</span><span style="color:#A6E3A1"> @typescript-eslint/parser</span><span style="color:#A6E3A1"> -D</span></span></code></pre>
 
-            <p>
-              O fato aqui &eacute; que tudo precisa ter um tipo em tempo de
-              compila&ccedil;&atilde;o no TypeScript, quando voc&ecirc;
-              n&atilde;o fornecer um tipo e o TSC tamb&eacute;m n&atilde;o
-              conseguir inferir um tipo correto, o padr&atilde;o ser&aacute;
-              &ldquo;any&rdquo; (qualquer coisa). Assim, voc&ecirc; n&atilde;o
-              ter&aacute; fun&ccedil;&otilde;es de intelliSense (auto completar,
-              erros, etc). O any aceitar&aacute; literalmente qualquer coisa que
-              voc&ecirc; pedir pra ele fazer.
-            </p>
+        <p>
+          Crie um arquivo com o nome .eslintrc.js na raiz do seu projeto e cole
+          o seguinte nele:
+        </p>
 
-            <p>Por exemplo:</p>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#89B4FA;font-style:italic">module.exports</span><span style="color:#A6E3A1"> =</span><span style="color:#A6E3A1"> {</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">  env:</span><span style="color:#A6E3A1"> {</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">    browser:</span><span style="color:#FAB387"> true</span><span style="color:#A6E3A1">,</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">    es6:</span><span style="color:#FAB387"> true</span><span style="color:#A6E3A1">,</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">    node:</span><span style="color:#FAB387"> true</span><span style="color:#A6E3A1">,</span></span>
+<span class="line"><span style="color:#CDD6F4">  },</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">  extends:</span><span style="color:#CDD6F4"> [</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">    'eslint:recommended'</span><span style="color:#89B4FA;font-style:italic">,</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">    'plugin:@typescript-eslint/eslint-recommended'</span><span style="color:#89B4FA;font-style:italic">,</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">    'plugin:@typescript-eslint/recommended'</span><span style="color:#89B4FA;font-style:italic">,</span></span>
+<span class="line"><span style="color:#CDD6F4">  ],</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">  globals:</span><span style="color:#A6E3A1"> {</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">    Atomics:</span><span style="color:#A6E3A1"> 'readonly',</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">    SharedArrayBuffer:</span><span style="color:#A6E3A1"> 'readonly',</span></span>
+<span class="line"><span style="color:#CDD6F4">  },</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">  parser:</span><span style="color:#A6E3A1"> '@typescript-eslint/parser',</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">  parserOptions:</span><span style="color:#A6E3A1"> {</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">    ecmaVersion:</span><span style="color:#A6E3A1"> 11,</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">    sourceType:</span><span style="color:#A6E3A1"> 'module',</span></span>
+<span class="line"><span style="color:#CDD6F4">  },</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">  plugins:</span><span style="color:#CDD6F4"> [</span><span style="color:#A6E3A1">'@typescript-eslint'</span><span style="color:#CDD6F4">],</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">  rules:</span><span style="color:#A6E3A1"> {},</span></span>
+<span class="line"><span style="color:#CDD6F4">};</span></span></code></pre>
 
-            <pre>
-// Agora a função recebe qualquer coisa
-const sumNumbers = (...anything: any[]) => {
-  return anything.reduce((s, v) => s + v);
-};
+        <p>
+          E &eacute; s&oacute;, agora voc&ecirc; j&aacute; tem o ESLint
+          integrado ao seu VSCode e configurado. No entanto, n&atilde;o
+          configurei nenhuma regra do ESLint justamente para que voc&ecirc;
+          possa fazer suas pr&oacute;prias escolhas. Seu projeto usa aspas
+          simples ou duplas? Requer ponto e v&iacute;rgula? Usa tabs ou
+          espa&ccedil;os? Quantos? Enfim, essas s&atilde;o decis&otilde;es que
+          voc&ecirc; precisa tomar.
+        </p>
 
-const result = sumNumbers(1, 2, 'a'); // O tipo dessa variável é any
-console.log(result); // 3a &lt;- Resultado inesperado</pre
-            >
+        <p>
+          Eu gosto de usar as regras do
+          <a href="https://prettier.io/">Prettier</a>, com ponto e
+          v&iacute;rgula, aspas simples e 2 espa&ccedil;os (vou mostrar como
+          configurar mais abaixo).
+        </p>
 
-            <p>
-              Evite usar <code>any</code> a todo o custo. Quase sempre tem uma
-              op&ccedil;&atilde;o melhor.
-            </p>
+        <h3>Configurando o Code Runner</h3>
 
-            <h4>tuple</h4>
+        <p>
+          No seu projeto, crie uma pasta chamada de <code>.vscode</code>. Nessa
+          pasta, crie um arquivo chamado de <code>settings.json</code>.
+        </p>
 
-            <p>Uma tupla &eacute; um array de tamanho fixo. Por exemplo:</p>
+        <p>Cole o seguinte neste arquivo:</p>
 
-            <pre>
-// O tipo é [string, number]
-const personFirstNameAndAge: [string, number] = ['Luiz', 30];
-console.log(personFirstNameAndAge);</pre
-            >
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#9399B2">{</span></span>
+<span class="line"><span style="color:#9399B2">  "</span><span style="color:#89B4FA">code-runner.executorMap</span><span style="color:#9399B2">"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {</span></span>
+<span class="line"><span style="color:#9399B2">    "</span><span style="color:#89B4FA">typescript</span><span style="color:#9399B2">"</span><span style="color:#9399B2">:</span><span style="color:#A6E3A1"> "npx ts-node --files"</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#9399B2">  }</span></span>
+<span class="line"><span style="color:#9399B2">}</span></span></code></pre>
 
-            <p>
-              Perceba que a tupla em TypeScript &eacute; representada como um
-              array, por&eacute;m ela &eacute; muito mais espec&iacute;fica. Os
-              tipos precisam bater exatamente com os valores. No exemplo acima,
-              minha tupla precisa ter uma string na posi&ccedil;&atilde;o 0 e um
-              n&uacute;mero na posi&ccedil;&atilde;o 1. Eu consigo alterar os
-              valores apenas se forem do mesmo tipo.
-            </p>
+        <p>
+          Note que este arquivo pode já existir. Caso positivo, adicione a
+          configuração acima junto com a configuração anterior que pode já estar
+          no arquivo settings.json.
+        </p>
 
-            <p>
-              Tupas podem ter quantos valores voc&ecirc; quiser, n&atilde;o
-              s&atilde;o apenas dois como no exemplo acima.
-            </p>
+        <p>Por exemplo:</p>
 
-            <h4>void</h4>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#9399B2">{</span></span>
+<span class="line"><span style="color:#9399B2">  "</span><span style="color:#89B4FA">window.zoomLevel</span><span style="color:#9399B2">"</span><span style="color:#9399B2">:</span><span style="color:#FAB387"> 0</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#9399B2">  "</span><span style="color:#89B4FA">code-runner.executorMap</span><span style="color:#9399B2">"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {</span></span>
+<span class="line"><span style="color:#9399B2">    "</span><span style="color:#89B4FA">typescript</span><span style="color:#9399B2">"</span><span style="color:#9399B2">:</span><span style="color:#A6E3A1"> "npx ts-node --files"</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#9399B2">  }</span></span>
+<span class="line"><span style="color:#9399B2">}</span></span></code></pre>
 
-            <p>
-              Embora represente um &ldquo;n&atilde;o valor&rdquo;, &eacute;
-              interessante em alguns casos representar um m&eacute;todo ou
-              fun&ccedil;&atilde;o que n&atilde;o tenha retorno, por exemplo:
-            </p>
-            <pre>
-function showLog(): void {
-  console.log('Hey, sou o log.');
-}</pre
-            >
+        <p>
+          No arquivo acima, estou simulando que j&aacute; existia a
+          configura&ccedil;&atilde;o
+          <code>&quot;window.zoomLevel&quot;</code>, ent&atilde;o adicionei as
+          configura&ccedil;&otilde;es do <strong>Code Runner</strong> junto.
+        </p>
 
-            <p>
-              Essa fun&ccedil;&atilde;o n&atilde;o tem retorno, por isso
-              representamos seu retorno com &ldquo;void&rdquo;.
-            </p>
+        <p>
+          Agora voc&ecirc; pode clicar no &ldquo;Play&rdquo; no canto superior
+          direito sempre que quiser executar o seu arquivo TypeScript.
+        </p>
 
-            <h4>never</h4>
+        <h3>tsconfig.json</h3>
 
-            <p>
-              Voc&ecirc; j&aacute; imaginou um m&eacute;todo ou
-              fun&ccedil;&atilde;o que NUNCA retorna? Sim, eu posso ter
-              fun&ccedil;&otilde;es que nunca retornam mas lan&ccedil;am um
-              erro. Por exemplo:
-            </p>
+        <p>
+          Voc&ecirc; pode compilar seus arquivos TypeScript em JavaScript de
+          duas maneiras diferentes:
+        </p>
 
-            <pre>
-function error(): never {
-  throw new Error('NUNCA VOU RETORNAR');
-}
+        <ol>
+          <li>com par&acirc;metros via linha de comando</li>
+          <li>com par&acirc;metros via <code>tsconfig.json</code></li>
+        </ol>
 
-error(); // Error: NUNCA VOU RETORNAR</pre
-            >
+        <p>
+          No entanto, n&atilde;o recomendo o uso da primeira
+          op&ccedil;&atilde;o.
+        </p>
 
-            <p>
-              O retorno dessa fun&ccedil;&atilde;o nunca vai ocorrer, porque o
-              erro ocorre antes.
-            </p>
+        <p>
+          Assim, crie um arquivo chamado <code>tsconfig.json</code> na raiz do
+          seu projeto e cole o seguinte:
+        </p>
 
-            <h4>Enum</h4>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#9399B2">{</span></span>
+<span class="line"><span style="color:#9399B2">  "</span><span style="color:#89B4FA">compilerOptions</span><span style="color:#9399B2">"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {</span></span>
+<span class="line"><span style="color:#9399B2">    "</span><span style="color:#89B4FA">lib</span><span style="color:#9399B2">"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> [</span></span>
+<span class="line"><span style="color:#A6E3A1">      "es2015"</span></span>
+<span class="line"><span style="color:#9399B2">    ],</span></span>
+<span class="line"><span style="color:#9399B2">    "</span><span style="color:#89B4FA">module</span><span style="color:#9399B2">"</span><span style="color:#9399B2">:</span><span style="color:#A6E3A1"> "commonjs"</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#9399B2">    "</span><span style="color:#89B4FA">outDir</span><span style="color:#9399B2">"</span><span style="color:#9399B2">:</span><span style="color:#A6E3A1"> "dist"</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#9399B2">    "</span><span style="color:#89B4FA">strict</span><span style="color:#9399B2">"</span><span style="color:#9399B2">:</span><span style="color:#FAB387"> true</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#9399B2">    "</span><span style="color:#89B4FA">target</span><span style="color:#9399B2">"</span><span style="color:#9399B2">:</span><span style="color:#A6E3A1"> "es2015"</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#9399B2">    "</span><span style="color:#89B4FA">esModuleInterop</span><span style="color:#9399B2">"</span><span style="color:#9399B2">:</span><span style="color:#FAB387"> true</span></span>
+<span class="line"><span style="color:#9399B2">  },</span></span>
+<span class="line"><span style="color:#9399B2">  "</span><span style="color:#89B4FA">include</span><span style="color:#9399B2">"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> [</span></span>
+<span class="line"><span style="color:#A6E3A1">    "src"</span></span>
+<span class="line"><span style="color:#9399B2">  ]</span></span>
+<span class="line"><span style="color:#9399B2">}</span></span></code></pre>
 
-            <p>
-              Enums s&atilde;o uma maneira de enumerar valores. Uma estrutura de
-              dados n&atilde;o ordenada que mapeiam chaves para valores.
-              S&atilde;o muito usados quando pessoas querem dar um determinado
-              n&uacute;mero de op&ccedil;&otilde;es de escolha (choice).
-            </p>
+        <p>
+          Vamos entender o que fizemos, afinal, &eacute; pra isso que voc&ecirc;
+          est&aacute; aqui:
+        </p>
 
-            <p>
-              Por exemplo, na fun&ccedil;&atilde;o abaixo, s&oacute; posso
-              receber par&acirc;metros do tipo
-              &ldquo;<code>ProgrammingLanguages</code>&ldquo;, nada mais que
-              isso.
-            </p>
+        <ul>
+          <li>
+            <code>lib</code> &ndash; configura o ambiente que o TSC vai assumir
+            que voc&ecirc; est&aacute; usando. Assim, es2015 assume que o
+            ambiente no qual voc&ecirc; vai rodar seu c&oacute;digo &eacute;
+            compat&iacute;vel com o ECMAScript 2015.
+          </li>
+          <li>
+            <code>module</code> &ndash; configura qual o sistema de
+            m&oacute;dulos o TSC vai usar para compilar seu c&oacute;digo.
+            Geralmente, escolho &lsquo;<code>common.js</code>&lsquo; e ativo
+            &lsquo;<code>esModuleInterop</code>&lsquo;. Isso me permite usar
+            Import/Export em qualquer ambiente. No entanto, se eu fosse usar
+            algum ambiente front-end, usaria o
+            <a href="https://webpack.js.org/">webpack</a> para fazer meu
+            <em>bundle</em>.
+          </li>
+          <li>
+            <code>outDir</code> &ndash; &Eacute; a pasta de sa&iacute;da do seu
+            c&oacute;digo. Quando voc&ecirc; compilar, a pasta de sa&iacute;da
+            ter&aacute; a mesma estrutura da pasta de entrada. Ent&atilde;o,
+            seus arquivos de produ&ccedil;&atilde;o estar&atilde;o em
+            &ldquo;dist&rdquo; ap&oacute;s a compila&ccedil;&atilde;o.
+          </li>
+          <li>
+            <code>strict</code> &ndash; Esse &eacute; o modo recomend&aacute;vel
+            para uso do TS, ativa v&aacute;rias
+            <a
+              href="https://www.typescriptlang.org/docs/handbook/compiler-options.html"
+              >flags restritivas no TSC</a
+            >. Qualquer coisa que n&atilde;o estiver em conformidade, o
+            compilador vai reclamar. Por&eacute;m, isso s&oacute; &eacute;
+            recomend&aacute;vel se voc&ecirc; estiver iniciando um projeto do
+            zero com TS, se for migrar um c&oacute;digo antigo de JS para TS,
+            configure como <code>false</code>.
+          </li>
+          <li>
+            <code>target</code> &ndash; configura a vers&atilde;o ECMASCript que
+            o TSC vai usar para compilar seu c&oacute;digo (ES3, ES5, &hellip;,
+            ES2020, ESNext). Entretanto, o ambiente de produ&ccedil;&atilde;o do
+            seu c&oacute;digo precisar&aacute; suportar a vers&atilde;o
+            escolhida.
+          </li>
+          <li><code>esModuleInterop</code> &ndash; Ver <code>module</code>.</li>
+          <li>
+            <code>include</code> &ndash; quais pastas o <code>tsc</code> vai
+            analisar para compilar.
+          </li>
+        </ul>
 
-            <pre>
-enum ProgrammingLanguages {
-  Python,
-  JavaScript,
-  TypeScript,
-}
+        <h3>Testando tudo</h3>
 
-function yourPreferedProgrammingLanguage(choice: ProgrammingLanguages) {
-  console.log(`Você gosta de ${ProgrammingLanguages[choice]}`);
-}
+        <p>
+          Como voc&ecirc; p&ocirc;de perceber na configura&ccedil;&atilde;o
+          anterior, nossa pasta de entrada ser&aacute;
+          &ldquo;<strong>src</strong>&rdquo; e de sa&iacute;da
+          &ldquo;<strong>dist</strong>&ldquo;. Embora voc&ecirc; possa usar a
+          configura&ccedil;&atilde;o que preferir, essa &eacute; uma
+          conven&ccedil;&atilde;o muito utilizada atualmente. Ent&atilde;o,
+          prefira mant&ecirc;-la.
+        </p>
 
-// Você gosta de TypeScript
-yourPreferedProgrammingLanguage(ProgrammingLanguages.TypeScript);
-// Você gosta de JavaScript
-yourPreferedProgrammingLanguage(ProgrammingLanguages.JavaScript);
-// Você gosta de Python
-yourPreferedProgrammingLanguage(ProgrammingLanguages.Python);
+        <p>
+          <strong>Nota:</strong> a pasta <strong>src</strong> precisa ser criada
+          manualmente, assim como os arquivos <strong>.ts </strong>dentro dela.
+        </p>
 
-// Error
-// Argument of type '"Java"' is not assignable to
-// parameter of type 'ProgrammingLanguages'.ts(2345)
-yourPreferedProgrammingLanguage('Java');</pre
-            >
+        <p>
+          Vamos criar todos os nossos arquivos com extens&otilde;es
+          <strong>.ts</strong> na pasta <strong>src</strong>. Eventualmente,
+          vamos compilar nosso c&oacute;digo simplesmente digitando
+          &ldquo;<strong>tsc</strong>&rdquo; (sem aspas) no terminal.
+        </p>
 
-            <p>
-              Te confesso que n&atilde;o uso muito essa estrutura (tem outras
-              maneira de fazer &ldquo;choices&rdquo; em TS).
-            </p>
+        <p>
+          Voc&ecirc; ter&aacute; duas op&ccedil;&otilde;es para executar seu
+          c&oacute;digo:
+        </p>
 
-            <h3>Salvando tipos em vari&aacute;veis</h3>
+        <ol>
+          <li>Usando o ts-node</li>
+          <li>Usando o tsc</li>
+        </ol>
 
-            <p>
-              &Eacute; claro que voc&ecirc; tamb&eacute;m pode reusar os tipos
-              que voc&ecirc; cria, para isso voc&ecirc; pode usar Type ou
-              Interface. N&atilde;o vou me aprofundar tanto nisso aqui, porque
-              esse post est&aacute; mais imenso do que eu poderia imaginar.
-              Por&eacute;m, voc&ecirc; pode ver um tutorial sobre isso
-              <a
-                href="https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases"
-                >aqui para Type</a
-              >
-              e
-              <a
-                href="https://www.typescriptlang.org/docs/handbook/interfaces.html"
-                >aqui para Interfaces</a
-              >.
-            </p>
+        <h4>C&oacute;digo de exemplo</h4>
 
-            <p>
-              Por exemplo, imagine que eu queira criar uma calculadora com
-              fun&ccedil;&otilde;es. Todas as opera&ccedil;&otilde;es
-              ser&atilde;o iguais, add (somar), div (dividir), sub (subtrair),
-              mul (multiplicar). Todas essas fun&ccedil;&otilde;es receberiam x
-              (number) e y (number). Eu posso facilmente criar um Type Alias ou
-              uma Interface para mapear o tipo de todas essas
-              fun&ccedil;&otilde;es a fim de reutilizar a tipagem.
-            </p>
+        <p>
+          Embora eu ainda n&atilde;o tenha especificado como escrever
+          c&oacute;digos TS. Crie o arquivo
+          <code>src/index.ts</code> (arquivo <em>index.ts</em> dentro da pasta
+          <em>src</em>) e digite o seguinte para testar:
+        </p>
 
-            <pre>
-// Usando type para declarar o tipo de uma função
-type CalculatorFn = (x: number, y: number) => number;
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> name </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> 'Otávio Miranda'</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#CDD6F4">console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(name)</span><span style="color:#9399B2">;</span></span></code></pre>
 
-const add: CalculatorFn = (x, y) => x + y;
-const div: CalculatorFn = (x, y) => x / y;
-const sub: CalculatorFn = (x, y) => x - y;
-const mul: CalculatorFn = (x, y) => x * y;
+        <p>
+          Conforme configuramos o <code>tsconfig.json</code> com
+          <code>strict = true</code>, voc&ecirc; n&atilde;o conseguiria executar
+          qualquer JS sem tipagem adequada (alguns sim, outros n&atilde;o). No
+          trecho acima estou usando a infer&ecirc;ncia de tipos do TypeScript.
+          Por&eacute;m, se quiser executar qualquer JS normal (sem tipagem)
+          dentro do seu script TS, modifique <code>strict</code> para
+          <code>false</code>.
+        </p>
 
-const onePlusTwo = add(1, 2); // number
-console.log(onePlusTwo); // 3
-            </pre>
+        <h4>ts-node</h4>
 
-            <p>
-              Perceba que o tipo CalculatorFn agora pode ser utilizado em
-              qualquer função que implemente essa assinatura. Além disso, eu já
-              fiz a tipagem dos parâmetros também, então não preciso adicionar
-              tipos de x e y em cada uma das funções.
-            </p>
+        <p>
+          Para usar o <code>ts-node</code>, digite seu c&oacute;digo dentro de
+          um arquivo (suponha <code>index.ts</code>) ou use meu c&oacute;digo de
+          exemplo (acima) e pressione o play no canto superior direito da tela.
+          Similarmente, voc&ecirc; pode simplesmente digitar:
+        </p>
 
-            <p>
-              Similarmente, posso fazer o mesmo com Interfaces (em várias
-              ocasiões, Type Alias e Interfaces podem ser usados para fazer a
-              mesma coisa).
-            </p>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CDD6F4">npx ts</span><span style="color:#94E2D5">-</span><span style="color:#CDD6F4">node src</span><span style="color:#94E2D5">/</span><span style="color:#CDD6F4">index</span><span style="color:#94E2D5">.</span><span style="color:#CDD6F4">ts</span></span></code></pre>
 
-            <pre>
-// Usando type para declarar o tipo de uma função
-interface CalculatorFn {
-  (x: number, y: number): number;
-}
+        <p>
+          Se o arquivo <code>index.ts</code> importar qualquer outro
+          m&oacute;dulo, ele ser&aacute; compilado temporariamente apenas para
+          exibir o resultado no terminal. Embora isso n&atilde;o compile
+          c&oacute;digos reais, &eacute; super interessante para
+          execu&ccedil;&atilde;o r&aacute;pida de c&oacute;digos
+          <em
+            ><a
+              href="https://www.mairovergara.com/on-the-fly-o-que-significa-esta-expressao/"
+              >on the fly</a
+            ></em
+          >. Contudo, voc&ecirc; vai precisar compilar seu c&oacute;digo em
+          algum momento. Para isso, use <code>tsc</code>.
+        </p>
 
-const add: CalculatorFn = (x, y) => x + y;
-const div: CalculatorFn = (x, y) => x / y;
-const sub: CalculatorFn = (x, y) => x - y;
-const mul: CalculatorFn = (x, y) => x * y;
+        <h4>tsc</h4>
 
-const onePlusTwo = add(1, 2); // number
-console.log(onePlusTwo); // 3
-            </pre>
+        <p>
+          Anteriormente, vimos uma maneira simples para compilar c&oacute;digos
+          temporariamente (sem criar novos arquivos) com
+          <code>ts-node</code>. Contudo, voc&ecirc; vai precisar dos arquivos
+          para produ&ccedil;&atilde;o, afinal, o c&oacute;digo JS &eacute; que
+          ser&aacute; executado no ambiente de produ&ccedil;&atilde;o. Portanto,
+          para compilar realmente seu c&oacute;digo (gerando os arquivos na
+          pasta <strong>dist</strong>), simplesmente digite no terminal:
+        </p>
 
-            <p>
-              Para casos mais simples assim, eu prefiro usar Type Alias, para
-              casos mais complexos, talvez use Interfaces.
-            </p>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CDD6F4">npx tsc</span></span></code></pre>
 
-            <p>Eu posso fazer isso com qualquer tipo, por exemplo:</p>
+        <p>
+          O compilador ir&aacute; usar as configura&ccedil;&otilde;es no
+          <code>tsconfig.json</code> a fim de gerar nossos arquivos JS.
+          Al&eacute;m disso, ele criar&aacute; e atualizar&aacute; a pasta
+          &ldquo;<strong>dist</strong>&rdquo; com os arquivos de sa&iacute;da.
+          Embora n&atilde;o necess&aacute;rio, d&ecirc; uma olhada nos arquivos
+          gerados na pasta <strong>dist</strong>.
+        </p>
 
-            <pre>
-type NumberOrString = number | string; // | significa OU (union type)
+        <p>
+          Depois que compilei o c&oacute;digo <strong>TS</strong>, meu arquivo
+          <code>dist/index.js</code> ficou assim:
+        </p>
 
-function sayIt(it: NumberOrString): void {
-  console.log(`Você disse: ${it}`);
-}
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#A6E3A1">"use strict"</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> name </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> 'Otávio Miranda'</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#CDD6F4">console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(name)</span><span style="color:#9399B2">;</span></span></code></pre>
 
-sayIt(10); // Você disse: 10
-sayIt('Olá'); // Você disse: Olá
+        <p>
+          Ou seja, quase nenhuma diferen&ccedil;a do arquivo original. Todavia,
+          os arquivos reais de produ&ccedil;&atilde;o devem ficar extremamente
+          diferentes dos originais, vai por mim.
+        </p>
 
-// Error:
-// Argument of type '{}' is not
-// assignable to parameter
-// of type 'NumberOrString'.
-sayIt({});
-            </pre>
+        <p>
+          Uma outra forma de compila&ccedil;&atilde;o &eacute; o modo
+          &ldquo;<strong>watch</strong>&ldquo;, onde o <code>tsc</code> fica
+          &ldquo;<em>assistindo</em>&rdquo; mudan&ccedil;as no seu c&oacute;digo
+          a fim de gerar automaticamente os arquivos de sa&iacute;da. Para usar
+          o modo &ldquo;<strong>watch</strong>&ldquo;, digite:
+        </p>
 
-            <p>
-              Perceba tamb&eacute;m que al&eacute;m de usar Type Alias,
-              tamb&eacute;m usei Union Type. Da uma lida sobre isso
-              <a
-                href="https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types"
-                >aqui</a
-              >.
-            </p>
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CDD6F4">npx tsc </span><span style="color:#94E2D5">-</span><span style="color:#CDD6F4">w</span></span></code></pre>
 
-            <h2>Concluindo</h2>
+        <p>
+          Voc&ecirc; vai perceber que o <code>tsc</code> vai ficar assistindo
+          modifica&ccedil;&otilde;es no seu c&oacute;digo e atualizando a
+          sa&iacute;da assim que voc&ecirc; salvar seu arquivo. Para parar,
+          pressione CTRL + C no terminal.
+        </p>
 
-            <p>
-              Como eu te disse no comecinho, essa seria uma longa
-              introdu&ccedil;&atilde;o ao TypeScript. Falamos sobre muita coisa,
-              por&eacute;m ainda tem muito, mas muito mais para voc&ecirc;
-              aprender. O local que sempre indico para quem me pergunta onde e
-              como aprender TypeScript &eacute; na documenta&ccedil;&atilde;o,
-              mais especificamente na parte do
-              <a
-                href="https://www.typescriptlang.org/docs/handbook/basic-types.html"
-                >Handbook</a
-              >.
-            </p>
+        <h3>
+          Prettier e formata&ccedil;&atilde;o autom&aacute;tica (opcional)
+        </h3>
 
-            <p>
-              Tenho a inten&ccedil;&atilde;o de trazer mais conte&uacute;do como
-              este aqui para o blog, ent&atilde;o fique de olho.
-            </p>
+        <p>
+          Como eu te disse anteriormente, gosto bastante de usar as
+          configura&ccedil;&otilde;es do &ldquo;Prettier&rdquo; e a
+          formata&ccedil;&atilde;o autom&aacute;tica em meus c&oacute;digos.
+          Embora opcional, voc&ecirc; pode fazer essa configura&ccedil;&atilde;o
+          como mostro abaixo.
+        </p>
 
+        <h4>Instalando os pacotes do Prettier</h4>
+
+        <p>Digite o seguinte no terminal:</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#89B4FA;font-style:italic">npm</span><span style="color:#A6E3A1"> i</span><span style="color:#A6E3A1"> prettier</span><span style="color:#A6E3A1"> eslint-config-prettier</span><span style="color:#A6E3A1"> eslint-plugin-prettier</span><span style="color:#A6E3A1"> -D</span></span></code></pre>
+
+        <p>
+          Não tenho muito o que te explicar sobre isso, são pacotes necessários
+          para o funcionamento do Prettier com o ESLint.
+        </p>
+
+        <p>
+          Crie um arquivo chamado .prettierrc.js na raiz do seu projeto e cole o
+          seguinte:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CDD6F4">module.exports = </span><span style="color:#9399B2">{</span></span>
+<span class="line"><span style="color:#CDD6F4">  semi</span><span style="color:#9399B2">:</span><span style="color:#FAB387"> true</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#CDD6F4">  trailingComma</span><span style="color:#9399B2">:</span><span style="color:#CDD6F4"> 'all'</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#CDD6F4">  singleQuote</span><span style="color:#9399B2">:</span><span style="color:#FAB387"> true</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#CDD6F4">  printWidth</span><span style="color:#9399B2">:</span><span style="color:#FAB387"> 80</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#CDD6F4">  tabWidth</span><span style="color:#9399B2">:</span><span style="color:#FAB387"> 2</span></span>
+<span class="line"><span style="color:#9399B2">}</span></span></code></pre>
+
+        <p>As configura&ccedil;&otilde;es s&atilde;o as seguintes:</p>
+
+        <ul>
+          <li>
+            <code>semi</code> &ndash; for&ccedil;a o uso de ponto e
+            v&iacute;rgula;
+          </li>
+          <li>
+            <code>trailingComma</code> &ndash; deixa uma v&iacute;rgula ao final
+            de arrays, objetos, etc;
+          </li>
+          <li>
+            <code>singleQuote</code> &ndash; prefere o uso de aspas simples
+          </li>
+          <li>
+            <code>printWidth</code> &ndash; tenta quebrar linhas com 80
+            caracteres ou mais;
+          </li>
+          <li>
+            <code>tabWidth</code> &ndash; usa dois espa&ccedil;os para tab;
+          </li>
+        </ul>
+
+        <h4>Configurando a formata&ccedil;&atilde;o autom&aacute;tica</h4>
+
+        <p>
+          O legal &eacute; que agora voc&ecirc; pode acessar as
+          configura&ccedil;&otilde;es do VSCode e solicitar a
+          formata&ccedil;&atilde;o autom&aacute;tica afim de formatar seu
+          arquivo assim que voc&ecirc; salv&aacute;-lo. Para isso, clique em
+          <code
+            >&quot;File&quot; &gt; &quot;Preferences&quot; &gt;
+            &quot;Settings&quot;</code
+          >. No canto superior direito da tela, clique no &iacute;cone
+          <code>&quot;Open settings (JSON)&quot;</code>. Por fim, cole o
+          seguinte nas configura&ccedil;&otilde;es:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#9399B2">{</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">  // Configurações já existentes</span></span>
+<span class="line"><span style="color:#9399B2">  "</span><span style="color:#89B4FA">editor.codeActionsOnSave</span><span style="color:#9399B2">"</span><span style="color:#9399B2">:</span><span style="color:#9399B2"> {</span></span>
+<span class="line"><span style="color:#9399B2">    "</span><span style="color:#89B4FA">source.fixAll.eslint</span><span style="color:#9399B2">"</span><span style="color:#9399B2">:</span><span style="color:#FAB387"> true</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#9399B2">    "</span><span style="color:#89B4FA">source.fixAll</span><span style="color:#9399B2">"</span><span style="color:#9399B2">:</span><span style="color:#FAB387"> true</span></span>
+<span class="line"><span style="color:#9399B2">  },</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">  // Mais configurações existentes</span></span>
+<span class="line"><span style="color:#9399B2">}</span></span></code></pre>
+
+        <p>
+          Assim, quando voc&ecirc; salvar o seu arquivo, ele ser&aacute;
+          automaticamente formatado com o Prettier e o ESLint.
+        </p>
+
+        <h4>Ajustando o eslint</h4>
+
+        <p>
+          Agora, precisamos adicionar o <em>prettier</em> na
+          configura&ccedil;&atilde;o &ldquo;<em>extends</em>&rdquo; do seu
+          <code>.eslintrc.js</code>.
+        </p>
+
+        <p>
+          Abra o <code>.eslintrc.js</code>, que atualmente deve estar assim:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7;font-style:italic">module</span><span style="color:#94E2D5">.</span><span style="color:#CBA6F7;font-style:italic">exports</span><span style="color:#94E2D5"> =</span><span style="color:#9399B2"> {</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">  // outras configs</span></span>
+<span class="line"><span style="color:#CDD6F4">  extends</span><span style="color:#94E2D5">:</span><span style="color:#CDD6F4"> [</span></span>
+<span class="line"><span style="color:#A6E3A1">    'eslint:recommended'</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#A6E3A1">    'plugin:@typescript-eslint/eslint-recommended'</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#A6E3A1">    'plugin:@typescript-eslint/recommended'</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#CDD6F4">  ]</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">  // outras configs</span></span>
+<span class="line"><span style="color:#9399B2">};</span></span></code></pre>
+
+        <p>
+          Em extends, adicione 'plugin:prettier/recommended', dessa maneira:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7;font-style:italic">module</span><span style="color:#94E2D5">.</span><span style="color:#CBA6F7;font-style:italic">exports</span><span style="color:#94E2D5"> =</span><span style="color:#9399B2"> {</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">  // outras configs</span></span>
+<span class="line"><span style="color:#CDD6F4">  extends</span><span style="color:#94E2D5">:</span><span style="color:#CDD6F4"> [</span></span>
+<span class="line"><span style="color:#A6E3A1">    'eslint:recommended'</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#A6E3A1">    'plugin:@typescript-eslint/eslint-recommended'</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#A6E3A1">    'plugin:@typescript-eslint/recommended'</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#A6E3A1">    'plugin:prettier/recommended'</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#CDD6F4">  ]</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">  // outras configs</span></span>
+<span class="line"><span style="color:#9399B2">};</span></span></code></pre>
+
+        <p>Como na <strong>linha 7</strong> do exemplo acima.</p>
+
+        <p>
+          Se voc&ecirc; adicionou tudo corretamente, agora o
+          <em>prettier</em> e a
+          <em>formata&ccedil;&atilde;o autom&aacute;tica</em> j&aacute; devem
+          estar funcionando.
+        </p>
+
+        <h2>Tipos b&aacute;sicos e infer&ecirc;ncia de tipos do TypeScript</h2>
+
+        <p>
+          At&eacute; aqui voc&ecirc; leu coisas superficiais sobre o TypeScript.
+          Voc&ecirc; sabe o que &eacute;, como configurar, mas ainda n&atilde;o
+          viu uma das coisas que faz ele ser o que &eacute; e ter a popularidade
+          que tem atualmente, os
+          <strong>Tipos</strong>.
+        </p>
+
+        <h3>Um perigo: A tipagem fraca e din&acirc;mica do JS</h3>
+
+        <p>
+          O Javascript &eacute; uma linguagem de tipagem fraca e din&acirc;mica.
+          Fraca porque voc&ecirc; consegue fazer coisas como
+          <code>10 / &#39;20&#39;</code> e o JavaScript se vira de alguma
+          maneira pra retornar um <code>0.5</code>. Quem n&atilde;o conhece JS
+          pode assustar com esse resultado (mas est&aacute; certo).
+        </p>
+
+        <p>
+          Isso pode ser algo ruim do ponto de vista l&oacute;gico, quando
+          <code>10 / &#39;20&#39;</code> um seria <code>0.5</code>? S&oacute;
+          podemos presumir que isso foi uma coer&ccedil;&atilde;o de tipos,
+          portanto, entendemos um dos valores foi convertido pra outro tipo
+          automaticamente. A string 20 foi convertida em number. Isso
+          caracteriza uma linguagem de <strong>tipagem fraca</strong>.
+        </p>
+
+        <p>
+          Linguagens de tipagem forte, provavelmente levantariam uma
+          exce&ccedil;&atilde;o neste ponto do seu c&oacute;digo.
+        </p>
+
+        <p>
+          E din&acirc;mica porque voc&ecirc; n&atilde;o precisa declarar os
+          tipos com anteced&ecirc;ncia e o tipo pode mudar ao longo do
+          c&oacute;digo, uma vari&aacute;vel que muda de valor, tamb&eacute;m
+          pode mudar de tipo. Em momento algum eu preciso falar que
+          <code>10</code> &eacute; um <code>number</code>, que
+          <code>true</code> &eacute; um <code>boolean</code>, que
+          <code>&#39;Luiz&#39;</code> &eacute; uma <code>string</code>. Ele faz
+          isso automaticamente tamb&eacute;m. Isso caracteriza uma linguagem de
+          <strong>tipagem din&acirc;mica</strong>.
+        </p>
+
+        <p>
+          Essas duas coisas combinadas podem trazer um benef&iacute;cio
+          excelente, a <strong>flexibilidade</strong>. &Eacute; algo
+          extremamente simples escrever c&oacute;digos em Javascript. Mas, aqui
+          tamb&eacute;m mora um perigo iminente. Programadores precisam tomar um
+          <strong>cuidado extremo</strong> e escrever testes al&eacute;m do
+          necess&aacute;rio apenas para garantir que os tipos dos valores
+          est&atilde;o corretos. Do contr&aacute;rio, um erro assim poderia
+          chegar em produ&ccedil;&atilde;o sem que soub&eacute;ssemos:
+        </p>
+
+        <p><code>10 / [20, 10] // NaN</code></p>
+
+        <h3>A tipagem forte, est&aacute;tica e inferida do TypeScript</h3>
+
+        <p>
+          Por outro lado, o TS tem tipagem forte, est&aacute;tica e inferida (a
+          infer&ecirc;ncia &eacute; muito importante aqui,
+          aten&ccedil;&atilde;o).
+        </p>
+
+        <p>
+          Se eu escrevo um c&oacute;digo assim no TypeScript, imediatamente
+          tenho um erro, veja:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">let</span><span style="color:#CDD6F4"> number1 </span><span style="color:#94E2D5">=</span><span style="color:#FAB387"> 10</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // number</span></span>
+<span class="line"><span style="color:#CBA6F7">let</span><span style="color:#CDD6F4"> number2 </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> '20'</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // string</span></span>
+<span class="line"><span style="color:#CBA6F7">let</span><span style="color:#CDD6F4"> number3 </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> number1 </span><span style="color:#94E2D5">/</span><span style="color:#CDD6F4"> number2</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">//                      ^</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// The right-hand side of an arithmetic</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// operation must be of type 'any',</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// 'number', 'bigint' or an enum type.ts(2363)</span></span></code></pre>
+
+        <p>
+          Aqui o TS usa um recurso muito interessante chamado de
+          <strong>infer&ecirc;ncia de tipos</strong>. Perceba que eu deixei
+          comentado os tipos das duas primeiras vari&aacute;veis (a
+          &uacute;ltima foi um erro). Esses tipos foram inferidos
+          automaticamente pelo TypeScript, em momento algum eu disse que
+          <code>10</code> era um <code>number</code> e que
+          <code>&#39;20&#39;</code> era uma <code>string</code>. Mas est&aacute;
+          igual ao JS, tipagem din&acirc;mica? N&atilde;o!
+        </p>
+
+        <p>
+          A infer&ecirc;ncia de tipos &eacute; uma forma do TypeScript modelar o
+          comportamento do JavaScript e tamb&eacute;m de deixar o seu
+          c&oacute;digo mais limpo. Voc&ecirc; n&atilde;o precisa adicionar
+          tipagem em coisas &oacute;bvias (salvo em casos onde ele n&atilde;o
+          consegue inferir um tipo). No entanto, uma vez que o tipo for
+          inferido, ele n&atilde;o poder&aacute; mais ser alterado (e aqui
+          estamos falando em tipo, n&atilde;o em valor).
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">let</span><span style="color:#CDD6F4"> number1 </span><span style="color:#94E2D5">=</span><span style="color:#FAB387"> 10</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // number</span></span>
+<span class="line"><span style="color:#CDD6F4">number1 </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> '20'</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// ^</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// Type '"20"' is not assignable to type 'number'.ts(2322)</span></span></code></pre>
+
+        <p>
+          Em conclusão, minha dica pra você que está iniciando com o TS seria:
+          só coloque tipos em coisas que não são óbvias, evite sair adicionando
+          tipo em todas as suas variáveis. Quando o TS não conseguir inferir um
+          tipo, ele vai te avisar. Use o seu editor para saber qual tipo foi
+          inferido. Geralmente basta passar o mouse sobre a variável e o editor
+          (como o VSCode) irá lhe informar o tipo da variável.
+        </p>
+
+        <p>
+          <img
+            loading="lazy"
+            src="imgs/Peek-14-06-2020-17-38.gif"
+            alt="Figura 6. A inferência de tipos consegue saber o tipo de retorno da função e repassar isso para a variável.
+                "
+          />
+          <span class="img-description"
+            >Figura 6. A inferência de tipos consegue saber o tipo de retorno da
+            função e repassar isso para a variável.
+          </span>
+        </p>
+
+        <h3>Tipos mais b&aacute;sicos</h3>
+
+        <p>
+          O TS suporta todos os tipos que voc&ecirc; tem o costume de usar em
+          JS, como: boolean, number, bigint, symbol, string, array, null,
+          undefined e object. Al&eacute;m disso, ele tamb&eacute;m adiciona seus
+          pr&oacute;prios tipos, como: any, tuple, void, never e Enum.
+        </p>
+
+        <p>
+          A maneira que eu tenho para informar qual o tipo da minha
+          vari&aacute;vel, par&acirc;metro ou retorno de fun&ccedil;&otilde;es e
+          m&eacute;todos &eacute; com
+          <code>:</code> (dois pontos). Existem algumas outras maneiras, mas
+          vamos deixar isso de lado por enquanto.
+        </p>
+
+        <p>
+          Por exemplo, aqui eu vou
+          <strong
+            >quebrar minha pr&oacute;pria dica (sobre infer&ecirc;ncia)</strong
+          >
+          e vou adicionar os tipos em tudo o que for poss&iacute;vel s&oacute;
+          pra voc&ecirc; ver a estrutura:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#9399B2;font-style:italic">/* eslint-disable */</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// Se você não desativar o ESLint aqui, não conseguirá</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// declarar esses tipos que seriam inferidos naturalmente</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> name</span><span style="color:#94E2D5">:</span><span style="color:#CBA6F7"> string</span><span style="color:#94E2D5"> =</span><span style="color:#A6E3A1"> 'Luiz'</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // string</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> age</span><span style="color:#94E2D5">:</span><span style="color:#CBA6F7"> number</span><span style="color:#94E2D5"> =</span><span style="color:#FAB387"> 30</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // number</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> birthday</span><span style="color:#94E2D5">:</span><span style="color:#F9E2AF;font-style:italic"> Date </span><span style="color:#94E2D5">=</span><span style="color:#CBA6F7;font-weight:bold"> new</span><span style="color:#89B4FA;font-style:italic"> Date</span><span style="color:#CDD6F4">(</span><span style="color:#A6E3A1">'1990-06-14T00:00:00-03:00'</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // Date</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> addresses</span><span style="color:#94E2D5">:</span><span style="color:#F9E2AF;font-style:italic"> Array</span><span style="color:#89DCEB">&#x3C;</span><span style="color:#CBA6F7">string</span><span style="color:#89DCEB">></span><span style="color:#94E2D5"> =</span><span style="color:#CDD6F4"> [</span><span style="color:#A6E3A1">'Rua 1'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'Rua 2'</span><span style="color:#CDD6F4">]</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // array de strings</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> parentNames</span><span style="color:#94E2D5">:</span><span style="color:#CBA6F7"> string</span><span style="color:#F9E2AF;font-style:italic">[] </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> [</span><span style="color:#A6E3A1">'João'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'Maria'</span><span style="color:#CDD6F4">]</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // array de strings</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> isEmployed</span><span style="color:#94E2D5">:</span><span style="color:#CBA6F7"> boolean</span><span style="color:#94E2D5"> =</span><span style="color:#FAB387"> true</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // boolean</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CDD6F4">console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(</span><span style="color:#A6E3A1">`Meu nome é </span><span style="color:#9399B2">${</span><span style="color:#CDD6F4">name</span><span style="color:#9399B2">}</span><span style="color:#A6E3A1"> e tenho </span><span style="color:#9399B2">${</span><span style="color:#CDD6F4">age</span><span style="color:#9399B2">}</span><span style="color:#A6E3A1"> anos.`</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#CDD6F4">console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(</span><span style="color:#A6E3A1">`Nasci em </span><span style="color:#9399B2">${</span><span style="color:#CDD6F4">birthday</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">toLocaleString</span><span style="color:#A6E3A1">()</span><span style="color:#9399B2">}</span><span style="color:#A6E3A1">, moro em </span><span style="color:#9399B2">${</span><span style="color:#CDD6F4">addresses</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">join</span><span style="color:#A6E3A1">(</span><span style="color:#A6E3A1">', '</span><span style="color:#A6E3A1">)</span><span style="color:#9399B2">}</span><span style="color:#A6E3A1">.`</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#CDD6F4">console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(</span><span style="color:#A6E3A1">`Meus pais são </span><span style="color:#9399B2">${</span><span style="color:#CDD6F4">parentNames</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">join</span><span style="color:#A6E3A1">(</span><span style="color:#A6E3A1">' e '</span><span style="color:#A6E3A1">)</span><span style="color:#9399B2">}</span><span style="color:#A6E3A1">`</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#CDD6F4">console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(</span><span style="color:#A6E3A1">`Eu </span><span style="color:#9399B2">${</span><span style="color:#CDD6F4">isEmployed</span><span style="color:#94E2D5"> ?</span><span style="color:#A6E3A1"> 'estou'</span><span style="color:#94E2D5"> :</span><span style="color:#A6E3A1"> 'não estou'</span><span style="color:#9399B2">}</span><span style="color:#A6E3A1"> empregado atualmente.`</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">/*</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">Saída:</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">Meu nome é Luiz e tenho 30 anos.</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">Nasci em 14/06/1990 00:00:00, moro em Rua 1, Rua 2.</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">Meus pais são João e Maria</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">Eu estou empregado atualmente.</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">*/</span></span></code></pre>
+
+        <p>
+          Perceba que todos esses tipos seriam inferidos naturalmente por serem
+          óbvios, basta o TS olhar o valor para saber o tipo. Então, eu poderia
+          limpar drasticamente meu código os removendo.
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> name </span><span style="color:#94E2D5">=</span><span style="color:#A6E3A1"> 'Luiz'</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // string</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> age </span><span style="color:#94E2D5">=</span><span style="color:#FAB387"> 30</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // number</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> birthday </span><span style="color:#94E2D5">=</span><span style="color:#CBA6F7;font-weight:bold"> new</span><span style="color:#89B4FA;font-style:italic"> Date</span><span style="color:#CDD6F4">(</span><span style="color:#A6E3A1">'1990-06-14T00:00:00-03:00'</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // Date</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> addresses </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> [</span><span style="color:#A6E3A1">'Rua 1'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'Rua 2'</span><span style="color:#CDD6F4">]</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // array de strings</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> parentNames </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> [</span><span style="color:#A6E3A1">'João'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'Maria'</span><span style="color:#CDD6F4">]</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // array de strings</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> isEmployed </span><span style="color:#94E2D5">=</span><span style="color:#FAB387"> true</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // boolean</span></span></code></pre>
+
+        <p>
+          Menos em objetos um pouco mais complexos, como array e date, o
+          TypeScript foi capaz de inferir os tipos.
+        </p>
+
+        <p>
+          O ideal seria você adicionar tipos em coisas onde o tipo não é tão
+          óbvio assim. Por exemplo, os parâmetros de uma função não são óbvios,
+          eu poderia passar literalmente qualquer coisa sem que o JS reclamasse.
+          Esses parâmetros devem ter tipos em TypeScript.
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#9399B2;font-style:italic">// Essa função precisa receber um array de números</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// posso representar isso com number[] ou Array&#x3C;number></span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#89B4FA;font-style:italic"> sumNumbers</span><span style="color:#94E2D5"> =</span><span style="color:#9399B2"> (</span><span style="color:#EBA0AC;font-style:italic">arrayOfNumbers</span><span style="color:#94E2D5">:</span><span style="color:#CBA6F7"> number</span><span style="color:#F9E2AF;font-style:italic">[]</span><span style="color:#9399B2">)</span><span style="color:#CBA6F7"> =></span><span style="color:#9399B2"> {</span></span>
+<span class="line"><span style="color:#CBA6F7">return</span><span style="color:#CDD6F4"> arrayOfNumbers</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">reduce</span><span style="color:#CDD6F4">(</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">s</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> v</span><span style="color:#9399B2">)</span><span style="color:#CBA6F7"> =></span><span style="color:#CDD6F4"> s </span><span style="color:#94E2D5">+</span><span style="color:#CDD6F4"> v)</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#9399B2">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> result </span><span style="color:#94E2D5">=</span><span style="color:#89B4FA;font-style:italic"> sumNumbers</span><span style="color:#CDD6F4">([</span><span style="color:#FAB387">1</span><span style="color:#9399B2">,</span><span style="color:#FAB387"> 2</span><span style="color:#9399B2">,</span><span style="color:#FAB387"> 3</span><span style="color:#CDD6F4">])</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // number</span></span>
+<span class="line"><span style="color:#CDD6F4">console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(result)</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // 6</span></span></code></pre>
+
+        <p>
+          Al&eacute;m disso, eu tamb&eacute;m poderia representar isso com o
+          <a
+            href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Functions/rest_parameters"
+            >rest operator (&hellip;)</a
+          >.
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#9399B2;font-style:italic">// Agora qualquer parâmetro dessa função deve</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// ser um número</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#89B4FA;font-style:italic"> sumNumbers</span><span style="color:#94E2D5"> =</span><span style="color:#9399B2"> (</span><span style="color:#94E2D5">...</span><span style="color:#EBA0AC;font-style:italic">nums</span><span style="color:#94E2D5">:</span><span style="color:#CBA6F7"> number</span><span style="color:#F9E2AF;font-style:italic">[]</span><span style="color:#9399B2">)</span><span style="color:#CBA6F7"> =></span><span style="color:#9399B2"> {</span></span>
+<span class="line"><span style="color:#CBA6F7">  return</span><span style="color:#CDD6F4"> nums</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">reduce</span><span style="color:#CDD6F4">(</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">s</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> v</span><span style="color:#9399B2">)</span><span style="color:#CBA6F7"> =></span><span style="color:#CDD6F4"> s </span><span style="color:#94E2D5">+</span><span style="color:#CDD6F4"> v)</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#9399B2">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> result </span><span style="color:#94E2D5">=</span><span style="color:#89B4FA;font-style:italic"> sumNumbers</span><span style="color:#CDD6F4">(</span><span style="color:#FAB387">1</span><span style="color:#9399B2">,</span><span style="color:#FAB387"> 2</span><span style="color:#9399B2">,</span><span style="color:#FAB387"> 3</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // number</span></span>
+<span class="line"><span style="color:#CDD6F4">console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(result)</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // 6</span></span></code></pre>
+
+        <p>
+          Conforme voc&ecirc; tamb&eacute;m p&ocirc;de notar nos c&oacute;digos
+          anteriores, a maioria dos tipos b&aacute;sicos s&atilde;o adicionados
+          com letra min&uacute;scula: boolean, number, bigint, symbol, string,
+          array, null, undefined e object.
+        </p>
+
+        <h3>Tipos b&aacute;sicos que existem apenas no TypeScript</h3>
+
+        <p>
+          Alguns dos tipos que indiquei anteriormente, existem apenas no
+          TypeScript, como any, tuple, void, never e Enum. Ent&atilde;o vamos
+          ver quando us&aacute;-los:
+        </p>
+
+        <h4>any</h4>
+
+        <p>
+          Esse &eacute; um tipo que voc&ecirc; n&atilde;o gostaria de ter no seu
+          c&oacute;digo (a n&atilde;o ser que n&atilde;o tenha outra
+          op&ccedil;&atilde;o). Significa a mesma coisa que &ldquo;qualquer
+          coisa&rdquo; (assim como no JS).
+        </p>
+
+        <p>
+          O fato aqui &eacute; que tudo precisa ter um tipo em tempo de
+          compila&ccedil;&atilde;o no TypeScript, quando voc&ecirc; n&atilde;o
+          fornecer um tipo e o TSC tamb&eacute;m n&atilde;o conseguir inferir um
+          tipo correto, o padr&atilde;o ser&aacute; &ldquo;any&rdquo; (qualquer
+          coisa). Assim, voc&ecirc; n&atilde;o ter&aacute; fun&ccedil;&otilde;es
+          de intelliSense (auto completar, erros, etc). O any aceitar&aacute;
+          literalmente qualquer coisa que voc&ecirc; pedir pra ele fazer.
+        </p>
+
+        <p>Por exemplo:</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#9399B2;font-style:italic">// Agora a função recebe qualquer coisa</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#89B4FA;font-style:italic"> sumNumbers</span><span style="color:#94E2D5"> =</span><span style="color:#9399B2"> (</span><span style="color:#94E2D5">...</span><span style="color:#EBA0AC;font-style:italic">anything</span><span style="color:#94E2D5">:</span><span style="color:#CBA6F7"> any</span><span style="color:#F9E2AF;font-style:italic">[]</span><span style="color:#9399B2">)</span><span style="color:#CBA6F7"> =></span><span style="color:#9399B2"> {</span></span>
+<span class="line"><span style="color:#CBA6F7">  return</span><span style="color:#CDD6F4"> anything</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">reduce</span><span style="color:#CDD6F4">(</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">s</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> v</span><span style="color:#9399B2">)</span><span style="color:#CBA6F7"> =></span><span style="color:#CDD6F4"> s </span><span style="color:#94E2D5">+</span><span style="color:#CDD6F4"> v)</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#9399B2">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> result </span><span style="color:#94E2D5">=</span><span style="color:#89B4FA;font-style:italic"> sumNumbers</span><span style="color:#CDD6F4">(</span><span style="color:#FAB387">1</span><span style="color:#9399B2">,</span><span style="color:#FAB387"> 2</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'a'</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // O tipo dessa variável é any</span></span>
+<span class="line"><span style="color:#CDD6F4">console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(result)</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // 3a &#x3C;- Resultado inesperado</span></span></code></pre>
+
+        <p>
+          Evite usar <code>any</code> a todo o custo. Quase sempre tem uma
+          op&ccedil;&atilde;o melhor.
+        </p>
+
+        <h4>tuple</h4>
+
+        <p>Uma tupla &eacute; um array de tamanho fixo. Por exemplo:</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#9399B2;font-style:italic">// O tipo é [string, number]</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> personFirstNameAndAge</span><span style="color:#94E2D5">:</span><span style="color:#F9E2AF;font-style:italic"> [</span><span style="color:#CBA6F7">string</span><span style="color:#9399B2">,</span><span style="color:#CBA6F7"> number</span><span style="color:#F9E2AF;font-style:italic">] </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> [</span><span style="color:#A6E3A1">'Luiz'</span><span style="color:#9399B2">,</span><span style="color:#FAB387"> 30</span><span style="color:#CDD6F4">]</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#CDD6F4">console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(personFirstNameAndAge)</span><span style="color:#9399B2">;</span></span></code></pre>
+
+        <p>
+          Perceba que a tupla em TypeScript &eacute; representada como um array,
+          por&eacute;m ela &eacute; muito mais espec&iacute;fica. Os tipos
+          precisam bater exatamente com os valores. No exemplo acima, minha
+          tupla precisa ter uma string na posi&ccedil;&atilde;o 0 e um
+          n&uacute;mero na posi&ccedil;&atilde;o 1. Eu consigo alterar os
+          valores apenas se forem do mesmo tipo.
+        </p>
+
+        <p>
+          Tupas podem ter quantos valores voc&ecirc; quiser, n&atilde;o
+          s&atilde;o apenas dois como no exemplo acima.
+        </p>
+
+        <h4>void</h4>
+
+        <p>
+          Embora represente um &ldquo;n&atilde;o valor&rdquo;, &eacute;
+          interessante em alguns casos representar um m&eacute;todo ou
+          fun&ccedil;&atilde;o que n&atilde;o tenha retorno, por exemplo:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">function</span><span style="color:#89B4FA;font-style:italic"> showLog</span><span style="color:#9399B2">()</span><span style="color:#94E2D5">:</span><span style="color:#CBA6F7"> void</span><span style="color:#9399B2"> {</span></span>
+<span class="line"><span style="color:#CDD6F4">  console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(</span><span style="color:#A6E3A1">'Hey, sou o log.'</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#9399B2">}</span></span></code></pre>
+
+        <p>
+          Essa fun&ccedil;&atilde;o n&atilde;o tem retorno, por isso
+          representamos seu retorno com &ldquo;void&rdquo;.
+        </p>
+
+        <h4>never</h4>
+
+        <p>
+          Voc&ecirc; j&aacute; imaginou um m&eacute;todo ou fun&ccedil;&atilde;o
+          que NUNCA retorna? Sim, eu posso ter fun&ccedil;&otilde;es que nunca
+          retornam mas lan&ccedil;am um erro. Por exemplo:
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">function</span><span style="color:#89B4FA;font-style:italic"> error</span><span style="color:#9399B2">()</span><span style="color:#94E2D5">:</span><span style="color:#CBA6F7"> never</span><span style="color:#9399B2"> {</span></span>
+<span class="line"><span style="color:#CBA6F7">  throw</span><span style="color:#CBA6F7;font-weight:bold"> new</span><span style="color:#89B4FA;font-style:italic"> Error</span><span style="color:#CDD6F4">(</span><span style="color:#A6E3A1">'NUNCA VOU RETORNAR'</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#9399B2">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">error</span><span style="color:#CDD6F4">()</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // Error: NUNCA VOU RETORNAR</span></span></code></pre>
+
+        <p>
+          O retorno dessa fun&ccedil;&atilde;o nunca vai ocorrer, porque o erro
+          ocorre antes.
+        </p>
+
+        <h4>Enum</h4>
+
+        <p>
+          Enums s&atilde;o uma maneira de enumerar valores. Uma estrutura de
+          dados n&atilde;o ordenada que mapeiam chaves para valores. S&atilde;o
+          muito usados quando pessoas querem dar um determinado n&uacute;mero de
+          op&ccedil;&otilde;es de escolha (choice).
+        </p>
+
+        <p>
+          Por exemplo, na fun&ccedil;&atilde;o abaixo, s&oacute; posso receber
+          par&acirc;metros do tipo
+          &ldquo;<code>ProgrammingLanguages</code>&ldquo;, nada mais que isso.
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">enum</span><span style="color:#F9E2AF;font-style:italic"> ProgrammingLanguages</span><span style="color:#9399B2"> {</span></span>
+<span class="line"><span style="color:#94E2D5">  Python</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#94E2D5">  JavaScript</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#94E2D5">  TypeScript</span><span style="color:#9399B2">,</span></span>
+<span class="line"><span style="color:#9399B2">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">function</span><span style="color:#89B4FA;font-style:italic"> yourPreferedProgrammingLanguage</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">choice</span><span style="color:#94E2D5">:</span><span style="color:#F9E2AF;font-style:italic"> ProgrammingLanguages</span><span style="color:#9399B2">)</span><span style="color:#9399B2"> {</span></span>
+<span class="line"><span style="color:#CDD6F4">  console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(</span><span style="color:#A6E3A1">`Você gosta de </span><span style="color:#9399B2">${</span><span style="color:#CDD6F4">ProgrammingLanguages</span><span style="color:#A6E3A1">[</span><span style="color:#CDD6F4">choice</span><span style="color:#A6E3A1">]</span><span style="color:#9399B2">}</span><span style="color:#A6E3A1">`</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#9399B2">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// Você gosta de TypeScript</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">yourPreferedProgrammingLanguage</span><span style="color:#CDD6F4">(ProgrammingLanguages</span><span style="color:#94E2D5">.</span><span style="color:#CDD6F4">TypeScript)</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// Você gosta de JavaScript</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">yourPreferedProgrammingLanguage</span><span style="color:#CDD6F4">(ProgrammingLanguages</span><span style="color:#94E2D5">.</span><span style="color:#CDD6F4">JavaScript)</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// Você gosta de Python</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">yourPreferedProgrammingLanguage</span><span style="color:#CDD6F4">(ProgrammingLanguages</span><span style="color:#94E2D5">.</span><span style="color:#CDD6F4">Python)</span><span style="color:#9399B2">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// Error</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// Argument of type '"Java"' is not assignable to</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// parameter of type 'ProgrammingLanguages'.ts(2345)</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">yourPreferedProgrammingLanguage</span><span style="color:#CDD6F4">(</span><span style="color:#A6E3A1">'Java'</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span></span></code></pre>
+
+        <p>
+          Te confesso que n&atilde;o uso muito essa estrutura (tem outras
+          maneira de fazer &ldquo;choices&rdquo; em TS).
+        </p>
+
+        <h3>Salvando tipos em vari&aacute;veis</h3>
+
+        <p>
+          &Eacute; claro que voc&ecirc; tamb&eacute;m pode reusar os tipos que
+          voc&ecirc; cria, para isso voc&ecirc; pode usar Type ou Interface.
+          N&atilde;o vou me aprofundar tanto nisso aqui, porque esse post
+          est&aacute; mais imenso do que eu poderia imaginar. Por&eacute;m,
+          voc&ecirc; pode ver um tutorial sobre isso
+          <a
+            href="https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases"
+            >aqui para Type</a
+          >
+          e
+          <a href="https://www.typescriptlang.org/docs/handbook/interfaces.html"
+            >aqui para Interfaces</a
+          >.
+        </p>
+
+        <p>
+          Por exemplo, imagine que eu queira criar uma calculadora com
+          fun&ccedil;&otilde;es. Todas as opera&ccedil;&otilde;es ser&atilde;o
+          iguais, add (somar), div (dividir), sub (subtrair), mul (multiplicar).
+          Todas essas fun&ccedil;&otilde;es receberiam x (number) e y (number).
+          Eu posso facilmente criar um Type Alias ou uma Interface para mapear o
+          tipo de todas essas fun&ccedil;&otilde;es a fim de reutilizar a
+          tipagem.
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#9399B2;font-style:italic">// Usando type para declarar o tipo de uma função</span></span>
+<span class="line"><span style="color:#CBA6F7">type</span><span style="color:#F9E2AF;font-style:italic"> CalculatorFn </span><span style="color:#94E2D5">=</span><span style="color:#9399B2"> (</span><span style="color:#EBA0AC;font-style:italic">x</span><span style="color:#94E2D5">:</span><span style="color:#CBA6F7"> number</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> y</span><span style="color:#94E2D5">:</span><span style="color:#CBA6F7"> number</span><span style="color:#9399B2">)</span><span style="color:#94E2D5"> =></span><span style="color:#CBA6F7"> number</span><span style="color:#9399B2">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#89B4FA;font-style:italic"> add</span><span style="color:#94E2D5">:</span><span style="color:#F9E2AF;font-style:italic"> CalculatorFn </span><span style="color:#94E2D5">=</span><span style="color:#9399B2"> (</span><span style="color:#EBA0AC;font-style:italic">x</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> y</span><span style="color:#9399B2">)</span><span style="color:#94E2D5"> =></span><span style="color:#CDD6F4"> x </span><span style="color:#94E2D5">+</span><span style="color:#CDD6F4"> y</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#89B4FA;font-style:italic"> div</span><span style="color:#94E2D5">:</span><span style="color:#F9E2AF;font-style:italic"> CalculatorFn </span><span style="color:#94E2D5">=</span><span style="color:#9399B2"> (</span><span style="color:#EBA0AC;font-style:italic">x</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> y</span><span style="color:#9399B2">)</span><span style="color:#94E2D5"> =></span><span style="color:#CDD6F4"> x </span><span style="color:#94E2D5">/</span><span style="color:#CDD6F4"> y</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#89B4FA;font-style:italic"> sub</span><span style="color:#94E2D5">:</span><span style="color:#F9E2AF;font-style:italic"> CalculatorFn </span><span style="color:#94E2D5">=</span><span style="color:#9399B2"> (</span><span style="color:#EBA0AC;font-style:italic">x</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> y</span><span style="color:#9399B2">)</span><span style="color:#94E2D5"> =></span><span style="color:#CDD6F4"> x </span><span style="color:#94E2D5">-</span><span style="color:#CDD6F4"> y</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#89B4FA;font-style:italic"> mul</span><span style="color:#94E2D5">:</span><span style="color:#F9E2AF;font-style:italic"> CalculatorFn </span><span style="color:#94E2D5">=</span><span style="color:#9399B2"> (</span><span style="color:#EBA0AC;font-style:italic">x</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> y</span><span style="color:#9399B2">)</span><span style="color:#94E2D5"> =></span><span style="color:#CDD6F4"> x </span><span style="color:#94E2D5">*</span><span style="color:#CDD6F4"> y</span><span style="color:#9399B2">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> onePlusTwo </span><span style="color:#94E2D5">=</span><span style="color:#89B4FA;font-style:italic"> add</span><span style="color:#CDD6F4">(</span><span style="color:#FAB387">1</span><span style="color:#9399B2">,</span><span style="color:#FAB387"> 2</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // number</span></span>
+<span class="line"><span style="color:#CDD6F4">console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(onePlusTwo)</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // 3</span></span></code></pre>
+
+        <p>
+          Perceba que o tipo CalculatorFn agora pode ser utilizado em qualquer
+          função que implemente essa assinatura. Além disso, eu já fiz a tipagem
+          dos parâmetros também, então não preciso adicionar tipos de x e y em
+          cada uma das funções.
+        </p>
+
+        <p>
+          Similarmente, posso fazer o mesmo com Interfaces (em várias ocasiões,
+          Type Alias e Interfaces podem ser usados para fazer a mesma coisa).
+        </p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#9399B2;font-style:italic">// Usando type para declarar o tipo de uma função</span></span>
+<span class="line"><span style="color:#CBA6F7">interface</span><span style="color:#F9E2AF;font-style:italic"> CalculatorFn</span><span style="color:#9399B2"> {</span></span>
+<span class="line"><span style="color:#9399B2">  (</span><span style="color:#EBA0AC;font-style:italic">x</span><span style="color:#94E2D5">:</span><span style="color:#CBA6F7"> number</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> y</span><span style="color:#94E2D5">:</span><span style="color:#CBA6F7"> number</span><span style="color:#9399B2">)</span><span style="color:#94E2D5">:</span><span style="color:#CBA6F7"> number</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#9399B2">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#89B4FA;font-style:italic"> add</span><span style="color:#94E2D5">:</span><span style="color:#F9E2AF;font-style:italic"> CalculatorFn </span><span style="color:#94E2D5">=</span><span style="color:#9399B2"> (</span><span style="color:#EBA0AC;font-style:italic">x</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> y</span><span style="color:#9399B2">)</span><span style="color:#94E2D5"> =></span><span style="color:#CDD6F4"> x </span><span style="color:#94E2D5">+</span><span style="color:#CDD6F4"> y</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#89B4FA;font-style:italic"> div</span><span style="color:#94E2D5">:</span><span style="color:#F9E2AF;font-style:italic"> CalculatorFn </span><span style="color:#94E2D5">=</span><span style="color:#9399B2"> (</span><span style="color:#EBA0AC;font-style:italic">x</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> y</span><span style="color:#9399B2">)</span><span style="color:#94E2D5"> =></span><span style="color:#CDD6F4"> x </span><span style="color:#94E2D5">/</span><span style="color:#CDD6F4"> y</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#89B4FA;font-style:italic"> sub</span><span style="color:#94E2D5">:</span><span style="color:#F9E2AF;font-style:italic"> CalculatorFn </span><span style="color:#94E2D5">=</span><span style="color:#9399B2"> (</span><span style="color:#EBA0AC;font-style:italic">x</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> y</span><span style="color:#9399B2">)</span><span style="color:#94E2D5"> =></span><span style="color:#CDD6F4"> x </span><span style="color:#94E2D5">-</span><span style="color:#CDD6F4"> y</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#89B4FA;font-style:italic"> mul</span><span style="color:#94E2D5">:</span><span style="color:#F9E2AF;font-style:italic"> CalculatorFn </span><span style="color:#94E2D5">=</span><span style="color:#9399B2"> (</span><span style="color:#EBA0AC;font-style:italic">x</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> y</span><span style="color:#9399B2">)</span><span style="color:#94E2D5"> =></span><span style="color:#CDD6F4"> x </span><span style="color:#94E2D5">*</span><span style="color:#CDD6F4"> y</span><span style="color:#9399B2">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">const</span><span style="color:#CDD6F4"> onePlusTwo </span><span style="color:#94E2D5">=</span><span style="color:#89B4FA;font-style:italic"> add</span><span style="color:#CDD6F4">(</span><span style="color:#FAB387">1</span><span style="color:#9399B2">,</span><span style="color:#FAB387"> 2</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // number</span></span>
+<span class="line"><span style="color:#CDD6F4">console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(onePlusTwo)</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // 3</span></span></code></pre>
+
+        <p>
+          Para casos mais simples assim, eu prefiro usar Type Alias, para casos
+          mais complexos, talvez use Interfaces.
+        </p>
+
+        <p>Eu posso fazer isso com qualquer tipo, por exemplo:</p>
+
+        <pre
+          class="shiki catppuccin-mocha"
+          style="background-color: #1e1e2e; color: #cdd6f4"
+          tabindex="0"
+        ><code><span class="line"><span style="color:#CBA6F7">type</span><span style="color:#F9E2AF;font-style:italic"> NumberOrString </span><span style="color:#94E2D5">=</span><span style="color:#CBA6F7"> number</span><span style="color:#94E2D5"> |</span><span style="color:#CBA6F7"> string</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // | significa OU (union type)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#CBA6F7">function</span><span style="color:#89B4FA;font-style:italic"> sayIt</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">it</span><span style="color:#94E2D5">:</span><span style="color:#F9E2AF;font-style:italic"> NumberOrString</span><span style="color:#9399B2">)</span><span style="color:#94E2D5">:</span><span style="color:#CBA6F7"> void</span><span style="color:#9399B2"> {</span></span>
+<span class="line"><span style="color:#CDD6F4">  console</span><span style="color:#94E2D5">.</span><span style="color:#89B4FA;font-style:italic">log</span><span style="color:#CDD6F4">(</span><span style="color:#A6E3A1">`Você disse: </span><span style="color:#9399B2">${</span><span style="color:#CDD6F4">it</span><span style="color:#9399B2">}</span><span style="color:#A6E3A1">`</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span></span>
+<span class="line"><span style="color:#9399B2">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">sayIt</span><span style="color:#CDD6F4">(</span><span style="color:#FAB387">10</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // Você disse: 10</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">sayIt</span><span style="color:#CDD6F4">(</span><span style="color:#A6E3A1">'Olá'</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span><span style="color:#9399B2;font-style:italic"> // Você disse: Olá</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// Error:</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// Argument of type '{}' is not</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// assignable to parameter</span></span>
+<span class="line"><span style="color:#9399B2;font-style:italic">// of type 'NumberOrString'.</span></span>
+<span class="line"><span style="color:#89B4FA;font-style:italic">sayIt</span><span style="color:#CDD6F4">(</span><span style="color:#9399B2">{}</span><span style="color:#CDD6F4">)</span><span style="color:#9399B2">;</span></span></code></pre>
+
+        <p>
+          Perceba tamb&eacute;m que al&eacute;m de usar Type Alias,
+          tamb&eacute;m usei Union Type. Da uma lida sobre isso
+          <a
+            href="https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types"
+            >aqui</a
+          >.
+        </p>
+
+        <h2>Concluindo</h2>
+
+        <p>
+          Como eu te disse no comecinho, essa seria uma longa
+          introdu&ccedil;&atilde;o ao TypeScript. Falamos sobre muita coisa,
+          por&eacute;m ainda tem muito, mas muito mais para voc&ecirc; aprender.
+          O local que sempre indico para quem me pergunta onde e como aprender
+          TypeScript &eacute; na documenta&ccedil;&atilde;o, mais
+          especificamente na parte do
+          <a
+            href="https://www.typescriptlang.org/docs/handbook/basic-types.html"
+            >Handbook</a
+          >.
+        </p>
+
+        <p>
+          Tenho a inten&ccedil;&atilde;o de trazer mais conte&uacute;do como
+          este aqui para o blog, ent&atilde;o fique de olho.
+        </p>
       </article>
 
       <footer class="nav">
