@@ -235,10 +235,27 @@ a {
   color: var(--fg-default);
   text-decoration: none;
   cursor: pointer;
+  transition: opacity 300ms ease-in-out;
 }
 
 a:hover {
   text-decoration: underline;
+}
+
+.article p a {
+  text-decoration: none;
+  opacity: 1;
+  border-bottom: 1px dashed var(--fg-default);
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+.article p a:hover {
+  text-decoration: none;
+  opacity: 1;
+  border-bottom: none;
+  background: var(--bg-surface-default);
+  box-shadow: 0 0 4px rgba(118, 118, 148, 0.75);
 }
 
 /* ===============================
