@@ -33,3 +33,43 @@ All notable changes to this project are documented here.
   - prevented horizontal overflow from long content in migrated post pages.
 - Ran a final mobile pass in localhost (`390x844` and `320x568`) and confirmed
   all migrated posts are now passing without horizontal overflow.
+- Added a new 2026 home draft in `index_2026.html` focused on conversion and
+  visibility of key links, while keeping legacy `index.html` unchanged.
+- Added dedicated home styles in `css/home_2026.css` with:
+  - alternating light/dark sections;
+  - responsive hero, metrics, coupon, and course-card grids;
+  - mouse-reactive glow on highlighted dark sections.
+- Added `js/home_2026.js` for home-only interactions:
+  - scoped Google search (`site:otaviomiranda.com.br`);
+  - animated counters on scroll (including reset when leaving viewport);
+  - pointer-follow glow positioning via CSS custom properties.
+- Updated homepage metrics/copy to final values:
+  - nota Udemy `4.8`;
+  - `330.819` alunos;
+  - `108.302` avaliações;
+  - `140.000+` inscritos no YouTube;
+  - cupom `FEB2026`, válido até `22/02/2026`.
+- Refined the first fold of `index_2026.html` to a more minimal/personal style:
+  - headline simplified to `Olá, sou Otávio Miranda.`;
+  - reduced intro text and emphasized direct links (`YouTube`, `Cursos`,
+    `Contatos`);
+  - removed the search form from the first fold.
+- Improved home performance by using local/system font stacks in
+  `css/home_2026.css` (without Google Fonts dependency).
+- Reworked `js/home_2026.js` into modular blocks and removed legacy particle
+  code coupled to `#nokey`.
+- Added a reusable particles contract via `data-particles-*` attributes and
+  enabled it in the hero (`#about`) with defaults:
+  - desktop density `160`, mobile density `56`;
+  - radius `1.6`, speed `0.35`, attract `0.055`, friction `0.92`,
+    opacity `0.55`;
+  - palette `#1d4ed8,#2563eb,#3b82f6,#ef4444,#f59e0b`.
+- Implemented a lightweight canvas vortex engine with:
+  - auto canvas injection (`.particles-canvas`) in marked sections;
+  - pointer attraction, center-orbit dynamics, and device-pixel-ratio cap;
+  - pause/resume by section visibility and document visibility;
+  - reduced-motion static rendering fallback.
+- Added `animation-timeline: view(...)` progressive enhancement for
+  `.course-card` reveal animation, with static fallback where unsupported.
+- Added root feature flag detection (`html.has-view-timeline`) to gate scroll
+  timeline styles safely.
