@@ -10,28 +10,10 @@
       content="For my personal use. I just want the end HTML and CSS for Shiki Syntax highlighter (Not the JavaScript). This would be only for pure static sites."
     />
 
-    <link rel="stylesheet" href="../../css/styles_2026.css" />
-
+    <link rel="stylesheet" href="../../css/styles_2026_v2.css" />
     <link rel="icon" type="image/webp" href="../../imgs/favicon-1.webp" />
-
-    <!-- conexão antecipada -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- fonte -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
-    <input
-      aria-label="Tema Claro ou Escuro (Temporário)"
-      title="Tema Claro ou Escuro (Temporário)"
-      id="theme-mode"
-      type="checkbox"
-    />
-
     <main class="main">
       <aside class="nav">
         <a class="copyright-link" href="/">Otávio Miranda</a>
@@ -72,8 +54,12 @@
             ></textarea>
           </div>
 
-          <div class="form-row">
-            <button id="get-code">Get code</button>
+          <div class="form-row form-row-submit">
+            <div class="link-container">
+              <div class="link-bg-blur"></div>
+              <div class="link-bg"></div>
+              <button id="get-code" type="submit" class="link">Get code</button>
+            </div>
           </div>
         </div>
 
@@ -94,7 +80,6 @@
     </main>
 
     <script defer src="../../js/scripts_2026.js"></script>
-
     <script type="module" src="../../js/shiki_generator_2026.js"></script>
   </body>
 </html>
