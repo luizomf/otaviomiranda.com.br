@@ -1,10 +1,10 @@
 :root {
   --home-gap: clamp(2rem, 4vw, 4rem);
   --home-radius: 18px;
-  --home-dark: #0f172a;
-  --home-dark-soft: #1e293b;
-  --home-accent: #22d3ee;
-  --home-accent-strong: #06b6d4;
+  --home-dark: #000011;
+  --home-dark-soft: #111112;
+  --home-accent: #347ce3;
+  --home-accent-strong: #1b79ff;
   --home-surface: #f7f9fc;
 }
 
@@ -100,11 +100,13 @@
 .hero-band {
   position: relative;
   isolation: isolate;
-  min-height: calc(100svh - 8rem);
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
-  padding-top: clamp(4rem, 12vw, 12rem);
-  padding-bottom: clamp(8rem, 16vw, 14rem);
+  padding-top: clamp(3rem, 7vh, 7rem);
+  padding-bottom: clamp(7rem, 14vh, 11rem);
 }
 
 .has-particles > .container {
@@ -166,6 +168,77 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+.hero-scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(1.8rem, 3.6vh, 3.2rem);
+  transform: translateX(-50%);
+  z-index: 2;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  color: color-mix(in srgb, var(--fg-default) 70%, transparent);
+  font-size: var(--font-xxsm);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  animation: hero-scroll-bob 2.1s ease-in-out infinite;
+}
+
+.hero-scroll-cue:hover {
+  text-decoration: none;
+  color: var(--fg-default);
+}
+
+.hero-scroll-cue__dot {
+  width: 2.1rem;
+  height: 3.2rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--fg-default) 35%, transparent);
+  position: relative;
+}
+
+.hero-scroll-cue__dot::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0.55rem;
+  width: 0.4rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--fg-default) 55%, transparent);
+  transform: translateX(-50%);
+  animation: hero-scroll-wheel 1.35s ease-in-out infinite;
+}
+
+@keyframes hero-scroll-bob {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-0.5rem);
+  }
+}
+
+@keyframes hero-scroll-wheel {
+  0% {
+    opacity: 0.15;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(1rem);
+  }
+
+  100% {
+    opacity: 0.1;
+    transform: translateX(-50%) translateY(1rem);
+  }
 }
 
 .cta {
@@ -245,7 +318,7 @@
   margin-top: 2.4rem;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--home-gap);
+  gap: clamp(1.2rem, 2.2vw, 2.8rem);
 }
 
 .metric-card {
@@ -253,19 +326,45 @@
   border: 1px solid color-mix(in srgb, #ffffff 24%, transparent);
   border-radius: var(--home-radius);
   padding: 2rem;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .metric-value {
   margin: 0;
-  font-size: clamp(3.2rem, 6vw, 5.2rem);
-  line-height: 1;
-  font-weight: var(--font-bold);
+  font-family:
+    'Segoe UI',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+  font-size: clamp(2.8rem, 4.4vw, 4.6rem);
+  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums lining-nums;
+  white-space: nowrap;
+  text-wrap: nowrap;
+  text-overflow: clip;
+  overflow: hidden;
+}
+
+#numbers {
+  padding-top: clamp(7rem, 16vw, 22rem);
+  padding-bottom: clamp(7rem, 16vw, 22rem);
+}
+
+#coupon {
+  padding-top: clamp(7rem, 16vw, 22rem);
+  padding-bottom: clamp(7rem, 16vw, 22rem);
 }
 
 .metric-label {
   margin: 0.8rem 0 0;
   color: color-mix(in srgb, #eef6ff 76%, transparent);
   font-size: var(--font-xsm);
+  line-height: 1.35;
 }
 
 .coupon-box {
@@ -438,6 +537,10 @@ html.has-view-timeline .course-card {
     grid-template-columns: 1fr;
   }
 
+  .metric-value {
+    font-size: clamp(3rem, 11vw, 4.2rem);
+  }
+
   .hero-cta {
     width: 100%;
   }
@@ -445,12 +548,21 @@ html.has-view-timeline .course-card {
   .hero-cta .cta {
     flex: 1 1 auto;
   }
+
+  .hero-scroll-cue {
+    bottom: 1.2rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .interactive-glow::before,
   .cta {
     transition: none;
+  }
+
+  .hero-scroll-cue,
+  .hero-scroll-cue__dot::before {
+    animation: none;
   }
 
   html.has-view-timeline .course-card {
