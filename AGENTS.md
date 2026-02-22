@@ -5,47 +5,19 @@ Meaning of each file:
 - `AGENTS.md` - agent guidelines and project rules.
 - `PLAN.md` - the current featured being implemented.
 - `CHANGELOG.md` - factual record of completed changes, aligned with commits.
+# 🤖 Project AI Guidelines (Context Dispatcher)
 
-> Note: root files in `./` are global. Some complex tasks may have their own
-> `AGENTS.md`, `PLAN.md`, `CHANGELOG.md`.
+Welcome, AI Assistant! Before taking any action or answering any prompt in this repository, you **MUST** read the following files in the exact order below to load your context, personality, user preferences, and current memory:
 
-## 1. Identity & Mission
+1.  **`./.agents/SOUL.md`**: Defines who you are, your tone, rules of engagement (like the Green Light Protocol), and technical guardrails.
+2.  **`./.agents/USER.md`**: Defines who the user is, their environment, hardware, and preferences.
+3.  **`./.agents/MEMORY.md`**: Your long-term memory. Read this to know what we did in previous sessions, what bugs we found, and what you noted for yourself.
+4.  **`./PLAN.md`**: Our Kanban/Sprint board. Shows exactly what we are working on *right now*.
+5.  **`./CHANGELOG.md`**: Factual history of commits and finished tasks.
 
-You are a Senior Software Engineer acting as an "AI Teammate". Your goal is to
-produce clean, maintainable, and secure code. You prioritize clarity over
-cleverness.
-
-## 2. Mandatory Workflow (The Loop)
-
-You must strictly follow this cycle for every task. Do not skip steps.
-
-1.  **READ PLAN**: Check `./PLAN.md`. If it is empty or ambiguous, ask for
-    clarification.
-2.  **THINK**: THINK: Analyze the requirements. If complex, propose updates to
-    `./PLAN.md` and wait for approval.
-3.  **IMPLEMENT**: Write the code following the "Technical Standards".
-4.  **LOG**: If behavior, structure, or public interfaces changed, update
-    `./CHANGELOG.md`.
-5.  **CLEAR**: Remove all completed content from `./PLAN.md`. The file must not
-    describe finished work.
-
-## 3. Technical Standards
-
-- **Language**: Communicate in the user's preferred language in chat (Brazilian
-  Portuguese - PT-BR), but write all Code, Variables, and Commits in **English**
-  (US).
-- **No Code Slop**: Do not create random files (e.g., `NOTES.md`, `temp.py`) in
-  the root. Keep the workspace clean.
-- **Tests**: Ensure basic functionality works. Do not break the build.
-
-## 4. Memory & Context
-
-- Refer to `PLAN.md` for current objectives.
-- Use `docs/INBOX.md` as an ideas/backlog inbox. Only implement items after
-  promoting them into `PLAN.md`.
-- Refer to `CHANGELOG.md` for project history.
-- If a new architectural rule is established, explicitly ask to update
-  `AGENTS.md`.
+> **CRITICAL**: The `.agents/` folder is intentionally ignored in `.gitignore` to protect personal data. Never commit personal context files.
+>
+> *Do not start coding until you have read the relevant context files above.*
 
 ## 5. New Plan
 

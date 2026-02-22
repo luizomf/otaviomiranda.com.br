@@ -1,0 +1,45 @@
+---
+// src/components/Newsletter.astro
+---
+<section id="section-newsletter" class="section section-light">
+  <div class="section-content section-newsletter">
+    <header class="section-header">
+      <p class="section-eyeball">No seu e-mail</p>
+      <h2 class="section-title">Newsletter</h2>
+      <p class="section-line">
+        Junte-se a centenas de outros desenvolvedores e receba dicas e
+        conteúdo técnico diretamente na sua caixa de entrada. Sem SPAM ou
+        publicidade. Apenas conteúdo de qualidade.
+      </p>
+
+      <form
+        action="https://luizomf.substack.com/subscribe"
+        method="GET"
+        class="newsletter-form"
+        target="_blank"
+      >
+        <input type="hidden" name="skip_redirect_check" value="true" />
+        <input type="hidden" name="utm_medium" value="web" />
+        <input type="hidden" name="utm_source" value="embed" />
+
+        <div class="link-container">
+          <div class="link-bg-blur"></div>
+          <div class="link-bg"></div>
+          <input
+            type="email"
+            name="freeSignupEmail"
+            placeholder="Seu melhor e-mail"
+            required
+            class="newsletter-input link"
+          />
+        </div>
+
+        <div class="link-container">
+          <div class="link-bg-blur"></div>
+          <div class="link-bg"></div>
+          <button type="submit" class="link newsletter-button">OK</button>
+        </div>
+      </form>
+    </header>
+  </div>
+</section>

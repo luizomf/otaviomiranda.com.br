@@ -1,0 +1,50 @@
+---
+// src/pages/[...slug].astro
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Newsletter from '../components/Newsletter.astro';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('posts');
+  return blogEntries.map((entry: CollectionEntry<'posts'>) => {
+    // O entry.id nativamente já contém o caminho baseado na pasta (ex: "2025/post/text" no Astro 5)
+    // Queremos que o SLUG da URL exclua o nome do arquivo final, para SEO bater certinho "2025/post/"
+    const slugPath = entry.id.replace(/\/(text|texto|TEXT)$/i, '');
+
+    return {
+      params: { slug: slugPath },
+      props: { entry },
+    };
+  });
+}
+
+interface Props {
+  entry: CollectionEntry<'posts'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout
+  title={entry.data.title + ' - Otávio Miranda'}
+  description={entry.data.description}
+  image={entry.data.image}
+>
+  <div class='main'>
+    <Header />
+
+    <section class='section section-light article-section'>
+      <div class='section-content'>
+        <article class='article markdown-body article-body'>
+          <Content />
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <Newsletter />
+  <Footer />
+</BaseLayout>

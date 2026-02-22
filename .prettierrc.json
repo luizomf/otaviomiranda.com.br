@@ -15,5 +15,10 @@
   "singleQuote": true,
   "tabWidth": 2,
   "trailingComma": "all",
-  "useTabs": false
+  "useTabs": false,
+  "plugins": ["prettier-plugin-astro"],
+  "overrides": [
+    { "files": "*.md", "options": { "printWidth": 80, "proseWrap": "always" } },
+    { "files": "*.astro", "options": { "parser": "astro" } }
+  ]
 }

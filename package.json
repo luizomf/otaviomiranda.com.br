@@ -1,0 +1,30 @@
+{
+  "name": "otaviomiranda.com.br",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/luizomf/otaviomiranda.com.br/issues"
+  },
+  "homepage": "https://github.com/luizomf/otaviomiranda.com.br#readme",
+  "devDependencies": {
+    "@astrojs/check": "^0.9.6",
+    "astro": "^5.17.3",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "marked": "^17.0.3",
+    "prettier-plugin-astro": "^0.14.1"
+  }
+}

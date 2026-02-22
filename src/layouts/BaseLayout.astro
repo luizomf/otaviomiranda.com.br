@@ -1,0 +1,51 @@
+---
+// src/layouts/BaseLayout.astro
+import '../styles/global.css'; // Optional: Astro local css styles (We still use public css below for legacy)
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'Otávio Miranda | Cursos de Programação Python, JS e Full Stack',
+  description = 'Aprenda programação de verdade com Otávio Miranda. Cursos de Python, JavaScript, TypeScript e Full Stack focados em projetos reais. Mais de 300 mil alunos.',
+  image = 'https://otaviomiranda.com.br/imgs/curso-javascript-typescript.webp',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang='pt-BR'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+
+    <title>{title}</title>
+    <meta name='description' content={description} />
+
+    <!-- Open Graph / Sociabilidade -->
+    <meta property='og:title' content={title} />
+    <meta property='og:description' content={description} />
+    <meta property='og:type' content='website' />
+    <meta property='og:url' content={Astro.url} />
+    <meta property='og:image' content={image} />
+
+    <!-- Twitter -->
+    <meta name='twitter:card' content='summary_large_image' />
+    <meta name='twitter:title' content={title} />
+    <meta name='twitter:description' content={description} />
+    <meta name='twitter:image' content={image} />
+
+    <!-- Legacy Style & Favicon mapped to /public -->
+    <link rel='stylesheet' href='/css/styles_2026_v2.css' />
+    <link rel='icon' type='image/webp' href='/imgs/favicon-1.webp' />
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+
+    <script is:inline src='/js/scripts_2026_v2.js'></script>
+  </body>
+</html>
