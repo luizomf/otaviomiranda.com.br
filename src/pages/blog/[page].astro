@@ -44,7 +44,7 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
       class='pt-20'
     >
       <SectionHeader
-        class='blog-header'
+        class='blog-header blog-archive-header'
         eyeball='Arquivo'
         title='Todos os posts'
         description={`Página ${page.currentPage} de ${page.lastPage}. Explorando o acervo de tutoriais e anotações.`}
@@ -53,23 +53,20 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
       <ul class='blog-list'>
         {
           paginatedPosts.map(({ post, dateLabel, dateTime }) => (
-            <li style='margin-bottom: 2rem;'>
+            <li class='blog-post-item'>
               <a
                 href={getEntryHref(post)}
-                style='display: block; font-size: var(--font-size-md); font-weight: 700; color: var(--main-clr-shade); text-decoration: none; margin-bottom: 0.5rem;'
+                class='blog-post-link'
               >
                 {post.data.title}
               </a>
               {post.data.description && (
-                <p style='color: hsl(from var(--main-clr-shade) h s 40% / 1); font-size: var(--font-size-sm); margin: 0;'>
+                <p class='blog-post-description'>
                   {post.data.description}
                 </p>
               )}
               {dateLabel && dateTime && (
-                <time
-                  datetime={dateTime}
-                  style='font-size: var(--font-size-xxsm); color: hsl(from var(--main-clr-shade) h s 60% / 1); text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;'
-                >
+                <time datetime={dateTime} class='blog-post-date'>
                   {dateLabel}
                 </time>
               )}
@@ -78,27 +75,21 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
         }
       </ul>
 
-      <div
-        class='pagination'
-        style='display: flex; justify-content: space-between; align-items: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid hsl(from var(--main-clr-shade) h s 90% / 1);'
-      >
+      <div class='pagination blog-pagination'>
         {
           page.url.prev ? (
             <a
               href={page.url.prev}
-              class='button'
-              style='padding: 0.8rem 1.6rem; background-color: transparent; color: var(--main-clr-shade); text-decoration: none; font-weight: 700; border: 2px solid var(--main-clr-shade); border-radius: 4px;'
+              class='button blog-pagination-button blog-pagination-button--prev'
             >
               &larr; Página Anterior
             </a>
           ) : (
-            <span style='opacity: 0.5; padding: 0.8rem 1.6rem; border: 2px solid transparent;' />
+            <span class='blog-pagination-placeholder' />
           )
         }
 
-        <span
-          style='font-weight: 600; color: hsl(from var(--main-clr-shade) h s 50% / 1);'
-        >
+        <span class='blog-pagination-current'>
           Página {page.currentPage}
         </span>
 
@@ -106,13 +97,12 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
           page.url.next ? (
             <a
               href={page.url.next}
-              class='button'
-              style='padding: 0.8rem 1.6rem; background-color: var(--main-clr-shade); color: var(--main-clr); text-decoration: none; font-weight: 700; border: 2px solid var(--main-clr-shade); border-radius: 4px;'
+              class='button blog-pagination-button blog-pagination-button--next'
             >
               Próxima Página &rarr;
             </a>
           ) : (
-            <span style='opacity: 0.5; padding: 0.8rem 1.6rem; border: 2px solid transparent;' />
+            <span class='blog-pagination-placeholder' />
           )
         }
       </div>
@@ -122,3 +112,70 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
   <Newsletter />
   <Footer />
 </BaseLayout>
+
+<style>
+  .blog-post-item {
+    margin-bottom: 2rem;
+  }
+
+  .blog-post-link {
+    display: block;
+    font-size: var(--font-size-md);
+    font-weight: 700;
+    color: var(--main-clr-shade);
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-post-description {
+    color: hsl(from var(--main-clr-shade) h s 40% / 1);
+    font-size: var(--font-size-sm);
+    margin: 0;
+  }
+
+  .blog-post-date {
+    font-size: var(--font-size-xxsm);
+    color: hsl(from var(--main-clr-shade) h s 60% / 1);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .blog-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid hsl(from var(--main-clr-shade) h s 90% / 1);
+  }
+
+  .blog-pagination-button {
+    padding: 0.8rem 1.6rem;
+    text-decoration: none;
+    font-weight: 700;
+    border: 2px solid var(--main-clr-shade);
+    border-radius: 4px;
+  }
+
+  .blog-pagination-button--prev {
+    background-color: transparent;
+    color: var(--main-clr-shade);
+  }
+
+  .blog-pagination-button--next {
+    background-color: var(--main-clr-shade);
+    color: var(--main-clr);
+  }
+
+  .blog-pagination-placeholder {
+    opacity: 0.5;
+    padding: 0.8rem 1.6rem;
+    border: 2px solid transparent;
+  }
+
+  .blog-pagination-current {
+    font-weight: 600;
+    color: hsl(from var(--main-clr-shade) h s 50% / 1);
+  }
+</style>

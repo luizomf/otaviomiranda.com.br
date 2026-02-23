@@ -659,6 +659,55 @@ Fancy links and buttons
 Blog Section
 */
 
+.section-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: clamp(var(--spacings-lg-400), 8vw, var(--spacings-lg-900)) 0;
+  max-width: 80ch;
+  /* Expanded slightly to flow better on wide screens */
+  margin: 0 auto;
+  margin-bottom: clamp(var(--spacings-lg-400), 8vw, var(--spacings-lg-900));
+
+  p {
+    margin: 0;
+  }
+}
+
+.section-eyeball {
+  font-size: var(--font-size-xxsm);
+  color: hsl(from var(--main-clr-shade) h s 30% / 1);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-bottom: var(--spacings-sm-200);
+}
+
+.section-dark .section-eyeball {
+  color: hsl(from var(--main-clr-shade) h s 70% / 1);
+}
+
+.section-line {
+  color: hsl(from var(--main-clr-shade) h s 30% / 1);
+  font-size: clamp(var(--font-size-sm), 3vw, var(--font-size-md));
+  max-width: 60ch;
+  margin: 0 auto;
+}
+
+.section-dark .section-line {
+  color: hsl(from var(--main-clr-shade) h s 70% / 1);
+}
+
+.section-title {
+  font-size: var(--font-size-h-me);
+  margin: var(--spacings-sm-600) auto;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+}
+
 .section-blog {
   max-width: 72ch;
   margin: 0 auto;
@@ -668,6 +717,28 @@ Blog Section
 
 .blog-header {
   margin-bottom: clamp(var(--spacings-sm-600), 5vw, var(--spacings-sm-900));
+}
+
+.blog-archive-header {
+  align-items: flex-start;
+  text-align: left;
+  max-width: none;
+  padding: clamp(var(--spacings-sm-800), 4vw, var(--spacings-lg-200)) 0
+    clamp(var(--spacings-sm-600), 3vw, var(--spacings-lg-100));
+  margin-bottom: clamp(var(--spacings-sm-600), 4vw, var(--spacings-lg-200));
+}
+
+.blog-archive-header .section-eyeball {
+  margin-bottom: var(--spacings-sm-100);
+}
+
+.blog-archive-header .section-title {
+  margin: var(--spacings-sm-400) 0;
+}
+
+.blog-archive-header .section-line {
+  max-width: none;
+  margin: 0;
 }
 
 .blog-eyeball {
