@@ -1,6 +1,7 @@
 ---
 import Section from './Section.astro';
 import SectionHeader from './SectionHeader.astro';
+import Course from './Course.astro';
 ---
 
 <Section id='courses' theme='light' contentClass='section-courses'>
@@ -11,228 +12,86 @@ import SectionHeader from './SectionHeader.astro';
   />
 
   <div class='courses-grid'>
-    <!-- COURSE 1 -->
-    <article class='course-card'>
-      <a
-        href='https://www.udemy.com/course/curso-de-javascript-moderno-do-basico-ao-avancado/?referralCode=C6F07057B0999D3E36BA'
-        target='_blank'
-        rel='noreferrer noopener'
-        class='course-card-link'
-      >
-        <div class='course-card-image-wrapper'>
-          <img
-            loading='lazy'
-            src='imgs/curso-javascript-typescript.webp'
-            alt='Curso de JavaScript e TypeScript do básico ao avançado'
-            class='course-card-image'
-          />
-        </div>
-        <div class='course-card-content'>
-          <h3 class='course-card-title'>
-            Curso de JavaScript e TypeScript do básico ao avançado
-          </h3>
-          <p class='course-card-description'>
-            JavaScript e TypeScript – front-end e back-end (Full Stack) – Node,
-            Express, noSQL, React, hooks, Redux, Design Patterns
-          </p>
-        </div>
-      </a>
-    </article>
+    <Course
+      href='https://www.udemy.com/course/curso-de-javascript-moderno-do-basico-ao-avancado/?referralCode=C6F07057B0999D3E36BA'
+      imageSrc='imgs/curso-javascript-typescript.webp'
+      imageAlt='Curso de JavaScript e TypeScript do básico ao avançado'
+      title='Curso de JavaScript e TypeScript do básico ao avançado'
+    >
+      JavaScript e TypeScript - front-end e back-end (Full Stack) - Node,
+      Express, noSQL, React, hooks, Redux, Design Patterns
+    </Course>
 
-    <!-- COURSE 2 -->
-    <article class='course-card'>
-      <a
-        href='https://www.udemy.com/course/python-3-do-zero-ao-avancado/?referralCode=5DDCAD01311E2A9599B2'
-        target='_blank'
-        rel='noreferrer noopener'
-        class='course-card-link'
-      >
-        <div class='course-card-image-wrapper'>
-          <img
-            loading='lazy'
-            src='imgs/curso-de-python.webp'
-            alt='Curso de Python 3 do Básico Ao Avançado'
-            class='course-card-image'
-          />
-        </div>
-        <div class='course-card-content'>
-          <h3 class='course-card-title'>
-            Curso de Python 3 do Básico Ao Avançado (com projetos reais)
-          </h3>
-          <p class='course-card-description'>
-            Python 3 completo – programação com Django, PyQT5, Selenium, Regexp,
-            Testes e TDD, POO, Design Patterns GoF, algoritmos.
-          </p>
-        </div>
-      </a>
-    </article>
+    <Course
+      href='https://www.udemy.com/course/python-3-do-zero-ao-avancado/?referralCode=5DDCAD01311E2A9599B2'
+      imageSrc='imgs/curso-de-python.webp'
+      imageAlt='Curso de Python 3 do Básico Ao Avançado'
+      title='Curso de Python 3 do Básico Ao Avançado (com projetos reais)'
+    >
+      Python 3 completo - programação com Django, PyQT5, Selenium, Regexp,
+      Testes e TDD, POO, Design Patterns GoF, algoritmos.
+    </Course>
 
-    <!-- COURSE 3 -->
-    <article class='course-card'>
-      <a
-        href='https://www.udemy.com/course/nestjs-curso-completo-rest-api-typeorm-jwt-e-mais/?referralCode=7EAD0D9F0C7D4B6F9B4E'
-        target='_blank'
-        rel='noreferrer noopener'
-        class='course-card-link'
-      >
-        <div class='course-card-image-wrapper'>
-          <img
-            loading='lazy'
-            src='imgs/curso-de-nestjs.webp'
-            alt='NestJS - Curso completo'
-            class='course-card-image'
-          />
-        </div>
-        <div class='course-card-content'>
-          <h3 class='course-card-title'>
-            NestJS - Curso completo para REST API com TypeORM e JWT
-          </h3>
-          <p class='course-card-description'>
-            Domine NestJS criando APIs RESTful com TypeORM, autenticação JWT, e
-            testes automatizados para aplicações robustas.
-          </p>
-        </div>
-      </a>
-    </article>
+    <Course
+      href='https://www.udemy.com/course/nestjs-curso-completo-rest-api-typeorm-jwt-e-mais/?referralCode=7EAD0D9F0C7D4B6F9B4E'
+      imageSrc='imgs/curso-de-nestjs.webp'
+      imageAlt='NestJS - Curso completo'
+      title='NestJS - Curso completo para REST API com TypeORM e JWT'
+    >
+      Domine NestJS criando APIs RESTful com TypeORM, autenticação JWT, e
+      testes automatizados para aplicações robustas.
+    </Course>
 
-    <!-- COURSE 4 (Hostinger) -->
-    <article class='course-card'>
-      <a
-        href='https://hostinger.com/otaviomiranda'
-        target='_blank'
-        rel='noreferrer noopener'
-        class='course-card-link'
-      >
-        <div class='course-card-image-wrapper'>
-          <img
-            loading='lazy'
-            src='imgs/hostinger.webp'
-            alt='Hostinger'
-            class='course-card-image'
-          />
-        </div>
-        <div class='course-card-content'>
-          <h3 class='course-card-title'>
-            Para servidores e hospedagem de sites, recomendo Hostinger!
-          </h3>
-          <p class='course-card-description'>
-            Além da qualidade da infraestrutura, a Hostinger ainda disponibiliza
-            <strong style='color: var(--glow-clr-1)'>+10% de desconto</strong>
-            com o cupom
-            <strong style='color: var(--glow-clr-1)'>OTAVIOMIRANDA</strong>.
-          </p>
-        </div>
-      </a>
-    </article>
+    <Course
+      href='https://hostinger.com/otaviomiranda'
+      imageSrc='imgs/hostinger.webp'
+      imageAlt='Hostinger'
+      title='Para servidores e hospedagem de sites, recomendo Hostinger!'
+    >
+      Além da qualidade da infraestrutura, a Hostinger ainda disponibiliza
+      <strong style='color: var(--glow-clr-1)'>+10% de desconto</strong>
+      com o cupom
+      <strong style='color: var(--glow-clr-1)'>OTAVIOMIRANDA</strong>.
+    </Course>
 
-    <!-- COURSE 5 -->
-    <article class='course-card'>
-      <a
-        href='https://www.udemy.com/course/curso-de-django-web-framework-com-python-html-e-css/?referralCode=D43F8EDA2A980B64C0FC'
-        target='_blank'
-        rel='noreferrer noopener'
-        class='course-card-link'
-      >
-        <div class='course-card-image-wrapper'>
-          <img
-            loading='lazy'
-            src='imgs/curso-django.webp'
-            alt='Curso de Django'
-            class='course-card-image'
-          />
-        </div>
-        <div class='course-card-content'>
-          <h3 class='course-card-title'>
-            Curso de Django Web Framework com Python, HTML e CSS
-          </h3>
-          <p class='course-card-description'>
-            Aprenda Django Web Framework com Python, HTML e CSS. Conheça o ORM,
-            os templates e Views, entenda HTTP e muito mais.
-          </p>
-        </div>
-      </a>
-    </article>
+    <Course
+      href='https://www.udemy.com/course/curso-de-django-web-framework-com-python-html-e-css/?referralCode=D43F8EDA2A980B64C0FC'
+      imageSrc='imgs/curso-django.webp'
+      imageAlt='Curso de Django'
+      title='Curso de Django Web Framework com Python, HTML e CSS'
+    >
+      Aprenda Django Web Framework com Python, HTML e CSS. Conheça o ORM, os
+      templates e Views, entenda HTTP e muito mais.
+    </Course>
 
-    <!-- COURSE 6 -->
-    <article class='course-card'>
-      <a
-        href='https://www.udemy.com/course/curso-de-reactjs-nextjs-completo-do-basico-ao-avancado/?referralCode=C228CEEAEB14B76159E1'
-        target='_blank'
-        rel='noreferrer noopener'
-        class='course-card-link'
-      >
-        <div class='course-card-image-wrapper'>
-          <img
-            loading='lazy'
-            src='imgs/curso-react-nextjs.webp'
-            alt='Curso de React.Js + Next.Js'
-            class='course-card-image'
-          />
-        </div>
-        <div class='course-card-content'>
-          <h3 class='course-card-title'>
-            Curso de React.Js + Next.Js completo do básico ao avançado
-          </h3>
-          <p class='course-card-description'>
-            Aprenda ReactJS, NextJS, Styled-Components, Testes com Jest,
-            Storybook, Strapi, HTML e CSS com TypeScript e JavaScript.
-          </p>
-        </div>
-      </a>
-    </article>
+    <Course
+      href='https://www.udemy.com/course/curso-de-reactjs-nextjs-completo-do-basico-ao-avancado/?referralCode=C228CEEAEB14B76159E1'
+      imageSrc='imgs/curso-react-nextjs.webp'
+      imageAlt='Curso de React.Js + Next.Js'
+      title='Curso de React.Js + Next.Js completo do básico ao avançado'
+    >
+      Aprenda ReactJS, NextJS, Styled-Components, Testes com Jest, Storybook,
+      Strapi, HTML e CSS com TypeScript e JavaScript.
+    </Course>
 
-    <!-- COURSE 7 -->
-    <article class='course-card'>
-      <a
-        href='https://www.udemy.com/course/curso-de-graphql-e-apollo-server-client/?referralCode=7C1982716397A5668A2C'
-        target='_blank'
-        rel='noreferrer noopener'
-        class='course-card-link'
-      >
-        <div class='course-card-image-wrapper'>
-          <img
-            loading='lazy'
-            src='imgs/graphql.webp'
-            alt='Curso de GraphQL e Apollo-Server'
-            class='course-card-image'
-          />
-        </div>
-        <div class='course-card-content'>
-          <h3 class='course-card-title'>Curso de GraphQL e Apollo-Server</h3>
-          <p class='course-card-description'>
-            GraphQL e Apollo-Server – Crie back-ends para aplicações e junte
-            tudo em um grafo e end-point usando dados de APIs e BDs
-          </p>
-        </div>
-      </a>
-    </article>
+    <Course
+      href='https://www.udemy.com/course/curso-de-graphql-e-apollo-server-client/?referralCode=7C1982716397A5668A2C'
+      imageSrc='imgs/graphql.webp'
+      imageAlt='Curso de GraphQL e Apollo-Server'
+      title='Curso de GraphQL e Apollo-Server'
+    >
+      GraphQL e Apollo-Server - Crie back-ends para aplicações e junte tudo em
+      um grafo e end-point usando dados de APIs e BDs
+    </Course>
 
-    <!-- COURSE 8 -->
-    <article class='course-card'>
-      <a
-        href='https://www.udemy.com/course/expressoes-regulares-com-python-3-curso-gratuito/?referralCode=974C646591CF3D055109'
-        target='_blank'
-        rel='noreferrer noopener'
-        class='course-card-link'
-      >
-        <div class='course-card-image-wrapper'>
-          <img
-            loading='lazy'
-            src='imgs/expressoes-regulares.webp'
-            alt='Expressões regulares com Python 3'
-            class='course-card-image'
-          />
-        </div>
-        <div class='course-card-content'>
-          <h3 class='course-card-title'>
-            Expressões regulares com Python 3 (Curso gratuito)
-          </h3>
-          <p class='course-card-description'>
-            Aprenda expressões regulares utilizando Python 3 – Grátis
-          </p>
-        </div>
-      </a>
-    </article>
+    <Course
+      href='https://www.udemy.com/course/expressoes-regulares-com-python-3-curso-gratuito/?referralCode=974C646591CF3D055109'
+      imageSrc='imgs/expressoes-regulares.webp'
+      imageAlt='Expressões regulares com Python 3'
+      title='Expressões regulares com Python 3 (Curso gratuito)'
+    >
+      Aprenda expressões regulares utilizando Python 3 - Grátis
+    </Course>
   </div>
 </Section>
 
@@ -260,114 +119,4 @@ Section courses
     transform-style: preserve3d;
   }
 
-  .course-card {
-    display: flex;
-    flex-direction: column;
-    background: var(--bg-clr-light-mode);
-    box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.04),
-      0 8px 16px rgba(0, 0, 0, 0.04);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: var(--border-radius-lg);
-    overflow: hidden;
-    transition:
-      transform 400ms cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 400ms cubic-bezier(0.16, 1, 0.3, 1),
-      border-color 400ms ease;
-    height: 100%;
-  }
-
-  :global(.section-dark) .course-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.2),
-      0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-
-  .course-card:hover {
-    transform: translateY(-4px);
-    box-shadow:
-      0 12px 24px rgba(0, 0, 0, 0.08),
-      0 24px 48px rgba(0, 0, 0, 0.08);
-    border-color: rgba(0, 0, 0, 0.12);
-  }
-
-  :global(.section-dark) .course-card:hover {
-    box-shadow:
-      0 12px 24px rgba(0, 0, 0, 0.4),
-      0 24px 48px rgba(0, 0, 0, 0.4),
-      0 0 0 1px rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.15);
-  }
-
-  .course-card-link {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: inherit;
-    height: 100%;
-  }
-
-  .course-card-image-wrapper {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    position: relative;
-    background: rgba(0, 0, 0, 0.05);
-    /* Placeholder while image loads */
-  }
-
-  :global(.section-dark) .course-card-image-wrapper {
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  .course-card-image {
-    opacity: 0.95;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition:
-      transform 600ms cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 600ms ease;
-    margin: 0;
-    border-radius: 0;
-  }
-
-  .course-card:hover .course-card-image {
-    opacity: 1;
-    transform: scale(1.03);
-  }
-
-  .course-card-content {
-    padding: var(--spacings-sm-700) var(--spacings-sm-600);
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-
-  .course-card-title {
-    font-size: var(--font-size-sm);
-    line-height: var(--line-height-xsm);
-    margin: 0 0 var(--spacings-sm-300) 0;
-    color: hsl(from var(--main-clr-shade) h s 10% / 1);
-    transition: color 300ms ease;
-    letter-spacing: -0.015em;
-    text-wrap: balance;
-  }
-
-  :global(.section-dark) .course-card-title {
-    color: hsl(from var(--main-clr-shade) h s 5% / 1);
-  }
-
-  .course-card-description {
-    font-size: var(--font-size-xsm);
-    color: hsl(from var(--main-clr-shade) h s 30% / 1);
-    margin: 0;
-    line-height: var(--line-height-me);
-  }
-
-  :global(.section-dark) .course-card-description {
-    color: hsl(from var(--main-clr-shade) h s 70% / 1);
-  }
 </style>
