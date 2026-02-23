@@ -709,7 +709,7 @@ Blog Section
 }
 
 .section-blog {
-  max-width: 72ch;
+  max-width: var(--main-width);
   margin: 0 auto;
   padding-top: clamp(var(--spacings-lg-100), 8vw, var(--spacings-lg-400));
   padding-bottom: 8rem;
