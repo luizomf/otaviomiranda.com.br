@@ -1,0 +1,47 @@
+---
+// src/layouts/BlankLayout.astro
+import Seo from '../components/Seo.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'Otávio Miranda | Cursos de Programação Python, JS e Full Stack',
+  description = 'Aprenda programação de verdade com Otávio Miranda. Cursos de Python, JavaScript, TypeScript e Full Stack focados em projetos reais. Mais de 300 mil alunos.',
+  image = 'https://otaviomiranda.com.br/imgs/curso-javascript-typescript.webp',
+} = Astro.props;
+
+// Canonical Base
+const SITE = 'https://www.otaviomiranda.com.br';
+const canonical = new URL(Astro.url.pathname, SITE).href;
+---
+
+<!doctype html>
+<html lang='pt-BR'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <!-- Sitemap Link injetado (Requisito SEO) -->
+    <link rel='sitemap' href='/sitemap-index.xml' />
+    <link rel='icon' type='image/webp' href='/imgs/favicon-1.webp' />
+
+    <!-- SEO Component Inject -->
+    <title>{title}</title>
+    <meta name='description' content={description} />
+    <meta property='og:title' content={title} />
+    <meta property='og:description' content={description} />
+    <meta property='og:type' content='website' />
+    <meta property='og:url' content={canonical} />
+    <meta property='og:image' content={image} />
+    <meta name='twitter:card' content='summary_large_image' />
+
+    <!-- NO GLOBAL CSS, NO GLOBAL JS. PURE HTML. -->
+  </head>
+  <body>
+    <!-- Blank Canvas para o Desenvolvedor -->
+    <slot />
+  </body>
+</html>
