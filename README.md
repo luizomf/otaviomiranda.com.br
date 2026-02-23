@@ -19,6 +19,17 @@ Em **Fevereiro de 2026** nós iniciamos a grande _"Apollo Mission"_: **A migraç
 completa do núcleo estático para o [Astro](https://astro.build) (Static Site
 Generation)**.
 
+## 🧭 Princípios Editoriais (Real)
+
+- O conteúdo (texto + código) vem primeiro: leitura acima da dobra e sem
+  distração desnecessária.
+- Sem popup, sem ads e sem dependência de script externo para highlight de
+  código.
+- Posts em Markdown com frontmatter obrigatório (`title`, `description`,
+  `date`, `author`) para manter padrão.
+- Arquivo do blog simples e paginado (sem vitrine de cards com thumbnail).
+- Links de contato centralizados em página interna do próprio site.
+
 ### O que mudou com o Astro?
 
 1. **Content Layer API (Acesso a dados tipados)**: O site agora extrai 100% dos
@@ -155,6 +166,15 @@ o meu Agent AI (O _"Brien"_) catalogamos para voltar e matar depois.
   Critério de conclusão: limite por página definido, navegação entre páginas funcionando e layout consistente em desktop/mobile.
 - [ ] Editor local de posts (sem auth): prototipar um editor Markdown local com Vim motions, botão de salvar e geração automática do arquivo no caminho padrão (`ano/slug/text.md`) com frontmatter padronizado (`title`, `description`, `date`, `author`).
   Critério de conclusão: criar/editar/salvar post localmente em fluxo único, reduzindo trabalho manual e inconsistência de padrão.
+- [ ] Componentizar o cupom mensal da Home: extrair o bloco de desconto
+  (`section-coupon`) para componente próprio com dados fáceis de atualizar
+  (`código` e `validade`) sem editar o miolo do `index.astro`.
+  Critério de conclusão: cupom renderizado por componente dedicado e alteração
+  mensal feita em um único ponto.
+- [x] Substituir hub externo de contatos: criar página interna `/contatos/` e
+  apontar navegação principal para ela, removendo dependência de `beacons.ai`.
+  Critério de conclusão: Header/Hero/Footer usando `/contatos/` e página
+  publicada no próprio site.
 
 ---
 
