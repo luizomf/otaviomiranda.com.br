@@ -77,6 +77,7 @@ import BlankLayout from '../layouts/BlankLayout.astro';
       let vimMode = null;
       let monacoVimModule = null;
       let vimKeymapsConfigured = false;
+      let vimCommandsConfigured = false;
 
       const setCurrentFileName = fileName => {
         currentFileName = fileName;
@@ -257,6 +258,21 @@ import BlankLayout from '../layouts/BlankLayout.astro';
         vimKeymapsConfigured = true;
       };
 
+      const configureVimCommands = () => {
+        if (vimCommandsConfigured) return;
+        const vimApi = monacoVimModule?.VimMode?.Vim;
+        if (!vimApi?.defineEx) return;
+
+        vimApi.defineEx('write', 'w', () => {
+          save().catch(() => {});
+        });
+        vimApi.defineEx('wq', 'wq', () => {
+          save().catch(() => {});
+        });
+
+        vimCommandsConfigured = true;
+      };
+
       const loadMonaco = () =>
         new Promise(resolve => {
           const waitForRequire = () => {
@@ -324,6 +340,7 @@ import BlankLayout from '../layouts/BlankLayout.astro';
 
         if (monacoVimModule?.initVimMode) {
           configureVimKeymaps();
+          configureVimCommands();
           enableVimMode();
         } else {
           setVimUiState({ enabled: false, available: false });
