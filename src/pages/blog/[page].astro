@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Newsletter from '../../components/Newsletter.astro';
+import PillLink from '../../components/PillLink.astro';
 import { getCollection } from 'astro:content';
 import type { GetStaticPathsOptions, Page } from 'astro';
 import type { CollectionEntry } from 'astro:content';
@@ -68,35 +69,37 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
           </ul>
 
           <div class='pagination blog-pagination'>
-            {
-              page.url.prev ? (
-                <a
-                  href={page.url.prev}
-                  class='button blog-pagination-button blog-pagination-button--prev'
-                >
-                  &larr; Página Anterior
-                </a>
-              ) : (
-                <span class='blog-pagination-placeholder' />
-              )
-            }
+            <div class='blog-pagination-side blog-pagination-side--prev'>
+              {
+                page.url.prev && (
+                  <PillLink
+                    href={page.url.prev}
+                    containerClass='blog-pagination-control'
+                    linkClass='blog-pagination-link'
+                  >
+                    &larr; Página Anterior
+                  </PillLink>
+                )
+              }
+            </div>
 
             <span class='blog-pagination-current'>
               Página {page.currentPage}
             </span>
 
-            {
-              page.url.next ? (
-                <a
-                  href={page.url.next}
-                  class='button blog-pagination-button blog-pagination-button--next'
-                >
-                  Próxima Página &rarr;
-                </a>
-              ) : (
-                <span class='blog-pagination-placeholder' />
-              )
-            }
+            <div class='blog-pagination-side blog-pagination-side--next'>
+              {
+                page.url.next && (
+                  <PillLink
+                    href={page.url.next}
+                    containerClass='blog-pagination-control'
+                    linkClass='blog-pagination-link'
+                  >
+                    Próxima Página &rarr;
+                  </PillLink>
+                )
+              }
+            </div>
           </div>
         </article>
       </div>
@@ -175,40 +178,68 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
   }
 
   .blog-pagination {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
+    gap: var(--spacings-sm-500);
     margin-top: 4rem;
     padding-top: 2rem;
     border-top: 1px solid hsl(from var(--main-clr-shade) h s 90% / 1);
   }
 
-  .blog-pagination-button {
-    padding: 0.8rem 1.6rem;
-    text-decoration: none;
+  .blog-pagination-side {
+    display: flex;
+  }
+
+  .blog-pagination-side--prev {
+    justify-content: flex-start;
+  }
+
+  .blog-pagination-side--next {
+    justify-content: flex-end;
+  }
+
+  .blog-pagination-control {
+    flex: 0 0 auto;
+    min-width: 22rem;
+    max-width: 100%;
+  }
+
+  .blog-pagination-link {
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-size-xsm);
     font-weight: 700;
-    border: 2px solid var(--main-clr-shade);
-    border-radius: 4px;
-  }
-
-  .blog-pagination-button--prev {
-    background-color: transparent;
-    color: var(--main-clr-shade);
-  }
-
-  .blog-pagination-button--next {
-    background-color: var(--main-clr-shade);
-    color: var(--main-clr);
-  }
-
-  .blog-pagination-placeholder {
-    opacity: 0.5;
-    padding: 0.8rem 1.6rem;
-    border: 2px solid transparent;
+    text-decoration: none;
+    white-space: nowrap;
   }
 
   .blog-pagination-current {
+    justify-self: center;
     font-weight: 600;
     color: hsl(from var(--main-clr-shade) h s 50% / 1);
+  }
+
+  @media (max-width: 780px) {
+    .blog-pagination {
+      grid-template-columns: 1fr;
+      justify-items: stretch;
+      gap: var(--spacings-sm-400);
+    }
+
+    .blog-pagination-side--next {
+      justify-content: flex-start;
+    }
+
+    .blog-pagination-current {
+      justify-self: flex-start;
+    }
+
+    .blog-pagination-control {
+      min-width: 0;
+      width: 100%;
+    }
   }
 </style>

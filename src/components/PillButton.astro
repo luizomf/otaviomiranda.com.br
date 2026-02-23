@@ -1,0 +1,20 @@
+---
+type Props = Omit<astroHTML.JSX.ButtonHTMLAttributes, 'class'> & {
+  containerClass?: string;
+  linkClass?: string;
+};
+
+const {
+  containerClass = '',
+  linkClass = '',
+  ...buttonProps
+} = Astro.props as Props;
+---
+
+<div class:list={['link-container', containerClass]}>
+  <div class='link-bg-blur'></div>
+  <div class='link-bg'></div>
+  <button class:list={['link', linkClass]} {...buttonProps}>
+    <slot />
+  </button>
+</div>

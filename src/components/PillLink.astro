@@ -1,0 +1,22 @@
+---
+type Props = Omit<astroHTML.JSX.AnchorHTMLAttributes, 'class'> & {
+  href: string;
+  containerClass?: string;
+  linkClass?: string;
+};
+
+const {
+  href,
+  containerClass = '',
+  linkClass = '',
+  ...linkProps
+} = Astro.props as Props;
+---
+
+<div class:list={['link-container', containerClass]}>
+  <div class='link-bg-blur'></div>
+  <div class='link-bg'></div>
+  <a href={href} class:list={['link', linkClass]} {...linkProps}>
+    <slot />
+  </a>
+</div>
