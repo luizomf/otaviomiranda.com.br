@@ -3,8 +3,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Newsletter from '../../components/Newsletter.astro';
-import Section from '../../components/Section.astro';
-import SectionHeader from '../../components/SectionHeader.astro';
 import { getCollection } from 'astro:content';
 import type { GetStaticPathsOptions, Page } from 'astro';
 import type { CollectionEntry } from 'astro:content';
@@ -37,76 +35,72 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
   <div class='main'>
     <Header />
 
-    <Section
-      id='blog-page'
-      theme='light'
-      contentClass='section-blog'
-      class='pt-20'
-    >
-      <SectionHeader
-        class='blog-header blog-archive-header'
-        eyeball='Arquivo'
-        title='Todos os posts'
-        description={`Página ${page.currentPage} de ${page.lastPage}. Explorando o acervo de tutoriais e anotações.`}
-      />
+    <section id='blog-page' class='section section-light article-section'>
+      <div class='section-content'>
+        <article class='article markdown-body article-body blog-archive-body'>
+          <header class='blog-archive-heading'>
+            <p class='blog-archive-eyeball'>Arquivo</p>
+            <h1 class='blog-archive-title'>Todos os posts</h1>
+            <p class='blog-archive-line'>
+              Página {page.currentPage} de {page.lastPage}. Explorando o acervo de
+              tutoriais e anotações.
+            </p>
+          </header>
 
-      <ul class='blog-list'>
-        {
-          paginatedPosts.map(({ post, dateLabel, dateTime }) => (
-            <li class='blog-post-item'>
-              <a
-                href={getEntryHref(post)}
-                class='blog-post-link'
-              >
-                {post.data.title}
-              </a>
-              {post.data.description && (
-                <p class='blog-post-description'>
-                  {post.data.description}
-                </p>
-              )}
-              {dateLabel && dateTime && (
-                <time datetime={dateTime} class='blog-post-date'>
-                  {dateLabel}
-                </time>
-              )}
-            </li>
-          ))
-        }
-      </ul>
+          <ul class='blog-list'>
+            {
+              paginatedPosts.map(({ post, dateLabel, dateTime }) => (
+                <li class='blog-post-item'>
+                  <a href={getEntryHref(post)} class='blog-post-link'>
+                    {post.data.title}
+                  </a>
+                  {post.data.description && (
+                    <p class='blog-post-description'>{post.data.description}</p>
+                  )}
+                  {dateLabel && dateTime && (
+                    <time datetime={dateTime} class='blog-post-date'>
+                      {dateLabel}
+                    </time>
+                  )}
+                </li>
+              ))
+            }
+          </ul>
 
-      <div class='pagination blog-pagination'>
-        {
-          page.url.prev ? (
-            <a
-              href={page.url.prev}
-              class='button blog-pagination-button blog-pagination-button--prev'
-            >
-              &larr; Página Anterior
-            </a>
-          ) : (
-            <span class='blog-pagination-placeholder' />
-          )
-        }
+          <div class='pagination blog-pagination'>
+            {
+              page.url.prev ? (
+                <a
+                  href={page.url.prev}
+                  class='button blog-pagination-button blog-pagination-button--prev'
+                >
+                  &larr; Página Anterior
+                </a>
+              ) : (
+                <span class='blog-pagination-placeholder' />
+              )
+            }
 
-        <span class='blog-pagination-current'>
-          Página {page.currentPage}
-        </span>
+            <span class='blog-pagination-current'>
+              Página {page.currentPage}
+            </span>
 
-        {
-          page.url.next ? (
-            <a
-              href={page.url.next}
-              class='button blog-pagination-button blog-pagination-button--next'
-            >
-              Próxima Página &rarr;
-            </a>
-          ) : (
-            <span class='blog-pagination-placeholder' />
-          )
-        }
+            {
+              page.url.next ? (
+                <a
+                  href={page.url.next}
+                  class='button blog-pagination-button blog-pagination-button--next'
+                >
+                  Próxima Página &rarr;
+                </a>
+              ) : (
+                <span class='blog-pagination-placeholder' />
+              )
+            }
+          </div>
+        </article>
       </div>
-    </Section>
+    </section>
   </div>
 
   <Newsletter />
@@ -114,6 +108,44 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
 </BaseLayout>
 
 <style>
+  .blog-archive-body {
+    padding-bottom: 8rem;
+  }
+
+  .blog-archive-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: clamp(var(--spacings-sm-800), 4vw, var(--spacings-lg-200)) 0
+      clamp(var(--spacings-sm-600), 3vw, var(--spacings-lg-100));
+    margin-bottom: clamp(var(--spacings-sm-600), 4vw, var(--spacings-lg-200));
+  }
+
+  .blog-archive-eyeball {
+    margin: 0 0 var(--spacings-sm-100);
+    font-size: var(--font-size-xxsm);
+    color: hsl(from var(--main-clr-shade) h s 30% / 1);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+
+  .blog-archive-title {
+    margin: var(--spacings-sm-400) 0;
+    font-size: var(--font-size-h-me);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    font-weight: 800;
+  }
+
+  .blog-archive-line {
+    margin: 0;
+    color: hsl(from var(--main-clr-shade) h s 30% / 1);
+    font-size: clamp(var(--font-size-sm), 3vw, var(--font-size-md));
+    max-width: none;
+  }
+
   .blog-post-item {
     margin-bottom: 2rem;
   }
