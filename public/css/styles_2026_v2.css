@@ -302,16 +302,20 @@ svg {
 
 .colorful-border {
   background-image:
-    linear-gradient(to right,
+    linear-gradient(
+      to right,
       transparent 0 10px,
       hsl(from var(--main-clr-shade) h s 5% / 1) 10px 100%,
-      transparent),
-    repeating-linear-gradient(0,
+      transparent
+    ),
+    repeating-linear-gradient(
+      0,
       var(--glow-clr-1) 0 20%,
       var(--glow-clr-2) 29% 40%,
       var(--glow-clr-3) 49% 60%,
       var(--glow-clr-4) 69% 80%,
-      var(--glow-clr-5) 89% 100%);
+      var(--glow-clr-5) 89% 100%
+    );
 }
 
 .glass {
@@ -349,11 +353,13 @@ svg {
   opacity: 0.2;
   transition: opacity 300ms ease-in-out;
 
-  background: linear-gradient(135deg,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(255, 255, 255, 0) 30%,
-      rgba(255, 255, 255, 0) 70%,
-      rgba(255, 255, 255, 0.3) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0) 70%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
 
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -556,7 +562,6 @@ footer.nav {
   }
 }
 
-
 /*
 Fancy links and buttons
 */
@@ -567,7 +572,6 @@ Fancy links and buttons
   line-height: var(--line-height-xxxsm);
   opacity: 1;
   transition: var(--transition-fast);
-  transform: translateY(0);
   border-radius: var(--border-radius-pill);
   font-family: var(--font-family-monospace);
   flex: 1;
@@ -581,10 +585,12 @@ Fancy links and buttons
     width: 100%;
     height: 100%;
     z-index: 3;
-    background: linear-gradient(-45deg,
-        transparent 10%,
-        rgba(255, 255, 255, 0.2) 50%,
-        transparent 90%);
+    background: linear-gradient(
+      -45deg,
+      transparent 10%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 90%
+    );
     transition: left 600ms ease;
   }
 
@@ -592,11 +598,13 @@ Fancy links and buttons
     left: 100%;
   }
 
-  .link,
+  .link.link,
   .link-bg,
   .link-bg-blur {
-    padding: clamp(var(--spacings-sm-200), 3vw, var(--spacings-sm-300)) clamp(var(--spacings-sm-400), 3vw, var(--spacings-sm-900));
+    padding: clamp(var(--spacings-sm-200), 3vw, var(--spacings-sm-300))
+      clamp(var(--spacings-sm-400), 3vw, var(--spacings-sm-900));
     border-radius: var(--border-radius-pill);
+    text-decoration: none;
   }
 
   .link {
@@ -616,12 +624,14 @@ Fancy links and buttons
     position: absolute;
     inset: -2px;
     z-index: 1;
-    background-image: conic-gradient(from var(--conic-angle),
-        var(--glow-clr-1),
-        var(--glow-clr-2),
-        var(--glow-clr-3),
-        var(--glow-clr-4),
-        var(--glow-clr-5));
+    background-image: conic-gradient(
+      from var(--conic-angle),
+      var(--glow-clr-1),
+      var(--glow-clr-2),
+      var(--glow-clr-3),
+      var(--glow-clr-4),
+      var(--glow-clr-5)
+    );
 
     animation-name: glow;
     animation-duration: 10s;
@@ -843,10 +853,12 @@ Blog Section
     width: 100%;
     height: 100%;
     z-index: 3;
-    background: linear-gradient(-45deg,
-        transparent 10%,
-        rgba(255, 255, 255, 0.2) 50%,
-        transparent 90%);
+    background: linear-gradient(
+      -45deg,
+      transparent 10%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 90%
+    );
     transition: left 600ms ease;
   }
 
@@ -862,7 +874,6 @@ Blog Section
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
-
 
 /* Newsletter */
 form.newsletter-form {
@@ -1005,9 +1016,11 @@ Footer Massive
   left: 0;
   width: 100%;
   height: 80%;
-  background: linear-gradient(to top,
-      hsl(from var(--main-clr-shade) h s 5% / 1) 0%,
-      transparent 50%);
+  background: linear-gradient(
+    to top,
+    hsl(from var(--main-clr-shade) h s 5% / 1) 0%,
+    transparent 50%
+  );
   z-index: 2;
   pointer-events: none;
 }

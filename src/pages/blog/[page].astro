@@ -43,8 +43,8 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
             <p class='blog-archive-eyeball'>Arquivo</p>
             <h1 class='blog-archive-title'>Todos os posts</h1>
             <p class='blog-archive-line'>
-              Página {page.currentPage} de {page.lastPage}. Explorando o acervo de
-              tutoriais e anotações.
+              Página {page.currentPage} de {page.lastPage}. Explorando o acervo
+              de tutoriais e anotações.
             </p>
           </header>
 
@@ -77,14 +77,14 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
                     containerClass='blog-pagination-control'
                     linkClass='blog-pagination-link'
                   >
-                    &larr; Página Anterior
+                    ◀ Anterior
                   </PillLink>
                 )
               }
             </div>
 
             <span class='blog-pagination-current'>
-              Página {page.currentPage}
+              ▲ Página {page.currentPage}
             </span>
 
             <div class='blog-pagination-side blog-pagination-side--next'>
@@ -95,7 +95,7 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
                     containerClass='blog-pagination-control'
                     linkClass='blog-pagination-link'
                   >
-                    Próxima Página &rarr;
+                    Próxima ▶
                   </PillLink>
                 )
               }
@@ -135,7 +135,7 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
   }
 
   .blog-archive-title {
-    margin: var(--spacings-sm-600) 0 var(--spacings-sm-700);
+    margin-bottom: var(--spacings-sm-700);
     font-size: var(--font-size-h-me);
     line-height: 1.1;
     letter-spacing: -0.04em;
@@ -152,21 +152,23 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
 
   .blog-post-item {
     margin-bottom: 2rem;
+    padding-bottom: 2rem;
   }
 
-  .blog-post-link {
+  .blog-post-link.blog-post-link {
     display: block;
     font-size: var(--font-size-md);
     font-weight: 700;
     color: var(--main-clr-shade);
     text-decoration: none;
-    margin-bottom: 0.5rem;
+    padding: 1rem 0;
   }
 
   .blog-post-description {
     color: hsl(from var(--main-clr-shade) h s 40% / 1);
     font-size: var(--font-size-sm);
     margin: 0;
+    padding-bottom: var(--spacings-sm-300);
   }
 
   .blog-post-date {
@@ -180,11 +182,11 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
   .blog-pagination {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
+    justify-items: center;
     align-items: center;
-    gap: var(--spacings-sm-500);
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid hsl(from var(--main-clr-shade) h s 90% / 1);
+    gap: var(--spacings-sm-600) var(--spacings-sm-500);
+    margin-block: var(--spacings-sm-700);
+    padding-block: var(--spacings-sm-700);
   }
 
   .blog-pagination-side {
@@ -206,27 +208,33 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
   }
 
   .blog-pagination-link {
-    display: inline-flex;
+    display: flex;
     width: 100%;
     justify-content: center;
     align-items: center;
     font-size: var(--font-size-xsm);
-    font-weight: 700;
     text-decoration: none;
     white-space: nowrap;
   }
 
   .blog-pagination-current {
-    justify-self: center;
-    font-weight: 600;
-    color: hsl(from var(--main-clr-shade) h s 50% / 1);
+    --clr: hsl(from var(--main-clr-shade) h s 60% / 1);
+
+    color: var(--clr);
+    font-size: var(--font-size-xsm);
+    border: 2px solid var(--clr);
+
+    line-height: var(--line-height-xxxsm);
+    border-radius: var(--border-radius-pill);
+    font-family: var(--font-family-monospace);
+    padding: clamp(var(--spacings-sm-200), 3vw, var(--spacings-sm-300))
+      clamp(var(--spacings-sm-400), 3vw, var(--spacings-sm-900));
   }
 
-  @media (max-width: 780px) {
+  @media (max-width: 500px) {
     .blog-pagination {
       grid-template-columns: 1fr;
       justify-items: stretch;
-      gap: var(--spacings-sm-400);
     }
 
     .blog-pagination-side--next {
@@ -235,6 +243,8 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
 
     .blog-pagination-current {
       justify-self: flex-start;
+      width: 100%;
+      text-align: center;
     }
 
     .blog-pagination-control {
