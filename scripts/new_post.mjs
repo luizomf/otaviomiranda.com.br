@@ -1,0 +1,87 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import readline from 'readline';
+
+// Equivalente a __dirname no ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
+
+function toSlug(str) {
+    return str
+        .toLowerCase()
+        .normalize('NFD') // Normaliza caracteres Unicode
+        .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+        .replace(/[^a-z0-9\s-]/g, '') // Remove caracteres especiais
+        .trim()
+        .replace(/[\s-]+/g, '-'); // Troca espaços por hifens
+}
+
+const AUTHOR_NAME = 'Otávio Miranda';
+const CONTENT_DIR = path.join(__dirname, '..', 'src', 'content', 'posts');
+
+function askQuestion(query) {
+    return new Promise((resolve) => rl.question(query, resolve));
+}
+
+async function createPost() {
+    console.log('🚀 Criador de Postagens - OtavioMiranda.com.br');
+    console.log('-----------------------------------------------');
+
+    let title = process.argv.slice(2).join(' ');
+
+    if (!title) {
+        title = await askQuestion('Digite o título da postagem: ');
+        if (!title.trim()) {
+            console.error('❌ Erro: O título não pode ser vazio!');
+            process.exit(1);
+        }
+    }
+
+    const description = await askQuestion('Digite uma breve descrição (opcional): ');
+
+    const date = new Date();
+    const year = date.getFullYear().toString();
+
+    // Formatando data para YYYY-MM-DD local (America/Sao_Paulo baseline)
+    const formattedDate = date.toLocaleDateString('sv-SE', { timeZone: 'America/Sao_Paulo' });
+
+    const slug = toSlug(title);
+
+    const postDirPath = path.join(CONTENT_DIR, year, slug);
+    const imagesDirPath = path.join(postDirPath, 'images');
+    const filePath = path.join(postDirPath, 'text.md');
+
+    if (fs.existsSync(postDirPath)) {
+        console.error(`\n❌ Erro: Uma postagem com o slug "${slug}" já existe no ano ${year}!`);
+        process.exit(1);
+    }
+
+    // Criar pastas
+    fs.mkdirSync(imagesDirPath, { recursive: true });
+
+    // Criar arquivo text.md com Frontmatter do Zod
+    const frontmatter = `---
+title: '${title.replace(/'/g, "''")}'
+description: '${(description || '').replace(/'/g, "''")}'
+date: ${formattedDate}
+author: '${AUTHOR_NAME}'
+---
+<!-- Substitua este texto pelo conteúdo da sua aula/artigo -->
+`;
+
+    fs.writeFileSync(filePath, frontmatter, 'utf-8');
+
+    console.log('\n✅ Postagem gerada com sucesso e pronta para uso no Astro SSG!');
+    console.log(`📁 Diretório: src/content/posts/${year}/${slug}/`);
+    console.log(`📄 DICA DEV (Neovim): e src/content/posts/${year}/${slug}/text.md`);
+
+    rl.close();
+}
+
+createPost();

@@ -135,10 +135,9 @@ o meu Agent AI (O _"Brien"_) catalogamos para voltar e matar depois.
 - **Templates Puros "BlankLayout"**: Implementados na v2 para servir Landing pages independentes da Home e do header de Navegação Global.
 - **Injeção do Frontmatter Dinâmica no Layout**: Extirpamos os `<h1>` repetidos dentro de cada Post. O Content Layer agora controla 100% dos títulos e autores.
 - **Modularização de CSS via Astro Islands**: Desacoplamos os 14 mil bytes de estilos monolíticos do arquivo global. Seções como `<Courses>`, `<Testimonials>` e `<Hero>` operam de forma autossuficiente (DRY Components) herdando o wrapper global de tema e grid (`<Section>` e `<SectionHeader>`).
+- **CLI Worklows e Neovim Scaffold**: Para redigir novos tutoriais de forma supersônica sem sair do Terminal, um binário local NodeJs foi projetado (`scripts/new_post.mjs`). Agora, basta disparar do seu Neovim `:!npm run post "Meu Blog Post"` e ele gera automaticamente o slug, as subpastas `year/slug/images` e injeta o `text.md` já preenchido com a data Zod e autor validados prontos para escrita da aula.
 
 ### 🚧 TO-DO: Débitos e Próximas Milestones
-
-- [ ] **Integração de Vim-bindings**: Implementar fluxo estendido para edição e navegação dos arquivos markdown otimizando o workflow local.
 - [ ] CSS Legacy Cleaning: Ainda existem classes e divs (`is-pulled-right`, e centenas de divs irrelevantes) que vieram da exportação bruta das páginas de 2020 para o Markdown. Limpar visualmente.
 - [ ] Resquícios do Lightbox Visual: Algumas imagens ainda podem carregar as classes do Javascript/Lightbox anterior, ignorando carregamentos nativos lazy (isso não quebra a foto, mas carrega semântica vazia).
 - [ ] Revisitar index.astro: Fazer grid de paginação pros arquivos `.md` caso os posts comecem a crescer infinitivamente na primeira página baseada.
