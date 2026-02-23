@@ -392,16 +392,17 @@ const editorSchema = {
           inherit: true,
           rules: [],
           colors: {
-            'editor.background': '#0b1020',
-            'editorLineNumber.foreground': '#7680a4',
-            'editorLineNumber.activeForeground': '#dbe2ff',
+            // 'editor.background': '#0b1020',
+            // 'editorLineNumber.foreground': '#7680a4',
+            // 'editorLineNumber.activeForeground': '#dbe2ff',
           },
         });
 
         editor = monaco.editor.create(
           document.getElementById('editor-monaco'),
           {
-            value: '',
+            value:
+              '# Olá mundo!\n\nEste é o mesmo editor que roda no seu VS Code. Use como quiser.',
             language: 'markdown',
             theme: 'otavio-dark',
             fontSize: 16,
@@ -490,24 +491,20 @@ const editorSchema = {
 </BlankLayout>
 
 <style>
-  :root {
-    --editor-bg: #090d1a;
-    --editor-panel: #10182d;
-    --editor-panel-soft: #121b35;
-    --editor-border: #2f3f68;
-    --editor-text: #f0f4ff;
-    --editor-text-soft: #b4c2eb;
-    --editor-accent: #3a86ff;
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 62.5%;
   }
 
   html,
   body {
     margin: 0;
-    background:
-      radial-gradient(1200px 600px at 10% 0%, #122450, transparent),
-      radial-gradient(1000px 500px at 90% 0%, #1a2a4d, transparent),
-      var(--editor-bg);
-    color: var(--editor-text);
+    background: #eee;
     font-family:
       ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
       'Courier New', monospace;
@@ -525,14 +522,13 @@ const editorSchema = {
     align-items: center;
     gap: 1.2rem;
     padding: 1.2rem 1.6rem;
-    border-bottom: 1px solid var(--editor-border);
-    background: color-mix(in hsl, var(--editor-panel), black 20%);
+    background: #1e1e1e;
   }
 
   .editor-title {
     font-size: 1.6rem;
     font-weight: 800;
-    color: var(--editor-text);
+    color: #eee;
     letter-spacing: 0.03em;
     margin-right: 0.8rem;
     margin-block: 0;
@@ -540,7 +536,7 @@ const editorSchema = {
 
   .editor-file {
     font-size: 1.3rem;
-    color: var(--editor-text-soft);
+    color: #ccc;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -556,8 +552,8 @@ const editorSchema = {
 
   .editor-actions button {
     border: 1px solid var(--editor-border);
-    background: color-mix(in hsl, var(--editor-panel-soft), black 18%);
-    color: var(--editor-text);
+    background: #aaa;
+    color: #000;
     font: inherit;
     font-size: 1.2rem;
     font-weight: 700;
@@ -567,12 +563,11 @@ const editorSchema = {
   }
 
   .editor-actions button:hover {
-    border-color: var(--editor-accent);
+    background: #ccc;
   }
 
   .editor-actions button[data-active='true'] {
-    border-color: #00d084;
-    background: color-mix(in hsl, #00d084 16%, var(--editor-panel-soft));
+    background: #aabbcc;
   }
 
   .editor-actions button:disabled {
@@ -582,8 +577,7 @@ const editorSchema = {
 
   .editor-vim-status {
     font-size: 1.15rem;
-    color: var(--editor-text-soft);
-    border: 1px solid var(--editor-border);
+    color: #ccc;
     border-radius: 999px;
     padding: 0.4rem 0.8rem;
     white-space: nowrap;
@@ -600,15 +594,15 @@ const editorSchema = {
 
   .editor-pane {
     min-height: 0;
-    border: 1px solid var(--editor-border);
-    border-radius: 1.2rem;
+    border-radius: 8px;
     overflow: hidden;
-    background: color-mix(in hsl, var(--editor-panel), black 14%);
+    background: #1e1e1e;
   }
 
   .editor-monaco {
     width: 100%;
     height: 100%;
+    padding: 1rem;
   }
 
   .editor-preview {
@@ -617,7 +611,9 @@ const editorSchema = {
     padding: 2.2rem;
     line-height: 1.7;
     font-size: 1.8rem;
-    color: var(--editor-text);
+    color: #111;
+    background: #fff;
+    box-shadow: 0 0 10px hsla(0 0 5% / 0.5);
   }
 
   .editor-preview h1,
@@ -634,7 +630,7 @@ const editorSchema = {
     border-radius: 0.8rem;
     padding: 1.2rem;
     font-size: 1.4rem;
-    background: #0b1020;
+    background: #ccc;
   }
 
   .editor-preview code {
