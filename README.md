@@ -84,6 +84,9 @@ Visite `http://localhost:4321` no navegador.
 # Dev server local
 npm run dev
 
+# Lint (Astro check + Prettier check)
+npm run lint
+
 # Build de produção (check + build)
 npm run build
 
