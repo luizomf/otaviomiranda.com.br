@@ -137,14 +137,15 @@ o meu Agent AI (O _"Brien"_) catalogamos para voltar e matar depois.
 - **Modularização de CSS via Astro Islands**: Desacoplamos os 14 mil bytes de estilos monolíticos do arquivo global. Seções como `<Courses>`, `<Testimonials>` e `<Hero>` operam de forma autossuficiente (DRY Components) herdando o wrapper global de tema e grid (`<Section>` e `<SectionHeader>`).
 - **CLI Worklows e Neovim Scaffold**: Para redigir novos tutoriais de forma supersônica sem sair do Terminal, um binário local NodeJs foi projetado (`scripts/new_post.mjs`). Agora, basta disparar do seu Neovim `:!npm run post "Meu Blog Post"` e ele gera automaticamente o slug, as subpastas `year/slug/images` e injeta o `text.md` já preenchido com a data Zod e autor validados prontos para escrita da aula.
 - **Arquivo do Blog com navegação completa e links válidos**: A página de "Ver todos os posts" (`/blog/1` e `/blog/2`) agora renderiza com shell completo (`Header`, `Newsletter`, `Footer`) e os links dos posts são gerados por `entry.id` (sem `undefined`).
+- **Componentização singular dos blocos da Home**: `Course.astro`,
+  `Testimonial.astro` e `RecentPostLink.astro` foram extraídos dos wrappers
+  (`Courses`, `Testimonials` e `index.astro`) para reduzir duplicação e
+  facilitar manutenção incremental.
 
 ### 🚧 TO-DO: Débitos e Próximas Milestones
 - [ ] CSS Legacy Cleaning: Ainda existem classes e divs (`is-pulled-right`, e centenas de divs irrelevantes) que vieram da exportação bruta das páginas de 2020 para o Markdown. Limpar visualmente.
 - [ ] Resquícios do Lightbox Visual: Algumas imagens ainda podem carregar as classes do Javascript/Lightbox anterior, ignorando carregamentos nativos lazy (isso não quebra a foto, mas carrega semântica vazia).
 - [ ] Revisitar index.astro: Fazer grid de paginação pros arquivos `.md` caso os posts comecem a crescer infinitivamente na primeira página baseada.
-- [ ] Refatorar `Courses.astro`: manter o wrapper `Courses` e extrair cada card para um componente singular reutilizável (`Course.astro`).
-- [ ] Refatorar `Testimonials.astro`: manter o wrapper `Testimonials` e extrair cada depoimento para um componente singular reutilizável (`Testimonial.astro`).
-- [ ] Refatorar os "Últimos links do blog": extrair o item de link do bloco de posts recentes em `index.astro` para um componente singular reutilizável.
 
 ---
 
