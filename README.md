@@ -37,7 +37,8 @@ Generation)**.
 
 ## 💻 Como Rodar o Projeto na Sua Máquina
 
-Se quiser seguir o mesmo caminho que eu, pode clonar o repositório e rodar o projeto na sua máquina.
+Se quiser seguir o mesmo caminho que eu, pode clonar o repositório e rodar o
+projeto na sua máquina.
 
 ### Pré-requisitos
 
