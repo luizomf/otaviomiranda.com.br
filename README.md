@@ -141,10 +141,15 @@ o meu Agent AI (O _"Brien"_) catalogamos para voltar e matar depois.
   `Testimonial.astro` e `RecentPostLink.astro` foram extraídos dos wrappers
   (`Courses`, `Testimonials` e `index.astro`) para reduzir duplicação e
   facilitar manutenção incremental.
+- **Limpeza inicial de markup legado (posts antigos)**: adicionamos um script
+  de higienização (`scripts/clean_legacy_markdown.mjs`) e removemos classes
+  JS/resíduos inúteis de snapshot de gist no post de recursão de 2020.
+- **Padronização visual no botão de arquivo da Home**: o CTA "Ver todos os
+  posts" em `index.astro` deixou de usar inline style e passou a usar
+  `PillLink`.
 
 ### 🚧 TO-DO: Débitos e Próximas Milestones
-- [ ] CSS Legacy Cleaning: Ainda existem classes e divs (`is-pulled-right`, e centenas de divs irrelevantes) que vieram da exportação bruta das páginas de 2020 para o Markdown. Limpar visualmente.
-- [ ] Resquícios do Lightbox Visual: Algumas imagens ainda podem carregar as classes do Javascript/Lightbox anterior, ignorando carregamentos nativos lazy (isso não quebra a foto, mas carrega semântica vazia).
+- [ ] CSS Legacy Cleaning (fase 2): reduzir o HTML de snapshots antigos de Gist (classes `blob-*`, wrappers de tabela e metadados do embed) nos posts antigos, mantendo legibilidade e sem quebrar conteúdo.
 - [ ] Revisitar index.astro: Fazer grid de paginação pros arquivos `.md` caso os posts comecem a crescer infinitivamente na primeira página baseada.
 
 ---
