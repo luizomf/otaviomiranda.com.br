@@ -524,102 +524,81 @@ author: 'Luiz Otávio Miranda'
 <div class="gist-file" translate="no" data-color-mode="light" data-light-theme="light">
 <div class="gist-data">
 
-<div class="js-gist-file-update-container js-task-list-container">
+<div>
 <div id="file-fibonacci_sequence-py" class="file my-2">
 
 <div itemprop="text" class="Box-body p-0 blob-wrapper data type-python  " style="overflow: auto" tabindex="0" role="region" aria-label="fibonacci_sequence.py content, created by luizomf on 05:28PM on March 30, 2020.">
 
-<div class="js-check-hidden-unicode js-blob-code-container blob-code-content">
+<div class="blob-code-content">
 
-<template class="js-file-alert-template">
-<div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
-<svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
-<path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path>
-</svg>
-<span>
-This file contains hidden or bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
-<a class="Link--inTextBlock" href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
-</span>
-
-<div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">    Show hidden characters
-</a>
-</div>
-</div></template>
-<template class="js-line-alert-template">
-<span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
-<svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
-<path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path>
-</svg>
-</span></template>
-
-<table data-hpc="" class="highlight tab-size js-file-line-container" data-tab-size="4" data-paste-markdown-skip="" data-tagsearch-path="fibonacci_sequence.py">
+<table data-hpc="" class="highlight tab-size" data-tab-size="4" data-paste-markdown-skip="" data-tagsearch-path="fibonacci_sequence.py">
 <tbody><tr>
-  <td id="file-fibonacci_sequence-py-L1" class="blob-num js-line-number js-blob-rnum" data-line-number="1"></td>
-  <td id="file-fibonacci_sequence-py-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">from</span> <span class="pl-s1">functools</span> <span class="pl-k">import</span> <span class="pl-s1">lru_cache</span></td>
+  <td id="file-fibonacci_sequence-py-L1" class="blob-num" data-line-number="1"></td>
+  <td id="file-fibonacci_sequence-py-LC1" class="blob-code blob-code-inner"><span class="pl-k">from</span> <span class="pl-s1">functools</span> <span class="pl-k">import</span> <span class="pl-s1">lru_cache</span></td>
 </tr>
 <tr>
-  <td id="file-fibonacci_sequence-py-L2" class="blob-num js-line-number js-blob-rnum" data-line-number="2"></td>
-  <td id="file-fibonacci_sequence-py-LC2" class="blob-code blob-code-inner js-file-line">
+  <td id="file-fibonacci_sequence-py-L2" class="blob-num" data-line-number="2"></td>
+  <td id="file-fibonacci_sequence-py-LC2" class="blob-code blob-code-inner">
 </td>
 </tr>
 <tr>
-  <td id="file-fibonacci_sequence-py-L3" class="blob-num js-line-number js-blob-rnum" data-line-number="3"></td>
-  <td id="file-fibonacci_sequence-py-LC3" class="blob-code blob-code-inner js-file-line">
+  <td id="file-fibonacci_sequence-py-L3" class="blob-num" data-line-number="3"></td>
+  <td id="file-fibonacci_sequence-py-LC3" class="blob-code blob-code-inner">
 </td>
 </tr>
 <tr>
-  <td id="file-fibonacci_sequence-py-L4" class="blob-num js-line-number js-blob-rnum" data-line-number="4"></td>
-  <td id="file-fibonacci_sequence-py-LC4" class="blob-code blob-code-inner js-file-line"><span class="pl-en">@<span class="pl-s1">lru_cache</span></span></td>
+  <td id="file-fibonacci_sequence-py-L4" class="blob-num" data-line-number="4"></td>
+  <td id="file-fibonacci_sequence-py-LC4" class="blob-code blob-code-inner"><span class="pl-en">@<span class="pl-s1">lru_cache</span></span></td>
 </tr>
 <tr>
-  <td id="file-fibonacci_sequence-py-L5" class="blob-num js-line-number js-blob-rnum" data-line-number="5"></td>
-  <td id="file-fibonacci_sequence-py-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-k">def</span> <span class="pl-en">fibonacci_sequence</span>(<span class="pl-s1">n</span>: <span class="pl-smi">int</span>) <span class="pl-c1">-&gt;</span> <span class="pl-smi">int</span>:</td>
+  <td id="file-fibonacci_sequence-py-L5" class="blob-num" data-line-number="5"></td>
+  <td id="file-fibonacci_sequence-py-LC5" class="blob-code blob-code-inner"><span class="pl-k">def</span> <span class="pl-en">fibonacci_sequence</span>(<span class="pl-s1">n</span>: <span class="pl-smi">int</span>) <span class="pl-c1">-&gt;</span> <span class="pl-smi">int</span>:</td>
 </tr>
 <tr>
-  <td id="file-fibonacci_sequence-py-L6" class="blob-num js-line-number js-blob-rnum" data-line-number="6"></td>
-  <td id="file-fibonacci_sequence-py-LC6" class="blob-code blob-code-inner js-file-line">    <span class="pl-s">"""Sequência Fibonacci with memoization"""</span></td>
+  <td id="file-fibonacci_sequence-py-L6" class="blob-num" data-line-number="6"></td>
+  <td id="file-fibonacci_sequence-py-LC6" class="blob-code blob-code-inner">    <span class="pl-s">"""Sequência Fibonacci with memoization"""</span></td>
 </tr>
 <tr>
-  <td id="file-fibonacci_sequence-py-L7" class="blob-num js-line-number js-blob-rnum" data-line-number="7"></td>
-  <td id="file-fibonacci_sequence-py-LC7" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">if</span> <span class="pl-s1">n</span> <span class="pl-c1">&lt;</span> <span class="pl-c1">1</span>:</td>
+  <td id="file-fibonacci_sequence-py-L7" class="blob-num" data-line-number="7"></td>
+  <td id="file-fibonacci_sequence-py-LC7" class="blob-code blob-code-inner">    <span class="pl-k">if</span> <span class="pl-s1">n</span> <span class="pl-c1">&lt;</span> <span class="pl-c1">1</span>:</td>
 </tr>
 <tr>
-  <td id="file-fibonacci_sequence-py-L8" class="blob-num js-line-number js-blob-rnum" data-line-number="8"></td>
-  <td id="file-fibonacci_sequence-py-LC8" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">return</span> <span class="pl-c1">0</span></td>
+  <td id="file-fibonacci_sequence-py-L8" class="blob-num" data-line-number="8"></td>
+  <td id="file-fibonacci_sequence-py-LC8" class="blob-code blob-code-inner">        <span class="pl-k">return</span> <span class="pl-c1">0</span></td>
 </tr>
 <tr>
-  <td id="file-fibonacci_sequence-py-L9" class="blob-num js-line-number js-blob-rnum" data-line-number="9"></td>
-  <td id="file-fibonacci_sequence-py-LC9" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">if</span> <span class="pl-s1">n</span> <span class="pl-c1">&lt;=</span> <span class="pl-c1">2</span>:</td>
+  <td id="file-fibonacci_sequence-py-L9" class="blob-num" data-line-number="9"></td>
+  <td id="file-fibonacci_sequence-py-LC9" class="blob-code blob-code-inner">    <span class="pl-k">if</span> <span class="pl-s1">n</span> <span class="pl-c1">&lt;=</span> <span class="pl-c1">2</span>:</td>
 </tr>
 <tr>
-  <td id="file-fibonacci_sequence-py-L10" class="blob-num js-line-number js-blob-rnum" data-line-number="10"></td>
-  <td id="file-fibonacci_sequence-py-LC10" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">return</span> <span class="pl-c1">1</span></td>
+  <td id="file-fibonacci_sequence-py-L10" class="blob-num" data-line-number="10"></td>
+  <td id="file-fibonacci_sequence-py-LC10" class="blob-code blob-code-inner">        <span class="pl-k">return</span> <span class="pl-c1">1</span></td>
 </tr>
 <tr>
-  <td id="file-fibonacci_sequence-py-L11" class="blob-num js-line-number js-blob-rnum" data-line-number="11"></td>
-  <td id="file-fibonacci_sequence-py-LC11" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">return</span> <span class="pl-en">fibonacci_sequence</span>(<span class="pl-s1">n</span> <span class="pl-c1">-</span> <span class="pl-c1">1</span>) <span class="pl-c1">+</span> <span class="pl-en">fibonacci_sequence</span>(<span class="pl-s1">n</span> <span class="pl-c1">-</span> <span class="pl-c1">2</span>)</td>
+  <td id="file-fibonacci_sequence-py-L11" class="blob-num" data-line-number="11"></td>
+  <td id="file-fibonacci_sequence-py-LC11" class="blob-code blob-code-inner">    <span class="pl-k">return</span> <span class="pl-en">fibonacci_sequence</span>(<span class="pl-s1">n</span> <span class="pl-c1">-</span> <span class="pl-c1">1</span>) <span class="pl-c1">+</span> <span class="pl-en">fibonacci_sequence</span>(<span class="pl-s1">n</span> <span class="pl-c1">-</span> <span class="pl-c1">2</span>)</td>
 </tr>
 <tr>
-  <td id="file-fibonacci_sequence-py-L12" class="blob-num js-line-number js-blob-rnum" data-line-number="12"></td>
-  <td id="file-fibonacci_sequence-py-LC12" class="blob-code blob-code-inner js-file-line">
+  <td id="file-fibonacci_sequence-py-L12" class="blob-num" data-line-number="12"></td>
+  <td id="file-fibonacci_sequence-py-LC12" class="blob-code blob-code-inner">
 </td>
 </tr>
 <tr>
-  <td id="file-fibonacci_sequence-py-L13" class="blob-num js-line-number js-blob-rnum" data-line-number="13"></td>
-  <td id="file-fibonacci_sequence-py-LC13" class="blob-code blob-code-inner js-file-line">
+  <td id="file-fibonacci_sequence-py-L13" class="blob-num" data-line-number="13"></td>
+  <td id="file-fibonacci_sequence-py-LC13" class="blob-code blob-code-inner">
 </td>
 </tr>
 <tr>
-  <td id="file-fibonacci_sequence-py-L14" class="blob-num js-line-number js-blob-rnum" data-line-number="14"></td>
-  <td id="file-fibonacci_sequence-py-LC14" class="blob-code blob-code-inner js-file-line"><span class="pl-k">if</span> <span class="pl-s1">__name__</span> <span class="pl-c1">==</span> <span class="pl-s">"__main__"</span>:</td>
+  <td id="file-fibonacci_sequence-py-L14" class="blob-num" data-line-number="14"></td>
+  <td id="file-fibonacci_sequence-py-LC14" class="blob-code blob-code-inner"><span class="pl-k">if</span> <span class="pl-s1">__name__</span> <span class="pl-c1">==</span> <span class="pl-s">"__main__"</span>:</td>
 </tr>
 <tr>
-  <td id="file-fibonacci_sequence-py-L15" class="blob-num js-line-number js-blob-rnum" data-line-number="15"></td>
-  <td id="file-fibonacci_sequence-py-LC15" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-c1">1000</span>):</td>
+  <td id="file-fibonacci_sequence-py-L15" class="blob-num" data-line-number="15"></td>
+  <td id="file-fibonacci_sequence-py-LC15" class="blob-code blob-code-inner">    <span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-c1">1000</span>):</td>
 </tr>
 <tr>
-  <td id="file-fibonacci_sequence-py-L16" class="blob-num js-line-number js-blob-rnum" data-line-number="16"></td>
-  <td id="file-fibonacci_sequence-py-LC16" class="blob-code blob-code-inner js-file-line">        <span class="pl-en">print</span>(<span class="pl-en">fibonacci_sequence</span>(<span class="pl-s1">i</span>))</td>
+  <td id="file-fibonacci_sequence-py-L16" class="blob-num" data-line-number="16"></td>
+  <td id="file-fibonacci_sequence-py-LC16" class="blob-code blob-code-inner">        <span class="pl-en">print</span>(<span class="pl-en">fibonacci_sequence</span>(<span class="pl-s1">i</span>))</td>
 </tr>
 </tbody></table>
 </div>
@@ -632,7 +611,7 @@ This file contains hidden or bidirectional Unicode text that may be interpreted 
 
 </div>
 <div class="gist-meta">
-<a href="https://gist.github.com/luizomf/2a44f26d91f25a755420cb2d3bf085e1/raw/bb48d06e8a05e5d562742d5f11bb0350c12bb371/fibonacci_sequence.py" style="float:right" class="Link--inTextBlock">view raw</a>
+<a href="https://gist.github.com/luizomf/2a44f26d91f25a755420cb2d3bf085e1/raw/bb48d06e8a05e5d562742d5f11bb0350c12bb371/fibonacci_sequence.py" class="Link--inTextBlock">view raw</a>
 <a href="https://gist.github.com/luizomf/2a44f26d91f25a755420cb2d3bf085e1#file-fibonacci_sequence-py" class="Link--inTextBlock">
   fibonacci_sequence.py
 </a>
@@ -666,200 +645,179 @@ hosted with ❤ by <a class="Link--inTextBlock" href="https://github.com">GitHub
 <div class="gist-file" translate="no" data-color-mode="light" data-light-theme="light">
 <div class="gist-data">
 
-<div class="js-gist-file-update-container js-task-list-container">
+<div>
 <div id="file-quicksort-py" class="file my-2">
 
 <div itemprop="text" class="Box-body p-0 blob-wrapper data type-python  " style="overflow: auto" tabindex="0" role="region" aria-label="quicksort.py content, created by luizomf on 05:45PM on March 30, 2020.">
 
-<div class="js-check-hidden-unicode js-blob-code-container blob-code-content">
+<div class="blob-code-content">
 
-<template class="js-file-alert-template">
-<div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
-<svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
-<path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path>
-</svg>
-<span>
-This file contains hidden or bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
-<a class="Link--inTextBlock" href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
-</span>
-
-<div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">    Show hidden characters
-</a>
-</div>
-</div></template>
-<template class="js-line-alert-template">
-<span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
-<svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
-<path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path>
-</svg>
-</span></template>
-
-<table data-hpc="" class="highlight tab-size js-file-line-container" data-tab-size="4" data-paste-markdown-skip="" data-tagsearch-path="quicksort.py">
+<table data-hpc="" class="highlight tab-size" data-tab-size="4" data-paste-markdown-skip="" data-tagsearch-path="quicksort.py">
 <tbody><tr>
-  <td id="file-quicksort-py-L1" class="blob-num js-line-number js-blob-rnum" data-line-number="1"></td>
-  <td id="file-quicksort-py-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-s">"""</span></td>
+  <td id="file-quicksort-py-L1" class="blob-num" data-line-number="1"></td>
+  <td id="file-quicksort-py-LC1" class="blob-code blob-code-inner"><span class="pl-s">"""</span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L2" class="blob-num js-line-number js-blob-rnum" data-line-number="2"></td>
-  <td id="file-quicksort-py-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-s">Quicksort algorithm</span></td>
+  <td id="file-quicksort-py-L2" class="blob-num" data-line-number="2"></td>
+  <td id="file-quicksort-py-LC2" class="blob-code blob-code-inner"><span class="pl-s">Quicksort algorithm</span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L3" class="blob-num js-line-number js-blob-rnum" data-line-number="3"></td>
-  <td id="file-quicksort-py-LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-s"></span></td>
+  <td id="file-quicksort-py-L3" class="blob-num" data-line-number="3"></td>
+  <td id="file-quicksort-py-LC3" class="blob-code blob-code-inner"><span class="pl-s"></span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L4" class="blob-num js-line-number js-blob-rnum" data-line-number="4"></td>
-  <td id="file-quicksort-py-LC4" class="blob-code blob-code-inner js-file-line"><span class="pl-s">&gt;&gt;&gt; print(quicksort(list_of_numbers))</span></td>
+  <td id="file-quicksort-py-L4" class="blob-num" data-line-number="4"></td>
+  <td id="file-quicksort-py-LC4" class="blob-code blob-code-inner"><span class="pl-s">&gt;&gt;&gt; print(quicksort(list_of_numbers))</span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L5" class="blob-num js-line-number js-blob-rnum" data-line-number="5"></td>
-  <td id="file-quicksort-py-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-s">[2, 2, 4, 5, 9, 10, 11, 122, 123, 321]</span></td>
+  <td id="file-quicksort-py-L5" class="blob-num" data-line-number="5"></td>
+  <td id="file-quicksort-py-LC5" class="blob-code blob-code-inner"><span class="pl-s">[2, 2, 4, 5, 9, 10, 11, 122, 123, 321]</span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L6" class="blob-num js-line-number js-blob-rnum" data-line-number="6"></td>
-  <td id="file-quicksort-py-LC6" class="blob-code blob-code-inner js-file-line"><span class="pl-s">&gt;&gt;&gt; print(quicksort(list_of_words))</span></td>
+  <td id="file-quicksort-py-L6" class="blob-num" data-line-number="6"></td>
+  <td id="file-quicksort-py-LC6" class="blob-code blob-code-inner"><span class="pl-s">&gt;&gt;&gt; print(quicksort(list_of_words))</span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L7" class="blob-num js-line-number js-blob-rnum" data-line-number="7"></td>
-  <td id="file-quicksort-py-LC7" class="blob-code blob-code-inner js-file-line"><span class="pl-s">['Aline', 'Helena', 'João', 'Luiz', 'Maria', 'Zara']</span></td>
+  <td id="file-quicksort-py-L7" class="blob-num" data-line-number="7"></td>
+  <td id="file-quicksort-py-LC7" class="blob-code blob-code-inner"><span class="pl-s">['Aline', 'Helena', 'João', 'Luiz', 'Maria', 'Zara']</span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L8" class="blob-num js-line-number js-blob-rnum" data-line-number="8"></td>
-  <td id="file-quicksort-py-LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-s">&gt;&gt;&gt; print(quicksort(['A']))</span></td>
+  <td id="file-quicksort-py-L8" class="blob-num" data-line-number="8"></td>
+  <td id="file-quicksort-py-LC8" class="blob-code blob-code-inner"><span class="pl-s">&gt;&gt;&gt; print(quicksort(['A']))</span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L9" class="blob-num js-line-number js-blob-rnum" data-line-number="9"></td>
-  <td id="file-quicksort-py-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-s">['A']</span></td>
+  <td id="file-quicksort-py-L9" class="blob-num" data-line-number="9"></td>
+  <td id="file-quicksort-py-LC9" class="blob-code blob-code-inner"><span class="pl-s">['A']</span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L10" class="blob-num js-line-number js-blob-rnum" data-line-number="10"></td>
-  <td id="file-quicksort-py-LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-s">&gt;&gt;&gt; print(quicksort(['B', 'A']))</span></td>
+  <td id="file-quicksort-py-L10" class="blob-num" data-line-number="10"></td>
+  <td id="file-quicksort-py-LC10" class="blob-code blob-code-inner"><span class="pl-s">&gt;&gt;&gt; print(quicksort(['B', 'A']))</span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L11" class="blob-num js-line-number js-blob-rnum" data-line-number="11"></td>
-  <td id="file-quicksort-py-LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-s">['A', 'B']</span></td>
+  <td id="file-quicksort-py-L11" class="blob-num" data-line-number="11"></td>
+  <td id="file-quicksort-py-LC11" class="blob-code blob-code-inner"><span class="pl-s">['A', 'B']</span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L12" class="blob-num js-line-number js-blob-rnum" data-line-number="12"></td>
-  <td id="file-quicksort-py-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-s">&gt;&gt;&gt; print(quicksort([]))</span></td>
+  <td id="file-quicksort-py-L12" class="blob-num" data-line-number="12"></td>
+  <td id="file-quicksort-py-LC12" class="blob-code blob-code-inner"><span class="pl-s">&gt;&gt;&gt; print(quicksort([]))</span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L13" class="blob-num js-line-number js-blob-rnum" data-line-number="13"></td>
-  <td id="file-quicksort-py-LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-s">[]</span></td>
+  <td id="file-quicksort-py-L13" class="blob-num" data-line-number="13"></td>
+  <td id="file-quicksort-py-LC13" class="blob-code blob-code-inner"><span class="pl-s">[]</span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L14" class="blob-num js-line-number js-blob-rnum" data-line-number="14"></td>
-  <td id="file-quicksort-py-LC14" class="blob-code blob-code-inner js-file-line"><span class="pl-s">"""</span></td>
+  <td id="file-quicksort-py-L14" class="blob-num" data-line-number="14"></td>
+  <td id="file-quicksort-py-LC14" class="blob-code blob-code-inner"><span class="pl-s">"""</span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L15" class="blob-num js-line-number js-blob-rnum" data-line-number="15"></td>
-  <td id="file-quicksort-py-LC15" class="blob-code blob-code-inner js-file-line">
+  <td id="file-quicksort-py-L15" class="blob-num" data-line-number="15"></td>
+  <td id="file-quicksort-py-LC15" class="blob-code blob-code-inner">
 </td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L16" class="blob-num js-line-number js-blob-rnum" data-line-number="16"></td>
-  <td id="file-quicksort-py-LC16" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-s1">doctest</span></td>
+  <td id="file-quicksort-py-L16" class="blob-num" data-line-number="16"></td>
+  <td id="file-quicksort-py-LC16" class="blob-code blob-code-inner"><span class="pl-k">import</span> <span class="pl-s1">doctest</span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L17" class="blob-num js-line-number js-blob-rnum" data-line-number="17"></td>
-  <td id="file-quicksort-py-LC17" class="blob-code blob-code-inner js-file-line"><span class="pl-k">from</span> <span class="pl-s1">typing</span> <span class="pl-k">import</span> <span class="pl-v">List</span>, <span class="pl-v">TypeVar</span></td>
+  <td id="file-quicksort-py-L17" class="blob-num" data-line-number="17"></td>
+  <td id="file-quicksort-py-LC17" class="blob-code blob-code-inner"><span class="pl-k">from</span> <span class="pl-s1">typing</span> <span class="pl-k">import</span> <span class="pl-v">List</span>, <span class="pl-v">TypeVar</span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L18" class="blob-num js-line-number js-blob-rnum" data-line-number="18"></td>
-  <td id="file-quicksort-py-LC18" class="blob-code blob-code-inner js-file-line">
+  <td id="file-quicksort-py-L18" class="blob-num" data-line-number="18"></td>
+  <td id="file-quicksort-py-LC18" class="blob-code blob-code-inner">
 </td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L19" class="blob-num js-line-number js-blob-rnum" data-line-number="19"></td>
-  <td id="file-quicksort-py-LC19" class="blob-code blob-code-inner js-file-line"><span class="pl-v">TListValue</span> <span class="pl-c1">=</span> <span class="pl-en">TypeVar</span>(<span class="pl-s">'TListValue'</span>, <span class="pl-s1">int</span>, <span class="pl-s1">float</span>, <span class="pl-s1">str</span>, <span class="pl-s1">bool</span>)</td>
+  <td id="file-quicksort-py-L19" class="blob-num" data-line-number="19"></td>
+  <td id="file-quicksort-py-LC19" class="blob-code blob-code-inner"><span class="pl-v">TListValue</span> <span class="pl-c1">=</span> <span class="pl-en">TypeVar</span>(<span class="pl-s">'TListValue'</span>, <span class="pl-s1">int</span>, <span class="pl-s1">float</span>, <span class="pl-s1">str</span>, <span class="pl-s1">bool</span>)</td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L20" class="blob-num js-line-number js-blob-rnum" data-line-number="20"></td>
-  <td id="file-quicksort-py-LC20" class="blob-code blob-code-inner js-file-line">
+  <td id="file-quicksort-py-L20" class="blob-num" data-line-number="20"></td>
+  <td id="file-quicksort-py-LC20" class="blob-code blob-code-inner">
 </td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L21" class="blob-num js-line-number js-blob-rnum" data-line-number="21"></td>
-  <td id="file-quicksort-py-LC21" class="blob-code blob-code-inner js-file-line">
+  <td id="file-quicksort-py-L21" class="blob-num" data-line-number="21"></td>
+  <td id="file-quicksort-py-LC21" class="blob-code blob-code-inner">
 </td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L22" class="blob-num js-line-number js-blob-rnum" data-line-number="22"></td>
-  <td id="file-quicksort-py-LC22" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">list_of_numbers</span>: <span class="pl-v">List</span>[<span class="pl-smi">int</span>] <span class="pl-c1">=</span> [<span class="pl-c1">10</span>, <span class="pl-c1">9</span>, <span class="pl-c1">5</span>, <span class="pl-c1">2</span>, <span class="pl-c1">11</span>, <span class="pl-c1">4</span>, <span class="pl-c1">2</span>, <span class="pl-c1">123</span>, <span class="pl-c1">321</span>, <span class="pl-c1">122</span>]</td>
+  <td id="file-quicksort-py-L22" class="blob-num" data-line-number="22"></td>
+  <td id="file-quicksort-py-LC22" class="blob-code blob-code-inner"><span class="pl-s1">list_of_numbers</span>: <span class="pl-v">List</span>[<span class="pl-smi">int</span>] <span class="pl-c1">=</span> [<span class="pl-c1">10</span>, <span class="pl-c1">9</span>, <span class="pl-c1">5</span>, <span class="pl-c1">2</span>, <span class="pl-c1">11</span>, <span class="pl-c1">4</span>, <span class="pl-c1">2</span>, <span class="pl-c1">123</span>, <span class="pl-c1">321</span>, <span class="pl-c1">122</span>]</td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L23" class="blob-num js-line-number js-blob-rnum" data-line-number="23"></td>
-  <td id="file-quicksort-py-LC23" class="blob-code blob-code-inner js-file-line"><span class="pl-s1">list_of_words</span>: <span class="pl-v">List</span>[<span class="pl-smi">str</span>] <span class="pl-c1">=</span> [<span class="pl-s">'Luiz'</span>, <span class="pl-s">'Maria'</span>, <span class="pl-s">'João'</span>, <span class="pl-s">'Helena'</span>, <span class="pl-s">'Zara'</span>, <span class="pl-s">'Aline'</span>]</td>
+  <td id="file-quicksort-py-L23" class="blob-num" data-line-number="23"></td>
+  <td id="file-quicksort-py-LC23" class="blob-code blob-code-inner"><span class="pl-s1">list_of_words</span>: <span class="pl-v">List</span>[<span class="pl-smi">str</span>] <span class="pl-c1">=</span> [<span class="pl-s">'Luiz'</span>, <span class="pl-s">'Maria'</span>, <span class="pl-s">'João'</span>, <span class="pl-s">'Helena'</span>, <span class="pl-s">'Zara'</span>, <span class="pl-s">'Aline'</span>]</td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L24" class="blob-num js-line-number js-blob-rnum" data-line-number="24"></td>
-  <td id="file-quicksort-py-LC24" class="blob-code blob-code-inner js-file-line">
+  <td id="file-quicksort-py-L24" class="blob-num" data-line-number="24"></td>
+  <td id="file-quicksort-py-LC24" class="blob-code blob-code-inner">
 </td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L25" class="blob-num js-line-number js-blob-rnum" data-line-number="25"></td>
-  <td id="file-quicksort-py-LC25" class="blob-code blob-code-inner js-file-line">
+  <td id="file-quicksort-py-L25" class="blob-num" data-line-number="25"></td>
+  <td id="file-quicksort-py-LC25" class="blob-code blob-code-inner">
 </td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L26" class="blob-num js-line-number js-blob-rnum" data-line-number="26"></td>
-  <td id="file-quicksort-py-LC26" class="blob-code blob-code-inner js-file-line"><span class="pl-k">def</span> <span class="pl-en">quicksort</span>(<span class="pl-s1">a_list</span>: <span class="pl-v">List</span>[<span class="pl-smi">TListValue</span>]) <span class="pl-c1">-&gt;</span> <span class="pl-v">List</span>[<span class="pl-smi">TListValue</span>]:</td>
+  <td id="file-quicksort-py-L26" class="blob-num" data-line-number="26"></td>
+  <td id="file-quicksort-py-LC26" class="blob-code blob-code-inner"><span class="pl-k">def</span> <span class="pl-en">quicksort</span>(<span class="pl-s1">a_list</span>: <span class="pl-v">List</span>[<span class="pl-smi">TListValue</span>]) <span class="pl-c1">-&gt;</span> <span class="pl-v">List</span>[<span class="pl-smi">TListValue</span>]:</td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L27" class="blob-num js-line-number js-blob-rnum" data-line-number="27"></td>
-  <td id="file-quicksort-py-LC27" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">if</span> <span class="pl-en">len</span>(<span class="pl-s1">a_list</span>) <span class="pl-c1">&lt;</span> <span class="pl-c1">2</span>:</td>
+  <td id="file-quicksort-py-L27" class="blob-num" data-line-number="27"></td>
+  <td id="file-quicksort-py-LC27" class="blob-code blob-code-inner">    <span class="pl-k">if</span> <span class="pl-en">len</span>(<span class="pl-s1">a_list</span>) <span class="pl-c1">&lt;</span> <span class="pl-c1">2</span>:</td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L28" class="blob-num js-line-number js-blob-rnum" data-line-number="28"></td>
-  <td id="file-quicksort-py-LC28" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">return</span> <span class="pl-s1">a_list</span></td>
+  <td id="file-quicksort-py-L28" class="blob-num" data-line-number="28"></td>
+  <td id="file-quicksort-py-LC28" class="blob-code blob-code-inner">        <span class="pl-k">return</span> <span class="pl-s1">a_list</span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L29" class="blob-num js-line-number js-blob-rnum" data-line-number="29"></td>
-  <td id="file-quicksort-py-LC29" class="blob-code blob-code-inner js-file-line">
+  <td id="file-quicksort-py-L29" class="blob-num" data-line-number="29"></td>
+  <td id="file-quicksort-py-LC29" class="blob-code blob-code-inner">
 </td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L30" class="blob-num js-line-number js-blob-rnum" data-line-number="30"></td>
-  <td id="file-quicksort-py-LC30" class="blob-code blob-code-inner js-file-line">    <span class="pl-s1">pivot_index</span> <span class="pl-c1">=</span> <span class="pl-en">len</span>(<span class="pl-s1">a_list</span>) <span class="pl-c1">//</span> <span class="pl-c1">2</span></td>
+  <td id="file-quicksort-py-L30" class="blob-num" data-line-number="30"></td>
+  <td id="file-quicksort-py-LC30" class="blob-code blob-code-inner">    <span class="pl-s1">pivot_index</span> <span class="pl-c1">=</span> <span class="pl-en">len</span>(<span class="pl-s1">a_list</span>) <span class="pl-c1">//</span> <span class="pl-c1">2</span></td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L31" class="blob-num js-line-number js-blob-rnum" data-line-number="31"></td>
-  <td id="file-quicksort-py-LC31" class="blob-code blob-code-inner js-file-line">    <span class="pl-s1">pivot</span> <span class="pl-c1">=</span> <span class="pl-s1">a_list</span>.<span class="pl-c1">pop</span>(<span class="pl-s1">pivot_index</span>)</td>
+  <td id="file-quicksort-py-L31" class="blob-num" data-line-number="31"></td>
+  <td id="file-quicksort-py-LC31" class="blob-code blob-code-inner">    <span class="pl-s1">pivot</span> <span class="pl-c1">=</span> <span class="pl-s1">a_list</span>.<span class="pl-c1">pop</span>(<span class="pl-s1">pivot_index</span>)</td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L32" class="blob-num js-line-number js-blob-rnum" data-line-number="32"></td>
-  <td id="file-quicksort-py-LC32" class="blob-code blob-code-inner js-file-line">    <span class="pl-s1">smaller_values</span>: <span class="pl-smi">List</span> <span class="pl-c1">=</span> [<span class="pl-s1">item</span> <span class="pl-k">for</span> <span class="pl-s1">item</span> <span class="pl-c1">in</span> <span class="pl-s1">a_list</span> <span class="pl-k">if</span> <span class="pl-s1">item</span> <span class="pl-c1">&lt;=</span> <span class="pl-s1">pivot</span>]</td>
+  <td id="file-quicksort-py-L32" class="blob-num" data-line-number="32"></td>
+  <td id="file-quicksort-py-LC32" class="blob-code blob-code-inner">    <span class="pl-s1">smaller_values</span>: <span class="pl-smi">List</span> <span class="pl-c1">=</span> [<span class="pl-s1">item</span> <span class="pl-k">for</span> <span class="pl-s1">item</span> <span class="pl-c1">in</span> <span class="pl-s1">a_list</span> <span class="pl-k">if</span> <span class="pl-s1">item</span> <span class="pl-c1">&lt;=</span> <span class="pl-s1">pivot</span>]</td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L33" class="blob-num js-line-number js-blob-rnum" data-line-number="33"></td>
-  <td id="file-quicksort-py-LC33" class="blob-code blob-code-inner js-file-line">    <span class="pl-s1">higher_values</span>: <span class="pl-smi">List</span> <span class="pl-c1">=</span> [<span class="pl-s1">item</span> <span class="pl-k">for</span> <span class="pl-s1">item</span> <span class="pl-c1">in</span> <span class="pl-s1">a_list</span> <span class="pl-k">if</span> <span class="pl-s1">item</span> <span class="pl-c1">&gt;</span> <span class="pl-s1">pivot</span>]</td>
+  <td id="file-quicksort-py-L33" class="blob-num" data-line-number="33"></td>
+  <td id="file-quicksort-py-LC33" class="blob-code blob-code-inner">    <span class="pl-s1">higher_values</span>: <span class="pl-smi">List</span> <span class="pl-c1">=</span> [<span class="pl-s1">item</span> <span class="pl-k">for</span> <span class="pl-s1">item</span> <span class="pl-c1">in</span> <span class="pl-s1">a_list</span> <span class="pl-k">if</span> <span class="pl-s1">item</span> <span class="pl-c1">&gt;</span> <span class="pl-s1">pivot</span>]</td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L34" class="blob-num js-line-number js-blob-rnum" data-line-number="34"></td>
-  <td id="file-quicksort-py-LC34" class="blob-code blob-code-inner js-file-line">
+  <td id="file-quicksort-py-L34" class="blob-num" data-line-number="34"></td>
+  <td id="file-quicksort-py-LC34" class="blob-code blob-code-inner">
 </td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L35" class="blob-num js-line-number js-blob-rnum" data-line-number="35"></td>
-  <td id="file-quicksort-py-LC35" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">return</span> <span class="pl-en">quicksort</span>(<span class="pl-s1">smaller_values</span>) <span class="pl-c1">+</span> [<span class="pl-s1">pivot</span>] <span class="pl-c1">+</span> <span class="pl-en">quicksort</span>(<span class="pl-s1">higher_values</span>)</td>
+  <td id="file-quicksort-py-L35" class="blob-num" data-line-number="35"></td>
+  <td id="file-quicksort-py-LC35" class="blob-code blob-code-inner">    <span class="pl-k">return</span> <span class="pl-en">quicksort</span>(<span class="pl-s1">smaller_values</span>) <span class="pl-c1">+</span> [<span class="pl-s1">pivot</span>] <span class="pl-c1">+</span> <span class="pl-en">quicksort</span>(<span class="pl-s1">higher_values</span>)</td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L36" class="blob-num js-line-number js-blob-rnum" data-line-number="36"></td>
-  <td id="file-quicksort-py-LC36" class="blob-code blob-code-inner js-file-line">
+  <td id="file-quicksort-py-L36" class="blob-num" data-line-number="36"></td>
+  <td id="file-quicksort-py-LC36" class="blob-code blob-code-inner">
 </td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L37" class="blob-num js-line-number js-blob-rnum" data-line-number="37"></td>
-  <td id="file-quicksort-py-LC37" class="blob-code blob-code-inner js-file-line">
+  <td id="file-quicksort-py-L37" class="blob-num" data-line-number="37"></td>
+  <td id="file-quicksort-py-LC37" class="blob-code blob-code-inner">
 </td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L38" class="blob-num js-line-number js-blob-rnum" data-line-number="38"></td>
-  <td id="file-quicksort-py-LC38" class="blob-code blob-code-inner js-file-line"><span class="pl-k">if</span> <span class="pl-s1">__name__</span> <span class="pl-c1">==</span> <span class="pl-s">"__main__"</span>:</td>
+  <td id="file-quicksort-py-L38" class="blob-num" data-line-number="38"></td>
+  <td id="file-quicksort-py-LC38" class="blob-code blob-code-inner"><span class="pl-k">if</span> <span class="pl-s1">__name__</span> <span class="pl-c1">==</span> <span class="pl-s">"__main__"</span>:</td>
 </tr>
 <tr>
-  <td id="file-quicksort-py-L39" class="blob-num js-line-number js-blob-rnum" data-line-number="39"></td>
-  <td id="file-quicksort-py-LC39" class="blob-code blob-code-inner js-file-line">    <span class="pl-s1">doctest</span>.<span class="pl-c1">testmod</span>(<span class="pl-s1">verbose</span><span class="pl-c1">=</span><span class="pl-c1">True</span>)</td>
+  <td id="file-quicksort-py-L39" class="blob-num" data-line-number="39"></td>
+  <td id="file-quicksort-py-LC39" class="blob-code blob-code-inner">    <span class="pl-s1">doctest</span>.<span class="pl-c1">testmod</span>(<span class="pl-s1">verbose</span><span class="pl-c1">=</span><span class="pl-c1">True</span>)</td>
 </tr>
 </tbody></table>
 </div>
@@ -872,7 +830,7 @@ This file contains hidden or bidirectional Unicode text that may be interpreted 
 
 </div>
 <div class="gist-meta">
-<a href="https://gist.github.com/luizomf/afcd473af1ecdb8210e508511e6005f3/raw/db4aa9566efa937dfd49b8c41acf6ac477caba81/quicksort.py" style="float:right" class="Link--inTextBlock">view raw</a>
+<a href="https://gist.github.com/luizomf/afcd473af1ecdb8210e508511e6005f3/raw/db4aa9566efa937dfd49b8c41acf6ac477caba81/quicksort.py" class="Link--inTextBlock">view raw</a>
 <a href="https://gist.github.com/luizomf/afcd473af1ecdb8210e508511e6005f3#file-quicksort-py" class="Link--inTextBlock">
   quicksort.py
 </a>
