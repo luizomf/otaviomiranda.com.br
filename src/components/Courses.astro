@@ -1,246 +1,240 @@
 ---
-// src/components/Cursos.astro
+import Section from './Section.astro';
+import SectionHeader from './SectionHeader.astro';
 ---
 
-<section id='courses' class='section section-light'>
-  <div class='section-content section-courses'>
-    <header class='section-header'>
-      <p class='section-eyeball'>Escolha sua stack</p>
-      <h2 class='section-title'>Cursos de programação</h2>
-      <p class='section-line'>
-        Domine tecnologias como Python, JavaScript, TypeScript e React.
-        Metodologia focada na prática para te levar do zero à sua primeira vaga
-        de desenvolvedor.
-      </p>
-    </header>
+<Section id='courses' theme='light' contentClass='section-courses'>
+  <SectionHeader
+    eyeball='Escolha sua stack'
+    title='Cursos de programação'
+    description='Domine tecnologias como Python, JavaScript, TypeScript e React. Metodologia focada na prática para te levar do zero à sua primeira vaga de desenvolvedor.'
+  />
 
-    <div class='courses-grid'>
-      <!-- COURSE 1 -->
-      <article class='course-card'>
-        <a
-          href='https://www.udemy.com/course/curso-de-javascript-moderno-do-basico-ao-avancado/?referralCode=C6F07057B0999D3E36BA'
-          target='_blank'
-          rel='noreferrer noopener'
-          class='course-card-link'
-        >
-          <div class='course-card-image-wrapper'>
-            <img
-              loading='lazy'
-              src='imgs/curso-javascript-typescript.webp'
-              alt='Curso de JavaScript e TypeScript do básico ao avançado'
-              class='course-card-image'
-            />
-          </div>
-          <div class='course-card-content'>
-            <h3 class='course-card-title'>
-              Curso de JavaScript e TypeScript do básico ao avançado
-            </h3>
-            <p class='course-card-description'>
-              JavaScript e TypeScript – front-end e back-end (Full Stack) –
-              Node, Express, noSQL, React, hooks, Redux, Design Patterns
-            </p>
-          </div>
-        </a>
-      </article>
+  <div class='courses-grid'>
+    <!-- COURSE 1 -->
+    <article class='course-card'>
+      <a
+        href='https://www.udemy.com/course/curso-de-javascript-moderno-do-basico-ao-avancado/?referralCode=C6F07057B0999D3E36BA'
+        target='_blank'
+        rel='noreferrer noopener'
+        class='course-card-link'
+      >
+        <div class='course-card-image-wrapper'>
+          <img
+            loading='lazy'
+            src='imgs/curso-javascript-typescript.webp'
+            alt='Curso de JavaScript e TypeScript do básico ao avançado'
+            class='course-card-image'
+          />
+        </div>
+        <div class='course-card-content'>
+          <h3 class='course-card-title'>
+            Curso de JavaScript e TypeScript do básico ao avançado
+          </h3>
+          <p class='course-card-description'>
+            JavaScript e TypeScript – front-end e back-end (Full Stack) – Node,
+            Express, noSQL, React, hooks, Redux, Design Patterns
+          </p>
+        </div>
+      </a>
+    </article>
 
-      <!-- COURSE 2 -->
-      <article class='course-card'>
-        <a
-          href='https://www.udemy.com/course/python-3-do-zero-ao-avancado/?referralCode=5DDCAD01311E2A9599B2'
-          target='_blank'
-          rel='noreferrer noopener'
-          class='course-card-link'
-        >
-          <div class='course-card-image-wrapper'>
-            <img
-              loading='lazy'
-              src='imgs/curso-de-python.webp'
-              alt='Curso de Python 3 do Básico Ao Avançado'
-              class='course-card-image'
-            />
-          </div>
-          <div class='course-card-content'>
-            <h3 class='course-card-title'>
-              Curso de Python 3 do Básico Ao Avançado (com projetos reais)
-            </h3>
-            <p class='course-card-description'>
-              Python 3 completo – programação com Django, PyQT5, Selenium,
-              Regexp, Testes e TDD, POO, Design Patterns GoF, algoritmos.
-            </p>
-          </div>
-        </a>
-      </article>
+    <!-- COURSE 2 -->
+    <article class='course-card'>
+      <a
+        href='https://www.udemy.com/course/python-3-do-zero-ao-avancado/?referralCode=5DDCAD01311E2A9599B2'
+        target='_blank'
+        rel='noreferrer noopener'
+        class='course-card-link'
+      >
+        <div class='course-card-image-wrapper'>
+          <img
+            loading='lazy'
+            src='imgs/curso-de-python.webp'
+            alt='Curso de Python 3 do Básico Ao Avançado'
+            class='course-card-image'
+          />
+        </div>
+        <div class='course-card-content'>
+          <h3 class='course-card-title'>
+            Curso de Python 3 do Básico Ao Avançado (com projetos reais)
+          </h3>
+          <p class='course-card-description'>
+            Python 3 completo – programação com Django, PyQT5, Selenium, Regexp,
+            Testes e TDD, POO, Design Patterns GoF, algoritmos.
+          </p>
+        </div>
+      </a>
+    </article>
 
-      <!-- COURSE 3 -->
-      <article class='course-card'>
-        <a
-          href='https://www.udemy.com/course/nestjs-curso-completo-rest-api-typeorm-jwt-e-mais/?referralCode=7EAD0D9F0C7D4B6F9B4E'
-          target='_blank'
-          rel='noreferrer noopener'
-          class='course-card-link'
-        >
-          <div class='course-card-image-wrapper'>
-            <img
-              loading='lazy'
-              src='imgs/curso-de-nestjs.webp'
-              alt='NestJS - Curso completo'
-              class='course-card-image'
-            />
-          </div>
-          <div class='course-card-content'>
-            <h3 class='course-card-title'>
-              NestJS - Curso completo para REST API com TypeORM e JWT
-            </h3>
-            <p class='course-card-description'>
-              Domine NestJS criando APIs RESTful com TypeORM, autenticação JWT,
-              e testes automatizados para aplicações robustas.
-            </p>
-          </div>
-        </a>
-      </article>
+    <!-- COURSE 3 -->
+    <article class='course-card'>
+      <a
+        href='https://www.udemy.com/course/nestjs-curso-completo-rest-api-typeorm-jwt-e-mais/?referralCode=7EAD0D9F0C7D4B6F9B4E'
+        target='_blank'
+        rel='noreferrer noopener'
+        class='course-card-link'
+      >
+        <div class='course-card-image-wrapper'>
+          <img
+            loading='lazy'
+            src='imgs/curso-de-nestjs.webp'
+            alt='NestJS - Curso completo'
+            class='course-card-image'
+          />
+        </div>
+        <div class='course-card-content'>
+          <h3 class='course-card-title'>
+            NestJS - Curso completo para REST API com TypeORM e JWT
+          </h3>
+          <p class='course-card-description'>
+            Domine NestJS criando APIs RESTful com TypeORM, autenticação JWT, e
+            testes automatizados para aplicações robustas.
+          </p>
+        </div>
+      </a>
+    </article>
 
-      <!-- COURSE 4 (Hostinger) -->
-      <article class='course-card'>
-        <a
-          href='https://hostinger.com/otaviomiranda'
-          target='_blank'
-          rel='noreferrer noopener'
-          class='course-card-link'
-        >
-          <div class='course-card-image-wrapper'>
-            <img
-              loading='lazy'
-              src='imgs/hostinger.webp'
-              alt='Hostinger'
-              class='course-card-image'
-            />
-          </div>
-          <div class='course-card-content'>
-            <h3 class='course-card-title'>
-              Para servidores e hospedagem de sites, recomendo Hostinger!
-            </h3>
-            <p class='course-card-description'>
-              Além da qualidade da infraestrutura, a Hostinger ainda
-              disponibiliza
-              <strong style='color: var(--glow-clr-1)'>+10% de desconto</strong>
-              com o cupom
-              <strong style='color: var(--glow-clr-1)'>OTAVIOMIRANDA</strong>.
-            </p>
-          </div>
-        </a>
-      </article>
+    <!-- COURSE 4 (Hostinger) -->
+    <article class='course-card'>
+      <a
+        href='https://hostinger.com/otaviomiranda'
+        target='_blank'
+        rel='noreferrer noopener'
+        class='course-card-link'
+      >
+        <div class='course-card-image-wrapper'>
+          <img
+            loading='lazy'
+            src='imgs/hostinger.webp'
+            alt='Hostinger'
+            class='course-card-image'
+          />
+        </div>
+        <div class='course-card-content'>
+          <h3 class='course-card-title'>
+            Para servidores e hospedagem de sites, recomendo Hostinger!
+          </h3>
+          <p class='course-card-description'>
+            Além da qualidade da infraestrutura, a Hostinger ainda disponibiliza
+            <strong style='color: var(--glow-clr-1)'>+10% de desconto</strong>
+            com o cupom
+            <strong style='color: var(--glow-clr-1)'>OTAVIOMIRANDA</strong>.
+          </p>
+        </div>
+      </a>
+    </article>
 
-      <!-- COURSE 5 -->
-      <article class='course-card'>
-        <a
-          href='https://www.udemy.com/course/curso-de-django-web-framework-com-python-html-e-css/?referralCode=D43F8EDA2A980B64C0FC'
-          target='_blank'
-          rel='noreferrer noopener'
-          class='course-card-link'
-        >
-          <div class='course-card-image-wrapper'>
-            <img
-              loading='lazy'
-              src='imgs/curso-django.webp'
-              alt='Curso de Django'
-              class='course-card-image'
-            />
-          </div>
-          <div class='course-card-content'>
-            <h3 class='course-card-title'>
-              Curso de Django Web Framework com Python, HTML e CSS
-            </h3>
-            <p class='course-card-description'>
-              Aprenda Django Web Framework com Python, HTML e CSS. Conheça o
-              ORM, os templates e Views, entenda HTTP e muito mais.
-            </p>
-          </div>
-        </a>
-      </article>
+    <!-- COURSE 5 -->
+    <article class='course-card'>
+      <a
+        href='https://www.udemy.com/course/curso-de-django-web-framework-com-python-html-e-css/?referralCode=D43F8EDA2A980B64C0FC'
+        target='_blank'
+        rel='noreferrer noopener'
+        class='course-card-link'
+      >
+        <div class='course-card-image-wrapper'>
+          <img
+            loading='lazy'
+            src='imgs/curso-django.webp'
+            alt='Curso de Django'
+            class='course-card-image'
+          />
+        </div>
+        <div class='course-card-content'>
+          <h3 class='course-card-title'>
+            Curso de Django Web Framework com Python, HTML e CSS
+          </h3>
+          <p class='course-card-description'>
+            Aprenda Django Web Framework com Python, HTML e CSS. Conheça o ORM,
+            os templates e Views, entenda HTTP e muito mais.
+          </p>
+        </div>
+      </a>
+    </article>
 
-      <!-- COURSE 6 -->
-      <article class='course-card'>
-        <a
-          href='https://www.udemy.com/course/curso-de-reactjs-nextjs-completo-do-basico-ao-avancado/?referralCode=C228CEEAEB14B76159E1'
-          target='_blank'
-          rel='noreferrer noopener'
-          class='course-card-link'
-        >
-          <div class='course-card-image-wrapper'>
-            <img
-              loading='lazy'
-              src='imgs/curso-react-nextjs.webp'
-              alt='Curso de React.Js + Next.Js'
-              class='course-card-image'
-            />
-          </div>
-          <div class='course-card-content'>
-            <h3 class='course-card-title'>
-              Curso de React.Js + Next.Js completo do básico ao avançado
-            </h3>
-            <p class='course-card-description'>
-              Aprenda ReactJS, NextJS, Styled-Components, Testes com Jest,
-              Storybook, Strapi, HTML e CSS com TypeScript e JavaScript.
-            </p>
-          </div>
-        </a>
-      </article>
+    <!-- COURSE 6 -->
+    <article class='course-card'>
+      <a
+        href='https://www.udemy.com/course/curso-de-reactjs-nextjs-completo-do-basico-ao-avancado/?referralCode=C228CEEAEB14B76159E1'
+        target='_blank'
+        rel='noreferrer noopener'
+        class='course-card-link'
+      >
+        <div class='course-card-image-wrapper'>
+          <img
+            loading='lazy'
+            src='imgs/curso-react-nextjs.webp'
+            alt='Curso de React.Js + Next.Js'
+            class='course-card-image'
+          />
+        </div>
+        <div class='course-card-content'>
+          <h3 class='course-card-title'>
+            Curso de React.Js + Next.Js completo do básico ao avançado
+          </h3>
+          <p class='course-card-description'>
+            Aprenda ReactJS, NextJS, Styled-Components, Testes com Jest,
+            Storybook, Strapi, HTML e CSS com TypeScript e JavaScript.
+          </p>
+        </div>
+      </a>
+    </article>
 
-      <!-- COURSE 7 -->
-      <article class='course-card'>
-        <a
-          href='https://www.udemy.com/course/curso-de-graphql-e-apollo-server-client/?referralCode=7C1982716397A5668A2C'
-          target='_blank'
-          rel='noreferrer noopener'
-          class='course-card-link'
-        >
-          <div class='course-card-image-wrapper'>
-            <img
-              loading='lazy'
-              src='imgs/graphql.webp'
-              alt='Curso de GraphQL e Apollo-Server'
-              class='course-card-image'
-            />
-          </div>
-          <div class='course-card-content'>
-            <h3 class='course-card-title'>Curso de GraphQL e Apollo-Server</h3>
-            <p class='course-card-description'>
-              GraphQL e Apollo-Server – Crie back-ends para aplicações e junte
-              tudo em um grafo e end-point usando dados de APIs e BDs
-            </p>
-          </div>
-        </a>
-      </article>
+    <!-- COURSE 7 -->
+    <article class='course-card'>
+      <a
+        href='https://www.udemy.com/course/curso-de-graphql-e-apollo-server-client/?referralCode=7C1982716397A5668A2C'
+        target='_blank'
+        rel='noreferrer noopener'
+        class='course-card-link'
+      >
+        <div class='course-card-image-wrapper'>
+          <img
+            loading='lazy'
+            src='imgs/graphql.webp'
+            alt='Curso de GraphQL e Apollo-Server'
+            class='course-card-image'
+          />
+        </div>
+        <div class='course-card-content'>
+          <h3 class='course-card-title'>Curso de GraphQL e Apollo-Server</h3>
+          <p class='course-card-description'>
+            GraphQL e Apollo-Server – Crie back-ends para aplicações e junte
+            tudo em um grafo e end-point usando dados de APIs e BDs
+          </p>
+        </div>
+      </a>
+    </article>
 
-      <!-- COURSE 8 -->
-      <article class='course-card'>
-        <a
-          href='https://www.udemy.com/course/expressoes-regulares-com-python-3-curso-gratuito/?referralCode=974C646591CF3D055109'
-          target='_blank'
-          rel='noreferrer noopener'
-          class='course-card-link'
-        >
-          <div class='course-card-image-wrapper'>
-            <img
-              loading='lazy'
-              src='imgs/expressoes-regulares.webp'
-              alt='Expressões regulares com Python 3'
-              class='course-card-image'
-            />
-          </div>
-          <div class='course-card-content'>
-            <h3 class='course-card-title'>
-              Expressões regulares com Python 3 (Curso gratuito)
-            </h3>
-            <p class='course-card-description'>
-              Aprenda expressões regulares utilizando Python 3 – Grátis
-            </p>
-          </div>
-        </a>
-      </article>
-    </div>
+    <!-- COURSE 8 -->
+    <article class='course-card'>
+      <a
+        href='https://www.udemy.com/course/expressoes-regulares-com-python-3-curso-gratuito/?referralCode=974C646591CF3D055109'
+        target='_blank'
+        rel='noreferrer noopener'
+        class='course-card-link'
+      >
+        <div class='course-card-image-wrapper'>
+          <img
+            loading='lazy'
+            src='imgs/expressoes-regulares.webp'
+            alt='Expressões regulares com Python 3'
+            class='course-card-image'
+          />
+        </div>
+        <div class='course-card-content'>
+          <h3 class='course-card-title'>
+            Expressões regulares com Python 3 (Curso gratuito)
+          </h3>
+          <p class='course-card-description'>
+            Aprenda expressões regulares utilizando Python 3 – Grátis
+          </p>
+        </div>
+      </a>
+    </article>
   </div>
-</section>
+</Section>
 
 <style>
   /*
@@ -251,55 +245,6 @@ Section courses
     max-width: 180rem;
     margin: 0 auto;
     padding-bottom: 8rem;
-  }
-
-  .section-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: clamp(var(--spacings-lg-400), 8vw, var(--spacings-lg-900)) 0;
-    max-width: 80ch;
-    /* Expanded slightly to flow better on wide screens */
-    margin: 0 auto;
-    margin-bottom: clamp(var(--spacings-lg-400), 8vw, var(--spacings-lg-900));
-
-    p {
-      margin: 0;
-    }
-  }
-
-  .section-eyeball {
-    font-size: var(--font-size-xxsm);
-    color: hsl(from var(--main-clr-shade) h s 30% / 1);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 600;
-    margin-bottom: var(--spacings-sm-200);
-  }
-
-  :global(.section-dark) .section-eyeball {
-    color: hsl(from var(--main-clr-shade) h s 70% / 1);
-  }
-
-  .section-line {
-    color: hsl(from var(--main-clr-shade) h s 30% / 1);
-    font-size: clamp(var(--font-size-sm), 3vw, var(--font-size-md));
-    max-width: 60ch;
-    margin: 0 auto;
-  }
-
-  :global(.section-dark) .section-line {
-    color: hsl(from var(--main-clr-shade) h s 70% / 1);
-  }
-
-  .section-title {
-    font-size: var(--font-size-h-me);
-    margin: var(--spacings-sm-600) auto;
-    line-height: 1.1;
-    letter-spacing: -0.04em;
-    font-weight: 800;
   }
 
   .courses-grid {

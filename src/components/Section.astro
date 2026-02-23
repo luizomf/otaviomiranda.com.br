@@ -1,0 +1,16 @@
+---
+interface Props {
+  id?: string;
+  theme?: 'light' | 'dark';
+  class?: string;
+  contentClass?: string;
+}
+
+const { id, theme = 'light', class: className, contentClass } = Astro.props;
+---
+
+<section id={id} class:list={['section', `section-${theme}`, className]}>
+  <div class:list={['section-content', contentClass]}>
+    <slot />
+  </div>
+</section>

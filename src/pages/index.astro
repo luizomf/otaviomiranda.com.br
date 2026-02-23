@@ -5,6 +5,8 @@ import Courses from '../components/Courses.astro';
 import Testimonials from '../components/Testimonials.astro';
 import Footer from '../components/Footer.astro';
 import Newsletter from '../components/Newsletter.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
 ---
 
 <BaseLayout>
@@ -15,150 +17,145 @@ import Newsletter from '../components/Newsletter.astro';
   <Courses />
 
   <!-- 3. Coupon Section -->
-    <section id='section-coupon' class='section section-dark bg-parallax'>
-      <div class='section-content section-coupon'>
-        <header class='section-header'>
-          <p class='section-eyeball'>Para você</p>
-          <h2 class='section-title'>Desconto exclusivo</h2>
-          <p class='section-line'>
-            Leve sua carreira de desenvolvedor para o próximo nível pagando
-            menos. Use o cupom abaixo e tenha acesso vitalício.
-          </p>
-          <div class='discount-container'>
-            <div class='coupon glass'>JAN282026</div>
-            <div class='coupon-date'>Válido até 02/02/2026</div>
-          </div>
-        </header>
+  <Section
+    id='section-coupon'
+    theme='dark'
+    class='bg-parallax'
+    contentClass='section-coupon'
+  >
+    <SectionHeader
+      eyeball='Para você'
+      title='Desconto exclusivo'
+      description='Leve sua carreira de desenvolvedor para o próximo nível pagando menos. Use o cupom abaixo e tenha acesso vitalício.'
+    >
+      <div class='discount-container'>
+        <div class='coupon glass'>JAN282026</div>
+        <div class='coupon-date'>Válido até 02/02/2026</div>
       </div>
-    </section>
+    </SectionHeader>
+  </Section>
 
-    <!-- 4. Blog Posts Static Placeholder (Will become dynamic later) -->
-    <section id='section-blog' class='section section-light'>
-      <div class='section-content section-blog'>
-        <header class='section-header blog-header'>
-          <p class='section-eyeball'>Últimos posts do</p>
-          <h2 class='section-title'>Meu blog</h2>
-          <p class='section-line'>
-            Minhas notas de estudo acabaram se tornando tutoriais sobre o
-            ecossistema de engenharia de software.
-          </p>
-        </header>
+  <!-- 4. Blog Posts Static Placeholder (Will become dynamic later) -->
+  <Section id='section-blog' theme='light' contentClass='section-blog'>
+    <SectionHeader
+      class='blog-header'
+      eyeball='Últimos posts do'
+      title='Meu blog'
+      description='Minhas notas de estudo acabaram se tornando tutoriais sobre o ecossistema de engenharia de software.'
+    />
 
-        <ul class='blog-list'>
-          <li>
-            <a href='2026/shiki_syntax_highlighter_generator/'
-              >Shiki - Syntax highlighter <span class='blog-arrow'>→</span></a
-            >
-          </li>
-          <li>
-            <a href='2025/liskov-substitution-principle-lsp-solid/'
-              >Liskov Substitution Principle ou Princípio da Substituição de
-              Liskov <span class='blog-arrow'>→</span></a
-            >
-          </li>
-          <li>
-            <a href='2025/f-strings-no-python-do-basico-ao-avancado/'
-              >f-strings em Python: coisas que você não sabia
-              <span class='blog-arrow'>→</span></a
-            >
-          </li>
-          <li>
-            <a href='2025/logging-no-python-pare-de-usar-print-no-lugar-errado/'
-              >logging no Python: Pare de usar print no lugar errado
-              <span class='blog-arrow'>→</span></a
-            >
-          </li>
-          <li>
-            <a href='2025/namespace-escopo-python/'
-              >Escopo e Namespace em Python
-              <span class='blog-arrow'>→</span></a
-            >
-          </li>
-          <li>
-            <a href='2025/whisper-live-sera-que-deu-certo/'
-              >Tentei usar o whisper live via microfone
-              <span class='blog-arrow'>→</span></a
-            >
-          </li>
-          <li>
-            <a href='2025/python-sussu-cli-openai-whisper/'
-              >Transcreva áudio com Python: Sussu CLI + OpenAI Whisper
-              <span class='blog-arrow'>→</span></a
-            >
-          </li>
-          <li>
-            <a
-              href='2025/notas-tecnicas-whisper-openai-guia-completo-de-transcricao-com-inteligencia-artificial-video-e-audio/'
-              >Notas técnicas sobre o vídeo Whisper OpenAI CLI do Youtube
-              <span class='blog-arrow'>→</span></a
-            >
-          </li>
-          <li>
-            <a href='2025/notas-tecnicas-python-argparse-cli/'
-              >Notas Técnicas: Criando CLIs com Python e Argparse
-              <span class='blog-arrow'>→</span></a
-            >
-          </li>
-          <li>
-            <a href='2020/pilhas-em-python-com-listas-stack/'
-              >Pilhas em Python com listas (stack)
-              <span class='blog-arrow'>→</span></a
-            >
-          </li>
-          <li>
-            <a href='2020/typescript-uma-longa-introducao/'
-              >TypeScript - uma longa introdução
-              <span class='blog-arrow'>→</span></a
-            >
-          </li>
-          <li>
-            <a href='2020/normalizacao-unicode-em-python/'
-              >Normalização Unicode em Python
-              <span class='blog-arrow'>→</span></a
-            >
-          </li>
-          <li>
-            <a href='2020/funcoes-recursivas-com-python/'
-              >Funções recursivas com Python
-              <span class='blog-arrow'>→</span></a
-            >
-          </li>
-          <li>
-            <a href='2020/filas-em-python-com-deque-queue/'
-              >Filas em Python com deque (queue)
-              <span class='blog-arrow'>→</span></a
-            >
-          </li>
-          <li>
-            <a href='2018/ssh-keys-chaves-de-autenticacao-ssh/'
-              >SSH keys: chaves de autenticação SSH
-              <span class='blog-arrow'>→</span></a
-            >
-          </li>
-          <li>
-            <a
-              href='2018/instalando-o-certificado-ssl-tls-gratis-da-lets-encrypt/'
-              >Instalando o certificado SSL-TLS grátis da Let’s Encrypt
-              <span class='blog-arrow'>→</span></a
-            >
-          </li>
-          <li>
-            <a href='2018/dominio-e-hospedagem-guia-para-leigos/'>
-              Domínio e hospedagem: guia para leigos
-              <span class='blog-arrow'>→</span></a
-            >
-          </li>
-        </ul>
-      </div>
-    </section>
+    <ul class='blog-list'>
+      <li>
+        <a href='2026/shiki_syntax_highlighter_generator/'
+          >Shiki - Syntax highlighter <span class='blog-arrow'>→</span></a
+        >
+      </li>
+      <li>
+        <a href='2025/liskov-substitution-principle-lsp-solid/'
+          >Liskov Substitution Principle ou Princípio da Substituição de Liskov <span
+            class='blog-arrow'>→</span
+          ></a
+        >
+      </li>
+      <li>
+        <a href='2025/f-strings-no-python-do-basico-ao-avancado/'
+          >f-strings em Python: coisas que você não sabia
+          <span class='blog-arrow'>→</span></a
+        >
+      </li>
+      <li>
+        <a href='2025/logging-no-python-pare-de-usar-print-no-lugar-errado/'
+          >logging no Python: Pare de usar print no lugar errado
+          <span class='blog-arrow'>→</span></a
+        >
+      </li>
+      <li>
+        <a href='2025/namespace-escopo-python/'
+          >Escopo e Namespace em Python
+          <span class='blog-arrow'>→</span></a
+        >
+      </li>
+      <li>
+        <a href='2025/whisper-live-sera-que-deu-certo/'
+          >Tentei usar o whisper live via microfone
+          <span class='blog-arrow'>→</span></a
+        >
+      </li>
+      <li>
+        <a href='2025/python-sussu-cli-openai-whisper/'
+          >Transcreva áudio com Python: Sussu CLI + OpenAI Whisper
+          <span class='blog-arrow'>→</span></a
+        >
+      </li>
+      <li>
+        <a
+          href='2025/notas-tecnicas-whisper-openai-guia-completo-de-transcricao-com-inteligencia-artificial-video-e-audio/'
+          >Notas técnicas sobre o vídeo Whisper OpenAI CLI do Youtube
+          <span class='blog-arrow'>→</span></a
+        >
+      </li>
+      <li>
+        <a href='2025/notas-tecnicas-python-argparse-cli/'
+          >Notas Técnicas: Criando CLIs com Python e Argparse
+          <span class='blog-arrow'>→</span></a
+        >
+      </li>
+      <li>
+        <a href='2020/pilhas-em-python-com-listas-stack/'
+          >Pilhas em Python com listas (stack)
+          <span class='blog-arrow'>→</span></a
+        >
+      </li>
+      <li>
+        <a href='2020/typescript-uma-longa-introducao/'
+          >TypeScript - uma longa introdução
+          <span class='blog-arrow'>→</span></a
+        >
+      </li>
+      <li>
+        <a href='2020/normalizacao-unicode-em-python/'
+          >Normalização Unicode em Python
+          <span class='blog-arrow'>→</span></a
+        >
+      </li>
+      <li>
+        <a href='2020/funcoes-recursivas-com-python/'
+          >Funções recursivas com Python
+          <span class='blog-arrow'>→</span></a
+        >
+      </li>
+      <li>
+        <a href='2020/filas-em-python-com-deque-queue/'
+          >Filas em Python com deque (queue)
+          <span class='blog-arrow'>→</span></a
+        >
+      </li>
+      <li>
+        <a href='2018/ssh-keys-chaves-de-autenticacao-ssh/'
+          >SSH keys: chaves de autenticação SSH
+          <span class='blog-arrow'>→</span></a
+        >
+      </li>
+      <li>
+        <a href='2018/instalando-o-certificado-ssl-tls-gratis-da-lets-encrypt/'
+          >Instalando o certificado SSL-TLS grátis da Let’s Encrypt
+          <span class='blog-arrow'>→</span></a
+        >
+      </li>
+      <li>
+        <a href='2018/dominio-e-hospedagem-guia-para-leigos/'>
+          Domínio e hospedagem: guia para leigos
+          <span class='blog-arrow'>→</span></a
+        >
+      </li>
+    </ul>
+  </Section>
+  <!-- 5. Testimonials Section -->
+  <Testimonials />
 
-    <!-- 5. Testimonials Section -->
-    <Testimonials />
+  <!-- 6. Newsletter -->
+  <Newsletter />
 
-    <!-- 6. Newsletter -->
-    <Newsletter />
-
-    <!-- 7. Footer -->
-    <Footer />
-  </section>
+  <!-- 7. Footer -->
+  <Footer />
 </BaseLayout>

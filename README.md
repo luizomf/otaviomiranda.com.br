@@ -127,36 +127,21 @@ o meu Agent AI (O _"Brien"_) catalogamos para voltar e matar depois.
 ### ✅ O que foi CONCLUÍDO (Successes)
 
 - Migração dos `assets/js` e `css/` puros para subdireção Vite controlada.
-- Refatoração do modelo antigo (Páginas independentes) para sistema de Layout e
-  Componentes reutilizáveis (Header.astro, BaseHead.astro, etc)
-- Implementação da biblioteca **Shiki**, abandonando bibliotecas legacy de JS
-  Highlight que pesavam o LCP no LightHouse.
-- Script de RegEx personalizado massivo gerado em Node para consertar imagens
-  antigas: Removemos os block-wrappers indesejados (`<p><img/></p>`) que haviam
-  saído imundos de conversores HTML -> MD antigos, consertando ~20 imagens 404
-  quebradas no build estático.
-- Action Pipeline para GitHub Pages configurado, rodando sem travamentos de
-  `Cache.duplicateId`.
+- Refatoração do modelo antigo (Páginas independentes) para sistema de Layout e Componentes reutilizáveis (Header.astro, BaseHead.astro, etc)
+- Implementação da biblioteca **Shiki**, abandonando bibliotecas legacy de JS Highlight que pesavam o LCP no LightHouse.
+- Script de RegEx personalizado massivo gerado em Node para consertar imagens antigas: Removemos os block-wrappers indesejados (`<p><img/></p>`).
+- Action Pipeline para GitHub Pages configurado, rodando sem travamentos de `Cache.duplicateId`.
+- **Sitemap Automatizado**: Foi habilitado a integração `@astrojs/sitemap` global.
+- **Templates Puros "BlankLayout"**: Implementados na v2 para servir Landing pages independentes da Home e do header de Navegação Global.
+- **Injeção do Frontmatter Dinâmica no Layout**: Extirpamos os `<h1>` repetidos dentro de cada Post. O Content Layer agora controla 100% dos títulos e autores.
+- **Modularização de CSS via Astro Islands**: Desacoplamos os 14 mil bytes de estilos monolíticos do arquivo global. Seções como `<Courses>`, `<Testimonials>` e `<Hero>` operam de forma autossuficiente (DRY Components) herdando o wrapper global de tema e grid (`<Section>` e `<SectionHeader>`).
 
 ### 🚧 TO-DO: Débitos e Próximas Milestones
 
-- [ ] **Sitemap Automatizado**: Descobrir/adicionar o plugin `@astrojs/sitemap`
-      ou `Astro API` para gerar um sitemap atualizado toda vez que um novo post
-      é listado, em vez de depender de uma árvore manual do Webmaster legado.
-- [ ] **Templates "Puros" ou Landing Pages em Branco**: Precisamos pensar num
-      Layout sem navegação. Antigamente, páginas experimentais subiam "html
-      puro", agora, as páginas injetarão `CSS` e `Header` fatalmente. Precisamos
-      de um layout para driblar o sistema atual de rotas/CSS se precisarmos
-      fazer demo visual de um App por fora.
-- [ ] CSS Legacy Cleaning: Ainda existem classes e divs (`is-pulled-right`, e
-      centenas de divs irrelevantes) que vieram da exportação bruta das páginas
-      de 2020 para o Markdown. Limpar visualmente.
-- [ ] Resquícios do Lightbox Visual: Algumas imagens ainda podem carregar as
-      classes do Javascript/Lightbox anterior, ignorando carregamentos nativos
-      lazy (isso não quebra a foto, mas carrega semântica vazia).
-- [ ] Revisitar index.astro: Fazer grid de paginação pros arquivos `.md` caso os
-      posts comecem a crescer infinitivamente na primeira página baseada.
-- [ ] **Integração do Frontmatter no Layout**: Parar de escrever o título (H1), autor e data manualmente dentro do corpo de cada arquivo Markdown (`text.md`). O objetivo é extrair esses metadados diretamente do Frontmatter (`post.data.title`, `post.data.author`, `post.data.date`) e injetá-ar dinamicamente no componente de página principal (`[...slug].astro`), padronizando o cabeçalho de todos os posts e tirando esse fardo das costas do autor.
+- [ ] **Integração de Vim-bindings**: Implementar fluxo estendido para edição e navegação dos arquivos markdown otimizando o workflow local.
+- [ ] CSS Legacy Cleaning: Ainda existem classes e divs (`is-pulled-right`, e centenas de divs irrelevantes) que vieram da exportação bruta das páginas de 2020 para o Markdown. Limpar visualmente.
+- [ ] Resquícios do Lightbox Visual: Algumas imagens ainda podem carregar as classes do Javascript/Lightbox anterior, ignorando carregamentos nativos lazy (isso não quebra a foto, mas carrega semântica vazia).
+- [ ] Revisitar index.astro: Fazer grid de paginação pros arquivos `.md` caso os posts comecem a crescer infinitivamente na primeira página baseada.
 
 ---
 

@@ -1,0 +1,17 @@
+---
+interface Props {
+  eyeball: string;
+  title: string;
+  description?: string;
+  class?: string;
+}
+
+const { eyeball, title, description, class: className } = Astro.props;
+---
+
+<header class:list={['section-header', className]}>
+  <p class='section-eyeball'>{eyeball}</p>
+  <h2 class='section-title'>{title}</h2>
+  {description && <p class='section-line'>{description}</p>}
+  <slot />
+</header>
