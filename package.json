@@ -23,6 +23,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.0",
     "cheerio": "^1.2.0",
     "marked": "^17.0.3",
     "prettier-plugin-astro": "^0.14.1"
