@@ -73,6 +73,9 @@ const editorSchema = {
   ></script>
   <script is:inline>
     (() => {
+      if (window.__otavioMarkdownEditorBooted) return;
+      window.__otavioMarkdownEditorBooted = true;
+
       const fileLabel = document.getElementById('editor-file');
       const previewEl = document.getElementById('editor-preview');
       const openInput = document.getElementById('editor-open-input');
@@ -368,14 +371,20 @@ const editorSchema = {
             });
 
             window.require(
-              ['vs/editor/editor.main', 'monaco-vim'],
-              (_editorMain, monacoVim) => {
-                resolve({ monaco: window.monaco, monacoVim });
+              ['vs/editor/editor.main'],
+              () => {
+                window.require(
+                  ['monaco-vim'],
+                  monacoVim => {
+                    resolve({ monaco: window.monaco, monacoVim });
+                  },
+                  () => {
+                    resolve({ monaco: window.monaco, monacoVim: null });
+                  },
+                );
               },
               () => {
-                window.require(['vs/editor/editor.main'], () => {
-                  resolve({ monaco: window.monaco, monacoVim: null });
-                });
+                resolve({ monaco: window.monaco, monacoVim: null });
               },
             );
           };
