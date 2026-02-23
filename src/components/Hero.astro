@@ -2,56 +2,136 @@
 // src/components/Hero.astro
 ---
 
-<section id="section-hero" class="section section-dark section-hero">
-  <div class="section-content hero-content">
+<section id='section-hero' class='section section-dark section-hero'>
+  <div class='section-content hero-content'>
     <header>
-      <p class="hero-eyeball">Olá, sou</p>
-      <h1 class="hero-title">Otávio Miranda</h1>
-      <p class="hero-line">
+      <p class='hero-eyeball'>Olá, sou</p>
+      <h1 class='hero-title'>Otávio Miranda</h1>
+      <p class='hero-line'>
         Desenvolvedor de software e criador de conteúdo desde 2009.
       </p>
-      <p class="hero-line">
+      <p class='hero-line'>
         Educador em cursos de programação com mais de 300 mil alunos.
       </p>
-      <p class="hero-line">Fique à vontade para explorar.</p>
+      <p class='hero-line'>Fique à vontade para explorar.</p>
     </header>
 
-    <div class="hero-links">
-      <div class="link-container">
-        <div class="link-bg-blur"></div>
-        <div class="link-bg"></div>
-        <a class="link" href="#courses">Cursos</a>
+    <div class='hero-links'>
+      <div class='link-container'>
+        <div class='link-bg-blur'></div>
+        <div class='link-bg'></div>
+        <a class='link' href='#courses'>Cursos</a>
       </div>
 
-      <div class="link-container">
-        <div class="link-bg-blur"></div>
-        <div class="link-bg"></div>
+      <div class='link-container'>
+        <div class='link-bg-blur'></div>
+        <div class='link-bg'></div>
         <a
-          target="_blank"
-          rel="nnoreferrer noopener"
-          class="link"
-          href="https://www.youtube.com/@otaviomiranda/videos"
-          >YouTube</a
+          target='_blank'
+          rel='nnoreferrer noopener'
+          class='link'
+          href='https://www.youtube.com/@otaviomiranda/videos'>YouTube</a
         >
       </div>
 
-      <div class="link-container">
-        <div class="link-bg-blur"></div>
-        <div class="link-bg"></div>
+      <div class='link-container'>
+        <div class='link-bg-blur'></div>
+        <div class='link-bg'></div>
         <a
-          target="_blank"
-          rel="nnoreferrer noopener"
-          class="link"
-          href="https://beacons.ai/otaviomiranda"
-          >Contatos</a
+          target='_blank'
+          rel='nnoreferrer noopener'
+          class='link'
+          href='https://beacons.ai/otaviomiranda'>Contatos</a
         >
       </div>
     </div>
   </div>
 
-  <div class="next-section">
-    <a href="#courses"> Continue ▼ </a>
+  <div class='next-section'>
+    <a href='#courses'> Continue ▼ </a>
   </div>
 
-  <canvas id="canvas-hero-dark" class="canvas-bg"></canvas>
+  <canvas id='canvas-hero-dark' class='canvas-bg'></canvas>
 </section>
+
+<style>
+  /*
+Hero
+*/
+
+  .section-hero {
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-monospace);
+    position: relative;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    /* backdrop-filter: blur(var(--blur-me)); */
+    text-align: center;
+    justify-content: center;
+    max-width: 75ch;
+  }
+
+  .hero-eyeball {
+    margin: 0.5rem 0;
+    line-height: var(--line-height-xxxsm);
+    font-size: var(--font-size-sm);
+    color: hsl(from var(--main-clr-shade) h s 70% / 1);
+  }
+
+  .hero-title {
+    margin: 0 auto;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    font-size: var(--font-size-huge-responsive);
+    white-space: nowrap;
+    border-right: 1rem solid currentcolor;
+    overflow: hidden;
+    animation:
+      typewritter 20s steps(20, end) alternate infinite,
+      blinking-caret 0.75s step-end infinite;
+  }
+
+  .hero-line {
+    margin: 1.5rem 0;
+    line-height: 1.5;
+    font-size: var(--font-size-me);
+    color: hsl(from var(--main-clr-shade) h s 70% / 1);
+  }
+
+  .hero-links {
+    margin: clamp(var(--spacings-sm-900), 4vw, var(--spacings-lg-600)) auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(var(--spacings-sm-600), 3vw, var(--spacings-sm-900))
+      clamp(var(--spacings-sm-500), 3vw, var(--spacings-sm-700));
+    max-width: 80%;
+  }
+
+  @keyframes typewritter {
+    0% {
+      width: 0;
+    }
+
+    7% {
+      width: 100%;
+    }
+  }
+
+  @keyframes blinking-caret {
+    from,
+    to {
+      border-color: transparent;
+    }
+
+    50% {
+      border-color: currentcolor;
+    }
+  }
+</style>

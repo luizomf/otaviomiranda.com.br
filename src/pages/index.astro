@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import Cursos from '../components/Cursos.astro';
+import Depoimentos from '../components/Depoimentos.astro';
 import Footer from '../components/Footer.astro';
 import Newsletter from '../components/Newsletter.astro';
 ---
@@ -10,48 +12,68 @@ import Newsletter from '../components/Newsletter.astro';
   <Hero />
 
   <!-- 2. Courses Section -->
-  <section id="courses" class="section section-light">
-    <div class="section-content section-courses">
-      <header class="section-header">
-        <p class="section-eyeball">Escolha sua stack</p>
-        <h2 class="section-title">Cursos de programação</h2>
-        <p class="section-line">
+  <section id='courses' class='section section-light'>
+    <div class='section-content section-courses'>
+      <header class='section-header'>
+        <p class='section-eyeball'>Escolha sua stack</p>
+        <h2 class='section-title'>Cursos de programação</h2>
+        <p class='section-line'>
           Domine tecnologias como Python, JavaScript, TypeScript e React.
           Metodologia focada na prática para te levar do zero à sua primeira
           vaga de desenvolvedor.
         </p>
       </header>
 
-      <div class="courses-grid">
+      <div class='courses-grid'>
         <!-- COURSE 1 -->
-        <article class="course-card">
-          <a href="https://www.udemy.com/course/curso-de-javascript-moderno-do-basico-ao-avancado/?referralCode=C6F07057B0999D3E36BA" target="_blank" rel="noreferrer noopener" class="course-card-link">
-            <div class="course-card-image-wrapper">
-              <img loading="lazy" src="imgs/curso-javascript-typescript.webp" alt="Curso de JavaScript e TypeScript do básico ao avançado" class="course-card-image">
+        <article class='course-card'>
+          <a
+            href='https://www.udemy.com/course/curso-de-javascript-moderno-do-basico-ao-avancado/?referralCode=C6F07057B0999D3E36BA'
+            target='_blank'
+            rel='noreferrer noopener'
+            class='course-card-link'
+          >
+            <div class='course-card-image-wrapper'>
+              <img
+                loading='lazy'
+                src='imgs/curso-javascript-typescript.webp'
+                alt='Curso de JavaScript e TypeScript do básico ao avançado'
+                class='course-card-image'
+              />
             </div>
-            <div class="course-card-content">
-              <h3 class="course-card-title">
+            <div class='course-card-content'>
+              <h3 class='course-card-title'>
                 Curso de JavaScript e TypeScript do básico ao avançado
               </h3>
-              <p class="course-card-description">
-                JavaScript e TypeScript – front-end e back-end (Full Stack)
-                – Node, Express, noSQL, React, hooks, Redux, Design Patterns
+              <p class='course-card-description'>
+                JavaScript e TypeScript – front-end e back-end (Full Stack) –
+                Node, Express, noSQL, React, hooks, Redux, Design Patterns
               </p>
             </div>
           </a>
         </article>
 
         <!-- COURSE 2 -->
-        <article class="course-card">
-          <a href="https://www.udemy.com/course/python-3-do-zero-ao-avancado/?referralCode=5DDCAD01311E2A9599B2" target="_blank" rel="noreferrer noopener" class="course-card-link">
-            <div class="course-card-image-wrapper">
-              <img loading="lazy" src="imgs/curso-de-python.webp" alt="Curso de Python 3 do Básico Ao Avançado" class="course-card-image">
+        <article class='course-card'>
+          <a
+            href='https://www.udemy.com/course/python-3-do-zero-ao-avancado/?referralCode=5DDCAD01311E2A9599B2'
+            target='_blank'
+            rel='noreferrer noopener'
+            class='course-card-link'
+          >
+            <div class='course-card-image-wrapper'>
+              <img
+                loading='lazy'
+                src='imgs/curso-de-python.webp'
+                alt='Curso de Python 3 do Básico Ao Avançado'
+                class='course-card-image'
+              />
             </div>
-            <div class="course-card-content">
-              <h3 class="course-card-title">
+            <div class='course-card-content'>
+              <h3 class='course-card-title'>
                 Curso de Python 3 do Básico Ao Avançado (com projetos reais)
               </h3>
-              <p class="course-card-description">
+              <p class='course-card-description'>
                 Python 3 completo – programação com Django, PyQT5, Selenium,
                 Regexp, Testes e TDD, POO, Design Patterns GoF, algoritmos.
               </p>
@@ -60,16 +82,26 @@ import Newsletter from '../components/Newsletter.astro';
         </article>
 
         <!-- COURSE 3 -->
-        <article class="course-card">
-          <a href="https://www.udemy.com/course/nestjs-curso-completo-rest-api-typeorm-jwt-e-mais/?referralCode=7EAD0D9F0C7D4B6F9B4E" target="_blank" rel="noreferrer noopener" class="course-card-link">
-            <div class="course-card-image-wrapper">
-              <img loading="lazy" src="imgs/curso-de-nestjs.webp" alt="NestJS - Curso completo" class="course-card-image">
+        <article class='course-card'>
+          <a
+            href='https://www.udemy.com/course/nestjs-curso-completo-rest-api-typeorm-jwt-e-mais/?referralCode=7EAD0D9F0C7D4B6F9B4E'
+            target='_blank'
+            rel='noreferrer noopener'
+            class='course-card-link'
+          >
+            <div class='course-card-image-wrapper'>
+              <img
+                loading='lazy'
+                src='imgs/curso-de-nestjs.webp'
+                alt='NestJS - Curso completo'
+                class='course-card-image'
+              />
             </div>
-            <div class="course-card-content">
-              <h3 class="course-card-title">
+            <div class='course-card-content'>
+              <h3 class='course-card-title'>
                 NestJS - Curso completo para REST API com TypeORM e JWT
               </h3>
-              <p class="course-card-description">
+              <p class='course-card-description'>
                 Domine NestJS criando APIs RESTful com TypeORM, autenticação
                 JWT, e testes automatizados para aplicações robustas.
               </p>
@@ -78,55 +110,87 @@ import Newsletter from '../components/Newsletter.astro';
         </article>
 
         <!-- COURSE 4 (Hostinger) -->
-        <article class="course-card">
-          <a href="https://hostinger.com/otaviomiranda" target="_blank" rel="noreferrer noopener" class="course-card-link">
-            <div class="course-card-image-wrapper">
-              <img loading="lazy" src="imgs/hostinger.webp" alt="Hostinger" class="course-card-image">
+        <article class='course-card'>
+          <a
+            href='https://hostinger.com/otaviomiranda'
+            target='_blank'
+            rel='noreferrer noopener'
+            class='course-card-link'
+          >
+            <div class='course-card-image-wrapper'>
+              <img
+                loading='lazy'
+                src='imgs/hostinger.webp'
+                alt='Hostinger'
+                class='course-card-image'
+              />
             </div>
-            <div class="course-card-content">
-              <h3 class="course-card-title">
+            <div class='course-card-content'>
+              <h3 class='course-card-title'>
                 Para servidores e hospedagem de sites, recomendo Hostinger!
               </h3>
-              <p class="course-card-description">
+              <p class='course-card-description'>
                 Além da qualidade da infraestrutura, a Hostinger ainda
                 disponibiliza
-                <strong style="color: var(--glow-clr-1)">+10% de desconto</strong>
+                <strong style='color: var(--glow-clr-1)'
+                  >+10% de desconto</strong
+                >
                 com o cupom
-                <strong style="color: var(--glow-clr-1)">OTAVIOMIRANDA</strong>.
+                <strong style='color: var(--glow-clr-1)'>OTAVIOMIRANDA</strong>.
               </p>
             </div>
           </a>
         </article>
 
         <!-- COURSE 5 -->
-        <article class="course-card">
-          <a href="https://www.udemy.com/course/curso-de-django-web-framework-com-python-html-e-css/?referralCode=D43F8EDA2A980B64C0FC" target="_blank" rel="noreferrer noopener" class="course-card-link">
-            <div class="course-card-image-wrapper">
-              <img loading="lazy" src="imgs/curso-django.webp" alt="Curso de Django" class="course-card-image">
+        <article class='course-card'>
+          <a
+            href='https://www.udemy.com/course/curso-de-django-web-framework-com-python-html-e-css/?referralCode=D43F8EDA2A980B64C0FC'
+            target='_blank'
+            rel='noreferrer noopener'
+            class='course-card-link'
+          >
+            <div class='course-card-image-wrapper'>
+              <img
+                loading='lazy'
+                src='imgs/curso-django.webp'
+                alt='Curso de Django'
+                class='course-card-image'
+              />
             </div>
-            <div class="course-card-content">
-              <h3 class="course-card-title">
+            <div class='course-card-content'>
+              <h3 class='course-card-title'>
                 Curso de Django Web Framework com Python, HTML e CSS
               </h3>
-              <p class="course-card-description">
-                Aprenda Django Web Framework com Python, HTML e CSS. Conheça
-                o ORM, os templates e Views, entenda HTTP e muito mais.
+              <p class='course-card-description'>
+                Aprenda Django Web Framework com Python, HTML e CSS. Conheça o
+                ORM, os templates e Views, entenda HTTP e muito mais.
               </p>
             </div>
           </a>
         </article>
 
         <!-- COURSE 6 -->
-        <article class="course-card">
-          <a href="https://www.udemy.com/course/curso-de-reactjs-nextjs-completo-do-basico-ao-avancado/?referralCode=C228CEEAEB14B76159E1" target="_blank" rel="noreferrer noopener" class="course-card-link">
-            <div class="course-card-image-wrapper">
-              <img loading="lazy" src="imgs/curso-react-nextjs.webp" alt="Curso de React.Js + Next.Js" class="course-card-image">
+        <article class='course-card'>
+          <a
+            href='https://www.udemy.com/course/curso-de-reactjs-nextjs-completo-do-basico-ao-avancado/?referralCode=C228CEEAEB14B76159E1'
+            target='_blank'
+            rel='noreferrer noopener'
+            class='course-card-link'
+          >
+            <div class='course-card-image-wrapper'>
+              <img
+                loading='lazy'
+                src='imgs/curso-react-nextjs.webp'
+                alt='Curso de React.Js + Next.Js'
+                class='course-card-image'
+              />
             </div>
-            <div class="course-card-content">
-              <h3 class="course-card-title">
+            <div class='course-card-content'>
+              <h3 class='course-card-title'>
                 Curso de React.Js + Next.Js completo do básico ao avançado
               </h3>
-              <p class="course-card-description">
+              <p class='course-card-description'>
                 Aprenda ReactJS, NextJS, Styled-Components, Testes com Jest,
                 Storybook, Strapi, HTML e CSS com TypeScript e JavaScript.
               </p>
@@ -135,267 +199,207 @@ import Newsletter from '../components/Newsletter.astro';
         </article>
 
         <!-- COURSE 7 -->
-        <article class="course-card">
-          <a href="https://www.udemy.com/course/curso-de-graphql-e-apollo-server-client/?referralCode=7C1982716397A5668A2C" target="_blank" rel="noreferrer noopener" class="course-card-link">
-            <div class="course-card-image-wrapper">
-              <img loading="lazy" src="imgs/graphql.webp" alt="Curso de GraphQL e Apollo-Server" class="course-card-image">
+        <article class='course-card'>
+          <a
+            href='https://www.udemy.com/course/curso-de-graphql-e-apollo-server-client/?referralCode=7C1982716397A5668A2C'
+            target='_blank'
+            rel='noreferrer noopener'
+            class='course-card-link'
+          >
+            <div class='course-card-image-wrapper'>
+              <img
+                loading='lazy'
+                src='imgs/graphql.webp'
+                alt='Curso de GraphQL e Apollo-Server'
+                class='course-card-image'
+              />
             </div>
-            <div class="course-card-content">
-              <h3 class="course-card-title">
+            <div class='course-card-content'>
+              <h3 class='course-card-title'>
                 Curso de GraphQL e Apollo-Server
               </h3>
-              <p class="course-card-description">
-                GraphQL e Apollo-Server – Crie back-ends para aplicações e
-                junte tudo em um grafo e end-point usando dados de APIs e
-                BDs
+              <p class='course-card-description'>
+                GraphQL e Apollo-Server – Crie back-ends para aplicações e junte
+                tudo em um grafo e end-point usando dados de APIs e BDs
               </p>
             </div>
           </a>
         </article>
 
         <!-- COURSE 8 -->
-        <article class="course-card">
-          <a href="https://www.udemy.com/course/expressoes-regulares-com-python-3-curso-gratuito/?referralCode=974C646591CF3D055109" target="_blank" rel="noreferrer noopener" class="course-card-link">
-            <div class="course-card-image-wrapper">
-              <img loading="lazy" src="imgs/expressoes-regulares.webp" alt="Expressões regulares com Python 3" class="course-card-image">
+        <article class='course-card'>
+          <a
+            href='https://www.udemy.com/course/expressoes-regulares-com-python-3-curso-gratuito/?referralCode=974C646591CF3D055109'
+            target='_blank'
+            rel='noreferrer noopener'
+            class='course-card-link'
+          >
+            <div class='course-card-image-wrapper'>
+              <img
+                loading='lazy'
+                src='imgs/expressoes-regulares.webp'
+                alt='Expressões regulares com Python 3'
+                class='course-card-image'
+              />
             </div>
-            <div class="course-card-content">
-              <h3 class="course-card-title">
+            <div class='course-card-content'>
+              <h3 class='course-card-title'>
                 Expressões regulares com Python 3 (Curso gratuito)
               </h3>
-              <p class="course-card-description">
+              <p class='course-card-description'>
                 Aprenda expressões regulares utilizando Python 3 – Grátis
               </p>
             </div>
           </a>
         </article>
       </div>
-
-  </section>
-
-  <!-- 3. Coupon Section -->
-  <section id="section-coupon" class="section section-dark bg-parallax">
-    <div class="section-content section-coupon">
-      <header class="section-header">
-        <p class="section-eyeball">Para você</p>
-        <h2 class="section-title">Desconto exclusivo</h2>
-        <p class="section-line">Leve sua carreira de desenvolvedor para o próximo nível pagando menos. Use o cupom abaixo e tenha acesso vitalício.</p>
-        <div class="discount-container">
-          <div class="coupon glass">JAN282026</div>
-          <div class="coupon-date">Válido até 02/02/2026</div>
-        </div>
-      </header>
     </div>
-  </section>
 
-  <!-- 4. Blog Posts Static Placeholder (Will become dynamic later) -->
-  <section id="section-blog" class="section section-light">
-    <div class="section-content section-blog">
-      <header class="section-header blog-header">
-        <p class="section-eyeball">Últimos posts do</p>
-        <h2 class="section-title">Meu blog</h2>
-        <p class="section-line">Minhas notas de estudo acabaram se tornando tutoriais sobre o ecossistema de engenharia de software.</p>
-      </header>
-
-      <ul class="blog-list">
-        <li>
-          <a href="2026/shiki_syntax_highlighter_generator/">Shiki - Syntax highlighter <span class="blog-arrow">→</span></a>
-        </li>
-        <li>
-          <a href="2025/liskov-substitution-principle-lsp-solid/">Liskov Substitution Principle ou Princípio da Substituição de
-            Liskov <span class="blog-arrow">→</span></a>
-        </li>
-        <li>
-          <a href="2025/f-strings-no-python-do-basico-ao-avancado/">f-strings em Python: coisas que você não sabia
-            <span class="blog-arrow">→</span></a>
-        </li>
-        <li>
-          <a href="2025/logging-no-python-pare-de-usar-print-no-lugar-errado/">logging no Python: Pare de usar print no lugar errado
-            <span class="blog-arrow">→</span></a>
-        </li>
-        <li>
-          <a href="2025/namespace-escopo-python/">Escopo e Namespace em Python
-            <span class="blog-arrow">→</span></a>
-        </li>
-        <li>
-          <a href="2025/whisper-live-sera-que-deu-certo/">Tentei usar o whisper live via microfone
-            <span class="blog-arrow">→</span></a>
-        </li>
-        <li>
-          <a href="2025/python-sussu-cli-openai-whisper/">Transcreva áudio com Python: Sussu CLI + OpenAI Whisper
-            <span class="blog-arrow">→</span></a>
-        </li>
-        <li>
-          <a href="2025/notas-tecnicas-whisper-openai-guia-completo-de-transcricao-com-inteligencia-artificial-video-e-audio/">Notas técnicas sobre o vídeo Whisper OpenAI CLI do Youtube
-            <span class="blog-arrow">→</span></a>
-        </li>
-        <li>
-          <a href="2025/notas-tecnicas-python-argparse-cli/">Notas Técnicas: Criando CLIs com Python e Argparse
-            <span class="blog-arrow">→</span></a>
-        </li>
-        <li>
-          <a href="2020/pilhas-em-python-com-listas-stack/">Pilhas em Python com listas (stack)
-            <span class="blog-arrow">→</span></a>
-        </li>
-        <li>
-          <a href="2020/typescript-uma-longa-introducao/">TypeScript - uma longa introdução
-            <span class="blog-arrow">→</span></a>
-        </li>
-        <li>
-          <a href="2020/normalizacao-unicode-em-python/">Normalização Unicode em Python
-            <span class="blog-arrow">→</span></a>
-        </li>
-        <li>
-          <a href="2020/funcoes-recursivas-com-python/">Funções recursivas com Python
-            <span class="blog-arrow">→</span></a>
-        </li>
-        <li>
-          <a href="2020/filas-em-python-com-deque-queue/">Filas em Python com deque (queue)
-            <span class="blog-arrow">→</span></a>
-        </li>
-        <li>
-          <a href="2018/ssh-keys-chaves-de-autenticacao-ssh/">SSH keys: chaves de autenticação SSH
-            <span class="blog-arrow">→</span></a>
-        </li>
-        <li>
-          <a href="2018/instalando-o-certificado-ssl-tls-gratis-da-lets-encrypt/">Instalando o certificado SSL-TLS grátis da Let’s Encrypt
-            <span class="blog-arrow">→</span></a>
-        </li>
-        <li>
-          <a href="2018/dominio-e-hospedagem-guia-para-leigos/">
-            Domínio e hospedagem: guia para leigos
-            <span class="blog-arrow">→</span></a>
-        </li>
-      </ul>
-
-
-    </div>
-  </section>
-
-  <!-- 5. Testimonials Section -->
-  <section id="section-testimonials" class="section section-dark bg-parallax">
-    <div class="section-content section-testimonials">
-      <header class="section-header">
-        <p class="section-eyeball">O que os alunos dizem</p>
-        <h2 class="section-title">Histórias de sucesso</h2>
-        <p class="section-line">
-          Veja o que desenvolvedores que já estudaram comigo têm a dizer
-          sobre a didática e os resultados.
-        </p>
-      </header>
-
-      <div class="testimonials-grid">
-        <article class="testimonial-card glass">
-          <p class="testimonial-text">
-            “Oi professor, tudo bem? Só queria passar aqui e deixar meu
-            agradecimento pra ti. Hoje sou programador sênior muito por sua
-            ajuda! Seus cursos são ótimos e sua didática é perfeita. Muito
-            obrigado e que Deus continue abençoando o senhor e sua família!
-            Um grande abraço!”
+    <!-- 3. Coupon Section -->
+    <section id='section-coupon' class='section section-dark bg-parallax'>
+      <div class='section-content section-coupon'>
+        <header class='section-header'>
+          <p class='section-eyeball'>Para você</p>
+          <h2 class='section-title'>Desconto exclusivo</h2>
+          <p class='section-line'>
+            Leve sua carreira de desenvolvedor para o próximo nível pagando
+            menos. Use o cupom abaixo e tenha acesso vitalício.
           </p>
-          <div class="testimonial-footer">
-            <img loading="lazy" src="imgs/assets/2026/02/usernopicture.avif" alt="Foto de Luiz Danella" width="48" height="48" class="testimonial-avatar">
-            <div class="testimonial-author-wrapper">
-              <span class="testimonial-author">Luiz Danella</span>
-              <span class="testimonial-role">Software Engineer</span>
-            </div>
+          <div class='discount-container'>
+            <div class='coupon glass'>JAN282026</div>
+            <div class='coupon-date'>Válido até 02/02/2026</div>
           </div>
-        </article>
-
-        <article class="testimonial-card glass">
-          <p class="testimonial-text">
-            “Acompanho você desde 2023 a partir dos cursos da udemy, com seu
-            conhecimento cheguei ao cargo de senior dentro da empresa em
-            qual trabalho, agora comecei a fazer faculdade de ADS, e para
-            TODOS os meus colegas eu recomendo seus videos, por que SEMPRE
-            estou aprendendo. Você é a minha referência de profissional!”
-          </p>
-          <div class="testimonial-footer">
-            <img loading="lazy" src="imgs/assets/2026/02/usernopicture.avif" alt="Foto de @juniordasrosas" width="48" height="48" class="testimonial-avatar">
-            <div class="testimonial-author-wrapper">
-              <span class="testimonial-author">@juniordasrosas</span>
-              <span class="testimonial-role">Aluno Udemy</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="testimonial-card glass">
-          <p class="testimonial-text">
-            “De longe, o melhor curso de Python disponível em português. O
-            professor demonstra um conhecimento profundo do conteúdo e se
-            dedica de verdade ao aprendizado dos alunos, sempre com
-            explicações claras e didáticas. Não deixa pontos em aberto,
-            tornando o aprendizado mais completo e eficiente.”
-          </p>
-          <div class="testimonial-footer">
-            <img loading="lazy" src="imgs/assets/2026/02/usernopicture.avif" alt="Foto de Gustavo Sales" width="48" height="48" class="testimonial-avatar">
-            <div class="testimonial-author-wrapper">
-              <span class="testimonial-author">Gustavo Sales D.</span>
-              <span class="testimonial-role">Aluno de Python</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="testimonial-card glass">
-          <p class="testimonial-text">
-            “Eu escolhi Python... encontrei seu curso no Udemy, e pela ÓTIMA
-            DIDÁTICA incrivelmente eu estou aprendendo de uma forma que
-            nunca imaginei incrível. Estudando todos os dias 2 horas! com
-            foco. Estou MUITO FELIZ pois consegui realizar o EXERCÍCIO pela
-            1º Vez Sozinho! ... Estou comemorando Esta pequena conquista
-            como nunca!”
-          </p>
-          <div class="testimonial-footer">
-            <img loading="lazy" src="imgs/assets/2026/02/usernopicture.avif" alt="Foto de Gabriel Henrique" width="48" height="48" class="testimonial-avatar">
-            <div class="testimonial-author-wrapper">
-              <span class="testimonial-author">Gabriel Henrique</span>
-              <span class="testimonial-role">Estudante de Programação</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="testimonial-card glass">
-          <p class="testimonial-text">
-            “Curso top demais, estou aprendendo muito rápido e com muita
-            facilidade. Recomendo para qualquer um que queira aprender
-            Python e não sabe nada de programação, tudo explicado muito
-            mastigadinho. Acredito que depois que eu terminar este curso vai
-            ser muito mais fácil aprender outra linguagem de programação
-            para seguir carreira.”
-          </p>
-          <div class="testimonial-footer">
-            <img loading="lazy" src="imgs/assets/2026/02/usernopicture.avif" alt="Foto de Felipe dos Santos" width="48" height="48" class="testimonial-avatar">
-            <div class="testimonial-author-wrapper">
-              <span class="testimonial-author">Felipe dos Santos D.</span>
-              <span class="testimonial-role">Aluno Iniciante</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="testimonial-card glass">
-          <p class="testimonial-text">
-            “Foi então que encontrei seu curso e comecei a pesquisar sobre
-            seus conteúdos e sua metodologia. Percebi que estava investindo
-            meu dinheiro da forma errada [antes num curso mais caro]. Você
-            oferece um material de altíssima qualidade, com uma didática
-            excelente e, ainda assim, acessível para pessoas de baixa renda,
-            algo raro no mercado.”
-          </p>
-          <div class="testimonial-footer">
-            <img loading="lazy" src="imgs/assets/2026/02/usernopicture.avif" alt="Foto de Pedro S." width="48" height="48" class="testimonial-avatar">
-            <div class="testimonial-author-wrapper">
-              <span class="testimonial-author">Pedro S.</span>
-              <span class="testimonial-role">Aluno de Programação</span>
-            </div>
-          </div>
-        </article>
+        </header>
       </div>
-    </div>
+    </section>
+
+    <!-- 4. Blog Posts Static Placeholder (Will become dynamic later) -->
+    <section id='section-blog' class='section section-light'>
+      <div class='section-content section-blog'>
+        <header class='section-header blog-header'>
+          <p class='section-eyeball'>Últimos posts do</p>
+          <h2 class='section-title'>Meu blog</h2>
+          <p class='section-line'>
+            Minhas notas de estudo acabaram se tornando tutoriais sobre o
+            ecossistema de engenharia de software.
+          </p>
+        </header>
+
+        <ul class='blog-list'>
+          <li>
+            <a href='2026/shiki_syntax_highlighter_generator/'
+              >Shiki - Syntax highlighter <span class='blog-arrow'>→</span></a
+            >
+          </li>
+          <li>
+            <a href='2025/liskov-substitution-principle-lsp-solid/'
+              >Liskov Substitution Principle ou Princípio da Substituição de
+              Liskov <span class='blog-arrow'>→</span></a
+            >
+          </li>
+          <li>
+            <a href='2025/f-strings-no-python-do-basico-ao-avancado/'
+              >f-strings em Python: coisas que você não sabia
+              <span class='blog-arrow'>→</span></a
+            >
+          </li>
+          <li>
+            <a href='2025/logging-no-python-pare-de-usar-print-no-lugar-errado/'
+              >logging no Python: Pare de usar print no lugar errado
+              <span class='blog-arrow'>→</span></a
+            >
+          </li>
+          <li>
+            <a href='2025/namespace-escopo-python/'
+              >Escopo e Namespace em Python
+              <span class='blog-arrow'>→</span></a
+            >
+          </li>
+          <li>
+            <a href='2025/whisper-live-sera-que-deu-certo/'
+              >Tentei usar o whisper live via microfone
+              <span class='blog-arrow'>→</span></a
+            >
+          </li>
+          <li>
+            <a href='2025/python-sussu-cli-openai-whisper/'
+              >Transcreva áudio com Python: Sussu CLI + OpenAI Whisper
+              <span class='blog-arrow'>→</span></a
+            >
+          </li>
+          <li>
+            <a
+              href='2025/notas-tecnicas-whisper-openai-guia-completo-de-transcricao-com-inteligencia-artificial-video-e-audio/'
+              >Notas técnicas sobre o vídeo Whisper OpenAI CLI do Youtube
+              <span class='blog-arrow'>→</span></a
+            >
+          </li>
+          <li>
+            <a href='2025/notas-tecnicas-python-argparse-cli/'
+              >Notas Técnicas: Criando CLIs com Python e Argparse
+              <span class='blog-arrow'>→</span></a
+            >
+          </li>
+          <li>
+            <a href='2020/pilhas-em-python-com-listas-stack/'
+              >Pilhas em Python com listas (stack)
+              <span class='blog-arrow'>→</span></a
+            >
+          </li>
+          <li>
+            <a href='2020/typescript-uma-longa-introducao/'
+              >TypeScript - uma longa introdução
+              <span class='blog-arrow'>→</span></a
+            >
+          </li>
+          <li>
+            <a href='2020/normalizacao-unicode-em-python/'
+              >Normalização Unicode em Python
+              <span class='blog-arrow'>→</span></a
+            >
+          </li>
+          <li>
+            <a href='2020/funcoes-recursivas-com-python/'
+              >Funções recursivas com Python
+              <span class='blog-arrow'>→</span></a
+            >
+          </li>
+          <li>
+            <a href='2020/filas-em-python-com-deque-queue/'
+              >Filas em Python com deque (queue)
+              <span class='blog-arrow'>→</span></a
+            >
+          </li>
+          <li>
+            <a href='2018/ssh-keys-chaves-de-autenticacao-ssh/'
+              >SSH keys: chaves de autenticação SSH
+              <span class='blog-arrow'>→</span></a
+            >
+          </li>
+          <li>
+            <a
+              href='2018/instalando-o-certificado-ssl-tls-gratis-da-lets-encrypt/'
+              >Instalando o certificado SSL-TLS grátis da Let’s Encrypt
+              <span class='blog-arrow'>→</span></a
+            >
+          </li>
+          <li>
+            <a href='2018/dominio-e-hospedagem-guia-para-leigos/'>
+              Domínio e hospedagem: guia para leigos
+              <span class='blog-arrow'>→</span></a
+            >
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 5. Testimonials Section -->
+    <Depoimentos />
+
+    <!-- 6. Newsletter -->
+    <Newsletter />
+
+    <!-- 7. Footer -->
+    <Footer />
   </section>
-
-  <!-- 6. Newsletter -->
-  <Newsletter />
-
-  <!-- 7. Footer -->
-  <Footer />
 </BaseLayout>
