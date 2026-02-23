@@ -19,6 +19,13 @@ Welcome, AI Assistant! Before taking any action or answering any prompt in this 
 >
 > *Do not start coding until you have read the relevant context files above.*
 
+## Commit & Memory Protocol (Mandatory)
+
+- Every code/config change must be committed in small, conventional-commit chunks.
+- Before each code/config commit, append a short entry to local `./.agents/MEMORY.md`.
+- Never stage or commit anything inside `./.agents/`.
+- Run `npm run hooks:install` once per clone. The pre-commit hook enforces these rules.
+
 ## 5. New Plan
 
 When a task is finished, added to the change log and pushed to the repository,

@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+staged_files="$(git diff --cached --name-only --diff-filter=ACMR)"
+
+if [ -z "$staged_files" ]; then
+  exit 0
+fi
+
+# Never allow personal context files to be staged.
+if printf '%s\n' "$staged_files" | rg -q '^\.agents/'; then
+  echo 'ERROR: .agents/ is personal context and must never be committed.'
+  echo 'Remove it from the index and retry:'
+  echo '  git reset HEAD .agents/'
+  exit 1
+fi
+
+# Enforce memory update only for non-doc code/config changes.
+if ! printf '%s\n' "$staged_files" | rg -qv '^(README\.md|CHANGELOG\.md|PLAN\.md|AGENTS\.md|\.githooks/|\.github/|.*\.md$)'; then
+  exit 0
+fi
+
+memory_file='.agents/MEMORY.md'
+if [ ! -f "$memory_file" ]; then
+  echo "ERROR: ${memory_file} not found."
+  echo 'Update/create your local memory file before committing code changes.'
+  exit 1
+fi
+
+head_ts="$(git log -1 --format=%ct 2>/dev/null || echo 0)"
+memory_ts="$(stat -f %m "$memory_file" 2>/dev/null || echo 0)"
+
+if [ "$memory_ts" -le "$head_ts" ]; then
+  echo 'ERROR: code/config changes detected, but .agents/MEMORY.md was not updated after the last commit.'
+  echo 'Please add a short log entry to .agents/MEMORY.md and commit again.'
+  exit 1
+fi
+
+exit 0

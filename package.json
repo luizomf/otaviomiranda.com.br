@@ -8,7 +8,8 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "post": "node scripts/new_post.mjs"
+    "post": "node scripts/new_post.mjs",
+    "hooks:install": "bash scripts/install-hooks.sh"
   },
   "keywords": [],
   "author": "",
