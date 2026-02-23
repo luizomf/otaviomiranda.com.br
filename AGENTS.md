@@ -1,49 +1,25 @@
 # AGENTS
 
-Meaning of each file:
+Minimal repository rules for coding agents.
 
-- `AGENTS.md` - agent guidelines and project rules.
-- `PLAN.md` - the current featured being implemented.
-# 🤖 Project AI Guidelines (Context Dispatcher)
+## Context Order (always read first)
 
-Welcome, AI Assistant! Before taking any action or answering any prompt in this repository, you **MUST** read the following files in the exact order below to load your context, personality, user preferences, and current memory:
+1. `./.agents/SOUL.md`
+2. `./.agents/USER.md`
+3. `./.agents/MEMORY.md`
+4. `./PLAN.md`
 
-1.  **`./.agents/SOUL.md`**: Defines who you are, your tone, rules of engagement (like the Green Light Protocol), and technical guardrails.
-2.  **`./.agents/USER.md`**: Defines who the user is, their environment, hardware, and preferences.
-3.  **`./.agents/MEMORY.md`**: Your long-term memory. Read this to know what we did in previous sessions, what bugs we found, and what you noted for yourself.
-4.  **`./PLAN.md`**: Our Kanban/Sprint board. Shows exactly what we are working on *right now*.
+## Hard Rules
 
-> **CRITICAL**: The `.agents/` folder is intentionally ignored in `.gitignore` to protect personal data. Never commit personal context files.
->
-> *Do not start coding until you have read the relevant context files above.*
+- Never commit files inside `./.agents/` (private/local only).
+- Use small conventional commits.
+- For every code/config commit: append a short log entry to
+  `./.agents/MEMORY.md` first.
+- Install hooks once per clone: `npm run hooks:install`.
 
-## Commit & Memory Protocol (Mandatory)
+## Project Workflow
 
-- Every code/config change must be committed in small, conventional-commit chunks.
-- Before each code/config commit, append a short entry to local `./.agents/MEMORY.md`.
-- Never stage or commit anything inside `./.agents/`.
-- Run `npm run hooks:install` once per clone. The pre-commit hook enforces these rules.
-
-## 5. New Plan
-
-When a task is finished, logged in local memory and committed/pushed to the
-repository, clear the current plan and use this template to create new one.
-
-```md
-# Current Plan
-
-## Task: <task name>
-
-<task description>
-
-Current Date: YYYY-MM-DD
-
-- [ ] Step 1: Analyze requirements.
-- [ ] Step 2: Implement core logic.
-- [ ] Step 3: Verify/Test.
-- [ ] Step 4: Update .agents/MEMORY.md.
-- [ ] Step 5: Clear PLAN.md (remove all completed content).
-
-_(Note: Once all items are checked `[x]`, this file should be cleared for the
-next task)_
-```
+- `PLAN.md` = current task board (single source of truth for what is in
+  progress).
+- When a task is done: verify/test, update local memory, commit, and clear
+  `PLAN.md` for the next task.
