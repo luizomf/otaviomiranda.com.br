@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import Courses from '../components/Courses.astro';
+import Coupon from '../components/Coupon.astro';
 import Testimonials from '../components/Testimonials.astro';
 import Footer from '../components/Footer.astro';
 import Newsletter from '../components/Newsletter.astro';
@@ -27,23 +28,7 @@ const recentPosts: CollectionEntry<'posts'>[] = posts.slice(0, 5);
   <Courses />
 
   <!-- 3. Coupon Section -->
-  <Section
-    id='section-coupon'
-    theme='dark'
-    class='bg-parallax'
-    contentClass='section-coupon'
-  >
-    <SectionHeader
-      eyeball='Para você'
-      title='Desconto exclusivo'
-      description='Leve sua carreira de desenvolvedor para o próximo nível pagando menos. Use o cupom abaixo e tenha acesso vitalício.'
-    >
-      <div class='discount-container'>
-        <div class='coupon glass'>JAN282026</div>
-        <div class='coupon-date'>Válido até 02/02/2026</div>
-      </div>
-    </SectionHeader>
-  </Section>
+  <Coupon />
 
   <!-- 4. Blog Posts Static Placeholder (Will become dynamic later) -->
   <Section id='section-blog' theme='light' contentClass='section-blog'>

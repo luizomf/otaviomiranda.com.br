@@ -1,0 +1,33 @@
+---
+import Section from './Section.astro';
+import SectionHeader from './SectionHeader.astro';
+import { HOME_COUPON } from '../config/coupon';
+
+interface Props {
+  code?: string;
+  expiresAtLabel?: string;
+}
+
+const {
+  code = HOME_COUPON.code,
+  expiresAtLabel = HOME_COUPON.expiresAtLabel,
+} = Astro.props as Props;
+---
+
+<Section
+  id='section-coupon'
+  theme='dark'
+  class='bg-parallax'
+  contentClass='section-coupon'
+>
+  <SectionHeader
+    eyeball='Para você'
+    title='Desconto exclusivo'
+    description='Leve sua carreira de desenvolvedor para o próximo nível pagando menos. Use o cupom abaixo e tenha acesso vitalício.'
+  >
+    <div class='discount-container'>
+      <div class='coupon glass'>{code}</div>
+      <div class='coupon-date'>{expiresAtLabel}</div>
+    </div>
+  </SectionHeader>
+</Section>

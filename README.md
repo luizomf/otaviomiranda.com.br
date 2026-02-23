@@ -238,7 +238,7 @@ o meu Agent AI (O _"Brien"_) catalogamos para voltar e matar depois.
   Critério de conclusão: limite por página definido, navegação entre páginas funcionando e layout consistente em desktop/mobile.
 - [ ] Editor local de posts (sem auth): prototipar um editor Markdown local com Vim motions, botão de salvar e geração automática do arquivo no caminho padrão (`ano/slug/text.md`) com frontmatter padronizado (`title`, `description`, `date`, `author`).
   Critério de conclusão: criar/editar/salvar post localmente em fluxo único, reduzindo trabalho manual e inconsistência de padrão.
-- [ ] Componentizar o cupom mensal da Home: extrair o bloco de desconto
+- [x] Componentizar o cupom mensal da Home: extrair o bloco de desconto
   (`section-coupon`) para componente próprio com dados fáceis de atualizar
   (`código` e `validade`) sem editar o miolo do `index.astro`.
   Critério de conclusão: cupom renderizado por componente dedicado e alteração
