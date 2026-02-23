@@ -6,9 +6,16 @@ const postsCollection = defineCollection({
     schema: z.object({
         title: z.string(),
         description: z.string(),
-        // Data opcional depois nós vemos como extrair do HTML antigo
-        date: z.date().optional(),
-        author: z.string().optional(),
+        date: z.coerce.date({
+            errorMap: () => ({ message: "Frontmatter `date` is required and must be a valid date." }),
+        }),
+        author: z
+            .string({
+                required_error: "Frontmatter `author` is required.",
+                invalid_type_error: "Frontmatter `author` must be a string.",
+            })
+            .trim()
+            .min(1, "Frontmatter `author` cannot be empty."),
         image: z.string().optional(),
     }),
 });
