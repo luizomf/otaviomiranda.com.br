@@ -67,8 +67,8 @@ import BlankLayout from '../layouts/BlankLayout.astro';
         'showOpenFilePicker' in window && 'showSaveFilePicker' in window;
 
       const nowDate = () => new Date().toLocaleDateString('sv-SE');
-      const defaultFrontmatter = () =>
-        `---\ntitle: ''\ndescription: ''\ndate: ${nowDate()}\nauthor: 'Otávio Miranda'\n---\n\n# Novo artigo\n\nComece a escrever aqui...\n`;
+      const frontmatterTemplate = () =>
+        `---\ntitle: ''\ndescription: ''\ndate: ${nowDate()}\nauthor: 'Otávio Miranda'\n---\n\n`;
 
       let editor;
       let fileHandle = null;
@@ -173,13 +173,13 @@ import BlankLayout from '../layouts/BlankLayout.astro';
         if (!editor) return;
         const value = editor.getValue().trimStart();
         if (value.startsWith('---')) return;
-        editor.setValue(`${defaultFrontmatter()}${editor.getValue()}`.trim());
+        editor.setValue(`${frontmatterTemplate()}${editor.getValue()}`);
       };
 
       const createNewDocument = () => {
         fileHandle = null;
         setCurrentFileName('untitled.md');
-        editor.setValue(defaultFrontmatter());
+        editor.setValue('');
       };
 
       const openWithFallbackInput = () => {
@@ -307,7 +307,7 @@ import BlankLayout from '../layouts/BlankLayout.astro';
         editor = monaco.editor.create(
           document.getElementById('editor-monaco'),
           {
-            value: defaultFrontmatter(),
+            value: '',
             language: 'markdown',
             theme: 'otavio-dark',
             fontSize: 16,
