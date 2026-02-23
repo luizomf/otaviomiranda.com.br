@@ -185,6 +185,19 @@ Nesse caso, coloque os arquivos em:
 - `public/labs/meu-lab.css`
 - `public/labs/meu-lab.js`
 
+## ✍️ Editor Markdown (Browser)
+
+Existe uma página de editor local em:
+
+- `/editor/`
+
+Ela oferece:
+
+- Monaco editor de um lado + preview markdown do outro;
+- Abrir arquivo `.md` local;
+- Salvar (`Ctrl/Cmd + S`) com File System Access API;
+- Fallback de download `.md` em navegadores sem suporte da API.
+
 ---
 
 ## 🛠️ Deploy: Como Vai Para o Ar?

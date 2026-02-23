@@ -1,0 +1,428 @@
+---
+import BlankLayout from '../layouts/BlankLayout.astro';
+---
+
+<BlankLayout
+  title='Markdown Editor | Otávio Miranda'
+  description='Editor Markdown no navegador com Monaco de um lado e preview do outro.'
+>
+  <div class='editor-shell'>
+    <header class='editor-toolbar'>
+      <strong class='editor-title'>Markdown Editor</strong>
+      <span id='editor-file' class='editor-file'>untitled.md</span>
+      <div class='editor-actions'>
+        <button id='editor-new' type='button'>Novo</button>
+        <button id='editor-open' type='button'>Abrir</button>
+        <button id='editor-frontmatter' type='button'>Frontmatter</button>
+        <button id='editor-save' type='button'>Salvar</button>
+        <button id='editor-save-as' type='button'>Salvar Como</button>
+      </div>
+    </header>
+
+    <div class='editor-panes'>
+      <section class='editor-pane editor-pane--code'>
+        <div id='editor-monaco' class='editor-monaco'></div>
+      </section>
+
+      <section class='editor-pane editor-pane--preview'>
+        <article id='editor-preview' class='editor-preview'></article>
+      </section>
+    </div>
+  </div>
+
+  <input
+    id='editor-open-input'
+    type='file'
+    hidden
+    accept='.md,.markdown,text/markdown,text/plain'
+  />
+
+  <script src='https://cdn.jsdelivr.net/npm/marked/marked.min.js'></script>
+  <script
+    src='https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs/loader.js'
+  ></script>
+  <script is:inline>
+    (() => {
+      const fileLabel = document.getElementById('editor-file');
+      const previewEl = document.getElementById('editor-preview');
+      const openInput = document.getElementById('editor-open-input');
+
+      const newButton = document.getElementById('editor-new');
+      const openButton = document.getElementById('editor-open');
+      const frontmatterButton = document.getElementById('editor-frontmatter');
+      const saveButton = document.getElementById('editor-save');
+      const saveAsButton = document.getElementById('editor-save-as');
+
+      const supportsFSApi =
+        'showOpenFilePicker' in window && 'showSaveFilePicker' in window;
+
+      const nowDate = () => new Date().toLocaleDateString('sv-SE');
+      const defaultFrontmatter = () =>
+        `---\ntitle: ''\ndescription: ''\ndate: ${nowDate()}\nauthor: 'Otávio Miranda'\n---\n\n# Novo artigo\n\nComece a escrever aqui...\n`;
+
+      let editor;
+      let fileHandle = null;
+      let currentFileName = 'untitled.md';
+      let renderTimer = null;
+
+      const setCurrentFileName = fileName => {
+        currentFileName = fileName;
+        fileLabel.textContent = fileName;
+      };
+
+      const renderPreview = () => {
+        if (!editor || !window.marked) return;
+        previewEl.innerHTML = window.marked.parse(editor.getValue());
+      };
+
+      const schedulePreviewRender = () => {
+        if (renderTimer) {
+          clearTimeout(renderTimer);
+        }
+        renderTimer = setTimeout(renderPreview, 90);
+      };
+
+      const suggestMarkdownName = name => {
+        if (!name || typeof name !== 'string') return 'untitled.md';
+        return name.endsWith('.md') ? name : `${name}.md`;
+      };
+
+      const downloadFallback = () => {
+        const blob = new Blob([editor.getValue()], {
+          type: 'text/markdown;charset=utf-8',
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = suggestMarkdownName(currentFileName);
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      };
+
+      const writeHandle = async handle => {
+        const writable = await handle.createWritable();
+        await writable.write(editor.getValue());
+        await writable.close();
+      };
+
+      const saveAs = async () => {
+        if (!supportsFSApi) {
+          downloadFallback();
+          return;
+        }
+
+        const handle = await window.showSaveFilePicker({
+          suggestedName: suggestMarkdownName(currentFileName),
+          types: [
+            {
+              description: 'Markdown',
+              accept: { 'text/markdown': ['.md', '.markdown'] },
+            },
+          ],
+        });
+
+        await writeHandle(handle);
+        fileHandle = handle;
+        setCurrentFileName(handle.name || suggestMarkdownName(currentFileName));
+      };
+
+      const save = async () => {
+        if (!editor) return;
+        if (!supportsFSApi) {
+          downloadFallback();
+          return;
+        }
+
+        if (!fileHandle) {
+          await saveAs();
+          return;
+        }
+
+        await writeHandle(fileHandle);
+      };
+
+      const insertFrontmatterIfMissing = () => {
+        if (!editor) return;
+        const value = editor.getValue().trimStart();
+        if (value.startsWith('---')) return;
+        editor.setValue(`${defaultFrontmatter()}${editor.getValue()}`.trim());
+      };
+
+      const createNewDocument = () => {
+        fileHandle = null;
+        setCurrentFileName('untitled.md');
+        editor.setValue(defaultFrontmatter());
+      };
+
+      const openWithFallbackInput = () => {
+        openInput.value = '';
+        openInput.click();
+      };
+
+      const openFromFileSystem = async () => {
+        if (!supportsFSApi) {
+          openWithFallbackInput();
+          return;
+        }
+
+        const [handle] = await window.showOpenFilePicker({
+          multiple: false,
+          types: [
+            {
+              description: 'Markdown',
+              accept: {
+                'text/markdown': ['.md', '.markdown'],
+                'text/plain': ['.txt'],
+              },
+            },
+          ],
+        });
+
+        const file = await handle.getFile();
+        const text = await file.text();
+        fileHandle = handle;
+        setCurrentFileName(file.name || 'untitled.md');
+        editor.setValue(text);
+      };
+
+      const loadMonaco = () =>
+        new Promise(resolve => {
+          if (window.monaco?.editor) {
+            resolve(window.monaco);
+            return;
+          }
+
+          const waitForRequire = () => {
+            if (!window.require) {
+              setTimeout(waitForRequire, 25);
+              return;
+            }
+
+            window.require.config({
+              paths: {
+                vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs',
+              },
+            });
+
+            window.require(['vs/editor/editor.main'], () => {
+              resolve(window.monaco);
+            });
+          };
+
+          waitForRequire();
+        });
+
+      const boot = async () => {
+        const monaco = await loadMonaco();
+
+        monaco.editor.defineTheme('otavio-dark', {
+          base: 'vs-dark',
+          inherit: true,
+          rules: [],
+          colors: {
+            'editor.background': '#0b1020',
+            'editorLineNumber.foreground': '#7680a4',
+            'editorLineNumber.activeForeground': '#dbe2ff',
+          },
+        });
+
+        editor = monaco.editor.create(
+          document.getElementById('editor-monaco'),
+          {
+            value: defaultFrontmatter(),
+            language: 'markdown',
+            theme: 'otavio-dark',
+            fontSize: 16,
+            minimap: { enabled: false },
+            automaticLayout: true,
+            wordWrap: 'on',
+            lineNumbersMinChars: 3,
+            scrollBeyondLastLine: false,
+          },
+        );
+
+        editor.onDidChangeModelContent(schedulePreviewRender);
+        renderPreview();
+
+        openInput.addEventListener('change', async event => {
+          const file = event.target.files?.[0];
+          if (!file) return;
+          const text = await file.text();
+          fileHandle = null;
+          setCurrentFileName(file.name || 'untitled.md');
+          editor.setValue(text);
+        });
+
+        newButton.addEventListener('click', createNewDocument);
+        openButton.addEventListener('click', () => {
+          openFromFileSystem().catch(() => {});
+        });
+        frontmatterButton.addEventListener('click', insertFrontmatterIfMissing);
+        saveButton.addEventListener('click', () => {
+          save().catch(() => {});
+        });
+        saveAsButton.addEventListener('click', () => {
+          saveAs().catch(() => {});
+        });
+
+        window.addEventListener('keydown', event => {
+          const key = event.key.toLowerCase();
+          const ctrlOrCmd = event.metaKey || event.ctrlKey;
+          if (!ctrlOrCmd) return;
+
+          if (key === 's') {
+            event.preventDefault();
+            save().catch(() => {});
+            return;
+          }
+
+          if (key === 'o') {
+            event.preventDefault();
+            openFromFileSystem().catch(() => {});
+          }
+        });
+      };
+
+      boot();
+    })();
+  </script>
+</BlankLayout>
+
+<style>
+  :root {
+    --editor-bg: #090d1a;
+    --editor-panel: #10182d;
+    --editor-panel-soft: #121b35;
+    --editor-border: #2f3f68;
+    --editor-text: #f0f4ff;
+    --editor-text-soft: #b4c2eb;
+    --editor-accent: #3a86ff;
+  }
+
+  html,
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 600px at 10% 0%, #122450, transparent),
+      radial-gradient(1000px 500px at 90% 0%, #1a2a4d, transparent),
+      var(--editor-bg);
+    color: var(--editor-text);
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+      'Courier New', monospace;
+  }
+
+  .editor-shell {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+  }
+
+  .editor-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.2rem 1.6rem;
+    border-bottom: 1px solid var(--editor-border);
+    background: color-mix(in hsl, var(--editor-panel), black 20%);
+  }
+
+  .editor-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--editor-text);
+    letter-spacing: 0.03em;
+    margin-right: 0.8rem;
+  }
+
+  .editor-file {
+    font-size: 1.3rem;
+    color: var(--editor-text-soft);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 34ch;
+    margin-right: auto;
+  }
+
+  .editor-actions {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .editor-actions button {
+    border: 1px solid var(--editor-border);
+    background: color-mix(in hsl, var(--editor-panel-soft), black 18%);
+    color: var(--editor-text);
+    font: inherit;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .editor-actions button:hover {
+    border-color: var(--editor-accent);
+  }
+
+  .editor-panes {
+    display: grid;
+    grid-template-columns: minmax(540px, 1fr) minmax(420px, 0.9fr);
+    gap: 1.2rem;
+    padding: 1.2rem;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .editor-pane {
+    min-height: 0;
+    border: 1px solid var(--editor-border);
+    border-radius: 1.2rem;
+    overflow: hidden;
+    background: color-mix(in hsl, var(--editor-panel), black 14%);
+  }
+
+  .editor-monaco {
+    width: 100%;
+    height: 100%;
+  }
+
+  .editor-preview {
+    height: 100%;
+    overflow: auto;
+    padding: 2.2rem;
+    line-height: 1.7;
+    font-size: 1.8rem;
+    color: var(--editor-text);
+  }
+
+  .editor-preview h1,
+  .editor-preview h2,
+  .editor-preview h3 {
+    line-height: 1.2;
+    margin-top: 2.4rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .editor-preview pre {
+    overflow-x: auto;
+    border: 1px solid var(--editor-border);
+    border-radius: 0.8rem;
+    padding: 1.2rem;
+    font-size: 1.4rem;
+    background: #0b1020;
+  }
+
+  .editor-preview code {
+    font-size: 0.92em;
+  }
+
+  .editor-preview a {
+    color: #77b0ff;
+  }
+</style>
