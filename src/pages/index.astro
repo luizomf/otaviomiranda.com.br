@@ -10,6 +10,7 @@ import SectionHeader from '../components/SectionHeader.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import { comparePostsByDateDesc } from '../utils/post-date';
+import { getEntryHref } from '../utils/post-path';
 
 const posts = await getCollection('posts');
 posts.sort(comparePostsByDateDesc);
@@ -55,7 +56,7 @@ const recentPosts: CollectionEntry<'posts'>[] = posts.slice(0, 5);
       {
         recentPosts.map(post => (
           <li>
-            <a href={`/${post.slug}/`}>
+            <a href={getEntryHref(post)}>
               {post.data.title} <span class='blog-arrow'>→</span>
             </a>
           </li>

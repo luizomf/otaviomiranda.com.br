@@ -136,6 +136,7 @@ o meu Agent AI (O _"Brien"_) catalogamos para voltar e matar depois.
 - **Injeção do Frontmatter Dinâmica no Layout**: Extirpamos os `<h1>` repetidos dentro de cada Post. O Content Layer agora controla 100% dos títulos e autores.
 - **Modularização de CSS via Astro Islands**: Desacoplamos os 14 mil bytes de estilos monolíticos do arquivo global. Seções como `<Courses>`, `<Testimonials>` e `<Hero>` operam de forma autossuficiente (DRY Components) herdando o wrapper global de tema e grid (`<Section>` e `<SectionHeader>`).
 - **CLI Worklows e Neovim Scaffold**: Para redigir novos tutoriais de forma supersônica sem sair do Terminal, um binário local NodeJs foi projetado (`scripts/new_post.mjs`). Agora, basta disparar do seu Neovim `:!npm run post "Meu Blog Post"` e ele gera automaticamente o slug, as subpastas `year/slug/images` e injeta o `text.md` já preenchido com a data Zod e autor validados prontos para escrita da aula.
+- **Arquivo do Blog com navegação completa e links válidos**: A página de "Ver todos os posts" (`/blog/1` e `/blog/2`) agora renderiza com shell completo (`Header`, `Newsletter`, `Footer`) e os links dos posts são gerados por `entry.id` (sem `undefined`).
 
 ### 🚧 TO-DO: Débitos e Próximas Milestones
 - [ ] CSS Legacy Cleaning: Ainda existem classes e divs (`is-pulled-right`, e centenas de divs irrelevantes) que vieram da exportação bruta das páginas de 2020 para o Markdown. Limpar visualmente.
@@ -144,7 +145,6 @@ o meu Agent AI (O _"Brien"_) catalogamos para voltar e matar depois.
 - [ ] Refatorar `Courses.astro`: manter o wrapper `Courses` e extrair cada card para um componente singular reutilizável (`Course.astro`).
 - [ ] Refatorar `Testimonials.astro`: manter o wrapper `Testimonials` e extrair cada depoimento para um componente singular reutilizável (`Testimonial.astro`).
 - [ ] Refatorar os "Últimos links do blog": extrair o item de link do bloco de posts recentes em `index.astro` para um componente singular reutilizável.
-- [ ] Corrigir `/blog/1` (Ver todos os posts): página de arquivo precisa ter navegação completa (header/footer/newsletter), corrigir links que estão apontando para `undefined` e evitar fluxo em que o usuário fica "preso" na página.
 
 ---
 

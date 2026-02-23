@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Newsletter from '../../components/Newsletter.astro';
 import Section from '../../components/Section.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
 import { getCollection } from 'astro:content';
@@ -10,6 +13,7 @@ import {
   getEntryDateLabel,
   getEntryDateTimeAttr,
 } from '../../utils/post-date';
+import { getEntryHref } from '../../utils/post-path';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const posts = await getCollection('posts');
@@ -30,84 +34,91 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
 ---
 
 <BaseLayout>
-  <Section
-    id='blog-page'
-    theme='light'
-    contentClass='section-blog'
-    class='pt-20'
-  >
-    <SectionHeader
-      class='blog-header'
-      eyeball='Arquivo'
-      title='Todos os posts'
-      description={`Página ${page.currentPage} de ${page.lastPage}. Explorando o acervo de tutoriais e anotações.`}
-    />
+  <div class='main'>
+    <Header />
 
-    <ul class='blog-list'>
-      {
-        paginatedPosts.map(({ post, dateLabel, dateTime }) => (
-          <li style='margin-bottom: 2rem;'>
-            <a
-              href={`/${post.slug}/`}
-              style='display: block; font-size: var(--font-size-md); font-weight: 700; color: var(--main-clr-shade); text-decoration: none; margin-bottom: 0.5rem;'
-            >
-              {post.data.title}
-            </a>
-            {post.data.description && (
-              <p style='color: hsl(from var(--main-clr-shade) h s 40% / 1); font-size: var(--font-size-sm); margin: 0;'>
-                {post.data.description}
-              </p>
-            )}
-            {dateLabel && dateTime && (
-              <time
-                datetime={dateTime}
-                style='font-size: var(--font-size-xxsm); color: hsl(from var(--main-clr-shade) h s 60% / 1); text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;'
-              >
-                {dateLabel}
-              </time>
-            )}
-          </li>
-        ))
-      }
-    </ul>
-
-    <div
-      class='pagination'
-      style='display: flex; justify-content: space-between; align-items: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid hsl(from var(--main-clr-shade) h s 90% / 1);'
+    <Section
+      id='blog-page'
+      theme='light'
+      contentClass='section-blog'
+      class='pt-20'
     >
-      {
-        page.url.prev ? (
-          <a
-            href={page.url.prev}
-            class='button'
-            style='padding: 0.8rem 1.6rem; background-color: transparent; color: var(--main-clr-shade); text-decoration: none; font-weight: 700; border: 2px solid var(--main-clr-shade); border-radius: 4px;'
-          >
-            &larr; Página Anterior
-          </a>
-        ) : (
-          <span style='opacity: 0.5; padding: 0.8rem 1.6rem; border: 2px solid transparent;' />
-        )
-      }
+      <SectionHeader
+        class='blog-header'
+        eyeball='Arquivo'
+        title='Todos os posts'
+        description={`Página ${page.currentPage} de ${page.lastPage}. Explorando o acervo de tutoriais e anotações.`}
+      />
 
-      <span
-        style='font-weight: 600; color: hsl(from var(--main-clr-shade) h s 50% / 1);'
+      <ul class='blog-list'>
+        {
+          paginatedPosts.map(({ post, dateLabel, dateTime }) => (
+            <li style='margin-bottom: 2rem;'>
+              <a
+                href={getEntryHref(post)}
+                style='display: block; font-size: var(--font-size-md); font-weight: 700; color: var(--main-clr-shade); text-decoration: none; margin-bottom: 0.5rem;'
+              >
+                {post.data.title}
+              </a>
+              {post.data.description && (
+                <p style='color: hsl(from var(--main-clr-shade) h s 40% / 1); font-size: var(--font-size-sm); margin: 0;'>
+                  {post.data.description}
+                </p>
+              )}
+              {dateLabel && dateTime && (
+                <time
+                  datetime={dateTime}
+                  style='font-size: var(--font-size-xxsm); color: hsl(from var(--main-clr-shade) h s 60% / 1); text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;'
+                >
+                  {dateLabel}
+                </time>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+
+      <div
+        class='pagination'
+        style='display: flex; justify-content: space-between; align-items: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid hsl(from var(--main-clr-shade) h s 90% / 1);'
       >
-        Página {page.currentPage}
-      </span>
+        {
+          page.url.prev ? (
+            <a
+              href={page.url.prev}
+              class='button'
+              style='padding: 0.8rem 1.6rem; background-color: transparent; color: var(--main-clr-shade); text-decoration: none; font-weight: 700; border: 2px solid var(--main-clr-shade); border-radius: 4px;'
+            >
+              &larr; Página Anterior
+            </a>
+          ) : (
+            <span style='opacity: 0.5; padding: 0.8rem 1.6rem; border: 2px solid transparent;' />
+          )
+        }
 
-      {
-        page.url.next ? (
-          <a
-            href={page.url.next}
-            class='button'
-            style='padding: 0.8rem 1.6rem; background-color: var(--main-clr-shade); color: var(--main-clr); text-decoration: none; font-weight: 700; border: 2px solid var(--main-clr-shade); border-radius: 4px;'
-          >
-            Próxima Página &rarr;
-          </a>
-        ) : (
-          <span style='opacity: 0.5; padding: 0.8rem 1.6rem; border: 2px solid transparent;' />
-        )
-      }
-    </div>
-  </Section>
+        <span
+          style='font-weight: 600; color: hsl(from var(--main-clr-shade) h s 50% / 1);'
+        >
+          Página {page.currentPage}
+        </span>
+
+        {
+          page.url.next ? (
+            <a
+              href={page.url.next}
+              class='button'
+              style='padding: 0.8rem 1.6rem; background-color: var(--main-clr-shade); color: var(--main-clr); text-decoration: none; font-weight: 700; border: 2px solid var(--main-clr-shade); border-radius: 4px;'
+            >
+              Próxima Página &rarr;
+            </a>
+          ) : (
+            <span style='opacity: 0.5; padding: 0.8rem 1.6rem; border: 2px solid transparent;' />
+          )
+        }
+      </div>
+    </Section>
+  </div>
+
+  <Newsletter />
+  <Footer />
 </BaseLayout>
