@@ -87,6 +87,7 @@ const editorSchema = {
 
       const supportsFSApi =
         'showOpenFilePicker' in window && 'showSaveFilePicker' in window;
+      const AUTO_SAVE_INTERVAL_MS = 60_000;
 
       const nowDate = () => new Date().toLocaleDateString('sv-SE');
       const frontmatterTemplate = () =>
@@ -100,6 +101,9 @@ const editorSchema = {
       let monacoVimModule = null;
       let vimKeymapsConfigured = false;
       let vimCommandsConfigured = false;
+      let autoSaveTimerId = null;
+      let lastSavedContent = '';
+      let isSaving = false;
 
       const setCurrentFileName = fileName => {
         currentFileName = fileName;
@@ -156,9 +160,44 @@ const editorSchema = {
         await writable.close();
       };
 
+      const markCurrentContentAsSaved = () => {
+        if (!editor) return;
+        lastSavedContent = editor.getValue();
+      };
+
+      const hasUnsavedChanges = () => {
+        if (!editor) return false;
+        return editor.getValue() !== lastSavedContent;
+      };
+
+      const canAutoSaveToFile = () => {
+        return Boolean(supportsFSApi && fileHandle && editor);
+      };
+
+      const autoSaveIfNeeded = async () => {
+        if (!canAutoSaveToFile() || !hasUnsavedChanges() || isSaving) return;
+        isSaving = true;
+        try {
+          await writeHandle(fileHandle);
+          markCurrentContentAsSaved();
+        } catch (_) {
+          // Keep silent; manual save flow remains available.
+        } finally {
+          isSaving = false;
+        }
+      };
+
+      const startAutoSaveLoop = () => {
+        if (autoSaveTimerId) return;
+        autoSaveTimerId = window.setInterval(() => {
+          autoSaveIfNeeded().catch(() => {});
+        }, AUTO_SAVE_INTERVAL_MS);
+      };
+
       const saveAs = async () => {
         if (!supportsFSApi) {
           downloadFallback();
+          markCurrentContentAsSaved();
           return;
         }
 
@@ -172,15 +211,24 @@ const editorSchema = {
           ],
         });
 
-        await writeHandle(handle);
-        fileHandle = handle;
-        setCurrentFileName(handle.name || suggestMarkdownName(currentFileName));
+        isSaving = true;
+        try {
+          await writeHandle(handle);
+          fileHandle = handle;
+          setCurrentFileName(
+            handle.name || suggestMarkdownName(currentFileName),
+          );
+          markCurrentContentAsSaved();
+        } finally {
+          isSaving = false;
+        }
       };
 
       const save = async () => {
         if (!editor) return;
         if (!supportsFSApi) {
           downloadFallback();
+          markCurrentContentAsSaved();
           return;
         }
 
@@ -189,7 +237,13 @@ const editorSchema = {
           return;
         }
 
-        await writeHandle(fileHandle);
+        isSaving = true;
+        try {
+          await writeHandle(fileHandle);
+          markCurrentContentAsSaved();
+        } finally {
+          isSaving = false;
+        }
       };
 
       const insertFrontmatterIfMissing = () => {
@@ -203,6 +257,7 @@ const editorSchema = {
         fileHandle = null;
         setCurrentFileName('untitled.md');
         editor.setValue('');
+        markCurrentContentAsSaved();
       };
 
       const openWithFallbackInput = () => {
@@ -234,6 +289,7 @@ const editorSchema = {
         fileHandle = handle;
         setCurrentFileName(file.name || 'untitled.md');
         editor.setValue(text);
+        markCurrentContentAsSaved();
       };
 
       const setVimUiState = ({ enabled, available }) => {
@@ -375,6 +431,7 @@ const editorSchema = {
           fileHandle = null;
           setCurrentFileName(file.name || 'untitled.md');
           editor.setValue(text);
+          markCurrentContentAsSaved();
         });
 
         newButton.addEventListener('click', createNewDocument);
@@ -413,6 +470,18 @@ const editorSchema = {
             openFromFileSystem().catch(() => {});
           }
         });
+
+        window.addEventListener('beforeunload', event => {
+          autoSaveIfNeeded().catch(() => {});
+          if (!hasUnsavedChanges()) return;
+          event.preventDefault();
+        });
+
+        window.addEventListener('pagehide', () => {
+          autoSaveIfNeeded().catch(() => {});
+        });
+
+        startAutoSaveLoop();
       };
 
       boot();
