@@ -2,15 +2,8 @@
 title: 'Instalando o certificado SSL-TLS grátis da Let’s Encrypt'
 description: 'Instalando o certificado SSL-TLS grátis da Let’s Encrypt'
 date: 2018-04-04
+author: 'Luiz Otávio Miranda'
 ---
-
-<p class="author">
-  <span class="meta-date">
-    <time datetime="2018-04-04">4 de abril de 2018</time>
-  </span>
-  ·
-  <span class="meta-author">Luiz Otávio Miranda</span>
-</p>
 
 <p>
   Nesse artigo você vai aprender a instalar e configurar o

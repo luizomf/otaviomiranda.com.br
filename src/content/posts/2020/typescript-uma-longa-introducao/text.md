@@ -4,15 +4,9 @@ description:
   'Sou Luiz Otávio Miranda e trabalho com desenvolvimento de softwares desde
   2009 usando várias linguagens, bibliotecas e frameworks diferentes.'
 date: 2018-09-02
+author: 'Luiz Otávio Miranda'
 ---
 
-<p class="author">
-  <span class="meta-date">
-    <time datetime="2018-09-02">2 de setembro de 2020</time>
-  </span>
-  ·
-  <span class="meta-author">Luiz Otávio Miranda</span>
-</p>
 <p>
   Esse post vai te ajudar a entender melhor o que é o TypeScript
   de maneira geral. Vamos entrar um pouco mais na parte conceitual sem
@@ -61,12 +55,11 @@ date: 2018-09-02
 
 <p>
 
-
 ![Figura 1. Cada nova versão do ECMAScript adiciona novos recursos ao JavaScript.](./imgs/JavaScript-Versions@2x-2048x1648.png)
 
+<span class="img-description">Figura 1. Cada nova versão do ECMAScript adiciona
+novos recursos ao JavaScript.</span>
 
-  <span class="img-description">Figura 1. Cada nova versão do ECMAScript adiciona novos recursos ao
-    JavaScript.</span>
 </p>
 
 <p>
@@ -106,13 +99,12 @@ date: 2018-09-02
 
 <p>
 
-
 ![Figura 2. O TypeScript é um superset do JavaScript.
         ](./imgs/Typescript-is-a-javascript-superset-2048x1946.png)
 
+<span class="img-description">Figura 2. O TypeScript é um superset do
+JavaScript. </span>
 
-  <span class="img-description">Figura 2. O TypeScript é um superset do JavaScript.
-  </span>
 </p>
 
 <p>
@@ -181,12 +173,9 @@ date: 2018-09-02
 
 <p>
 
-
 ![Figura 3. Processo de compilação do TypeScript em JavaScript usando Node.js
 
         ](./imgs/TypeScript-compilado-para-javascript-1-2048x1690.png)
-
-
 
 <span class="img-description">Figura 3. Processo de compilação do TypeScript em
 JavaScript usando Node.js </span>
@@ -334,12 +323,10 @@ JavaScript usando Node.js </span>
 
 <p>
 
-
-![Figura 4. O TypeScript detecta o erro antes que você possa executar seu código.
+![Figura 4. O TypeScript detecta o erro antes que você possa executar seu
+código.
 
         ](./imgs/typescript-error-1.png)
-
-
 
 <span class="img-description">Figura 4. O TypeScript detecta o erro antes que
 você possa executar seu código. </span>
@@ -551,12 +538,9 @@ você possa executar seu código. </span>
 
 <p>
 
-
 ![Figura 5. VSCode + tsserver exibindo o tipo de uma variável
 
         ](./imgs/typescript-2.png)
-
-
 
 <span class="img-description">Figura 5. VSCode + tsserver exibindo o tipo de uma
 variável </span>
@@ -1301,14 +1285,12 @@ variável </span>
 
 <p>
 
-
 ![Figura 6. A inferência de tipos consegue saber o tipo de retorno da função e repassar isso para a variável.
         ](./imgs/Peek-14-06-2020-17-38.gif)
 
+<span class="img-description">Figura 6. A inferência de tipos consegue saber o
+tipo de retorno da função e repassar isso para a variável. </span>
 
-  <span class="img-description">Figura 6. A inferência de tipos consegue saber o tipo de retorno da
-    função e repassar isso para a variável.
-  </span>
 </p>
 
 <h3>Tipos mais básicos</h3>
@@ -1658,4 +1640,3 @@ variável </span>
   Tenho a intenção de trazer mais conteúdo como
   este aqui para o blog, então fique de olho.
 </p>
-

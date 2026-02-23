@@ -4,8 +4,9 @@ description:
   'Criei essa página para documentar minhas tentativas de usar o whisper live
   via microfone. Já quero deixar claro que isso não funcionou conforme eu
   esperava e cabem mais testes.'
+date: 2025-10-02
+author: 'Luiz Otávio Miranda'
 ---
-2 de outubro de 2025 · Luiz Otávio Miranda
 
 Criei esse arquivo pra ir anotando minhas tentativas de rodar o `whisper` em
 tempo real, puxando o áudio direto do microfone. Já vou **deixar claro que isso

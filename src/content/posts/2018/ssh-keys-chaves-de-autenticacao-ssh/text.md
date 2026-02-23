@@ -2,15 +2,8 @@
 title: 'SSH keys: chaves de autenticação SSH'
 description: 'SSH keys: chaves de autenticação SSH'
 date: 2018-04-04
+author: 'Luiz Otávio Miranda'
 ---
-
-<p class="author">
-  <span class="meta-date">
-    <time datetime="2018-04-04">4 de abril de 2018</time>
-  </span>
-  ·
-  <span class="meta-author">Luiz Otávio Miranda</span>
-</p>
 
 <p>
   SSH keys são chaves de autenticação SSH para
@@ -233,12 +226,7 @@ date: 2018-04-04
   puttygen:
 </p>
 
-
 ![Exemplo 1](./imgs/1.jpg)
-
-
-
-
 
 <p>
   Copie sua chave pública para o servidor, como explico na

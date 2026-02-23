@@ -3,16 +3,9 @@ title: 'Funções recursivas com Python'
 description:
   'Funções recursivas com Python (ou qualquer linguagem de programação) são
   funções que chamam a si mesmas de maneira direta ou indireta.'
-date: 2018-06-20
+date: 2020-08-20
+author: 'Luiz Otávio Miranda'
 ---
-
-<p class="author">
-  <span class="meta-date">
-    <time datetime="2018-06-20">20 de junho de 2020</time>
-  </span>
-  ·
-  <span class="meta-author">Luiz Otávio Miranda</span>
-</p>
 
 <p>
   Funções recursivas com Python (ou qualquer linguagem de
@@ -168,12 +161,7 @@ date: 2018-06-20
   existe uma chamada para função:
 </p>
 
-
 ![Exemplo de recursão](./imgs/recursion-1.gif)
-
-
-
-
 
 <p>
   No trecho simples de código acima, existe uma
@@ -211,12 +199,7 @@ date: 2018-06-20
   (após a execução da linha 8).
 </p>
 
-
 ![Exemplo no VS Code](./imgs/rec-2.png)
-
-
-
-
 
 <p>
   Após a chamada para a função, a
@@ -237,12 +220,7 @@ date: 2018-06-20
   stack”.
 </p>
 
-
 ![Exemplo 3](./imgs/rec-3.png)
-
-
-
-
 
 <p>
   Após o retorno da função, ela é eliminada
@@ -279,11 +257,7 @@ date: 2018-06-20
   dentro da função já criada.
 </p>
 
-
 ![Exemplo 4](./imgs/rec4.png)
-
-
-
 
 <p>
   Agora os passos são um pouco diferentes. Mas, se você me
@@ -377,12 +351,7 @@ date: 2018-06-20
   caso-base, que é quando n for igual a 1.
 </p>
 
-
 ![Exemplo 5](./imgs/rec5.png)
-
-
-
-
 
 <p>Essas chamadas ocorreram na seguinte ordem:</p>
 
@@ -407,11 +376,7 @@ date: 2018-06-20
 
 <p>O trecho descrito acima é exatamente como a pilha foi resolvida.</p>
 
-
 ![Exemplo 6](./imgs/6.png)
-
-
-
 
 <p>
   Perceba que após retornar todos os valores e a pilha terminar
@@ -1003,4 +968,3 @@ hosted with ❤ by <a class="Link--inTextBlock" href="https://github.com">GitHub
   programação) são funções que chamam
   a si mesmas de maneira direta ou indireta.
 </p>
-

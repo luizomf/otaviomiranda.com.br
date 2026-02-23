@@ -3,6 +3,8 @@ title: 'Notas técnicas sobre o vídeo Whisper OpenAI CLI do Youtube'
 description:
   'Acesse as notas técnicas detalhadas sobre o vídeo Whisper OpenAI CLI do
   Youtube. São coisas gerados por IA através da legenda SRT do vídeo.'
+date: 2025-10-03
+author: 'Luiz Otávio Miranda'
 ---
 
 <p>
@@ -1008,4 +1010,3 @@ description:
   <code>tokens Whisper</code>, <code>beam search</code>,
   <code>greedy decoding</code>, <code>modelos de transcrição</code>.
 </p>
-

@@ -4,16 +4,9 @@ description:
   'Além da normalização Unicode e as formas de normalização NFC, NFD, NFKC e
   NFKD, você vai aprender tudo o que precisa saber sobre o padrão Unicode em si
   e Python.'
-date: 2018-09-20
+date: 2020-08-20
+author: 'Luiz Otávio Miranda'
 ---
-
-<p class="author">
-  <span class="meta-date">
-    <time datetime="2018-09-20">20 de agosto de 2020</time>
-  </span>
-  ·
-  <span class="meta-author">Luiz Otávio Miranda</span>
-</p>
 
 <p>
   Além da
@@ -908,12 +901,7 @@ date: 2018-09-20
   <a href="https://code.visualstudio.com/">Visual Studio Code</a>.
 </p>
 
-
 ![Exemplo de codificação no VS Code](./imgs/python-1.png)
-
-
-
-
 
 <p>
   Nós sabemos qual a codificação de caracteres foi
@@ -974,12 +962,7 @@ date: 2018-09-20
   Será que os caracteres se mantiveram?
 </p>
 
-
 ![UTF-8](./imgs/python-2.png)
-
-
-
-
 
 <p>
   Perfeito! Viu como a aproximação que o
@@ -1208,4 +1191,3 @@ date: 2018-09-20
 </p>
 
 <p>Te espero no próximo post.</p>
-

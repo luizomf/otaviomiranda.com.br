@@ -3,8 +3,9 @@ title: 'Liskov Substitution Principle ou Princípio da Substituição de Liskov'
 description:
   'Liskov Substitution Principle explicado: valide pré‑condições, pós‑condições
   e invariantes com casos reais e código Python.'
+date: 2025-09-12
+author: 'Luiz Otávio Miranda'
 ---
-12 de agosto de 2025 - Luiz Otávio Miranda
 
 Quem já trabalhou com herança na programação orientada a objetos, muito
 provavelmente também já ouviu falar sobre o **Princípio da Substituição de

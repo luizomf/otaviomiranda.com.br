@@ -2,15 +2,8 @@
 title: 'Domínio e hospedagem: guia para leigos'
 description: 'Domínio e hospedagem: guia para leigos'
 date: 2018-04-04
+author: 'Luiz Otávio Miranda'
 ---
-
-<p class="author">
-  <span class="meta-date">
-    <time datetime="2018-04-04">4 de abril de 2018</time>
-  </span>
-  ·
-  <span class="meta-author">Luiz Otávio Miranda</span>
-</p>
 
 <p>
   Domínio e hospedagem são duas coisas que caminham de

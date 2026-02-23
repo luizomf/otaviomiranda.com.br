@@ -4,16 +4,9 @@ description:
   'Pilhas em Python são comumente criadas usando listas, porque estamos
   interessados em manipular apenas a extremidade do topo da estrutura (o final
   da lista).'
-date: 2018-09-02
+date: 2018-09-03
+author: 'Luiz Otávio Miranda'
 ---
-
-<p class="author">
-  <span class="meta-date">
-    <time datetime="2018-09-02">2 de setembro de 2020</time>
-  </span>
-  ·
-  <span class="meta-author">Luiz Otávio Miranda</span>
-</p>
 
 <p>
   Pilhas em Python são comumente criadas usando
@@ -675,4 +668,3 @@ date: 2018-09-02
 </p>
 
 <p>É só isso… Te vejo no próximo artigo.</p>
-

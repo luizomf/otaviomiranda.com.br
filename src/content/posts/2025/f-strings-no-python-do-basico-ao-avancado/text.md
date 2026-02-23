@@ -4,7 +4,10 @@ description:
   'Uso avançado de f-strings para formatação de strings em Python, cobrindo
   conceitos como concatenação, formatação numérica e representação em diferentes
   bases numéricas.'
+date: 2025-11-10
+author: 'Luiz Otávio Miranda'
 ---
+
 Este texto explora o uso avançado das f-strings no Python, incluindo
 concatenação, formatação numérica, representação em diferentes bases e várias
 outras técnicas que talvez você não conheça.

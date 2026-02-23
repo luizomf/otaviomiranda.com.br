@@ -40,15 +40,10 @@ const { Content } = await render(entry);
         <article class='article markdown-body article-body'>
           <header class='post-header'>
             <h1 class='post-title'>{entry.data.title}</h1>
-            {
-              entry.data.description && (
-                <p class='post-description'>{entry.data.description}</p>
-              )
-            }
             <div class='post-meta'>
               {
                 entry.data.author && (
-                  <span class='post-author'>Por {entry.data.author}</span>
+                  <span class='post-author'>{entry.data.author}</span>
                 )
               }
               {
@@ -57,12 +52,17 @@ const { Content } = await render(entry);
                     class='post-date'
                     datetime={entry.data.date.toISOString()}
                   >
-                    {entry.data.date.toLocaleDateString('pt-BR')}
+                    {entry.data.date.toLocaleDateString('pt-BR', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
                   </time>
                 )
               }
             </div>
           </header>
+
           <Content />
         </article>
       </div>
@@ -72,3 +72,13 @@ const { Content } = await render(entry);
   <Newsletter />
   <Footer />
 </BaseLayout>
+
+<style>
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacings-sm-100) var(--spacings-sm-500);
+    color: hsl(from var(--main-clr-shade) h 10% 50% / 1);
+    font-size: var(--font-size-sm);
+  }
+</style>

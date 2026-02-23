@@ -3,8 +3,9 @@ title: 'logging no Python: Pare de usar print no lugar errado'
 description:
   'Nesse artigo falamos do módulo logging no Python do básico ao avançado. Pare
   de usar o print no local errado e comece a ter logs na sua aplicação Python.'
+date: 2025-08-05
+author: 'Luiz Otávio Miranda'
 ---
-05 de julho de 2025 | Luiz Otávio Miranda
 
 O `logging` é o módulo oficial do Python para lidar com logs de forma
 estruturada, profissional e extensível. Além disso, ele serve como uma
@@ -1590,12 +1591,7 @@ dicionário mesmo.
 Só de fazer isso, meu log ficou como mostro na imagem a seguir. Por padrão o
 `RichHandler` emit os logs para `stdout`.
 
-
 ![Exemplo de log do rich, uma tabela com os logs coloridos por nível de severidade.](./images/rich_log_exemple.webp)
-
-
-
-
 
 Se quiser, pode manter o `rich` para o seu `debug`. E daqui em diante, toda vez
 que pensar em ver o valor de uma variável ou algo semelhante, use o log. Deixa o

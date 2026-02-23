@@ -4,6 +4,8 @@ description:
   'Acesse as notas técnicas detalhadas e a transcrição semântica do vídeo sobre
   como criar CLIs profissionais em Python com argparse. Um guia completo para
   consulta e estudo.'
+date: 2025-10-05
+author: 'Luiz Otávio Miranda'
 ---
 
 <p>
@@ -1509,4 +1511,3 @@ description:
   uv sync, uv pip install, programação, tutorial argparse, argparse
   python, criar programa linha de comando, linha de comando python.
 </p>
-

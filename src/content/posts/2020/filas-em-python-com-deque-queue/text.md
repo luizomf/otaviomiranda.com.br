@@ -6,15 +6,8 @@ description:
   inserção e remoção de elementos em qualquer uma das pontas, cabeça (head) ou
   cauda (tail).'
 date: 2020-06-08
+author: 'Luiz Otávio Miranda'
 ---
-
-<p class="author">
-  <span class="meta-date">
-    <time datetime="2020-06-08">8 de junho de 2020</time>
-  </span>
-  ·
-  <span class="meta-author">Luiz Otávio Miranda</span>
-</p>
 
 <p>
   Filas em Python podem ser implementadas utilizando a estrutura de
@@ -82,12 +75,7 @@ date: 2020-06-08
   diagrama a seguir:
 </p>
 
-
 ![Queues em Python - Exemplo 1](./imgs/Queues-1.png)
-
-
-
-
 
 <p>
   Mas, se eu precisasse remover um elemento da fila anterior, o elemento
@@ -96,12 +84,7 @@ date: 2020-06-08
 
 <p>Este elemento é representado pelo A na imagem a seguir:</p>
 
-
 ![Queues em Python - Exemplo 2](./imgs/Queues-2-1.png)
-
-
-
-
 
 <p>
   Além disso, perceba que agora, além da minha fila

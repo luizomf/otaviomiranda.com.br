@@ -3,6 +3,8 @@ title: 'Shiki - Syntax highlighter'
 description:
   'For my personal use. I just want the end HTML and CSS for Shiki Syntax
   highlighter (Not the JavaScript). This would be only for pure static sites.'
+date: 2026-02-20
+author: 'Luiz Otávio Miranda'
 ---
 
 <p>
@@ -386,4 +388,3 @@ description:
 })();
 
 </script>
-
