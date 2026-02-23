@@ -8,6 +8,7 @@ const postsCollection = defineCollection({
         description: z.string(),
         // Data opcional depois nós vemos como extrair do HTML antigo
         date: z.date().optional(),
+        author: z.string().optional(),
         image: z.string().optional(),
     }),
 });
