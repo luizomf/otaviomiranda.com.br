@@ -7,6 +7,13 @@ import Footer from '../components/Footer.astro';
 import Newsletter from '../components/Newsletter.astro';
 import Section from '../components/Section.astro';
 import SectionHeader from '../components/SectionHeader.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { comparePostsByDateDesc } from '../utils/post-date';
+
+const posts = await getCollection('posts');
+posts.sort(comparePostsByDateDesc);
+const recentPosts: CollectionEntry<'posts'>[] = posts.slice(0, 5);
 ---
 
 <BaseLayout>
@@ -45,110 +52,26 @@ import SectionHeader from '../components/SectionHeader.astro';
     />
 
     <ul class='blog-list'>
-      <li>
-        <a href='2026/shiki_syntax_highlighter_generator/'
-          >Shiki - Syntax highlighter <span class='blog-arrow'>→</span></a
-        >
-      </li>
-      <li>
-        <a href='2025/liskov-substitution-principle-lsp-solid/'
-          >Liskov Substitution Principle ou Princípio da Substituição de Liskov <span
-            class='blog-arrow'>→</span
-          ></a
-        >
-      </li>
-      <li>
-        <a href='2025/f-strings-no-python-do-basico-ao-avancado/'
-          >f-strings em Python: coisas que você não sabia
-          <span class='blog-arrow'>→</span></a
-        >
-      </li>
-      <li>
-        <a href='2025/logging-no-python-pare-de-usar-print-no-lugar-errado/'
-          >logging no Python: Pare de usar print no lugar errado
-          <span class='blog-arrow'>→</span></a
-        >
-      </li>
-      <li>
-        <a href='2025/namespace-escopo-python/'
-          >Escopo e Namespace em Python
-          <span class='blog-arrow'>→</span></a
-        >
-      </li>
-      <li>
-        <a href='2025/whisper-live-sera-que-deu-certo/'
-          >Tentei usar o whisper live via microfone
-          <span class='blog-arrow'>→</span></a
-        >
-      </li>
-      <li>
-        <a href='2025/python-sussu-cli-openai-whisper/'
-          >Transcreva áudio com Python: Sussu CLI + OpenAI Whisper
-          <span class='blog-arrow'>→</span></a
-        >
-      </li>
-      <li>
-        <a
-          href='2025/notas-tecnicas-whisper-openai-guia-completo-de-transcricao-com-inteligencia-artificial-video-e-audio/'
-          >Notas técnicas sobre o vídeo Whisper OpenAI CLI do Youtube
-          <span class='blog-arrow'>→</span></a
-        >
-      </li>
-      <li>
-        <a href='2025/notas-tecnicas-python-argparse-cli/'
-          >Notas Técnicas: Criando CLIs com Python e Argparse
-          <span class='blog-arrow'>→</span></a
-        >
-      </li>
-      <li>
-        <a href='2020/pilhas-em-python-com-listas-stack/'
-          >Pilhas em Python com listas (stack)
-          <span class='blog-arrow'>→</span></a
-        >
-      </li>
-      <li>
-        <a href='2020/typescript-uma-longa-introducao/'
-          >TypeScript - uma longa introdução
-          <span class='blog-arrow'>→</span></a
-        >
-      </li>
-      <li>
-        <a href='2020/normalizacao-unicode-em-python/'
-          >Normalização Unicode em Python
-          <span class='blog-arrow'>→</span></a
-        >
-      </li>
-      <li>
-        <a href='2020/funcoes-recursivas-com-python/'
-          >Funções recursivas com Python
-          <span class='blog-arrow'>→</span></a
-        >
-      </li>
-      <li>
-        <a href='2020/filas-em-python-com-deque-queue/'
-          >Filas em Python com deque (queue)
-          <span class='blog-arrow'>→</span></a
-        >
-      </li>
-      <li>
-        <a href='2018/ssh-keys-chaves-de-autenticacao-ssh/'
-          >SSH keys: chaves de autenticação SSH
-          <span class='blog-arrow'>→</span></a
-        >
-      </li>
-      <li>
-        <a href='2018/instalando-o-certificado-ssl-tls-gratis-da-lets-encrypt/'
-          >Instalando o certificado SSL-TLS grátis da Let’s Encrypt
-          <span class='blog-arrow'>→</span></a
-        >
-      </li>
-      <li>
-        <a href='2018/dominio-e-hospedagem-guia-para-leigos/'>
-          Domínio e hospedagem: guia para leigos
-          <span class='blog-arrow'>→</span></a
-        >
-      </li>
+      {
+        recentPosts.map(post => (
+          <li>
+            <a href={`/${post.slug}/`}>
+              {post.data.title} <span class='blog-arrow'>→</span>
+            </a>
+          </li>
+        ))
+      }
     </ul>
+
+    <div style='text-align: center; margin-top: 2rem;'>
+      <a
+        href='/blog/1/'
+        class='button'
+        style='display: inline-block; padding: 1rem 2rem; background-color: var(--main-clr); color: var(--main-clr-shade); text-decoration: none; font-weight: 800; border-radius: 4px; border: 2px solid var(--secondary-clr); transition: all 0.2s ease;'
+      >
+        Ver todos os posts
+      </a>
+    </div>
   </Section>
   <!-- 5. Testimonials Section -->
   <Testimonials />

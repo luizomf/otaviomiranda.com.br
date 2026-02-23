@@ -141,6 +141,10 @@ o meu Agent AI (O _"Brien"_) catalogamos para voltar e matar depois.
 - [ ] CSS Legacy Cleaning: Ainda existem classes e divs (`is-pulled-right`, e centenas de divs irrelevantes) que vieram da exportação bruta das páginas de 2020 para o Markdown. Limpar visualmente.
 - [ ] Resquícios do Lightbox Visual: Algumas imagens ainda podem carregar as classes do Javascript/Lightbox anterior, ignorando carregamentos nativos lazy (isso não quebra a foto, mas carrega semântica vazia).
 - [ ] Revisitar index.astro: Fazer grid de paginação pros arquivos `.md` caso os posts comecem a crescer infinitivamente na primeira página baseada.
+- [ ] Refatorar `Courses.astro`: manter o wrapper `Courses` e extrair cada card para um componente singular reutilizável (`Course.astro`).
+- [ ] Refatorar `Testimonials.astro`: manter o wrapper `Testimonials` e extrair cada depoimento para um componente singular reutilizável (`Testimonial.astro`).
+- [ ] Refatorar os "Últimos links do blog": extrair o item de link do bloco de posts recentes em `index.astro` para um componente singular reutilizável.
+- [ ] Corrigir `/blog/1` (Ver todos os posts): página de arquivo precisa ter navegação completa (header/footer/newsletter), corrigir links que estão apontando para `undefined` e evitar fluxo em que o usuário fica "preso" na página.
 
 ---
 
