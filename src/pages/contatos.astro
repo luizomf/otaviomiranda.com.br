@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PillLink from '../components/PillLink.astro';
+
+const contactLinks = [
+  {
+    label: 'YouTube',
+    href: 'https://www.youtube.com/@otaviomiranda/videos',
+    external: true,
+  },
+  {
+    label: 'Newsletter',
+    href: 'https://luizomf.substack.com/',
+    external: true,
+  },
+  {
+    label: 'GitHub',
+    href: 'https://github.com/luizomf',
+    external: true,
+  },
+  {
+    label: 'Blog',
+    href: '/blog/1/',
+    external: false,
+  },
+  {
+    label: 'Cursos',
+    href: '/#courses',
+    external: false,
+  },
+];
+---
+
+<BaseLayout
+  title='Contatos | Otávio Miranda'
+  description='Links oficiais e canais de contato do Otávio Miranda em uma página interna simples.'
+>
+  <div class='main'>
+    <Header />
+
+    <section class='section section-light article-section'>
+      <div class='section-content'>
+        <header class='section-header contacts-header'>
+          <p class='section-eyeball'>Links oficiais</p>
+          <h1 class='section-title'>Contatos</h1>
+          <p class='section-line'>
+            Página interna simples para acessar meus canais sem depender de hubs
+            externos.
+          </p>
+        </header>
+
+        <ul class='contacts-list'>
+          {
+            contactLinks.map(link => (
+              <li class='contacts-item'>
+                {link.external ? (
+                  <PillLink
+                    href={link.href}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    containerClass='contacts-control'
+                    linkClass='contacts-link'
+                  >
+                    {link.label} ↗
+                  </PillLink>
+                ) : (
+                  <PillLink
+                    href={link.href}
+                    containerClass='contacts-control'
+                    linkClass='contacts-link'
+                  >
+                    {link.label}
+                  </PillLink>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .contacts-header {
+    text-align: left;
+    align-items: flex-start;
+    max-width: 64rem;
+  }
+
+  .contacts-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--spacings-sm-500);
+    margin: 0;
+    padding: 0;
+  }
+
+  .contacts-item {
+    margin: 0;
+    padding: 0;
+  }
+
+  .contacts-control {
+    width: 100%;
+  }
+
+  .contacts-link {
+    width: 100%;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  @media (max-width: 640px) {
+    .contacts-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
