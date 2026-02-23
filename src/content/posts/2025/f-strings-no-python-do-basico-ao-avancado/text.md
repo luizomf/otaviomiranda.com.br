@@ -5,9 +5,6 @@ description:
   conceitos como concatenação, formatação numérica e representação em diferentes
   bases numéricas.'
 ---
-
-# f-strings em Python: coisas que você não sabia
-
 Este texto explora o uso avançado das f-strings no Python, incluindo
 concatenação, formatação numérica, representação em diferentes bases e várias
 outras técnicas que talvez você não conheça.

@@ -4,9 +4,6 @@ description:
   'Liskov Substitution Principle explicado: valide pré‑condições, pós‑condições
   e invariantes com casos reais e código Python.'
 ---
-
-# O Princípio da Substituição de Liskov (LSP)
-
 12 de agosto de 2025 - Luiz Otávio Miranda
 
 Quem já trabalhou com herança na programação orientada a objetos, muito

@@ -5,9 +5,6 @@ description:
   via microfone. Já quero deixar claro que isso não funcionou conforme eu
   esperava e cabem mais testes.'
 ---
-
-# (🚫 FAILED) `whisper` em tempo real via microfone
-
 2 de outubro de 2025 · Luiz Otávio Miranda
 
 Criei esse arquivo pra ir anotando minhas tentativas de rodar o `whisper` em

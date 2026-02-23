@@ -7,8 +7,6 @@ description:
 date: 2018-09-20
 ---
 
-<h1>Normalização Unicode em Python</h1>
-
 <p class="author">
   <span class="meta-date">
     <time datetime="2018-09-20">20 de agosto de 2020</time>

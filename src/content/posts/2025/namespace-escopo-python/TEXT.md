@@ -4,9 +4,6 @@ description:
   'Em Python, o escopo determina a visibilidade e o tempo de vida dos nomes do
   seu programa, já o namespace é o local onde os nomes estão salvos.'
 ---
-
-# Escopo e Namespace em Python
-
 26 de julho de 2025 - Luiz Otávio Miranda
 
 Em Python, **escopo** é o contexto onde um **nome** pode ser usado. Ele define a

@@ -4,9 +4,6 @@ description:
   'Nesse artigo falamos do módulo logging no Python do básico ao avançado. Pare
   de usar o print no local errado e comece a ter logs na sua aplicação Python.'
 ---
-
-# logging no Python: Pare de usar print no lugar errado
-
 05 de julho de 2025 | Luiz Otávio Miranda
 
 O `logging` é o módulo oficial do Python para lidar com logs de forma

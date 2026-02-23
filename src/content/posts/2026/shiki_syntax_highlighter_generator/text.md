@@ -5,8 +5,6 @@ description:
   highlighter (Not the JavaScript). This would be only for pure static sites.'
 ---
 
-<h1>Shiki - Syntax highlighter</h1>
-
 <p>
   For my personal use. I just want the end HTML and CSS from
   <a rel="nofollow noopener noreferrer" href="https://shiki.matsu.io/"

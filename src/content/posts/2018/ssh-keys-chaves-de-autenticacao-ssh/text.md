@@ -4,8 +4,6 @@ description: 'SSH keys: chaves de autenticação SSH'
 date: 2018-04-04
 ---
 
-<h1>SSH keys: chaves de autenticação SSH</h1>
-
 <p class="author">
   <span class="meta-date">
     <time datetime="2018-04-04">4 de abril de 2018</time>

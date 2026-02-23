@@ -8,8 +8,6 @@ description:
 date: 2020-06-08
 ---
 
-<h1>Filas em Python com deque (queue)</h1>
-
 <p class="author">
   <span class="meta-date">
     <time datetime="2020-06-08">8 de junho de 2020</time>

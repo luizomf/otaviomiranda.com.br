@@ -5,7 +5,6 @@ description:
   Youtube. São coisas gerados por IA através da legenda SRT do vídeo.'
 ---
 
-<h1>Notas Técnicas e Bastidores do Vídeo: Whisper OpenAI CLI</h1>
 <p>
   Fala aí! 👋 Este post mostra como usei a legenda <code>.srt</code> do
   vídeo abaixo para gerar

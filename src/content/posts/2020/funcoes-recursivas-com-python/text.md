@@ -6,8 +6,6 @@ description:
 date: 2018-06-20
 ---
 
-<h1>Funções recursivas com Python</h1>
-
 <p class="author">
   <span class="meta-date">
     <time datetime="2018-06-20">20 de junho de 2020</time>

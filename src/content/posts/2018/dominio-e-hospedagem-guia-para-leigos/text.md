@@ -4,8 +4,6 @@ description: 'Domínio e hospedagem: guia para leigos'
 date: 2018-04-04
 ---
 
-<h1>Domínio e hospedagem: guia para leigos</h1>
-
 <p class="author">
   <span class="meta-date">
     <time datetime="2018-04-04">4 de abril de 2018</time>

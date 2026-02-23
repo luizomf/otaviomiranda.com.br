@@ -7,8 +7,6 @@ description:
 date: 2018-09-02
 ---
 
-<h1>Pilhas em Python com listas (stack)</h1>
-
 <p class="author">
   <span class="meta-date">
     <time datetime="2018-09-02">2 de setembro de 2020</time>

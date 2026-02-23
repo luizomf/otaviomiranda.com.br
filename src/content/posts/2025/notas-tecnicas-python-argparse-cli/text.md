@@ -6,10 +6,6 @@ description:
   consulta e estudo.'
 ---
 
-<h1>
-  Notas Técnicas e Bastidores do Vídeo: Criando uma CLI com Python e
-  Argparse
-</h1>
 <p>
   Olá! Este post serve como um guia técnico detalhado e notas de apoio
   para o
