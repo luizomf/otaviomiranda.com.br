@@ -7,6 +7,7 @@ import Footer from '../components/Footer.astro';
 import Newsletter from '../components/Newsletter.astro';
 import Section from '../components/Section.astro';
 import SectionHeader from '../components/SectionHeader.astro';
+import RecentPostLink from '../components/RecentPostLink.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import { comparePostsByDateDesc } from '../utils/post-date';
@@ -55,11 +56,7 @@ const recentPosts: CollectionEntry<'posts'>[] = posts.slice(0, 5);
     <ul class='blog-list'>
       {
         recentPosts.map(post => (
-          <li>
-            <a href={getEntryHref(post)}>
-              {post.data.title} <span class='blog-arrow'>→</span>
-            </a>
-          </li>
+          <RecentPostLink href={getEntryHref(post)} title={post.data.title} />
         ))
       }
     </ul>

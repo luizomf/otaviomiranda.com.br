@@ -1,0 +1,14 @@
+---
+type Props = {
+  href: string;
+  title: string;
+};
+
+const { href, title } = Astro.props as Props;
+---
+
+<li>
+  <a href={href}>
+    {title} <span class='blog-arrow'>→</span>
+  </a>
+</li>
