@@ -46,8 +46,7 @@ const contactLinks = [
           <p class='section-eyeball'>Links oficiais</p>
           <h1 class='section-title'>Contatos</h1>
           <p class='section-line'>
-            Página interna simples para acessar meus canais sem depender de hubs
-            externos.
+            Para qualquer contato comercial: <strong>luizomf@gmail.com</strong>.
           </p>
         </header>
 
@@ -86,18 +85,26 @@ const contactLinks = [
 </BaseLayout>
 
 <style>
+  .section-header.section-header {
+    margin-bottom: 0;
+
+    p {
+      margin: 0 auto;
+    }
+  }
+
   .contacts-header {
-    text-align: left;
     align-items: flex-start;
     max-width: 64rem;
   }
 
   .contacts-list {
+    max-width: 64rem;
     list-style: none;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--spacings-sm-500);
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
   }
 

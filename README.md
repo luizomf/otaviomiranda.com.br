@@ -171,9 +171,9 @@ o meu Agent AI (O _"Brien"_) catalogamos para voltar e matar depois.
   (`código` e `validade`) sem editar o miolo do `index.astro`.
   Critério de conclusão: cupom renderizado por componente dedicado e alteração
   mensal feita em um único ponto.
-- [x] Substituir hub externo de contatos: criar página interna `/contatos/` e
+- [x] Substituir hub externo de contatos: criar página interna `/contacts/` e
   apontar navegação principal para ela, removendo dependência de `beacons.ai`.
-  Critério de conclusão: Header/Hero/Footer usando `/contatos/` e página
+  Critério de conclusão: Header/Hero/Footer usando `/contacts/` e página
   publicada no próprio site.
 
 ---
