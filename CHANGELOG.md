@@ -2,6 +2,25 @@
 
 All notable changes to this project are documented here.
 
+## 2026-02-23
+
+- Switched base styling to Astro's CSS pipeline by removing direct stylesheet
+  loading from `BaseLayout.astro` and keeping global styles via
+  `import '../styles/global.css'`.
+- Completed legacy gist snapshot cleanup in active markdown content:
+  - replaced embedded GitHub/Gist HTML markup with plain markdown fences in
+    `2020/funcoes-recursivas-com-python/text.md`;
+  - adjusted post metadata date in
+    `2025/python-sussu-cli-openai-whisper/text.md`.
+- Replaced external contacts hub dependency:
+  - created an internal contacts page;
+  - migrated navigation links from `beacons.ai` to the internal route;
+  - normalized route naming to `/contacts/`.
+- Updated project documentation (`README.md`) with:
+  - editorial principles for the blog experience;
+  - clarified and updated TODO milestones;
+  - completion of archive pagination and legacy CSS cleaning tasks.
+
 ## 2026-02-20
 
 - Reordered sections on the homepage (`index.html`) to improve conversion flow:

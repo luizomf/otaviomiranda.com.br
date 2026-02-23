@@ -160,7 +160,7 @@ o meu Agent AI (O _"Brien"_) catalogamos para voltar e matar depois.
   `PillLink`.
 
 ### 🚧 TO-DO: Débitos e Próximas Milestones
-- [ ] CSS Legacy Cleaning (fase 2): limpar snapshots antigos vindos de Gist/GitHub nos posts legados, removendo classes `blob-*`, wrappers de tabela e metadados de embed, e convertendo para markup simples (`pre/code`, listas e parágrafos) sem perder conteúdo.
+- [x] CSS Legacy Cleaning (fase 2): limpar snapshots antigos vindos de Gist/GitHub nos posts legados, removendo classes `blob-*`, wrappers de tabela e metadados de embed, e convertendo para markup simples (`pre/code`, listas e parágrafos) sem perder conteúdo.
   Critério de conclusão: posts com snapshot legado renderizando com o mesmo texto/código, sem dependência de CSS de embed externo.
 - [x] Revisitar `index.astro`: preparar listagem paginada em grid/lista para quando o volume de `.md` crescer, evitando carregar "posts demais" na primeira página.
   Critério de conclusão: limite por página definido, navegação entre páginas funcionando e layout consistente em desktop/mobile.
