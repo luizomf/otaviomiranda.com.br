@@ -78,6 +78,19 @@ npm run dev
 
 Visite `http://localhost:4321` no navegador.
 
+### Comandos do dia a dia
+
+```bash
+# Dev server local
+npm run dev
+
+# Build de produção (check + build)
+npm run build
+
+# Preview local da build gerada em dist/
+npm run preview
+```
+
 ---
 
 ## 📝 Como Criar um Novo Post
@@ -86,11 +99,25 @@ Nós padronizamos a criação de posts na versão atual do site para utilizar os
 recursos de indexação do **Astro Content Layer**. Todo post novo **DEVE** seguir
 as seguintes regras de diretório (ele só varre `src/content/posts/`):
 
-1. **Crie uma nova pasta** pro seu post usando a estrutura:
-   `src/content/posts/ANO/nomedopost/`
-2. **Crie o arquivo `text.md`** dentro dela.
-3. **Adicione as imagens** de referência dentro de uma subpasta
-   `src/content/posts/ANO/nomedopost/images/` no seu post.
+### Fluxo recomendado (automatizado)
+
+Use o gerador de post:
+
+```bash
+npm run post "Título do meu novo artigo"
+```
+
+Esse comando cria automaticamente:
+
+1. Pasta do post em `src/content/posts/ANO/slug-do-titulo/`
+2. Pasta de imagens em `src/content/posts/ANO/slug-do-titulo/images/`
+3. Arquivo `text.md` com frontmatter padrão preenchido
+
+### Fluxo manual (caso necessário)
+
+1. Crie uma nova pasta: `src/content/posts/ANO/nomedopost/`
+2. Crie `text.md` dentro dela
+3. Adicione imagens em `src/content/posts/ANO/nomedopost/images/`
 
 ### O "Frontmatter" (Obrigatório)
 
@@ -110,6 +137,51 @@ date: 2026-03-01
 
 Seja sempre claro e coloque espaços duplos enter parágrafos!
 ```
+
+## 🧪 Como Criar Página em Branco (Experimentos)
+
+Para páginas de experimento com CSS/JS próprios (sem herdar o visual global),
+use o `BlankLayout`.
+
+1. Crie um arquivo em `src/pages/` (exemplo:
+   `src/pages/lab-meu-teste.astro`)
+2. Importe `BlankLayout`
+3. Escreva seu HTML livre
+4. Ligue seus assets próprios (opcional) via `/public`
+
+Exemplo mínimo:
+
+```astro
+---
+import BlankLayout from '../layouts/BlankLayout.astro';
+---
+
+<BlankLayout title='Lab - Meu Teste'>
+  <main>
+    <h1>Meu experimento</h1>
+    <p>Página isolada para testes.</p>
+  </main>
+</BlankLayout>
+```
+
+Com assets próprios:
+
+```astro
+---
+import BlankLayout from '../layouts/BlankLayout.astro';
+---
+
+<BlankLayout title='Lab - Com CSS e JS próprios'>
+  <link rel='stylesheet' href='/labs/meu-lab.css' />
+  <main id='app'></main>
+  <script is:inline src='/labs/meu-lab.js'></script>
+</BlankLayout>
+```
+
+Nesse caso, coloque os arquivos em:
+
+- `public/labs/meu-lab.css`
+- `public/labs/meu-lab.js`
 
 ---
 
