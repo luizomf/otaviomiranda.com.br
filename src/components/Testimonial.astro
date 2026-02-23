@@ -7,13 +7,7 @@ type Props = {
   proofLabel?: string;
 };
 
-const {
-  slug,
-  author,
-  role,
-  text,
-  proofLabel = 'Ver',
-} = Astro.props as Props;
+const { slug, author, role, text, proofLabel = 'Ver' } = Astro.props as Props;
 ---
 
 <article class='testimonial-card glass'>

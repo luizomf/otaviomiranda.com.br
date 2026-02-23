@@ -8,10 +8,8 @@ interface Props {
   expiresAtLabel?: string;
 }
 
-const {
-  code = HOME_COUPON.code,
-  expiresAtLabel = HOME_COUPON.expiresAtLabel,
-} = Astro.props as Props;
+const { code = HOME_COUPON.code, expiresAtLabel = HOME_COUPON.expiresAtLabel } =
+  Astro.props as Props;
 ---
 
 <Section

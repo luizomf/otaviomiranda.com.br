@@ -25,8 +25,8 @@ Generation)**.
   distração desnecessária.
 - Sem popup, sem ads e sem dependência de script externo para highlight de
   código.
-- Posts em Markdown com frontmatter obrigatório (`title`, `description`,
-  `date`, `author`) para manter padrão.
+- Posts em Markdown com frontmatter obrigatório (`title`, `description`, `date`,
+  `author`) para manter padrão.
 - Arquivo do blog simples e paginado (sem vitrine de cards com thumbnail).
 - Links de contato centralizados em página interna do próprio site.
 
@@ -143,8 +143,7 @@ Seja sempre claro e coloque espaços duplos enter parágrafos!
 Para páginas de experimento com CSS/JS próprios (sem herdar o visual global),
 use o `BlankLayout`.
 
-1. Crie um arquivo em `src/pages/` (exemplo:
-   `src/pages/lab-meu-teste.astro`)
+1. Crie um arquivo em `src/pages/` (exemplo: `src/pages/lab-meu-teste.astro`)
 2. Importe `BlankLayout`
 3. Escreva seu HTML livre
 4. Ligue seus assets próprios (opcional) via `/public`
@@ -210,43 +209,74 @@ o meu Agent AI (O _"Brien"_) catalogamos para voltar e matar depois.
 ### ✅ O que foi CONCLUÍDO (Successes)
 
 - Migração dos `assets/js` e `css/` puros para subdireção Vite controlada.
-- Refatoração do modelo antigo (Páginas independentes) para sistema de Layout e Componentes reutilizáveis (Header.astro, BaseHead.astro, etc)
-- Implementação da biblioteca **Shiki**, abandonando bibliotecas legacy de JS Highlight que pesavam o LCP no LightHouse.
-- Script de RegEx personalizado massivo gerado em Node para consertar imagens antigas: Removemos os block-wrappers indesejados (`<p><img/></p>`).
-- Action Pipeline para GitHub Pages configurado, rodando sem travamentos de `Cache.duplicateId`.
-- **Sitemap Automatizado**: Foi habilitado a integração `@astrojs/sitemap` global.
-- **Templates Puros "BlankLayout"**: Implementados na v2 para servir Landing pages independentes da Home e do header de Navegação Global.
-- **Injeção do Frontmatter Dinâmica no Layout**: Extirpamos os `<h1>` repetidos dentro de cada Post. O Content Layer agora controla 100% dos títulos e autores.
-- **Modularização de CSS via Astro Islands**: Desacoplamos os 14 mil bytes de estilos monolíticos do arquivo global. Seções como `<Courses>`, `<Testimonials>` e `<Hero>` operam de forma autossuficiente (DRY Components) herdando o wrapper global de tema e grid (`<Section>` e `<SectionHeader>`).
-- **CLI Worklows e Neovim Scaffold**: Para redigir novos tutoriais de forma supersônica sem sair do Terminal, um binário local NodeJs foi projetado (`scripts/new_post.mjs`). Agora, basta disparar do seu Neovim `:!npm run post "Meu Blog Post"` e ele gera automaticamente o slug, as subpastas `year/slug/images` e injeta o `text.md` já preenchido com a data Zod e autor validados prontos para escrita da aula.
-- **Arquivo do Blog com navegação completa e links válidos**: A página de "Ver todos os posts" (`/blog/1` e `/blog/2`) agora renderiza com shell completo (`Header`, `Newsletter`, `Footer`) e os links dos posts são gerados por `entry.id` (sem `undefined`).
+- Refatoração do modelo antigo (Páginas independentes) para sistema de Layout e
+  Componentes reutilizáveis (Header.astro, BaseHead.astro, etc)
+- Implementação da biblioteca **Shiki**, abandonando bibliotecas legacy de JS
+  Highlight que pesavam o LCP no LightHouse.
+- Script de RegEx personalizado massivo gerado em Node para consertar imagens
+  antigas: Removemos os block-wrappers indesejados (`<p><img/></p>`).
+- Action Pipeline para GitHub Pages configurado, rodando sem travamentos de
+  `Cache.duplicateId`.
+- **Sitemap Automatizado**: Foi habilitado a integração `@astrojs/sitemap`
+  global.
+- **Templates Puros "BlankLayout"**: Implementados na v2 para servir Landing
+  pages independentes da Home e do header de Navegação Global.
+- **Injeção do Frontmatter Dinâmica no Layout**: Extirpamos os `<h1>` repetidos
+  dentro de cada Post. O Content Layer agora controla 100% dos títulos e
+  autores.
+- **Modularização de CSS via Astro Islands**: Desacoplamos os 14 mil bytes de
+  estilos monolíticos do arquivo global. Seções como `<Courses>`,
+  `<Testimonials>` e `<Hero>` operam de forma autossuficiente (DRY Components)
+  herdando o wrapper global de tema e grid (`<Section>` e `<SectionHeader>`).
+- **CLI Worklows e Neovim Scaffold**: Para redigir novos tutoriais de forma
+  supersônica sem sair do Terminal, um binário local NodeJs foi projetado
+  (`scripts/new_post.mjs`). Agora, basta disparar do seu Neovim
+  `:!npm run post "Meu Blog Post"` e ele gera automaticamente o slug, as
+  subpastas `year/slug/images` e injeta o `text.md` já preenchido com a data Zod
+  e autor validados prontos para escrita da aula.
+- **Arquivo do Blog com navegação completa e links válidos**: A página de "Ver
+  todos os posts" (`/blog/1` e `/blog/2`) agora renderiza com shell completo
+  (`Header`, `Newsletter`, `Footer`) e os links dos posts são gerados por
+  `entry.id` (sem `undefined`).
 - **Componentização singular dos blocos da Home**: `Course.astro`,
   `Testimonial.astro` e `RecentPostLink.astro` foram extraídos dos wrappers
   (`Courses`, `Testimonials` e `index.astro`) para reduzir duplicação e
   facilitar manutenção incremental.
-- **Limpeza inicial de markup legado (posts antigos)**: adicionamos um script
-  de higienização (`scripts/clean_legacy_markdown.mjs`) e removemos classes
+- **Limpeza inicial de markup legado (posts antigos)**: adicionamos um script de
+  higienização (`scripts/clean_legacy_markdown.mjs`) e removemos classes
   JS/resíduos inúteis de snapshot de gist no post de recursão de 2020.
 - **Padronização visual no botão de arquivo da Home**: o CTA "Ver todos os
   posts" em `index.astro` deixou de usar inline style e passou a usar
   `PillLink`.
 
 ### 🚧 TO-DO: Débitos e Próximas Milestones
-- [x] CSS Legacy Cleaning (fase 2): limpar snapshots antigos vindos de Gist/GitHub nos posts legados, removendo classes `blob-*`, wrappers de tabela e metadados de embed, e convertendo para markup simples (`pre/code`, listas e parágrafos) sem perder conteúdo.
-  Critério de conclusão: posts com snapshot legado renderizando com o mesmo texto/código, sem dependência de CSS de embed externo.
-- [x] Revisitar `index.astro`: preparar listagem paginada em grid/lista para quando o volume de `.md` crescer, evitando carregar "posts demais" na primeira página.
-  Critério de conclusão: limite por página definido, navegação entre páginas funcionando e layout consistente em desktop/mobile.
-- [ ] Editor local de posts (sem auth): prototipar um editor Markdown local com Vim motions, botão de salvar e geração automática do arquivo no caminho padrão (`ano/slug/text.md`) com frontmatter padronizado (`title`, `description`, `date`, `author`).
-  Critério de conclusão: criar/editar/salvar post localmente em fluxo único, reduzindo trabalho manual e inconsistência de padrão.
+
+- [x] CSS Legacy Cleaning (fase 2): limpar snapshots antigos vindos de
+      Gist/GitHub nos posts legados, removendo classes `blob-*`, wrappers de
+      tabela e metadados de embed, e convertendo para markup simples
+      (`pre/code`, listas e parágrafos) sem perder conteúdo. Critério de
+      conclusão: posts com snapshot legado renderizando com o mesmo
+      texto/código, sem dependência de CSS de embed externo.
+- [x] Revisitar `index.astro`: preparar listagem paginada em grid/lista para
+      quando o volume de `.md` crescer, evitando carregar "posts demais" na
+      primeira página. Critério de conclusão: limite por página definido,
+      navegação entre páginas funcionando e layout consistente em
+      desktop/mobile.
+- [ ] Editor local de posts (sem auth): prototipar um editor Markdown local com
+      Vim motions, botão de salvar e geração automática do arquivo no caminho
+      padrão (`ano/slug/text.md`) com frontmatter padronizado (`title`,
+      `description`, `date`, `author`). Critério de conclusão:
+      criar/editar/salvar post localmente em fluxo único, reduzindo trabalho
+      manual e inconsistência de padrão.
 - [x] Componentizar o cupom mensal da Home: extrair o bloco de desconto
-  (`section-coupon`) para componente próprio com dados fáceis de atualizar
-  (`código` e `validade`) sem editar o miolo do `index.astro`.
-  Critério de conclusão: cupom renderizado por componente dedicado e alteração
-  mensal feita em um único ponto.
+      (`section-coupon`) para componente próprio com dados fáceis de atualizar
+      (`código` e `validade`) sem editar o miolo do `index.astro`. Critério de
+      conclusão: cupom renderizado por componente dedicado e alteração mensal
+      feita em um único ponto.
 - [x] Substituir hub externo de contatos: criar página interna `/contacts/` e
-  apontar navegação principal para ela, removendo dependência de `beacons.ai`.
-  Critério de conclusão: Header/Hero/Footer usando `/contacts/` e página
-  publicada no próprio site.
+      apontar navegação principal para ela, removendo dependência de
+      `beacons.ai`. Critério de conclusão: Header/Hero/Footer usando
+      `/contacts/` e página publicada no próprio site.
 
 ---
 

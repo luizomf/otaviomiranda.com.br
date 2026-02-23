@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -19,8 +19,8 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         with:
-            # path: . # Caso o repositório não estivesse na raiz, mas está
-            node-version: 20
+          # path: . # Caso o repositório não estivesse na raiz, mas está
+          node-version: 20
 
   deploy:
     needs: build

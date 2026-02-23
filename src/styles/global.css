@@ -1091,8 +1091,7 @@ Animations
 
   background-image:
     url('/imgs/assets/2026/02/stars.svg'),
-    url('/imgs/assets/2026/02/stars.svg'),
-    url('/imgs/assets/2026/02/stars.svg');
+    url('/imgs/assets/2026/02/stars.svg'), url('/imgs/assets/2026/02/stars.svg');
   background-size: 250px 250px;
   background-position-x: 0%, 20%, 40%;
   background-position-y: 0%, 20%, 40%;

@@ -329,8 +329,16 @@
           0.05,
           1,
         ),
-        centerX: clamp(readNumber(node.dataset.particlesCenterX, 0.5), 0.1, 0.9),
-        centerY: clamp(readNumber(node.dataset.particlesCenterY, 0.5), 0.1, 0.9),
+        centerX: clamp(
+          readNumber(node.dataset.particlesCenterX, 0.5),
+          0.1,
+          0.9,
+        ),
+        centerY: clamp(
+          readNumber(node.dataset.particlesCenterY, 0.5),
+          0.1,
+          0.9,
+        ),
         coreRadius: clamp(
           readNumber(node.dataset.particlesCoreRadius, 120),
           24,
@@ -366,7 +374,10 @@
       var cx = width * config.centerX;
       var cy = height * config.centerY;
       var maxRadius = Math.max(width, height) * 0.58;
-      var coreRadius = Math.min(config.coreRadius, Math.min(width, height) * 0.42);
+      var coreRadius = Math.min(
+        config.coreRadius,
+        Math.min(width, height) * 0.42,
+      );
       var minRadius = Math.max(18, coreRadius * 0.42);
       var distance =
         minRadius +
@@ -448,13 +459,7 @@
       var hex = hexColor.replace('#', '');
 
       if (hex.length === 3) {
-        hex =
-          hex[0] +
-          hex[0] +
-          hex[1] +
-          hex[1] +
-          hex[2] +
-          hex[2];
+        hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
       }
 
       var red = parseInt(hex.slice(0, 2), 16);
@@ -491,10 +496,13 @@
       particles.forEach(function (particle) {
         var targetX =
           particle.homeX +
-          Math.cos(t * particle.floatSpeed + particle.floatPhase) * particle.floatAmp;
+          Math.cos(t * particle.floatSpeed + particle.floatPhase) *
+            particle.floatAmp;
         var targetY =
           particle.homeY +
-          Math.sin(t * (particle.floatSpeed * 0.87) + particle.floatPhase * 1.13) *
+          Math.sin(
+            t * (particle.floatSpeed * 0.87) + particle.floatPhase * 1.13,
+          ) *
             particle.floatAmp;
 
         particle.vx += (targetX - particle.x) * homePull * dt;
@@ -542,7 +550,6 @@
           respawnParticle(particle);
           return;
         }
-
       });
     }
 

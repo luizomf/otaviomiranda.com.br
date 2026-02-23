@@ -63,11 +63,7 @@ const testimonials: Testimonial[] = [
   />
 
   <div class='testimonials-grid'>
-    {
-      testimonials.map(testimonial => (
-        <Testimonial {...testimonial} />
-      ))
-    }
+    {testimonials.map(testimonial => <Testimonial {...testimonial} />)}
   </div>
 </Section>
 
@@ -97,5 +93,4 @@ const testimonials: Testimonial[] = [
       column-count: 1;
     }
   }
-
 </style>

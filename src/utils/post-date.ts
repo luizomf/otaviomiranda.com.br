@@ -44,7 +44,9 @@ function getEntryFallbackDate(entry: PostEntry): Date | undefined {
 }
 
 export function getEntrySortDate(entry: PostEntry): Date {
-  return getEntryFrontmatterDate(entry) ?? getEntryFallbackDate(entry) ?? new Date(0);
+  return (
+    getEntryFrontmatterDate(entry) ?? getEntryFallbackDate(entry) ?? new Date(0)
+  );
 }
 
 export function comparePostsByDateDesc(a: PostEntry, b: PostEntry): number {
@@ -56,7 +58,10 @@ export function comparePostsByDateDesc(a: PostEntry, b: PostEntry): number {
   return b.id.localeCompare(a.id);
 }
 
-export function getEntryDateLabel(entry: PostEntry, locale = 'pt-BR'): string | undefined {
+export function getEntryDateLabel(
+  entry: PostEntry,
+  locale = 'pt-BR',
+): string | undefined {
   const frontmatterDate = getEntryFrontmatterDate(entry);
   if (frontmatterDate) {
     return frontmatterDate.toLocaleDateString(locale);
