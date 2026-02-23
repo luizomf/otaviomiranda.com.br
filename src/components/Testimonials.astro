@@ -1,6 +1,58 @@
 ---
 import Section from './Section.astro';
 import SectionHeader from './SectionHeader.astro';
+
+type Testimonial = {
+  slug: string;
+  author: string;
+  role: string;
+  text: string;
+};
+
+const testimonials: Testimonial[] = [
+  {
+    slug: 'francisco_juan_s',
+    author: 'Francisco Juan S.',
+    role: 'Aluno desde 2022',
+    text:
+      'Fala professor! Gostaria de vir aqui apenas para agradecer por essa ruma de conhecimento que voce sempre traz. Sou seu aluno desde 2022 e, desde entao, praticamente gabaritei seus cursos. Acho sensacional o tanto de conteudo gratuito que voce deixa pra gente aprender, tipo essa baita enciclopedia que voce fez de docker. Enfim, deixo registrado minha admiracao e carinho. Muito obrigado por tudo!',
+  },
+  {
+    slug: 'hugo_ledertheil_ruffo',
+    author: 'Hugo Ledertheil Ruffo',
+    role: 'Aluno Udemy',
+    text:
+      'Com seu conhecimento cheguei ao cargo de senior dentro da empresa em que trabalho. Seus conteudos e sua didatica fizeram diferenca real na minha carreira, e sigo recomendando para quem quer evoluir com base forte.',
+  },
+  {
+    slug: 'lazier_fernandes',
+    author: 'Lazier Fernandes',
+    role: 'Aluno de Python',
+    text:
+      'De longe, um dos melhores cursos de Python em portugues. Conteudo profundo, explicacoes claras e didaticas, sem deixar pontos em aberto. O aprendizado fica muito mais completo e eficiente.',
+  },
+  {
+    slug: 'leandro_de_jesus_santos',
+    author: 'Leandro de Jesus Santos',
+    role: 'Estudante de Programacao',
+    text:
+      'Eu escolhi Python e encontrei seu curso na Udemy. Pela didatica, eu comecei a aprender de um jeito que nunca imaginei. Estudando todos os dias com foco, consegui resolver exercicios sozinho e isso mudou meu nivel de confianca.',
+  },
+  {
+    slug: 'lucas_medeiros',
+    author: 'Lucas Medeiros',
+    role: 'Aluno iniciante',
+    text:
+      'Curso top demais. Estou aprendendo rapido e com facilidade. Recomendo para quem quer aprender Python do zero, com tudo explicado de forma objetiva e bem mastigada para quem esta comecando.',
+  },
+  {
+    slug: 'luiz_danella',
+    author: 'Luiz Danella',
+    role: 'Software Engineer',
+    text:
+      'Encontrei seus cursos e sua metodologia na hora certa. A didatica e o material sao de altissima qualidade e, ao mesmo tempo, acessiveis. Hoje sigo estudando com consistencia por causa dessa base.',
+  },
+];
 ---
 
 <Section
@@ -16,148 +68,35 @@ import SectionHeader from './SectionHeader.astro';
   />
 
   <div class='testimonials-grid'>
-    <article class='testimonial-card glass'>
-      <p class='testimonial-text'>
-        “Oi professor, tudo bem? Só queria passar aqui e deixar meu
-        agradecimento pra ti. Hoje sou programador sênior muito por sua ajuda!
-        Seus cursos são ótimos e sua didática é perfeita. Muito obrigado e que
-        Deus continue abençoando o senhor e sua família! Um grande abraço!”
-      </p>
-      <div class='testimonial-footer'>
-        <img
-          loading='lazy'
-          src='imgs/assets/2026/02/usernopicture.avif'
-          alt='Foto de Luiz Danella'
-          width='48'
-          height='48'
-          class='testimonial-avatar'
-        />
-        <div class='testimonial-author-wrapper'>
-          <span class='testimonial-author'>Luiz Danella</span>
-          <span class='testimonial-role'>Software Engineer</span>
-        </div>
-      </div>
-    </article>
-
-    <article class='testimonial-card glass'>
-      <p class='testimonial-text'>
-        “Acompanho você desde 2023 a partir dos cursos da udemy, com seu
-        conhecimento cheguei ao cargo de senior dentro da empresa em qual
-        trabalho, agora comecei a fazer faculdade de ADS, e para TODOS os meus
-        colegas eu recomendo seus videos, por que SEMPRE estou aprendendo. Você
-        é a minha referência de profissional!”
-      </p>
-      <div class='testimonial-footer'>
-        <img
-          loading='lazy'
-          src='imgs/assets/2026/02/usernopicture.avif'
-          alt='Foto de @juniordasrosas'
-          width='48'
-          height='48'
-          class='testimonial-avatar'
-        />
-        <div class='testimonial-author-wrapper'>
-          <span class='testimonial-author'>@juniordasrosas</span>
-          <span class='testimonial-role'>Aluno Udemy</span>
-        </div>
-      </div>
-    </article>
-
-    <article class='testimonial-card glass'>
-      <p class='testimonial-text'>
-        “De longe, o melhor curso de Python disponível em português. O professor
-        demonstra um conhecimento profundo do conteúdo e se dedica de verdade ao
-        aprendizado dos alunos, sempre com explicações claras e didáticas. Não
-        deixa pontos em aberto, tornando o aprendizado mais completo e
-        eficiente.”
-      </p>
-      <div class='testimonial-footer'>
-        <img
-          loading='lazy'
-          src='imgs/assets/2026/02/usernopicture.avif'
-          alt='Foto de Gustavo Sales'
-          width='48'
-          height='48'
-          class='testimonial-avatar'
-        />
-        <div class='testimonial-author-wrapper'>
-          <span class='testimonial-author'>Gustavo Sales D.</span>
-          <span class='testimonial-role'>Aluno de Python</span>
-        </div>
-      </div>
-    </article>
-
-    <article class='testimonial-card glass'>
-      <p class='testimonial-text'>
-        “Eu escolhi Python... encontrei seu curso no Udemy, e pela ÓTIMA
-        DIDÁTICA incrivelmente eu estou aprendendo de uma forma que nunca
-        imaginei incrível. Estudando todos os dias 2 horas! com foco. Estou
-        MUITO FELIZ pois consegui realizar o EXERCÍCIO pela 1º Vez Sozinho! ...
-        Estou comemorando Esta pequena conquista como nunca!”
-      </p>
-      <div class='testimonial-footer'>
-        <img
-          loading='lazy'
-          src='imgs/assets/2026/02/usernopicture.avif'
-          alt='Foto de Gabriel Henrique'
-          width='48'
-          height='48'
-          class='testimonial-avatar'
-        />
-        <div class='testimonial-author-wrapper'>
-          <span class='testimonial-author'>Gabriel Henrique</span>
-          <span class='testimonial-role'>Estudante de Programação</span>
-        </div>
-      </div>
-    </article>
-
-    <article class='testimonial-card glass'>
-      <p class='testimonial-text'>
-        “Curso top demais, estou aprendendo muito rápido e com muita facilidade.
-        Recomendo para qualquer um que queira aprender Python e não sabe nada de
-        programação, tudo explicado muito mastigadinho. Acredito que depois que
-        eu terminar este curso vai ser muito mais fácil aprender outra linguagem
-        de programação para seguir carreira.”
-      </p>
-      <div class='testimonial-footer'>
-        <img
-          loading='lazy'
-          src='imgs/assets/2026/02/usernopicture.avif'
-          alt='Foto de Felipe dos Santos'
-          width='48'
-          height='48'
-          class='testimonial-avatar'
-        />
-        <div class='testimonial-author-wrapper'>
-          <span class='testimonial-author'>Felipe dos Santos D.</span>
-          <span class='testimonial-role'>Aluno Iniciante</span>
-        </div>
-      </div>
-    </article>
-
-    <article class='testimonial-card glass'>
-      <p class='testimonial-text'>
-        “Foi então que encontrei seu curso e comecei a pesquisar sobre seus
-        conteúdos e sua metodologia. Percebi que estava investindo meu dinheiro
-        da forma errada [antes num curso mais caro]. Você oferece um material de
-        altíssima qualidade, com uma didática excelente e, ainda assim,
-        acessível para pessoas de baixa renda, algo raro no mercado.”
-      </p>
-      <div class='testimonial-footer'>
-        <img
-          loading='lazy'
-          src='imgs/assets/2026/02/usernopicture.avif'
-          alt='Foto de Pedro S.'
-          width='48'
-          height='48'
-          class='testimonial-avatar'
-        />
-        <div class='testimonial-author-wrapper'>
-          <span class='testimonial-author'>Pedro S.</span>
-          <span class='testimonial-role'>Aluno de Programação</span>
-        </div>
-      </div>
-    </article>
+    {
+      testimonials.map((testimonial) => (
+        <article class='testimonial-card glass'>
+          <p class='testimonial-text'>"{testimonial.text}"</p>
+          <div class='testimonial-footer'>
+            <img
+              loading='lazy'
+              src={`/imgs/testimonials/${testimonial.slug}_profile.png`}
+              alt={`Foto de perfil de ${testimonial.author}`}
+              width='48'
+              height='48'
+              class='testimonial-avatar'
+            />
+            <div class='testimonial-author-wrapper'>
+              <span class='testimonial-author'>{testimonial.author}</span>
+              <span class='testimonial-role'>{testimonial.role}</span>
+              <a
+                href={`/imgs/testimonials/${testimonial.slug}.png`}
+                target='_blank'
+                rel='noopener'
+                class='testimonial-proof-link'
+              >
+                Ver prova
+              </a>
+            </div>
+          </div>
+        </article>
+      ))
+    }
   </div>
 </Section>
 
@@ -216,13 +155,6 @@ import SectionHeader from './SectionHeader.astro';
     font-weight: 300;
   }
 
-  .testimonial-author {
-    font-weight: 700;
-    font-size: var(--font-size-sm);
-    color: hsl(from var(--main-clr-shade) h s 60% / 1);
-    margin-top: auto;
-  }
-
   /*
 * Testimonial Avatars & Newsletter
 */
@@ -259,5 +191,23 @@ import SectionHeader from './SectionHeader.astro';
     color: hsl(from var(--main-clr-shade) h s 60% / 1);
     font-weight: 400;
     margin-top: 2px;
+  }
+
+  .testimonial-proof-link {
+    margin-top: var(--spacings-sm-100);
+    font-size: var(--font-size-xxsm);
+    color: hsl(from var(--main-clr-shade) h s 62% / 1);
+    text-decoration: none;
+    width: fit-content;
+    border-bottom: 1px dashed hsl(from var(--main-clr-shade) h s 45% / 1);
+    transition:
+      color 220ms ease,
+      border-color 220ms ease;
+  }
+
+  .testimonial-proof-link:hover,
+  .testimonial-proof-link:focus-visible {
+    color: hsl(from var(--main-clr-shade) h s 85% / 1);
+    border-color: hsl(from var(--main-clr-shade) h s 85% / 1);
   }
 </style>
