@@ -76,6 +76,7 @@ import BlankLayout from '../layouts/BlankLayout.astro';
       let renderTimer = null;
       let vimMode = null;
       let monacoVimModule = null;
+      let vimKeymapsConfigured = false;
 
       const setCurrentFileName = fileName => {
         currentFileName = fileName;
@@ -233,6 +234,16 @@ import BlankLayout from '../layouts/BlankLayout.astro';
         setVimUiState({ enabled: true, available: true });
       };
 
+      const configureVimKeymaps = () => {
+        if (vimKeymapsConfigured) return;
+        const vimApi = monacoVimModule?.VimMode?.Vim;
+        if (!vimApi?.map) return;
+
+        // Faster escape from insert mode, similar to common Neovim setup.
+        vimApi.map('jj', '<Esc>', 'insert');
+        vimKeymapsConfigured = true;
+      };
+
       const loadMonaco = () =>
         new Promise(resolve => {
           const waitForRequire = () => {
@@ -299,6 +310,7 @@ import BlankLayout from '../layouts/BlankLayout.astro';
         renderPreview();
 
         if (monacoVimModule?.initVimMode) {
+          configureVimKeymaps();
           enableVimMode();
         } else {
           setVimUiState({ enabled: false, available: false });
