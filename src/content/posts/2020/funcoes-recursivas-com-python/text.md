@@ -44,19 +44,23 @@ author: 'Luiz Otávio Miranda'
   </li>
 </ul>
 
-<pre class="shiki catppuccin-mocha" style="background-color: #1e1e2e; color: #cdd6f4" tabindex="0"><code><span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> fatorial</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">n</span><span style="color:#9399B2">:</span><span style="color:#CBA6F7;font-style:italic"> int</span><span style="color:#9399B2">)</span><span style="color:#9399B2"> -&gt;</span><span style="color:#CBA6F7;font-style:italic"> int</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#CBA6F7">    if</span><span style="color:#CDD6F4"> n </span><span style="color:#94E2D5">==</span><span style="color:#FAB387"> 1</span><span style="color:#CBA6F7"> or</span><span style="color:#CDD6F4"> n </span><span style="color:#94E2D5">==</span><span style="color:#FAB387"> 0</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#CBA6F7">        return</span><span style="color:#FAB387"> 1</span></span>
-<span class="line"><span style="color:#CBA6F7">    return</span><span style="color:#CDD6F4"> n </span><span style="color:#94E2D5">*</span><span style="color:#89B4FA"> fatorial</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">n </span><span style="color:#94E2D5">-</span><span style="color:#FAB387"> 1</span><span style="color:#9399B2">)</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line"><span style="color:#CBA6F7">if</span><span style="color:#CDD6F4"> __name__ </span><span style="color:#94E2D5">==</span><span style="color:#A6E3A1"> "__main__"</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#CDD6F4">    fat5 </span><span style="color:#94E2D5">=</span><span style="color:#89B4FA"> fatorial</span><span style="color:#9399B2">(</span><span style="color:#FAB387">5</span><span style="color:#9399B2">)</span></span>
-<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">fat5</span><span style="color:#9399B2">)</span></span></code></pre>
+```python
+def fatorial(n: int) -> int:
+    if n == 1 or n == 0:
+        return 1
+    return n * fatorial(n - 1)
+
+
+if __name__ == "__main__":
+    fat5 = fatorial(5)
+    print(fat5)
+```
 
 <p>O resultado da execução da função acima será 120.</p>
 
-<pre class="shiki catppuccin-mocha" style="background-color: #1e1e2e; color: #cdd6f4" tabindex="0"><code><span class="line"><span style="color:#9399B2;font-style:italic"># 5 * 4 * 3 * 2 * 1 = 120</span></span></code></pre>
+```
+# 5 * 4 * 3 * 2 * 1 = 120
+```
 
 <p>
   <strong>Observação:</strong> você poderia escrever
@@ -71,19 +75,23 @@ author: 'Luiz Otávio Miranda'
   isso no código a seguir:
 </p>
 
-<pre class="shiki catppuccin-mocha" style="background-color: #1e1e2e; color: #cdd6f4" tabindex="0"><code><span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> recursao_infinita</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">numero</span><span style="color:#9399B2">:</span><span style="color:#CBA6F7;font-style:italic"> int</span><span style="color:#94E2D5"> =</span><span style="color:#FAB387"> 100</span><span style="color:#9399B2">)</span><span style="color:#9399B2"> -&gt;</span><span style="color:#CBA6F7;font-style:italic"> int</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#CBA6F7">    return</span><span style="color:#89B4FA"> recursao_infinita</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">numero </span><span style="color:#94E2D5">-</span><span style="color:#FAB387"> 1</span><span style="color:#9399B2">)</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line"><span style="color:#CBA6F7">if</span><span style="color:#CDD6F4"> __name__ </span><span style="color:#94E2D5">==</span><span style="color:#A6E3A1"> "__main__"</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#89B4FA">    recursao_infinita</span><span style="color:#9399B2">()</span></span></code></pre>
+```python
+def recursao_infinita(numero: int = 100) -> int:
+    return recursao_infinita(numero - 1)
+
+
+if __name__ == "__main__":
+    recursao_infinita()
+```
 
 <p>
   O Python não vai permitir que este código execute infinitamente, então
   você deverá ver uma exceção:
 </p>
 
-<pre class="shiki catppuccin-mocha" style="background-color: #1e1e2e; color: #cdd6f4" tabindex="0"><code><span class="line"><span style="color:#9399B2;font-style:italic"># RecursionError: maximum recursion depth exceeded</span></span></code></pre>
+```
+# RecursionError: maximum recursion depth exceeded
+```
 
 <p>
   Isso ocorre porque nunca dissemos para a função quando
@@ -106,26 +114,28 @@ author: 'Luiz Otávio Miranda'
   os casos: caso-base e caso recursivo.
 </p>
 
-<pre class="shiki catppuccin-mocha" style="background-color: #1e1e2e; color: #cdd6f4" tabindex="0"><code><span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> contagem_regressiva_recursiva</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">comeca_em</span><span style="color:#9399B2">:</span><span style="color:#CBA6F7;font-style:italic"> int</span><span style="color:#94E2D5"> =</span><span style="color:#FAB387"> 10</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> termina_em</span><span style="color:#9399B2">:</span><span style="color:#CBA6F7;font-style:italic"> int</span><span style="color:#94E2D5"> =</span><span style="color:#FAB387"> 0</span><span style="color:#9399B2">)</span><span style="color:#9399B2"> -&gt;</span><span style="color:#CBA6F7;font-style:italic"> int</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#A6E3A1">    """</span></span>
-<span class="line"><span style="color:#A6E3A1">    Contagem regressiva iniciando em 'comeca_em' e terminando em 'termina_em'</span></span>
-<span class="line"><span style="color:#A6E3A1">    """</span></span>
-<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">comeca_em</span><span style="color:#9399B2">)</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#9399B2;font-style:italic">    # Caso-base</span></span>
-<span class="line"><span style="color:#CBA6F7">    if</span><span style="color:#CDD6F4"> comeca_em </span><span style="color:#94E2D5">&lt;=</span><span style="color:#CDD6F4"> termina_em</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#9399B2;font-style:italic">        # Perceba que aqui um valor real é retornado</span></span>
-<span class="line"><span style="color:#9399B2;font-style:italic">        # e não há mais recursão</span></span>
-<span class="line"><span style="color:#CBA6F7">        return</span><span style="color:#CDD6F4"> comeca_em</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#9399B2;font-style:italic">    # Caso recursivo</span></span>
-<span class="line"><span style="color:#9399B2;font-style:italic">    # Esse código será executado sempre, até</span></span>
-<span class="line"><span style="color:#9399B2;font-style:italic">    # 'comeca_em' se tornar menor ou igual a 'termina_em'</span></span>
-<span class="line"><span style="color:#CBA6F7">    return</span><span style="color:#89B4FA"> contagem_regressiva_recursiva</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">comeca_em </span><span style="color:#94E2D5">-</span><span style="color:#FAB387"> 1</span><span style="color:#9399B2">)</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line"><span style="color:#CBA6F7">if</span><span style="color:#CDD6F4"> __name__ </span><span style="color:#94E2D5">==</span><span style="color:#A6E3A1"> "__main__"</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#89B4FA">    contagem_regressiva_recursiva</span><span style="color:#9399B2">()</span></span></code></pre>
+```python
+def contagem_regressiva_recursiva(comeca_em: int = 10, termina_em: int = 0) -> int:
+    """
+    Contagem regressiva iniciando em 'comeca_em' e terminando em 'termina_em'
+    """
+    print(comeca_em)
+
+    # Caso-base
+    if comeca_em <= termina_em:
+        # Perceba que aqui um valor real é retornado
+        # e não há mais recursão
+        return comeca_em
+
+    # Caso recursivo
+    # Esse código será executado sempre, até
+    # 'comeca_em' se tornar menor ou igual a 'termina_em'
+    return contagem_regressiva_recursiva(comeca_em - 1)
+
+
+if __name__ == "__main__":
+    contagem_regressiva_recursiva()
+```
 
 <h2>Call stack</h2>
 
@@ -335,15 +345,17 @@ author: 'Luiz Otávio Miranda'
   nesse post:
 </p>
 
-<pre class="shiki catppuccin-mocha" style="background-color: #1e1e2e; color: #cdd6f4" tabindex="0"><code><span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> fatorial</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">n</span><span style="color:#9399B2">:</span><span style="color:#CBA6F7;font-style:italic"> int</span><span style="color:#9399B2">)</span><span style="color:#9399B2"> -&gt;</span><span style="color:#CBA6F7;font-style:italic"> int</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#CBA6F7">  if</span><span style="color:#CDD6F4"> n </span><span style="color:#94E2D5">==</span><span style="color:#FAB387"> 1</span><span style="color:#CBA6F7"> or</span><span style="color:#CDD6F4"> n </span><span style="color:#94E2D5">==</span><span style="color:#FAB387"> 0</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#CBA6F7">      return</span><span style="color:#FAB387"> 1</span></span>
-<span class="line"><span style="color:#CBA6F7">  return</span><span style="color:#CDD6F4"> n </span><span style="color:#94E2D5">*</span><span style="color:#89B4FA"> fatorial</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">n </span><span style="color:#94E2D5">-</span><span style="color:#FAB387"> 1</span><span style="color:#9399B2">)</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line"><span style="color:#CBA6F7">if</span><span style="color:#CDD6F4"> __name__ </span><span style="color:#94E2D5">==</span><span style="color:#A6E3A1"> "__main__"</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#CDD6F4">  fat5 </span><span style="color:#94E2D5">=</span><span style="color:#89B4FA"> fatorial</span><span style="color:#9399B2">(</span><span style="color:#FAB387">5</span><span style="color:#9399B2">)</span></span>
-<span class="line"><span style="color:#FAB387;font-style:italic">  print</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">fat5</span><span style="color:#9399B2">)</span></span></code></pre>
+```python
+def fatorial(n: int) -> int:
+  if n == 1 or n == 0:
+      return 1
+  return n * fatorial(n - 1)
+
+
+if __name__ == "__main__":
+  fat5 = fatorial(5)
+  print(fat5)
+```
 
 <p>
   A chamada dessa função (iniciando na linha 8) desencadeará mais 4
@@ -368,11 +380,13 @@ author: 'Luiz Otávio Miranda'
 
 <p>Dessa maneira (vou mostrar apenas os retornos):</p>
 
-<pre class="shiki catppuccin-mocha" style="background-color: #1e1e2e; color: #cdd6f4" tabindex="0"><code><span class="line"><span style="color:#9399B2;font-style:italic"># 1 = 1</span></span>
-<span class="line"><span style="color:#9399B2;font-style:italic"># 2 * 1 = 2</span></span>
-<span class="line"><span style="color:#9399B2;font-style:italic"># 3 * 2 = 6</span></span>
-<span class="line"><span style="color:#9399B2;font-style:italic"># 4 * 6 = 24</span></span>
-<span class="line"><span style="color:#9399B2;font-style:italic"># 5 * 24 = 120</span></span></code></pre>
+```
+# 1 = 1
+# 2 * 1 = 2
+# 3 * 2 = 6
+# 4 * 6 = 24
+# 5 * 24 = 120
+```
 
 <p>O trecho descrito acima é exatamente como a pilha foi resolvida.</p>
 
@@ -495,9 +509,11 @@ author: 'Luiz Otávio Miranda'
 
 <p>Para aumentar o limite de recursão, use:</p>
 
-<pre class="shiki catppuccin-mocha" style="background-color: #1e1e2e; color: #cdd6f4" tabindex="0"><code><span class="line"><span style="color:#CBA6F7">import</span><span style="color:#CDD6F4"> sys</span></span>
-<span class="line"><span style="color:#CDD6F4">sys</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">setrecursionlimit</span><span style="color:#9399B2">(</span><span style="color:#FAB387">5000</span><span style="color:#9399B2">)</span></span>
-<span class="line"><span style="color:#FAB387;font-style:italic">print</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">sys</span><span style="color:#9399B2">.</span><span style="color:#89B4FA">getrecursionlimit</span><span style="color:#9399B2">())</span><span style="color:#9399B2;font-style:italic">  # 5000</span></span></code></pre>
+```python
+import sys
+sys.setrecursionlimit(5000)
+print(sys.getrecursionlimit())  # 5000
+```
 
 <p>
   O padrão são 1000 recursões, no trecho acima
@@ -520,105 +536,24 @@ author: 'Luiz Otávio Miranda'
 
 <h3>Sequência Fibonacci</h3>
 
-<script src="https://gist.github.com/luizomf/2a44f26d91f25a755420cb2d3bf085e1.js"></script><link rel="stylesheet" href="https://github.githubassets.com/assets/gist-embed-f6e25add23b42c0d.css"><div id="gist102084320" class="gist">
-<div class="gist-file" translate="no" data-color-mode="light" data-light-theme="light">
-<div class="gist-data">
+```python
+from functools import lru_cache
 
-<div>
-<div id="file-fibonacci_sequence-py" class="file my-2">
 
-<div itemprop="text" class="Box-body p-0 blob-wrapper data type-python  " style="overflow: auto" tabindex="0" role="region" aria-label="fibonacci_sequence.py content, created by luizomf on 05:28PM on March 30, 2020.">
+@lru_cache
+def fibonacci_sequence(n: int) -> int:
+    """Sequência Fibonacci with memoization"""
+    if n < 1:
+        return 0
+    if n <= 2:
+        return 1
+    return fibonacci_sequence(n - 1) + fibonacci_sequence(n - 2)
 
-<div class="blob-code-content">
 
-<table data-hpc="" class="highlight tab-size" data-tab-size="4" data-paste-markdown-skip="" data-tagsearch-path="fibonacci_sequence.py">
-<tbody><tr>
-  <td id="file-fibonacci_sequence-py-L1" class="blob-num" data-line-number="1"></td>
-  <td id="file-fibonacci_sequence-py-LC1" class="blob-code blob-code-inner"><span class="pl-k">from</span> <span class="pl-s1">functools</span> <span class="pl-k">import</span> <span class="pl-s1">lru_cache</span></td>
-</tr>
-<tr>
-  <td id="file-fibonacci_sequence-py-L2" class="blob-num" data-line-number="2"></td>
-  <td id="file-fibonacci_sequence-py-LC2" class="blob-code blob-code-inner">
-</td>
-</tr>
-<tr>
-  <td id="file-fibonacci_sequence-py-L3" class="blob-num" data-line-number="3"></td>
-  <td id="file-fibonacci_sequence-py-LC3" class="blob-code blob-code-inner">
-</td>
-</tr>
-<tr>
-  <td id="file-fibonacci_sequence-py-L4" class="blob-num" data-line-number="4"></td>
-  <td id="file-fibonacci_sequence-py-LC4" class="blob-code blob-code-inner"><span class="pl-en">@<span class="pl-s1">lru_cache</span></span></td>
-</tr>
-<tr>
-  <td id="file-fibonacci_sequence-py-L5" class="blob-num" data-line-number="5"></td>
-  <td id="file-fibonacci_sequence-py-LC5" class="blob-code blob-code-inner"><span class="pl-k">def</span> <span class="pl-en">fibonacci_sequence</span>(<span class="pl-s1">n</span>: <span class="pl-smi">int</span>) <span class="pl-c1">-&gt;</span> <span class="pl-smi">int</span>:</td>
-</tr>
-<tr>
-  <td id="file-fibonacci_sequence-py-L6" class="blob-num" data-line-number="6"></td>
-  <td id="file-fibonacci_sequence-py-LC6" class="blob-code blob-code-inner">    <span class="pl-s">"""Sequência Fibonacci with memoization"""</span></td>
-</tr>
-<tr>
-  <td id="file-fibonacci_sequence-py-L7" class="blob-num" data-line-number="7"></td>
-  <td id="file-fibonacci_sequence-py-LC7" class="blob-code blob-code-inner">    <span class="pl-k">if</span> <span class="pl-s1">n</span> <span class="pl-c1">&lt;</span> <span class="pl-c1">1</span>:</td>
-</tr>
-<tr>
-  <td id="file-fibonacci_sequence-py-L8" class="blob-num" data-line-number="8"></td>
-  <td id="file-fibonacci_sequence-py-LC8" class="blob-code blob-code-inner">        <span class="pl-k">return</span> <span class="pl-c1">0</span></td>
-</tr>
-<tr>
-  <td id="file-fibonacci_sequence-py-L9" class="blob-num" data-line-number="9"></td>
-  <td id="file-fibonacci_sequence-py-LC9" class="blob-code blob-code-inner">    <span class="pl-k">if</span> <span class="pl-s1">n</span> <span class="pl-c1">&lt;=</span> <span class="pl-c1">2</span>:</td>
-</tr>
-<tr>
-  <td id="file-fibonacci_sequence-py-L10" class="blob-num" data-line-number="10"></td>
-  <td id="file-fibonacci_sequence-py-LC10" class="blob-code blob-code-inner">        <span class="pl-k">return</span> <span class="pl-c1">1</span></td>
-</tr>
-<tr>
-  <td id="file-fibonacci_sequence-py-L11" class="blob-num" data-line-number="11"></td>
-  <td id="file-fibonacci_sequence-py-LC11" class="blob-code blob-code-inner">    <span class="pl-k">return</span> <span class="pl-en">fibonacci_sequence</span>(<span class="pl-s1">n</span> <span class="pl-c1">-</span> <span class="pl-c1">1</span>) <span class="pl-c1">+</span> <span class="pl-en">fibonacci_sequence</span>(<span class="pl-s1">n</span> <span class="pl-c1">-</span> <span class="pl-c1">2</span>)</td>
-</tr>
-<tr>
-  <td id="file-fibonacci_sequence-py-L12" class="blob-num" data-line-number="12"></td>
-  <td id="file-fibonacci_sequence-py-LC12" class="blob-code blob-code-inner">
-</td>
-</tr>
-<tr>
-  <td id="file-fibonacci_sequence-py-L13" class="blob-num" data-line-number="13"></td>
-  <td id="file-fibonacci_sequence-py-LC13" class="blob-code blob-code-inner">
-</td>
-</tr>
-<tr>
-  <td id="file-fibonacci_sequence-py-L14" class="blob-num" data-line-number="14"></td>
-  <td id="file-fibonacci_sequence-py-LC14" class="blob-code blob-code-inner"><span class="pl-k">if</span> <span class="pl-s1">__name__</span> <span class="pl-c1">==</span> <span class="pl-s">"__main__"</span>:</td>
-</tr>
-<tr>
-  <td id="file-fibonacci_sequence-py-L15" class="blob-num" data-line-number="15"></td>
-  <td id="file-fibonacci_sequence-py-LC15" class="blob-code blob-code-inner">    <span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-c1">1000</span>):</td>
-</tr>
-<tr>
-  <td id="file-fibonacci_sequence-py-L16" class="blob-num" data-line-number="16"></td>
-  <td id="file-fibonacci_sequence-py-LC16" class="blob-code blob-code-inner">        <span class="pl-en">print</span>(<span class="pl-en">fibonacci_sequence</span>(<span class="pl-s1">i</span>))</td>
-</tr>
-</tbody></table>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="gist-meta">
-<a href="https://gist.github.com/luizomf/2a44f26d91f25a755420cb2d3bf085e1/raw/bb48d06e8a05e5d562742d5f11bb0350c12bb371/fibonacci_sequence.py" class="Link--inTextBlock">view raw</a>
-<a href="https://gist.github.com/luizomf/2a44f26d91f25a755420cb2d3bf085e1#file-fibonacci_sequence-py" class="Link--inTextBlock">
-  fibonacci_sequence.py
-</a>
-hosted with ❤ by <a class="Link--inTextBlock" href="https://github.com">GitHub</a>
-</div>
-</div>
-</div>
+if __name__ == "__main__":
+    for i in range(1000):
+        print(fibonacci_sequence(i))
+```
 
 <p>
   A
@@ -641,203 +576,47 @@ hosted with ❤ by <a class="Link--inTextBlock" href="https://github.com">GitHub
 
 <h3>Quicksort</h3>
 
-<script src="https://gist.github.com/luizomf/afcd473af1ecdb8210e508511e6005f3.js"></script><link rel="stylesheet" href="https://github.githubassets.com/assets/gist-embed-f6e25add23b42c0d.css"><div id="gist102084604" class="gist">
-<div class="gist-file" translate="no" data-color-mode="light" data-light-theme="light">
-<div class="gist-data">
+```python
+"""
+Quicksort algorithm
 
-<div>
-<div id="file-quicksort-py" class="file my-2">
+>>> print(quicksort(list_of_numbers))
+[2, 2, 4, 5, 9, 10, 11, 122, 123, 321]
+>>> print(quicksort(list_of_words))
+['Aline', 'Helena', 'João', 'Luiz', 'Maria', 'Zara']
+>>> print(quicksort(['A']))
+['A']
+>>> print(quicksort(['B', 'A']))
+['A', 'B']
+>>> print(quicksort([]))
+[]
+"""
 
-<div itemprop="text" class="Box-body p-0 blob-wrapper data type-python  " style="overflow: auto" tabindex="0" role="region" aria-label="quicksort.py content, created by luizomf on 05:45PM on March 30, 2020.">
+import doctest
+from typing import List, TypeVar
 
-<div class="blob-code-content">
+TListValue = TypeVar('TListValue', int, float, str, bool)
 
-<table data-hpc="" class="highlight tab-size" data-tab-size="4" data-paste-markdown-skip="" data-tagsearch-path="quicksort.py">
-<tbody><tr>
-  <td id="file-quicksort-py-L1" class="blob-num" data-line-number="1"></td>
-  <td id="file-quicksort-py-LC1" class="blob-code blob-code-inner"><span class="pl-s">"""</span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L2" class="blob-num" data-line-number="2"></td>
-  <td id="file-quicksort-py-LC2" class="blob-code blob-code-inner"><span class="pl-s">Quicksort algorithm</span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L3" class="blob-num" data-line-number="3"></td>
-  <td id="file-quicksort-py-LC3" class="blob-code blob-code-inner"><span class="pl-s"></span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L4" class="blob-num" data-line-number="4"></td>
-  <td id="file-quicksort-py-LC4" class="blob-code blob-code-inner"><span class="pl-s">&gt;&gt;&gt; print(quicksort(list_of_numbers))</span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L5" class="blob-num" data-line-number="5"></td>
-  <td id="file-quicksort-py-LC5" class="blob-code blob-code-inner"><span class="pl-s">[2, 2, 4, 5, 9, 10, 11, 122, 123, 321]</span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L6" class="blob-num" data-line-number="6"></td>
-  <td id="file-quicksort-py-LC6" class="blob-code blob-code-inner"><span class="pl-s">&gt;&gt;&gt; print(quicksort(list_of_words))</span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L7" class="blob-num" data-line-number="7"></td>
-  <td id="file-quicksort-py-LC7" class="blob-code blob-code-inner"><span class="pl-s">['Aline', 'Helena', 'João', 'Luiz', 'Maria', 'Zara']</span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L8" class="blob-num" data-line-number="8"></td>
-  <td id="file-quicksort-py-LC8" class="blob-code blob-code-inner"><span class="pl-s">&gt;&gt;&gt; print(quicksort(['A']))</span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L9" class="blob-num" data-line-number="9"></td>
-  <td id="file-quicksort-py-LC9" class="blob-code blob-code-inner"><span class="pl-s">['A']</span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L10" class="blob-num" data-line-number="10"></td>
-  <td id="file-quicksort-py-LC10" class="blob-code blob-code-inner"><span class="pl-s">&gt;&gt;&gt; print(quicksort(['B', 'A']))</span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L11" class="blob-num" data-line-number="11"></td>
-  <td id="file-quicksort-py-LC11" class="blob-code blob-code-inner"><span class="pl-s">['A', 'B']</span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L12" class="blob-num" data-line-number="12"></td>
-  <td id="file-quicksort-py-LC12" class="blob-code blob-code-inner"><span class="pl-s">&gt;&gt;&gt; print(quicksort([]))</span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L13" class="blob-num" data-line-number="13"></td>
-  <td id="file-quicksort-py-LC13" class="blob-code blob-code-inner"><span class="pl-s">[]</span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L14" class="blob-num" data-line-number="14"></td>
-  <td id="file-quicksort-py-LC14" class="blob-code blob-code-inner"><span class="pl-s">"""</span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L15" class="blob-num" data-line-number="15"></td>
-  <td id="file-quicksort-py-LC15" class="blob-code blob-code-inner">
-</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L16" class="blob-num" data-line-number="16"></td>
-  <td id="file-quicksort-py-LC16" class="blob-code blob-code-inner"><span class="pl-k">import</span> <span class="pl-s1">doctest</span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L17" class="blob-num" data-line-number="17"></td>
-  <td id="file-quicksort-py-LC17" class="blob-code blob-code-inner"><span class="pl-k">from</span> <span class="pl-s1">typing</span> <span class="pl-k">import</span> <span class="pl-v">List</span>, <span class="pl-v">TypeVar</span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L18" class="blob-num" data-line-number="18"></td>
-  <td id="file-quicksort-py-LC18" class="blob-code blob-code-inner">
-</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L19" class="blob-num" data-line-number="19"></td>
-  <td id="file-quicksort-py-LC19" class="blob-code blob-code-inner"><span class="pl-v">TListValue</span> <span class="pl-c1">=</span> <span class="pl-en">TypeVar</span>(<span class="pl-s">'TListValue'</span>, <span class="pl-s1">int</span>, <span class="pl-s1">float</span>, <span class="pl-s1">str</span>, <span class="pl-s1">bool</span>)</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L20" class="blob-num" data-line-number="20"></td>
-  <td id="file-quicksort-py-LC20" class="blob-code blob-code-inner">
-</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L21" class="blob-num" data-line-number="21"></td>
-  <td id="file-quicksort-py-LC21" class="blob-code blob-code-inner">
-</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L22" class="blob-num" data-line-number="22"></td>
-  <td id="file-quicksort-py-LC22" class="blob-code blob-code-inner"><span class="pl-s1">list_of_numbers</span>: <span class="pl-v">List</span>[<span class="pl-smi">int</span>] <span class="pl-c1">=</span> [<span class="pl-c1">10</span>, <span class="pl-c1">9</span>, <span class="pl-c1">5</span>, <span class="pl-c1">2</span>, <span class="pl-c1">11</span>, <span class="pl-c1">4</span>, <span class="pl-c1">2</span>, <span class="pl-c1">123</span>, <span class="pl-c1">321</span>, <span class="pl-c1">122</span>]</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L23" class="blob-num" data-line-number="23"></td>
-  <td id="file-quicksort-py-LC23" class="blob-code blob-code-inner"><span class="pl-s1">list_of_words</span>: <span class="pl-v">List</span>[<span class="pl-smi">str</span>] <span class="pl-c1">=</span> [<span class="pl-s">'Luiz'</span>, <span class="pl-s">'Maria'</span>, <span class="pl-s">'João'</span>, <span class="pl-s">'Helena'</span>, <span class="pl-s">'Zara'</span>, <span class="pl-s">'Aline'</span>]</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L24" class="blob-num" data-line-number="24"></td>
-  <td id="file-quicksort-py-LC24" class="blob-code blob-code-inner">
-</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L25" class="blob-num" data-line-number="25"></td>
-  <td id="file-quicksort-py-LC25" class="blob-code blob-code-inner">
-</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L26" class="blob-num" data-line-number="26"></td>
-  <td id="file-quicksort-py-LC26" class="blob-code blob-code-inner"><span class="pl-k">def</span> <span class="pl-en">quicksort</span>(<span class="pl-s1">a_list</span>: <span class="pl-v">List</span>[<span class="pl-smi">TListValue</span>]) <span class="pl-c1">-&gt;</span> <span class="pl-v">List</span>[<span class="pl-smi">TListValue</span>]:</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L27" class="blob-num" data-line-number="27"></td>
-  <td id="file-quicksort-py-LC27" class="blob-code blob-code-inner">    <span class="pl-k">if</span> <span class="pl-en">len</span>(<span class="pl-s1">a_list</span>) <span class="pl-c1">&lt;</span> <span class="pl-c1">2</span>:</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L28" class="blob-num" data-line-number="28"></td>
-  <td id="file-quicksort-py-LC28" class="blob-code blob-code-inner">        <span class="pl-k">return</span> <span class="pl-s1">a_list</span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L29" class="blob-num" data-line-number="29"></td>
-  <td id="file-quicksort-py-LC29" class="blob-code blob-code-inner">
-</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L30" class="blob-num" data-line-number="30"></td>
-  <td id="file-quicksort-py-LC30" class="blob-code blob-code-inner">    <span class="pl-s1">pivot_index</span> <span class="pl-c1">=</span> <span class="pl-en">len</span>(<span class="pl-s1">a_list</span>) <span class="pl-c1">//</span> <span class="pl-c1">2</span></td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L31" class="blob-num" data-line-number="31"></td>
-  <td id="file-quicksort-py-LC31" class="blob-code blob-code-inner">    <span class="pl-s1">pivot</span> <span class="pl-c1">=</span> <span class="pl-s1">a_list</span>.<span class="pl-c1">pop</span>(<span class="pl-s1">pivot_index</span>)</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L32" class="blob-num" data-line-number="32"></td>
-  <td id="file-quicksort-py-LC32" class="blob-code blob-code-inner">    <span class="pl-s1">smaller_values</span>: <span class="pl-smi">List</span> <span class="pl-c1">=</span> [<span class="pl-s1">item</span> <span class="pl-k">for</span> <span class="pl-s1">item</span> <span class="pl-c1">in</span> <span class="pl-s1">a_list</span> <span class="pl-k">if</span> <span class="pl-s1">item</span> <span class="pl-c1">&lt;=</span> <span class="pl-s1">pivot</span>]</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L33" class="blob-num" data-line-number="33"></td>
-  <td id="file-quicksort-py-LC33" class="blob-code blob-code-inner">    <span class="pl-s1">higher_values</span>: <span class="pl-smi">List</span> <span class="pl-c1">=</span> [<span class="pl-s1">item</span> <span class="pl-k">for</span> <span class="pl-s1">item</span> <span class="pl-c1">in</span> <span class="pl-s1">a_list</span> <span class="pl-k">if</span> <span class="pl-s1">item</span> <span class="pl-c1">&gt;</span> <span class="pl-s1">pivot</span>]</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L34" class="blob-num" data-line-number="34"></td>
-  <td id="file-quicksort-py-LC34" class="blob-code blob-code-inner">
-</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L35" class="blob-num" data-line-number="35"></td>
-  <td id="file-quicksort-py-LC35" class="blob-code blob-code-inner">    <span class="pl-k">return</span> <span class="pl-en">quicksort</span>(<span class="pl-s1">smaller_values</span>) <span class="pl-c1">+</span> [<span class="pl-s1">pivot</span>] <span class="pl-c1">+</span> <span class="pl-en">quicksort</span>(<span class="pl-s1">higher_values</span>)</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L36" class="blob-num" data-line-number="36"></td>
-  <td id="file-quicksort-py-LC36" class="blob-code blob-code-inner">
-</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L37" class="blob-num" data-line-number="37"></td>
-  <td id="file-quicksort-py-LC37" class="blob-code blob-code-inner">
-</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L38" class="blob-num" data-line-number="38"></td>
-  <td id="file-quicksort-py-LC38" class="blob-code blob-code-inner"><span class="pl-k">if</span> <span class="pl-s1">__name__</span> <span class="pl-c1">==</span> <span class="pl-s">"__main__"</span>:</td>
-</tr>
-<tr>
-  <td id="file-quicksort-py-L39" class="blob-num" data-line-number="39"></td>
-  <td id="file-quicksort-py-LC39" class="blob-code blob-code-inner">    <span class="pl-s1">doctest</span>.<span class="pl-c1">testmod</span>(<span class="pl-s1">verbose</span><span class="pl-c1">=</span><span class="pl-c1">True</span>)</td>
-</tr>
-</tbody></table>
-</div>
 
-</div>
+list_of_numbers: List[int] = [10, 9, 5, 2, 11, 4, 2, 123, 321, 122]
+list_of_words: List[str] = ['Luiz', 'Maria', 'João', 'Helena', 'Zara', 'Aline']
 
-</div>
 
-</div>
+def quicksort(a_list: List[TListValue]) -> List[TListValue]:
+    if len(a_list) < 2:
+        return a_list
 
-</div>
-<div class="gist-meta">
-<a href="https://gist.github.com/luizomf/afcd473af1ecdb8210e508511e6005f3/raw/db4aa9566efa937dfd49b8c41acf6ac477caba81/quicksort.py" class="Link--inTextBlock">view raw</a>
-<a href="https://gist.github.com/luizomf/afcd473af1ecdb8210e508511e6005f3#file-quicksort-py" class="Link--inTextBlock">
-  quicksort.py
-</a>
-hosted with ❤ by <a class="Link--inTextBlock" href="https://github.com">GitHub</a>
-</div>
-</div>
-</div>
+    pivot_index = len(a_list) // 2
+    pivot = a_list.pop(pivot_index)
+    smaller_values: List = [item for item in a_list if item <= pivot]
+    higher_values: List = [item for item in a_list if item > pivot]
+
+    return quicksort(smaller_values) + [pivot] + quicksort(higher_values)
+
+
+if __name__ == "__main__":
+    doctest.testmod(verbose=True)
+```
 
 <p>
   Adaptação do Livro
@@ -846,39 +625,41 @@ hosted with ❤ by <a class="Link--inTextBlock" href="https://github.com">GitHub
 
 <h3>Um código personalizado</h3>
 
-<pre class="shiki catppuccin-mocha" style="background-color: #1e1e2e; color: #cdd6f4" tabindex="0"><code><span class="line"><span style="color:#CBA6F7">from</span><span style="color:#CDD6F4"> typing </span><span style="color:#CBA6F7">import</span><span style="color:#CDD6F4"> List</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line"><span style="color:#CBA6F7">  class</span><span style="color:#F9E2AF;font-style:italic"> Caixa</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#CBA6F7">      def</span><span style="color:#89DCEB;font-style:italic"> __init__</span><span style="color:#9399B2">(</span><span style="color:#F38BA8;font-style:italic">self</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> tem_chave</span><span style="color:#94E2D5">=</span><span style="color:#FAB387">False</span><span style="color:#9399B2">)</span><span style="color:#9399B2"> -&gt;</span><span style="color:#FAB387"> None</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#F38BA8;font-style:italic">          self</span><span style="color:#9399B2">.</span><span style="color:#CDD6F4">tem_chave </span><span style="color:#94E2D5">=</span><span style="color:#CDD6F4"> tem_chave</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#CBA6F7">      def</span><span style="color:#89DCEB;font-style:italic"> __repr__</span><span style="color:#9399B2">(</span><span style="color:#F38BA8;font-style:italic">self</span><span style="color:#9399B2">)</span><span style="color:#9399B2"> -&gt;</span><span style="color:#CBA6F7;font-style:italic"> str</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#CBA6F7">          return</span><span style="color:#A6E3A1;font-style:italic"> f</span><span style="color:#A6E3A1">'Caixa(</span><span style="color:#F5C2E7">{</span><span style="color:#F38BA8;font-style:italic">self</span><span style="color:#9399B2">.</span><span style="color:#CDD6F4">tem_chave</span><span style="color:#F5C2E7">}</span><span style="color:#A6E3A1">)'</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line"><span style="color:#CBA6F7">  def</span><span style="color:#89B4FA;font-style:italic"> encontra_chave</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">caixas</span><span style="color:#9399B2">:</span><span style="color:#EBA0AC;font-style:italic"> List</span><span style="color:#9399B2">[</span><span style="color:#EBA0AC;font-style:italic">Caixa</span><span style="color:#9399B2">],</span><span style="color:#EBA0AC;font-style:italic"> index</span><span style="color:#9399B2">:</span><span style="color:#CBA6F7;font-style:italic"> int</span><span style="color:#94E2D5"> =</span><span style="color:#FAB387"> 0</span><span style="color:#9399B2">)</span><span style="color:#9399B2"> -&gt;</span><span style="color:#CDD6F4"> Caixa</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#CBA6F7">      if</span><span style="color:#FAB387;font-style:italic"> len</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">caixas</span><span style="color:#9399B2">)</span><span style="color:#94E2D5"> &lt;=</span><span style="color:#CDD6F4"> index</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#CBA6F7">          return</span><span style="color:#89B4FA"> Caixa</span><span style="color:#9399B2">()</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#CDD6F4">      caixa </span><span style="color:#94E2D5">=</span><span style="color:#EBA0AC;font-style:italic"> caixas</span><span style="color:#9399B2">[</span><span style="color:#EBA0AC;font-style:italic">index</span><span style="color:#9399B2">]</span></span>
-<span class="line"><span style="color:#FAB387;font-style:italic">      print</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1;font-style:italic">f</span><span style="color:#A6E3A1">'Procurando chave na caixa do índice </span><span style="color:#F5C2E7">{</span><span style="color:#CDD6F4">index</span><span style="color:#F5C2E7">}</span><span style="color:#A6E3A1"> -&gt; </span><span style="color:#F5C2E7">{</span><span style="color:#CDD6F4">caixa</span><span style="color:#F5C2E7">}</span><span style="color:#A6E3A1">'</span><span style="color:#9399B2">)</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#CBA6F7">      if</span><span style="color:#CDD6F4"> caixa</span><span style="color:#9399B2">.</span><span style="color:#CDD6F4">tem_chave</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#CBA6F7">          return</span><span style="color:#CDD6F4"> caixa</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#CDD6F4">      index </span><span style="color:#94E2D5">+=</span><span style="color:#FAB387"> 1</span></span>
-<span class="line"><span style="color:#CBA6F7">      return</span><span style="color:#89B4FA"> encontra_chave</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">caixas</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> index</span><span style="color:#9399B2">)</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line"><span style="color:#CBA6F7">  if</span><span style="color:#CDD6F4"> __name__ </span><span style="color:#94E2D5">==</span><span style="color:#A6E3A1"> "__main__"</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#CDD6F4">      caixas</span><span style="color:#9399B2">:</span><span style="color:#EBA0AC;font-style:italic"> List</span><span style="color:#9399B2">[</span><span style="color:#EBA0AC;font-style:italic">Caixa</span><span style="color:#9399B2">]</span><span style="color:#94E2D5"> =</span><span style="color:#9399B2"> [</span></span>
-<span class="line"><span style="color:#89B4FA">          Caixa</span><span style="color:#9399B2">(</span><span style="color:#FAB387">True</span><span style="color:#9399B2">),</span><span style="color:#89B4FA"> Caixa</span><span style="color:#9399B2">(),</span><span style="color:#89B4FA"> Caixa</span><span style="color:#9399B2">(),</span><span style="color:#89B4FA"> Caixa</span><span style="color:#9399B2">(),</span></span>
-<span class="line"><span style="color:#89B4FA">          Caixa</span><span style="color:#9399B2">(),</span><span style="color:#89B4FA"> Caixa</span><span style="color:#9399B2">(),</span><span style="color:#89B4FA"> Caixa</span><span style="color:#9399B2">(),</span><span style="color:#89B4FA"> Caixa</span><span style="color:#9399B2">(),</span></span>
-<span class="line"><span style="color:#89B4FA">          Caixa</span><span style="color:#9399B2">(),</span><span style="color:#89B4FA"> Caixa</span><span style="color:#9399B2">(),</span><span style="color:#89B4FA"> Caixa</span><span style="color:#9399B2">(),</span><span style="color:#89B4FA"> Caixa</span><span style="color:#9399B2">(),</span></span>
-<span class="line"><span style="color:#9399B2">      ]</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#FAB387;font-style:italic">      print</span><span style="color:#9399B2">(</span><span style="color:#89B4FA">encontra_chave</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">caixas</span><span style="color:#9399B2">))</span></span></code></pre>
+```python
+from typing import List
+
+
+  class Caixa:
+      def __init__(self, tem_chave=False) -> None:
+          self.tem_chave = tem_chave
+
+      def __repr__(self) -> str:
+          return f'Caixa({self.tem_chave})'
+
+
+  def encontra_chave(caixas: List[Caixa], index: int = 0) -> Caixa:
+      if len(caixas) <= index:
+          return Caixa()
+
+      caixa = caixas[index]
+      print(f'Procurando chave na caixa do índice {index} -> {caixa}')
+
+      if caixa.tem_chave:
+          return caixa
+
+      index += 1
+      return encontra_chave(caixas, index)
+
+
+  if __name__ == "__main__":
+      caixas: List[Caixa] = [
+          Caixa(True), Caixa(), Caixa(), Caixa(),
+          Caixa(), Caixa(), Caixa(), Caixa(),
+          Caixa(), Caixa(), Caixa(), Caixa(),
+      ]
+
+      print(encontra_chave(caixas))
+```
 
 <p>Meu código mesmo.</p>
 
@@ -889,17 +670,19 @@ hosted with ❤ by <a class="Link--inTextBlock" href="https://github.com">GitHub
   <a href="https://amzn.to/2Jn18Lc">O melhor do JavaScript (Por Douglas Crockford)</a>
 </p>
 
-<pre class="shiki catppuccin-mocha" style="background-color: #1e1e2e; color: #cdd6f4" tabindex="0"><code><span class="line"><span style="color:#9399B2;font-style:italic"># Torre de Hanói</span></span>
-<span class="line"><span style="color:#CBA6F7">def</span><span style="color:#89B4FA;font-style:italic"> hanoi</span><span style="color:#9399B2">(</span><span style="color:#EBA0AC;font-style:italic">disco</span><span style="color:#9399B2">:</span><span style="color:#CBA6F7;font-style:italic"> int</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> origem</span><span style="color:#9399B2">:</span><span style="color:#CBA6F7;font-style:italic"> str</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> auxiliar</span><span style="color:#9399B2">:</span><span style="color:#CBA6F7;font-style:italic"> str</span><span style="color:#9399B2">,</span><span style="color:#EBA0AC;font-style:italic"> destino</span><span style="color:#9399B2">:</span><span style="color:#CBA6F7;font-style:italic"> str</span><span style="color:#9399B2">)</span><span style="color:#9399B2"> -&gt;</span><span style="color:#FAB387"> None</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#CBA6F7">    if</span><span style="color:#CDD6F4"> disco </span><span style="color:#94E2D5">&lt;=</span><span style="color:#FAB387"> 0</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#CBA6F7">        return</span></span>
-<span class="line"><span style="color:#89B4FA">    hanoi</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">disco </span><span style="color:#94E2D5">-</span><span style="color:#FAB387"> 1</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> origem</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> destino</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> auxiliar</span><span style="color:#9399B2">)</span></span>
-<span class="line"><span style="color:#FAB387;font-style:italic">    print</span><span style="color:#9399B2">(</span><span style="color:#A6E3A1;font-style:italic">f</span><span style="color:#A6E3A1">'Movendo disco </span><span style="color:#F5C2E7">{</span><span style="color:#CDD6F4">disco</span><span style="color:#F5C2E7">}</span><span style="color:#A6E3A1"> de </span><span style="color:#F5C2E7">{</span><span style="color:#CDD6F4">origem</span><span style="color:#F5C2E7">}</span><span style="color:#A6E3A1"> para </span><span style="color:#F5C2E7">{</span><span style="color:#CDD6F4">destino</span><span style="color:#F5C2E7">}</span><span style="color:#A6E3A1">'</span><span style="color:#9399B2">)</span></span>
-<span class="line"><span style="color:#89B4FA">    hanoi</span><span style="color:#9399B2">(</span><span style="color:#CDD6F4">disco </span><span style="color:#94E2D5">-</span><span style="color:#FAB387"> 1</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> auxiliar</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> origem</span><span style="color:#9399B2">,</span><span style="color:#CDD6F4"> destino</span><span style="color:#9399B2">)</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line"><span style="color:#CBA6F7">if</span><span style="color:#CDD6F4"> __name__ </span><span style="color:#94E2D5">==</span><span style="color:#A6E3A1"> "__main__"</span><span style="color:#9399B2">:</span></span>
-<span class="line"><span style="color:#89B4FA">    hanoi</span><span style="color:#9399B2">(</span><span style="color:#FAB387">3</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'Origem'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'Auxiliar'</span><span style="color:#9399B2">,</span><span style="color:#A6E3A1"> 'Destino'</span><span style="color:#9399B2">)</span></span></code></pre>
+```python
+# Torre de Hanói
+def hanoi(disco: int, origem: str, auxiliar: str, destino: str) -> None:
+    if disco <= 0:
+        return
+    hanoi(disco - 1, origem, destino, auxiliar)
+    print(f'Movendo disco {disco} de {origem} para {destino}')
+    hanoi(disco - 1, auxiliar, origem, destino)
+
+
+if __name__ == "__main__":
+    hanoi(3, 'Origem', 'Auxiliar', 'Destino')
+```
 
 <p>
   Adaptação do Livro

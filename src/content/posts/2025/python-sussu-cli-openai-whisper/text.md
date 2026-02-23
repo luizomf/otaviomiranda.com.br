@@ -4,7 +4,7 @@ description:
   'Aprenda a usar o Sussu, uma ferramenta de linha de comando feita em Python
   que utiliza o modelo Whisper da OpenAI para transcrever áudios e vídeos de
   forma simples e eficiente.'
-date: 2018-04-04
+date: 2025-10-25
 author: 'Luiz Otávio Miranda'
 ---
 
