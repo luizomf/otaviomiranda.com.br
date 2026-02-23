@@ -26,7 +26,7 @@ Current Date: 2026-02-21
 - [ ] Step 8: Setup de um ambiente de _Live Preview_ para que o markdown editado
       seja renderizado localmente sem delays (aproveitando o dev server nativo).
 - [ ] Step 9: Verify/Test.
-- [ ] Step 10: Update CHANGELOG.md.
+- [ ] Step 10: Update .agents/MEMORY.md.
 - [ ] Step 11: Clear PLAN.md (remove all completed content).
 
 _(Note: Once all items are checked `[x]`, this file should be cleared for the

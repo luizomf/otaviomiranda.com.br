@@ -4,7 +4,6 @@ Meaning of each file:
 
 - `AGENTS.md` - agent guidelines and project rules.
 - `PLAN.md` - the current featured being implemented.
-- `CHANGELOG.md` - factual record of completed changes, aligned with commits.
 # 🤖 Project AI Guidelines (Context Dispatcher)
 
 Welcome, AI Assistant! Before taking any action or answering any prompt in this repository, you **MUST** read the following files in the exact order below to load your context, personality, user preferences, and current memory:
@@ -13,7 +12,6 @@ Welcome, AI Assistant! Before taking any action or answering any prompt in this 
 2.  **`./.agents/USER.md`**: Defines who the user is, their environment, hardware, and preferences.
 3.  **`./.agents/MEMORY.md`**: Your long-term memory. Read this to know what we did in previous sessions, what bugs we found, and what you noted for yourself.
 4.  **`./PLAN.md`**: Our Kanban/Sprint board. Shows exactly what we are working on *right now*.
-5.  **`./CHANGELOG.md`**: Factual history of commits and finished tasks.
 
 > **CRITICAL**: The `.agents/` folder is intentionally ignored in `.gitignore` to protect personal data. Never commit personal context files.
 >
@@ -28,8 +26,8 @@ Welcome, AI Assistant! Before taking any action or answering any prompt in this 
 
 ## 5. New Plan
 
-When a task is finished, added to the change log and pushed to the repository,
-clear the current plan and use this template to create new one.
+When a task is finished, logged in local memory and committed/pushed to the
+repository, clear the current plan and use this template to create new one.
 
 ```md
 # Current Plan
@@ -43,7 +41,7 @@ Current Date: YYYY-MM-DD
 - [ ] Step 1: Analyze requirements.
 - [ ] Step 2: Implement core logic.
 - [ ] Step 3: Verify/Test.
-- [ ] Step 4: Update CHANGELOG.md.
+- [ ] Step 4: Update .agents/MEMORY.md.
 - [ ] Step 5: Clear PLAN.md (remove all completed content).
 
 _(Note: Once all items are checked `[x]`, this file should be cleared for the
