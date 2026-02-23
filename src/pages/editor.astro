@@ -10,10 +10,16 @@ import BlankLayout from '../layouts/BlankLayout.astro';
     <header class='editor-toolbar'>
       <strong class='editor-title'>Markdown Editor</strong>
       <span id='editor-file' class='editor-file'>untitled.md</span>
+      <span id='editor-vim-status' class='editor-vim-status'
+        >Vim: carregando...</span
+      >
       <div class='editor-actions'>
         <button id='editor-new' type='button'>Novo</button>
         <button id='editor-open' type='button'>Abrir</button>
         <button id='editor-frontmatter' type='button'>Frontmatter</button>
+        <button id='editor-vim-toggle' type='button' data-active='false'>
+          Vim OFF
+        </button>
         <button id='editor-save' type='button'>Salvar</button>
         <button id='editor-save-as' type='button'>Salvar Como</button>
       </div>
@@ -52,6 +58,8 @@ import BlankLayout from '../layouts/BlankLayout.astro';
       const newButton = document.getElementById('editor-new');
       const openButton = document.getElementById('editor-open');
       const frontmatterButton = document.getElementById('editor-frontmatter');
+      const vimToggleButton = document.getElementById('editor-vim-toggle');
+      const vimStatus = document.getElementById('editor-vim-status');
       const saveButton = document.getElementById('editor-save');
       const saveAsButton = document.getElementById('editor-save-as');
 
@@ -66,6 +74,8 @@ import BlankLayout from '../layouts/BlankLayout.astro';
       let fileHandle = null;
       let currentFileName = 'untitled.md';
       let renderTimer = null;
+      let vimMode = null;
+      let monacoVimModule = null;
 
       const setCurrentFileName = fileName => {
         currentFileName = fileName;
@@ -189,13 +199,42 @@ import BlankLayout from '../layouts/BlankLayout.astro';
         editor.setValue(text);
       };
 
+      const setVimUiState = ({ enabled, available }) => {
+        if (!vimToggleButton || !vimStatus) return;
+
+        if (!available) {
+          vimToggleButton.disabled = true;
+          vimToggleButton.dataset.active = 'false';
+          vimToggleButton.textContent = 'Vim indisponível';
+          vimStatus.textContent = 'Vim: plugin indisponível';
+          return;
+        }
+
+        vimToggleButton.disabled = false;
+        vimToggleButton.dataset.active = enabled ? 'true' : 'false';
+        vimToggleButton.setAttribute(
+          'aria-pressed',
+          enabled ? 'true' : 'false',
+        );
+        vimToggleButton.textContent = enabled ? 'Vim ON' : 'Vim OFF';
+        vimStatus.textContent = enabled ? '-- NORMAL --' : 'Vim: desativado';
+      };
+
+      const disableVimMode = () => {
+        if (!vimMode) return;
+        vimMode.dispose();
+        vimMode = null;
+        setVimUiState({ enabled: false, available: true });
+      };
+
+      const enableVimMode = () => {
+        if (!editor || !monacoVimModule?.initVimMode || vimMode) return;
+        vimMode = monacoVimModule.initVimMode(editor, vimStatus);
+        setVimUiState({ enabled: true, available: true });
+      };
+
       const loadMonaco = () =>
         new Promise(resolve => {
-          if (window.monaco?.editor) {
-            resolve(window.monaco);
-            return;
-          }
-
           const waitForRequire = () => {
             if (!window.require) {
               setTimeout(waitForRequire, 25);
@@ -205,19 +244,30 @@ import BlankLayout from '../layouts/BlankLayout.astro';
             window.require.config({
               paths: {
                 vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs',
+                'monaco-vim':
+                  'https://cdn.jsdelivr.net/npm/monaco-vim@0.4.4/dist/monaco-vim',
               },
             });
 
-            window.require(['vs/editor/editor.main'], () => {
-              resolve(window.monaco);
-            });
+            window.require(
+              ['vs/editor/editor.main', 'monaco-vim'],
+              (_editorMain, monacoVim) => {
+                resolve({ monaco: window.monaco, monacoVim });
+              },
+              () => {
+                window.require(['vs/editor/editor.main'], () => {
+                  resolve({ monaco: window.monaco, monacoVim: null });
+                });
+              },
+            );
           };
 
           waitForRequire();
         });
 
       const boot = async () => {
-        const monaco = await loadMonaco();
+        const { monaco, monacoVim } = await loadMonaco();
+        monacoVimModule = monacoVim;
 
         monaco.editor.defineTheme('otavio-dark', {
           base: 'vs-dark',
@@ -248,6 +298,12 @@ import BlankLayout from '../layouts/BlankLayout.astro';
         editor.onDidChangeModelContent(schedulePreviewRender);
         renderPreview();
 
+        if (monacoVimModule?.initVimMode) {
+          enableVimMode();
+        } else {
+          setVimUiState({ enabled: false, available: false });
+        }
+
         openInput.addEventListener('change', async event => {
           const file = event.target.files?.[0];
           if (!file) return;
@@ -262,6 +318,14 @@ import BlankLayout from '../layouts/BlankLayout.astro';
           openFromFileSystem().catch(() => {});
         });
         frontmatterButton.addEventListener('click', insertFrontmatterIfMissing);
+        vimToggleButton.addEventListener('click', () => {
+          if (!monacoVimModule?.initVimMode) return;
+          if (vimMode) {
+            disableVimMode();
+            return;
+          }
+          enableVimMode();
+        });
         saveButton.addEventListener('click', () => {
           save().catch(() => {});
         });
@@ -370,6 +434,25 @@ import BlankLayout from '../layouts/BlankLayout.astro';
 
   .editor-actions button:hover {
     border-color: var(--editor-accent);
+  }
+
+  .editor-actions button[data-active='true'] {
+    border-color: #00d084;
+    background: color-mix(in hsl, #00d084 16%, var(--editor-panel-soft));
+  }
+
+  .editor-actions button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .editor-vim-status {
+    font-size: 1.15rem;
+    color: var(--editor-text-soft);
+    border: 1px solid var(--editor-border);
+    border-radius: 999px;
+    padding: 0.4rem 0.8rem;
+    white-space: nowrap;
   }
 
   .editor-panes {
