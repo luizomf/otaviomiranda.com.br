@@ -156,6 +156,7 @@ o meu Agent AI (O _"Brien"_) catalogamos para voltar e matar depois.
       lazy (isso não quebra a foto, mas carrega semântica vazia).
 - [ ] Revisitar index.astro: Fazer grid de paginação pros arquivos `.md` caso os
       posts comecem a crescer infinitivamente na primeira página baseada.
+- [ ] **Integração do Frontmatter no Layout**: Parar de escrever o título (H1), autor e data manualmente dentro do corpo de cada arquivo Markdown (`text.md`). O objetivo é extrair esses metadados diretamente do Frontmatter (`post.data.title`, `post.data.author`, `post.data.date`) e injetá-ar dinamicamente no componente de página principal (`[...slug].astro`), padronizando o cabeçalho de todos os posts e tirando esse fardo das costas do autor.
 
 ---
 
