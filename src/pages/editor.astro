@@ -1,14 +1,36 @@
 ---
 import BlankLayout from '../layouts/BlankLayout.astro';
+
+const editorSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Markdown Editor',
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'Any',
+  isAccessibleForFree: true,
+  description:
+    'Editor Markdown com Monaco, Vim mode e preview em tempo real no navegador.',
+  url: 'https://www.otaviomiranda.com.br/editor/',
+  author: {
+    '@type': 'Person',
+    name: 'Otávio Miranda',
+  },
+};
 ---
 
 <BlankLayout
-  title='Markdown Editor | Otávio Miranda'
-  description='Editor Markdown no navegador com Monaco de um lado e preview do outro.'
+  title='Markdown Editor com Vim e Preview ao Vivo | Otávio Miranda'
+  description='Editor Markdown gratuito com Monaco Editor, Vim motions, busca com regex e preview ao vivo. Abra, edite e salve arquivos .md direto no navegador.'
 >
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={JSON.stringify(editorSchema)}
+  />
+
   <div class='editor-shell'>
     <header class='editor-toolbar'>
-      <strong class='editor-title'>Markdown Editor</strong>
+      <h1 class='editor-title'>Markdown Editor</h1>
       <span id='editor-file' class='editor-file'>untitled.md</span>
       <span id='editor-vim-status' class='editor-vim-status'
         >Vim: carregando...</span
@@ -444,6 +466,7 @@ import BlankLayout from '../layouts/BlankLayout.astro';
     color: var(--editor-text);
     letter-spacing: 0.03em;
     margin-right: 0.8rem;
+    margin-block: 0;
   }
 
   .editor-file {

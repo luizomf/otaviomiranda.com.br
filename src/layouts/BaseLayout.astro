@@ -6,13 +6,22 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  canonical?: string;
+  robots?: string;
+  ogType?: string;
 }
 
 const {
   title = 'Otávio Miranda | Cursos de Programação Python, JS e Full Stack',
   description = 'Aprenda programação de verdade com Otávio Miranda. Cursos de Python, JavaScript, TypeScript e Full Stack focados em projetos reais. Mais de 300 mil alunos.',
   image = 'https://otaviomiranda.com.br/imgs/curso-javascript-typescript.webp',
+  canonical,
+  robots = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1',
+  ogType = 'website',
 } = Astro.props;
+
+const site = Astro.site ?? new URL('https://www.otaviomiranda.com.br');
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, site).toString();
 ---
 
 <!doctype html>
@@ -21,6 +30,8 @@ const {
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <link rel='sitemap' href='/sitemap-index.xml' />
+    <link rel='canonical' href={canonicalUrl} />
+    <meta name='robots' content={robots} />
 
     <title>{title}</title>
     <meta name='description' content={description} />
@@ -28,8 +39,10 @@ const {
     <!-- Open Graph / Sociabilidade -->
     <meta property='og:title' content={title} />
     <meta property='og:description' content={description} />
-    <meta property='og:type' content='website' />
-    <meta property='og:url' content={Astro.url} />
+    <meta property='og:type' content={ogType} />
+    <meta property='og:url' content={canonicalUrl} />
+    <meta property='og:site_name' content='Otávio Miranda' />
+    <meta property='og:locale' content='pt_BR' />
     <meta property='og:image' content={image} />
 
     <!-- Twitter -->
