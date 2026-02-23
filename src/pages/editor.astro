@@ -83,9 +83,22 @@ import BlankLayout from '../layouts/BlankLayout.astro';
         fileLabel.textContent = fileName;
       };
 
+      const stripFrontmatterForPreview = markdown => {
+        const withoutBom = markdown.replace(/^\uFEFF/, '');
+        if (
+          !withoutBom.startsWith('---\n') &&
+          !withoutBom.startsWith('---\r\n')
+        ) {
+          return markdown;
+        }
+
+        return withoutBom.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '');
+      };
+
       const renderPreview = () => {
         if (!editor || !window.marked) return;
-        previewEl.innerHTML = window.marked.parse(editor.getValue());
+        const markdown = stripFrontmatterForPreview(editor.getValue());
+        previewEl.innerHTML = window.marked.parse(markdown);
       };
 
       const schedulePreviewRender = () => {
