@@ -6,10 +6,22 @@
 <canvas id='canvas-hero-dark' class='canvas-bg' aria-hidden='true'></canvas>
 
 <script>
+  type Configs = {
+    spring: number;
+    force: number;
+    drag: number;
+    particle_min_size: number;
+    particle_max_size: number;
+    particle_count: number;
+    color: string;
+    radius: number;
+  };
+
   function canvasBg() {
-    const makeCanvasBg = (canv, configs) => {
+    const makeCanvasBg = (canv: HTMLCanvasElement, configs: Configs) => {
       if (!canv) return;
-      let w, h;
+
+      let w: number, h: number;
 
       const ctx = canv.getContext('2d');
 
@@ -24,7 +36,7 @@
         radius: configs.radius,
       };
 
-      window.addEventListener('mousemove', (e) => {
+      window.addEventListener('mousemove', e => {
         const bounds = canv.parentElement.getBoundingClientRect();
         const x = e.clientX - bounds.left;
         const y = e.clientY - bounds.top;
@@ -128,7 +140,7 @@
         requestAnimationFrame(loop);
       }
 
-      let resizeTimeout;
+      let resizeTimeout: NodeJS.Timeout;
 
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
@@ -144,7 +156,10 @@
       loop();
     };
 
-    const canvas = document.getElementById('canvas-hero-dark');
+    const canvas = document.getElementById(
+      'canvas-hero-dark',
+    ) as HTMLCanvasElement;
+
     makeCanvasBg(canvas, {
       spring: 0.01,
       force: 25,
