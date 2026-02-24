@@ -42,7 +42,7 @@ const editorSchema = {
         <button id='editor-vim-toggle' type='button' data-active='false'>
           Vim OFF
         </button>
-<button id='editor-preview-visibility' type='button' data-active='true'>
+        <button id='editor-preview-visibility' type='button' data-active='true'>
           Ocultar Preview
         </button>
         <button id='editor-save' type='button'>Salvar</button>
@@ -91,7 +91,7 @@ const editorSchema = {
       const openButton = document.getElementById('editor-open');
       const frontmatterButton = document.getElementById('editor-frontmatter');
       const vimToggleButton = document.getElementById('editor-vim-toggle');
-const previewVisibilityButton = document.getElementById(
+      const previewVisibilityButton = document.getElementById(
         'editor-preview-visibility',
       );
       const vimStatus = document.getElementById('editor-vim-status');
@@ -179,7 +179,6 @@ const previewVisibilityButton = document.getElementById(
         panesEl.classList.toggle('editor-panes--code-only', !previewVisible);
         codePaneEl.classList.toggle('editor-pane--full', !previewVisible);
         previewPaneEl.hidden = !previewVisible;
-
       };
 
       const setCurrentFileName = fileName => {
@@ -678,7 +677,7 @@ const previewVisibilityButton = document.getElementById(
           }
           enableVimMode();
         });
-previewVisibilityButton.addEventListener('click', () => {
+        previewVisibilityButton.addEventListener('click', () => {
           previewVisible = !previewVisible;
           setPreviewVisibilityUiState();
           if (previewVisible) {
@@ -756,6 +755,7 @@ previewVisibilityButton.addEventListener('click', () => {
 
   .editor-toolbar {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 1.2rem;
     padding: 1.2rem 1.6rem;
@@ -772,7 +772,7 @@ previewVisibilityButton.addEventListener('click', () => {
   }
 
   .editor-file {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: #ccc;
     white-space: nowrap;
     overflow: hidden;
@@ -788,13 +788,13 @@ previewVisibilityButton.addEventListener('click', () => {
   }
 
   .editor-actions button {
-    border: 1px solid var(--editor-border);
+    border: 1px solid transparent;
     background: #aaa;
     color: #000;
     font: inherit;
     font-size: 1.2rem;
     font-weight: 700;
-    padding: 0.6rem 1rem;
+    padding: 0.3rem 0.8rem;
     border-radius: 999px;
     cursor: pointer;
   }
@@ -822,7 +822,7 @@ previewVisibilityButton.addEventListener('click', () => {
 
   .editor-panes {
     display: grid;
-    grid-template-columns: minmax(540px, 1fr) minmax(420px, 0.9fr);
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
     gap: 1.2rem;
     padding: 1.2rem;
     height: 100%;
@@ -864,7 +864,7 @@ previewVisibilityButton.addEventListener('click', () => {
     overflow: auto;
     padding: 2.2rem;
     line-height: 1.7;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: #111;
     background: #fff;
     box-shadow: 0 0 10px hsla(0 0 5% / 0.5);
