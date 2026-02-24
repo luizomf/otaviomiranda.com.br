@@ -45,6 +45,13 @@ const editorSchema = {
         <button id='editor-preview-toggle' type='button' data-active='true'>
           Preview Seguro
         </button>
+        <button
+          id='editor-preview-visibility'
+          type='button'
+          data-active='true'
+        >
+          Ocultar Preview
+        </button>
         <button id='editor-save' type='button'>Salvar</button>
         <button id='editor-save-as' type='button'>Salvar Como</button>
       </div>
@@ -94,9 +101,14 @@ const editorSchema = {
       const previewToggleButton = document.getElementById(
         'editor-preview-toggle',
       );
+      const previewVisibilityButton = document.getElementById(
+        'editor-preview-visibility',
+      );
       const vimStatus = document.getElementById('editor-vim-status');
       const saveButton = document.getElementById('editor-save');
       const saveAsButton = document.getElementById('editor-save-as');
+      const panesEl = document.querySelector('.editor-panes');
+      const previewPaneEl = document.querySelector('.editor-pane--preview');
 
       const supportsFSApi =
         'showOpenFilePicker' in window && 'showSaveFilePicker' in window;
@@ -121,6 +133,10 @@ const editorSchema = {
         'yml',
         'markdown',
         'sql',
+        'nginx',
+        'xml',
+        'apache',
+        'ssh-config',
       ];
 
       const nowDate = () => new Date().toLocaleDateString('sv-SE');
@@ -139,6 +155,7 @@ const editorSchema = {
       let lastSavedContent = '';
       let isSaving = false;
       let safePreviewEnabled = true;
+      let previewVisible = true;
       let previewRenderNonce = 0;
       let shikiModulePromise = null;
       let shikiHighlighterPromise = null;
@@ -155,6 +172,28 @@ const editorSchema = {
         previewToggleButton.textContent = safePreviewEnabled
           ? 'Preview Seguro'
           : 'Preview Raw';
+      };
+
+      const setPreviewVisibilityUiState = () => {
+        if (!previewVisibilityButton || !panesEl || !previewPaneEl) return;
+
+        previewVisibilityButton.dataset.active = previewVisible
+          ? 'true'
+          : 'false';
+        previewVisibilityButton.setAttribute(
+          'aria-pressed',
+          previewVisible ? 'true' : 'false',
+        );
+        previewVisibilityButton.textContent = previewVisible
+          ? 'Ocultar Preview'
+          : 'Mostrar Preview';
+
+        panesEl.classList.toggle('editor-panes--code-only', !previewVisible);
+        previewPaneEl.hidden = !previewVisible;
+
+        if (previewToggleButton) {
+          previewToggleButton.disabled = !previewVisible;
+        }
       };
 
       const setCurrentFileName = fileName => {
@@ -251,6 +290,7 @@ const editorSchema = {
 
       const renderPreview = () => {
         if (!editor || !window.marked) return;
+        if (!previewVisible) return;
         const markdown = stripFrontmatterForPreview(editor.getValue());
         const renderedHtml = window.marked.parse(markdown);
         const currentRenderNonce = ++previewRenderNonce;
@@ -558,10 +598,10 @@ const editorSchema = {
               '# Olá mundo!\n\nEste é o mesmo editor que roda no seu VS Code. Use como quiser.',
             language: 'markdown',
             theme: 'otavio-dark',
-            fontSize: 16,
+            fontSize: 14,
             minimap: { enabled: false },
             automaticLayout: true,
-            wordWrap: 'on',
+            wordWrap: 'off',
             lineNumbersMinChars: 3,
             scrollBeyondLastLine: false,
           },
@@ -569,6 +609,7 @@ const editorSchema = {
 
         editor.onDidChangeModelContent(schedulePreviewRender);
         setPreviewModeUiState();
+        setPreviewVisibilityUiState();
         renderPreview();
 
         if (monacoVimModule?.initVimMode) {
@@ -606,6 +647,13 @@ const editorSchema = {
           safePreviewEnabled = !safePreviewEnabled;
           setPreviewModeUiState();
           renderPreview();
+        });
+        previewVisibilityButton.addEventListener('click', () => {
+          previewVisible = !previewVisible;
+          setPreviewVisibilityUiState();
+          if (previewVisible) {
+            renderPreview();
+          }
         });
         saveButton.addEventListener('click', () => {
           save().catch(() => {});
@@ -749,6 +797,10 @@ const editorSchema = {
     padding: 1.2rem;
     height: 100%;
     min-height: 0;
+  }
+
+  .editor-panes.editor-panes--code-only {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .editor-pane {
