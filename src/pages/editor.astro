@@ -107,7 +107,9 @@ const editorSchema = {
       const vimStatus = document.getElementById('editor-vim-status');
       const saveButton = document.getElementById('editor-save');
       const saveAsButton = document.getElementById('editor-save-as');
+      const shellEl = document.querySelector('.editor-shell');
       const panesEl = document.querySelector('.editor-panes');
+      const codePaneEl = document.querySelector('.editor-pane--code');
       const previewPaneEl = document.querySelector('.editor-pane--preview');
 
       const supportsFSApi =
@@ -175,7 +177,15 @@ const editorSchema = {
       };
 
       const setPreviewVisibilityUiState = () => {
-        if (!previewVisibilityButton || !panesEl || !previewPaneEl) return;
+        if (
+          !previewVisibilityButton ||
+          !shellEl ||
+          !panesEl ||
+          !codePaneEl ||
+          !previewPaneEl
+        ) {
+          return;
+        }
 
         previewVisibilityButton.dataset.active = previewVisible
           ? 'true'
@@ -188,7 +198,9 @@ const editorSchema = {
           ? 'Ocultar Preview'
           : 'Mostrar Preview';
 
+        shellEl.classList.toggle('editor-shell--code-only', !previewVisible);
         panesEl.classList.toggle('editor-panes--code-only', !previewVisible);
+        codePaneEl.classList.toggle('editor-pane--full', !previewVisible);
         previewPaneEl.hidden = !previewVisible;
 
         if (previewToggleButton) {
@@ -803,6 +815,11 @@ const editorSchema = {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .editor-shell.editor-shell--code-only .editor-panes {
+    padding: 0;
+    gap: 0;
+  }
+
   .editor-pane {
     min-height: 0;
     border-radius: 8px;
@@ -810,10 +827,18 @@ const editorSchema = {
     background: #1e1e1e;
   }
 
+  .editor-pane.editor-pane--full {
+    border-radius: 0;
+  }
+
   .editor-monaco {
     width: 100%;
     height: 100%;
     padding: 1rem;
+  }
+
+  .editor-shell.editor-shell--code-only .editor-monaco {
+    padding: 0;
   }
 
   .editor-preview {
