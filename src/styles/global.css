@@ -36,11 +36,11 @@
 
   --main-clr-shade: hsl(240 22% 5% / 1);
 
-  --glow-clr-1: rgba(0, 120, 230, 1);
-  --glow-clr-2: rgba(180, 0, 200, 1);
-  --glow-clr-3: rgba(128, 0, 190, 1);
-  --glow-clr-4: rgba(0, 150, 200, 1);
-  --glow-clr-5: rgba(0, 120, 230, 1);
+  --glow-clr-1: rgba(0, 120, 210, 1);
+  --glow-clr-2: rgba(190, 0, 220, 1);
+  --glow-clr-3: rgba(138, 0, 190, 1);
+  --glow-clr-4: rgba(0, 180, 245, 1);
+  --glow-clr-5: rgba(0, 120, 210, 1);
 
   --blur-xsm: 1px;
   --blur-sm: 2px;
@@ -48,7 +48,7 @@
   --blur-lg: 8px;
   --blur-xlg: 12px;
 
-  --glow-shadow-clr: rgba(220, 0, 255, 0.75);
+  --glow-shadow-clr: rgba(230, 0, 255, 0.85);
 
   --line-height-xxxsm: 1;
   --line-height-xxsm: 1.2;
