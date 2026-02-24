@@ -7,42 +7,25 @@ date: 2020-08-20
 author: 'Luiz Otávio Miranda'
 ---
 
-<p>
-  Funções recursivas com Python (ou qualquer linguagem de
-  programação) são funções que chamam
-  a si mesmas de maneira direta ou indireta. Infelizmente, não
-  há nenhum benefício em termos de desempenho ao usar
-  funções recursivas em
-  <a href="https://www.otaviomiranda.com.br/2017/cursos-de-python-e-javascript-com-desconto/">Python</a>, já que laços podem resolver o problema com mais
-  eficiência. Porém, funções recursivas podem
-  ser mais intuitivas para o programador quando um problema pode ser
-  dividido em problemas menores de mesmo tipo.
-</p>
+Funções recursivas com Python (ou qualquer linguagem de programação) são funções
+que chamam a si mesmas de maneira direta ou indireta. Infelizmente, não há
+nenhum benefício em termos de desempenho ao usar funções recursivas em
+[Python](/#courses), já que laços podem resolver o problema com mais eficiência.
+Porém, funções recursivas podem ser mais intuitivas para o programador quando um
+problema pode ser dividido em problemas menores de mesmo tipo.
 
-<p>
-  Considere o conceito de
-  <a href="https://www.todamateria.com.br/fatorial/">fatorial da matemática</a>: o fatorial de um número é calculado pela
-  multiplicação desse número por todos os seus
-  antecessores até chegar ao número 1.
-</p>
+Considere o conceito de
+[fatorial da matemática](https://www.todamateria.com.br/fatorial/): o fatorial
+de um número é calculado pela multiplicação desse número por todos os seus
+antecessores até chegar ao número 1.
 
-<p>
-  Esse é um problema extremamente simples para ser resolvido com
-  recursão por dois fatores:
-</p>
+Esse é um problema extremamente simples para ser resolvido com recursão por dois
+fatores:
 
-<ul>
-  <li>
-    É um problema que pode ser dividido em sub-problemas menores
-    e de mesmo tipo (multiplicar um número pelos seus
-    antecessores)
-  </li>
-  <li>
-    Temos um <em>caso-base</em> para parar a recursão, retornar
-    um valor real e resolver as equações (quando chegarmos
-    em 1)
-  </li>
-</ul>
+- É um problema que pode ser dividido em sub-problemas menores e de mesmo tipo
+  (multiplicar um número pelos seus antecessores)
+- Temos um _caso-base_ para parar a recursão, retornar um valor real e resolver
+  as equações (quando chegarmos em 1)
 
 ```python
 def fatorial(n: int) -> int:
@@ -56,24 +39,19 @@ if __name__ == "__main__":
     print(fat5)
 ```
 
-<p>O resultado da execução da função acima será 120.</p>
+O resultado da execução da função acima será 120.
 
-```
+```python
 # 5 * 4 * 3 * 2 * 1 = 120
 ```
 
-<p>
-  <strong>Observação:</strong> você poderia escrever
-  uma condição mais concisa eliminando o
-  <code>or</code> da expressão com “<code>if n &lt; 2</code>” ao invés de “<code>if n == 1 or n == 0</code>“.
-</p>
-<h2>Caso-base e caso recursivo</h2>
+**Observação:** você poderia escrever uma condição mais concisa eliminando o
+`or` da expressão com “`if n < 2`” ao invés de “`if n == 1 or n == 0`“.
 
-<p>
-  É muito fácil escrever uma função
-  recursiva incorretamente e cair em uma recursão infinita. Veja
-  isso no código a seguir:
-</p>
+## Caso-base e caso recursivo
+
+É muito fácil escrever uma função recursiva incorretamente e cair em uma
+recursão infinita. Veja isso no código a seguir:
 
 ```python
 def recursao_infinita(numero: int = 100) -> int:
@@ -84,35 +62,24 @@ if __name__ == "__main__":
     recursao_infinita()
 ```
 
-<p>
-  O Python não vai permitir que este código execute infinitamente, então
-  você deverá ver uma exceção:
-</p>
+O Python não vai permitir que este código execute infinitamente, então você
+deverá ver uma exceção:
 
-```
+```python
 # RecursionError: maximum recursion depth exceeded
 ```
 
-<p>
-  Isso ocorre porque nunca dissemos para a função quando
-  parar a recursão, mais especificamente, não adicionamos
-  um
-  <a href="https://pt.wikipedia.org/wiki/Caso_base">caso-base na função</a>.
-</p>
+Isso ocorre porque nunca dissemos para a função quando parar a recursão, mais
+especificamente, não adicionamos um
+[caso-base na função](https://pt.wikipedia.org/wiki/Caso_base).
 
-<p>
-  Toda função recursiva é composta de, pelo menos,
-  duas partes: caso-base e caso recursivo. O caso-base é quando a
-  função <em>NÃO</em> chama a si mesma, mas retorna
-  um valor real; já o caso recursivo, como o próprio nome
-  indica, é onde a recursividade ocorre (a função
-  chama a si mesma).
-</p>
+Toda função recursiva é composta de, pelo menos, duas partes: caso-base e caso
+recursivo. O caso-base é quando a função _NÃO_ chama a si mesma, mas retorna um
+valor real; já o caso recursivo, como o próprio nome indica, é onde a
+recursividade ocorre (a função chama a si mesma).
 
-<p>
-  Veja uma nova função recursiva, porém com ambos
-  os casos: caso-base e caso recursivo.
-</p>
+Veja uma nova função recursiva, porém com ambos os casos: caso-base e caso
+recursivo.
 
 ```python
 def contagem_regressiva_recursiva(comeca_em: int = 10, termina_em: int = 0) -> int:
@@ -137,213 +104,132 @@ if __name__ == "__main__":
     contagem_regressiva_recursiva()
 ```
 
-<h2>Call stack</h2>
+## Call stack
 
-<p>
-  Sempre que invocamos uma função, dados do seu escopo
-  interno (como variáveis e parâmetros) precisam ser salvos
-  em algum local. Além disso, também precisamos saber
-  quando a função retorna um valor para que o programa
-  continue a seguir o seu fluxo. Tudo isso é gerenciado pela
-  <em>Call Stack</em> (pilha de chamada ou pilha de
-  execução).
-</p>
+Sempre que invocamos uma função, dados do seu escopo interno (como variáveis e
+parâmetros) precisam ser salvos em algum local. Além disso, também precisamos
+saber quando a função retorna um valor para que o programa continue a seguir o
+seu fluxo. Tudo isso é gerenciado pela _Call Stack_ (pilha de chamada ou pilha
+de execução).
 
-<h3>Como funciona a Call Stack</h3>
+### Como funciona a Call Stack
 
-<p>
-  De forma simples e direta, funciona assim: quando meu programa
-  está em execução e encontra uma chamada de
-  função, ele pausa temporariamente o que estava fazendo e
-  vai até o código interno da função para
-  realizar sua execução. Após a
-  execução, a função precisa saber como
-  retornar o programa para o local onde ele parou antes da chamada para
-  a execução. Então, após o retorno da
-  função, o programa sabe como resumir o código
-  partindo exatamente de onde a função retornou.
-</p>
+De forma simples e direta, funciona assim: quando meu programa está em execução
+e encontra uma chamada de função, ele pausa temporariamente o que estava fazendo
+e vai até o código interno da função para realizar sua execução. Após a
+execução, a função precisa saber como retornar o programa para o local onde ele
+parou antes da chamada para a execução. Então, após o retorno da função, o
+programa sabe como resumir o código partindo exatamente de onde a função
+retornou.
 
-<h3>Exemplo de funcionamento da Call Stack</h3>
+### Exemplo de funcionamento da Call Stack
 
-<p>
-  Veja um exemplo no gif abaixo como o fluxo do programa muda quando
-  existe uma chamada para função:
-</p>
+Veja um exemplo no gif abaixo como o fluxo do programa muda quando existe uma
+chamada para função:
 
-![Exemplo de recursão](./imgs/recursion-1.gif)
+![Exemplo de recursão](/_image?href=%2F%40fs%2FUsers%2Fluizotavio%2FDesktop%2Ftutoriais_e_cursos%2Fotaviomiranda.com.br%2Fsrc%2Fcontent%2Fposts%2F2020%2Ffuncoes-recursivas-com-python%2Fimgs%2Frecursion-1.gif%3ForigWidth%3D940%26origHeight%3D558%26origFormat%3Dgif&w=940&h=558&f=webp)
 
-<p>
-  No trecho simples de código acima, existe uma
-  definição de função (linha 1),
-  definição de variável (linha 5), uma chamada para
-  função (linha 8) e em seguida um “print” em
-  uma variável (linha 11). Eu marquei breakpoints nas linhas 2,
-  5, 8 e 11, mas não é essa a ordem de
-  execução. Ao executar o programa, a ordem dos
-  breakpoints não é a mesma. Ela é alterada para 5,
-  8, 2 e 11. Isso porque existe uma chamada para função na
-  linha 8. Então enquanto o interpretador não conferir o
-  que a função da linha 8 retorna, ele não tem como
-  continuar a execução.
-</p>
+No trecho simples de código acima, existe uma definição de função (linha 1),
+definição de variável (linha 5), uma chamada para função (linha 8) e em seguida
+um “print” em uma variável (linha 11). Eu marquei breakpoints nas linhas 2, 5, 8
+e 11, mas não é essa a ordem de execução. Ao executar o programa, a ordem dos
+breakpoints não é a mesma. Ela é alterada para 5, 8, 2 e 11. Isso porque existe
+uma chamada para função na linha 8. Então enquanto o interpretador não conferir
+o que a função da linha 8 retorna, ele não tem como continuar a execução.
 
-<p>
-  Além disso, perceba que, na lateral esquerda do gif, a
-  “Call Stack” está aberta. Nela, existe o que
-  está sendo executado no momento (stack frames). Nesse caso em
-  específico, começamos com o módulo que
-  está sendo executado (<code>&lt;module&gt;</code>). Tudo o que
-  estiver definido dentro do módulo, será exibido na Call
-  Stack dele. Porém, ao chamar a função, algo novo
-  é adicionado ali, a chamada para função
-  “<code>funcao</code>“. Isso ocorre após a
-  execução da linha 8 (chamada da função) e
-  termina após o retorno da função.
-</p>
+Além disso, perceba que, na lateral esquerda do gif, a “Call Stack” está aberta.
+Nela, existe o que está sendo executado no momento (stack frames). Nesse caso em
+específico, começamos com o módulo que está sendo executado (`<module>`). Tudo o
+que estiver definido dentro do módulo, será exibido na Call Stack dele. Porém,
+ao chamar a função, algo novo é adicionado ali, a chamada para função
+“`funcao`“. Isso ocorre após a execução da linha 8 (chamada da função) e termina
+após o retorno da função.
 
-<h3>Locals</h3>
+### Locals
 
-<p>
-  Vamos observar o que existe dentro da chamada de função
-  (após a execução da linha 8).
-</p>
+Vamos observar o que existe dentro da chamada de função (após a execução da
+linha 8).
 
-![Exemplo no VS Code](./imgs/rec-2.png)
+![Exemplo no VS Code](/_image?href=%2F%40fs%2FUsers%2Fluizotavio%2FDesktop%2Ftutoriais_e_cursos%2Fotaviomiranda.com.br%2Fsrc%2Fcontent%2Fposts%2F2020%2Ffuncoes-recursivas-com-python%2Fimgs%2Frec-2.png%3ForigWidth%3D1129%26origHeight%3D509%26origFormat%3Dpng&w=1129&h=509&f=webp)
 
-<p>
-  Após a chamada para a função, a
-  execução do módulo é pausada
-  temporariamente até que o interpretador verifique o que a
-  função retorna. Nesse momento, ela é adicionada
-  na “Call Stack”, seus dados internos são salvos
-  até que ela decida retornar um valor. Perceba que o argumento
-  enviado ao parâmetro “<code>nome</code>” está
-  em “<code>Variables</code>” como locals dessa
-  função, essas são suas variáveis locais.
-</p>
+Após a chamada para a função, a execução do módulo é pausada temporariamente até
+que o interpretador verifique o que a função retorna. Nesse momento, ela é
+adicionada na “Call Stack”, seus dados internos são salvos até que ela decida
+retornar um valor. Perceba que o argumento enviado ao parâmetro “`nome`” está em
+“`Variables`” como locals dessa função, essas são suas variáveis locais.
 
-<p>
-  Assim que o retorno for concluído, a execução do
-  módulo continuará a seguir seu fluxo e a chamada para a
-  função será eliminada da “Call
-  stack”.
-</p>
+Assim que o retorno for concluído, a execução do módulo continuará a seguir seu
+fluxo e a chamada para a função será eliminada da “Call stack”.
 
-![Exemplo 3](./imgs/rec-3.png)
+![Exemplo 3](/_image?href=%2F%40fs%2FUsers%2Fluizotavio%2FDesktop%2Ftutoriais_e_cursos%2Fotaviomiranda.com.br%2Fsrc%2Fcontent%2Fposts%2F2020%2Ffuncoes-recursivas-com-python%2Fimgs%2Frec-3.png%3ForigWidth%3D1321%26origHeight%3D549%26origFormat%3Dpng&w=1321&h=549&f=webp)
 
-<p>
-  Após o retorno da função, ela é eliminada
-  da Call Stack e o módulo pode prosseguir com sua
-  execução. Aliás, também preciso mencionar
-  que capturei o valor do seu retorno em uma variável
-  <code>frase</code> para fazer algo ela posteriormente (como dar um
-  simples print no terminal).
-</p>
+Após o retorno da função, ela é eliminada da Call Stack e o módulo pode
+prosseguir com sua execução. Aliás, também preciso mencionar que capturei o
+valor do seu retorno em uma variável `frase` para fazer algo ela posteriormente
+(como dar um simples print no terminal).
 
-<p>
-  Então, podemos resumir que “Call Stack” é
-  exatamente o que sua tradução descreve, uma
-  <em>pilha de chamadas</em>. Assim como existe uma pilha de livros na
-  prateleira, existe uma pilha de chamadas de funções no
-  seu programa. Cada elemento na call stack contém os dados do
-  momento em que a funções foram chamadas.
-</p>
+Então, podemos resumir que “Call Stack” é exatamente o que sua tradução
+descreve, uma _pilha de chamadas_. Assim como existe uma pilha de livros na
+prateleira, existe uma pilha de chamadas de funções no seu programa. Cada
+elemento na call stack contém os dados do momento em que a funções foram
+chamadas.
 
-<h3>Funções dentro de funções</h3>
+### Funções dentro de funções
 
-<p>
-  Assim como acontece com funções chamadas diretamente
-  dentro de um módulo, também ocorre com
-  funções chamadas dentro de outras funções.
-  Nesse caso, a pilha de chamadas fica ainda maior, porque se existir
-  outra chamada para função dentro de uma
-  função existente, o interpretador também
-  precisará checar o retorno dessa outra função.
-</p>
+Assim como acontece com funções chamadas diretamente dentro de um módulo, também
+ocorre com funções chamadas dentro de outras funções. Nesse caso, a pilha de
+chamadas fica ainda maior, porque se existir outra chamada para função dentro de
+uma função existente, o interpretador também precisará checar o retorno dessa
+outra função.
 
-<p>
-  Considere o mesmo código anterior, porém com uma chamada
-  dentro da função já criada.
-</p>
+Considere o mesmo código anterior, porém com uma chamada dentro da função já
+criada.
 
-![Exemplo 4](./imgs/rec4.png)
+![Exemplo 4](/_image?href=%2F%40fs%2FUsers%2Fluizotavio%2FDesktop%2Ftutoriais_e_cursos%2Fotaviomiranda.com.br%2Fsrc%2Fcontent%2Fposts%2F2020%2Ffuncoes-recursivas-com-python%2Fimgs%2Frec4.png%3ForigWidth%3D1429%26origHeight%3D872%26origFormat%3Dpng&w=1429&h=872&f=webp)
 
-<p>
-  Agora os passos são um pouco diferentes. Mas, se você me
-  acompanhou até aqui, não terá dificuldade nenhuma
-  para entender o que ocorreu.
-</p>
+Agora os passos são um pouco diferentes. Mas, se você me acompanhou até aqui,
+não terá dificuldade nenhuma para entender o que ocorreu.
 
-<p>
-  Lembra que eu te disse que quando há uma chamada de
-  função, o interpretador precisa verificar o que essa
-  chamada retorna? Então, não é diferente aqui!
-</p>
+Lembra que eu te disse que quando há uma chamada de função, o interpretador
+precisa verificar o que essa chamada retorna? Então, não é diferente aqui!
 
-<p>
-  Quando estamos dentro de uma <code>funcao_um</code> realizando uma
-  chamada para uma <code>funcao_dois</code>, o que ocorre é que a
-  <code>funcao_um</code> precisa pausar sua execução para
-  saber o que a <code>funcao_dois</code> retorna. Só após
-  isso, a <code>funcao_um</code> poderá continuar sua
-  execução normal.
-</p>
+Quando estamos dentro de uma `funcao_um` realizando uma chamada para uma
+`funcao_dois`, o que ocorre é que a `funcao_um` precisa pausar sua execução para
+saber o que a `funcao_dois` retorna. Só após isso, a `funcao_um` poderá
+continuar sua execução normal.
 
-<p>
-  Mas não termina aqui, isso tudo é registrado pela
-  “Call Stack” (chamarei de <em>pilha</em> daqui em diante).
-  Então, quanto mais chamadas de funções dentro de
-  funções, mais coisas existem acontecendo na pilha.
-</p>
+Mas não termina aqui, isso tudo é registrado pela “Call Stack” (chamarei de
+_pilha_ daqui em diante). Então, quanto mais chamadas de funções dentro de
+funções, mais coisas existem acontecendo na pilha.
 
-<p>
-  <a href="https://gist.github.com/luizomf/83c8f286a83ad6ddb1e7094aedabbef5">No código da imagem anterior</a>, temos uma chamada para função na linha 19,
-  então sabemos que o interpretador vai conferir o retorno para
-  essa chamada. Porém, ao acessar o código da
-  função, o interpretador encontra uma nova chamada para
-  função na linha 13, então ele também vai
-  conferir o que essa outra função retorna.
-</p>
+[No código da imagem anterior](https://gist.github.com/luizomf/83c8f286a83ad6ddb1e7094aedabbef5),
+temos uma chamada para função na linha 19, então sabemos que o interpretador vai
+conferir o retorno para essa chamada. Porém, ao acessar o código da função, o
+interpretador encontra uma nova chamada para função na linha 13, então ele
+também vai conferir o que essa outra função retorna.
 
-<p>Veja na imagem, que a pilha agora tem o seguinte:</p>
+Veja na imagem, que a pilha agora tem o seguinte:
 
-<ul>
-  <li><code>nova_funcao</code></li>
-  <li><code>funcao_anterior</code></li>
-  <li><code>&lt;module&gt;</code></li>
-</ul>
+- `nova_funcao`
+- `funcao_anterior`
+- `<module>`
 
-<p>
-  Cada elemento na pilha tem suas próprias variáveis
-  locais salvas em memória.
-</p>
+Cada elemento na pilha tem suas próprias variáveis locais salvas em memória.
 
-<p>
-  Portanto, para resolver essa pilha o interpretador precisa voltar
-  resolvendo todos os retornos de cima para baixo. Ou seja, o resultado
-  final será: retorno da <code>nova_funcao</code> + retorno da
-  <code>funcao_anterior</code> + continua executando o módulo.
-  Como a <code>funcao_anterior</code> retorna a
-  <code>nova_funcao</code>, o retorno final será o que a
-  <code>nova_funcao</code> retornar.
-</p>
+Portanto, para resolver essa pilha o interpretador precisa voltar resolvendo
+todos os retornos de cima para baixo. Ou seja, o resultado final será: retorno
+da `nova_funcao` + retorno da `funcao_anterior` + continua executando o módulo.
+Como a `funcao_anterior` retorna a `nova_funcao`, o retorno final será o que a
+`nova_funcao` retornar.
 
-<h2>Funções recursivas com Python</h2>
+## Funções recursivas com Python
 
-<p>
-  As funções recursivas com Python ou com qualquer outra
-  linguagem de programação, funcionam exatamente como
-  outras funções, porém, ao chamarem a si mesmas
-  dentro do seu código, a cada nova chamada um novo elemento
-  é adicionado na pilha (Call Stack, lembra?) contendo as
-  variáveis locais daquele ponto na execução.
-</p>
+As funções recursivas com Python ou com qualquer outra linguagem de programação,
+funcionam exatamente como outras funções, porém, ao chamarem a si mesmas dentro
+do seu código, a cada nova chamada um novo elemento é adicionado na pilha (Call
+Stack, lembra?) contendo as variáveis locais daquele ponto na execução.
 
-<p>
-  Considere a função fatorial, que te mostrei mais acima
-  nesse post:
-</p>
+Considere a função fatorial, que te mostrei mais acima nesse post:
 
 ```python
 def fatorial(n: int) -> int:
@@ -357,30 +243,22 @@ if __name__ == "__main__":
   print(fat5)
 ```
 
-<p>
-  A chamada dessa função (iniciando na linha 8) desencadeará mais 4
-  chamadas para ela mesma (somando 5 no total) até atingir meu
-  caso-base, que é quando n for igual a 1.
-</p>
+A chamada dessa função (iniciando na linha 8) desencadeará mais 4 chamadas para
+ela mesma (somando 5 no total) até atingir meu caso-base, que é quando n for
+igual a 1.
 
-![Exemplo 5](./imgs/rec5.png)
+![Exemplo 5](/_image?href=%2F%40fs%2FUsers%2Fluizotavio%2FDesktop%2Ftutoriais_e_cursos%2Fotaviomiranda.com.br%2Fsrc%2Fcontent%2Fposts%2F2020%2Ffuncoes-recursivas-com-python%2Fimgs%2Frec5.png%3ForigWidth%3D1037%26origHeight%3D507%26origFormat%3Dpng&w=1037&h=507&f=webp)
 
-<p>Essas chamadas ocorreram na seguinte ordem:</p>
+Essas chamadas ocorreram na seguinte ordem:
 
-<p>
-  <code>fatorial(5) * fatorial(4) * fatorial(3) * fatorial(2) * fatorial(1)
-  </code>
-</p>
+`fatorial(5) * fatorial(4) * fatorial(3) * fatorial(2) * fatorial(1)`
 
-<p>
-  Isso tudo está na pilha de chamadas e agora o interpretador precisa
-  voltar resolvendo todas as chamadas de cima para baixo (ou de trás pra
-  frente).
-</p>
+Isso tudo está na pilha de chamadas e agora o interpretador precisa voltar
+resolvendo todas as chamadas de cima para baixo (ou de trás pra frente).
 
-<p>Dessa maneira (vou mostrar apenas os retornos):</p>
+Dessa maneira (vou mostrar apenas os retornos):
 
-```
+```python
 # 1 = 1
 # 2 * 1 = 2
 # 3 * 2 = 6
@@ -388,126 +266,79 @@ if __name__ == "__main__":
 # 5 * 24 = 120
 ```
 
-<p>O trecho descrito acima é exatamente como a pilha foi resolvida.</p>
+O trecho descrito acima é exatamente como a pilha foi resolvida.
 
-![Exemplo 6](./imgs/6.png)
+![Exemplo 6](/_image?href=%2F%40fs%2FUsers%2Fluizotavio%2FDesktop%2Ftutoriais_e_cursos%2Fotaviomiranda.com.br%2Fsrc%2Fcontent%2Fposts%2F2020%2Ffuncoes-recursivas-com-python%2Fimgs%2F6.png%3ForigWidth%3D1025%26origHeight%3D411%26origFormat%3Dpng&w=1025&h=411&f=webp)
 
-<p>
-  Perceba que após retornar todos os valores e a pilha terminar
-  de ser resolvida, todas as chamadas e suas variáveis locais
-  agora foram eliminadas da memória e temos apenas o valor de
-  retorno de toda a pilha.
-</p>
+Perceba que após retornar todos os valores e a pilha terminar de ser resolvida,
+todas as chamadas e suas variáveis locais agora foram eliminadas da memória e
+temos apenas o valor de retorno de toda a pilha.
 
-<p>
-  É assim que as Funções recursivas com Python (ou
-  qualquer outra linguagem de programação) funcionam.
-  Exatamente como descrito em todo este artigo.
-</p>
+É assim que as Funções recursivas com Python (ou qualquer outra linguagem de
+programação) funcionam. Exatamente como descrito em todo este artigo.
 
-<h2>
-  Problemas que podemos encontrar com Funções recursivas
-</h2>
+## Problemas que podemos encontrar com Funções recursivas
 
-<p>
-  Como você pôde perceber no texto que seguiu, cada chamada
-  para função dentro de uma função recursiva
-  é adicionada à pilha (cada elemento na pilha, cujo
-  retorno ainda não foi finalizado, é chamado de
-  <em>stack frame</em>). Isso pode ser um problema quando temos muitas
-  recursões ocorrendo dentro de um programa.
-</p>
+Como você pôde perceber no texto que seguiu, cada chamada para função dentro de
+uma função recursiva é adicionada à pilha (cada elemento na pilha, cujo retorno
+ainda não foi finalizado, é chamado de _stack frame_). Isso pode ser um problema
+quando temos muitas recursões ocorrendo dentro de um programa.
 
-<p>
-  Imagine que eu peça o fatorial de 998, isso significa que a
-  minha recursão ocorreria 997 vezes até atingir o caso
-  base (somando 998 chamadas). Isso também significa que eu teria
-  998 elementos na minha pilha de chamadas (sem contar qualquer outra
-  chamada para funções no módulo e a chamada do
-  módulo em si). Talvez, se o custo de execução da
-  função consumir muita memória, eu poderia esgotar
-  os recursos do computador facilmente apenas chamando uma
-  função recursiva.
-</p>
+Imagine que eu peça o fatorial de 998, isso significa que a minha recursão
+ocorreria 997 vezes até atingir o caso base (somando 998 chamadas). Isso também
+significa que eu teria 998 elementos na minha pilha de chamadas (sem contar
+qualquer outra chamada para funções no módulo e a chamada do módulo em si).
+Talvez, se o custo de execução da função consumir muita memória, eu poderia
+esgotar os recursos do computador facilmente apenas chamando uma função
+recursiva.
 
-<p>
-  Existe uma técnica chamada de
-  <em>Tail Call Optimization</em> (ou
-  <em>Tail Recursion Elimination</em> em casos recursivos) que
-  resolveria este problema. Porém, Guido van Rossum, criador do
-  Python, foi um contra a adição disso no Python alegando
-  ser “Não Pythônico”.
-</p>
+Existe uma técnica chamada de _Tail Call Optimization_ (ou _Tail Recursion
+Elimination_ em casos recursivos) que resolveria este problema. Porém, Guido van
+Rossum, criador do Python, foi um contra a adição disso no Python alegando ser
+“Não Pythônico”.
 
-<blockquote>
-  <p>
-    <em>I recently posted an entry in my Python History blog on the
-      origins of Python’s functional features. A side remark about
-      not supporting tail recursion elimination (TRE) immediately
-      sparked several comments about what a pity it is that Python
-      doesn’t do this, including links to recent blog entries by
-      others trying to “prove” that TRE can be added to
-      Python easily. So let me defend my position (which is that I
-      don’t want TRE in the language). If you want a short answer,
-      it’s simply unpythonic. Here’s the long answer.</em>
-  </p>
-  <a href="https://neopythonic.blogspot.com/2009/04/tail-recursion-elimination.html">Por Guido van Rossum, em 22/04/2009, em Neopythonic</a>
-</blockquote>
+> _I recently posted an entry in my Python History blog on the origins of
+> Python’s functional features. A side remark about not supporting tail
+> recursion elimination (TRE) immediately sparked several comments about what a
+> pity it is that Python doesn’t do this, including links to recent blog entries
+> by others trying to “prove” that TRE can be added to Python easily. So let me
+> defend my position (which is that I don’t want TRE in the language). If you
+> want a short answer, it’s simply unpythonic. Here’s the long answer._
+>
+> [Por Guido van Rossum, em 22/04/2009, em Neopythonic](https://neopythonic.blogspot.com/2009/04/tail-recursion-elimination.html)
 
-<p>Tradução Livre:</p>
+Tradução Livre:
 
-<blockquote>
-  <p>
-    <em>Recentemente, publiquei um post em meu blog Python History, sobre
-      as origens dos recursos funcionais do Python. Uma
-      observação simples sobre não suportar Tail
-      Recursion Elimination (TRE) imediatamente provocou vários
-      comentários sobre ser uma pena Python suportar isso,
-      incluindo links para posts recentes de blogs de outros que
-      tentaram “provar” que TRE pode ser adicionado ao
-      Python facilmente. Então, deixe-me defender minha
-      posição (que não quero TRE na linguagem). Se
-      você quer uma resposta curta, simplesmente não
-      é Pythônico. Aqui está a resposta longa.</em>
-  </p>
-  <a href="https://neopythonic.blogspot.com/2009/04/tail-recursion-elimination.html">Por Guido van Rossum, em 22/04/2009, em Neopythonic</a>
-</blockquote>
+> _Recentemente, publiquei um post em meu blog Python History, sobre as origens
+> dos recursos funcionais do Python. Uma observação simples sobre não suportar
+> Tail Recursion Elimination (TRE) imediatamente provocou vários comentários
+> sobre ser uma pena Python suportar isso, incluindo links para posts recentes
+> de blogs de outros que tentaram “provar” que TRE pode ser adicionado ao Python
+> facilmente. Então, deixe-me defender minha posição (que não quero TRE na
+> linguagem). Se você quer uma resposta curta, simplesmente não é Pythônico.
+> Aqui está a resposta longa._
+>
+> [Por Guido van Rossum, em 22/04/2009, em Neopythonic](https://neopythonic.blogspot.com/2009/04/tail-recursion-elimination.html)
 
-<p>
-  Se o próprio criador do Python mencionou isso, não
-  iremos discutir isso por aqui =).
-</p>
+Se o próprio criador do Python mencionou isso, não iremos discutir isso por aqui
+=).
 
-<h2>RecursionError: maximum recursion depth exceeded in comparison</h2>
+## RecursionError: maximum recursion depth exceeded in comparison
 
-<p>
-  Esse erro apareceu pra você? Isso quer dizer que a pilha de
-  elementos no seu call stack passou de 1000 (limite padrão em
-  Python).
-</p>
+Esse erro apareceu pra você? Isso quer dizer que a pilha de elementos no seu
+call stack passou de 1000 (limite padrão em Python).
 
-<p>
-  Você pode fazer três coisas para resolver este problema:
-</p>
+Você pode fazer três coisas para resolver este problema:
 
-<ul>
-  <li>
-    Checar se você realmente queria fazer mais de 1000 chamadas
-    recursivas. Geralmente, quando criamos funções
-    recursivas incorretamente, são realizadas mais
-    recursões do que gostaríamos;
-  </li>
-  <li>
-    Trocar por um laço <code>for</code>. Como Python não
-    tem <em>Tail Recursion Elimination</em> (pelo menos até o
-    momento da escrita deste post), talvez você poderia reescrever
-    o código usando <code>for</code> ou até
-    <code>while</code>;
-  </li>
-  <li>Por fim, um hack (aumentar o limite de recursão).</li>
-</ul>
+- Checar se você realmente queria fazer mais de 1000 chamadas recursivas.
+  Geralmente, quando criamos funções recursivas incorretamente, são realizadas
+  mais recursões do que gostaríamos;
+- Trocar por um laço `for`. Como Python não tem _Tail Recursion Elimination_
+  (pelo menos até o momento da escrita deste post), talvez você poderia
+  reescrever o código usando `for` ou até `while`;
+- Por fim, um hack (aumentar o limite de recursão).
 
-<p>Para aumentar o limite de recursão, use:</p>
+Para aumentar o limite de recursão, use:
 
 ```python
 import sys
@@ -515,26 +346,18 @@ sys.setrecursionlimit(5000)
 print(sys.getrecursionlimit())  # 5000
 ```
 
-<p>
-  O padrão são 1000 recursões, no trecho acima
-  aumentei para 5000.
-</p>
+O padrão são 1000 recursões, no trecho acima aumentei para 5000.
 
-<h2>Algoritmos usando recursão</h2>
+## Algoritmos usando recursão
 
-<p>
-  Como vimos anteriormente, o algoritmo mais clichê que é
-  implementado com recursão, seria o fatorial, que vimos ao longo
-  de todo o post. No entanto, há uma gama enorme de algoritmos
-  que podem se beneficiar da recursão.
-</p>
+Como vimos anteriormente, o algoritmo mais clichê que é implementado com
+recursão, seria o fatorial, que vimos ao longo de todo o post. No entanto, há
+uma gama enorme de algoritmos que podem se beneficiar da recursão.
 
-<p>
-  Eu não pretendo detalhar o que todos eles fazem (talvez fique
-  pra um próximo post), mas seguem alguns:
-</p>
+Eu não pretendo detalhar o que todos eles fazem (talvez fique pra um próximo
+post), mas seguem alguns:
 
-<h3>Sequência Fibonacci</h3>
+### Sequência Fibonacci
 
 ```python
 from functools import lru_cache
@@ -555,26 +378,18 @@ if __name__ == "__main__":
         print(fibonacci_sequence(i))
 ```
 
-<p>
-  A
-  <a href="https://pt.wikipedia.org/wiki/Sequ%C3%AAncia_de_Fibonacci">Sequência Fibonacci</a>
-  pode se beneficiar da
-  <a href="https://en.wikipedia.org/wiki/Memoization">memoization</a>
-  (cache) de funções executadas anteriormente. O Python
-  inclui
-  <a href="https://docs.python.org/3/library/functools.html#functools.lru_cache">lru_cache</a>
-  no módulo
-  <a href="https://docs.python.org/3/library/functools.html">functools</a>
-  que serve justamente para isso.
-</p>
+A
+[Sequência Fibonacci](https://pt.wikipedia.org/wiki/Sequ%C3%AAncia_de_Fibonacci)
+pode se beneficiar da [memoization](https://en.wikipedia.org/wiki/Memoization)
+(cache) de funções executadas anteriormente. O Python inclui
+[lru_cache](https://docs.python.org/3/library/functools.html#functools.lru_cache)
+no módulo [functools](https://docs.python.org/3/library/functools.html) que
+serve justamente para isso.
 
-<p>
-  Adaptação do Livro
-  <a href="https://amzn.to/2QXcx8W">Estruturas de dados e algoritmos com JavaScript (por Loiane
-    Groner)</a>
-</p>
+Adaptação do Livro
+[Estruturas de dados e algoritmos com JavaScript (por Loiane Groner)](https://amzn.to/2QXcx8W)
 
-<h3>Quicksort</h3>
+### Quicksort
 
 ```python
 """
@@ -618,12 +433,10 @@ if __name__ == "__main__":
     doctest.testmod(verbose=True)
 ```
 
-<p>
-  Adaptação do Livro
-  <a href="https://amzn.to/39v5jPV">Entendendo Algoritmos (por Aditya Bhargava)</a>
-</p>
+Adaptação do Livro
+[Entendendo Algoritmos (por Aditya Bhargava)](https://amzn.to/39v5jPV)
 
-<h3>Um código personalizado</h3>
+### Um código personalizado
 
 ```python
 from typing import List
@@ -661,14 +474,12 @@ from typing import List
       print(encontra_chave(caixas))
 ```
 
-<p>Meu código mesmo.</p>
+Meu código mesmo.
 
-<h3>Torre de Hanoi</h3>
+### Torre de Hanoi
 
-<p>
-  Adaptação do Livro
-  <a href="https://amzn.to/2Jn18Lc">O melhor do JavaScript (Por Douglas Crockford)</a>
-</p>
+Adaptação do Livro
+[O melhor do JavaScript (Por Douglas Crockford)](https://amzn.to/2Jn18Lc)
 
 ```python
 # Torre de Hanói
@@ -684,28 +495,17 @@ if __name__ == "__main__":
     hanoi(3, 'Origem', 'Auxiliar', 'Destino')
 ```
 
-<p>
-  Adaptação do Livro
-  <a href="https://amzn.to/2Jn18Lc">O melhor do JavaScript (Por Douglas Crockford)</a>
-</p>
+Adaptação do Livro
+[O melhor do JavaScript (Por Douglas Crockford)](https://amzn.to/2Jn18Lc)
 
-<h2>Em vídeo</h2>
+## Em vídeo
 
-<p>
-  Também criei um vídeo sobre este conteúdo em meu
-  canal do Youtube, segue abaixo:
-</p>
+Também criei um vídeo sobre este conteúdo em meu canal do Youtube, segue abaixo:
 
-<p>
-  Link do vídeo no YouTube:
-  <a href="https://youtu.be/0PwFwqiNfAI">https://youtu.be/0PwFwqiNfAI
-  </a>
-</p>
+Link do vídeo no YouTube:
+[https://youtu.be/0PwFwqiNfAI](https://youtu.be/0PwFwqiNfAI)
 
-<h2>Super resumo do resumo</h2>
+## Super resumo do resumo
 
-<p>
-  Funções recursivas com Python (ou qualquer linguagem de
-  programação) são funções que chamam
-  a si mesmas de maneira direta ou indireta.
-</p>
+Funções recursivas com Python (ou qualquer linguagem de programação) são funções
+que chamam a si mesmas de maneira direta ou indireta.

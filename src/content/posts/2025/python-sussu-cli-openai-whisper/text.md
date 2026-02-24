@@ -8,24 +8,26 @@ date: 2025-10-25
 author: 'Luiz Otávio Miranda'
 ---
 
-> Ferramenta de linha de comando focada em educação e IA offline. Utiliza o
-> poder do Whisper da OpenAI para transcrever áudios e vídeos de forma simples e
-> eficiente.
+Essa é uma ferramenta de linha de comando focada em educação e IA offline.
+Utiliza o poder do Whisper da OpenAI para transcrever áudios e vídeos de forma
+simples e eficiente.
 
 Esses são todos os links que menciono nos dois vídeos:
 
-- [(🚫 FAILED) whisper em tempo real via microfone](https://www.otaviomiranda.com.br/2025/whisper-live-sera-que-deu-certo/)
-- [logging — Logging facility for Python](https://docs.python.org/3/library/logging.html)
-- [sussu(rro): CLI educacional com OpenAI Whisper](https://www.otaviomiranda.com.br/2025/python-sussu-cli-openai-whisper/)
-- [openai / whisper](https://github.com/openai/whisper)
+- whisper em tempo real via microfone -
+  [Link](https://www.otaviomiranda.com.br/2025/whisper-live-sera-que-deu-certo/)
+- logging — Logging facility for Python -
+  [Link](https://docs.python.org/3/library/logging.html)
+- sussu(rro): CLI educacional com OpenAI Whisper -
+  [Link](https://www.otaviomiranda.com.br/2025/python-sussu-cli-openai-whisper/)
+- openai / whisper - [Link](https://github.com/openai/whisper)
 
-### 🎥 Parte 1 — CLI do Whisper:
+Vídeos:
 
-- [Whisper OpenAI: Guia Completo de Transcrição com Inteligência Artificial (vídeo e áudio)](https://youtu.be/y15070biffg)
-
-### 💻 Parte 2 — Código do `sussu` com Python + Whisper:
-
-- [Whisper com Python: transcrição de áudio com Inteligência Artificial no seu projeto](https://youtu.be/SAt7yuO8DX4)
+- Vídeo da parte 1 -
+  [Guia Whisper OpenAI Completo](https://youtu.be/y15070biffg)
+- Vídeo da Parte 2 -
+  [Whisper e Sussu no seu projeto](https://youtu.be/SAt7yuO8DX4)
 
 ---
 

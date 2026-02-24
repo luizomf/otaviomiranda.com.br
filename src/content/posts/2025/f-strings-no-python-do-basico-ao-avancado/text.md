@@ -14,7 +14,7 @@ outras técnicas que talvez você não conheça.
 
 Eu me baseei na transcrição do meu vídeo original, que você pode assistir aqui:
 
-[![Luiz Otávio Miranda do lado esquerdo e o texto f-strings além do básico do lado direito.](./images/f-strings-em-python.webp)](https://youtu.be/yt2wPLGMAA0)
+- [f-strings em Python: coisas que você não sabia](https://youtu.be/yt2wPLGMAA0)
 
 Mas atenção: o texto não é idêntico ao vídeo. Incluí novos exemplos de código,
 explicações alternativas e detalhei melhor alguns tópicos que achei
