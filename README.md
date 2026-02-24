@@ -213,68 +213,42 @@ seja, eu altero o arquivo Markdown hoje e aperto um botão para publicar.
 
 ---
 
-## 📋 TODO & Technical Debts (A Memória do Projeto)
+## 📊 Números do Site
 
-Como num software real com 8 anos de história as refatorações são cruéis e nunca
-o tempo é suficiente para apagar rastros de bibliotecas defuntas e regras
-antigas. Alunos: **Isso é um software de verdade na vida real**.
+| Metric | Valor |
+|--------|-------|
+| Páginas | 22 |
+| Build time | ~900ms |
+| Home (total transfer) | ~150KB |
+| Post (total transfer) | ~40KB |
+| JS em `public/` | 0 arquivos |
+| CSS em `public/` | 0 arquivos |
 
-Aqui embaixo eu deixo o nosso histórico de combate recente e problemas que eu e
-o meu Agent AI (O _"Brien"_) catalogamos para voltar e matar depois.
+Todo JavaScript e CSS é processado pelo Vite em build time. O único script
+client-side é o canvas de partículas do Hero, empacotado como componente Astro.
 
-### ✅ O que foi CONCLUÍDO (Successes)
+---
 
-- Migração dos `assets/js` e `css/` puros para subdireção Vite controlada.
-- Refatoração do modelo antigo (Páginas independentes) para sistema de Layout e
-  Componentes reutilizáveis (Header.astro, BaseHead.astro, etc)
-- Implementação da biblioteca **Shiki**, abandonando bibliotecas legacy de JS
-  Highlight que pesavam o LCP no LightHouse.
-- Script de RegEx personalizado massivo gerado em Node para consertar imagens
-  antigas: Removemos os block-wrappers indesejados (`<p><img/></p>`).
-- Action Pipeline para GitHub Pages configurado, rodando sem travamentos de
-  `Cache.duplicateId`.
-- **Sitemap Automatizado**: Foi habilitado a integração `@astrojs/sitemap`
-  global.
-- **Templates Puros "BlankLayout"**: Implementados na v2 para servir Landing
-  pages independentes da Home e do header de Navegação Global.
-- **Injeção do Frontmatter Dinâmica no Layout**: Extirpamos os `<h1>` repetidos
-  dentro de cada Post. O Content Layer agora controla 100% dos títulos e
-  autores.
-- **Modularização de CSS via Astro Islands**: Desacoplamos os 14 mil bytes de
-  estilos monolíticos do arquivo global. Seções como `<Courses>`,
-  `<Testimonials>` e `<Hero>` operam de forma autossuficiente (DRY Components)
-  herdando o wrapper global de tema e grid (`<Section>` e `<SectionHeader>`).
-- **CLI Worklows e Neovim Scaffold**: Para redigir novos tutoriais de forma
-  supersônica sem sair do Terminal, um binário local NodeJs foi projetado
-  (`scripts/new_post.mjs`). Agora, basta disparar do seu Neovim
-  `:!npm run post "Meu Blog Post"` e ele gera automaticamente o slug, as
-  subpastas `year/slug/images` e injeta o `text.md` já preenchido com a data Zod
-  e autor validados prontos para escrita da aula.
-- **Arquivo do Blog com navegação completa e links válidos**: A página de "Ver
-  todos os posts" (`/blog/1` e `/blog/2`) agora renderiza com shell completo
-  (`Header`, `Newsletter`, `Footer`) e os links dos posts são gerados por
-  `entry.id` (sem `undefined`).
-- **Componentização singular dos blocos da Home**: `Course.astro`,
-  `Testimonial.astro` e `RecentPostLink.astro` foram extraídos dos wrappers
-  (`Courses`, `Testimonials` e `index.astro`) para reduzir duplicação e
-  facilitar manutenção incremental.
-- **Limpeza inicial de markup legado (posts antigos)**: adicionamos um script de
-  higienização (`scripts/clean_legacy_markdown.mjs`) e removemos classes
-  JS/resíduos inúteis de snapshot de gist no post de recursão de 2020.
-- **Padronização visual no botão de arquivo da Home**: o CTA "Ver todos os
-  posts" em `index.astro` deixou de usar inline style e passou a usar
-  `PillLink`.
+## 📋 Histórico da Migração
 
-### ✅ Status Atual da Migração
+A migração completa de HTML estático para Astro SSG foi concluída em Fevereiro
+de 2026. Este projeto foi construído com a ajuda de múltiplos agentes de IA
+(Gemini, GPT/Codex, Claude), cada um contribuindo em etapas diferentes.
 
-A fase principal da migração para Astro está concluída e estabilizada.
+Destaques do que foi feito:
 
-No momento, não há débitos ativos deste ciclo de migração. O `/editor/` local
-já foi prototipado e está disponível para edição de Markdown no navegador com
-preview e fluxo de salvamento local.
+- Layouts e componentes reutilizáveis (Header, Footer, Section, SectionHeader)
+- Content Layer API com schemas Zod para validação de frontmatter
+- Syntax highlight nativo via Shiki (`github-dark-high-contrast`)
+- Deploy automático via GitHub Actions para GitHub Pages
+- Sitemap automatizado com `@astrojs/sitemap`
+- Editor Markdown no browser (`/editor/`) com Monaco, Vim mode e DOMPurify
+- CLI para criação de posts (`npm run post "Titulo"`)
+- Dados de cursos, depoimentos e contatos centralizados em `src/config/`
+- Purge completo de assets legados (~4.000 linhas de código morto removidas)
+- Canvas de partículas do Hero como componente Astro com TypeScript
 
-Daqui para frente, este repositório segue para um novo ciclo com melhorias e
-iniciativas novas.
+Não há débitos técnicos ativos neste ciclo.
 
 ---
 
