@@ -10,7 +10,7 @@ export default defineConfig({
   markdown: {
     shikiConfig: {
       // Tema que se assemelha ao legacy dark highlighter
-      theme: 'catppuccin-mocha',
+      theme: 'github-dark-high-contrast',
       wrap: true, // Força a quebra de linha em telas pequenas ao invés de scroll infinito
     },
   },
