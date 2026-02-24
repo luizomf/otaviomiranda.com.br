@@ -1,5 +1,6 @@
 ---
 // src/components/Hero.astro
+import HeroCanvas from './HeroCanvas.astro';
 ---
 
 <section id='section-hero' class='section section-dark section-hero'>
@@ -46,9 +47,7 @@
     <a href='#courses'> Continue ▼ </a>
   </div>
 
-  <canvas id='canvas-hero-dark' class='canvas-bg'></canvas>
-
-  <script is:inline src='/js/scripts_2026_v2.js'></script>
+  <HeroCanvas />
 </section>
 
 <style>
