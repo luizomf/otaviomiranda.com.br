@@ -42,10 +42,7 @@ const editorSchema = {
         <button id='editor-vim-toggle' type='button' data-active='false'>
           Vim OFF
         </button>
-        <button id='editor-preview-toggle' type='button' data-active='true'>
-          Preview Seguro
-        </button>
-        <button id='editor-preview-visibility' type='button' data-active='true'>
+<button id='editor-preview-visibility' type='button' data-active='true'>
           Ocultar Preview
         </button>
         <button id='editor-save' type='button'>Salvar</button>
@@ -94,10 +91,7 @@ const editorSchema = {
       const openButton = document.getElementById('editor-open');
       const frontmatterButton = document.getElementById('editor-frontmatter');
       const vimToggleButton = document.getElementById('editor-vim-toggle');
-      const previewToggleButton = document.getElementById(
-        'editor-preview-toggle',
-      );
-      const previewVisibilityButton = document.getElementById(
+const previewVisibilityButton = document.getElementById(
         'editor-preview-visibility',
       );
       const vimStatus = document.getElementById('editor-vim-status');
@@ -152,27 +146,12 @@ const editorSchema = {
       let autoSaveTimerId = null;
       let lastSavedContent = '';
       let isSaving = false;
-      let safePreviewEnabled = true;
       let previewVisible = true;
       let previewRenderNonce = 0;
       let shikiModulePromise = null;
       let shikiHighlighterPromise = null;
       let syncingFromEditor = false;
       let syncingFromPreview = false;
-
-      const setPreviewModeUiState = () => {
-        if (!previewToggleButton) return;
-        previewToggleButton.dataset.active = safePreviewEnabled
-          ? 'true'
-          : 'false';
-        previewToggleButton.setAttribute(
-          'aria-pressed',
-          safePreviewEnabled ? 'true' : 'false',
-        );
-        previewToggleButton.textContent = safePreviewEnabled
-          ? 'Preview Seguro'
-          : 'Preview Raw';
-      };
 
       const setPreviewVisibilityUiState = () => {
         if (
@@ -201,9 +180,6 @@ const editorSchema = {
         codePaneEl.classList.toggle('editor-pane--full', !previewVisible);
         previewPaneEl.hidden = !previewVisible;
 
-        if (previewToggleButton) {
-          previewToggleButton.disabled = !previewVisible;
-        }
       };
 
       const setCurrentFileName = fileName => {
@@ -351,26 +327,20 @@ const editorSchema = {
         const renderedHtml = window.marked.parse(markdown);
         const currentRenderNonce = ++previewRenderNonce;
 
-        if (!safePreviewEnabled) {
-          previewEl.innerHTML = renderedHtml;
-          requestAnimationFrame(syncPreviewScrollToEditor);
-          applyShikiToPreview(currentRenderNonce).catch(() => {});
-          return;
-        }
-
         const purifier = window.DOMPurify;
 
         if (purifier?.sanitize) {
           previewEl.innerHTML = purifier.sanitize(renderedHtml, {
             USE_PROFILES: { html: true },
           });
-          requestAnimationFrame(syncPreviewScrollToEditor);
-          applyShikiToPreview(currentRenderNonce).catch(() => {});
+        } else {
+          // Fail closed: if sanitizer is unavailable, avoid injecting raw HTML.
+          previewEl.textContent = markdown;
           return;
         }
 
-        // Fail closed: if sanitizer is unavailable, avoid injecting raw HTML.
-        previewEl.textContent = markdown;
+        requestAnimationFrame(syncPreviewScrollToEditor);
+        applyShikiToPreview(currentRenderNonce).catch(() => {});
       };
 
       const schedulePreviewRender = () => {
@@ -674,7 +644,6 @@ const editorSchema = {
           if (syncingFromEditor) return;
           syncEditorScrollToPreview();
         });
-        setPreviewModeUiState();
         setPreviewVisibilityUiState();
         renderPreview();
 
@@ -709,12 +678,7 @@ const editorSchema = {
           }
           enableVimMode();
         });
-        previewToggleButton.addEventListener('click', () => {
-          safePreviewEnabled = !safePreviewEnabled;
-          setPreviewModeUiState();
-          renderPreview();
-        });
-        previewVisibilityButton.addEventListener('click', () => {
+previewVisibilityButton.addEventListener('click', () => {
           previewVisible = !previewVisible;
           setPreviewVisibilityUiState();
           if (previewVisible) {
