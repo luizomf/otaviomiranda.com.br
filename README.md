@@ -265,34 +265,16 @@ o meu Agent AI (O _"Brien"_) catalogamos para voltar e matar depois.
   posts" em `index.astro` deixou de usar inline style e passou a usar
   `PillLink`.
 
-### 🚧 TO-DO: Débitos e Próximas Milestones
+### ✅ Status Atual da Migração
 
-- [x] CSS Legacy Cleaning (fase 2): limpar snapshots antigos vindos de
-      Gist/GitHub nos posts legados, removendo classes `blob-*`, wrappers de
-      tabela e metadados de embed, e convertendo para markup simples
-      (`pre/code`, listas e parágrafos) sem perder conteúdo. Critério de
-      conclusão: posts com snapshot legado renderizando com o mesmo
-      texto/código, sem dependência de CSS de embed externo.
-- [x] Revisitar `index.astro`: preparar listagem paginada em grid/lista para
-      quando o volume de `.md` crescer, evitando carregar "posts demais" na
-      primeira página. Critério de conclusão: limite por página definido,
-      navegação entre páginas funcionando e layout consistente em
-      desktop/mobile.
-- [ ] Editor local de posts (sem auth): prototipar um editor Markdown local com
-      Vim motions, botão de salvar e geração automática do arquivo no caminho
-      padrão (`ano/slug/text.md`) com frontmatter padronizado (`title`,
-      `description`, `date`, `author`). Critério de conclusão:
-      criar/editar/salvar post localmente em fluxo único, reduzindo trabalho
-      manual e inconsistência de padrão.
-- [x] Componentizar o cupom mensal da Home: extrair o bloco de desconto
-      (`section-coupon`) para componente próprio com dados fáceis de atualizar
-      (`código` e `validade`) sem editar o miolo do `index.astro`. Critério de
-      conclusão: cupom renderizado por componente dedicado e alteração mensal
-      feita em um único ponto.
-- [x] Substituir hub externo de contatos: criar página interna `/contacts/` e
-      apontar navegação principal para ela, removendo dependência de
-      `beacons.ai`. Critério de conclusão: Header/Hero/Footer usando
-      `/contacts/` e página publicada no próprio site.
+A fase principal da migração para Astro está concluída e estabilizada.
+
+No momento, não há débitos ativos deste ciclo de migração. O `/editor/` local
+já foi prototipado e está disponível para edição de Markdown no navegador com
+preview e fluxo de salvamento local.
+
+Daqui para frente, este repositório segue para um novo ciclo com melhorias e
+iniciativas novas.
 
 ---
 
