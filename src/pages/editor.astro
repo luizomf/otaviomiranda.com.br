@@ -69,6 +69,10 @@ const editorSchema = {
   ></script>
   <script
     is:inline
+    src='https://cdn.jsdelivr.net/npm/dompurify@3.2.7/dist/purify.min.js'
+  ></script>
+  <script
+    is:inline
     src='https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs/loader.js'
   ></script>
   <script is:inline>
@@ -128,7 +132,18 @@ const editorSchema = {
       const renderPreview = () => {
         if (!editor || !window.marked) return;
         const markdown = stripFrontmatterForPreview(editor.getValue());
-        previewEl.innerHTML = window.marked.parse(markdown);
+        const renderedHtml = window.marked.parse(markdown);
+        const purifier = window.DOMPurify;
+
+        if (purifier?.sanitize) {
+          previewEl.innerHTML = purifier.sanitize(renderedHtml, {
+            USE_PROFILES: { html: true },
+          });
+          return;
+        }
+
+        // Fail closed: if sanitizer is unavailable, avoid injecting raw HTML.
+        previewEl.textContent = markdown;
       };
 
       const schedulePreviewRender = () => {
