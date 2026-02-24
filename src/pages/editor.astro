@@ -42,6 +42,9 @@ const editorSchema = {
         <button id='editor-vim-toggle' type='button' data-active='false'>
           Vim OFF
         </button>
+        <button id='editor-preview-toggle' type='button' data-active='true'>
+          Preview Seguro
+        </button>
         <button id='editor-save' type='button'>Salvar</button>
         <button id='editor-save-as' type='button'>Salvar Como</button>
       </div>
@@ -88,6 +91,9 @@ const editorSchema = {
       const openButton = document.getElementById('editor-open');
       const frontmatterButton = document.getElementById('editor-frontmatter');
       const vimToggleButton = document.getElementById('editor-vim-toggle');
+      const previewToggleButton = document.getElementById(
+        'editor-preview-toggle',
+      );
       const vimStatus = document.getElementById('editor-vim-status');
       const saveButton = document.getElementById('editor-save');
       const saveAsButton = document.getElementById('editor-save-as');
@@ -111,6 +117,21 @@ const editorSchema = {
       let autoSaveTimerId = null;
       let lastSavedContent = '';
       let isSaving = false;
+      let safePreviewEnabled = true;
+
+      const setPreviewModeUiState = () => {
+        if (!previewToggleButton) return;
+        previewToggleButton.dataset.active = safePreviewEnabled
+          ? 'true'
+          : 'false';
+        previewToggleButton.setAttribute(
+          'aria-pressed',
+          safePreviewEnabled ? 'true' : 'false',
+        );
+        previewToggleButton.textContent = safePreviewEnabled
+          ? 'Preview Seguro'
+          : 'Preview Raw';
+      };
 
       const setCurrentFileName = fileName => {
         currentFileName = fileName;
@@ -133,6 +154,11 @@ const editorSchema = {
         if (!editor || !window.marked) return;
         const markdown = stripFrontmatterForPreview(editor.getValue());
         const renderedHtml = window.marked.parse(markdown);
+        if (!safePreviewEnabled) {
+          previewEl.innerHTML = renderedHtml;
+          return;
+        }
+
         const purifier = window.DOMPurify;
 
         if (purifier?.sanitize) {
@@ -439,6 +465,7 @@ const editorSchema = {
         );
 
         editor.onDidChangeModelContent(schedulePreviewRender);
+        setPreviewModeUiState();
         renderPreview();
 
         if (monacoVimModule?.initVimMode) {
@@ -471,6 +498,11 @@ const editorSchema = {
             return;
           }
           enableVimMode();
+        });
+        previewToggleButton.addEventListener('click', () => {
+          safePreviewEnabled = !safePreviewEnabled;
+          setPreviewModeUiState();
+          renderPreview();
         });
         saveButton.addEventListener('click', () => {
           save().catch(() => {});
