@@ -3,34 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PillLink from '../components/PillLink.astro';
-
-const contactLinks = [
-  {
-    label: 'YouTube',
-    href: 'https://www.youtube.com/@otaviomiranda/videos',
-    external: true,
-  },
-  {
-    label: 'Newsletter',
-    href: 'https://luizomf.substack.com/',
-    external: true,
-  },
-  {
-    label: 'GitHub',
-    href: 'https://github.com/luizomf',
-    external: true,
-  },
-  {
-    label: 'Blog',
-    href: '/blog/1/',
-    external: false,
-  },
-  {
-    label: 'Cursos',
-    href: '/#courses',
-    external: false,
-  },
-];
+import { CONTACT_LINKS, EMAIL } from '../config/contacts';
 ---
 
 <BaseLayout
@@ -46,13 +19,13 @@ const contactLinks = [
           <p class='section-eyeball'>Links oficiais</p>
           <h1 class='section-title'>Contatos</h1>
           <p class='section-line'>
-            Para qualquer contato comercial: <strong>luizomf@gmail.com</strong>.
+            Para qualquer contato comercial: <strong>{EMAIL}</strong>.
           </p>
         </header>
 
         <ul class='contacts-list'>
           {
-            contactLinks.map(link => (
+            CONTACT_LINKS.map(link => (
               <li class='contacts-item'>
                 {link.external ? (
                   <PillLink
