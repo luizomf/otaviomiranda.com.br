@@ -161,6 +161,8 @@ const editorSchema = {
       let previewRenderNonce = 0;
       let shikiModulePromise = null;
       let shikiHighlighterPromise = null;
+      let syncingFromEditor = false;
+      let syncingFromPreview = false;
 
       const setPreviewModeUiState = () => {
         if (!previewToggleButton) return;
@@ -223,6 +225,50 @@ const editorSchema = {
         }
 
         return withoutBom.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '');
+      };
+
+      const getScrollProgress = (scrollTop, scrollHeight, viewportHeight) => {
+        const maxScrollTop = Math.max(0, scrollHeight - viewportHeight);
+        if (!maxScrollTop) return 0;
+        return Math.min(1, Math.max(0, scrollTop / maxScrollTop));
+      };
+
+      const syncPreviewScrollToEditor = () => {
+        if (!editor || !previewVisible) return;
+
+        const editorViewportHeight = editor.getLayoutInfo().height;
+        const progress = getScrollProgress(
+          editor.getScrollTop(),
+          editor.getScrollHeight(),
+          editorViewportHeight,
+        );
+
+        const previewMaxScrollTop = Math.max(
+          0,
+          previewEl.scrollHeight - previewEl.clientHeight,
+        );
+        syncingFromEditor = true;
+        previewEl.scrollTop = progress * previewMaxScrollTop;
+        syncingFromEditor = false;
+      };
+
+      const syncEditorScrollToPreview = () => {
+        if (!editor || !previewVisible) return;
+
+        const progress = getScrollProgress(
+          previewEl.scrollTop,
+          previewEl.scrollHeight,
+          previewEl.clientHeight,
+        );
+        const editorViewportHeight = editor.getLayoutInfo().height;
+        const editorMaxScrollTop = Math.max(
+          0,
+          editor.getScrollHeight() - editorViewportHeight,
+        );
+
+        syncingFromPreview = true;
+        editor.setScrollTop(progress * editorMaxScrollTop);
+        syncingFromPreview = false;
       };
 
       const getShikiModule = async () => {
@@ -298,6 +344,8 @@ const editorSchema = {
 
           preEl.replaceWith(shikiPre);
         }
+
+        syncPreviewScrollToEditor();
       };
 
       const renderPreview = () => {
@@ -309,6 +357,7 @@ const editorSchema = {
 
         if (!safePreviewEnabled) {
           previewEl.innerHTML = renderedHtml;
+          requestAnimationFrame(syncPreviewScrollToEditor);
           applyShikiToPreview(currentRenderNonce).catch(() => {});
           return;
         }
@@ -319,6 +368,7 @@ const editorSchema = {
           previewEl.innerHTML = purifier.sanitize(renderedHtml, {
             USE_PROFILES: { html: true },
           });
+          requestAnimationFrame(syncPreviewScrollToEditor);
           applyShikiToPreview(currentRenderNonce).catch(() => {});
           return;
         }
@@ -620,6 +670,14 @@ const editorSchema = {
         );
 
         editor.onDidChangeModelContent(schedulePreviewRender);
+        editor.onDidScrollChange(() => {
+          if (syncingFromPreview) return;
+          syncPreviewScrollToEditor();
+        });
+        previewEl.addEventListener('scroll', () => {
+          if (syncingFromEditor) return;
+          syncEditorScrollToPreview();
+        });
         setPreviewModeUiState();
         setPreviewVisibilityUiState();
         renderPreview();
