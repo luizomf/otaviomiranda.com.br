@@ -4,6 +4,6 @@ export interface CouponConfig {
 }
 
 export const HOME_COUPON: CouponConfig = {
-  code: 'JAN282026',
-  expiresAtLabel: 'Válido até 02/02/2026',
+  code: 'FEV2026',
+  expiresAtLabel: 'Válido até 01/03/2026',
 };
