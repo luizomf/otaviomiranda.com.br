@@ -101,6 +101,27 @@ const editorSchema = {
       const supportsFSApi =
         'showOpenFilePicker' in window && 'showSaveFilePicker' in window;
       const AUTO_SAVE_INTERVAL_MS = 60_000;
+      const SHIKI_THEME = 'github-dark-high-contrast';
+      const SHIKI_IMPORT_URL = 'https://esm.sh/shiki@3.14.0?bundle';
+      const SHIKI_LANGS = [
+        'plaintext',
+        'text',
+        'bash',
+        'shell',
+        'sh',
+        'javascript',
+        'typescript',
+        'jsx',
+        'tsx',
+        'json',
+        'python',
+        'html',
+        'css',
+        'yaml',
+        'yml',
+        'markdown',
+        'sql',
+      ];
 
       const nowDate = () => new Date().toLocaleDateString('sv-SE');
       const frontmatterTemplate = () =>
@@ -118,6 +139,9 @@ const editorSchema = {
       let lastSavedContent = '';
       let isSaving = false;
       let safePreviewEnabled = true;
+      let previewRenderNonce = 0;
+      let shikiModulePromise = null;
+      let shikiHighlighterPromise = null;
 
       const setPreviewModeUiState = () => {
         if (!previewToggleButton) return;
@@ -150,12 +174,90 @@ const editorSchema = {
         return withoutBom.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '');
       };
 
+      const getShikiModule = async () => {
+        if (shikiModulePromise) return shikiModulePromise;
+        shikiModulePromise = import(SHIKI_IMPORT_URL).catch(() => null);
+        return shikiModulePromise;
+      };
+
+      const getShikiHighlighter = async () => {
+        if (shikiHighlighterPromise) return shikiHighlighterPromise;
+
+        shikiHighlighterPromise = (async () => {
+          const shiki = await getShikiModule();
+          if (!shiki?.createHighlighter) return null;
+
+          try {
+            return await shiki.createHighlighter({
+              themes: [SHIKI_THEME],
+              langs: SHIKI_LANGS,
+            });
+          } catch (_) {
+            return null;
+          }
+        })();
+
+        return shikiHighlighterPromise;
+      };
+
+      const inferCodeLanguage = codeEl => {
+        const className = codeEl.className || '';
+        const languageClass = className
+          .split(/\s+/)
+          .find(token => token.startsWith('language-'));
+
+        if (!languageClass) return 'plaintext';
+
+        const language = languageClass.replace('language-', '').trim();
+        if (!language) return 'plaintext';
+        return language;
+      };
+
+      const applyShikiToPreview = async renderNonce => {
+        const highlighter = await getShikiHighlighter();
+        if (!highlighter || renderNonce !== previewRenderNonce) return;
+
+        const blocks = Array.from(previewEl.querySelectorAll('pre > code'));
+        for (const codeEl of blocks) {
+          if (renderNonce !== previewRenderNonce) return;
+
+          const preEl = codeEl.parentElement;
+          if (!preEl) continue;
+
+          const source = codeEl.textContent || '';
+          const language = inferCodeLanguage(codeEl);
+
+          let shikiHtml = '';
+          try {
+            shikiHtml = highlighter.codeToHtml(source, {
+              lang: language,
+              theme: SHIKI_THEME,
+            });
+          } catch (_) {
+            shikiHtml = highlighter.codeToHtml(source, {
+              lang: 'plaintext',
+              theme: SHIKI_THEME,
+            });
+          }
+
+          const template = document.createElement('template');
+          template.innerHTML = shikiHtml.trim();
+          const shikiPre = template.content.firstElementChild;
+          if (!shikiPre) continue;
+
+          preEl.replaceWith(shikiPre);
+        }
+      };
+
       const renderPreview = () => {
         if (!editor || !window.marked) return;
         const markdown = stripFrontmatterForPreview(editor.getValue());
         const renderedHtml = window.marked.parse(markdown);
+        const currentRenderNonce = ++previewRenderNonce;
+
         if (!safePreviewEnabled) {
           previewEl.innerHTML = renderedHtml;
+          applyShikiToPreview(currentRenderNonce).catch(() => {});
           return;
         }
 
@@ -165,6 +267,7 @@ const editorSchema = {
           previewEl.innerHTML = purifier.sanitize(renderedHtml, {
             USE_PROFILES: { html: true },
           });
+          applyShikiToPreview(currentRenderNonce).catch(() => {});
           return;
         }
 
