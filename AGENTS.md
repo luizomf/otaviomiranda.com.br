@@ -7,7 +7,7 @@ Minimal repository rules for coding agents.
 1. `./.agents/SOUL.md`
 2. `./.agents/USER.md`
 3. `./.agents/MEMORY.md`
-4. `./PLAN.md`
+4. `./.agents/PLAN.md`
 
 ## Hard Rules
 
@@ -19,7 +19,7 @@ Minimal repository rules for coding agents.
 
 ## Project Workflow
 
-- `PLAN.md` = current task board (single source of truth for what is in
+- `.agents/PLAN.md` = current task board (single source of truth for what is in
   progress).
 - When a task is done: verify/test, update local memory, commit, and clear
-  `PLAN.md` for the next task.
+  `.agents/PLAN.md` for the next task.
