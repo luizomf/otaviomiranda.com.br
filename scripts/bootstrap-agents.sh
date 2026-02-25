@@ -79,7 +79,7 @@ Minimal repository rules for coding agents.
 1. `./.agents/SOUL.md`
 2. `./.agents/USER.md`
 3. `./.agents/MEMORY.md`
-4. `./PLAN.md`
+4. `./.agents/PLAN.md`
 
 ## Hard Rules
 
@@ -91,10 +91,10 @@ Minimal repository rules for coding agents.
 
 ## Project Workflow
 
-- `PLAN.md` = current task board (single source of truth for what is in
+- `.agents/PLAN.md` = current task board (single source of truth for what is in
   progress).
 - When a task is done: verify/test, update local memory, commit, and clear
-  `PLAN.md` for the next task.
+  `.agents/PLAN.md` for the next task.
 TXT
 )
 
@@ -251,7 +251,7 @@ write_file "$repo_root/AGENTS.md" "$AGENTS_CONTENT"
 write_file "$repo_root/.agents/SOUL.md" "$SOUL_CONTENT"
 write_file "$repo_root/.agents/USER.md" "$USER_CONTENT"
 write_file "$repo_root/.agents/MEMORY.md" "$MEMORY_CONTENT"
-write_file "$repo_root/PLAN.md" "$PLAN_CONTENT"
+write_file "$repo_root/.agents/PLAN.md" "$PLAN_CONTENT"
 write_file "$repo_root/.githooks/pre-commit" "$PRE_COMMIT_CONTENT"
 write_file "$repo_root/scripts/install-hooks.sh" "$INSTALL_HOOKS_CONTENT"
 
