@@ -15,5 +15,10 @@ export default defineConfig({
     },
   },
 
+  image: {
+    layout: 'constrained',
+    responsiveStyles: true,
+  },
+
   integrations: [sitemap()],
 });
