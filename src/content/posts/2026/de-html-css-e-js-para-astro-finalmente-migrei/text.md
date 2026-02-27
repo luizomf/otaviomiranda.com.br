@@ -4,7 +4,7 @@ description:
   'Migrei meu site de HTML, CSS e JavaScript puro para Astro SSG e explico as
   decisões técnicas, os desafios e como a IA (Codex, Claude e Gemini) acelerou a
   migração.'
-date: 2026-02-27
+date: 2026-02-27T12:00:00-03:00
 author: 'Otávio Miranda'
 ---
 
@@ -14,18 +14,22 @@ Já tem alguns dias que estou falando sobre esta migração na
 [comunidade do meu canal](https://www.youtube.com/@otaviomiranda/posts). Hoje,
 finalmente terminei!
 
-Meu site foi de **HTML, CSS e JavaScript PURO** para o
+Meu site foi de **HTML, CSS e JavaScript PUROS** para o
 [Astro](https://astro.build/) (_usando SSG - Static Site Generation_).
 
-Além disso, digitei pouquíssimo código na migração. Diria que **95%** de todo o
-código atual foi escrito por 3 LLMs diferentes: **Claude Code** _(Opus 4.6)_,
-**Codex App** _(GPT 5.3 Codex High)_ e **Antigravity** _(Gemini 3.1 Pro High)_.
+Além disso, este foi um dos primeiros projetos que mais administrei do que
+digitei código. Diria que **95%** do código atual foi escrito por 3 LLMs
+diferentes: **Claude Code** _(Opus 4.6)_, **Codex App** _(GPT 5.3 Codex High)_ e
+**Antigravity** _(Gemini 3.1 Pro High)_. Também usei variações desses modelos
+para tarefas simples ou mais complexas.
 
-A parte mais legal sobre as IAs, foi **como trabalhamos neste projeto**. Ao
-invés de algo complexo e cheio de regras, montei um _loop_ que fez todos os
-modelos de IA trabalharem precisamente da mesma forma.
+Usando um arquivo de regras simples, `git` e GitHub, consegui manter o contexto
+do que estava em andamento até a conclusão do projeto. Isso me permitiu até
+trocar de modelo ao longo da migração sem muitos problemas.
 
-Vamos entender mais detalhes sobre tudo isso adiante.
+Vamos entender mais detalhes sobre isso adiante.
+
+Mas, primeiro vamos garantir que você não vai cometer os mesmos erros que eu.
 
 ---
 
@@ -43,7 +47,7 @@ novamente. Então...
 ### Blog novo de novo
 
 Para mim, escrever é uma ótima forma de marcar presença online, manter-se
-atualizado e estudar.
+atualizado e estudar sem ter que se expor tanto.
 
 Mas, com tantas opções, onde faria isso? Medium? WordPress? Blogger 😒???
 Precisava de algo meu de verdade...
@@ -56,7 +60,7 @@ Um site estático consiste apenas de arquivos HTML, estilos CSS e JavaScript.
 vários outros_) oferecem hospedagem gratuita para conteúdo estático.
 
 Então, já que vou criar um repositório para manter os arquivos do meu site,
-**GitHub Pages** foi a escolha mais próxima.
+**GitHub Pages** foi a escolha mais próxima e de menor atrito.
 
 ### O problema começa aqui
 
@@ -64,8 +68,8 @@ Quando você cria seu site sem servidor, precisa entregar HTML, CSS e JS prontos
 
 Como eu já tinha bastante conhecimento nessas tecnologias, foi bem simples.
 
-Olha só que legal. Se você criar este arquivo no seu computador, você **já tem
-um site** estático.
+Olha só que legal. Se você criar este arquivo agora no seu computador, **aí está
+o seu site estático**. Simples assim!
 
 ```html
 <!doctype html>
@@ -117,88 +121,117 @@ formato de diretório).
 └── index.html
 ```
 
-Quando essa estrutura cresce, você termina com 1000 posts, cada um com variações
-do mesmo `index.html`. Todos têm o mesmo cabeçalho, rodapé, menu, etc...
+Geralmente, servidores web são configurados para buscar um arquivo `index.html`
+no diretório requisitado.
 
-Mas funciona, então você mantém a estrutura crescendo.
+Isso significa o seguinte:
+
+```bash
+# O caminho abaixo:
+./2026/meu-post/index.html
+
+# Se torna isso no seu domínio:
+https://www.meusite.com/2026/meu-post/
+
+# index.html carregado automaticamente pelo servidor web
+```
+
+O problema começa quando essa estrutura cresce. Você vai terminar com 1000
+posts, cada um com variações do mesmo `index.html`.
+
+Todos eles terão uma repetição do mesmo cabeçalho, rodapé, menu, etc...
+
+Mas, como todo bom `dev`, cheio de projetos para entregar, você pensa:
+
+> "Se funciona, deixa como está! Depois eu vejo isso."
 
 ### Tudo está bem, até que...
 
 Você precisa alterar algo.
 
-Imagine que no post 25 você decidiu fazer uma alteração em um erro que passou
-despercebido no rodapé do seu site. Aquele tipo de `typo` que, quando você vê,
-não dá pra "desver" mais.
+Não cheguei nem perto de 1000 posts, mas vamos imaginar que chegamos.
 
-Como você sempre clona o último post para criar um novo, isso foi replicado para
-todos os outros 975.
+Suponha que no post 25 você decidiu fazer uma alteração porque encontrou um erro
+no rodapé do site. Aquele tipo de erro de digitação que fica te provocando com
+um _"FIX ME..."_ no fundo do seu cérebro.
 
-Você faz um script que faz essa alteração e segue o jogo.
+Como você sempre clonou o último post para cada nova criação, isso foi replicado
+para todos os outros 975.
 
-Porém, se isso ainda não tinha passado pela sua cabeça, agora você não para de
-pensar:
+> "Um script Python resolve!"
 
-> "Mas... e se aparecer outro erro?"  
+Mas, se isso ainda não tinha passado pela sua cabeça, agora você pensa o tempo
+todo:
+
+> "E se aparecer outro erro?"  
 > "E se eu tiver que alterar o layout e o CSS?"  
 > "E se eu quiser adicionar ou remover um link de menu?"
 
-Refatorar todo o site a essa altura do campeonato é complicado. Você está com
-vários outros projetos em andamento.
+Refatorar todo o site nessa altura do campeonato é complicado. Você está com
+vários outros projetos em andamento. Deadlines batendo na porta.
+
+Seu script não vai capturar todas as nuances dos posts porque, todo ser humano
+tem bursts de dopamina que geram micro alterações ao longo do tempo.
+
+E nós sabemos que você nunca voltou para alterar todos os 1000 posts.
 
 ### As janelas estão quebradas...
 
-Neste ponto acontece algo muito parecido com a
+Neste ponto, acontece algo muito parecido com a
 [teoria das janelas quebradas](https://pt.wikipedia.org/wiki/Teoria_das_janelas_quebradas).
-Você passa a "vandalizar" seu próprio site com: só mais um script, só mais um
-CSS, uma div aqui e ali. E assim vai... até parar de publicar coisas novas.
+
+Você passa a "vandalizar" seu próprio site com: "só mais um script", "um ajuste
+de margem aqui", "uma div ali"... Ele nunca vai estar perfeito.
+
+Isso vai rapidamente da empolgação para o _"medo de quebrar algo"_, para o _"Não
+ligo mais"_.
+
+Até que você para de publicar completamente.
 
 ### Baseado em fatos reais
 
-Foi exatamente o que aconteceu comigo. Meu site nem chegou a crescer muito para
-chegar num ponto onde eu já estava desconfortável com todos os padrões
-diferentes em cada um dos posts.
+Foi exatamente o que aconteceu comigo.
 
 A ideia de criar um novo post era rapidamente substituída pela ideia de
-refatorar tudo. Mas, eu SEMPRE estou muito ocupado para parar e olhar isso.
+refatorar tudo ou até **jogar tudo fora e começar do zero**.
 
-Resultado? Sem novos posts... Você abandona seu próprio site.
+Mas, eu SEMPRE estou muito ocupado... enfim 🙄!
 
 ---
 
 ## A refatoração mal sucedida
 
-Já tenho um vasto conhecimento no `Next.js`. De fato, foi exatamente por este
-motivo que decidi não usá-lo neste projeto. Achei **demais** para um simples
-blog.
+Já tenho um vasto conhecimento no `Next.js`. E foi exatamente por este motivo
+que decidi não usá-lo neste projeto. Achei **demais** para um simples blog.
 
-Então, o que tentei fazer?
+Então eu tivesse essa ideia brilhante:
 
 > "Vou refatorar isso aqui na mão mesmo."
 
-Vamos cometer o mesmo erro duas vezes seguidas, não é mesmo? Já que vamos errar,
-erra tudo o que for possível já para não restar dúvidas do erro.
+Vamos cometer o mesmo erro duas vezes seguidas... Pense pelo lado positivo: já
+que vamos errar, erramos em tudo o que for possível para não restar dúvidas do
+erro.
 
-Comecei a ver algumas tendências pelo CodePen e Dribbble. Não sou muito bom com
-design, por isso, tudo que adiciono nos meus layouts vem de coisas que vejo na
-Internet e gosto.
+Olhei algumas tendências no CodePen e Dribbble. Não sou bom com design, por
+isso, tudo que adiciono nos meus layouts vem de coisas que vejo na Internet e
+gosto.
 
-### O único código que digitei neste projeto
+### Meu único código do projeto
 
-Decidi que queria uma section `Hero` no topo do site com um texto bem grande
+Decidi que queria uma section `Hero` no topo do site com um texto bem grande e
 centralizado.
 
-Como background, me inspirei no design do
-[Antigravity](https://antigravity.google/). Partículas interativas que ficam se
-mexendo suavemente.
+Me inspirei no design do [Antigravity](https://antigravity.google/), com as
+partículas interativas que ficam se mexendo suavemente.
 
-Cheguei a fazer 3 efeitos de background para decidir qual usar, veja:
+Cheguei a fazer 3 efeitos de background para decidir qual usar. Estão todas
+abaixo:
 
 - [Primeiro canvas](https://codepen.io/luizomf/full/ZYOdpdx)
 - [Segundo Canvas](https://codepen.io/luizomf/full/yyJdoWP)
 - [Final (Home do site)](https://www.otaviomiranda.com.br/)
 
-Perdi uns 2 ou 3 dias só com isso, mas pelo menos consegui um resultado
-satisfatório.
+Perdi uns 2 ou 3 dias com isso, mas consegui um resultado que me agradou.
 
 E essa foi minha única participação em digitação de código neste projeto. O
 canvas e o JavaScript que o acompanha.
@@ -207,75 +240,78 @@ canvas e o JavaScript que o acompanha.
 
 Cheguei a colocar o canvas na página inicial e fazer alguns ajustes de fonte.
 
-Queria muito (e consegui) criar um site onde o conteúdo vem primeiro.
-Principalmente na parte dos posts.
+Queria (e consegui) criar um site onde o conteúdo vem primeiro. Principalmente
+na [parte dos posts](/blog/1/).
 
-Usei uma fonte grande, muito bem espaçada e, o mais importante, não tenho
-anúncios, sem pop-ups, sem coletar dados ou cookies...
+Usei uma fonte grande, muito bem espaçada e não tenho anúncios, pop-ups,
+cookies...
 
 Nada além do conteúdo.
 
 ### Código antigo embaixo da cama
 
-Mesmo tentando remover o máximo de coisas do código antigo sem quebrar nada.
-Infelizmente, mexer em uma parte do CSS ou JS antigo estragava outras partes do
-site.
+BoOoO 👻!
 
-Isso é como aquele monstro embaixo da cama que as crianças têm medo. Só que o
-meu realmente estava lá.
+Mesmo tentando remover o máximo de coisas do código antigo sem quebrar nada,
+mexer em uma parte do CSS ou JS antigo estragava outras partes do site.
 
-Trocar o tamanho de algo significava que eu tinha que sair conferindo todas as
-outras páginas. Isso aconteceu umas duas vezes até eu desistir rapidamente e
-sair em busca de uma solução.
+É como aquele monstro embaixo da cama que as crianças têm medo. Mas o meu era só
+código velho mesmo.
+
+Trocar o tamanho de algo significava eu ter que sair conferindo todas as outras
+páginas. Com umas duas ou três tentativas, já desisti e fui atrás de solução.
 
 > Eu: Me indique um bom framework para SSG em 2026.  
 > IA: Astro!
 
-Então vamos checar o tal do **Astro**.
+Como eu ainda não havia usado o **Astro**, vamos checar do que se trata.
 
 ---
 
 ## Astro is a JavaScript web framework 🤮🫣☺️💜
 
-Ao entrar no [astro.build](https://astro.build/), a primeira coisa que vejo:
-`Astro is a JavaScript web framework`.
+Ao entrar no [astro.build](https://astro.build/), adivinha a primeira coisa que
+vejo?
+
+_"Astro is a JavaScript web framework"_
 
 Toda vez que vejo as palavras **JavaScript** e **Framework** juntas, a vontade é
-tapar os ouvidos e ficar gritando: _"lá lá lá lá lá, não quero saber..."_. Se
-você já usou a quantidade de frameworks e libs de JS que eu, deve ter a mesma
-sensação.
+tapar os ouvidos e ficar gritando: _"lá lá lá lá lá, não quero saber..."_.
 
-Mas o Astro 💜 foi diferente.
+Se você já usou a quantidade de frameworks e libs de JS que eu, deve ter a mesma
+sensação. No final você só quer não usar nada.
+
+Mas, o Astro foi diferente.
 
 ### Conceitos do Astro
 
-Esses foram alguns conceitos que me fizeram analisar melhor o **Astro**:
+Algumas coisas do **Astro** atacavam diretamente os meus problemas:
 
-- Server-First: _"O Astro melhora o desempenho do website renderizando
+- Servidor primeiro: _"O Astro melhora o desempenho do seu website renderizando
   componentes no servidor, enviando HTML leve para o browser, com zero overhead
   de JavaScript desnecessário."_
-- Content-Driven: _"O Astro foi criado para trabalhar com o seu conteúdo, não
-  importa onde ele estiver. Carregue dados do seu sistema de arquivos, APIs
+- Voltado para conteúdo: _"O Astro foi criado para trabalhar com o seu conteúdo,
+  não importa onde ele estiver. Carregue dados do seu sistema de arquivos, APIs
   externas ou seu CMS favorito."_
-- Customizable: _"Extenda o Astro com suas ferramentas favoritas. Traga sua
-  própria UI de componentes JS, bibliotecas JS, temas, integrações e mais."_
+- Personalizável: _"Estenda o Astro com suas ferramentas favoritas. Traga sua
+  própria UI de componentes, bibliotecas JS, temas, integrações e mais."_
 
-Interessante, parece funcionar para o que eu preciso. Agora, quer algo ainda
-mais legal?
+Interessante! Tudo isso realmente está lá no site deles e pareceu falar
+**diretamente para mim**.
+
+Quer mais?
 
 ### Astro Islands
 
 Se você já usou qualquer framework ou lib de JavaScript, já deve ter notado que
 queremos encapsular o máximo de coisas que for possível em um único componente.
-Isso evita o problema que eu tive na minha refatoração falha que mencionei
-antes.
 
-Mas, até o presente momento, eu fazia isso em um único framework na mesma
-página.
+Isso evita o problema que eu tive na minha refatoração falha. Mas, até o
+momento, eu fazia isso em um único framework na mesma página.
 
 O Astro permite criar ilhas (islands) dentro da sua página. Dessa forma, um
-componente pode usar React, outro pode usar Vue, outro pode ter somente HTML
-puro (de novo, na mesma página).
+componente pode usar React, outro Vue, outro pode ter somente HTML puro (de
+novo, na mesma página).
 
 Não recomendo adicionar 20 frameworks em uma página só porque pode, mas você
 pode 😂.
@@ -284,8 +320,8 @@ pode 😂.
 
 A partir daqui o negócio até que fluiu bem.
 
-Só tem o fato de eu não ter trabalhado com o **Astro** ainda. Então deixa eu
-chamar os LLMs que tenho acesso no momento. Temos trabalho!
+Só tem aquele fato que mencionei antes _"ainda não havia usado o **Astro**"_.
+Então deixa eu chamar os LLMs e começar os trabalhos.
 
 ---
 
