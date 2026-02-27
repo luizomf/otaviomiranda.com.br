@@ -13,6 +13,9 @@ import {
   getEntryDateTimeAttr,
 } from '../../utils/post-date';
 import { getEntryHref } from '../../utils/post-path';
+import Section from '../../components/Section.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import ThemeToggle from '../../components/ThemeToggle.astro';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const posts = await getCollection('posts');
@@ -33,78 +36,79 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
 ---
 
 <BaseLayout>
-  <div class='main'>
-    <Header />
+  <Header />
 
-    <section id='blog-page' class='section section-light article-section'>
-      <div class='section-content'>
-        <article class='article markdown-body article-body blog-archive-body'>
-          <header class='blog-archive-heading'>
-            <p class='blog-archive-eyeball'>Arquivo</p>
-            <h1 class='blog-archive-title'>Todos os posts</h1>
-            <p class='blog-archive-line'>
-              Página {page.currentPage} de {page.lastPage}. Explorando o acervo
-              de tutoriais e anotações.
-            </p>
-          </header>
+  <ThemeToggle />
 
-          <ul class='blog-list'>
-            {
-              paginatedPosts.map(({ post, dateLabel, dateTime }) => (
-                <li class='blog-post-item'>
-                  <a href={getEntryHref(post)} class='blog-post-link'>
-                    {post.data.title}
-                  </a>
-                  {post.data.description && (
-                    <p class='blog-post-description'>{post.data.description}</p>
-                  )}
-                  {dateLabel && dateTime && (
-                    <time datetime={dateTime} class='blog-post-date'>
-                      {dateLabel}
-                    </time>
-                  )}
-                </li>
-              ))
-            }
-          </ul>
+  <Section
+    id='blog-archive'
+    class='article-section'
+    theme='light'
+    contentClass='section-blog'
+  >
+    <SectionHeader
+      class='blog-header'
+      eyeball='Arquivo'
+      title='Todos os posts'
+      description={`Página ${page.currentPage} de ${page.lastPage}. Explorando o acervo de tutoriais e anotações.`}
+    />
 
-          <div class='pagination blog-pagination'>
-            <div class='blog-pagination-side blog-pagination-side--prev'>
-              {
-                page.url.prev && (
-                  <PillLink
-                    href={page.url.prev}
-                    containerClass='blog-pagination-control'
-                    linkClass='blog-pagination-link'
-                  >
-                    ◀ Anterior
-                  </PillLink>
-                )
-              }
-            </div>
+    <article class='article markdown-body article-body blog-archive-body'>
+      <ul class='blog-list'>
+        {
+          paginatedPosts.map(({ post, dateLabel, dateTime }) => (
+            <li class='blog-post-item'>
+              <a href={getEntryHref(post)} class='blog-post-link'>
+                {post.data.title}
+              </a>
+              {post.data.description && (
+                <p class='blog-post-description'>{post.data.description}</p>
+              )}
+              {dateLabel && dateTime && (
+                <time datetime={dateTime} class='blog-post-date'>
+                  {dateLabel}
+                </time>
+              )}
+            </li>
+          ))
+        }
+      </ul>
 
-            <span class='blog-pagination-current'>
-              ▲ Página {page.currentPage}
-            </span>
+      <div class='pagination blog-pagination'>
+        <div class='blog-pagination-side blog-pagination-side--prev'>
+          {
+            page.url.prev && (
+              <PillLink
+                href={page.url.prev}
+                containerClass='blog-pagination-control'
+                linkClass='blog-pagination-link'
+              >
+                ◀ Anterior
+              </PillLink>
+            )
+          }
+        </div>
 
-            <div class='blog-pagination-side blog-pagination-side--next'>
-              {
-                page.url.next && (
-                  <PillLink
-                    href={page.url.next}
-                    containerClass='blog-pagination-control'
-                    linkClass='blog-pagination-link'
-                  >
-                    Próxima ▶
-                  </PillLink>
-                )
-              }
-            </div>
-          </div>
-        </article>
+        <span class='blog-pagination-current'>
+          ▲ Página {page.currentPage}
+        </span>
+
+        <div class='blog-pagination-side blog-pagination-side--next'>
+          {
+            page.url.next && (
+              <PillLink
+                href={page.url.next}
+                containerClass='blog-pagination-control'
+                linkClass='blog-pagination-link'
+              >
+                Próxima ▶
+              </PillLink>
+            )
+          }
+        </div>
       </div>
-    </section>
-  </div>
+    </article>
+  </Section>
 
   <Newsletter />
   <Footer />
@@ -128,7 +132,7 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
   .blog-archive-eyeball {
     margin: 0 0 var(--spacings-sm-400);
     font-size: var(--font-size-xxsm);
-    color: hsl(from var(--main-clr-shade) h s 30% / 1);
+    color: hsl(from var(--main-clr-shade) h s 20% / 1);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-weight: 600;

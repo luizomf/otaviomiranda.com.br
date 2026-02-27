@@ -4,8 +4,11 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 import Newsletter from '../components/Newsletter.astro';
 import { getEntrySlugPath } from '../utils/post-path';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('posts');
@@ -32,42 +35,37 @@ const { Content } = await render(entry);
   description={entry.data.description}
   image={entry.data.image}
 >
-  <div class='main'>
-    <Header />
+  <Header />
 
-    <section class='section section-light article-section'>
-      <div class='section-content'>
-        <article class='article markdown-body article-body'>
-          <header class='post-header'>
-            <h1 class='post-title'>{entry.data.title}</h1>
-            <div class='post-meta'>
-              {
-                entry.data.author && (
-                  <span class='post-author'>{entry.data.author}</span>
-                )
-              }
-              {
-                entry.data.date && (
-                  <time
-                    class='post-date'
-                    datetime={entry.data.date.toISOString()}
-                  >
-                    {entry.data.date.toLocaleDateString('pt-BR', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </time>
-                )
-              }
-            </div>
-          </header>
+  <ThemeToggle />
 
-          <Content />
-        </article>
-      </div>
-    </section>
-  </div>
+  <Section id='post-content' class='article-section' contentClass='section-blog'>
+    <article class='article markdown-body article-body'>
+      <header class='post-header'>
+        <h1 class='post-title'>{entry.data.title}</h1>
+        <div class='post-meta'>
+          {
+            entry.data.author && (
+              <span class='post-author'>{entry.data.author}</span>
+            )
+          }
+          {
+            entry.data.date && (
+              <time class='post-date' datetime={entry.data.date.toISOString()}>
+                {entry.data.date.toLocaleDateString('pt-BR', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </time>
+            )
+          }
+        </div>
+      </header>
+
+      <Content />
+    </article>
+  </Section>
 
   <Newsletter />
   <Footer />
