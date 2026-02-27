@@ -4,55 +4,62 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PillLink from '../components/PillLink.astro';
 import { CONTACT_LINKS, EMAIL } from '../config/contacts';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
 ---
 
 <BaseLayout
   title='Contatos | Otávio Miranda'
   description='Links oficiais e canais de contato do Otávio Miranda em uma página interna simples.'
 >
-  <div class='main'>
-    <Header />
+  <Header />
+  <ThemeToggle />
 
-    <section class='section section-light article-section'>
-      <div class='section-content'>
-        <header class='section-header contacts-header'>
-          <p class='section-eyeball'>Links oficiais</p>
-          <h1 class='section-title'>Contatos</h1>
-          <p class='section-line'>
-            Para qualquer contato comercial: <strong>{EMAIL}</strong>.
-          </p>
-        </header>
+  <Section
+    id='blog-page'
+    class='article-section'
+    theme='light'
+    contentClass='section-blog'
+  >
+    <SectionHeader
+      class='blog-header'
+      eyeball='Links oficiais'
+      title='Contatos'
+    >
+      <p class='section-line'>
+        Para qualquer contato comercial: <strong>{EMAIL}</strong>.
+      </p>
+    </SectionHeader>
 
-        <ul class='contacts-list'>
-          {
-            CONTACT_LINKS.map(link => (
-              <li class='contacts-item'>
-                {link.external ? (
-                  <PillLink
-                    href={link.href}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    containerClass='contacts-control'
-                    linkClass='contacts-link'
-                  >
-                    {link.label} ↗
-                  </PillLink>
-                ) : (
-                  <PillLink
-                    href={link.href}
-                    containerClass='contacts-control'
-                    linkClass='contacts-link'
-                  >
-                    {link.label}
-                  </PillLink>
-                )}
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </section>
-  </div>
+    <ul class='contacts-list'>
+      {
+        CONTACT_LINKS.map(link => (
+          <li class='contacts-item'>
+            {link.external ? (
+              <PillLink
+                href={link.href}
+                target='_blank'
+                rel='noopener noreferrer'
+                containerClass='contacts-control'
+                linkClass='contacts-link'
+              >
+                {link.label} ↗
+              </PillLink>
+            ) : (
+              <PillLink
+                href={link.href}
+                containerClass='contacts-control'
+                linkClass='contacts-link'
+              >
+                {link.label}
+              </PillLink>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
 
   <Footer />
 </BaseLayout>
@@ -79,6 +86,7 @@ import { CONTACT_LINKS, EMAIL } from '../config/contacts';
     gap: var(--spacings-sm-500);
     margin: 0 auto;
     padding: 0;
+    padding-bottom: 15rem;
   }
 
   .contacts-item {
