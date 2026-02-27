@@ -119,41 +119,6 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
     padding-bottom: 8rem;
   }
 
-  .blog-archive-heading {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-    padding: clamp(var(--spacings-lg-200), 7vw, var(--spacings-lg-700)) 0
-      clamp(var(--spacings-lg-100), 5vw, var(--spacings-lg-400));
-    margin-bottom: clamp(var(--spacings-lg-200), 5vw, var(--spacings-lg-500));
-  }
-
-  .blog-archive-eyeball {
-    margin: 0 0 var(--spacings-sm-400);
-    font-size: var(--font-size-xxsm);
-    color: hsl(from var(--main-clr-shade) h s 20% / 1);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 600;
-  }
-
-  .blog-archive-title {
-    margin-bottom: var(--spacings-sm-700);
-    font-size: var(--font-size-h-me);
-    line-height: 1.1;
-    letter-spacing: -0.04em;
-    font-weight: 800;
-  }
-
-  .blog-archive-line {
-    margin: 0 0 var(--spacings-sm-700);
-    color: hsl(from var(--main-clr-shade) h s 30% / 1);
-    font-size: clamp(var(--font-size-sm), 3vw, var(--font-size-md));
-    line-height: 1.45;
-    max-width: 60ch;
-  }
-
   .blog-post-item {
     margin-bottom: 2rem;
     padding-bottom: 2rem;
