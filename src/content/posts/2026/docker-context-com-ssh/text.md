@@ -84,7 +84,9 @@ O que fiz foi configurar SSH em todos os computadores. Então, consigo trabalhar
 por qualquer um deles simplesmente digitando:
 
 ```shell
-ssh m132 # <-- Me conecto por aqui ssh m4128 ssh fedoraair # <-- E trabalho aqui
+ssh m132 # <-- Me conecto por aqui
+ssh m4128
+ssh fedoraair # <-- E trabalho aqui
 ```
 
 Sem perceber, acabei montando o **cenário perfeito para o Docker Context**. A
