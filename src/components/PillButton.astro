@@ -1,4 +1,26 @@
 ---
+/**
+ * ARQUIVO: PillButton.astro
+ *
+ * O QUE FAZ:
+ *   Botao (<button>) em formato de "pilula" com borda animada.
+ *   Envolve o <button> dentro de <ColorfulBorder>, herdando o
+ *   efeito de glow. Props: containerClass (classe para o wrapper)
+ *   e buttonClass (classe para o <button>). Atributos extras do
+ *   botao sao propagados via spread (...buttonProps).
+ *
+ * USADO EM:
+ *   - src/components/Coupon.astro
+ *
+ * CONCEITO ASTRO:
+ *   - Composicao via <slot />: o conteudo filho (texto do botao)
+ *     flui de PillButton -> ColorfulBorder -> <slot /> final.
+ *   - class:list={[buttonClass]} aceita string, array ou objeto,
+ *     tornando a API flexivel para quem consome o componente.
+ *   - Spread de props ({...buttonProps}) permite passar atributos
+ *     HTML nativos (type, disabled, aria-*) sem declara-los um
+ *     a um na interface.
+ */
 import ColorfulBorder from './ColorfulBorder.astro';
 
 type Props = Omit<astroHTML.JSX.ButtonHTMLAttributes, 'class'> & {

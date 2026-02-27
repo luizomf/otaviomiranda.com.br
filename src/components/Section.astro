@@ -1,4 +1,26 @@
 ---
+/**
+ * ARQUIVO: Section.astro
+ *
+ * O QUE FAZ:
+ *   Wrapper generico de secao que renderiza <section> + <div class="section-content">.
+ *   Aceita props para id, tema (light/dark), e classes extras tanto na <section>
+ *   quanto na div interna. Todo conteudo filho e projetado via <slot />.
+ *
+ * USADO EM:
+ *   - Courses.astro, Testimonials.astro, Newsletter.astro, RecentPosts.astro
+ *   - Header.astro (barra de navegacao)
+ *   - pages/blog/[page].astro, pages/[...slug].astro, pages/contacts.astro
+ *
+ * CONCEITO ASTRO:
+ *   - Props tipadas com "interface Props": o Astro infere automaticamente os
+ *     tipos das props quando voce declara essa interface no frontmatter.
+ *   - Astro.props: objeto que contem todas as props passadas ao componente.
+ *   - <slot />: equivalente ao "children" do React — renderiza o conteudo
+ *     filho que foi colocado entre as tags <Section>...</Section>.
+ *   - class:list={[...]}: diretiva do Astro que junta classes condicionalmente,
+ *     similar ao classnames/clsx. Aceita strings, objetos e arrays.
+ */
 interface Props {
   id?: string;
   theme?: 'light' | 'dark';

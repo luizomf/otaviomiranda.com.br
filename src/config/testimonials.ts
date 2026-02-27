@@ -1,3 +1,20 @@
+/**
+ * ARQUIVO: testimonials.ts
+ *
+ * O QUE FAZ:
+ *   Exporta a lista de depoimentos de alunos exibidos na home page.
+ *   Cada entrada possui slug (identificador unico), nome do autor,
+ *   funcao/papel e o texto do depoimento.
+ *
+ * USADO EM:
+ *   - Testimonials.astro (itera sobre o array TESTIMONIALS e renderiza
+ *     os cards de depoimentos)
+ *
+ * CONCEITO ASTRO:
+ *   Dados estaticos importados em build time. O Astro resolve o import
+ *   durante a geracao estatica (SSG), injetando os depoimentos
+ *   diretamente no HTML — sem JavaScript no cliente.
+ */
 export interface TestimonialEntry {
   slug: string;
   author: string;

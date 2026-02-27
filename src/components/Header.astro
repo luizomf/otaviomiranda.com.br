@@ -1,4 +1,27 @@
 ---
+/**
+ * ARQUIVO: Header.astro
+ *
+ * O QUE FAZ:
+ *   Barra de navegacao do site exibida nas paginas internas (blog, post, contatos).
+ *   Renderiza links para Home, Contatos e Blog dentro de um componente Section.
+ *   Nao aparece na landing page (index), que usa o Hero em vez disso.
+ *
+ * USADO EM:
+ *   - pages/[...slug].astro (paginas de post individual)
+ *   - pages/blog/[page].astro (listagem do blog)
+ *   - pages/contacts.astro
+ *
+ * CONCEITO ASTRO:
+ *   - import de componente .astro: importamos Section e o usamos como tag
+ *     JSX. O Astro resolve isso em build time — nao ha runtime framework.
+ *   - <style> com escopo (scoped): os estilos aqui so se aplicam a ESTE
+ *     componente. O Astro adiciona atributos data-astro-cid-xxx automaticamente
+ *     no HTML e no CSS para garantir o isolamento. Estilos globais ficam em
+ *     arquivos separados (ex: global.css).
+ *   - CSS nesting nativo: as regras aninhadas dentro de "a { &:hover {...} }"
+ *     usam CSS nesting, suportado por browsers modernos e processado pelo Astro.
+ */
 import Section from './Section.astro';
 ---
 

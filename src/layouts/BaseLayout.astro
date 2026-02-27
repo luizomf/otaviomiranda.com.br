@@ -1,5 +1,29 @@
 ---
-// src/layouts/BaseLayout.astro
+/**
+ * ARQUIVO: BaseLayout.astro
+ *
+ * O QUE FAZ:
+ *   Layout principal do site. Monta a estrutura HTML completa (<html>, <head>,
+ *   <body>) com todas as meta tags de SEO (Open Graph, Twitter Card, canonical,
+ *   robots) e importa o CSS global. O conteudo de cada pagina e injetado pelo
+ *   componente <slot />, que funciona como um "buraco" onde o conteudo filho
+ *   sera inserido.
+ *
+ * USADO EM:
+ *   - src/pages/index.astro (pagina inicial)
+ *   - src/pages/[...slug].astro (posts individuais do blog)
+ *   - src/pages/blog/[page].astro (arquivo paginado do blog)
+ *   - src/pages/contacts.astro (pagina de contatos)
+ *
+ * CONCEITO ASTRO:
+ *   Layouts - arquivos em src/layouts/ que definem a estrutura HTML reutilizavel.
+ *   O <slot /> e o mecanismo do Astro (inspirado nos Web Components) que permite
+ *   ao layout receber conteudo dinamico dos componentes filhos. As props sao
+ *   recebidas via Astro.props, que e a forma do Astro acessar os atributos
+ *   passados ao componente (ex: <BaseLayout title="..." description="...">).
+ *   Tudo dentro das cercas (---) e o "frontmatter" do componente, executado
+ *   apenas no servidor durante o build (SSG).
+ */
 import '../styles/global.css';
 
 interface Props {

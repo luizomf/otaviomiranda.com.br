@@ -1,5 +1,36 @@
 ---
-// src/pages/[...slug].astro
+/**
+ * ARQUIVO: [...slug].astro
+ *
+ * O QUE FAZ:
+ *   Pagina dinamica que renderiza cada post individual do blog. Busca todos os
+ *   posts da content collection "posts", gera um caminho (slug) para cada um
+ *   via getEntrySlugPath, e renderiza o conteudo Markdown como HTML. Exibe
+ *   titulo, autor, data de publicacao e o corpo do artigo.
+ *
+ * USADO EM:
+ *   - Qualquer URL de post, por exemplo:
+ *     https://otaviomiranda.com.br/2024/meu-post-exemplo/
+ *     O slug pode conter barras (ex: "2024/titulo-do-post"), por isso usa
+ *     o rest parameter [...slug] em vez de [slug].
+ *
+ * CONCEITO ASTRO:
+ *   Rest parameters em rotas dinamicas — o [...slug] (com "...") captura
+ *   multiplos segmentos de URL (ex: /2024/titulo vira slug = "2024/titulo").
+ *   Diferente de [slug], que captura apenas UM segmento.
+ *
+ *   getStaticPaths() — funcao OBRIGATORIA em rotas dinamicas no modo SSG
+ *   (Static Site Generation). Ela roda no build e retorna um array de objetos
+ *   { params, props } que dizem ao Astro QUAIS paginas gerar. Cada objeto
+ *   gera uma pagina HTML estatica.
+ *
+ *   Content Collections — os posts ficam em src/content/posts/ e sao
+ *   acessados via getCollection('posts'). A funcao render(entry) converte
+ *   o Markdown/MDX em um componente <Content /> que pode ser usado no template.
+ *
+ *   Astro.props — recebe os dados passados pelo objeto "props" retornado
+ *   em getStaticPaths(). Aqui, recebe a entry completa do post.
+ */
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';

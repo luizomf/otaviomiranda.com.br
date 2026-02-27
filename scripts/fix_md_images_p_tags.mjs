@@ -1,3 +1,22 @@
+/**
+ * ARQUIVO: fix_md_images_p_tags.mjs
+ *
+ * O QUE FAZ:
+ *   Remove tags <p> que envolvem imagens Markdown (![alt](src)) e
+ *   elimina espacos em branco iniciais antes da sintaxe de imagem.
+ *   Isso corrige problemas de renderizacao onde o parser Markdown
+ *   tratava imagens dentro de <p> como HTML inline em vez de blocos.
+ *
+ * USADO EM:
+ *   - Executado manualmente via `node scripts/fix_md_images_p_tags.mjs`
+ *   - Utilizado apos a migracao de conteudo HTML para Markdown
+ *
+ * CONCEITO ASTRO:
+ *   Este script NAO faz parte do build do Astro. E um utilitario
+ *   standalone de Node.js. A correcao e necessaria porque o processador
+ *   Markdown do Astro (remark) precisa que imagens estejam em blocos
+ *   isolados para aplicar otimizacao de imagens corretamente.
+ */
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

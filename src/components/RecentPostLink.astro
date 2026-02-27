@@ -1,4 +1,27 @@
 ---
+/**
+ * ARQUIVO: RecentPostLink.astro
+ *
+ * O QUE FAZ:
+ *   Renderiza um item individual (li > a) na lista de posts recentes do
+ *   blog. Exibe o titulo do post como link e uma seta animada que
+ *   aparece ao passar o mouse (transicao de opacidade e translateX).
+ *
+ * USADO EM:
+ *   - RecentPosts.astro (renderizado via .map() para cada post recente)
+ *
+ * CONCEITO ASTRO:
+ *   - Astro.props: recebe href e title do componente pai via a interface
+ *     "type Props". Componentes Astro sao como funcoes puras — recebem
+ *     dados e retornam HTML.
+ *   - Estilos com escopo (scoped styles): os seletores "li" e "a" so
+ *     afetam este componente, sem conflitar com outros elementos da
+ *     pagina. O Astro adiciona um atributo data-astro-* unico em tempo
+ *     de build.
+ *   - :global(.section-dark): permite estilizar o link quando ele esta
+ *     dentro de uma secao com tema escuro, ja que a classe .section-dark
+ *     e definida em um componente ancestral (Section.astro).
+ */
 type Props = {
   href: string;
   title: string;

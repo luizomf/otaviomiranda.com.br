@@ -1,3 +1,36 @@
+---
+/**
+ * ARQUIVO: ThemeToggle.astro
+ *
+ * O QUE FAZ:
+ *   Toggle de tema claro/escuro (dark mode). Renderiza um checkbox
+ *   estilizado como slider (position: fixed) que, via JavaScript no
+ *   client, le e grava a preferencia no localStorage e aplica o
+ *   atributo data-theme="dark" nos elementos .article-section.
+ *   Tambem respeita prefers-color-scheme do sistema operacional
+ *   quando o usuario ainda nao fez uma escolha manual.
+ *
+ * USADO EM:
+ *   - src/pages/[...slug].astro
+ *   - src/pages/blog/[page].astro
+ *   - src/pages/contacts.astro
+ *
+ * CONCEITO ASTRO:
+ *   - Este componente nao possui frontmatter (nao tem props nem
+ *     imports), pois toda a logica e client-side.
+ *   - A tag <script> no Astro e processada pelo Vite: o TypeScript
+ *     e compilado, o bundle e otimizado, e o script roda uma unica
+ *     vez por pagina (nao duplica se o componente aparecer mais de
+ *     uma vez). Isso e diferente de <script is:inline>, que seria
+ *     copiado literalmente para o HTML sem bundling.
+ *   - O CSS deste componente e definido externamente (global.css ou
+ *     layout pai), por isso nao ha bloco <style> aqui.
+ *   - Usar document.getElementById / querySelectorAll dentro do
+ *     <script> e o padrao "vanilla JS" do Astro — sem framework
+ *     de UI, sem hidratacao; apenas JS imperativo no browser.
+ */
+---
+
 <label class='theme-toggle' aria-label='Alternar tema'>
   <input type='checkbox' id='theme-mode' />
   <span class='theme-toggle-track'>

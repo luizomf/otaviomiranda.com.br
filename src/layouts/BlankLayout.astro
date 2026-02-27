@@ -1,5 +1,23 @@
 ---
-// src/layouts/BlankLayout.astro
+/**
+ * ARQUIVO: BlankLayout.astro
+ *
+ * O QUE FAZ:
+ *   Layout "em branco" — fornece a estrutura HTML minima (<html>, <head>, <body>)
+ *   com meta tags de SEO, mas SEM importar CSS global nem JavaScript do site.
+ *   Isso cria uma tela limpa ("blank canvas") para paginas que precisam de
+ *   controle total sobre estilos e scripts, como o editor Markdown.
+ *
+ * USADO EM:
+ *   - src/pages/editor.astro (editor Markdown com Monaco Editor)
+ *
+ * CONCEITO ASTRO:
+ *   Layouts - voce pode ter multiplos layouts no Astro. Enquanto o BaseLayout
+ *   serve para paginas "normais" do site (com CSS global, Header, Footer), o
+ *   BlankLayout existe para paginas que precisam de isolamento total de estilos.
+ *   O <slot /> aqui funciona da mesma forma: injeta o conteudo passado como
+ *   filho. As props (title, description, etc.) sao recebidas via Astro.props.
+ */
 
 interface Props {
   title?: string;

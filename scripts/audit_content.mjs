@@ -1,3 +1,22 @@
+/**
+ * ARQUIVO: audit_content.mjs
+ *
+ * O QUE FAZ:
+ *   Script de auditoria que compara o conteudo dos arquivos Markdown
+ *   migrados (text.md) com os HTMLs legados (index_old.html) de cada
+ *   post. Usa cheerio para extrair texto e imagens de ambas as versoes,
+ *   renderiza o Markdown com "marked" e reporta discrepancias
+ *   (diferenca de caracteres > 500 ou quantidade de imagens divergente).
+ *
+ * USADO EM:
+ *   - Executado manualmente via `node scripts/audit_content.mjs`
+ *   - Utilizado durante a migracao de conteudo HTML legado para Markdown
+ *
+ * CONCEITO ASTRO:
+ *   Este script NAO faz parte do build do Astro. E um utilitario
+ *   standalone de Node.js usado para garantir a integridade do conteudo
+ *   ao migrar posts antigos para o formato de Content Collections.
+ */
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

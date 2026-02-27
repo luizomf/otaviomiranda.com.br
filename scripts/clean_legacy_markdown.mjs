@@ -1,3 +1,23 @@
+/**
+ * ARQUIVO: clean_legacy_markdown.mjs
+ *
+ * O QUE FAZ:
+ *   Limpa resquicios de HTML legado dentro dos arquivos Markdown dos
+ *   posts. Remove especificamente:
+ *     1. Blocos <template> de alertas do GitHub Gist
+ *     2. Classes CSS prefixadas com "js-" copiadas do DOM do GitHub
+ *     3. Estilos inline de float herdados de links raw do Gist
+ *   Percorre recursivamente todos os .md em src/content/posts/.
+ *
+ * USADO EM:
+ *   - Executado manualmente via `node scripts/clean_legacy_markdown.mjs`
+ *   - Utilizado apos a migracao inicial de HTML para Markdown
+ *
+ * CONCEITO ASTRO:
+ *   Este script NAO faz parte do build do Astro. E um utilitario
+ *   standalone de Node.js para higienizar arquivos Markdown que serao
+ *   consumidos pela Content Collection "posts" do Astro.
+ */
 #!/usr/bin/env node
 import { promises as fs } from 'node:fs';
 import path from 'node:path';

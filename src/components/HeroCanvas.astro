@@ -1,6 +1,29 @@
 ---
-// src/components/HeroCanvas.astro
-// Particle canvas island — only hydrates when Hero enters viewport.
+/**
+ * ARQUIVO: HeroCanvas.astro
+ *
+ * O QUE FAZ:
+ *   Canvas HTML5 que renderiza uma animacao de particulas interativas como
+ *   fundo do hero. As particulas flutuam com movimento orbital ("drift
+ *   planetario") e reagem ao mouse com fisica de mola (spring + force + drag).
+ *   Tudo e desenhado via Canvas 2D API com requestAnimationFrame.
+ *
+ * USADO EM:
+ *   - Hero.astro (unico local de uso — fundo da secao hero)
+ *
+ * CONCEITO ASTRO:
+ *   - <script> no Astro: diferente do frontmatter (que roda no build/servidor),
+ *     o bloco <script> roda NO NAVEGADOR do usuario. O Astro processa esse
+ *     script via Vite: faz bundle, minifica e adiciona ao HTML final.
+ *   - Script sem framework: este componente usa Canvas 2D puro, sem React,
+ *     Vue ou qualquer framework. O Astro permite isso naturalmente — voce
+ *     escreve JS/TS vanilla e ele e enviado ao client como modulo ES.
+ *   - TypeScript no <script>: o Astro suporta TS direto no bloco <script>.
+ *     Aqui, o type "Configs" e a classe "Particle" sao tipados com TS e
+ *     compilados para JS no build.
+ *   - aria-hidden="true": o canvas e puramente decorativo, entao e oculto
+ *     de leitores de tela para acessibilidade.
+ */
 ---
 
 <canvas id='canvas-hero-dark' class='canvas-bg' aria-hidden='true'></canvas>

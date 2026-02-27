@@ -1,4 +1,26 @@
 ---
+/**
+ * ARQUIVO: SectionHeader.astro
+ *
+ * O QUE FAZ:
+ *   Renderiza o cabecalho padrao de uma secao com o pattern: eyeball (texto
+ *   pequeno acima), titulo principal e descricao opcional. Tambem aceita
+ *   conteudo extra via <slot /> abaixo da descricao.
+ *
+ * USADO EM:
+ *   - Courses.astro, Testimonials.astro, Newsletter.astro, RecentPosts.astro
+ *   - pages/blog/[page].astro, pages/contacts.astro
+ *
+ * CONCEITO ASTRO:
+ *   - Props tipadas com "interface Props": define o contrato de dados do
+ *     componente. O Astro valida os tipos em tempo de build.
+ *   - Astro.props: desestruturado aqui para extrair eyeball, title, description
+ *     e class (renomeada para className, pois "class" e palavra reservada em JS).
+ *   - Renderizacao condicional: {description && <p>...} — JSX-like, so renderiza
+ *     o <p> se description for truthy. Isso e avaliado no servidor (build time).
+ *   - <slot />: permite que o componente pai injete conteudo adicional dentro
+ *     do <header>, apos o titulo e descricao.
+ */
 interface Props {
   eyeball: string;
   title: string;

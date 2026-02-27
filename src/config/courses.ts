@@ -1,3 +1,18 @@
+/**
+ * ARQUIVO: courses.ts
+ *
+ * O QUE FAZ:
+ *   Exporta a lista de cursos exibidos na secao "Cursos" da home page.
+ *   Cada entrada possui link (Udemy/Hostinger), imagem, titulo e descricao.
+ *
+ * USADO EM:
+ *   - Courses.astro (itera sobre o array COURSES e renderiza os cards)
+ *
+ * CONCEITO ASTRO:
+ *   Dados estaticos importados em build time. Como o array e resolvido
+ *   durante a geracao estatica (SSG), os dados ficam embutidos no HTML
+ *   final sem nenhum custo de JavaScript no navegador.
+ */
 export interface CourseEntry {
   href: string;
   imageSrc: string;

@@ -1,4 +1,31 @@
 ---
+/**
+ * ARQUIVO: Newsletter.astro
+ *
+ * O QUE FAZ:
+ *   Secao de cadastro na newsletter. Exibe um formulario com campo
+ *   de e-mail e botao "OK", ambos envolvidos por <ColorfulBorder>
+ *   para o efeito de borda animada. O form envia via GET para o
+ *   Substack (luizomf.substack.com/subscribe), abrindo em nova aba.
+ *
+ * USADO EM:
+ *   - src/pages/index.astro
+ *   - src/pages/[...slug].astro
+ *   - src/pages/blog/[page].astro
+ *
+ * CONCEITO ASTRO:
+ *   - Componente puramente server-side: nao possui <script> nem
+ *     logica client-side. Todo o HTML e gerado no build (SSG).
+ *   - Composicao de multiplos componentes Astro (Section,
+ *     SectionHeader, ColorfulBorder) para montar a UI de forma
+ *     declarativa, cada um com seu <style> scoped.
+ *   - O <style> scoped aqui estiliza apenas os elementos internos
+ *     (.newsletter-form, .newsletter-input, .newsletter-button)
+ *     sem afetar outros formularios da pagina.
+ *   - <ColorfulBorder> e usado duas vezes (input + button),
+ *     mostrando como um componente wrapper generico pode ser
+ *     reutilizado com conteudos diferentes via <slot />.
+ */
 import ColorfulBorder from './ColorfulBorder.astro';
 import Section from './Section.astro';
 import SectionHeader from './SectionHeader.astro';

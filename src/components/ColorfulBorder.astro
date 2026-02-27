@@ -1,5 +1,33 @@
 ---
-// ColorfulBorder.astro
+/**
+ * ARQUIVO: ColorfulBorder.astro
+ *
+ * O QUE FAZ:
+ *   Wrapper visual que cria uma borda animada com efeito de brilho
+ *   (glow) usando conic-gradient. Dois elementos (.bg e .bg-blur)
+ *   giram o gradiente continuamente; no hover, a velocidade aumenta
+ *   e um blur mais forte simula uma "aura". Aceita uma prop opcional
+ *   `class` para customizar o container externo.
+ *
+ * USADO EM:
+ *   - src/components/PillLink.astro
+ *   - src/components/PillButton.astro
+ *   - src/components/Newsletter.astro
+ *
+ * CONCEITO ASTRO:
+ *   - <slot /> permite compor conteudo filho (anchor, button, input)
+ *     sem que este componente precise saber o que sera inserido.
+ *   - class:list={['container', className]} e a forma do Astro de
+ *     concatenar classes condicionalmente (similar ao clsx/classnames).
+ *   - <style> com escopo automatico (scoped): o Astro gera atributos
+ *     data-astro-cid-* para isolar o CSS deste componente.
+ *   - @property --conic-angle registra uma custom property CSS como
+ *     <angle>, permitindo anima-la com @keyframes (sem @property, o
+ *     navegador nao sabe interpolar angulos).
+ *   - @keyframes glow roda dentro do <style> scoped, porem keyframes
+ *     e @property sao sempre globais no browser; o escopo do Astro
+ *     nao os isola de verdade.
+ */
 interface Props {
   class?: string;
 }

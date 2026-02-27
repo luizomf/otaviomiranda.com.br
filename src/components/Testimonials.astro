@@ -1,4 +1,26 @@
 ---
+/**
+ * ARQUIVO: Testimonials.astro
+ *
+ * O QUE FAZ:
+ *   Renderiza a secao completa de depoimentos da pagina inicial. Exibe
+ *   um cabecalho (SectionHeader) e um grid responsivo com todos os
+ *   depoimentos de alunos, sobre fundo escuro com parallax.
+ *
+ * USADO EM:
+ *   - src/pages/index.astro (pagina principal do site)
+ *
+ * CONCEITO ASTRO:
+ *   - Dados externos: importa o array TESTIMONIALS de
+ *     src/config/testimonials.ts, mantendo os dados separados da UI.
+ *   - Spread de props: usa a sintaxe {...testimonial} no .map() para
+ *     passar todas as propriedades do objeto como props de uma vez
+ *     para o componente Testimonial — equivalente a escrever cada
+ *     prop manualmente (slug={testimonial.slug} author={...} etc).
+ *   - Composicao de componentes: Section controla o tema (theme='dark')
+ *     e a classe de fundo (bg-parallax), enquanto cada Testimonial
+ *     cuida da sua propria apresentacao.
+ */
 import Section from './Section.astro';
 import SectionHeader from './SectionHeader.astro';
 import Testimonial from './Testimonial.astro';

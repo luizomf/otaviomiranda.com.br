@@ -1,4 +1,36 @@
 ---
+/**
+ * ARQUIVO: blog/[page].astro
+ *
+ * O QUE FAZ:
+ *   Pagina de arquivo (listagem) do blog com paginacao. Exibe todos os posts
+ *   ordenados por data (mais recente primeiro), com 10 posts por pagina.
+ *   Mostra titulo, descricao e data de cada post, alem de controles de
+ *   navegacao (anterior/proxima) entre as paginas.
+ *
+ * USADO EM:
+ *   - https://otaviomiranda.com.br/blog/1 (primeira pagina)
+ *   - https://otaviomiranda.com.br/blog/2 (segunda pagina)
+ *   - E assim por diante, uma pagina para cada grupo de 10 posts.
+ *
+ * CONCEITO ASTRO:
+ *   Rota dinamica com paginacao — o [page] no nome do arquivo indica um
+ *   parametro dinamico de URL. O Astro fornece a funcao paginate() dentro
+ *   de getStaticPaths() que automaticamente divide os dados em paginas e
+ *   gera as rotas /blog/1, /blog/2, etc.
+ *
+ *   GetStaticPathsOptions — o tipo que fornece a funcao paginate() como
+ *   argumento de getStaticPaths(). Ao chamar paginate(posts, { pageSize: 10 }),
+ *   o Astro gera automaticamente os params e props de cada pagina.
+ *
+ *   Page<T> — o tipo do objeto de paginacao recebido via Astro.props. Contem:
+ *   - page.data: array dos itens da pagina atual
+ *   - page.currentPage / page.lastPage: numeros da pagina
+ *   - page.url.prev / page.url.next: URLs de navegacao (ou undefined)
+ *
+ *   Content Collections — os posts sao buscados via getCollection('posts')
+ *   e ordenados com comparePostsByDateDesc antes de paginar.
+ */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';

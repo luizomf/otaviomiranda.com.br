@@ -1,3 +1,25 @@
+/**
+ * ARQUIVO: post-date.ts
+ *
+ * O QUE FAZ:
+ *   Funcoes utilitarias para extrair, formatar e comparar datas de posts
+ *   da content collection "posts". Lida com tres cenarios:
+ *     1. Data definida no frontmatter (campo "date")
+ *     2. Ano extraido do ID do arquivo (ex.: "2024/meu-post")
+ *     3. Fallback para Date(0) quando nenhuma data e encontrada
+ *   Exporta tambem helpers de ordenacao (desc), label legivel em pt-BR
+ *   e atributo datetime para a tag <time>.
+ *
+ * USADO EM:
+ *   - [...slug].astro (exibe a data de publicacao do post)
+ *   - blog/[page].astro (ordena posts por data na listagem paginada)
+ *   - RecentPosts.astro (ordena e exibe os posts mais recentes)
+ *
+ * CONCEITO ASTRO:
+ *   Trabalha com Content Collections (astro:content). O tipo
+ *   CollectionEntry<'posts'> garante tipagem forte sobre o frontmatter
+ *   definido no schema Zod. Tudo e resolvido em build time (SSG).
+ */
 import type { CollectionEntry } from 'astro:content';
 
 type PostEntry = CollectionEntry<'posts'>;

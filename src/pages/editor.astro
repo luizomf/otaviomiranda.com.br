@@ -1,4 +1,37 @@
 ---
+/**
+ * ARQUIVO: editor.astro
+ *
+ * O QUE FAZ:
+ *   Pagina do editor Markdown online. Implementa um editor completo usando
+ *   Monaco Editor (o mesmo motor do VS Code) com suporte a Vim motions,
+ *   preview em tempo real com syntax highlighting via Shiki, abertura/salvamento
+ *   de arquivos .md via File System Access API, auto-save periodico e
+ *   insercao automatica de frontmatter. E uma pagina 100% client-side
+ *   (todo o JavaScript roda no navegador).
+ *
+ * USADO EM:
+ *   - https://otaviomiranda.com.br/editor/
+ *
+ * CONCEITO ASTRO:
+ *   Pagina com BlankLayout — usa o BlankLayout em vez do BaseLayout para
+ *   ter controle total sobre CSS e JS, sem herdar estilos globais do site.
+ *
+ *   Diretiva is:inline — os <script is:inline> dizem ao Astro para NAO
+ *   processar esses scripts (sem bundling, sem tree-shaking). O codigo e
+ *   inserido tal qual no HTML final. Isso e necessario aqui porque os scripts
+ *   dependem de CDNs externas (Monaco, Marked, DOMPurify) carregadas via
+ *   require/AMD, que nao funcionam com o bundler do Astro.
+ *
+ *   set:html — a diretiva set:html={JSON.stringify(editorSchema)} injeta
+ *   HTML bruto (neste caso, JSON-LD para SEO) dentro da tag <script>,
+ *   sem escapar os caracteres. E a forma do Astro de fazer innerHTML.
+ *
+ *   Scoped styles — o bloco <style> no final gera CSS com escopo local
+ *   (o Astro adiciona atributos data-astro-cid-* para isolar os estilos).
+ *   O seletor :global() e usado para estilizar elementos dentro do preview
+ *   que sao gerados dinamicamente pelo JavaScript e nao tem o atributo de escopo.
+ */
 import BlankLayout from '../layouts/BlankLayout.astro';
 
 const editorSchema = {

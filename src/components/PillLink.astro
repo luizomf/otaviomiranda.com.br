@@ -1,4 +1,33 @@
 ---
+/**
+ * ARQUIVO: PillLink.astro
+ *
+ * O QUE FAZ:
+ *   Link (ancora <a>) em formato de "pilula" com borda animada.
+ *   Envolve o <a> dentro de <ColorfulBorder>, herdando o efeito
+ *   de glow. Props: href (destino), containerClass (classe para o
+ *   wrapper externo) e linkClass (classe para o proprio <a>).
+ *   Atributos extras do <a> sao propagados via spread (...linkProps).
+ *
+ * USADO EM:
+ *   - src/components/Hero.astro
+ *   - src/components/Courses.astro
+ *   - src/components/RecentPosts.astro
+ *   - src/pages/blog/[page].astro
+ *   - src/pages/contacts.astro
+ *
+ * CONCEITO ASTRO:
+ *   - <slot /> e delegado para ColorfulBorder: o conteudo filho
+ *     passado a PillLink acaba dentro do <slot /> de ColorfulBorder,
+ *     demonstrando composicao de componentes em cadeia.
+ *   - class:list={['link', linkClass]} concatena classes de forma
+ *     segura, ignorando strings vazias.
+ *   - O <style> scoped garante que a.link.link (especificidade
+ *     aumentada) nao vaze para outros <a> da pagina.
+ *   - Tipagem via Omit<astroHTML.JSX.AnchorHTMLAttributes, 'class'>
+ *     reaproveita os tipos nativos do HTML, removendo `class` para
+ *     evitar conflito com as props customizadas.
+ */
 import ColorfulBorder from './ColorfulBorder.astro';
 
 type Props = Omit<astroHTML.JSX.AnchorHTMLAttributes, 'class'> & {

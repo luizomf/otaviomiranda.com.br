@@ -1,4 +1,27 @@
 ---
+/**
+ * ARQUIVO: Courses.astro
+ *
+ * O QUE FAZ:
+ *   Renderiza a secao completa de cursos da pagina inicial. Exibe um
+ *   cabecalho (SectionHeader) e um grid responsivo com todos os cursos
+ *   cadastrados. Possui logica condicional para exibir conteudo especial
+ *   no card da Hostinger (cupom de desconto).
+ *
+ * USADO EM:
+ *   - src/pages/index.astro (pagina principal do site)
+ *
+ * CONCEITO ASTRO:
+ *   - Dados externos: importa o array COURSES de src/config/courses.ts,
+ *     separando dados da apresentacao (pattern comum em Astro).
+ *   - .map() para listas: itera sobre COURSES com .map() dentro de {}
+ *     nas chaves JSX-like do template Astro — similar ao React, mas sem
+ *     necessidade de key (Astro nao usa Virtual DOM).
+ *   - Composicao de componentes: usa Section, SectionHeader e Course
+ *     como blocos de construcao reutilizaveis.
+ *   - Grid responsivo com CSS: grid-template-columns com repeat(auto-fit,
+ *     minmax(...)) cria layout que se adapta sem media queries.
+ */
 import Section from './Section.astro';
 import SectionHeader from './SectionHeader.astro';
 import Course from './Course.astro';

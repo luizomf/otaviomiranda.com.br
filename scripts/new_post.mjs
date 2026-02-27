@@ -1,3 +1,23 @@
+/**
+ * ARQUIVO: new_post.mjs
+ *
+ * O QUE FAZ:
+ *   Scaffolding interativo para criar novos posts no blog. Pergunta
+ *   titulo e descricao (via stdin), gera o slug automaticamente,
+ *   cria a estrutura de pastas (ano/slug/images/) e o arquivo text.md
+ *   com frontmatter pre-preenchido (titulo, descricao, data, autor).
+ *   Tambem aceita o titulo como argumento de linha de comando.
+ *
+ * USADO EM:
+ *   - Executado manualmente via `node scripts/new_post.mjs [titulo]`
+ *   - Utilizado sempre que um novo post precisa ser criado
+ *
+ * CONCEITO ASTRO:
+ *   Este script NAO faz parte do build do Astro. E um utilitario
+ *   standalone de Node.js que gera a estrutura de arquivos esperada
+ *   pela Content Collection "posts" do Astro (src/content/posts/ANO/SLUG/).
+ *   O frontmatter gerado segue o schema Zod definido na collection.
+ */
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';

@@ -1,4 +1,27 @@
 ---
+/**
+ * ARQUIVO: Testimonial.astro
+ *
+ * O QUE FAZ:
+ *   Renderiza um card individual de depoimento com efeito glass
+ *   (background semi-transparente + backdrop-filter: blur). Exibe o
+ *   texto do depoimento, foto de perfil, nome, cargo e um link para
+ *   a imagem de prova (screenshot do depoimento original).
+ *
+ * USADO EM:
+ *   - Testimonials.astro (renderizado via .map() para cada depoimento)
+ *
+ * CONCEITO ASTRO:
+ *   - Astro.props com tipagem: recebe slug, author, role, text e
+ *     proofLabel (com valor padrao 'Ver') via "type Props".
+ *   - Caminhos dinamicos: usa template literals para montar os caminhos
+ *     das imagens (/imgs/testimonials/${slug}_profile.png) a partir do
+ *     slug recebido por props.
+ *   - Efeito glass (glassmorphism): combinacao de background com
+ *     rgba() e backdrop-filter: blur() nos estilos com escopo.
+ *   - Estilos com escopo (scoped styles): todo CSS e automaticamente
+ *     isolado a este componente pelo compilador do Astro.
+ */
 type Props = {
   slug: string;
   author: string;

@@ -1,4 +1,23 @@
 ---
+/**
+ * ARQUIVO: index.astro
+ *
+ * O QUE FAZ:
+ *   Pagina inicial (home) do site. Compoe as secoes principais em ordem:
+ *   Hero (apresentacao), Courses (cursos), Coupon (cupom de desconto),
+ *   RecentPosts (ultimos posts do blog), Testimonials (depoimentos),
+ *   Newsletter (formulario de inscricao) e Footer (rodape).
+ *
+ * USADO EM:
+ *   - Rota raiz do site: https://otaviomiranda.com.br/
+ *
+ * CONCEITO ASTRO:
+ *   File-based routing (roteamento baseado em arquivos) — no Astro, cada arquivo
+ *   .astro dentro de src/pages/ se torna automaticamente uma rota. O arquivo
+ *   index.astro corresponde a rota "/" (raiz). Nao e necessario configurar
+ *   rotas manualmente. Esta pagina usa o BaseLayout como wrapper, passando
+ *   seus componentes como filhos que serao inseridos no <slot /> do layout.
+ */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import Courses from '../components/Courses.astro';

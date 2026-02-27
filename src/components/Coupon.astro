@@ -1,4 +1,32 @@
 ---
+/**
+ * ARQUIVO: Coupon.astro
+ *
+ * O QUE FAZ:
+ *   Secao de cupom de desconto. Exibe um codigo promocional (ex.:
+ *   "OTAVIO") dentro de um card com efeito glassmorphism (.glass)
+ *   e uma label de validade. Os valores padrao vem da configuracao
+ *   centralizada HOME_COUPON (src/config/coupon), mas podem ser
+ *   sobrescritos via props (code, expiresAtLabel).
+ *
+ * USADO EM:
+ *   - src/pages/index.astro
+ *
+ * CONCEITO ASTRO:
+ *   - Props com valores padrao: desestruturacao com fallback
+ *     (code = HOME_COUPON.code) permite que o componente funcione
+ *     sem que o consumidor passe nenhuma prop.
+ *   - Importacao de dados de configuracao (../config/coupon) no
+ *     frontmatter: como o Astro roda no servidor/build, qualquer
+ *     modulo JS/TS pode ser importado e usado para gerar HTML
+ *     estatico.
+ *   - O <style> scoped estiliza .coupon com pseudo-elemento
+ *     ::after para o efeito de "brilho" deslizante no hover,
+ *     similar ao de ColorfulBorder mas implementado localmente.
+ *   - theme='dark' e class='bg-parallax' sao passados para o
+ *     componente <Section>, demonstrando como props fluem entre
+ *     componentes Astro na arvore de composicao.
+ */
 import Section from './Section.astro';
 import SectionHeader from './SectionHeader.astro';
 import { HOME_COUPON } from '../config/coupon';

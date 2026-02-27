@@ -1,4 +1,25 @@
 ---
+/**
+ * ARQUIVO: Course.astro
+ *
+ * O QUE FAZ:
+ *   Renderiza um card individual de curso com imagem, titulo e descricao.
+ *   Possui efeito de elevacao (translateY + box-shadow) ao passar o mouse,
+ *   e se adapta automaticamente ao tema claro ou escuro da secao pai.
+ *
+ * USADO EM:
+ *   - Courses.astro (renderizado via .map() para cada curso do array)
+ *
+ * CONCEITO ASTRO:
+ *   - Astro.props: recebe dados tipados do componente pai (href, imageSrc,
+ *     imageAlt, title, target, rel) via a interface "type Props".
+ *   - <slot />: insere conteudo filho arbitrario (a descricao do curso)
+ *     passado entre as tags <Course>...</Course> no componente pai.
+ *   - Estilos com escopo (scoped styles): cada classe CSS so se aplica a
+ *     este componente. O seletor :global(.section-dark) permite estilizar
+ *     o card quando ele esta dentro de uma secao com tema escuro, ja que
+ *     .section-dark e definida fora deste componente.
+ */
 type Props = {
   href: string;
   imageSrc: string;

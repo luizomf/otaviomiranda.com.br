@@ -1,3 +1,22 @@
+/**
+ * ARQUIVO: fix_md_images_spacing.mjs
+ *
+ * O QUE FAZ:
+ *   Adiciona duas linhas em branco antes e depois de cada imagem
+ *   Markdown (![alt](src)) nos arquivos .md dos posts. Isso garante
+ *   que as imagens saiam de blocos HTML adjacentes e sejam tratadas
+ *   como elementos de bloco independentes pelo parser Markdown.
+ *
+ * USADO EM:
+ *   - Executado manualmente via `node scripts/fix_md_images_spacing.mjs`
+ *   - Utilizado apos a migracao de conteudo HTML para Markdown
+ *
+ * CONCEITO ASTRO:
+ *   Este script NAO faz parte do build do Astro. E um utilitario
+ *   standalone de Node.js. O espacamento correto e importante para que
+ *   o remark/rehype do Astro processe as imagens como blocos isolados,
+ *   permitindo otimizacao automatica de imagens em build time.
+ */
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

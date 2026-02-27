@@ -1,4 +1,28 @@
 ---
+/**
+ * ARQUIVO: Hero.astro
+ *
+ * O QUE FAZ:
+ *   Secao hero da landing page com apresentacao pessoal, animacao de
+ *   typewriter no titulo (CSS puro via @keyframes), links em formato
+ *   "pill" (PillLink) e o canvas de particulas (HeroCanvas) como fundo.
+ *   Ocupa 100% da viewport (min-height: 100svh).
+ *
+ * USADO EM:
+ *   - pages/index.astro (landing page — unico local de uso)
+ *
+ * CONCEITO ASTRO:
+ *   - Composicao de componentes: Hero importa e usa HeroCanvas e PillLink
+ *     como tags. Cada componente e independente e isolado, mas juntos
+ *     formam a secao hero completa. Isso e o modelo de composicao do Astro.
+ *   - Animacoes CSS puras: typewritter e blinking-caret sao @keyframes
+ *     definidos no <style> com escopo. Nenhum JS e necessario para isso.
+ *   - <style> com escopo (scoped): todas as classes (.section-hero,
+ *     .hero-content, .hero-title, etc.) so existem neste componente.
+ *     O Astro adiciona data-astro-cid-xxx para isolar o CSS.
+ *   - Sem <slot />: este componente nao aceita conteudo filho — a
+ *     estrutura do hero e fixa e auto-contida.
+ */
 import HeroCanvas from './HeroCanvas.astro';
 import PillLink from './PillLink.astro';
 ---

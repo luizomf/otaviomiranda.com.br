@@ -1,3 +1,22 @@
+/**
+ * ARQUIVO: fix_images_to_md.mjs
+ *
+ * O QUE FAZ:
+ *   Converte tags <img> HTML remanescentes nos arquivos Markdown para
+ *   a sintaxe nativa de imagem do Markdown (![alt](src)). Trata dois
+ *   cenarios: imagens externas (http) e imagens locais (prepende "./"
+ *   quando necessario para que o Vite do Astro resolva o caminho).
+ *
+ * USADO EM:
+ *   - Executado manualmente via `node scripts/fix_images_to_md.mjs`
+ *   - Utilizado apos a migracao de conteudo HTML para Markdown
+ *
+ * CONCEITO ASTRO:
+ *   Este script NAO faz parte do build do Astro. E um utilitario
+ *   standalone de Node.js. O prefixo "./" nas imagens locais e
+ *   importante porque o Astro/Vite usa caminhos relativos para
+ *   otimizar e processar imagens em build time.
+ */
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

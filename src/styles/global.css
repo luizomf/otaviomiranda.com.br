@@ -1,6 +1,23 @@
 /* ===============================
-   RESET
+   VARIAVEIS CSS (Design Tokens)
 ================================ */
+/*
+ * O QUE FAZ:
+ *   Define todas as custom properties (variaveis CSS) do projeto.
+ *   Inclui: tamanhos de fonte (com clamp para responsividade), familias
+ *   tipograficas, cores base, cores de glow/neon, escalas de blur, line-height,
+ *   espacamentos (sm e lg), border-radius e transicoes.
+ *
+ * POR QUE GLOBAL (nao scoped)?
+ *   Variaveis em :root ficam disponiveis em TODOS os componentes Astro,
+ *   mesmo os que usam <style> scoped. Qualquer componente pode referenciar
+ *   var(--font-size-me), var(--spacings-sm-400) etc. sem precisar reimportar.
+ *
+ * CONCEITO ASTRO:
+ *   Astro faz scoped styles por padrao em componentes .astro, mas este
+ *   arquivo e importado globalmente via BaseLayout, garantindo que as
+ *   variaveis e o reset estejam presentes em todas as paginas.
+ */
 :root {
   --main-width: 96rem;
 
@@ -97,9 +114,19 @@
   --transition-fast: all 300ms ease-in-out;
 }
 
+/* ===============================
+   RESET CSS
+================================ */
 /*
-Super simple reset
-*/
+ * O QUE FAZ:
+ *   Reset minimalista que remove margens/paddings padrao do navegador,
+ *   aplica box-sizing: border-box globalmente e define font-size base
+ *   em 62.5% (1rem = 10px) para facilitar calculos com rem.
+ *
+ * POR QUE GLOBAL?
+ *   O reset PRECISA ser global — se fosse scoped, cada componente teria
+ *   comportamentos de box-model diferentes. Normaliza a base para todo o site.
+ */
 
 *,
 *::before,
@@ -113,7 +140,7 @@ Super simple reset
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 62.5%; /* 1rem = 10px (facilita: 1.6rem = 16px, 2.4rem = 24px) */
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -130,9 +157,22 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* ===============================
+   TIPOGRAFIA BASE
+================================ */
 /*
-Default Typography
-*/
+ * O QUE FAZ:
+ *   Define estilos tipograficos globais: fonte monospace no body, escala
+ *   responsiva de headings (h1-h6) com clamp(), espacamentos verticais
+ *   entre elementos de texto, hifenizacao automatica e text-wrap balance/pretty.
+ *   Tambem estiliza links, blockquotes, pre/code e listas.
+ *
+ * POR QUE GLOBAL?
+ *   Tipografia base precisa ser consistente em todo o site. Posts Markdown
+ *   renderizam h1-h6, p, ul, ol, blockquote, pre — todos precisam destes
+ *   estilos sem depender de classes especificas. Componentes Astro herdam
+ *   estes estilos e podem sobrescrever via scoped styles se necessario.
+ */
 
 body {
   font-family: var(--font-family-default);
@@ -281,9 +321,20 @@ pre code {
   word-break: normal;
 }
 
+/* ===============================
+   MIDIA (Imagens, Video, SVG)
+================================ */
 /*
-Media
-*/
+ * O QUE FAZ:
+ *   Centraliza imagens, limita largura maxima a 100% e aplica border-radius.
+ *   Garante que elementos de midia (img, picture, video, canvas, svg) sejam
+ *   display:block com max-width:100% — previne overflow em telas pequenas.
+ *
+ * POR QUE GLOBAL?
+ *   Imagens dentro de posts Markdown nao tem classes customizadas. Estes
+ *   estilos garantem que qualquer <img> renderizada pelo Astro (inclusive
+ *   as otimizadas via astro:assets) fique responsiva automaticamente.
+ */
 img {
   margin-left: auto;
   margin-right: auto;
@@ -300,6 +351,20 @@ svg {
   height: auto;
 }
 
+/* ===============================
+   EFEITO GLASS (Glassmorphism)
+================================ */
+/*
+ * O QUE FAZ:
+ *   Classe utilitaria .glass que cria efeito "glassmorphism" (vidro fosco):
+ *   backdrop-filter blur, sombra interna sutil, borda gradiente via ::before
+ *   com mask-composite, e hover com scale + sombra mais intensa.
+ *
+ * POR QUE GLOBAL?
+ *   Usada em varios componentes (cards na home, blog cards etc.). Sendo global,
+ *   qualquer componente pode aplicar class="glass" sem reimplementar o efeito.
+ *   E uma classe utilitaria do design system do site.
+ */
 .glass {
   overflow: hidden;
   position: relative;
@@ -356,8 +421,20 @@ svg {
 }
 
 /* ===============================
-   THEME TOGGLE
+   THEME TOGGLE (Alternador Claro/Escuro)
 ================================ */
+/*
+ * O QUE FAZ:
+ *   Estiliza o botao toggle de tema (sol/lua) fixo no canto superior direito.
+ *   Usa um <input type="checkbox"> oculto (#theme-mode) com CSS puro para
+ *   controlar a posicao do "thumb" e a cor do "track". Sem JavaScript para
+ *   a animacao — apenas :checked + transicoes CSS.
+ *
+ * POR QUE GLOBAL?
+ *   O toggle aparece em todas as paginas de post (via BaseLayout/[...slug]).
+ *   A logica de checked/unchecked precisa estar acessivel globalmente porque
+ *   o checkbox e o track vivem no layout, nao em um componente scoped.
+ */
 
 .theme-toggle {
   position: fixed;
@@ -431,8 +508,30 @@ svg {
 }
 
 /* ===============================
-   LAYOUT
+   LAYOUT (Estrutura de Pagina)
 ================================ */
+/*
+ * O QUE FAZ:
+ *   Define a estrutura de layout do site:
+ *   - .main: container principal com fundo branco e min-height 100vh
+ *   - .article: area de conteudo dos posts (max-width, links estilizados)
+ *   - .section / .section-dark / .section-light: secoes full-width com
+ *     variantes de cor (usadas na home para alternar fundos claro/escuro)
+ *   - .section-content: container interno com max-width e padding responsivo
+ *   - .canvas-bg: fundo fixo para o canvas de particulas (z-index: -1)
+ *   - .next-section: barra de navegacao entre secoes na home (setas/links)
+ *
+ * POR QUE GLOBAL?
+ *   Estas classes formam o "esqueleto" de todas as paginas. Sao usadas
+ *   diretamente nos layouts (BaseLayout, BlankLayout) e nas paginas
+ *   (index, blog/[page], [...slug], contacts). Precisam ser globais
+ *   para que diferentes paginas .astro compartilhem a mesma grade.
+ *
+ * CONCEITO ASTRO:
+ *   Layouts Astro (.astro em src/layouts/) usam <slot /> para injetar
+ *   conteudo. Estas classes envolvem o <slot />, criando a estrutura
+ *   visual que todas as paginas herdam.
+ */
 
 .main {
   border-radius: var(--border-radius-me);
@@ -545,9 +644,25 @@ svg {
   }
 }
 
+/* ===============================
+   DESIGN SYSTEM: Section Header + Blog
+================================ */
 /*
-Blog Section
-*/
+ * O QUE FAZ:
+ *   Classes do design system para cabecalhos de secao e area de blog:
+ *   - .section-header: container flexbox centralizado para titulo de secao
+ *   - .section-eyeball: label pequeno em uppercase acima do titulo (ex: "BLOG")
+ *   - .section-line: subtitulo/descricao com largura max de 60ch
+ *   - .section-title: titulo principal da secao com letra grande e tracking apertado
+ *   - .section-blog: wrapper da listagem de posts com padding vertical
+ *
+ *   Variantes .section-dark ajustam as cores para fundo escuro.
+ *
+ * POR QUE GLOBAL?
+ *   Estas classes sao reutilizadas em multiplas paginas: home (index.astro),
+ *   listagem de blog (blog/[page].astro), contatos e possivelmente futuras
+ *   paginas. Sao o "design system" de titulos de secao do site.
+ */
 
 .section-header {
   display: flex;
@@ -604,9 +719,19 @@ Blog Section
   padding-bottom: 8rem;
 }
 
+/* ===============================
+   FORMULARIOS
+================================ */
 /*
-* Forms
-*/
+ * O QUE FAZ:
+ *   Estiliza formularios globalmente: layout flexbox vertical (.form),
+ *   linhas de campos (.form-row), textarea, select, button e estados
+ *   (disabled). Usa as variaveis de spacing e font do design system.
+ *
+ * POR QUE GLOBAL?
+ *   Usado na pagina de contato (contacts.astro) e potencialmente no
+ *   editor. Manter global evita duplicacao de estilos de formulario.
+ */
 .form {
   display: flex;
   align-items: flex-start;
@@ -661,8 +786,27 @@ button:disabled {
 }
 
 /* ===============================
-   DARK MODE (scoped to posts)
+   DARK MODE (Modo Escuro para Posts)
 ================================ */
+/*
+ * O QUE FAZ:
+ *   Sobrescreve cores quando o atributo data-theme="dark" esta ativo na
+ *   .article-section. Afeta: texto, fundo, links, blockquotes, hr, navegacao,
+ *   metadados do post, paginacao e links de posts. Usa hsl() relativo
+ *   (hsl(from var(...))) para derivar tons claros/escuros da cor base.
+ *
+ * POR QUE GLOBAL?
+ *   O toggle de tema (checkbox) altera data-theme no DOM via JavaScript.
+ *   Os seletores [data-theme='dark'] precisam ser globais porque afetam
+ *   elementos vindos de VARIOS componentes diferentes (article, nav, footer,
+ *   blog cards). CSS scoped de um componente nao conseguiria estilizar
+ *   filhos de outros componentes.
+ *
+ * CONCEITO ASTRO:
+ *   Astro permite scoped styles via <style> em componentes .astro, mas
+ *   temas globais (dark/light) precisam ficar aqui. O script de tema
+ *   roda no client via <script> em BaseLayout ou um componente de toggle.
+ */
 
 .article-section {
   transition:
@@ -727,9 +871,27 @@ button:disabled {
   text-decoration: none;
 }
 
+/* ===============================
+   ANIMACOES (Parallax CSS)
+================================ */
 /*
-Animations
-*/
+ * O QUE FAZ:
+ *   Implementa efeito parallax puro em CSS usando animation-timeline: view().
+ *   A classe .bg-parallax aplica um fundo com estrelas (SVG repetido em 3
+ *   camadas) que se movem em velocidades diferentes conforme o scroll,
+ *   criando profundidade. Usa @supports para aplicar apenas em navegadores
+ *   compativeis e respeita prefers-reduced-motion.
+ *
+ * POR QUE GLOBAL?
+ *   Usada em secoes da home (index.astro) com fundo escuro/estrelado.
+ *   Precisa ser global porque a classe e aplicada diretamente nas <section>
+ *   das paginas, nao dentro de um componente scoped especifico.
+ *
+ * CONCEITO ASTRO:
+ *   Astro gera HTML estatico — esta animacao e 100% CSS (sem JS).
+ *   animation-timeline: view() e uma API CSS moderna (Scroll-Driven
+ *   Animations) que dispensa bibliotecas JS de scroll como GSAP/AOS.
+ */
 
 .bg-parallax {
   color: hsl(from var(--main-clr-shade) h s 95% / 1);

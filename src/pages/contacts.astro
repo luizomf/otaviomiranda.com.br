@@ -1,4 +1,24 @@
 ---
+/**
+ * ARQUIVO: contacts.astro
+ *
+ * O QUE FAZ:
+ *   Pagina de contatos do site. Lista os links oficiais e canais de contato
+ *   (redes sociais, email, etc.) importados de um arquivo de configuracao
+ *   centralizado (src/config/contacts). Renderiza cada link usando o componente
+ *   PillLink, diferenciando links externos (com target="_blank") dos internos.
+ *
+ * USADO EM:
+ *   - https://otaviomiranda.com.br/contacts/
+ *
+ * CONCEITO ASTRO:
+ *   File-based routing (roteamento por arquivo) — o arquivo contacts.astro
+ *   dentro de src/pages/ gera automaticamente a rota /contacts/. Nao precisa
+ *   de nenhuma configuracao extra de rotas. Esta e uma pagina estatica simples
+ *   (sem getStaticPaths), pois nao possui parametros dinamicos na URL.
+ *   Os dados de contato vem de um modulo TypeScript importado, nao de uma
+ *   content collection — demonstrando que nem tudo precisa ser collection.
+ */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';

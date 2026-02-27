@@ -1,4 +1,30 @@
 ---
+/**
+ * ARQUIVO: RecentPosts.astro
+ *
+ * O QUE FAZ:
+ *   Renderiza a secao de posts recentes do blog na pagina inicial. Busca
+ *   todos os posts da content collection 'posts', ordena por data
+ *   decrescente, seleciona os 10 mais recentes e exibe como lista de
+ *   links. Inclui um botao "Ver todos os posts" no final.
+ *
+ * USADO EM:
+ *   - src/pages/index.astro (pagina principal do site)
+ *
+ * CONCEITO ASTRO:
+ *   - Content Collections (getCollection): busca todos os posts definidos
+ *     em src/content/posts/ via await getCollection('posts'). Essa API
+ *     do Astro valida os dados contra o schema e retorna entradas tipadas
+ *     (CollectionEntry<'posts'>).
+ *   - Codigo assíncrono no frontmatter: o bloco --- suporta top-level
+ *     await, permitindo buscar dados sem useEffect ou getStaticProps.
+ *     Tudo roda no servidor em tempo de build (SSG).
+ *   - .map() para listas: itera sobre recentPosts para renderizar um
+ *     componente RecentPostLink para cada post — padrao comum em Astro
+ *     similar ao React, mas sem necessidade de key.
+ *   - Utilitarios auxiliares: usa comparePostsByDateDesc para ordenacao
+ *     e getEntryHref para gerar o caminho de cada post.
+ */
 import Section from '../components/Section.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import RecentPostLink from '../components/RecentPostLink.astro';

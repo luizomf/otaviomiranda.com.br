@@ -1,5 +1,31 @@
 ---
-// src/components/Footer.astro
+/**
+ * ARQUIVO: Footer.astro
+ *
+ * O QUE FAZ:
+ *   Rodape do site com layout "mega-text" — exibe links de navegacao (Home,
+ *   Contatos, Topo) e o nome "OTAVIO MIRANDA" em tipografia gigante com
+ *   efeito de gradiente (fade-out via ::after). Usa classes globais como
+ *   "section", "section-dark" e "bg-parallax" definidas no CSS global.
+ *
+ * USADO EM:
+ *   - pages/index.astro (landing page)
+ *   - pages/[...slug].astro (paginas de post individual)
+ *   - pages/blog/[page].astro (listagem do blog)
+ *   - pages/contacts.astro
+ *
+ * CONCEITO ASTRO:
+ *   - Componente sem props e sem imports: este componente nao recebe dados
+ *     externos — todo o conteudo e estatico (hardcoded). O frontmatter (---)
+ *     pode ficar vazio ou conter apenas comentarios.
+ *   - <style> com escopo (scoped): os seletores aqui (.footer-massive,
+ *     .footer-megatext, etc.) so afetam este componente. O Astro gera
+ *     atributos data-astro-cid-xxx para isolar o CSS automaticamente.
+ *   - Sem <slot />: este componente nao aceita conteudo filho — ele e
+ *     auto-contido e sempre renderiza a mesma estrutura.
+ *   - ::after pseudo-elemento: usado para criar o gradiente de fade sobre
+ *     o mega-text, tecnica puramente CSS.
+ */
 ---
 
 <footer
