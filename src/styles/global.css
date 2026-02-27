@@ -729,7 +729,8 @@ Blog Section
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: clamp(var(--spacings-lg-400), 8vw, var(--spacings-lg-900)) 0;
+  padding: clamp(var(--spacings-lg-200), 8vw, var(--spacings-lg-700)) 0;
+  padding-top: clamp(var(--spacings-lg-300), 8vw, var(--spacings-lg-800));
   max-width: 80ch;
   margin: 0 auto;
   margin-bottom: clamp(var(--spacings-lg-400), 8vw, var(--spacings-lg-900));
@@ -1002,78 +1003,6 @@ form.newsletter-form {
 
 .newsletter-button:hover {
   transform: scale(1.02);
-}
-
-/*
-Footer Massive
-*/
-
-.footer-massive {
-  position: relative;
-  overflow: hidden;
-  padding-top: clamp(var(--spacings-lg-100), 8vw, var(--spacings-lg-600));
-  flex-direction: column;
-  padding-bottom: clamp(var(--spacings-lg-100), 8vw, var(--spacings-lg-600));
-}
-
-.footer-top-links {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 clamp(var(--spacings-sm-400), 4vw, var(--spacings-sm-900));
-  font-size: var(--font-size-xsm);
-  color: hsl(from var(--main-clr-shade) h s 60% / 1);
-  font-weight: 400;
-  z-index: 2;
-  flex-wrap: wrap;
-  gap: var(--spacings-sm-400);
-}
-
-.footer-top-links a {
-  color: inherit;
-  text-decoration: none;
-  transition: var(--transition-fast);
-}
-
-.footer-top-links a:hover {
-  color: hsl(from var(--main-clr-shade) h s 95% / 1);
-}
-
-.footer-megatext-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
-  pointer-events: none;
-  user-select: none;
-  z-index: 1;
-  margin-top: auto;
-}
-
-.footer-megatext {
-  font-size: 11.5vw;
-  line-height: 0.9;
-  font-weight: 900;
-  letter-spacing: -0.06em;
-  color: hsl(from var(--main-clr-shade) h s 95% / 1);
-  white-space: nowrap;
-  padding-top: 12vw;
-}
-
-.footer-massive::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 80%;
-  background: linear-gradient(
-    to top,
-    hsl(from var(--main-clr-shade) h s 5% / 1) 0%,
-    transparent 50%
-  );
-  z-index: 2;
-  pointer-events: none;
 }
 
 /*
