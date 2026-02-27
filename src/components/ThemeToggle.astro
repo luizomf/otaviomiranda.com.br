@@ -1,0 +1,42 @@
+<label class='theme-toggle' aria-label='Alternar tema'>
+  <input type='checkbox' id='theme-mode' />
+  <span class='theme-toggle-track'>
+    <span class='theme-toggle-thumb'></span>
+  </span>
+</label>
+
+<script>
+  const checkbox = document.getElementById(
+    'theme-mode',
+  ) as HTMLInputElement | null;
+  const section = document.querySelectorAll('.article-section');
+
+  if (checkbox && section) {
+    const stored = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const isDark = stored === 'dark' || (!stored && prefersDark.matches);
+
+    function apply(dark: boolean) {
+      if (dark) {
+        section.forEach(item => item.setAttribute('data-theme', 'dark'));
+      } else {
+        section.forEach(item => item.removeAttribute('data-theme'));
+      }
+      checkbox.checked = dark;
+    }
+
+    apply(isDark);
+
+    checkbox.addEventListener('change', () => {
+      const dark = checkbox.checked;
+      apply(dark);
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+    });
+
+    prefersDark.addEventListener('change', e => {
+      if (!localStorage.getItem('theme')) {
+        apply(e.matches);
+      }
+    });
+  }
+</script>
