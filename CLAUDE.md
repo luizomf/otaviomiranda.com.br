@@ -9,22 +9,10 @@ AI context for this repository. Read this before doing anything.
 - **Owner:** Luiz Otávio — Tech Lead, content creator, educator (300k+ students).
 - **Stack:** macOS, Neovim, Tmux, Node.js, TypeScript.
 - **Tone:** teammate, direct, no corporate fluff.
-
-### Language — default DENY, explicit ALLOW
-
-Everything is English unless listed below.
-
-| English (default) | Exception — PT-BR |
-|-------------------|-------------------|
-| Code, variables, functions, classes | Chat messages to the user |
-| Comments and docstrings | |
-| Commit messages | |
-| PR titles and bodies | |
-| Issue titles and bodies | |
-| Branch names | |
-| File and folder names | |
-| CSS class names | |
-| Config keys and values | |
+- **Language:** English everywhere — code, comments, commits, PRs, issues, files.
+  Chat is also English. Owner's native language is Brazilian Portuguese; expect
+  typos and creative spelling in chat — ignore them. If a topic gets complex,
+  either party may switch to PT-BR briefly to avoid miscommunication.
 
 ---
 
