@@ -29,3 +29,51 @@ const { code = HOME_COUPON.code, expiresAtLabel = HOME_COUPON.expiresAtLabel } =
     </div>
   </SectionHeader>
 </Section>
+
+<style>
+  .discount-container {
+    margin-top: var(--spacings-lg-100);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .coupon {
+    padding: var(--spacings-sm-600) var(--spacings-lg-200);
+    margin-bottom: var(--spacings-lg-200);
+    border-radius: var(--border-radius-me);
+    font-weight: 900;
+    font-size: clamp(var(--font-size-h-xsm), 4vw, var(--font-size-h-xxlg));
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      background: linear-gradient(
+        -45deg,
+        transparent 10%,
+        rgba(255, 255, 255, 0.2) 50%,
+        transparent 90%
+      );
+      transition: left 600ms ease;
+    }
+
+    &:hover::after {
+      left: 100%;
+    }
+  }
+
+  .coupon-date {
+    padding: var(--spacings-sm-200) 0;
+    font-size: var(--font-size-xxsm);
+    color: hsl(from var(--main-clr-shade) h s 60% / 1);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+</style>

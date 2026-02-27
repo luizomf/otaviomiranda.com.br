@@ -1,6 +1,6 @@
 ---
-// src/components/Hero.astro
 import HeroCanvas from './HeroCanvas.astro';
+import PillLink from './PillLink.astro';
 ---
 
 <section id='section-hero' class='section section-dark section-hero'>
@@ -18,28 +18,15 @@ import HeroCanvas from './HeroCanvas.astro';
     </header>
 
     <div class='hero-links'>
-      <div class='link-container'>
-        <div class='link-bg-blur'></div>
-        <div class='link-bg'></div>
-        <a class='link' href='#courses'>Cursos</a>
-      </div>
+      <PillLink href='#courses'>Cursos</PillLink>
 
-      <div class='link-container'>
-        <div class='link-bg-blur'></div>
-        <div class='link-bg'></div>
-        <a
-          target='_blank'
-          rel='noreferrer noopener'
-          class='link'
-          href='https://www.youtube.com/@otaviomiranda/videos'>YouTube</a
-        >
-      </div>
+      <PillLink
+        target='_blank'
+        rel='noreferrer noopener'
+        href='https://www.youtube.com/@otaviomiranda/videos'>YouTube</PillLink
+      >
 
-      <div class='link-container'>
-        <div class='link-bg-blur'></div>
-        <div class='link-bg'></div>
-        <a class='link' href='/contacts/'>Contatos</a>
-      </div>
+      <PillLink href='/contacts/'>Contatos</PillLink>
     </div>
   </div>
 
@@ -51,10 +38,6 @@ import HeroCanvas from './HeroCanvas.astro';
 </section>
 
 <style>
-  /*
-Hero
-*/
-
   .section-hero {
     min-height: 100svh;
     display: grid;
@@ -66,7 +49,6 @@ Hero
   .hero-content {
     display: flex;
     flex-direction: column;
-    /* backdrop-filter: blur(var(--blur-me)); */
     text-align: center;
     justify-content: center;
     max-width: 75ch;
@@ -108,6 +90,10 @@ Hero
     gap: clamp(var(--spacings-sm-600), 3vw, var(--spacings-sm-900))
       clamp(var(--spacings-sm-500), 3vw, var(--spacings-sm-700));
     max-width: 80%;
+
+    a {
+      text-decoration: none;
+    }
   }
 
   @keyframes typewritter {

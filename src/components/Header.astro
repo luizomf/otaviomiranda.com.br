@@ -1,5 +1,4 @@
 ---
-// src/components/Header.astro
 import Section from './Section.astro';
 ---
 
@@ -10,3 +9,34 @@ import Section from './Section.astro';
     <a href='/blog/1/'>Blog</a>
   </nav>
 </Section>
+
+<style>
+  nav.nav,
+  footer.nav {
+    width: 100%;
+    max-width: var(--main-width);
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    font-size: var(--font-size-xxsm);
+    color: hsl(from var(--main-clr-shade) h 10% 30% / 1);
+    gap: clamp(var(--spacings-sm-400), 8vw, var(--spacings-lg-900));
+
+    a {
+      text-decoration: none;
+      color: hsl(from var(--link-clr) h 50% 20% / 100%);
+
+      &:hover {
+        text-decoration: underline;
+        color: hsl(from var(--link-clr) h 90% 50% / 100%);
+      }
+    }
+  }
+
+  .nav {
+    padding-block: clamp(1.8rem, 2.4vw, 2.4rem);
+  }
+</style>

@@ -115,6 +115,15 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
 </BaseLayout>
 
 <style>
+  .blog-list {
+    margin: 0;
+    list-style: none;
+  }
+
+  .blog-header {
+    margin-bottom: clamp(var(--spacings-sm-600), 5vw, var(--spacings-sm-900));
+  }
+
   .blog-archive-body {
     padding-bottom: 8rem;
   }
@@ -176,7 +185,7 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
     max-width: 100%;
   }
 
-  .blog-pagination-link {
+  .blog-pagination-side :global(.blog-pagination-link) {
     display: flex;
     width: 100%;
     justify-content: center;

@@ -1,0 +1,145 @@
+---
+// ColorfulBorder.astro
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class:list={['container', className]}>
+  <div class='bg-blur'></div>
+  <div class='bg'></div>
+  <div class='el'>
+    <slot />
+  </div>
+</div>
+
+<style>
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    line-height: var(--line-height-xxxsm);
+    transition: var(--transition-fast);
+    border-radius: var(--border-radius-pill);
+    font-family: var(--font-family-monospace);
+    flex: 1;
+    cursor: pointer;
+
+    .el::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      background: linear-gradient(
+        -45deg,
+        transparent 10%,
+        rgba(255, 255, 255, 0.2) 50%,
+        transparent 90%
+      );
+      transition: left 600ms ease;
+    }
+
+    .el:hover::before {
+      left: 100%;
+    }
+
+    .el.el,
+    .bg,
+    .bg-blur {
+      border-radius: var(--border-radius-pill);
+      text-decoration: none;
+    }
+
+    .el {
+      color: hsl(from var(--main-clr-shade) h s 95% /1);
+      text-decoration: none;
+      font-size: var(--font-size-xsm);
+      position: relative;
+      background: hsl(from var(--main-clr-shade) h s 5% /1);
+      z-index: 2;
+      flex: 1;
+      outline: none;
+      overflow: hidden;
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+
+      > * {
+        padding: clamp(var(--spacings-sm-200), 3vw, var(--spacings-sm-300))
+          clamp(var(--spacings-sm-400), 3vw, var(--spacings-sm-900));
+      }
+
+      &:hover {
+        color: hsl(from var(--main-clr-shade) h s 95% / 1);
+      }
+    }
+
+    .bg,
+    .bg-blur {
+      position: absolute;
+      inset: -2px;
+      z-index: 1;
+      background-image: conic-gradient(
+        from var(--conic-angle),
+        var(--glow-clr-1),
+        var(--glow-clr-2),
+        var(--glow-clr-3),
+        var(--glow-clr-4),
+        var(--glow-clr-5)
+      );
+
+      animation-name: glow;
+      animation-duration: 10s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+
+    .bg-blur {
+      filter: blur(var(--blur-sm));
+    }
+
+    &:hover,
+    &:active,
+    &:focus,
+    &:focus-visible,
+    &:focus-within {
+      opacity: 1;
+      transform: translateY(-5px);
+      box-shadow: 0 0 30px var(--glow-shadow-clr);
+
+      .bg,
+      .bg-blur {
+        animation-duration: 1s;
+        animation-timing-function: ease-in-out;
+      }
+
+      .bg-blur {
+        filter: blur(var(--blur-me));
+      }
+    }
+  }
+
+  @property --conic-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  @keyframes glow {
+    from {
+      --conic-angle: 0deg;
+    }
+
+    to {
+      --conic-angle: 360deg;
+    }
+  }
+</style>

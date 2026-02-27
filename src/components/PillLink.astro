@@ -1,4 +1,6 @@
 ---
+import ColorfulBorder from './ColorfulBorder.astro';
+
 type Props = Omit<astroHTML.JSX.AnchorHTMLAttributes, 'class'> & {
   href: string;
   containerClass?: string;
@@ -13,10 +15,17 @@ const {
 } = Astro.props as Props;
 ---
 
-<div class:list={['link-container', containerClass]}>
-  <div class='link-bg-blur'></div>
-  <div class='link-bg'></div>
-  <a href={href} class:list={['link', linkClass]} {...linkProps}>
-    <slot />
-  </a>
-</div>
+<ColorfulBorder class={containerClass}>
+  <a href={href} class:list={['link', linkClass]} {...linkProps}> <slot /></a>
+</ColorfulBorder>
+
+<style>
+  a.link.link {
+    text-decoration: none;
+    color: hsl(from var(--main-clr-shade) h s 95% /1);
+
+    &:hover {
+      color: hsl(from var(--main-clr-shade) h s 95% /1);
+    }
+  }
+</style>

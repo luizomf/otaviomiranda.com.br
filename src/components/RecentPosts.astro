@@ -1,0 +1,85 @@
+---
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import RecentPostLink from '../components/RecentPostLink.astro';
+import PillLink from '../components/PillLink.astro';
+
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { comparePostsByDateDesc } from '../utils/post-date';
+import { getEntryHref } from '../utils/post-path';
+
+const posts = await getCollection('posts');
+posts.sort(comparePostsByDateDesc);
+const recentPosts: CollectionEntry<'posts'>[] = posts.slice(0, 10);
+---
+
+<Section id='section-blog' theme='light' contentClass='section-blog'>
+  <SectionHeader
+    class='blog-header'
+    eyeball='Últimos posts do'
+    title='Meu blog'
+    description='Minhas notas de estudo acabaram se tornando tutoriais sobre o ecossistema de engenharia de software.'
+  />
+
+  <ul class='blog-list'>
+    {
+      recentPosts.map(post => (
+        <RecentPostLink href={getEntryHref(post)} title={post.data.title} />
+      ))
+    }
+  </ul>
+
+  <div class='blog-all-posts'>
+    <PillLink
+      href='/blog/1/'
+      containerClass='blog-all-posts-control'
+      linkClass='blog-all-posts-link'
+    >
+      Ver todos os posts
+    </PillLink>
+  </div>
+</Section>
+
+<style>
+  .blog-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    max-width: 72ch;
+    margin-inline: auto;
+  }
+
+  .blog-all-posts {
+    margin-top: 6rem;
+    display: flex;
+    justify-content: center;
+    max-width: 72ch;
+    margin-inline: auto;
+  }
+
+  .blog-all-posts-control {
+    flex: 0 0 auto;
+    min-width: 24rem;
+    max-width: 100%;
+  }
+
+  .blog-all-posts :global(.blog-all-posts-link) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-decoration: none;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 540px) {
+    .blog-all-posts-control {
+      min-width: 0;
+      width: 100%;
+    }
+  }
+</style>

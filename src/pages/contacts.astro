@@ -16,11 +16,7 @@ import SectionHeader from '../components/SectionHeader.astro';
   <Header />
   <ThemeToggle />
 
-  <Section
-    id='contacts-page'
-    class='article-section'
-    theme='light'
-  >
+  <Section id='contacts-page' class='article-section' theme='light'>
     <SectionHeader
       class='blog-header'
       eyeball='Links oficiais'
@@ -72,11 +68,6 @@ import SectionHeader from '../components/SectionHeader.astro';
     }
   }
 
-  .contacts-header {
-    align-items: flex-start;
-    max-width: 64rem;
-  }
-
   .contacts-list {
     max-width: 64rem;
     list-style: none;
@@ -97,7 +88,7 @@ import SectionHeader from '../components/SectionHeader.astro';
     width: 100%;
   }
 
-  .contacts-link {
+  .contacts-item :global(.contacts-link) {
     width: 100%;
     justify-content: center;
     text-decoration: none;

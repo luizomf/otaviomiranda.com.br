@@ -1,13 +1,10 @@
 ---
+import ColorfulBorder from './ColorfulBorder.astro';
 import Section from './Section.astro';
 import SectionHeader from './SectionHeader.astro';
 ---
 
-<Section
-  id='section-newsletter'
-  class='article-section'
-  theme='light'
->
+<Section id='section-newsletter' class='article-section' theme='light'>
   <SectionHeader
     class='blog-header'
     eyeball='No seu e-mail'
@@ -24,9 +21,7 @@ import SectionHeader from './SectionHeader.astro';
       <input type='hidden' name='utm_medium' value='web' />
       <input type='hidden' name='utm_source' value='embed' />
 
-      <div class='link-container'>
-        <div class='link-bg-blur'></div>
-        <div class='link-bg'></div>
+      <ColorfulBorder>
         <input
           type='email'
           name='freeSignupEmail'
@@ -34,13 +29,87 @@ import SectionHeader from './SectionHeader.astro';
           required
           class='newsletter-input link'
         />
-      </div>
+      </ColorfulBorder>
 
-      <div class='link-container'>
-        <div class='link-bg-blur'></div>
-        <div class='link-bg'></div>
+      <ColorfulBorder>
         <button type='submit' class='link newsletter-button'>OK</button>
-      </div>
+      </ColorfulBorder>
     </form>
   </SectionHeader>
 </Section>
+
+<style>
+  /* Newsletter */
+  form.newsletter-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacings-sm-700) var(--spacings-sm-400);
+    margin-top: clamp(var(--spacings-sm-600), 5vw, var(--spacings-sm-900));
+    padding: clamp(var(--spacings-sm-600), 5vw, var(--spacings-sm-900));
+    flex-wrap: wrap;
+  }
+
+  .newsletter-form .newsletter-input {
+    flex: 1;
+    border: none;
+    padding: var(--spacings-sm-400) var(--spacings-sm-600);
+    border-radius: var(--border-radius-pill);
+    font-family: inherit;
+    font-size: var(--font-size-xsm);
+    min-width: 220px;
+    background: hsl(from var(--main-clr-shade) h s 100% / 1);
+    color: hsl(from var(--main-clr-shade) h s 30% / 1);
+    font-weight: 400;
+    outline: none;
+    transition:
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
+
+  @media (min-width: 720px) {
+    .newsletter-form .newsletter-input {
+      min-width: 380px;
+    }
+  }
+
+  @media (min-width: 980px) {
+    .newsletter-form .newsletter-input {
+      min-width: 480px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .newsletter-form .newsletter-input {
+      min-width: 180px;
+      width: 100%;
+    }
+  }
+
+  .newsletter-input:focus {
+    opacity: 1;
+  }
+
+  .newsletter-form .newsletter-button {
+    padding: var(--spacings-sm-400) var(--spacings-sm-800);
+    border-radius: var(--border-radius-pill);
+    border: none;
+    font-family: inherit;
+    font-size: var(--font-size-xsm);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      transform var(--transition-fast),
+      background-color var(--transition-fast);
+    flex: 1;
+    background: #000;
+    color: #fff;
+  }
+
+  .newsletter-button:hover {
+    transform: scale(1.02);
+  }
+</style>
