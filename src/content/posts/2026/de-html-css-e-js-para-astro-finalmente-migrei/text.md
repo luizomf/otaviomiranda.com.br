@@ -17,7 +17,7 @@ finalmente terminei!
 Meu site foi de **HTML, CSS e JavaScript PUROS** para o
 [Astro](https://astro.build/) (_usando SSG - Static Site Generation_).
 
-Além disso, este foi um dos primeiros projetos que mais administrei do que
+Além disso, este foi um dos primeiros projetos em que mais administrei do que
 digitei código. Diria que **95%** do código atual foi escrito por 3 LLMs
 diferentes: **Claude Code** _(Opus 4.6)_, **Codex App** _(GPT 5.3 Codex High)_ e
 **Antigravity** _(Gemini 3.1 Pro High)_. Também usei variações desses modelos
@@ -87,7 +87,7 @@ muitos assuntos, você pode publicar mais de uma vez por dia. Então, rapidament
 você tem 999 notícias.
 
 Só que algo passou despercebido na vigésima quinta notícia que você publicou. Um
-erro de digitação no rodapé do seu `index.html`. O seu hábito de copia e cola
+erro de digitação no rodapé do seu `index.html`. O seu hábito de copiar e colar
 clonou este erro para mais 974 páginas.
 
 Ao publicar sua próxima notícia, você percebe que é um grande momento, mas
@@ -152,11 +152,11 @@ centralizado.
 Me inspirei no design do [Antigravity](https://antigravity.google/), com as
 partículas interativas que ficam se mexendo suavemente.
 
-Cheguei a fazer 3 efeitos de background para decidir qual usar. Estão todas
+Cheguei a fazer 3 efeitos de background para decidir qual usar. Estão todos
 abaixo:
 
 - [Primeiro canvas](https://codepen.io/luizomf/full/ZYOdpdx)
-- [Segundo Canvas](https://codepen.io/luizomf/full/yyJdoWP)
+- [Segundo canvas](https://codepen.io/luizomf/full/yyJdoWP)
 - [Final (Home do site)](https://www.otaviomiranda.com.br/)
 
 Perdi uns 2 ou 3 dias com isso, mas consegui um resultado que me agradou.
@@ -256,7 +256,7 @@ que eu).
 
 Mas, temos um grande problema atualmente: **NÃO EXISTE UM PADRÃO**.
 
-Como tudo é muito novo, o que posso te passar são apenas experiencias que tive
+Como tudo é muito novo, o que posso te passar são apenas experiências que tive
 **TESTANDO** algumas coisas.
 
 ### O problema do contexto
@@ -280,7 +280,7 @@ Foi exatamente o que fiz, com alguns percalços até encontrar algo que funciono
 No meu arquivo `AGENTS.md`, só apontei o modelo para outros arquivos separados:
 
 - `MEMORY.md` - estado da sessão, o que foi feito e o que falta fazer (tipo um
-  `CHAGELOG` mas para o LLM).
+  `CHANGELOG` mas para o LLM).
 - `SOUL.md` - personalidade e tom do agente (seja conciso, fale em inglês, etc).
 - `USER.md` - Meu nome, softwares disponíveis e coisas relevantes sobre o
   usuário (eu).
@@ -394,7 +394,7 @@ Max 5x (e ele bateu limite várias vezes). Ainda tem um plano acima, o 20x (mais
 caro ainda). Depois tem a API. Aí o preço não faz nem sentido para mim.
 
 **Codex** _(GPT 5.3 Codex High)_: não usei o CLI porque o **Codex App** está com
-uma promoção que te dá o dobro de tokens até Abril. Então, vamos economizar, não
+uma promoção que te dá o dobro de tokens até abril. Então, vamos economizar, não
 é? Eu não chequei essa informação, mas mesmo usando o **Codex App** um dia
 inteiro, não vi onde é o limite (e meu plano é o plus, o mais barato).
 
@@ -409,9 +409,9 @@ erros são mais comuns.
 
 **O ponto principal:**
 
-Neste projeto, não vi diferença entre os modelos. Como era algo mais simples.
-Muito **copia** e **cola** do velho para o novo, todos os modelos se saíram
-muito bem.
+Neste projeto, como era algo mais simples, não vi diferença entre os modelos.
+Foi muita **cópia** e **cola** do velho para o novo, e todos os modelos se
+saíram muito bem.
 
 Tentei usar um por dia. Quando começava os trabalhos pela manhã, já iniciava com
 um deles e ia até o final do dia.
@@ -420,7 +420,7 @@ Em alguns dias eu fui forçado a trocar por erro (Gemini) ou por limite (Claude)
 
 ### O que eles construíram?
 
-Se você está lendo isso no meu site, tem "a mão" deles aí. Foram aproximadamente
+Se você está lendo isso no meu site, tem a mão deles aí. Foram aproximadamente
 2 semanas, comigo basicamente dirigindo e revisando.
 
 - Sistema de layouts com componentes reutilizáveis
