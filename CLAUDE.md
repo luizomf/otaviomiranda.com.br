@@ -6,13 +6,14 @@ AI context for this repository. Read this before doing anything.
 
 ## Who / Environment
 
-- **Owner:** Luiz Otávio — Tech Lead, content creator, educator (300k+ students).
+- **Owner:** Luiz Otávio — Tech Lead, content creator, educator (300k+
+  students).
 - **Stack:** macOS, Neovim, Tmux, Node.js, TypeScript.
 - **Tone:** teammate, direct, no corporate fluff.
-- **Language:** English everywhere — code, comments, commits, PRs, issues, files.
-  Chat is also English. Owner's native language is Brazilian Portuguese; expect
-  typos and creative spelling in chat — ignore them. If a topic gets complex,
-  either party may switch to PT-BR briefly to avoid miscommunication.
+- **Language:** English everywhere — code, comments, commits, PRs, issues,
+  files. Chat is also English. Owner's native language is Brazilian Portuguese;
+  expect typos and creative spelling in chat — ignore them. If a topic gets
+  complex, either party may switch to PT-BR briefly to avoid miscommunication.
 
 ---
 
@@ -22,24 +23,25 @@ Personal site + blog. Astro SSG, deployed to GitHub Pages via Actions.
 
 ### Key paths
 
-| Path | What |
-|------|------|
-| `src/pages/` | File-based routing. `[...slug].astro` = posts, `blog/[page].astro` = archive |
-| `src/components/` | All UI components (see comments inside each file) |
-| `src/layouts/` | `BaseLayout` (all pages) · `BlankLayout` (editor only) |
-| `src/styles/global.css` | Global CSS only — variables, reset, cross-component rules |
-| `src/content/posts/` | Markdown posts (`text.md` + frontmatter) |
-| `src/content.config.ts` | Zod schema for content collection |
-| `src/config/` | Static data (courses, testimonials, contacts, coupon) |
-| `src/utils/` | `post-date.ts`, `post-path.ts` — helpers for content collection |
-| `scripts/` | One-off Node.js migration scripts, NOT part of the build |
-| `astro.config.mjs` | Astro config — site URL, integrations, image settings |
+| Path                    | What                                                                         |
+| ----------------------- | ---------------------------------------------------------------------------- |
+| `src/pages/`            | File-based routing. `[...slug].astro` = posts, `blog/[page].astro` = archive |
+| `src/components/`       | All UI components (see comments inside each file)                            |
+| `src/layouts/`          | `BaseLayout` (all pages) · `BlankLayout` (editor only)                       |
+| `src/styles/global.css` | Global CSS only — variables, reset, cross-component rules                    |
+| `src/content/posts/`    | Markdown posts (`text.md` + frontmatter)                                     |
+| `src/content.config.ts` | Zod schema for content collection                                            |
+| `src/config/`           | Static data (courses, testimonials, contacts, coupon)                        |
+| `src/utils/`            | `post-date.ts`, `post-path.ts` — helpers for content collection              |
+| `scripts/`              | One-off Node.js migration scripts, NOT part of the build                     |
+| `astro.config.mjs`      | Astro config — site URL, integrations, image settings                        |
 
 ### Architecture decisions (stable)
 
 - **Scoped styles by default.** CSS that belongs to one component lives in its
   `<style>` block. Only truly global/cross-component CSS goes in `global.css`.
-- **`:global()` for parent-context selectors** (e.g. `:global(.section-dark) li`).
+- **`:global()` for parent-context selectors** (e.g.
+  `:global(.section-dark) li`).
 - **`containerClass` vs `linkClass` in PillLink:** `containerClass` lands on
   ColorfulBorder's root div (gets page scope ✓). `linkClass` lands on the inner
   `<a>` (only has PillLink scope) — parent pages must use
@@ -57,7 +59,8 @@ Personal site + blog. Astro SSG, deployed to GitHub Pages via Actions.
 **Issues → branch → PR → merge.** That's it.
 
 1. **Pick an issue** from GitHub Issues.
-2. **Work in small conventional commits** (`feat`, `fix`, `refactor`, `chore`, `docs`).
+2. **Work in small conventional commits** (`feat`, `fix`, `refactor`, `chore`,
+   `docs`).
 3. **Open a PR** referencing the issue (`closes #N`).
 4. **Merge** and close.
 
@@ -76,7 +79,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 ### Safety rules
 
 - Never force-push `main`.
-- Never skip hooks (`--no-verify`) unless explicitly asked.
+- If hooks are installed, do not skip them unless explicitly asked.
 - No destructive git ops without explicit user confirmation.
 - Never commit `.env`, secrets, or `.agents/`.
 
