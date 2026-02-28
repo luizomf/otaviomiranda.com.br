@@ -25,7 +25,7 @@ para tarefas simples ou mais complexas.
 
 Usando um arquivo de regras simples, `git` e GitHub, consegui manter o contexto
 do que estava em andamento até a conclusão do projeto. Isso me permitiu até
-trocar de modelo ao longo da migração sem muitos problemas.
+mesmo trocar de modelo ao longo da migração sem muitos problemas.
 
 Vamos entender mais detalhes sobre isso adiante.
 
@@ -35,84 +35,26 @@ Mas, primeiro vamos garantir que você não vai cometer os mesmos erros que eu.
 
 ## Meu erro ao usar HTML, CSS e JS puros
 
-Desde a época do "blogger" (_nos anos 2000_), sempre mantive
-[um blog](https://web.archive.org/web/20100225145510/http://www.todoespacoonline.com/)
-com conteúdo sobre tecnologia. Só que fui perdendo este hábito à medida que
-comecei a criar conteúdo
-[em vídeo](https://www.youtube.com/@otaviomiranda/videos).
-
-De 2018 para 2019, senti a necessidade de ter o meu cantinho da Internet
-novamente. Então...
-
-### Blog novo de novo
-
-Para mim, escrever é uma ótima forma de marcar presença online, manter-se
-atualizado e estudar sem ter que se expor tanto.
-
-Mas, com tantas opções, onde faria isso? Medium? WordPress? Blogger 😒???
-Precisava de algo meu de verdade...
-
-### Servir HTML, CSS e JS é fácil
-
-Um site estático consiste apenas de arquivos HTML, estilos CSS e JavaScript.
-[Netlify](https://www.netlify.com/), [Vercel](https://vercel.com/),
-[GitHub Pages](https://docs.github.com/pt/pages)... Todos estes serviços (_e
-vários outros_) oferecem hospedagem gratuita para conteúdo estático.
-
-Então, já que vou criar um repositório para manter os arquivos do meu site,
-**GitHub Pages** foi a escolha mais próxima e de menor atrito.
-
-### O problema começa aqui
-
-Quando você cria seu site sem servidor, precisa entregar HTML, CSS e JS prontos.
-
-Como eu já tinha bastante conhecimento nessas tecnologias, foi bem simples.
-
-Olha só que legal. Se você criar este arquivo agora no seu computador, **aí está
-o seu site estático**. Simples assim!
-
-```html
-<!doctype html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Hello, world!</title>
-  </head>
-
-  <body>
-    <h1>Hello, world!</h1>
-  </body>
-</html>
-```
-
-Mas, se quer um conselho de quem já sofreu por muito tempo com isso: **não siga
-por este caminho**.
-
----
-
-## Uma breve história do que vai acontecer
-
-Essa era a estrutura que eu tinha antes. CSS e JS globais, usados por um
-`index.html` na raiz para a página inicial.
-
-Nos posts, eu criava um diretório do `ANO/SLUG` (slug é o título do post no
-formato de diretório).
+Ao criar um website com HTML, CSS e JS puros, é muito provável que você termine
+com uma estrutura assim (ou variações disso):
 
 ```
 .
 ├── css
 │   └── styles.css
+├── images
+│   └── ...
 ├── js
 │   └── scripts.js
-├── 2018
-│   ├── primeiro-post-do-meu-blog
+├── 2025
+│   ├── meu-post-1
 │   │   └── index.html
-│   ├── segundo-post-do-meu-blog
+│   ├── meu-post-2
 │   │   └── index.html
-├── 2019
-│   ├── feliz-ano-novo
+├── 2026
+│   ├── meu-post-3
 │   │   └── index.html
-│   ├── fiquei-rico
+│   ├── meu-post-4
 │   │   └── index.html
 
 ... vários anos e posts ...
@@ -121,47 +63,40 @@ formato de diretório).
 └── index.html
 ```
 
-Geralmente, servidores web são configurados para buscar um arquivo `index.html`
-no diretório requisitado.
+No começo, isso parece uma boa ideia.
 
-Isso significa o seguinte:
+Só que, sem um padrão ou framework, você vai precisar copiar e colar o diretório
+a uma página para criar outra (ou inventar uma outra maneira qualquer).
 
-```bash
-# O caminho abaixo:
-./2026/meu-post/index.html
+Com o passar do tempo, isso vai fazer você terminar com centenas de páginas com
+variações levemente diferentes do `index.html`.
 
-# Se torna isso no seu domínio:
-https://www.meusite.com/2026/meu-post/
+Todas com repetições do mesmo cabeçalho, rodapé, menu e qualquer outra coisa que
+estiver no seu layout.
 
-# index.html carregado automaticamente pelo servidor web
-```
+Como todo bom **dev**, cheio de projetos para entregar, você vai pensar:
 
-O problema começa quando essa estrutura cresce. Você vai terminar com 1000
-posts, cada um com variações do mesmo `index.html`.
+> "Se funciona, vou manter como está! Se precisar, depois melhoro a estrutura."
 
-Todos eles terão uma repetição do mesmo cabeçalho, rodapé, menu, etc...
-
-Mas, como todo bom `dev`, cheio de projetos para entregar, você pensa:
-
-> "Se funciona, deixa como está! Depois eu vejo isso."
-
-### Tudo está bem, até que...
+### Tudo vai ficar bem até que...
 
 Você precisa alterar algo.
 
-Não cheguei nem perto de 1000 posts, mas vamos imaginar que chegamos.
+Pense que você criou um site de notícias que fala de assuntos variados. Como são
+muitos assuntos, você pode publicar mais de uma vez por dia. Então, rapidamente
+você tem 999 notícias.
 
-Suponha que no post 25 você decidiu fazer uma alteração porque encontrou um erro
-no rodapé do site. Aquele tipo de erro de digitação que fica te provocando com
-um _"FIX ME..."_ no fundo do seu cérebro.
+Só que algo passou despercebido na vigésima quinta notícia que você publicou. Um
+erro de digitação no rodapé do seu `index.html`. O seu hábito de copia e cola
+clonou este erro para mais 974 páginas.
 
-Como você sempre clonou o último post para cada nova criação, isso foi replicado
-para todos os outros 975.
+Ao publicar sua próxima notícia, você percebe que é um grande momento, mas
+aquele erro está pegando mal. Então você pensa:
 
 > "Um script Python resolve!"
 
-Mas, se isso ainda não tinha passado pela sua cabeça, agora você pensa o tempo
-todo:
+Talvez! Mas, se isso ainda não tinha passado pela sua cabeça, de agora em diante
+você lembra disso o tempo todo.
 
 > "E se aparecer outro erro?"  
 > "E se eu tiver que alterar o layout e o CSS?"  
@@ -171,46 +106,39 @@ Refatorar todo o site nessa altura do campeonato é complicado. Você está com
 vários outros projetos em andamento. Deadlines batendo na porta.
 
 Seu script não vai capturar todas as nuances dos posts porque, todo ser humano
-tem bursts de dopamina que geram micro alterações ao longo do tempo.
+tem bursts de dopamina que geram micro alterações de código ao longo do tempo.
 
-E nós sabemos que você nunca voltou para alterar todos os 1000 posts.
+E nós sabemos que você nunca voltou para alterar todos aqueles quase 1000 posts.
 
 ### As janelas estão quebradas...
 
-Neste ponto, acontece algo muito parecido com a
+A partir daqui, começa a acontecer algo muito parecido com a
 [teoria das janelas quebradas](https://pt.wikipedia.org/wiki/Teoria_das_janelas_quebradas).
 
-Você passa a "vandalizar" seu próprio site com: "só mais um script", "um ajuste
-de margem aqui", "uma div ali"... Ele nunca vai estar perfeito.
+Você passa a "vandalizar" seu próprio site com. Adiciona "só mais um script"
+para alguma coisa específica, "um ajuste de margem aqui", "uma div ali"... Este
+site nunca vai estar perfeito.
 
-Isso vai rapidamente da empolgação para o _"medo de quebrar algo"_, para o _"Não
-ligo mais"_.
+Isso vai rapidamente da empolgação de algo novo para o _"medo de quebrar outro
+trecho do site"_, para o _"Eu não ligo mais"_.
 
-Até que você para de publicar completamente.
+Um belo dia, você simplesmente para de publicar completamente. Só manter o que
+já tem, já será sua vitória.
 
-### Baseado em fatos reais
-
-Foi exatamente o que aconteceu comigo.
-
-A ideia de criar um novo post era rapidamente substituída pela ideia de
-refatorar tudo ou até **jogar tudo fora e começar do zero**.
-
-Mas, eu SEMPRE estou muito ocupado... enfim 🙄!
+Exatamente o que aconteceu comigo.
 
 ---
 
 ## A refatoração mal sucedida
 
-Já tenho um vasto conhecimento no `Next.js`. E foi exatamente por este motivo
-que decidi não usá-lo neste projeto. Achei **demais** para um simples blog.
+Com o advento dos agentes para código com LLMs cada vez mais inteligentes, criei
+coragem para fazer essa refatoração. Mas, antes de colocar qualquer IA no
+projeto tive essa ideia brilhante:
 
-Então eu tivesse essa ideia brilhante:
+> "Vou refatorar isso aqui na mão mesmo mantendo HTML, CSS e JS"
 
-> "Vou refatorar isso aqui na mão mesmo."
-
-Vamos cometer o mesmo erro duas vezes seguidas... Pense pelo lado positivo: já
-que vamos errar, erramos em tudo o que for possível para não restar dúvidas do
-erro.
+Claro! Vamos cometer o mesmo erro duas vezes seguidas. Já que vamos errar,
+erramos em tudo o que for possível para não restar dúvidas sobre o erro 😅.
 
 Olhei algumas tendências no CodePen e Dribbble. Não sou bom com design, por
 isso, tudo que adiciono nos meus layouts vem de coisas que vejo na Internet e
@@ -255,11 +183,9 @@ BoOoO 👻!
 Mesmo tentando remover o máximo de coisas do código antigo sem quebrar nada,
 mexer em uma parte do CSS ou JS antigo estragava outras partes do site.
 
-É como aquele monstro embaixo da cama que as crianças têm medo. Mas o meu era só
-código velho mesmo.
-
-Trocar o tamanho de algo significava eu ter que sair conferindo todas as outras
-páginas. Com umas duas ou três tentativas, já desisti e fui atrás de solução.
+Trocar o tamanho de algo, significava ter que sair conferindo todas as outras
+páginas. Confesso que nem forcei, com uma ou duas tentativas, já desisti disso e
+fui atrás de solução.
 
 > Eu: Me indique um bom framework para SSG em 2026.  
 > IA: Astro!
@@ -273,7 +199,7 @@ Como eu ainda não havia usado o **Astro**, vamos checar do que se trata.
 Ao entrar no [astro.build](https://astro.build/), adivinha a primeira coisa que
 vejo?
 
-_"Astro is a JavaScript web framework"_
+_"Astro is a JavaScript web framework"_ (sentiu um calafrio aí?).
 
 Toda vez que vejo as palavras **JavaScript** e **Framework** juntas, a vontade é
 tapar os ouvidos e ficar gritando: _"lá lá lá lá lá, não quero saber..."_.
@@ -285,36 +211,33 @@ Mas, o Astro foi diferente.
 
 ### Conceitos do Astro
 
-Algumas coisas do **Astro** atacavam diretamente os meus problemas:
+Olha só que coincidência, alguns dos conceitos do **Astro** que falaram
+diretamente comigo, como se eu estivesse em uma consultoria com o framework:
 
-- Servidor primeiro: _"O Astro melhora o desempenho do seu website renderizando
-  componentes no servidor, enviando HTML leve para o browser, com zero overhead
-  de JavaScript desnecessário."_
+- Servidor primeiro: _"O Astro melhora o desempenho do seu website
+  **renderizando componentes no servidor**, enviando HTML leve para o browser,
+  com **zero overhead de JavaScript desnecessário**."_
 - Voltado para conteúdo: _"O Astro foi criado para trabalhar com o seu conteúdo,
-  não importa onde ele estiver. Carregue dados do seu sistema de arquivos, APIs
-  externas ou seu CMS favorito."_
+  não importa onde ele estiver. **Carregue dados do seu sistema de arquivos**,
+  APIs externas ou seu CMS favorito."_
 - Personalizável: _"Estenda o Astro com suas ferramentas favoritas. Traga sua
   própria UI de componentes, bibliotecas JS, temas, integrações e mais."_
 
-Interessante! Tudo isso realmente está lá no site deles e pareceu falar
-**diretamente para mim**.
-
-Quer mais?
+Interessante! Tudo isso realmente está lá no site deles. Agora, quer mais?
 
 ### Astro Islands
 
-Se você já usou qualquer framework ou lib de JavaScript, já deve ter notado que
-queremos encapsular o máximo de coisas que for possível em um único componente.
+Se você já usou qualquer framework ou lib JavaScript, deve ter notado que
+queremos encapsular o máximo de coisas de um componente.
 
-Isso evita o problema que eu tive na minha refatoração falha. Mas, até o
-momento, eu fazia isso em um único framework na mesma página.
+Isso evita o problema que eu tive na minha refatoração falha. Editar algo e
+quebrar outro componente. Mas, até o momento, eu fazia isso com um único
+framework.
 
-O Astro permite criar ilhas (islands) dentro da sua página. Dessa forma, um
-componente pode usar React, outro Vue, outro pode ter somente HTML puro (de
-novo, na mesma página).
+O **Astro** permite criar ilhas (islands) dentro da página. Dessa forma, um
+componente pode usar _React_, outro _Vue_, outro pode ter **somente HTML puro**.
 
-Não recomendo adicionar 20 frameworks em uma página só porque pode, mas você
-pode 😂.
+Então não vamos procurar mais.
 
 ### Fechado com Astro 💜
 
@@ -327,4 +250,215 @@ Então deixa eu chamar os LLMs e começar os trabalhos.
 
 ## LLMs: problemas e soluções
 
-Continua...
+O meu intuito com a IA neste projeto não é fazer "Vibe Coding". É o oposto.
+Quero a IA trabalhando como um colega qualquer (que digita 1000x mais rápido do
+que eu).
+
+Mas, temos um grande problema atualmente: **NÃO EXISTE UM PADRÃO**.
+
+Como tudo é muito novo, o que posso te passar são apenas experiencias que tive
+**TESTANDO** algumas coisas.
+
+### O problema do contexto
+
+Sempre que você inicia um novo agente no projeto, ele vem **em branco**. É como
+um desenvolvedor entrando em uma base de código **pela primeira vez**. Precisa
+ler a documentação ou todo o projeto para entender o que será feito.
+
+O problema é que agentes têm limites de tamanho na janela de contexto e, mesmo
+que não tivessem, também existe o problema do
+[Context Rot](https://medium.com/@pfarzana1313/context-rot-why-bigger-isnt-always-better-for-llms-091f1bdcfb83).
+
+Se você quer fazer algo grande sem dores de cabeça, a melhor opção e seguir a
+técnica de _dividir para conquistar_. Divida o problema em partes pequenas o
+suficiente para serem gerenciadas e resolva as pequenas partes uma por vez.
+
+Foi exatamente o que fiz, com alguns percalços até encontrar algo que funcionou.
+
+### Primeira tentativa: AGENTS.md
+
+No meu arquivo `AGENTS.md`, só apontei o modelo para outros arquivos separados:
+
+- `MEMORY.md` - estado da sessão, o que foi feito e o que falta fazer (tipo um
+  `CHAGELOG` mas para o LLM).
+- `SOUL.md` - personalidade e tom do agente (seja conciso, fale em inglês, etc).
+- `USER.md` - Meu nome, softwares disponíveis e coisas relevantes sobre o
+  usuário (eu).
+- `AGENTS.md` - Aponta o agente para os arquivos anteriores.
+
+A ideia era simples: antes de fazer qualquer coisa, a IA lê esses arquivos e
+segue as regras.
+
+Terminou o código, atualiza o `MEMORY.md` com o que aconteceu e faz um commit do
+que mudou. Assim eu só reviso o commit no final.
+
+Se eu precisar trocar de modelo ou simplesmente limpar o contexto, o `MEMORY.md`
+lembra tudo para a IA.
+
+**Quando funciona (caminho feliz):**
+
+De início, achei que esse era o modo perfeito. Trabalhei tranquilamente uma
+manhã inteira dessa forma. Gemini, Codex e Claude respeitaram as regras e eu
+estava revisando o código.
+
+Chamei isso de "loop":
+
+```
+Prompt para a tarefa:
+  LLM:
+    -> AGENTS.md
+      -> SOUL.md
+      -> USER.md
+   -> Faz o código
+      -> MEMORY.md (Contexto)
+      -> commit (Contexto)
+  EU:
+    -> reviso
+```
+
+**Problema:**
+
+Quando a task era mais complexa, todos os modelos falhavam. E o pior, não dava
+pra saber onde seria a falha.
+
+Corrigi isso adicionando as regras direto no arquivo global de cada LLM
+(`GEMINI.md`, `CODEX.md` e `CLAUDE.md`). Esses arquivos sempre são lidos, então
+elas não esquecem. Mesmo assim, ainda passava alguma coisa sem atualização.
+
+Como percebi que eles estavam sempre fazendo o `commit`, adicionei um hook
+validando minhas regras. Se o modelo tentasse fazer `commit` sem atualizar
+`MEMORY.md`, eu gerava um erro explicando as regras de novo.
+
+Isso funcionou? Sim! Mas com vários problemas.
+
+Primeiro, o hook atrapalha você também. Quando você for fazer algum `commit`,
+seu hook vai fazer você ter que atualizar o `MEMORY.md` também 😂.
+
+Segundo, a fricção do modelo com este sistema. Se você ficar olhando ele
+trabalhar, vai ver isso:
+
+- Modelo faz o código
+- Tenta fazer `commit` sem atualizar a memória
+- Erro no `commit`
+- Modelo volta e lê o `AGENTS.md` novamente
+- Atualiza o `MEMORY.md`
+- Faz o `commit`
+- Te avisa que esqueceu do `MEMORY.md`, mas corrigiu
+
+Trabalhei alguns dias assim. Mas, essa fricção estressa você e atrapalha o
+modelo. Então tentei outra coisa.
+
+### Issues, Branch, PR e Merge
+
+Regras em um único arquivo global do modelo. Para cada modelo, usei seu próprio
+arquivo (`GEMINI.md`, `CODEX.md` e `CLAUDE.md`). Sem espalhar dados em outros
+arquivos.
+
+```md
+# NOME_MODELO.md
+
+- Quem sou eu e como me trate
+- O que é o projeto
+- Decisões de arquitetura
+- Regras do workflow (já explico)
+```
+
+Nessas regras do workflow, fiz o modelo trabalhar como qualquer outro
+desenvolvedor. Vai fazer algo novo no projeto? Ok, siga esses passos:
+
+- Abra uma _Issue_ no repositório
+- Crie um novo _Branch_ para o que for fazer e faça
+- Terminou? Crie uma _Pull Request_
+- Eu reviso a PR e faço o merge
+
+Por incrível que pareça, nenhuma IA erra nunca neste processo. Creio que ela
+foram bem treinadas em código open source 😅.
+
+Mas e o contexto? Elas sabem usar o git muito bem. Só avisar o processo para o
+modelo que ele vai ler _Issues_, histórico de `commits`, etc.
+
+Por falar nisso, você também nem precisa conversar com o modelo usando
+mensagens. Abra uma _Issue_ no repositório e avise ao modelo:
+
+> "Trabalhe na issue #N"
+
+Simples assim!
+
+### Os três modelos
+
+Os modelos que usei foram:
+
+**Claude Code** _(Opus 4.6)_ via Claude CLI: Muito bom, mas é o mais caro deles.
+Além disso, ele é o que tem o menos limite nos meus planos. Meu plano atual é o
+Max 5x (e ele bateu limite várias vezes). Ainda tem um plano acima, o 20x (mais
+caro ainda). Depois tem a API. Aí o preço não faz nem sentido para mim.
+
+**Codex** _(GPT 5.3 Codex High)_: não usei o CLI porque o **Codex App** está com
+uma promoção que te dá o dobro de tokens até Abril. Então, vamos economizar, não
+é? Eu não chequei essa informação, mas mesmo usando o **Codex App** um dia
+inteiro, não vi onde é o limite (e meu plano é o plus, o mais barato).
+
+**Antigravity** _(Gemini 3.1 Pro High)_: eu não sei o motivo, mas eu considero
+que "ganhei" o acesso aos produtos do Gemini. Eu já assinava o **Google One**
+para backup no **Google Drive**. Um belo dia incluíram o **Gemini** no plano.
+Com ele eu também não vi o limite. Mas, pode ser que tenha acontecido. Em alguns
+momentos, o modelo começava a dar erro e parava de funcionar. Não sei se foi por
+causa do volume de uso ou limite mesmo. Acontece que o **Gemini 3.1 Pro** acabou
+de ser lançado. Nesses momentos, todo mundo quer testar o novo modelo, então
+erros são mais comuns.
+
+**O ponto principal:**
+
+Neste projeto, não vi diferença entre os modelos. Como era algo mais simples.
+Muito **copia** e **cola** do velho para o novo, todos os modelos se saíram
+muito bem.
+
+Tentei usar um por dia. Quando começa os trabalhos pela manhã, já iniciava com
+um deles e ia até o final do dia.
+
+Em alguns dias eu fui forçado a trocar por erro (Gemini) ou por limite (Claude).
+
+### O que eles construíram?
+
+Se você está lendo isso no meu site, tem "a mão" deles aí. Foram aproximadamente
+2 semanas, comigo basicamente dirigindo e revisando:
+
+- Sistema de layouts com componentes reutilizáveis
+- Content Layer API com schemas Zod para validação de frontmatter
+- Syntax highlight nativo via Shiki (zero JS client-side para blocos de código)
+- Pipeline de deploy automático via GitHub Actions
+- Sitemap automatizado
+- Editor Markdown no browser com Monaco e Vim mode
+- CLI para criação de posts (`npm run post "Título"`)
+- Remoção de ~4.000 linhas de código legado
+- Dark mode (somente nos posts)
+
+A única parte que eu fiz foi o canvas de partículas na home.
+
+### A lição
+
+Simples: trate modelos de IA como qualquer outro desenvolvedor:
+
+```
+Issue -> branch -> commit -> revisão (VOCÊ) -> merge (VOCÊ)
+```
+
+Pelo menos até o momento em que escrevi isso, este foi o modelo que melhor
+funcionou.
+
+---
+
+## Conclusão
+
+Este post começou com um site quebrado e o medo de tocar em qualquer coisa.
+
+Termina com o Astro e `builds` automáticos no **GitHub Pages**. Além disso,
+também aderi ao modelo de _Issues_. Antes eu fazia `push` direto no `main`. Isso
+me permite até ter rascunhos de posts 😂.
+
+A lição não é sobre o Astro, sobre IA ou sobre nenhuma ferramenta específica.
+
+Quando algo está quebrado e doloroso, a solução quase nunca é _"só mais um
+script"_. É começar de novo com fundações melhores, mesmo que isso signifique
+engolir o orgulho e usar outro `FrameworkJavaScript` (as duas palavras coladas
+uma na outra pra você 🤬).
