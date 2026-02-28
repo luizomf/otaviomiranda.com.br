@@ -66,7 +66,7 @@ com uma estrutura assim (ou variações disso):
 No começo, isso parece uma boa ideia.
 
 Só que, sem um padrão ou framework, você vai precisar copiar e colar o diretório
-a uma página para criar outra (ou inventar uma outra maneira qualquer).
+de uma página para criar outra (ou inventar uma outra maneira qualquer).
 
 Com o passar do tempo, isso vai fazer você terminar com centenas de páginas com
 variações levemente diferentes do `index.html`.
@@ -105,7 +105,7 @@ você lembra disso o tempo todo.
 Refatorar todo o site nessa altura do campeonato é complicado. Você está com
 vários outros projetos em andamento. Deadlines batendo na porta.
 
-Seu script não vai capturar todas as nuances dos posts porque, todo ser humano
+Seu script não vai capturar todas as nuances dos posts, porque todo ser humano
 tem bursts de dopamina que geram micro alterações de código ao longo do tempo.
 
 E nós sabemos que você nunca voltou para alterar todos aqueles quase 1000 posts.
@@ -115,9 +115,9 @@ E nós sabemos que você nunca voltou para alterar todos aqueles quase 1000 post
 A partir daqui, começa a acontecer algo muito parecido com a
 [teoria das janelas quebradas](https://pt.wikipedia.org/wiki/Teoria_das_janelas_quebradas).
 
-Você passa a "vandalizar" seu próprio site com. Adiciona "só mais um script"
-para alguma coisa específica, "um ajuste de margem aqui", "uma div ali"... Este
-site nunca vai estar perfeito.
+Você passa a "vandalizar" seu próprio site. Adiciona "só mais um script" para
+alguma coisa específica, "um ajuste de margem aqui", "uma div ali"... Este site
+nunca vai estar perfeito.
 
 Isso vai rapidamente da empolgação de algo novo para o _"medo de quebrar outro
 trecho do site"_, para o _"Eu não ligo mais"_.
@@ -211,8 +211,8 @@ Mas, o Astro foi diferente.
 
 ### Conceitos do Astro
 
-Olha só que coincidência, alguns dos conceitos do **Astro** que falaram
-diretamente comigo, como se eu estivesse em uma consultoria com o framework:
+Olha só que coincidência, alguns dos conceitos do **Astro** falaram diretamente
+comigo, como se eu estivesse em uma consultoria com o framework:
 
 - Servidor primeiro: _"O Astro melhora o desempenho do seu website
   **renderizando componentes no servidor**, enviando HTML leve para o browser,
@@ -269,7 +269,7 @@ O problema é que agentes têm limites de tamanho na janela de contexto e, mesmo
 que não tivessem, também existe o problema do
 [Context Rot](https://medium.com/@pfarzana1313/context-rot-why-bigger-isnt-always-better-for-llms-091f1bdcfb83).
 
-Se você quer fazer algo grande sem dores de cabeça, a melhor opção e seguir a
+Se você quer fazer algo grande sem dores de cabeça, a melhor opção é seguir a
 técnica de _dividir para conquistar_. Divida o problema em partes pequenas o
 suficiente para serem gerenciadas e resolva as pequenas partes uma por vez.
 
@@ -371,7 +371,7 @@ desenvolvedor. Vai fazer algo novo no projeto? Ok, siga esses passos:
 - Terminou? Crie uma _Pull Request_
 - Eu reviso a PR e faço o merge
 
-Por incrível que pareça, nenhuma IA erra nunca neste processo. Creio que ela
+Por incrível que pareça, nenhuma IA erra nunca neste processo. Creio que elas
 foram bem treinadas em código open source 😅.
 
 Mas e o contexto? Elas sabem usar o git muito bem. Só avisar o processo para o
@@ -389,7 +389,7 @@ Simples assim!
 Os modelos que usei foram:
 
 **Claude Code** _(Opus 4.6)_ via Claude CLI: Muito bom, mas é o mais caro deles.
-Além disso, ele é o que tem o menos limite nos meus planos. Meu plano atual é o
+Além disso, ele é o que tem menos limite nos meus planos. Meu plano atual é o
 Max 5x (e ele bateu limite várias vezes). Ainda tem um plano acima, o 20x (mais
 caro ainda). Depois tem a API. Aí o preço não faz nem sentido para mim.
 
@@ -413,7 +413,7 @@ Neste projeto, não vi diferença entre os modelos. Como era algo mais simples.
 Muito **copia** e **cola** do velho para o novo, todos os modelos se saíram
 muito bem.
 
-Tentei usar um por dia. Quando começa os trabalhos pela manhã, já iniciava com
+Tentei usar um por dia. Quando começava os trabalhos pela manhã, já iniciava com
 um deles e ia até o final do dia.
 
 Em alguns dias eu fui forçado a trocar por erro (Gemini) ou por limite (Claude).
@@ -421,7 +421,7 @@ Em alguns dias eu fui forçado a trocar por erro (Gemini) ou por limite (Claude)
 ### O que eles construíram?
 
 Se você está lendo isso no meu site, tem "a mão" deles aí. Foram aproximadamente
-2 semanas, comigo basicamente dirigindo e revisando:
+2 semanas, comigo basicamente dirigindo e revisando.
 
 - Sistema de layouts com componentes reutilizáveis
 - Content Layer API com schemas Zod para validação de frontmatter
@@ -432,12 +432,13 @@ Se você está lendo isso no meu site, tem "a mão" deles aí. Foram aproximadam
 - CLI para criação de posts (`npm run post "Título"`)
 - Remoção de ~4.000 linhas de código legado
 - Dark mode (somente nos posts)
+- E mais coisas que eu talvez tenha esquecido.
 
 A única parte que eu fiz foi o canvas de partículas na home.
 
 ### A lição
 
-Simples: trate modelos de IA como qualquer outro desenvolvedor:
+É simples: só tratei modelos de IA como qualquer outro desenvolvedor:
 
 ```
 Issue -> branch -> commit -> revisão (VOCÊ) -> merge (VOCÊ)
