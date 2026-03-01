@@ -118,10 +118,19 @@
   --font-size-body: var(--font-size-me);
   --font-size-body-sm: var(--font-size-sm);
   --font-size-meta: var(--font-size-xxxsm);
+  --font-size-label: var(--font-size-xxsm);
+  --font-size-body-fluid: clamp(
+    var(--font-size-body-sm),
+    3vw,
+    var(--font-size-body)
+  );
   --line-height-body: var(--line-height-me);
   --color-bg: hsl(from var(--main-clr-shade) h s 5% / 1);
   --color-text: hsl(from var(--main-clr-shade) h s 5% / 1);
   --color-text-muted: hsl(from var(--main-clr-shade) h s 30% / 1);
+  --color-text-subtle: hsl(from var(--main-clr-shade) h s 40% / 1);
+  --color-text-soft: hsl(from var(--main-clr-shade) h s 60% / 1);
+  --color-text-muted-on-dark: hsl(from var(--main-clr-shade) h s 70% / 1);
   --color-surface: hsl(from var(--main-clr-shade) h s 100% / 1);
   --color-link: var(--link-clr);
   --radius-md: var(--border-radius-me);
@@ -696,8 +705,8 @@ svg {
 }
 
 .section-eyeball {
-  font-size: var(--font-size-xxsm);
-  color: hsl(from var(--main-clr-shade) h s 30% / 1);
+  font-size: var(--font-size-label);
+  color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 600;
@@ -705,18 +714,18 @@ svg {
 }
 
 .section-dark .section-eyeball {
-  color: hsl(from var(--main-clr-shade) h s 70% / 1);
+  color: var(--color-text-muted-on-dark);
 }
 
 .section-line {
-  color: hsl(from var(--main-clr-shade) h s 30% / 1);
-  font-size: clamp(var(--font-size-sm), 3vw, var(--font-size-me));
+  color: var(--color-text-muted);
+  font-size: var(--font-size-body-fluid);
   max-width: 60ch;
   margin: 0 auto;
 }
 
 .section-dark .section-line {
-  color: hsl(from var(--main-clr-shade) h s 70% / 1);
+  color: var(--color-text-muted-on-dark);
 }
 
 .section-title {
