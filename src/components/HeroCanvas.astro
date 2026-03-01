@@ -12,13 +12,14 @@
  *   - Hero.astro (unico local de uso — fundo da secao hero)
  *
  * CONCEITO ASTRO:
- *   - <script> no Astro: diferente do frontmatter (que roda no build/servidor),
- *     o bloco <script> roda NO NAVEGADOR do usuario. O Astro processa esse
+ *   - In Astro, the script tag is different from frontmatter (which runs at
+ *     build time / on the server): this script runs in the user's browser.
+ *     Astro processes it
  *     script via Vite: faz bundle, minifica e adiciona ao HTML final.
  *   - Script sem framework: este componente usa Canvas 2D puro, sem React,
  *     Vue ou qualquer framework. O Astro permite isso naturalmente — voce
  *     escreve JS/TS vanilla e ele e enviado ao client como modulo ES.
- *   - TypeScript no <script>: o Astro suporta TS direto no bloco <script>.
+ *   - TypeScript in the script tag: Astro supports TS directly in this block.
  *     Aqui, o type "Configs" e a classe "Particle" sao tipados com TS e
  *     compilados para JS no build.
  *   - aria-hidden="true": o canvas e puramente decorativo, entao e oculto

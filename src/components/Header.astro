@@ -37,24 +37,24 @@ import Section from './Section.astro';
   nav.nav,
   footer.nav {
     width: 100%;
-    max-width: var(--main-width);
+    max-width: var(--layout-content-max-width);
     margin: 0 auto;
 
     display: flex;
     align-items: center;
     justify-content: start;
 
-    font-size: var(--font-size-xxsm);
-    color: hsl(from var(--main-clr-shade) h 10% 30% / 1);
-    gap: clamp(var(--spacings-sm-400), 8vw, var(--spacings-lg-900));
+    font-size: var(--font-size-text-200);
+    color: var(--color-text-muted);
+    gap: clamp(var(--space-400), 8vw, var(--space-1800));
 
     a {
       text-decoration: none;
-      color: hsl(from var(--link-clr) h 50% 20% / 100%);
+      color: var(--color-link-subtle);
 
       &:hover {
         text-decoration: underline;
-        color: hsl(from var(--link-clr) h 90% 50% / 100%);
+        color: var(--color-link-hover);
       }
     }
   }

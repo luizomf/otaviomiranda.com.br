@@ -18,15 +18,15 @@
  * CONCEITO ASTRO:
  *   - Este componente nao possui frontmatter (nao tem props nem
  *     imports), pois toda a logica e client-side.
- *   - A tag <script> no Astro e processada pelo Vite: o TypeScript
+ *   - The script tag in Astro is processed by Vite: TypeScript
  *     e compilado, o bundle e otimizado, e o script roda uma unica
- *     vez por pagina (nao duplica se o componente aparecer mais de
- *     uma vez). Isso e diferente de <script is:inline>, que seria
+ *     vez por pagina (nao duplica se o componente aparecer mais de uma vez).
+ *     This is different from an inline script (`is:inline`), which would be
  *     copiado literalmente para o HTML sem bundling.
  *   - O CSS deste componente e definido externamente (global.css ou
- *     layout pai), por isso nao ha bloco <style> aqui.
+ *     layout pai), por isso nao ha style block aqui.
  *   - Usar document.getElementById / querySelectorAll dentro do
- *     <script> e o padrao "vanilla JS" do Astro — sem framework
+ *     script e o padrao "vanilla JS" do Astro — sem framework
  *     de UI, sem hidratacao; apenas JS imperativo no browser.
  */
 ---

@@ -149,27 +149,29 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
 <style>
   .blog-list {
     margin: 0;
+    margin-left: 0;
+    padding-left: 0;
     list-style: none;
   }
 
   .blog-header {
-    margin-bottom: clamp(var(--spacings-sm-600), 5vw, var(--spacings-sm-900));
+    margin-bottom: clamp(var(--space-600), 5vw, var(--space-900));
   }
 
   .blog-archive-body {
-    padding-bottom: 8rem;
+    padding-bottom: var(--space-section-bottom);
   }
 
   .blog-post-item {
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
+    margin-bottom: var(--space-500);
+    padding-bottom: var(--space-500);
   }
 
   .blog-post-link.blog-post-link {
     display: block;
-    font-size: var(--font-size-me);
+    font-size: var(--font-size-text-500);
     font-weight: 700;
-    color: var(--main-clr-shade);
+    color: var(--color-text-strong);
     text-decoration: none;
     padding: 1rem 0;
   }
@@ -178,7 +180,7 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
     color: var(--color-text-subtle);
     font-size: var(--font-size-body-sm);
     margin: 0;
-    padding-bottom: var(--spacings-sm-300);
+    padding-bottom: var(--space-300);
   }
 
   .blog-post-date {
@@ -194,9 +196,9 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
     grid-template-columns: 1fr auto 1fr;
     justify-items: center;
     align-items: center;
-    gap: var(--spacings-sm-600) var(--spacings-sm-500);
-    margin-block: var(--spacings-sm-700);
-    padding-block: var(--spacings-sm-700);
+    gap: var(--space-600) var(--space-500);
+    margin-block: var(--space-700);
+    padding-block: var(--space-700);
   }
 
   .blog-pagination-side {
@@ -213,7 +215,7 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
 
   .blog-pagination-control {
     flex: 0 0 auto;
-    min-width: 22rem;
+    min-width: var(--layout-control-min-width);
     max-width: 100%;
   }
 
@@ -222,23 +224,23 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
     width: 100%;
     justify-content: center;
     align-items: center;
-    font-size: var(--font-size-xsm);
+    font-size: var(--font-size-text-300);
     text-decoration: none;
     white-space: nowrap;
   }
 
   .blog-pagination-current {
-    --clr: hsl(from var(--main-clr-shade) h s 60% / 1);
+    --clr: var(--color-text-soft);
 
     color: var(--clr);
-    font-size: var(--font-size-xsm);
-    border: 2px solid var(--clr);
+    font-size: var(--font-size-text-300);
+    border: var(--border-width-200) solid var(--clr);
 
-    line-height: var(--line-height-xxxsm);
-    border-radius: var(--border-radius-pill);
-    font-family: var(--font-family-monospace);
-    padding: clamp(var(--spacings-sm-200), 3vw, var(--spacings-sm-300))
-      clamp(var(--spacings-sm-400), 3vw, var(--spacings-sm-900));
+    line-height: var(--line-height-100);
+    border-radius: var(--radius-full);
+    font-family: var(--font-family-code);
+    padding: clamp(var(--space-200), 3vw, var(--space-300))
+      clamp(var(--space-400), 3vw, var(--space-900));
   }
 
   @media (max-width: 500px) {
