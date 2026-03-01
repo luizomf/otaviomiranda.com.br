@@ -85,13 +85,13 @@ import SectionHeader from './SectionHeader.astro';
     font-family: inherit;
     font-size: var(--font-size-xsm);
     min-width: 220px;
-    background: hsl(from var(--main-clr-shade) h s 100% / 1);
-    color: hsl(from var(--main-clr-shade) h s 30% / 1);
+    background: var(--color-surface);
+    color: var(--color-text-muted);
     font-weight: 400;
     outline: none;
     transition:
-      border-color var(--transition-fast),
-      box-shadow var(--transition-fast);
+      border-color var(--motion-fast),
+      box-shadow var(--motion-fast);
   }
 
   @media (min-width: 720px) {
@@ -129,8 +129,8 @@ import SectionHeader from './SectionHeader.astro';
     cursor: pointer;
     white-space: nowrap;
     transition:
-      transform var(--transition-fast),
-      background-color var(--transition-fast);
+      transform var(--motion-fast),
+      background-color var(--motion-fast);
     flex: 1;
     background: #000;
     color: #fff;

@@ -167,7 +167,7 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
 
   .blog-post-link.blog-post-link {
     display: block;
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-me);
     font-weight: 700;
     color: var(--main-clr-shade);
     text-decoration: none;
@@ -175,15 +175,15 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
   }
 
   .blog-post-description {
-    color: hsl(from var(--main-clr-shade) h s 40% / 1);
-    font-size: var(--font-size-sm);
+    color: var(--color-text-subtle);
+    font-size: var(--font-size-body-sm);
     margin: 0;
     padding-bottom: var(--spacings-sm-300);
   }
 
   .blog-post-date {
-    font-size: var(--font-size-xxsm);
-    color: hsl(from var(--main-clr-shade) h s 60% / 1);
+    font-size: var(--font-size-label);
+    color: var(--color-text-soft);
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.05em;
