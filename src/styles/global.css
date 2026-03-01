@@ -53,8 +53,6 @@
 
   --main-clr-shade: hsl(240 22% 5% / 1);
   --link-clr: hsl(210 100% 40% / 1);
-  --bg-clr-light-mode: hsl(from var(--main-clr-shade) h s 100% / 1);
-  --editor-border: hsl(from var(--main-clr-shade) h 10% 85% / 1);
 
   --glow-clr-1: rgba(0, 120, 210, 1);
   --glow-clr-2: rgba(190, 0, 220, 1);
