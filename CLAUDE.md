@@ -79,9 +79,8 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 ### Safety rules
 
 - Never force-push `main`.
-- If hooks are installed, do not skip them unless explicitly asked.
 - No destructive git ops without explicit user confirmation.
-- Never commit `.env`, secrets, or `.agents/`.
+- Never commit `.env` or secrets.
 
 ---
 
