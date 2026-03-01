@@ -310,7 +310,7 @@ blockquote {
   padding: clamp(var(--spacings-sm-600), 3vw, var(--spacings-lg-100));
   color: hsl(from var(--main-clr-shade) h s 10% / 1);
   background-color: hsl(from var(--main-clr-shade) h s 95% / 1);
-  border-radius: var(--border-radius-me);
+  border-radius: var(--radius-md);
   font-family: var(--font-family-monospace);
   font-size: var(--font-size-xsm);
   line-height: var(--line-height-xsm);
@@ -330,7 +330,7 @@ pre {
   min-width: 0;
   padding: clamp(var(--spacings-sm-600), 3vw, var(--spacings-lg-100));
   padding-top: clamp(var(--spacings-sm-700), 3vw, var(--spacings-lg-100));
-  border-radius: var(--border-radius-me);
+  border-radius: var(--radius-md);
   overflow-x: auto;
   font-family: var(--font-family-monospace);
   font-size: var(--font-size-xsm);
@@ -361,7 +361,7 @@ pre code {
 img {
   margin-left: auto;
   margin-right: auto;
-  border-radius: var(--border-radius-me);
+  border-radius: var(--radius-md);
 }
 
 img,
@@ -517,7 +517,7 @@ svg {
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background: hsl(from var(--main-clr-shade) h s 100% / 1);
+  background: var(--color-surface);
   box-shadow: 0 1px 3px hsl(0 0% 0% / 0.3);
   transition: transform 300ms ease-in-out;
 }
@@ -557,10 +557,10 @@ svg {
  */
 
 .main {
-  border-radius: var(--border-radius-me);
+  border-radius: var(--radius-md);
   margin-inline: auto;
-  color: hsl(from var(--main-clr-shade) h s 5% / 1);
-  background-color: hsl(from var(--main-clr-shade) h s 100% / 1);
+  color: var(--color-text);
+  background-color: var(--color-surface);
   min-height: 100vh;
 }
 
@@ -600,14 +600,14 @@ svg {
 }
 
 .section-light {
-  color: hsl(from var(--main-clr-shade) h s 5% / 1);
-  background-color: hsl(from var(--main-clr-shade) h s 100% / 1);
+  color: var(--color-text);
+  background-color: var(--color-surface);
 }
 
 .section-content {
   max-width: 180rem;
   padding: clamp(var(--spacings-sm-400), 3vw, var(--spacings-sm-900));
-  border-radius: var(--border-radius-me);
+  border-radius: var(--radius-md);
   margin-inline: auto;
 }
 
@@ -626,7 +626,7 @@ svg {
   left: 0;
   right: 0;
   bottom: 0;
-  font-size: var(--font-size-xxxsm);
+  font-size: var(--font-size-meta);
   text-align: center;
 
   display: flex;
@@ -638,7 +638,7 @@ svg {
   a {
     color: inherit;
     text-decoration: none;
-    transition: var(--transition-fast);
+    transition: var(--motion-fast);
     padding: clamp(var(--spacings-sm-200), 3vw, var(--spacings-sm-600)) 0;
   }
 
@@ -783,7 +783,7 @@ select {
 select {
   width: 100%;
   padding: var(--spacings-sm-400) var(--spacings-sm-200);
-  border-radius: var(--border-radius-me);
+  border-radius: var(--radius-md);
 }
 
 textarea {
@@ -791,7 +791,7 @@ textarea {
   max-width: var(--main-width);
   min-height: 25rem;
   font-family: var(--font-family-monospace);
-  border-radius: var(--border-radius-me);
+  border-radius: var(--radius-md);
   padding: var(--spacings-sm-400) var(--spacings-sm-200);
 }
 
