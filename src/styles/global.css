@@ -50,9 +50,6 @@
 
   --font-family-headings: var(--font-family-default);
   --font-family-monospace: var(--font-family-default);
-  --font-size-md: var(--font-size-me);
-  --font-mono: var(--font-family-monospace);
-  --font-monospace: var(--font-family-monospace);
 
   --main-clr-shade: hsl(240 22% 5% / 1);
   --link-clr: hsl(210 100% 40% / 1);
@@ -701,7 +698,7 @@ svg {
 
 .section-line {
   color: hsl(from var(--main-clr-shade) h s 30% / 1);
-  font-size: clamp(var(--font-size-sm), 3vw, var(--font-size-md));
+  font-size: clamp(var(--font-size-sm), 3vw, var(--font-size-me));
   max-width: 60ch;
   margin: 0 auto;
 }
