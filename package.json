@@ -10,8 +10,7 @@
     "lint:fix": "prettier --write --ignore-path NUL --config .prettierrc.json \"AGENTS.md\" \"PLAN.md\" \"README.md\" \"astro.config.mjs\" \"package.json\" \".github/**/*.{yml,yaml}\" \"public/**/*.{css,js}\" \"scripts/**/*.{js,mjs,ts}\" \"src/**/*.{astro,ts,js,mjs,md,mdx,html,css,json}\"",
     "preview": "astro preview",
     "astro": "astro",
-    "post": "node scripts/new_post.mjs",
-    "hooks:install": "bash scripts/install-hooks.sh"
+    "post": "node scripts/new_post.mjs"
   },
   "keywords": [],
   "author": "",
