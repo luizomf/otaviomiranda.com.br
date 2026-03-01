@@ -62,27 +62,27 @@ const { slug, author, role, text, proofLabel = 'Ver' } = Astro.props as Props;
 <style>
   .testimonial-card {
     break-inside: avoid;
-    padding: var(--spacings-sm-800);
-    margin-bottom: clamp(var(--spacings-sm-800), 4vw, var(--spacings-lg-400));
+    padding: var(--space-800);
+    margin-bottom: clamp(var(--space-800), 4vw, var(--space-1300));
     display: flex;
     flex-direction: column;
-    gap: var(--spacings-sm-400);
-    border-radius: var(--border-radius-lg);
-    background-color: rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(2px);
+    gap: var(--space-400);
+    border-radius: var(--radius-600);
+    background-color: var(--color-white-alpha-020);
+    backdrop-filter: blur(var(--blur-200));
     transition:
-      transform 300ms ease,
-      box-shadow 300ms ease;
+      transform var(--motion-timing-fast-gentle),
+      box-shadow var(--motion-timing-fast-gentle);
   }
 
   .testimonial-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(calc(var(--motion-distance-100) * -1));
   }
 
   .testimonial-text {
-    font-size: var(--font-size-me);
-    line-height: 1.6;
-    color: hsl(from var(--main-clr-shade) h s 70% / 1);
+    font-size: var(--font-size-text-500);
+    line-height: var(--line-height-400);
+    color: var(--color-text-subtle-on-dark);
     font-style: italic;
     font-weight: 300;
   }
@@ -91,8 +91,8 @@ const { slug, author, role, text, proofLabel = 'Ver' } = Astro.props as Props;
     display: grid;
     justify-items: start;
     align-items: start;
-    grid-template-columns: 64px 1fr;
-    gap: var(--spacings-sm-400);
+    grid-template-columns: var(--layout-media-column-width) 1fr;
+    gap: var(--space-400);
     margin-top: auto;
   }
 
@@ -100,10 +100,10 @@ const { slug, author, role, text, proofLabel = 'Ver' } = Astro.props as Props;
     margin: 0;
     padding: 0;
     align-self: start;
-    width: 48px;
-    height: 48px;
+    width: var(--layout-avatar-size);
+    height: var(--layout-avatar-size);
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--color-white-alpha-050);
   }
 
   .testimonial-author-wrapper {
@@ -113,33 +113,33 @@ const { slug, author, role, text, proofLabel = 'Ver' } = Astro.props as Props;
 
   .testimonial-author {
     font-weight: 700;
-    font-size: var(--font-size-xsm);
-    color: hsl(from var(--main-clr-shade) h s 70% / 1);
+    font-size: var(--font-size-text-300);
+    color: var(--color-text-subtle-on-dark);
   }
 
   .testimonial-role {
-    font-size: var(--font-size-xxsm);
-    color: hsl(from var(--main-clr-shade) h s 60% / 1);
+    font-size: var(--font-size-text-200);
+    color: var(--color-text-soft-on-dark);
     font-weight: 400;
     margin-top: 2px;
   }
 
   .testimonial-proof-link {
-    margin-top: var(--spacings-sm-100);
+    margin-top: var(--space-100);
     font-size: var(--font-size-meta);
-    color: hsl(from var(--main-clr-shade) h s 62% / 1);
+    color: var(--color-text-quiet-on-dark);
     text-decoration: none;
     width: fit-content;
-    border-bottom: 1px dashed hsl(from var(--main-clr-shade) h s 45% / 1);
+    border-bottom: var(--border-width-100) dashed var(--color-border-muted-on-dark);
     transition:
-      color 220ms ease,
-      border-color 220ms ease;
+      color var(--motion-timing-quick-gentle),
+      border-color var(--motion-timing-quick-gentle);
   }
 
   .testimonial-proof-link:hover,
   .testimonial-proof-link:focus-visible {
-    color: hsl(from var(--main-clr-shade) h s 85% / 1);
-    border-color: hsl(from var(--main-clr-shade) h s 85% / 1);
+    color: var(--color-text-strong-on-dark);
+    border-color: var(--color-text-strong-on-dark);
   }
 
   @media (max-width: 320px) {

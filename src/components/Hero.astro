@@ -66,7 +66,7 @@ import PillLink from './PillLink.astro';
     min-height: 100svh;
     display: grid;
     place-items: center;
-    font-family: var(--font-family-monospace);
+    font-family: var(--font-family-code);
     position: relative;
   }
 
@@ -80,16 +80,16 @@ import PillLink from './PillLink.astro';
 
   .hero-eyeball {
     margin: 0.5rem 0;
-    line-height: var(--line-height-xxxsm);
-    font-size: var(--font-size-sm);
-    color: hsl(from var(--main-clr-shade) h s 70% / 1);
+    line-height: var(--line-height-100);
+    font-size: var(--font-size-text-400);
+    color: var(--color-text-subtle-on-dark);
   }
 
   .hero-title {
     margin: 0 auto;
     margin-top: 1rem;
     margin-bottom: 2rem;
-    font-size: var(--font-size-huge-responsive);
+    font-size: var(--font-size-display-fluid);
     white-space: nowrap;
     border-right: 1rem solid currentcolor;
     overflow: hidden;
@@ -101,18 +101,18 @@ import PillLink from './PillLink.astro';
   .hero-line {
     margin: 1.5rem 0;
     line-height: 1.5;
-    font-size: var(--font-size-me);
-    color: hsl(from var(--main-clr-shade) h s 70% / 1);
+    font-size: var(--font-size-text-500);
+    color: var(--color-text-subtle-on-dark);
   }
 
   .hero-links {
-    margin: clamp(var(--spacings-sm-900), 4vw, var(--spacings-lg-600)) auto;
+    margin: clamp(var(--space-900), 4vw, var(--space-1500)) auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: clamp(var(--spacings-sm-600), 3vw, var(--spacings-sm-900))
-      clamp(var(--spacings-sm-500), 3vw, var(--spacings-sm-700));
+    gap: clamp(var(--space-600), 3vw, var(--space-900))
+      clamp(var(--space-500), 3vw, var(--space-700));
     max-width: 80%;
 
     a {

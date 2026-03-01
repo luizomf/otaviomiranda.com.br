@@ -1,154 +1,267 @@
 /* ===============================
-   VARIAVEIS CSS (Design Tokens)
+   CSS Design Tokens
 ================================ */
 /*
- * O QUE FAZ:
- *   Define todas as custom properties (variaveis CSS) do projeto.
- *   Inclui: tamanhos de fonte (com clamp para responsividade), familias
- *   tipograficas, cores base, cores de glow/neon, escalas de blur, line-height,
- *   espacamentos (sm e lg), border-radius e transicoes.
+ * What this does:
+ *   Defines the shared design token contract for the site. The top of :root
+ *   contains primitive scales (layout, type, color, spacing, radius, blur,
+ *   borders, shadows, and motion), followed by semantic aliases used by
+ *   components and page-level styles.
  *
- * POR QUE GLOBAL (nao scoped)?
- *   Variaveis em :root ficam disponiveis em TODOS os componentes Astro,
- *   mesmo os que usam <style> scoped. Qualquer componente pode referenciar
- *   var(--font-size-me), var(--spacings-sm-400) etc. sem precisar reimportar.
+ * Why this is global:
+ *   Tokens in :root are available to every Astro component, including those
+ *   with scoped <style> blocks. Components can rely on the same contract
+ *   without re-declaring values locally.
  *
- * CONCEITO ASTRO:
- *   Astro faz scoped styles por padrao em componentes .astro, mas este
- *   arquivo e importado globalmente via BaseLayout, garantindo que as
- *   variaveis e o reset estejam presentes em todas as paginas.
+ * Astro note:
+ *   This file is imported globally via BaseLayout, so the token system and
+ *   cross-component reset rules load everywhere that uses the main site layout.
+ *   The /editor page uses BlankLayout and intentionally stays self-contained.
  */
 :root {
-  --main-width: 96rem;
+  /* Primitive token layer: the shared source of truth for the design system. */
+  --layout-content-max-width: 96rem;
+  --layout-section-max-width: 180rem;
+  --layout-card-min-width: 38rem;
+  --layout-control-min-width: 22rem;
+  --layout-avatar-size: var(--space-1200);
+  --layout-media-column-width: var(--space-1600);
 
-  --font-size-xxxsm: clamp(1.2rem, 1.4vw, 1.4rem);
-  --font-size-xxsm: clamp(1.4rem, 1.6vw, 1.6rem);
-  --font-size-xsm: clamp(1.6rem, 1.7vw, 1.7rem);
-  --font-size-sm: clamp(1.6rem, 1.8vw, 1.8rem);
-  --font-size-me: clamp(1.6rem, 2.2vw, 2.2rem);
-  --font-size-lg: clamp(1.8rem, 2.4vw, 2.4rem);
-  --font-size-xlg: clamp(2rem, 2.4vw, 2.4rem);
-  --font-size-xxlg: clamp(2.2rem, 2.8vw, 2.8rem);
-  --font-size-xxxlg: clamp(2.4rem, 3.2vw, 3.2rem);
-
-  --font-size-h-xxxsm: clamp(1.4rem, 1.6vw, 1.6rem);
-  --font-size-h-xxsm: clamp(1.8rem, 2.2vw, 2.2rem);
-  --font-size-h-xsm: clamp(2rem, 3vw, 3rem);
-  --font-size-h-sm: clamp(2.4rem, 3.8vw, 3.8rem);
-  --font-size-h-me: clamp(2.8rem, 4.6vw, 4.6rem);
-  --font-size-h-lg: clamp(3.2rem, 5.2vw, 5.2rem);
-  --font-size-h-xlg: clamp(3.6rem, 6vw, 6rem);
-  --font-size-h-xxlg: clamp(4rem, 6.8vw, 6.8rem);
-  --font-size-h-xxxlg: clamp(4.4rem, 7.6vw, 7.6rem);
-
-  --font-size-huge-responsive: clamp(1.6rem, 10vw, 10rem);
-
-  --font-family-default:
+  --font-family-text:
     ui-monospace, SFMono-Regular, 'SF Mono', Consolas, Menlo, 'Liberation Mono',
     'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', 'Jetbrains Mono',
     'Source Code Pro', Monaco, monospace, 'Courier New';
+  --font-family-display: var(--font-family-text);
+  --font-family-code: var(--font-family-text);
 
-  --font-family-headings: var(--font-family-default);
-  --font-family-monospace: var(--font-family-default);
+  --font-size-text-100: clamp(1.2rem, 1.4vw, 1.4rem);
+  --font-size-text-200: clamp(1.4rem, 1.6vw, 1.6rem);
+  --font-size-text-300: clamp(1.5rem, 1.65vw, 1.6rem);
+  --font-size-text-400: clamp(1.6rem, 1.9vw, 1.9rem);
+  --font-size-text-500: clamp(1.6rem, 2.2vw, 2.2rem);
+  --font-size-text-600: clamp(1.8rem, 2.5vw, 2.5rem);
+  --font-size-text-700: clamp(2rem, 2.7vw, 2.7rem);
+  --font-size-text-800: clamp(2.2rem, 2.8vw, 2.8rem);
+  --font-size-text-900: clamp(2.4rem, 3.2vw, 3.2rem);
 
-  --main-clr-shade: hsl(240 22% 5% / 1);
-  --link-clr: hsl(210 100% 40% / 1);
+  --font-size-heading-100: clamp(1.4rem, 1.6vw, 1.6rem);
+  --font-size-heading-200: clamp(1.8rem, 2.2vw, 2.2rem);
+  --font-size-heading-300: clamp(2rem, 3vw, 3rem);
+  --font-size-heading-400: clamp(2.4rem, 3.7vw, 3.7rem);
+  --font-size-heading-500: clamp(2.8rem, 4.4vw, 4.4rem);
+  --font-size-heading-600: clamp(3.2rem, 5.1vw, 5.1rem);
+  --font-size-heading-700: clamp(3.6rem, 5.8vw, 5.8rem);
+  --font-size-heading-800: clamp(4rem, 6.5vw, 6.5rem);
+  --font-size-heading-900: clamp(4.4rem, 7.2vw, 7.2rem);
+  --font-size-display-fluid: clamp(1.6rem, 10vw, 10rem);
 
-  --glow-clr-1: rgba(0, 120, 210, 1);
-  --glow-clr-2: rgba(190, 0, 220, 1);
-  --glow-clr-3: rgba(138, 0, 190, 1);
-  --glow-clr-4: rgba(0, 180, 245, 1);
-  --glow-clr-5: rgba(0, 120, 210, 1);
+  --color-glow-100: hsl(210 100% 41% / 1);
+  --color-glow-200: hsl(286 100% 52% / 1);
+  --color-glow-300: hsl(262 100% 46% / 1);
+  --color-glow-400: hsl(194 100% 54% / 1);
+  --color-glow-500: hsl(224 100% 60% / 1);
+  --color-glow-shadow: hsl(285 100% 62% / 0.82);
 
-  --blur-xsm: 1px;
-  --blur-sm: 2px;
-  --blur-me: 4px;
-  --blur-lg: 8px;
-  --blur-xlg: 12px;
+  --blur-100: 1px;
+  --blur-200: 2px;
+  --blur-300: 4px;
+  --blur-400: 8px;
+  --blur-500: 12px;
 
-  --glow-shadow-clr: rgba(230, 0, 255, 0.85);
+  --shadow-100: 0 1px 3px hsl(0 0 0 / 0.3);
+  --shadow-200:
+    0 2px 4px hsl(0 0 0 / 0.04),
+    0 8px 16px hsl(0 0 0 / 0.04);
+  --shadow-300:
+    0 2px 4px hsl(0 0 0 / 0.2),
+    0 8px 16px hsl(0 0 0 / 0.2);
+  --shadow-400:
+    0 12px 24px hsl(0 0 0 / 0.08),
+    0 24px 48px hsl(0 0 0 / 0.08);
+  --shadow-500:
+    0 12px 24px hsl(0 0 0 / 0.4),
+    0 24px 48px hsl(0 0 0 / 0.4),
+    0 0 0 1px hsl(0 0 100% / 0.15);
+  --shadow-600:
+    0 24px 40px -8px hsl(0 0 0 / 0.3),
+    inset 0 0 1px 1px hsl(0 0 100% / 0.065);
+  --shadow-700:
+    0 24px 50px -8px hsl(0 0 0 / 0.5),
+    inset 0 0 1px 1px hsl(0 0 100% / 0.08);
+  --shadow-800: 0 0 10px hsl(0 0 5% / 0.5);
+  --shadow-glow: 0 0 30px var(--color-glow-shadow);
 
-  --line-height-xxxsm: 1;
-  --line-height-xxsm: 1.2;
-  --line-height-xsm: 1.4;
-  --line-height-sm: 1.6;
-  --line-height-me: 1.8;
-  --line-height-lg: 2;
-  --line-height-xlg: 2.2;
-  --line-height-xxlg: 2.4;
-  --line-height-xxxlg: 2.6;
+  --line-height-100: 1;
+  --line-height-200: 1.2;
+  --line-height-300: 1.4;
+  --line-height-400: 1.6;
+  --line-height-500: 1.8;
+  --line-height-600: 2;
+  --line-height-700: 2.2;
+  --line-height-800: 2.4;
+  --line-height-900: 2.6;
 
-  --spacings-sm-000: 0rem;
-  --spacings-sm-100: 0.4rem;
-  --spacings-sm-200: 0.8rem;
-  --spacings-sm-300: 1.2rem;
-  --spacings-sm-400: 1.6rem;
-  --spacings-sm-500: 2rem;
-  --spacings-sm-600: 2.4rem;
-  --spacings-sm-700: 2.8rem;
-  --spacings-sm-800: 3.2rem;
-  --spacings-sm-900: 3.6rem;
+  --space-000: 0rem;
+  --space-100: 0.4rem;
+  --space-200: 0.8rem;
+  --space-300: 1.2rem;
+  --space-400: 1.6rem;
+  --space-500: 2rem;
+  --space-600: 2.4rem;
+  --space-700: 2.8rem;
+  --space-800: 3.2rem;
+  --space-900: 3.6rem;
+  --space-1000: 4rem;
+  --space-1100: 4.4rem;
+  --space-1200: 4.8rem;
+  --space-1300: 5.2rem;
+  --space-1400: 5.6rem;
+  --space-1500: 6rem;
+  --space-1600: 6.4rem;
+  --space-1700: 6.8rem;
+  --space-1800: 7.2rem;
 
-  --spacings-lg-000: 0rem;
-  --spacings-lg-100: 4rem;
-  --spacings-lg-200: 4.4rem;
-  --spacings-lg-300: 4.8rem;
-  --spacings-lg-400: 5rem;
-  --spacings-lg-500: 5.4rem;
-  --spacings-lg-600: 5.8rem;
-  --spacings-lg-700: 6.2rem;
-  --spacings-lg-800: 7.8rem;
-  --spacings-lg-900: 8.6rem;
+  --radius-100: 0.1rem;
+  --radius-200: 0.2rem;
+  --radius-300: 0.4rem;
+  --radius-400: 0.6rem;
+  --radius-500: 0.8rem;
+  --radius-600: 1rem;
+  --radius-700: 1.2rem;
+  --radius-800: 1.4rem;
+  --radius-900: 1.6rem;
+  --radius-full: 1000px;
 
-  --border-radius-xxxsm: 0.1rem;
-  --border-radius-xxsm: 0.2rem;
-  --border-radius-xsm: 0.4rem;
-  --border-radius-sm: 0.6rem;
-  --border-radius-me: 0.8rem;
-  --border-radius-lg: 1rem;
-  --border-radius-xlg: 1.2rem;
-  --border-radius-xxlg: 1.4rem;
-  --border-radius-xxxlg: 1.6rem;
-  --border-radius-pill: 1000px;
+  --border-width-100: 1px;
+  --border-width-200: 2px;
 
-  --transition-fast: all 300ms ease-in-out;
+  --motion-duration-quick: 220ms;
+  --motion-duration-fast: 300ms;
+  --motion-duration-medium: 400ms;
+  --motion-duration-slow: 600ms;
+  --motion-distance-100: 2px;
+  --motion-distance-200: 4px;
+  --motion-distance-300: 5px;
+  --motion-distance-500: 10px;
+  --motion-easing-gentle: ease;
+  --motion-easing-standard: ease-in-out;
+  --motion-easing-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-timing-quick-gentle: var(--motion-duration-quick)
+    var(--motion-easing-gentle);
+  --motion-timing-fast-gentle: var(--motion-duration-fast)
+    var(--motion-easing-gentle);
+  --motion-timing-fast: var(--motion-duration-fast)
+    var(--motion-easing-standard);
+  --motion-timing-medium-gentle: var(--motion-duration-medium)
+    var(--motion-easing-gentle);
+  --motion-timing-medium-emphasized: var(--motion-duration-medium)
+    var(--motion-easing-emphasized);
+  --motion-timing-slow-emphasized: var(--motion-duration-slow)
+    var(--motion-easing-emphasized);
+  --motion-timing-slow-gentle: var(--motion-duration-slow)
+    var(--motion-easing-gentle);
 
-  /* First semantic alias layer: maps current primitives without visual changes. */
-  --font-family-body: var(--font-family-default);
-  --font-size-body: var(--font-size-me);
-  --font-size-body-sm: var(--font-size-sm);
-  --font-size-meta: var(--font-size-xxxsm);
-  --font-size-label: var(--font-size-xxsm);
-  --font-size-body-fluid: clamp(
-    var(--font-size-body-sm),
-    3vw,
-    var(--font-size-body)
-  );
-  --line-height-body: var(--line-height-me);
-  --color-bg: hsl(from var(--main-clr-shade) h s 5% / 1);
-  --color-text: hsl(from var(--main-clr-shade) h s 5% / 1);
-  --color-text-muted: hsl(from var(--main-clr-shade) h s 30% / 1);
-  --color-text-subtle: hsl(from var(--main-clr-shade) h s 40% / 1);
-  --color-text-soft: hsl(from var(--main-clr-shade) h s 60% / 1);
-  --color-text-muted-on-dark: hsl(from var(--main-clr-shade) h s 70% / 1);
-  --color-surface: hsl(from var(--main-clr-shade) h s 100% / 1);
-  --color-link: var(--link-clr);
-  --radius-md: var(--border-radius-me);
-  --motion-fast: var(--transition-fast);
+  /* Primitive palettes and semantic aliases are the shared contract. */
+  --font-family-body: var(--font-family-text);
+  --font-size-body: var(--font-size-text-500);
+  --font-size-body-sm: var(--font-size-text-400);
+  --font-size-icon-sm: 1.2rem;
+  --font-size-meta: clamp(1.3rem, 1.45vw, 1.5rem);
+  --font-size-label: clamp(1.45rem, 1.7vw, 1.7rem);
+  --font-size-body-fluid: clamp(1.7rem, 2.5vw, 2.2rem);
+  --space-section-bottom: 8rem;
+  --line-height-body: var(--line-height-500);
+  --color-neutral-990: hsl(240 10% 99% / 1);
+  --color-neutral-960: hsl(240 14% 96% / 1);
+  --color-neutral-950: hsl(240 22% 95% / 1);
+  --color-neutral-900: hsl(240 22% 90% / 1);
+  --color-neutral-850: hsl(240 22% 85% / 1);
+  --color-neutral-800: hsl(240 22% 80% / 1);
+  --color-neutral-740: hsl(240 10% 74% / 1);
+  --color-neutral-700: hsl(240 22% 70% / 1);
+  --color-neutral-620: hsl(240 22% 62% / 1);
+  --color-neutral-600: hsl(240 22% 60% / 1);
+  --color-neutral-560: hsl(240 12% 56% / 1);
+  --color-neutral-450: hsl(240 22% 45% / 1);
+  --color-neutral-420: hsl(240 13% 42% / 1);
+  --color-neutral-320: hsl(240 14% 32% / 1);
+  --color-neutral-300: hsl(240 22% 30% / 1);
+  --color-neutral-150: hsl(240 10% 15% / 1);
+  --color-neutral-100: hsl(240 16% 10% / 1);
+  --color-neutral-050: hsl(240 22% 5% / 1);
+  --color-neutral-020: hsl(240 10% 2% / 1);
+  --color-bg: var(--color-neutral-960);
+  --color-text: var(--color-neutral-100);
+  --color-text-strong: var(--color-neutral-100);
+  --color-text-muted: var(--color-neutral-320);
+  --color-text-subtle: var(--color-neutral-420);
+  --color-text-soft: var(--color-neutral-560);
+  --color-text-inverse: var(--color-neutral-950);
+  --color-text-high-on-dark: var(--color-neutral-900);
+  --color-text-on-dark: var(--color-neutral-800);
+  --color-text-muted-on-dark: var(--color-neutral-740);
+  --color-text-subtle-on-dark: var(--color-neutral-700);
+  --color-text-quiet-on-dark: var(--color-neutral-620);
+  --color-text-soft-on-dark: var(--color-neutral-600);
+  --color-text-strong-on-dark: var(--color-neutral-850);
+  --color-surface: var(--color-neutral-990);
+  --color-surface-soft: var(--color-neutral-950);
+  --color-surface-muted: var(--color-neutral-850);
+  --color-surface-strong: var(--color-neutral-300);
+  --color-surface-dark: var(--color-neutral-050);
+  --color-surface-dark-canvas: var(--color-neutral-100);
+  --color-surface-dark-elevated: var(--color-neutral-150);
+  --color-accent-200: hsl(210 50% 20% / 1);
+  --color-accent-400: hsl(210 80% 40% / 1);
+  --color-accent-500: hsl(210 100% 40% / 1);
+  --color-accent-550: hsl(210 90% 50% / 1);
+  --color-accent-750: hsl(210 80% 75% / 1);
+  --color-accent-800: hsl(210 30% 80% / 1);
+  --color-accent-850: hsl(210 95% 85% / 1);
+  --color-accent-950: hsl(210 50% 95% / 1);
+  --color-link: var(--color-accent-500);
+  --color-link-subtle: var(--color-accent-200);
+  --color-link-strong: var(--color-accent-400);
+  --color-link-hover: var(--color-accent-550);
+  --color-link-strong-on-dark: var(--color-accent-800);
+  --color-link-strong-on-dark-hover: var(--color-accent-950);
+  --color-link-on-dark: var(--color-accent-750);
+  --color-link-on-dark-hover: var(--color-accent-850);
+  --color-white-alpha-000: hsl(0 0 100% / 0);
+  --color-white-alpha-020: hsl(0 0 100% / 0.02);
+  --color-white-alpha-050: hsl(0 0 100% / 0.05);
+  --color-white-alpha-060: hsl(0 0 100% / 0.06);
+  --color-white-alpha-100: hsl(0 0 100% / 0.1);
+  --color-white-alpha-150: hsl(0 0 100% / 0.15);
+  --color-white-alpha-200: hsl(0 0 100% / 0.2);
+  --color-white-alpha-300: hsl(0 0 100% / 0.3);
+  --color-white-alpha-1000: hsl(0 0 100% / 1);
+  --color-black-alpha-050: hsl(0 0 0 / 0.05);
+  --color-black-alpha-060: hsl(0 0 0 / 0.06);
+  --color-black-alpha-080: hsl(0 0 0 / 0.08);
+  --color-black-alpha-120: hsl(0 0 0 / 0.12);
+  --color-black-alpha-1000: hsl(0 0 0 / 1);
+  --color-border-soft: var(--color-neutral-850);
+  --color-border-muted-on-dark: var(--color-neutral-450);
+  --color-border-dark-soft: var(--color-neutral-150);
+  --color-border-dark-strong: var(--color-neutral-020);
+  --radius-md: var(--radius-500);
+  --motion-fast: var(--motion-timing-fast);
 }
 
 /* ===============================
-   RESET CSS
+   CSS Reset
 ================================ */
 /*
- * O QUE FAZ:
- *   Reset minimalista que remove margens/paddings padrao do navegador,
- *   aplica box-sizing: border-box globalmente e define font-size base
- *   em 62.5% (1rem = 10px) para facilitar calculos com rem.
+ * What this does:
+ *   Provides a minimal reset: removes the browser's default margins/padding,
+ *   applies global box-sizing: border-box, and sets the root font-size to
+ *   62.5% (1rem = 10px) so rem-based sizing stays easy to reason about.
  *
- * POR QUE GLOBAL?
- *   O reset PRECISA ser global — se fosse scoped, cada componente teria
- *   comportamentos de box-model diferentes. Normaliza a base para todo o site.
+ * Why this is global:
+ *   The reset must be global. If it were scoped, components would end up with
+ *   different box-model behavior. This keeps the rendering baseline consistent
+ *   across the whole site.
  */
 
 *,
@@ -181,20 +294,20 @@ body {
 }
 
 /* ===============================
-   TIPOGRAFIA BASE
+   Base Typography
 ================================ */
 /*
- * O QUE FAZ:
- *   Define estilos tipograficos globais: fonte monospace no body, escala
- *   responsiva de headings (h1-h6) com clamp(), espacamentos verticais
- *   entre elementos de texto, hifenizacao automatica e text-wrap balance/pretty.
- *   Tambem estiliza links, blockquotes, pre/code e listas.
+ * What this does:
+ *   Defines the shared typography layer: monospace body text, responsive
+ *   heading scales (h1-h6) with clamp(), vertical rhythm between text
+ *   elements, automatic hyphenation, and text-wrap balance/pretty rules.
+ *   It also styles links, blockquotes, pre/code, and lists.
  *
- * POR QUE GLOBAL?
- *   Tipografia base precisa ser consistente em todo o site. Posts Markdown
- *   renderizam h1-h6, p, ul, ol, blockquote, pre — todos precisam destes
- *   estilos sem depender de classes especificas. Componentes Astro herdam
- *   estes estilos e podem sobrescrever via scoped styles se necessario.
+ * Why this is global:
+ *   Base typography needs to stay consistent site-wide. Markdown posts render
+ *   h1-h6, p, ul, ol, blockquote, and pre without custom classes, so those
+ *   elements need sensible defaults. Astro components inherit these styles and
+ *   can still override them with scoped CSS when needed.
  */
 
 body {
@@ -222,11 +335,11 @@ h3,
 h4,
 h5,
 h6 {
-  line-height: var(--line-height-xxsm);
+  line-height: var(--line-height-200);
   letter-spacing: -0.03rem;
   font-weight: 900;
-  font-size: var(--font-size-h-xxxlg);
-  margin: clamp(var(--spacings-sm-900), 8vw, var(--spacings-lg-900)) 0;
+  font-size: var(--font-size-heading-900);
+  margin: clamp(var(--space-900), 8vw, var(--space-1800)) 0;
   -webkit-hyphens: auto;
   -ms-hyphens: auto;
   hyphens: auto;
@@ -236,38 +349,38 @@ h6 {
 }
 
 h2 {
-  line-height: var(--line-height-xxsm);
+  line-height: var(--line-height-200);
   letter-spacing: -0.03rem;
-  font-size: var(--font-size-h-xlg);
-  margin: clamp(var(--spacings-sm-600), 8vw, var(--spacings-lg-700)) 0;
+  font-size: var(--font-size-heading-700);
+  margin: clamp(var(--space-600), 8vw, var(--space-1600)) 0;
 }
 
 h3 {
-  line-height: var(--line-height-xsm);
+  line-height: var(--line-height-300);
   letter-spacing: -0.03rem;
-  font-size: var(--font-size-h-lg);
-  margin: clamp(var(--spacings-sm-400), 8vw, var(--spacings-lg-600)) 0;
+  font-size: var(--font-size-heading-600);
+  margin: clamp(var(--space-400), 8vw, var(--space-1500)) 0;
 }
 
 h4 {
-  line-height: var(--line-height-sm);
-  font-size: var(--font-size-h-me);
+  line-height: var(--line-height-400);
+  font-size: var(--font-size-heading-500);
   letter-spacing: -0.02rem;
-  margin: clamp(var(--spacings-sm-400), 8vw, var(--spacings-lg-500)) 0;
+  margin: clamp(var(--space-400), 8vw, var(--space-1400)) 0;
 }
 
 h5 {
-  line-height: var(--line-height-sm);
+  line-height: var(--line-height-400);
   letter-spacing: -0.02rem;
-  font-size: var(--font-size-h-sm);
-  margin: clamp(var(--spacings-sm-400), 8vw, var(--spacings-lg-300)) 0;
+  font-size: var(--font-size-heading-400);
+  margin: clamp(var(--space-400), 8vw, var(--space-1200)) 0;
 }
 
 h6 {
-  line-height: var(--line-height-me);
+  line-height: var(--line-height-500);
   letter-spacing: -0.01rem;
-  font-size: var(--font-size-h-xsm);
-  margin: clamp(var(--spacings-sm-400), 8vw, var(--spacings-lg-200)) 0;
+  font-size: var(--font-size-heading-300);
+  margin: clamp(var(--space-400), 8vw, var(--space-1100)) 0;
 }
 
 p {
@@ -281,12 +394,12 @@ blockquote,
 img,
 ul,
 ol {
-  margin: clamp(var(--spacings-sm-600), 2vw, var(--spacings-lg-400)) 0;
+  margin: clamp(var(--space-600), 2vw, var(--space-1300)) 0;
 }
 
 hr {
-  border: 1px solid hsl(from var(--main-clr-shade) h 10% 85% / 1);
-  margin: clamp(var(--spacings-sm-800), 3vw, var(--spacings-lg-700)) 0;
+  border: var(--border-width-100) solid var(--color-border-soft);
+  margin: clamp(var(--space-800), 3vw, var(--space-1600)) 0;
 }
 
 p,
@@ -302,18 +415,18 @@ ol {
 
 ul,
 ol {
-  margin-left: clamp(var(--spacings-sm-500), 2vw, var(--spacings-sm-700));
-  padding-left: clamp(var(--spacings-sm-500), 2vw, var(--spacings-sm-700));
+  margin-left: clamp(var(--space-500), 2vw, var(--space-700));
+  padding-left: clamp(var(--space-500), 2vw, var(--space-700));
 }
 
 blockquote {
-  padding: clamp(var(--spacings-sm-600), 3vw, var(--spacings-lg-100));
-  color: hsl(from var(--main-clr-shade) h s 10% / 1);
-  background-color: hsl(from var(--main-clr-shade) h s 95% / 1);
+  padding: clamp(var(--space-600), 3vw, var(--space-1000));
+  color: var(--color-text);
+  background-color: var(--color-surface-soft);
   border-radius: var(--radius-md);
-  font-family: var(--font-family-monospace);
-  font-size: var(--font-size-xsm);
-  line-height: var(--line-height-xsm);
+  font-family: var(--font-family-code);
+  font-size: var(--font-size-text-300);
+  line-height: var(--line-height-300);
 
   p:first-child {
     margin-top: 0;
@@ -328,13 +441,13 @@ pre {
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  padding: clamp(var(--spacings-sm-600), 3vw, var(--spacings-lg-100));
-  padding-top: clamp(var(--spacings-sm-700), 3vw, var(--spacings-lg-100));
+  padding: clamp(var(--space-600), 3vw, var(--space-1000));
+  padding-top: clamp(var(--space-700), 3vw, var(--space-1000));
   border-radius: var(--radius-md);
   overflow-x: auto;
-  font-family: var(--font-family-monospace);
-  font-size: var(--font-size-xsm);
-  line-height: var(--line-height-xsm);
+  font-family: var(--font-family-code);
+  font-size: var(--font-size-text-300);
+  line-height: var(--line-height-300);
 }
 
 pre code {
@@ -344,19 +457,28 @@ pre code {
   word-break: normal;
 }
 
+:where(p, li, blockquote, figcaption, h1, h2, h3, h4, h5, h6) code {
+  padding: 0 var(--space-100);
+  border: var(--border-width-100) solid var(--color-border-soft);
+  border-radius: var(--radius-300);
+  background-color: var(--color-surface-soft);
+  color: var(--color-text-strong);
+}
+
 /* ===============================
-   MIDIA (Imagens, Video, SVG)
+   Media (Images, Video, SVG)
 ================================ */
 /*
- * O QUE FAZ:
- *   Centraliza imagens, limita largura maxima a 100% e aplica border-radius.
- *   Garante que elementos de midia (img, picture, video, canvas, svg) sejam
- *   display:block com max-width:100% — previne overflow em telas pequenas.
+ * What this does:
+ *   Centers media, caps width at 100%, and applies a shared border radius.
+ *   It also ensures image/media elements (img, picture, video, canvas, svg)
+ *   render as display:block with max-width:100%, preventing overflow on small
+ *   screens.
  *
- * POR QUE GLOBAL?
- *   Imagens dentro de posts Markdown nao tem classes customizadas. Estes
- *   estilos garantem que qualquer <img> renderizada pelo Astro (inclusive
- *   as otimizadas via astro:assets) fique responsiva automaticamente.
+ * Why this is global:
+ *   Images inside Markdown posts do not have custom classes. These defaults
+ *   make any Astro-rendered image responsive automatically, including images
+ *   optimized through astro:assets.
  */
 img {
   margin-left: auto;
@@ -375,39 +497,35 @@ svg {
 }
 
 /* ===============================
-   EFEITO GLASS (Glassmorphism)
+   Glass Effect (Glassmorphism)
 ================================ */
 /*
- * O QUE FAZ:
- *   Classe utilitaria .glass que cria efeito "glassmorphism" (vidro fosco):
- *   backdrop-filter blur, sombra interna sutil, borda gradiente via ::before
- *   com mask-composite, e hover com scale + sombra mais intensa.
+ * What this does:
+ *   Defines the `.glass` utility class for the site's frosted-glass effect:
+ *   backdrop blur, subtle inner highlight, a gradient edge via ::before with
+ *   mask-composite, and a stronger hover state with scale + shadow.
  *
- * POR QUE GLOBAL?
- *   Usada em varios componentes (cards na home, blog cards etc.). Sendo global,
- *   qualquer componente pode aplicar class="glass" sem reimplementar o efeito.
- *   E uma classe utilitaria do design system do site.
+ * Why this is global:
+ *   It is reused across multiple components (home cards, blog cards, and
+ *   others). Keeping it global lets any component opt into the effect with
+ *   `class="glass"` instead of re-implementing it locally.
  */
 .glass {
   overflow: hidden;
   position: relative;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(var(--blur-200));
+  -webkit-backdrop-filter: blur(var(--blur-400));
 
   transition:
-    transform 300ms ease-in-out,
-    box-shadow 300ms ease-in-out;
+    transform var(--motion-fast),
+    box-shadow var(--motion-fast);
 
-  box-shadow:
-    0 24px 40px -8px hsl(0 0 0 / 0.3),
-    inset 0 0 1px 1px hsl(0 0 100% / 0.065);
+  box-shadow: var(--shadow-600);
 }
 
 .glass:hover {
   transform: scale(1.05);
-  box-shadow:
-    0 24px 50px -8px hsl(0 0 0 / 0.5),
-    inset 0 0 1px 1px hsl(0 0 100% / 0.08);
+  box-shadow: var(--shadow-700);
 }
 
 .glass:hover::before {
@@ -419,44 +537,43 @@ svg {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  padding: 2px;
+  padding: var(--border-width-200);
   opacity: 0.2;
-  transition: opacity 300ms ease-in-out;
+  transition: opacity var(--motion-fast);
 
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0) 30%,
-    rgba(255, 255, 255, 0) 70%,
-    rgba(255, 255, 255, 0.3) 100%
+    var(--color-white-alpha-1000) 0%,
+    var(--color-white-alpha-000) 30%,
+    var(--color-white-alpha-000) 70%,
+    var(--color-white-alpha-300) 100%
   );
 
   -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
+    linear-gradient(var(--color-white-alpha-1000) 0 0) content-box,
+    linear-gradient(var(--color-white-alpha-1000) 0 0);
   -webkit-mask-composite: xor;
   mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
+    linear-gradient(var(--color-white-alpha-1000) 0 0) content-box,
+    linear-gradient(var(--color-white-alpha-1000) 0 0);
   mask-composite: exclude;
 
   pointer-events: none;
 }
 
 /* ===============================
-   THEME TOGGLE (Alternador Claro/Escuro)
+   Theme Toggle
 ================================ */
 /*
- * O QUE FAZ:
- *   Estiliza o botao toggle de tema (sol/lua) fixo no canto superior direito.
- *   Usa um <input type="checkbox"> oculto (#theme-mode) com CSS puro para
- *   controlar a posicao do "thumb" e a cor do "track". Sem JavaScript para
- *   a animacao — apenas :checked + transicoes CSS.
+ * What this does:
+ *   Styles the fixed theme toggle (sun/moon) in the top-right corner. It uses
+ *   a hidden `<input type="checkbox">` (`#theme-mode`) and pure CSS to drive
+ *   the thumb position and track color. The animation itself is CSS-only:
+ *   `:checked` plus transitions.
  *
- * POR QUE GLOBAL?
- *   O toggle aparece em todas as paginas de post (via BaseLayout/[...slug]).
- *   A logica de checked/unchecked precisa estar acessivel globalmente porque
- *   o checkbox e o track vivem no layout, nao em um componente scoped.
+ * Why this is global:
+ *   The toggle appears in post/blog layouts and its checked/unchecked state
+ *   styles live at the layout level, not inside a single scoped component.
  */
 
 .theme-toggle {
@@ -465,7 +582,7 @@ svg {
   top: clamp(1rem, 2.5vw, 3rem);
   z-index: 9999;
   opacity: 0.6;
-  transition: opacity 300ms ease-in-out;
+  transition: opacity var(--motion-fast);
   cursor: pointer;
   display: block;
 }
@@ -487,73 +604,71 @@ svg {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 4.8rem;
-  height: 2.4rem;
-  border-radius: var(--border-radius-pill);
-  background: hsl(from var(--main-clr-shade) h s 85% / 1);
+  width: var(--space-1200);
+  height: var(--space-600);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-muted);
   position: relative;
-  padding: 0 0.4rem;
-  transition: background-color 300ms ease-in-out;
+  padding: 0 var(--space-100);
+  transition: background-color var(--motion-fast);
 }
 
 .theme-toggle-track::before {
   content: '☀️';
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: var(--font-size-icon-sm);
+  line-height: var(--line-height-100);
   z-index: 1;
 }
 
 .theme-toggle-track::after {
   content: '🌙';
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: var(--font-size-icon-sm);
+  line-height: var(--line-height-100);
   z-index: 1;
 }
 
 .theme-toggle-thumb {
   position: absolute;
-  top: 0.2rem;
-  left: 0.2rem;
-  width: 2rem;
-  height: 2rem;
+  top: var(--radius-200);
+  left: var(--radius-200);
+  width: var(--space-500);
+  height: var(--space-500);
   border-radius: 50%;
   background: var(--color-surface);
-  box-shadow: 0 1px 3px hsl(0 0% 0% / 0.3);
-  transition: transform 300ms ease-in-out;
+  box-shadow: var(--shadow-100);
+  transition: transform var(--motion-fast);
 }
 
 #theme-mode:checked ~ .theme-toggle-track {
-  background: hsl(from var(--main-clr-shade) h s 30% / 1);
+  background: var(--color-surface-strong);
 }
 
 #theme-mode:checked ~ .theme-toggle-track .theme-toggle-thumb {
-  transform: translateX(2.4rem);
+  transform: translateX(var(--space-600));
 }
 
 /* ===============================
-   LAYOUT (Estrutura de Pagina)
+   Layout (Page Structure)
 ================================ */
 /*
- * O QUE FAZ:
- *   Define a estrutura de layout do site:
- *   - .main: container principal com fundo branco e min-height 100vh
- *   - .article: area de conteudo dos posts (max-width, links estilizados)
- *   - .section / .section-dark / .section-light: secoes full-width com
- *     variantes de cor (usadas na home para alternar fundos claro/escuro)
- *   - .section-content: container interno com max-width e padding responsivo
- *   - .canvas-bg: fundo fixo para o canvas de particulas (z-index: -1)
- *   - .next-section: barra de navegacao entre secoes na home (setas/links)
+ * What this does:
+ *   Defines the site's structural layout classes:
+ *   - `.main`: the main page shell with a light canvas and min-height: 100vh
+ *   - `.article`: post content area (width, typography, link styling)
+ *   - `.section`, `.section-dark`, `.section-light`: full-width sections with
+ *     alternating light/dark color variants
+ *   - `.section-content`: inner container with shared width + responsive padding
+ *   - `.canvas-bg`: fixed background layer for the particles canvas
+ *   - `.next-section`: the cross-section nav strip on the home page
  *
- * POR QUE GLOBAL?
- *   Estas classes formam o "esqueleto" de todas as paginas. Sao usadas
- *   diretamente nos layouts (BaseLayout, BlankLayout) e nas paginas
- *   (index, blog/[page], [...slug], contacts). Precisam ser globais
- *   para que diferentes paginas .astro compartilhem a mesma grade.
+ * Why this is global:
+ *   These classes form the site's shared skeleton. They are used directly by
+ *   layouts (`BaseLayout`, `BlankLayout`) and by multiple pages, so they need
+ *   to stay global for the layout system to remain shared.
  *
- * CONCEITO ASTRO:
- *   Layouts Astro (.astro em src/layouts/) usam <slot /> para injetar
- *   conteudo. Estas classes envolvem o <slot />, criando a estrutura
- *   visual que todas as paginas herdam.
+ * Astro note:
+ *   Astro layouts use `<slot />` to inject page content. These classes wrap
+ *   that slot and provide the structural shell inherited by each page.
  */
 
 .main {
@@ -566,19 +681,19 @@ svg {
 
 .article {
   width: 100%;
-  max-width: var(--main-width);
-  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  max-width: var(--layout-content-max-width);
+  font-size: clamp(var(--font-size-text-300), 2.4vw, var(--font-size-text-600));
   display: flow-root;
   overflow-wrap: anywhere;
   margin: 0 auto;
 
   a {
     text-decoration: none;
-    color: hsl(from var(--link-clr) h 80% 40% / 100%);
+    color: var(--color-link-strong);
 
     &:hover {
       text-decoration: underline;
-      color: hsl(from var(--link-clr) h 90% 50% / 100%);
+      color: var(--color-link-hover);
     }
   }
 
@@ -595,8 +710,8 @@ svg {
 }
 
 .section-dark {
-  color: hsl(from var(--main-clr-shade) h s 80% / 1);
-  background-color: hsl(from var(--main-clr-shade) h s 5% / 1);
+  color: var(--color-text-on-dark);
+  background-color: var(--color-surface-dark);
 }
 
 .section-light {
@@ -605,8 +720,8 @@ svg {
 }
 
 .section-content {
-  max-width: 180rem;
-  padding: clamp(var(--spacings-sm-400), 3vw, var(--spacings-sm-900));
+  max-width: var(--layout-section-max-width);
+  padding: clamp(var(--space-400), 3vw, var(--space-900));
   border-radius: var(--radius-md);
   margin-inline: auto;
 }
@@ -633,37 +748,39 @@ svg {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: clamp(var(--spacings-sm-400), 3vw, var(--spacings-sm-900));
+  gap: clamp(var(--space-400), 3vw, var(--space-900));
 
   a {
     color: inherit;
     text-decoration: none;
-    transition: var(--motion-fast);
-    padding: clamp(var(--spacings-sm-200), 3vw, var(--spacings-sm-600)) 0;
+    transition:
+      transform var(--motion-fast),
+      color var(--motion-fast);
+    padding: clamp(var(--space-200), 3vw, var(--space-600)) 0;
   }
 
   a:hover {
-    transform: translate(0, -5px);
+    transform: translateY(calc(var(--motion-distance-300) * -1));
   }
 }
 
 .section-dark .next-section {
-  color: hsl(from var(--main-clr-shade) h s 60% / 1);
-  background-color: hsl(from var(--main-clr-shade) h s 5% / 1);
+  color: var(--color-text-soft-on-dark);
+  background-color: var(--color-surface-dark);
 
   a:hover {
-    transform: translate(0, -5px);
-    color: hsl(from var(--main-clr-shade) h s 95% / 1);
+    transform: translateY(calc(var(--motion-distance-300) * -1));
+    color: var(--color-text-inverse);
   }
 }
 
 .section-light .next-section {
-  color: hsl(from var(--main-clr-shade) h s 30% / 1);
-  background-color: hsl(from var(--main-clr-shade) h s 100% / 1);
+  color: var(--color-text-muted);
+  background-color: var(--color-surface);
 
   a:hover {
-    transform: translate(0, -5px);
-    color: hsl(from var(--main-clr-shade) h s 5% / 1);
+    transform: translateY(calc(var(--motion-distance-300) * -1));
+    color: var(--color-text);
   }
 }
 
@@ -671,20 +788,19 @@ svg {
    DESIGN SYSTEM: Section Header + Blog
 ================================ */
 /*
- * O QUE FAZ:
- *   Classes do design system para cabecalhos de secao e area de blog:
- *   - .section-header: container flexbox centralizado para titulo de secao
- *   - .section-eyeball: label pequeno em uppercase acima do titulo (ex: "BLOG")
- *   - .section-line: subtitulo/descricao com largura max de 60ch
- *   - .section-title: titulo principal da secao com letra grande e tracking apertado
- *   - .section-blog: wrapper da listagem de posts com padding vertical
+ * What this does:
+ *   Defines the shared section-header system and blog wrapper styles:
+ *   - `.section-header`: centered flex wrapper for section titles
+ *   - `.section-eyeball`: small uppercase label above the title
+ *   - `.section-line`: subtitle/description with a readable max width
+ *   - `.section-title`: large heading with tighter tracking
+ *   - `.section-blog`: the vertical wrapper around blog listings
  *
- *   Variantes .section-dark ajustam as cores para fundo escuro.
+ *   `.section-dark` variants adjust these colors for dark backgrounds.
  *
- * POR QUE GLOBAL?
- *   Estas classes sao reutilizadas em multiplas paginas: home (index.astro),
- *   listagem de blog (blog/[page].astro), contatos e possivelmente futuras
- *   paginas. Sao o "design system" de titulos de secao do site.
+ * Why this is global:
+ *   These classes are reused across the home page, blog archive, contacts, and
+ *   likely future pages. They are the shared section-heading design system.
  */
 
 .section-header {
@@ -693,11 +809,11 @@ svg {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: clamp(var(--spacings-lg-200), 8vw, var(--spacings-lg-700)) 0;
-  padding-top: clamp(var(--spacings-lg-300), 8vw, var(--spacings-lg-800));
+  padding: clamp(var(--space-1100), 8vw, var(--space-1600)) 0;
+  padding-top: clamp(var(--space-1200), 8vw, var(--space-1700));
   max-width: 80ch;
   margin: 0 auto;
-  margin-bottom: clamp(var(--spacings-lg-400), 8vw, var(--spacings-lg-900));
+  margin-bottom: clamp(var(--space-1300), 8vw, var(--space-1800));
 
   p {
     margin: 0;
@@ -710,7 +826,7 @@ svg {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 600;
-  margin-bottom: var(--spacings-sm-200);
+  margin-bottom: var(--space-200);
 }
 
 .section-dark .section-eyeball {
@@ -729,8 +845,8 @@ svg {
 }
 
 .section-title {
-  font-size: var(--font-size-h-me);
-  margin: var(--spacings-sm-600) auto;
+  font-size: var(--font-size-heading-500);
+  margin: var(--space-600) auto;
   line-height: 1.1;
   letter-spacing: -0.04em;
   font-weight: 800;
@@ -738,29 +854,29 @@ svg {
 
 .section-blog {
   margin: 0 auto;
-  padding-top: clamp(var(--spacings-lg-100), 8vw, var(--spacings-lg-400));
-  padding-bottom: 8rem;
+  padding-top: clamp(var(--space-1000), 8vw, var(--space-1300));
+  padding-bottom: var(--space-section-bottom);
 }
 
 /* ===============================
-   FORMULARIOS
+   Forms
 ================================ */
 /*
- * O QUE FAZ:
- *   Estiliza formularios globalmente: layout flexbox vertical (.form),
- *   linhas de campos (.form-row), textarea, select, button e estados
- *   (disabled). Usa as variaveis de spacing e font do design system.
+ * What this does:
+ *   Styles the shared form system: vertical form layout (`.form`), field rows
+ *   (`.form-row`), textarea, select, button, and disabled states. It uses the
+ *   spacing and typography tokens from the design system.
  *
- * POR QUE GLOBAL?
- *   Usado na pagina de contato (contacts.astro) e potencialmente no
- *   editor. Manter global evita duplicacao de estilos de formulario.
+ * Why this is global:
+ *   These styles are used by the contact page and can be reused elsewhere.
+ *   Keeping them global avoids duplicating the same form styling rules.
  */
 .form {
   display: flex;
   align-items: flex-start;
   align-content: flex-start;
   flex-direction: column;
-  gap: clamp(var(--spacings-lg-100), 4.4vw, var(--spacings-lg-200));
+  gap: clamp(var(--space-1000), 4.4vw, var(--space-1100));
 }
 
 .form-row {
@@ -768,7 +884,7 @@ svg {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  gap: clamp(var(--spacings-sm-400), 4.4vw, var(--spacings-lg-200));
+  gap: clamp(var(--space-400), 4.4vw, var(--space-1100));
   align-items: flex-start;
   align-content: flex-start;
 }
@@ -776,23 +892,23 @@ svg {
 textarea,
 button,
 select {
-  font-size: clamp(var(--font-size-xsm), 1.8vw, var(--font-size-me));
-  font-family: var(--font-family-monospace);
+  font-size: clamp(var(--font-size-text-300), 1.8vw, var(--font-size-text-500));
+  font-family: var(--font-family-code);
 }
 
 select {
   width: 100%;
-  padding: var(--spacings-sm-400) var(--spacings-sm-200);
+  padding: var(--space-400) var(--space-200);
   border-radius: var(--radius-md);
 }
 
 textarea {
   width: 100%;
-  max-width: var(--main-width);
+  max-width: var(--layout-content-max-width);
   min-height: 25rem;
-  font-family: var(--font-family-monospace);
+  font-family: var(--font-family-code);
   border-radius: var(--radius-md);
-  padding: var(--spacings-sm-400) var(--spacings-sm-200);
+  padding: var(--space-400) var(--space-200);
 }
 
 .form-row-submit {
@@ -809,66 +925,70 @@ button:disabled {
 }
 
 /* ===============================
-   DARK MODE (Modo Escuro para Posts)
+   Dark Mode (Posts / Blog)
 ================================ */
 /*
- * O QUE FAZ:
- *   Sobrescreve cores quando o atributo data-theme="dark" esta ativo na
- *   .article-section. Afeta: texto, fundo, links, blockquotes, hr, navegacao,
- *   metadados do post, paginacao e links de posts. Usa hsl() relativo
- *   (hsl(from var(...))) para derivar tons claros/escuros da cor base.
+ * What this does:
+ *   Overrides colors when `data-theme="dark"` is active on `.article-section`.
+ *   It affects text, background, links, blockquotes, hr, navigation, post
+ *   metadata, pagination, and blog-link styling.
  *
- * POR QUE GLOBAL?
- *   O toggle de tema (checkbox) altera data-theme no DOM via JavaScript.
- *   Os seletores [data-theme='dark'] precisam ser globais porque afetam
- *   elementos vindos de VARIOS componentes diferentes (article, nav, footer,
- *   blog cards). CSS scoped de um componente nao conseguiria estilizar
- *   filhos de outros componentes.
+ * Why this is global:
+ *   The theme toggle flips `data-theme` at the DOM level, and these selectors
+ *   affect elements rendered by multiple different components. Scoped CSS from
+ *   a single component would not be able to coordinate all of those children.
  *
- * CONCEITO ASTRO:
- *   Astro permite scoped styles via <style> em componentes .astro, mas
- *   temas globais (dark/light) precisam ficar aqui. O script de tema
- *   roda no client via <script> em BaseLayout ou um componente de toggle.
+ * Astro note:
+ *   Astro supports scoped `<style>` blocks, but site-wide theme overrides need
+ *   to live here. The toggle logic runs on the client and updates the DOM.
  */
 
 .article-section {
   transition:
-    background-color 300ms ease-in-out,
-    color 300ms ease-in-out,
-    border 300ms ease-in-out;
+    background-color var(--motion-fast),
+    color var(--motion-fast),
+    border-color var(--motion-fast);
 }
 
 .article-section[data-theme='dark'] {
-  color: hsl(from var(--main-clr-shade) h s 90% / 1);
-  background-color: hsl(from var(--main-clr-shade) h 12% 10% / 1);
+  color: var(--color-text-high-on-dark);
+  background-color: var(--color-surface-dark-canvas);
 
-  border-top: 1px solid hsl(from var(--main-clr-shade) h 10% 15% / 1);
-  border-bottom: 1px solid hsl(from var(--main-clr-shade) h 10% 2% / 1);
+  border-top: var(--border-width-100) solid var(--color-border-dark-soft);
+  border-bottom: var(--border-width-100) solid var(--color-border-dark-strong);
 }
 
 .article-section[data-theme='dark'] .article a {
-  color: hsl(from var(--link-clr) h 80% 75% / 100%);
+  color: var(--color-link-on-dark);
   text-decoration: underline;
 }
 
 .article-section[data-theme='dark'] .article a:hover {
-  color: hsl(from var(--link-clr) h 95% 85% / 100%);
+  color: var(--color-link-on-dark-hover);
   text-decoration: none;
 }
 
 .article-section[data-theme='dark'] .post-meta {
-  color: hsl(from var(--main-clr-shade) h 10% 60% / 1);
+  color: var(--color-text-soft-on-dark);
 }
 
 .article-section[data-theme='dark'] blockquote {
-  color: hsl(from var(--main-clr-shade) h s 85% / 1);
-  background-color: hsl(from var(--main-clr-shade) h 12% 15% / 1);
+  color: var(--color-text-strong-on-dark);
+  background-color: var(--color-surface-dark-elevated);
+}
+
+.article-section[data-theme='dark']
+  :where(p, li, blockquote, figcaption, h1, h2, h3, h4, h5, h6)
+  code {
+  color: var(--color-text-high-on-dark);
+  background-color: var(--color-surface-dark-elevated);
+  border-color: var(--color-border-dark-soft);
 }
 
 .article-section[data-theme='dark'] hr {
-  border: 1px solid transparent;
-  border-top: 1px solid hsl(from var(--main-clr-shade) h 10% 2% / 1);
-  border-bottom: 1px solid hsl(from var(--main-clr-shade) h 10% 15% / 1);
+  border: var(--border-width-100) solid transparent;
+  border-top: var(--border-width-100) solid var(--color-border-dark-strong);
+  border-bottom: var(--border-width-100) solid var(--color-border-dark-soft);
 }
 
 .article-section[data-theme='dark'] nav.nav,
@@ -879,13 +999,13 @@ button:disabled {
 .article-section[data-theme='dark'] .blog-post-description,
 .article-section[data-theme='dark'] .blog-post-date,
 .article-section[data-theme='dark'] .blog-pagination-current {
-  color: hsl(from var(--main-clr-shade) h 10% 80% / 1);
+  color: var(--color-text-on-dark);
 
   a {
-    color: hsl(from var(--link-clr) h 30% 80% / 100%);
+    color: var(--color-link-strong-on-dark);
 
     &:hover {
-      color: hsl(from var(--link-clr) h 50% 95% / 100%);
+      color: var(--color-link-strong-on-dark-hover);
     }
   }
 }
@@ -895,29 +1015,26 @@ button:disabled {
 }
 
 /* ===============================
-   ANIMACOES (Parallax CSS)
+   Animations (CSS Parallax)
 ================================ */
 /*
- * O QUE FAZ:
- *   Implementa efeito parallax puro em CSS usando animation-timeline: view().
- *   A classe .bg-parallax aplica um fundo com estrelas (SVG repetido em 3
- *   camadas) que se movem em velocidades diferentes conforme o scroll,
- *   criando profundidade. Usa @supports para aplicar apenas em navegadores
- *   compativeis e respeita prefers-reduced-motion.
+ * What this does:
+ *   Implements a pure-CSS parallax effect using `animation-timeline: view()`.
+ *   The `.bg-parallax` class applies a starfield background (three repeated
+ *   SVG layers) that move at different speeds during scroll to create depth.
+ *   It is gated with `@supports` and respects `prefers-reduced-motion`.
  *
- * POR QUE GLOBAL?
- *   Usada em secoes da home (index.astro) com fundo escuro/estrelado.
- *   Precisa ser global porque a classe e aplicada diretamente nas <section>
- *   das paginas, nao dentro de um componente scoped especifico.
+ * Why this is global:
+ *   It is used directly on home-page sections. Since the class is applied at
+ *   the page section level, it needs to be globally available.
  *
- * CONCEITO ASTRO:
- *   Astro gera HTML estatico — esta animacao e 100% CSS (sem JS).
- *   animation-timeline: view() e uma API CSS moderna (Scroll-Driven
- *   Animations) que dispensa bibliotecas JS de scroll como GSAP/AOS.
+ * Astro note:
+ *   Astro outputs static HTML here. This animation is 100% CSS and uses the
+ *   modern Scroll-Driven Animations API without any JS scroll library.
  */
 
 .bg-parallax {
-  color: hsl(from var(--main-clr-shade) h s 95% / 1);
+  color: var(--color-text-inverse);
   background-image:
     url('/imgs/assets/2026/02/stars.svg'),
     url('/imgs/assets/2026/02/stars.svg'), url('/imgs/assets/2026/02/stars.svg');

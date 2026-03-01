@@ -48,9 +48,9 @@ const HOSTINGER_SLUG = 'hostinger';
             title={course.title}
           >
             Além da qualidade da infraestrutura, a Hostinger ainda disponibiliza
-            <strong style='color: var(--glow-clr-1)'>+10% de desconto</strong>
+            <strong style='color: var(--color-glow-100)'>+10% de desconto</strong>
             com o cupom
-            <strong style='color: var(--glow-clr-1)'>OTAVIOMIRANDA</strong>.
+            <strong style='color: var(--color-glow-100)'>OTAVIOMIRANDA</strong>.
           </Course>
         ) : (
           <Course
@@ -73,22 +73,25 @@ Section courses
 */
 
   .section-courses {
-    max-width: 180rem;
+    max-width: var(--layout-section-max-width);
     margin: 0 auto;
-    padding-bottom: 8rem;
+    padding-bottom: var(--space-section-bottom);
   }
 
   .courses-grid {
     perspective: 1200px;
     transform-origin: center;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(100%, var(--layout-card-min-width)), 1fr)
+    );
     /* Added min(100%, ...) to prevent overflow on mobile displays */
     grid-auto-flow: row dense;
-    gap: clamp(var(--spacings-sm-900), 4vw, var(--spacings-lg-400));
+    gap: clamp(var(--space-900), 4vw, var(--space-1300));
 
     perspective: 1000px;
     transform-style: preserve3d;
-    padding-bottom: clamp(var(--spacings-lg-100), 10vw, var(--spacings-lg-900));
+    padding-bottom: clamp(var(--space-1000), 10vw, var(--space-1800));
   }
 </style>

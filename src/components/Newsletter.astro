@@ -71,19 +71,19 @@ import SectionHeader from './SectionHeader.astro';
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--spacings-sm-700) var(--spacings-sm-400);
-    margin-top: clamp(var(--spacings-sm-600), 5vw, var(--spacings-sm-900));
-    padding: clamp(var(--spacings-sm-600), 5vw, var(--spacings-sm-900));
+    gap: var(--space-700) var(--space-400);
+    margin-top: clamp(var(--space-600), 5vw, var(--space-900));
+    padding: clamp(var(--space-600), 5vw, var(--space-900));
     flex-wrap: wrap;
   }
 
   .newsletter-form .newsletter-input {
     flex: 1;
     border: none;
-    padding: var(--spacings-sm-400) var(--spacings-sm-600);
-    border-radius: var(--border-radius-pill);
+    padding: var(--space-400) var(--space-600);
+    border-radius: var(--radius-full);
     font-family: inherit;
-    font-size: var(--font-size-xsm);
+    font-size: var(--font-size-text-300);
     min-width: 220px;
     background: var(--color-surface);
     color: var(--color-text-muted);
@@ -96,7 +96,7 @@ import SectionHeader from './SectionHeader.astro';
 
   @media (min-width: 720px) {
     .newsletter-form .newsletter-input {
-      min-width: 380px;
+      min-width: var(--layout-card-min-width);
     }
   }
 
@@ -118,11 +118,11 @@ import SectionHeader from './SectionHeader.astro';
   }
 
   .newsletter-form .newsletter-button {
-    padding: var(--spacings-sm-400) var(--spacings-sm-800);
-    border-radius: var(--border-radius-pill);
+    padding: var(--space-400) var(--space-800);
+    border-radius: var(--radius-full);
     border: none;
     font-family: inherit;
-    font-size: var(--font-size-xsm);
+    font-size: var(--font-size-text-300);
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -132,8 +132,8 @@ import SectionHeader from './SectionHeader.astro';
       transform var(--motion-fast),
       background-color var(--motion-fast);
     flex: 1;
-    background: #000;
-    color: #fff;
+    background: var(--color-black-alpha-1000);
+    color: var(--color-white-alpha-1000);
   }
 
   .newsletter-button:hover {

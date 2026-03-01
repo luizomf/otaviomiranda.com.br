@@ -39,30 +39,30 @@ const { href, title } = Astro.props as Props;
 
 <style>
   li {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: var(--border-width-100) solid var(--color-black-alpha-080);
   }
 
   :global(.section-dark) li {
-    border-bottom-color: rgba(255, 255, 255, 0.1);
+    border-bottom-color: var(--color-white-alpha-100);
   }
 
   li:first-child {
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-top: var(--border-width-100) solid var(--color-black-alpha-080);
   }
 
   :global(.section-dark) li:first-child {
-    border-top-color: rgba(255, 255, 255, 0.1);
+    border-top-color: var(--color-white-alpha-100);
   }
 
   a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: clamp(var(--spacings-sm-400), 3vw, var(--spacings-sm-600)) 0;
-    font-size: clamp(var(--font-size-xsm), 2vw, var(--font-size-sm));
+    padding: clamp(var(--space-400), 3vw, var(--space-600)) 0;
+    font-size: clamp(var(--font-size-text-300), 2vw, var(--font-size-text-400));
     color: inherit;
     text-decoration: none;
-    transition: var(--motion-fast);
+    transition: color var(--motion-fast);
     margin-inline: auto;
   }
 
@@ -77,10 +77,12 @@ const { href, title } = Astro.props as Props;
 
   .blog-arrow {
     opacity: 0;
-    transform: translateX(-10px);
-    transition: all var(--motion-fast);
+    transform: translateX(calc(var(--motion-distance-500) * -1));
+    transition:
+      opacity var(--motion-fast),
+      transform var(--motion-fast);
     color: var(--color-link);
-    font-family: var(--font-family-monospace);
+    font-family: var(--font-family-code);
   }
 
   a:hover .blog-arrow {

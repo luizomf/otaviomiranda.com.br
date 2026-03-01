@@ -60,19 +60,19 @@ const { code = HOME_COUPON.code, expiresAtLabel = HOME_COUPON.expiresAtLabel } =
 
 <style>
   .discount-container {
-    margin-top: var(--spacings-lg-100);
+    margin-top: var(--space-1000);
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
   .coupon {
-    padding: var(--spacings-sm-600) var(--spacings-lg-200);
-    margin-bottom: var(--spacings-lg-200);
+    padding: var(--space-600) var(--space-1100);
+    margin-bottom: var(--space-1100);
     border-radius: var(--radius-md);
     font-weight: 900;
-    font-size: clamp(var(--font-size-h-xsm), 4vw, var(--font-size-h-xxlg));
-    font-family: var(--font-family-monospace);
+    font-size: clamp(var(--font-size-heading-300), 4vw, var(--font-size-heading-800));
+    font-family: var(--font-family-code);
     letter-spacing: 0.05em;
 
     &::after {
@@ -86,10 +86,10 @@ const { code = HOME_COUPON.code, expiresAtLabel = HOME_COUPON.expiresAtLabel } =
       background: linear-gradient(
         -45deg,
         transparent 10%,
-        rgba(255, 255, 255, 0.2) 50%,
+        var(--color-white-alpha-200) 50%,
         transparent 90%
       );
-      transition: left 600ms ease;
+      transition: left var(--motion-timing-slow-gentle);
     }
 
     &:hover::after {
@@ -98,9 +98,9 @@ const { code = HOME_COUPON.code, expiresAtLabel = HOME_COUPON.expiresAtLabel } =
   }
 
   .coupon-date {
-    padding: var(--spacings-sm-200) 0;
-    font-size: var(--font-size-xxsm);
-    color: hsl(from var(--main-clr-shade) h s 60% / 1);
+    padding: var(--space-200) 0;
+    font-size: var(--font-size-text-200);
+    color: var(--color-text-soft-on-dark);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
