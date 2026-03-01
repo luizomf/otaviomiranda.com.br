@@ -68,9 +68,27 @@ date: 2026-01-01
 
 ## Contributing a post
 
-Want to write a guest post? Open an issue using the **Content** template and
-describe what you want to cover. If it fits the site's editorial line, we'll
-work from there.
+Want to write a guest post? Start by opening an issue using the **Content**
+template.
+
+Use that issue to pitch:
+
+- The topic
+- Who the post is for
+- What you want to cover
+- A rough outline (even short bullet points are enough)
+
+We review the pitch first so nobody wastes time writing a full draft that does
+not fit the site.
+
+If the topic is a good fit, the next step is simple:
+
+1. You write the post in your fork or branch following the structure above
+2. We review the draft and may suggest scope, clarity, or editorial changes
+3. Final approval, edit, and merge stay with the maintainer
+
+Accepted posts are merged like any other contribution here, so yes: this counts
+as an open source contribution.
 
 ### Editorial line
 
@@ -83,9 +101,9 @@ work from there.
 
 1. Fork the repo
 2. Create a branch: `git checkout -b post/your-post-slug`
-3. Write your post following the structure above
-4. Open a PR using the PR template — fill in all fields
-5. Reference the issue: `closes #N`
+3. Write your post following the approved issue
+4. Open a PR using the PR template and fill in all fields
+5. Reference the issue in the PR body: `closes #N`
 
 ---
 
@@ -107,7 +125,3 @@ Pages → Run workflow**.
 
 There's a browser-based Markdown editor at `/editor/` — Monaco + live preview
 + File System Access API. Useful for writing posts directly in the browser.
-
----
-
-_"Done is better than perfect."_

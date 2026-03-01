@@ -58,13 +58,17 @@ Personal site + blog. Astro SSG, deployed to GitHub Pages via Actions.
 
 **Issues → branch → PR → merge.** That's it.
 
-1. **Pick an issue** from GitHub Issues.
-2. **Work in small conventional commits** (`feat`, `fix`, `refactor`, `chore`,
+1. **Pick an issue** from GitHub Issues. If none exists, create one first using
+   the appropriate issue template.
+2. **Create a branch** for that issue.
+3. **Work in small conventional commits** (`feat`, `fix`, `refactor`, `chore`,
    `docs`).
-3. **Open a PR** referencing the issue (`closes #N`).
-4. **Merge** and close.
+4. **Open a PR** using the PR template and reference the issue in the body
+   (`closes #N`).
+5. **Merge** the PR. GitHub closes the linked issue automatically.
 
-No local task files. No MEMORY.md ceremony. The git log + Issues are the record.
+No local task files. No MEMORY.md ceremony. The git log + Issues + PRs are the
+record.
 
 ### Commit style
 
