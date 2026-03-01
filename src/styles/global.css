@@ -112,6 +112,20 @@
   --border-radius-pill: 1000px;
 
   --transition-fast: all 300ms ease-in-out;
+
+  /* First semantic alias layer: maps current primitives without visual changes. */
+  --font-family-body: var(--font-family-default);
+  --font-size-body: var(--font-size-me);
+  --font-size-body-sm: var(--font-size-sm);
+  --font-size-meta: var(--font-size-xxxsm);
+  --line-height-body: var(--line-height-me);
+  --color-bg: hsl(from var(--main-clr-shade) h s 5% / 1);
+  --color-text: hsl(from var(--main-clr-shade) h s 5% / 1);
+  --color-text-muted: hsl(from var(--main-clr-shade) h s 30% / 1);
+  --color-surface: hsl(from var(--main-clr-shade) h s 100% / 1);
+  --color-link: var(--link-clr);
+  --radius-md: var(--border-radius-me);
+  --motion-fast: var(--transition-fast);
 }
 
 /* ===============================
@@ -175,13 +189,13 @@ body {
  */
 
 body {
-  font-family: var(--font-family-default);
+  font-family: var(--font-family-body);
   font-optical-sizing: auto;
-  line-height: var(--line-height-me);
-  font-size: var(--font-size-me);
+  line-height: var(--line-height-body);
+  font-size: var(--font-size-body);
   font-weight: 400;
-  color: hsl(from var(--main-clr-shade) h s 5% / 1);
-  background: hsl(from var(--main-clr-shade) h s 5% / 1);
+  color: var(--color-text);
+  background: var(--color-bg);
 }
 
 a {
