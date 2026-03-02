@@ -71,6 +71,14 @@ date: 2026-01-01
 Want to write a guest post? Start by opening an issue using the **Content**
 template.
 
+**If you're a Brazilian contributor: content and blog post issues may be
+written in Portuguese or English. Code-related issues (bug, refactor, feature)
+must be written in English only.**
+
+**🇧🇷 Se você é um contribuidor brasileiro: issues de conteúdo e posts do blog
+podem ser escritas em português ou em inglês. Issues relacionadas a código
+(bug, refactor, feature) devem ser escritas apenas em inglês.**
+
 Use that issue to pitch:
 
 - The topic
