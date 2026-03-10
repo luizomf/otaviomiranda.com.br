@@ -22,12 +22,12 @@
   },
   "homepage": "https://github.com/luizomf/otaviomiranda.com.br#readme",
   "devDependencies": {
-    "@astrojs/check": "^0.9.6",
-    "astro": "^5.17.3",
+    "@astrojs/check": "^0.9.7",
+    "astro": "^6.0.1",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/sitemap": "^3.7.1",
     "cheerio": "^1.2.0",
     "marked": "^17.0.3",
     "prettier-plugin-astro": "^0.14.1"
