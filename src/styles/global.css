@@ -69,25 +69,16 @@
   --blur-500: 12px;
 
   --shadow-100: 0 1px 3px hsl(0 0 0 / 0.3);
-  --shadow-200:
-    0 2px 4px hsl(0 0 0 / 0.04),
-    0 8px 16px hsl(0 0 0 / 0.04);
-  --shadow-300:
-    0 2px 4px hsl(0 0 0 / 0.2),
-    0 8px 16px hsl(0 0 0 / 0.2);
-  --shadow-400:
-    0 12px 24px hsl(0 0 0 / 0.08),
-    0 24px 48px hsl(0 0 0 / 0.08);
+  --shadow-200: 0 2px 4px hsl(0 0 0 / 0.04), 0 8px 16px hsl(0 0 0 / 0.04);
+  --shadow-300: 0 2px 4px hsl(0 0 0 / 0.2), 0 8px 16px hsl(0 0 0 / 0.2);
+  --shadow-400: 0 12px 24px hsl(0 0 0 / 0.08), 0 24px 48px hsl(0 0 0 / 0.08);
   --shadow-500:
-    0 12px 24px hsl(0 0 0 / 0.4),
-    0 24px 48px hsl(0 0 0 / 0.4),
+    0 12px 24px hsl(0 0 0 / 0.4), 0 24px 48px hsl(0 0 0 / 0.4),
     0 0 0 1px hsl(0 0 100% / 0.15);
   --shadow-600:
-    0 24px 40px -8px hsl(0 0 0 / 0.3),
-    inset 0 0 1px 1px hsl(0 0 100% / 0.065);
+    0 24px 40px -8px hsl(0 0 0 / 0.3), inset 0 0 1px 1px hsl(0 0 100% / 0.065);
   --shadow-700:
-    0 24px 50px -8px hsl(0 0 0 / 0.5),
-    inset 0 0 1px 1px hsl(0 0 100% / 0.08);
+    0 24px 50px -8px hsl(0 0 0 / 0.5), inset 0 0 1px 1px hsl(0 0 100% / 0.08);
   --shadow-800: 0 0 10px hsl(0 0 5% / 0.5);
   --shadow-glow: 0 0 30px var(--color-glow-shadow);
 
@@ -1077,4 +1068,21 @@ button:disabled {
       300px 300px,
       350px 350px;
   }
+}
+
+/* ===============================
+   Giscus
+================================ */
+#giscus {
+  padding-block: 4rem;
+}
+
+#giscus .title {
+  font-size: var(--font-size-heading-500);
+  line-height: 1.1;
+  margin: 0;
+  margin: var(--space-600) auto;
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: 0;
 }

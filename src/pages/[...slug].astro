@@ -69,7 +69,11 @@ const { Content } = await render(entry);
 
   <ThemeToggle />
 
-  <Section id='post-content' class='article-section' contentClass='section-blog'>
+  <Section
+    id='post-content'
+    class='article-section'
+    contentClass='section-blog'
+  >
     <article class='article markdown-body article-body'>
       <header class='post-header'>
         <h1 class='post-title'>{entry.data.title}</h1>
@@ -94,6 +98,30 @@ const { Content } = await render(entry);
       </header>
 
       <Content />
+    </article>
+  </Section>
+
+  <Section id='giscus' class='article-section' theme='dark'>
+    <article class='article article-body'>
+      <h2 class='title'>Comentários</h2>
+
+      <script
+        is:inline
+        src='https://giscus.app/client.js'
+        data-repo='luizomf/otaviomiranda.com.br'
+        data-repo-id='R_kgDOKGV7BA'
+        data-category='General'
+        data-category-id='DIC_kwDOKGV7BM4C4VDU'
+        data-mapping='title'
+        data-strict='0'
+        data-reactions-enabled='1'
+        data-emit-metadata='0'
+        data-input-position='top'
+        data-theme='catppuccin_mocha'
+        data-lang='pt'
+        data-loading='lazy'
+        crossorigin='anonymous'
+        async></script>
     </article>
   </Section>
 
