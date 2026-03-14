@@ -48,18 +48,23 @@ quando precisar:
 # Para Compartilhamento de Internet adicione isso no servidor
 # NAT masquerading to share internet
 PostUp = sysctl -w net.ipv4.ip_forward=1
-PostUp = iptables -A FORWARD -i %i -j ACCEPT
-PostUp = iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 PostUp = sysctl -w net.ipv6.conf.all.forwarding=1
+
+PostUp = iptables -A FORWARD -i %i -j ACCEPT
+PostUp = iptables -A FORWARD -o %i -m state --state RELATED,ESTABLISHED -j ACCEPT
+PostUp = iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 PostUp = ip6tables -A FORWARD -i %i -j ACCEPT
-PostUp = ip6tables -A FORWARD -o %i -j ACCEPT
+PostUp = ip6tables -A FORWARD -o %i -m state --state RELATED,ESTABLISHED -j ACCEPT
 PostUp = ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
 PostDown = iptables -D FORWARD -i %i -j ACCEPT
+PostDown = iptables -D FORWARD -o %i -m state --state RELATED,ESTABLISHED -j ACCEPT
 PostDown = iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
 PostDown = ip6tables -D FORWARD -i %i -j ACCEPT
-PostDown = ip6tables -D FORWARD -o %i -j ACCEPT
-PostDown =  ip6tables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+PostDown = ip6tables -D FORWARD -o %i -m state --state RELATED,ESTABLISHED -j ACCEPT
+PostDown = ip6tables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+PostDown = sysctl -w net.ipv4.ip_forward=0
+PostDown = sysctl -w net.ipv6.conf.all.forwarding=0
 ```
 
 ## Exemplo de configuração completo
@@ -72,16 +77,26 @@ PrivateKey = <SERVER_PRIVATE_KEY>
 Address = 10.0.0.1/24
 ListenPort = 51820
 
-# Habilita forwarding e NAT (IPv4 + IPv6) ao subir a interface
-PostUp   = sysctl -w net.ipv4.ip_forward=1; sysctl -w net.ipv6.conf.all.forwarding=1
-PostUp   = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT
-PostUp   = iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-PostUp   = ip6tables -A FORWARD -i %i -j ACCEPT; ip6tables -A FORWARD -o %i -j ACCEPT
-PostUp   = ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT
+# Para Compartilhamento de Internet adicione isso no servidor
+# NAT masquerading to share internet
+PostUp = sysctl -w net.ipv4.ip_forward=1
+PostUp = sysctl -w net.ipv6.conf.all.forwarding=1
+
+PostUp = iptables -A FORWARD -i %i -j ACCEPT
+PostUp = iptables -A FORWARD -o %i -m state --state RELATED,ESTABLISHED -j ACCEPT
+PostUp = iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostUp = ip6tables -A FORWARD -i %i -j ACCEPT
+PostUp = ip6tables -A FORWARD -o %i -m state --state RELATED,ESTABLISHED -j ACCEPT
+PostUp = ip6tables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+PostDown = iptables -D FORWARD -i %i -j ACCEPT
+PostDown = iptables -D FORWARD -o %i -m state --state RELATED,ESTABLISHED -j ACCEPT
 PostDown = iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
-PostDown = ip6tables -D FORWARD -i %i -j ACCEPT; ip6tables -D FORWARD -o %i -j ACCEPT
+PostDown = ip6tables -D FORWARD -i %i -j ACCEPT
+PostDown = ip6tables -D FORWARD -o %i -m state --state RELATED,ESTABLISHED -j ACCEPT
 PostDown = ip6tables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+PostDown = sysctl -w net.ipv4.ip_forward=0
+PostDown = sysctl -w net.ipv6.conf.all.forwarding=0
 
 # Cliente 1
 [Peer]
