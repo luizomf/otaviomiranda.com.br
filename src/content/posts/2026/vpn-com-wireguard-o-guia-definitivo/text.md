@@ -107,7 +107,9 @@ topologia de rede vai usar. Então, responder essas perguntas pode ajudar.
 O fato é que, no mundo de redes, existem várias topologias que você pode usar.
 
 Nós, no entanto, não estamos em um curso de redes. Além disso, no **WireGuard**
-dá pra fazer muita coisa apenas usando essas duas:
+dá pra fazer muita coisa
+([se não tudo](https://pt.wikipedia.org/wiki/Efeito_Dunning%E2%80%93Kruger) o
+que você quiser) apenas usando essas duas:
 
 - [Hub-and-Spoke ou Estrela](https://en.wikipedia.org/wiki/Network_topology)
 - [Topologia Mesh](https://en.wikipedia.org/wiki/Mesh_networking)
