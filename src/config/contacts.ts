@@ -39,6 +39,11 @@ export const CONTACT_LINKS: ContactLink[] = [
     external: true,
   },
   {
+    label: 'Discussions',
+    href: 'https://github.com/luizomf/otaviomiranda.com.br/discussions',
+    external: true,
+  },
+  {
     label: 'Blog',
     href: '/blog/1/',
     external: false,
