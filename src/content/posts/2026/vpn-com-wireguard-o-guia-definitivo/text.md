@@ -13,6 +13,16 @@ tudo que eu descobri configurando 7 nodes espalhados por casa, Hostinger e GCP.
 
 ---
 
+## Em vídeo
+
+Se preferir assistir ao invés de ler, também fiz um vídeo:
+
+[![VPN com WireGuard: O Guia Definitivo](./images/wireguard-7-1.jpg)](https://youtu.be/yqsLvVz0Y44)
+
+Link: [https://youtu.be/yqsLvVz0Y44](https://youtu.be/yqsLvVz0Y44)
+
+---
+
 ## Por que WireGuard
 
 Sempre que você coloca um software novo no projeto, não está levando só uma nova
