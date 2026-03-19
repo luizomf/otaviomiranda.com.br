@@ -10,7 +10,11 @@ author: 'Otávio Miranda'
 Eu não sou o cara das news, como você já deve ter notado pelo meu conteúdo. Mas
 aqui não deu pra pular.
 
-![OpenAI compra Astral - uv add astral](./images/openai-astral.jpg)
+Em vídeo:
+
+[![OpenAI compra Astral - uv add astral](./images/openai-astral.jpg)](https://youtu.be/kHePnM4NPWo)
+
+Link: [youtu.be/kHePnM4NPWo](https://youtu.be/kHePnM4NPWo)
 
 A
 [OpenAI acabou de anunciar a compra da Astral](https://openai.com/index/openai-to-acquire-astral/).
