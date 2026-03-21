@@ -15,9 +15,9 @@ remoto com -R e dinâmico com -D.
 ![SSH Tunnel Cover](./images/ssh-tunnels-1.jpg)
 
 Depois dessa, você vai conseguir expor um serviço rodando na sua máquina para
-fora mesmo com NAT ou firewall no caminho, acessar um serviço remoto como se
-estivesse sentado no próprio servidor e, de quebra, ainda criar um proxy SOCKS.
-Tudo isso via SSH.
+fora (mesmo com NAT ou firewall no meio do caminho), acessar um serviço remoto
+como se estivesse sentado de frente para o próprio servidor e, de quebra,
+ainda criar um proxy SOCKS. Tudo isso via SSH.
 
 Nesse texto, vou assumir que você já tem uma conexão SSH com um servidor
 qualquer. Ele nem precisa ter IP público para os exemplos fazerem sentido, mas
@@ -54,7 +54,7 @@ que você apontar para esse proxy passa a sair pelo servidor SSH. Se você
 configurar isso no sistema, os apps que respeitam o proxy do sistema entram no
 mesmo barco também.
 
-Vamos ver cada um.
+Bora destrinchar cada um.
 
 ---
 
@@ -77,9 +77,9 @@ Abra o arquivo de configuração do **servidor SSH**. Em geral ele fica aqui:
 /etc/ssh/sshd_config
 ```
 
-No OpenSSH padrão, `AllowTcpForwarding`, `PermitOpen` e `PermitListen` já
-costumam permitir isso por padrão. O que normalmente pega gente de surpresa é o
-`GatewayPorts`, porque ele vem como `no`.
+No OpenSSH, `AllowTcpForwarding`, `PermitOpen` e `PermitListen` já costumam
+vir liberados por padrão. O que costuma pegar a galera de surpresa é o
+`GatewayPorts`, porque ele vem de fábrica como `no`.
 
 Se você endureceu a config do `sshd`, garanta pelo menos isso:
 
@@ -181,7 +181,7 @@ ssh -L 5432:localhost:5432 deploy@servidor
 Conecte seu cliente local em `localhost:5432`. Pronto, você está no banco
 remoto.
 
-Se a porta `5432` já estiver em uso na sua máquina, mude a local:
+Se a porta `5432` já estiver ocupada na sua máquina, sem pânico. É só mudar a local:
 
 ```bash
 # Você controla qual a porta quer usar no seu lado
@@ -239,7 +239,8 @@ do computador onde você executou o comando.
 ### Wait, what? Não funcionou?
 
 Isso acontece. Por padrão, o `-R` escuta só em `127.0.0.1` no servidor. Ou seja,
-`curl http://localhost:8080` no próprio VPS funciona, mas a Internet ainda não.
+um `curl http://localhost:8080` rodando no próprio VPS funciona de boa, mas o
+tráfego externo (da Internet) bate de frente numa porta fechada.
 
 Para liberar acesso externo, o servidor SSH precisa ter isso no
 `/etc/ssh/sshd_config`:
@@ -300,8 +301,9 @@ seu app -> SOCKS proxy (localhost:porta) -> túnel SSH -> servidor -> destino fi
 Você quer navegar como se estivesse no seu VPS. Não é uma VPN completa do
 sistema inteiro, mas para os apps que usam o proxy a sensação é bem parecida.
 
-Talvez para testar algo, talvez porque você está numa rede Wi-Fi duvidosa e quer
-criptografar esse tráfego.
+Talvez para testar um bloqueio de IP, talvez porque você está naquele Wi-Fi
+público super duvidoso de aeroporto e não quer ninguém "cheirando" (sniffing)
+seus pacotes.
 
 ```bash
 ssh -D 1080 user@seu-vps
@@ -359,7 +361,7 @@ quando a porta já estava ocupada.
 ssh -f -N -o ExitOnForwardFailure=yes -L 8080:localhost:8080 user@servidor
 ```
 
-Quando quiser encerrar, mate o processo:
+Quando cansar da brincadeira, é só caçar e matar o processo:
 
 ```bash
 # encontre o PID
@@ -398,8 +400,8 @@ ssh -L 5432:localhost:5432 -L 8080:localhost:80 -L 3000:localhost:3000 user@serv
 
 ## Coloca isso no SSH config
 
-Se você usa algum tunnel com frequência, pare de digitar o comando toda vez.
-Adicione em `~/.ssh/config`:
+Se você levanta um tunnel com frequência, pelo amor de Deus, pare de digitar
+esse textão toda vez. Coloca lá no seu `~/.ssh/config`:
 
 ```
 Host vps-tunnel
