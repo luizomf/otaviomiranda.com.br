@@ -88,6 +88,22 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 
 ---
 
+## GitHub Discussions
+
+GitHub Discussions is enabled on this repo as a **general dev forum** and as the
+**blog comment system** (via [giscus](https://giscus.app)).
+
+- **Forum:** community-facing space for Q&A, ideas, polls, show-and-tell, and
+  announcements. Not widely advertised yet — organic traffic only for now, but
+  intended to grow into a proper forum.
+- **Blog comments:** each blog post has a giscus widget that maps to a
+  Discussion in the "Geral" category. The giscus bot creates the Discussion
+  automatically on first comment.
+- **Categories:** Geral, Novidades, Perguntas e Respostas, Mostrar algo, Ideias,
+  Enquetes.
+
+---
+
 ## Editor page note
 
 `/editor/` uses Monaco + marked + DOMPurify (CDN, `is:inline`). Vim mode via
