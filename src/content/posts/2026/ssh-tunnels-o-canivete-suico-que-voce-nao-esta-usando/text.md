@@ -14,46 +14,45 @@ remoto com -R e dinâmico com -D.
 
 ![SSH Tunnel Cover](./images/ssh-tunnels-1.jpg)
 
-Depois dessa, você vai conseguir acessar o seu computador da Internet para
-dentro da sua rede local (mesmo com NAT ou firewall), simular que você está no
-servidor remoto mesmo estando dentro do seu quarto e, de quebra, ainda vai criar
-um servidor proxy SOCKS. Tudo via SSH.
+Depois dessa, você vai conseguir expor um serviço rodando na sua máquina para
+fora mesmo com NAT ou firewall no caminho, acessar um serviço remoto como se
+estivesse sentado no próprio servidor e, de quebra, ainda criar um proxy SOCKS.
+Tudo isso via SSH.
 
 Nesse texto, vou assumir que você já tem uma conexão SSH com um servidor
-qualquer. Não precisar ser um servidor com IP real, mas vai ser muito mais legal
-se for 😈.
+qualquer. Ele nem precisa ter IP público para os exemplos fazerem sentido, mas
+vai ser muito mais legal se tiver 😈.
 
 ---
 
 ## O que é um SSH Tunnel?
 
-Que você usa SSH para acessar o terminal de outra máquina todo mundo já sabe. O
-que pouca gente te ensina é que aquele mesmo canal criptografado pode carregar
+Todo mundo já sabe que SSH serve para abrir terminal em outra máquina. O que
+pouca gente te ensina é que aquele mesmo canal criptografado pode carregar
 **outro tipo de tráfego**.
 
 E se você parar para pensar, tudo começa a fazer mais sentido. O túnel já está
-aberto e seguro, que tal aproveitar a oportunidade para enfiar uma conexão com
+aberto e seguro, que tal aproveitar a oportunidade para encaixar uma conexão com
 banco de dados, uma requisição HTTP ou qualquer coisa que use TCP?
 
-O SSH suporta três tipos de _tunnel_:
+O SSH suporta três tipos clássicos de _tunnel_:
 
-**Local** `-L` - Esse é o cara que abre uma porta na sua máquina e redireciona
-para o servidor. Com ele você poderia fazer algo assim: _"Quando alguém acessar
-a porta 4321 na minha máquina local, redirecione para a porta 5432 no servidor
-SSH"_. E, magicamente, ao usar `localhost:4321`, você recebe um PostgreSQL como
-se estivesse lá no servidor.
+**Local** `-L` - Abre uma porta na sua máquina e encaminha para um destino visto
+do lado do servidor SSH. Com ele você poderia dizer algo como: _"Quando alguém
+acessar a porta 4321 na minha máquina, conecte em `localhost:5432` no servidor e
+me entregue isso aqui"_. E, magicamente, ao usar `localhost:4321`, você recebe
+um PostgreSQL como se estivesse lá no servidor.
 
-**Remote** `-R` - Esse aqui já vai furar o seu NAT ou firewall com vontade. A
-conexão vem de fora para dentro, por isso tende a confundir as pessoas. Quando
-você precisa que o seu computador local entregue algo na Internet, seu firewall
-ou NAT não vão permitir que essa conexão aconteça. O _SSH Tunnel Remote (-R)_
-consegue enviar algo que chega em uma porta no seu servidor para dentro da sua
-conexão. Novamente acontece a mágica: alguém acessa a porta 8000 no servidor e o
-SSH chama o seu computador local na porta 3000.
+**Remote** `-R` - Faz o caminho contrário: abre uma porta no servidor e manda o
+que cair nela para um destino visto do lado da sua máquina. É a carta na manga
+quando você quer mostrar algo local para fora usando a conexão SSH que já saiu
+da sua rede. Alguém acessa a porta 8000 no servidor e o SSH chama a sua máquina
+na porta 3000.
 
-**Dynamic** `-D` - Cria um proxy SOCKS onde você o executar. O que souber usar
-este proxy vai mandar tudo por SSH. Quando eu configuro o proxy no macOS em uma
-conexão de rede, tudo que usar essa conexão passa a sair pelo proxy.
+**Dynamic** `-D` - Cria um proxy SOCKS na máquina onde você executou o SSH. Tudo
+que você apontar para esse proxy passa a sair pelo servidor SSH. Se você
+configurar isso no sistema, os apps que respeitam o proxy do sistema entram no
+mesmo barco também.
 
 Vamos ver cada um.
 
@@ -61,66 +60,59 @@ Vamos ver cada um.
 
 ## sshd_config
 
-Estou reescrevendo isso depois de ter terminado o artigo inteiro. Eu havia
-espalhado essas configurações pelo texto, mas julguei melhor adicionar tudo
-junto antes de você começar.
+Estou escrevendo isso depois de terminar o artigo inteiro. Eu tinha espalhado
+essas configurações pelo texto, mas faz mais sentido deixar tudo junto antes de
+você sair abrindo túnel e depois culpar o SSH por algo que foi o `sshd`.
 
-Abra o seu arquivo de configuração do servidor SSH. No meu caso é o:
-
-```bash
-# No Ubuntu Server 24
-/etc/ssh/sshd_config.d/01_sshd_settings.conf
-# No MacOS (porque mexi no arquivo original ao invés dos includes)
-/etc/ssh/ssh_config
-```
-
-Tenha certeza que essas configurações estão assim:
-
-```ssh-config
-# SSH tunnels (-L, -R, -D)
-AllowTcpForwarding yes
-PermitOpen any
-PermitListen any
-GatewayPorts yes
-```
-
-Se não existirem, pode copiar o trecho acima e colar no seu arquivo de
-configuração. Depois reinicie o servidor SSH.
+Abra o arquivo de configuração do **servidor SSH**. Em geral ele fica aqui:
 
 ```bash
-sudo systemctl restart ssh # ou sshd
+# Linux
+/etc/ssh/sshd_config
+
+# Algumas distros também usam includes aqui
+/etc/ssh/sshd_config.d/*.conf
+
+# macOS
+/etc/ssh/sshd_config
 ```
 
-Não vem tanto ao caso, mas o meu arquivo completo (com hardening) está assim e o
-resto é padrão:
+No OpenSSH padrão, `AllowTcpForwarding`, `PermitOpen` e `PermitListen` já
+costumam permitir isso por padrão. O que normalmente pega gente de surpresa é o
+`GatewayPorts`, porque ele vem como `no`.
+
+Se você endureceu a config do `sshd`, garanta pelo menos isso:
 
 ```ssh-config
-PubkeyAuthentication yes
-PasswordAuthentication no
-KbdInteractiveAuthentication no
-ChallengeResponseAuthentication no
-PermitRootLogin no
-PermitEmptyPasswords no
-UsePAM yes
-AuthenticationMethods publickey
-PermitUserEnvironment no
-PermitUserRC no
-X11Forwarding no
-AllowStreamLocalForwarding no
-AllowAgentForwarding no
-PermitTunnel no
-MaxAuthTries 4
-LoginGraceTime 30
-ClientAliveInterval 300
-ClientAliveCountMax 2
-PrintMotd no
-UseDNS no
-
-# SSH tunnels (-L, -R, -D)
+# Necessário para -L, -R e -D
 AllowTcpForwarding yes
+
+# Só se você restringiu destinos ou portas remotas
 PermitOpen any
 PermitListen any
-GatewayPorts yes
+
+# Necessário para expor um -R para outras máquinas
+GatewayPorts clientspecified
+```
+
+Resumo rápido do que interessa:
+
+- `AllowTcpForwarding yes` libera os forwards TCP.
+- `PermitOpen any` só é necessário se você travou os destinos permitidos para
+  `-L`/`-D`.
+- `PermitListen any` só é necessário se você travou as portas/endereços
+  permitidos para `-R`.
+- `GatewayPorts clientspecified` deixa o cliente escolher se o `-R` vai escutar
+  só em `localhost` ou em `0.0.0.0`.
+
+Depois de alterar isso, reinicie o serviço SSH.
+
+```bash
+# Linux
+sudo systemctl restart sshd # ou ssh
+
+# macOS
+sudo launchctl kickstart -k system/com.openssh.sshd
 ```
 
 ---
@@ -139,19 +131,19 @@ que, ao acessar essa porta, quem responde é o servidor.
 **A sintaxe**
 
 ```bash
-# <porta_local> encaminha para <destino:porta_destino> em <user@servidor>
-ssh -L <porta_local>:<destino:porta_destino> <user@servidor>
+# Sua porta local encaminha para <host:porta> visto do lado do servidor SSH
+ssh -L <porta_local>:<host_remoto>:<porta_remota> <user@servidor>
 ```
 
 **Fluxo**
 
 ```
-sua_máquina:porta_local -> túnel SSH -> servidor -> destino:porta_destino
+sua_máquina:porta_local -> túnel SSH -> servidor -> host_remoto:porta_remota
 ```
 
 **Na prática**
 
-Você tem um VPS e subiu um servidorzinho HTTP nele. Este servidor escuta em
+Você tem um VPS e subiu um servidorzinho HTTP nele. Esse servidor escuta em
 `localhost:8080`. Você não liberou a porta no firewall, não configurou NGINX,
 não fez nada. Exemplo:
 
@@ -160,17 +152,17 @@ não fez nada. Exemplo:
 python3 -m http.server 8080 -d caminho_qualquer
 ```
 
-Na sua máquina você pode encaminhar chamadas na porta 8080 para 8080 no servidor
-dessa forma:
+Na sua máquina você pode encaminhar a porta local `8080` para `localhost:8080`
+do servidor assim:
 
 ```bash
 # ---> você:vps --->
 ssh -L 8080:localhost:8080 user@seu-vps
 ```
 
-Agora, se você abrir `http://localhost:8080` no seu navegador, vai ver o
-conteúdo do VPS como se estivesse lá. Sem liberar porta, sem configurar nada.
-Tipo um _teletransporte_.
+Agora, se você abrir `http://localhost:8080` no navegador, vai ver o conteúdo do
+VPS como se estivesse lá. Sem liberar porta, sem configurar nada. Tipo um
+_teletransporte_.
 
 O `localhost` ali no meio da sintaxe se refere ao ponto de vista do
 **servidor**. Ou seja, "conecte em `localhost:8080` do servidor e traga pra
@@ -184,7 +176,6 @@ Sem acesso externo.
 ```bash
 # Isso é o mais comum, mesma porta
 ssh -L 5432:localhost:5432 deploy@servidor
-
 ```
 
 Conecte seu cliente local em `localhost:5432`. Pronto, você está no banco
@@ -213,9 +204,8 @@ servidor, quem responde é sua máquina local.
 **A sintaxe**
 
 ```bash
-#       ⬇️
-# <porta_remota> encaminha para <destino:porta_destino> em <user@servidor>
-ssh -R porta_remota:destino:porta_destino user@servidor
+# A porta no servidor encaminha para <host:porta> visto do lado da sua máquina
+ssh -R <porta_remota>:<destino_local>:<porta_destino> <user@servidor>
 ```
 
 **O fluxo**
@@ -226,56 +216,56 @@ servidor:porta_remota → túnel SSH → sua_máquina → destino:porta_destino
 
 **Na prática**
 
-Agora inverte o cenário (vou parar de falar _inverte_, juro 😅). Você tem um
-servidorzinho rodando **na sua máquina**:
+Agora vira o jogo. Você tem um servidorzinho rodando **na sua máquina**:
 
 Mesmo exemplo, só que... 😏
 
 ```bash
 # caminho_qualquer tem index.html
-python3 -m http.server 8080 caminho_qualquer
+python3 -m http.server 8080 -d caminho_qualquer
 ```
 
 Quer que alguém acesse isso pelo seu VPS? Faz esse túnel com -R:
 
 ```bash
-# Alguém acessa seu VPS por fora, na porta 8080 e o SSH chama na sua máquina local
+# Cria a porta 8080 no VPS apontando para a sua máquina local
 ssh -R 8080:localhost:8080 user@seu-vps
 ```
 
-Qualquer pessoa que acessar `http://seu-vps:8080` chega no servidorzinho que
-está rodando na sua máquina local.
+Esse comando cria uma porta `8080` **no VPS** apontando para `localhost:8080`
+**da sua máquina**. O `localhost` aqui é visto do lado do cliente SSH, ou seja,
+do computador onde você executou o comando.
 
 ### Wait, what? Não funcionou?
 
-Isso acontece. Por padrão, o `-R` só escuta em `127.0.0.1` no servidor. Ou seja,
-só funciona se alguém acessar de dentro do próprio servidor.
+Isso acontece. Por padrão, o `-R` escuta só em `127.0.0.1` no servidor. Ou seja,
+`curl http://localhost:8080` no próprio VPS funciona, mas a Internet ainda não.
 
 Para liberar acesso externo, o servidor SSH precisa ter isso no
 `/etc/ssh/sshd_config`:
 
-```
-GatewayPorts yes
-```
-
-Ou, se quiser dar o controle pro cliente:
-
-```
+```ssh-config
 GatewayPorts clientspecified
 ```
 
-E aí você especifica:
+Eu prefiro `clientspecified` porque você escolhe no comando se quer deixar isso
+privado ou público. Aí sim você especifica o bind:
 
 ```bash
 ssh -R 0.0.0.0:8080:localhost:8080 user@seu-vps
 ```
 
-Depois de alterar o `sshd_config`, reinicie o serviço:
+Se você usar `GatewayPorts yes`, o `sshd` força bind no wildcard e você perde um
+pouco desse controle fino.
+
+Depois de alterar o `sshd_config`, reinicie o serviço SSH:
 
 ```bash
+# Linux
 sudo systemctl restart sshd
-# Ou
-sudo systemctl restart ssh
+
+# macOS
+sudo launchctl kickstart -k system/com.openssh.sshd
 ```
 
 E não esqueça do firewall. Se a porta `8080` está bloqueada no firewall do VPS,
@@ -286,8 +276,8 @@ o _tunnel_ funciona, mas ninguém de fora chega lá.
 ## Dynamic Forward (`-D`): proxy SOCKS
 
 Os dois anteriores conectam portas específicas. O `-D` é diferente: ele cria um
-**proxy SOCKS** na sua máquina. Qualquer aplicação que suporte SOCKS pode rotear
-tráfego pelo servidor SSH, e o servidor conecta no destino final.
+**proxy SOCKS** na sua máquina. Qualquer aplicação que suporte SOCKS pode mandar
+tráfego por ele, e o servidor SSH conecta no destino final.
 
 Você não precisa definir o destino antes. O proxy decide na hora.
 
@@ -296,7 +286,7 @@ Você não precisa definir o destino antes. O proxy decide na hora.
 **A sintaxe**
 
 ```bash
-ssh -D porta_local user@servidor
+ssh -D <porta_local> <user@servidor>
 ```
 
 **O fluxo**
@@ -307,9 +297,11 @@ seu app -> SOCKS proxy (localhost:porta) -> túnel SSH -> servidor -> destino fi
 
 **Na prática**
 
-Você quer navegar como se estivesse no seu VPS (igual a um VPS _full tunnel_).
-Talvez para testar algo, talvez porque está numa rede Wi-Fi duvidosa e quer
-criptografar tudo.
+Você quer navegar como se estivesse no seu VPS. Não é uma VPN completa do
+sistema inteiro, mas para os apps que usam o proxy a sensação é bem parecida.
+
+Talvez para testar algo, talvez porque você está numa rede Wi-Fi duvidosa e quer
+criptografar esse tráfego.
 
 ```bash
 ssh -D 1080 user@seu-vps
@@ -319,17 +311,18 @@ Agora configure o proxy SOCKS no sistema ou no navegador.
 
 **No macOS:** vá em Ajustes do Sistema -> Rede -> a interface que está usando
 (Wi-Fi, por exemplo) -> Detalhes -> Proxies -> ative **Proxy SOCKS** → coloque
-`localhost` e porta `1080`.
+`127.0.0.1` e porta `1080`.
 
-Abra o navegador e acesse `ifconfig.me` ou `ip.me`. O IP que aparece é o do seu
-VPS, não o seu.
+Abra o navegador e acesse `ifconfig.me` ou `ip.me`. O IP que aparece deve ser o
+do seu VPS, não o seu.
 
-Todo o tráfego está passando pelo servidor.
+Só não mistura as coisas: isso vale para o que estiver usando o proxy, não para
+todo e qualquer pacote do sistema.
 
 ### Um detalhe sobre DNS
 
-Dependendo da aplicação, a resolução DNS pode acontecer **antes** de ir pro
-proxy. Isso meio que anula o propósito.
+Dependendo da aplicação, a resolução DNS pode acontecer **antes** de ir para o
+proxy. Isso meio que entrega o jogo.
 
 No Firefox, por exemplo, vá em `about:config` e mude
 `network.proxy.socks_remote_dns` para `true`. Assim até as consultas DNS passam
@@ -339,7 +332,7 @@ pelo tunnel.
 
 ## Flags úteis
 
-Na maioria das vezes, você não quer um shell remoto. Quer só o tunnel. Essas
+Na maioria das vezes, você não quer um shell remoto. Quer só o _tunnel_. Essas
 flags resolvem:
 
 `-N` - sem comando remoto
@@ -350,7 +343,7 @@ Não executa nenhum comando no servidor. Só mantém o tunnel aberto.
 ssh -N -L 8080:localhost:8080 user@servidor
 ```
 
-`-f` - manda pro background
+`-f` - manda para o background
 
 Joga o processo SSH pro background depois de autenticar.
 
@@ -358,8 +351,15 @@ Joga o processo SSH pro background depois de autenticar.
 ssh -f -N -L 8080:localhost:8080 user@servidor
 ```
 
-Combinar `-f` com `-N` é o padrão pra tunnels que rodam em segundo plano. Quando
-quiser encerrar, mate o processo:
+Combinar `-f` com `-N` é o padrão para _tunnels_ em segundo plano. Eu gosto de
+somar `-o ExitOnForwardFailure=yes` para o SSH não fingir que deu tudo certo
+quando a porta já estava ocupada.
+
+```bash
+ssh -f -N -o ExitOnForwardFailure=yes -L 8080:localhost:8080 user@servidor
+```
+
+Quando quiser encerrar, mate o processo:
 
 ```bash
 # encontre o PID
@@ -374,13 +374,15 @@ kill <PID>
 
 ### Keepalive
 
-Tunnels morrem se ficam muito tempo sem tráfego. Para evitar isso:
+_Tunnels_ podem morrer se ficarem tempo demais sem tráfego ou se algum NAT no
+meio resolver te abandonar. Para reduzir isso:
 
 ```bash
 ssh -o ServerAliveInterval=60 -o ServerAliveCountMax=3 -L 8080:localhost:8080 user@servidor
 ```
 
-Envia um pacote a cada 60 segundos. Se 3 falharem seguidos, encerra a conexão.
+Se o servidor ficar sem responder, o SSH detecta isso e encerra a conexão sem te
+deixar adivinhando o que aconteceu.
 
 ---
 
@@ -404,6 +406,7 @@ Host vps-tunnel
     HostName seu-vps.com
     User deploy
     LocalForward 5432 localhost:5432
+    ExitOnForwardFailure yes
     ServerAliveInterval 60
     ServerAliveCountMax 3
 ```
@@ -418,7 +421,7 @@ ssh -N vps-tunnel
 
 ## Tunnels persistentes com `autossh`
 
-O SSH não reconecta sozinho. Se a conexão cair, o tunnel morre junto. O
+O SSH não reconecta sozinho. Se a conexão cair, o _tunnel_ morre junto. O
 `autossh` resolve isso: ele monitora a conexão e reinicia se precisar.
 
 ```bash
@@ -438,12 +441,15 @@ automaticamente em caso de falha.
 
 ### Só funciona com TCP
 
-SSH Tunnels encaminham **apenas TCP**. Se você precisa de UDP (DNS, VPN, jogos),
-olhe para `socat`, WireGuard ou `sshuttle`.
+SSH Tunnels encaminham **TCP**. Se você precisa de UDP de verdade, vá de
+WireGuard. Se precisa de um redirecionamento pontual fora do SSH, `socat` pode
+ajudar. Se quer algo mais para o lado de "quase uma VPN por SSH" para TCP/DNS,
+dá uma olhada no `sshuttle`.
 
 ### Portas privilegiadas
 
-Portas abaixo de 1024 precisam de root. Se você tentar:
+Portas abaixo de 1024 precisam de root no lado que vai abrir a escuta. Se você
+tentar isso com `-L`:
 
 ```bash
 ssh -L 80:localhost:80 user@servidor
@@ -454,6 +460,8 @@ Vai falhar sem `sudo`. Use uma porta alta:
 ```bash
 ssh -L 8080:localhost:80 user@servidor
 ```
+
+No `-R`, a ideia é a mesma, mas do lado do servidor.
 
 ### Firewall
 
@@ -471,18 +479,20 @@ sudo firewall-cmd --reload
 
 ### Segurança
 
-Tunnels podem furar políticas de rede. Use com responsabilidade.
+_Tunnels_ podem furar políticas de rede. Use com responsabilidade.
 
-Qualquer pessoa que acesse sua porta local encaminhada consegue chegar no
-serviço remoto. Por isso o SSH escuta em `localhost` por padrão. Se for mudar
-para `0.0.0.0`, saiba o que está fazendo.
+Se você mandar o bind para `0.0.0.0` no `-L`, `-D` ou `-R`, qualquer máquina que
+consiga alcançar essa porta pode usar o forward. Por isso o SSH costuma ficar em
+`localhost` por padrão. Se for abrir para fora, saiba exatamente o que está
+fazendo.
 
 ---
 
 ## Referência rápida
 
 - Acessar serviço remoto localmente - `ssh -L 8080:localhost:8080 user@servidor`
-- Expor serviço local pelo servidor - `ssh -R 8080:localhost:3000 user@vps`
+- Expor serviço local pelo servidor -
+  `ssh -R 0.0.0.0:8080:localhost:3000 user@vps`
 - Proxy SOCKS para navegação - `ssh -D 1080 user@servidor`
 - Tunnel em background - `ssh -f -N -L 8080:localhost:8080 user@servidor`
 - Tunnel persistente - `autossh -M 0 -f -N -L 8080:db:5432 user@vps`
@@ -494,18 +504,19 @@ para `0.0.0.0`, saiba o que está fazendo.
 
 - Precisa acessar algo que está numa rede remota - Local (`-L`)
 - Precisa expor algo local para o mundo - Remote (`-R`)
-- Precisa acessar vários serviços sem criar tunnel por um - Dynamic (`-D`)
+- Precisa acessar vários serviços sem criar um _tunnel_ para cada um - Dynamic
+  (`-D`)
 - Quer navegar com o IP de outra máquina - Dynamic (`-D`)
 
 ---
 
 ## Conclusão
 
-SSH Tunnel é uma daquelas ferramentas que resolve o problema em uma linha e,
+SSH Tunnel é uma daquelas ferramentas que resolvem o problema em uma linha e,
 mesmo assim, a maioria das pessoas não usa.
 
 `-L` traz, `-R` manda, `-D` faz proxy. Mais do que isso, é saber que você não
-precisa liberar porta no firewall, configurar reverse proxy ou instalar
-ferramenta nenhuma toda vez que quer acessar algo de outra máquina.
+precisa liberar porta no firewall, configurar reverse proxy ou instalar nada
+extra toda vez que quer acessar algo de outra máquina.
 
 Isso já está instalado no seu sistema. Usa.
