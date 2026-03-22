@@ -16,8 +16,8 @@ remoto com -R e dinâmico com -D.
 
 Depois dessa, você vai conseguir expor um serviço rodando na sua máquina para
 fora (mesmo com NAT ou firewall no meio do caminho), acessar um serviço remoto
-como se estivesse sentado de frente para o próprio servidor e, de quebra,
-ainda criar um proxy SOCKS. Tudo isso via SSH.
+como se estivesse sentado de frente para o próprio servidor e, de quebra, ainda
+criar um proxy SOCKS. Tudo isso via SSH.
 
 Nesse texto, vou assumir que você já tem uma conexão SSH com um servidor
 qualquer. Ele nem precisa ter IP público para os exemplos fazerem sentido, mas
@@ -77,8 +77,8 @@ Abra o arquivo de configuração do **servidor SSH**. Em geral ele fica aqui:
 /etc/ssh/sshd_config
 ```
 
-No OpenSSH, `AllowTcpForwarding`, `PermitOpen` e `PermitListen` já costumam
-vir liberados por padrão. O que costuma pegar a galera de surpresa é o
+No OpenSSH, `AllowTcpForwarding`, `PermitOpen` e `PermitListen` já costumam vir
+liberados por padrão. O que costuma pegar a galera de surpresa é o
 `GatewayPorts`, porque ele vem de fábrica como `no`.
 
 Se você endureceu a config do `sshd`, garanta pelo menos isso:
@@ -181,7 +181,8 @@ ssh -L 5432:localhost:5432 deploy@servidor
 Conecte seu cliente local em `localhost:5432`. Pronto, você está no banco
 remoto.
 
-Se a porta `5432` já estiver ocupada na sua máquina, sem pânico. É só mudar a local:
+Se a porta `5432` já estiver ocupada na sua máquina, sem pânico. É só mudar a
+local:
 
 ```bash
 # Você controla qual a porta quer usar no seu lado
@@ -522,3 +523,45 @@ precisa liberar porta no firewall, configurar reverse proxy ou instalar nada
 extra toda vez que quer acessar algo de outra máquina.
 
 Isso já está instalado no seu sistema. Usa.
+
+PS.: essa é a minha configuração do ssh ao terminar de escrever isso. Tem um
+aviso enorme só para me lembrar.
+
+```ssh-config
+PubkeyAuthentication yes
+PasswordAuthentication no
+KbdInteractiveAuthentication no
+ChallengeResponseAuthentication no
+PermitRootLogin no
+PermitEmptyPasswords no
+UsePAM yes
+AuthenticationMethods publickey
+PermitUserEnvironment no
+PermitUserRC no
+X11Forwarding no
+AllowStreamLocalForwarding no
+AllowAgentForwarding no
+PermitTunnel no
+MaxAuthTries 4
+LoginGraceTime 30
+ClientAliveInterval 300
+ClientAliveCountMax 2
+PrintMotd no
+UseDNS no
+
+# ===================================================================
+# 🚨 ATENÇÃO: ZONA DE PERIGO (TÚNEIS ESCANCARADOS) 🚨
+# ===================================================================
+# O bloco abaixo permite que qualquer túnel (-R) exponha portas
+# diretamente para a INTERNET PÚBLICA (0.0.0.0).
+# Excelente para o nosso laboratório e testes, mas se for rodar em
+# PRODUÇÃO real, mude o GatewayPorts para 'no' ou 'clientspecified'
+# para evitar expor serviços internos acidentalmente.
+# ===================================================================
+AllowTcpForwarding yes
+PermitOpen any
+PermitListen any
+GatewayPorts yes
+```
+
+Fui.
