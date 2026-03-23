@@ -23,6 +23,17 @@ Nesse texto, vou assumir que você já tem uma conexão SSH com um servidor
 qualquer. Ele nem precisa ter IP público para os exemplos fazerem sentido, mas
 vai ser muito mais legal se tiver 😈.
 
+**Servidor Privado Virtual (VPS)**
+
+Se você está precisando de um servidor para hospedar seu site, aplicação ou
+projeto, dá uma olhada na Hostinger.
+
+Estou deixando meu link com desconto abaixo. Isso pode te garantir até 2 anos de
+benefícios.
+
+Acesse: [Hostinger + Otávio Miranda](https://hostinger.com/otaviomiranda)  
+Cupom: `OTAVIOMIRANDA`
+
 ---
 
 ## O que é um SSH Tunnel?
