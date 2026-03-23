@@ -23,10 +23,10 @@ Nesse texto, vou assumir que você já tem uma conexão SSH com um servidor
 qualquer. Ele nem precisa ter IP público para os exemplos fazerem sentido, mas
 vai ser muito mais legal se tiver 😈.
 
-**Servidor Privado Virtual (VPS)**
+**Falando em servidores**
 
-Se você está precisando de um servidor para hospedar seu site, aplicação ou
-projeto, dá uma olhada na Hostinger.
+Se você estiver precisando de um servidor para hospedar seu site, aplicação ou
+projeto, dá uma olhada na **Hostinger**.
 
 Estou deixando meu link com desconto abaixo. Isso pode te garantir até 2 anos de
 benefícios.
@@ -73,7 +73,8 @@ Bora destrinchar cada um.
 
 Estou escrevendo isso depois de terminar o artigo inteiro. Eu tinha espalhado
 essas configurações pelo texto, mas faz mais sentido deixar tudo junto antes de
-você sair abrindo túnel e depois culpar o SSH por algo que foi o `sshd`.
+você sair abrindo túnel e depois culpar o SSH (client) por algo que foi o `sshd`
+(server).
 
 Abra o arquivo de configuração do **servidor SSH**. Em geral ele fica aqui:
 
@@ -99,6 +100,7 @@ Se você endureceu a config do `sshd`, garanta pelo menos isso:
 AllowTcpForwarding yes
 
 # Só se você restringiu destinos ou portas remotas
+# No final, deixo um aviso sobre isso.
 PermitOpen any
 PermitListen any
 
@@ -144,6 +146,8 @@ que, ao acessar essa porta, quem responde é o servidor.
 ```bash
 # Sua porta local encaminha para <host:porta> visto do lado do servidor SSH
 ssh -L <porta_local>:<host_remoto>:<porta_remota> <user@servidor>
+
+# Obs.: na maioria das vezes eu uso -N antes de -L para ele só focar no túnel
 ```
 
 **Fluxo**
