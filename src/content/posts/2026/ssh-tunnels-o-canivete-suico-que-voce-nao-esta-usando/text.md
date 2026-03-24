@@ -36,6 +36,14 @@ Cupom: `OTAVIOMIRANDA`
 
 ---
 
+## Em vídeo:
+
+Se quiser assistir ao invés de ler (mas aqui tem muito mais informação):
+
+[![Acesse QUALQUER Coisa de Qualquer Lugar: SSH Tunnels](./images/ssh-tunnels-thumb.jpg)](https://youtu.be/s-B2A8A4hHc)
+
+- [https://youtu.be/s-B2A8A4hHc](https://youtu.be/s-B2A8A4hHc)
+
 ## O que é um SSH Tunnel?
 
 Todo mundo já sabe que SSH serve para abrir terminal em outra máquina. O que
