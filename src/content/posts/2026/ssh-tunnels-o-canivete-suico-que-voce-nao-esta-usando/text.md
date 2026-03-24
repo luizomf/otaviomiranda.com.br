@@ -73,6 +73,11 @@ que você apontar para esse proxy passa a sair pelo servidor SSH. Se você
 configurar isso no sistema, os apps que respeitam o proxy do sistema entram no
 mesmo barco também.
 
+Se quiser usar uma ferramenta automatizada, fiz o
+[SSH Toolkit](https://sshtoolkit.otaviomiranda.com.br/), é uma ferramenta de
+código aberto que te ajuda a gerar esses túneis de forma visual. Faz mais do que
+isso, mas vou te falando ao longo do texto.
+
 Bora destrinchar cada um.
 
 ---
@@ -135,6 +140,8 @@ sudo systemctl restart sshd # ou ssh
 # macOS
 sudo launchctl kickstart -k system/com.openssh.sshd
 ```
+
+O [SSH Toolkit](https://sshtoolkit.otaviomiranda.com.br/) também te ajuda nisso.
 
 ---
 
@@ -353,6 +360,9 @@ proxy. Isso meio que entrega o jogo.
 No Firefox, por exemplo, vá em `about:config` e mude
 `network.proxy.socks_remote_dns` para `true`. Assim até as consultas DNS passam
 pelo tunnel.
+
+Pra variar, o [SSH Toolkit](https://sshtoolkit.otaviomiranda.com.br/) também faz
+isso.
 
 ---
 
@@ -588,3 +598,6 @@ GatewayPorts yes
 ```
 
 Fui.
+
+Ah, o [SSH Toolkit](https://sshtoolkit.otaviomiranda.com.br/) faz ssh hardening
+também.
