@@ -74,7 +74,7 @@ enquanto faço outras coisas. Tudo gerado por ele.
 
 Todo o meu ambiente Dev está aqui.
 
-- Link: **[dotfiles](https://github.com/luizomf/loudterm)**
+- Link: **[dotfiles](https://github.com/luizomf/dotfiles)**
 
 ---
 
