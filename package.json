@@ -27,6 +27,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.17",
     "@astrojs/sitemap": "^3.7.1",
     "cheerio": "^1.2.0",
     "marked": "^17.0.3",
