@@ -18,7 +18,7 @@ Tools _(esta página)_ é onde vou agregar todas essas ferramentas.
 - **[WireGuard Config Generator](https://wireguard.otaviomiranda.com.br/)**
 - **[SSH Toolkit](https://sshtoolkit.otaviomiranda.com.br/)**
 - **[Loudterm TTS](https://github.com/luizomf/loudterm)**
-- **[dotfiles](https://github.com/luizomf/loudterm)**
+- **[dotfiles](https://github.com/luizomf/dotfiles)**
 - **[Om Theme - VS Code](https://marketplace.visualstudio.com/items?itemName=omthemes.omthemes)**
 - **[BGRemover](https://github.com/luizomf/bgremover)**
 
