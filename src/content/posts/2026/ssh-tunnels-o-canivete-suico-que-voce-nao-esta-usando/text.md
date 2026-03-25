@@ -3,7 +3,7 @@ title: 'SSH Tunnels: o canivete suíço que você não está usando'
 description:
   'Aprenda SSH Tunnels na prática: Local -L, Remote -R e Dynamic -D. Acesse
   serviços remotos, exponha portas locais e crie proxies SOCKS com um comando.'
-date: 2026-03-21
+date: 2026-03-25T18:06:00-0300
 author: 'Otávio Miranda'
 ---
 
