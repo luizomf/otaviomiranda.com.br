@@ -70,10 +70,17 @@ async function createPost() {
   const date = new Date();
   const year = date.getFullYear().toString();
 
-  // Formatando data para YYYY-MM-DD local (America/Sao_Paulo baseline)
-  const formattedDate = date.toLocaleDateString('sv-SE', {
+  // Formatando data em ISO 8601 com offset de São Paulo
+  const parts = new Intl.DateTimeFormat('en-CA', {
     timeZone: 'America/Sao_Paulo',
-  });
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+    hour12: false,
+    timeZoneName: 'longOffset',
+  }).formatToParts(date);
+  const get = (type) => parts.find(p => p.type === type)?.value ?? '';
+  const offset = get('timeZoneName').replace('GMT', '') || '+00:00';
+  const formattedDate = `${get('year')}-${get('month')}-${get('day')}T${get('hour')}:${get('minute')}:${get('second')}${offset}`;
 
   const slug = toSlug(title);
 
