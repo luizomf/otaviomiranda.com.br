@@ -34,6 +34,11 @@ export const CONTACT_LINKS: ContactLink[] = [
     external: true,
   },
   {
+    label: 'Feed RSS',
+    href: '/rss.xml',
+    external: true,
+  },
+  {
     label: 'GitHub',
     href: 'https://github.com/luizomf',
     external: true,
@@ -51,6 +56,11 @@ export const CONTACT_LINKS: ContactLink[] = [
   {
     label: 'Cursos',
     href: '/#courses',
+    external: false,
+  },
+  {
+    label: 'Ferramentas',
+    href: '/2026/tools-ferramentas-para-desenvolvedores/',
     external: false,
   },
 ];
