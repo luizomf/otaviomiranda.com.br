@@ -25,6 +25,14 @@ Referência da issue inicial:
 > **Observação**: ainda estou escrevendo este conteúdo. Só estou
 > disponibilizando os comandos primeiro pelo fato do caso ser urgente.
 
+**Apoio Hostinger**
+
+Se estiver precisando de servidores (VPS) com bom custo-benefício, dá uma olhada
+na Hostinger. Usando meu link e cupom, você ganha até 2 anos de desconto.
+
+- [hostinger.com/otaviomiranda](https://hostinger.com/otaviomiranda)
+- Cupom: `OTAVIOMIRANDA`
+
 ---
 
 ## O que aconteceu?
