@@ -58,12 +58,35 @@ interface Props {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+
+const postImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/content/posts/**/images/*.{png,jpg,jpeg,gif,webp,avif}',
+  { eager: true },
+);
+
+function getFirstBodyImage(body: string | undefined, entryId: string): string | undefined {
+  const match = body?.match(/!\[.*?\]\(\.\/images\/([^)]+)\)/);
+  if (!match) return undefined;
+
+  const entryDir = entryId.replace(/\/[^/]+$/, '');
+  const key = `/src/content/posts/${entryDir}/images/${match[1]}`;
+  return postImages[key]?.default.src;
+}
+
+const site = Astro.site ?? new URL('https://www.otaviomiranda.com.br');
+const resolvedImage = entry.data.image ?? getFirstBodyImage(entry.body, entry.id);
+const ogImage = resolvedImage?.startsWith('http')
+  ? resolvedImage
+  : resolvedImage
+    ? new URL(resolvedImage, site).toString()
+    : undefined;
 ---
 
 <BaseLayout
   title={entry.data.title + ' - Otávio Miranda'}
   description={entry.data.description}
-  image={entry.data.image}
+  image={ogImage}
+  ogType='article'
 >
   <Header />
 
