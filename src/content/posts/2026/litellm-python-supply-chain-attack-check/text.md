@@ -7,8 +7,6 @@ date: 2026-03-26T08:31:44-03:00
 author: 'Otávio Miranda'
 ---
 
-# Verificação de supply chain attack: litellm
-
 O pacote `litellm` versão 1.82.8 foi comprometido com um arquivo `.pth`
 malicioso (`litellm_init.pth`) que rouba credenciais. Os comandos abaixo
 verificam se você tem o pacote instalado em qualquer lugar da sua máquina.
