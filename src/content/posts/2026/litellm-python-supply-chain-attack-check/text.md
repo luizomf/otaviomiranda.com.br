@@ -22,9 +22,6 @@ litellm por baixo dos panos, esse texto é pra você.
 Referência da issue inicial:
 [https://github.com/BerriAI/litellm/issues/24512](https://github.com/BerriAI/litellm/issues/24512)
 
-> **Observação**: ainda estou escrevendo este conteúdo. Só estou
-> disponibilizando os comandos primeiro pelo fato do caso ser urgente.
-
 **Apoio Hostinger**
 
 Se estiver precisando de servidores (VPS) com bom custo-benefício, dá uma olhada
@@ -437,7 +434,4 @@ versões abaixo, mas não consegui confirmar isso. Se você atualizou o `litellm
 (direto ou indiretamente) no dia 24 de março de 2026, vale rodar os comandos
 acima pra checar.
 
-Qualquer dúvida, comenta aí. Vou ver se faço um vídeo mais detalhado sobre isso
-em breve.
-
-Valeu. Até o próximo.
+Qualquer dúvida, comenta aí. Valeu. Até o próximo.
