@@ -27,6 +27,14 @@ laboratório privado e agora vou te mandar a real dos acontecimentos por baixo
 dos panos e como você protege o seu próprio código de dor de cabeça igual a
 essa.
 
+**Apoio**
+
+Se estiver precisando de servidores (VPS) com bom custo-benefício, dá uma olhada
+na Hostinger. Usando meu link e cupom, você ganha até 2 anos de desconto.
+
+- [hostinger.com/otaviomiranda](https://hostinger.com/otaviomiranda)
+- Cupom: `OTAVIOMIRANDA`
+
 ## Em vídeo
 
 Fiz um vídeo completo sobre o assunto, caso queira assistir:
