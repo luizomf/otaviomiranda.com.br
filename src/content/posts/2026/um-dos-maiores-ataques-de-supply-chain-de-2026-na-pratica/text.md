@@ -32,7 +32,7 @@ essa.
 Se estiver precisando de servidores (VPS) com bom custo-benefício, dá uma olhada
 na Hostinger. Usando meu link e cupom, você ganha até 2 anos de desconto.
 
-- [hostinger.com/otaviomiranda](https://hostinger.com/otaviomiranda)
+- [hostinger.com/otaviomiranda](https://www.hostg.xyz/SHJC8)
 - Cupom: `OTAVIOMIRANDA`
 
 ## Em vídeo
