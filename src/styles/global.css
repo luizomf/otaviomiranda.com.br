@@ -944,6 +944,7 @@ button:disabled {
 .article-section[data-theme='dark'] {
   color: var(--color-text-high-on-dark);
   background-color: var(--color-surface-dark-canvas);
+  color-scheme: dark;
 
   border-top: var(--border-width-100) solid var(--color-border-dark-soft);
   border-bottom: var(--border-width-100) solid var(--color-border-dark-strong);

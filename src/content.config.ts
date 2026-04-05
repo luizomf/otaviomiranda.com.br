@@ -44,6 +44,7 @@ const postsCollection = defineCollection({
       .trim()
       .min(1, 'Frontmatter `author` cannot be empty.'),
     image: z.string().optional(),
+    audio: z.string().url().optional(),
   }),
 });
 

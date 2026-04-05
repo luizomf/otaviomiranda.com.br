@@ -6,6 +6,7 @@ description:
   migração.'
 date: 2026-02-27T12:00:00-03:00
 author: 'Otávio Miranda'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/de-html-css-e-js-para-astro-finalmente-migrei/de-html-css-e-js-para-astro-finalmente-migrei.opus'
 ---
 
 ![Logo do Astro](./images/astro-cover.webp)
@@ -420,8 +421,8 @@ Em alguns dias eu fui forçado a trocar por erro (Gemini) ou por limite (Claude)
 
 ### O que eles construíram?
 
-Se você está lendo isso no meu site, tem a mão deles aí. Foram aproximadamente
-2 semanas, comigo basicamente dirigindo e revisando.
+Se você está lendo isso no meu site, tem a mão deles aí. Foram aproximadamente 2
+semanas, comigo basicamente dirigindo e revisando.
 
 - Sistema de layouts com componentes reutilizáveis
 - Content Layer API com schemas Zod para validação de frontmatter

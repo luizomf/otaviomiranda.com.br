@@ -80,6 +80,8 @@ const ogImage = resolvedImage?.startsWith('http')
   : resolvedImage
     ? new URL(resolvedImage, site).toString()
     : undefined;
+
+const audioSrc = entry.data.audio;
 ---
 
 <BaseLayout
@@ -118,6 +120,14 @@ const ogImage = resolvedImage?.startsWith('http')
             )
           }
         </div>
+
+        {audioSrc && (
+          <div class="post-audio">
+            <audio controls preload="none">
+              <source src={audioSrc} type="audio/ogg; codecs=opus" />
+            </audio>
+          </div>
+        )}
       </header>
 
       <Content />
@@ -159,5 +169,14 @@ const ogImage = resolvedImage?.startsWith('http')
     gap: var(--space-100) var(--space-500);
     color: var(--color-text-soft);
     font-size: var(--font-size-text-400);
+  }
+
+  .post-audio {
+    margin-top: var(--space-600);
+    margin-bottom: var(--space-600);
+  }
+
+  .post-audio audio {
+    width: 100%;
   }
 </style>
