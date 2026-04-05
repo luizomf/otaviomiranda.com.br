@@ -6,7 +6,7 @@ description:
   migração.'
 date: 2026-02-27T12:00:00-03:00
 author: 'Otávio Miranda'
-audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/de-html-css-e-js-para-astro-finalmente-migrei/de-html-css-e-js-para-astro-finalmente-migrei.opus'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/de-html-css-e-js-para-astro-finalmente-migrei/de-html-css-e-js-para-astro-finalmente-migrei-2.opus'
 ---
 
 ![Logo do Astro](./images/astro-cover.webp)
