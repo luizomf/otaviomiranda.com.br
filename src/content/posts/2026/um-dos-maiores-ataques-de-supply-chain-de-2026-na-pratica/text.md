@@ -5,6 +5,7 @@ description:
   Caso tenha perdido, vou replicar o ataque na prática. Bora aprender juntos!'
 date: 2026-04-02T17:07:56-03:00
 author: 'Otávio Miranda'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/um-dos-maiores-ataques-de-supply-chain-de-2026-na-pratica/2026-04-08-00-00-00.opus'
 ---
 
 Obs.: o tom desse artigo está extremamente diferente de como eu escrevo
