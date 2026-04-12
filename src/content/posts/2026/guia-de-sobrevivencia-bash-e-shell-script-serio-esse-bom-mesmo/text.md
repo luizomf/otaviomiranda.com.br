@@ -12,6 +12,8 @@ Esse vai para devs que já sabem o básico do Shell Script e Bash e querem subir
 de nível. Me incluo nisso também. De fato, só estou escrevendo isso porque tenho
 estudado muito sobre o assunto.
 
+![Logo do Bash](./images/bash.jpg)
+
 Você vai ler por sua conta e risco. Perceba que o autor desse post não tem
 nenhum desses nomes: **Erich Gamma**, **Richard Helm**, **Ralph Johnson** e
 **John Vlissides**. Então você está vivendo perigosamente.
