@@ -760,10 +760,10 @@ while IFS= read -r line; do
 done < input.txt
 ```
 
-Tem `lastpipe`? Tem. Eu basearia convenção de time nisso? Nem ferrando.
+Tem `lastpipe`? Tem. Eu basearia convenção de time nisso? Nem a pau.
 
-Regra simples: se a lógica mexe em estado que você ainda vai usar, evita pipear
-pra dentro dela.
+Se a lógica mexe em estado que você ainda vai usar, eu evitaria pipear pra
+dentro dela (mais uma palavra inventada neste post).
 
 ## Traps: cleanup de verdade
 
