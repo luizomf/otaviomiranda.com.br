@@ -29,7 +29,7 @@ Pilhas são estruturas de dados muito simples, mas podem ser usadas para
 representar várias coisas no mundo real, por exemplo: uma pilha de pratos, uma
 pilha de livros ou qualquer coisa que você coloque uma sobre a outra formando
 uma pilha. Além disso, programas também usam pilhas, como a
-[pilha de chamadas](https://www.otaviomiranda.com.br/2020/funcoes-recursivas-com-python/#Call_stack)
+[pilha de chamadas](https://otaviomiranda.com.br/2020/funcoes-recursivas-com-python/#Call_stack)
 para funções que já vimos anteriormente nesse blog.
 
 ## Listas são pilhas muito genéricas em Python

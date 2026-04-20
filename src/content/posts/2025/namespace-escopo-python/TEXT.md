@@ -506,7 +506,7 @@ Esse mecanismo é fundamental para a organização e o isolamento do código:
 Para um aprofundamento sobre a call stack e funções, especialmente em cenários
 como recursão, recomendo este material:
 
-- [Funções recursivas com Python](https://www.otaviomiranda.com.br/2020/funcoes-recursivas-com-python/)
+- [Funções recursivas com Python](https://otaviomiranda.com.br/2020/funcoes-recursivas-com-python/)
 
 Agora que entendemos o Enclosing e o que acontece por baixo dos panos, podemos
 continuar.

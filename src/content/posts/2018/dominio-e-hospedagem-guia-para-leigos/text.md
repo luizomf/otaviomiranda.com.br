@@ -30,7 +30,7 @@ posteriormente nesse artigo.
 ## Domínio: o endereço do site
 
 O domínio é o endereço do site em si. Aquele que, geralmente, inicia-se com
-“www” e termina com “.com” ou “.com.br”. Como www.otaviomiranda.com.br por
+“www” e termina com “.com” ou “.com.br”. Como `www.exemplo.com.br`, por
 exemplo.
 
 Contudo, aqui cabem alguns adendos: não é necessário que um domínio inicie com

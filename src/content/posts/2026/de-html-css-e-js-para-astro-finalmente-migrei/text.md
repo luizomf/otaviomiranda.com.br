@@ -158,7 +158,7 @@ abaixo:
 
 - [Primeiro canvas](https://codepen.io/luizomf/full/ZYOdpdx)
 - [Segundo canvas](https://codepen.io/luizomf/full/yyJdoWP)
-- [Final (Home do site)](https://www.otaviomiranda.com.br/)
+- [Final (Home do site)](https://otaviomiranda.com.br/)
 
 Perdi uns 2 ou 3 dias com isso, mas consegui um resultado que me agradou.
 

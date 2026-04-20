@@ -15,11 +15,11 @@ simples e eficiente.
 Esses são todos os links que menciono nos dois vídeos:
 
 - whisper em tempo real via microfone -
-  [Link](https://www.otaviomiranda.com.br/2025/whisper-live-sera-que-deu-certo/)
+  [Link](https://otaviomiranda.com.br/2025/whisper-live-sera-que-deu-certo/)
 - logging — Logging facility for Python -
   [Link](https://docs.python.org/3/library/logging.html)
 - sussu(rro): CLI educacional com OpenAI Whisper -
-  [Link](https://www.otaviomiranda.com.br/2025/python-sussu-cli-openai-whisper/)
+  [Link](https://otaviomiranda.com.br/2025/python-sussu-cli-openai-whisper/)
 - openai / whisper - [Link](https://github.com/openai/whisper)
 
 Vídeos:
@@ -50,7 +50,7 @@ então questionei o ChatGPT...
 Estou tentando manter este documento (`README.md`) sincronizado com o link
 abaixo. Caso não encontre o que procura aqui, acesse:
 
-- [Transcreva áudio com Python: Sussu CLI + OpenAI Whisper](https://www.otaviomiranda.com.br/2025/python-sussu-cli-openai-whisper/)
+- [Transcreva áudio com Python: Sussu CLI + OpenAI Whisper](https://otaviomiranda.com.br/2025/python-sussu-cli-openai-whisper/)
 
 ---
 
