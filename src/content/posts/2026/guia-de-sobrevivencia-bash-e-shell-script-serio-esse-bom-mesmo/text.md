@@ -767,10 +767,11 @@ dentro dela (mais uma palavra inventada neste post).
 
 ## Traps: cleanup de verdade
 
-Se o script cria temporário, lock, socket ou processo em background, cleanup não
-é detalhe. Tem que entrar no design.
+Se o script cria temporário, lock, socket ou processo em background, cleanup
+deixa de ser detalhe bem rápido. Se você deixa pra pensar nisso no fim,
+normalmente já deu tempo de se arrepender.
 
-Um padrão que costuma me servir bem:
+Um padrão que costuma me servir:
 
 ```bash
 #!/usr/bin/env bash
@@ -802,7 +803,7 @@ wait "$worker_pid"
 
 Se o script só limpa no caminho feliz, ele não limpa. Só teve sorte.
 
-Coisas que valem lembrar:
+Coisas que eu tento não esquecer:
 
 - `EXIT` é onde eu quase sempre penduro teardown.
 - `INT` e `TERM` merecem atenção.
@@ -813,7 +814,7 @@ E não, o Bash não vira supervisor só porque você colocou um `&` no final.
 Guardou PID? Sabe quem precisa morrer? Sabe o que acontece se o shell ignorar um
 sinal? Isso tudo importa.
 
-## Job control: ótimo no terminal, não no lugar de um supervisor
+## Job control: bom no terminal, outra história em script
 
 No shell interativo, job control é uma mão na roda:
 
@@ -829,8 +830,8 @@ $ fg %1
 rsync -av --info=progress2 big-tree/ backup:/srv/backup/
 ```
 
-Pra esse tipo de uso, ele é ótimo. Você pausa, manda pro background, traz de
-volta. Beleza.
+Pra esse tipo de uso, ele quebra um galho bonito. Você pausa, manda pro
+background, traz de volta. Beleza.
 
 O tropeço vem quando a gente começa a tratar isso como gerenciamento de serviço.
 Não é.
@@ -852,9 +853,9 @@ nohup rsync -av --info=progress2 big-tree/ backup:/srv/backup/ \
 Lembra do detalhe: `nohup` não manda pro background sozinho. O `&` continua
 necessário.
 
-Se o processo realmente importa, usa `systemd`, `tmux`, `screen`, `systemd-run`
-ou outro supervisor de verdade. `disown` e `nohup` resolvem um problema bem mais
-simples.
+Se o processo realmente importa, eu tenderia a jogar isso pra `systemd`, `tmux`,
+`screen`, `systemd-run` ou outro supervisor de verdade. `disown` e `nohup`
+resolvem um problema bem mais simples.
 
 ## Subshells vs grupos de comando
 
@@ -918,7 +919,7 @@ O problema é que muita gente acha que parsing acaba quando você conseguiu ler
 `-v` e `-o`. Não acaba. Parsing também é validar aridade, formato e tudo aquilo
 de que o resto do script depende.
 
-Esse padrão aqui é bom de manter na manga:
+Esse é o tipo de padrão que eu gosto de ter por perto:
 
 ```bash
 #!/usr/bin/env bash
@@ -1022,7 +1023,7 @@ parse_args() {
 parse_args "$@"
 ```
 
-Algumas escolhas aí eu manteria sem pensar muito:
+Algumas escolhas aí eu manteria, pelo menos hoje:
 
 - normalizar opção longa na mão em vez de depender de `getopt` externo
 - validar logo depois do parsing
@@ -1106,9 +1107,9 @@ if find_config_file; then
 fi
 ```
 
-Ele é rígido de propósito. Se alguém quiser array, objeto aninhado e meia dúzia
-de regra de escape, melhor trocar de formato logo em vez de inventar uma mini
-linguagem no shell.
+Eu deixei ele rígido de propósito. Se alguém quiser array, objeto aninhado e
+meia dúzia de regra de escape, melhor trocar de formato logo em vez de inventar
+uma mini linguagem no shell.
 
 Pra JSON, usa `jq`:
 
@@ -1165,8 +1166,8 @@ log() {
 }
 ```
 
-Pronto. Você ganha nível, timestamp e arquivo de log sem sujar `stdout`. Quando
-eu quero espelhar stream, ainda gosto de `tee`:
+Com isso, você ganha nível, timestamp e arquivo de log sem sujar `stdout`.
+Quando eu quero espelhar stream, ainda gosto de `tee`:
 
 ```bash
 exec 2> >(tee -a "$LOG_FILE" >&2)
@@ -1188,7 +1189,7 @@ set +x
 É o tipo de coisa que vale guardar porque economiza um bom tempo quando o script
 começa a se comportar como se estivesse possuído.
 
-## Testando script Bash como gente grande
+## Testando script Bash sem sofrimento
 
 Dá pra testar shell script, sim. E eu acho que vale bastante quando o script
 começa a lidar com flag, config, arquivo ou efeito colateral.
@@ -1197,8 +1198,8 @@ Se for um scriptinho de 15 linhas em volta de um comando, talvez nem precise.
 Agora, se ele apaga coisa, faz parsing e conversa com produção, eu prefiro ter
 algum teste.
 
-[`bats`](https://bats-core.readthedocs.io/en/latest/writing-tests.html) resolve
-bem porque mantém tudo no ecossistema do shell.
+[`bats`](https://bats-core.readthedocs.io/en/latest/writing-tests.html) me
+atende bem porque mantém tudo no ecossistema do shell.
 
 Um teste útil, pro loader de config acima, seria algo assim:
 
@@ -1218,14 +1219,14 @@ load '../lib/config.sh'
 }
 ```
 
-Esse teste protege uma fronteira importante: config tem que continuar sendo
-dado.
+Esse teste protege uma fronteira que, pra mim, importa bastante: config tem que
+continuar sendo dado.
 
 Pra mockar comando externo, eu gosto do jeito simples: diretório temporário no
 começo do `PATH` e executável falso lá dentro. Menos frágil do que tentar
 inventar mágica com alias.
 
-No fim, testabilidade em Bash costuma andar junto com design menos bagunçado.
+Pra mim, testabilidade em Bash costuma andar junto com design menos bagunçado.
 Quando parsing, config e efeito colateral ficam separados em funções pequenas, o
 teste deixa de ser castigo.
 
@@ -1329,8 +1330,8 @@ export DB_PASS="secret"                 # Herdado por TODO processo filho
 Em shell, segredo espalha fácil demais. Vai pro histórico, vai pro `ps`, vai pro
 ambiente do processo filho, vai parar onde você não queria.
 
-Sempre que der, lê de arquivo/FD ou deixa a plataforma injetar só no momento do
-uso:
+Quando der, eu prefiro ler de arquivo/FD ou deixar a plataforma injetar só no
+momento do uso:
 
 ```bash
 # Le segredo de file descriptor, sem tocar disco nem aparecer em ps
@@ -1340,8 +1341,9 @@ PGPASSWORD="$db_password" psql -h "$host" -U "$user" "$dbname" <<< "$query"
 
 ## Quando o Bash fica lento (e quando isso não importa)
 
-Bash é muito melhor abrindo processo do que processando dado em loop apertado.
-Quando o script fica lento, muitas vezes o problema é um festival de fork.
+Bash costuma ir melhor abrindo processo do que processando dado em loop
+apertado. Quando o script fica lento, muitas vezes o problema é um festival de
+fork.
 
 **A versão lenta**: 3 forks externos por iteração.
 
@@ -1415,14 +1417,15 @@ jobs:
           bats tests/
 ```
 
-Com ShellCheck e algum teste em Bats, você já sobe bastante o nível do script.
+Com ShellCheck e algum teste em Bats, eu já fico bem mais tranquilo com o
+script.
 
 ## Docker: o problema do PID 1
 
 Docker com shell tem uma pegadinha bem comum: PID 1. Se a sua app vira filha do
 Bash e o Bash não repassa sinal direito, o container morre de forma feia.
 
-**Um entrypoint decente pra produção:**
+**Um entrypoint que eu usaria com mais tranquilidade em produção:**
 
 ```bash
 #!/bin/bash
@@ -1496,7 +1499,7 @@ if [[ "${BASH_VERSINFO[0]}" -lt 4 ]]; then
 fi
 ```
 
-### Idempotência ou nada
+### Idempotência ajuda bastante
 
 Script de produção roda de novo. Retry, cron, recuperação, operador apertando
 seta pra cima sem querer pensar muito. Então idempotência ajuda bastante:
@@ -1526,8 +1529,12 @@ Nessa hora, chamar Python ou Go não é derrota. Muitas vezes é só bom senso.
 
 # Conclusão: script chato costuma ser o melhor script
 
-Pra mim, Bash fica melhor quando você para de procurar truque esperto e começa a
-desconfiar das coisas certas. Desconfiar do `set -e`, do pipeline inocente, do
+Como eu falei no começo, isso aqui continua sendo nota de estudo. Só que é o
+tipo de nota de estudo que já me poupou de algumas burradas, então resolvi
+juntar tudo num lugar só.
+
+Pra mim, Bash fica melhor quando a gente para de procurar truque esperto e
+começa a desconfiar das coisas certas. Do `set -e`, do pipeline inocente, do
 `eval`, do temporário malfeito, do loop que abre processo demais e jura que está
 tudo sob controle.
 
@@ -1537,9 +1544,8 @@ cedo, fala onde doeu, não mistura dado com código e não sai fazendo gracinha 
 silêncio, eu já fico feliz.
 
 Se ele funcionar no notebook, no CI e dentro do container sem virar um caso de
-polícia, ótimo. E se em algum momento você perceber que está forçando a barra e
-tentando transformar Bash em linguagem de aplicação, passa o bastão. Chamar
-Python, Go ou qualquer outra ferramenta melhor praquele pedaço não é derrota.
-Pra mim, é só bom senso mesmo.
+polícia, melhor ainda. E se em algum momento você perceber que está forçando a
+barra e tentando transformar Bash em linguagem de aplicação, passa o bastão. Eu
+mesmo prefiro isso a insistir por teimosia.
 
-Valeu.
+Valeu. Até o próximo (esse aqui foi sofrido pra escrever 🙏)
