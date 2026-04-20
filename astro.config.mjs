@@ -24,7 +24,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   // URL final do site — usada pelo sitemap, canonical URLs e Open Graph
-  site: 'https://www.otaviomiranda.com.br',
+  site: 'https://otaviomiranda.com.br',
 
   // SSG puro: todas as paginas sao pre-renderizadas em HTML no build
   output: 'static',
