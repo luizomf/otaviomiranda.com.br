@@ -1,9 +1,9 @@
 ---
 title: 'Guia de sobrevivência Bash e Shell Script (Sério!)'
 description:
-  'Se eu coloquei a mão no negócio, é porque é bom. Só leia! Tô brincando, estou
-  estudando mais bash e shell script e pensei em montar este post. Tudo aqui é
-  parte do que já estudei.'
+  'Este é um dos posts mais completos sobre Bash e Shell Script que você vai
+  encontrar. Vamos estudar juntos coisas básicas e avançadas para ficarmos
+  ninjas em shell scripting.'
 date: 2026-04-10T16:09:38-03:00
 author: 'Otávio Miranda'
 ---
@@ -23,21 +23,23 @@ Tá parei!
 Não sei se foi assim com você também, mas eu tive um caso com Bash e Shell
 Script.
 
-Como tinha acesso ao root do servidor, aprendi `#!/bin/bash` e
-`echo "hello world"`. Daqui foi só ladeira abaixo. Te juro que lembro de
-pesquisar no Google, porque via `#!/bin/bash` e `#!/bin/sh` em scripts (pode ir
-lá, vou te esperar. Tá
-[aqui o link](https://claude.ai/share/9b9bb01d-d98b-4166-aa1c-685100146860)).
+Como tinha acesso ao root do servidor, depois que aprendi `#!/bin/bash` e
+`echo "hello world"`, fui só ladeira abaixo.
+
+Eu te juro que lembro de pesquisar no Google algo como: "_Por que alguns scripts
+têm `#!/bin/bash` e outros `#!/bin/sh`_". (pode ir pesquisar, te espero)
 
 Se você está estranhando o acesso ao servidor, antigamente usávamos tudo direto
 mesmo (pelo menos EU, usava). Digitava `ssh user@host` e usava um programa
-maravilhoso chamado **FileZilla** na porta `21` (seco mesmo). Segurança? FTP-se.
+chamado **FileZilla** na porta `21` (seco, inseguro, direto). Segurança? 🤬
 
-Mas eu divago. As coisas mudaram um pouco. Melhorei meu conhecimento (um pouco)
-e sigo estudando. Considere que você está lendo minhas notas de estudo. Espero
-que elas sejam úteis pra você, como estão sendo pra mim..
+Mas estou divagando.
 
-Do que pretendo falar? (caramba velho, você já está no artigo, só rolar ↓)
+As coisas mudaram (um pouco). Melhorei meu conhecimento (um pouco, também) e
+sigo estudando. Então considere que você está lendo minhas notas de estudo.
+Espero que elas sejam úteis pra você, como estão sendo pra mim.
+
+Do que pretendo falar? (caramba velho, você já está no artigo, só rolar, mas...)
 
 - Padrões de tratamento de erro que separam script de brinquedo de script de
   produção
@@ -48,30 +50,29 @@ Do que pretendo falar? (caramba velho, você já está no artigo, só rolar ↓)
 - Padrões do mundo real pra parsing de argumentos, config, logs e testes
 - Armadilhas de segurança e como não ser atropelado por elas
 
-Eu poderia muito bem corrigir as frases acima, trazendo o texto de volta para
-meu tom de escrita. Mas prefiro manter as coisas simples. Como minha mãe sempre
-falava: **Otávio, lembre-se que mais é menos**.
+Eu poderia muito bem corrigir as frases acima. Elas não têm meu tom de escrita.
+Mas vou manter do jeito que veio da IA por alguns motivos.
 
-A lista acima foi gerada por IA porque eu não sabia o que era cada uma daquelas
-coisas. Mas confia, tem coisa interessante para baixo.
+Primeiro, este post está sendo escrito faz um tempo e eu não lembrava o que
+tinha escrito. Segundo, eu não sabia falar tecnicamente o que eram cada uma das
+coisas que escrevi. Então, fique com uma pitada de IA neste texto.
 
-Eu já enrolei e brinquei demais. E cá entre nós, faço isso pra espantar público
-desqualificado. Aquele povo só queria copiar algo daqui e sair.
+Eu já enrolei e brinquei demais. E, não comenta com ninguém, mas faço isso pra
+espantar público desqualificado. Aquele povo só queria copiar algo daqui e sair.
+Prefiro você, que está disposto a aprender assim como eu.
 
-Já que eles já foram, então agora temos trabalho. (Você leu aquela frase de
-novo?)
+Já que eles já foram, então agora temos trabalho.
 
 ---
 
 # Fundamentos e redes de segurança: escrevendo scripts Bash sem susto
 
 Essa parte aqui é o kit de sobrevivência. Não é a parte "olha como eu sou
-avançado". É a parte "como eu evito passar vergonha porque um `cd` falhou e o
-resto do script saiu correndo sem mim".
+avançado". É mais como um básico inicial, mas essencial.
 
 ## Tratamento de erro sem autoengano
 
-Quase todo mundo já escreveu algo nessa linha:
+Considero o script abaixo:
 
 ```bash
 #!/bin/bash
@@ -82,9 +83,11 @@ tar czf release.tar.gz *
 echo "Pronto!"
 ```
 
-Enquanto tudo está bonito, ele parece ótimo. O problema aparece no dia em que
-`/tmp/build` não existe. O `cd` falha, o `rm -rf *` roda no diretório errado, e
-pronto: você ganhou uma tarde bem educativa.
+Enquanto tudo está bonito, ele funciona.
+
+O problema aparece no dia em que `/tmp/build` não existe. Nesse caso, o `cd`
+falha e o `rm -rf *` roda no diretório errado. Parabéns, agora você apagou tudo
+do diretório atual. Seu release vai ficar lindo!
 
 O primeiro freio de mão costuma ser este:
 
@@ -92,10 +95,12 @@ O primeiro freio de mão costuma ser este:
 set -euo pipefail
 ```
 
-Ajuda bastante. Só não compra a lenda de que isso resolve tudo sozinho.
+Ajuda bastante. Mas eu acabei descobrindo que isso não resolve tudo.
 
-**`set -e` (errexit)** manda o script parar quando um comando falha. Beleza. Só
-que ele tem vários cantos estranhos. Um dos meus favoritos é este aqui:
+**`set -e` (errexit)** manda o script parar quando um comando falha. Show! Só
+que ele tem alguns comportamentos estranhos.
+
+Um dos meus favoritos é este aqui:
 
 ```bash
 # Isso engole erros silenciosamente:
@@ -106,17 +111,21 @@ local result
 result=$(might_fail)
 ```
 
+Até ontem, as duas linhas acima não teriam diferença na minha cabeça.
+
 No primeiro caso, o `local` devolve `0` e esconde a falha do comando. Você segue
 com uma variável vazia e ainda acha que está tudo certo.
 
-Outra pegadinha chata: `set -e` fica meio "desligado" em alguns contextos, como
-comandos usados em `if`. Então não confia cegamente nele. Entende onde ele ajuda
-e onde ele faz pose.
+Outra pegadinha estranha: `set -e` fica meio "desligado" em alguns contextos,
+como comandos usados em `if`. Então não confia cegamente nele. Entende onde ele
+ajuda e onde ele faz pose.
 
 **`set -u` (nounset)** transforma variável não definida em erro. Sem isso,
 `$UNSET_VAR` vira string vazia e a festa continua. Em Bash antigo, arrays vazios
 podem dar umas respostas mais esquisitas, então vale testar se você ainda
-precisa suportar versão jurássica.
+precisa suportar versão jurássica. A maioria dos servidores modernos suporta
+versões novas do Bash (e para de ficar mantendo script legado, a IA resolve eles
+pra você em segundos).
 
 **`set -o pipefail`** corrige outro clássico: pipeline que "passa" porque só o
 último comando foi bem. Sem ele, um `curl` pode falhar e o `jq` ainda sair com
@@ -126,7 +135,8 @@ forma explícita.
 
 ### O modo estrito moderno
 
-Hoje, se eu puder escolher, eu prefiro partir daqui:
+Se eu pudesse escolher, prefiro já começar assim (mas não olhe meus dotfiles, só
+confia no que falo 🤣):
 
 ```bash
 #!/usr/bin/env bash
@@ -139,8 +149,8 @@ Os extras fazem diferença.
 
 - `set -E` ajuda o `trap ERR` a alcançar função e subshell.
 - `inherit_errexit` evita outra daquelas "gentilezas" do Bash com `$(...)`.
-- O `trap` pelo menos te diz onde a coisa foi pro espaço, em vez de deixar só um
-  silêncio constrangedor.
+- O `trap` pelo menos te diz onde deu pepino, em vez de deixar só um silêncio
+  constrangedor e "_indebugável_" (não copia, acabei de inventar a palavra).
 
 Olha o contraste:
 
@@ -153,9 +163,9 @@ echo "Exportacao concluida"
 ```
 
 Se a API estiver fora, esse script ainda consegue terminar sorrindo e dizendo
-"exportação concluída". Maravilhoso. Só que não.
+"exportação concluída". Maravilhoso. Assim você esperava...
 
-Eu prefiro algo assim:
+Talvez assim fique melhor. Faça o teste:
 
 ```bash
 #!/usr/bin/env bash
@@ -173,10 +183,11 @@ echo "Exportacao concluida: $LINES emails"
 falhar quando o resultado vem vazio ou `null`. E o `trap` te devolve um erro que
 dá pra investigar sem precisar abrir uma sessão espírita.
 
-## POSIX vs recursos específicos do Bash
+## POSIX vs recursos específicos do Bash (ou zsh)
 
 Antes de usar array, `[[ ]]`, `mapfile` e companhia, decide uma coisa: seu
-script é `sh` ou é Bash?
+script é `sh` ou é Bash? Quando não temos experiencia com isso, achamos que
+shell é tudo igual.
 
 `#!/bin/sh` não significa "shell genérico mágico". No macOS, costuma cair num
 Bash 3.2 antigo. Em Debian e Ubuntu, normalmente é `dash`. Em Alpine, geralmente
@@ -222,15 +233,21 @@ printf 'Hello\tWorld\n'
 curl -s https://example.com >/dev/null 2>&1
 ```
 
-Minha regra é simples:
+Vou falar dele mais adiante, mas o `shellcheck` pode te ajudar a escrever
+scripts que funciona de acordo com o
+[shebang](https://pt.wikipedia.org/wiki/Shebang).
+
+O jeito que eu tenho usado é simples:
 
 - Se o shebang é `#!/bin/sh`, escreve POSIX sem jeitinho.
 - Se você quer recurso do Bash, assume isso logo e usa `#!/usr/bin/env bash`.
+- Também tenho me aventurado no Mac com `#!/usr/bin/env zsh` (e já munda muito
+  do Bash para o zsh).
 
 Pra testar, `shellcheck -s sh` e `dash script.sh` já evitam bastante dor de
 cabeça.
 
-## ShellCheck é seu melhor amigo
+## ShellCheck ajuda bastante
 
 Se eu tivesse que te recomendar uma ferramenta só pra escrever shell script
 menos torto, seria o [ShellCheck](https://www.shellcheck.net/). Ele não pega só
@@ -248,7 +265,7 @@ Se `$STEAMROOT` vier vazio, isso pode virar `rm -rf /*`. Não é paranoia. Já
 aconteceu com o cliente Linux da Steam. A forma segura é exigir que a variável
 exista de verdade com `${STEAMROOT:?}`.
 
-Cinco avisos que valem decorar:
+Cinco avisos que vivem aparecendo:
 
 - **SC2086**: coloca aspas nas variáveis.
 - **SC2155**: separa declaração de atribuição.
@@ -266,7 +283,16 @@ severity=style
 source-path=SCRIPTDIR
 ```
 
-No CI, já resolve assim:
+Às vezes também vem warning chato, aí eu só desativo mesmo. Às vezes ele não
+enxerga o arquivo que você está usando para `source` e eu também não estou muito
+animado a configurar (nem sei se dá pra configurar).
+
+```bash
+# shellcheck disable=SC1091
+. "${HOME}/dotfiles/zsh/config/functions"
+```
+
+No CI, eu faria algo assim:
 
 ```yaml
 - name: ShellCheck
@@ -286,8 +312,8 @@ repos:
 
 ## Quando NÃO usar Bash
 
-Bash é ótimo como cola. Como linguagem de propósito geral, cá entre nós, ele é
-meio barraqueiro.
+Bash é ótimo como cola. Como linguagem de propósito geral, pode ser mais
+trabalhoso do que o necessário.
 
 Eu gosto de Bash quando a tarefa é:
 
@@ -311,8 +337,10 @@ eu só estou teimando?".
 Às vezes 200 linhas em Bash ficam ótimas. Às vezes 50 já passaram da conta. O
 critério, pra mim, é menos tamanho e mais sofrimento.
 
-No fim, o melhor script Bash costuma ser o que sabe seu lugar: orquestra bem,
-falha cedo e passa o trabalho pesado pra ferramenta certa.
+Hoje, eu tendo a gostar mais do script Bash que sabe seu lugar: orquestra bem,
+falha cedo e passa o trabalho pesado pra ferramenta certa. Python é um ótimo
+substituto do Bash para lógicas mais complexas, mas aí já envolve subir o
+interpretador. Você escolhe.
 
 ---
 
@@ -324,22 +352,19 @@ expansões direito e para de abrir subprocesso por qualquer coisinha.
 
 ## Arrays: pare de fingir com string separada por espaço
 
-Se você ainda faz isso aqui:
+Isso aqui é a minha cara:
 
 ```bash
 files="file1.txt file2.txt file3.txt"
 ```
 
-... então você está deixando um bug quietinho esperando o primeiro nome com
-espaço aparecer.
-
-Use array de verdade:
+... mas em minha defesa, eu nem sabia que o Bash tinha arrays. Olha só:
 
 ```bash
 # Declaracao
 files=("report Q1.csv" "data 2024.json" "notes.txt")
 
-# Iteracao - O UNICO JEITO CORRETO
+# Iteracao - o jeito mais seguro
 for f in "${files[@]}"; do
     echo "Processando: $f"
 done
@@ -389,25 +414,29 @@ que transformar tudo em texto e depois parsear de novo.
 Pra carregar arquivo em array:
 
 ```bash
-# Correto: lida com espacos e nao faz glob
+# Seguro: lida com espacos e nao faz glob
 mapfile -t lines < input.txt
 
-# Tambem correto (alternativa para bash 3.x)
+# Tambem funciona (alternativa para bash 3.x)
 IFS=$'\n' read -r -d '' -a lines < input.txt || true
 
-# ERRADO: globbing + word splitting destroem seus dados
+# Evite isto: globbing + word splitting destroem seus dados
 lines=( $(cat input.txt) )    # NAO FACA ISSO
 ```
 
-`mapfile` resolve isso sem drama. O `$(cat file)` é o tipo de coisa que parece
-funcionar até o dia em que a entrada vem com espaço, `*` ou qualquer outra
-surpresinha simpática.
+`mapfile` resolve isso. O `$(cat file)` é o tipo de coisa que parece funcionar
+até o dia em que a entrada vem com espaço, `*` ou qualquer outra surpresinha
+simpática.
 
-## Expansão de parâmetros: o tipo de coisa que faz você chamar menos `sed`
+## Expansão de parâmetros
 
 Aqui começa a parte divertida do Bash. Não divertida no sentido "uau, que
 linguagem elegante". Divertida no sentido "pera, eu realmente não preciso abrir
 um processo pra isso?".
+
+Só pra constar, eu não sei isso de cor. Toda vez que preciso de algo assim:
+Google. O problema é você não conhecer e nem saber o que pesquisar. Olha que
+massa:
 
 ```bash
 filepath="/home/deploy/app/config.tar.gz"
@@ -418,18 +447,22 @@ echo "${filepath%%.*}"    # /home/deploy/app/config  (remove TODAS as extensoes)
 echo "${filepath%.gz}"    # /home/deploy/app/config.tar  (remove so a ultima extensao)
 ```
 
-Resumo rápido:
+Sua colinha de bolso:
 
 - `#` corta da esquerda
 - `%` corta da direita
 - uma vez = menor correspondência
 - dobrado = maior correspondência
 
-Renomear extensão fica simples:
+Renomear extensão fica simples. E eu estava precisando disso agora mesmo pra
+fazer isso:
 
 ```bash
-for f in *.jpeg; do
-    mv -- "$f" "${f%.jpeg}.jpg"
+# Agora suas imagens .png com fundo transparente tem um fundo preto.
+# De nada 🥸 (a pasta mess aí é pra me lembrar de limpar minha própria bagunça)
+for f in "${HOME}"/Desktop/mess/fotos/*.png; do
+    ########################## só isso pra trocar a extensão   ↓     ↓
+    magick "$f" -background black -alpha remove -alpha off "${f%.png}.jpg"
 done
 ```
 
@@ -444,7 +477,9 @@ echo "${msg/#ERROR/WARN}"    # Substitui so se estiver no inicio
 echo "${msg/%prod/staging}"  # Substitui so se estiver no fim
 ```
 
-E tem as expansões de default, que eu uso bastante:
+E tem as expansões de default, que eu uso bastante. Você seria obrigado a usar
+isso se fosse fazer um script direito, como vimos anteriormente. Se uma variável
+não tiver valor, dá erro e ele nem roda. Isso resolve:
 
 ```bash
 # ${var:-default} - usa o default se var estiver vazia OU nao definida
@@ -478,7 +513,8 @@ echo "${name^}"    # John DOE  (capitaliza o primeiro caractere)
 
 Se eu tivesse que escolher uma coisa pra martelar em shell script, seria aspas.
 Metade dos bugs estranhos de Bash parece ter sido criada num laboratório só pra
-te lembrar disso.
+te lembrar disso. Sabe aquele tipo de regra cheio de `ifs`? Sãs as aspas no Bash
+(principalmente as duplas).
 
 ```bash
 #!/bin/bash
@@ -495,6 +531,18 @@ cleanup "/tmp/my app/cache"
 Esse script é uma fábrica de problema. `$(ls "$dir")` faz word splitting. Aí o
 arquivo com espaço vira dois. E você só percebe quando apagou a coisa errada ou
 quando nada funciona no servidor "sem motivo".
+
+**Pro tip**: Se você está começando agora, já saiba disso: `rm` não tem volta.
+Começa com `echo rm algumacoisa`. E veja o comando que vai ser executado
+primeiro. Eu faço isso toda hora. Aqui o histórico do meu `zsh` que não me deixa
+mentir:
+
+```txt
+: 1776691649:0;for f in ~/Desktop/mess/fotos/*.*; do echo magick "$f" -background black -alpha remove -alpha off "${f%(.png|.jpg)}.jpg" ; done
+: 1776691666:0;for f in ~/Desktop/mess/fotos/*.*; do magick "$f" -background black -alpha remove -alpha off "${f%(.png|.jpg)}.jpg" ; done
+```
+
+O que? Achou que era mentira, né? Te peguei!
 
 O mínimo aceitável fica assim:
 
@@ -861,13 +909,14 @@ Quando eu penso em Bash de produção, eu não penso em "script elegante". Eu pe
 em script previsível. Aquele troço chato, explícito e um pouco paranoico, mas
 que não inventa surpresa ruim.
 
-## Parsing de argumentos do jeito certo
+## Parsing de argumentos sem gambiarra
 
 `getopts` já resolve muita coisa. Não é framework de CLI, não vai te dar
 subcomando bonitinho, mas pra muito script real ele basta.
 
-O ponto é: parsing não termina quando você conseguiu ler `-v` e `-o`. Parsing
-também é validar aridade, formato e pressuposto que o resto do script depende.
+O problema é que muita gente acha que parsing acaba quando você conseguiu ler
+`-v` e `-o`. Não acaba. Parsing também é validar aridade, formato e tudo aquilo
+de que o resto do script depende.
 
 Esse padrão aqui é bom de manter na manga:
 
@@ -1116,8 +1165,8 @@ log() {
 }
 ```
 
-Isso te dá nível, timestamp e arquivo de log sem sujar `stdout`. Quando eu quero
-espelhar stream, ainda gosto de `tee`:
+Pronto. Você ganha nível, timestamp e arquivo de log sem sujar `stdout`. Quando
+eu quero espelhar stream, ainda gosto de `tee`:
 
 ```bash
 exec 2> >(tee -a "$LOG_FILE" >&2)
@@ -1208,8 +1257,8 @@ eval "cat logs/$filename"
 O atacante pode meter um `;`, um `$(...)` ou qualquer outra gracinha. E, às
 vezes, nem precisa ser algo espalhafatoso pra causar estrago.
 
-A correção não é "sanitizar melhor". A correção é parar de tratar dado como
-código:
+Pra mim, aqui não adianta tentar "sanitizar melhor". O que ajuda de verdade é
+parar de tratar dado como código:
 
 ```bash
 #!/bin/bash
@@ -1229,9 +1278,9 @@ cat -- "logs/$filename"
 O `--` evita interpretar nome como opção. O regex barra `../../etc/passwd` e
 coisa parecida. Aqui a ideia é simples: cada camada corta um pedaço do problema.
 
-Minha regra pessoal é: se bateu vontade de usar `eval`, eu paro e desconfio.
-Quase sempre dá pra fazer melhor. Quando realmente precisar montar comando, usa
-array:
+Quando bate vontade de usar `eval`, eu paro e desconfio. Na maior parte das
+vezes dá pra fazer melhor. Quando eu realmente preciso montar comando, costumo
+ir de array:
 
 ```bash
 cmd=(find "$directory" -name "*.log" -mtime +"$days")
@@ -1250,7 +1299,7 @@ Esse padrão com PID no nome parece "único o bastante" até o dia em que algué
 cria um symlink ali antes de você. Aí o seu script grava dado onde não devia e a
 brincadeira acaba.
 
-**O padrão correto:**
+**Um padrão bem melhor:**
 
 ```bash
 #!/bin/bash
@@ -1423,7 +1472,7 @@ child_pid=$!
 wait "$child_pid"
 ```
 
-O que eu tento guardar daqui:
+Daqui, eu guardo basicamente isto:
 
 - `exec` substitui o shell pelo processo final quando você não precisa de lógica
   extra.
@@ -1433,7 +1482,7 @@ O que eu tento guardar daqui:
 
 ## Padrões de deploy
 
-### Publique do jeito certo
+### Publicando sem surpresa
 
 Pra script standalone, eu gosto de falhar cedo se a versão do Bash não for a
 necessária:
@@ -1477,36 +1526,20 @@ Nessa hora, chamar Python ou Go não é derrota. Muitas vezes é só bom senso.
 
 # Conclusão: script chato costuma ser o melhor script
 
-Pra mim, evoluir em Bash tem menos a ver com decorar truque obscuro e mais com
-entender onde o shell costuma mentir, omitir ou te dar corda pra se enforcar.
+Pra mim, Bash fica melhor quando você para de procurar truque esperto e começa a
+desconfiar das coisas certas. Desconfiar do `set -e`, do pipeline inocente, do
+`eval`, do temporário malfeito, do loop que abre processo demais e jura que está
+tudo sob controle.
 
-No meio desse artigo, a gente passou por várias dessas cascas de banana:
+No fim, o tipo de script Bash de que eu mais gosto é aquele que você roda daqui
+a três meses sem sentir vontade de xingar o seu eu do passado. Se ele falha
+cedo, fala onde doeu, não mistura dado com código e não sai fazendo gracinha em
+silêncio, eu já fico feliz.
 
-- erro que some no meio do caminho
-- variável que morre em subshell
-- `eval` querendo transformar dado em código
-- loop lento porque cada linha abre processo demais
-- PID 1 maltratado no container
-
-Se eu tivesse que resumir tudo numa lista curta, seria mais ou menos isto:
-
-- falha cedo
-- coloca aspas onde precisa
-- valida entrada antes de mexer no que não deve
-- trata config como dado
-- limpa temporário e processo auxiliar
-- testa o que pode machucar
-
-Bash bom, no fim, costuma ser meio sem graça. E isso é elogio.
-
-Ele faz o trabalho, não inventa moda, não esconde erro e não tenta parecer uma
-linguagem que ele não é. A parte interessante normalmente está nos programas que
-ele orquestra. O shell é a cola.
-
-Então, se eu puder te deixar com uma ideia só, é esta: tenta escrever script que
-não surpreende você daqui a três meses.
-
-Se funcionar no notebook, no CI, no container e ainda falhar de um jeito que dá
-pra entender, já está muito bom.
+Se ele funcionar no notebook, no CI e dentro do container sem virar um caso de
+polícia, ótimo. E se em algum momento você perceber que está forçando a barra e
+tentando transformar Bash em linguagem de aplicação, passa o bastão. Chamar
+Python, Go ou qualquer outra ferramenta melhor praquele pedaço não é derrota.
+Pra mim, é só bom senso mesmo.
 
 Valeu.
