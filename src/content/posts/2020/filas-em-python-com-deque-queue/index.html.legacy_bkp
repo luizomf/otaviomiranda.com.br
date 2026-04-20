@@ -48,7 +48,7 @@
           <em>Double Ended Queue</em> (ou Fila de duas pontas) &ndash; pode ser
           usada para implementar filas FIFO (que veremos a seguir) e
           <a
-            href="https://www.otaviomiranda.com.br/2020/pilhas-em-python-com-listas-stack/"
+            href="https://otaviomiranda.com.br/2020/pilhas-em-python-com-listas-stack/"
             >pilhas LIFO</a
           >.
         </p>
@@ -66,7 +66,7 @@
           Por&eacute;m, remover elementos da frente (com &iacute;ndice 0) pode
           ser problem&aacute;tico do ponto de vista de desempenho do programa.
           Por exemplo, poder&iacute;amos usar listas para criar filas (<a
-            href="https://www.otaviomiranda.com.br/2020/pilhas-em-python-com-listas-stack/"
+            href="https://otaviomiranda.com.br/2020/pilhas-em-python-com-listas-stack/"
             >como fizemos com as pilhas</a
           >), por&eacute;m elas n&atilde;o s&atilde;o otimizadas para isso e
           acabam movendo os &iacute;ndices de todos os elementos posteriores ao
@@ -169,7 +169,7 @@
           Perceba que <code>deque</code> tem quase os mesmos m&eacute;todos de
           uma lista normal no Python (por isso podemos us&aacute;-las como
           <a
-            href="https://www.otaviomiranda.com.br/2020/pilhas-em-python-com-listas-stack/"
+            href="https://otaviomiranda.com.br/2020/pilhas-em-python-com-listas-stack/"
             >pilhas</a
           >
           se quisermos). Ent&atilde;o, para inserir um novo elemento na cauda da
@@ -260,7 +260,7 @@
         <p>
           Assim como fizemos com as pilhas (no
           <a
-            href="https://www.otaviomiranda.com.br/2020/pilhas-em-python-com-listas-stack/"
+            href="https://otaviomiranda.com.br/2020/pilhas-em-python-com-listas-stack/"
             >artigo anterior</a
           >), podemos encapsular <code>deque</code> em uma classe para manter o
           controle sobre os m&eacute;todos que dever&atilde;o ser utilizados
