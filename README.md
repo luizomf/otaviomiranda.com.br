@@ -1,6 +1,6 @@
 # Otávio Miranda — Blog & Personal Site
 
-Source code for [otaviomiranda.com.br](https://www.otaviomiranda.com.br).
+Source code for [otaviomiranda.com.br](https://otaviomiranda.com.br).
 
 This is an open lab. Read the code, open issues, submit posts.
 
@@ -46,7 +46,8 @@ npm run lint       # Astro check + Prettier
 npm run post "Your post title"
 ```
 
-Creates the folder, images directory, and `text.md` with frontmatter ready to fill.
+Creates the folder, images directory, and `text.md` with frontmatter ready to
+fill.
 
 ### Manual way
 
@@ -71,13 +72,13 @@ date: 2026-01-01
 Want to write a guest post? Start by opening an issue using the **Content**
 template.
 
-**If you're a Brazilian contributor: content and blog post issues may be
-written in Portuguese or English. Code-related issues (bug, refactor, feature)
-must be written in English only.**
+**If you're a Brazilian contributor: content and blog post issues may be written
+in Portuguese or English. Code-related issues (bug, refactor, feature) must be
+written in English only.**
 
 **🇧🇷 Se você é um contribuidor brasileiro: issues de conteúdo e posts do blog
-podem ser escritas em português ou em inglês. Issues relacionadas a código
-(bug, refactor, feature) devem ser escritas apenas em inglês.**
+podem ser escritas em português ou em inglês. Issues relacionadas a código (bug,
+refactor, feature) devem ser escritas apenas em inglês.**
 
 Use that issue to pitch:
 
@@ -124,12 +125,13 @@ Refactor) before starting.
 
 ## Deploy
 
-Triggered manually via GitHub Actions. Go to **Actions → Deploy to GitHub
-Pages → Run workflow**.
+Triggered manually via GitHub Actions. Go to **Actions → Deploy to GitHub Pages
+→ Run workflow**.
 
 ---
 
 ## Editor
 
 There's a browser-based Markdown editor at `/editor/` — Monaco + live preview
-+ File System Access API. Useful for writing posts directly in the browser.
+
+- File System Access API. Useful for writing posts directly in the browser.

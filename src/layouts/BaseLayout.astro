@@ -44,7 +44,7 @@ const {
   ogType = 'website',
 } = Astro.props;
 
-const site = Astro.site ?? new URL('https://www.otaviomiranda.com.br');
+const site = Astro.site ?? new URL('https://otaviomiranda.com.br');
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, site).toString();
 ---
 

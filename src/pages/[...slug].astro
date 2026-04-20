@@ -64,7 +64,10 @@ const postImages = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true },
 );
 
-function getFirstBodyImage(body: string | undefined, entryId: string): string | undefined {
+function getFirstBodyImage(
+  body: string | undefined,
+  entryId: string,
+): string | undefined {
   const match = body?.match(/!\[.*?\]\(\.\/images\/([^)]+)\)/);
   if (!match) return undefined;
 
@@ -73,8 +76,9 @@ function getFirstBodyImage(body: string | undefined, entryId: string): string | 
   return postImages[key]?.default.src;
 }
 
-const site = Astro.site ?? new URL('https://www.otaviomiranda.com.br');
-const resolvedImage = entry.data.image ?? getFirstBodyImage(entry.body, entry.id);
+const site = Astro.site ?? new URL('https://otaviomiranda.com.br');
+const resolvedImage =
+  entry.data.image ?? getFirstBodyImage(entry.body, entry.id);
 const ogImage = resolvedImage?.startsWith('http')
   ? resolvedImage
   : resolvedImage
@@ -121,13 +125,15 @@ const audioSrc = entry.data.audio;
           }
         </div>
 
-        {audioSrc && (
-          <div class="post-audio">
-            <audio controls preload="none">
-              <source src={audioSrc} type="audio/ogg; codecs=opus" />
-            </audio>
-          </div>
-        )}
+        {
+          audioSrc && (
+            <div class='post-audio'>
+              <audio controls preload='none'>
+                <source src={audioSrc} type='audio/ogg; codecs=opus' />
+              </audio>
+            </div>
+          )
+        }
       </header>
 
       <Content />

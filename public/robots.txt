@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.otaviomiranda.com.br/sitemap-index.xml
+Sitemap: https://otaviomiranda.com.br/sitemap-index.xml
