@@ -127,6 +127,24 @@ atalho ruim que aparece em muita implementação apressada.
 Fonte:
 [Anthropic - Scaling Managed Agents: Decoupling the brain from the hands](https://www.anthropic.com/engineering/managed-agents)
 
+## Destaques rápidos
+
+- O texto do Martin Fowler sobre [technical, cognitive, and intent debt](https://martinfowler.com/fragments/2026-04-02.html) continua valendo a leitura porque põe nome num problema que muita equipe já está sentindo: não é só o código que degrada quando a automação entra sem cuidado. O entendimento do sistema e a clareza sobre o que o time realmente quis construir também começam a escorregar. Fonte: [Martin Fowler - Technical, cognitive, and intent debt](https://martinfowler.com/fragments/2026-04-02.html)
+
+- O paper sobre [hidden measurement error in LLM pipelines](https://arxiv.org/abs/2604.11581) combina bem com a discussão sobre benchmarks acima. A ideia central é simples: juiz, prompt, temperatura e detalhes do pipeline conseguem distorcer avaliação a ponto de fazer diferença pequena parecer grande. Fonte: [arXiv - Hidden Measurement Error in LLM Pipelines Distorts Annotation, Evaluation, and Benchmarking](https://arxiv.org/abs/2604.11581)
+
+- Em [The Tool-Overuse Illusion](https://arxiv.org/abs/2604.19749), os autores batem numa tecla que aparece com frequência em stacks de agentes: mais ferramenta nem sempre significa mais capacidade. Em bastante caso, excesso de chamada é sintoma de orquestração ruim ou planejamento fraco. Fonte: [arXiv - The Tool-Overuse Illusion](https://arxiv.org/abs/2604.19749)
+
+- O trabalho [AVISE](https://arxiv.org/abs/2604.20833) chama atenção por um motivo bem prático: segurança de IA precisa de suíte de avaliação repetível, não só demo bonita de lançamento. Ainda está cedo, mas a direção faz sentido. Fonte: [arXiv - AVISE: Framework for Evaluating the Security of AI Systems](https://arxiv.org/abs/2604.20833)
+
+## Acompanhamento de tendências
+
+- A fronteira de segurança está descendo a pilha. O risco aparece menos no prompt isolado e mais no editor, no sandbox, no runner, no CI e no container onde o agente realmente vive.
+
+- A discussão sobre benchmark está ficando menos glamourosa e mais útil. Infraestrutura, metodologia e critério de avaliação estão pesando tanto quanto o modelo em si.
+
+- Plataformas de agentes estão ficando com cara de produto de infraestrutura. Memória, identidade, observabilidade, isolamento e governança já não são detalhe de implementação.
+
 ## Fechando o quadro
 
 Juntando as quatro histórias, o padrão fica claro: a discussão séria sobre
