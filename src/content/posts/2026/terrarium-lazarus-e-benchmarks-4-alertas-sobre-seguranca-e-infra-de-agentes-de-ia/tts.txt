@@ -1,0 +1,99 @@
+Terrarium, Lazarus e benchmarks. Quatro alertas sobre segurança e infraestrutura de agentes de IA.
+
+Nota. Gerado por IA, The Paper LLM, com fontes originais listadas por bloco.
+
+O lote de hoje gira em torno do mesmo problema. Muita gente ainda olha para IA pensando só no modelo. Mas os riscos e os gargalos estão cada vez mais no runtime, no sandbox, no ambiente de execução e no jeito como essas ferramentas entram no fluxo de trabalho de quem desenvolve.
+
+Terrarium mostra como um sandbox pode virar parte do problema.
+
+Em vinte e um de abril de dois mil e vinte e seis, o CERT ponto C C publicou a nota V U número quatro um quatro oito um um sobre uma falha no Terrarium, uma plataforma de execução de código em sandbox.
+
+O problema está numa travessia da cadeia de protótipos JavaScript dentro do ambiente Pyodide. Isso pode abrir caminho para alcançar o global this, acessar internals do Node ponto J S e executar comandos arbitrários com privilégios de root no processo hospedeiro.
+
+O ponto mais importante aqui não é só a existência da falha. É o tipo de confiança que ela quebra. Ferramentas como o Terrarium costumam aparecer justamente no momento em que alguém pensa que pode deixar o modelo gerar código porque aquilo está isolado. Quando a camada de isolamento falha, o sandbox deixa de ser proteção e passa a ser mais uma superfície de ataque.
+
+O CERT ponto C C diz que não conseguiu coordenar uma correção com o fornecedor. Também lista mitigações mais defensivas do que curativas, como segmentação de rede, monitoramento da atividade do container, controles de acesso e redução das funcionalidades expostas.
+
+Em português claro, se você executa código não confiável, o ideal continua sendo reduzir o raio de explosão desde o início. Não faz sentido presumir que o sandbox vai segurar tudo sozinho.
+
+Fonte. CERT ponto C C, na nota V U número quatro um quatro oito um um.
+
+A campanha descrita pela Expel leva o ataque direto para o workflow do desenvolvedor.
+
+Em vinte e dois de abril de dois mil e vinte e seis, a Expel publicou um relatório sobre um grupo que ela rastreia com alta confiança como ligado à Coreia do Norte.
+
+O alvo principal são desenvolvedores de Web três. Mas a mecânica do ataque interessa a qualquer pessoa que receba repositório de teste, projeto de entrevista ou prova técnica para rodar localmente.
+
+Segundo a Expel, o grupo usa falsas ofertas de emprego e envia take home assessments adulterados. Em vários casos, o pacote vem com tasks ponto json malicioso no VS Code, configurado para disparar código assim que a pasta é aberta. Quando isso não basta, o próprio código do projeto já traz backdoors pensados para rodar quando a vítima tenta executar a aplicação.
+
+O detalhe que chama atenção é o uso pesado de ferramentas de IA generativa no processo. No relatório, a Expel diz que o grupo abusa de ferramentas como Cursor e ChatGPT para escalar a operação.
+
+O resultado não é malware mágico feito por IA. É algo mais pé no chão e, por isso mesmo, mais perigoso. Campanhas mais baratas, melhor escritas e mais fáceis de multiplicar.
+
+Esse tipo de história é um bom lembrete de que abrir pasta, confiar em automação do editor e rodar projeto de terceiros já faz parte do modelo de ameaça. Não é só navegador, e mail ou anexo estranho. O ambiente de desenvolvimento entrou de vez nessa conta.
+
+Fonte. Expel, no relatório sobre a campanha da Lazarus contra desenvolvedores.
+
+Benchmarks de agentes podem mudar bastante só por causa da infraestrutura.
+
+Em um texto recente de engenharia, a Anthropic argumenta que benchmarks de coding agents podem variar vários pontos percentuais sem que o modelo mude. A mudança vem só da configuração de infraestrutura.
+
+No experimento descrito pela empresa, a diferença entre o setup mais restrito e o menos restrito no Terminal Bench dois ponto zero chegou a seis pontos percentuais.
+
+Os números do texto ajudam a entender o tamanho do ruído. Em configuração estrita, os erros de infraestrutura ficaram em cinco vírgula oito por cento. No cenário sem limite, caíram para zero vírgula cinco por cento.
+
+Até certo ponto, dar mais folga de CPU e memória corrige instabilidade que nem deveria contaminar a medição. Depois desse ponto, a própria prova muda, porque agentes mais pesados passam a conseguir instalar dependências grandes, abrir subprocessos caros e tentar estratégias que morrem sob orçamento apertado.
+
+Essa distinção importa muito. Uma coisa é remover ruído operacional. Outra coisa é facilitar a prova sem dizer claramente que isso aconteceu.
+
+O argumento da Anthropic é simples. Leaderboard de agente não vale muita coisa sem CPU, memória, limite rígido, método de enforcement e janela de tempo bem descritos. Diferença pequena demais, sem metodologia clara, merece desconfiança.
+
+Fonte. Anthropic, no texto sobre ruído de infraestrutura em avaliações de coding agents.
+
+Managed Agents reforça uma separação que muita stack ainda ignora.
+
+Em outro texto de engenharia, a Anthropic descreve a arquitetura do Managed Agents como uma separação mais dura entre sessão, harness e sandbox.
+
+A ideia é parar de tratar o agente inteiro como um container único, frágil e cheio de acoplamentos. Em vez disso, o cérebro fica desacoplado das mãos. Cada parte pode falhar, reiniciar ou ser trocada sem levar o resto junto.
+
+O ganho não fica só na elegância da arquitetura. A Anthropic diz que, com essa separação, a recuperação de falhas ficou mais simples, a integração com V P C dos clientes melhorou e o tempo até o primeiro token caiu bastante.
+
+No texto, a empresa afirma que essa latência caiu cerca de sessenta por cento na mediana e mais de noventa por cento nos casos mais lentos.
+
+Tem também um ponto de segurança que merece atenção. Quando código não confiável roda no mesmo container que guarda credenciais e contexto, uma injeção bem sucedida precisa atravessar bem menos barreiras para chegar em segredo valioso.
+
+Separar o harness, a sessão e o sandbox não elimina o risco. Mas corta um atalho ruim, desses que aparecem com facilidade em implementação apressada.
+
+Fonte. Anthropic, no texto sobre managed agents.
+
+Destaques rápidos.
+
+O texto do Martin Fowler sobre dívida técnica, dívida cognitiva e dívida de intenção continua valendo a leitura. Ele põe nome num problema que muita equipe já está sentindo. Não é só o código que degrada quando a automação entra sem cuidado. O entendimento do sistema e a clareza sobre o que o time realmente quis construir também começam a escorregar.
+
+Fonte. Martin Fowler.
+
+Outro ponto importante vem de um estudo sobre erro de medição escondido em pipelines de modelos de linguagem. A ideia central é simples. Juiz, prompt, temperatura e detalhes do pipeline conseguem distorcer a avaliação a ponto de fazer diferença pequena parecer grande.
+
+Fonte. Arxiv, no paper sobre hidden measurement error in L L M pipelines.
+
+Tem também um estudo sobre excesso de uso de ferramentas. Os autores batem numa tecla que aparece com frequência em stacks de agentes. Mais ferramenta nem sempre significa mais capacidade. Em muitos casos, excesso de chamada é sintoma de orquestração ruim ou de planejamento fraco.
+
+Fonte. Arxiv, no paper The Tool Overuse Illusion.
+
+E o trabalho Avise chama atenção por um motivo bem prático. Segurança de inteligência artificial precisa de avaliação repetível. Não basta demo bonita de lançamento. Ainda está cedo, mas a direção faz sentido.
+
+Fonte. Arxiv, no paper A V I S E.
+
+Acompanhamento de tendências.
+
+A fronteira de segurança está descendo a pilha. O risco aparece menos no prompt isolado e mais no editor, no sandbox, no runner, no C I e no container onde o agente realmente vive.
+
+A discussão sobre benchmark está ficando menos glamourosa e mais útil. Infraestrutura, metodologia e critério de avaliação estão pesando tanto quanto o modelo em si.
+
+Plataformas de agentes estão ficando com cara de produto de infraestrutura. Memória, identidade, observabilidade, isolamento e governança já não são detalhe de implementação.
+
+Fechando o quadro.
+
+Juntando as quatro histórias, o padrão fica claro. A discussão séria sobre agentes de IA está descendo a pilha.
+
+O modelo continua importante, claro. Mas o estrago real, e também as diferenças práticas, estão aparecendo no container, no editor, no benchmark, no scheduler, no sandbox e na forma como tudo isso conversa com código e credenciais do mundo real.
