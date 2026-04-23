@@ -1,0 +1,85 @@
+GPT cinco ponto cinco apareceu no Codex hoje, e eu peguei no pulo.
+
+Criado por Otávio Miranda em 23 de abril de 2026.
+
+O GPT cinco ponto cinco saiu hoje, 23 de abril de 2026, e eu descobri do jeito mais besta possível: apareceu um botão pra atualizar o Codex. Cliquei.
+
+Quando olhei de novo, o modelo já tinha mudado pra GPT cinco ponto cinco.
+
+Então, antes que isso vire notícia de ontem, o que em IA parece acontecer em umas três horas, resolvi deixar esta nota aqui.
+
+Mas, vamos com calma. Isso aqui não é review. Não deu tempo. Eu literalmente acabei de pegar o modelo.
+
+Este texto é baseado principalmente no material de lançamento da própria Open AI. Então ainda tem muito cheiro de marketing de fabricante. Benchmark bonito, frase forte, promessa de produtividade, aquele pacote completo.
+
+Dito isso, tem algumas coisas interessantes.
+
+Primeiro: o que a Open AI está prometendo.
+
+Segundo a Open AI, o GPT cinco ponto cinco não está sendo vendido só como um chat melhor. A promessa é mais específica: um modelo melhor pra trabalhar com ferramentas por mais tempo.
+
+Código, pesquisa online, análise de dados, documentos, planilhas, uso de software e tarefas que exigem várias etapas.
+
+Ou seja: menos "me responde isso aqui", e mais "pega esse problema bagunçado, entende o contexto, usa ferramentas, testa, corrige e me devolve algo que preste".
+
+Pra quem usa Codex, isso é exatamente onde a coisa começa a ficar interessante.
+
+A Open AI diz que o GPT cinco ponto cinco melhorou em tarefas de código e uso de terminal. No material oficial, eles citam 82,7 por cento no Terminal Bench dois ponto zero, contra 75,1 por cento do GPT cinco ponto quatro.
+
+No SWE Bench Pro, que tenta medir resolução de issues reais em projetos, o número subiu pouco: 58,6 por cento contra 57,7 por cento.
+
+Esse "subiu pouco" também é importante. Nem todo benchmark grita revolução. Algumas coisas parecem avanço incremental mesmo.
+
+E tudo isso ainda precisa passar pelo teste mais cruel: projeto real, com código velho, decisão estranha, teste quebrando, dependência chata e humano cansado do outro lado.
+
+Agora: Codex, contexto e preço.
+
+No anúncio oficial, a Open AI diz que o GPT cinco ponto cinco está chegando ao ChatGPT e ao Codex para usuários Plus, Pro, Business e Enterprise.
+
+No Codex, também entram Edu e Go, com janela de contexto de quatrocentos mil tokens.
+
+Também existe um modo Fast, que gera tokens mais rápido, mas custa mais. A promessa oficial é gerar uma vez e meia mais rápido, por duas vezes e meia o custo.
+
+Na API, ele ainda aparece como em breve.
+
+A própria página de preços da Open AI já lista o GPT cinco ponto cinco como coming soon, com cinco dólares por um milhão de tokens de entrada, e trinta dólares por um milhão de tokens de saída.
+
+Então, sim, parece mais capaz. Também parece mais caro.
+
+Como todo bom dev, a gente comemora com uma mão e segura a carteira com a outra.
+
+Outra parte forte do lançamento é segurança.
+
+A Open AI publicou um system card do GPT cinco ponto cinco. Também fala em testes antes do lançamento, red teaming, avaliações para cyber e biologia, além de feedback de quase duzentos parceiros de acesso antecipado.
+
+Ela também abriu um Bio Bug Bounty específico do GPT cinco ponto cinco.
+
+O escopo é bem específico: GPT cinco ponto cinco no Codex Desktop, procurando um jailbreak universal para perguntas de segurança biológica. O prêmio principal anunciado é de vinte e cinco mil dólares.
+
+Traduzindo: eles também sabem que um modelo melhor em código, pesquisa e ferramentas pode ser útil pra coisa boa e pra coisa ruim.
+
+E esse é o pedaço que mais me interessa no longo prazo. Não só "o modelo ficou mais inteligente", mas "o modelo ficou mais capaz de agir".
+
+Quando entra ferramenta, terminal, navegador, arquivo, repositório, sandbox e automação, a conversa muda de tamanho.
+
+Minha impressão de primeira hora?
+
+Curiosidade.
+
+Não vou fingir conclusão madura onde só existe botão recém-clicado. Quero ver se ele realmente entende melhor projetos grandes, se respeita mais o estilo do código, se testa direito, se não inventa moda quando eu só quero uma alteração pequena, e se consegue trabalhar sem transformar cada tarefa simples numa tese.
+
+Também quero ver uma coisa que benchmark não mede tão bem: comportamento no fluxo real.
+
+Porque um agente pode ser muito inteligente e ainda ser chato. Pode ser capaz e ansioso. Pode resolver um bug difícil e, cinco minutos depois, mexer onde não precisava.
+
+Quem usa esse tipo de ferramenta todo dia sabe que mais autonomia só é bom quando vem junto com bom senso.
+
+Então fica a nota: peguei o GPT cinco ponto cinco no pulo aqui no Codex.
+
+Talvez eu volte a falar dele depois de usar mais. Talvez não. Eu não costumo fazer post sobre cada modelo novo que aparece, mas esse caiu direto na ferramenta que eu uso pra trabalhar no blog, no código e nas automações.
+
+Aí ficou difícil ignorar.
+
+As fontes usadas foram o anúncio oficial do GPT cinco ponto cinco, o system card do modelo, a página de preços da API da Open AI e a página do Bio Bug Bounty do GPT cinco ponto cinco.
+
+Valeu.
