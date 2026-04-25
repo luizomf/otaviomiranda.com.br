@@ -61,6 +61,7 @@ const {
 
 const site = Astro.site ?? new URL('https://otaviomiranda.com.br');
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, site).toString();
+const rssUrl = new URL('/rss.xml', site).toString();
 const resolvedImageWidth =
   imageWidth ?? (image === DEFAULT_IMAGE ? DEFAULT_IMAGE_WIDTH : undefined);
 const resolvedImageHeight =
@@ -78,6 +79,12 @@ const resolvedImageAlt =
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <link rel='sitemap' href='/sitemap-index.xml' />
     <link rel='canonical' href={canonicalUrl} />
+    <link
+      rel='alternate'
+      type='application/rss+xml'
+      title='Otávio Miranda'
+      href={rssUrl}
+    />
     <meta name='robots' content={robots} />
 
     <title>{title}</title>
