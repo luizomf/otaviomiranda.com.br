@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "post": "node scripts/new_post.mjs",
-    "check:css-tokens": "node scripts/check_css_tokens.mjs"
+    "check:css-tokens": "node scripts/check_css_tokens.mjs",
+    "check:url-metadata": "node scripts/check_url_metadata.mjs"
   },
   "keywords": [],
   "author": "",

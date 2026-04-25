@@ -106,13 +106,36 @@ async function main() {
         value: getMetaContent($, 'meta[property="og:image"]'),
       },
       {
+        label: 'og:image:width',
+        value: getMetaContent($, 'meta[property="og:image:width"]'),
+      },
+      {
+        label: 'og:image:height',
+        value: getMetaContent($, 'meta[property="og:image:height"]'),
+      },
+      {
         label: 'twitter:image',
         value: getMetaContent($, 'meta[name="twitter:image"]'),
       },
     ];
 
-    for (const tag of tags) {
+    for (const tag of tags.filter(
+      tag =>
+        tag.label.includes('image') &&
+        tag.label !== 'og:image:width' &&
+        tag.label !== 'og:image:height',
+    )) {
       errors.push(...(await validateImageUrl({ filePath, ...tag })));
+    }
+
+    for (const tag of tags.filter(
+      tag => tag.label === 'og:image:width' || tag.label === 'og:image:height',
+    )) {
+      if (!tag.value || !Number.isInteger(Number(tag.value))) {
+        errors.push(
+          `${path.relative(ROOT_DIR, filePath)}: missing numeric ${tag.label}`,
+        );
+      }
     }
   }
 

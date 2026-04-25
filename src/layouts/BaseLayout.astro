@@ -30,15 +30,30 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  imageType?: string;
+  imageAlt?: string;
   canonical?: string;
   robots?: string;
   ogType?: string;
 }
 
+const DEFAULT_IMAGE =
+  'https://otaviomiranda.com.br/imgs/curso-javascript-typescript.webp';
+const DEFAULT_IMAGE_WIDTH = 830;
+const DEFAULT_IMAGE_HEIGHT = 467;
+const DEFAULT_IMAGE_TYPE = 'image/webp';
+const DEFAULT_IMAGE_ALT = 'Curso de JavaScript e TypeScript de Otávio Miranda';
+
 const {
   title = 'Otávio Miranda | Cursos de Programação Python, JS e Full Stack',
   description = 'Aprenda programação de verdade com Otávio Miranda. Cursos de Python, JavaScript, TypeScript e Full Stack focados em projetos reais. Mais de 300 mil alunos.',
-  image = 'https://otaviomiranda.com.br/imgs/curso-javascript-typescript.webp',
+  image = DEFAULT_IMAGE,
+  imageWidth,
+  imageHeight,
+  imageType,
+  imageAlt,
   canonical,
   robots = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1',
   ogType = 'website',
@@ -46,6 +61,14 @@ const {
 
 const site = Astro.site ?? new URL('https://otaviomiranda.com.br');
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, site).toString();
+const resolvedImageWidth =
+  imageWidth ?? (image === DEFAULT_IMAGE ? DEFAULT_IMAGE_WIDTH : undefined);
+const resolvedImageHeight =
+  imageHeight ?? (image === DEFAULT_IMAGE ? DEFAULT_IMAGE_HEIGHT : undefined);
+const resolvedImageType =
+  imageType ?? (image === DEFAULT_IMAGE ? DEFAULT_IMAGE_TYPE : undefined);
+const resolvedImageAlt =
+  imageAlt ?? (image === DEFAULT_IMAGE ? DEFAULT_IMAGE_ALT : title);
 ---
 
 <!doctype html>
@@ -68,12 +91,41 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, site).toString();
     <meta property='og:site_name' content='Otávio Miranda' />
     <meta property='og:locale' content='pt_BR' />
     <meta property='og:image' content={image} />
+    <meta property='og:image:secure_url' content={image} />
+    {
+      resolvedImageWidth && (
+        <meta property='og:image:width' content={String(resolvedImageWidth)} />
+      )
+    }
+    {
+      resolvedImageHeight && (
+        <meta
+          property='og:image:height'
+          content={String(resolvedImageHeight)}
+        />
+      )
+    }
+    {
+      resolvedImageType && (
+        <meta property='og:image:type' content={resolvedImageType} />
+      )
+    }
+    {
+      resolvedImageAlt && (
+        <meta property='og:image:alt' content={resolvedImageAlt} />
+      )
+    }
 
     <!-- Twitter -->
     <meta name='twitter:card' content='summary_large_image' />
     <meta name='twitter:title' content={title} />
     <meta name='twitter:description' content={description} />
     <meta name='twitter:image' content={image} />
+    {
+      resolvedImageAlt && (
+        <meta name='twitter:image:alt' content={resolvedImageAlt} />
+      )
+    }
 
     <!-- Favicon mapped to /public -->
     <link rel='icon' type='image/webp' href='/imgs/favicon-1.webp' />

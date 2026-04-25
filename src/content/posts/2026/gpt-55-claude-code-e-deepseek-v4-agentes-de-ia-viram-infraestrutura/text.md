@@ -1,13 +1,12 @@
 ---
-title:
-  'GPT-5.5, Claude Code e DeepSeek V4: agentes de IA viram infraestrutura'
+title: 'GPT-5.5, Claude Code e DeepSeek V4: agentes de IA viram infraestrutura'
 description:
   'OpenAI leva GPT-5.5 à API com ferramentas nativas, DeepSeek V4 aposta em
   cache e contexto longo, Anthropic explica queda no Claude Code e novas
   ferramentas mostram a pilha real dos agentes.'
 date: 2026-04-25T07:01:28-03:00
 author: 'The Paper LLM'
-image: 'https://otaviomiranda.com.br/content/posts/2026/gpt-55-claude-code-e-deepseek-v4-agentes-de-ia-viram-infraestrutura/images/gpt-55.png'
+image: 'https://otaviomiranda.com.br/content/posts/2026/gpt-55-claude-code-e-deepseek-v4-agentes-de-ia-viram-infraestrutura/images/gpt-55.jpg'
 audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/gpt-55-claude-code-e-deepseek-v4-agentes-de-ia-viram-infraestrutura/final.opus'
 ---
 
@@ -42,23 +41,22 @@ omitted_briefing_items:
 - Deepgram Python SDK tutorial: útil como checklist futuro de áudio, mas fonte secundária demais para entrar no lote.
 -->
 
-> Nota: gerado por IA (The Paper LLM), com fontes originais
-> listadas por bloco.
+> Nota: gerado por IA (The Paper LLM), com fontes originais listadas por bloco.
 
 O lote de hoje continua batendo na mesma tecla, mas com peças novas: agente de
 IA não é mais só "modelo respondendo prompt". A diferença prática está no
 runtime, no cache, no histórico, nas ferramentas, no sandbox, no custo por token
 e no jeito como tudo isso é observado quando dá errado.
 
-![Agentes de IA virando infraestrutura](./images/gpt-55.png)
+![Agentes de IA virando infraestrutura](./images/gpt-55.jpg)
 
 ## GPT-5.5 chega na API com cara de plataforma de agentes
 
 A OpenAI colocou o GPT-5.5 e o GPT-5.5 Pro na API em 24 de abril de 2026. O
-changelog lista uma janela de contexto de 1 milhão de tokens, entrada por imagem,
-saída estruturada, function calling, prompt caching, Batch, web search, computer
-use, hosted shell, apply patch, Skills, MCP e tool search. A página do modelo
-também mostra 1.050.000 tokens de contexto e até 128.000 tokens de saída.
+changelog lista uma janela de contexto de 1 milhão de tokens, entrada por
+imagem, saída estruturada, function calling, prompt caching, Batch, web search,
+computer use, hosted shell, apply patch, Skills, MCP e tool search. A página do
+modelo também mostra 1.050.000 tokens de contexto e até 128.000 tokens de saída.
 
 Isso muda o enquadramento do lançamento. O GPT-5.5 não aparece só como "modelo
 mais forte". Ele chega grudado em uma superfície de execução para agentes. A
@@ -125,8 +123,7 @@ briga em agentes não é só benchmark. É cache hit, formato de trace, prompt
 imutável, log append-only, custo por chamada e arquitetura que entende o modelo
 que está usando.
 
-Fontes:
-[Hugging Face - DeepSeek-V4](https://huggingface.co/blog/deepseekv4),
+Fontes: [Hugging Face - DeepSeek-V4](https://huggingface.co/blog/deepseekv4),
 [NVIDIA Developer Blog sobre DeepSeek V4](https://developer.nvidia.com/blog/build-with-deepseek-v4-using-nvidia-blackwell-and-gpu-accelerated-endpoints/)
 e [GitHub - Reasonix](https://github.com/esengine/reasonix).
 
@@ -149,9 +146,9 @@ O segundo caso é mais interessante para quem mexe com automação longa. Em 26 
 março, a Anthropic enviou uma otimização para limpar pensamento antigo depois de
 uma sessão ficar ociosa por mais de uma hora. A intenção era reduzir custo ao
 retomar uma sessão que já teria perdido cache. O bug fez essa limpeza acontecer
-em todos os turnos seguintes. Resultado: o agente parecia esquecido, repetitivo e
-tomava decisões estranhas porque perdia a trilha do próprio raciocínio. A correção
-saiu em 10 de abril.
+em todos os turnos seguintes. Resultado: o agente parecia esquecido, repetitivo
+e tomava decisões estranhas porque perdia a trilha do próprio raciocínio. A
+correção saiu em 10 de abril.
 
 O terceiro caso veio de prompt. Uma instrução para limitar texto entre tool
 calls e respostas finais foi enviada em 16 de abril e revertida em 20 de abril
@@ -159,10 +156,10 @@ depois que avaliações mais amplas mostraram queda de 3% em Opus 4.6 e 4.7.
 Prompt pequeno, efeito grande. Quem já ajustou agente por tentativa e erro
 conhece esse tipo de acidente.
 
-A lição é ótima porque é chata do jeito certo. Quando um coding agent piora,
-não basta perguntar "qual modelo está por baixo?". Tem que olhar effort,
-prompt, memória, cache, rollout, versão pública, evals internas e métricas de
-qualidade. O modelo pode ser o mesmo, mas o produto em volta mudou.
+A lição é ótima porque é chata do jeito certo. Quando um coding agent piora, não
+basta perguntar "qual modelo está por baixo?". Tem que olhar effort, prompt,
+memória, cache, rollout, versão pública, evals internas e métricas de qualidade.
+O modelo pode ser o mesmo, mas o produto em volta mudou.
 
 Fonte:
 [Anthropic - An update on recent Claude Code quality reports](https://www.anthropic.com/engineering/april-23-postmortem)
@@ -175,8 +172,8 @@ fluxo legítimo de device code da Microsoft. O atacante inicia uma solicitação
 vítima entra em uma página real da Microsoft, autentica de verdade, passa pelo
 MFA e, sem perceber, autoriza uma sessão controlada pelo atacante.
 
-O que sai disso não é uma senha. São tokens OAuth válidos. Segundo a Arctic Wolf,
-tokens de acesso e refresh capturados permitem acesso imediato à mailbox e
+O que sai disso não é uma senha. São tokens OAuth válidos. Segundo a Arctic
+Wolf, tokens de acesso e refresh capturados permitem acesso imediato à mailbox e
 atividade pós-comprometimento. Em alguns casos, os operadores também criaram
 regras maliciosas de inbox para esconder alertas de segurança e aumentar o tempo
 de permanência.
@@ -189,9 +186,9 @@ mas produto.
 
 O ponto defensivo é bem concreto. Se device code flow não é necessário, bloquear
 por Conditional Access reduz muito o caminho do ataque. Quando for necessário,
-vale restringir por grupo, local confiável e dispositivo gerenciado. Também
-vale caçar padrões de autorização suspeitos, regras novas de mailbox e sinais de
-uso do cliente identificado pela Arctic Wolf.
+vale restringir por grupo, local confiável e dispositivo gerenciado. Também vale
+caçar padrões de autorização suspeitos, regras novas de mailbox e sinais de uso
+do cliente identificado pela Arctic Wolf.
 
 Para treinamento de segurança, esse caso é melhor do que mais um slide dizendo
 "cuidado com phishing". Ele mostra o fluxo exato: código legítimo, provedor
@@ -207,11 +204,11 @@ Code não tentam ganhar a conversa dizendo "temos o modelo mais inteligente".
 Eles mexem no que fica ao redor: mapa de código, memória persistente, política
 de comando, sandbox, auditoria e contexto.
 
-O GitNexus indexa um repositório em grafo de conhecimento com dependências,
-call chains, clusters e fluxos de execução. A parte prática está na exposição
-via MCP e em ferramentas como análise de impacto antes de mudança. Em vez de
-dar para o agente um monte de arquivo solto e esperar que ele descubra tudo, a
-ideia é entregar uma visão estrutural do código.
+O GitNexus indexa um repositório em grafo de conhecimento com dependências, call
+chains, clusters e fluxos de execução. A parte prática está na exposição via MCP
+e em ferramentas como análise de impacto antes de mudança. Em vez de dar para o
+agente um monte de arquivo solto e esperar que ele descubra tudo, a ideia é
+entregar uma visão estrutural do código.
 
 O Stash ataca outro problema: memória entre sessões. Ele usa PostgreSQL,
 pgvector e MCP para transformar episódios em fatos, relacionamentos, padrões,
@@ -230,10 +227,9 @@ Juntando os três, a mensagem é difícil de ignorar. Agente bom não é só mod
 bom. É contexto certo, memória que dá para auditar, ferramenta com política,
 comando com limite e mapa de impacto antes de sair editando código.
 
-Fontes:
-[GitHub - GitNexus](https://github.com/abhigyanpatwari/GitNexus),
-[Stash - Persistent Memory for AI Agents](https://alash3al.github.io/stash/)
-e [GitHub - VT Code](https://github.com/vinhnx/VTCode).
+Fontes: [GitHub - GitNexus](https://github.com/abhigyanpatwari/GitNexus),
+[Stash - Persistent Memory for AI Agents](https://alash3al.github.io/stash/) e
+[GitHub - VT Code](https://github.com/vinhnx/VTCode).
 
 ## Destaques rápidos
 
@@ -275,9 +271,9 @@ e [GitHub - VT Code](https://github.com/vinhnx/VTCode).
   `X25519MLKEM768`. Fonte:
   [AWS Security Blog - Protecting your secrets from tomorrow's quantum risks](https://aws.amazon.com/blogs/security/protecting-your-secrets-from-tomorrows-quantum-risks/)
 
-- A dica `git config am.threeWay true`, do Michael Catanzaro, é pequena e
-  ótima. Ela faz muitos patches que falhariam no `git am` caírem em conflito de
-  três vias, como um merge normal. Para mantenedor e backport de segurança, isso
+- A dica `git config am.threeWay true`, do Michael Catanzaro, é pequena e ótima.
+  Ela faz muitos patches que falhariam no `git am` caírem em conflito de três
+  vias, como um merge normal. Para mantenedor e backport de segurança, isso
   economiza tempo e paciência. Fonte:
   [Michael Catanzaro - git config am.threeWay](https://blogs.gnome.org/mcatanzaro/2026/04/24/git-config-am-threeway/)
 
@@ -293,9 +289,9 @@ e [GitHub - VT Code](https://github.com/vinhnx/VTCode).
   ferramentas hospedadas, DeepSeek V4 força conversa sobre cache e Reasonix
   tenta explorar comportamento específico do provedor.
 
-- A qualidade percebida de agente depende de camadas que muita gente não mede.
-  O postmortem da Anthropic deixa isso explícito: effort, cache, memória,
-  prompt, eval e rollout podem mudar a experiência sem trocar o modelo base.
+- A qualidade percebida de agente depende de camadas que muita gente não mede. O
+  postmortem da Anthropic deixa isso explícito: effort, cache, memória, prompt,
+  eval e rollout podem mudar a experiência sem trocar o modelo base.
 
 - Segurança está saindo do prompt isolado. Device code phishing, memória
   persistente, MCP, sandbox, política de comando e audit trail estão na mesma
@@ -312,7 +308,8 @@ O resumo de hoje poderia ser "o modelo continua importante, mas sozinho ele não
 fecha a conta". GPT-5.5 mostra o pacote de plataforma. DeepSeek V4 mostra custo
 e cache. Anthropic mostra que produto em volta do modelo quebra qualidade.
 Kali365 mostra que identidade falha mesmo quando o login parece legítimo.
-GitNexus, Stash e VT Code mostram que contexto, memória, política e auditoria
-já viraram parte do produto.
+GitNexus, Stash e VT Code mostram que contexto, memória, política e auditoria já
+viraram parte do produto.
 
-Não é a parte mais brilhante da IA. É a parte que decide se ela aguenta uso real.
+Não é a parte mais brilhante da IA. É a parte que decide se ela aguenta uso
+real.

@@ -113,23 +113,33 @@ function getPostImage(
 function getFirstBodyImage(
   body: string | undefined,
   entryId: string,
-): string | undefined {
+): ImageMetadata | undefined {
   const match = body?.match(/!\[.*?\]\(\.\/images\/([^)]+)\)/);
   if (!match) return undefined;
 
-  return getPostImage(`./images/${match[1]}`, entryId)?.src;
+  return getPostImage(`./images/${match[1]}`, entryId);
+}
+
+function getImageType(imageMetadata: ImageMetadata): string | undefined {
+  if (imageMetadata.format === 'jpg') return 'image/jpeg';
+  if (!imageMetadata.format) return undefined;
+
+  return `image/${imageMetadata.format}`;
 }
 
 const frontmatterImage = entry.data.image?.trim();
 const frontmatterImageKey = frontmatterImage
   ? getPostImageKey(frontmatterImage, entry.id)
   : undefined;
+const frontmatterImageMetadata = frontmatterImage
+  ? getPostImage(frontmatterImage, entry.id)
+  : undefined;
+const bodyImageMetadata = getFirstBodyImage(entry.body, entry.id);
+const imageMetadata = frontmatterImageMetadata ?? bodyImageMetadata;
 const resolvedImage =
-  (frontmatterImage
-    ? getPostImage(frontmatterImage, entry.id)?.src
-    : undefined) ??
+  frontmatterImageMetadata?.src ??
   (!frontmatterImageKey ? frontmatterImage : undefined) ??
-  getFirstBodyImage(entry.body, entry.id);
+  bodyImageMetadata?.src;
 const ogImage = resolvedImage?.startsWith('http')
   ? resolvedImage
   : resolvedImage
@@ -143,6 +153,10 @@ const audioSrc = entry.data.audio;
   title={entry.data.title + ' - Otávio Miranda'}
   description={entry.data.description}
   image={ogImage}
+  imageWidth={imageMetadata?.width}
+  imageHeight={imageMetadata?.height}
+  imageType={imageMetadata ? getImageType(imageMetadata) : undefined}
+  imageAlt={entry.data.title}
   ogType='article'
 >
   <Header />
