@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "node scripts/check_css_tokens.mjs && astro check && astro build",
+    "build": "node scripts/check_css_tokens.mjs && astro check && astro build && node scripts/check_social_meta.mjs",
     "lint": "astro check && prettier --check --config .prettierrc.json \"AGENTS.md\" \"PLAN.md\" \"README.md\" \"astro.config.mjs\" \"package.json\" \".github/**/*.{yml,yaml}\" \"public/**/*.{css,js}\" \"scripts/**/*.{js,mjs,ts}\" \"src/**/*.{astro,ts,js,mjs,md,mdx,html,css,json}\"",
     "lint:fix": "prettier --write --ignore-path NUL --config .prettierrc.json \"AGENTS.md\" \"PLAN.md\" \"README.md\" \"astro.config.mjs\" \"package.json\" \".github/**/*.{yml,yaml}\" \"public/**/*.{css,js}\" \"scripts/**/*.{js,mjs,ts}\" \"src/**/*.{astro,ts,js,mjs,md,mdx,html,css,json}\"",
     "preview": "astro preview",
