@@ -4,7 +4,18 @@ import { getCollection } from 'astro:content';
 import { Marked } from 'marked';
 import { getEntryHref } from '../utils/post-path';
 
-const marked = new Marked();
+const marked = new Marked({
+  renderer: {
+    html(token) {
+      return isHtmlComment(token.text) ? '' : false;
+    },
+  },
+});
+
+function isHtmlComment(value: string): boolean {
+  const trimmedValue = value.trim();
+  return trimmedValue.startsWith('<!--') && trimmedValue.endsWith('-->');
+}
 
 export async function GET(context: APIContext) {
   const posts = await getCollection('posts');

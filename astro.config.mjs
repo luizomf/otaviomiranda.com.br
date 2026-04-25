@@ -21,6 +21,30 @@ import { defineConfig } from 'astro/config';
 
 import sitemap from '@astrojs/sitemap';
 
+function removeMarkdownHtmlComments() {
+  return tree => {
+    removeCommentChildren(tree);
+  };
+}
+
+function removeCommentChildren(node) {
+  if (!Array.isArray(node.children)) return;
+
+  node.children = node.children.filter(child => {
+    if (isHtmlComment(child)) return false;
+
+    removeCommentChildren(child);
+    return true;
+  });
+}
+
+function isHtmlComment(node) {
+  if (node.type !== 'html') return false;
+
+  const value = node.value.trim();
+  return value.startsWith('<!--') && value.endsWith('-->');
+}
+
 // https://astro.build/config
 export default defineConfig({
   // URL final do site — usada pelo sitemap, canonical URLs e Open Graph
@@ -31,6 +55,7 @@ export default defineConfig({
 
   // Configuracao do processador de Markdown (posts do blog sao .md)
   markdown: {
+    remarkPlugins: [removeMarkdownHtmlComments],
     shikiConfig: {
       // Tema que se assemelha ao legacy dark highlighter
       theme: 'github-dark-high-contrast',

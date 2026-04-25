@@ -32,6 +32,7 @@
  *   em getStaticPaths(). Aqui, recebe a entry completa do post.
  */
 import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -65,6 +66,9 @@ const postImages = import.meta.glob<{ default: ImageMetadata }>(
 );
 
 const site = Astro.site ?? new URL('https://otaviomiranda.com.br');
+const OG_IMAGE_MAX_WIDTH = 1280;
+const OG_IMAGE_FORMAT = 'jpg';
+const OG_IMAGE_QUALITY = 82;
 
 function getEntryDir(entryId: string): string {
   return entryId.replace(/\/[^/]+$/, '');
@@ -136,14 +140,31 @@ const frontmatterImageMetadata = frontmatterImage
   : undefined;
 const bodyImageMetadata = getFirstBodyImage(entry.body, entry.id);
 const imageMetadata = frontmatterImageMetadata ?? bodyImageMetadata;
+const optimizedOgImage = imageMetadata
+  ? await getImage({
+      src: imageMetadata,
+      width: Math.min(imageMetadata.width, OG_IMAGE_MAX_WIDTH),
+      format: OG_IMAGE_FORMAT,
+      quality: OG_IMAGE_QUALITY,
+    })
+  : undefined;
 const resolvedImage =
-  frontmatterImageMetadata?.src ??
+  optimizedOgImage?.src ??
   (!frontmatterImageKey ? frontmatterImage : undefined) ??
-  bodyImageMetadata?.src;
+  imageMetadata?.src;
 const ogImage = resolvedImage?.startsWith('http')
   ? resolvedImage
   : resolvedImage
     ? new URL(resolvedImage, site).toString()
+    : undefined;
+const ogImageWidth =
+  Number(optimizedOgImage?.attributes.width) || imageMetadata?.width;
+const ogImageHeight =
+  Number(optimizedOgImage?.attributes.height) || imageMetadata?.height;
+const ogImageType = optimizedOgImage
+  ? 'image/jpeg'
+  : imageMetadata
+    ? getImageType(imageMetadata)
     : undefined;
 
 const audioSrc = entry.data.audio;
@@ -153,9 +174,9 @@ const audioSrc = entry.data.audio;
   title={entry.data.title + ' - Otávio Miranda'}
   description={entry.data.description}
   image={ogImage}
-  imageWidth={imageMetadata?.width}
-  imageHeight={imageMetadata?.height}
-  imageType={imageMetadata ? getImageType(imageMetadata) : undefined}
+  imageWidth={ogImageWidth}
+  imageHeight={ogImageHeight}
+  imageType={ogImageType}
   imageAlt={entry.data.title}
   ogType='article'
 >
