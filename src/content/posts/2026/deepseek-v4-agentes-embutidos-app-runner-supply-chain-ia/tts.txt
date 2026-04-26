@@ -1,0 +1,175 @@
+Nota: este texto foi gerado por IA, chamada The Paper L L M, com checagem nas fontes originais. As fontes aparecem ao final de cada bloco, em formato falado.
+
+DeepSeek V4, agentes embutidos e App Runner: IA vira infraestrutura de verdade.
+
+O lote de hoje tem uma linha bem visível: a parte interessante da IA está descendo para a infraestrutura.
+
+O modelo continua importante, claro. Mas o que muda o resultado no mundo real aparece no cache, no runtime, no desenho da interface, no fluxo de verificação, no serviço gerenciado que deixa de evoluir e na cadeia de pacotes que entra no container sem pedir licença.
+
+DeepSeek V4 volta como história de runtime, não só de modelo.
+
+O DeepSeek V4 já tinha aparecido pelo ângulo de contexto longo, pesos abertos e custo. A novidade de 25 de abril de 2026 é outra: a equipe de S G Lang e Miles publicou suporte de dia zero para servir e treinar o modelo, e o texto deixa claro que 1 milhão de tokens não se sustenta sozinho.
+
+O post da L M Sys fala de duas famílias de problema.
+
+Na inferência, aparecem Shadow Radix para prefix caching em atenção híbrida, Hi Sparse para estender K V cache com memória de C P U, speculative decoding com metadados dentro do CUDA graph, Flash Compressor, Lightning Top K, kernels para Blackwell e Hopper, além de paralelismo para prefill e deployment.
+
+Na parte de treinamento, Miles entra com suporte a R L, paralelismo D P, T P, S P, E P, P P e C P, F P 8 e cuidado extra com estabilidade numérica.
+
+O detalhe que importa para agente é o custo de carregar histórico. O texto mostra que, com Shadow Radix e metadados dentro do grafo, o throughput de decode fica quase plano entre 4 mil e 900 mil tokens.
+
+Em B 200, a queda citada vai de 199 para 180 tokens por segundo. Em H 200, de 266 para 240. Em outra parte, o Hi Sparse promete até 3 vezes mais capacidade e throughput em serving de contexto longo ao manter a parte inativa do K V cache em C P U.
+
+Isso muda o jeito de olhar para contexto gigante.
+
+Não é: joga tudo no prompt e pronto. É uma pilha inteira para impedir que o histórico mate latência, memória e custo. Prefix cache, compressão, seleção top K, offload de cache, kernel customizado e scheduler viram parte do produto.
+
+Então, sim, DeepSeek V4 apareceu de novo. Mas não é reprise. O foco saiu da tabela de preço e foi para a pergunta que realmente decide se um agente longo fica usável: quem está segurando o peso do contexto quando a conversa passa de demo bonita para workload de verdade?
+
+A fonte do artigo é L M Sys, no texto chamado DeepSeek V4 on Day 0, From Fast Inference to Verified R L with S G Lang and Miles.
+
+Feldera puxa agentes para dentro do software.
+
+O texto da Feldera acerta porque troca a fantasia do agente colega de trabalho por um problema mais técnico: agente fica barulhento quando o software oferece interface ruim.
+
+Se a única superfície é chat, ele precisa perguntar, resumir, negociar, inferir estado e explicar demais. Isso consome atenção humana e tokens.
+
+A proposta é construir software que o agente consiga operar com menos conversa.
+
+O post cita três padrões bem conhecidos: C L I, especificações declarativas e reconciliation loops no estilo Kubernetes. Em vez de transformar tudo em um diálogo, o sistema oferece comandos, estado desejado e mecanismo de convergência.
+
+O agente deixa de perguntar o que faço agora o tempo todo e passa a trabalhar em cima de interfaces mais previsíveis.
+
+O ponto mais forte vem quando o texto entra em banco de dados e change data capture.
+
+Em um modelo ruim, o agente consulta tabelas, compara snapshots e tenta descobrir o que mudou. Em um modelo melhor, o sistema emite eventos: esta transação entrou, esta conta foi marcada como risco alto, este registro mudou para revisão.
+
+O agente reage a mudanças específicas, não a um mar de estado.
+
+Isso conversa muito com DevOps, segurança e coding agents. Um agente com boa interface não precisa ficar lendo o mundo a cada rodada. Ele recebe sinais precisos, aplica uma política, propõe uma mudança ou chama um humano quando a decisão passa do limite.
+
+A frase que fica é simples: software feito para humanos nem sempre é software bom para agentes.
+
+Às vezes, a melhor evolução não é um prompt maior. É um produto com C L I decente, estado declarativo, evento de mudança e limite de ação.
+
+A fonte do artigo é Feldera, no texto chamado Agents Aren't Coworkers, Embed Them in Your Software.
+
+O caso da matemática mostra o gargalo da verificação.
+
+A Scientific American publicou uma história com cara de manchete viral: Liam Price, 23 anos, sem treinamento avançado formal em matemática, usou ChatGPT Pro e chegou a uma solução para um problema de Erdős que estava aberto havia cerca de 60 anos.
+
+O assunto envolve conjuntos primitivos de números inteiros e uma conjectura sobre o comportamento do chamado Erdős sum quando os números do conjunto ficam grandes.
+
+O risco óbvio seria transformar isso em: IA substituiu matemáticos. Não é o que a própria reportagem mostra.
+
+Price encontrou uma rota incomum com ajuda do modelo e mandou o resultado para Kevin Barreto. Depois, especialistas como Terence Tao e Jared Lichtman avaliaram o caminho.
+
+Lichtman foi bem direto: a saída bruta do ChatGPT era ruim, e alguém com conhecimento precisava peneirar, entender e comprimir a ideia. Tao também descreveu a mudança como uma rota diferente da sequência padrão de movimentos que humanos vinham tentando.
+
+Essa é a parte útil para quem trabalha com código, agentes e automação. A IA consegue baratear busca. Ela pode sugerir um caminho estranho, puxar uma técnica de uma área vizinha ou quebrar a inércia de uma abordagem que todo mundo vinha repetindo.
+
+Mas a prova ainda precisa existir. No fim, alguém precisa validar se o caminho fecha.
+
+É um bom antídoto contra dois exageros opostos. Não é milagre, acabou a matemática humana. Também não é: não aconteceu nada, ignore.
+
+A notícia mostra um padrão que deve aparecer mais vezes: geração de candidatos fica barata, verificação continua cara.
+
+Para dev, dá para traduzir quase sem esforço. O agente pode sugerir refactor, patch, arquitetura ou exploit hipotético. A pergunta séria vem depois: compila, passa teste, preserva contrato, não vaza segredo, não inventa requisito e não quebra produção?
+
+A fonte do artigo é Scientific American, no texto sobre um amador que usou ChatGPT para resolver um problema matemático de 60 anos.
+
+AWS App Runner fecha para novos clientes e vira lição de plataforma.
+
+A AWS informa que o App Runner deixará de aceitar novos clientes a partir de 30 de abril de 2026.
+
+Quem já usa o serviço pode continuar criando recursos e serviços normalmente, mas a AWS também diz que não planeja adicionar novos recursos. Em outras palavras: o produto continua vivo para clientes existentes, mas a trilha de evolução acabou.
+
+O guia de migração recomenda Amazon E C S Express Mode. A promessa é preservar parte da simplicidade operacional do App Runner, mas em cima de uma pilha E C S mais explícita.
+
+A AWS descreve um fluxo em que você fornece uma imagem de container e duas I A M roles, e o E C S cria a aplicação com Fargate, Application Load Balancer, auto scaling e rede na sua conta.
+
+O caminho sugerido é blue green com D N S weighted routing. O serviço antigo e o novo rodam em paralelo, e o tráfego vai sendo deslocado aos poucos via Route 53 ou outro provedor de D N S.
+
+Se a aplicação foi publicada no App Runner a partir de código fonte, antes é preciso criar uma etapa de build que gere uma imagem de container e envie para um registry.
+
+O recado prático é antigo, mas sempre volta com um nome novo.
+
+Serviço gerenciado compra velocidade, não imortalidade. Quando o produto para de evoluir, o que salva a migração é ter container, domínio, D N S, certificado, observabilidade, variáveis, health check e papéis de I A M minimamente entendidos.
+
+Para quem mantém aplicação pequena, isso não significa nunca use serviço gerenciado. Seria exagero. Significa só que abstração boa precisa ter rota de saída. Se ela não tiver, a conveniência vira dívida.
+
+A fonte do artigo é a documentação da AWS, na página sobre mudança de disponibilidade do App Runner.
+
+npm e PyPI continuam sendo parte da superfície de ataque.
+
+O texto Npm Slop and Wonky Software Supply Chains, publicado em 9 de abril e atualizado em 24 de abril de 2026, não é uma notícia de última hora.
+
+Entra aqui porque encaixa direto no tema do dia: infraestrutura de agente não é só sandbox. Também é o que você instala dentro dele.
+
+A crítica central é que npm e PyPI não são ecossistemas realmente baseados em fonte. Eles distribuem bundles, wheels e binários enviados por mantenedores.
+
+Em muitos casos, não dá para reconstruir o pacote publicado a partir do repositório original. Lockfile ajuda a fixar o artefato baixado, mas o hash normalmente amarra o pacote pronto, não toda a cadeia de origem.
+
+Os exemplos tornam o problema bem visível.
+
+O texto diz que o OpenClaw puxa 385 pacotes npm, com 324 sem attestation. Express, mesmo sendo um servidor web clássico do Node, puxa 65 pacotes, todos sem attestation no levantamento citado. Vite aparece como caso menor, com 15 pacotes, mas ainda inclui JavaScript empacotado e binários Rust pré-compilados.
+
+Attestation melhora a situação, mas não fecha a história.
+
+O autor lembra que ela pode fixar commit e workflow, sem necessariamente fixar imagem do runner, ferramentas baixadas durante o build e binários de ações terceiras. A cadeia parece mais limpa, mas ainda pode depender de coisa que muda por baixo.
+
+Para agente de IA, isso é especialmente chato.
+
+Muita gente fala de prompt injection, permissão de ferramenta e isolamento de container. Tudo isso importa. Mas, se o ambiente baixa centenas de dependências opacas antes de rodar, a fronteira de confiança já começou antes do primeiro prompt.
+
+A fonte do artigo é Simon Ramstedt, no texto chamado Npm Slop and Wonky Software Supply Chains.
+
+Destaques rápidos.
+
+O relatório da Cisco Talos sobre UAT 4356 e Firestarter é de 23 de abril, mas ainda merece atenção operacional: o backdoor roda dentro do processo LINA em dispositivos Cisco ASA e F T D, e a mitigação séria pode envolver reimagem do equipamento.
+
+A fonte é Cisco Talos, no relatório sobre UAT 4356 e Firestarter.
+
+O texto da DTN Advisory sobre OAuth em ferramentas de IA junta Vercel, Context.ai, Lovable e M C P em uma tese útil: uma integração SaaS com escopo amplo demais vira uma relação de confiança persistente.
+
+O ponto não é só mais um vazamento. É inventário e governo de OAuth.
+
+A fonte é DTN Advisory, no artigo chamado Knock Knock, Your AI Tool Just OAuth'd the Attacker In.
+
+O GnuPG 2.5.19 saiu em 24 de abril com a série 2.5 trazendo Kyber, também chamado de M L K E M ou FIPS 203, para o caminho principal de criptografia pós-quântica.
+
+O anúncio também lembra que a série 2.4 chega ao fim de vida em cerca de dois meses.
+
+A fonte é o anúncio oficial do GnuPG 2.5.19.
+
+O tutorial sobre PageIndex é mais vitrine de produto do que paper final, mas a ideia vale radar: em documentos longos e estruturados, árvore de seções e busca guiada por raciocínio podem ser melhores do que jogar tudo em vetor e torcer pela similaridade.
+
+A fonte é MarkTechPost, no artigo sobre RAG sem vetores com PageIndex.
+
+Matthew Brunelle descreve um uso bem pé no chão de Claude Code: ressuscitar um projeto pessoal que provavelmente ficaria parado.
+
+O valor não está em aceitar tudo, mas em dar spec, convenções, OpenAPI, plan mode, revisão e teste real de cliente.
+
+A fonte é o blog de Matthew Brunelle, no texto sobre usar ferramentas de coding assistance para reviver projetos inacabados.
+
+O post sobre reviver BrowserID em 2026 é pequeno, mas toca em um problema que vai crescer com apps pessoais feitos com IA: autenticação para software pequeno, de domínio próprio, sem depender de Auth0, Google ou um painel centralizado para cada brinquedo novo.
+
+A fonte é Wakamoleguy, no artigo Reviving BrowserID in 2026.
+
+Chris Wellons aposentou o Emacs depois de 20 anos de uso diário e está procurando mantenedores para pacotes ativos como Elfeed.
+
+O trecho mais curioso é a reconstrução de ferramentas pessoais com ajuda de IA, que muda o custo de refazer software que antes ficaria eternamente para algum dia.
+
+A fonte é Nullprogram, no texto I have officially retired from Emacs.
+
+Acompanhamento de tendências.
+
+Agente está virando problema de sistema. DeepSeek V4 precisa de S G Lang, Miles, cache, kernel e paralelismo. Feldera quer interfaces melhores para agentes. PageIndex tenta mudar a camada de retrieval. O modelo é só uma peça.
+
+Verificação continua sendo o gargalo.
+
+A história da matemática não vale por dizer que a IA provou sozinha, mas por mostrar que busca ficou barata e validação continua especializada. O mesmo vale para código gerado, automação, segurança e migração de infraestrutura.
+
+A confiança está nas camadas chatas.
+
+OAuth, pacote npm, wheel do PyPI, App Runner, GnuPG, D N S e processo LINA não têm o brilho de um modelo novo. Mas é ali que o sistema ganha ou perde no mundo real.
