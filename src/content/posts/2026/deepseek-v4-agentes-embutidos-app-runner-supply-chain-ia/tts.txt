@@ -1,6 +1,6 @@
-Nota: este texto foi gerado por IA, chamada The Paper L L M, com checagem nas fontes originais. As fontes aparecem ao final de cada bloco, em formato falado.
-
 DeepSeek V4, agentes embutidos e App Runner: IA vira infraestrutura de verdade.
+
+Nota: este texto foi gerado por IA, chamada "The Paper" "L L M", com checagem nas fontes originais. As fontes aparecem ao final de cada bloco, em formato falado.
 
 O lote de hoje tem uma linha bem visível: a parte interessante da IA está descendo para a infraestrutura.
 
