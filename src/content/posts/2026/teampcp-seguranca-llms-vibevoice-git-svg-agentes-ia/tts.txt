@@ -1,0 +1,219 @@
+Campanha do Team P C P, segurança de L L M e vibe voice: agentes saem do prompt.
+
+Nota: este texto foi gerado por IA, chamada "The Paper" "L L M", com checagem nas fontes originais. As fontes aparecem ao final de cada bloco, em formato falado.
+
+O dia ficou mais com cara de incidente do que de lançamento. A campanha Team P C P voltou, e agora encostou em ferramentas que aparecem no build de muita gente que desenvolve software.
+
+Ao mesmo tempo, dois papers trataram segurança de L L M como problema de runtime. Ou seja: não basta escrever um prompt bonito e torcer.
+
+No meio disso tudo, ainda apareceu teste local de transcrição com vibe voice, um livro aberto sobre Git por dentro e um texto longo sobre sanitização de S V G. Esse último quase deveria vir com aviso: leia antes de deixar agente mexer com arquivo vindo de usuário.
+
+Campanha Team P C P volta com três comprometimentos no mesmo dia.
+
+O SANS Internet Storm Center publicou, em 27 de abril de 2026, uma atualização sobre a campanha Team P C P.
+
+Segundo o diário, a pausa de 26 dias acabou com três comprometimentos quase ao mesmo tempo: imagens Docker do Checkmarx kicks, pacote X inference no repositório de pacotes Python, e um worm de N P M chamado Canister Sprawl.
+
+O problema é que isso não parece só mais um pacote malicioso perdido por aí.
+
+A cadeia passa por scanner de segurança popular, imagem Docker oficial e token de publicador de pacote. Quando esse caminho quebra, o C I vira porta de entrada. Não é só esteira de build.
+
+A Docker disse que as imagens do Checkmarx kicks foram trocadas em 22 de abril de 2026 por alguém com credenciais válidas de publicador.
+
+A Socket descreveu extensões de V S Code e Open V S X baixando um payload chamado M C P addon ponto JS.
+
+Esse payload coleta praticamente tudo que importa numa máquina de dev: credenciais de cloud, tokens de GitHub e N P M, chaves S S H, configuração de Claude e configuração de M C P.
+
+Também apareceu o caso do Bitwarden C L I na mesma vizinhança.
+
+Já ficou difícil defender o uso de latest por conveniência e ainda dormir tranquilo.
+
+Pin por digest, permissão mínima em GitHub Actions e rotação de segredo depois de ferramenta comprometida viraram requisito. Não é capricho de segurança paranoica.
+
+As fontes deste bloco são: SANS Internet Storm Center, Socket, Docker e J Frog Security Research.
+
+Defesa de L L M agora olha para dentro do modelo.
+
+O paper chamado Layerwise Convergence Fingerprints foi publicado no arxiv em 27 de abril de 2026.
+
+Ele tenta detectar mau comportamento de L L M enquanto o modelo ainda está gerando a resposta.
+
+A ideia é observar como os estados internos convergem entre as camadas. Quando essa trajetória fica estranha, o sistema trata aquilo como sinal de risco.
+
+Em vez de esperar a resposta sair para bloquear depois, a defesa olha o que acontece dentro das camadas do modelo.
+
+Os autores testaram isso contra backdoor, jailbreak e prompt injection.
+
+A ressalva é bem óbvia, mas importante: esse caminho precisa de acesso aos internos do modelo. Em A P I fechada, isso não está na sua mão.
+
+O Agent Ward completa bem a leitura.
+
+O paper organiza segurança de agente por fase do ciclo de vida, da inicialização até a execução de ferramenta.
+
+O ganho real é trocar a metáfora. Tratar agente como chat com ferramenta pendurada é pouco.
+
+Na prática, agente é runtime. Tem estado, identidade, permissão e efeito real no mundo.
+
+Nesse nível, melhorar o prompt vira só uma peça. Ainda importa, claro. Mas não segura tudo sozinho.
+
+O resto fica em telemetria, política de ferramenta e limite explícito para ação perigosa.
+
+As fontes deste bloco são: arxiv, no artigo chamado Layerwise Convergence Fingerprints for Runtime Misbehavior Detection in Large Language Models, e arxiv, no artigo chamado Agent Ward: A Lifecycle Security Architecture for Autonomous AI Agents.
+
+Vibe voice rodou local com número medido.
+
+Simon Willison testou o vibe voice da Microsoft no Mac O S em 27 de abril de 2026, usando uma conversão para M L X.
+
+O modelo não é exatamente estreia. O repositório da Microsoft já existia.
+
+O que muda é ter alguém rodando localmente, medindo e contando onde doeu.
+
+No teste dele, cerca de 1 hora de áudio virou J S O N com marcas de tempo e identificação de falantes em 524 vírgula 79 segundos.
+
+Isso dá pouco menos de 9 minutos em um M 5 Max com 128 giga de memória.
+
+A conversão quantizada em 4 bits pesava 5 vírgula 71 gigabytes, contra 17 vírgula 3 gigabytes do modelo original.
+
+A pegadinha aparece depois.
+
+Para colocar isso num fluxo real, ainda tem trabalho: limite de duração por chamada, pico de memória no prefill e a chatice de cortar áudio em pedaços com sobreposição.
+
+Depois ainda precisa reconciliar quem fala o quê.
+
+Está bom o bastante para entrar em pipeline. Mas não simples o bastante para fingir que não tem engenharia ali.
+
+Para quem grava aula, podcast ou reunião, esse tipo de teste vale mais do que benchmark genérico.
+
+A dúvida agora é prática: dá para rodar toda semana, com erro controlado, sem transformar o Mac numa torradeira?
+
+As fontes deste bloco são: Simon Willison e o repositório Microsoft barra vibe voice no GitHub.
+
+High Performance Git, agora com agente no loop.
+
+Ted Nyman publicou High Performance Git como livro aberto sobre Git por dentro.
+
+O ângulo é interessante porque ele sai do Git do dia a dia, como git add, git commit e git push, e olha para a estrutura.
+
+Entra armazenamento por conteúdo, grafo de commits, cache, índice e tudo que faz o Git ser rápido ou lento na prática.
+
+O sumário cobre coisas que normalmente ficam escondidas: objetos, refs, pack files, commit graphs, partial clone, worktrees e Trace 2.
+
+Dá para usar Git por anos sem pensar em nada disso.
+
+Só que agora tem agente criando branch, worktree e commit em ritmo de máquina.
+
+Aí performance vira assunto sério. Não é obsessão de quem cronometra milissegundo por esporte.
+
+Repo grande com automação por cima sofre em clone, fetch e indexação.
+
+Se o agente usa Git como memória de trabalho, o custo aparece no fluxo todo.
+
+O livro serve bem como referência de base.
+
+Antes de culpar o agente, vale checar se o repo tem commit graph configurado, partial clone bem usado e algum rastro via Trace 2 para entender onde o tempo está indo.
+
+A fonte deste bloco é Ted Nyman, no livro High Performance Git.
+
+S V G continua sendo um pesadelo de sanitizar.
+
+O texto The woes of sanitizing SVGs foi publicado em abril de 2026.
+
+Ele usa anos de histórico do Scratch para mostrar por que sanitizar S V G é tarefa ingrata.
+
+O formato parece imagem, mas carrega script, C S S, import remoto e parser de navegador no meio do caminho.
+
+Com tudo isso junto, filtro vira corrida sem fim.
+
+O autor mostra bugs com D O M Purify, vazamento por imagem remota, image set e diferença entre o parser de C S S deles e o parser do navegador.
+
+É o tipo de coisa que só aparece quando alguém insiste bastante.
+
+Detalhe divertido: o próprio post foi atualizado depois que o Claude achou outro vazamento via C S S nesting e import H T T P.
+
+A lição não fica presa ao S V G.
+
+Algumas entradas são expressivas demais para a gente fingir que vai limpar tudo com regex, parser e esperança.
+
+Em algum momento, a saída honesta é contenção: iframe com sandbox, Content Security Policy restritiva e limite claro do que aquele conteúdo pode alcançar.
+
+Isso conversa direto com agente.
+
+Ferramenta, arquivo, pacote e página H T M L viram linguagem de ataque sem aviso.
+
+Sanitizar melhor às vezes resolve. Mas a pergunta mais útil costuma ser outra: qual é o raio de alcance se aquele conteúdo for hostil?
+
+A fonte deste bloco é muffin ponto ink, no texto The woes of sanitizing SVGs.
+
+Destaques rápidos.
+
+A Silverfort detalhou uma falha no papel Agent I D Administrator do Microsoft Entra I D.
+
+Segundo a empresa, esse papel conseguia assumir propriedade de service principals fora do escopo de agentes, criar credenciais e autenticar como eles.
+
+A Microsoft informou correção em abril de 2026.
+
+A fonte é Silverfort.
+
+O N P M X chegou em alpha como alternativa comunitária para navegar o registro N P M.
+
+O ponto bom é a transparência: dá para ver tamanho transitivo, E S M ou C J S, e aviso de dependência velha antes de instalar qualquer coisa.
+
+A fonte é Info Q.
+
+O pip vinte e seis ponto um trouxe cooldown de dependência, lockfile experimental em pylock ponto toml e removeu suporte a Python três ponto nove.
+
+É uma evolução boa. Mas lockfile experimental ainda não é coisa para colocar direto em produção.
+
+A fonte é Richard Si.
+
+Thibault Martin mostrou um setup de YubiKey com PAM e U dois F para sudo, login e lock screen no Linux.
+
+A parte boa é o cuidado com fallback.
+
+Segurança que prende o dono para fora da máquina morre rápido.
+
+A fonte é Thibault Martin.
+
+O ow L S M da Cybereason combina E B P F L S M com regras Sigma com estado.
+
+Parece nichado, mas a ideia é forte: prevenir no kernel em vez de só alertar depois.
+
+A fonte é Cybereason.
+
+O G T F O Bins voltou a aparecer como referência evergreen para Unix e Linux.
+
+Em imagem de agente, container mínimo ou shell restrito, a lista funciona como checklist de binários que podem ler arquivo, abrir shell ou escapar de política fraca.
+
+A fonte é G T F O Bins.
+
+O Code Guardian, descrito pela Info Q, encaixa scanners de qualidade e segurança num servidor M C P.
+
+Ferramenta de segurança chamável por agente é uma direção promissora.
+
+O contraponto é que isso adiciona mais uma superfície entre prompt, scanner e correção automática.
+
+A fonte é Info Q.
+
+Acompanhamento de tendências.
+
+Tem dois eixos claros no dia.
+
+O primeiro é supply chain virando infraestrutura de ataque.
+
+Team P C P, N P M X e G T F O Bins encostam no mesmo chão: máquina de dev, runner de C I e pacote já fazem parte do ambiente produtivo.
+
+Tratar tudo isso como só build ficou ingênuo.
+
+O segundo eixo é segurança de agente saindo do prompt.
+
+LCF olha para dentro do modelo. Agent Ward organiza o ciclo de vida. E ow L S M puxa enforcement para o kernel.
+
+Entra I D e S V G entram pelo lado de identidade e contenção, dois assuntos que continuam mandando independente do hype do dia.
+
+A parte local também apareceu de novo.
+
+Vibe voice mostra áudio local quase pronto para fluxo sério.
+
+High Performance Git lembra que o básico fica caro quando roda em cadência de agente.
+
+Modelo é o que ganha manchete. Mas o trabalho real do dia está em coisa mais chata: ferramenta, permissão e log de execução.
