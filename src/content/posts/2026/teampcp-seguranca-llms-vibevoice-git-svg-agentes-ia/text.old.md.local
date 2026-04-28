@@ -1,0 +1,255 @@
+---
+title:
+  'TeamPCP, segurança de LLMs e VibeVoice: agentes saem do prompt'
+description:
+  'TeamPCP volta com ataques em npm, PyPI e Docker Hub; LCF e AgentWard olham
+  segurança de LLMs em runtime; VibeVoice, Git e SVG completam o dia de
+  infraestrutura para agentes.'
+date: 2026-04-28T07:01:57-03:00
+author: 'The Paper LLM'
+image: './images/seguranca-de-agentes.jpg'
+---
+
+<!--
+briefing_slug: 2026-04-28
+generated_at: 2026-04-28T07:01:57-03:00
+source_urls:
+- https://isc.sans.edu/diary/TeamPCP%2BSupply%2BChain%2BCampaign%2BUpdate%2B008%2B26Day%2BPause%2BEnds%2Bwith%2BThree%2BConcurrent%2BCompromises%2BCheckmarx%2BKICS%2BBitwarden%2BCLI%2BCascade%2Bxinference%2BPyPI%2BCanisterSprawl%2Bnpm%2BWorm%2BIdentified%2Band%2BTier%2B1%2BCoverage%2BReturns/32926
+- https://socket.dev/blog/checkmarx-supply-chain-compromise
+- https://www.docker.com/blog/kics-security-incident/
+- https://research.jfrog.com/campaigns/teampcp/
+- https://arxiv.org/abs/2604.24542v1
+- https://arxiv.org/abs/2604.24657v1
+- https://simonwillison.net/2026/Apr/27/vibevoice/
+- https://github.com/microsoft/VibeVoice
+- https://gitperf.com/
+- https://muffin.ink/blog/scratch-svg-sanitization/
+- https://www.silverfort.com/blog/agent-id-administrator-scope-overreach-service-principal-takeover-in-entra-id/
+- https://www.infoq.com/news/2026/04/npmx-browser-alpha/
+- https://ichard26.github.io/blog/2026/04/whats-new-in-pip-26.1/
+- https://ergaster.org/til/yubikey-unlock-laptop/
+- https://cybereason-public.github.io/owLSM/
+- https://gtfobins.org/
+- https://www.infoq.com/articles/ai-code-guardian/
+omitted_briefing_items:
+- Google Cloud AI infrastructure at Next 26: bom sinal de infraestrutura, mas anúncio de semana anterior e com energia de release.
+- Persona Collapse e AI sabotage papers: interessantes, porém menos práticos para o leitor de hoje que LCF e AgentWard.
+- Jandaira, 49Agents e zsh-claude-code: ferramentas alinhadas ao tema, mas jovens demais para virar recomendação forte.
+- elementary-data PyPI compromise: item potencialmente forte, mas melhor esperar relatório primário antes de promover.
+- Chrome Prompt API: relevante, mas já entrou como nota recente e não tinha desenvolvimento novo hoje.
+- RAS, FastOMOP e prompt under-specification: bons papers para acompanhamento, mas ficaram redundantes com o eixo de segurança em runtime.
+- PostgreSQL archive_mode: redirect falhou no briefing e não passou como fonte final.
+- Claude Code model configuration: documentação útil, mas sem confirmação externa suficiente para a alegação de uso extra no Pro.
+-->
+
+> Nota: gerado por IA (The Paper LLM), com fontes originais
+> listadas por bloco.
+
+Hoje tem menos brilho de lançamento e mais cheiro de build que acorda alguém de
+madrugada. A campanha TeamPCP voltou mirando ferramentas que dev confia. Ao
+mesmo tempo, papers novos tratam segurança de LLM como runtime, e não como
+frase mágica no prompt.
+
+No meio disso, apareceu um teste local de transcrição com VibeVoice, um livro
+inteiro sobre Git rápido e uma aula de sanitização de SVG que parece ter sido
+escrita para qualquer pessoa tentando proteger agentes. Dia sem elegância, mas
+com bastante coisa útil na mesa.
+
+![Imagem abstrata sobre segurança de agentes, supply chain e runtime de LLMs](./images/seguranca-de-agentes.jpg)
+
+## TeamPCP voltou pelo lugar mais caro: a confiança do build
+
+O SANS Internet Storm Center publicou em 27 de abril de 2026 uma atualização
+sobre a campanha TeamPCP. Segundo o diário, a pausa de 26 dias acabou com três
+comprometimentos quase ao mesmo tempo: imagens Docker do Checkmarx KICS, pacote
+xinference no PyPI e um worm de npm chamado CanisterSprawl.
+
+O ponto ruim é que a cadeia não parece uma história isolada de pacote
+malicioso. Ela encosta em scanner de segurança, imagem Docker, automação de
+dependência, token de publicação, script de instalação e máquina de dev. Quando
+esse caminho quebra, o CI deixa de ser só uma esteira. Ele vira o lugar onde o
+ataque ganha permissão.
+
+A Docker disse que as imagens de KICS foram trocadas em 22 de abril de 2026
+por alguém usando credenciais válidas de publicador. A Socket descreveu
+extensões de VS Code e OpenVSX baixando um payload chamado `mcpAddon.js`, com
+coleta de credenciais de GitHub, cloud, npm, SSH, variáveis de ambiente e
+arquivos de configuração ligados a Claude e MCP.
+
+Também há o caso Bitwarden CLI na mesma vizinhança. A leitura mais segura aqui
+é não tratar `latest` como conveniência inocente. Imagem por digest, permissão
+mínima em GitHub Actions, rotação de segredo depois de ferramenta
+comprometida, backup fora do mesmo raio de destruição e log de egress deixaram
+de ser "capricho de segurança".
+
+Fontes:
+[SANS Internet Storm Center](https://isc.sans.edu/diary/TeamPCP%2BSupply%2BChain%2BCampaign%2BUpdate%2B008%2B26Day%2BPause%2BEnds%2Bwith%2BThree%2BConcurrent%2BCompromises%2BCheckmarx%2BKICS%2BBitwarden%2BCLI%2BCascade%2Bxinference%2BPyPI%2BCanisterSprawl%2Bnpm%2BWorm%2BIdentified%2Band%2BTier%2B1%2BCoverage%2BReturns/32926),
+[Socket](https://socket.dev/blog/checkmarx-supply-chain-compromise),
+[Docker](https://www.docker.com/blog/kics-security-incident/) e
+[JFrog Security Research](https://research.jfrog.com/campaigns/teampcp/).
+
+## Segurança de LLM começou a parecer observabilidade
+
+O paper Layerwise Convergence Fingerprints, publicado no arXiv em 27 de abril
+de 2026, tenta detectar mau comportamento de LLM enquanto o modelo ainda está
+gerando. A ideia é observar como os estados internos convergem entre camadas.
+Quando essa trajetória fica estranha, o sistema trata aquilo como sinal de
+risco.
+
+Isso muda o foco. Em vez de esperar a resposta sair para depois bloquear, a
+defesa olha para o movimento interno do modelo. Os autores testaram o método
+contra backdoors, jailbreaks e prompt injection, com a ressalva óbvia: é uma
+técnica para cenários em que existe acesso aos internos do modelo. Em API
+fechada, esse tipo de defesa não está na sua mão.
+
+AgentWard completa bem a conversa. O paper organiza a segurança de agentes por
+ciclo de vida: inicialização, entrada, memória, decisão e execução. A parte boa
+é essa troca de mentalidade. "Chat com ferramenta pendurada" é uma descrição
+pequena demais. Na prática, o agente vira um runtime com estado, memória,
+identidade, permissão e efeito colateral.
+
+Quando a defesa chega nesse nível, "melhorar o prompt" vira uma peça pequena.
+Ainda importa, mas não segura tudo. O resto mora em telemetria, política de
+ferramenta, contenção, revisão humana e limite explícito para ação perigosa.
+
+Fontes:
+[arXiv, "Layerwise Convergence Fingerprints for Runtime Misbehavior Detection in Large Language Models"](https://arxiv.org/abs/2604.24542v1) e
+[arXiv, "AgentWard: A Lifecycle Security Architecture for Autonomous AI Agents"](https://arxiv.org/abs/2604.24657v1).
+
+## VibeVoice ficou interessante quando rodou local com número na mesa
+
+Simon Willison testou o VibeVoice da Microsoft em 27 de abril de 2026 usando
+uma conversão para MLX no macOS. A notícia não é exatamente o lançamento do
+modelo, porque o repositório da Microsoft já existia antes. O valor do post é
+mais simples: alguém rodou, mediu e mostrou onde dói.
+
+No teste dele, cerca de uma hora de áudio virou JSON com timestamps e
+identificação de falantes em 524,79 segundos. Isso dá pouco menos de 9 minutos
+em um M5 Max com 128 GB de memória. A conversão quantizada em 4 bits pesava
+5,71 GB, contra 17,3 GB do modelo original.
+
+A parte que interessa para fluxo real vem logo depois. O caminho local ainda
+precisa lidar com limite de duração, uso alto de memória no prefill, divisão em
+chunks, sobreposição entre trechos e reconciliação de falantes. A transcrição
+local está ficando boa o suficiente para entrar em pipeline, mas não ficou
+simples o suficiente para ignorar engenharia.
+
+Para quem grava aula, vídeo, podcast ou áudio de reunião, esse é o tipo de
+experimento que vale mais do que benchmark genérico. O problema deixa de ser
+"existe modelo?". A pergunta vira: dá para repetir toda semana, com erro
+controlado, sem transformar o Mac em torradeira?
+
+Fontes:
+[Simon Willison](https://simonwillison.net/2026/Apr/27/vibevoice/) e
+[repositório microsoft/VibeVoice no GitHub](https://github.com/microsoft/VibeVoice).
+
+## Git rápido deixou de ser curiosidade quando agente entrou no loop
+
+Ted Nyman publicou High Performance Git como um livro aberto sobre Git por
+dentro. A graça é que ele não trata Git como ritual de `add`, `commit` e
+`push`. Ele trata Git como banco de dados endereçado por conteúdo, grafo,
+cache, índice, protocolo de transferência e ferramenta de recuperação.
+
+O sumário já mostra o tom: objetos, refs, packfiles, commit-graphs, Bloom
+filters, sparse checkout, partial clone, worktrees, Trace2 e manutenção. Dá
+para usar Git por anos sem pensar nisso. Aí entram agentes criando branches,
+worktrees, diffs, tentativas, rollback e metadados em ritmo de máquina.
+
+Quando isso acontece, Git performance deixa de ser assunto de gente obcecada
+por milissegundo. Um repo grande com automação rodando por cima pode sofrer em
+clone, fetch, status, indexação e busca de histórico. Se o agente usa Git como
+memória operacional, o custo aparece no fluxo inteiro.
+
+O livro entra bem como referência de base. Antes de culpar o agente por tudo,
+vale saber se o repo tem commit-graph, manutenção decente, estratégia de
+partial clone, worktree bem usado e algum rastro via Trace2 para entender onde
+o tempo foi embora.
+
+Fonte:
+[Ted Nyman, "High Performance Git"](https://gitperf.com/).
+
+## SVG ensinou de novo que filtro perfeito é armadilha
+
+O texto "The woes of sanitizing SVGs", publicado em abril de 2026, usa anos de
+histórico do Scratch para mostrar por que sanitizar SVG é uma tarefa ingrata. O
+formato parece uma imagem, mas carrega script, CSS, import remoto, `url()`,
+parser de navegador e variações suficientes para transformar filtro em corrida
+sem fim.
+
+O autor passa por bugs envolvendo DOMPurify, vazamento por imagem remota,
+`image-set()`, diferenças entre parser de CSS e navegador, reestilização da
+página e detalhes que só aparecem quando alguém insiste o bastante. Um ponto
+curioso é que o próprio post recebeu atualização depois que o Claude encontrou
+outro vazamento via CSS nesting e import HTTP.
+
+A lição útil não fica presa ao SVG. Algumas entradas são expressivas demais
+para a gente fingir que vai limpar tudo com regex, parser e esperança. Em algum
+momento, a solução mais honesta é contenção: iframe sandboxed, Content Security
+Policy restritiva e limite claro do que aquele conteúdo pode alcançar.
+
+Isso conversa direto com agentes. Ferramenta, arquivo, pacote, prompt, página
+HTML e imagem podem virar linguagem de ataque. A pergunta boa não é "dá para
+sanitizar melhor?". Às vezes dá. A pergunta melhor é: se esse conteúdo for
+hostil, até onde ele consegue encostar?
+
+Fonte:
+[muffin.ink, "The woes of sanitizing SVGs"](https://muffin.ink/blog/scratch-svg-sanitization/).
+
+## Destaques rápidos
+
+- A Silverfort detalhou uma falha no papel Agent ID Administrator do Microsoft
+  Entra ID. Segundo a empresa, o papel conseguia assumir propriedade de service
+  principals fora do escopo de agentes, criar credenciais e autenticar como
+  eles; a Microsoft informou correção em abril de 2026. Fonte:
+  [Silverfort](https://www.silverfort.com/blog/agent-id-administrator-scope-overreach-service-principal-takeover-in-entra-id/).
+
+- O npmx chegou ao alpha como alternativa comunitária para navegar o registro
+  npm. O detalhe bom é segurança por visibilidade: tamanho transitivo,
+  indicação de ESM/CJS, avisos de dependência antiga e navegação rápida antes
+  de instalar qualquer coisa. Fonte:
+  [InfoQ](https://www.infoq.com/news/2026/04/npmx-browser-alpha/).
+
+- O pip 26.1 trouxe cooldown de dependências e suporte experimental a lockfile
+  `pylock.toml`, além de abandonar Python 3.9. É evolução prática, mas lockfile
+  experimental continua sendo lugar de laboratório antes de produção. Fonte:
+  [Richard Si](https://ichard26.github.io/blog/2026/04/whats-new-in-pip-26.1/).
+
+- Thibault Martin mostrou um setup de YubiKey com PAM e U2F para sudo, login e
+  lock screen no Linux. A parte boa é o cuidado com fallback: segurança que
+  prende o dono para fora da máquina morre rápido. Fonte:
+  [Thibault Martin](https://ergaster.org/til/yubikey-unlock-laptop/).
+
+- O owLSM é um projeto da Cybereason que combina eBPF LSM com regras Sigma com
+  estado. Parece nichado, mas aponta para uma ideia forte: prevenção no kernel,
+  não só alerta bonito depois do fato. Fonte:
+  [Cybereason](https://cybereason-public.github.io/owLSM/).
+
+- GTFOBins voltou a aparecer como referência evergreen para Unix e Linux. Para
+  imagem de agente, container mínimo ou shell restrito, a lista serve como
+  checklist de binários que podem ler arquivo, abrir shell, fazer upload ou
+  escapar de política fraca. Fonte:
+  [GTFOBins](https://gtfobins.org/).
+
+- O CodeGuardian, descrito pela InfoQ, encaixa scanners de qualidade e segurança
+  em um servidor MCP. A direção é interessante: ferramenta de segurança
+  chamável por agente. O risco também: mais uma superfície entre prompt,
+  scanner, falso positivo e correção automática. Fonte:
+  [InfoQ](https://www.infoq.com/articles/ai-code-guardian/).
+
+## Acompanhamento de tendências
+
+O fio mais forte do dia é supply chain virando infraestrutura de ataque. TeamPCP,
+npmx, pip e GTFOBins falam de pontos diferentes, mas todos encostam no mesmo
+chão: máquina de dev, runner de CI, pacote, imagem e ferramenta de segurança já
+fazem parte do ambiente produtivo. Tratar isso como "só build" ficou velho.
+
+Outro fio é segurança de agente saindo do prompt. LCF olha para sinais internos
+do modelo. AgentWard organiza o ciclo de vida. Entra ID mostra identidade.
+SVG mostra contenção. owLSM mostra enforcement em camada baixa. O padrão não é
+romântico, mas é bom: menos magia, mais limite.
+
+Por fim, a parte local voltou com força. VibeVoice mostra áudio local quase
+pronto para fluxo sério, e High Performance Git lembra que o básico fica caro
+quando roda em cadência de agente. A IA continua chamando atenção pelo modelo,
+mas o trabalho real está descendo para ferramenta, cache, índice, permissão,
+arquivo e log.
