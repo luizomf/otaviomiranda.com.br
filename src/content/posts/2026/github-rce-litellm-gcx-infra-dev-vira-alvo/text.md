@@ -6,7 +6,7 @@ description:
   segurança não acaba no compilador.'
 date: 2026-04-29T07:00:34-03:00
 author: 'The Paper LLM'
-image: './images/git-push-rce.jpg'
+image: './images/warp-open-source.jpg'
 audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/github-rce-litellm-gcx-infra-dev-vira-alvo/final.opus'
 ---
 
@@ -38,8 +38,7 @@ omitted_briefing_items:
 - Before GitHub, HardenedBSD/Radicle e PostgreSQL ecosystem: entraram no pano de fundo de open source infra, mas não couberam sem alongar demais.
 -->
 
-> Nota: gerado por IA (The Paper LLM), com fontes originais
-> listadas por bloco.
+> Nota: gerado por IA (The Paper LLM), com fontes originais listadas por bloco.
 
 Hoje tem cara de incidente de infraestrutura, daqueles que começam com comando
 normal e terminam no lugar errado. Um `git push` virou caminho para RCE. Um
@@ -52,14 +51,14 @@ observabilidade. Open source precisa decidir até onde deixa agente tocar no
 produto. E Rust, coitado, segue fazendo muita coisa certa sem virar varinha
 mágica para código privilegiado.
 
-![Capa editorial abstrata com a label Git Push RCE, mostrando uma linha de commit quebrando no meio de uma infraestrutura técnica](./images/git-push-rce.jpg)
+![Capa editorial abstrata com a label Warp Open Source](./images/warp-open-source.jpg)
 
 ## GitHub corrigiu um RCE no caminho do git push
 
 A Wiz divulgou em 28 de abril de 2026 a CVE-2026-3854, uma falha crítica no
-pipeline interno de Git do GitHub. O formato é simples o bastante para dar
-frio: usuário autenticado, acesso de push a um repositório e um `git push` com
-opção manipulada.
+pipeline interno de Git do GitHub. O formato é simples o bastante para dar frio:
+usuário autenticado, acesso de push a um repositório e um `git push` com opção
+manipulada.
 
 O problema estava na passagem de metadados entre serviços internos. O GitHub
 explica que push options, que são parte normal do Git, entravam nesse caminho.
@@ -84,19 +83,18 @@ segunda é método: a pesquisa usou IA para ajudar a reverter binários fechados
 entender o protocolo interno. Não é preciso transformar isso em ficção
 científica. Já é suficiente: source hosting é produção.
 
-Fontes:
-[Wiz](https://www.wiz.io/blog/github-rce-vulnerability-cve-2026-3854) e
+Fontes: [Wiz](https://www.wiz.io/blog/github-rce-vulnerability-cve-2026-3854) e
 [GitHub Security Blog](https://github.blog/security/securing-the-git-push-pipeline-responding-to-a-critical-remote-code-execution-vulnerability/).
 
 ## LiteLLM mostra o risco de tratar gateway de IA como proxy comum
 
 O LiteLLM apareceu de novo, agora por uma SQL injection crítica na verificação
-de chaves da API do proxy. A advisory GHSA-r75f-5x8p-qvmc afeta versões a
-partir da 1.81.16 e antes da 1.83.7. A correção está na 1.83.7.
+de chaves da API do proxy. A advisory GHSA-r75f-5x8p-qvmc afeta versões a partir
+da 1.81.16 e antes da 1.83.7. A correção está na 1.83.7.
 
 O bug não precisava de login. A advisory diz que um atacante podia enviar um
-header `Authorization` manipulado para rotas de LLM, como `POST
-/chat/completions`, e alcançar uma query de banco pelo caminho de erro do
+header `Authorization` manipulado para rotas de LLM, como
+`POST /chat/completions`, e alcançar uma query de banco pelo caminho de erro do
 proxy. O ponto frágil era clássico: valor vindo do usuário misturado no texto da
 query em vez de virar parâmetro.
 
@@ -139,19 +137,19 @@ modo de agente, tem catálogo de comandos legível por máquina e pede confirma�
 em operações destrutivas. Parece detalhe chato. É exatamente o tipo de detalhe
 que separa uma CLI boa para humano de uma CLI usável por agente.
 
-Se a automação do futuro vai tocar código, ela precisa ver produção sem abrir
-um painel colorido no navegador e fingir que entendeu. Texto estável, erro
-documentado e contexto nomeado ainda são o idioma mais honesto para esse tipo
-de integração.
+Se a automação do futuro vai tocar código, ela precisa ver produção sem abrir um
+painel colorido no navegador e fingir que entendeu. Texto estável, erro
+documentado e contexto nomeado ainda são o idioma mais honesto para esse tipo de
+integração.
 
 Fonte:
 [Grafana Labs](https://grafana.com/blog/get-observability-in-the-terminal-for-you-and-your-agents-with-the-gcx-cli-tool/).
 
 ## Warp abriu o cliente, mas a pergunta é quem controla o loop
 
-A Warp anunciou que seu cliente agora é open source. A parte óbvia é a
-licença. A parte mais interessante é o motivo declarado: agentes mudaram a
-forma como a empresa quer desenvolver o produto.
+A Warp anunciou que seu cliente agora é open source. A parte óbvia é a licença.
+A parte mais interessante é o motivo declarado: agentes mudaram a forma como a
+empresa quer desenvolver o produto.
 
 O post fala em comunidade ajudando a direcionar, especificar e melhorar Warp,
 enquanto agentes entram no ciclo de implementação. A empresa também é direta
@@ -175,16 +173,15 @@ Fonte: [Warp](https://www.warp.dev/blog/warp-is-now-open-source).
 
 ## Rust não protege contra lógica errada no filesystem
 
-Matthias Endler publicou um texto excelente sobre bugs que Rust não pega. A
-base é a divulgação de 44 CVEs em `uutils`, a reimplementação em Rust do GNU
+Matthias Endler publicou um texto excelente sobre bugs que Rust não pega. A base
+é a divulgação de 44 CVEs em `uutils`, a reimplementação em Rust do GNU
 coreutils usada pela Canonical. O ponto não é bater no projeto. É entender onde
 a garantia da linguagem termina.
 
-O maior grupo de problemas vem de path handling. Caminho de arquivo parece
-valor simples no código, mas para o kernel é nome resolvido no momento da
-syscall. Se um programa privilegiado checa uma path em uma chamada e age sobre a
-mesma path em outra, alguém com acesso ao diretório pai pode trocar o alvo no
-intervalo.
+O maior grupo de problemas vem de path handling. Caminho de arquivo parece valor
+simples no código, mas para o kernel é nome resolvido no momento da syscall. Se
+um programa privilegiado checa uma path em uma chamada e age sobre a mesma path
+em outra, alguém com acesso ao diretório pai pode trocar o alvo no intervalo.
 
 Esse tipo de erro não depende de `unsafe`, ponteiro solto ou buffer overflow. O
 borrow checker pode estar feliz enquanto o programa abre uma janela de corrida
@@ -205,9 +202,8 @@ Fonte: [corrode.dev](https://corrode.dev/blog/bugs-rust-wont-catch/).
 
 - O paper Agentic Harness Engineering diz que o harness pode pesar mais que a
   troca de modelo em agentes de código. A proposta é observar componentes,
-  trajetórias e decisões para evoluir o harness com contrato verificável, não
-  só tentativa e erro. Fonte:
-  [arXiv](https://arxiv.org/abs/2604.25850v1).
+  trajetórias e decisões para evoluir o harness com contrato verificável, não só
+  tentativa e erro. Fonte: [arXiv](https://arxiv.org/abs/2604.25850v1).
 
 - SnapGuard mira agentes web baseados em screenshot. A ideia é detectar prompt
   injection visual sem chamar um modelo de visão pesado para cada página, usando
@@ -219,8 +215,8 @@ Fonte: [corrode.dev](https://corrode.dev/blog/bugs-rust-wont-catch/).
   reportados. Para pipeline de áudio, é o tipo de arquitetura que vale guardar.
   Fonte: [arXiv](https://arxiv.org/abs/2604.25611v1).
 
-- A Socket encontrou 73 extensões dormentes no Open VSX ligadas ao GlassWorm.
-  O alvo inclui VS Code, Cursor, Windsurf e VSCodium, com loaders que baixam
+- A Socket encontrou 73 extensões dormentes no Open VSX ligadas ao GlassWorm. O
+  alvo inclui VS Code, Cursor, Windsurf e VSCodium, com loaders que baixam
   payloads depois da ativação. Fonte:
   [Socket](https://socket.dev/blog/73-open-vsx-sleeper-extensions-glassworm).
 
@@ -237,21 +233,19 @@ Fonte: [corrode.dev](https://corrode.dev/blog/bugs-rust-wont-catch/).
 
 - RESTestBench alerta para um efeito chato: quando um LLM refina testes contra
   um sistema já mutado ou com bug, ele pode aprender o comportamento errado como
-  se fosse verdade. Fonte:
-  [arXiv](https://arxiv.org/abs/2604.25862v1).
+  se fosse verdade. Fonte: [arXiv](https://arxiv.org/abs/2604.25862v1).
 
 - O paper da Salesforce sobre compound AI systems fala de inferência com vários
   modelos, retrievers e ferramentas escalando em paralelo. O detalhe bom é
   operacional: sistemas de agentes precisam escalar partes diferentes de forma
-  independente. Fonte:
-  [arXiv](https://arxiv.org/abs/2604.25724v1).
+  independente. Fonte: [arXiv](https://arxiv.org/abs/2604.25724v1).
 
 ## Acompanhamento de tendências
 
 A linha do dia é infraestrutura de desenvolvimento entrando no threat model sem
-pedir licença. GitHub, LiteLLM, Open VSX, Kubernetes e mise aparecem em
-camadas diferentes, mas todos vivem perto do mesmo lugar: onde código vira
-execução confiável.
+pedir licença. GitHub, LiteLLM, Open VSX, Kubernetes e mise aparecem em camadas
+diferentes, mas todos vivem perto do mesmo lugar: onde código vira execução
+confiável.
 
 Também tem uma virada boa em agentes. O assunto menos útil é "qual modelo
 escreve melhor". O assunto que começa a ficar sério é o que o agente consegue
