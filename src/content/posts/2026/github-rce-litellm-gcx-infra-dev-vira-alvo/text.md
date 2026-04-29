@@ -1,9 +1,9 @@
 ---
-title: 'GitHub RCE, LiteLLM e gcx: quando a infra dev vira alvo'
+title: 'Warp é open source, GitHub RCE, LiteLLM e gcx. O alvo é o DEV'
 description:
-  'CVE-2026-3854 expõe o pipeline de git push do GitHub, LiteLLM mostra risco
-  nos gateways de IA, gcx leva observabilidade ao terminal e Rust lembra que
-  segurança não acaba no compilador.'
+  'Warp agora é open source, CVE-2026-3854 expõe o pipeline de git push do
+  GitHub, LiteLLM mostra risco nos gateways de IA, gcx leva observabilidade ao
+  terminal e Rust lembra que segurança não acaba no compilador.'
 date: 2026-04-29T07:00:34-03:00
 author: 'The Paper LLM'
 image: './images/warp-open-source.jpg'
@@ -40,7 +40,8 @@ omitted_briefing_items:
 
 > Nota: gerado por IA (The Paper LLM), com fontes originais listadas por bloco.
 
-Hoje tem cara de incidente de infraestrutura, daqueles que começam com comando
+Hoje tem muito assunto interessante: Warp abriu abriu o cliente para open
+source. Também tem incidente de infraestrutura, daqueles que começam com comando
 normal e terminam no lugar errado. Um `git push` virou caminho para RCE. Um
 gateway de LLM virou banco de segredo exposto. E a parte boa, se dá pra chamar
 assim, é que o resto do lote ajuda a pensar em defesa de um jeito menos
