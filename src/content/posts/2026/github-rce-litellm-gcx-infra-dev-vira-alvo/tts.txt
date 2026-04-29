@@ -1,0 +1,289 @@
+Execução remota de código no "git hub", "Lite L L M", e observabilidade. Quando a infra estrutura de desenvolvimento vira alvo.
+
+Nota: este texto foi gerado por IA, chamada "The Paper" "L L M", com checagem nas fontes originais. As fontes aparecem ao final de cada bloco, em formato falado.
+
+Hoje tem cara de incidente de infraestrutura.
+
+Daquele tipo que começa com um comando normal e termina no lugar errado.
+
+Um git push virou caminho para execução remota de código.
+
+Um gateway de L L M virou banco de segredo exposto.
+
+E a parte boa, se dá para chamar assim, é que o resto do lote ajuda a pensar em defesa de um jeito menos romântico.
+
+Agente precisa de contexto de produção.
+
+Terminal precisa falar com observabilidade.
+
+Open source precisa decidir até onde deixa agente tocar no produto.
+
+E Rust, coitado, segue fazendo muita coisa certa sem virar varinha mágica para código privilegiado.
+
+O "git hub" corrigiu uma execução remota de código no caminho do "git push".
+
+A, "Wiz", divulgou, em 28 de abril de 2026, a CVE 2026, trinta e oito cinquenta e quatro, uma falha crítica no pipeline interno de git do github.
+
+O formato é simples o bastante para dar frio.
+
+Usuário autenticado, acesso de push a um repositório e um git push com opção manipulada.
+
+O problema estava na passagem de metadados entre serviços internos.
+
+A empresa explica que push options, que são parte normal do Git, entravam nesse caminho.
+
+Como o formato interno usava um delimitador que também podia aparecer no valor fornecido pelo usuário, o serviço seguinte podia receber campos falsos como confiáveis.
+
+A partir daí, a cadeia ficava feia.
+
+Segundo o relatório, os pesquisadores demonstraram como mudar o ambiente de processamento do push.
+
+Também conseguiram contornar a contenção esperada para execução de hooks e chegar a comando arbitrário no servidor.
+
+O "git hub" diz que recebeu o relatório em 4 de março de 2026.
+
+A empresa validou o problema em menos de duas horas, corrigiu o "git hub ponto com", no mesmo dia e não encontrou exploração por outros usuários.
+
+Para GitHub Enterprise Server, a história é mais prática.
+
+Atualizar para as versões corrigidas e revisar o log de auditoria do GitHub em busca de push options contendo ponto e vírgula.
+
+A Wiz acrescenta duas partes que deixam o caso maior.
+
+A primeira é impacto: no GitHub Enterprise Server, a falha poderia comprometer o servidor inteiro.
+
+A segunda é método: a pesquisa usou IA para ajudar a reverter binários fechados e entender o protocolo interno.
+
+Não precisa transformar isso em ficção científica.
+
+Já é suficiente: source hosting é produção.
+
+As fontes deste bloco são a Wiz e o GitHub Security Blog.
+
+Lite L L M mostra o risco de tratar gateway de IA como proxy comum.
+
+O [L AY1 T] L L M apareceu de novo, agora por uma [EH2 S K Y UW1 EH1 L] [IH2 N JH EH1 K SH AH0 N] crítica na verificação de chaves da [EY1 P IY1 AY1] do proxy.
+
+A advisory de segurança afeta versões a partir da um ponto oitenta e um ponto dezesseis e antes da um ponto oitenta e três ponto sete.
+
+A correção está na versão um ponto oitenta e três ponto sete.
+
+O bug não precisava de login.
+
+A advisory diz que um atacante podia enviar um header de autorização manipulado para rotas de L L M.
+
+Uma rota como chat completions já bastava para alcançar uma query de banco pelo caminho de erro do proxy.
+
+O ponto frágil era clássico.
+
+Valor vindo do usuário misturado no texto da query, em vez de virar parâmetro.
+
+O detalhe que muda o peso da história veio da Sysdig.
+
+A equipe observou a primeira tentativa de exploração 36 horas e 7 minutos depois da advisory entrar no GitHub Advisory Database.
+
+E não parecia barulho genérico de scanner.
+
+A tentativa mirava tabelas com chaves virtuais, credenciais de provedores e configuração de ambiente do proxy.
+
+Esse é o tipo de bug que obriga a olhar para o desenho inteiro.
+
+Se esse proxy está exposto, ele não é só um roteador simpático entre aplicação e provedores de modelo.
+
+Ele pode ser o lugar onde ficam as chaves, as políticas e o mapa de como seu produto chama modelo.
+
+A ação curta é atualizar.
+
+A ação menos confortável é assumir possível exposição.
+
+Revisar logs, rotacionar segredos relevantes, reduzir acesso de rede ao proxy, e parar de colocar gateway de "IA" público como um "end point" qualquer.
+
+As fontes deste bloco são a Sysdig e o GitHub Advisory Database.
+
+A ferramenta da Grafana leva observabilidade para o terminal do agente.
+
+A Grafana colocou em preview público uma ferramenta de terminal para conectar Grafana Cloud e Grafana Assistant.
+
+A frase parece anúncio de ferramenta, mas a ideia é boa.
+
+Se o agente já roda git, [K Y UW1 B K AH0 N T R OW1 L] e teste, ele também deveria consultar latência, traces, S L O, alertas e dashboards antes de mexer em código.
+
+O texto da Grafana dá exemplos bem concretos.
+
+Um agente pode perguntar por que um endpoint ficou mais lento, puxar traces e histogramas de latência.
+
+Também pode consultar burn rate de objetivo de serviço ou olhar histórico de alerta antes de sugerir um threshold novo.
+
+Isso muda o tipo de palpite que o agente faz.
+
+Tem uma camada de design que interessa mais que o produto em si.
+
+A ferramenta [JH IY1 S IY1 EH1 K S] emite [JH EY1 S AH0 N] ou [Y AE1 M AH0 L], documenta códigos de saída e evita ruído visual em modo de agente.
+
+Também tem catálogo de comandos legível por máquina e pede confirmação em operações destrutivas.
+
+Isso parece detalhe chato de ferramenta.
+
+É exatamente o tipo de detalhe que separa uma [S IY1 EH1 L AY1] boa para humano de uma [S IY1 EH1 L AY1] usável por agente.
+
+Se a automação do futuro vai tocar código, ela precisa ver produção sem abrir um painel colorido no navegador e fingir que entendeu.
+
+Texto estável, erro documentado e contexto nomeado ainda são o idioma mais honesto para esse tipo de integração.
+
+A fonte deste bloco é a Grafana Labs.
+
+Warp abriu o cliente, mas a pergunta é quem controla o loop.
+
+A Warp anunciou que seu cliente agora é open source.
+
+A parte óbvia é a licença.
+
+A parte mais interessante é o motivo declarado: agentes mudaram a forma como a empresa quer desenvolver o produto.
+
+O post fala em comunidade ajudando a direcionar, especificar e melhorar Warp.
+
+Enquanto isso, agentes entram no ciclo de implementação.
+
+A empresa também é direta sobre o lado comercial.
+
+Open source, ali, não aparece como pureza estética.
+
+É estratégia para competir, acelerar desenvolvimento e atrair uma comunidade mais envolvida.
+
+Esse é um experimento que vale acompanhar sem comprar a embalagem inteira.
+
+O cliente aberto ajuda bastante.
+
+O ecossistema em volta, especialmente a camada Oz de orquestração de agentes, continua sendo parte do jogo da empresa.
+
+Então a pergunta prática não é só se o repositório abriu.
+
+É até onde a comunidade consegue influenciar o produto quando a execução passa por um loop semi automatizado.
+
+Mesmo assim, tem algo real aqui.
+
+Manutenção open source com agente não combina com issue vaga e pull request jogado por cima do muro.
+
+Combina com especificação clara, verificação boa e humano decidindo quando o resultado presta.
+
+Esse caminho parece bonito? Nem sempre.
+
+Provavelmente é por aí que vai andar.
+
+A fonte deste bloco é a Warp.
+
+Rust não protege contra lógica errada no file system.
+
+Matthias Endler publicou um texto excelente sobre bugs que Rust não pega.
+
+A base é a divulgação de quarenta e quatro vulnerabilidades com [S IY1 V IY1 IY1] no [Y UW1 Y UW1 T IH0 L Z].
+
+Ele é a reimplementação em Rust do [JH IY1 EH1 N Y UW1] [K AO1 R Y UW1 T IH0 L Z] adotada pela Canonical no Ubuntu.
+
+O ponto não é bater no projeto.
+
+É entender onde a garantia da linguagem termina.
+
+O maior grupo de problemas vem de path handling.
+
+Caminho de arquivo parece valor simples no código, mas para o kernel do Linux é nome resolvido no momento da syscall.
+
+Se um programa privilegiado checa uma path em uma chamada e age sobre a mesma path em outra, alguém pode trocar o alvo no intervalo.
+
+Esse tipo de erro não depende de unsafe, ponteiro solto ou buffer overflow.
+
+O borrow checker pode estar feliz enquanto o programa abre uma janela de corrida contra o file system.
+
+Em ferramenta privilegiada, isso vira bug de segurança.
+
+A correção muda o jeito de pensar.
+
+Em vez de confiar na path como identidade estável, ancore a operação em file descriptor quando a situação pedir.
+
+Crie com permissões corretas desde o começo.
+
+Evite checar uma coisa e agir sobre outra como se o mundo tivesse congelado entre duas syscalls.
+
+Rust continua sendo uma baita escolha para sistemas.
+
+Só não dá para terceirizar o modelo de ameaça para o compilador.
+
+Ele não conhece o adversário sentado no diretório temp.
+
+A fonte deste bloco é corrode ponto dev.
+
+Agora, alguns destaques rápidos.
+
+O paper, "Agentic Harness Engineering", diz que o harness pode pesar mais que a troca de modelo em agentes de código.
+
+A proposta é observar componentes, trajetórias e decisões para evoluir o harness com contrato verificável, não só tentativa e erro.
+
+A fonte é da arxiv, no artigo chamado, "Agentic Harness Engineering".
+
+SnapGuard mira agentes web baseados em screenshot.
+
+A ideia é detectar prompt injection visual sem chamar um modelo de visão pesado para cada página.
+
+Para isso, usa sinais visuais e texto recuperado da própria captura.
+
+A fonte é da arxiv, no paper chamado, "SnapGuard".
+
+WhisperPipe é um paper de streaming A S R com memória limitada, Silero V A D, janelas sobrepostas e latência mediana de 89 milissegundos.
+
+Para pipeline de áudio, é o tipo de arquitetura que vale guardar.
+
+A fonte é da arxiv, no paper chamado, "WhisperPipe".
+
+A Socket encontrou 73 extensões dormentes no Open V S X ligadas ao GlassWorm.
+
+O alvo inclui VS Code, Cursor, Windsurf e VSCodium, com loaders que baixam payloads depois da ativação.
+
+A fonte deste item é a "Socket".
+
+O Kubernetes 1.36 trouxe mitigação de staleness para controladores.
+
+O resumo prático é este: cache de controller desatualizado pode tomar ação errada.
+
+Operadores precisam tratar consistência eventual como risco real.
+
+A fonte é o blog do Kubernetes.
+
+Jeff Dickey saiu da Figma para trabalhar em open source em tempo integral, principalmente no mise.
+
+A parte útil do relato é sustentabilidade de ferramenta que já virou infraestrutura de dev, inclusive em ambientes de agente.
+
+A fonte deste item é [JH EY1 D IY1 EH1 K S] ponto dev.
+
+RESTestBench alerta para um efeito chato.
+
+Quando um L L M refina testes contra um sistema já mutado ou com bug, ele pode aprender o comportamento errado como se fosse verdade.
+
+A fonte é da arxiv, no artigo chamado, "RESTestBench".
+
+O paper da Salesforce sobre compound AI systems fala de inferência com vários modelos, retrievers e ferramentas escalando em paralelo.
+
+O detalhe bom é operacional: sistemas de agentes precisam escalar partes diferentes de forma independente.
+
+A fonte é da arxiv, no paper da Salesforce sobre compound A I systems.
+
+Acompanhamento de tendências.
+
+A linha do dia é infraestrutura de desenvolvimento entrando no threat model sem pedir licença.
+
+Git Hub, o proxy de IA, Open V S X, Kubernetes e mise aparecem em camadas diferentes.
+
+Mas todos vivem perto do mesmo lugar: onde código vira execução confiável.
+
+Também tem uma virada boa em agentes.
+
+O assunto menos útil é qual modelo escreve melhor.
+
+O assunto que começa a ficar sério é o que o agente consegue ver, em qual formato, com qual permissão e como ele prova que a mudança funcionou.
+
+A ferramenta da Grafana, "Agentic Harness Engineering", "RESTestBench" e "SnapGuard" caem nessa família.
+
+E tem o lembrete antigo, agora com roupa nova: segurança de software ainda é cheia de chão batido.
+
+Um delimitador mal tratado, uma query sem parâmetro, uma path re resolvida na hora errada.
+
+A IA pode acelerar a descoberta e a correção, mas o bug continua morando em detalhes bem humanos.
