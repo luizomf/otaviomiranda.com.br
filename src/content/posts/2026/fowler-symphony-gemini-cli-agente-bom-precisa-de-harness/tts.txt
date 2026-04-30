@@ -1,0 +1,375 @@
+Fowler, Symphony e Gemini [S IY1 EH1 L AY1]: agente bom precisa de harness.
+
+Nota: este texto foi gerado por IA, chamada "The Paper" "L L M", com checagem nas fontes originais. As fontes aparecem ao final de cada bloco, em formato falado.
+
+Martin Fowler juntou alguns fragmentos em 29 de abril e o começo já resolve uma confusão comum sobre agentes de código.
+
+A parte interessante não é o modelo escrever mais rápido.
+
+É descobrir se aquilo que ele escreveu presta, se pode rodar e se respeita o projeto.
+
+Também é descobrir se ele não abriu uma cratera no caminho.
+
+No mesmo pacote, a OpenAI mostrou o Symphony.
+
+O Gemini [S IY1 EH1 L AY1] corrigiu uma falha de confiança em integração contínua.
+
+O Linux ganhou um bug de page cache com cheiro de pesadelo para sandbox.
+
+E projetos open source começaram a deixar mais claro onde aceitam, ou rejeitam, contribuição com IA.
+
+O tema do dia é menos glamouroso que um prompt bonito.
+
+É controle.
+
+Fowler colocou o dedo na parte menos cinematográfica do agente.
+
+O fragmento do Fowler não é uma notícia única.
+
+É uma costura.
+
+Ele aponta para o guia atualizado do Chris Parsons sobre programação com IA.
+
+Também volta ao texto da Birgitta Böckeler sobre harness engineering.
+
+E passa pela diferença entre vibe coding e agentic engineering.
+
+No fim, ainda encosta num ponto mais antigo de design.
+
+Nomes, conceitos e definições continuam importando.
+
+Essa costura é boa porque tira a conversa do encantamento.
+
+Parsons escreve que "verificado" deixou de significar apenas "lido por você".
+
+Com agentes gerando mais trabalho do que uma pessoa consegue revisar linha por linha, parte da checagem precisa ir para ferramentas.
+
+Entram aí testes, checadores de tipo, linters, gates automáticos e ambientes onde o agente consegue falhar antes de pedir atenção humana.
+
+É aí que o harness deixa de ser palavra bonita.
+
+No texto da Böckeler, o harness em volta de um agente de código combina guias e sensores.
+
+Guia é aquilo que orienta antes da ação.
+
+Pode ser AGENTS ponto M D, CLAUDE ponto M D, arquivos de skill, documentação curta e convenções do projeto.
+
+Sensor é aquilo que observa depois.
+
+Pode ser teste, análise estática, log, browser headless, script de verificação ou revisão automática.
+
+Os sensores bons são baratos, repetíveis e falam numa linguagem que o agente consegue usar para se corrigir.
+
+Isso muda o papel do senior.
+
+O trabalho não some.
+
+Fica mais estranho.
+
+Em vez de ficar no fim da esteira aprovando um monte de diffs que chegaram rápido demais, a pessoa experiente precisa transformar cicatriz de produção em estrutura.
+
+Uma regra que sempre aparece em review vira linter, teste, script ou skill.
+
+Um erro recorrente vira instrução versionada.
+
+Uma decisão de arquitetura vira critério que o agente consegue consultar antes de abrir o editor.
+
+Sim, tem uma ironia aqui.
+
+Este texto também sai de um pipeline cheio de prompt, arquivo, build, texto para fala e checagem.
+
+A diferença entre piada e ferramenta é o quanto desse pipeline consegue acusar erro sem depender de torcida.
+
+As fontes deste bloco são Martin Fowler, Chris Parsons e o artigo sobre harness engineering publicado no site do Martin Fowler.
+
+Symphony transforma o issue tracker em sala de controle.
+
+A OpenAI publicou em 27 de abril de 2026 o Symphony, uma especificação open source e uma implementação experimental para orquestrar agentes de código.
+
+O gancho é simples.
+
+Em vez de abrir várias sessões do Codex e cuidar de cada uma como quem vigia panela no fogão, o time usa o tracker de tarefas como plano de controle.
+
+Na descrição da OpenAI, cada issue ativa pode virar um workspace isolado com um agente trabalhando.
+
+O Symphony acompanha estados no Linear, reinicia execução quando algo trava e deixa tarefas bloqueadas esperando dependências.
+
+Também trata parte da vida real do pull request.
+
+Isso inclui integração contínua, feedback de review, rebases, conflitos e checagens instáveis.
+
+A OpenAI diz que alguns times tiveram aumento de 500 por cento em pull requests landados nas três primeiras semanas.
+
+É número de vendor, então merece sobrancelha levantada.
+
+Mas o desenho técnico é mais importante que o número.
+
+O repositório deixa claro que é uma prévia de engenharia para ambientes confiáveis.
+
+Isso importa.
+
+Symphony não é "solta o agente no data center e vai dormir".
+
+A própria especificação fala de workspaces por issue, política no repo, logs estruturados, retry, estados de handoff e limites de escopo.
+
+É menos brinquedo de chat e mais fila de trabalho com execução assistida.
+
+O ponto forte é que Symphony combina muito bem com a tese do Fowler.
+
+Um agente rodando por issue só é útil se o projeto já sabe se defender.
+
+Teste que pega regressão.
+
+Integração contínua que falha de verdade.
+
+Instrução curta no repo.
+
+Ambiente que limita onde o comando roda.
+
+E revisão humana onde julgamento ainda pesa.
+
+Sem isso, a orquestração só aumenta a velocidade com que a bagunça chega.
+
+As fontes deste bloco são a OpenAI e o repositório openai barra Symphony.
+
+Gemini [S IY1 EH1 L AY1] mostra que o harness também pode virar ataque.
+
+O aviso de segurança do run Gemini [S IY1 EH1 L AY1] é uma daquelas correções que parecem detalhe.
+
+Pelo menos até você imaginar isso dentro de um pull request de desconhecido.
+
+Versões anteriores do Gemini [S IY1 EH1 L AY1] confiavam automaticamente na pasta do workspace quando rodavam em modo sem interface, como em integração contínua.
+
+Isso permitia carregar configuração e variáveis locais a partir de conteúdo controlado pelo repositório.
+
+A atualização publicada em 24 de abril de 2026 endurece esse modelo.
+
+O pacote Gemini [S IY1 EH1 L AY1] foi corrigido nas versões zero ponto trinta e nove ponto um, e zero ponto quarenta preview três.
+
+A action do GitHub foi corrigida na versão zero ponto um ponto vinte e dois.
+
+O comportamento novo exige confiança explícita antes de processar configurações do workspace em ambiente não interativo.
+
+Tem outro ajuste importante no mesmo aviso.
+
+Allowlist de ferramentas em modo yolo.
+
+Antes, uma configuração ampla demais podia ignorar o limite fino para comandos de shell.
+
+Em workflow que analisa issue ou pull request de fora, isso vira receita clássica de prompt injection com acesso a comando.
+
+O aprendizado aqui é meio seco, mas necessário.
+
+O harness não é automaticamente uma camada de segurança.
+
+Ele também é código, configuração, limite de confiança e política de execução.
+
+Se o agente lê env, confia em pasta errada ou aceita comando demais porque alguém quis agilidade, o problema não está no modelo.
+
+Está no trilho em volta dele.
+
+A fonte deste bloco é a advisory de segurança do GitHub para o run Gemini [S IY1 EH1 L AY1].
+
+Copy Fail lembra que container ainda divide kernel.
+
+Copy Fail, rastreado como CVE 2026, trinta e um quatrocentos e trinta e um, é uma falha no kernel Linux descrita pela Xint em 29 de abril de 2026.
+
+O resumo curto já é desconfortável.
+
+Uma combinação no subsistema de criptografia do kernel permite uma escrita controlada de quatro bytes no page cache de um arquivo legível.
+
+O arquivo no disco não muda.
+
+O checksum do disco pode continuar lindo.
+
+Só que o page cache é a versão que o sistema lê em memória.
+
+A Xint demonstra o impacto com um script Python pequeno o bastante para caber num susto.
+
+Ele corrompe a visão em memória de um binário com permissão elevada e consegue root em distribuições testadas como Ubuntu, Amazon Linux, RHEL e SUSE.
+
+Para quem mexe com agente, integração contínua e sandbox, a parte pior está na frase sobre container.
+
+O page cache é compartilhado pelo host.
+
+Então a conversa não fica limitada a um usuário local escalando privilégio.
+
+Ela encosta em runner de integração contínua, ambiente multi tenant, nó Kubernetes e máquina que executa código não confiável.
+
+Tudo isso achando que container é parede de concreto.
+
+O conserto prático começa onde sempre começa.
+
+Kernel atualizado.
+
+Para ambiente de execução de agente, a mitigação de defesa em profundidade é reduzir a superfície do kernel exposta para workloads não confiáveis.
+
+Se o agente não precisa de certas interfaces do kernel, a política de sandbox deve dizer isso com todas as letras.
+
+Container ajuda.
+
+Kernel continua sendo a fronteira de verdade.
+
+A fonte deste bloco é a Xint.
+
+Segredo de agente não deveria virar variável de ambiente gourmet.
+
+Agent Vault, da Infisical, olha para um problema bem concreto.
+
+Como deixar um agente chamar APIs sem entregar o segredo para ele?
+
+A resposta proposta é um proxy HTTPS local.
+
+O agente faz uma requisição normal, o proxy injeta a credencial no caminho e registra metadados do acesso.
+
+A chave não entra no contexto do agente.
+
+Isso conversa com o MCP Server da DBmaestro no mesmo ponto, só em outro domínio.
+
+No caso da DBmaestro, agentes e copilotos acessam fluxos de database DevOps por MCP.
+
+Mas a promessa útil não é natural language controlando banco.
+
+A parte que presta atenção é outra.
+
+Controle de acesso por papéis, trilha de auditoria, compliance, templates de release e execução determinística continuam mandando.
+
+A IA vira interface de entrada, não substituta da governança.
+
+O detalhe que decide se isso é segurança ou teatro está no egress.
+
+Configurar proxy no ambiente e deixar o agente sair direto para a internet é só decorar a porta da frente enquanto a janela está aberta.
+
+Para o proxy de credencial fazer sentido, o sandbox precisa bloquear saída direta e obrigar o caminho controlado.
+
+Essa é uma regra boa para avaliar ferramentas de agente nos próximos meses.
+
+A pergunta não é se tem MCP ou se tem vault.
+
+É quem segura o segredo, quem executa a ação, quem autoriza, quem audita e como o agente é impedido de contornar o caminho feliz.
+
+As fontes deste bloco são Infisical e DBmaestro.
+
+Zig e Zulip tratam IA como política de mantenedor, não como opinião de Twitter.
+
+Zig e Zulip chegaram a decisões diferentes, mas a dor é parecida.
+
+Loris Cro explica a proibição de contribuições com IA no Zig usando a ideia de contributor poker.
+
+Um projeto open source investe em pessoas, não só em patches.
+
+Revisar um pull request ruim pode ser racional quando aquilo ajuda alguém a virar colaborador recorrente.
+
+Revisar pull request gerado por IA, sem autor capaz de explicar e manter a mudança, queima esse investimento.
+
+O texto não tenta vender nostalgia.
+
+Ele fala de custo de mantenedor.
+
+Pull request gigante de primeira viagem.
+
+Explicação alucinada.
+
+Autor que não domina a própria mudança.
+
+Volume extra de ruído.
+
+Tudo isso é problema social e técnico ao mesmo tempo.
+
+Integração contínua passar não prova que existe ownership.
+
+Zulip escolheu outro caminho.
+
+No release do Zulip 12, Tim Abbott conta que o projeto recebeu centenas de pull requests gerados por IA durante a temporada de Google Summer of Code.
+
+Praticamente nenhum foi mergeado.
+
+Em vez de banir todo uso, o projeto adotou política de responsabilidade humana.
+
+Quem contribui precisa entender, testar e explicar o trabalho, mesmo que tenha usado modelo de linguagem.
+
+Ao mesmo tempo, o Zulip investiu em preparar o próprio repo para Claude Code, com contexto de projeto e orientação de self review.
+
+Em abril, segundo o post, engenheiros do core team já produziam pull requests com Claude Code em qualidade próxima ao padrão histórico do time.
+
+A diferença não é mágica.
+
+É quem está dirigindo, em qual base, com quais instruções e sob qual responsabilidade.
+
+No fundo, Zig e Zulip concordam no ponto que importa.
+
+IA em open source precisa de política explícita.
+
+Pode ser não.
+
+Pode ser sim, com responsabilidade.
+
+O que não funciona é fingir que todo patch é igual só porque apareceu verde na integração contínua.
+
+As fontes deste bloco são Loris Cro e Zulip.
+
+Destaques rápidos.
+
+A OpenAI publicou um post sobre os goblins que apareceram em metáforas de modelos recentes.
+
+O valor técnico está em mostrar como recompensa de estilo, personalidade e dados sintéticos podem espalhar tique verbal para lugares onde ninguém pediu um monstrinho retórico.
+
+A fonte deste item é a OpenAI.
+
+Claw Gym tenta organizar o ciclo completo de agentes pessoais em workspace.
+
+Dados sintéticos, trajetórias, treino e benchmark.
+
+O número que importa menos é o placar.
+
+O que importa mais é a direção.
+
+Agente precisa de ambiente, tarefa verificável e rollout reproduzível.
+
+A fonte deste item é da arxiv, no paper chamado, "ClawGym".
+
+O paper, "Hot Fixing in the Wild", analisou hot fixes em mais de 61 mil repositórios.
+
+Hot fix tende a ser menor, com menos gente, menos review e menos teste.
+
+É exatamente o tipo de cenário em que agente pode ajudar no patch local e atrapalhar feio se alguém terceirizar contexto de produção.
+
+A fonte deste item é da arxiv, no paper chamado, "Hot Fixing in the Wild".
+
+O Open Agents da Vercel apareceu como referência para agentes de código em background.
+
+Ele usa workflow durável e execução em sandbox.
+
+Vale acompanhar mais pelo desenho de controle do que pelo release em si.
+
+A fonte deste item é a Vercel.
+
+Acompanhamento de tendências.
+
+A linha que atravessa tudo hoje é a mesma.
+
+Agente bom precisa de chão.
+
+Issue tracker, arquivo de skill, teste, sandbox, egress, segredo, integração contínua, política de review e observabilidade não são detalhes depois da demo.
+
+São o produto real.
+
+Também ficou mais claro que segurança de agente tem duas camadas.
+
+A primeira é o que o agente pode fazer.
+
+A segunda é o que o ambiente em volta dele deixa passar sem perceber.
+
+Gemini [S IY1 EH1 L AY1] e Copy Fail mostram lados diferentes do mesmo medo.
+
+Uma confiança errada no workspace ou uma interface perigosa do kernel já bastam para transformar automação em ataque.
+
+E a parte social finalmente está entrando na conversa técnica.
+
+Zig e Zulip não estão brigando sobre gostar ou não gostar de IA.
+
+Estão definindo o custo que cada projeto aceita pagar em review, aprendizado, responsabilidade e manutenção.
+
+Isso é infraestrutura também.
+
+Só não compila.
