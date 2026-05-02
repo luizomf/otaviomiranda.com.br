@@ -1,0 +1,223 @@
+Hoje tem Copy Fail, K três K e Governor: quando o host vira limite do agente.
+
+Nota: este texto foi gerado por IA, chamada "The Paper" "LLM", com checagem nas fontes originais. As fontes aparecem ao final de cada bloco, em formato falado.
+
+Copy Fail não pede licença bonita. Ele parte de execução local sem privilégio e mira uma camada que muita pilha de agente ainda trata como chão firme: o kernel compartilhado.
+
+O dia ficou menos sobre trocar modelo e mais sobre onde a automação encosta: host, CI, volume, token, tela do desktop e treino dos modelos. É aí que a conta chega.
+
+Copy Fail lembrou que container ainda divide kernel.
+
+A Microsoft publicou em primeiro de maio de 2026 a análise da CVE 2026, trinta e um quarenta e um, também chamada de Copy Fail.
+
+É uma elevação local de privilégio no subsistema de criptografia do kernel Linux. A falha tem severidade alta e afeta Ubuntu, Amazon Linux, Red Hat, SUSE, Debian, Fedora, Arch e outras distribuições.
+
+Ela também entrou no catálogo americano de vulnerabilidades exploradas em primeiro de maio de 2026. Para órgãos federais dos Estados Unidos, o prazo de correção ficou em 15 de maio de 2026.
+
+O detalhe que muda a temperatura da história é a cache de páginas do Linux.
+
+Segundo a Microsoft e a divulgação técnica do Copy Fail, um usuário sem privilégio pode abusar de uma otimização de memória.
+
+Essa otimização entrou no kernel em 2017.
+
+Com isso, ele consegue escrever quatro bytes controlados na cache de páginas de um arquivo legível, inclusive binários com set U I D, como o binário su.
+
+A exploração não depende de corrida. A prova de conceito pública foi apresentada como um script pequeno, capaz de obter root em várias distribuições testadas.
+
+Isoladamente, isso não é execução remota de código.
+
+Precisa de execução local.
+
+Só que execução local é comum em CI, runner compartilhado, notebook hospedado e sandbox de código.
+
+Também aparece em servidor multiusuário e pod comprometido.
+
+O host continua dividindo kernel com o container. Quando a cache de páginas entra na jogada, a borda entre pod e nó vira bem menos confortável.
+
+O caminho seguro é atualizar o kernel. Onde não der, as mitigações citadas pelas fontes passam por bloquear a interface de criptografia afetada ou desativar o módulo vulnerável.
+
+Mitigação de emergência sempre cobra alguma coisa em compatibilidade. A lição para agente de código é mais simples: se ele executa código não confiável, o container sozinho não merece tanta fé assim.
+
+As fontes deste bloco são o blog de segurança da Microsoft, o banco nacional de vulnerabilidades dos Estados Unidos e o site Copy Fail.
+
+K três K e SELinux mostram que isolamento tem conta de luz.
+
+O K três K, da Rancher, é Kubernetes dentro de Kubernetes.
+
+Ele cria clusters K três S isolados dentro de um cluster existente.
+
+Existe um modo compartilhado para economizar recurso e um modo virtual com pods de servidor dedicados por tenant.
+
+Para um mundo de agentes, isso é uma ideia tentadora. Em vez de colocar cada tarefa em um container solto, você pode pensar em um cluster pequeno por agente, com RBAC, quota e escopo mais explícitos.
+
+Só que o texto da Andrea Veri sobre S E Linux M C S em GitLab Runners joga água fria no entusiasmo fácil.
+
+No fluxo do runner, um container helper clona o repositório e escreve no volume de builds. Outro container roda o job.
+
+Com Podman e S E Linux em modo enforcing, cada container recebe categorias M C S aleatórias.
+
+O helper escreve o volume com uma categoria.
+
+O build entra com outra categoria, e a política faz exatamente o que deveria fazer.
+
+Ela nega acesso entre containers que não dominam a mesma categoria.
+
+A sugestão oficial do GitLab, descrita no post, é fixar o mesmo nível M C S para os containers do runner.
+
+Funciona, mas também derruba parte da separação entre jobs concorrentes no mesmo runner.
+
+Todo mundo passa a compartilhar a mesma categoria.
+
+A solução pragmática do GNOME foi usar categorias fixas diferentes por tipo de runner. Melhor que nada, mas ainda é compromisso, não mágica.
+
+Veri também testou libkrun e discutiu Firecracker, Cloud Hypervisor e executors customizados.
+
+A moral é ótima justamente porque é chata. MicroVM ajuda, mas integração com CI, volume, virtio F S, kernel convidado, lifecycle e coleta de artefato não desaparecem por decreto.
+
+A parte que protege também é a parte que quebra o caminho feliz.
+
+As fontes deste bloco são Rancher K três K e Andrea Veri.
+
+Governor e Codex Harness M C P baixam o agente para o chão.
+
+Depois do Fowler, a parte boa foi ver ferramentas pequenas repetirem a tese sem gravata. O gargalo não está só em pedir melhor.
+
+Está em dar trilho para a execução. Contexto que não incha até virar pântano. Log que não afoga a sessão. Tentativa que deixa rastro. E uma porta antes do agente declarar que terminou.
+
+O Governor é um plugin para Claude Code focado em economia de contexto e controle de ruído.
+
+Ele comprime respostas, filtra saída de Bash, teste e build, mantém telemetria local e reduz drift em tarefas amplas.
+
+Também oferece comandos para auditar ou comprimir arquivos de memória.
+
+Os benchmarks do próprio repositório são pequenos e locais, então não valem como lei da física.
+
+Mesmo assim, os números são úteis como sinal.
+
+A fonte fala em cinquenta e cinco vírgula cinco porcento de redução em prompts técnicos.
+
+Também fala em noventa e seis vírgula oito porcento de bloqueio em uma saída sintética de testes Python, preservando as linhas de falha.
+
+O aviso importante continua o mesmo: não comprimir arquivo com segredo.
+
+O Codex Harness M C P, publicado no TabNews, vai para outro lado do mesmo problema.
+
+É um M C P local para Codex [S IY1 EH1 L AY1].
+
+Ele traz contratos de execução, memória por projeto e traces brutos de tentativa, erro, decisão e sucesso.
+
+Também traz casos de avaliação, perfis de harness e completion gate antes do pronto.
+
+O texto do autor resume bem. Prompt faz o agente começar. Harness faz o agente trabalhar como engenharia.
+
+Sean Escriva, no texto chamado "The Architect's Instinct", coloca a parte humana por baixo. IA tornou a execução fácil, mas não tornou o sistema simples. O plano continua sendo onde a pessoa pensa.
+
+É uma frase perigosa de transformar em pôster motivacional, então vamos deixar no chão. Se o agente executa rápido demais, o artefato que segura o trabalho precisa ser mais forte que a conversa.
+
+As fontes deste bloco são Governor, Codex Harness M C P no TabNews e The Architect's Instinct.
+
+NeMo R L colocou speculative decoding dentro do treino.
+
+A NVIDIA publicou uma integração de speculative decoding no NeMo R L, usando backend v L L M e caminho com Eagle três.
+
+A ideia geral é conhecida em inferência.
+
+Um modelo menor propõe tokens e o modelo principal verifica.
+
+Aqui, a técnica entrou na etapa em que o treino gera respostas para avaliar, preservando a semântica do verificador.
+
+Nos testes com um modelo Qwen de oito bilhões de parâmetros, o caso R L Zero cortou a geração das respostas de treino de cem para cinquenta e seis vírgula seis segundos por etapa.
+
+Foi um ganho de uma vírgula oito vez.
+
+O passo total de R L chegou a uma vírgula quatro vez de aceleração. Em simulação para 235 bilhões de parâmetros, a projeção favorável chega perto de duas vírgula cinco vezes no treino de ponta a ponta.
+
+A parte mais útil está nos controles, não no número maior. Inicialização do draft com dados do domínio venceu draft genérico. K igual a três apareceu como ponto bom nos testes de oito B.
+
+Drafts mais longos podem piorar workloads de raciocínio, porque o custo de verificar também cresce. Adaptação online ajuda quando o draft começa fraco, mas acrescenta pouco quando ele já veio bem alinhado.
+
+Para quem não treina modelo em um monte de G B duzentos, ainda tem leitura prática.
+
+O tempo caro vai além do modelo pensando.
+
+A sequência operacional ao redor dele também cobra.
+
+Até no treino, a diferença está em como você alimenta, verifica e reaproveita trabalho sem mudar a promessa estatística do resultado.
+
+As fontes deste bloco são NVIDIA Nemotron e documentação do NeMo R L.
+
+O agent desktop prefere árvore de acessibilidade a print da tela.
+
+O agent desktop é uma ferramenta em Rust para automatizar apps de desktop usando a árvore de acessibilidade do sistema operacional.
+
+Em vez de screenshot, OCR e clique por coordenada, ele tenta dar ao agente uma visão estruturada da interface.
+
+Essa visão vem com [JH EY1 S AH0 N], referências determinísticas de elementos e ações que começam pela A P I de acessibilidade antes de cair para mouse.
+
+O recurso mais interessante é a travessia progressiva de skeleton.
+
+Em apps densos, o agente vê primeiro um mapa raso, escolhe uma região e aprofunda só ali.
+
+Depois age em um elemento referenciado e captura de novo o trecho que mudou.
+
+O README fala em redução de 78 a 96 porcento de tokens em apps densos, além de 53 comandos para observação, interação, teclado, mouse, notificações, clipboard e janelas.
+
+Isso conversa direto com o estado atual dos agentes. Screenshot é universal, mas caro e frágil.
+
+Árvore de acessibilidade não resolve tudo. Depende de permissão e da qualidade do app. Mas entrega algo que agente gosta: estrutura, identificador e erro mais fácil de recuperar.
+
+Parece menos mágico. Esse é o charme.
+
+A fonte deste bloco é agent desktop.
+
+Agora, alguns destaques rápidos do mesmo dia.
+
+Um pesquisador mostrou como encontrou execução remota de código em um roteador antigo da TP-Link.
+
+Ele baixou firmware de um bucket S três público da própria TP-Link.
+
+Depois analisou um comando Telnet não documentado chamado mdlog prepare.
+
+O comunicado oficial trata a CVE 2026, trinta e oito quarenta e um, como uma falha de injeção de comando com severidade alta, e recomenda instalar o firmware corrigido.
+
+As fontes deste item são MrBruh e TP-Link.
+
+A Trellix confirmou acesso não autorizado a parte de seu repositório de código fonte.
+
+A empresa disse que não encontrou evidência de impacto no processo de release ou exploração do código.
+
+Ela ainda não detalhou vetor, tempo de acesso ou autoria.
+
+A fonte deste item é The Hacker News.
+
+Desenvolvedores pressionam o serviço nacional de saúde da Inglaterra para retirar uma política interna de desenvolvimento de software.
+
+Eles querem manter o princípio de abrir código novo pago com dinheiro público.
+
+A carta é interessante porque coloca segurança e transparência na mesma mesa, em vez de tratar open source como vazamento por padrão.
+
+A fonte deste item é Keep Things Open.
+
+O projeto web scroll video, da Universidade da Pensilvânia, gera vídeos automáticos de rolagem de página usando Chrome headless e ffmpeg.
+
+Ele aceita cue sheets com pausa, clique, digitação, zoom e destaque visual.
+
+É o tipo de ferramenta pequena que encaixa bem em pipeline de vídeo técnico.
+
+A fonte deste item é upenn, no repositório web scroll video.
+
+Acompanhamento de tendências.
+
+O host apareceu de novo. Copy Fail, S E Linux M C S, K três K, microVM e runner de CI estão falando da mesma família de problema.
+
+Quando você executa coisa não confiável, o limite real costuma estar abaixo do seu container. Às vezes no kernel. Às vezes no volume. Às vezes na categoria de segurança que alguém fixou para o build passar.
+
+Harness também continuou descendo para infraestrutura, longe do conselho de produtividade.
+
+Governor, Codex Harness M C P e o texto do Sean Escriva não pedem um prompt mais esperto. Eles pedem rastro, orçamento de contexto, checagem, plano e porta de saída.
+
+É menos divertido que demo de agente abrindo app. Também é mais perto de produção.
+
+A interface ficou mais operacional. NeMo R L mexe no custo da geração durante treino. Agent desktop mexe na forma como o agente enxerga um app.
+
+O fio comum é reduzir ambiguidade no ponto em que a automação age. Menos adivinhação, mais superfície verificável. Bonito? Nem sempre. Útil? Bastante.
