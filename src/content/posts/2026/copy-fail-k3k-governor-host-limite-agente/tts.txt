@@ -4,15 +4,15 @@ Nota: este texto foi gerado por IA, chamada "The Paper" "LLM", com checagem nas 
 
 Copy Fail não pede licença bonita. Ele parte de execução local sem privilégio e mira uma camada que muita pilha de agente ainda trata como chão firme: o kernel compartilhado.
 
-O dia ficou menos sobre trocar modelo e mais sobre onde a automação encosta: host, CI, volume, token, tela do desktop e treino dos modelos. É aí que a conta chega.
+O dia ficou menos sobre trocar modelo e mais sobre onde a automação encosta: host, CI, volume, token, tela do "Desk Top" e treino dos modelos. É aí que a conta chega.
 
 Copy Fail lembrou que container ainda divide kernel.
 
 A Microsoft publicou em primeiro de maio de 2026 a análise da CVE 2026, trinta e um quarenta e um, também chamada de Copy Fail.
 
-É uma elevação local de privilégio no subsistema de criptografia do kernel Linux. A falha tem severidade alta e afeta Ubuntu, Amazon Linux, Red Hat, SUSE, Debian, Fedora, Arch e outras distribuições.
+É uma elevação local de privilégio no sub sistema de criptografia do kernel Linux. A falha tem severidade alta e afeta Ubuntu, Amazon Linux, Red Hat, SUSE, Debian, Fedora, Arch e "outras distribuições".
 
-Ela também entrou no catálogo americano de vulnerabilidades exploradas em primeiro de maio de 2026. Para órgãos federais dos Estados Unidos, o prazo de correção ficou em 15 de maio de 2026.
+Ela também entrou no catálogo americano de vulnerabilidades exploradas em primeiro de maio de 2026. Para órgãos federais dos Estados Unidos, o prazo de correção ficou em "15 de maio de 2026".
 
 O detalhe que muda a temperatura da história é a cache de páginas do Linux.
 
@@ -146,9 +146,9 @@ Até no treino, a diferença está em como você alimenta, verifica e reaproveit
 
 As fontes deste bloco são NVIDIA Nemotron e documentação do NeMo R L.
 
-O agent desktop prefere árvore de acessibilidade a print da tela.
+O agent "Desk Top" prefere árvore de acessibilidade a print da tela.
 
-O agent desktop é uma ferramenta em Rust para automatizar apps de desktop usando a árvore de acessibilidade do sistema operacional.
+O agent "Desk Top" é uma ferramenta em Rust para automatizar apps de "Desk Top" usando a árvore de acessibilidade do sistema operacional.
 
 Em vez de screenshot, OCR e clique por coordenada, ele tenta dar ao agente uma visão estruturada da interface.
 
@@ -198,7 +198,7 @@ A carta é interessante porque coloca segurança e transparência na mesma mesa,
 
 A fonte deste item é Keep Things Open.
 
-O projeto web scroll video, da Universidade da Pensilvânia, gera vídeos automáticos de rolagem de página usando Chrome headless e ffmpeg.
+O projeto web scroll video, da Universidade da Pensilvânia, gera vídeos automáticos de rolagem de página usando Chrome headless e "F F M PEG".
 
 Ele aceita cue sheets com pausa, clique, digitação, zoom e destaque visual.
 
