@@ -401,3 +401,4 @@ depoimentos/
 # Astro
 .astro/
 .claude/
+run_dir/
