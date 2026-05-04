@@ -1,0 +1,325 @@
+DigiCert, cPanel e software sob medida. Confiança dá trabalho.
+
+O tema de hoje é confiança em lugares que costumam parecer chatos até o dia em que quebram.
+
+Suporte de autoridade certificadora, painel de hospedagem, fornecedor de serviço público, fila no Postgres.
+
+E também terminal "só texto", que vira uma parede para leitor de tela.
+
+A notícia mais forte é a DigiCert. A raiz da internet segue de pé, calma lá.
+
+O problema é mais mundano, e por isso mesmo mais útil.
+
+Um fluxo de suporte aparentemente comum abriu caminho para certificados E V de "code signing" usados em malware.
+
+Depois, o remédio da detecção também tropeçou.
+
+O Microsoft Defender passou a tratar certificados legítimos da DigiCert como trojan.
+
+No outro extremo do dia tem Geir Isene montando um desktop para uma pessoa só, com Claude Code no banco de ferramentas.
+
+Parece uma história pequena, mas é uma das formas mais honestas de olhar para agentes de código.
+
+Eles ficam muito mais úteis quando o escopo é estreito, o dono sabe o que quer e a revisão continua humana.
+
+Primeiro, a DigiCert: quando o suporte vira parte da cadeia de confiança.
+
+O incidente da DigiCert começou em abril de 2026 com engenharia social contra a equipe de suporte.
+
+Segundo o relatório publicado no Bugzilla da Mozilla, o atacante enviou arquivos ZIP disfarçados de capturas de tela.
+
+Esses arquivos foram enviados por um canal de chat de suporte.
+
+Dentro havia um arquivo S C R, que no Windows é executável com roupa de descanso de tela.
+
+Quatro tentativas foram bloqueadas, mas uma delas comprometeu um endpoint usado por um analista.
+
+O primeiro endpoint foi detectado e contido em 3 de abril.
+
+O problema é que um segundo endpoint, comprometido no dia 4, só entrou no radar em 14 de abril.
+
+A causa foi uma falha de cobertura do CrowdStrike naquele host.
+
+Esse detalhe importa porque o incidente passa do clique errado para algo bem mais perigoso.
+
+Uma máquina fora do campo de visão transforma a telemetria em um cobertor curto.
+
+Com acesso ao endpoint do analista, o atacante entrou em funções internas do portal de suporte.
+
+A DigiCert afirma que esse acesso não permitia gerenciar contas, usuários, chaves de A P I ou pedidos.
+
+Mesmo assim, ele permitia ver códigos de inicialização de pedidos já aprovados de certificados E V de "code signing".
+
+E aí mora o susto: com um pedido aprovado e o código de inicialização, era possível obter o certificado.
+
+Certificado E V de "code signing" não é enfeite de PDF.
+
+Ele ajuda sistemas, navegadores e ferramentas de segurança a decidir se um binário assinado merece mais confiança.
+
+Quando isso cai na mão errada, malware ganha uma fantasia administrativa.
+
+Daquelas que passam pela portaria acenando com crachá.
+
+A DigiCert revogou 60 certificados de "code signing".
+
+Vinte e sete foram explicitamente ligados ao ator.
+
+E alguns certificados explorados apareceram assinando a família de malware Zhong Stealer.
+
+A empresa também cancelou pedidos pendentes no escopo.
+
+Passou a mascarar códigos de inicialização em sessões de suporte por proxy.
+
+E disse não ter encontrado abuso de validação para outros tipos de certificado.
+
+O segundo tropeço veio pelo lado defensivo.
+
+Depois dos relatos de certificados comprometidos, o Microsoft Defender passou a marcar entradas legítimas de certificados raiz da DigiCert.
+
+Essas entradas foram marcadas como Trojan Win trinta e dois, Cerdigent, A D H A.
+
+Em alguns casos, segundo a BleepingComputer, essas entradas chegaram a ser removidas do "trust store" do Windows.
+
+A Microsoft orientou atualizar para Security Intelligence, versão um ponto quatro quatro nove ponto quatro três zero ponto zero, ou superior.
+
+A distinção aqui precisa ficar limpa.
+
+As raízes da DigiCert não foram confirmadas como comprometidas nesse incidente.
+
+O que houve foi abuso de certificados de "code signing" emitidos a partir de pedidos aprovados.
+
+Depois veio uma detecção que exagerou e acertou itens legítimos do AuthRoot.
+
+Para quem administra ambiente Windows, suporte técnico, E D R ou cadeia de build, o checklist é feio e útil.
+
+Procurar binários assinados pelos certificados revogados.
+
+Confirmar a versão das assinaturas do Defender.
+
+Verificar a integridade do "trust store".
+
+E olhar com carinho para cobertura de endpoint em máquinas de suporte.
+
+A cadeia de confiança não começa no H S M glamouroso.
+
+Às vezes começa numa tela de chat e num arquivo S C R que jamais deveria ter passado dali.
+
+As fontes deste bloco são o relatório da DigiCert no Bugzilla da Mozilla, a BleepingComputer e a Risky Business.
+
+Agora, um desktop para uma pessoa só também ensina bastante.
+
+Geir Isene publicou "A desktop made for one", um texto sobre trocar ferramentas de desktop tradicionais por software feito para o próprio fluxo.
+
+O artigo fala de componentes em assembly x86 sessenta e quatro, ferramentas em Rust, editor modal, T U I e Claude Code.
+
+Claude Code aparece ali como força de implementação.
+
+A parte que chama atenção é a velocidade.
+
+Ele diz que usava Vim desde 2001, fez o primeiro commit do novo editor em 1 de maio e, em 3 de maio, já tinha parado de usar Vim.
+
+Essa é a manchete perigosa, porque dá vontade de transformar em "IA matou o Vim", e aí a gente perde a notícia real.
+
+O ponto bom é outro: agentes reduziram o custo de criar software para uma audiência de uma pessoa.
+
+Não um produto para todo mundo.
+
+Não algo com documentação, compatibilidade ampla, empacotamento decente, governança e as dores de mantenedor.
+
+Aquelas dores que fazem uma pessoa olhar para a parede às três da tarde.
+
+Aqui é um conjunto de ferramentas para as mãos de quem construiu.
+
+Isso muda a economia da gambiarra séria.
+
+Um dev experiente pode olhar para um incômodo antigo e descrever o comportamento que quer.
+
+Pode deixar o agente escrever boa parte do código.
+
+E pode continuar tomando as decisões de design, revisão e aceite.
+
+O agente vira "workhorse". Não vira dono da oficina.
+
+O limite também é a graça da história.
+
+Software de uma pessoa pode aceitar arestas afiadas, atalhos estranhos e decisões impossíveis de vender para uma base grande de usuários.
+
+O criador sabe onde dói, sabe o que tolera e sabe quando jogar fora.
+
+Isso não prova que agentes eliminam engenharia.
+
+Prova que engenharia pequena, situada e muito opinativa ficou mais barata.
+
+Para quem usa Claude Code, Codex ou qualquer ferramenta parecida no dia a dia, o aprendizado prático é simples.
+
+Procure tarefas com fronteira clara.
+
+Editor pessoal, utilitário de arquivos, scripts de fluxo de trabalho, visualizador interno e pequena ferramenta de terminal.
+
+Se o público é você mesmo, o ciclo de feedback é curto e honesto.
+
+Se o público é "o mundo", prepare teste, suporte, release, documentação e paciência.
+
+A IA ajuda nos dois casos, mas só em um deles o usuário principal consegue reclamar diretamente com o autor no espelho do banheiro.
+
+A fonte deste bloco é Geir Isene.
+
+Agora, os destaques rápidos para hoje.
+
+A exploração do cPanel barra W H M, na CVE de 2026, quarenta e um noventa e quatro, ganhou uma atualização pesada.
+
+A SecurityWeek reportou mais de 40 mil servidores provavelmente comprometidos.
+
+Houve um pico de 44 mil I Ps únicos, interpretado a partir de sensores da Shadowserver.
+
+Como isso já foi assunto principal por aqui em 1 de maio, o ponto novo é escala e resposta.
+
+Aplicar versões corrigidas, reiniciar o cpsrvd, rodar checagens de I O C da cPanel e tratar painel exposto como incidente completo.
+
+Esse ponto novo não é só patch atrasado.
+
+As fontes são SecurityWeek, cPanel e N V D.
+
+Na Itália, a IBM confirmou que a Sistemi Informativi sofreu um incidente cibernético.
+
+A empresa é do grupo IBM e atende infraestrutura de administração pública e grandes clientes.
+
+Segundo a confirmação, o incidente foi contido e os serviços afetados foram restaurados.
+
+A atribuição a Salt Typhoon e o escopo de exfiltração ainda aparecem como pontos reportados, não como fatos fechados.
+
+O valor da notícia é lembrar que provedor gerenciado concentra risco.
+
+Quando o fornecedor cai, vários clientes precisam entender que logs, sistemas e dados estavam ao alcance dele.
+
+As fontes são la Repubblica e Adnkronos, via Il Fatto Nisseno.
+
+O DeepClaude tenta separar o loop autônomo do Claude Code do backend de modelo.
+
+O projeto configura variáveis como Anthropic base URL e Anthropic auth token.
+
+Também pode usar um proxy local em localhost, porta três mil e duzentos.
+
+Com isso, ele roteia chamadas para DeepSeek V4 Pro, OpenRouter, Fireworks ou backends compatíveis.
+
+A ideia é interessante para custo e portabilidade.
+
+Mas as promessas de economia são claims do README.
+
+Também há limitações em visão, ferramentas M C P pela camada de compatibilidade e semântica de cache.
+
+Teste em projeto descartável antes de mandar código sensível passear por outro provedor.
+
+A fonte é o repositório do DeepClaude no GitHub.
+
+PgQue trouxe de volta uma ideia estilo PgQ para filas e event logs no Postgres.
+
+A proposta evita mutar a tabela quente no caminho do consumidor.
+
+Em vez de update, delete ou select for update skip locked nos eventos, o desenho usa snapshots.
+
+Também usa pg visible in snapshot e um cursor de assinatura.
+
+Com isso, calcula o que ficou visível entre dois ticks.
+
+É uma bela aula de sistema, ótima para fan-out e event log.
+
+Menos indicado se você precisa despacho de jobs com latência de poucos milissegundos.
+
+A fonte deste item é Christophe Pettus.
+
+A Microsoft publicou materiais antigos de DOS com licença MIT.
+
+Entram aí listagens do kernel do oitenta e seis DOS, versão um ponto zero zero.
+
+Também entram snapshots de desenvolvimento do PC-DOS um ponto zero zero, utilitários como CHKDSK, scans e notas manuscritas.
+
+O escopo é preservação de artefatos iniciais, não uma abertura geral de todo DOS.
+
+E isso ajuda a estudar como sistemas nasciam antes de histórico Git ser barato.
+
+A fonte é o blog Microsoft Open Source.
+
+Um ensaio do The Inclusive Lens lembra que terminal não é automaticamente acessível.
+
+CLIs em fluxo linear costumam conversar melhor com leitores de tela.
+
+TUIs modernas baseadas em grade reativa podem virar cursor pulando, spinner repetindo, timer redesenhando e histórico inteiro sendo recalculado.
+
+Para ferramentas de IA no terminal, vale oferecer modo linear, headless ou sem cursor agressivo.
+
+E vale tratar bug de leitor de tela como bug de produto.
+
+A fonte é The Inclusive Lens.
+
+HTTPXYZ se apresenta como um fork mantido do HTTPX para Python.
+
+O foco declarado é estabilidade, correções e compatibilidade.
+
+Os mantenedores dizem que o HTTPX ficou sem patch release desde novembro de 2024 enquanto problemas reais seguiam abertos.
+
+A migração documentada pode ser tão pequena quanto importar HTTPXYZ como HTTPX.
+
+Ainda assim, fork de dependência central não é troca de tema no editor.
+
+Avalie governança, cadência, compatibilidade transitiva e impacto do alias em produção.
+
+As fontes são HTTPXYZ e PyPI.
+
+Lina documentou a investigação de um aparente honeypot de booter e stresser chamado Cyberzap.
+
+Ela associa o caso ao contexto da Operation PowerOFF.
+
+O caso é bom para pensar em engenharia de engano.
+
+Mercados de DDoS for hire dependem de confiança.
+
+E um honeypot, mesmo imperfeito, pode envenenar essa confiança.
+
+Mas a ligação exata com operadores oficiais e a causa do bloqueio por erro 401 Unauthorized ficam como inferência da autora.
+
+Não como confirmação de autoridade.
+
+A fonte deste item é o blog da Lina.
+
+Acompanhamento de tendências do dia.
+
+Os agentes de código ganharam hoje um contrapeso bom.
+
+Lars Faye escreveu que agentic coding pode criar dívida cognitiva.
+
+Quanto mais você delega, mais precisa supervisionar.
+
+E essa supervisão exige justamente as habilidades que podem enferrujar.
+
+O texto também aponta dependência de fornecedor e custo de tokens como risco operacional.
+
+Se a sua equipe só trabalha quando um serviço específico está no ar e barato, você não tem apenas ferramenta.
+
+Você tem uma dependência de produção com logo bonito.
+
+Lelanthran chega por outro caminho e cutuca a metáfora de "LLM como abstração de nível mais alto".
+
+Compilador, linguagem e framework continuam sendo sistemas determinísticos no essencial.
+
+Uma entrada leva a um artefato esperado dentro de regras definidas.
+
+Um LLM produz uma distribuição de probabilidades sobre artefatos possíveis.
+
+Isso não torna a ferramenta inútil, longe disso.
+
+Só torna perigoso fingir que ela tem o mesmo contrato de uma abstração clássica.
+
+O teste feliz pode passar enquanto comportamento indesejado entra pela janela.
+
+A conexão com o desktop do Isene é direta.
+
+Agentes brilham quando a tarefa é limitada, o dono entende o domínio, o diff cabe na cabeça e a consequência de errar é suportável.
+
+Para trabalho desconhecido, arquitetura sensível, segurança ou código que muita gente vai manter depois, a disciplina precisa subir junto.
+
+Escopo menor, diffs revisáveis, testes determinísticos e checagens para aquilo que o agente não deveria fazer.
+
+A meta é usar IA sem chamar probabilidade de abstração só porque soa mais bonito na reunião.
+
+As fontes deste bloco são Lars Faye e Lelanthran.
