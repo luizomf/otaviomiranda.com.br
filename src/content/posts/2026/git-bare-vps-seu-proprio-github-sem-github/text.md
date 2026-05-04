@@ -9,8 +9,6 @@ author: 'Otávio Miranda'
 image: './images/github.webp'
 ---
 
-Git bare em VPS: seu próprio GitHub sem GitHub
-
 Isso tem acontecido há algum tempo. Vou fazer alguma coisa que depende do GitHub
 e me deparo com um erro no comando. Tento de novo... Nada! Vou no site e dou de
 cara com um unicórnio colorido.
