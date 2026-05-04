@@ -487,6 +487,28 @@ svg {
   height: auto;
 }
 
+.video-embed {
+  margin: clamp(var(--space-800), 3vw, var(--space-1600)) 0;
+}
+
+.video-embed iframe {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-soft);
+}
+
+.video-embed figcaption {
+  margin-top: var(--space-300);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-text-200);
+  line-height: var(--line-height-300);
+  text-align: center;
+}
+
 /* ===============================
    Glass Effect (Glassmorphism)
 ================================ */

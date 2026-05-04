@@ -24,6 +24,29 @@ quantas vezes essa falha ocorreu.
 O fato é: eu quero comprar um submarino. Mas o dinheiro ainda não dá. Então sigo
 trabalhando e juntando.
 
+---
+
+## Em vídeo
+
+Se preferir assistir ao invés de ler, gravei esse conteúdo em vídeo:
+
+<figure class="video-embed">
+  <iframe
+    src="https://www.youtube-nocookie.com/embed/qYLAvyZ2qW8"
+    title="Git bare em VPS: seu próprio GitHub sem GitHub"
+    loading="lazy"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
+  <figcaption>
+    Vídeo:
+    <a href="https://youtu.be/qYLAvyZ2qW8">youtu.be/qYLAvyZ2qW8</a>
+  </figcaption>
+</figure>
+
+---
+
 Esses dias pra trás eu tive um "momento eureca" no banho. É sempre lá.
 
 E eu só falei banho por educação... foi noutro momento...
