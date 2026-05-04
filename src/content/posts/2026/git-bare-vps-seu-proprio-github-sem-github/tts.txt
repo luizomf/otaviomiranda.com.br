@@ -1,0 +1,601 @@
+Entenda "git" [B EH1 R] em VPS. Seu próprio "git hub" sem "git hub no caminho".
+
+Publicado por Otávio Miranda em 4 de maio de 2026.
+
+Isso tem acontecido há algum tempo. Vou fazer alguma coisa que depende do GitHub e me deparo com um erro no comando. 
+
+Tento de novo e nada! Vou no site e dou de cara com um unicórnio colorido.
+
+Não ligo muito com isso. Tudo bem acontecerem erros. Quer dizer, às vezes não, né? 
+
+Mas, quando você roda uma automação às 6 horas da manhã, no cron de modelos de "L L M" caríssimos, seria muito bom acordar e ver tudo pronto para review. 
+
+E eu já perdi a conta de quantas vezes essa falha ocorreu.
+
+O fato mais importante é: Eu quero comprar um submarino, mas o dinheiro ainda não dá. Então sigo trabalhando e juntando.
+
+Esses dias pra trás eu tive um "momento eureca" no banho. 
+
+É sempre lá! E eu só falei banho por educação. Foi noutro momento. 
+
+Mas, sabe quando vem aquela ideia que não é nova, mas que estava guardada lá em cima daquele seu guarda-roupas que você não limpa há uns 13 anos? 
+
+Ela veio de lá. Eu só dei uma lavada, repaginei e aqui estamos. Ironicamente, em uma página que também está no "git hub".
+
+O negócio é o seguinte. Dá para ter um servidor git próprio com praticamente nada além de Linux, Open S S H, e git.
+
+E não me venha com "é um git hub caseiro". 
+
+Se eu coloquei isso no título, me desculpa. 
+
+Não tem botão bonito, P R, "action" ou compra de estrelinha. Nem aquela sensação de que você está usando uma rede social disfarçada de ferramenta.
+
+É só Git mesmo. E, dependendo do projeto, isso é exatamente o que você quer. 
+
+Vai mesmo publicar todas essas notas privadas em servidores de terceiros com todas essas falhas de segurança aparecendo ultimamente? 
+
+Sei lá! Sua declaração de imposto de renda? Seus boletos? Faturas de cartão? Tem doido pra tudo.
+
+Vou te mostrar o caminho que eu usaria para colocar um repositório [B EH1 R] no VPS. Acessar ele via S S H, escolher a chave certa e, usar git push como gatilho de deploy.
+
+Então, com a vossa licença, apresento-lhe o post. Bora lá!
+
+O que é um repositório [B EH1 R]?
+
+Agora virou modinha falar de "work tree". O marketing vai à loucura quando surge um assunto em alta assim. Tudo por conta dos modelos de I A.
+
+E é claro que eu vou falar disso no futuro também. Mas...
+
+Sobre o git [B EH1 R]. Quando criamos um repositório normal, ganhamos essas duas coisas:
+
+Os arquivos do projeto e a pasta ponto git.
+
+Ela é onde o git guarda objetos e tudo que ele precisa para saber o que está acontecendo
+
+Eu não sei falar código, cara. Olha na página porque tem código aqui.
+
+Um repositório [B EH1 R] é, de forma bem simplificada, só a parte do ponto git. Tipo pegar tudo o que está dentro de ponto git e jogar na raiz do projeto. Só que sem o projeto.
+
+Ele não tem uma cópia de trabalho dos seus arquivos. Só guarda o histórico, referências e os objetos do git.
+
+Por isso ele costuma terminar com ponto git no nome. Tipo aquele seu crud feito com arquitetura limpa.
+
+Código de novo. Olha na página porque tem código aqui.
+
+Veja a diferença. Em um repositório normal, ponto git fica dentro do projeto. 
+
+No [B EH1 R], o próprio diretório já é o repositório.
+
+Você cria o [B EH1 R] usando a flag com dois sinais de menos e a palavra [B EH1 R]. É interessante colocar ponto git no final do nome do projeto por convenção.
+
+Agora. Fala a verdade! Isso dá uma sensação tão boa, não é? Esse momento "ah, entendi!", Que acabamos de ter.
+
+Um cenário mais real.
+
+Não é necessariamente necessário, com o perdão da redundância, mas vou usar uma VPS para um cenário mais real.
+
+Tem zero graça fazer git push para a minha própria máquina.
+
+E como você já deve ter sentido isso chegando, também faço um plug sem vergonha aqui da minha parceira. A Hostinger.
+
+Se precisar de um servidor VPS, o link está na descrição e no post. E o cupom é OTAVIOMIRANDA.
+
+Voltando ao assunto.
+
+Quando você faz git push origin main, seu git local conversa com outro git do outro lado.
+
+Esse outro lado precisa receber objetos, atualizar referências e guardar o histórico.
+
+Ele não precisa ter uma cópia de trabalho aberta.
+
+Na verdade, se você tentar dar push para um repositório normal, com a branch checada, o git costuma recusar.
+
+E isso faz sentido.
+
+Imagine que o servidor está com main aberta em disco, e você empurra uma versão nova por cima.
+
+O que acontece com os arquivos que já estavam lá?
+
+E com alteração local?
+
+E com o índice do git?
+
+É o tipo de coisa que parece funcionar até o dia em que apaga algo, ou deixa o servidor em um estado esquisito.
+
+Com repositório [B EH1 R], a separação fica clara.
+
+O remoto fica em barra srv barra git barra meuapp ponto git.
+
+A aplicação publicada fica em barra var barra www barra meuapp.
+
+Seu notebook continua sendo onde você trabalha.
+
+E a VPS recebe push via S S H.
+
+Essa separação é o motivo da coisa toda.
+
+Git [B EH1 R] não é "git hub".
+
+Só pra constar, aqui vai uma comparação bem besta, mas útil.
+
+O git é o motor.
+
+O "git hub" e o git lab são plataformas inteiras em volta desse motor.
+
+Quando você usa "git hub", você ganha git remoto, interface web, pull request, review, issue e Actions.
+
+Também ganha permissões, integrações, webhooks, releases, pacotes e um monte de coisas que não fazem parte do git em si.
+
+Quando você usa um repositório [B EH1 R] em uma VPS, você ganha basicamente git clone, git fetch, git pull, git push, S S H e hooks do git.
+
+E é só.
+
+Mas isso seria ruim?
+
+Sei lá. Depende!
+
+Se você quer trabalhar com time, fazer review formal, controlar permissão por branch, rodar pipeline e auditar tudo, um repositório [B EH1 R] puro vai ficar pequeno rápido.
+
+Mas, se você quer um remoto privado para projeto pessoal, ele resolve muito bem.
+
+Também resolve para staging simples, deploy direto para uma VPS ou servidor git interno para poucas pessoas.
+
+É como usar SQLite em vez de subir um cluster de banco.
+
+Às vezes, a resposta certa é justamente a que tem menos peça para quebrar.
+
+Quando eu usaria?
+
+Eu usaria git [B EH1 R] em VPS para projeto pessoal privado, site estático, app pequeno, protótipo, staging, ferramenta interna e deploy simples por S S H.
+
+Também usaria quando eu quero controle e não quero depender de plataforma externa.
+
+Eu pensaria duas vezes antes de usar para time grande.
+
+Também pensaria duas vezes para projeto com muitos juniores dependendo de review visual.
+
+Fluxo pesado de pull requests, permissão fina por branch, git L F S pesado, auditoria formal e C I, C D mais sofisticado, também pedem mais cuidado.
+
+Se a equipe precisa de uma forge completa, talvez repositório [B EH1 R] puro não seja a melhor ideia.
+
+Se você quer continuar auto hospedado, mas precisa de interface, dá para olhar Gitea ou Forgejo.
+
+Se o problema é só controle de acesso mais fino via S S H, o Gitolite existe há muito tempo e resolve uma parte disso.
+
+Mas, para este texto, vou ficar no git puro.
+
+A nossa VPS.
+
+Vou assumir uma VPS Linux com Ubuntu ou Debian.
+
+Se você estiver em outra distro, troque apt pelo gerenciador de pacotes correspondente.
+
+A ideia é esta.
+
+Seu notebook dá git push para um remoto chamado vps, na branch main.
+
+Na VPS, o repositório [B EH1 R] fica em barra srv barra git barra meuapp ponto git.
+
+Os arquivos publicados ficam em barra var barra www barra meuapp barra current.
+
+O usuário git recebe os pushes.
+
+O repositório [B EH1 R] fica em barra srv barra git.
+
+O diretório publicado fica em barra var barra www barra meuapp barra current.
+
+Não coloque o repositório [B EH1 R] dentro do diretório servido pelo Nginx ou pelo Apache.
+
+Ou seja, evite colocar algo como meuapp ponto git dentro de barra var barra www barra meuapp.
+
+Se o servidor web expõe isso por acidente, você pode acabar entregando o histórico do projeto inteiro por H T T P.
+
+Aí nem precisa atacante sofisticado.
+
+Você mesmo montou o buffet.
+
+Preparando a VPS.
+
+No servidor, primeiro atualize os pacotes e instale git e Open S S H server.
+
+Depois, crie um usuário dedicado chamado git.
+
+Crie a pasta ponto S S H desse usuário, com permissão sete zero zero.
+
+Crie também o arquivo authorized keys, com permissão seis zero zero.
+
+Esse arquivo é onde vão entrar as chaves públicas autorizadas a fazer push.
+
+Em seguida, crie o diretório barra srv barra git, pertencendo ao usuário git.
+
+Agora você inicializa o repositório [B EH1 R] em barra srv barra git barra meuapp ponto git.
+
+No post, o comando já cria a branch inicial como main.
+
+Se tudo der certo, o git responde que criou um repositório vazio nesse caminho.
+
+Também gosto de configurar duas travas básicas no repositório central.
+
+A primeira evita push force destrutivo.
+
+A segunda evita apagar branch via push.
+
+Dá para desativar depois?
+
+Dá.
+
+Mas, como padrão de servidor central, eu prefiro começar chato e aliviar se tiver motivo.
+
+Pode pular isso se quiser.
+
+Mas começar permissivo e descobrir depois que alguém apagou main é uma experiência que eu ainda não passei.
+
+E espero continuar assim.
+
+A parte do S S H que confunde.
+
+Aqui tem uma distinção importante.
+
+Quando você faz git push do seu notebook para a VPS, quem escolhe a chave privada é o seu notebook.
+
+A VPS não usa uma chave privada para receber esse push.
+
+Ela recebe uma conexão S S H e verifica se a chave pública correspondente está no authorized keys do usuário git.
+
+Então o fluxo é assim.
+
+O notebook usa a chave privada.
+
+A VPS confere a chave pública.
+
+O S S H libera.
+
+E o git recebe o push.
+
+Isso resolve a dúvida mais comum.
+
+Se o servidor também precisar acessar outro git remoto, por exemplo clonar um repositório privado do "git hub" dentro de um hook ou script, aí sim muda.
+
+Nesse caso, o git rodando no servidor precisa escolher uma chave privada específica.
+
+Vamos cobrir os dois casos.
+
+Criando uma chave específica para a VPS.
+
+Na sua máquina local, gere uma chave do tipo E D dois cinco cinco dezenove.
+
+Use um nome dedicado, como id ed dois cinco cinco dezenove vps git.
+
+Isso cria dois arquivos.
+
+A chave privada fica com você.
+
+A chave pública vai para a VPS.
+
+Agora você copia a chave pública para o servidor.
+
+Pode ser com ssh copy id, mas no post eu mostro do jeito explícito.
+
+Assim você entende exatamente onde ela fica.
+
+Você lê o arquivo ponto pub, copia a linha que apareceu e cola essa linha no authorized keys do usuário git.
+
+Depois ajusta dono e permissão para git dois pontos git, e permissão seis zero zero.
+
+Agora teste da sua máquina local usando essa chave e Identities Only, yes.
+
+Se entrar, beleza.
+
+Saia da sessão com exit.
+
+Depois que você testou o acesso, dá para restringir o usuário git para aceitar apenas comandos git.
+
+Para isso, troque o shell do usuário para git shell.
+
+O git shell vem com o próprio git.
+
+Ele bloqueia login interativo normal, mas permite os comandos de servidor usados por git push e git fetch.
+
+Depois disso, se você tentar entrar com S S H puro, pode receber a mensagem: fatal, interactive git shell is not enabled.
+
+Isso não é erro para o nosso caso.
+
+Na verdade, é o que a gente queria.
+
+O usuário git não é para ficar navegando no servidor.
+
+Ele é para receber git.
+
+Fazendo o git usar a chave certa.
+
+Agora vem a parte que eu mesmo erro às vezes.
+
+Você provavelmente já tem uma chave para "git hub", outra para algum servidor, outra para trabalho, e outra esquecida de 2021 com nome esquisito.
+
+Não me pergunte nem de onde é.
+
+Se você não configurar nada, o S S H pode tentar várias chaves do seu ssh agent até acertar uma.
+
+Em alguns servidores, isso termina em "Too many authentication failures".
+
+Ou pior.
+
+Você autentica com a chave errada e fica tentando entender por que está logando como outra identidade.
+
+A forma mais limpa que eu encontrei é usar o arquivo config dentro da pasta ponto S S H.
+
+Sempre me salvando.
+
+Na sua máquina local, você cria um bloco para o host minha vps git.
+
+Esse bloco aponta para o I P da VPS, usa o usuário git e escolhe o arquivo da chave vps git.
+
+O detalhe importante é Identities Only, yes.
+
+Sem isso, o S S H ainda pode oferecer chaves que estão no agent antes da chave que você colocou no Identity File.
+
+Com isso, ele usa a identidade configurada para aquele host.
+
+Agora você pode usar o alias minha vps git como se fosse o servidor.
+
+No git, você entra no projeto, adiciona um remoto chamado vps e aponta para minha vps git, dois pontos, barra srv barra git barra meuapp ponto git.
+
+Depois roda git push menos u vps main.
+
+No primeiro push, você deve ver o git enumerando objetos, contando objetos e enviando a branch main.
+
+No final, a branch main fica rastreando vps barra main.
+
+Pronto.
+
+Você tem um remoto git privado na sua VPS.
+
+Não tem UI.
+
+Não tem P R.
+
+Não tem Action.
+
+Mas tem git push.
+
+E, para muita coisa, isso já é bastante.
+
+Alternativas ao config do S S H.
+
+Eu prefiro o config do S S H porque ele funciona para ssh, scp, rsync, git e qualquer outro cliente que use S S H.
+
+Mas existem alternativas.
+
+Para um comando só, dá para usar a variável GIT S S H COMMAND.
+
+Ela manda o git usar um comando S S H específico naquele momento.
+
+Para deixar configurado só em um repositório local, dá para usar core ponto ssh command.
+
+Essa configuração fica no ponto git config do projeto atual.
+
+Eu usaria assim.
+
+Config do S S H para uso diário.
+
+Core ponto ssh command quando quero prender uma chave a um repo específico.
+
+E GIT S S H COMMAND em script, C I ou teste pontual.
+
+E se o servidor precisar usar uma chave S S H?
+
+Agora o outro caso.
+
+Imagine que, dentro da VPS, o usuário git precisa clonar um repositório privado do "git hub".
+
+Nesse caso, o servidor virou cliente S S H.
+
+Aí sim ele precisa de uma chave privada própria.
+
+No servidor, gere uma chave como o usuário git.
+
+Depois, veja a chave pública gerada.
+
+Você adiciona essa chave pública no lugar adequado do serviço remoto.
+
+No "git hub", por exemplo, isso pode ser uma deploy key do repositório.
+
+Depois, configure o S S H do usuário git com um alias, por exemplo github vps.
+
+Esse alias aponta para github ponto com, usa o usuário git e usa a chave privada do usuário git.
+
+Também aqui, o detalhe Identities Only, yes, continua importante.
+
+Agora, quando um comando rodar como git, ele pode clonar usando esse alias.
+
+Esse é o caso em que o git do servidor usa uma chave específica.
+
+Para receber push da sua máquina, não é isso.
+
+Para o servidor acessar outro repositório, é isso.
+
+Transformando push em deploy.
+
+Até aqui, a VPS já funciona como remoto git.
+
+Agora vem a parte divertida.
+
+Usar um hook para publicar os arquivos quando você der push na branch main.
+
+No servidor, crie o diretório de deploy em barra var barra www barra meuapp barra current.
+
+No exemplo, esse diretório pertence ao usuário git e ao grupo www data.
+
+Se seu Nginx, Apache ou app não usa www data, ajuste para o usuário real do serviço.
+
+Agora crie o hook post receive.
+
+O script começa com bash em modo mais rígido, define a branch main, define o repositório [B EH1 R] e define o alvo publicado.
+
+Quando chega um push, o hook lê três valores: revisão antiga, revisão nova e referência.
+
+Se a referência não for a branch main, ele ignora e segue a vida.
+
+Se for main, ele cria o diretório de destino e faz checkout forçado daquela revisão no diretório publicado.
+
+Depois imprime uma mensagem dizendo que o deploy foi publicado, e mostra o commit.
+
+Agora, no seu projeto local, rode git push vps main.
+
+Você deve ver mensagens do remoto dizendo deploy publicado e commit enviado.
+
+O post receive roda no servidor depois que o git atualiza as referências.
+
+Por isso o script consegue saber qual branch recebeu push.
+
+Também tem outro detalhe importante.
+
+Hooks disparados por push rodam dentro do GIT DIR.
+
+Em repositório [B EH1 R], isso significa que caminho relativo vira uma armadilha fácil.
+
+Use caminho absoluto no hook.
+
+É chato, mas é o chato que evita surpresa.
+
+Esse hook simples tem um limite.
+
+O hook acima é bom para aprender e para deploy simples.
+
+Mas ele faz checkout em cima do mesmo diretório sempre.
+
+Ou seja, em barra var barra www barra meuapp barra current.
+
+Isso significa que arquivos não rastreados podem ficar ali entre deploys.
+
+Às vezes isso é exatamente o que você quer, como uploads, ponto env, cache local ou arquivos gerados.
+
+Às vezes é lixo velho.
+
+Se você quer um deploy mais limpo, eu prefiro releases versionadas.
+
+Cada deploy cria uma pasta nova.
+
+Depois, o symlink current aponta para a release mais recente.
+
+Rollback fica muito mais simples.
+
+Se tiver um serviço rodando, você reinicia o serviço depois da troca.
+
+Não vou colocar esse como primeiro exemplo porque ele distrai um pouco da ideia principal.
+
+Mas, para produção, é o desenho que eu gosto mais.
+
+O checkout forçado é simples.
+
+Release versionada é mais disciplinada.
+
+E build?
+
+Depende do projeto.
+
+Se você está publicando um site estático já pronto, talvez o hook só precise colocar arquivos no lugar certo.
+
+Se é Node, Python, P H P, Go ou qualquer coisa que precisa buildar, você tem algumas escolhas.
+
+Você pode buildar local e enviar artefato.
+
+Pode buildar em C I e enviar artefato.
+
+Pode buildar na VPS dentro do hook.
+
+Ou pode fazer o hook chamar um script de deploy separado.
+
+O que eu evitaria é transformar o post receive em uma novela de 300 linhas.
+
+Hook bom é curto, previsível e fácil de debugar.
+
+Se o deploy ficou complexo, chame um script.
+
+Por exemplo, um script em barra usr barra local barra bin barra deploy meuapp, recebendo o commit novo.
+
+E deixe esse script cuidar do resto.
+
+Também evite dar sudo amplo para o usuário git.
+
+Se ele precisa reiniciar um serviço, libere só aquele comando no arquivo sudoers.
+
+Por exemplo, permitir que git reinicie apenas o serviço meuapp.
+
+Não faça aquela configuração sem senha que libera tudo, para tudo, para o usuário git.
+
+A segunda linha é basicamente dizer: usuário que recebe push agora manda no servidor inteiro.
+
+Coragem, mas não nesse sentido.
+
+Troubleshooting rápido.
+
+Se der "Permission denied publickey", verifique o S S H com modo verboso.
+
+No servidor, confira as permissões da pasta ponto S S H e do authorized keys.
+
+Você quer a pasta com permissão sete zero zero.
+
+E o arquivo authorized keys com permissão seis zero zero.
+
+Se der "Too many authentication failures", confira se o bloco do config tem Identities Only, yes.
+
+Se o hook não rodar, confira se o arquivo post receive tem bit de execução.
+
+Se você recebeu "refusing to update checked out branch", provavelmente empurrou para um repositório que não era [B EH1 R].
+
+Volta duas casas e cria o repo com git init menos menos [B EH1 R].
+
+Se o deploy publicou, mas a aplicação não lê os arquivos, olhe usuário, grupo e permissão do diretório em barra var barra www.
+
+Metade dos problemas de "git não funciona" nessa área são S S H e permissão Unix.
+
+O git só estava passando perto e levou a culpa.
+
+As fontes.
+
+Óbvio que eu não sei essas coisas de cabeça.
+
+A zoeira está sempre lá, mas comandos são doc mesmo.
+
+As fontes deste texto são a documentação do git init, dos hooks, do git shell e do git config.
+
+Também usei o livro Pro Git, no capítulo sobre git no servidor.
+
+E usei a documentação do Open S S H sobre ssh config.
+
+Pra finalizar.
+
+Git [B EH1 R] é uma daquelas coisas que parecem antigas demais para serem úteis.
+
+Até você lembrar que o git foi feito justamente para isso.
+
+Mover histórico entre máquinas.
+
+Você não precisa de uma plataforma inteira para todo projeto.
+
+Às vezes, uma VPS, um usuário git, uma chave S S H, um repositório [B EH1 R] e um hook pequeno resolvem.
+
+Só não confunda simplicidade com improviso.
+
+Separe o repositório [B EH1 R] do diretório publicado.
+
+Use chave S S H específica.
+
+Use Identities Only, yes.
+
+Não coloque o ponto git dentro do servidor web.
+
+Teste o acesso antes de desligar senha.
+
+Não dê sudo infinito para o usuário do git.
+
+E, se o deploy for ficando sério, pense em releases e rollback.
+
+Pronto, já dei a lição de moral. Opa, de segurança.
+
+Agora o resto é Git.
+
+Ah... já tava esquecendo.
+
+Eu te aviso quando comprar o submarino.
