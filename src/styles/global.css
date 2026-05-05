@@ -269,6 +269,8 @@
 html {
   font-size: 62.5%; /* 1rem = 10px (facilita: 1.6rem = 16px, 2.4rem = 24px) */
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   hanging-punctuation: first last;
@@ -309,6 +311,7 @@ body {
   font-weight: 400;
   color: var(--color-text);
   background: var(--color-bg);
+  overflow-x: clip;
 }
 
 a {
@@ -970,6 +973,11 @@ button:disabled {
 
   border-top: var(--border-width-100) solid var(--color-border-dark-soft);
   border-bottom: var(--border-width-100) solid var(--color-border-dark-strong);
+}
+
+html:has(.article-section[data-theme='dark']),
+body:has(.article-section[data-theme='dark']) {
+  background-color: var(--color-surface-dark-canvas);
 }
 
 .article-section[data-theme='dark'] .article a {
