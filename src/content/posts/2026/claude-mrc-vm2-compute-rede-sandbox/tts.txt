@@ -1,0 +1,284 @@
+Claude, M R C e V M dois: capacidade, rede e sand box no limite.
+
+Tem uma parte da inteligência artificial que parece mágica porque fica na tela.
+O chat responde, o agente edita arquivo, o modelo escreve código, e a demo anda.
+Hoje, as notícias boas estão quase todas na parte que fica atrás disso.
+Falo de limite de uso, data center, rede, GPU, memória, teste, sand box, servidor de [EY1 P IY1 AY1] e conta de energia.
+
+É menos cinematográfico, eu sei, mas também é onde a brincadeira vira produto.
+
+Claude Code ganhou mais fôlego depois de um acordo de capacidade com a Space [EH1 K S].
+A OpenAI publicou um protocolo de rede para clusters gigantes de GPU.
+A Unsloth e a NVIDIA mostraram ganho de treino mexendo em desperdício de sincronização e cópia.
+E o V M dois apareceu com outra leva de escapes de sand box para lembrar que rodar código não confiável continua sendo uma frase pequena demais para o tamanho do problema.
+
+O fio do dia é esse: a inteligência artificial está batendo em limite físico e operacional.
+Às vezes o limite é GPU, às vezes é rede.
+Às vezes é o host rodando um pedaço de JavaScript que ninguém deveria tratar como bichinho doméstico.
+Vamos com calma, porque tem bastante coisa útil.
+
+Claude Code ganhou limite, mas a história maior é o encanamento do agente.
+
+A Anthropic anunciou em 6 de maio de 2026 aumento de limites para Claude Code e para a [EY1 P IY1 AY1] do Claude Opus.
+Segundo a empresa, os limites de cinco horas do Claude Code foram dobrados para planos Pro, Max, Team e Enterprise baseados em assentos.
+No Pro e no Max, a Anthropic também removeu as reduções de limite em horários de pico.
+Para quem usa Claude Code no dia a dia, isso tende a aparecer como menos interrupção.
+Especialmente naquela hora em que o agente estava no meio de uma refatoração e decidiu pedir água, café e mais tokens.
+
+Esse aumento veio junto de um acordo com a Space [EH1 K S] para uso da capacidade do Colossus um.
+O post da Anthropic fala em mais de 300 megawatts e mais de duzentas e vinte mil GPUs da NVIDIA adicionadas dentro do mês.
+A [EH1 K S] [EY1 AY1] também publicou sobre a parceria e lista aceleradores H cem, H duzentos e G B duzentos no Colossus um.
+
+O ponto prático é simples: produto de inteligência artificial virou produto de capacidade.
+Não adianta o modelo ser ótimo se o usuário bate no limite, se a fila cresce ou se a sessão longa perde fôlego.
+Também não adianta se a [EY1 P IY1 AY1] fica estreita ou se o custo torna a automação inviável.
+A experiência de ver o agente trabalhar sozinho por meia hora depende de inferência sobrando e memória útil.
+Também depende de ferramentas boas e de uma forma decente de verificar se o trabalho prestou.
+
+Por isso a outra metade do anúncio importa.
+No evento "Code with Claude", a Anthropic também apresentou novidades em "Claude Managed Agents": dreaming, outcomes, orquestração multiagente e web hooks.
+O nome "dreaming" tem um perfume perigoso de marketing, então vamos tirar o incenso da sala.
+Pela documentação, os dreams podem ler uma base de memória existente e até cem sessões, depois produzir uma nova base de memória separada.
+Em termos menos místicos, é uma rotina para reorganizar memória entre sessões sem sair remexendo no estado original.
+
+Outcomes tenta resolver outro problema conhecido: o mesmo contexto que faz o trabalho nem sempre é o melhor contexto para julgar o trabalho.
+A Anthropic descreve um avaliador separado, usando critérios definidos pelo usuário.
+Isso conversa com engenharia real.
+Se você pede para um agente mexer em um app, quer algum tipo de rubrica externa.
+Testes passando, arquivo esperado alterado, comportamento preservado, documentação atualizada e diff pequeno quando couber.
+Essas coisas parecem chatas até salvarem sua tarde.
+
+A orquestração multiagente delega partes do trabalho para especialistas com modelo, prompt e ferramentas próprias.
+Web hooks entram para avisar conclusão ou mudança de estado sem depender de polling constante.
+Parece detalhe de produto, mas é a diferença entre um chat esperto e uma peça dentro de um sistema.
+Agente em produção precisa avisar, registrar, receber tarefa, terminar, falhar de um jeito auditável e não sumir dentro de uma aba.
+
+As cautelas continuam do tamanho certo.
+Dreaming está como research preview.
+Outcomes, multiagente e web hooks aparecem em superfícies beta ou public beta.
+Mais capacidade não significa trabalho ilimitado, nem revisão automática perfeita, nem segurança resolvida.
+Ainda tem custo, isolamento, autorização, qualidade e governança.
+Mas a direção está ficando bem clara.
+A próxima melhora visível em agentes deve vir de capacidade, memória, avaliação e orquestração, além de modelos melhores.
+
+As fontes deste bloco são Anthropic, [EH1 K S] [EY1 AY1], o blog de Claude Managed Agents e a documentação de Dreams.
+
+A OpenAI colocou a briga das GPUs dentro da rede.
+
+A OpenAI publicou o M R C, ou "Multipath Reliable Connection", um protocolo de rede para treinamento em escala grande.
+O post diz que o M R C foi desenvolvido com AMD, Broadcom, Intel, Microsoft e NVIDIA, e liberado pelo Open Compute Project.
+A peça técnica é bem específica.
+Ela estende o protocolo RoCE, explicado como R D M A sobre Ethernet convergente, com espalhamento de pacotes.
+Também usa roteamento de origem via S R V seis e desenho com múltiplos planos para redes de GPUs.
+
+Isso soa distante de quem está fazendo CRUD, bot, software como serviço ou curso no fim da noite.
+Só que a história conecta direto com o anúncio da Anthropic.
+Quando você junta dezenas ou centenas de milhares de GPUs para treinar modelo, o problema deixa de ser apenas saber se existe GPU suficiente.
+Uma transferência lenta, congestionamento, falha em link ou switch e caminho ruim podem deixar hardware caríssimo ocioso.
+GPU parada em cluster grande é dinheiro queimando com ventilador.
+
+O M R C ataca esse gargalo espalhando uma transferência por centenas de caminhos.
+Em vez de apostar que um caminho vai estar livre, ele distribui pacotes e tenta evitar pontos quentes.
+O roteamento de origem ajuda a escolher rotas e contornar falhas rapidamente.
+A OpenAI fala em reação a falhas na escala de microssegundos.
+Também fala em redes com múltiplos planos, usando placas de rede de 800 gigabits por segundo divididas em planos de cem gigabits por segundo.
+
+O número que chama atenção é o de aproximadamente 131 mil GPUs conectadas com dois níveis de switches.
+Segundo a própria OpenAI, esse número aparece dentro desse desenho com múltiplos planos.
+O post também cita implantação em supercomputadores G B duzentos da OpenAI, incluindo O C I Abilene e Microsoft Fairwater.
+
+Aqui vale segurar a empolgação no lugar certo.
+O dev médio não vai instalar M R C com um comando do npm depois do almoço.
+Também não dá para tratar o post como resolução completa da infraestrutura de inteligência artificial.
+A peça descrita pela OpenAI mora na rede de data centers de escala absurda, com placas de rede, topologia, parceiros e operação especializados.
+
+Mesmo assim, ela explica o momento.
+A corrida de inteligência artificial está descendo camada por camada.
+Primeiro a gente falava do modelo.
+Depois virou inferência, cache, quantização, memória, prompt, ferramenta e agente.
+Agora a discussão aparece em switch, caminho de pacote, congestionamento, falha e topologia física.
+Parece menos glamouroso, mas é ali que produto de inteligência artificial caro ganha ou perde viabilidade.
+
+Tem uma frase mental útil para ler esse tipo de notícia: modelo grande também é problema distribuído.
+O treinamento síncrono faz a rede virar parte do algoritmo prático.
+Se a rede engasga, o treinamento sente.
+Se a rede recupera rápido e usa caminho melhor, o cluster aproveita melhor a capacidade que já comprou.
+A infraestrutura não fica embaixo do produto; ela é parte do produto.
+
+A fonte deste bloco é a OpenAI.
+
+Unsloth e NVIDIA acharam ganho onde a GPU estava esperando.
+
+A Unsloth publicou uma colaboração com a NVIDIA sobre otimizações para treino e fine-tuning de modelos de LLM.
+O tipo de notícia é ótimo porque não tenta vender um novo cérebro artificial.
+Ela mexe em uma parte mais honesta do desempenho.
+Tira trabalho repetido, sincronização desnecessária e cópia serializada de onde já existe kernel rápido fazendo a matemática pesada.
+
+O caso principal citado envolve Qwen três quatorze B em QLoRA S F T, com sequências empacotadas.
+A otimização de cache de metadados de sequências empacotadas evita reconstruir metadados camada por camada.
+Em treino empacotado, esse tipo de metadado ajuda a dizer onde cada sequência começa, termina e deve ser mascarada.
+Fazer isso de novo várias vezes custa tempo, sincroniza stream e rouba atenção da GPU.
+
+No teste comparativo informado pela Unsloth, esse caminho gerou ganho de quarenta e três vírgula três porcento no forward.
+Também gerou cinco vírgula oito porcento no backward e quatorze vírgula três porcento por batch.
+A manchete de vinte e cinco porcento mais rápido pode ser útil como atalho, mas os números por caminho são mais importantes.
+Eles mostram que o ganho não cai igualmente em tudo.
+O forward se beneficia muito mais nesse cenário específico.
+O backward melhora menos, e o batch completo fica no meio.
+
+Também aparece recarga de checkpoint com buffer duplo.
+Checkpointing de gradiente economiza memória recomputando partes do grafo em vez de guardar tudo.
+Só que essa economia pode cobrar caro quando ativações precisam voltar da memória para a GPU em série.
+A ideia do double buffering é sobrepor cópia e computação.
+Enquanto uma parte está sendo usada no backward, a próxima já pode estar sendo preparada.
+É o tipo de coisa que lembra cozinha profissional.
+A panela certa no fogo certo evita que todo mundo espere pela mesma boca do fogão.
+
+A terceira peça é roteamento de M o E mais simples, usando operações de agrupamento como arg sort e bin count para reduzir sincronizações repetidas.
+Em modelos mixture of experts, o roteamento decide qual token vai para qual especialista.
+Quando essa decisão gera muito vai e volta entre C P U, GPU e streams, a arquitetura bonita começa a pagar pedágio em coordenação.
+
+Para quem treina ou ajusta modelo local, a notícia é interessante porque fala de GPUs de consumidor e de fine-tuning realista.
+Nem todo mundo tem cluster de G B duzentos com rede desenhada em parceria com cinco empresas.
+Muita gente tem uma placa forte, pouca memória de vídeo sobrando e uma vontade perigosa de rodar experimento à noite.
+Melhorar o uso do que já existe pode esticar bastante o alcance desses fluxos.
+
+A cautela é obrigatória, porque esse tipo de número pede contexto.
+Não dá para sair dizendo que todo treino de modelo de LLM em toda GPU ficou vinte e cinco porcento mais rápido.
+O ganho depende do modelo, do formato do batch, do uso de sequências empacotadas, do caminho de checkpointing, da implementação e do ambiente de execução.
+O valor público da notícia está justamente no mecanismo.
+Quando os kernels principais já estão otimizados, sobra desempenho escondido em metadado, cópia, sincronização e roteamento.
+Otimização de inteligência artificial, muitas vezes, tem cara de engenharia de sistemas com avental de laboratório.
+
+A fonte deste bloco é a Unsloth.
+
+V M dois voltou a mostrar o limite frágil do sand box de linguagem.
+
+O V M dois é uma biblioteca conhecida no ecossistema Node ponto JS para executar JavaScript em uma sand box.
+Esse tipo de ferramenta aparece em executor de plugins, juiz online e plataforma de automação.
+Também aparece em ferramenta dev, serviço que deixa usuário escrever script e, cada vez mais, em volta de agentes que precisam rodar código gerado ou recebido de fora.
+
+Em maio de 2026, uma nova leva de vulnerabilidades no V M dois voltou a acender o alerta.
+The Hacker News reportou uma dúzia de falhas, com vários casos críticos e recomendação de atualização para V M dois três ponto onze ponto dois.
+Entre os problemas citados nas fontes aparecem escapes de sand box e caminhos para execução arbitrária no host.
+Um advisory do "Git Hub" para a CVE de 2026, número vinte e quatro mil cento e dezoito, descreve breakout usando o identificador lookup getter.
+O identificador completo está escrito na página do artigo, e o problema afeta V M dois até três ponto dez ponto quatro.
+A correção veio em três ponto onze ponto zero.
+A release três ponto onze ponto dois trouxe novas correções de segurança e atualizou invariantes de defesa.
+
+O detalhe importante é o modelo mental.
+Sand box de JavaScript tenta cercar objetos, protótipos, recursos internos, coerções e acesso ao ambiente.
+Isso é um trabalho ingrato, mesmo quando a ferramenta parece simples.
+JavaScript é poderoso, flexível e cheio de cantos que parecem inocentes até alguém transformar coerção de símbolo para string em passagem secreta.
+Quando uma sand box baseada em proxies e objetos falha, o código que parecia preso pode alcançar coisas do host.
+Isso inclui o módulo child process, dependendo do bug e das permissões do processo ao redor.
+
+Isso não quer dizer que todo app Node usando V M dois foi comprometido.
+O risco depende de atacante conseguir executar código controlado dentro da sand box, da versão usada e do privilégio do processo hospedeiro.
+Mas para quem constrói agente, extensão, ferramenta de automação ou plataforma de execução, a pergunta certa é mais dura.
+Se esse código escapar da sand box de linguagem, o que ele encontra?
+
+Se encontra um processo com token de produção, sistema de arquivos amplo, rede aberta e permissão para chamar shell.
+A sand box era uma cerca bonita em frente a um portão aberto.
+Se encontra processo descartável, container com privilégio baixo, micro V M, rede limitada, secrets fora do ambiente e timeout agressivo, o bug ainda é ruim.
+O bug ainda é ruim, mas o raio da explosão muda.
+
+A ação imediata é atualizar V M dois para versões corrigidas, com atenção especial para três ponto onze ponto dois nas fontes checadas.
+A ação menos confortável é auditar arquitetura.
+Juiz online, plugin de usuário, helper de integração contínua, agente que roda trecho de código, ferramenta que só avalia código rapidinho.
+Tudo isso merece isolamento em processo, container, micro V M ou fronteira do sistema operacional.
+A linguagem ajuda, e processo costuma segurar melhor.
+Host com permissão demais continua sendo convite para sofrimento.
+
+As fontes deste bloco são The Hacker News, o advisory do "Git Hub" para a CVE de 2026 número vinte e quatro mil cento e dezoito, e a release V M dois três ponto onze ponto dois.
+
+Agora, os destaques rápidos de hoje.
+
+A conta oficial do Ubuntu no X parece ter sido usada para divulgar um falso agente de inteligência artificial chamado Numbat.
+O domínio parecido era ai Ubuntu ponto com, com linguagem de Solana e pedido de conexão de carteira.
+A leitura cuidadosa aqui importa.
+As fontes checadas falam de phishing em canal social depois de um período de D D O S.
+Não há evidência pública de comprometimento de A P T, imagens ISO, chaves de assinatura ou do Ubuntu em si.
+As fontes são It's FOSS, TechCrunch e Cyber Kendra.
+
+Daniel Stenberg, criador do curl, voltou a bater na tecla de verificar software em vez de confiar só no nome do projeto.
+Na prática, isso significa releases assinadas, documentação de verificação, integração contínua, fuzzing e S B O M.
+Também significa uma cultura em que dependência famosa precisa deixar rastro conferível.
+S B O M sozinho não salva ninguém, mas inventário sem verificação também é só lista bonita.
+As fontes são InfoQ, Daniel Stenberg e curl.
+
+O Microcks virou projeto incubado da C N C F em 7 de maio de 2026.
+Ele trabalha com simulação de [EY1 P IY1 AY1] e testes de contrato.
+Essas duas coisas ficam mais importantes quando agentes começam a chamar serviços de verdade e você precisa de ambiente falso que se comporte direito.
+Incubação é sinal de maturidade comunitária, não certificado mágico de encaixe em toda stack, e a fonte é a C N C F.
+
+A Prompt [EY1 P IY1 AY1] do Chrome chegou cercada por debate de padrões.
+O texto de Mat Marquis aponta preocupações de Mozilla, WebKit e W três C T A G, além do acoplamento prático com Gemini Nano no Chrome.
+Para dev web, tratar isso apenas como oba, modelo de LLM no navegador, deixa metade do problema fora.
+Entram permissão, privacidade, fingerprinting, custo local de recurso e risco de depender de uma [EY1 P IY1 AY1] que nasce com cara de um fornecedor só.
+As fontes são Mat Marquis, Chrome Developers, ChromeStatus, Mozilla e WebKit.
+
+Simon Willison escreveu que vibe coding e engenharia com agentes estão ficando mais próximos do que ele gostaria.
+Ele menciona inclusive que já não revisa cada linha gerada pelo Claude Code em alguns trabalhos de produção.
+A leitura responsável passa longe de usar isso como autorização para largar código no mundo sem olhar.
+Confiança hoje passa por escopo, teste, documentação, uso real, reputação e responsabilidade de quem envia o resultado.
+A fonte deste destaque é Simon Willison.
+
+A SecurityWeek publicou que atacantes usaram Claude e modelos GPT como motor operacional durante uma intrusão.
+A intrusão era ligada a uma companhia municipal de água e drenagem em Monterrey, no México.
+Isso teria acontecido dentro de uma campanha mais ampla entre dezembro de 2025 e fevereiro de 2026.
+Nada de imaginar uma inteligência artificial invadindo tudo sozinha, com trilha sonora de filme ruim.
+A parte séria é outra: modelos já aparecem como aceleradores de análise, script e navegação em ambiente comprometido.
+Inclusive com contexto de tecnologia operacional e SCADA.
+As fontes são SecurityWeek e Los Angeles Times.
+
+A discussão sobre infraestrutura física de inteligência artificial apareceu de novo em cobertura da TechCrunch.
+O texto fala de falta de chips, energia, refrigeração, rede e até data centers orbitais como ideia exploratória.
+Essa nota ajuda a ler o resto do dia.
+Anthropic compra capacidade, OpenAI mexe na rede, Unsloth espreme treino em GPU existente.
+A inteligência artificial parece software, mas está cada vez mais presa em coisas bem materiais: tomada, calor, distância e silício.
+As fontes são TechCrunch, OpenAI e Anthropic.
+
+O Kubernetes um ponto trinta e seis trouxe list and watch fragmentado no servidor como recurso alpha.
+O problema é antigo em clusters grandes.
+Você escala controladores horizontalmente, mas cada réplica ainda recebe o fluxo inteiro de objetos e joga fora o que não é dela.
+Com sharding no servidor de [EY1 P IY1 AY1], cada réplica pode receber sua fatia direto da origem.
+Ótimo para acompanhar, cedo demais para vender como garantia madura de produção, e a fonte é Kubernetes.
+
+Agora, o acompanhamento de tendências do dia.
+
+O padrão mais forte do dia é que agentes estão virando sistemas cercados por harness de controle, não só prompts longos.
+"Claude Managed Agents" entra com memória curada, outcomes e orquestração.
+ProgramBench entra como balde de água fria.
+Em duzentas tarefas, o teste vai de ferramentas de linha de comando a F F M PEG, SQLite e um interpretador PHP.
+O paper reporta que nenhum dos nove modelos avaliados resolveu completamente qualquer tarefa.
+Os modelos tendiam a produzir implementações monolíticas, de arquivo único, que se afastavam do desenho humano original.
+Para quem acha que agente de código já entendeu arquitetura, esse resultado pede um cafezinho e revisão.
+
+LongSeeker vai pelo lado do contexto.
+Ele propõe operações chamadas Skip, Compress, Rollback, Snippet e Delete para agentes de busca de horizonte longo.
+Uno-Orchestra olha para decomposição e roteamento, aprendendo seleção de modelo e primitiva junto da divisão de tarefa.
+A mensagem combinada é boa: contexto grande demais também vira ruído, e delegar trabalho para agente especializado sem critério pode ser só terceirizar confusão.
+
+Na segurança, DTap aparece como plataforma de red teaming para agentes em ambientes simulados.
+[EY1 JH AH0 N T] Trust propõe interceptar chamadas de ferramenta antes da execução e devolver decisões como permitir, avisar, bloquear ou pedir revisão.
+Ele usa um servidor compatível com M C P.
+S L Y P usa um fluxo com agentes para raciocínio sobre vulnerabilidades em Windows COM e reporta dezesseis vulnerabilidades com identificador CVE atribuídas pela M S R C.
+É pesquisa e ferramenta inicial, então convém não vender como verdade de produção.
+O rumo é claro: agente precisa de ambiente, política, verificador e freio.
+
+Esse é um bom fechamento para o dia porque junta quase tudo.
+A Anthropic aumenta capacidade e cria primitivas de agente.
+A OpenAI publica rede para escalar treino.
+Unsloth corta desperdício em GPU menor.
+V M dois lembra que execução de código precisa de fronteira forte.
+Kubernetes mexe em sharding no servidor de [EY1 P IY1 AY1].
+Curl insiste em verificação.
+Microcks amadurece mocks de [EY1 P IY1 AY1].
+
+No fim, deixa o agente fazer está virando uma frase perigosa quando vem sozinha.
+A versão mais útil é: deixe o agente fazer dentro de um sistema que mede, limita, simula, registra, testa e interrompe.
+Eu sei, falando assim perde um pouco a poesia.
+Mas ganha uma chance maior de não destruir o ambiente na terça-feira.
+
+As fontes deste bloco são ProgramBench, LongSeeker, Uno-Orchestra, DTap, [EY1 JH AH0 N T] Trust, S L Y P e Claude Managed Agents.
