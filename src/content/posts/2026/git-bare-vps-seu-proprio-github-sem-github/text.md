@@ -9,71 +9,62 @@ author: 'Otávio Miranda'
 image: './images/github.webp'
 ---
 
-Isso tem acontecido há algum tempo. Vou fazer alguma coisa que depende do GitHub
-e me deparo com um erro no comando. Tento de novo... Nada! Vou no site e dou de
-cara com um unicórnio colorido.
+Isso já tem acontecido há algum tempo. Vou fazer alguma coisa que depende do
+GitHub e me deparo com um erro no comando. Tento de novo... Nada! Vou no site e
+dou de cara com um unicórnio colorido.
 
 ![Uma imagem mostrando a página de erro do GitHub. A imagem tem um unicórnio colorido e contém os textos: No server is currently available to service your request. Sorry about that. Please try refreshing and contact us if the problem persists. Contact Support, GitHub Status, @githubstatus](./images/github.webp)
 
-Não ligo muito para isso. Tudo bem acontecerem alguns erros (quer dizer,
-[às vezes não, né?](https://www.youtube.com/watch?v=CDedT1uQljQ)). Mas, quando
+Nem ligo muito pra isso. Tudo bem acontecerem alguns erros (quer dizer,
+[às vezes não, né?](https://www.youtube.com/watch?v=CDedT1uQljQ)). Mas quando
 você roda uma automação às 6 da manhã no Heartbeat de modelos de LLM caríssimos,
-seria muito bom acordar e ver tudo pronto para review. E eu já perdi a conta de
-quantas vezes essa falha ocorreu.
+seria muito bom acordar e ver tudo pronto para review.
 
-O fato é: eu quero comprar um submarino. Mas o dinheiro ainda não dá. Então sigo
+Já perdi a conta de quantas vezes essa falha ocorreu.
+
+O fato é que quero comprar um submarino. Mas o dinheiro ainda não dá. Então sigo
 trabalhando e juntando.
 
----
+Esses dias pra trás eu tive um "momento eureca" no banho. É sempre lá.
+
+Mentira! Só falei banho por educação. Foi em outro momento no banheiro...
+
+Mas, sabe quando vem aquela ideia que não é nova, mas que estava guardada lá em
+cima daquele seu guarda-roupa que você não limpa há uns 13 anos? Ela veio de lá.
+
+Só dei aquela lavada marota, repaginei e aqui estamos. Ironicamente, em uma
+página no GitHub Pages.
+
+O negócio é o seguinte. Dá para ter um servidor Git próprio com praticamente
+nada além de **Linux**, **OpenSSH** e **Git**.
+
+E não me venha com "é um GitHub caseiro". Se eu coloquei isso no título, me
+desculpa. Mas isso te trouxe aqui, então valeu a pena.
+
+Não tem botão bonito, pull request, issue, actions, estrelinhas, gráfico,
+mascote, nem aquela sensação de que você está usando uma rede social disfarçada
+de ferramenta de versionamento.
+
+É só Git. E isso vem de graça junto com ele.
+
+Dependendo do projeto, é exatamente isso que você vai querer (eu acho). Vai
+mesmo publicar todas essas notas privadas no GitHub com todas essas falhas de
+segurança aparecendo ultimamente? Sei lá... Sua declaração de imposto de renda,
+boletos, faturas de cartão? Vai saber, né? Tem doido pra tudo (tipo eu).
+
+Neste texto, vou te mostrar o caminho que usaria para colocar um repositório
+**bare** em uma VPS, acessar via SSH, escolher a chave certa e usar `git push`
+como gatilho de deploy.
+
+Então, com a vossa licença 🥁... Apresento-lhe o post. Bora!
 
 ## Em vídeo
 
 Se preferir assistir ao invés de ler, gravei esse conteúdo em vídeo:
 
-<figure class="video-embed">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/qYLAvyZ2qW8"
-    title="Git bare em VPS: seu próprio GitHub sem GitHub"
-    loading="lazy"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    referrerpolicy="strict-origin-when-cross-origin"
-    allowfullscreen
-  ></iframe>
-  <figcaption>
-    Vídeo:
-    <a href="https://youtu.be/qYLAvyZ2qW8">youtu.be/qYLAvyZ2qW8</a>
-  </figcaption>
-</figure>
+[![Otávio Miranda com logos do git aprovado e github reprovado](./images/git-bare-thumb-2.jpg)](https://youtu.be/qYLAvyZ2qW8)
 
----
-
-Esses dias pra trás eu tive um "momento eureca" no banho. É sempre lá.
-
-E eu só falei banho por educação... foi noutro momento...
-
-Mas, sabe quando vem aquela ideia que não é nova, mas que estava guardada lá em
-cima daquele seu guarda-roupa que você não limpa há uns 13 anos? Ela veio de lá.
-Só dei uma lavada, repaginei e aqui estamos. Ironicamente, em uma página no
-GitHub Pages.
-
-O negócio é o seguinte. Dá para ter um servidor Git próprio com praticamente
-nada além de **Linux**, **OpenSSH** e **Git**.
-
-E não me venha com "é um GitHub caseiro". Se eu coloquei isso no título,
-desculpa. Não tem botão bonito, pull request, issue, Action, estrelinha,
-gráfico, mascote, nem aquela sensação de que você está usando uma rede social
-disfarçada de ferramenta de versionamento.
-
-É só Git. E, dependendo do projeto, isso é exatamente o que você quer. Vai mesmo
-publicar todas essas notas privadas no GitHub com todas essas falhas de
-segurança aparecendo ultimamente? Sei lá, sua declaração de imposto de renda?
-Seus boletos? Faturas de cartão? Tem doido pra tudo.
-
-Neste texto, vou te montar o caminho que usaria para colocar um repositório
-**bare** em uma VPS, acessar via SSH, escolher a chave certa e usar `git push`
-como gatilho de deploy.
-
-Então, com a vossa licença, apresento-lhe o post. Bora!
+- [youtu.be/qYLAvyZ2qW8](https://youtu.be/qYLAvyZ2qW8)
 
 ## Repositório... É o quê? Bare? Bear? Bearer?
 
@@ -837,6 +828,7 @@ Separe o repositório bare do diretório publicado. Use chave SSH específica. U
 antes de desligar senha. Não dê `sudo` infinito para o usuário do Git. E, se o
 deploy for ficando sério, pense em releases e rollback.
 
-Pronto, já dei a lição de moral (opa, de segurança), agora o resto é Git.
+Pronto, já dei a lição de moral (opa, dica de segurança), agora o resto é Git.
 
-Ah... já tava esquecendo. Eu te aviso quando comprar o submarino.
+Ah... e eu já estava me esquecendo. Se eu comprar aquele submarino, **você
+saberá** 🤣.
