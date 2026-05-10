@@ -1,0 +1,233 @@
+Debian cobra builds reproduzíveis, LangChain expõe agente e Rust mira a GPU.
+
+Hoje tem uma notícia que parece pequena, até você lembrar que quase tudo em produção começa com um pacote.
+O Debian decidiu apertar builds reproduzíveis no processo de migração.
+O LangChain corrigiu uma falha em caminhos de deserialização usados por agentes.
+A NVlabs abriu um compilador experimental de Rust para P T X.
+E apareceu um conjunto de alvos vulneráveis para testar agente antes que ele teste sua paciência em produção.
+
+O fio do dia é confiança verificável.
+Menos "confia que eu gerei", e mais "mostra o binário, mostra a versão, mostra o teste".
+Também vale mostrar onde o agente escapou.
+Eu gosto de IA, olha minha situação aqui.
+Mas até eu fico mais tranquilo quando a automação precisa passar por uma catraca.
+
+O Debian Release Team publicou, em 10 de maio de 2026, um aviso na lista debian-devel-announce.
+Segundo o anúncio, o Debian deve enviar pacotes reproduzíveis.
+A frase é curta, mas o efeito é grande.
+O software de migração agora bloqueia pacotes novos que não conseguem ser reproduzidos.
+Também bloqueia regressões em pacotes que já estavam em testing.
+
+Build reproduzível, em português sem incenso, é isto.
+Se duas pessoas compilam o mesmo código-fonte, com o mesmo ambiente definido, o binário precisa bater bit a bit.
+Isso ajuda a responder uma pergunta chata e necessária.
+O binário que chegou ao usuário veio mesmo daquele código-fonte?
+
+Isso não resolve supply chain sozinho.
+Um código-fonte malicioso continua malicioso, e um mantenedor comprometido continua sendo um problema.
+Dependência ruim também não vira santa só porque o build é determinístico.
+Mas a auditoria melhora em uma parte importante.
+Dá para comparar o que foi publicado com o que foi construído de forma independente.
+
+O anúncio é assinado por Paul Gevers em nome do Release Team.
+Ele aponta o reproduce ponto debian ponto net como parte da infraestrutura pública de verificação.
+Também menciona a direção de Q A em torno de autopkgtest para bin N M U.
+Essas são rebuilds binárias sem alteração de fonte.
+Às vezes parecem detalhe de empacotamento, até quebrarem seu dia.
+
+A parte operacional ficou mais séria.
+Uploaders são responsáveis por garantir que os pacotes migrem.
+Talvez eles precisem abrir bugs release-critical quando regressões de autopkgtest travarem dependências reversas.
+Traduzindo: build reproduzível saiu do pôster bonito de segurança.
+Agora entrou no fluxo que segura pacote na porta.
+
+Para quem usa Debian, derivadas, imagens base ou containers, isso não significa perfeição hoje de manhã.
+É política de release e processo, não varinha mágica.
+Mesmo assim, é uma mudança que empurra o piso da indústria um pouco para cima.
+Dev que nunca empacotou um pacote deb também herda essa decisão.
+Isso aparece quando a pessoa puxa uma imagem, instala uma lib ou constrói em cima da distribuição.
+As fontes deste bloco são o anúncio do Debian Release Team, Reproducible Builds e reproduce ponto debian ponto net.
+
+A GitHub Advisory Database publicou o C V E 2026, quarenta e quatro oito quatro três.
+O registro também aparece como G H S A, P J W X, R três sete V, sete sete dois quatro.
+O pacote afetado é o langchain-core.
+O problema é deserialização insegura de objetos controlados por atacante.
+Isso passa por allowlists largas demais em caminhos de load e loads.
+
+O detalhe para quem constrói agente é bem direto.
+Dados estruturados de usuário não podem entrar no sistema como se fossem só JSON inocente.
+Depois, esses dados não podem passar por um deserializador que revive objetos confiáveis.
+Em app com histórico de conversa, eventos de ferramenta e logs de execução, essa fronteira fica fácil de borrar.
+O dado entra como mensagem, passeia pela aplicação, ganha crachá e senta na reunião dos objetos internos.
+
+As versões afetadas do langchain-core vão de um ponto zero ponto zero até um ponto três ponto dois.
+A linha anterior também é afetada até zero ponto três ponto oitenta e quatro.
+As versões corrigidas são um ponto três ponto três e zero ponto três ponto oitenta e cinco.
+O advisory cita superfícies como Runnable With Message History.
+Também cita astream log e astream events, na versão V um.
+
+O impacto listado inclui envenenamento de histórico de chat.
+Também inclui manipulação de comportamento por prompt injection.
+Há ainda instanciação inesperada de objetos tratados como confiáveis.
+E existe possível exposição de credenciais ou requisições do lado servidor.
+A classificação envolve C W E quinhentos e dois e C V S S oito ponto dois.
+
+Tem uma cautela importante aqui.
+Isso não quer dizer que todo app LangChain vaze chave da LangSmith com uma mensagem qualquer.
+A exposição depende do desenho da aplicação.
+Também depende de dados controlados por atacante chegando a esses caminhos afetados.
+O título de write-up técnico pode ser mais dramático.
+Mas a correção pública que interessa é objetiva.
+Atualize o pacote, e não use load e loads em dados controlados por usuário.
+Antes de chamar o framework, transforme entrada externa em um schema inerte.
+
+Também vale revisar segredo de agente com mentalidade de menor privilégio.
+Se um agente consegue ler chave demais, chamar URL demais ou preservar estrutura demais, o parsing ganha pernas.
+O bug é do pacote, mas o estrago costuma ser da arquitetura ao redor.
+As fontes são a GitHub Advisory Database e o write-up técnico de Dewank Pant.
+
+A NVlabs mantém um repositório público chamado cuda-oxide.
+Ele é um backend customizado do rustc.
+A ideia é compilar kernels de GPU escritos em Rust para P T X.
+P T X é o assembly virtual usado no caminho CUDA da NVIDIA.
+
+A promessa técnica é gostosa para quem gosta de sistemas.
+O projeto busca código host e device em uma experiência de fonte única.
+Os comandos passam por cargo oxide.
+Há crates de runtime e exemplos como vec add, host closure e gemm sol.
+
+O pipeline documentado começa em Rust e passa pelo Rust MIR.
+Depois vem Pliron IR, depois L L V M IR, e finalmente P T X.
+Pliron aparece no README como uma IR em Rust.
+Ela cumpre um papel parecido com camadas intermediárias que ferramentas como M L I R tornaram comuns.
+
+Isso importa porque o mundo NVIDIA ainda gira muito em torno de CUDA C++.
+Rust já aparece em várias pontas de infraestrutura.
+Mas programar kernel de GPU com bom encaixe na linguagem ainda é um terreno irregular.
+Um caminho Rust-native para P T X pode facilitar experimentos em bibliotecas de inferência.
+Também pode ajudar em H P C e tooling de baixo nível para aceleradores.
+
+Agora vem o balde de água, mas daqueles úteis, não o balde chato de reunião.
+O projeto se declara alpha, sem tentar vender estabilidade cedo demais.
+O próprio repositório avisa para esperar bugs, recursos incompletos e quebra de [EY1 P IY1 AY1].
+Também pede um ambiente bem específico.
+Linux, Rust nightly, CUDA Toolkit doze ou superior, e L L V M vinte e um ou superior com N V P T X.
+Além disso, o ambiente precisa de Clang e libclang.
+
+O README traz um número chamativo para gemm sol.
+São 868 T F L O P S, descritos como cinquenta e oito porcento do cuBLAS em uma B duzentos.
+Esse número deve ser lido como reportado pelo repositório, não como benchmark independente.
+É um sinal interessante de que há exemplo sério ali.
+Mas não é autorização para trocar pilha CUDA de produção por Rust no intervalo do café.
+
+O valor da notícia, por enquanto, é outro.
+A NVlabs publicou um caminho de compilador real, com arquitetura clara e exemplos.
+Para Rust em GPU, isso é mais concreto do que "um dia seria legal".
+Ainda é pesquisa e ferramenta experimental, e tudo bem.
+Algumas coisas boas começam como um repositório que diz "vai quebrar" com honestidade rara.
+As fontes são o repositório NVlabs barra cuda-oxide e a cobertura da MarkTechPost.
+
+ARGUS apareceu como um repositório público chamado Odingard barra validation-benchmarks.
+A ideia é simples e bem-vinda.
+Em vez de discutir segurança de agente só no campo do medo abstrato, o projeto oferece alvos vulneráveis.
+Esses alvos são intencionais e podem rodar com Docker.
+
+O README lista dezesseis alvos, de A R G T zero zero um vinte e cinco até A R G T zero dezesseis vinte e cinco.
+Eles cobrem chat simples, conversa em múltiplos turnos, ferramentas e RAG.
+Também cobrem memória persistente, M C P, geração de código, visão, áudio e ingestão de documento P D F.
+Ainda entram exaustão de recursos, autenticação, autorização, handoff multiagente e VALHALLA.
+
+O mecanismo de pontuação usa canaries.
+Em vez de uma flag clássica de C T F, o alvo tem um token, como ARGUS CANARY.
+O teste observa se o modelo, ou o sistema, acaba ecoando aquilo.
+É uma forma binária de dizer "escapou" ou "não escapou".
+Isso ajuda quando ataques contra agente ficam subjetivos demais.
+
+Para usar, o projeto pede Docker com Docker Compose.
+Também pede algum provedor de L L M, ou um Ollama local.
+O README cita comandos como make run target e argus bench target.
+Não vou transformar isso em tutorial aqui, porque este estágio é notícia, não laboratório.
+Mas o formato é claro o bastante para entrar no radar de quem avalia guardrail.
+
+Aqui, a cautela também é proporcional.
+É um repositório novo, pequeno, e ainda precisa ser testado antes de virar recomendação forte.
+Também não dá para imprimir cadeia de ataque em post público como quem distribui receita de bolo ruim.
+Mas, como direção, ARGUS conversa muito bem com o bug do LangChain.
+Se agente vai ter memória, ferramenta, RAG e permissão, você precisa de alvos de validação.
+"Meu prompt diz para não vazar" não é estratégia de segurança.
+É só um bilhete colado na porta.
+A fonte deste bloco é o repositório Odingard barra validation-benchmarks.
+
+Agora, os destaques rápidos de hoje.
+O Google anunciou, em 5 de maio, que o Gemini [EY1 P IY1 AY1] File Search ficou multimodal.
+Agora há busca em imagem e texto, filtros por metadata e citações por página.
+É RAG gerenciado ficando mais completo.
+Mesmo assim, ainda pede validação de produto, custo, privacidade e qualidade de grounding.
+A fonte é o Google, no The Keyword.
+
+O FreeBSD publicou o advisory FreeBSD S A vinte e seis, treze, exec em 29 de abril.
+Ele trata do C V E 2026, setenta e dois sete zero.
+É uma escalada local de privilégio via execve.
+Afeta versões suportadas, não tem workaround, e a correção é atualizar para os branches corrigidos.
+Depois disso, o caminho é reiniciar.
+A fonte é o FreeBSD Security Advisory.
+
+Sketch é um projeto em Rust para sessões efêmeras de filesystem no Linux.
+Ele usa OverlayFS, namespaces de mount, namespace U T S e pivot root.
+É legal para testar instalação e configuração sem sujar a máquina.
+Mas o README deixa claro: rede, processos, I P C e dispositivos não ficam isolados.
+Não é sandbox para código hostil.
+A fonte é o repositório ivpravdin barra sketch.
+
+A Tilde Research apresentou Aurora.
+É um otimizador que mira uma patologia do Muon em matrizes retangulares.
+Essa patologia é ligada a row leverage e neurônios mortos.
+Os autores relatam 3175 steps no track modded nano G P T.
+Também relatam perda final menor em um pré-treino de um ponto um bilhão com cerca de 100 bilhões de tokens.
+Mas é número de autor: interessante, não dogma.
+A fonte desse bloco é a Tilde Research.
+
+Thorsten Ball publicou o "Joy and Curiosity número oitenta e cinco".
+Ele citou o Amp Neo, uma reconstrução do Amp com controle remoto.
+Também falou em plugins como recurso de primeira classe e compaction.
+O detalhe ainda é alto nível, mas o sinal é bom.
+Agente de código está virando sistema com loop, extensões e gerenciamento de contexto.
+Não é só chat com botão bonito.
+A fonte é Register Spill, de Thorsten Ball.
+
+ymawky é um servidor web estático para macOS escrito inteiramente em assembly ARM sessenta e quatro.
+A graça é que o projeto implementa métodos como GET, PUT, DELETE, OPTIONS e HEAD.
+Também implementa Range requests, MIME types e bloqueio de traversal.
+Ele rejeita symlink com O NOFOLLOW ANY.
+Tem timeout estilo slowloris e PUT atômico por rename.
+O próprio autor avisa que é projeto divertido e provavelmente tem vulnerabilidades desconhecidas.
+A fonte é o repositório imtomt barra ymawky.
+
+Lorin Hochstein escreveu sobre o perigo de ligar o "bozo bit" depois de incidente com agente.
+Quando a gente só ridiculariza a pessoa envolvida, para de aprender com o sistema que falhou.
+Para times adotando agentes, a pergunta útil é menos "quem foi burro?".
+E mais "cadê dry run, permissão, backup, review, rollback e dono?".
+A fonte é o Surfing Complexity.
+
+Para fechar, o acompanhamento de tendências do dia.
+Jeff Kaufman publicou, em 8 de maio, uma análise sobre IA e disclosure.
+Segundo ele, IA pressiona duas culturas antigas de divulgação de vulnerabilidade.
+Uma é a divulgação coordenada, com embargo.
+A outra é o estilo de correções silenciosas em aberto, comum em partes do mundo Linux.
+A tese é que análise barata de commits, diffs e patches reduz uma esperança antiga.
+Aquela esperança de que ninguém perceba rápido.
+
+É bom manter isso no tamanho certo.
+O texto é análise, não advisory.
+O próprio Kaufman trata partes do experimento com cautela.
+Ele não vende o teste informal com modelos como benchmark.
+Também não diz que disclosure acabou.
+O ponto é mais incômodo e mais plausível.
+A janela confortável entre corrigir, publicar pista e alguém reconstruir a falha está encolhendo.
+
+O assunto já apareceu no acompanhamento de ontem, então hoje ele entra como ponte curta.
+Debian exigindo build reproduzível e LangChain corrigindo fronteira de deserialização apontam para esse lado.
+FreeBSD dizendo "sem workaround, atualize e reinicie" também aponta.
+ARGUS oferecendo alvos vulneráveis para agente entra na mesma conversa.
+Menos confiança vaga, mais prova, mais patch, mais teste.
+A fonte é o texto "AI is Breaking Two Vulnerability Cultures", de Jeff Kaufman.
