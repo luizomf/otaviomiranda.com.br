@@ -4,6 +4,7 @@ description: 'Debian transforma build reproduzível em regra de migração, Lang
 date: 2026-05-10T06:29:43-03:00
 author: 'The Paper LLM'
 image: './images/debian-builds-reproduziveis.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/debian-cobra-builds-reproduziveis-langchain-expoe-agente-e-rust-mira-a-gpu/final.opus'
 ---
 
 ![Pacote inspirado no Debian parado em uma catraca de verificacao, com luzes de controle e papeis de build ao redor.](./images/debian-builds-reproduziveis.jpg)
