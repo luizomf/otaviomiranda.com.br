@@ -1,0 +1,186 @@
+A ressaca dos agentes chegou ao código real.
+O bug mais caro do dia não começou com uma C V E.
+Começou com uma tela nova quebrando outras telas.
+Esse detalhe é quase cruel, porque muita gente que usa agente de código já viveu uma versão menor disso.
+A feature nasce rápido, o diff parece aceitável, o projeto continua andando.
+Só depois aparece aquela estrutura central segurando estados demais, decisões demais e confiança demais.
+Hoje a conversa passa por K dez S, DORA, curl, kernel Linux e algumas peças de infraestrutura ao redor.
+A IA de código segue viva, útil e barulhenta.
+Só que a segunda-feira veio lembrar uma coisa sem glamour.
+Código gerado também envelhece, disputa estado, entra em review, abre porta de rede e vira manutenção.
+Que coisa, né? Software continuou sendo software.
+O K dez S pausou o rewrite em Go depois que a arquitetura cobrou.
+O autor do K dez S publicou um postmortem bem direto sobre o projeto.
+O K dez S é uma T U I para Kubernetes com foco em G P U, inspirada no K nove S.
+Ele foi escrito em Go com "Bubble Tea".
+Segundo o autor, foram sete meses, cerca de trinta fins de semana e 234 commits.
+Essas sessões foram assistidas por Claude.
+Até aí, a história parece boa. Feature andando, dashboard crescendo, fluxo rápido.
+O problema apareceu quando uma nova visão de frota de G P Us quebrou telas de pods e nodes.
+Ela também quebrou as atualizações ao vivo.
+Ao abrir o arquivo model ponto go, o autor encontrou um arquivo com 1690 linhas.
+Também havia uma estrutura Model gigante, um método Update com 500 linhas e 110 ramos de switch case.
+Esse tipo de falha é traiçoeiro porque não aparece como: o agente errou uma linha.
+A coisa funciona por um tempo. O agente entrega o próximo pedido local.
+Depois vem outro pedido. Depois vem outro de novo.
+Quando ninguém segura explicitamente a arquitetura, o projeto vai aceitando atalhos.
+Entra estado global demais, limpeza manual de tela, dados posicionais mágicos.
+E entram goroutines mexendo em estado sem lock.
+O ponto mais útil do post é que o autor não joga tudo no colo da IA.
+Ele assume as escolhas de arquitetura e descreve a virada para um rewrite em Rust.
+Antes de voltar a pedir código, ele escreveu regras.
+Entre elas: separar views, usar dados tipados e impedir trabalho assíncrono de mexer direto no estado da U I.
+Ele também fala em colocar invariantes em arquivos como AGENTS ponto M D ou CLAUDE ponto M D.
+Para quem usa agente no trabalho real, isso é bem acionável.
+Antes de pedir, adiciona essa tela, vale escrever quais partes podem possuir estado.
+Também vale definir quem pode alterar o quê, onde a concorrência entra e quais interfaces não devem ser atravessadas.
+O agente pode acelerar implementação, mas precisa correr dentro de uma pista que alguém desenhou.
+A cautela também importa nesse caso.
+É um postmortem de um projeto, não um benchmark universal de Claude, Go, Bubble Tea ou vibe coding.
+Ainda assim, ele é valioso porque mostra a dívida que nasce quando tudo parece estar rendendo.
+As fontes deste bloco são o postmortem do K dez S e o arquivo público do K dez S em Go arquivado.
+DORA colocou retorno sobre investimento de IA na mesa, mas com a conta inteira.
+O programa DORA, do Google Cloud, publicou uma página e uma calculadora sobre esse retorno.
+A cobertura da InfoQ trouxe os números mais chamativos.
+Em um cenário modelado para uma organização de 500 pessoas, o relatório fala em 11,6 milhões de dólares de valor.
+Isso aparece contra 8,4 milhões de dólares de investimento.
+O retorno sobre investimento ficaria em 39 porcento, com payback por volta de oito meses.
+Esses números são interessantes, mas precisam ficar no lugar certo.
+São resultado de cenário modelado, não promessa para qualquer empresa que comprar licença na sexta-feira.
+A própria conversa de DORA gira em torno de base de engenharia, plataforma interna e fluxo de trabalho.
+Também entram treinamento, medição e um mergulho inicial de produtividade, a famosa curva em J.
+A parte que conversa com K dez S é a taxa de verificação.
+O código pode sair mais rápido, mas alguém precisa revisar, testar e entender impacto.
+Também precisa ajustar workflow e lidar com legado.
+A InfoQ cita um recorte de pesquisa de produtividade de engenharia de software da Stanford.
+O recorte fala em ganhos de 35 a 40 porcento em tarefas simples e greenfield.
+Em código legado complexo, o ganho citado fica em 10 porcento ou menos.
+Essa diferença explica muita frustração em time real.
+Em projeto novo, com pouca regra antiga e pouca superfície escondida, o agente parece uma bicicleta elétrica.
+Em monolito cheio de exceções, migração pela metade e teste temperamental, ele vira mais uma fonte de review.
+Outro número útil da cobertura vem do exemplo da calculadora.
+Subir a taxa de falha de mudança de 5 para 6 porcento pode gerar impacto negativo estimado em 344 mil dólares.
+Esse impacto seria por downtime. É modelagem, de novo.
+Mas serve para lembrar que entregar mais P Rs não paga a conta se cada mudança aumenta risco operacional.
+Então o uso honesto do relatório é menos: IA tem R O I de 39 porcento.
+É mais: vamos medir onde a IA remove gargalo sem jogar dívida para a próxima fila.
+Plataforma boa, teste confiável, deploy previsível, revisão menor e batches pequenos continuam sendo produtividade.
+Essa infraestrutura só ficou mais fácil de ignorar quando o chat entrega um diff em quarenta segundos.
+As fontes deste bloco são o relatório e calculadora DORA sobre R O I de IA, e a cobertura da InfoQ.
+Mythos achou uma falha no curl, depois que humanos limparam a névoa.
+Daniel Stenberg, mantenedor do curl, publicou em 11 de maio um relato sobre uma análise feita pelo Mythos.
+A análise olhou cerca de 178 mil linhas nas pastas source e lib, no master do projeto curl.
+O relatório chegou dizendo que havia cinco vulnerabilidades confirmadas.
+Depois da triagem do time de segurança do curl, sobrou uma vulnerabilidade real.
+Três itens foram considerados falsos positivos.
+Um virou bug comum, sem classificação de segurança.
+A falha que sobrou deve receber um registro C V E de baixa severidade no curl oito ponto vinte e um ponto zero.
+Esse release está planejado para o fim de junho de 2026.
+Os detalhes técnicos ficam retidos até o release, como deve ser.
+Esse é um placar bem melhor do que parece para os dois lados.
+Para ferramenta de IA, achar uma falha real em curl pesa bastante.
+O projeto é antigo, muito auditado, usa fuzzing e passa por uma quantidade séria de olhos.
+Ao mesmo tempo, o relatório bruto veio com barulho suficiente para exigir trabalho humano.
+A métrica que interessa para mantenedor passa por uma pergunta incômoda.
+Quanto custou provar que os outros achados não eram aquilo tudo?
+Stenberg também menciona que ferramentas anteriores ajudaram a disparar entre 200 e 300 correções no curl.
+A lista inclui AISLE, Zeropath e OpenAI Codex Security.
+Essas correções aconteceram nos últimos oito a dez meses.
+Isso coloca Mythos dentro de uma linha mais ampla.
+IA como sinal extra na segurança de projeto C, junto com análise estática, fuzzing e revisão humana.
+Tem duas cautelas aqui, e as duas mudam o tom.
+A primeira é não especular sobre a falha antes da publicação.
+A segunda é não transformar o resultado em torcida.
+Mythos não virou oráculo, mas também não foi inútil.
+Ele produziu um achado de baixa severidade e uma pilha de triagem.
+Para projeto mantido por gente real, essa segunda parte aparece na agenda.
+As fontes deste bloco são Daniel Stenberg sobre Mythos e curl, e o preview público do Claude Mythos.
+Codex apareceu em patch Linux para sensor AMD PROM vinte e um.
+Jihong Min enviou a versão quatro de uma série de patches para o kernel Linux.
+A série adiciona suporte a sensor de temperatura no AMD Promontory vinte e um, também chamado de PROM vinte e um.
+A proposta adiciona um driver X H C I, específico para P C I no PROM vinte e um.
+Ela também adiciona um driver auxiliar H W mon, expondo temp um underline input com o nome PROM vinte e um underline X H C I.
+O detalhe que puxou atenção é uma linha no patch: Assisted by, Codex, GPT cinco ponto cinco.
+Isso não significa que Codex entrou no kernel como fato consumado.
+O patch está em revisão, passou por revisões e não há confirmação de merge na mainline.
+Também não quer dizer que um agente virou mantenedor.
+A autoria humana e o processo público de review continuam no centro.
+Mesmo assim, é um sinal interessante porque sai do C R U D e aparece em encanamento de sistema.
+O patch mira controladores AMD PROM vinte e um X H C I, com identificador P C I um zero dois dois, dois pontos, quatro três F D.
+Segundo a Phoronix, esses controladores são usados em chipsets AMD 600 e 800 para AM5.
+A documentação fala em registradores de vendor index e vendor data.
+Eles ficam nos offsets hexadecimais 3000 e 3008.
+O patch também traz uma fórmula de conversão de temperatura inferida empiricamente.
+Essa última parte é importante.
+O próprio material diz que não há referência pública da AMD para esses registradores.
+A conversão foi inferida por observação.
+Para driver de hardware, isso muda o tom.
+O assunto sai de compila e pronto, e entra em revisão de mantenedor e teste em hardware.
+Também entram discussão sobre interface, runtime P M, sysfs e o quanto aquela inferência é aceitável.
+Gosto dessa notícia justamente por ela ser pequena e concreta.
+Uma linha Assisted by em lista do kernel vale mais para entender 2026 do que dez apresentações grandonas.
+Ela diz mais do que promessas de que agente vai dominar engenharia de baixo nível.
+A automação apareceu onde existe ritual técnico, revisão pública e gente podendo dizer: não, ajusta isso.
+As fontes deste bloco são a série de patches no Spinics e a cobertura da Phoronix.
+Agora, os destaques rápidos de hoje.
+Um guia em português mostrou uma migração de workloads web e worker de Docker para Podman rootless com Quadlet.
+As peças importantes são sub U I D, sub G I D, system D user e login C T L enable linger.
+Também entram arquivos container, network e volume, além da estratégia para portas privilegiadas.
+O ganho é tirar o daemon Docker rootful do caminho comum, não tornar container invencível.
+A fonte desse destaque é o TabNews.
+O firewall do Vercel Sandbox ganhou suporte beta a proxy e filtragem de requisições de saída.
+Com o pacote Vercel Sandbox beta, dá para usar forward U R L em domínios permitidos.
+Também dá para usar matchers por path, método, query e headers.
+Isso inclui headers como Vercel Sandbox O I D C token.
+O padrão maior é claro: agente que roda código precisa de política de rede observável.
+A fonte é o changelog da Vercel.
+James Shore publicou uma conta simples para esfriar o entusiasmo com duas vezes mais código.
+Se a IA dobra a saída, o código precisa custar aproximadamente metade para manter.
+Se não, o ganho inicial vira arrasto de manutenção com o tempo.
+É um modelo ilustrativo, mas combina demais com o caso K dez S.
+A fonte desse destaque é James Shore.
+Shrivu Shankar escreveu sobre por que produtividade com IA falha mesmo quando a saída aumenta.
+O texto aponta planejamento fraco, tarefas pequenas demais e paralelismo mal dosado.
+Também aponta falta de loop fechado de verificação, sessões descartáveis e perda de habilidade de domínio.
+O número de 10 a 20 porcento é observação do autor, não medição universal.
+A fonte é AI Productivity Fails.
+The Build publicou uma nota útil sobre autovacuum work mem no PostgreSQL.
+Antes do PostgreSQL 17, o array plano tinha teto útil de um gigabyte.
+Isso dava cerca de 179 milhões de tuplas mortas.
+No PostgreSQL 17, o T I D Store com adaptive radix tree muda a recomendação.
+Agora importa observar index vacuum count, dentro da visão pg stat progress vacuum, quando o vacuum faz múltiplas passagens.
+A fonte desse destaque é The Build.
+Revaulter versão dois mostrou um caminho para desbloquear volumes Z F S criptografados usando passkeys.
+A ideia é guardar um envelope criptografado e pedir aprovação por passkey no navegador.
+Depois, a chave resultante é passada para Z F S load key.
+Isso evita chave em texto claro no disco.
+Em troca, você precisa pensar em disponibilidade, recuperação e dependência do serviço de aprovação.
+A fonte desse destaque é With Blue Ink.
+Adam Dunkels fez Claude Code agir como uma pilha I P em espaço de usuário para responder ping.
+O experimento usa um helper T U N em modo F I F O.
+Ele também usa um comando Markdown e instruções para ler pacotes I P versão quatro e I C M P em hexadecimal.
+Depois, o agente calcula checksums e escreve uma resposta.
+É deliberadamente absurdo, caro e divertido.
+Fica ainda melhor vindo de alguém conhecido por lwIP e uIP.
+A fonte desse destaque é Adam Dunkels.
+Agora, o acompanhamento de tendências do dia.
+O padrão de hoje passa longe de uma torcida entre agentes bons e ruins.
+Ele mostra agentes batendo em partes do sistema que não perdoam teatro.
+Arquitetura, custo de manutenção, revisão de segurança, patch de kernel, rede de sandbox e banco em produção.
+K dez S dá a cena concreta: feature rápida sem regra de arquitetura virou um objeto central grande demais.
+DORA amplia para a organização.
+R O I depende de plataforma, fluxo, medição e curva de adoção.
+James Shore coloca a pergunta de manutenção na planilha.
+Shankar lembra que prompt descartável e verificação manual não sustentam ganho grande por muito tempo.
+Do lado de segurança e isolamento, curl mostra que scanner de IA pode ajudar.
+Mas alguém paga a triagem no mundo real.
+Vercel e Podman aparecem em outro canto da mesma conversa.
+Se código gerado ou agente vai executar coisas, saída de rede, credencial e privilégio precisam de fronteira explícita.
+O caso antigo da Elastic sobre Obsidian e "PHANTOM PULSE" também entra só como contexto.
+Ferramenta local com plugin e sync pode virar superfície de execução quando a confiança é automática demais.
+O caminho mais saudável parece menos glamouroso do que a demo.
+Regras de arquitetura antes do prompt, teste que fecha loop, review com dono e rede filtrada.
+Também entram privilégio menor e manutenção medida.
+Tudo isso dá trabalho, claro, e não é pouco.
+Mas é o tipo de trabalho que continua existindo depois que o vídeo bonito acaba.
+As fontes finais são K dez S, DORA R O I, James Shore, AI Productivity Fails e Elastic sobre Obsidian e PHANTOM PULSE.
