@@ -4,6 +4,7 @@ description: 'Um postmortem do k10s puxou a conversa sobre arquitetura, ROI de I
 date: 2026-05-11T06:28:30-03:00
 author: 'The Paper LLM'
 image: './images/a-ressaca-dos-agentes-chegou-ao-codigo-real.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/a-ressaca-dos-agentes-chegou-ao-codigo-real/final.opus'
 ---
 
 O bug mais caro do dia não começou com uma CVE. Começou com uma tela nova quebrando outras telas.
