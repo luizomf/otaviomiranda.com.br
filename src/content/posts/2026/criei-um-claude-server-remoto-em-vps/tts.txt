@@ -1,0 +1,139 @@
+Criei um Claude Server remoto em V P S.
+
+A história começa comigo descobrindo um template do Claude Code nos templates de sistema operacional do V P S.
+Ele só dizia que era um Ubuntu vinte e quatro ponto zero quatro L T S com Claude Code.
+
+Eu já instalei agentes de I A quando subo servidores para fazer hardening tantas vezes que essa etapa já está quase entrando no meu script principal.
+
+Caso queira assistir ao vídeo, eu repliquei exatamente o que descrevo aqui.
+
+Como eu já ia formatar o V P S para fazer outro vídeo, que sai em breve, pensei: vou testar esse template do Claude.
+E ele funciona. Sério? Não brinca.
+
+É uma instalação normal do Ubuntu vinte e quatro ponto zero quatro que vem com o Claude Code instalado.
+
+Nada demais. Mas é menos um passo com que me preocupar.
+
+Como sempre, a primeira coisa que fiz foi criar o meu usuário próprio no V P S para sair do usuário root.
+Dizem por aí que é pecado usar root direto no servidor. Vamos respeitar.
+
+Depois, autentiquei no Claude Code e pedi para ele fazer o hardening usando a base do meu D E V Guide.
+
+Já fiz isso antes, inclusive em vídeo do canal.
+
+O fato é que eu adoro digitar.
+Mas já não aguento mais fazer hardening de servidor.
+
+Depois que terminei tudo, percebi que o servidor ainda não tinha o Docker instalado.
+O outro template que eu estava acostumado a usar tinha um nome criativo e sugestivo.
+Ele já te dá uma dica do motivo de isso não estar no meu script principal: Ubuntu vinte e quatro ponto zero quatro L T S com Docker.
+
+Pedi ao Claude para instalar o Docker e o Traefik para mim.
+Também apontei um registro A do D N S, usando o coringa, para o I P do servidor.
+Não vou falar o domínio real porque, quando você for ouvir isso, é provável que ele já esteja fora do ar.
+
+Mas esse negócio do D N S facilita demais a criação de subdomínios.
+Você consegue ter o domínio principal, um subdomínio para estudos, e por aí vai.
+
+E pronto, mais um V P S configurado com sucesso.
+
+Fechei o laptop e fui dormir, pelo menos na versão bonita da história.
+
+Mentira, eu não fecho laptop e também quase nunca durmo, mas ficou melhor na história.
+
+No dia seguinte pela manhã, vi o tweet do Thariq e gostei muito da ideia de trocar Markdown por H T M L.
+Só que apenas em alguns casos mais específicos.
+
+Pensei nisso mais para estudos em geral.
+
+Quando você está estudando um assunto novo, ficar cheio de fontes em Markdown e notas é bem chato.
+Fora os meus post-its amarelinhos, de verdade e escritos à mão.
+
+Acho que H T M L pode ajudar mais nessa parte, porque você pode fazer uma página bem mais interativa.
+Isso deixaria qualquer assunto mais interessante. Talvez até mais bonito.
+
+Eu simplesmente peguei o post do Thariq e mandei para o Claude.
+Expliquei que queria um layout parecido para gerar documentos sobre assuntos que eu estivesse estudando.
+
+Ele gerou uma página bonitinha de várias outras que também fez para mim.
+E tudo ficou indexado perfeitamente.
+Do jeito que está, adicionar uma busca, mudar o layout e adicionar interatividade fica bem fácil.
+
+Então ele subiu isso no Docker, atrás de um domínio de estudos.
+O restante das páginas ficou no formato de subdiretórios, como uma página para cada assunto.
+
+Também usou o Traefik para adicionar T L S, ou H T T P S, automaticamente e de graça.
+
+Tudo ficou muito bom, mas eu queria mais.
+Eu queria aquela ideia do assistente que vemos no Hermes Agent ou no OpenClaw.
+Sabe quando você adiciona alguma bridge qualquer para aplicativos de mensagem? Era isso.
+
+A gente acostuma tanto com isso que, quando não tem, sente falta.
+Como eu iria pedir para o agente criar aquela minha ideia genial enquanto estivesse no mercado?
+
+Já faz algum tempo que o Claude Remote Control existe, mas eu sempre esbarrava no mesmo problema: contexto.
+
+Você pode usar o comando Claude remote control para iniciar uma thread controlada por outros apps do Claude.
+Isso inclui Claude Desktop, Claude Web e Claude Mobile.
+O [S IY1 EH1 L AY1] passa a funcionar como um servidor.
+E suas mensagens ficam sincronizadas entre todos os dispositivos conectados.
+
+Isso perde um pouco o propósito se você forçar.
+
+Por exemplo: se eu inicio uma sessão com remote control e saio para fazer alguma coisa, só tenho aquela única thread disponível para tudo.
+E outra: só no computador onde iniciei o Claude Code, que é o [S IY1 EH1 L AY1].
+
+Creio que a ideia inicial disso era só para você terminar algum serviço sem ter que ficar preso no computador.
+
+Esse comportamento força você a deixar o computador ligado.
+Também precisa manter o Claude Code aberto e usar essa única thread, gastando cada vez mais tokens a cada mensagem.
+
+Fora o perigo do Context Rot, que também entra nessa conta.
+Sabemos que, quanto mais você mantém um único chat, maior a chance de poluir o contexto com alguma coisa.
+
+Se acontecer, é muito difícil o agente se recuperar sem que você limpe o contexto.
+Spoiler: você não consegue limpar o contexto nem iniciar uma nova thread de dentro de outra thread via remote control.
+
+Agora, sobre o tê mux, hein, meu amigo.
+
+Vou resumir um pouco porque eu estou digitando isso e faltam quarenta minutos para este vídeo ir ao ar, então...
+
+Depois de muito pensar, bater cabeça e tentar criar uma nova thread do Claude remotamente, lembrei do meu querido tê mux.
+Nem tentei tanto assim, isso é só para dar ênfase no texto.
+
+Para quem nunca usou o tê mux, ele é um multiplexador de terminal.
+
+Basicamente, ele te dá a habilidade de organizar sessões, janelas e painéis com vários shells.
+
+Quando você vê alguém com terminais divididos na tela, é muito provável que essa pessoa esteja usando um multiplexador como o tê mux.
+Ou um desses terminais modernos, tipo Ghostty.
+
+Eu sei que você achou que eu não estava digitando mesmo, mas vou te perdoar dessa vez.
+A imagem mostrava o tê mux usando painéis para dividir uma janela dentro de uma sessão.
+Também aparecia um trecho do meu texto, que eu acabei de corrigir e ficou diferente.
+E ainda tinha uma prova de que a I A não tem a mínima noção sobre o que é uma piada.
+Era uma piada do Qwen. Eu nem entendi o propósito ali.
+
+Enfim, não estou te dando um curso de tê mux nem falando para você usar isso.
+Mas use, vai por mim, fica a dica não solicitada.
+
+O ponto é que as sessões precisam de uma janela, e essa janela precisa de um shell.
+Isso é o que permite que o tê mux rode vários terminais em background.
+Fora buffers e outras coisas que nem vou falar, porque eu nem sei.
+
+O que eu pedi para o Claude fazer foi testar com tê mux.
+
+Quando quero que ele inicie uma nova thread no Claude Code, ele cria uma sessão no tê mux.
+Essa sessão entra com uma janela, e dentro da janela fica um shell rodando o Claude em modo remote control.
+
+Funcionou perfeitamente, e aí a brincadeira ficou séria.
+Então criamos um script que faz isso automaticamente.
+
+Quando percebi o quão bem isso estava funcionando, pedi ao Claude para pegar tudo o que fizemos no servidor.
+A ideia era jogar tudo em um repositório público para ficar fácil de replicar.
+
+No final, eu só fiquei com este texto, o vídeo lá em cima, que eu sei que você foi assistir em vez de ler, e o repositório público no Git Hub.
+Você também pode usar se quiser.
+
+Agora deixa eu publicar isso que estou atrasado.
+Dezoito horas e um minuto. Até o próximo.

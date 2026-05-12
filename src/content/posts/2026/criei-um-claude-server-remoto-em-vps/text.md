@@ -2,7 +2,7 @@
 title: 'Criei um Claude Server Remoto em VPS'
 description:
   'Montei um Claude Server experimental para controlar várias threads pelo
-  desktop, web ou celular em um VPS. Só precisei do tmux e um Claude Code.'
+  desktop, web ou celular em uma VPS. Só precisei do tmux e do Claude Code.'
 date: 2026-05-12T16:43:22-03:00
 author: 'Otávio Miranda'
 ---
@@ -13,7 +13,7 @@ Code".
 
 Eu já instalei agentes de IA quando subo servidores
 [para fazer o hardening](https://github.com/luizomf/vps_deploy_template/blob/main/DEV_GUIDE.md)
-tantas vezes, que essa etapa já tá quase entrando no meu script principal.
+tantas vezes que essa etapa já está quase entrando no meu script principal.
 
 ## Em vídeo
 
@@ -23,16 +23,16 @@ Caso queira assistir ao vídeo, repliquei exatamente o que descrevo aqui:
 
 - [https://youtu.be/fdWBSN9wkv0](https://youtu.be/fdWBSN9wkv0)
 
-## O template e hardening
+## O template e o hardening
 
 Como eu já ia formatar o VPS para fazer outro vídeo (em breve), pensei: "vou
-testar esse template do Claude". E, ele funciona. (Sério 😬? Num brinca.)
+testar esse template do Claude". E ele funciona. (Sério 😬? Não brinca.)
 
 É uma instalação normal do Ubuntu 24.04 que vem com o Claude Code instalado.
 
-Nada demais. Mas é menos um passo para me preocupar.
+Nada demais. Mas é menos um passo com que me preocupar.
 
-Como sempre, a primeira coisa que fiz foi criar o meu usuário próprio do VPS
+Como sempre, a primeira coisa que fiz foi criar o meu usuário próprio no VPS
 para sair do `root`. Dizem por aí que é pecado usar `root` direto no servidor.
 Vamos respeitar.
 
@@ -51,9 +51,9 @@ criativo e sugestivo. Ele já te dá uma dica do motivo de isso não estar no me
 script principal: "Ubuntu 24.04 LTS com Docker".
 
 Pedi ao `claude` para instalar o Docker e o Traefik para mim. Também apontei um
-registro `A` do DNS com valor `*` (tudo) para o IP do servidor. Não vou colocar
-o [domínio real](https://learn.otaviomiranda.cloud) porque quando você for ler
-isso é provável que já esteja fora do ar.
+registro `A` do DNS com o valor `*` (tudo) para o IP do servidor. Não vou
+colocar o [domínio real](https://learn.otaviomiranda.cloud) porque, quando você
+for ler isso, é provável que ele já esteja fora do ar.
 
 Mas o negócio do DNS facilita demais a criação de subdomínios no estilo
 `otaviomiranda.cloud`, `learn.otaviomiranda.cloud`, etc.
@@ -67,15 +67,16 @@ história)
 
 ## Acordei com um artigo
 
-No outro dia pela manhã, vi o tweet do
+No dia seguinte pela manhã, vi o tweet do
 [Thariq](https://x.com/trq212/status/2052809885763747935) e gostei muito da
-ideia de trocar Markdown para HTML. Só que, apenas em alguns casos mais
+ideia de trocar Markdown por HTML. Só que apenas em alguns casos mais
 específicos.
 
 Pensei nisso mais para estudos em geral.
 
 Quando você está estudando um assunto novo, ficar cheio de fontes em Markdown e
-notas é bem chato. Fora meus post-its amarelinhos (de verdade e escritos à mão).
+notas é bem chato. Fora os meus post-its amarelinhos (de verdade e escritos à
+mão).
 
 ![Post-it](./images/post-it.jpg)
 
@@ -104,26 +105,26 @@ gratuitamente.
 
 Tudo ficou muito bom, mas eu queria mais. Eu queria aquela ideia do "assistente"
 que vemos no `Hermes Agent` ou no `OpenClaw` quando você adiciona alguma bridge
-qualquer de aplicativos de mensagem.
+qualquer para aplicativos de mensagem.
 
-A gente acostuma tanto com isso, que quando não tem sente falta. Como eu iria
-falar para o agente criar aquela minha ideia genial enquanto estivesse no
+A gente acostuma tanto com isso que, quando não tem, sente falta. Como eu iria
+pedir para o agente criar aquela minha ideia genial enquanto estivesse no
 mercado?
 
-## Claude Remote control
+## Claude Remote Control
 
 Já faz algum tempo que isso existe, mas eu sempre esbarrava no mesmo problema:
 **contexto**.
 
-Você pode usar o comando `claude --remote control` ou `/remote-control` para
+Você pode usar o comando `claude --remote-control` ou `/remote-control` para
 iniciar uma thread que pode ser controlada por outros apps do Claude, como:
 Claude Desktop, Claude Web e Claude Mobile. O CLI passa a funcionar como um
-"servidor" e suas mensagem ficam sincronizadas entre todos os dispositivos
+"servidor" e suas mensagens ficam sincronizadas entre todos os dispositivos
 conectados.
 
 Isso perde um pouco o propósito se você forçar.
 
-Por exemplo: se eu inicio uma seção com o `--remote-control` e saio para fazer
+Por exemplo: se eu inicio uma sessão com o `--remote-control` e saio para fazer
 alguma coisa, só tenho aquela única thread disponível para tudo. E outra, só no
 computador onde iniciei o Claude Code (o CLI).
 
@@ -134,40 +135,40 @@ Esse comportamento força você a deixar o computador ligado, manter o Claude Co
 (CLI) aberto e usar essa única thread gastando cada vez mais tokens a cada
 mensagem.
 
-Fora o perigo do Context Rot. Sabemos que quanto mais você mantem um único chat,
-maior a chace de poluir o contexto com algo.
+Fora o perigo do Context Rot. Sabemos que quanto mais você mantém um único chat,
+maior a chance de poluir o contexto com algo.
 
 Se acontecer, é muito difícil o agente se recuperar sem que você limpe o
-contexto. Spoiler, você não consegue limpar o contexto e nem iniciar uma nova
+contexto. Spoiler: você não consegue limpar o contexto nem iniciar uma nova
 thread de dentro de outra thread via `remote-control`.
 
 ## Mas e o tmux, hein?
 
-Vou resumir um pouco porque eu to digitando isso e faltam 40 minutos para este
+Vou resumir um pouco porque eu tô digitando isso e faltam 40 minutos para este
 vídeo ir ao ar, então...
 
 Depois de muito pensar, bater cabeça e tentar criar uma nova thread do Claude
 remotamente, lembrei do meu querido `tmux`. (Nem tentei tanto assim, isso é só
-pra dar ênfase no texto).
+para dar ênfase no texto).
 
 Para quem nunca usou o `tmux`, ele é um multiplexador de terminal.
 
 Basicamente, ele te dá a habilidade de organizar sessões, janelas e painéis com
 vários shells.
 
-Quando você ver alguém com terminais divididos na tela como na imagem abaixo, é
-muito provável que essa pessoal esteja usando um multiplexador como o `tmux`. Ou
+Quando você vir alguém com terminais divididos na tela como na imagem abaixo, é
+muito provável que essa pessoa esteja usando um multiplexador como o `tmux`. Ou
 um desses terminais modernos, tipo Ghostty.
 
 ![Tmux](./images/tmux.png)
 
 Eu sei que você achou que eu não estava digitando mesmo, mas vou te perdoar
 dessa vez. A imagem acima mostra o `tmux` usando painéis para dividir uma janela
-dentro de uma sessão. Também esse trecho do meu texto (que acabei de corrigir e
-ficou diferente) e que a IA não tem a mínima noção sobre o que é uma piada. Leia
-a piada do Qwen. Eu nem entendi o propósito ali.
+dentro de uma sessão. Também aparece esse trecho do meu texto (que acabei de
+corrigir e ficou diferente) e uma prova de que a IA não tem a mínima noção sobre
+o que é uma piada. Leia a piada do Qwen. Eu nem entendi o propósito ali.
 
-Enfim, não estou te dando um curso de `tmux` e nem falando para você usar isso
+Enfim, não estou te dando um curso de `tmux` nem falando para você usar isso
 (mas use, vai por mim). O ponto é que as `sessions` precisam de uma `window`
 (janela) e essa janela precisa de um shell. Isso é o que permite que o `tmux`
 rode vários "terminais" em background. Fora buffers e outras coisas que nem vou
@@ -187,8 +188,8 @@ Quando percebi o quão bem isso estava funcionando, pedi ao `claude` para pegar
 tudo o que fizemos no servidor e jogar em um repositório público para ficar
 fácil de replicar.
 
-No final, eu só sobrei com este texto, o vídeo lá em cima, que eu sei que você
-foi assistir ao invés de ler, e
+No final, eu só fiquei com este texto, o vídeo lá em cima, que eu sei que você
+foi assistir em vez de ler, e
 [este repositório](https://github.com/luizomf/claude-vps-studio) que você também
 pode usar se quiser.
 
