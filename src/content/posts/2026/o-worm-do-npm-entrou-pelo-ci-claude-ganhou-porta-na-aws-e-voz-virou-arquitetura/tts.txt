@@ -1,0 +1,246 @@
+O worm do N P M entrou pelo C I, Claude ganhou porta na A W S e voz virou arquitetura.
+
+Um pacote malicioso no N P M já seria ruim o bastante.
+O Mini Shai-Hulud conseguiu ser mais chato do que isso.
+Ele passou pelo fluxo de release e apareceu com sinais válidos de provenance.
+E lembrou que C I e C D também são superfície de ataque.
+Não são só uma esteira obediente apertando botão.
+
+Esse é o centro do dia, e ele puxa o resto da pauta.
+Depois dele, vem uma leva bem concreta de infraestrutura para I A.
+Claude Platform agora tem uma porta oficial pela A W S.
+A Thinking Machines tenta treinar o próprio modelo para conversar em áudio, vídeo e texto.
+A ideia é evitar aquele revezamento duro de agora fala você, agora falo eu.
+E o Hermes Agent ganhou tutoriais que servem mais como checklist operacional.
+Bem mais isso do que propaganda de agente mágico.
+
+Tem bastante I A hoje, mas o assunto real é menos brilho de demo e mais fronteira de confiança.
+Quem pode publicar? Quem pode ler segredo? Onde o modelo roda?
+Quem controla o áudio? Qual helper sai da sandbox?
+A parte divertida da tecnologia continua existindo.
+A parte que assina o incidente também.
+
+Primeiro, o Mini Shai-Hulud mostrou o buraco dentro do fluxo confiável do N P M.
+A TanStack publicou um postmortem sobre o comprometimento de pacotes N P M.
+O incidente aconteceu em 11 de maio de 2026.
+Segundo o projeto, entre 19 horas e 20 e 19 horas e 26, no horário U T C, o atacante publicou versões maliciosas.
+Foram 84 versões em 42 pacotes do escopo TanStack.
+
+O detalhe que muda o peso da história é a cadeia usada.
+A TanStack diz que o incidente não começou com roubo de token N P M.
+O ataque passou por um padrão conhecido em Git Hub Actions.
+Entraram na história um pull request malicioso, o modo pull request target e envenenamento de cache.
+Também houve extração em memória de um token O I D C do runner.
+Com esse token, o atacante conseguiu acionar publicação pelo caminho de release.
+
+Traduzindo para gente que só queria instalar dependência em paz.
+O pacote podia parecer vindo do workflow esperado.
+A StepSecurity afirma que os pacotes carregavam attestations válidas de S L S A Build Level três.
+Isso não torna S L S A inútil, nem transforma trusted publishing em teatro.
+Mas coloca a caveat no lugar certo.
+Provenance diz onde e como o artefato foi construído.
+Se o ambiente confiável rodou código controlado pelo atacante, o selo fica bem menos tranquilizador.
+
+O payload rodava durante a instalação.
+Ele caçava credenciais de cloud, Kubernetes, Vault, Git Hub, N P M e S S H.
+Depois exfiltrava por endpoints ligados a Session e Oxen.
+Também tentava se propagar olhando quais pacotes o mantenedor podia publicar.
+A Aikido reporta uma lista maior.
+Segundo ela, havia 373 entradas de versões maliciosas em 169 nomes de pacotes.
+Essa lista incluía namespaces como Mistral A I e U I Path, além de outros.
+Como esse número mais amplo ainda estava se movendo em 12 de maio, trate como relatório da Aikido.
+Não como contagem final gravada em pedra.
+
+Para defesa, a parte útil é bem direta.
+Se um ambiente instalou versões afetadas, atualize e remova, mas não pare aí.
+Revise lockfiles, caches e histórico de C I.
+Procure marcadores citados pela Aikido.
+Entre eles estão router init ponto J S, router runtime ponto J S e TanStack runner ponto J S.
+Também aparecem TanStack setup e uma referência longa a um commit do TanStack Router no Git Hub.
+Gire credenciais alcançáveis por máquinas e runners que fizeram a instalação.
+
+Também vale olhar permissões de workflow, escrita em cache, escopo de O I D C e publicações N P M recentes.
+O pacote é o sintoma visível.
+O incidente morou mesmo naquele lugar meio sem glamour.
+É onde automação, cache e permissão ficam conversando sozinhos de madrugada.
+As fontes deste bloco são o postmortem da TanStack, a análise da StepSecurity e o levantamento da Aikido.
+
+Agora, Claude Platform na A W S separa conta, controle e processamento.
+A Anthropic anunciou em 11 de maio que o Claude Platform on A W S está em disponibilidade geral.
+A ideia é deixar clientes A W S acessarem a plataforma nativa da Claude.
+Esse acesso usa autenticação via A W S I A M, logs no CloudTrail e billing em uma única fatura A W S.
+Também permite usar compromissos comerciais da A W S.
+
+O ponto fino é este, e ele importa bastante.
+Isso não deve ser lido como Claude no Bedrock com outro nome.
+A própria Anthropic separa os caminhos.
+No Claude Platform on A W S, o cliente ganha a superfície da plataforma Claude.
+Isso inclui Claude Managed Agents, Advisor strategy, web search, web fetch e code execution.
+Também inclui Skills e a Files [EY1 P IY1 AY1].
+Mas o tráfego de modelo é processado pela Anthropic.
+Já no Amazon Bedrock, a Anthropic lembra que a A W S é a data processor.
+
+Essa diferença parece detalhe de contrato.
+Até alguém de segurança, jurídico ou compras perguntar onde o dado passa.
+Ou perguntar quem registra auditoria, qual compromisso financeiro pode ser usado e qual feature precisa estar disponível no dia um.
+A nova opção tenta responder ao time que quer I A M e CloudTrail.
+Mas sem abrir mão da [EY1 P IY1 AY1] nativa da Anthropic.
+
+Para tech lead, isso vira conversa de arquitetura, não só de fornecedor.
+Se o requisito principal é identidade, auditoria e fatura A W S, esse caminho pode reduzir atrito.
+Se a política exige que a A W S seja a processadora dos dados, Bedrock continua mais alinhado.
+O anúncio não elimina essa escolha.
+Ele só deixa a bifurcação mais explícita.
+
+A cautela é simples: é anúncio de fornecedor.
+Não invente promessa de preço, residência de dados ou equivalência total além do que foi publicado.
+O material diz A W S como plano de acesso e cobrança.
+E diz Anthropic como plano de processamento do modelo para essa oferta.
+Essa frase, sozinha, já deve fazer o diagrama de compliance abrir uma aba nova.
+A fonte deste bloco é o anúncio da Anthropic sobre Claude Platform on A W S.
+
+Agora, a Thinking Machines quer tirar a conversa do modo pingue-pongue.
+A Thinking Machines Lab apresentou em 11 de maio uma prévia de pesquisa sobre interaction models.
+O nome é meio acadêmico, mas a dor é familiar.
+Mas a ambição é fácil de reconhecer para quem já usou voz com I A.
+A proposta é parar de tratar conversa como uma fila rígida.
+Primeiro vem fala, silêncio, transcrição, modelo, resposta e áudio.
+Quem já usou sabe que esse fluxo funciona, mas parece uma conversa usando luvas grossas.
+
+O T M L Interaction Small é descrito pela empresa como um modelo MoE.
+Ele tem 276 bilhões de parâmetros, com 12 bilhões ativos.
+Ele recebe áudio, vídeo e texto em fluxo contínuo.
+E trabalha com micro-turnos de 200 milissegundos, alinhando entrada e saída no tempo.
+Em vez de um módulo separado decidir que o humano parou de falar, a arquitetura tenta lidar com isso.
+Ela tenta lidar com escuta, fala, sobreposição, interrupção e pistas visuais.
+
+Isso mexe com uma peça sensível das aplicações de voz.
+Muita stack atual é uma colagem.
+Tem speech to text, L L M, detecção de atividade de voz e text to speech.
+Também tem um monte de fila e alguma cola tentando esconder a latência.
+Funciona, às vezes muito bem.
+Mas todo mundo que já conversou com um agente que responde em cima da sua frase sabe que o truque tem costura.
+
+A proposta da Thinking Machines coloca outro desenho na mesa.
+Um interaction model cuidaria do loop em tempo real.
+Um background model assíncrono ficaria com raciocínio mais longo, ferramentas e trabalho sustentado.
+Para quem cria produto com voz, atendimento, vídeo ou colaboração ao vivo, a pergunta começa a mudar.
+O desenvolvedor ainda vai controlar streaming, vocoder, barge-in e T T S externo?
+Ou o modelo vai engolir cada vez mais esse caminho?
+
+Agora o freio: ainda é prévia de pesquisa.
+A empresa fala em preview limitado nos próximos meses.
+E fala em release mais amplo mais tarde em 2026.
+Também lista problemas abertos.
+Entre eles estão sessões longas, conectividade confiável, segurança, deployment e servir modelos maiores.
+Então é cedo para reescrever produto em cima disso.
+Mas como direção técnica, é bem mais interessante do que colocar uma voz mais bonita no chat.
+As fontes são Thinking Machines Lab e Latent Space.
+
+Agora, o Hermes Agent virou um bom mapa dos parafusos de produção.
+A DigitalOcean publicou material sobre rodar o Hermes Agent com Serverless Inference e Inference Router.
+O valor aqui passa longe de tratar a DigitalOcean como resposta universal para agentes.
+O bom da história é o formato operacional que aparece no tutorial.
+Ele mostra endpoint compatível com OpenAI, chave de acesso única e roteamento de modelo.
+Também mostra tarefas auxiliares separadas e um gateway que precisa continuar vivo depois que o S S H fecha.
+
+No tutorial de 11 de maio, o Hermes aponta para o endpoint de inferência da DigitalOcean.
+O modelo pode ser um nome específico.
+Ou pode usar o formato router, dois pontos, nome do router, com o DigitalOcean Inference Router.
+A fonte também diz que as respostas carregam metadados sobre o modelo escolhido e a tarefa detectada.
+Além disso, sugere overrides para tarefas auxiliares.
+Entram aí visão, compressão, busca em sessão, extração web, skills hub e M C P.
+
+Esse tipo de detalhe separa rodei um agente no terminal de talvez isso sobreviva a uma semana de uso.
+Um agente real pode precisar de modelo caro para raciocínio.
+Também pode precisar de modelo barato para compressão, contexto mínimo de 64 K e busca em sessão.
+Pode precisar de extração web, gateway de mensagem e backend de terminal.
+Se tudo isso usa o mesmo modelo, a mesma chave e o mesmo processo solto dentro de uma sessão S S H, a conta aparece.
+E a manutenção também aparece rapidinho.
+
+O repositório do Hermes lista suporte a gateways como Telegram, Discord, Slack, WhatsApp e Signal.
+Também lista backends de terminal locais, Docker, S S H, Singularity, Modal, Daytona e Vercel Sandbox.
+Além disso, fala em skills, memória, M C P, cron e aprovação de comandos.
+É bastante superfície. Bastante mesmo.
+Do tipo que pede isolamento, segredo bem guardado, logs e um humano autorizado para as ações perigosas.
+
+Como material de arquitetura, o tutorial serve para uma checklist curta.
+Endpoint estável, troca de modelo sem reescrever o agente e tarefas auxiliares com custo menor entram na lista.
+Também entram observabilidade do modelo escolhido, serviço gerenciado por system D ou equivalente e política clara para credenciais.
+Só não vale ler tutorial de fornecedor como benchmark neutro de custo ou qualidade.
+A função dele aqui é mostrar os parafusos, não vender que todos eles já estão apertados.
+As fontes são os tutoriais da DigitalOcean e o repositório NousResearch barra hermes agent.
+
+Agora, os destaques rápidos de hoje.
+O Google Threat Intelligence Group publicou em 11 de maio um relatório sobre exploração de vulnerabilidade.
+Segundo o Google, ele identificou um exploit de zero-day que teria sido desenvolvido com auxílio de I A, com alta confiança.
+O caso envolvia bypass de 2 F A em uma ferramenta web open-source de administração.
+Exigia credenciais válidas e tinha sinais curiosos.
+Entre eles, docstrings educativas e um C V S S alucinado.
+O Google diz que não acredita que Gemini tenha sido usado.
+A fonte é o Google Cloud Blog.
+
+O Yelp 49 ponto um corrigiu uma fuga de sandbox envolvendo Flatpak e arquivos de ajuda maliciosos.
+Segundo Michael Catanzaro, um app sandboxed podia acionar o Yelp pelo portal Open U R I.
+O arquivo aberto podia exfiltrar arquivos do host por comportamento de S V G e C S S.
+A fonte faz questão de dizer que isso não é Flatpak quebrado.
+É helper fora da sandbox virando parte da fronteira.
+A fonte é o blog de Michael Catanzaro no GNOME.
+
+Linscope é um projeto open-source para visualizar comportamento Linux em tempo real.
+Ele usa coletor E B P F, backend Fast [EY1 P IY1 AY1], WebSocket e frontend React.
+Também pode usar Ollama local para explicar incidentes.
+Mas pede root no coletor e dependências de E B P F.
+Então teste em V M ou laboratório antes de colocar algo novo com esse nível de acesso na sua máquina real.
+A fonte é o repositório ogtamimi barra linscope.
+
+A DigitalOcean publicou um texto conceitual sobre o que quebra em um milhão de requests de I A por dia.
+A média dá só 11 vírgula 6 requests por segundo.
+Mas tráfego real vem em rajadas.
+Por isso fila, espera, T T F T, pê noventa e cinco, pê noventa e nove e memória de G P U contam muito.
+Tokens por segundo, retry e custo por token também contam mais do que uma média bonitinha no dashboard.
+A fonte é a DigitalOcean Community.
+
+O GitLab publicou o plano Act dois.
+Ele amarra reestruturação interna à tese de desenvolvimento agentic.
+A empresa fala em reduzir presença por países em até trinta porcento.
+Também fala em remover até três camadas de gestão em algumas funções.
+O plano reorganiza P e D em cerca de 60 times menores.
+E troca valores internos por Speed with Quality, Ownership Mindset e Customer Outcomes.
+É uma notícia de estratégia, mas também de impacto humano.
+Então cuidado com a leitura de produtividade sem pessoas dentro.
+As fontes são GitLab e Simon Willison.
+
+Uma dica pequena para quem caiu no Ubuntu 26 ponto zero quatro L T S fresco.
+Talvez você tenha achado que as fotos do celular tinham estragado.
+Segundo o OMG Ubuntu, instalações novas podem mostrar thumbnail de H E I C.
+Mas podem falhar ao abrir no Image Viewer, também chamado Loupe.
+Isso acontece se faltar o pacote lib heif plugin libde265.
+O ajuste sugerido é instalar esse pacote pelo apt.
+Upgrades antigos talvez já tenham o pacote.
+A fonte é o OMG Ubuntu, naquele tom bem útil de desktop Linux.
+
+Agora, o acompanhamento de tendências do dia.
+O padrão que dá para ligar hoje é modesto, mas importante.
+A fronteira de segurança está escorrendo para as ferramentas ao redor do app.
+
+No Mini Shai-Hulud, a história passa por cache de C I, O I D C e publicação N P M.
+Também passa por arquivos adjacentes a ferramentas de desenvolvimento.
+O artigo cita configurações que miravam Claude Code e V S Code.
+No relatório do Google, a parte relevante é que assistência de I A já aparece em exploração de vulnerabilidade.
+Segundo a empresa, isso inclui vulnerabilidade e lógica de 2 F A.
+No caso Yelp e Flatpak, o problema passa por um helper do host aberto via portal.
+Ele fica fora do processo sandboxed que o usuário talvez imaginasse como a aplicação.
+
+Essas histórias não são a mesma campanha.
+E não provam uma tese grandona sobre I A quebrando tudo.
+Elas só apontam para uma revisão bem menos cinematográfica.
+Quando você audita um sistema, olhe também para o workflow que publica.
+Olhe para o runner que guarda segredo.
+Olhe para o helper que abre arquivo, o agente que chama ferramenta e o token que parece pequeno.
+Porque esse token parece pequeno até poder publicar pacote.
+
+Segurança em 2026 está ficando com cara de inventário.
+Meio sem glamour, eu sei, mas é uma leitura honesta.
+Mas glamour nenhum sobrevive ao N P M install rodando payload com acesso a chave de cloud.
+As fontes são TanStack, Google G T I G e GNOME Yelp.
