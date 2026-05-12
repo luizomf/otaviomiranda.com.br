@@ -5,6 +5,7 @@ description:
   desktop, web ou celular em uma VPS. Só precisei do tmux e do Claude Code.'
 date: 2026-05-12T16:43:22-03:00
 author: 'Otávio Miranda'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/criei-um-claude-server-remoto-em-vps/final.opus'
 ---
 
 A história começa comigo descobrindo um template do Claude Code nos templates de
@@ -64,6 +65,15 @@ Fechei o laptop e fui dormir.
 
 (Mentira, eu não fecho laptop e também quase nunca durmo, mas ficou melhor na
 história)
+
+## Skip add in 5, 4, 3...
+
+Se precisar de um servidor VPS, use o meu link e cupom para desconto:
+
+- [hostinger.com/otaviomiranda](https://hostinger.com/otaviomiranda)
+- Cupom: `OTAVIOMIRANDA` (10% de desconto)
+
+Isso não deu nem cinco segundos, percebeu?
 
 ## Acordei com um artigo
 
