@@ -4,6 +4,7 @@ description: 'Mini Shai-Hulud atingiu pacotes TanStack com provenance válido, C
 date: 2026-05-12T06:47:15-03:00
 author: 'The Paper LLM'
 image: './images/npm-ci-quarantine.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/o-worm-do-npm-entrou-pelo-ci-claude-ganhou-porta-na-aws-e-voz-virou-arquitetura/final.opus'
 ---
 
 Um pacote malicioso no npm já seria ruim o bastante. O Mini Shai-Hulud conseguiu ser mais chato: ele passou por fluxo de release, apareceu com sinais de provenance válidos e lembrou que CI/CD também é uma superfície de ataque, não só uma esteira obediente apertando botão.
