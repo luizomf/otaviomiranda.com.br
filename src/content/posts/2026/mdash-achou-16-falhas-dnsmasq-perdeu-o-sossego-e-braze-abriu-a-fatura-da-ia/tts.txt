@@ -1,0 +1,409 @@
+M dash achou dezesseis falhas, D N S masq perdeu o sossego e Braze abriu a fatura da IA.
+
+Hoje a IA apareceu dentro da esteira, além da janelinha de chat que fica piscando enquanto alguém pede: refatora isso aqui.
+
+Tem agente caçando vulnerabilidade em código da Microsoft.
+
+Tem mantenedor de D N S masq dizendo que relatório de segurança virou enchente.
+
+Tem C T O falando que mais da metade do código commitado veio de IA.
+
+E tem uma conta de inferência que mordeu cento e cinquenta dólares em um dia.
+
+Aí, para não deixar o café da manhã virar só papo de modelo, a Cloudflare trouxe um bug de rede bem clássico.
+
+Era uma conta de tempo pequena, portada de um lugar para outro, travando download em H T T P três.
+
+É um dia bom para olhar menos para a demo e mais para o encaixe.
+
+Quem valida? Quem paga? Quem coordena disclosure? Quem lê log?
+
+Quem segura o custo quando o uso deixa de ser brincadeira de terminal?
+
+A Microsoft colocou mais de cem agentes para procurar falhas no Windows.
+
+A Microsoft anunciou, em doze de maio, o M dash.
+
+É um sistema de segurança com agentes, usando vários modelos e mais de cem agentes especializados.
+
+A proposta é transformar parte da caça a vulnerabilidades em pipeline.
+
+Preparar alvo, escanear, validar achado, remover duplicata e gerar prova de conceito.
+
+Segundo a empresa, o sistema encontrou dezesseis vulnerabilidades no Windows.
+
+Isso inclui quatro falhas críticas de execução remota de código.
+
+O post cita exemplos como C V E 2026, trinta e três oito dois sete.
+
+Também cita C V E 2026, trinta e três oito dois quatro.
+
+E cita C V E 2026, quarenta e um zero oito nove, além de C V E 2026, quarenta e um zero nove seis.
+
+Essas falhas são ligadas a superfícies de rede e autenticação.
+
+O número que chama atenção é bonito, mas o detalhe importante é o formato.
+
+O M dash não aparece como um chatbot que olha código.
+
+Ele aparece como um conjunto de agentes com tarefas diferentes, cada um trabalhando em uma parte do funil.
+
+Isso parece mais com laboratório de segurança automatizado do que com autocomplete metido a pentester.
+
+A Microsoft também publicou resultados de benchmark.
+
+Foram vinte e uma vulnerabilidades plantadas encontradas em vinte e uma, com zero falso positivo nesse conjunto.
+
+Em outro teste, o recall foi de noventa e seis porcento.
+
+No CyberGym, foi de oitenta e oito vírgula quarenta e cinco porcento.
+
+São números fortes, e chamam atenção no papel.
+
+Também são números publicados pela própria Microsoft, e o M dash está em private preview.
+
+Então o jeito honesto de ler é este: sinal técnico relevante, com evidência de fornecedor.
+
+Ainda sem auditoria pública independente.
+
+Para time de engenharia, a parte que vale levar para a mesa é a mudança de fluxo.
+
+Se ferramenta assim amadurecer, segurança pode ganhar mais achados automatizados com prova, triagem e deduplicação.
+
+Isso ajuda bastante na triagem.
+
+Mas também cria bastante trabalho.
+
+Alguém precisa confirmar impacto, priorizar correção, cuidar de embargo, falar com mantenedor e decidir o que entra no patch.
+
+Agente não tira a pessoa responsável da sala.
+
+Só chega com uma pasta maior.
+
+A fonte deste bloco é o Microsoft Security Blog.
+
+O D N S masq virou exemplo de como disclosure pode ficar apertado.
+
+O mantenedor do D N S masq publicou um aviso importante na lista do projeto.
+
+Seis identificadores C V E foram atribuídos pelo C E R T.
+
+Patches foram publicados e fornecedores receberam aviso antes da divulgação pública.
+
+O D N S masq é aquele componente pequeno e teimosamente essencial.
+
+Ele aparece em roteador, distro, ambiente embarcado, D N S local e D H C P.
+
+Quando ele tem falha, fica longe de uma biblioteca exótica esquecida num canto bonito do "Git Hub".
+
+A mensagem diz que os problemas afetam praticamente todas as versões que não são antigas demais.
+
+O projeto aponta patches na página de C V E do D N S masq.
+
+Também menciona a versão dois ponto noventa e dois rel dois, com correções.
+
+E fala em dois ponto noventa e três R C um, além da dois ponto noventa e três estável na sequência.
+
+Para quem mantém sistema, a ação é básica.
+
+Acompanhar pacote da distro, advisory do fornecedor e atualização do próprio projeto.
+
+Mas o ponto editorial aqui é maior que: seis falhas, atualize.
+
+O mantenedor escreveu que a pesquisa de segurança baseada em IA gerou uma enxurrada de relatórios.
+
+E gerou achados duplicados ou próximos demais.
+
+Segundo ele, isso mudou a dinâmica do embargo longo.
+
+Porque vários grupos podem chegar a falhas parecidas ao mesmo tempo.
+
+Isso não quer dizer que a IA criou os bugs.
+
+O D N S masq já tinha os problemas.
+
+A fala do mantenedor é sobre volume, coordenação e pressão no processo de divulgação.
+
+Esse é um pedaço menos glamouroso da história, mas talvez mais importante para software livre.
+
+Quando fica barato procurar falha em escala, mantenedor pequeno recebe trabalho em escala também.
+
+O leitor que cuida de infra tem duas tarefas aqui.
+
+A primeira é atualizar o que estiver exposto.
+
+A segunda é observar esse padrão chegando em outros projetos.
+
+Mais relatórios, mais duplicatas, mais pressa, mais negociação com fornecedores.
+
+E, às vezes, menos paciência para aquele teatro lento de embargo.
+
+Aquele teatro onde todo mundo finge que só existe um pesquisador no planeta.
+
+As fontes deste bloco são a mensagem na lista dnsmasq-discuss e a página de C V E do D N S masq.
+
+Na Braze, o código gerado por IA passou de sessenta porcento, mas a fatura veio junto.
+
+O Stack Overflow publicou uma entrevista com Jon Hyman, cofundador e C T O da Braze.
+
+A entrevista também inclui Jody Bailey, C P T O do Stack Overflow.
+
+O número que vai circular é este.
+
+Segundo Hyman, mais de sessenta porcento do código commitado nos repositórios principais da Braze foi gerado por IA.
+
+Esse número merece atenção porque a Braze passa longe de um projeto de fim de semana.
+
+A entrevista fala de uma organização de engenharia com cerca de trezentas pessoas.
+
+Também diz que a transformação aconteceu nos três meses anteriores.
+
+É um retrato de adoção intensa, dentro de uma empresa real.
+
+Com gente suficiente para o problema deixar de ser: meu setup favorito de domingo.
+
+Só que a mesma fonte coloca um balde de água fria, desses necessários.
+
+Um engenheiro teria gasto cerca de cento e cinquenta dólares em inferência no primeiro dia útil de março.
+
+A entrevista também fala de infraestrutura para agentes.
+
+Fala de trabalho com M C P, integração com C I e ambiente local.
+
+E fala de limite de janela de contexto e escolha de modelo.
+
+Essa é a parte que eu mais gosto na história, porque ela tira a conversa do campo mágico.
+
+Se trezentas pessoas começam a usar IA para codar de verdade, o gargalo vira sistema.
+
+Como dar contexto certo? Como evitar desperdício de token? Como escolher modelo por tarefa?
+
+Como medir qualidade? Como integrar com teste e C I?
+
+Como revisar sem transformar P R em fila de reciclagem?
+
+Também tem uma caveat óbvia: é uma empresa, uma cultura, um momento.
+
+Não dá para pegar sessenta porcento e colar na parede como meta universal.
+
+Em alguns times isso pode ser ótimo.
+
+Em outros, pode só significar que a pessoa gerou mais código do que o review consegue digerir.
+
+O dado da Braze é útil justamente porque vem com o custo junto.
+
+A IA entrou no fluxo de desenvolvimento.
+
+Agora ela precisa caber no orçamento, no processo e no cérebro de quem mantém.
+
+A fonte deste bloco é o Stack Overflow Blog.
+
+A Cloudflare achou um bug pequeno que colocava QUIC em espiral.
+
+A Cloudflare publicou um post muito bom sobre um problema em QUIC, CUBIC e H T T P três.
+
+O teste era simples de entender.
+
+Uma transferência de dez megabytes via H T T P três recebia trinta porcento de perda aleatória nos primeiros dois segundos.
+
+Depois disso, a perda acabava.
+
+Mesmo assim, cerca de sessenta porcento dos downloads falhavam.
+
+O estranho é que a conexão não morria de uma vez.
+
+Ela ficava presa no pior lugar possível.
+
+A janela de congestionamento, a famosa C W N D, caía para o mínimo de dois pacotes.
+
+E a conexão não se recuperava direito.
+
+O resultado era aquela cena que todo dev ama.
+
+Nada explode, nada resolve, tudo fica devagar o bastante para você duvidar da própria sanidade.
+
+A causa estava em CUBIC, algoritmo de controle de congestionamento padronizado no R F C nove quatro três oito.
+
+A implementação em quiche, a biblioteca QUIC da Cloudflare, tinha herdado um comportamento do Linux CUBIC.
+
+Só que um detalhe de tempo, que fazia sentido no contexto original, não se comportava bem nesse outro ambiente.
+
+A correção passou por rastrear o momento do último A C K.
+
+Esse ajuste fez o teste voltar a cem porcento de sucesso.
+
+Essa história é ótima porque não tem IA salvando nada, nem IA quebrando tudo.
+
+É engenharia de rede mesmo, bem pé no chão.
+
+Algoritmo antigo, stack nova, perda artificial, métrica estranha, investigação paciente.
+
+Também lembra que protocolo maduro não imuniza implementação.
+
+Portar uma ideia correta para outro lugar pode carregar uma premissa escondida junto.
+
+Para quem trabalha com backend, proxy, edge ou qualquer coisa sensível a latência, o post vale como estudo de depuração.
+
+O bug não precisa ser um apagão global para ensinar.
+
+Às vezes ele só mostra que dois pacotes presos no fundo da janela já bastam para estragar o almoço.
+
+A fonte deste bloco é o Cloudflare Blog.
+
+Agora, os destaques rápidos para hoje.
+
+RubyGems desativou novas inscrições depois de uma onda de pacotes maliciosos.
+
+Isso vem de coberturas públicas da Risky Business e da SecurityWeek.
+
+O alvo relatado incluía equipe e superfícies da própria plataforma, com centenas de pacotes envolvidos.
+
+Como ainda falta nota primária detalhada do RubyGems ou da Ruby Central, trate como incidente em desenvolvimento.
+
+E não misture com o caso npm e TanStack de ontem.
+
+As fontes são Risky Business e SecurityWeek.
+
+Bun um ponto três ponto quatorze saiu com Bun ponto Image e uma store global virtual de dependências.
+
+A parte de imagem cobre formatos comuns e pode remover módulos nativos em vários casos.
+
+A store é opt-in, com install ponto global store igual a true.
+
+O Bun fala em installs quentes até sete vezes mais rápidos.
+
+Enquanto isso, H T T P dois e H T T P três ainda merecem o rótulo experimental.
+
+A fonte é o anúncio do Bun um ponto três ponto quatorze.
+
+O Fedora vai integrar análise do Log Detective ao Packit para builds Koji que falham.
+
+A promessa é triagem automática no dashboard.
+
+Sem o mantenedor escolher log na mão ou escrever prompt.
+
+A versão quatro ponto zero usa Bee A I Framework.
+
+É bom uso de IA como encanamento de build, não como substituto para saber empacotar.
+
+A fonte deste item é a Fedora Magazine.
+
+A XBOW divulgou o identificador C V E 2026, quarenta e cinco um oito cinco.
+
+Ela descreve a falha como execução remota de código crítica e não autenticada no Exim.
+
+O caso envolve GnuTLS e tratamento de B D A T.
+
+A linha segura aqui é acompanhar advisory da distro ou fornecedor e aplicar correção.
+
+Sem brincar de colecionar detalhe de exploit em servidor de e-mail.
+
+A fonte deste item é o blog da XBOW.
+
+O SecurityBaseline ponto E U foi lançado como expansão europeia de um esforço holandês.
+
+O foco é monitoramento de higiene de segurança em sites governamentais.
+
+O projeto diz ter encontrado mais de três mil sites governamentais com cookies de tracking ilegais.
+
+Também fala em mil e setenta portais phpMyAdmin em três mil quinhentos e vinte e nove domínios.
+
+São números fortes, atribuídos ao projeto e dependentes da metodologia dele.
+
+A fonte é a Internet Cleanup Foundation.
+
+O LongMemEval V dois propõe um benchmark para memória de longo prazo em agentes web.
+
+São quatrocentas e cinquenta e uma perguntas curadas manualmente.
+
+Os históricos chegam a até quinhentas trajetórias e cento e quinze milhões de tokens.
+
+O paper reporta AgentRunbook C com setenta e dois vírgula cinco porcento de acurácia média.
+
+Isso aparece contra quarenta e oito vírgula cinco porcento do melhor baseline RAG.
+
+Mas o trabalho ainda deixa custo e latência como problemas abertos.
+
+A fonte deste item é o paper no arXiv.
+
+A Microsoft também publicou um texto sobre geração de logs sintéticos de ataque com IA.
+
+A ideia é transformar T T Ps em telemetria realista.
+
+Isso ajuda equipes a criar e testar detecções quando logs reais são raros.
+
+É útil para laboratório de detecção, desde que ninguém confunda log sintético validado com ataque real no ambiente.
+
+A fonte é o Microsoft Security Blog.
+
+A Cactus lançou o Needle, um modelo de vinte e seis milhões de parâmetros voltado a function calling.
+
+O projeto diz que ele foi destilado do Gemini três ponto um.
+
+Também diz que roda localmente via Cactus e atinge números altos de throughput.
+
+Ainda assim, a leitura saudável é testar com as suas ferramentas.
+
+Modelo pequeno especializado pode ser rápido e temperamental no mesmo pacote.
+
+A fonte é o repositório cactus-compute barra Needle, no "Git Hub".
+
+O scrcpy versão quatro ponto zero migrou de SDL dois para SDL três.
+
+E trouxe melhorias de controle, câmera e display.
+
+Tem suporte a flex display, torch e zoom de câmera.
+
+Também tem enforcement de aspect ratio, fullscreen com F onze e correções de aresta.
+
+É release de polimento que deixa uma ferramenta já querida menos áspera.
+
+A fonte é o release do scrcpy versão quatro ponto zero.
+
+No acompanhamento de tendências do dia, o padrão é bem visível.
+
+IA começa a ficar interessante quando vira peça cercada por trilho, regra e evidência.
+
+No M dash, o modelo entra em um pipeline de segurança.
+
+Tem preparação, varredura, validação e prova.
+
+Nos logs sintéticos da Microsoft, ele ajuda a fabricar telemetria para detecção.
+
+No Packit, aparece como análise automática de build quebrado.
+
+No LongMemEval V dois, a pergunta é como guardar histórico de agente sem enterrar tudo num RAG genérico.
+
+Na Braze, o assunto vira integração com C I, local dev, M C P e custo.
+
+No Needle, vira um modelo pequeno e especializado em chamar função.
+
+Repare no padrão que aparece aqui.
+
+O chat sozinho perde espaço para uma peça cercada de regra, entrada, saída, teste e orçamento.
+
+Isso não resolve a mágica toda.
+
+Ainda tem falso positivo, manutenção, latência, custo, privacidade, revisão humana.
+
+E aquele detalhe irritante chamado produção.
+
+Mas a conversa está ficando menos abstrata.
+
+Talvez esse seja o melhor filtro para avaliar ferramenta de agente agora.
+
+Ela só fala bonito ou deixa evidência no caminho?
+
+Mostra custo? Guarda contexto de forma auditável?
+
+Entra no C I sem virar privilégio solto?
+
+Dá para desligar sem apagar metade da empresa?
+
+Perguntas simples, respostas nada simples.
+
+Pelo menos já são perguntas melhores do que: qual modelo parece mais esperto hoje?
+
+As fontes deste bloco são Microsoft M dash, Microsoft synthetic attack logs, Fedora Log Detective e LongMemEval V dois.
+
+Também entram Stack Overflow com Braze, e Needle.
