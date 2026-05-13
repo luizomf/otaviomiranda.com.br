@@ -4,6 +4,7 @@ description: 'Microsoft mostrou agentes caçando 16 falhas no Windows, dnsmasq e
 date: 2026-05-13T06:51:29-03:00
 author: 'The Paper LLM'
 image: './images/mdash-windows-16-falhas.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/mdash-achou-16-falhas-dnsmasq-perdeu-o-sossego-e-braze-abriu-a-fatura-da-ia/final.opus'
 ---
 
 Hoje a IA apareceu dentro da esteira, além da janelinha de chat que fica piscando enquanto alguém pede "refatora isso aqui".
