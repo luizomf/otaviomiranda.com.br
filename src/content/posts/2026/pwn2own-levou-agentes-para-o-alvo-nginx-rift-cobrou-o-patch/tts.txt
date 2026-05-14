@@ -1,64 +1,252 @@
-[EH1 N JH AH0 N] [EH1 K S] fica na frente de aplicações, chamadas de [EY1 P IY1 AY1], proxies internos e balanceadores.
-Ele também aparece em imagens de container e ingress controllers em Kubernetes.
-Quando uma falha aparece nessa camada, o raio de inventário fica grande por definição.
-A primeira tarefa é descobrir onde você roda [EH1 N JH AH0 N] [EH1 K S] Open Source, [EH1 N JH AH0 N] [EH1 K S] Plus, [EH1 N JH AH0 N] [EH1 K S] Ingress Controller.
-Também entra nessa busca o [EH1 N JH AH0 N] [EH1 K S] Gateway Fabric.
-E entram pacotes de distribuição que tragam correção por backport.
+Agentes entraram na mira, [EH1 N JH AH0 N] [EH1 K S] pediu patch e a IA mostrou a conta.
+
+Tem uma fase engraçada da ferramenta de desenvolvedor.
+Primeiro ela parece só conveniência.
+Depois começa a abrir arquivo, rodar comando, ler segredo, mexer em cache, publicar pacote, conversar com C I e chamar isso tudo de ajuda.
+
+Aí alguém da segurança olha para a mesma cena e vê outra coisa.
+Uma superfície de ataque com carinha simpática.
+
+O dia de hoje gira em torno disso.
+As ferramentas que escrevem código, executam tarefas e prometem produtividade estão sendo tratadas como infraestrutura.
+Infraestrutura mesmo, daquela que precisa de permissão, log, orçamento, isolamento e um adulto responsável olhando de vez em quando.
+Eu sei, estraguei a magia, mas produção tem esse talento.
+
+O primeiro sinal veio de um lugar bem público.
+Um concurso de exploração colocou agentes, bancos de dados de IA e execução local de modelos entre os alvos oficiais.
+Isso não quer dizer que seu agente favorito explodiu hoje de manhã.
+Quer dizer que pesquisadores já consideram esse tipo de ferramenta digno de tempo, prêmio e análise.
+
+No mesmo pacote do dia, uma falha antiga no [EH1 N JH AH0 N] [EH1 K S] lembrou que peça boring de servidor também cobra aluguel.
+O N P M apareceu menos como olha que pacote ruim, e mais como: como eu reconheço o comportamento de um ataque antes da lista perfeita chegar?
+E a briga entre Claude e Codex desceu para uma pergunta que ninguém gosta, mas todo mundo precisa responder.
+Quanto custa deixar um agente trabalhando de verdade?
+
+Vamos por partes, porque jogar todos os nomes na mesa de uma vez vira sopa de sigla.
+E sopa de sigla de manhã é uma agressão.
+
+O [P AO1 N D] [T IH0] [OW1 N] colocou agente de código na lista de coisas quebráveis.
+
+A Zero Day Initiative publicou em 13 de maio a cobertura do primeiro dia do [P AO1 N D] [T IH0] [OW1 N] Berlin 2026.
+A organização também publicou a programação completa do evento.
+Entre as categorias oficiais aparecem bancos de dados de IA, agentes de código e inferência local.
+
+Esse é o fato principal, e agora não convém inventar exploit que ainda não teve postmortem público.
+Também não convém sair dizendo que todo runtime local virou queijo suíço.
+Concurso desse tipo costuma funcionar em etapas.
+Primeiro aparecem alvos, agenda, placar e prêmios.
+Depois vêm análises dos pesquisadores e detalhes mais úteis para defesa.
+
+Mesmo assim, a mudança de categoria já diz bastante.
+
+Durante muito tempo, agente de código foi vendido como uma janelinha esperta no canto da tela.
+Só que, na vida real, ele pode ler repositório, editar arquivo, chamar terminal, abrir container e acessar token.
+Ele também pode falar com extensão, usar cache, navegar, instalar pacote e deixar rastro em lugar que ninguém estava olhando.
+Quando esse conjunto entra no mapa de um concurso como o [P AO1 N D] [T IH0] [OW1 N], ele deixa de ser só produtividade.
+Passa a ocupar o mesmo tipo de conversa que navegador, C I e terminal já ocupam há anos.
+
+Para quem usa agente local, a ação saudável é sem pânico e sem romance: faça inventário.
+O que a ferramenta consegue ler, e onde ela escreve?
+Ela pode rodar comando, ou tem acesso a ponto env, chave S S H, token de "Git Hub", credencial de cloud ou cache de pacote?
+O tráfego de saída é livre?
+Existe log do que foi feito, ou só aquele silêncio bonito de ferramenta que funcionou?
+
+Local inference também merece esse olhar.
+Rodar modelo perto do código pode ser ótimo para latência, privacidade ou custo, mas coloca outro processo poderoso dentro da máquina.
+Banco de dados de IA, vector store, indexador local e agente com ferramenta formam um pequeno bairro operacional.
+Bairro bom tem portão, rua iluminada e síndico chato.
+
+A ideia aqui é tratar o brinquedo como parte do ambiente. O brinquedo cresceu.
+
+As fontes deste bloco são a Zero Day Initiative, com a cobertura do primeiro dia e a programação completa do [P AO1 N D] [T IH0] [OW1 N] Berlin 2026.
+
+[EH1 N JH AH0 N] [EH1 K S] Rift é uma falha estreita, mas na porta da frente.
+
+A Depthfirst divulgou o [EH1 N JH AH0 N] [EH1 K S] Rift, registrado como C V E 2026, quarenta e dois nove quatro cinco.
+A falha fica no módulo de rewrite do [EH1 N JH AH0 N] [EH1 K S] e é descrita como um heap buffer overflow.
+A origem é antiga, com a análise falando em uma vulnerabilidade de dezoito anos.
+
+Aqui a nuance importa: não basta existir [EH1 N JH AH0 N] [EH1 K S] em uma máquina para a manchete mais assustadora valer igual.
+O gatilho público envolve um padrão específico de configuração.
+São regras de rewrite com capturas P C R E sem nome.
+Também entram o tratamento de ponto de interrogação na substituição e outra diretiva no caminho, como rewrite, if ou set.
+
+Traduzindo do idioma espinhoso do servidor.
+Uma regra antiga, escrita de um jeito específico, pode colocar uma parte muito exposta da infra em situação ruim.
+
+Isso continua sendo sério porque [EH1 N JH AH0 N] [EH1 K S] costuma ficar na frente de tudo.
+Site público, chamada de [EY1 P IY1 AY1], proxy interno, load balancer, imagem de container e ingress controller em Kubernetes.
+Também entra aquele appliance esquecido com cara de ninguém mexe nisso desde 2019.
+Quando uma falha aparece nessa camada, discutir manchete vem depois.
+Primeiro você descobre onde ela roda.
 
 A F5 publicou orientação própria no documento K zero zero zero um seis um zero um nove.
-A ação principal é atualizar os produtos afetados.
-Quando patch imediato não for possível, a mitigação pública citada nas fontes é trocar capturas sem nome.
-No lugar, use capturas nomeadas nas regras afetadas.
-Pouca gente quer fazer isso antes do café.
-Mas pelo menos é um ponto auditável.
-Procure rewrite, capture groups e configurações antigas que ninguém olha desde a inauguração do servidor.
+A rota principal é aplicar correção nos produtos afetados.
+O inventário precisa olhar [EH1 N JH AH0 N] [EH1 K S] Open Source, [EH1 N JH AH0 N] [EH1 K S] Plus e [EH1 N JH AH0 N] [EH1 K S] Ingress Controller.
+Também precisa olhar [EH1 N JH AH0 N] [EH1 K S] Gateway Fabric, pacotes de distribuição e imagens fixadas em versão antiga.
+Distribuição também pode aplicar backport.
+Então a versão parece velha nem sempre conta a história inteira.
+Advisory do fornecedor manda mais do que chute visual.
 
-Também vale segurar a mão na hora de repetir manchete.
-Algumas coberturas falam em R C E remoto não autenticado, e o tema é sério.
-Mas A S L R, build, configuração e caminho exposto influenciam a exploração.
-A postura correta é urgente: inventariar, aplicar correção, revisar workaround e acompanhar pacote do fornecedor.
-A postura teatral, aquela de declarar que todo [EH1 N JH AH0 N] [EH1 K S] do planeta virou porta aberta, só atrapalha quem precisa consertar.
+Quando patch imediato não for possível, a mitigação pública citada nas fontes é trocar capturas sem nome por capturas nomeadas.
+Isso vale nas regras afetadas.
+É aquele tipo de tarefa que ninguém sonha em fazer, mas que pelo menos dá para procurar.
+Procure rewrite, grupos de captura, ponto de interrogação na substituição e config antiga herdada de algum servidor com história para contar.
 
-As fontes deste bloco são Depthfirst Labs, o registro do C V E e F5 K zero zero zero um seis um zero um nove.
-A cobertura complementar vem do The Hacker News.
+Também vale segurar o teatro.
+Algumas coberturas falam em execução remota sem autenticação, e a gravidade é real.
+Só que A S L R, build, configuração e caminho exposto influenciam a exploração.
+Urgência, sim. Pânico performático, não.
+O trabalho útil é patch, workaround onde couber, validação de pacote e revisão de regra.
 
-Terceiro bloco: npm precisa de caça por comportamento, não só de lista de nomes.
+As fontes deste bloco são Depthfirst Labs, o registro C V E, a orientação F5 K zero zero zero um seis um zero um nove e The Hacker News.
 
-Depois de uma sequência de sustos no npm, o texto da DerivAI sobre supply chain acerta num ponto útil.
-Indicador estático envelhece rápido.
-Nome de pacote, domínio de exfiltração e hash ajudam, claro.
-Mas atacante troca isso com facilidade.
-O comportamento costuma denunciar mais.
+N P M: depois do susto, vem a caça por comportamento.
 
-A linha proposta olha para a cadeia de execução.
-Ela passa por lifecycle hooks do npm, child process, downloads por curl ou W get.
-Também olha criação de arquivo em diretórios temporários e leitura de variáveis de ambiente.
-Entra ainda acesso a dotfiles e tentativas de persistência.
-No mundo real, persistência pode aparecer em Launch Agents no macOS.
-Pode aparecer em chaves Run no Windows.
-Ou pode aparecer em cron no Linux, o que é feio, mas útil.
+Depois de uma sequência de incidentes no N P M, o texto da DerivAI sobre supply chain acerta no ponto que costuma faltar quando a poeira baixa.
+Lista de pacote ruim ajuda, domínio de exfiltração ajuda e hash ajuda.
+Só que atacante troca nome, endpoint e payload com uma facilidade irritante.
 
-Esse bloco conversa com o caso TanStack sem precisar recontar o incidente inteiro.
-O postmortem da TanStack mostrou como um comprometimento de pacote pode passar por automação.
-Pode passar também por workflow e publicação.
-A pergunta defensiva agora é outra.
-Depois que você sabe que esse tipo de coisa acontece, que sinal sua máquina ou seu C I consegue enxergar?
+Comportamento é mais difícil de disfarçar o tempo todo.
 
-Um pacote malicioso que roda durante instalação e abre shell para baixar payload deixa rastro diferente.
-Não é a mesma coisa que um pacote normal compilando dependência nativa.
-Um processo node chamando bash, consultando variáveis sensíveis e fazendo conexão para fora merece atenção.
-O problema é que telemetria muda muito entre macOS, Linux, Windows, E D R, C I hospedado e container curto.
-Às vezes o container morre antes de alguém olhar.
-Variável de ambiente, por exemplo, pode ser invisível ou truncada em muita ferramenta.
+A ideia é observar a cadeia de execução.
+Um pacote que roda durante instalação pode abusar de lifecycle hooks do N P M.
+Ele pode chamar child process, abrir curl ou W get, baixar arquivo para diretório temporário e ler variável de ambiente.
+Também pode procurar dotfile e tentar persistência.
+Persistência, nesse contexto, pode aparecer como Launch Agents no macOS, chaves Run no Windows ou cron no Linux.
 
-Para dev e time pequeno, dá para começar com medidas menos cinematográficas.
+É uma lista feia, mas também é uma lista útil.
+
+O caso TanStack serve como pano de fundo, sem precisar recontar o postmortem inteiro.
+Ele mostrou como automação, workflow e publicação podem se misturar em um incidente real.
+Para defesa, o ponto vira bem concreto.
+Quando um pacote comprometido roda no seu C I ou na sua máquina, que sinal você enxerga?
+
+Um node chamando bash durante instalação já merece atenção.
+O mesmo vale para processo tentando ler segredo, fazer conexão para fora ou deixar arquivo temporário com cara de payload.
+Só que a fonte também lembra um limite importante.
+Telemetria muda por plataforma.
+Variável de ambiente pode ficar invisível, truncada ou mal registrada dependendo de macOS, Linux, Windows, E D R, container, runner hospedado e configuração de log.
+
+Para time pequeno, dá para começar sem comprar um painel com quarenta e sete abas.
 Revise lockfile depois de incidente conhecido.
-Limpe cache de C I e gire token exposto.
-Olhe scripts de instalação com calma.
-Limite segredo disponível em job de build.
-E registre processos filhos em ambientes sensíveis.
-Para time maior, a caça vira regra em S I E M, E D R e pipeline.
-Nesse caso, entram processo, rede, arquivo temporário e persistência.
+Limpe cache de C I e gire token que estava disponível no ambiente.
+Limite segredo em job de build.
+Olhe scripts de instalação e registre árvore de processos em máquinas sensíveis.
+Para time maior, isso vira regra de S I E M, E D R e pipeline.
 
-A fase do npm dá medo a gente já passou em alguma terça-feira anterior.
-Agora vale aprender a reconhecer a coreografia do ataque.
+A fase do N P M dá medo já rendeu conteúdo suficiente para encher uma gaveta.
+O próximo passo é reconhecer a coreografia do ataque.
+Lista perfeita chega tarde e, quando chega, geralmente o atacante já trocou a roupa.
+
+As fontes deste bloco são DerivAI, com o texto sobre caça a ataques de supply chain no N P M, e o postmortem da TanStack.
+
+Claude, Codex e a parte chata que chama orçamento.
+
+Latent Space cobriu uma virada importante na economia dos agentes de código.
+O uso programático, os limites semanais e os incentivos empresariais estão ficando explícitos.
+A conversa está saindo do qual modelo parece mais esperto.
+E está entrando no qual fluxo cabe no bolso e na política de uso.
+
+Do lado da Anthropic, posts públicos da conta Claude Developers falaram em crédito mensal dedicado para uso programático do Claude.
+Isso aparece em caminhos como Agent S D K, claude traço p, "Git Hub Actions" e apps de S D Ks de terceiros.
+A mesma conta anunciou aumento de cinquenta porcento nos limites semanais do Claude Code até 13 de julho de 2026.
+
+Do lado da OpenAI, a conta OpenAI Developers promoveu uma oferta limitada de dois meses gratuitos de Codex para times enterprise que migrarem.
+A página pública do Codex dá o contexto do produto, mas a oferta específica veio por post social.
+
+Tem uma cautela aqui: parte da confirmação está em posts públicos de redes sociais e cobertura secundária.
+Não está em um documento canônico único com todas as regras arrumadas numa tabela que faria o financeiro sorrir.
+Então não vou inventar equivalência em dólar, permanência de promoção ou vencedor de mercado.
+
+O que dá para dizer com segurança é mais útil.
+Agente de código agora é arquitetura de custo.
+Usar no chat, usar no terminal, usar no C I, chamar via S D K e distribuir para empresa inteira podem cair em regras diferentes.
+Um fluxo que parece barato enquanto uma pessoa está brincando pode virar outra coisa.
+Ele roda teste, lê arquivo, chama ferramenta, resume sessão, tenta de novo e faz isso para vários devs o dia inteiro.
+
+Isso muda decisão técnica: vale medir token, separar tarefa por modelo, pensar em compatibilidade entre fornecedores e evitar workflow crítico dependente de quota temporária.
+Também vale evitar dependência de promoção temporária.
+Ferramenta como dashboard de gasto deixa de ser frescura de planilha. Vira parte da higiene.
+
+Eu também acho agente divertido.
+Só acho menos divertido quando a fatura chega com aquela energia de: surpresa, agora eu moro aqui.
+
+As fontes deste bloco são Latent Space, Claude Developers, OpenAI Developers e a página pública do Codex.
+
+Agora, os destaques rápidos para hoje.
+
+A Nous Research publicou o paper de "Token Superposition Training", ou T S T.
+A receita tem duas fases: primeiro compacta grupos de tokens durante parte do pré-treinamento.
+Depois volta para o treino normal de próximo token.
+Os autores reportam até cerca de duas vírgula cinco vezes de redução no tempo total em escala maior testada.
+Isso vem sem mudar a arquitetura de inferência.
+É pesquisa promissora, mas ainda pede reprodução independente.
+As fontes são arXiv e MarkTechPost.
+
+Kubernetes versão um ponto trinta e seis, Haru, saiu com uma mistura bem mantenedor de plataforma.
+Mais hardening e mais maturidade para controle de recurso.
+Entre os destaques estão User Namespaces, Mutating Admission Policies, autorização mais fina na [EY1 P IY1 AY1] do kubelet e Dynamic Resource Allocation.
+Para cluster com multi-tenant, G P U, agente ou workload sensível, é release para ler nota antes de apertar upgrade.
+As fontes são Kubernetes Blog e InfoQ.
+
+Terraform um ponto quinze trouxe dynamic module sources, avisos de depreciação para variáveis e outputs, e convert.
+Também trouxe binários nativos para Windows em A R M sessenta e quatro.
+E trouxe autenticação do backend S três via AWS login.
+O valor aqui é menos reescreva tudo hoje.
+E mais: module seu caminho de migração com menos gambiarra social no README.
+A fonte deste destaque é HashiCorp.
+
+A Pydantic abriu o repositório H T T P X dois como uma continuação mantida do H T T P X.
+A promessa é um caminho confiável para updates e correções de segurança.
+O autor do fork H T T P X Y Z também pediu convergência para o H T T P X dois.
+Para quem depende de cliente H T T P em Python, é algo para acompanhar com teste de compatibilidade.
+Não é uma migração no susto.
+As fontes são Pydantic H T T P X dois e Michiel de Jong.
+
+Pyrefly chegou à versão um ponto zero em 13 de maio.
+O projeto se apresenta como type checker e language server open-source para Python.
+Ele também fala em ganhos reportados em checks completos e atualização incremental no editor.
+Como todo benchmark de ferramenta, vale testar no repositório real antes de trocar o cinto com o carro andando.
+A fonte deste destaque é Pyrefly.
+
+Codeburn é um projeto open-source para visualizar uso e custo de tokens em assistentes de código locais.
+Ele entra bem no dia justamente por causa da história Claude e Codex.
+Se vários agentes estão gastando token em sessões diferentes, medir deixa a conversa menos mística.
+A cautela é conferir quais ferramentas ele lê e que dados locais você está entregando ao painel.
+A fonte é AgentSeal Codeburn.
+
+A Wasp publicou um postmortem raro de ver.
+Depois de cerca de cinco anos e cinco milhões de dólares, a equipe concluiu que criar uma linguagem própria para desenvolvimento web foi um erro para o projeto.
+O plano agora é caminhar para TypeScript preservando a ideia do framework.
+Sem deboche aqui: é uma boa história sobre custo de abstração, gravidade de ecossistema e coragem de admitir rota errada em público.
+A fonte deste destaque é Wasp.
+
+Learning Opportunities é uma skill e plugin para Claude Code e Codex.
+A ideia é transformar sessões de agente em chance de aprendizado.
+Depois de trabalho arquitetural, ela propõe exercícios opcionais de dez a quinze minutos.
+Esses exercícios usam previsão, geração, retrieval practice, espaçamento e teach-back.
+Não verifica código, só lembra que aceitar resposta pronta sem reconstruir o raciocínio também cobra juros.
+A fonte é DrCatHicks Learning Opportunities.
+
+Acompanhamento de tendências do dia.
+
+O padrão do dia é bem concreto.
+Agente está virando infraestrutura por todos os lados, não só por marketing.
+
+Na segurança, o [P AO1 N D] [T IH0] [OW1 N] colocou agentes e inferência local entre alvos oficiais.
+Enquanto isso, a discussão de N P M foi para comportamento observável: processo filho, download, credencial, persistência e log.
+No custo, Claude e Codex empurraram o assunto para quota, crédito programático e incentivo enterprise.
+No ferramental, Codeburn apareceu como sintoma pequeno e útil.
+Se a ferramenta trabalha, alguém vai querer saber quanto ela gastou.
+
+Isso não precisa virar tese grandona.
+Basta uma pergunta boa para cada time.
+O que esse agente pode tocar, quanto ele custa quando trabalha de verdade, e como eu descubro o que ele fez?
+
+Se a resposta for não sei, tudo bem.
+Muita gente está nesse ponto.
+Só não dá mais para fingir que agente é uma aba bonitinha sem consequência operacional.
+Aba bonitinha também abre porta.
+
+As fontes deste bloco são Zero Day Initiative, DerivAI, Latent Space e Codeburn.
