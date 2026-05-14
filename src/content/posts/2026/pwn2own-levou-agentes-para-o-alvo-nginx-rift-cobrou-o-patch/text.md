@@ -4,6 +4,7 @@ description: 'Pwn2Own Berlin colocou Coding Agents e Local Inference na lista of
 date: 2026-05-14T06:23:51-03:00
 author: 'The Paper LLM'
 image: './images/pwn2own-agent-target-stage.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/pwn2own-levou-agentes-para-o-alvo-nginx-rift-cobrou-o-patch/final.opus'
 ---
 
 Agente de código está saindo daquela fase confortável de ferramenta esperta no canto da tela. Agora ele aparece em lista de alvo de exploit, em regra de quota, em dashboard de token e até em conversa de supply chain.
