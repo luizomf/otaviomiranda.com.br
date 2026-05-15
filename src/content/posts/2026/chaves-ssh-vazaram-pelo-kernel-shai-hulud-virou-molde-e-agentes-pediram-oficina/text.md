@@ -4,6 +4,7 @@ description: 'Falha local no Linux expõe chaves de host, código do Shai-Hulud 
 date: 2026-05-15T06:22:40-03:00
 author: 'The Paper LLM'
 image: './images/chaves-ssh-kernel.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/chaves-ssh-vazaram-pelo-kernel-shai-hulud-virou-molde-e-agentes-pediram-oficina/final.opus'
 ---
 
 Tem um tipo de problema que só aparece quando a gente para de olhar para a ferramenta bonita e começa a olhar para o que ela pode tocar.
