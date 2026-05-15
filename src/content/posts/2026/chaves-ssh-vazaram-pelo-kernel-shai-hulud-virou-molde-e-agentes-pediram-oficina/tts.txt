@@ -1,0 +1,224 @@
+Chaves S S H vazaram pelo kernel, Shai-Hulud virou molde e agentes pediram oficina.
+
+Tem um tipo de problema que só aparece quando a gente para de olhar para a ferramenta bonita.
+E começa a olhar, com calma, para o que ela pode tocar.
+Um programa simples pode ler arquivo?
+Pode abrir descritor de outro processo?
+Pode publicar pacote dentro do fluxo de release?
+Pode rodar dentro do C I com credencial de nuvem?
+Pode vasculhar seu repositório, chamar terminal, mexer em cache e depois dizer que era só uma ajudinha?
+Hoje o fio que passa pelas notícias é esse.
+Permissão demais, contexto velho ou confiança automática viram superfície de ataque.
+Às vezes isso aparece como falha no kernel.
+Às vezes aparece como verme de supply chain.
+Às vezes aparece como agente de código que só fica bom quando alguém monta uma oficina inteira ao redor dele.
+Com busca, regra, teste e porteiro.
+A primeira história é bem pé no chão.
+Em uma máquina Linux compartilhada, uma falha local pode expor chaves que identificam o servidor por S S H.
+Não é o tipo de bug que permite invadir qualquer máquina pela internet com um estalar de dedos.
+Mas é daqueles que deixam uma pergunta chata depois do patch.
+Se alguém já estava dentro, a identidade da máquina ainda é confiável?
+A segunda história vem do mundo dos pacotes.
+O Shai-Hulud, aquele verme de supply chain que já tinha aparecido em ataques envolvendo npm e PyPI, entrou em outra fase.
+Agora temos código publicado, risco de cópia e mais gente olhando para a mesma receita.
+E, para completar, os agentes continuam saindo da fantasia de modelo esperto para um lugar mais operacional.
+O modelo ainda importa, claro.
+Só que o entorno dele começa a parecer a parte que decide se a coisa ajuda ou só produz trabalho com confiança.
+Esse entorno inclui busca no código vivo, permissões, arquivos de instrução, hooks e validação.
+Vamos com calma, porque hoje tem chave, pacote, agente, modelo local e kernel de Mac no mesmo café.
+Café forte, inclusive, porque a pauta veio carregada.
+
+Primeiro, uma falha local no Linux pode virar vazamento de identidade da máquina.
+A lista O S S Security da Openwall publicou um aviso sobre uma falha de lógica no ptrace do kernel Linux.
+Ela foi corrigida por um commit no Linux depois de reporte da Qualys.
+O repositório público S S H keysign pwn demonstra o impacto de um jeito que chama atenção.
+Ele mostra leitura de chaves privadas de host S S H usando S S H keysign.
+E também mostra leitura do arquivo E T C barra shadow via chage, em kernels antes da correção.
+O detalhe técnico fica no caminho de permissão da função interna ptrace may access.
+Durante a saída de um processo, existe uma janela em que o campo task M M pode estar nulo.
+Segundo a análise, isso pulava uma verificação de dumpability.
+Enquanto isso, descritores de arquivo ainda podiam ser roubados com a chamada pid F D get F D.
+Em português de gente: um processo privilegiado está indo embora, mas ainda segura arquivos importantes.
+Outro processo local consegue aproveitar o momento certo e puxar o que não deveria.
+É uma falha local, e isso muda bastante o alcance do risco.
+Esse ponto precisa ficar grudado na notícia.
+Não é uma porta remota aberta para qualquer pessoa da internet.
+Só que local não quer dizer irrelevante.
+C I runner roda código de P R.
+V P S recebe usuário, serviço, container e script que nem sempre merecem confiança plena.
+Laboratório de aula e servidor compartilhado têm múltiplas contas.
+Container também compartilha o kernel do host.
+Então a frase mas está containerizado não é cobertor mágico para dormir tranquilo.
+O estrago mais sensível aqui é a identidade do host.
+Quando a chave privada de S S H de uma máquina vaza, o problema não termina no apt upgrade ou no reboot.
+Depois de aplicar o kernel corrigido, vale avaliar rotação das chaves em máquinas expostas.
+Isso vale especialmente para máquinas multiusuário, de build ou que servem como host de containers.
+Trocar chave de host dá trabalho, quebra confiança conhecida e gera aviso para cliente S S H.
+E geralmente aparece no pior horário.
+Ainda assim, é melhor do que manter uma identidade possivelmente copiada.
+O histórico também cutuca a história de um jeito incômodo.
+Jann Horn já tinha proposto correções relacionadas em 2020.
+Software de base às vezes passa anos com uma porta pequena torta, até alguém encostar do ângulo certo.
+Que alegria tranquila para quem cuida de produção.
+As fontes deste bloco são a lista O S S Security da Openwall, o commit no Linux, o PoC S S H keysign pwn e a Phoronix.
+
+Agora, o Shai-Hulud deixou de ser só incidente e virou material reutilizável.
+A Risky Biz reportou que o código-fonte do Shai-Hulud foi publicado por pessoas que diziam ter ligação com o TeamPCP.
+A mesma cobertura cita avaliação da Datadog de que o material seria uma correspondência quase exata.
+A atribuição ainda merece cuidado, porque alguém pode estar se passando pelo grupo.
+O ponto publicável mais sólido é outro.
+Código de um verme de supply chain saiu do campo de resposta a incidente.
+E virou material que outras pessoas podem estudar, adaptar ou copiar.
+Isso muda a temperatura do caso.
+JFrog e Orca descrevem a campanha Mini Shai-Hulud atingindo pacotes em npm e PyPI.
+No caminho aparecem nomes conhecidos, incluindo TanStack, Mistral AI e UiPath.
+A cadeia abusava de suposições de confiança no fluxo de publicação.
+Código malicioso rodava dentro de infraestrutura legítima de release.
+Ele extraía material O I D C do runner, mexia com cache do "Git Hub" Actions e podia publicar pacote.
+Esse pacote ainda podia sair com atestação de proveniência aparentemente válida.
+Essa última parte é a que dói.
+Assinatura e proveniência ajudam muito.
+Mas não salvam sozinhas quando o atacante consegue executar antes da publicação, dentro do workflow confiável.
+É como carimbar um documento falso usando o carimbo verdadeiro da empresa.
+O carimbo é real, mas o conteúdo continua sendo problema.
+Também apareceu OpenAI nessa história, mas de forma estreita.
+A cobertura pública fala em dispositivos corporativos afetados e rotação de credenciais.
+Não há relato de comprometimento de dados de usuários.
+Melhor deixar assim, sem transformar um detalhe em espetáculo.
+Para quem mantém pacote ou C I, o trabalho útil é bem menos cinematográfico.
+Revisar triggers do "Git Hub" Actions, cache compartilhado, escopo de segredo, O I D C e lifecycle hooks do npm.
+Também vale olhar allowlist de pacote, token disponível para build e o que acontece quando um hook preinstall resolve brincar de ser adulto.
+E, se você depende de pacote publicado por terceiros, provenance vira um sinal dentro de um conjunto maior.
+Não uma bênção papal para desligar o resto do cérebro.
+Comparações com Mirai, Babuk ou LockBit ajudam só como alerta histórico.
+Quando código ofensivo funcional vaza, variantes costumam aparecer.
+Não quer dizer que todo npm install virou roleta russa.
+Quer dizer que uma receita que já funcionou agora ficou mais fácil de reaproveitar.
+As fontes deste bloco são Risky Biz, JFrog, Orca Security e The Next Web.
+
+Agora, agentes bons dependem da oficina, não só do motor.
+Uma parte das notícias de agentes está ficando mais honesta.
+A conversa sai um pouco do ranking de modelo e entra no desenho do ambiente onde o agente trabalha.
+Eu gosto dessa virada porque ela deixa menos espaço para misticismo.
+E deixa mais espaço para engenharia chata, aquela que realmente salva a pele.
+A própria Anthropic publicou orientações sobre como usar Claude Code em bases grandes.
+Ela diz, com todas as letras, que o harness importa tanto quanto o modelo.
+No texto, a recomendação passa por navegação no sistema de arquivos vivo e busca com grep.
+Também passa por instruções enxutas em Claude ponto M D, hooks, skills, plugins e servidores M C P.
+Além disso, entram integrações com L S P e subagentes.
+O nome da moda pode mudar sem mexer no ponto principal.
+A ideia é antiga: ferramenta precisa enxergar o lugar certo, ter permissão limitada e receber feedback que preste.
+Um preprint chamado "Is Grep All You Need?" coloca sal nessa conversa.
+No recorte testado de busca agentic, grep venceu recuperação vetorial em certas condições.
+Isso não aposenta vetor, R A G ou indexação.
+Só lembra que uma busca simples, atual e bem conectada ao código real pode ganhar de uma camada bonita.
+Principalmente quando essa camada ficou velha cinco minutos depois do último commit.
+Outro ponto importante vem do benchmark AuthBench.
+O benchmark trabalha com 120 tarefas de terminal e mostra que permissões continuam difíceis para agentes.
+A decomposição em duas etapas, gerar e depois auditar, melhorou em quinze vírgula oito porcento o sucesso em tarefas sensíveis.
+Ela também reduziu sucesso de ataque no recorte reportado.
+O nome técnico é "Sufficiency-Tightness Decomposition".
+O efeito que interessa é mais simples.
+Peça para uma parte fazer e outra revisar a autoridade concedida.
+Parece burocracia, eu sei, mas aqui ela tem função.
+Às vezes burocracia é só segurança usando sapato social.
+Também há sinais de pesquisa em memória e execução, como Chronos e amostras de LongMemEval.
+E há cobertura secundária sobre Poetiq montando harness de forma automática.
+Eu trataria esses números como material interessante, não como verdade industrial já carimbada.
+Preprint e post de fornecedor são convite para testar, não para tatuar arquitetura no braço.
+Para dev que usa agente hoje, o resumo operacional fica bem concreto.
+Mantenha instruções de projeto curtas, dê acesso ao código vivo, rode type checker e teste.
+Separe ferramenta perigosa, registre ação, audite permissão e evite encher contexto com um caminhão de texto morto.
+Modelo forte dentro de oficina bagunçada continua tropeçando em chave de boca no chão.
+As fontes deste bloco são Anthropic, o preprint "Is Grep All You Need?", AuthBench, outro preprint sobre adoção de agentes e MarkTechPost.
+
+Agora, IA local ficou mais séria, mas ainda cobra hardware.
+Salvatore Sanfilippo, o antirez, publicou o DS4, ou DwarfStar 4.
+A proposta usa DeepSeek v4 Flash com uma receita de quantização assimétrica em dois e oito bits.
+Segundo ele, isso torna viável rodar localmente, em máquinas com 96 ou 128 gigabytes de RAM.
+A ideia é usar algo que ele realmente escolheria para trabalho sério, onde antes mandaria para Claude ou GPT.
+O model card no Hugging Face dá uma dimensão melhor do bicho.
+O artefato q dois tem oitenta vírgula oito gibibytes e mira Macs de 128 gigabytes.
+O q quatro tem 153 vírgula três gibibytes e pede máquinas com 256 gigabytes ou mais.
+Só essa frase já separa curiosidade técnica de compra parcelada em sofrimento.
+Mesmo assim, a notícia é importante.
+Durante muito tempo, IA local parecia dividida entre brinquedo pequeno simpático e modelo grande que exigia laboratório doméstico.
+DS4 sugere que a faixa alta está ficando mais usável para quem tem memória de sobra.
+Isso vale especialmente em Apple Silicon.
+Não é substituto universal para nuvem.
+É um sinal de que setups locais de alto nível estão ficando menos folclóricos.
+Para não vender sonho errado, vale colocar do lado o teste do It's FOSS com modelos locais sem G P U.
+Em C P U, modelos pequenos como Qwen 3, de zero vírgula seis bilhão de parâmetros, ficaram entre 34 e 36 tokens por segundo.
+TinyLlama, de um vírgula um bilhão de parâmetros, apareceu entre 25 e 28 tokens por segundo.
+Isso pode ser útil para tarefas leves, automação simples, rascunho local e privacidade.
+Quando o modelo cresce, a paciência também precisa crescer.
+Às vezes ela pede férias e deixa o dev esperando.
+O texto de Anton Leicht sobre corte de acesso a modelos de fronteira dá o contexto estratégico.
+Se chamadas de [EY1 P IY1 AY1] ficarem mais caras, restritas, policiadas por política ou limitadas por compute, a pilha local ganha valor.
+Eu não leria isso como previsão de apocalipse da nuvem.
+Nuvem continua conveniente demais.
+Mas ter uma rota local reduz dependência e pode deixar agentes mais reproduzíveis, privados e controláveis.
+Então o quadro honesto é este.
+No laptop comum, modelos pequenos ainda são o caminho razoável.
+Em máquinas de 128 ou 256 gigabytes, DS4 mostra uma trilha bem mais ambiciosa.
+A diferença entre as duas coisas cabe em muitos gigabytes e em uma conversa séria com o cartão de crédito.
+As fontes deste bloco são antirez, o DS4 no Hugging Face, It's FOSS e Anton Leicht.
+
+Agora, os destaques rápidos de hoje.
+A Calif afirma ter uma cadeia de escalada local de privilégio no macOS vinte e seis ponto quatro ponto um.
+O caso envolve a build vinte e cinco E dois cinco três, em hardware Apple M cinco com Memory Integrity Enforcement ativo.
+A equipe diz que o Mythos Preview ajudou a identificar bugs e no desenvolvimento do exploit.
+A descoberta teria acontecido em 25 de abril, com exploit funcional em primeiro de maio.
+O relatório técnico de 55 páginas está retido até a Apple corrigir.
+Então, por enquanto, isso é sinal de metodologia e pressão sobre mitigação, não walkthrough público.
+As fontes deste destaque são Calif e arXiv.
+
+CloudNativePG, nas versões um ponto vinte e nove ponto um e um ponto vinte e oito ponto três, corrige a C V E 2026, quarenta e quatro quatro sete sete.
+Ela tem CVSS versão quatro, nove ponto quatro.
+A falha vinha do metrics exporter conectando como superusuário postgres e tentando rebaixar autoridade com set role.
+Com reset role, dava para recuperar superusuário e usar copy to program para executar comando no pod primário.
+A correção troca isso por uma role dedicada, chamada C N P G metrics exporter, com privilégios de P G monitor.
+A fonte deste destaque é PostgreSQL News.
+
+O Rust discute uma política estreita para contribuições geradas por L L M no P R rust-lang barra rust-forge número 1040.
+A proposta é ficar no Forge e ser linkada pelos guias de contribuição do rust-lang barra rust.
+O foco é reduzir P Rs de baixo esforço gerados por IA.
+Caveat importante: é um P R aberto no momento da curadoria, não uma regra final já mesclada.
+A fonte é o P R rust-lang barra rust-forge número 1040.
+
+Um experimento independente com Mullvad testou três mil seiscentas e cinquenta chaves públicas WireGuard em nove servidores.
+Ele encontrou apenas 284 combinações de I Ps de saída.
+Isso apareceu apesar de os pools sugerirem mais de oito vírgula dois trilhões de combinações possíveis.
+A hipótese é atribuição determinística por chave.
+Isso pode virar impressão digital entre servidores.
+Não é advisory oficial da Mullvad.
+Mas é uma boa lembrança: trocar servidor V P N não garante identidade nova se o padrão acompanha a chave.
+A fonte deste destaque é tmctmt.
+
+O preprint Veritas, submetido em 14 de maio, mostra um uso mais pé no chão de L L M em pesquisa de vulnerabilidade.
+O sistema combina I R L L V M levantado pelo RetDec, slicing estático, visão em C decompilado e detector com L L M.
+Também combina validação por debugger e artefatos de runtime.
+O resumo fala em 90 porcento de recall e uma descoberta de C V E da Apple.
+Mas continua sendo preprint, com todo o cuidado que isso pede.
+É bom sinal de direção, não placa de problema resolvido.
+A fonte deste destaque é arXiv.
+
+Supertonic v3 apareceu em cobertura secundária como T T S local com suporte a 31 idiomas e tags de expressão.
+Para quem monta pipeline local de IA e áudio, isso é candidato interessante, especialmente se português entrar bem.
+Só não dá para recomendar migração sem testar pronúncia, latência e integração no mundo real.
+A fonte deste destaque é MarkTechPost.
+
+Agora, o acompanhamento de tendências do dia.
+O padrão de hoje é menos sobre IA ficou mais poderosa.
+É mais sobre o entorno ficando impossível de ignorar.
+No Linux, uma janela de permissão local pode expor a identidade S S H da máquina.
+No Shai-Hulud, a assinatura do pacote não basta quando o workflow de publicação já virou palco do ataque.
+Nos agentes, a qualidade depende de busca viva, instrução curta, permissão auditada e verificação executável.
+No DS4, a promessa local só fica boa quando a máquina tem memória para bancar.
+Tudo isso aponta para uma pergunta simples para produção.
+Quem pode tocar o quê, com qual evidência e por quanto tempo?
+Essa pergunta não resolve o post inteiro, mas ajuda a organizar a bagunça.
+Chave de host, pacote publicado, agente com terminal, modelo local, exporter de métrica e V P N parecem assuntos separados.
+A cola entre eles é autoridade.
+Quando a autoridade está ampla demais, antiga demais ou invisível demais, o problema só está esperando a notícia certa para ganhar nome.
+As fontes do acompanhamento são O S S Security da Openwall, Risky Biz, Anthropic, antirez e PostgreSQL News.
