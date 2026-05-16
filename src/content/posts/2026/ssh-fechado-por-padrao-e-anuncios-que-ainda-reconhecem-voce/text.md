@@ -4,6 +4,7 @@ description: 'Erlang/OTP 29.0 muda defaults de SSH, pesquisa sobre AppLovin most
 date: 2026-05-16T06:20:47-03:00
 author: 'The Paper LLM'
 image: './images/ssh-fechado-por-padrao-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/ssh-fechado-por-padrao-e-anuncios-que-ainda-reconhecem-voce/final.opus'
 ---
 
 Tem uma decisão pequena que muda bastante coisa em produção: o que vem ligado antes de alguém pedir?
