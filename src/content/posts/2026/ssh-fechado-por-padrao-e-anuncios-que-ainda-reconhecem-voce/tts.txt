@@ -1,0 +1,361 @@
+S S H fechado por padrão e anúncios que ainda reconhecem você.
+
+Tem uma decisão pequena que muda bastante coisa em produção: o que vem ligado antes de alguém pedir?
+
+Parece detalhe de configuração.
+
+Só que detalhe de configuração é aquele tipo de detalhe que acorda administrador de sistema às três da manhã.
+
+E acorda com vontade de largar tudo e virar artesão.
+
+Um serviço que nasce oferecendo shell, transferência de arquivo ou execução remota para usuário autenticado pode estar correto.
+
+Mas ele ainda pode entregar mais poder do que deveria.
+
+O login passou, a chave bateu, o usuário existe.
+
+Pronto, abriu o armário inteiro.
+
+O mesmo vale para S D K de anúncio, pilha de G P U, ferramenta de agente e até placar de competição.
+
+O problema raramente é uma peça isolada fazendo algo mágico.
+
+É o conjunto de permissões, dados, atalhos e defaults funcionando do jeito mais conveniente possível.
+
+Conveniência é ótima, mas sem freio vira aquela tomada com adaptador em cima de adaptador.
+
+Funciona, mas ninguém quer explicar para o seguro depois.
+
+Hoje o fio passa por aí, começando por uma linguagem veterana.
+
+Ela resolveu deixar o S S H embutido mais fechado por padrão.
+
+Um pesquisador mostrou que tirar o identificador de anúncio de um celular não remove tudo sozinho.
+
+O aparelho ainda pode ser reconhecido por outros sinais.
+
+A pilha de I A da [EY1 EH1 M D IY1] no Linux ganhou uma prévia cheia de peças importantes.
+
+Mas ainda com cara de obra em andamento.
+
+E, no cantinho das competições de segurança, agentes começaram a mexer no significado de um placar aberto.
+
+Agora sim entram os nomes, começando pelo runtime do Erlang.
+
+Erlang O T P vinte e nove ponto zero colocou o freio antes do acelerador.
+
+O Erlang O T P vinte e nove ponto zero foi anunciado em 13 de maio de 2026.
+
+Ele trouxe uma mudança que parece boring, mas eu gosto muito desse tipo de boring.
+
+O daemon S S H embutido agora vem com shell e execução exec desabilitados por padrão.
+
+O subsistema S F T P também não vem mais ligado automaticamente.
+
+Isso não significa que Erlang virou notícia só por causa de S S H.
+
+A release tem várias mudanças.
+
+Mas esse default é uma boa aula de segurança operacional.
+
+Usuário autenticado não deveria ganhar sessão interativa, execução de comando ou transferência de arquivo por conforto histórico.
+
+Para quem mantém sistema que usa o S S H embutido do Erlang, o ponto é revisar upgrade com cuidado.
+
+Se a aplicação dependia desse comportamento antigo, talvez precise habilitar explicitamente o que antes vinha pronto.
+
+Isso pode quebrar alguma integração? Pode, sem dúvida.
+
+Também pode impedir que um serviço interno vire uma portinha remota maior do que o desenho original pedia.
+
+A release também mexe no lado criptográfico.
+
+O S S H passa a usar uma troca de chaves híbrida como padrão, com fallback para pares que não suportam a opção.
+
+A combinação junta M L KEM setecentos e sessenta e oito, X25519 e SHA dois cinco seis.
+
+A página da release também cita, no S S L, um grupo preferido que combina X25519 com M L KEM setecentos e sessenta e oito.
+
+Traduzindo sem fazer pose de pós-quântico no café: é um default novo dentro desse runtime.
+
+Não é uma virada universal de todo S S H do planeta.
+
+Tem mais duas mudanças com impacto de upgrade.
+
+O diretório atual foi movido para o fim do caminho de código padrão.
+
+E builds de 32 bits para Windows foram descontinuados.
+
+São detalhes menores perto do S S H.
+
+Mas entram naquela categoria de coisa que quebra só o ambiente que ninguém lembrou de testar.
+
+A fonte deste bloco é a página de release do Erlang O T P vinte e nove ponto zero.
+
+AppLovin mostra que apagar um I D não apaga todos os rastros.
+
+Um pesquisador publicou em 16 de maio de 2026, em U T C, uma análise do protocolo de mediação de anúncios da AppLovin.
+
+O texto é bem técnico e a história precisa de cuidado.
+
+É uma pesquisa baseada em tráfego móvel consentido, com uma ferramenta pública de inspeção chamada OpenClawRadar.
+
+Mas não havia uma resposta independente da AppLovin nas fontes lidas para este texto.
+
+Mesmo com essa cautela, o caso é útil porque explica uma armadilha comum.
+
+A comunicação analisada passava por H T T P S.
+
+O problema descrito não era falta de T L S.
+
+O pesquisador diz que havia uma segunda camada própria por cima.
+
+Era um envelope cifrado para requisições de mediação da AppLovin.
+
+A chave seria derivada de dados como o sufixo da S D K key e uma constante embutida no S D K.
+
+Segundo o writeup, a cifra usa SplitMix64.
+
+Ela não tem M A C, não tem A E A D, e depende de um contador baseado em timestamp que pode ser recuperado.
+
+Sem autenticação da mensagem, decifrar não é o único problema.
+
+Fica mais difícil saber se aquilo foi protegido como protocolo sério ou só embrulhado com fita isolante criptográfica.
+
+O pesquisador relata ter decifrado cinco mil trezentos e noventa e quatro envelopes de um app sem falhas.
+
+Dentro do payload aparecem informações de dispositivo e dados de sinal.
+
+São cerca de cinquenta campos de dispositivo e sinais enviados para redes de anúncio.
+
+A parte mais delicada é a de privacidade.
+
+Quando a pessoa nega rastreamento pelo A T T da Apple, o I D F A aparece zerado.
+
+E o próprio identificador da AppLovin, chamado api did no relato, parece respeitar isso.
+
+Só que outros campos continuariam suficientes, na amostra do pesquisador.
+
+Eles permitiriam reconhecer o mesmo iPhone em apps diferentes.
+
+Esse é o ponto que interessa para dev de app também.
+
+Você pode obedecer à permissão visível e ainda carregar um S D K que monta outro caminho de identificação por baixo.
+
+Não precisa chamar todo S D K de vilão.
+
+Também não precisa dizer que A T T não serve para nada.
+
+A conclusão mais honesta é menos confortável.
+
+Remover um identificador famoso não remove automaticamente a superfície de fingerprint.
+
+Para quem cria app, a pergunta chata é quais dados o S D K de terceiro coleta.
+
+Também importa para quem envia, como cifra, quanto disso é necessário e o que acontece quando o usuário diz não para rastreamento.
+
+Sim, dá trabalho perguntar, porque privacidade raramente vem pronta em um botão bonito.
+
+As fontes deste bloco são Buchodi's Threat Intel e OpenClawRadar.
+
+ROCm sete ponto treze prepara terreno, mas ainda é prévia.
+
+A Phoronix reportou em 15 de maio de 2026 o ROCm sete ponto treze.
+
+Ele foi descrito como uma prévia do ROCm Core S D K caminhando para o ROCm oito ponto zero.
+
+Aqui o ângulo bom é infraestrutura Linux, não torcida organizada de G P U.
+
+ROCm é uma daquelas peças que decide se uma placa forte vira ferramenta de trabalho.
+
+Ou se vira enfeite caro com driver temperamental.
+
+No papel, hardware pode ser excelente.
+
+Na rotina, o que manda é suporte a distribuição, container, biblioteca, profiling, virtualização e particionamento.
+
+E aquela sensação simples de: eu consigo reproduzir isso amanhã?
+
+Nessa prévia, os destaques reportados incluem suporte ao Ubuntu vinte e seis ponto zero quatro L T S.
+
+Também entram validação no Ubuntu vinte e quatro ponto zero quatro ponto quatro L T S e suporte ao Instinct MI350P PCIe.
+
+Há mais Radeon PRO e Ryzen A I, além de otimizações para Ryzen A I Max trezentos Strix Halo.
+
+Também há melhorias em virtualização e particionamento de G P U.
+
+E o ROCprof Trace Decoder foi aberto como código.
+
+A documentação do TheRock também mostra artefatos sete ponto treze ponto zero a.
+
+Ela avisa que alguns caminhos de pacote nativo são de desenvolvimento e teste, sem assinatura.
+
+Esse caveat é importante para quem mantém infraestrutura.
+
+Se você mantém máquina de laboratório, homelab, workstation ou servidor de I A com [EY1 EH1 M D IY1], a notícia é boa para acompanhar.
+
+Se você mantém produção, preview não é sinônimo de jogue no cluster e confie no destino.
+
+Teste na combinação exata de G P U, kernel, distribuição, container e framework que você usa.
+
+Mesmo assim, a direção importa.
+
+Suporte a Ubuntu novo, placas G P U novas, profiling e particionamento são partes pouco glamourosas.
+
+Mas são elas que fazem inferência e treino local deixarem de parecer ritual.
+
+A [EY1 EH1 M D IY1] não resolveu magicamente a vida de todo mundo no Linux.
+
+Mas esse tipo de release reduz a distância entre a placa é rápida e a pilha trabalha sem drama todo dia.
+
+As fontes deste bloco são Phoronix e o arquivo de releases do ROCm TheRock.
+
+Agora, os destaques rápidos de hoje.
+
+Orthrus é um projeto de maio de 2026 para acelerar modelos Qwen três com um módulo de difusão treinável.
+
+Ele mantém o backbone autoregressivo congelado.
+
+O README lista checkpoints de um vírgula sete bilhão, quatro bilhões e oito bilhões de parâmetros.
+
+Os speedups médios chegam a cinco vírgula trinta e seis vezes no modelo de oito bilhões.
+
+A manchete fala em até sete vírgula oito vezes.
+
+Mas ainda não há integração pronta com v L L M ou S G Lang.
+
+As fontes são Git Hub e arXiv.
+
+A Cerebras precificou trinta milhões de ações a 185 dólares em 13 de maio.
+
+Ela começou a negociar na Nasdaq como C B R S em 14 de maio.
+
+E levantou cerca de cinco vírgula cinquenta e cinco bilhões de dólares.
+
+O valuation totalmente diluído ficou em torno de cinquenta e seis vírgula quarenta e três bilhões no preço do I P O.
+
+A parte técnica é infraestrutura de inferência com wafer-scale, W S E três, K V cache e claims enormes.
+
+Mas a afirmação sobre servir modelos Open A I de trilhões de parâmetros deve ficar atribuída a executivo da empresa.
+
+Não deve virar benchmark independente.
+
+As fontes são Cerebras, Nasdaq, TechCrunch e Latent Space.
+
+A Zulip anunciou em 15 de maio a criação da Zulip Foundation.
+
+A Kandra Labs será doada para a fundação.
+
+Quatro pessoas, incluindo Tim Abbott, vão para a Anthropic.
+
+E a equipe restante continua tocando o projeto.
+
+É uma nota curta, mas é boa para lembrar que governança também faz parte da resiliência técnica de software livre.
+
+A fonte deste item é o blog da Zulip.
+
+Epiq é um issue tracker de terminal, apoiado em Git.
+
+Ele guarda estado como log de eventos e expõe integração via M C P no epiq M C P.
+
+Dá para instalar pelo npm em modo global, mas o projeto ainda é jovem.
+
+Eu colocaria na pasta inspecionar com calma, não na pasta migrar o time inteiro hoje.
+
+A fonte é o repositório no Git Hub.
+
+Repowise tenta transformar contexto de repositório em algo mais computável para agentes de código.
+
+A documentação fala em Tree-sitter, PageRank, detecção de comunidades Leiden e histórico de Git.
+
+Também cita ownership, pares de co-change, sinais de código morto e ferramentas M C P.
+
+Parece alinhado com a necessidade real de contexto.
+
+Mas claims de produto precisam apanhar de um repositório real antes de ganhar confiança.
+
+As fontes são a documentação, o site e o repositório do Repowise.
+
+Um texto sobre a história dos ambientes de desenvolvimento do Google conta como o Cider usava indexação backend do monorepo.
+
+Também conta como o Cider V levou isso para uma interface baseada em V S Code.
+
+O autor diz que, em 2023, oitenta porcento do desenvolvimento na base principal já acontecia no Cider V.
+
+Para agentes, a lição é direta.
+
+Ferramenta esperta costuma depender de busca, indexação, workflow e revisão muito comuns, só que bem conectados.
+
+A fonte deste item é Laurent Le Brun.
+
+Um paper da P V L D B 2026 discute como bancos de dados deveriam escrever em unidades S S D.
+
+Os autores defendem escritas fora do lugar para reduzir write amplification.
+
+Eles reportam de um vírgula sessenta e cinco a dois vírgula vinte e quatro vezes mais throughput no Y C S B A.
+
+Também reportam de seis vírgula dois a nove vírgula oito vezes menos escritas flash nesse teste.
+
+No T P C C, com quinze mil warehouses, eles reportam dois vírgula quarenta e cinco vezes mais throughput.
+
+E também sete vírgula dois vezes menos escritas flash.
+
+É pesquisa, não produto mágico.
+
+Mas é um bom lembrete de que layout físico ainda manda boleto.
+
+A fonte deste item é o artigo no arXiv.
+
+A apalrd publicou um experimento de C D N pessoal usando o próprio A S Number.
+
+O texto compara visualmente Geo D N S e Anycast B G P.
+
+O próprio autor diz que, por enquanto, não entrega conteúdo útil.
+
+Serve para aprender e coletar estatística.
+
+Justamente por isso é bom, porque dá para ver tradeoff de latência sem o desenho perfeito do slide de fornecedor.
+
+As fontes são apalrd e YouTube.
+
+Agora, o acompanhamento de tendências do dia.
+
+O texto sobre competições de C T F não é uma notícia fresquinha de hoje.
+
+Foi publicado em 1º de maio de 2026 e é uma opinião de quem está olhando para a cena competitiva por dentro.
+
+Ainda assim, ele conversa bem com o resto do dia porque mexe em uma pergunta incômoda.
+
+Quando uma ferramenta automatizada resolve boa parte dos desafios, o placar ainda mede a mesma habilidade humana?
+
+O autor argumenta que placares abertos de C T F ficaram confusos como sinal.
+
+Dá para disparar uma sessão de modelo por desafio.
+
+Também dá para usar [EY1 P IY1 AY1] do C T F D, deixar agentes trabalharem em paralelo e focar humanos no que sobrar.
+
+As menções a Claude Code, Claude Opus quatro ponto cinco, GPT cinco ponto cinco, Hack The Box, CTFTime e picoGym são alegações do autor.
+
+Não são benchmark certificado por laboratório.
+
+O ponto público é mais modesto e mais útil.
+
+Talvez C T F precise separar melhor modo humano, modo assistido por I A e modo educacional.
+
+A escada de aprendizado não acabou.
+
+Ela só fica torta quando todo mundo sobe com equipamentos diferentes e finge que é a mesma corrida.
+
+Repara como isso encosta nos outros blocos.
+
+Defaults seguros dizem o que um usuário pode fazer sem pedir.
+
+S D K de anúncio mostra o quanto um sistema consegue reconhecer mesmo quando um I D famoso some.
+
+Pilhas de I A e ferramentas de repositório mostram que performance depende do encanamento em volta.
+
+No fim, a pergunta operacional é quase sempre parecida.
+
+Quem pode fazer o quê, com quais dados, e como eu descubro depois?
+
+A fonte é o texto de Kabir, "The CTF scene is dead".
