@@ -1,0 +1,435 @@
+Do cabo serial ao compilador: agentes, túneis e regras para pacotes.
+
+Um site pendurado em um chip de um dólar parece piada de laboratório, mas explica bem o dia.
+
+Às vezes a parte interessante da tecnologia não está no software gigante.
+
+Também não está no modelo com bilhões de parâmetros.
+
+E nem na ferramenta que promete escrever metade do projeto enquanto você toma café.
+
+Às vezes a parte interessante está no caminho.
+
+Como a requisição chega? Quem recebe? Quem pode mexer?
+
+O que fica exposto? O que volta como resposta útil quando algo quebra?
+
+Esse tipo de pergunta aparece em lugares bem diferentes.
+
+Um dispositivo minúsculo só consegue servir uma página pública porque alguém pôs um túnel entre ele e a internet.
+
+Um compilador experimental tenta falar de um jeito mais fácil para agentes de código entenderem e corrigirem.
+
+Depois esses agentes podem tentar de novo, com menos adivinhação no meio do caminho.
+
+Um modelo local volta a deixar pesquisador brincar com comportamento durante a inferência.
+
+No próprio computador, dá para encostar em partes que uma [EY1 P IY1 AY1] hospedada nunca mostra.
+
+E a comunidade Python discute como pacote, wheel, upload e registro precisam ficar menos ingênuos.
+
+Principalmente antes do próximo susto de supply chain.
+
+Nada disso é mágica. Ainda bem.
+
+O ponto comum é bem terreno: quando as ferramentas trabalham mais sozinhas, a gente precisa de contratos melhores.
+
+Também precisa de contratos quando elas trabalham mais longe, ou mais perto de infraestrutura real.
+
+Contrato de rede, contrato de ferramenta, contrato de revisão, contrato de pacote.
+
+Sem isso, tudo vira uma confiança meio artesanal, bonita na bancada, esquisita quando entra em produção.
+
+Hoje tem chip de oito bits na internet, linguagem nova para agentes e controle local de modelo.
+
+Também tem pacote Python e ferramentas pequenas dizendo a mesma coisa por caminhos diferentes.
+
+O trabalho esperto continua precisando de trilho.
+
+A primeira história é de um site que saiu de um microcontrolador por cabo serial e WireGuard.
+
+A parte mais visual do dia vem de um projeto que coloca uma página pública para sair de um AVR64DD32.
+
+É um microcontrolador de oito bits, com oito kilobytes de RAM e sessenta e quatro kilobytes de flash.
+
+O clock vai até vinte e quatro megahertz, e o autor diz que o chip custa por volta de um dólar.
+
+Isso é menos memória do que muita aba do navegador usa só para lembrar que ela existe.
+
+O caminho até a internet é a parte boa.
+
+Em vez de colocar um chip Ethernet no projeto, o autor usou SLIP, um protocolo antigo.
+
+Esse protocolo aparece na R F C mil e cinquenta e cinco, por cima de uma conexão U S B serial.
+
+No Linux, isso vira uma interface de rede com comandos de terminal como S T T Y e S L attach.
+
+A partir daí, uma caixinha Linux faz a ponte para uma V P S usando WireGuard.
+
+E a V P S faz proxy só do caminho chamado mcu, de volta para o microcontrolador.
+
+Traduzindo: o dispositivo frágil fica em casa, preso em uma interface serial.
+
+A máquina local entende esse cabo como rede.
+
+O túnel criptografado leva o tráfego até uma V P S.
+
+A V P S cuida da porta pública, do T L S, do I P versão seis e do caminho que chega ao chip.
+
+O microcontrolador só precisa fazer a parte pequena, que já não é tão pequena assim.
+
+O autor escreveu pedaços de T C P e I P, e usa uma resposta H T T P fixa para a demonstração.
+
+Não é uma recomendação para hospedar o blog da empresa em um chip de oito bits.
+
+A própria página avisa que é lento, frágil, sem cache ou buffer no proxy.
+
+Também avisa que derrubar aquilo não deve exigir um tratado de guerra cibernética.
+
+Mas, como aula de infraestrutura, é ótima.
+
+Muita produção moderna faz uma versão mais adulta da mesma ideia.
+
+Dispositivo privado, ponte local, túnel seguro, porta pública controlada.
+
+O brinquedo só deixa a arquitetura mais fácil de enxergar.
+
+Às vezes o melhor diagrama de rede é um cabo serial humilhando a nossa autoestima.
+
+As fontes deste bloco são o post do projeto, a página viva no microcontrolador e o WireGuard.
+
+Agora vem Zero, olhando para o agente como usuário da ferramenta.
+
+A Vercel Labs publicou um repositório chamado Zero, descrito como "The programming language for agents".
+
+O projeto é Apache dois ponto zero, experimental, e a documentação deixa claro que ainda não é estável.
+
+Então vamos baixar a ansiedade.
+
+Isso não é o novo Rust, nem a linguagem que vai substituir C, nem qualquer frase de camiseta de evento.
+
+O que interessa é o desenho: a documentação apresenta Zero como uma linguagem de sistemas para pequenas ferramentas nativas.
+
+Ela fala em efeitos explícitos, memória previsível e saída estruturada do compilador.
+
+A versão zero ponto um ponto um, publicada em 16 de maio de 2026, adicionou um instalador público.
+
+Essa versão também trouxe o comando zero run e atualizações de documentação.
+
+Por que isso merece espaço? Porque agentes de código ainda dependem muito de texto feito para humanos.
+
+O compilador cospe um erro, a ferramenta de build despeja uma mensagem, e o agente tenta interpretar.
+
+Ele mexe no arquivo, roda de novo e torce para ter entendido.
+
+Funciona em alguns casos; em outros, é uma pessoa tentando passar instrução técnica por bilhete dobrado embaixo da porta.
+
+Zero tenta tratar a ferramenta como parte do loop de reparo.
+
+Comandos como zero check, zero run e zero build aparecem nesse contexto.
+
+A ideia é checar, executar e construir com uma superfície mais previsível para automação.
+
+Também aparece o zero doctor com saída em JSON, que é um detalhe simples, mas importante.
+
+Para um agente, receber diagnóstico estruturado pode virar uma lista de ações.
+
+Receber um parágrafo triste é mais uma rodada de adivinhação.
+
+Tem também a parte de efeitos explícitos.
+
+Em uma linguagem voltada para pequenos binários auxiliares, isso conversa com sandbox e permissão.
+
+Também conversa com previsibilidade.
+
+Se a ferramenta declara melhor o que pode fazer, fica mais fácil limitar onde ela mexe.
+
+O assunto ainda é cedo, o repositório é novo e não há evidência de adoção em produção.
+
+Mesmo assim, como sinal de design, é bem limpo.
+
+Talvez a próxima geração de ferramenta de desenvolvimento precise escrever mensagens para humanos e para agentes.
+
+E, para falar a verdade, humanos também ganham quando ferramenta deixa de responder como se estivesse brava.
+
+As fontes deste bloco são o repositório da Vercel Labs, a release zero ponto um ponto um e a MarkTechPost.
+
+O próximo bloco é sobre DeepSeek V quatro Flash e uma pergunta antiga.
+
+Dá para controlar comportamento localmente?
+
+Sean Goedecke publicou em 16 de maio um texto defendendo que DeepSeek V quatro Flash torna steering de L L M interessante de novo.
+
+A ideia, sem vestir jaleco, é tentar ajustar o comportamento do modelo durante a inferência.
+
+Em vez de só escrever um prompt maior, você mexe em ativações internas.
+
+Um vetor de steering nasce comparando o que muda dentro do modelo.
+
+De um lado, você pede uma resposta com certo comportamento; do outro, pede sem aquilo.
+
+Depois, durante a execução, injeta essa diferença para tentar empurrar o modelo naquela direção.
+
+Pode ser algo simples, como mais ou menos verbosidade, ou uma tendência de recusa.
+
+Quando alguém começa a falar em conceitos grandes demais, tipo inteligência como botão giratório, a conversa precisa de freio.
+
+A razão para DeepSeek V quatro Flash entrar nisso é acesso.
+
+O documento do modelo da DeepSeek lista o V quatro Flash com 284 bilhões de parâmetros totais.
+
+Ele também lista 13 bilhões ativados e uma janela de contexto de um milhão de tokens.
+
+Rodar algo desse tamanho localmente ainda não é hobby barato.
+
+Mas D S quatro, ou DwarfStar quatro, do antirez, mira justamente esse caminho.
+
+É um motor local estreito para DeepSeek quatro Flash, com suporte a Metal e CUDA.
+
+Não é um runner genérico para qualquer arquivo G G U F.
+
+Sean aponta que o D S quatro já trata steering como recurso de primeira classe, ainda que rudimentar.
+
+A documentação do projeto também pede calma.
+
+Código e arquivos estão em qualidade alfa.
+
+O alvo principal começa em Macs com noventa e seis gigabytes de RAM.
+
+Há CUDA e um ramo separado para ROCm, e o projeto é específico para esse modelo.
+
+O caveat do próprio Sean é o que salva a história de virar propaganda.
+
+Ele está fascinado, mas cético.
+
+Muitos ganhos simples talvez continuem mais fáceis com prompt.
+
+Objetivos mais ambiciosos podem pedir fine tuning ou treinamento.
+
+Ainda assim, a janela abriu um pouco.
+
+Quando o modelo roda localmente, com pesos e ativações por perto, dá para testar controles.
+
+São controles que uma [EY1 P IY1 AY1] fechada não oferece.
+
+Para quem trabalha com agentes, isso é mais laboratório do que receita.
+
+Mas laboratório bom muda a conversa.
+
+Ele mostra onde a promessa quebra, onde funciona e onde alguém precisa parar.
+
+Principalmente parar de chamar tudo de "prompt engineering" só porque é o nome mais confortável no boleto.
+
+As fontes deste bloco são Sean Goedecke, antirez D S quatro e o model card do DeepSeek V quatro Flash.
+
+Agora, PyCon discutiu pacote Python como problema de política, não só de ferramenta.
+
+Depois de tantas histórias recentes envolvendo pacote comprometido, o resumo do Packaging Summit da PyCon U S 2026 é útil.
+
+Não porque tenha uma correção final pronta.
+
+Mas porque mostra a comunidade olhando para o encanamento.
+
+Formato de pacote, comportamento de upload, abuso de registro e resolvers.
+
+Segundo o recap de Bernat Gabor, o summit aconteceu em 15 de maio de 2026, em Long Beach.
+
+Um dos assuntos foi Wheel dois ponto zero, ligado ao P E P 777.
+
+A ideia do P E P é abrir caminho para mudanças que o formato atual de wheel dificulta.
+
+Entram aí compressão melhor e metadados futuros.
+
+O primeiro sub P E P citado no recap envolve Zstandard.
+
+A estimativa apresentada ali é que os mil wheels mais baixados poderiam ficar cerca de vinte e cinco porcento menores.
+
+Mas isso é mudança de ecossistema.
+
+É daquelas que levam anos e dependem de instaladores, índices e compatibilidade.
+
+A parte de supply chain é mais indigesta.
+
+Mike Fiedler discutiu vetores de abuso no Py P I.
+
+Ele falou de arquivos que continuam existindo como estado persistente.
+
+Também falou de releases antigas que podem receber novos arquivos depois.
+
+E do uso do Py P I como uma espécie de C D N genérica para conteúdo que não é exatamente pacote Python.
+
+O recap também fala em crescimento de novos projetos, de algo como oito mil para vinte e quatro mil por mês.
+
+Enquanto isso, recursos dedicados de segurança continuam limitados.
+
+Esse tipo de número precisa ficar atribuído ao recap.
+
+Mas a proporção já ajuda a entender o problema.
+
+Moderação humana não escala do mesmo jeito que upload automatizado.
+
+Entre as propostas discutidas aparecem janelas de cooldown para arquivos recém-enviados.
+
+Também aparecem reabertura explícita com checagens para releases antigas.
+
+E ideias futuras, como Upload dois ponto zero, associado ao P E P 694, ou mecânicas de release selada.
+
+Nada disso deve ser escrito como o pip agora faz.
+
+É discussão, proposta e direção de trabalho.
+
+Mesmo assim, é uma notícia boa de acompanhar.
+
+Segurança de dependência não mora só no requirements ponto T X T do seu projeto.
+
+Ela mora no registro, no instalador, no formato, na política de upload, na compressão e no resolver.
+
+E mora na capacidade de detectar abuso antes que o C I puxe o pacote feliz da vida.
+
+As fontes deste bloco são o recap de Bernat Gabor, a discussão no Python ponto org e o P E P 777.
+
+Também entram as notas oficiais do Packaging Summit no HackMD.
+
+Nos destaques rápidos de hoje, Codiff chegou à versão zero ponto um ponto zero em 17 de maio.
+
+É um visualizador local de diffs para mudanças staged e unstaged em Git.
+
+O detalhe interessante para a era dos agentes é o modo walkthrough do Codiff.
+
+Ele gera um passeio guiado pelas mudanças.
+
+Também há comentários inline copiáveis em Markdown, com contexto de diff.
+
+Ainda é lançamento inicial, por enquanto com app para mac O S e helper de terminal.
+
+As fontes são a release e a documentação do Codiff.
+
+Segundo reportagem do The Hacker News, a Grafana disse que um token do ambiente Git Hub foi comprometido.
+
+Esse acesso permitiu download de código-fonte, seguido de tentativa de extorsão.
+
+A empresa, citada pela reportagem, afirma que não houve acesso a dados de clientes.
+
+Também diz que não houve acesso a informações pessoais, sistemas de clientes ou impacto operacional.
+
+O tipo exato de token e o vetor de ataque não aparecem nos detalhes públicos.
+
+Então a lição, por enquanto, é higiene ampla de credenciais, escopos e rotação.
+
+As fontes são The Hacker News e a thread da Grafana na rede X.
+
+A Mozilla publicou em 15 de maio uma resposta a reguladores do Reino Unido contra age gating em V P Ns.
+
+O argumento não é deixa tudo solto.
+
+É que V P N também protege jornalistas, ativistas, trabalhadores remotos e jovens usuários.
+
+Também protege qualquer pessoa tentando reduzir rastreamento por I P.
+
+A alternativa defendida pela Mozilla passa por responsabilização de plataformas.
+
+Também passa por controles parentais responsáveis e educação digital.
+
+As fontes são a Mozilla e a consulta do governo britânico.
+
+Uros Popovic publicou um bom guia separando em camadas aquilo que muita gente chama só de terminal.
+
+Tem emulador, pseudo-terminal e shell.
+
+O emulador desenha bytes e captura entrada.
+
+O P T Y liga pontas e cuida de disciplina de linha.
+
+O shell interpreta comandos e inicia processos.
+
+É básico, mas é um básico que explica metade das confusões com T T Y.
+
+Também explica confusões com sequências de escape e programas interativos.
+
+A fonte é o Linux Field Guide.
+
+Wraith abriu um caminho gratuito e aberto de defesa para treino de prompt injection.
+
+O módulo visível agora é "System Prompt Hardening".
+
+Ele tem doze testes, passagem a partir de oitenta porcento e, segundo o anúncio, pontuação determinística ou heurística.
+
+É útil como exercício de camada defensiva.
+
+Desde que ninguém confunda prompt endurecido com segurança completa de agente.
+
+Agente de verdade também precisa de sandbox, permissão, limite de dados e registro de ação.
+
+As fontes são Wraith Defense Path e o anúncio no Reddit.
+
+Donos de Fisker Ocean viraram um caso prático de sobrevivência pós-cloud.
+
+A Electrek reporta organização de comunidades após a falência da Fisker em 2024.
+
+E o repositório Apache dois ponto zero confirma uma integração MyFisker para Home Assistant.
+
+Ela foi feita por engenharia reversa da [EY1 P IY1 AY1] do app My Fisker.
+
+A integração expõe valores da nuvem como sensores e botões.
+
+A documentação ainda avisa sobre incerteza de acesso à nuvem.
+
+Produto dependente de servidor vira herança arquitetural quando a empresa some.
+
+As fontes são Electrek e o repositório da integração no Git Hub.
+
+Um artigo em português no TabNews explica cache em sistemas distribuídos.
+
+Ele passa por cache aside, write through e write behind.
+
+Também fala de T T L jitter, hot keys e thundering herd.
+
+É conteúdo educacional, não notícia de produto, mas vale a leitura.
+
+O texto coloca cache no lugar certo.
+
+Banco é verdade durável, cache é aceleração temporária com falhas próprias.
+
+A fonte desse destaque é o TabNews.
+
+No acompanhamento de tendências do dia, agentes aparecem menos como modelo novo e mais como trabalho de infraestrutura.
+
+Thorsten Ball descreveu um fluxo de debugging em produção usando prompts longos em Markdown como runbooks para Amp.
+
+Um agente produz relatório, outro agente fresco valida ou propõe correção.
+
+A graça está no processo, não na fantasia de uma sessão de chat onisciente.
+
+O próprio Amp Neo reforça essa direção.
+
+A C L I foi reconstruída com controle remoto, compaction automática, fila e steering.
+
+Também ganhou [EY1 P IY1 AY1] de plugins e permissões movidas para plugins.
+
+Isso deixa a ferramenta menos parecida com uma caixa de texto glorificada.
+
+E deixa a coisa mais parecida com um ambiente que precisa de política, evento, U I, comando e porteiro.
+
+Aí entram os sustos normais: The Register reportou o merge de uma reescrita grande do Bun, de Zig para Rust.
+
+Foram mais de um milhão de linhas adicionadas, com testes passando, segundo a cobertura.
+
+Impressiona, e também dá frio na nuca de quem já revisou P R grande demais.
+
+Código assistido por I A pode chegar rápido.
+
+Revisão, ownership e regressão continuam sendo humanos com ferramenta na mão e uma aba de teste aberta.
+
+Zero, Codiff, Amp e esse tipo de runbook apontam para o mesmo lugar.
+
+Agentes ficam mais úteis quando a casa em volta deles tem contrato.
+
+Saída estruturada, permissão explícita, diffs revisáveis, contexto vivo.
+
+Também entra agente novo para checar agente velho.
+
+Parece menos futurista do que I A programa tudo sozinha.
+
+Melhor assim. Futuro que cabe em checklist costuma quebrar menos coisa.
+
+As fontes deste acompanhamento são Joy and Curiosity número 86, Amp Neo e The Register.
