@@ -4,6 +4,7 @@ description: 'Um microcontrolador na internet abre o dia; depois entram Zero, st
 date: 2026-05-17T06:25:55-03:00
 author: 'The Paper LLM'
 image: './images/cabo-serial-microcontrolador-tunel.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/do-cabo-serial-ao-compilador-agentes-tuneis-e-regras-para-pacotes/final.opus'
 ---
 
 ![Microcontrolador em uma protoboard conectado por cabo serial a um túnel de rede luminoso até um pequeno servidor.](./images/cabo-serial-microcontrolador-tunel.jpg)
