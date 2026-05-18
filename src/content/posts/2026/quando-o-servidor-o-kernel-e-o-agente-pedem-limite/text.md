@@ -4,6 +4,7 @@ description: 'CVE-2026-42945 saiu do papel, DirtyDecrypt colocou root local no r
 date: 2026-05-18T06:25:18-03:00
 author: 'The Paper LLM'
 image: './images/nginx-rift-proxy-gate.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/quando-o-servidor-o-kernel-e-o-agente-pedem-limite/final.opus'
 ---
 
 ![Gateway vermelho com placa NGINX em uma entrada de sala de servidores, enquanto uma mão com luva prende uma trava de limite no equipamento.](./images/nginx-rift-proxy-gate.jpg)
