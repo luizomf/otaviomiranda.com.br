@@ -4,7 +4,7 @@
  *
  * O QUE FAZ:
  *   Barra de navegacao do site exibida nas paginas internas (blog, post, contatos).
- *   Renderiza links para Home, Contatos e Blog dentro de um componente Section.
+ *   Renderiza links para Home, Contatos, Blog e busca dentro de um componente Section.
  *   Nao aparece na landing page (index), que usa o Hero em vez disso.
  *
  * USADO EM:
@@ -22,16 +22,46 @@
  *   - CSS nesting nativo: as regras aninhadas dentro de "a { &:hover {...} }"
  *     usam CSS nesting, suportado por browsers modernos e processado pelo Astro.
  */
+import '@pagefind/component-ui/css/pagefind-component-ui.css';
 import Section from './Section.astro';
+
+const pagefindBundlePath = `${import.meta.env.BASE_URL}pagefind/`;
 ---
 
 <Section class='article-section' theme='light'>
-  <nav class='nav'>
+  <nav class='nav' aria-label='Navegação principal' data-pagefind-ignore>
     <a class='copyright-link' href='/'>Otávio Miranda</a>
-    <a href='/contacts/'>Contatos</a>
-    <a href='/blog/1/'>Blog</a>
+    <div class='nav-actions'>
+      <a href='/contacts/'>Contatos</a>
+      <a href='/blog/1/'>Blog</a>
+
+      <div class='site-search' data-pf-theme='dark'>
+        <pagefind-config
+          lang='pt'
+          excerpt-length='28'
+          bundle-path={pagefindBundlePath}></pagefind-config>
+        <pagefind-modal-trigger compact hide-shortcut placeholder='Buscar'
+        ></pagefind-modal-trigger>
+        <pagefind-modal reset-on-close>
+          <pagefind-modal-header>
+            <pagefind-input placeholder='Buscar no site'></pagefind-input>
+          </pagefind-modal-header>
+          <pagefind-modal-body>
+            <pagefind-summary></pagefind-summary>
+            <pagefind-results show-images='false'></pagefind-results>
+          </pagefind-modal-body>
+          <pagefind-modal-footer>
+            <pagefind-keyboard-hints></pagefind-keyboard-hints>
+          </pagefind-modal-footer>
+        </pagefind-modal>
+      </div>
+    </div>
   </nav>
 </Section>
+
+<script>
+  import '@pagefind/component-ui';
+</script>
 
 <style>
   nav.nav,
@@ -42,11 +72,11 @@ import Section from './Section.astro';
 
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
 
     font-size: var(--font-size-text-200);
     color: var(--color-text-muted);
-    gap: clamp(var(--space-400), 8vw, var(--space-1800));
+    gap: clamp(var(--space-500), 5vw, var(--space-1100));
 
     a {
       text-decoration: none;
@@ -61,5 +91,109 @@ import Section from './Section.astro';
 
   .nav {
     padding-block: clamp(1.8rem, 2.4vw, 2.4rem);
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: clamp(var(--space-500), 5vw, var(--space-1100));
+  }
+
+  .site-search {
+    --pf-font: var(--font-family-code);
+    --pf-background: var(--color-surface-dark);
+    --pf-hover: rgb(255 255 255 / 0.08);
+    --pf-border: rgb(255 255 255 / 0.16);
+    --pf-border-focus: rgb(255 255 255 / 0.34);
+    --pf-text: var(--color-text-inverse);
+    --pf-text-secondary: var(--color-text-subtle-on-dark);
+    --pf-text-muted: var(--color-text-muted-on-dark);
+    --pf-outline-focus: var(--color-link-hover);
+    --pf-modal-backdrop: rgb(14 15 24 / 0.78);
+    --pf-modal-max-width: min(64rem, calc(100vw - 2rem));
+    --pf-modal-top: 8dvh;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  :global(.site-search .pf-trigger-btn) {
+    width: 3.6rem !important;
+    height: 3.6rem !important;
+    padding: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    color: var(--color-link-subtle) !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    box-shadow: none !important;
+    transition: color 0.15s;
+  }
+
+  :global(.site-search .pf-trigger-btn:hover) {
+    color: var(--color-link-hover) !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  :global(.site-search .pf-trigger-btn:active) {
+    background: transparent !important;
+  }
+
+  :global(.article-section[data-theme='dark'] .site-search .pf-trigger-btn) {
+    color: var(--color-link-strong-on-dark) !important;
+  }
+
+  :global(
+    .article-section[data-theme='dark'] .site-search .pf-trigger-btn:hover
+  ) {
+    color: var(--color-link-strong-on-dark-hover) !important;
+  }
+
+  :global(.site-search .pf-trigger-icon) {
+    width: 1.3rem !important;
+    height: 1.3rem !important;
+    background: currentColor !important;
+  }
+
+  :global(.site-search .pf-modal) {
+    border: 1px solid rgb(255 255 255 / 0.12) !important;
+  }
+
+  :global(.site-search .pf-result-link),
+  :global(.site-search .pf-heading-link),
+  :global(.site-search .pf-result-title) {
+    color: var(--color-link-strong-on-dark) !important;
+  }
+
+  :global(.site-search .pf-result-link:hover),
+  :global(.site-search .pf-heading-link:hover) {
+    color: var(--color-link-strong-on-dark-hover) !important;
+  }
+
+  :global(.site-search .pf-summary),
+  :global(.site-search .pf-input-clear),
+  :global(.site-search .pf-keyboard-hints),
+  :global(.site-search .pf-result-url) {
+    color: var(--color-text-muted-on-dark) !important;
+  }
+
+  :global(.site-search mark) {
+    color: var(--color-text-high-on-dark) !important;
+    background: transparent !important;
+  }
+
+  @media (max-width: 540px) {
+    nav.nav,
+    footer.nav {
+      gap: var(--space-400);
+      justify-content: space-between;
+    }
+
+    .nav-actions {
+      gap: var(--space-500);
+    }
   }
 </style>

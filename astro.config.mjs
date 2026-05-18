@@ -19,6 +19,7 @@
  */
 import { defineConfig } from 'astro/config';
 
+import pagefind from 'astro-pagefind';
 import sitemap from '@astrojs/sitemap';
 
 function removeMarkdownHtmlComments() {
@@ -70,5 +71,5 @@ export default defineConfig({
   },
 
   // Integracoes (plugins) do Astro — sitemap gera /sitemap-index.xml no build
-  integrations: [sitemap()],
+  integrations: [sitemap(), pagefind()],
 });
