@@ -1,0 +1,266 @@
+Quando o servidor, o kernel e o agente pedem limite.
+
+Tem um tipo de problema que cresce quieto.
+A gente dá poder para uma peça do sistema porque precisa que ela trabalhe por nós.
+Depois, quase sem perceber, esquece que ela ficou com esse poder.
+
+O servidor na entrada passa a decidir o que chega na aplicação.
+O caminho mais fundo da máquina decide quem pode fazer o quê lá dentro.
+A ferramenta que edita código ganha acesso a arquivos, comandos e talvez segredos.
+O operador de banco, lá no cluster, vira a mão que troca instância, disco, réplica e failover.
+Quando algo dá errado, é ele que empurra essa parte sensível da produção.
+
+Nada disso é ruim por si só.
+Sem essas camadas, a produção vira uma pessoa fazendo plantão com fita crepe e café frio.
+O problema aparece quando o poder fica grande demais, espalhado demais, antigo demais ou pouco observado.
+Aí o assunto deixa de ser só a etiqueta da falha ou o anúncio da ferramenta.
+Vira uma pergunta de gente adulta, infelizmente mais chata.
+Quem ganhou autoridade aqui, qual é o tamanho do estrago se ela falhar, e onde está o freio?
+
+Hoje o dia veio com esse gosto de inventário.
+Uma peça muito comum na frente de aplicações ganhou pressa de correção.
+Um caminho local no Linux lembrou que estar dentro da máquina não significa tanto faz.
+Um texto em P T B R sobre agentes foi direto no ponto.
+Antes de deixar automação mexer no repositório, desenhe a cerca.
+E uma comparação entre operadores de Postgres no Kubernetes mostrou outra coisa importante.
+Ferramenta de banco também é decisão sobre autoridade, não só sobre feature.
+
+Eu sei, talvez isso nunca vire adesivo bonito no notebook.
+Ainda assim, evita aquele silêncio estranho depois do deploy.
+Então vamos por partes, com calma.
+
+A primeira história é a falha do [EH1 N JH AH0 N] [EH1 K S] que saiu da prateleira de advisory.
+A história mais urgente do dia é o [EH1 N JH AH0 N] [EH1 K S] Rift.
+O registro é C V E 2026, quarenta e dois nove quatro cinco.
+A versão curta, sem transformar isso em receita de ataque, é a seguinte.
+Existe um estouro de buffer no heap dentro do módulo de rewrite H T T P do [EH1 N JH AH0 N] [EH1 K S].
+E ele atinge uma peça que muita gente coloca bem na frente da aplicação.
+
+Esse lugar na arquitetura muda o peso da notícia.
+Um bug em proxy exposto não é igual a um bug escondido em serviço interno.
+O serviço escondido ainda passaria por três controles antes de alguém chegar nele.
+[EH1 N JH AH0 N] [EH1 K S] costuma receber tráfego de usuário, [EY1 P IY1 AY1], dashboard e webhook.
+Também recebe painel interno publicado às pressas e todo tipo de coisa temporária que ficou.
+Temporário, em infraestrutura, às vezes ganha aniversário.
+
+A Depthfirst descreve o problema como uma falha antiga em um padrão específico de rewrite.
+Em configurações padrão, o impacto confirmado é negação de serviço.
+Nesse cenário, o worker pode cair.
+A mesma fonte e o registro C V E dizem que execução remota de código pode acontecer com ASLR desativado.
+Esse detalhe precisa ficar no texto porque muda o tom.
+É sério, mas não autoriza dizer que todo [EH1 N JH AH0 N] [EH1 K S] da internet virou acesso remoto.
+
+As versões citadas pela Depthfirst colocam o [EH1 N JH AH0 N] [EH1 K S] Open Source em área afetada.
+A faixa vai da versão zero ponto seis ponto vinte e sete até a um ponto trinta ponto zero.
+A correção aparece nas versões um ponto trinta ponto um e um ponto trinta e um ponto zero.
+Para [EH1 N JH AH0 N] [EH1 K S] Plus, a página lista R trinta e dois até R trinta e seis.
+As correções citadas são R trinta e dois P seis e R trinta e seis P quatro.
+A curadoria também apontou a cadeia de C V E e a prova de conceito pública.
+Para quem opera isso, a ação é bem pouco poética.
+Inventariar versões, olhar primeiro o que está exposto na internet, revisar rewrite e atualizar.
+
+O pedaço novo de hoje é a virada de urgência.
+A SecurityWeek publicou que a VulnCheck observou exploração em canários depois da publicação do C V E.
+Segundo a reportagem, uma consulta da Censys apontou cerca de cinco vírgula sete milhões de servidores expostos.
+O número fala de servidores [EH1 N JH AH0 N] [EH1 K S] com versão potencialmente vulnerável.
+A própria reportagem ressalta que a população realmente explorável deve ser menor.
+Isso depende de configuração específica, e esse caveat muda bastante a leitura.
+
+Esse é o ponto bom para levar para o time.
+Transforme a notícia em fila de prioridade, não em pânico.
+Edge primeiro, versão antiga primeiro, configuração de rewrite primeiro.
+O resto pode esperar a reunião.
+A menos que a reunião seja justamente sobre por que o proxy de 2019 ainda está de pé.
+
+As fontes deste bloco são Depthfirst, o registro C V E, o detector no "Git Hub" e a SecurityWeek.
+
+A segunda notícia é o DirtyDecrypt, que começa local e ainda assim merece respeito.
+Ela também é de segurança, mas tem outro desenho.
+DirtyDecrypt é uma escalada local de privilégio no Linux.
+Isso quer dizer que o atacante precisa executar código na máquina antes de tentar virar root.
+Parece menos dramático do que uma falha remota em servidor público, e em parte é mesmo.
+Só que local não é palavra mágica que apaga risco.
+
+Pensa em workstation de dev, runner de C I, máquina de build ou laboratório com distro rápida.
+Pensa também em host compartilhado, ou em container com o kernel do host logo ali embaixo.
+Depois que alguém tem um pé dentro, bugs locais decidem se aquilo fica contido.
+Ou se vira domínio completo da máquina.
+É o tipo de detalhe que separa um usuário limitado de um problema com gosto de fim de semana.
+
+A BleepingComputer reportou que há prova de conceito pública para DirtyDecrypt.
+Na cobertura, o mesmo caso também aparece como Dirty C B C.
+O problema envolve a função R X G K decrypt S K B, no caminho de R X R P C e R X G K.
+O projeto da V doze descreve uma falha ligada a page cache e falta de guarda de copy on write.
+A conexão com C V E 2026, trinta e um seis três cinco, precisa vir com cuidado.
+A reportagem atribui esse alinhamento a Will Dormann.
+Mas também diz que não há um identificador C V E oficial limpo na página da prova de conceito.
+A N V D fala de Linux antes da versão seis ponto quatorze ponto quatro.
+Ela aponta um commit específico, mas a descrição da N V D não bate perfeitamente com a prova de conceito pública.
+
+Traduzindo a bagunça sem perder o alerta, existe prova de conceito.
+Também existe área técnica identificada e existe correção em cadeia de kernel.
+Mas a etiqueta exata ainda merece atribuição.
+Isso não impede defesa, mas impede manchete gritando certeza onde a fonte ainda está com as bordas tortas.
+
+A superfície também não é todo Linux do planeta da mesma forma.
+A BleepingComputer diz que a exploração exige kernel compilado com CONFIG R X G K.
+Isso está ligado ao suporte de segurança R X G K para o cliente A F S e transporte de rede.
+A reportagem cita mais atenção para distros próximas do upstream.
+Entram nessa lista Fedora, Arch e openSUSE Tumbleweed.
+Ela também diz que a prova de conceito foi testada em Fedora e kernel mainline.
+
+Mitigação aqui é chata do jeito certo: atualizar kernel.
+Há sugestão de colocar módulos como E S P quatro, E S P seis e R X R P C em blacklist.
+Só que isso pode quebrar VPNs I P sec e A F S.
+Então não é um comando bonito para jogar em frota inteira antes de entender o que usa isso.
+Segurança que resolve um incidente criando outro merece uma cadeira separada na reunião.
+
+As fontes deste bloco são BleepingComputer, a prova de conceito da V doze no "Git Hub" e a N V D.
+
+Depois de proxy e kernel, vem uma história menos explosiva.
+Talvez ela seja até mais útil para a rotina de quem programa.
+Um texto no TabNews defende uma ideia simples.
+Antes de colocar agentes para mexer no seu repositório, desenhe as fronteiras.
+
+Gosto desse tipo de conselho porque ele troca a pergunta bonita pela pergunta operacional.
+O agente pode ler tudo, ou ver arquivos de ambiente?
+Pode instalar pacote e rodar comando arbitrário?
+Pode abrir P R, dar push na main ou iniciar deploy?
+Onde ficam os logs, e quem aprova o que saiu?
+Parece burocracia até você lembrar de uma coisa.
+A ferramenta escreve código com a mesma confiança textual com que erra o caminho de um arquivo.
+
+O artigo recomenda limitar workspace, segredos, branch, comando, deploy e aprovação antes da adoção.
+Em vez de soltar a automação no repositório inteiro, use branch temporária.
+Use ambiente falso quando der, token com privilégio mínimo e validação de C I.
+Use secret scanning, aprovação humana para passo perigoso e logs que expliquem o que aconteceu depois.
+Se a tarefa é pequena, o poder também deveria ser pequeno.
+
+Esse cuidado ajuda justamente quem quer usar agente de verdade.
+Se a ferramenta é útil o bastante para tocar código real, ela merece tratamento de automação com shell.
+A diferença é que ela conversa bonito, e isso engana.
+Shell com lábia continua sendo shell.
+
+Também vale uma distinção honesta.
+Esse bloco é orientação de prática, não benchmark, incidente ou paper medido.
+O valor está na checklist mental.
+Para times que testam agentes hoje, a decisão começa pelo espaço permitido para essa ferramenta trabalhar.
+Isso vale ainda mais em repositórios com segredo, infraestrutura, deploy ou cliente real.
+
+A fonte deste bloco é o texto do TabNews sobre fronteiras para agentes no repositório.
+
+Agora vem operador de Postgres, que também é decisão de incidente.
+Gabriele Bartolini publicou uma comparação entre Cloud Native P G e Crunchy P G O.
+A fonte precisa de aviso logo no começo.
+Ele é cofundador e mantenedor do Cloud Native P G, e chama o texto de opinionated.
+Então o melhor jeito de ler é como uma lista de critérios para testar no seu próprio cluster.
+Não como placar final de campeonato.
+
+O assunto parece específico, mas o fundo é bem comum.
+Quando você coloca Postgres no Kubernetes, o operador vira parte do plano de controle do banco.
+Ele mexe em pods, volumes, failover, backup, upgrade e observabilidade.
+Se ele falha, se a [EY1 P IY1 AY1] do Kubernetes some, ou se uma imagem carrega superfície demais, você sente.
+Nessa hora, operador vira uma palavra pequena para uma autoridade enorme.
+
+O contraste central do texto é arquitetural.
+Segundo Bartolini, o Crunchy P G O trabalha com Patroni em sidecar e um D C S.
+D C S, aqui, é o distributed configuration store.
+O Cloud Native P G usa a [EY1 P IY1 AY1] do Kubernetes como fonte de verdade.
+Ele também gerencia diretamente pods e volumes persistentes, os P V Cs.
+Isso muda o comportamento quando o cluster fica doente.
+
+Um exemplo bom é a queda da [EY1 P IY1 AY1] do Kubernetes.
+Pods existentes continuam rodando.
+Mas agendamento, reconciliação e lógica do operador ficam prejudicados.
+O texto diz que o Cloud Native P G suspende failover nesse cenário para proteger dados.
+Isso pode soar conservador demais para quem quer troca automática a qualquer custo.
+Também pode ser exatamente o freio que evita transformar falha de controle em divergência no banco.
+
+Há ainda a comparação de superfície de imagem, atribuída ao Docker Scout no texto.
+A imagem do Crunchy aparece com seiscentos e vinte e cinco pacotes.
+O scanner também aponta duas vulnerabilidades críticas e cento e cinquenta e seis altas.
+A imagem do Cloud Native P G aparece com cento e quarenta pacotes.
+Nesse caso, o scanner aponta zero críticas e quatro altas.
+Número de scanner não é verdade universal, e amanhã pode mudar com outra versão.
+Mesmo assim, é uma pergunta ótima: o que está dentro da imagem que carrega seu banco?
+
+Para quem escolhe operador de Postgres, a conclusão responsável é meio sem glamour.
+Rode backup e restore, simule upgrade e force failover.
+Derrube a [EY1 P IY1 AY1] em ambiente controlado.
+Olhe permissões, leia licença, entenda imagem e veja como o time reage ao incidente.
+Feature table ajuda na primeira triagem.
+Incidente real não lê tabela bonita.
+
+A fonte deste bloco é a comparação de Gabriele Bartolini entre Cloud Native P G e Crunchy P G O.
+
+Agora, alguns destaques rápidos de hoje, sem virar leitura de link.
+A Open S S F publicou um alerta de preparo para o Cyber Resilience Act.
+A organização diz que sessenta e seis porcento dos respondentes não conheciam bem a C R A.
+Também diz que cinquenta e um porcento dos fabricantes dependem passivamente de comunidades open source.
+Outro dado do alerta é que workarounds privados custam, em média, duzentos e cinquenta e oito mil dólares.
+Esse custo é por ciclo de release, segundo a Open S S F.
+As datas no radar são setembro de 2026, para reporte de vulnerabilidade.
+Depois vem dezembro de 2027, para obrigações mais amplas.
+Para empresa que usa software livre, isso vira inventário, S B O M e processo de vulnerabilidade.
+Também vira contato com upstream, porque ninguém corrige ecossistema só com planilha.
+A fonte deste destaque é a Open S S F.
+
+Semble apareceu como uma ferramenta open source de busca de código pensada para agentes.
+A promessa é reduzir o desperdício de contexto antes da edição.
+Ele roda localmente em C P U, sem chave de [EY1 P IY1 AY1] ou G P U.
+A ferramenta combina embeddings Model dois Vec, B M vinte e cinco, reciprocal rank fusion e reranking.
+Ela também expõe integração via M C P.
+Os números grandes, como noventa e oito porcento menos tokens, são claims do projeto.
+O mesmo vale para qualidade perto de noventa e nove porcento e melhorias de velocidade.
+Eu colocaria isso na pasta testar em repo real antes de acreditar com força.
+A fonte deste destaque é o repositório MinishLab Semble.
+
+O [P AO1 N D] [T IH0] [OW1 N] Berlin 2026 fechou com prêmios altos.
+Foram um milhão, duzentos e noventa e oito mil, duzentos e cinquenta dólares em prêmios.
+Segundo a Zero Day Initiative, também foram quarenta e sete vulnerabilidades zero day únicas.
+A DEVCORE ganhou Master of Pwn com cinquenta vírgula cinco pontos.
+O prêmio da DEVCORE foi de quinhentos e cinco mil dólares.
+O detalhe importante para ambiente corporativo é o relógio.
+Vendors têm janela coordenada de noventa dias antes da divulgação pública pela Z D I.
+Guarde isso como lista de advisories para acompanhar nos próximos meses.
+Não trate o resultado como exploit dump de hoje.
+As fontes deste destaque são a Z D I e a BleepingComputer.
+
+A opção block size no PostgreSQL parece configuração normal, mas não é bem assim.
+Ela é uma opção preset, lida a partir de como o servidor foi compilado.
+O valor padrão documentado é oito mil cento e noventa e dois bytes.
+Esse valor é determinado por B L C K S Z.
+Não é um botão de PostgreSQL ponto conf para mexer depois do almoço.
+Se você não está construindo um PostgreSQL customizado e testando cluster novo para isso, deixe quieto.
+As fontes deste destaque são The Build e a documentação do PostgreSQL.
+
+O fio que junta as histórias de hoje é autoridade com raio de explosão menor.
+O proxy na borda recebe tráfego demais para ficar velho sem dono.
+O kernel continua sendo a parte em que local vira root quando a corrente já começou.
+O agente no repositório precisa de limite antes de receber chave, branch e deploy.
+O operador de banco precisa ser escolhido pelo comportamento em falha.
+Não só pelo nome que aparece melhor no readme.
+
+Tem um sinal paralelo no kernel também.
+A Phoronix reportou que Greg Kroah Hartman continuou encontrando bugs com um fuzzer local apoiado por IA.
+O fuzzer é o Clanker 2000, e levou a correções no driver core do Linux.
+A graça aqui está em ver automação entrando no fluxo de gente experiente.
+Ela ajuda a achar coisa repetitiva, cansativa e útil.
+Depois vem revisão, patch e manutenção normal.
+Que coisa, né? Software ainda gosta de processo.
+
+O mesmo vale para a C R A no mundo open source.
+Quando a lei vira processo de vulnerabilidade, inventário e documentação, a cobrança não cai só em jurídico.
+Ela passa por quem mantém pacote, quem publica imagem e quem responde advisory.
+Passa por quem sabe onde está a dependência.
+E passa por quem vai receber o e-mail quando algo quebrar.
+O nome bonito é conformidade.
+O trabalho real parece mais com lista, contato, prazo e evidência.
+
+Se der para tirar uma ação pequena do dia, eu começaria assim.
+Descubra o que está exposto e reduza privilégio onde a ferramenta fala com produção.
+Teste o failover que você acha que entende.
+E deixe o agente trabalhar em um cercado que você conseguir explicar depois.
+Não resolve o mundo, mas já seria uma segunda-feira menos corajosa do que o necessário.
+
+As fontes finais são Depthfirst, BleepingComputer, TabNews, Open S S F e Phoronix.
