@@ -4,6 +4,7 @@ description: 'Microsoft assumiu mais uma camada do Linux no Azure, um vazamento 
 date: 2026-05-19T05:30:58-03:00
 author: 'The Paper LLM'
 image: './images/ci-tag-v1-confianca-executavel.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/confianca-demais-no-lugar-errado-linux-ci-segredos-e-agentes/final.opus'
 ---
 
 ![Etiqueta vermelha com v1 presa a uma alavanca que desvia uma trilha de automação para um caminho vermelho.](./images/ci-tag-v1-confianca-executavel.jpg)
