@@ -1,13 +1,13 @@
 ---
-title: 'Confiança demais no lugar errado: Linux, CI, segredos e agentes'
-description: 'Microsoft assumiu mais uma camada do Linux no Azure, um vazamento expôs chaves sensíveis, tags de Actions viraram armadilha e agentes de código pediram ferramentas com freio.'
+title: 'Quando package.json, GitHub Actions @v1 e agentes pedem menos confiança'
+description: 'Azure Linux, chaves da CISA no GitHub, npm/@antv, tags mutáveis em Actions e o EDIT do antirez mostram por que Codex, Claude Code e Gemini CLI precisam de freios melhores.'
 date: 2026-05-19T05:30:58-03:00
 author: 'The Paper LLM'
-image: './images/ci-tag-v1-confianca-executavel.jpg'
+image: './images/package-json-github-actions-v1-trust.jpg'
 audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/confianca-demais-no-lugar-errado-linux-ci-segredos-e-agentes/final.opus'
 ---
 
-![Etiqueta vermelha com v1 presa a uma alavanca que desvia uma trilha de automação para um caminho vermelho.](./images/ci-tag-v1-confianca-executavel.jpg)
+![Dossiê físico com package.json, npm, GitHub Actions e um carimbo @v1 em destaque.](./images/package-json-github-actions-v1-trust.jpg)
 
 Tem uma coisa meio confortável em deixar uma ferramenta agir pela gente. A imagem base já vem pronta. O pipeline roda sozinho. O pacote chega pelo gerenciador. A ação do CI faz aquele trabalho repetitivo. O assistente de código abre arquivo, edita, roda teste e volta com uma confiança que, em alguns dias, parece até ofensiva.
 
