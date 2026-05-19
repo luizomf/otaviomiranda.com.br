@@ -1,0 +1,201 @@
+Confiança demais no lugar errado: Linux, C I, segredos e agentes.
+
+Tem uma coisa meio confortável em deixar uma ferramenta agir pela gente.
+A imagem base já vem pronta, o pipeline roda sozinho, e o pacote chega pelo gerenciador.
+A ação do C I faz aquele trabalho repetitivo sem reclamar.
+O assistente de código abre arquivo, edita, roda teste e volta com uma confiança quase ofensiva.
+Isso tudo economiza tempo, claro. Também cria uma confiança espalhada que é fácil de esquecer.
+Um sistema pequeno recebe permissão para fazer uma tarefa pequena.
+Depois ganha mais contexto, mais credencial, mais acesso, e mais lugar para rodar.
+Quando a gente olha de novo, aquele pedacinho virou parte do caminho crítico.
+Hoje o assunto inteiro anda por aí.
+O dia passa menos por uma única grande falha e mais por autoridade delegada.
+Quem constrói a base do sistema operacional que roda sua carga?
+Quem pode publicar uma versão de pacote que o seu projeto instala sem pensar?
+Quem decide para onde uma tag de automação aponta?
+Quanto tempo uma chave de nuvem continua viva depois de ser vista por quem não deveria?
+E, no canto que cresce rápido demais para a nossa paz espiritual, tem a pergunta dos agentes de código.
+Se uma ferramenta pode mexer em arquivos por nós, ela deve editar como quem cola texto em um formulário?
+Ou deve editar como uma automação que precisa provar onde está mexendo?
+A parte chata é que quase tudo aqui parece detalhe até virar incidente.
+A parte boa é que detalhe bem tratado costuma ser barato antes do susto.
+Depois do susto, ele ganha reunião, planilha, ligação fora de hora.
+E ganha alguém perguntando, em voz baixa: mas isso estava público mesmo?
+Vamos começar pela camada de baixo.
+
+Microsoft colocou mais Linux no balcão do Azure.
+A Microsoft anunciou uma etapa importante para o Azure Linux.
+A leitura cuidadosa importa aqui, porque a manchete fácil pode escorregar.
+Azure Linux quatro ponto zero foi anunciado para uma futura prévia pública em máquinas virtuais do Azure.
+Já o Azure Container Linux foi anunciado como geralmente disponível.
+Nesse caso, o papel é de sistema imutável e otimizado para containers.
+A frase correta passa longe de dizer que a Microsoft lançou um Linux desktop para trocar de distro amanhã.
+O assunto é mais operacional.
+A empresa quer controlar melhor a base Linux que sustenta cargas de nuvem, Kubernetes e containers.
+Pelo texto da própria Microsoft, isso também inclui workloads de I A.
+O discurso público fala em sistema endurecido, menos pacotes e cadeia de suprimentos mais transparente.
+Também fala em comportamento consistente entre host e container.
+Para quem roda em nuvem, isso toca em um ponto muito concreto.
+A imagem base define quem empacota, quem corrige, quem assina e quem responde.
+Ela também define que tipo de integração específica vem junto.
+A Microsoft diz que mais de dois terços dos cores de clientes no Azure rodam Linux.
+Então não estamos falando de uma curiosidade simpática para slide de evento.
+O Linux já é chão de fábrica ali.
+O que muda é a Microsoft assumir esse chão como produto de primeira classe.
+Agora ele tem nome, versão, promessa de manutenção e integração direta ao Azure.
+Para times que usam A K S ou workloads Linux dentro do Azure, vale acompanhar o Microsoft Build.
+O anúncio está marcado para 2 de junho de 2026.
+Quando a prévia estiver disponível, o caminho sensato é testar com calma.
+Para quem está feliz em Debian, Ubuntu, R H E L, Rocky, Alma, Fedora ou uma V P S humilde, a notícia ainda serve.
+Ela lembra uma coisa simples: saiba quem é dono da sua base.
+Container não apaga o sistema que fica por baixo dele.
+Só deixa mais fácil esquecer que ele existe.
+As fontes deste bloco são o Microsoft Open Source Blog e a ZDNet.
+
+Um repositório público lembrou que segredo não perdoa nome de agência.
+Brian Krebs publicou uma investigação sobre um repositório público no Git Hub.
+Segundo ele, o repositório era mantido por um contratado da C I S A.
+O repositório se chamava Private C I S A, e teria exposto chaves de A W S GovCloud e credenciais internas.
+A GitGuardian encontrou e reportou a exposição.
+Philippe Caturegli, da Seralys, teria testado a validade de chaves citadas na matéria.
+Vou manter o nível de detalhe no lado seguro.
+Esse tipo de notícia não precisa virar manual de abuso para ser útil.
+O ponto público suficiente é este: havia credenciais sensíveis em um lugar público.
+A exposição envolvia ambiente governamental.
+E a própria C I S A disse a Krebs que investigava o caso.
+Também disse que não tinha indicação de que dados sensíveis haviam sido comprometidos.
+O pedaço mais constrangedor, se confirmado, é o controle que deveria impedir o erro.
+Krebs relata que o bloqueio padrão de segredos do Git Hub teria sido desativado naquela conta.
+Isso é quase a versão DevOps de tirar a bateria do detector de fumaça porque ele apita enquanto você cozinha.
+Funciona até o dia em que a cozinha quer participar da arquitetura.
+Para qualquer time, a lição é menos olhar a agência errando, e mais olhar o padrão de falha.
+Repositório público, histórico de commit, log e artefato de C I são lugares onde segredo aparece sem pedir licença.
+Paste, transcrição de chat e pacote de debug também entram nessa lista.
+Secret scanning precisa ser padrão, mas não pode ser a única cerca.
+Chave de nuvem deve ser curta, limitada, rotacionável e observável.
+Credencial de registry ou artifactory também é alvo valioso, porque mexe no que entra no build.
+O tempo de revogação também conta.
+Quando uma chave vaza, a frase a gente vê isso depois do almoço envelhece mal.
+O ideal é ter caminho ensaiado para invalidar, auditar uso e restringir privilégio.
+Também é preciso entender qual sistema dependia daquela credencial.
+Segurança boa tem botão chato, documentação chata e gente que sabe apertar o botão.
+E isso precisa acontecer antes de começar a caçar culpado.
+A fonte deste bloco é Krebs on Security.
+
+Pacote e tag continuam sendo confiança executável.
+A família Mini Shai-Hulud apareceu de novo.
+Agora, em relatos sobre pacotes npm ligados ao ecossistema AntV e tags comprometidas em Git Hub Actions.
+O ponto novo é importante porque mostra duas portas diferentes para o mesmo tipo de dor.
+Uma porta é a identidade de publicador.
+A outra é o ponteiro mutável.
+No lado do npm, o The Hacker News reportou pacotes relacionados ao AntV comprometidos pela conta mantenedora atool.
+A reportagem cita exemplos do escopo arroba AntV, como G dois, G seis, X seis e L sete.
+Também cita echarts for react, timeago ponto J S, size sensor e canvas nest ponto J S.
+Com atribuição a Socket, StepSecurity e SafeDep, a matéria fala em 639 versões maliciosas.
+Essas versões estavam em 323 pacotes únicos, incluindo 558 versões em 279 pacotes do escopo arroba AntV.
+Esse número pode mudar conforme a campanha for investigada.
+O essencial já é ruim o bastante.
+Um nome confiável no package ponto JSON não garante que aquela versão específica foi publicada em condições saudáveis.
+Se a conta certa é tomada, o pacote errado entra pela porta da frente.
+No lado do Git Hub Actions, outra reportagem do The Hacker News fala em tags movidas para um commit impostor.
+O caso envolveu o repositório issues-helper, da actions-cool, com código para roubo de credenciais.
+A StepSecurity afirmou que workflows presos a um S H A completo conhecido como bom não foram afetados.
+Também foram citadas tags comprometidas no repositório maintain-one-comment, da actions-cool.
+O Git Hub desabilitou o acesso ao repositório.
+Aqui mora um detalhe que muita gente aprende tarde: tag é nome, não garantia eterna.
+Se seu workflow usa uma ação na versão v um, você confia que v um continua apontando para o que você acha.
+Fixar um commit completo reduz essa superfície, embora aumente o trabalho de atualização.
+É aquela troca deliciosa entre segurança e conveniência, também conhecida como computação.
+A ligação entre os casos ainda deve ser tratada como em desenvolvimento.
+As reportagens apontam sobreposição de infraestrutura e domínio usado para exfiltração.
+Mas o caminho inicial exato não está fechado publicamente.
+Para quem mantém projeto, a ação não precisa esperar o documentário completo.
+Revise lockfiles e versões, rotacione segredos expostos em C I e restrinja tokens.
+Também vale monitorar conexões de saída e fixar Git Hub Actions por commit quando o risco justificar.
+As fontes são The Hacker News sobre pacotes AntV, The Hacker News sobre Git Hub Actions e Socket sobre Mini Shai-Hulud.
+
+O EDIT do antirez é pequeno, mas acerta um nervo dos agentes.
+Salvatore Sanfilippo, o antirez, publicou uma nota sobre edição usada por agentes de código.
+De primeira, o assunto parece miúdo.
+Em vez de fazer o modelo repetir o texto antigo inteiro, a ferramenta poderia devolver linhas numeradas e pequenas tags.
+Depois, o agente enviaria uma chamada de edição com linha, tag e novo conteúdo.
+Mas miudeza desse tipo é onde agente começa a ficar menos teatral e mais utilizável.
+O problema é conhecido por quem já deixou ferramenta automática mexer em arquivo.
+Uma edição precisa ser segura contra contexto velho.
+Se o modelo diz para trocar um trecho antigo por um novo, a ferramenta costuma conferir se o trecho antigo ainda existe.
+Isso funciona, mas gasta tokens e pode ser frágil quando o arquivo muda.
+Também fica frágil quando o trecho é grande demais.
+Em inferência local, onde contexto e custo apertam mais, repetir texto velho vira desperdício com cara de segurança.
+A proposta de antirez lembra um check and set.
+O comando de leitura ou busca mostraria cada linha com um número e uma tag curta, derivada de checksum.
+Na edição, o agente mandaria a linha, a tag e o novo conteúdo.
+Se a tag não bate, a ferramenta sabe que aquilo mudou desde que o agente viu.
+Ele fala em tags de quatro caracteres, algo em torno de dois vírgula cinco tokens de L L M por tag.
+Também comenta que DeepSeek v quatro Flash usou a ferramenta bem nos testes dentro do trabalho no D S quatro.
+Os caveats são bons e devem ficar junto da ideia.
+O próprio antirez menciona possível arte anterior e não apresenta medição formal exata de economia.
+Ele também discute colisão, tokenização e até uma alternativa com C R C trinta e dois do arquivo inteiro.
+Ainda não dá para tratar isso como padrão novo decretado do alto da montanha.
+É um desenho prático de ferramenta, feito por alguém tentando reduzir atrito real.
+Esse atrito fica entre modelo, arquivo e segurança de edição.
+O motivo de isso combinar com o resto do dia é simples.
+Agente melhor não nasce só de modelo maior.
+Nasce também de operação menor, verificável, barata e com falha detectável.
+Um bom EDIT não dá palestra.
+Ele só impede a ferramenta de mexer no lugar errado com muita convicção.
+A fonte deste bloco é antirez.
+
+Destaques rápidos para hoje, ainda no mesmo fio.
+A falha C V E 2026, oitenta e um cinco três, afeta Universal Robots PolyScope antes da versão cinco ponto vinte e cinco ponto um.
+O registro da N V D descreve injeção de comandos no sistema operacional pela interface Dashboard Server.
+Segundo o registro, isso ocorre sem autenticação.
+A pontuação C V S S três ponto um é nove ponto oito, atribuída pela C N A.
+Para ambiente industrial, a parte prática é segmentar interfaces de controle e corrigir.
+Não vale inventar exploração ativa quando a fonte não disse isso.
+As fontes são N V D e SecurityWeek.
+Vite oito continua valendo como contexto técnico, mas com aviso de data.
+O post primário do Vite é de 12 de março de 2026, enquanto a cobertura da InfoQ saiu hoje.
+A versão integra Rolldown e Oxc, relata reduções grandes de build em projetos reais.
+Ela também adiciona suporte embutido a caminhos de T S config.
+Na configuração, o nome do recurso é resolve ponto T S config Paths.
+Outro recurso é server ponto forward Console.
+Ele encaminha logs e erros do navegador para o terminal quando detecta agente de código.
+Esse último detalhe é pequeno e útil.
+Se o agente só vê o terminal, o erro do browser precisa chegar lá.
+As fontes desse destaque são Vite e InfoQ.
+
+Acompanhamento de tendências do dia.
+Simon Willison publicou slides anotados de uma lightning talk da PyCon U S 2026.
+O tema era os últimos seis meses em L L Ms.
+A tese dele é que novembro de 2025 foi um ponto de virada, especialmente para programação.
+Ele também faz uma ressalva honesta.
+Falar em melhor modelo nessa velocidade tem uma parte enorme de impressão, uso e contexto.
+Não é uma tabela divina descendo pronta.
+O trecho mais útil para este post é a conexão entre modelos e arnês.
+Simon atribui boa parte da melhora dos agentes de código a treinamento com recompensas verificáveis.
+Também atribui a ambientes como Codex e Claude Code.
+Nesses ambientes, a ferramenta pode tentar, executar, receber feedback e corrigir.
+Ele também aponta avanços em modelos abertos ou locais, como Gemma quatro e G L M cinco ponto um.
+Mas o centro da conversa passa longe de placar de nome.
+É o loop de trabalho ficando mais mensurável.
+Três papers recentes reforçam esse lado menos glamouroso.
+O paper "Overeager Coding Agents" mede ações fora de escopo em tarefas benignas.
+Ele usa OverEager Gen e OverEager Bench, com 500 cenários validados.
+Também relata cerca de sete mil e quinhentas execuções em Claude Code, OpenHands, Codex C L I e Gemini C L I.
+O paper relata mais comportamento overeager quando declarações de consentimento são removidas.
+As taxas também foram maiores em frameworks permissivos do que em fluxos que pedem confirmação para continuar.
+O paper "Code as Agent Harness" dá vocabulário para isso.
+Código e runtime viram interface, mecanismo e camada de escala para agentes.
+Já o Reversa mostra documentação reversa para legado.
+Ele usa rastreabilidade, marcação explícita de confiança e lacunas preservadas para validação humana.
+No estudo exploratório com C O B O L de A T M para Go, a ferramenta produziu 517 claims.
+Também produziu dez gaps, 53 cenários de paridade em Gherkin e um plano de reconstrução de nove de 11 tarefas.
+A validação final de paridade e cutover ainda não estavam concluídos.
+Juntando tudo, o padrão do dia fica bem pé no chão.
+Base Linux, credencial, pacote, tag e agente são todos lugares onde confiança vira execução.
+A resposta não precisa ser paranoia performática.
+Pin por S H A quando fizer sentido, chave curta, escopo mínimo e secret scanning ligado ajudam.
+Também entram agente em ambiente com limite, log que explique o que aconteceu e teste que reclame antes do cliente.
+Se isso parece menos emocionante que I A autônoma, ótimo.
+Produção saudável costuma ter pouco glamour mesmo.
+As fontes são Simon Willison, Overeager Coding Agents, Code as Agent Harness, Reversa e antirez.
