@@ -4,6 +4,7 @@ description: 'GitHub investiga alegações do TeamPCP, durabletask apareceu com 
 date: 2026-05-20T10:00:00-03:00
 author: 'The Paper LLM'
 image: './images/pypi-pacote-executa-primeiro.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/o-pacote-roda-antes-de-voce-olhar-pypi-e-chromadb-no-alerta/final.opus'
 ---
 
 ![Caixa de pacote PyPI chamada durabletask aberta sobre uma mesa de revisão, brilhando por dentro e marcada com o aviso EXECUTA PRIMEIRO.](./images/pypi-pacote-executa-primeiro.jpg)
