@@ -1,0 +1,226 @@
+O pacote roda antes de você olhar: Pai Pí Ai e Chroma D B no alerta.
+
+Às vezes a parte mais perigosa de um sistema fica fora da tela que todo mundo usa.
+Ela aparece naquele segundo silencioso em que alguma coisa executa por confiança.
+Pode ser um pacote importado no começo do processo, ou uma automação com token guardado.
+Pode ser um serviço carregando modelo, ou uma ferramenta de linha de comando que virou hábito.
+De repente, essa ferramenta também tem prazo para troca.
+
+Ninguém acorda pensando nisso de manhã.
+A gente quer que o build passe, que o bot ajude, que a biblioteca instale e que a aplicação responda.
+O problema é que computador é um colega muito literal.
+Se você deu permissão, ele usa. Se o caminho estava aberto, ele passa.
+Se o pacote roda ao importar, ele não espera você terminar o café para perguntar se tudo bem.
+
+O dia trouxe várias histórias nesse ponto meio desconfortável.
+Elas não parecem iguais na superfície.
+Uma envolve repositório interno e pacote publicado. Outra mexe com a rotina de quem programa usando assistente.
+Também apareceu relatório com números de violação, alerta em infraestrutura de IA, assinatura de software usada do jeito errado.
+E ainda vieram duas notas de bastidor para backend e banco de dados.
+
+Mas por baixo aparece a mesma pergunta.
+O que no seu ambiente consegue executar, publicar, assinar, chamar nuvem ou mexer em cluster?
+E o que consegue virar parte do fluxo sem alguém olhar de perto?
+
+Agora sim entram os nomes da edição.
+"Git Hub", Pai Pí Ai, Google, Chroma D B, Verizon, Microsoft e alguns projetos menores apareceram hoje.
+Não como bingo de marca, mas como lembrete de que execução confiável virou uma fronteira bem movimentada.
+E fronteira movimentada, você sabe, precisa de cerca, câmera e uma pessoa que não aceite qualquer crachá bonito.
+
+A primeira história é de um pacote Python mostrando que supply chain agora atravessa token, nuvem e cluster.
+A história principal ainda está em desenvolvimento, então a primeira obrigação é separar fato público de propaganda de atacante.
+O The Hacker News publicou que o "Git Hub" investigava acesso não autorizado a repositórios internos.
+Esse acesso estaria ligado a alegações do grupo Team P C P.
+A reportagem também diz que, segundo posição atribuída ao "Git Hub", não havia evidência de impacto em informações de clientes.
+Esse limite valia para fora desses repositórios internos, naquele momento.
+
+O número mais chamativo, cerca de quatro mil repositórios, veio da própria alegação do grupo.
+Isso merece caveat grande, daqueles que não cabem em rodapé minúsculo.
+Ator vendendo acesso também vende narrativa.
+Pode haver incidente real e, ao mesmo tempo, exagero comercial em cima dele.
+Segurança tem dessas coisas agradáveis.
+
+O pedaço mais útil para quem desenvolve é a ligação com pacote publicado.
+Pesquisadores relataram versões maliciosas do pacote durabletask no Pai Pí Ai.
+As versões citadas incluem um ponto quatro ponto um, um ponto quatro ponto dois e um ponto quatro ponto três.
+A Step Security citou os uploads infectados das versões um ponto quatro ponto um e um ponto quatro ponto dois.
+Esses uploads teriam acontecido em dezenove de maio de 2026.
+A Step Security também apontou a versão um ponto quatro ponto zero como a última versão limpa na análise dela.
+O pacote é associado ao ecossistema da Microsoft, e isso muda a reação de muita gente.
+Quando o nome parece confiável, a mão vai mais rápido no comando pip install.
+
+Esse é justamente o problema aqui.
+
+Segundo Snyk e Step Security, a família de payload ligada a essa campanha mirava ambientes Linux.
+Ela roubava segredos de desenvolvedor e de nuvem.
+Também criava repositórios públicos no "Git Hub" para despejar tokens roubados.
+Além disso, tentava persistência falsa via system D.
+E tinha caminhos de propagação por A W S S S M e Kubernetes, inclusive pelo comando kubectl exec.
+A Step Security também documentou um ramo destrutivo com wiper condicionado por geografia.
+Não precisa entrar em detalhe de exploração para entender o tamanho da encrenca.
+Importar um pacote pode virar roubo de segredo, uso de token, movimento em nuvem e alcance dentro de cluster.
+
+A Grafana entrou como exemplo concreto do raio de impacto.
+Em atualização própria, a empresa confirmou acesso não autorizado a repositórios internos no "Git Hub".
+Ela disse não ter evidência de impacto em dados de produção de clientes, informações pessoais ou ambientes de clientes.
+Também disse não ter evidência de impacto no Grafana Cloud.
+A empresa conectou o caso a um token vindo do incidente de supply chain do TanStack.
+O detalhe incômodo foi um token de workflow do "Git Hub" que teria passado batido e ampliado o caminho.
+A Grafana diz que rotacionou ou revogou tokens expostos.
+
+Para o time que mantém projeto, o trabalho defensivo é menos elegante do que a manchete.
+Revise se durabletask apareceu no ambiente.
+Confira versões, pinning e lockfiles.
+Volte para versão limpa quando for o caso.
+Procure execução em importação.
+Rotacione tokens que possam ter passado por máquina ou pipeline afetado.
+Olhe permissões de A W S S S M e Kubernetes.
+E trate incidente de pacote como incidente de credencial.
+O pacote é só a porta. O que ele consegue carregar no bolso é o inventário que costuma doer.
+
+As fontes deste bloco são The Hacker News, Grafana Labs, Snyk e Step Security.
+
+A segunda história é que o Google colocou uma data no fim do fluxo antigo.
+O anúncio do Google no I O 2026 tem modelo novo no fundo, incluindo Gemini três ponto cinco Flash.
+Mas a parte que chega primeiro para desenvolvedor é calendário.
+
+O Google publicou que Gemini C L I e as extensões Code Assist para I D E deixam de funcionar em dezoito de junho de 2026.
+Esse corte vale para usuários individuais e assinantes Google A I Pro ou Ultra.
+Usuários empresariais que usam a própria chave da Gemini [EY1 P IY1 AY1] ou um projeto do Google Cloud ficam fora desse corte.
+Esse é o texto oficial, pelo menos.
+Mesmo assim, se a sua rotina depende dessas ferramentas, a data já virou tarefa.
+
+O caminho indicado é Antigravity C L I e a família Antigravity dois ponto zero.
+O pacote anunciado está em prévia pública e inclui I D E desktop, C L I, [EY1 P IY1 AY1] de plataforma e agentes gerenciados.
+O Google diz que a nova C L I é escrita em Go, até quatro vezes mais rápida.
+Ela também traz hooks, skills, sub-agentes e extensões.
+Os agentes gerenciados rodam em ambiente Linux hospedado com Bash, Python e Node.
+E podem delegar até cem agentes paralelos.
+
+O pacote todo parece poderoso mesmo.
+Também parece o tipo de poder que precisa de política antes de virar hábito.
+
+Uma ferramenta local que você conhecia vira uma plataforma com execução hospedada, mais integração e mais peças ao redor.
+Isso muda onde ficam filesystem, segredos, rede, logs, histórico e aprovação.
+O Google também avisa que não haverá paridade um para um no lançamento.
+Apesar disso, conceitos centrais de agente seguem na migração.
+Em português de escritório: teste o seu fluxo real, não a demo bonita.
+
+Quem usa Gemini C L I em script, automação pessoal, extensão de editor ou fluxo de revisão deve fazer inventário agora.
+Quais comandos dependem dela? Quais credenciais ela enxerga?
+O fluxo precisa continuar local ou pode ir para ambiente hospedado?
+O preço da [EY1 P IY1 AY1] faz sentido para uso pesado?
+A página de preços existe, mas preço de [EY1 P IY1 AY1] é aquela coisa.
+Sempre confira perto da decisão, porque planilha velha tem talento para mentir sem querer.
+
+A notícia fica interessante justamente porque conversa com o bloco anterior.
+Ler isso como mais uma ferramenta de IA deixaria metade do problema no chão.
+A migração muda a fronteira de execução para quem já colocou assistente no dia a dia.
+Migração de C L I, quando a C L I mexe em código, comando e contexto, merece mais respeito do que trocar tema do terminal.
+
+As fontes deste bloco são o Google Blog sobre novidades para desenvolvedores no I O 2026.
+Também entram o Google Developers Blog sobre a transição do Gemini C L I e a página de preços da Gemini [EY1 P IY1 AY1].
+
+A terceira história é que o D B I R colocou número no incômodo.
+Incidente do dia sempre chama atenção, mas relatório anual ajuda a não enxergar tudo como caso isolado.
+O D B I R 2026 da Verizon diz que exploração de vulnerabilidades levou a trinta e um porcento das violações analisadas.
+Enquanto isso, abuso de credenciais ficou em treze porcento.
+A Verizon também afirma que ransomware apareceu em quase metade das violações.
+E diz que exploração de vulnerabilidade superou abuso de credencial pelo terceiro ano seguido.
+
+Isso não aposenta senha, M F A, chave curta, S S O ou higiene de identidade.
+Seria uma leitura preguiçosa. Credencial continua sendo dor real.
+O que os números fazem é puxar patching, inventário de exposição e remoção de serviço velho para a mesma mesa de prioridade.
+
+A análise da Tenable acrescenta cor operacional.
+Ela fala em aumento de trinta e quatro porcento em exploração de vulnerabilidades.
+Também fala em janelas de exploração caindo de meses para horas.
+E cita mediana de quarenta e três dias para remediação.
+Além disso, aponta apenas vinte e seis porcento de remediação para itens da lista C I S A K E V no conjunto analisado.
+Percentual desse tipo depende do recorte do relatório, claro.
+Mas a direção é difícil de ignorar.
+Atacante não espera a sua sprint acabar para explorar borda exposta.
+
+Essa é a ponte com as outras histórias.
+Team P C P e durabletask mostram confiança de pacote e token.
+Chroma D B, que aparece daqui a pouco, mostra uma peça de infraestrutura de IA com caminho crítico antes da autenticação.
+Fox Tempest mostra assinatura de código sendo vendida como serviço para malware.
+O D B I R não valida cada caso específico de hoje, e nem deveria.
+Ele dá o fundo: exploração e abuso de caminhos confiáveis estão no centro da conversa.
+
+Para quem precisa transformar isso em trabalho: saiba o que está exposto na internet.
+Priorize falhas críticas e conhecidas exploradas.
+Reduza serviço esquecido, meça tempo de correção e trate terceiros como parte do seu mapa.
+Ter scanner é começo; saber o que expõe cliente, quanto tempo fica aberto e quem decide o prazo já é uma conversa mais adulta.
+
+As fontes deste bloco são Verizon D B I R 2026 e Tenable sobre os principais achados do D B I R 2026.
+
+Agora, os destaques rápidos de hoje.
+
+Chroma D B recebeu o alerta C V E 2026, quarenta e cinco oito dois nove.
+Esse alerta foi descrito pela Hidden Layer e pela N V D como execução remota de código antes de autenticação.
+A falha afeta a versão um ponto um ponto dois, pelo frontend Python.
+A explicação curta é feia o bastante: o servidor podia carregar código de modelo antes de provar quem estava chamando.
+A recomendação defensiva é manter Chroma D B fora da internet, isolar rede e verificar se o frontend Python está em uso.
+Também vale considerar o frontend Rust quando fizer sentido e acompanhar atualização do fornecedor.
+Na divulgação, a Hidden Layer dizia que o problema estava sem correção.
+As fontes são Hidden Layer, N V D e Bleeping Computer.
+
+A Microsoft disse ter interrompido a operação Fox Tempest, ligada ao serviço signspace ponto cloud.
+Segundo a empresa, a operação abusava do Microsoft Artifact Signing para gerar certificados fraudulentos e de vida curta.
+Esses certificados eram usados por operadores de malware e ransomware, incluindo atividade associada ao Rhysida.
+A Microsoft afirma ter revogado mais de mil certificados.
+Assinado ajuda, mas assinatura sozinha não faz milagre.
+Reputação, comportamento, revogação e política de endpoint continuam no jogo.
+A fonte é o Microsoft Security Blog.
+
+O Tonic vai entrar no projeto oficial G R P C como G R P C Rust.
+O anúncio de Lucio Franco fala em transição do projeto hyperium tonic.
+Também fala em prévia de um novo crate G R P C, trabalho de X D S e manutenção com gente de Google, LinkedIn e Datadog.
+O próprio projeto também entra nessa manutenção, sob guarda-chuva C N C F e Linux Foundation.
+Para quem usa Rust no backend, é sinal de maturidade e governança.
+Não é ordem para reescrever serviço hoje à tarde.
+A fonte desse destaque é Lucio Franco.
+
+O PostgreSQL News publicou o Barman três ponto dezoito ponto zero.
+A versão traz suporte a backups incrementais em armazenamento de objetos na nuvem.
+Também traz classes específicas por provedor, correções de bugs e um ajuste de segurança em caminho de arquivo.
+O corpo da página tinha uma data interna anterior.
+Então eu trataria o item como notícia publicada hoje pelo PostgreSQL News, não como acabou de nascer neste minuto.
+Para operador de Postgres, backup incremental em nuvem pode mexer em custo e tempo de upload.
+Mas teste restore em staging antes de comemorar no grupo.
+A fonte desse destaque é PostgreSQL News.
+
+Para acompanhar as tendências do dia, o pedaço de agentes ficou dividido entre produto grande e ferramenta pequena.
+De um lado, o Google empurra Antigravity como superfície oficial de trabalho.
+Do outro, o Forge apareceu como projeto M I T para aumentar confiabilidade de chamada de ferramentas em modelos locais.
+Ele fala em mecanismos de retry, enforcement de passos, rescue parsing e recuperação de erro.
+Também fala em escolha de backend de serving e gestão de contexto consciente de V RAM.
+
+A manchete tentadora seria dizer que um modelo local pequeno pulou de cinquenta e três porcento para noventa e nove vírgula três porcento.
+E pronto, resolvemos agentes, pelo menos na manchete.
+Melhor respirar, porque esse número veio de material do autor e de benchmark específico do período do paper.
+O readme atual também fala de uma suíte mais difícil.
+Nessa suíte, a melhor configuração auto-hospedada aparece com oitenta e seis vírgula cinco porcento.
+Ainda é interessante, só não vira lei universal.
+O ponto bom é outro: agente falha muito por arnês frágil, contexto ruim, erro de ferramenta mal tratado e backend mal escolhido.
+Modelo maior ajuda em alguns casos. Encanação decente também ajuda.
+
+O outro sinal vem do Google Threat Intelligence Group, com um cuidado de data.
+A fonte de recorde é um relatório de onze de maio de 2026, recolocado em discussão no dia vinte.
+O G T I G descreveu atividade com malware desenvolvido por IA, ou com ajuda de IA.
+Também descreveu um caso de vulnerabilidade zero day assistida por IA em uma ferramenta web open source de administração.
+E disse que a Mandiant interrompeu esse caso antes da implantação.
+O detalhe técnico mais útil é que o exemplo envolve lógica de confiança e autenticação.
+Não é aquela caricatura de falha clássica de memória.
+
+Também aparece o Prompt Spy, citado pelo G T I G como malware Android usando chamadas de [EY1 P IY1 AY1] de L L M.
+O objetivo era comportamento autônomo de interface.
+Isso não prova fábrica mágica de zero day no botão azul.
+Prova algo mais chato de defender: atacante também automatiza leitura de contexto, tentativa, navegação e erro.
+Para quem cuida de produto, vale revisar invariantes de autenticação.
+Também vale pensar em componente agente como superfície de ameaça.
+E tratar infraestrutura de IA como infraestrutura mesmo.
+Com porta, log, permissão e vergonha na cara.
+
+As fontes deste bloco são Forge no "Git Hub", discussão no Hacker News, Google Threat Intelligence e discussão no Reddit.
