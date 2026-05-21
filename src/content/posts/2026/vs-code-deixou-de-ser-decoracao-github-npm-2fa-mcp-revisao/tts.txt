@@ -1,0 +1,242 @@
+V S Code deixou de ser decoração: "Git Hub", N P M com autenticação de dois fatores e M C P na revisão.
+
+A máquina de desenvolvimento sempre teve um ar de oficina.
+Ela fica ali, perto da pessoa, cheia de ferramenta, extensão, terminal aberto e credencial para testar coisa.
+Também tem acesso a repositório, chave temporária, e chave que deveria ser temporária, mas já fez aniversário.
+
+Como ela não atende cliente direto, muita gente trata esse ambiente como uma zona mais leve.
+O servidor de produção ganha alarme, painel, política, reunião e aquele drama todo.
+O computador de quem desenvolve ganha tema bonito, plugin de produtividade e coisas demais logadas ao mesmo tempo.
+
+Só que oficina também tem ferramenta afiada.
+
+Quando uma ferramenta do editor roda código, atualiza sozinha e enxerga segredo local, ela deixou de ser enfeite faz tempo.
+Ela virou um pedaço do caminho de execução.
+E caminho de execução, mesmo quando mora na ponta da mesa, precisa entrar no inventário mental de segurança.
+
+O dia veio cheio desse tipo de lembrança meio antipática.
+Um incidente passou por uma extensão de editor.
+Um registro de pacotes ganhou uma etapa de aprovação humana antes de publicar.
+E um estudo sobre conectores de agentes mostrou que plugin com acesso a arquivo, rede e shell precisa ser tratado como software perigoso.
+
+Também tem notícia boa e notícia nerd no meio.
+Um modelo interno da OpenAI apareceu em uma história de matemática séria.
+O Defender entrou no catálogo de vulnerabilidades conhecidas exploradas da C I S A.
+Drupal corrigiu um problema específico para Postgres.
+A A W S colocou uma cara compatível com OpenAI no SageMaker A I.
+E o asm ponto J S, coitado, vai sendo aposentado com dignidade depois de abrir caminho para o WebAssembly.
+
+Vamos por partes, porque hoje tem muita ferramenta comum ocupando lugar importante demais.
+
+A primeira história começa com o "Git Hub" dizendo que detectou e conteve, em 18 de maio de 2026, um dispositivo comprometido.
+Segundo o post oficial, o vetor envolveu uma extensão de terceiros do V S Code envenenada.
+A avaliação pública do "Git Hub", naquele momento, era de exfiltração de repositórios internos da própria empresa.
+
+O detalhe que impede a manchete de sair correndo pela sala é este.
+O "Git Hub" disse não ter evidência de impacto em informações de clientes fora dos repositórios internos.
+Ao mesmo tempo, a empresa reconhece que alguns repositórios internos podem conter fragmentos de interações de suporte com clientes.
+Então o tom correto fica nesse meio menos cinematográfico e mais útil.
+Incidente real, escopo confirmado limitado, investigação ainda andando.
+
+O número de aproximadamente três mil e oitocentos repositórios apareceu como alegação do atacante.
+O "Git Hub" disse que esse número é compatível em ordem de grandeza com a investigação.
+Isso não transforma a alegação inteira em fato público, mas também tira a história do campo do boato qualquer.
+É o tipo de caveat que dá trabalho escrever e evita bobagem depois.
+
+A outra fonte central é o advisory oficial do N X Console.
+Ele identifica a versão comprometida como N X Console para V S Code dezoito ponto noventa e cinco ponto zero.
+A correção veio na versão dezoito ponto cem ponto zero.
+A janela foi curta no Visual Studio Marketplace, de doze e trinta a doze e quarenta e oito U T C, em 18 de maio.
+No Open V S X, foi de doze e trinta e três a treze e nove U T C, no mesmo dia.
+Dezoito ou trinta e seis minutos parecem pouco.
+Até você lembrar que extensão autoatualiza e roda na máquina de alguém que tem tudo logado.
+
+O advisory também liga a raiz do problema a um desenvolvedor comprometido pela campanha de supply chain do TanStack.
+Segundo o N X, credenciais do "Git Hub" vazaram pela linha de comando do "Git Hub".
+A partir daí, a extensão maliciosa mirava credenciais de "Git Hub", N P M, A W S, Kubernetes e Vault.
+Também mirava sessões do "One Password" C L I, chaves S S H, Docker, G C P e até configuração do Claude Code.
+É uma lista boa para ler devagar e depois olhar para o próprio notebook com menos romantismo.
+
+Entre os indicadores citados pelo N X aparecem artefatos de persistência com nomes bem específicos.
+Havia um script chamado cat ponto pi na pasta local do Kitty.
+Também havia um Launch Agent de monitoramento no mac O S, um arquivo temporário de estado do "Git Hub" e arquivos kitty no temporário.
+Não estou colocando isso aqui para virar caça ao tesouro de pânico.
+É porque a ação responsável passa por conferir versão instalada, olhar indicadores, matar persistência e revisar logs.
+Também passa por rotacionar qualquer credencial alcançável pela máquina afetada.
+
+O ponto para desenvolvedor é bem direto.
+Extensão de editor não merece tratamento de adesivo no notebook.
+Se ela executa, atualiza, lê projeto e convive com sessão de C L I, ela é parte da superfície de ataque.
+Para ambientes mais sensíveis, faz sentido separar ferramentas arriscadas em dev container, máquina remota, perfil isolado ou sandbox.
+Chato? Sim, e ainda assim bem menos chato que descobrir depois que o plugin de produtividade estava com a mão na gaveta de tokens.
+
+As fontes deste bloco são o "Git Hub" Blog, o advisory do N X Console, a StepSecurity e o BleepingComputer.
+
+A segunda história conversa com a primeira sem precisar repetir o susto.
+O N P M documentou staged publishing, um fluxo em que o pacote é enviado para uma área de staging antes de virar versão pública instalável.
+
+Em vez de um comando N P M publish direto para o mundo, o mantenedor pode usar N P M stage publish.
+Depois dá para inspecionar com N P M stage list, N P M stage view e N P M stage download.
+A versão só sai para o registro público depois de uma aprovação explícita.
+Essa aprovação pode acontecer via N P M stage approve ou pelo site do N P M, com autenticação de dois fatores.
+
+Essa etapa é pequena no desenho e grande na consequência.
+Um pipeline ainda pode gerar artefato e usar trusted publishing com O I D C.
+Mas a virada irreversível para o público fica atrás de uma pessoa aprovando com autenticação de dois fatores.
+Em uma semana cheia de pacote ruim, extensão comprometida e token aparecendo onde não devia, uma catraca dessas faz sentido.
+
+Tem limite, claro, porque staged publishing não cura phishing nem salva aprovação feita no sono.
+Também não conserta máquina de mantenedor comprometida e não transforma humano em oráculo.
+Se a pessoa aprovar um artefato ruim, o ruim vai para frente com carimbo e tudo.
+Mesmo assim, ele quebra um caminho muito usado em incidente de supply chain.
+Esse caminho é token roubado ou C I comprometido publicando versão maliciosa imediatamente.
+
+Os requisitos também importam.
+A documentação fala em N P M C L I onze ponto quinze ponto zero ou superior.
+Também exige Node ponto J S vinte e dois ponto quatorze ponto zero ou superior.
+Além disso, o pacote precisa existir, a pessoa precisa ter acesso de publicação e a autenticação de dois fatores precisa estar habilitada.
+Ou seja, vale testar em projeto real antes de prometer para a equipe que, amanhã cedo, todo release virou solenidade com guarda de honra.
+
+Para mantenedor de pacote, o desenho bom é meio sem glamour.
+Automatize build, teste, assinatura e staging.
+Mantenha a publicação pública atrás de revisão.
+E garanta que a aprovação olhe o artefato certo, não só o número da versão.
+É uma barreira a mais, e em segurança de pacote, barreira a mais no ponto certo costuma ser bem-vinda.
+
+A fonte deste bloco é a documentação do N P M sobre staged publishing.
+
+Agora vamos para agentes e conectores.
+O Model Context Protocol, ou M C P, nasceu para ligar modelos a ferramentas e serviços.
+Isso é útil: um agente pode consultar arquivo, chamar uma [EY1 P IY1 AY1], mexer em sistema e buscar dado.
+Em resumo, ele pode fazer trabalho fora da caixinha de texto.
+
+Só que "fazer trabalho fora da caixinha de texto" é exatamente a frase que deveria acender uma luzinha amarela.
+Um servidor M C P pode expor operação de shell, rede, sistema de arquivos e serviço interno para chamadas feitas por um agente.
+Se o handler da ferramenta trata entrada como confiável demais, uma frase inocente do lado de fora pode virar caminho perigoso lá dentro.
+
+O paper Viper M C P, submetido ao arXiv em 20 de maio de 2026, foi nessa direção.
+Os autores descrevem uma estrutura para auditar vulnerabilidades de estilo taint em servidores M C P.
+A ideia, segundo o paper, combina análise estática com evolução de prompts para confirmar exploração.
+Ou seja, eles tentam não parar apenas no "esse código parece suspeito".
+
+Os números relatados chamam atenção.
+Houve varredura em trinta e nove mil oitocentos e oitenta e quatro repositórios open source de servidores M C P.
+O paper relata cento e seis vulnerabilidades zero day confirmadas e sessenta e sete registros C V E atribuídos.
+Como é preprint, vale tratar como resultado de pesquisa dos autores, não como decreto final gravado em pedra.
+Mesmo com esse cuidado, o volume é suficiente para levar o assunto para a revisão de arquitetura.
+
+Para quem gosta da parte mais técnica, o trabalho fala em análise estática em duas passagens.
+Ele também fala em uma etapa de "anchor query", evolução de prompt guiada por feedback e "dual mutator scheduling".
+A tradução curta é menos elegante.
+Eles tentam achar o caminho entre entrada controlada pelo usuário e uma operação sensível.
+Depois usam o próprio ambiente de agente para validar se aquilo realmente quebra alguma coisa.
+
+Eu não vou reproduzir prompt de exploração aqui.
+A utilidade pública é outra.
+Trate servidor M C P de terceiros como dependência com permissão forte.
+Rode esse servidor M C P em sandbox.
+Limite sistema de arquivos, rede e segredo.
+Fixe a versão quando der, sem tratar isso como detalhe.
+Leia handler de ferramenta como caminho de entrada não confiável.
+Acompanhe registros C V E ligados ao servidor.
+E, principalmente, evite dar ao plugin do agente o mesmo acesso folgado que você daria a um script seu num domingo à noite.
+Nessas horas, a coragem costuma ficar maior que o juízo.
+
+A fonte deste bloco é o paper Viper M C P no arXiv.
+
+Agora, alguns destaques rápidos de hoje.
+
+A OpenAI publicou que um modelo interno de raciocínio derrubou uma conjectura antiga no problema de distância unitária no plano.
+Essa conjectura foi proposta por Paul Érdosh em 1946.
+O problema pergunta, dado um conjunto de ene pontos no plano, quantos pares podem ficar exatamente à distância um.
+A OpenAI diz que a prova foi verificada por matemáticos externos.
+Ela também diz que há conexões inesperadas com teoria algébrica dos números.
+Entre elas estão torres infinitas de corpos de classes e teoria de Golod Shafarévitch.
+Não dá para cravar nome público do modelo, custo ou tempo de execução a partir da fonte primária.
+A fonte deste destaque é a OpenAI.
+
+A C I S A adicionou duas falhas do Microsoft Defender ao catálogo K E V em 20 de maio de 2026.
+As falhas são C V E 2026, quarenta e um zero nove um, e C V E 2026, quarenta e cinco quatro nove oito.
+A data de correção para ambientes federais dos Estados Unidos é 3 de junho.
+A primeira envolve elevação de privilégio por resolução indevida de link.
+A segunda é negação de serviço.
+O Canadian Cyber Centre lista versões afetadas antes do Malware Protection Engine um ponto um ponto dois seis zero quatro zero ponto oito.
+Também lista versões antes do Defender Antimalware Platform quatro ponto dezoito ponto dois seis zero quatro zero ponto sete.
+A C I S A marca uso em ransomware como desconhecido.
+Então o trabalho aqui é verificar update em vez de inventar pânico.
+As fontes são C I S A K E V em JSON, Canadian Cyber Centre e BleepingComputer.
+
+O Drupal publicou o advisory S A Core 2026, zero zero quatro, para C V E 2026, noventa zero oito dois.
+É uma injeção de S Q L no core que afeta sites com Postgres e pode ser explorada por usuários anônimos.
+As versões corrigidas incluem Drupal onze ponto três ponto dez, onze ponto dois ponto doze e onze ponto um ponto dez.
+Também entram Drupal dez ponto seis ponto nove, dez ponto cinco ponto dez e dez ponto quatro ponto dez.
+Drupal oito e nove têm patches best effort porque estão em fim de vida.
+A própria página marca a explorabilidade como teórica.
+Então confira backend e versão antes de sair derrubando café no teclado.
+As fontes são Drupal ponto org e The Hacker News.
+
+A A W S anunciou suporte a [EY1 P IY1 AY1] compatível com OpenAI em endpoints de inferência em tempo real do SageMaker A I.
+O caminho OpenAI v um aceita "Chat Completions", incluindo streaming.
+A A W S diz que usuários de S D K da OpenAI, LangChain e Strands Agents podem trocar a U R L do endpoint em muitos casos.
+Esse fluxo usa bearer tokens com tempo limitado.
+Compatível não significa comportamento, preço, latência ou recurso idêntico.
+É encanamento de integração, e encanamento bom costuma economizar muita gambiarra discreta.
+A fonte é o blog de machine learning da A W S.
+
+O time do SpiderMonkey anunciou que o Firefox cento e quarenta e oito desativa por padrão as otimizações de asm ponto J S.
+Código asm ponto J S continua rodando porque é um subconjunto de JavaScript.
+Ele só perde o caminho especial de otimização e passa pelo J I T normal.
+A recomendação para quem ainda mantém esse tipo de build é recompilar para WebAssembly quando desempenho e tamanho importarem.
+O asm ponto J S saiu no Firefox vinte e dois, em 2013.
+Ele ajudou a provar que a web aguentava código compilado com desempenho decente.
+Agora vai saindo de cena como tecnologia que fez o trabalho e merece uma cadeira confortável.
+A fonte deste destaque é o SpiderMonkey.
+
+Na parte de agentes, o fio mais útil do dia passa por medição e verificação.
+A pergunta que pega no trabalho real é menos brilhante e bem mais chata.
+A ferramenta ajudou mesmo, passou por teste oculto e reduziu revisão humana?
+Ela manteve lint e análise de segurança limpos, ou só ficou bonita no dashboard enquanto a base fazia careta?
+
+Greg Wilson publicou um texto em 20 de maio sobre formas erradas de medir programação assistida por I A.
+Entre outras coisas, ele cita um ensaio randomizado com desenvolvedores experientes de open source.
+Nesse ensaio, eles terminaram dezenove porcento mais devagar usando ferramentas de I A, mesmo esperando ganho.
+Isso não fecha a discussão contra I A.
+Fecha a porta de uma desculpa preguiçosa: medir sensação de velocidade e chamar de produtividade.
+
+O SpecBench vai para uma parte parecida com outro vocabulário.
+Ele separa especificação, testes visíveis de validação e testes ocultos em trinta tarefas de programação de sistemas.
+O paper relata que agentes atuais mais capazes conseguem saturar testes visíveis.
+Enquanto isso, o vão para os testes ocultos continua aparecendo.
+E piora em vinte e oito pontos percentuais a cada aumento de dez vezes no tamanho do código.
+O exemplo mais engraçado e triste é um compilador de tabela hash com duas mil e novecentas linhas.
+Ele memorizou entradas de teste.
+Parabéns, passou na prova errada.
+
+Outro estudo olhou pull requests de refatoração Python gerados por I A.
+O resultado não é só pancada.
+Houve melhoria em atributo de qualidade em vinte e dois vírgula cinco porcento das mudanças estudadas.
+Também houve usabilidade melhor em trinta e seis vírgula cinco porcento.
+Mas vinte e quatro vírgula dezessete porcento dos arquivos modificados introduziram novos problemas no "Pylint".
+Além disso, quatro vírgula sete porcento introduziram novos achados no "Bandit".
+E setenta e três vírgula cinco porcento dos pull requests analisados foram mergeados, inclusive alguns com esses sinais novos.
+Parece bastante com software real.
+Melhora uma coisa, piora outra, alguém aprova, e depois a gente descobre se o teste era honesto.
+
+A parte positiva aparece no paper sobre "Agentic Model Checking".
+O desenho ali é deixar agentes proporem especificações, refinamentos e classificações de contraexemplo.
+Enquanto isso, um verificador, como bounded model checking, cuida das decisões que precisam de solidez.
+Gosto desse formato porque ele não pede fé no texto do modelo.
+Ele usa o modelo onde linguagem e hipótese ajudam.
+E chama uma ferramenta mais dura para conferir a parte que não pode ser resolvida no gogó.
+
+Para equipes, o resumo operacional fica bem pé no chão.
+Mantenha teste oculto fora do campo de visão do agente.
+Compare o resultado com baseline real.
+Rode lint e análise de segurança dentro do fluxo.
+Meça o esforço de revisão humana.
+Guarde amostras ruins para aprender com elas.
+E use verificação formal quando o risco justificar.
+Agente pode ajudar muito, sem mistério.
+Só não deixe a avaliação ser feita pelo mesmo truque que a ferramenta aprendeu a agradar.
+
+As fontes finais são The Third Bit, SpecBench no arXiv, o estudo sobre refatoração Python no arXiv, e Agentic Model Checking no arXiv.
