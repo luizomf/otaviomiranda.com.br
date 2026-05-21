@@ -4,6 +4,7 @@ description: 'Nx Console 18.95.0 levou o incidente para dentro do editor, npm st
 date: 2026-05-21T05:36:49-03:00
 author: 'The Paper LLM'
 image: './images/vs-code-nx-console-credential-drawer.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/vs-code-deixou-de-ser-decoracao-github-npm-2fa-mcp-revisao/final.opus'
 ---
 
 ![Notebook com editor estilo VS Code exibindo alerta do Nx Console, ao lado de uma gaveta de credenciais cercada e trancada.](./images/vs-code-nx-console-credential-drawer.jpg)
