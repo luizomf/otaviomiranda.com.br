@@ -1,0 +1,244 @@
+Git Hub Actions em alerta: Megalodon, chaves do Google e passkeys.
+
+Tem uma confiança silenciosa dentro de quase todo projeto moderno.
+A gente escreve código, empurra para o repositório e deixa a automação fazer o resto.
+Ela testa, empacota, publica, sobe em servidor, fala com nuvem e assina artefato.
+Quando funciona, parece higiene de engenharia.
+Quando dá errado, parece que a esteira do release atravessou a área restrita sem pedir crachá.
+
+O detalhe ingrato é que essa automação costuma morar bem perto dos segredos.
+Ela vê variáveis de ambiente, tokens temporários, chaves de provedor e credenciais de pacote.
+Às vezes também tem acesso suficiente para mexer em produção sem muita cerimônia.
+Por isso, um arquivo pequeno, com cara de configuração, pode ter impacto maior que muito código de verdade.
+
+Hoje o fio principal passa por essa ideia: não basta proteger a aplicação.
+O caminho que constrói, publica, autentica e recupera a aplicação também virou parte da produção.
+Às vezes ele tem menos tela bonita e mais poder.
+
+Depois entram os nomes, começando por uma campanha nova que mirou workflows em repositórios do Git Hub.
+Um teste mostrou que apagar uma chave de [EY1 P IY1 AY1] do Google não necessariamente mata a chave na mesma hora.
+A Microsoft está tirando códigos por S M S das contas pessoais.
+E, no meio do noticiário mais tenso, apareceu uma história boa de IA local fazendo trabalho útil.
+Ela envolve vídeo, arquivo e esquema limitado, sem precisar vender a alma para uma nuvem qualquer.
+
+Vamos com calma, porque hoje a palavra credencial aparece bastante.
+Ela não grita, mas dá trabalho.
+
+Um workflow malicioso é código com crachá de produção.
+
+A história mais importante do dia é o Megalodon.
+Esse foi o nome dado por pesquisadores a uma campanha de backdoor em massa contra repositórios no Git Hub.
+O ponto novo não é só alguém ter colocado arquivo ruim em repositório.
+O ponto novo é o tipo de arquivo: workflows do Git Hub Actions.
+
+Workflow parece configuração.
+Na prática, ele é execução.
+Um YAML desses pode rodar shell, baixar coisa, chamar serviço externo e receber segredos do ambiente de C I.
+Em muitos projetos, é ali que ficam permissões para publicar pacote, abrir deploy e acessar nuvem.
+Também pode ter S S H, assinatura de release ou token para conversar com algum provedor.
+O arquivo tem indentação humilde, mas não é humilde coisa nenhuma.
+
+Segundo a SafeDep, a campanha fez milhares de commits maliciosos em cerca de seis horas.
+Essa janela foi em 18 de maio de 2026.
+Os arquivos usavam gatilhos de C I e payloads em shell, incluindo conteúdo codificado em base sessenta e quatro.
+O objetivo era coletar segredos e enviar dados para infraestrutura controlada pelo atacante.
+A O X Security também analisou a campanha.
+Ela disse ter confirmado mais de três mil e quinhentos repositórios com um YAML infectado.
+Naquele momento, a contagem ainda estava subindo.
+
+Esses números devem ser lidos com cuidado.
+A campanha ainda estava sendo medida quando as análises saíram, e cada empresa olhou uma fatia diferente.
+O que já basta para agir é menos cinematográfico e mais operacional.
+Houve uma campanha automatizada grande, mirando o lugar onde muitos projetos guardam permissões fortes por conveniência.
+
+Para quem usa Git Hub Actions, a revisão boa começa pelos commits recentes na pasta de workflows do Git Hub.
+Procure workflow novo, nome genérico demais, trigger estranho e trecho que decodifica script.
+Também procure chamada para domínio desconhecido e execução que não combina com o projeto.
+Depois vem a parte chata e necessária.
+Reduza permissões do token do Git Hub, fixe actions confiáveis por versão ou commit e revise secrets por ambiente.
+Também exija proteção de branch e rotacione credenciais se algum workflow suspeito rodou.
+
+Também vale olhar para O I D C com carinho técnico, não como adesivo de segurança.
+Token de curta duração é melhor que segredo permanente jogado no C I, mas a política precisa ser estreita.
+Se qualquer workflow de qualquer branch consegue pedir identidade para publicar, a esteira continua perigosa.
+Nesse caso, ela ainda passa por uma porta que deveria exigir autorização melhor.
+
+Essa história conversa com incidentes recentes de pacote, extensão e token.
+Mas tem uma novidade própria.
+O atacante não precisa convencer o usuário final a instalar nada se conseguir fazer a automação oficial trabalhar para ele.
+É um tipo de abuso muito desagradável, porque usa a linguagem normal do repositório.
+O golpe chega vestido de manutenção.
+As fontes deste bloco são SafeDep, O X Security e SANS Internet Storm Center.
+
+Apagar a chave não é o mesmo que ela sumir.
+
+A segunda história é menor em barulho e grande em expectativa quebrada.
+A Aikido testou a exclusão de chaves de [EY1 P IY1 AY1] do Google.
+Ela mediu uma janela em que chaves apagadas continuavam funcionando.
+
+Isso mexe com uma suposição comum em resposta a incidente.
+Vazou chave? Apaga. Rotaciona. Pronto, próximo incêndio.
+Só que sistemas distribuídos têm propagação, cache, bordas, réplicas e encanamento.
+É um monte de coisa que ninguém quer lembrar às duas da manhã.
+O botão de excluir pode registrar a intenção imediatamente sem fazer o mundo inteiro obedecer no mesmo milissegundo.
+
+Nos testes da Aikido, feitos em dez rodadas ao longo de dois dias, a pior janela foi de quase vinte e três minutos.
+A menor ficou perto de oito minutos, e a mediana ficou por volta de dezesseis minutos.
+A empresa diz que o Google fechou o relatório como "won't fix".
+Nesse caso, a propagação eventual foi tratada como propriedade conhecida do sistema.
+A recomendação da Aikido é tratar a exclusão como uma operação de trinta minutos.
+Durante esse período, continue monitorando uso e logs.
+
+O ponto público não é Google Cloud caiu, nem toda chave do Google é inútil.
+A história é mais específica.
+Chaves de [EY1 P IY1 AY1] do Google podem continuar autenticando por alguns minutos depois de deletadas.
+Isso importa para chave de Gemini, Maps, BigQuery ou qualquer [EY1 P IY1 AY1] genérica.
+Também importa quando a chave está em app, script, repositório, automação, C I ou agente.
+
+Um detalhe técnico da própria Aikido ajuda a calibrar.
+Nos testes dela, chaves de service account revogaram em cerca de cinco segundos.
+Novas chaves da [EY1 P IY1 AY1] Gemini teriam ficado em torno de um minuto.
+Ou seja, não dá para transformar o resultado em lei universal para todo tipo de credencial.
+Dá para transformar em regra de resposta.
+Depois de apagar uma chave vazada, olhe logs, uso e cobrança como se a chave ainda respirasse um pouco.
+
+A frase eventualmente consistente explica muita coisa em infraestrutura.
+Ela só não deve virar anestesia.
+Para o usuário, uma credencial apagada que ainda funciona é uma janela de abuso.
+Pequena, talvez, mas suficiente para alguém automatizado fazer bastante besteira.
+A fonte deste bloco é a Aikido Security.
+
+O S M S vai perdendo espaço para chave de verdade.
+
+A Microsoft publicou que vai começar a retirar códigos por S M S como autenticação e recuperação para contas pessoais.
+A direção sugerida é conta sem senha, passkeys e e-mail verificado.
+
+Quem já perdeu acesso a número de telefone, trocou chip ou viajou sabe que esse assunto fica concreto rápido.
+O mesmo vale para quem sofreu tentativa de golpe ou precisou recuperar conta antiga.
+S M S é familiar e conveniente, mas carrega problemas conhecidos.
+Tem interceptação, troca fraudulenta de chip, phishing, redirecionamento e página falsa pedindo código.
+
+Passkey muda o desenho de um jeito importante.
+Em vez de segredo curto que o usuário lê, copia, cola ou entrega sem querer, ela usa criptografia de chave pública.
+A comparação imperfeita, mas útil para dev, é pensar mais em par de chaves S S H do que em código descartável.
+O serviço guarda a parte pública.
+O dispositivo ou gerenciador guarda a parte privada.
+O login prova posse sem mandar a chave privada pela rede.
+
+Isso não resolve tudo, claro.
+Perda de dispositivo, recuperação de conta, sincronização entre ecossistemas e suporte de navegador ainda podem doer.
+Segurança boa também precisa de saída de emergência, senão vira cofre tão seguro que nem o dono entra.
+
+Mesmo assim, a direção faz sentido.
+A própria Microsoft descreve S M S como uma fonte importante de fraude.
+Para quem usa conta Microsoft em Windows, Xbox, e-mail, assinatura ou desenvolvimento, vale configurar passkey.
+Também vale revisar o e-mail de recuperação antes de ser empurrado pela mudança no pior momento possível.
+Segurança forçada durante login urgente tem um talento especial para estragar o humor.
+As fontes deste bloco são Microsoft Support e Risky Business News.
+
+IA local ficou interessante quando virou encanamento.
+
+Depois de C I, chave e autenticação, vem uma história mais construtiva.
+Um desenvolvedor descreveu como indexou um ano de vídeos localmente em um MacBook Pro M um Max de 2021.
+Ele usou Gemma quatro trinta e um B e um monte de ferramenta comum de mídia.
+
+A parte menos importante é discutir se esse modelo ganhou de algum serviço de nuvem.
+A própria história não deve ser lida como benchmark universal.
+O valor está na arquitetura miúda.
+Ela extrai metadados com F F probe e exiftool, amostra frames com F Fmpeg e transcreve áudio com Whisper X.
+Também faz diarização de falantes, usa insightface para embeddings faciais e escreve arquivos YAML ao lado dos vídeos.
+
+Isso é bonito por um motivo pouco glamouroso.
+O resultado fica perto do arquivo original, em texto simples, com esquema limitado.
+O autor enfatiza geração com schema e enums, em vez de pedir para o modelo descrever tudo com capricho.
+Para busca local, automação e manutenção futura, um YAML consistente vale mais que uma prosa brilhante.
+Principalmente quando essa prosa muda de humor a cada execução.
+
+O setup citado inclui L M Studio, quantização de quatro bits e até bastante swap.
+Não é mágica, e esse é o ponto bom.
+É um trabalho em lote, local-first, aceitando limite de máquina e usando nuvem só nos casos mais difíceis.
+O acervo continua sob controle do usuário.
+Para vídeo de aula, reunião, gravação de tela, arquivo de família ou pesquisa, a ideia é reaproveitável.
+Primeiro, transforme bagunça multimídia em índice estruturado.
+Depois, peça inteligência em cima desse índice.
+
+Esse é o lado saudável da IA em ferramenta.
+Menos olha o modelo pensando bonito, e mais agora eu consigo achar aquele trecho de 2023 sobre o bug.
+Se a revolução couber em grep, banco local e arquivo legível, eu presto atenção com mais boa vontade.
+A fonte deste bloco é SimbaStack.
+
+Agora, os destaques rápidos para hoje.
+
+O npm segue endurecendo o caminho de publicação.
+As ideias incluem staged publishing, trusted publishing via O I D C, tokens mais estreitos e autenticação forte.
+A motivação é simples nesse caso.
+Quando token roubado publica versão maliciosa rápido demais, o registro precisa de freio antes do pacote chegar a todos.
+Para mantenedores, vale auditar tokens clássicos, planejar publicação confiável e não tratar 2 F A como enfeite.
+A fonte é a documentação do npm.
+
+Kata Containers corrigiu a C V E 2026, quarenta e sete dois quatro três.
+É uma fuga de guest-root para host-root ligada ao caminho do virtio F S D no runtime R S três ponto trinta e anteriores.
+A divulgação diz que, em condição específica, root dentro do guest poderia criar symlinks sensíveis no host.
+A correção está no Kata Containers três ponto trinta e um ponto zero, ou em builds de fornecedor.
+Para quem usa micro V M como isolamento de C I, workload não confiável ou agente de código, a lição é simples.
+Atualize também os helpers na fronteira, não só confie no rótulo sandbox.
+As fontes são O S S Security, da Openwall, e Kata Containers três ponto trinta e um ponto zero.
+
+A Cisco corrigiu a C V E 2026, vinte vinte e dois três, no Secure Workload.
+Ela tem pontuação C V S S dez ponto zero.
+O problema envolve endpoints REST [EY1 P IY1 AY1], afeta SaaS e on-prem, e não tem workaround.
+Foi corrigido nas versões três ponto dez ponto oito ponto três e quatro ponto zero ponto três ponto dezessete.
+Instalações três ponto nove e anteriores precisam migrar.
+Segundo a reportagem, a Cisco disse não ter evidência de exploração no momento da divulgação.
+Se você roda a ferramenta, é caso de patch direto, não de reunião contemplativa.
+A fonte desse destaque é The Hacker News.
+
+A H P entrou como patrocinadora premier do Linux Vendor Firmware Service, ao lado de Dell e Lenovo.
+O L V F S, usado com F W update e F W update manager, é infraestrutura sem aplauso quando funciona.
+Mas todo usuário de Linux sente falta quando precisa atualizar firmware por um caminho torto.
+A notícia não garante suporte perfeito para todo dispositivo H P.
+Mesmo assim, é um bom sinal para manutenção de BIOS e firmware no desktop Linux.
+As fontes são It's FOSS e L V F S.
+
+O Dropbox descreveu Nova, sua plataforma interna para agentes de código.
+O interessante não é vender agente autônomo substituindo engenharia.
+É quase o contrário, na verdade.
+A empresa fala em ambientes isolados, snapshots de repositório e comandos de validação.
+Também fala em integração com fluxo de trabalho e tentativas controladas.
+Os casos incluem falha de C I, teste instável, migração e upgrade de dependência.
+Em escala menor, a moral é a mesma para quem usa Codex, Claude Code ou ferramenta parecida.
+Construa o arnês antes de soltar a corrida.
+A fonte desse destaque é Dropbox Tech.
+
+Acompanhamento de tendências do dia.
+
+O tema que liga boa parte do dia é fronteira.
+Fronteira entre workflow e produção.
+Entre chave apagada e chave realmente morta.
+Entre conta pessoal e método de recuperação.
+Entre guest e host, e entre agente útil e agente com acesso demais.
+
+Por isso o Claw Patrol, anunciado pela Deno, é um sinal interessante mesmo sendo projeto novo.
+A proposta é colocar um firewall entre agentes e sistemas reais.
+Ele segura credenciais, analisa tráfego, aplica regras, registra auditoria e exige aprovação humana para ações sensíveis.
+A lista de integrações citada pela Deno é bem pé no chão para produção moderna.
+Tem A W S, G C P, Postgres, Kubernetes, ClickHouse, Git Hub, Slack e Grafana.
+
+O desenho importa mais que o produto específico.
+Prompt não é perímetro, por mais tentador que pareça.
+Mensagem de sistema não é cofre.
+Agente que fala com banco, cluster, repositório e nuvem precisa de política fora dele.
+Isso significa rede, segredo injetado na borda, log verificável, regra por recurso e botão humano.
+Principalmente quando a ação passar do aceitável.
+
+Isso conversa com Nova, com Kata Containers e até com Megalodon.
+A mesma indústria que coloca automação em mais partes do trabalho está descobrindo o custo do limite fraco.
+Automação sem limite vira multiplicador de acidente.
+Às vezes o limite é passkey.
+Às vezes é O I D C bem configurado.
+Às vezes é sandbox corrigida.
+Às vezes é um gateway segurando a credencial para o agente não sair com ela no bolso.
+
+O bom caminho parece menos mágico e mais administrativo.
+Desculpa pela parte sem glamour.
+Segurança frequentemente vence por ser meio sem charme.
