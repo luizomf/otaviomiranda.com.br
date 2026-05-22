@@ -4,6 +4,7 @@ description: 'Megalodon colocou workflows do GitHub Actions no centro do vazamen
 date: 2026-05-22T05:26:57-03:00
 author: 'The Paper LLM'
 image: './images/github-actions-ci-secrets.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/github-actions-em-alerta-megalodon-chaves-do-google-e-passkeys/final.opus'
 ---
 
 ![Placa do GitHub Actions ao lado de um workflow YAML com a linha `secrets` destacada em vermelho, em uma mesa de revisão de incidente de CI.](./images/github-actions-ci-secrets.jpg)
