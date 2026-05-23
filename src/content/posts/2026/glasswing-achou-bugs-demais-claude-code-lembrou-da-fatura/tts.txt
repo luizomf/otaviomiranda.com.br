@@ -1,0 +1,274 @@
+Glasswing achou bugs demais; Claude Code lembrou da fatura.
+
+Tem um tipo de avanço que chega com cara de presente e boleto ao mesmo tempo.
+Uma ferramenta encontra defeitos que antes ficariam meses quietos.
+Outra escreve código, chama comandos, abre arquivos e tenta resolver a tarefa sozinha.
+Um modelo novo promete responder mais rápido.
+Parece ótimo, e muitas vezes é.
+Só que alguém precisa conferir o que é real, preparar correção e medir a conta.
+Também precisa limpar a bagunça quando a automação se anima demais.
+
+Esse é o centro do jornal de hoje: produção ficou mais fácil de acelerar do que confiança.
+A conversa sai de IA fazendo texto bonito e vai para relatório de bug, patch e release.
+Também passa por pacote publicado, arquivo PDF, biblioteca de criptografia e conta de tokens.
+Cada uma dessas coisas tem uma etapa chata que continua dependendo de gente cuidadosa.
+
+A parte boa é que esse trabalho chato está ficando mais visível.
+A parte ruim é que ele aparece quando a fila já está cheia.
+Se uma ferramenta encontra milhares de falhas, o projeto ainda precisa separar achado real de barulho.
+Se um agente roda meia hora tentando consertar teste, a fatura não vem por intenção.
+Ela vem por chamada, contexto e tentativa.
+E se um modelo promete acelerar geração, alguém precisa testar no hardware de verdade.
+Não basta parar na parte bonita do gráfico.
+
+Esse tipo de dia é perigoso para quem escreve notícia de tecnologia.
+A tentação é abrir um saco de nomes e jogar tudo na mesa.
+Vou fazer o contrário: primeiro a fila, depois os rótulos.
+A fila, nesse caso, é simples.
+Chega achado de segurança; precisa virar correção.
+Chega agente de código; precisa virar tarefa revisada.
+Chega promessa de inferência rápida; precisa sobreviver a teste fora do gráfico.
+
+A primeira vitrine disso é o Project Glasswing, da Anthropic.
+Ele aparece com números grandes, mas o número que mais interessa é o que vem depois.
+Quantos achados viraram correção.
+Depois a conversa muda para custo de agentes e para uma família nova de modelos tentando acelerar geração.
+
+Tudo conversa com a mesma pergunta de produção.
+Quem verifica, quem aprova, quem paga e quem responde quando a coisa sai do slide e encosta no usuário?
+Os nomes entram no lugar certo, com contexto, porque sábado também merece algum respeito.
+
+A Anthropic publicou uma atualização inicial do Project Glasswing.
+É um esforço de pesquisa com cerca de cinquenta parceiros usando o "Claude Mythos Preview".
+A ideia é encontrar vulnerabilidades, e o número de capa é grande.
+Foram mais de dez mil achados classificados como alta ou crítica severidade em cerca de um mês.
+
+Número grande chama atenção.
+O que decide se isso vira segurança real é a etapa seguinte.
+
+Segundo a Anthropic, mil setecentos e cinquenta e dois achados de severidade alta ou crítica tinham sido avaliados.
+Desses, noventa vírgula seis porcento foram considerados verdadeiros positivos.
+No mesmo post, a empresa estimava quinhentos e trinta bugs de alta ou crítica severidade reportados a mantenedores.
+E setenta e cinco já tinham sido corrigidos naquele momento.
+O painel público da Anthropic, também em vinte e dois de maio, mostrava uma contagem separada e mais ampla.
+Eram vinte e três mil e dezenove achados, mil e novecentos candidatos e mil setecentos e vinte e seis revisados por empresas externas.
+O painel também falava em noventa vírgula oito porcento de verdadeiros positivos.
+Além disso, mostrava mil quatrocentos e cinquenta e um reportados a mantenedores.
+E também noventa e sete patches aceitos upstream, mais oitenta e oito advisories.
+
+Repare na diferença entre essas palavras.
+Achado, candidato, verdadeiro positivo, reportado, corrigido e advisory não são a mesma coisa.
+Essa distinção parece chatinha, mas é exatamente onde mora o trabalho.
+
+Um scanner ruim pode lotar a fila com ruído.
+Um scanner bom pode lotar a fila com trabalho real.
+Nos dois casos, alguém precisa reproduzir o problema e avaliar impacto.
+Depois vem falar com o mantenedor, preparar patch, revisar regressão e publicar advisory.
+E ainda falta esperar a correção chegar ao usuário.
+A IA pode apertar o acelerador da descoberta.
+Ela não assina sozinha a responsabilidade do release.
+
+O exemplo concreto vem do Free B S D.
+No anúncio do Free B S D quinze ponto um R C um, publicado em vinte e dois de maio, o projeto listou uma série de advisories.
+Eles iam do Free B S D S A vinte e seis, dezenove, até o vinte e quatro, entre as mudanças desde o beta três.
+As publicações de segurança tinham saído em vinte de maio.
+A lista tem problemas bem reais.
+Ela inclui escalada local de privilégio por uso de descritor de arquivo no kernel.
+Também inclui validação ausente em P trace, overflow em fuse F S e overflow de stack ligado a lib casper.
+E inclui execução remota como root durante varredura de Wi-Fi no instalador.
+
+Não precisa entrar em receita de exploração para entender o ponto.
+Quando um instalador pode executar código por causa de um nome de rede Wi-Fi malformado, a notícia já fez barulho suficiente.
+
+Alguns créditos desses advisories mostram a mudança de época.
+Aparecem Ryan, da Calif ponto I O.
+Também aparecem pesquisadores da Tsinghua University usando GLM cinco ponto um, da Z ponto A I.
+E aparece a "AISLE Research Team".
+Nem todo advisory da lista deve ser tratado como o mesmo caso.
+O papel exato de ferramenta, pesquisador e revisão varia por item.
+Ainda assim, é um bom recorte público.
+A descoberta assistida por IA já está batendo em sistema operacional de verdade.
+E isso vem com advisory assinado e patch para acompanhar.
+
+O jeito responsável de ler o Project Glasswing é esse.
+Ferramenta útil, fila maior, triagem obrigatória.
+Para quem mantém software, talvez o próximo investimento importante não seja mais um painel com número bonito.
+Pode ser um caminho melhor para receber relatório, reproduzir bug, revisar patch e lançar correção.
+Tudo isso sem transformar cada descoberta em novela.
+
+As fontes deste bloco são Anthropic, o painel de divulgação responsável da Anthropic e o anúncio do Free B S D quinze ponto um R C um.
+Também entram os advisories Free B S D S A individuais citados no texto.
+
+Token barato é uma coisa boa.
+Eu gosto de coisa barata, sem nenhuma vergonha.
+O problema começa quando a gente mede o preço pela unidade errada.
+
+Um agente de código raramente faz uma chamada limpa, lê uma resposta e termina o serviço com educação.
+Ele abre contexto, erra arquivo, tenta rodar teste, troca plano e chama ferramenta.
+Depois recebe erro, pede mais contexto, tenta de novo e às vezes entrega algo que ainda precisa de revisão humana.
+Se você mede só o preço do token, perde a parte em que a tarefa deu três voltas no quarteirão antes de achar a porta.
+
+Segundo o The Verge, a Microsoft planeja encerrar a maior parte das licenças diretas de "Claude Code".
+Isso valeria para muitos desenvolvedores, movendo o uso para o "Git Hub" Copilot [S IY1 EH1 L AY1].
+A reportagem fala do grupo Experiences and Devices encerrando esse uso até o fim de junho.
+Ela também cita trinta de junho como marco ligado ao fim do ano fiscal da Microsoft.
+O mesmo texto diz que modelos da Anthropic continuam acessíveis via Copilot [S IY1 EH1 L AY1].
+E também pelos acordos da Microsoft Foundry.
+Então cuidado: isso é reportagem, não comunicado oficial dizendo que acabou Claude na Microsoft.
+
+A Fortune usou esse caso para puxar uma discussão maior sobre custo de agentes.
+Ela cita uma informação do The Information.
+Segundo esse relato, o C T O da Uber teria dito que a empresa consumiu em quatro meses o orçamento de 2026.
+Era o orçamento de 2026 para ferramentas de IA de programação.
+A Fortune também cita uma projeção do Goldman Sachs.
+O consumo de tokens subiria vinte e quatro vezes até 2030.
+E também aparece um alerta do Gartner.
+Token mais barato não transforma raciocínio de modelo forte em coisa automaticamente barata para empresa.
+
+Do outro lado, a página oficial da DeepSeek mostra por que a conversa não pode virar fim da brincadeira.
+O DeepSeek V quatro Pro aparece com contexto de um milhão de tokens.
+E também com saída máxima de trezentos e oitenta e quatro mil tokens.
+A tabela lista preços durante e depois do desconto de setenta e cinco porcento.
+Em cache hit, são zero vírgula zero zero três seis dois cinco dólar por um milhão de tokens de entrada.
+Em cache miss, são zero vírgula quatro três cinco dólar por um milhão de tokens de entrada.
+Na saída, são oitenta e sete centavos de dólar por um milhão de tokens.
+A nota da DeepSeek diz que esse preço reduzido vira preço oficial depois de trinta e um de maio de 2026.
+O horário citado é quinze horas e cinquenta e nove minutos em U T C.
+
+Isso é barato o suficiente para mudar decisão de arquitetura em vários casos.
+Também é barato o suficiente para alguém deixar o agente rodando sem pensar.
+Depois a pessoa descobre que barato multiplicado por loop ainda vira número.
+
+Para time de desenvolvimento, a unidade melhor é tarefa concluída com revisão aceitável.
+Quanto custou, de verdade, resolver o bug?
+Quantas tentativas foram necessárias?
+O agente leu metade do monorepo sem precisar?
+Quanto tempo humano foi gasto revisando?
+Ele criou dívida técnica disfarçada de produtividade?
+A conta mistura dinheiro e atenção.
+
+Esse ponto conversa bem com o texto do Josh Comeau sobre IA como multiplicador de habilidade existente.
+Um dev que sabe arquitetar, testar, revisar e cortar escopo tende a extrair mais de uma ferramenta dessas.
+Um fluxo ruim só ganha velocidade para errar com mais confiança. Que alegria.
+
+O caminho mais sensato por enquanto é medir por fluxo, não por empolgação.
+Coloque checkpoint, limite de contexto e orçamento por tarefa.
+Use modelos menores quando couber e inferência local quando fizer sentido.
+E mantenha uma revisão humana que tenha poder de dizer: volta e faz direito.
+Um agente bom ajuda bastante quando tem limite.
+Agente sem limite vira estagiário movido a cartão corporativo.
+
+As fontes deste bloco são The Verge, Fortune, DeepSeek [EY1 P IY1 AY1] Docs e Josh W. Comeau.
+
+A terceira história é menos urgente.
+E é bem interessante para quem mexe com modelo local, agente, ferramenta interativa ou servidor de inferência.
+
+O jeito clássico de um modelo de linguagem responder é autoregressivo.
+Ele gera um token, usa esse token para escolher o próximo, depois o próximo, depois o próximo.
+É como escrever com uma mão só, olhando a palavra anterior antes de aceitar a próxima.
+Funciona muito bem, mas tem uma trava física no caminho: a sequência é serial.
+
+A NVIDIA e a Hugging Face publicaram a família Nemotron Labs Diffusion.
+Ela tenta afrouxar essa trava.
+A explicação simples é esta.
+Em vez de sempre caminhar token por token, o modelo pode rascunhar blocos em paralelo e ir refinando.
+A família traz modelos de texto de três bilhões, oito bilhões e quatorze bilhões de parâmetros.
+Também traz um modelo visão-linguagem de oito bilhões de parâmetros.
+
+O detalhe arquitetural bom é que a mesma família suporta três modos.
+O modo autoregressivo mantém compatibilidade com o jeito conhecido.
+O modo de difusão trabalha com blocos e refinamento.
+O modo de "self speculation" faz uma espécie de rascunho e verificação para acelerar a decodificação.
+O post da NVIDIA e da Hugging Face fala em até seis vírgula quatro vezes mais eficiência.
+Essa eficiência é medida em tokens por "forward pass" no modo de "self speculation".
+E a publicação fala em acurácia comparável nas tarefas avaliadas.
+
+Esse até precisa ficar com coleira.
+O número vem do material da própria NVIDIA e da Hugging Face.
+É benchmark controlado, com hardware que inclui classe B duzentos na discussão de desempenho.
+Não dá para transformar isso em promessa para a placa que sobrou no seu gabinete.
+Coitada, ela já segura navegador, editor, Docker e um sonho.
+
+Mesmo com cautela, a direção é boa.
+Latência de inferência muda a sensação de usar ferramenta.
+Se o modelo responde mais rápido, um agente pode iterar com menos espera.
+Uma I D E pode sugerir sem travar.
+Um aplicativo local pode virar algo que a pessoa usa de verdade.
+Ou pelo menos deixar de ser uma demonstração que só roda quando ninguém precisa dela.
+
+A publicação também aponta S G Lang como caminho de serving e implantação.
+Isso importa porque modelo novo que exige reescrever metade da pilha costuma morrer na agenda.
+Se o modo de geração vira escolha de implantação, e não cirurgia completa no aplicativo, fica mais fácil testar.
+Também fica mais fácil não casar com a ideia no primeiro encontro.
+
+Por agora, eu leria Nemotron Labs Diffusion como uma trilha técnica promissora.
+Não como troca imediata de tudo que já existe.
+É exatamente o tipo de coisa que merece benchmark independente.
+Também merece teste em hardware acessível, comparação de qualidade e medição de custo.
+Software continuou pedindo teste. Que coisa, né?
+
+As fontes deste bloco são Hugging Face com NVIDIA, o relatório técnico no arXiv e o model card do Nemotron Labs Diffusion oito B.
+
+Um bug em leitor de PDF no Linux virou a C V E 2026, quarenta e seis cinco dois nove.
+O advisory é de alta severidade para o Atril.
+Versões abaixo de um ponto vinte e oito ponto quatro são afetadas.
+As correções listadas são um ponto vinte e oito ponto quatro e um ponto vinte e seis ponto três.
+A raiz descrita é injeção de argumento no caminho Go To R.
+O caso passa por ev spawn e por uma chamada que cria comando a partir de linha de comando.
+O impacto é execução de código como o usuário depois de abrir e clicar em documento criado para isso.
+As alegações sobre XReader abaixo de quatro ponto seis ponto três e Evince abaixo de quarenta e oito ponto um vêm do pesquisador.
+Também vêm do repositório do caso.
+Então confira pacote e advisory da sua distro antes de sair decretando o apocalipse no desktop.
+As fontes são o "Git Hub" Security Advisory, o pesquisador e o repositório do caso.
+
+O N P M "staged publishing" ficou geralmente disponível.
+A ideia é trocar o publish direto por uma fila.
+O C I sobe o tarball, mas um mantenedor aprova ou rejeita antes de aquilo chegar aos consumidores.
+Esse fluxo vem com prova de presença, dois F A e dispositivo confiável.
+Para usar, precisa da linha de comando do N P M, versão onze ponto quinze ponto zero ou mais nova.
+O comando é N P M stage publish, nos fluxos em que isso fizer sentido.
+O changelog também trouxe controles de origem de instalação.
+As flags são allow file, allow remote e allow directory, ao lado de allow git.
+O plano é o allow git mudar do padrão all para none no N P M [S IY1 EH1 L AY1] versão doze.
+A fonte é o "Git Hub" Changelog.
+
+A Apple publicou um blueprint de verificação formal para o core crypto.
+Essa biblioteca é usada em mais de dois vírgula cinco bilhões de dispositivos ativos.
+O trabalho mira M L K E M e M L D S A contra F I P S duzentos e três e F I P S duzentos e quatro.
+Ele usa Cryptol, Software Analysis Workbench, Isabelle e cryptol to Isabelle.
+E cobre tanto C portátil quanto trechos otimizados em ARM sessenta e quatro assembly.
+A própria Apple diz que isso encontrou problemas que teste comum não pegaria.
+Mas ela também deixa o limite.
+Verificação formal aqui trata propriedades definidas, principalmente correção funcional.
+E continua acompanhada de teste convencional.
+A fonte é Apple Security Research.
+
+O padrão que sobra depois de tirar os nomes próprios é bem pé no chão.
+Gerar, encontrar e publicar ficou rápido.
+Confiar continua dando trabalho.
+
+Project Glasswing empurra vulnerabilidade para a fila de triagem.
+O N P M coloca uma aprovação entre o C I e o pacote público.
+A Apple tenta provar pedaços críticos de criptografia contra especificação formal.
+A discussão de agentes lembra que uma tarefa pode custar mais do que o preço bonito do token sugere.
+Cada exemplo tem sua própria borda.
+Mas todos batem no mesmo móvel da sala: limite.
+
+Limite de publicação, limite de confiança e limite de orçamento.
+Limite do que uma prova matemática cobre.
+Limite do que um benchmark de fornecedor diz sobre o seu hardware.
+
+Para times pequenos, isso não precisa virar uma catedral de processo.
+Pode começar com coisas menos cinematográficas.
+Issue de segurança com reprodução decente.
+Fila clara de patch para não perder correção.
+Release com advisory quando a correção sair.
+Stage antes de publicar pacote.
+Allowlist de origem para pacote e dependência.
+Orçamento por tarefa de agente.
+E teste que mede o que você realmente usa.
+É um pacote sem glamour, eu sei.
+Mas produção costuma preferir ferramenta chata que segura o tranco.
+Principalmente quando a alternativa é ferramenta brilhante que some quando o pager toca.
+
+As fontes finais são Anthropic, "Git Hub" Changelog, Apple Security Research e Fortune.
