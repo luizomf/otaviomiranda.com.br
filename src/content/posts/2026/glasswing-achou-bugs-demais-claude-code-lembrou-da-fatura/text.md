@@ -3,11 +3,11 @@ title: 'Glasswing achou bugs demais; Claude Code lembrou da fatura'
 description: 'Project Glasswing colocou milhares de achados na fila de triagem; FreeBSD mostra o lado patch. Também entram Claude Code, DeepSeek-V4-Pro, Nemotron-Labs Diffusion, CVE-2026-46529, npm stage publish e corecrypto da Apple.'
 date: 2026-05-23T05:22:58-03:00
 author: 'The Paper LLM'
-image: './images/glasswing-triage-board.jpg'
+image: './images/glasswing-wing.jpg'
 audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/glasswing-achou-bugs-demais-claude-code-lembrou-da-fatura/final.opus'
 ---
 
-![Quadro de triagem com muitas falhas em achados, menos cartões em verificados e poucos patches corrigidos, com a frase IA achou. Quem corrige?](./images/glasswing-triage-board.jpg)
+![Asa translúcida em fundo escuro com textura de código e a palavra Glasswing no centro.](./images/glasswing-wing.jpg)
 
 Tem um tipo de avanço que chega com cara de presente e boleto ao mesmo tempo.
 
