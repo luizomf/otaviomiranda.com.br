@@ -1,0 +1,257 @@
+Megalodon mostrou que Git Hub Actions também é produção.
+
+Tem uma coisa meio cruel na infraestrutura de desenvolvimento: quanto melhor ela funciona, mais invisível ela fica.
+O arquivo que roda o build, o painel do servidor, o script de instalação e a máquina do dev começam a parecer só bastidor.
+A memória do agente que guarda contexto útil entra no mesmo pacote.
+Aí a gente revisa o código da aplicação com lupa e deixa token, chave e permissão passarem como decoração.
+
+A edição da noite vem dessa área menos glamourosa.
+O alerta de pacote ruim publicado na internet já deu trabalho mais cedo.
+Agora a preocupação pula para o caminho que constrói, publica, instala, administra e lembra.
+Se esse caminho pode falar com nuvem, registry, servidor ou banco, ele já está sentado na cadeira de produção.
+Só não ganhou crachá, pelo menos por enquanto.
+
+Por isso a história principal não começa com uma função vulnerável dentro do app.
+A história começa com workflow.
+Um repositório pode estar com o código limpo e, mesmo assim, o processo que roda ao lado dele pode vazar a casa inteira.
+O nome da campanha é Megalodon, e o alvo que importa para a gente é o Git Hub Actions.
+
+Depois disso, a noite ainda passa por uma falha local no Apple Silicon.
+Ela ensina uma coisa boa sobre defesas fortes.
+Quando o muro fica alto, muita pesquisa passa a procurar a porta que ainda tem autorização para mexer lá dentro.
+E fecha com um assunto mais construtivo: memória de agente.
+Mas aqui é memória do tipo que dá para inspecionar, não aquela névoa mística onde o robô lembra algo e ninguém sabe de onde tirou.
+
+Então o mapa de hoje é esse: pipeline com segredo, proteção de kernel com porta confiável e memória de agente com rastro.
+Também tem alerta rápido para servidor, site antigo, endpoint de dev, saída de rede e dependência.
+Noite tranquila, se você achar normal dormir pensando no token do Git Hub.
+
+Quando o workflow vira o lugar mais perigoso do repositório.
+
+O Megalodon é uma campanha reportada por Safe Dep e Step Security.
+Nela, atacantes mexeram em arquivos de workflow, e não necessariamente no código da aplicação.
+Esse detalhe muda toda a conversa.
+
+Em muitos times, mudança na pasta src, migração de banco e código de autenticação recebem revisão séria.
+Mudança no diretório ponto Git Hub barra workflows, por outro lado, às vezes passa com cara de é só C I.
+Só que o runner de C I pode enxergar variável de ambiente, chave S S H e configuração de Docker.
+Também pode ver credencial de Kubernetes, token de registry, credencial de nuvem e permissões do próprio Git Hub.
+
+Bonito, né? O arquivo parece YAML inofensivo.
+O ambiente ao redor dele parece uma gaveta cheia de chaves.
+
+A Safe Dep descreve a campanha como backdoor em massa por workflows de C I.
+A fonte fala em mais de cinco mil e setecentos commits maliciosos enviados em dezoito de maio de 2026.
+A Step Security reporta cinco mil quinhentos e sessenta e um repositórios afetados em cerca de seis horas.
+Esses números devem ficar atribuídos às fontes, porque o escopo final pode se mexer.
+Mas eles já são grandes o bastante para tratar o tema como incidente de supply chain com cara de produção.
+
+O mecanismo público descrito pelas fontes é o suficiente para o leitor agir sem receber receita de ataque.
+Arquivos de Git Hub Actions eram alterados para rodar dentro do C I e coletar segredos comuns naquele ambiente.
+A Step Security cita variáveis de ambiente, material S S H, configurações Docker e Kubernetes.
+Também cita tokens de package registry, credenciais de cloud, tokens do Git Hub e tokens ligados a O I D C.
+
+O I D C merece uma pausa aqui.
+Quando o workflow tem a permissão id token write, ele pode pedir credenciais temporárias para outros serviços.
+Isso depende da configuração do ambiente.
+Esse recurso é ótimo quando bem escopado.
+Quando vira permissão ampla em workflow que qualquer mudança suspeita consegue acionar, ele deixa de ser detalhe elegante.
+Aí ele vira uma porta bem iluminada.
+
+A Safe Dep também preserva um exemplo concreto de downstream: Tiledesk.
+Segundo a empresa, o pacote N P M arroba Tiledesk barra Tiledesk server carregou o backdoor em algumas versões.
+As versões citadas vão de dois ponto dezoito ponto seis até dois ponto dezoito ponto doze.
+Esse ponto aqui é importante para não exagerar.
+Isso não autoriza sair dizendo que todos os cinco mil quinhentos e sessenta e um repositórios viraram pacote comprometido.
+Repositório com workflow malicioso e pacote downstream comprometido são camadas diferentes do mesmo tipo de problema.
+
+Para responder, a lista é pouco glamourosa, o que ajuda.
+Revise mudanças no diretório ponto Git Hub barra workflows como você revisaria código com permissão sensível.
+Diminua as permissões do token do Git Hub.
+Evite id token write amplo e sem necessidade.
+Pinte de vermelho mental qualquer action não pinada ou difícil de auditar.
+Observe saída de rede do runner quando der.
+Se um workflow suspeito rodou com segredo disponível, trate os segredos acessíveis como expostos e faça rotação.
+
+Isso conversa com o alerta de Laravel Lang publicado mais cedo, mas por outro caminho.
+Lá a dor estava em tags e Composer.
+Aqui a dor está no plano de controle que executa a entrega.
+O nome técnico muda; o hábito que precisa mudar é parecido.
+Aquilo que instala, publica ou faz deploy também é código privilegiado.
+
+As fontes deste bloco são Safe Dep e Step Security.
+
+Apple M I E e a porta que ainda podia escrever.
+
+A segunda história é mais técnica, mas ela tem uma explicação simples se a gente não começar pelo meio do exploit.
+
+A Apple vem colocando camadas fortes de proteção de memória no Apple Silicon.
+O nome aqui é Memory Integrity Enforcement, ou M I E.
+A ideia geral é dificultar a vida de bugs clássicos de corrupção de memória no kernel.
+Isso continua sendo uma defesa séria.
+O caso de hoje não transforma M I E em enfeite nem merece aquela risada fácil de segurança não existe.
+Segurança existe, só insiste em ser feita de detalhes chatos.
+
+O que apareceu agora foi a C V E 2026, vinte e oito nove cinco dois.
+Ela foi corrigida nas atualizações de segurança da Apple publicadas em onze de maio de 2026.
+A página da Apple para o mac O S Tahoe vinte e seis ponto cinco lista o problema no kernel.
+O caso afeta Macs com Apple Silicon, e a Apple diz que ele foi tratado com validação de entrada melhorada.
+O crédito vai para Calif ponto I O em colaboração com Claude e Anthropic Research.
+
+Depois da correção, a Calif publicou um relato sobre uma cadeia local de escalada de privilégio.
+O teste era em um Mac com chip M cinco, M I E ativado e mac O S vinte e seis ponto quatro ponto um antes do patch.
+O caminho partia de um usuário local sem privilégio e terminava com shell de root.
+Isso é grave para ambientes de frota e para pesquisa de kernel.
+Mas não deve ser confundido com exploração remota sozinha.
+Alguém já precisava conseguir rodar código como usuário local.
+
+O detalhe didático veio forte na análise da IronPeak, publicada em vinte e três de maio.
+A leitura deles é que a falha não quebrou o muro por fora.
+Ela atingiu uma parte autorizada a escrever em regiões protegidas, um tipo de porta confiável.
+O termo técnico preservado é zalloc R O mut.
+Ele foi tratado como escritor confiável para zonas do kernel que deveriam ser somente leitura no uso normal.
+
+Se essa porta aceita argumento errado por causa de validação insuficiente, a arquitetura forte continua forte.
+Mas a fronteira de confiança muda de lugar.
+Em vez de mirar só tabela de páginas, tag ou corrupção clássica, a pesquisa passa a olhar outro ponto.
+O alvo vira o código que tem permissão legítima para mutar o que quase ninguém deveria tocar.
+
+Esse é o pedaço útil para quem não faz exploit de kernel no café da manhã.
+Defesa moderna não elimina auditoria.
+Ela empurra a auditoria para caminhos menores, privilegiados e mais sensíveis.
+Interfaces internas que escrevem em memória protegida continuam merecendo lupa.
+Validação de tamanho, overflow de inteiro e checagem de limite continuam sendo assunto de gente grande.
+
+Também vale calibrar o papel da I A aqui.
+O crédito menciona Claude e Anthropic Research, e a Calif fala em assistência no trabalho.
+Isso é diferente de imaginar um modelo acordando sozinho, explorando Apple Silicon e pedindo café depois.
+A parte pública aponta para pesquisadores experientes usando ferramenta forte em um problema difícil.
+
+Para quem administra Macs, a ação é menos cinematográfica: confirme o patch.
+Em ambiente gerenciado, olhe M D M, versão de mac O S, i O S e iPad O S quando couber.
+Trate atualização de segurança como trabalho de frota, não como notificação chata para empurrar até sexta que vem.
+Principalmente porque sexta que vem costuma chegar com outra notificação chata.
+
+As fontes deste bloco são Calif ponto I O, Apple Support, N V D e IronPeak.
+
+Memória de agente precisa deixar rastro.
+
+Depois de duas histórias com cheiro de incidente, uma peça mais construtiva: Tencent D B Agent Memory.
+O projeto é open source, com licença M I T, e tenta resolver uma dor bem real de agentes de código e automação longa.
+
+Quando a tarefa fica comprida, o contexto vira um depósito.
+Tem comando, saída de teste, arquivo aberto, plano antigo, plano novo, tentativa que falhou e hipótese que parecia boa.
+Também tem trecho que o agente esqueceu e uma quantidade pouco saudável de logs.
+Jogar tudo na janela de contexto custa caro e bagunça a atenção.
+Jogar tudo numa memória vetorial plana pode piorar outro lado.
+O agente lembra uma coisa, mas o humano não consegue auditar de onde aquilo saiu.
+
+A proposta da Tencent divide a memória em dois lados.
+O curto prazo comprime logs verbosos e representa o andamento da tarefa em um canvas Mermaid.
+Os identificadores de nós permitem voltar ao trecho original da conversa.
+Isso parece pequeno, mas é o tipo de detalhe que separa memória útil de anotação bonita.
+Se eu não consigo clicar mentalmente no porquê da lembrança, aquilo vira superstição com banco de dados.
+
+No longo prazo, o projeto fala em uma pirâmide com quatro camadas.
+As camadas são L zero Conversation, L um Atom, L dois Scenario e L três Persona.
+A leitura simples é que a memória vai do bruto para resumos cada vez mais abstratos.
+O ponto saudável é manter ligação de volta com evidência.
+Resumo sem trilha vira aquele colega de reunião que tem muita certeza e pouca ata.
+
+O backend padrão roda localmente com S Q Lite e S Q Lite Vec.
+A recuperação combina busca por palavra-chave e vetor.
+Ela usa B M vinte e cinco, busca vetorial e fusão recíproca de rankings.
+O repositório também oferece caminho de integração com OpenClaw e um adaptador para Hermes via Docker.
+Para quem mexe com agente local, isso coloca a memória mais perto de infraestrutura inspecionável.
+E um pouco mais longe de mágica de instrução.
+
+Agora, a coleira nos números.
+O repositório relata redução de tokens de até sessenta e um vírgula trinta e oito porcento.
+Também relata melhora no benchmark PersonaMem, de quarenta e oito porcento para setenta e seis porcento.
+Esses números são interessantes, mas continuam sendo números do próprio projeto.
+O jeito justo de ler é: vale testar em fluxo real, com tarefa real, custo real e erro real.
+
+Mesmo com essa cautela, a direção é boa.
+Agente que trabalha por horas precisa lembrar sem transformar cada retomada em arqueologia de chat.
+Só que memória boa para produção precisa ser local quando o caso pedir.
+Também precisa ser auditável, rastreável e fácil de apagar ou corrigir quando fica errada.
+Lembrar demais sem explicar de onde veio é só cache com autoestima.
+
+As fontes deste bloco são o repositório Tencent D B Agent Memory no Git Hub e a MarkTechPost.
+
+Agora, os destaques rápidos para hoje.
+
+O plugin LiteSpeed para C Panel tem alerta sério para quem cuida de hospedagem.
+A C V E 2026, quarenta e oito um sete dois, afeta o plugin de usuário do C Panel nas versões dois ponto três até dois ponto quatro ponto quatro.
+A própria LiteSpeed diz que qualquer usuário C Panel poderia abusar de L S W S ponto Redis Able para executar scripts como root.
+A empresa também diz que há exploração ativa.
+O caminho indicado é LiteSpeed W H M Plugin cinco ponto três ponto um ponto zero com C Panel plugin dois ponto quatro ponto sete ou mais novo.
+Outra saída é remover o plugin de usuário se não der para corrigir imediatamente.
+As fontes são LiteSpeed e The Hacker News.
+
+O Drupal publicou correções para a C V E 2026, nove zero oito dois.
+É uma injeção de S Q L na interface de abstração de banco de dados em instalações com Postgre S Q L.
+O aviso atualizado em vinte e dois de maio de 2026 diz que tentativas de exploração estavam sendo detectadas.
+Então site Drupal com Postgre S Q L exposto merece prioridade.
+As versões corrigidas listadas incluem onze ponto três ponto dez, onze ponto dois ponto doze e onze ponto um ponto dez.
+Também incluem dez ponto seis ponto nove, dez ponto cinco ponto dez e dez ponto quatro ponto dez.
+Além disso, há patch manual para os ramos antigos nove ponto cinco e oito ponto nove.
+As fontes são Drupal Security Team e N V D.
+
+A Perplexity abriu o Bumblebee.
+Ele é um coletor somente leitura para inventário de endpoint de desenvolvedor em mac O S e Linux.
+Ele lê metadados de arquivos de lock, gerenciadores de pacote, extensões de editor e extensões de navegador.
+Também lê configurações M C P e emite N D JSON.
+O Bumblebee faz isso sem chamar gerenciador de pacotes nem script de ciclo de vida.
+Isso serve para responder onde esse pacote ou extensão conhecida aparece.
+Não serve para declarar que a máquina está limpa para sempre.
+As fontes são o Git Hub da Perplexity e a própria Perplexity.
+
+Underminr, descrito pela ADAM Networks, é um bom lembrete de rede.
+Domínio com reputação limpa não basta quando D N S, S N I, cabeçalho Host, I P e rota de tenant em C D N são avaliados separados.
+A SecurityWeek relata a estimativa da ADAM Networks de dezenas de milhões de domínios em escopo.
+Mas esse número deve ser lido como estimativa de pesquisador.
+Para times de infra, a parte prática é correlacionar a rota completa de saída.
+Não dá para confiar em um único selo de domínio conhecido.
+As fontes são ADAM Networks e SecurityWeek.
+
+Apex Testing apareceu como mais uma tentativa de deixar benchmark de agente de código parecido com trabalho de verdade.
+O site apresenta tarefas práticas, repositórios reais ou privados, muitas execuções e metadados de custo.
+É útil observar esse tipo de infraestrutura de avaliação.
+Só não vale transformar um leaderboard em garantia de que o modelo vai se comportar bem no seu monorepo.
+Ainda mais com seu histórico e suas pequenas tragédias locais.
+A fonte desse destaque é Apex Testing.
+
+Separado do caso Laravel Lang, houve outro alerta envolvendo Packagist.
+O The Hacker News, citando pesquisa da Socket, reportou oito pacotes comprometidos.
+Neles, o ponto de execução malicioso ficava em hooks post install dentro de package ponto JSON.
+Ele não ficava em composer ponto JSON.
+A lição é incômoda para projetos P H P com tooling misto.
+Revisar só o ecossistema esperado pode deixar escapar script JavaScript rodando em build Linux ou C I.
+A fonte desse destaque é The Hacker News.
+
+Acompanhamento de tendências do dia.
+
+O padrão da noite é menos sobre uma marca específica e mais sobre onde a confiança fica guardada.
+Git Hub Actions executa com segredo.
+O N P M colocou staged publishing geralmente disponível, com aprovação protegida por dois fatores antes do pacote chegar ao público.
+Bumblebee olha para a máquina do dev como parte da resposta de supply chain.
+Tencent D B Agent Memory tenta deixar lembrança de agente auditável.
+LiteSpeed e Drupal lembram que painel administrativo e abstração de banco também têm fronteira de privilégio.
+
+Nada disso vira uma única campanha.
+Misturar tudo como se fosse o mesmo incidente seria ruim.
+A conexão é mais comum e mais chata.
+O lugar que parecia suporte ao desenvolvimento virou superfície principal.
+Workflow, aprovação de pacote, extensão, configuração local, plugin de painel, query builder e memória de agente mexem com produção.
+
+Para time pequeno, a resposta não precisa virar teatro de processo.
+Dá para começar por revisão obrigatória em workflow e permissão mínima para token.
+Use staged approval quando publicar pacote e inventário de endpoint quando sair advisory.
+Faça patch rápido em plugin com privilégio.
+E escolha memória de agente que aponta para evidência em vez de só guardar resumo bonito.
+
+No fim, é trabalho de manutenção.
+Só que desta vez a manutenção está bem perto da chave do cofre.
+
+As fontes da tendência são Step Security, Git Hub Changelog, Bumblebee no Git Hub e Tencent D B Agent Memory.
