@@ -57,9 +57,9 @@ A lista de IOCs publicada pela StepSecurity inclui estes sinais.
 
 Sinais de rede:
 
-- Requisição HTTPS para `flipboxstudio.info/payload`.
-- Requisição HTTPS para `flipboxstudio.info/exfil`.
-- A StepSecurity identifica `flipboxstudio.info` como typosquat de `flipboxstudio.com`.
+- Requisição HTTPS para `flipboxstudio[.]info/payload`.
+- Requisição HTTPS para `flipboxstudio[.]info/exfil`.
+- A StepSecurity identifica `flipboxstudio[.]info` como typosquat de `flipboxstudio[.]com`.
 
 Sinais de arquivo:
 
@@ -90,7 +90,7 @@ Para consumidores dos pacotes, a sequência prática, baseada na orientação da
 4. Compare o SHA travado no lockfile com os commits impostores listados pela StepSecurity e com um commit legítimo anterior ao incidente, vindo de clone local, mirror confiável ou outra referência que você já controlava antes.
 5. Se o lockfile foi regenerado em ou depois de 2026-05-22 22:32 UTC, trate o ambiente como suspeito, segundo a StepSecurity.
 6. Se Composer rodou a partir de 2026-05-22 22:32 UTC com um dos pacotes afetados, audite o runner, a máquina de desenvolvimento e os logs de rede usando os IOCs acima.
-7. Bloqueie ou sinkhole `flipboxstudio.info` na saída de rede quando isso couber no seu ambiente.
+7. Bloqueie ou sinkhole `flipboxstudio[.]info` na saída de rede quando isso couber no seu ambiente.
 
 Na parte de secrets, a recomendação da StepSecurity deve ser lida com uma palavra importante: acessíveis. Não é para rotacionar o universo inteiro por reflexo. É para levantar o que aquele job, runner ou terminal conseguia ler no momento em que Composer rodou.
 
@@ -100,7 +100,7 @@ Para mantenedores, a StepSecurity recomenda restaurar as tags para os commits or
 
 ## Caveats importantes
 
-A StepSecurity detonou `laravel-lang/http-statuses` `v3.4.5` em um runner isolado do GitHub Actions usando Harden-Runner em modo de auditoria. Nesse teste, segundo a StepSecurity, carregar o autoload do Composer foi seguido por chamada para `flipboxstudio.info/payload`, processos PHP e ELF órfãos, chamada para `flipboxstudio.info/exfil` e limpeza rápida dos artefatos temporários.
+A StepSecurity detonou `laravel-lang/http-statuses` `v3.4.5` em um runner isolado do GitHub Actions usando Harden-Runner em modo de auditoria. Nesse teste, segundo a StepSecurity, carregar o autoload do Composer foi seguido por chamada para `flipboxstudio[.]info/payload`, processos PHP e ELF órfãos, chamada para `flipboxstudio[.]info/exfil` e limpeza rápida dos artefatos temporários.
 
 Para os outros três pacotes, a própria StepSecurity apresenta o caveat: ela espera comportamento semelhante porque encontrou estrutura maliciosa e comportamento de payload equivalentes por análise de fonte, mas o artigo destaca a detonação específica de `http-statuses` `v3.4.5`. Então evite transformar isso em afirmação independente de que todos os ambientes exfiltraram dados. O correto, pelo relato da StepSecurity, é tratar como risco de exposição quando Composer rodou nos cenários descritos.
 
