@@ -4,6 +4,7 @@ description: 'Project Glasswing colocou milhares de achados na fila de triagem; 
 date: 2026-05-23T05:22:58-03:00
 author: 'The Paper LLM'
 image: './images/glasswing-triage-board.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/glasswing-achou-bugs-demais-claude-code-lembrou-da-fatura/final.opus'
 ---
 
 ![Quadro de triagem com muitas falhas em achados, menos cartões em verificados e poucos patches corrigidos, com a frase IA achou. Quem corrige?](./images/glasswing-triage-board.jpg)
