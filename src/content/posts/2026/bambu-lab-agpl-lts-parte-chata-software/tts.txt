@@ -1,0 +1,209 @@
+Bambu Lab, A G P L e L T S: quem manda na parte chata do software.
+
+Você compra uma ferramenta achando que a parte difícil é escolher modelo, preço e botão bonito.
+Só que, depois que ela entra na sua vida, aparecem umas perguntinhas menos empolgantes.
+Quem decide como ela conversa com outros programas? Quem pode consertar?
+Quem promete atualização? E o que acontece quando a opção estável mantém o mesmo defeito por tempo demais?
+
+Essas perguntas não têm glamour. Elas moram naquela área do projeto que quase ninguém mostra no banner.
+Licença. Memória. Suporte. Importação de módulo. Codificação de texto.
+Parece gaveta de manual velho, até o dia em que a gaveta impede você de usar o hardware que comprou.
+Ou lota a R A M do seu modelo local, ou transforma um restore do banco em sessão de arqueologia.
+
+O jornal de hoje vem dessa parte menos bonita do software.
+Primeiro, uma briga em torno de uma impressora três D mostra como uma licença aberta vira controle do equipamento.
+Depois, uma pesquisa da NVIDIA tenta melhorar memória longa de modelo sem responder compra mais máquina.
+E, no pedaço Linux da conversa, vem um lembrete útil: Long Term Support é promessa específica, não amuleto contra bug.
+
+Repare que ainda dá para explicar tudo sem despejar sigla em cima de você.
+Os nomes entram daqui a pouco, porque eles importam.
+Mas o ponto humano vem antes: quando uma camada pequena decide quem controla a ferramenta, o resto da pilha obedece.
+Às vezes isso salva a produção. Às vezes só te coloca para ler contrato, paper e documentação em pleno domingo.
+
+Também tem coisa rápida e boa: imagem dentro do runtime, monkey patching menos ansioso em Python e PostgreSQL recusando bytes suspeitos.
+Tem ainda uma demo de dezesseis bytes e um ping que achou que o tempo tinha voltado.
+Dev gosta de novidade, claro. O problema é que novidade sem encanamento vira decoração cara.
+
+Primeiro, Bambu Lab levou a A G P L para a briga pelo controle da impressora.
+
+A história da Bambu Lab parece, por fora, uma treta de impressora três D.
+Um fabricante popular, uma comunidade técnica irritada, um desenvolvedor pressionado, gente fazendo fork e discutindo licença.
+Dá para ler como drama de nicho. Eu acho melhor ler como um caso de controle de produto.
+
+A parte técnica começa no Bambu Studio.
+Segundo a Software Freedom Conservancy, o software tem linhagem em projetos como Prusa Slicer e Slicer três, que usam A G P L.
+Essa licença é mais exigente do que uma licença permissiva comum.
+Quando você distribui ou oferece uma versão modificada em certos contextos, precisa lidar com fonte correspondente.
+Esse é o famoso "Corresponding Source".
+Tradução sem juridiquês: se você constrói em cima de um software copyleft, a parte fechada ao redor dele pode virar problema real.
+
+O ponto da S F C, em resposta pública de dezoito de maio, é que a camada proprietária de rede da Bambu deveria entrar nessa conversa.
+Bradley Kuhn, da S F C, não está dizendo só: olha que feio, uma empresa ganhou dinheiro com open source.
+A discussão é mais específica.
+Até onde uma empresa pode pegar uma base aberta, fechar o caminho de controle remoto do hardware e ainda cumprir a licença?
+
+A reportagem do The Verge, publicada em vinte e um de maio, trouxe outro pedaço do caso.
+Segundo o texto, a Bambu pressionou o desenvolvedor Pawel Jarczak por causa de código para controle independente das impressoras.
+A matéria fala em ameaça envolvendo a seção mil duzentos e um do D M C A.
+Também menciona uma carta de cease and desist preparada.
+E registra a reação da comunidade, com forks e apoio público de nomes como Louis Rossmann, GamersNexus e Jeff Geerling.
+
+Aqui mora o detalhe que deve interessar até a quem nunca imprimiu uma peça na vida.
+Se você compra um equipamento, mas o caminho para controlá-lo depende de serviço, plugin ou biblioteca fechada, a propriedade fica esquisita.
+Você tem o objeto na mesa, mas não necessariamente tem o controle completo do fluxo que faz ele trabalhar.
+
+Não dá para cravar o resultado legal.
+A disputa está em andamento, e a S F C está apresentando a própria leitura de compliance.
+O que já dá para observar é a perda de confiança.
+Quando uma empresa usa software aberto como base e depois tenta apertar o funil de controle, a comunidade junta as peças.
+Licença, rede, firmware e cloud começam a parecer uma coisa só.
+Chato para vender no banner. Bem relevante para quem mantém produto.
+
+As fontes deste bloco são Software Freedom Conservancy e The Verge.
+
+Agora, Gated DeltaNet dois tenta lembrar mais sem pedir contexto infinito.
+
+A segunda história é mais de paper, mas tem um jeito simples de entrar nela: contexto longo custa.
+Quando um modelo precisa lembrar muita coisa, alguma parte do sistema paga a conta em memória, latência ou qualidade.
+A resposta mais comum do mercado é aumentar janela, comprar máquina maior e fingir que o boleto é uma feature premium.
+
+A pesquisa da NVIDIA vai por outro caminho.
+Gated DeltaNet dois, publicado em paper no arXiv e em repositório da N V Labs, é uma arquitetura de atenção linear.
+Em vez de guardar tudo como um Transformer clássico faz com cache de chaves e valores, esse tipo de modelo comprime o histórico.
+O histórico vira um estado recorrente de tamanho fixo.
+Isso promete custo mais previsível, mas cria uma pergunta incômoda.
+Quando a memória é comprimida, como o modelo decide o que apagar e o que escrever?
+
+O nome do trabalho entrega a ideia principal.
+Em variantes anteriores baseadas na delta rule, a decisão de apagar e escrever ficava mais acoplada.
+O Gated DeltaNet dois separa essas decisões.
+O lado da chave recebe um gate de apagamento por canal, representado por b t.
+O lado do valor recebe um gate de escrita por canal, representado por dáblio t.
+Há também decaimento por canal.
+Falando sem virar quadro de pós-graduação: o modelo ganha controles diferentes.
+Um controle ajuda a limpar associações antigas. Outro ajuda a gravar informação nova.
+
+Isso interessa porque long context retrieval costuma sofrer quando várias associações parecidas competem dentro da memória comprimida.
+O README da N V Labs fala em modelos de um vírgula três bilhão de parâmetros.
+Eles teriam sido treinados em cem bilhões de tokens do FineWeb Edu.
+O repositório cita resultados em linguagem, raciocínio comum, RULER e tarefas de recuperação.
+Um número citado é oitenta e nove vírgula oito no S NIAH três a dois K, em configuração recorrente.
+Esse teste é uma variação de agulha no palheiro com múltiplas chaves.
+
+Também aparecem comparações com Mamba dois, Mamba três, K D A e versões anteriores de Gated DeltaNet.
+É o tipo de tabela que dá vontade de transformar em manchete grande.
+Calma: esses são resultados reportados pelo paper e pelo repositório.
+Não são validação independente em produção.
+E a licença do código é NVIDIA Source Code License N C.
+Isso coloca a conversa no campo de pesquisa, avaliação e uso não comercial.
+
+Mesmo com a coleira, o assunto é bom.
+Nem toda evolução de modelo precisa ser mais parâmetros, mais contexto, mais G P U, boa sorte.
+Às vezes o avanço está em mexer na forma como a memória é editada.
+Para quem sonha com agente local, modelo em V P S ou ferramenta que não coma a máquina inteira no café da manhã, isso merece radar.
+Só falta o mundo real dar aquele abraço honesto.
+Benchmark fora do README, hardware acessível e tarefas menos comportadas.
+
+As fontes deste bloco são arXiv, N V Labs no Git Hub e MarkTechPost.
+
+Agora, L T S segura a base, mas também congela alguns bugs.
+
+A terceira história é quase um serviço público para quem escolhe distribuição Linux para servidor, desktop de trabalho ou V P S pessoal.
+O post do pointieststick, publicado em vinte e três de maio, cutuca uma confusão antiga.
+Muita gente lê Long Term Support como versão com menos bugs. Nem sempre.
+
+L T S costuma significar uma base congelada por mais tempo.
+Essa base recebe atualizações de segurança e manutenção dentro de uma promessa definida.
+Isso é ótimo quando você quer previsibilidade.
+Um servidor que troca menos peças no meio do caminho tende a surpreender menos.
+Pacote, biblioteca, A B I e integração mudam com mais calma.
+Em produção, menos susto já é quase um benefício com crachá.
+
+Só que congelar versão também congela defeito.
+Se um bug não for tratado como segurança, não estiver na política de manutenção ou não receber backport, ele pode continuar lá por anos.
+A distribuição não prometeu corrigir todo incômodo da sua vida.
+Ela prometeu um tipo de suporte para uma base específica.
+É menos romântico, mas muito mais útil de entender antes de escolher a imagem da V P S.
+
+O texto cita definições de Debian, Ubuntu e Kubuntu para separar essas coisas.
+Ele fala de suporte de segurança, manutenção, versões congeladas e kernels de hardware enablement quando disponíveis.
+Também fala de suporte comercial quando você precisa de S L A.
+Ubuntu Pro aparece como exemplo de produto pago.
+O post cita trezentos dólares por ano para workstation.
+Esse detalhe importa porque L T S grátis e correção específica com prazo são produtos diferentes.
+
+Nada disso joga L T S pela janela.
+Para muita coisa, L T S é a escolha correta.
+Banco, painel, app interno, servidor de cliente e ambiente de aula podem preferir uma base previsível a uma esteira de versões novas.
+O cuidado é outro: escolha L T S porque você quer estabilidade de integração e correções de segurança dentro daquele contrato.
+Não escolha porque alguém prometeu software sem bug.
+Esse produto ainda não saiu. Se sair, desconfie do vendedor.
+
+Distribuições mais rápidas ou rolling podem trazer correções upstream e suporte de hardware mais cedo.
+Mas cobram em mudança constante.
+L T S cobra de outro jeito: você aceita viver com algumas versões antigas e alguns defeitos antigos em troca de uma base mais previsível.
+Para iniciante, isso muda a pergunta.
+Em vez de qual tem menos bug, fica melhor perguntar: qual tipo de mudança eu aguento administrar?
+
+As fontes deste bloco são pointieststick e Ubuntu Support.
+
+Agora, destaques rápidos para hoje.
+
+O Bun colocou Bun ponto Image na documentação do runtime.
+É uma A P I inspirada no Sharp para decodificar, transformar e reencodar imagens.
+A promessa útil é reduzir a aventura de dependência nativa em pipelines pequenos.
+O alvo inclui J P E G, P N G, Web P, A V I F e H E I C.
+Mas isso continua sendo coisa específica do Bun.
+Teste formato, qualidade, deploy e performance antes de trocar o que já funciona.
+A fonte desse destaque é a documentação do Bun.
+
+O wrapt dois ponto dois ponto zero ganhou uma ergonomia boa para quem mantém A P M, tracer, profiler ou instrumentação em Python.
+O sufixo de interrogação no nome do módulo permite registrar monkey patching preguiçoso.
+Assim, ele não força a importação do alvo só para preparar o patch.
+Isso conversa bem com os lazy imports explícitos da P E P oitocentos e dez no Python três ponto quinze.
+As fontes desse destaque são Graham Dumpleton e o changelog do wrapt.
+
+Client encoding, no PostgreSQL, é aquele assunto que parece burocrático.
+Pelo menos até um restore antigo começar a cuspir caractere quebrado.
+A ideia é simples: o cliente declara a codificação que fala, e o servidor converte quando precisa.
+O PostgreSQL prefere erro a corrupção silenciosa.
+S Q L underscore ASCII é o aviso grande.
+Ele desliga validação e deixa bytes crus entrarem sem muita cerimônia.
+A fonte desse destaque é The Build.
+
+A demo "wake up dezesseis B", lançada na Outline Demoparty em maio de 2026, desenha um fractal de Sierpinski.
+Ela também gera áudio no P C speaker usando só dezesseis bytes de assembly X oitenta e seis em modo real.
+O writeup passa por X O R, triângulo de Pascal módulo dois, teorema de Lucas e porta sessenta e um H.
+Também passa por salto de cinquenta e seis bytes e oito mil cento e noventa e dois passos.
+É doce de nerd, mas também uma aula compacta sobre hardware antigo, memória e matemática cabendo num guardanapo muito pequeno.
+As fontes desse destaque são hellmood e Demozoo.
+
+Um texto antigo da Cloudflare voltou a circular e continua ótimo, com a data bem clara.
+Ele é de onze de julho de 2023.
+O caso explica por que o ping pode avisar que o tempo voltou e que está tomando contramedidas.
+Depois de ajuste de relógio ou sincronização por N T P, o cálculo de ida e volta pode ficar impossível.
+Aí entram detalhes como V D S O, timestamp no payload I C M P e R T T negativo travado em zero.
+A fonte desse destaque é Cloudflare.
+
+Acompanhamento de tendências do dia.
+
+O fio que sobrou depois de tirar os nomes próprios é pequeno, mas insistente.
+A fronteira sem graça decide muita coisa.
+No caso da Bambu, a fronteira é licença, rede e controle do hardware.
+No Gated DeltaNet dois, é como uma memória comprimida apaga e grava informação.
+Em L T S, é a diferença entre suporte prometido e expectativa inventada pelo usuário.
+
+Nos rápidos, a mesma coisa reaparece em escala menor.
+O runtime quer engolir processamento de imagem.
+A instrumentação em Python tenta parar de acordar biblioteca antes da hora.
+O PostgreSQL insiste em saber que idioma de bytes o cliente está falando.
+Até o ping velho da Cloudflare lembra que relógio do sistema também participa da rede.
+Para alegria de quem achou que rede já tinha peças demais.
+
+Não precisa virar grande tese para colar na parede.
+Use como observação simples: antes de se apaixonar pelo nome bonito, olhe a camada que dá permissão.
+Olhe também a camada que guarda estado, promete suporte, importa módulo ou interpreta bytes.
+Normalmente é ali que o produto fica livre, rápido, confiável ou irritante.
+Às vezes tudo ao mesmo tempo, porque software gosta de manter o mistério.
+
+As fontes finais são Software Freedom Conservancy, N V Labs, pointieststick, Graham Dumpleton e The Build.
