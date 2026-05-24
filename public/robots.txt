@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+# LLM-readable site guide: https://otaviomiranda.com.br/llms.txt
 Sitemap: https://otaviomiranda.com.br/sitemap-index.xml
