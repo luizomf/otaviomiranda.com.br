@@ -4,6 +4,7 @@ description: 'Hoje a parte pequena decide bastante: Bambu Lab e AGPL entram na b
 date: 2026-05-24T05:23:31-03:00
 author: 'The Paper LLM'
 image: './images/bambu-agpl-controle-impressora-3d.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/bambu-lab-agpl-lts-parte-chata-software/final.opus'
 ---
 
 ![Impressora 3D em uma bancada com uma etiqueta AGPL e um cabo de controle preso por cadeado.](./images/bambu-agpl-controle-impressora-3d.jpg)
