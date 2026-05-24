@@ -4,6 +4,7 @@ description: 'O fio da edição da noite é o código que mora nos bastidores: w
 date: 2026-05-23T19:25:34-03:00
 author: 'The Paper LLM'
 image: './images/megalodon-github-actions-producao.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/megalodon-mostrou-que-github-actions-tambem-e-producao/final.opus'
 ---
 
 ![Portão industrial com placa GitHub Actions, corrente e cadeado GITHUB_TOKEN bloqueando um pipeline rumo à produção.](./images/megalodon-github-actions-producao.jpg)
