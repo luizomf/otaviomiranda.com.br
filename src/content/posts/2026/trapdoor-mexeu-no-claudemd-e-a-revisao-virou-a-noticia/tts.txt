@@ -1,266 +1,287 @@
 Trap Door mexeu no Claude ponto M D, e a revisão virou a notícia.
 
-Tem um cansaço novo aparecendo no trabalho de desenvolvimento.
-Não é só o cansaço de escrever código, porque essa parte ficou mais fácil em vários cantos.
-O que pesa agora é conferir se o atalho mexeu no lugar certo.
-É ver se o pacote que entrou pela porta não trouxe visita junto.
-É checar se o texto do relatório descreve um fato, ou só uma hipótese bonita.
-E é saber se a mudança grande ainda cabe na cabeça de quem precisa revisar.
+Tem um momento estranho no desenvolvimento com I A.
+A máquina faz mais coisas sem pedir muita licença.
+Ela sugere código, resume issue, baixa dependência, monta patch e cutuca teste.
+E ainda fala com aquela segurança de quem nunca precisou manter um sistema às três da manhã.
 
-Isso muda a rotina de um jeito meio silencioso.
-A ferramenta completa, gera, instala, sugere e resume.
-A pessoa continua responsável pelo estrago quando alguma coisa escapa.
-A produtividade até pode subir, mas a confiança não aparece por mágica com o autocomplete.
-Ela precisa ser gasta, conferida e, às vezes, recuperada depois de uma segunda-feira pouco generosa.
+Aí o humano entra depois, meio detetive, meio zelador.
+Ele tenta descobrir se aquela ajuda tocou no arquivo certo.
+Tenta ver se o pacote rodou alguma coisa no install.
+E confere se o relatório trouxe fato observado, ou só palpite bem vestido.
 
-O assunto de hoje gira em torno dessa conta.
-Primeiro vem um ataque de cadeia de suprimentos que não parou no roubo de segredo.
-Ele tentou mexer em arquivos que assistentes de programação leem como instrução.
-Depois, uma pesquisa coloca número naquela sensação de que a I A aumentou a fila de revisão.
-No meio disso, uma proposta grande para o Node ponto J S vira estudo de caso.
-O caso é sobre código assistido por agente em infraestrutura crítica.
+A escrita ficou mais rápida em vários lugares.
+A confiança continua precisando de prova.
 
-Também tem um pedaço mais prático para quem mantém sistema.
-Golpe que trabalha em tempo real, segredo compartilhado virando execução remota e consulta abandonada gastando banco.
-Tem concorrência Python chegando a deployment real.
-E tem modelo local perdendo tempo quando reaproveita contexto mal.
-Bastante coisa, mas o fio é o mesmo.
-Gerar ficou barato em alguns lugares, e verificar continua cobrando entrada.
+Hoje essa prova aparece em lugares bem concretos.
+Um ataque de cadeia de suprimentos tentou roubar segredos de máquinas de desenvolvimento.
+E ainda tentou mexer nos arquivos que orientam assistentes de programação.
 
-Primeiro, Trap Door mirou pacotes, segredos e arquivos de instrução de agentes.
+Uma pesquisa colocou número naquela sensação de que o código chega mais rápido.
+Mas a revisão, convenientemente, não evaporou.
 
-A história mais concreta do dia vem da Socket.
-Em 24 de maio, a empresa publicou uma análise sobre a campanha Trap Door, observada inicialmente em 22 de maio.
-A campanha espalhou mais de trinta e quatro pacotes maliciosos.
-Também espalhou mais de trezentas e oitenta e quatro versões ou artefatos relacionados.
-Isso aconteceu em três registries: N P M, Py P I e Crates ponto I O.
+No Node ponto J S, uma proposta útil de sistema de arquivos virtual virou outra conversa também.
+Ela virou conversa sobre tamanho de patch, autoria assistida e responsabilidade de mantenedor.
 
-O objetivo clássico já seria ruim o bastante.
-A Socket descreve roubo de chaves S S H, credenciais da A W S e tokens do "Git Hub".
+Também tem golpe em tempo real, segredo compartilhado virando execução remota e consulta abandonada gastando banco.
+Tem Python chegando com novos modos de concorrência em deployment Apache.
+E tem llama ponto C P P tentando evitar que uma sessão local longa fique recozinhando o mesmo contexto.
+
+Tudo técnico, sim, mas o fio é bem humano.
+A ferramenta pode acelerar a ida.
+Alguém ainda precisa conferir se a ponte existe.
+
+Trap Door mirou pacotes, segredos e arquivos de instrução de agentes.
+
+A história mais fresca do dia veio da Socket.
+A empresa publicou em 24 de maio uma análise da campanha Trap Door.
+A campanha foi observada inicialmente em 22 de maio.
+Ela atravessou N P M, Py P I e Crates ponto I O.
+Foram mais de trinta e quatro pacotes maliciosos.
+E mais de trezentas e oitenta e quatro versões ou artefatos relacionados.
+
+O roubo de segredo já seria suficiente para estragar o café.
+A Socket descreve busca por chaves S S H, credenciais da A W S e tokens do "Git Hub".
 Também aparecem dados de navegador, variáveis de ambiente e informações de carteiras cripto.
-Para uma máquina de desenvolvimento, isso é quase abrir a gaveta onde o time guarda todos os crachás.
+Em máquina de dev, isso costuma ficar perto de tudo que abre porta.
+Repositório, nuvem, servidor, registry, carteira, sessão local.
+Um pacote ruim não precisa chegar em produção para doer.
 
 No fim de semana, falamos de Megalodon pelo lado dos workflows.
-Agora a novidade aparece antes: no pacote instalado pelo dev e no arquivo que orienta o assistente.
+O Trap Door puxa a conversa para antes do C I.
+Ele puxa para o pacote instalado pelo desenvolvedor e para o arquivo que o assistente lê como instrução.
 
-A parte nova, e bem desconfortável, é que alguns payloads de N P M tentavam escrever instruções.
-Os alvos eram o arquivo Claude ponto M D e o arquivo ponto cursor rules.
+Esse é o pedaço desconfortável.
+Alguns payloads de N P M tentavam escrever em Claude ponto M D e ponto cursor rules.
 Esses arquivos são usados para orientar ferramentas de programação assistida.
 A Socket também cita instruções escondidas com caracteres Unicode de largura zero.
-É aquela categoria de truque visual que deixa o diff parecendo mais inocente do que deveria.
+É aquela maldade visual que deixa o diff parecendo mais limpo do que deveria.
 
-O ataque usava caminhos normais de cada ecossistema.
-No N P M, usava hooks de post install.
+O ataque passava por caminhos normais dos ecossistemas.
+No N P M, hooks de post install.
 No Py P I, execução em tempo de importação que buscava JavaScript remoto.
 No Crates ponto I O, scripts build ponto R S.
 A análise também menciona trap core ponto J S como parte do encanamento.
-Não precisamos transformar isso em lista de indicador.
-A ação útil para a maioria dos times é outra.
-Revisar instalação recente, remover pacotes afetados e girar segredos expostos.
-Também vale procurar persistência em hooks do Git, hooks do shell, system D, cron, S S H e arquivos de instrução da I A.
 
-O cuidado de leitura é importante.
-Isso não prova que todo assistente de código está comprometido.
-Também não prova que a técnica funciona igual em todos os modelos e ferramentas.
-A própria Socket trata a parte de instruções para I A como algo que pode variar.
-Só que a intenção já basta para mudar o checklist.
-Claude ponto M D e ponto cursor rules não são enfeite de repositório quando uma ferramenta obedece aquilo.
-São entrada de confiança, perto demais do código para a gente fingir que é comentário decorativo.
+Para defesa, o começo é pouco glamouroso e bem necessário.
+Revise dependências instaladas recentemente e remova pacotes afetados.
+Gire segredos que possam ter sido expostos.
+E procure persistência em hooks do Git, hooks do shell, system D, cron, S S H e arquivos de instrução da I A.
+
+Pacotes e indicadores específicos ficam na análise da Socket.
+No repositório do leitor, o trabalho é conferir onde confiança virou entrada executável, ou quase isso.
+
+Tem limite nessa leitura, e ele importa.
+A própria Socket trata a técnica de instruções para I A como algo que pode variar entre ferramentas e modelos.
+A notícia confirmada é mais estreita, e justamente por isso mais útil.
+Atacantes já estão testando se malware de pacote consegue escrever em arquivos que agentes podem obedecer depois.
 
 As fontes deste bloco são Socket e The Hacker News.
 
-Agora, a Harness colocou número na fila de revisão que a I A não apagou.
+Harness colocou número na fila de revisão com I A.
 
-A segunda história é menos explosiva, mas talvez seja a mais familiar para quem trabalha em time.
 A Harness publicou o relatório State of Engineering Excellence 2026.
-Ele é baseado em uma pesquisa com setecentos profissionais e gestores de engenharia em cinco países.
+O relatório é baseado em uma pesquisa com setecentos profissionais e gestores de engenharia em cinco países.
 A pesquisa foi conduzida pela Sapio Research em abril de 2026.
 
-Os números da Harness combinam com uma sensação que muita gente já vinha descrevendo no corredor.
-Segundo a empresa, oitenta e um porcento disseram que os devs passam mais tempo em revisão de código.
-Esse aumento veio desde a adoção de ferramentas de programação com I A.
+Os números apontam para um deslocamento de trabalho.
+Segundo a Harness, oitenta e um porcento disseram que desenvolvedores passam mais tempo em revisão de código.
+Isso aconteceu desde a adoção de ferramentas de programação com I A.
+
 As organizações estimam que trinta e um porcento do tempo de desenvolvimento vai para trabalho invisível.
 Isso inclui revisar código gerado, corrigir bugs e trocar contexto.
-E noventa e quatro porcento afirmaram que fatores como dívida técnica, validação e burnout ficam fora das métricas atuais.
+E noventa e quatro porcento afirmaram que dívida técnica, tempo de validação e burnout ficam fora das métricas atuais.
 
-Tem uma coleira aqui: a Harness vende ferramenta para medir engenharia.
-Então esses dados são sinal útil, não mandamento descido da montanha com dashboard em anexo.
+A Harness vende ferramenta para medir engenharia.
+Então os dados pedem leitura com pé no chão.
+Ainda assim, eles combinam com uma dor bem reconhecível.
+Se o time mede só volume de entrega, a I A aparece linda no começo.
+Mais diff, mais P R, mais movimento no painel.
 
-Mesmo assim, o ponto do relatório é bom.
-Se o time só mede volume de entrega, a I A parece ótima no começo.
-Mais código, mais diff, mais coisa passando pela esteira.
-Só que alguém precisa revisar, entender, testar, corrigir, explicar e assumir o risco depois.
-Quando essa parte vira trabalho invisível, o revisor vira o vilão lento da história.
-Mesmo sendo a pessoa que está segurando a porta para o incêndio não entrar usando crachá.
+Só que alguém precisa revisar, entender, testar, corrigir, explicar e assumir o risco.
+Quando essa parte some da métrica, o revisor vira o sujeito lento da história.
+Mesmo sendo a pessoa que está impedindo o incêndio de entrar com crachá.
 
-O jeito saudável de ler o relatório é separar velocidade de geração e custo de validação.
-Meça fila de review, tempo para validar mudança, retrabalho e bugs criados por código assistido.
-Meça também carga cognitiva, custo da ferramenta e confiança do time no resultado.
-Se a I A ajuda de verdade, esses números precisam aparecer de algum jeito.
-Se eles só mudaram de coluna para virar sofrimento humano não contabilizado, parabéns.
-Inventamos planilha com cosplay de produtividade.
+Uma leitura útil desses números é separar geração de validação.
+Meça fila de review, tempo para validar mudança, retrabalho e bug criado por código assistido.
+Meça carga cognitiva, custo da ferramenta e confiança do time no resultado.
+Se a I A ajuda de verdade, alguma parte boa precisa aparecer nesse conjunto.
+Não só na quantidade de texto produzido.
+
+Se a melhora só troca digitação por sofrimento humano escondido, o dashboard ficou bonito e a engenharia ficou devendo.
+Acontece com frequência suficiente para a gente desconfiar do gráfico antes de comprar a caneca comemorativa.
 
 As fontes deste bloco são Harness e Tab News.
 
-No Node ponto J S, o V F S mostrou uma feature útil e uma revisão difícil.
+Node ponto J S V F S juntou feature real e review difícil.
 
-No Node ponto J S, a conversa ficou menos abstrata.
-Matteo Collina abriu o pull request número 61478 propondo node dois pontos V F S.
-A proposta é um sistema de arquivos virtual como parte do core.
-A feature tem casos de uso reais.
-Arquivos em memória, assets em "Single Executable Applications" e testes mais seguros.
-Também entram sandboxing, acesso multi tenant a arquivos e execução de código gerado por I A.
-Nesse último caso, a ideia é rodar em um ambiente mais controlado.
+No Node ponto J S, a conversa ganhou uma peça bem concreta.
+Matteo Collina abriu o pull request número 61478.
+A proposta é o node dois pontos V F S, um sistema de arquivos virtual como parte do core.
+Ela atende casos reais: arquivos em memória, assets em "Single Executable Applications" e testes mais seguros.
+Também entram sandboxing, acesso multi tenant a arquivos e, possivelmente, execução de código gerado por I A.
+Nesse último caso, a execução aconteceria em ambiente mais controlado.
 
-Ou seja, a ideia não é uma firula.
-O próprio relatório do Node ponto J S Collaboration Summit em Londres menciona objetivos parecidos.
-Ele fala em camadas em memória, mount points e overlays.
-Também fala em substituir monkey patching frágil em userland.
-Dá para entender por que mantenedores olham para isso com interesse.
+Dá para entender o interesse dessa proposta.
+O relatório do Node ponto J S Collaboration Summit em Londres cita camadas em memória.
+Também cita mount points, overlays e substituição de monkey patching frágil em userland.
+Um V F S no runtime pode tirar uma gambiarra recorrente das costas de muita biblioteca.
 
-A treta vem pelo tamanho e pelo processo.
+A dificuldade vem do tamanho e do processo.
 A InfoQ reportou que a proposta tem cerca de dezenove mil linhas em aproximadamente cem arquivos.
-A própria proposta explica que um V F S precisa interceptar muitos caminhos do runtime.
+A própria P R diz que um V F S precisa interceptar muitos caminhos do runtime.
 Isso inclui filesystem e carregamento de módulos.
-O texto fala em mais de cento e sessenta e quatro pontos de interceptação.
+E a proposta fala em mais de cento e sessenta e quatro pontos de interceptação.
 O desenho inclui provedores como Memory Provider, S E A Provider e Virtual Provider.
 
-E aí entra o pedaço que deixou a discussão quente.
-O pull request declara uso significativo de Claude Code.
-O autor diz que revisou todas as mudanças.
-Mesmo assim, a comunidade levantou uma pergunta que vai aparecer em muitos projetos grandes.
-Como revisar uma alteração enorme, assistida por I A, em uma peça de infraestrutura que muita gente usa para rodar software?
-
+A P R também declara uso significativo de Claude Code.
+O texto observa que o autor revisou todas as mudanças.
+Esse detalhe mudou a temperatura da sala.
 Fedor Indutny publicou uma petição contra aceitar pull requests gerados por L L M no core do Node ponto J S.
-Isso não é política final do projeto.
-O pull request também não foi aceito até agora.
-O valor público da história está em separar duas coisas que costumam grudar.
-Uma coisa é a utilidade da feature.
-Outra coisa é a responsabilidade pelo patch.
+A petição ainda não virou política final do projeto.
+E a P R continua aberta, sem merge confirmado.
 
-Um V F S no Node ponto J S pode ser útil.
-Um patch grande demais para revisar com calma continua sendo um patch grande demais para revisar com calma.
-Isso vale mesmo quando quem gerou parte dele foi uma ferramenta muito esperta.
-Para infraestrutura crítica, autoria assistida não remove dono humano.
-Só muda o tipo de prova que o dono precisa apresentar.
+O caso é bom porque não cabe no meme fácil.
+A feature pode ser útil, e esse é justamente o ponto.
+O autor pode ter feito revisão séria.
+E, ao mesmo tempo, uma mudança grande em infraestrutura crítica precisa ser dividida, testada e explicada.
+Também precisa ser assumida por humanos que conseguem defender cada pedaço.
 
-As fontes deste bloco são InfoQ, pull request 61478 do Node ponto J S, Node ponto J S Collaboration Summit e Fedor Indutny.
+Para projetos de base, "foi revisado" precisa virar algo observável.
+Teste, escopo, ownership, política de contribuição e trilha de decisão importam mais nesses casos.
+Importam ainda mais quando o patch atravessa caminhos sensíveis do runtime.
+Claude Code pode ajudar a escrever.
+Ele não comparece à reunião de mantenedores para responder por regressão seis meses depois.
 
-George Hotz provocou; Armin Ronacher trouxe higiene de issue.
+As fontes deste bloco são InfoQ, o pull request do Node ponto J S, o Node ponto J S Collaboration Summit e a petição de Fedor Indutny.
 
-George Hotz publicou em 24 de maio um texto chamado "The Eternal Sloptember".
-É um texto de opinião, bem direto e bem Hotz.
-Ele critica a adoção de agentes de programação como se fossem engenheiros.
-Também admite utilidade para busca melhorada e protótipos descartáveis.
-Mas insiste que o problema é código quebrado de um jeito mais difícil de perceber.
+Hotz provocou, e Armin trouxe o chão da issue.
 
-Dá para discordar do tamanho da paulada.
-A parte útil é pegar a provocação e transformar em pergunta operacional.
+George Hotz publicou em 24 de maio o texto "The Eternal Sloptember".
+É uma paulada no uso de agentes de programação como se fossem engenheiros.
+Ele reconhece utilidade para busca melhorada e protótipo descartável.
+Mas diz que o resultado perigoso é código quebrado de um jeito mais difícil de perceber.
+
+Dá para discordar do tamanho da pancada.
+Hotz escreve para provocar, e isso vem no pacote.
+Mesmo assim, a pergunta que sobra é boa.
 Quem verifica a mudança, o diagnóstico e a descrição do problema?
 
 No mesmo dia, Armin Ronacher publicou "Building Pi With Pi".
-O texto funciona como contraponto bem mais prático.
-Ele fala de issues quase inteiras geradas por máquina, muitas vezes confiantes e erradas.
-E recomenda uma separação simples: fatos observados de um lado, análise do modelo do outro.
-Em um bug report, o mantenedor precisa saber qual comando foi rodado.
-Também precisa saber qual era o comportamento esperado, o que aconteceu de fato e qual log ou erro apareceu.
+O texto coloca essa ansiedade em tarefas bem menores e bem mais úteis.
+Ele fala de issues quase inteiras geradas por máquina.
+Muitas vezes, elas chegam confiantes e erradas.
+E recomenda separar fatos observados da análise feita pelo modelo.
 
-Isso parece básico porque é básico.
-Exatamente por isso machuca quando some.
+Em bug report, mantenedor precisa saber comando rodado, comportamento esperado e comportamento real.
+Também precisa de log ou erro exato.
+Parece básico porque é básico.
+Justamente por isso machuca quando some.
 
 Issue também virou prompt para agente.
-Se ela nasce confusa, inventada ou cheia de diagnóstico sem evidência, todo mundo começa em cima de chão falso.
-Isso vale para o humano e para a ferramenta.
-Aí o custo aparece como retrabalho, correção torta e conversa longa.
-No fim, você descobre que o primeiro parágrafo já estava errado.
+Se ela nasce confusa, inventada ou cheia de diagnóstico sem evidência, humano e ferramenta começam em chão falso.
+Aí o custo aparece como retrabalho, patch torto e conversa longa.
+No fim, todo mundo descobre que a primeira premissa já estava quebrada.
 
 Outra recomendação boa do Armin é preferir invariantes fortes.
-Em vez de ensinar o sistema a tolerar qualquer estado malformado, corrija o fluxo.
-O objetivo é impedir que aquele estado exista.
-Isso conversa com backend, banco, parser, [EY1 P IY1 AY1] e interface.
-Agente adora remendar sintomas com bastante convicção.
+Quando der, corrija o fluxo para impedir que estado inválido exista.
+Não ensine o sistema a tolerar toda forma torta que apareceu pelo caminho.
+Backend, banco, parser, chamada de [EY1 P IY1 AY1] e interface vivem disso.
+Agente remenda sintoma com muita convicção.
 Mantenedor cansado também faz isso.
-A engenharia boa, quando dá, fecha a porta antes de contratar gente para enxugar a água.
+A diferença é que o bug não liga para a autoestima de nenhum dos dois.
 
 Juntando Hotz, Armin, Harness e Node ponto J S, o quadro fica menos histérico.
-Ferramenta de I A pode ajudar.
-Mas o trabalho nobre de 2026 parece cada vez mais com preservar fato, reduzir escopo e revisar pedaço por pedaço.
+Ferramenta de I A pode ajudar bastante.
+A engenharia que segura o rojão em 2026 parece cada vez mais com preservar fato, reduzir escopo e revisar por pedaços.
 Também parece com deixar responsabilidade clara.
-Menos glamour, mais checklist.
-Ninguém coloca isso no anúncio com música épica.
-Mas é o que impede o projeto de virar uma fábrica de plausibilidade.
+Não rende anúncio com trilha épica.
+Rende sistema que ainda dá para manter na terça.
 
 As fontes deste bloco são George Hotz e Armin Ronacher.
 
-Agora, alguns destaques rápidos para fechar o mapa do dia.
+Agora, os destaques rápidos de hoje.
 
 O Google Threat Intelligence Group analisou serviços chineses de phishing como serviço.
-A mudança importante é sair do formulário estático de senha e operar em tempo real.
-O objetivo é interceptar O T P e provisionar cartão roubado em carteira digital.
+A mudança descrita é importante.
+Menos formulário estático de senha.
+Mais operação em tempo real para interceptar O T P e provisionar cartão roubado em carteira digital.
+
 R C S e iMessage aparecem como canais de entrega.
-A criptografia desses canais não é o alvo do alerta.
-O problema é que mensagens familiares e canais criptografados podem dificultar filtro e aumentar confiança da vítima.
-A resposta boa passa por FIDO dois, WebAuthn e controles fortes de provisionamento de carteira.
-A fonte é o Google Cloud Blog.
+O alerta mira a confiança e a filtragem em canais fechados.
+Ele não afirma quebra da criptografia desses canais.
 
-A Mandiant publicou detalhes da C V E 2026, cinco quatro dois seis no Knowledge Deliver, da Digital Knowledge.
-O ponto feio é velho conhecido.
-Implantações antes de 24 de fevereiro de 2026 usavam uma machine key A S P ponto NET compartilhada.
-Segundo a Mandiant, isso permite forjar View State válido e chegar a execução remota de código sem autenticação.
-A lição serve para qualquer stack.
-Segredo copiado em template de cliente funciona como vulnerabilidade com atraso.
-As fontes são Mandiant, advisory M N D T 2026 zero zero zero nove e N V D.
+Para contas valiosas, FIDO dois, Web Auth N e controles fortes de provisionamento de carteira fazem mais diferença.
+Fazem mais diferença do que só pedir "atenção ao link".
 
-O PostgreSQL tem um ajuste pequeno que pode salvar C P U e entrada e saída em consulta longa abandonada.
-A configuração se chama client connection check interval.
-Ela existe desde o PostgreSQL 14, fica desligada por padrão e checa se o cliente ainda está vivo.
-Essa checagem acontece durante a execução.
-Não é cura geral de performance.
-Teste por workload, combine com statement timeout e keepalives.
-E lembre que o suporte depende da plataforma.
-As fontes são The Build e documentação do PostgreSQL.
+A fonte deste destaque é o Google Cloud Blog.
+
+A Mandiant detalhou a C V E 2026, cinco quatro dois seis no Knowledge Deliver, da Digital Knowledge.
+Implantações anteriores a 24 de fevereiro de 2026 usavam uma machine key compartilhada do A S P ponto NET.
+Com essa chave, segundo a Mandiant, um atacante pode forjar View State válido.
+E pode chegar a execução remota de código sem autenticação.
+
+Mesmo para quem não usa A S P ponto NET, a mensagem é simples.
+Segredo copiado em template de cliente vira vulnerabilidade com atraso.
+
+As fontes deste destaque são Mandiant, o advisory M N D T 2026, zero zero zero nove, e N V D.
+
+O PostgreSQL tem um ajuste pequeno para evitar consulta longa trabalhando para um cliente que já sumiu.
+O nome escrito com underlines é client connection check interval.
+Ele existe desde o PostgreSQL 14.
+Fica desligado por padrão no servidor.
+E faz o servidor checar, durante a execução, se a conexão ainda está viva.
+
+Isso pode economizar C P U e entrada e saída em workload com consulta demorada.
+Mas precisa de teste por ambiente.
+E continua convivendo com statement timeout, keepalives e suporte de plataforma.
+
+As fontes deste destaque são The Build e a documentação do PostgreSQL.
 
 O mod W S G I seis ponto zero ponto zero ainda está em trabalho de release candidate.
-Mesmo assim, já começou a expor modos novos de concorrência do Python para deployments Apache.
-W S G I Per Interpreter G I L conversa com o G I L por subinterpretador do Python três ponto doze.
-Já W S G I Free Threading olha para builds sem G I L no caminho do Python três ponto treze.
-É infraestrutura opt-in, sensível a application group e extensão em C.
-Ótimo para acompanhar, perigoso para ligar sexta à tarde porque o nome parece moderno.
-As fontes são Graham Dumpleton, documentação do mod W S G I e Py P I.
+Mesmo assim, ele começou a expor modos novos de concorrência do Python para deployments Apache.
 
-Por fim, o acompanhamento de tendência do dia aparece no llama ponto C P P.
+A diretiva W S G I Per Interpreter G I L conversa com o G I L por subinterpretador do Python três ponto doze.
+A diretiva W S G I Free Threading olha para builds sem G I L no caminho do Python três ponto treze.
+É infraestrutura opt in, sensível a application group e extensão C.
+Excelente para acompanhar, péssimo para ligar em produção só porque o nome parece moderno.
 
-O pedaço local da história aparece no llama ponto C P P.
-O pull request 22929 foi mergeado em 25 de maio.
-Ele melhora a criação de checkpoints de contexto ao redor das fronteiras de mensagens no chat.
-A motivação é bem concreta.
-Sessões longas de agente local podem forçar reprocessamento completo do prompt.
-Isso pesa especialmente depois de saídas grandes de ferramenta.
+As fontes deste destaque são Graham Dumpleton, a documentação do mod W S G I e Py P I.
 
-A mudança extrai message spans.
-Também cria um checkpoint antes da última entrada do usuário.
-E tenta aumentar a responsividade em fluxos de programação assistida.
-Isso conversa com relatos de usuários no Reddit sobre comportamento de K V cache e Qwen três ponto seis.
+Agora, o acompanhamento de tendências do dia.
+
+No pedaço local da edição, a revisão aparece como espera na frente do terminal.
+A P R número 22929 do llama ponto C P P foi mergeada em 25 de maio.
+Ela melhora a criação de checkpoints de contexto perto das fronteiras de mensagens no chat.
+
+A motivação é direta para quem usa agente local.
+Sessões longas de agente local podem forçar reprocessamento completo do prompt quando o histórico muda.
+Isso aparece principalmente depois de saídas grandes de ferramenta.
+
+A mudança extrai message spans, cria um checkpoint antes da última entrada do usuário e tenta melhorar fluxos de programação assistida.
+A ideia é deixar esses fluxos mais responsivos.
+Ao mesmo tempo, usuários no Reddit discutem comportamento de K V cache e ajustes de offload em Qwen três ponto seis.
+
 Um relato fala em espera caindo de cinco a trinta segundos para algo quase imediato em um fluxo específico.
 Outro cita Qwen três ponto seis, trinta e cinco B, A três B.
-Nesse caso, a velocidade teria subido de cerca de dezessete para trinta e quatro tokens por segundo.
-O relato liga a melhora a um ajuste no parâmetro n C P U M O E.
+Nesse relato, o modelo sobe de cerca de dezessete para trinta e quatro tokens por segundo.
+A mudança veio depois de mexer no parâmetro n C P U M O E.
 
-Esses números são interessantes, mas são relatos de usuário, não benchmark controlado.
-O conselho aqui é bem sem romance.
-Antes e depois, mesma máquina, mesmo modelo, mesmo prompt e mesma configuração que você consegue repetir.
-Modelo local fica rápido ou lento por vários motivos.
-Isso inclui cache, reescrita de contexto, offload de M O E e interface mandando histórico de um jeito pouco amigável.
+Esses números são relatos de usuário, não benchmark controlado.
+Servem como pista para experimento, não como promessa para copiar em qualquer máquina.
+Modelo local muda de humor por cache, contexto, offload, interface, driver, temperatura e V RAM.
+E mais umas três coisas que só aparecem quando você prometeu terminar o teste antes do almoço.
 
-No fundo, isso fecha bem com o resto do dia.
 No dia 23, falamos de Project Glasswing e Claude Mythos pelo gargalo de triagem.
-Descobrir muito não resolve sozinho se ninguém consegue validar, corrigir e priorizar.
-Hoje a mesma conta apareceu no pacote instalado, no review, no pull request grande e na issue.
-Também apareceu na sessão local que precisa reaproveitar contexto sem cozinhar a máquina.
+Descobrir muito não resolve sozinho se ninguém consegue validar e corrigir.
+Hoje a mesma família de problema apareceu em outro formato.
+Pacote instalado, P R grande, issue gerada por I A e métrica de engenharia.
+Também apareceu em sessão local que precisa reaproveitar contexto sem cozinhar a máquina.
 
-Pode chamar de tendência, mas é mais uma lista de lugares onde o trabalho humano voltou pela porta lateral.
-A ferramenta gera, instala, propõe, lembra e acelera.
-A pessoa ainda precisa saber o que foi confiado a quê.
+Para quem roda modelo local, a recomendação continua sem romance.
+Antes e depois, mesma máquina, mesmo modelo, mesmo prompt.
+Também a mesma configuração que você consegue repetir.
+A melhoria boa é aquela que sobrevive ao teste chato.
+Infelizmente, software ainda gosta desse tipo de grosseria.
 
-As fontes deste bloco são o pull request 22929 do llama ponto C P P, relatos no Reddit e Risky Business News.
-Também entram Project Glasswing e a cobertura pública da Anthropic.
+As fontes deste bloco são o pull request do llama ponto C P P e dois relatos no Reddit.
