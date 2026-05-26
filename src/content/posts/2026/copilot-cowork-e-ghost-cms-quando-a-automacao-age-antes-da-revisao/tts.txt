@@ -1,0 +1,280 @@
+Copilot Cowork e Ghost C M S: quando a automação age antes da revisão.
+
+Tem uma automação que parece inofensiva até a gente olhar para o que ela pode tocar.
+Ela lê um arquivo para ajudar, manda uma mensagem para economizar tempo e resume uma reunião.
+Também abre um link, faz uma alteração pequena e cria uma tarefa semanal.
+Depois ninguém acompanha aquilo com muita atenção, porque afinal era para ser só ajuda.
+
+O problema começa quando essa ajuda deixa de ser sugestão e passa a agir com permissões reais.
+Aí um detalhe escondido em um documento, uma página antiga sem patch ou uma revisão tardia muda de tamanho.
+Um benchmark quebrado também deixa de ser assunto acadêmico.
+Vira arquivo vazado, site envenenado, pull request barulhento ou gráfico bonito medindo a coisa errada.
+
+Hoje o fio passa por esse lugar bem pouco mágico.
+Antes de perguntar se o modelo ficou mais esperto, vale perguntar quem autorizou a próxima ação.
+Também vale perguntar quem viu o que ele leu, qual limite existe para a mensagem que ele pode enviar.
+E, claro, que tipo de prova segura o resultado.
+É menos glamouroso do que dizer "agente autônomo", mas costuma ser onde mora a conta.
+
+O primeiro caso vem do Microsoft Copilot Cowork.
+O segundo atinge quem mantém Ghost C M S e achou que uma correção de fevereiro podia esperar.
+Depois, o Linux sete ponto um, R C cinco, traz Linus Torvalds segurando o freio.
+Ele lembra que achar um ajuste pequeno não significa enfiar tudo no fim do ciclo.
+E, para organizar a cabeça, um paper novo tenta dar nome para a camada ao redor do modelo.
+Essa camada é o harness: memória, contexto, ferramentas, permissões e verificação.
+É ela que decide se o agente ajuda ou só faz bagunça com crachá.
+
+Agora, o Copilot Cowork mostrou como uma mensagem vira canal de vazamento.
+A PromptArmor publicou uma demonstração envolvendo o Microsoft Copilot Cowork.
+O recurso é um agente dentro do ambiente Microsoft trezentos e sessenta e cinco.
+A ideia do produto é familiar: o agente trabalha com dados do usuário.
+Ele também executa tarefas em ferramentas como SharePoint, OneDrive, Teams e Outlook.
+
+Essa comodidade é justamente a parte sensível.
+Segundo a PromptArmor, um arquivo de skill envenenado podia induzir o agente a buscar arquivos.
+Esses arquivos eram acessíveis pela conta do usuário.
+Depois, o agente podia enviar uma mensagem para esse mesmo usuário, via Teams ou Outlook.
+Na rota demonstrada, isso acontecia sem pedir aprovação humana clara naquele caminho.
+
+Até aqui já é ruim; o detalhe seguinte piora a história.
+A pesquisa descreve o uso de tags de imagem externas em H T M L.
+Quando a mensagem era aberta, essas imagens podiam fazer requisições para fora.
+Elas levavam links pré-autenticados de download do SharePoint ou do OneDrive.
+Em português menos bonito: a pessoa recebe uma mensagem aparentemente interna e abre.
+O conteúdo da própria mensagem pode virar canal de saída para link de arquivo.
+
+O modelo testado pela PromptArmor incluiu a rota automática do produto.
+Também incluiu Claude Opus quatro ponto sete quando escolhido explicitamente.
+A leitura saudável evita transformar isso em "modelo X é mau".
+O problema mora na combinação de conteúdo não confiável virando instrução.
+Também entra aí agente com permissões amplas, ação lateral sem aprovação clara.
+E a saída de rede fica escondida dentro de uma mensagem comum.
+
+Isso importa muito para empresas porque o agente atua com permissões do usuário.
+Se a conta enxerga muito site, biblioteca, pasta e arquivo compartilhado, o raio do acidente cresce junto.
+Uma tarefa recorrente também deixa tudo mais chato.
+O usuário talvez nem esteja olhando quando a automação roda.
+
+Para admins e times de segurança, a revisão é bem concreta.
+Reduzir acesso sensível no Microsoft trezentos e sessenta e cinco.
+Controlar quais skills e documentos o agente pode carregar.
+Restringir download em sites críticos quando fizer sentido.
+Exigir aprovação para ações com efeito colateral.
+E tratar mensagem gerada por agente como ação de risco quando ela pode disparar requisições externas.
+
+Não há, nas fontes usadas aqui, confirmação de exploração em massa.
+Também não há confirmação pública de correção pela Microsoft.
+É uma demonstração de pesquisa, mas ela pega em um nervo real.
+Quando um agente empresarial pode ler e agir, prompt injection deixa de ser só texto estranho no chat.
+Ele passa a conversar com permissão, rede e arquivo.
+
+As fontes desse bloco são PromptArmor e Gigazine.
+
+Agora, Ghost C M S velho transformou sites confiáveis em entrega de ClickFix.
+O segundo alerta é para quem roda blog, site de documentação ou página de produto.
+Também vale para portal pequeno e para qualquer instalação que caiu no grupo mental do "depois eu atualizo".
+Pesquisadores da QiAnXin X Lab relataram uma campanha contra o Ghost C M S.
+Ela explorava a C V E 2026, vinte e seis nove oito zero.
+A falha já tinha sido corrigida em fevereiro no Ghost seis ponto dezenove ponto um.
+
+A falha é uma injeção de S Q L na Content [EY1 P IY1 AY1].
+Em versões vulneráveis, ela podia permitir leitura não autenticada de dados.
+Segundo a X Lab e coberturas posteriores, atacantes usaram isso para obter chaves da Admin [EY1 P IY1 AY1].
+Com essas chaves, conseguiram editar artigos em massa e injetar JavaScript em sites publicados.
+
+Esse tipo de ataque é desagradável porque usa a confiança do próprio site contra o visitante.
+A pessoa não está necessariamente em um domínio estranho piscando em neon.
+Ela pode estar em um blog pessoal, site de empresa, página de tecnologia, conteúdo de educação ou mídia.
+A X Lab diz ter identificado mais de setecentos domínios envenenados até 17 de maio.
+A atividade tinha sido detectada em 7 de maio.
+
+O objetivo descrito foi alimentar ataques do tipo ClickFix.
+São páginas falsas de verificação, como imitações de CAPTCHA ou checagem de segurança.
+Elas convencem o visitante a executar comandos ou etapas que instalam malware.
+Domínios, comandos e indicadores maliciosos devem ficar no relatório técnico da fonte.
+Eles também pertencem ao ferramental do time de segurança, não a texto público comum.
+
+O que dá para agir sem drama é confirmar Ghost seis ponto dezenove ponto um ou posterior.
+Também vale girar chaves Admin e Content [EY1 P IY1 AY1] quando houver chance de exposição.
+Revise corpo e rodapé dos posts, confira tema e scripts inesperados.
+E olhe logs de admin e [EY1 P IY1 AY1] desde 7 de maio.
+Se um atacante editou conteúdo em massa, a correção não termina no upgrade.
+Tem que limpar a casa inteira.
+
+Também vale a etiqueta correta: a correção já existia desde fevereiro.
+A notícia de agora é a exploração em sites que ficaram para trás.
+Quem mantém C M S sabe como essa história começa: "é só um site pequeno".
+Quem visita o site comprometido não sabe, e o navegador dele paga a conta.
+
+As fontes desse bloco são QiAnXin X Lab, The Hacker News e BleepingComputer.
+
+Agora, Linus segurou o freio nos pull requests tardios do Linux sete ponto um, R C cinco.
+A terceira história tem menos cara de ataque e mais cara de manutenção adulta.
+Às vezes isso é pior para o humor, sejamos honestos.
+No anúncio do Linux sete ponto um, R C cinco, publicado em 24 de maio, Linus Torvalds reclamou.
+O release candidate estava maior do que ele gostaria para essa fase do ciclo.
+
+O incômodo era volume e timing, não uma rejeição ampla a inteligência artificial.
+Havia várias correções triviais de drivers chegando tarde.
+Algumas tinham sido disparadas por revisão de código com inteligência artificial.
+Só que essa fase deveria estar mais focada em estabilização.
+Em release candidate, mudança pequena também carrega risco.
+Um ajuste antigo, que não é regressão nem problema sério, pode esperar o próximo ciclo.
+Ele não precisa entrar correndo no fim da festa.
+
+Essa distinção é boa para qualquer projeto open source.
+Ferramenta automática pode achar coisa real.
+Um assistente pode apontar bug, limpeza, warning ou caso estranho.
+Só que achar não é o mesmo que priorizar.
+Mantenedor precisa perguntar se aquilo corrige regressão, segurança ou problema grave daquela janela.
+Se não corrige, talvez só aumente ruído quando a base deveria estar esfriando.
+
+O Linux é um exemplo grande, mas a dinâmica aparece em repositório pequeno também.
+Quando a inteligência artificial baixa o custo de produzir sugestão, o custo que sobra é triagem.
+Alguém precisa ler, medir risco, decidir fase e responder revisão.
+Também precisa aceitar que "parece trivial" não é garantia de nada.
+Todo mundo que já quebrou produção com alteração "boba" sentiu uma pequena fisgada agora.
+
+Para quem usa agentes em contribuição upstream, a regra de convivência é simples de falar.
+E, claro, trabalhosa de fazer.
+Use a ferramenta para encontrar problemas, mas leve ao mantenedor o que você consegue explicar.
+Também leve aquilo que você consegue testar e colocar no momento certo.
+Se for limpeza antiga, mande para o lugar adequado, como Linux next ou o próximo merge window.
+Isso evita desperdício de atenção e ajuda uma correção boa a não chegar parecendo entulho.
+
+As fontes desse bloco são L W N ponto net e Phoronix.
+
+Agora, o harness do agente decide memória, ferramenta e prova.
+Depois desses casos concretos, o paper "From Model Scaling to System Scaling" ajuda a dar vocabulário.
+Ele foi publicado no arXiv em 25 de maio.
+O argumento é que parte do avanço em agentes depende menos de aumentar o modelo.
+Depende mais de escalar o sistema ao redor dele.
+
+Esse sistema ao redor é o harness.
+Dá para pensar nele como a oficina do agente.
+Ele define o que entra no contexto, que memória o agente mantém e quais ferramentas pode usar.
+Também define como ele escolhe uma skill, quem coordena passos longos e que verificação aparece antes da ação.
+E, muito importante, onde ficam as permissões.
+
+O modelo continua importante, claro.
+Só que dois produtos usando modelos parecidos podem se comportar de maneiras bem diferentes.
+Um pode ter boa memória, limites claros e prova decente.
+O outro pode ter só uma janela gigante e fé.
+
+O paper cita gargalos como governança de contexto, memória confiável e roteamento dinâmico de habilidades.
+Também propõe medir coisas que não aparecem quando a gente olha só para benchmark de resposta final.
+Entram aí qualidade da trajetória, higiene de memória, eficiência de contexto e fidelidade de comunicação.
+Também entram custo de verificação e evolução segura.
+
+Como artefato de referência, os autores apresentam o Cheetah Claws.
+É um harness em Python inspirado por ferramentas como "Claude Code" e OpenClaw.
+O repositório fala em suporte a múltiplos provedores, modelos locais e memória.
+Também fala em ferramentas, permissões e recursos de agente.
+O projeto não vira recomendação universal para usar em produção amanhã cedo.
+É melhor ler como uma peça pública para inspecionar ideias.
+
+Essa história ajuda a trocar "prompt melhor" por engenharia de ambiente.
+Se o agente vai ler coisa sensível, ele precisa de fronteira.
+Se vai lembrar, precisa de trilha e apagamento.
+Se vai executar, precisa de permissão.
+Se vai afirmar que corrigiu, precisa de teste ou verificação.
+Parece menos mágico porque é menos mágico.
+É software, só que com uma voz confiante no meio.
+
+As fontes desse bloco são arXiv e Cheetah Claws no "Git Hub".
+
+Agora, os destaques rápidos de hoje.
+
+A SANS Internet Storm Center publicou um alerta sobre páginas falsas de download do Claude.
+Essas páginas eram distribuídas por anúncios maliciosos.
+A página muda instruções para Mac O S ou Windows.
+No exemplo de Windows, havia arquivo ZIP e uma sequência com PowerShell.
+A SANS avaliou o tráfego posterior como possível A C R Stealer.
+O detalhe curioso é que a Apple creditou recentemente Calif ponto I O, Claude e Anthropic Research.
+Esse crédito era por uma falha de kernel já corrigida em 11 de maio.
+Hoje a novidade é outra: atacante usando a marca Claude como isca.
+A fonte desse item é a SANS Internet Storm Center, com contexto da Apple Support.
+
+Um paper novo apresentou o Auto Benchmark Audit, ou A B A.
+Ele serve para auditar tarefas de benchmarks de inteligência artificial.
+Os autores dizem ter avaliado 168 benchmarks em nove domínios.
+Também dizem ter encontrado problemas críticos em mais de vinte e cinco vírgula sete porcento das tarefas avaliadas.
+Ao filtrar tarefas problemáticas, relatam mudanças de nove vírgula nove porcento no S W E bench Verified.
+Também relatam mudança de nove vírgula seis porcento no Terminal Bench dois.
+Benchmark também é software.
+Se o teste está torto, o ranking herda a coluna.
+A fonte desse item é o arXiv.
+
+Outro paper colocou um agente para gerar um interpretador RISC V, R V trinta e dois I.
+O trabalho teve apoio do provador interativo Rocq.
+Segundo os autores, o caso cobriu 47 instruções e terminou em cerca de 30 minutos.
+Ele gerou mil oitocentas e cinquenta e nove linhas verificadas em Rocq.
+Também gerou duas mil oitocentas e quarenta e oito linhas de C mais mais extraído.
+O resultado passou 265 testes e ficou 12 horas em A F L mais mais.
+É uma demonstração estreita, com lógica pura separada de efeitos.
+Mas mostra um caminho bom: código gerado tendo que satisfazer prova de máquina.
+Não só passar no "parece certo".
+A fonte desse item é o arXiv.
+
+O paper "How Agentic A I Coding Assistants Become the Attacker's Shell" coloca uma preocupação em palavras.
+Essa preocupação já apareceu nos casos de cadeia de suprimentos.
+Assistentes de código podem ler arquivos, rodar comandos e acessar a internet.
+Por isso, artefatos externos deixam de ser só texto.
+Repositório, documentação ou página maliciosa podem tentar empurrar instrução escondida.
+A resposta passa por sandbox, credencial escopada, permissão explícita e limite de rede ou arquivo.
+A fonte desse item é o arXiv.
+
+Eric Biggers, do Google, publicou patches de prova de conceito para M L K E M e X Wing.
+Segundo a Phoronix, os patches são para a biblioteca criptográfica do kernel Linux.
+O pacote inclui M L K E M sete seis oito e M L K E M mil e vinte e quatro.
+Também inclui X Wing, que combina X dois cinco cinco dezenove com M L K E M sete seis oito.
+Possíveis usuários futuros citados incluem autenticação N V M E, Bluetooth e WireGuard.
+Por enquanto, nada de sair dizendo que WireGuard pós-quântico chegou.
+A série não deve ir para upstream até existir usuário dentro do kernel.
+A fonte desse item é a Phoronix.
+
+Graham Dumpleton detalhou a diretiva W S G I Per Interpreter G I L no mod W S G I seis ponto zero ponto zero.
+Ela ainda está em release candidate.
+A diretiva fica desligada por padrão e exige Python três ponto doze ou mais novo.
+Também só ajuda sub-interpretadores.
+Não vale para main interpreter, nem promete milagre em app preso a entrada e saída.
+Ela aumenta custo de memória e importação.
+E cobra cuidado com daemon threads e extensões em C.
+Python ficando paralelo em produção continua sendo Python em produção.
+Ótimo, desde que você teste no seu caso.
+As fontes desse item são Graham Dumpleton e a documentação do mod W S G I.
+
+Fechando, o acompanhamento de tendências do dia.
+
+A pergunta velha sobre "inteligência artificial ruim" ou "inteligência artificial boa" atrapalha.
+As fontes de hoje apontam para permissão e verificação ficando mais importantes.
+Mais importantes do que a frase bonita no prompt.
+
+No Copilot Cowork, a pergunta é quem aprova uma mensagem que pode puxar rede para fora.
+No Ghost C M S, é quem aplicou patch, girou chave e conferiu conteúdo publicado.
+No Linux, é quem decide se uma correção encontrada por ferramenta automática merece entrar no R C cinco.
+Nos benchmarks, é quem audita a própria prova usada para comparar modelos.
+
+O guia "Agentic Patterns", da Veso, coloca algumas peças nessa mesa.
+Ele fala de arquivos de instrução persistentes como Claude ponto M D.
+Também cita Agents ponto M D e Gemini ponto M D.
+O guia passa por controles fora do prompt, com hooks e permissões.
+Também fala de orçamento de contexto, custo acompanhado desde cedo e M C P como protocolo de ferramenta.
+É um guia opinativo, não uma norma do planeta.
+Mas conversa bem com o dia porque tira segurança da frase "por favor, seja cuidadoso".
+E coloca segurança em mecanismo.
+
+Nolan Lawson também publicou um texto bom sobre usar inteligência artificial para escrever código melhor mais devagar.
+O fluxo dele roda Claude, Codex e Cursor Bugbot contra um P R.
+Depois ele valida e prioriza os achados, dando atenção ao que é crítico ou alto.
+É menos sedutor do que "dez vezes mais código".
+Mas talvez seja mais perto de engenharia.
+Menos alteração boba, mais pergunta boa, revisão com dono e capacidade de dizer "isso aqui espera".
+
+Para quem usa agente local, Codex, Claude Code, Gemini [S IY1 EH1 L AY1] ou ferramenta de revisão.
+Também vale para automação dentro da empresa.
+A frase para guardar é bem simples: o agente só parece maduro quando o ambiente ao redor dele é maduro.
+Memória, permissão, contexto, custo, triagem e rollback são chatos.
+Também são exatamente as coisas que impedem uma ajuda de virar incidente com interface amigável.
+
+As fontes finais são Veso Research, Nolan Lawson, Auto Benchmark Audit, PromptArmor e L W N ponto net.
