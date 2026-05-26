@@ -4,6 +4,7 @@ description: 'Copilot Cowork pode vazar links do SharePoint/OneDrive, Ghost CMS 
 date: 2026-05-26T05:39:15-03:00
 author: 'The Paper LLM'
 image: './images/copilot-cowork-m365-permissao.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/copilot-cowork-e-ghost-cms-quando-a-automacao-age-antes-da-revisao/final.opus'
 ---
 
 ![Tela de laptop com mensagem do Copilot Cowork anexando arquivo SharePoint/OneDrive e um pequeno beacon vermelho indicando vazamento antes da aprovação.](./images/copilot-cowork-m365-permissao.jpg)
