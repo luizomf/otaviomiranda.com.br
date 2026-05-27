@@ -1,0 +1,275 @@
+Downloads falsos, BadHost e a inteligência artificial encostando na produção.
+
+Tem uma confiança pequena, quase automática, que aparece no dia a dia de quem trabalha com computador.
+Você precisa instalar uma ferramenta, pergunta ao buscador ou ao chat, abre o link que parece certo, baixa, roda e segue a vida.
+Às vezes é só preguiça saudável. Às vezes é o começo do problema.
+
+O mesmo vale para aquele servidor simples que nasceu para servir uma [EY1 P IY1 AY1] interna.
+Vale para o agente que pede aprovação com cara de formalidade.
+Vale para o gráfico de benchmark que chega bonito no feed.
+E vale para a issue de segurança escrita com todos os detalhes do mundo.
+Cada uma dessas coisas parece pertencer a uma gaveta diferente.
+Download. Web. Agente. Teste. Manutenção.
+
+Mas produção não respeita gaveta.
+Se uma dica de download aponta para o lugar errado, a G P U trabalha para outra pessoa.
+Se o middleware olha para um caminho e o roteador entrega outro, autenticação vira decoração.
+Se o agente recebe permissão demais, o botão de aprovar começa a parecer aqueles termos de uso que todo mundo aceita sem ler.
+E se o benchmark mede a coisa torta, o placar só fica mais elegante, não mais verdadeiro.
+
+O primeiro alerta vem da Microsoft, com uma campanha de cryptojacking que mistura busca envenenada e recomendações vistas em chatbots.
+Depois entra o BadHost, uma falha no Starlette que interessa bastante para quem usa Fast [EY1 P IY1 AY1] em serviços de I A.
+A Anthropic publicou uma explicação boa sobre contenção de agentes.
+A Datacurve apresentou o Deep S W E para medir agentes de código com mais cuidado.
+E o curl mostrou uma parte humana dessa história: quando relatório fica barato de produzir, alguém ainda paga a conta da triagem.
+
+Agora, as recomendações de download por inteligência artificial viraram caminho para cryptojacking.
+
+A Microsoft publicou uma análise de uma campanha ativa de cryptojacking que se aproveita de uma rotina bem comum.
+A rotina é procurar um utilitário popular e clicar no download que parece confiável.
+A diferença de agora é que a empresa observou o caminho aparecendo também em interações com chatbots.
+Além disso, a campanha usa envenenamento de resultados de busca.
+
+Isso não transforma todo chatbot em malware ambulante.
+A leitura mais honesta é mais chata e mais útil.
+Atacante aprendeu que muita gente já trata resposta de I A como atalho para a internet.
+Se a pessoa pergunta onde baixar uma ferramenta e recebe um link com cara de resposta organizada, a barreira mental cai um pouco.
+A engenharia social agradece, com recibo e minerador.
+
+Na lista aparecem Crystal Disk Info, H W Monitor, Display Driver Uninstaller e FurMark.
+Também aparecem K-Lite Codec Pack e PDFgear.
+São utilitários de disco, hardware, vídeo, codec e P D F.
+Nada muito exótico. Justamente por isso funcionam como isca.
+
+Segundo a Microsoft, o pacote não parava em mineração barulhenta.
+A cadeia descrita inclui sideloading de D L L e abuso do ScreenConnect para acesso remoto persistente.
+Também inclui process hollowing, exclusões no Microsoft Defender e implantação de mineradores que exploram G P U.
+O susto vai além da ventoinha subindo.
+Um download normal pode abrir uma janela de controle remoto e mexer nas defesas da máquina.
+
+Para quem roda máquina com G P U para jogo, modelo local, benchmark ou trabalho pesado, o cuidado é bem direto.
+Download de utilitário vem de domínio do fornecedor, repositório confiável ou gerenciador de pacotes.
+Resposta de chatbot pode ajudar a lembrar o nome da ferramenta.
+Mas ela não deve virar instalador com autoridade de package manager.
+
+Em máquinas suspeitas, vale procurar ScreenConnect inesperado, tarefas agendadas estranhas e exclusões novas no Defender.
+Também vale procurar D L Ls carregadas por caminhos esquisitos e sinais de mineração.
+A Microsoft liga a campanha a sistemas com maior valor de mineração.
+Então aquela placa de vídeo que você comprou para rodar modelo local talvez esteja atraindo mais atenção do que o R G B dela sugeria.
+
+As fontes deste bloco são Microsoft Security Blog e The Hacker News.
+
+Agora, o BadHost mostrou um risco real em middleware Starlette e Fast [EY1 P IY1 AY1].
+
+O BadHost é uma daquelas falhas que parecem pequenas até você lembrar quantas decisões de segurança moram em middleware.
+A vulnerabilidade é a C V E 2026, quarenta e oito sete um zero.
+Ela afeta Starlette antes da versão um ponto zero ponto um.
+O risco aparece quando o código usa request ponto U R L ou uma U R L construída a partir do scope.
+O problema é tomar decisão de segurança baseada no caminho reconstruído da U R L.
+
+Em português normal: uma requisição criada de propósito pode fazer a reconstrução da U R L enxergar um caminho.
+Enquanto isso, o roteamento real chega em outro endpoint.
+Se o middleware usa essa U R L reconstruída para liberar, bloquear, aplicar C S R F ou limitar taxa, ele pode proteger a porta errada.
+O mesmo vale quando essa decisão define se um caminho precisa de autenticação.
+
+Isso interessa para Fast [EY1 P IY1 AY1] porque Fast [EY1 P IY1 AY1] se apoia em Starlette.
+Também interessa para o mundinho de I A porque muita [EY1 P IY1 AY1] de modelo usa esse tipo de pilha.
+A divulgação do BadHost cita ambientes A S G I, servidores de inferência e proxies de L L M.
+Também cita frameworks de agente, gateways M C P e chamadas customizadas de [EY1 P IY1 AY1].
+No fim, servidor de I A continua sendo servidor web.
+Ele só ganhou uma camiseta mais cara.
+
+O cuidado para o leitor é menos cinematográfico que o nome da falha.
+Atualize Starlette para um ponto zero ponto um, ou posterior, e audite middleware próprio.
+Procure Base H T T P Middleware, middleware A S G I cru e uso de request ponto U R L ponto path.
+Também procure construção manual de U R L com o scope, dentro das estruturas do Starlette.
+Quando a decisão for segurança, prefira o caminho do scope, autenticação no endpoint e normalização clara na borda.
+Um proxy reverso bem configurado entra nessa mesma conversa.
+
+Também vale segurar a ansiedade.
+A falha não significa que todo app Fast [EY1 P IY1 AY1] do planeta ficou aberto.
+O centro do risco está em código customizado que confia na U R L reconstruída para decidir permissão.
+Dependências de autenticação no endpoint, por exemplo, não são o padrão principal descrito pelo BadHost.
+Mesmo assim, esse é o tipo de bug que merece um grep hoje.
+Middleware antigo costuma ficar escondido naquele arquivo chamado depois eu vejo.
+
+As fontes deste bloco são BadHost, o advisory do Starlette no Git Hub e Risky Biz News.
+
+Agora, a Anthropic descreveu contenção para reduzir o raio de dano dos agentes.
+
+Ontem falamos de Copilot Cowork agindo antes da revisão.
+No dia 25, falamos de TrapDoor mexendo em arquivos de instrução.
+O texto novo da Anthropic entra nessa conversa pelo lado da arquitetura.
+A pergunta é como limitar o estrago quando um agente precisa mesmo tocar ferramenta, arquivo, rede e credencial.
+
+A empresa chama isso de contenção.
+A ideia central é tratar o aumento de capacidade do agente como aumento de raio de dano.
+Quanto mais ele pode fazer, mais importante fica controlar o ambiente onde ele age.
+Instrução educada ajuda, claro.
+Mas instrução sozinha é um cadeado desenhado na porta.
+
+O post fala em camadas diferentes.
+A camada de ambiente envolve isolamento parecido com sandbox ou máquina virtual.
+Também envolve controle de saída de rede e credenciais escopadas.
+A camada de modelo lida com instruções, confiança e comportamento.
+A camada de conteúdo externo olha para o que vem de ferramenta, documento, página ou repositório.
+Isso importa porque saída de ferramenta também pode virar entrada maliciosa para o próximo passo.
+
+Um detalhe humano do texto merece destaque.
+Segundo a Anthropic, usuários do Claude Code aprovaram cerca de noventa e três porcento dos pedidos de permissão.
+Esse número explica por que aprovação manual pode virar teatro operacional.
+Se quase tudo recebe sim, a segurança real precisa morar fora do cansaço do usuário.
+Ela precisa morar no runtime, na rede, nas credenciais, na política e na trilha de auditoria.
+
+Para quem usa Codex, Claude Code ou Gemini [S IY1 EH1 L AY1], o desenho fica bem concreto.
+O mesmo vale para servidores M C P, agentes locais e automações em V P S.
+Use credencial com escopo pequeno.
+Corte saída de rede quando a tarefa não precisa.
+Não deixe token de produção solto em ambiente de experimento.
+Faça ferramenta retornar dado de um jeito que possa ser inspecionado.
+E trate plugin de segurança ou sandbox como peça de uma arquitetura maior.
+Isso não é selo mágico de agora está tudo resolvido.
+
+A fonte é da própria Anthropic, então cabe a cautela normal com texto de fornecedor.
+Daqui, vale levar o vocabulário antes de qualquer promessa de segurança universal.
+Os termos úteis são raio de dano, contenção e egress, que é saída de rede.
+Também entram credencial escopada e inspeção de saída de ferramenta.
+
+As fontes deste bloco são Anthropic Engineering e SecurityWeek.
+
+Agora, o Deep S W E tenta medir agentes de código sem vazar a resposta.
+
+Benchmark de agente de programação é um assunto perigoso.
+Número bonito viaja mais rápido do que metodologia.
+A Datacurve apresentou o Deep S W E como um benchmark de tarefas longas de engenharia.
+O foco declarado é evitar contaminação e melhorar a verificação de que o agente realmente resolveu o problema.
+
+A diferença que a Datacurve quer vender não está só no placar.
+O Deep S W E usa tarefas escritas do zero, em vez de adaptar commits ou pull requests já existentes.
+A fonte fala em cento e treze tarefas, noventa e um repositórios e cinco linguagens.
+As linguagens são TypeScript, Go, Python, JavaScript e Rust.
+As tarefas são avaliadas com verificadores escritos manualmente.
+A ideia é mirar comportamento observável, não só diffs que parecem plausíveis.
+
+Isso importa porque benchmark público costuma sofrer de vazamento.
+A tarefa pode ter aparecido em dado de treino.
+O teste pode aceitar solução errada.
+O verificador pode medir uma implementação específica, em vez do comportamento esperado.
+O ambiente pode entregar pista sem querer.
+Quando isso acontece, o agente aprende a ganhar o jogo.
+Mas a pessoa do outro lado acha que ele aprendeu engenharia.
+
+A Datacurve também menciona uso do mini S W E agent para rodar o leaderboard.
+A empresa diz que o Deep S W E separa melhor os modelos de fronteira do que alguns benchmarks públicos.
+Esses resultados devem ser lidos como resultado reportado pela própria Datacurve, não como consenso independente.
+Ainda falta reprodução externa, auditoria ampla e aquela fase divertida em que a internet tenta quebrar o brinquedo novo.
+
+Mesmo com esse limite, a história é boa para quem usa agente no trabalho.
+Antes de acreditar em taxa de resolução, olhe de onde vieram as tarefas.
+Veja se os testes medem comportamento.
+Veja como falsos positivos e falsos negativos foram auditados.
+E veja se o ambiente limpa pistas que o agente poderia explorar.
+Benchmark também é software, e software de avaliação quebrado deixa todo mundo confiante do jeito errado.
+
+A fonte deste bloco é o blog do Deep S W E, da Datacurve.
+
+Agora, o curl sentiu a fila de relatórios de segurança assistidos por I A.
+
+Daniel Stenberg, criador do curl, publicou um texto curto e importante sobre pressão de manutenção.
+Segundo ele, o time de segurança do curl está recebendo relatórios em ritmo inédito.
+O volume está de quatro a cinco vezes maior que em 2024.
+E a velocidade está aproximadamente no dobro da velocidade de 2025.
+
+O detalhe delicado é que esses relatórios não chegam todos como lixo óbvio.
+Daniel descreve material detalhado, longo e plausível, muitas vezes assistido por I A.
+Esse material precisa ser lido, entendido e triado.
+Um relatório pode acabar sendo falha real, duplicata, baixo impacto, comportamento esperado ou hipótese sem exploração convincente.
+Só dá para saber depois que alguém gastou atenção.
+
+Essa é a parte que desaparece quando a gente fala de I A achando vulnerabilidade como se fosse só vitória.
+Reduzir o custo de produzir um relatório não reduz automaticamente o custo de manter uma biblioteca crítica.
+curl está em sistema operacional, container, appliance, aplicação, pipeline e naquele script velho.
+Aquele script que ninguém quer mexer porque ainda funciona.
+Quando a fila aumenta, o peso cai em gente de verdade.
+
+Daniel também deixa um freio importante.
+Quase nenhuma das vulnerabilidades encontradas é de alta severidade.
+E o texto não apresenta curl como projeto desabando.
+A notícia é sobre economia de triagem.
+Segurança responsável precisa de caso mínimo reproduzível, impacto claro, paciência e respeito pelo processo do projeto.
+Mandar um P D F bonito com ar de laudo não substitui evidência.
+
+Para empresas que consomem open source, fica uma pergunta meio indigesta.
+Quem financia a triagem que o seu stack exige?
+Ferramenta nova pode gerar alerta mais rápido.
+A revisão, a coordenação de disclosure, a correção e a decisão de severidade continuam custando tempo humano.
+Não tem botão mágico escondido naquela chamada clássica do curl, curl easy set opt.
+
+As fontes deste bloco são Daniel Stenberg e Simon Willison.
+
+Agora, os destaques rápidos de hoje.
+
+O ensaio "agent memory: an anatomy" desmonta a palavra memória em três partes.
+As partes são extractor, store e retriever.
+A graça está no checklist que isso cria.
+A primeira pergunta é: de onde veio a memória?
+Depois vem outra: quando ela fica velha?
+E como conflitos são tratados na prática?
+Como a busca ranqueia resultados?
+E rótulos como memória episódica, semântica ou procedural descrevem engenharia real, ou só embalagem bonita?
+A fonte é o ensaio de B R G S K.
+
+No dia 23, citamos o problema do LiteSpeed C Panel Plugin em Megalodon mostrou que Git Hub Actions também é produção.
+A novidade é que a C I S A adicionou a C V E 2026, quarenta e oito um sete dois, ao catálogo K E V em 26 de maio.
+O prazo citado é 29 de maio para órgãos federais dos Estados Unidos.
+A falha envolve o plugin user-end do C Panel.
+Ela pode permitir que qualquer conta C Panel execute scripts como root.
+A LiteSpeed orienta atualizar para LiteSpeed W H M Plugin cinco ponto três ponto um ponto zero.
+Esse conjunto deve vir com C Panel plugin dois ponto quatro ponto sete, ou mais novo.
+Se não der para corrigir, a orientação é remover o plugin user-end.
+As fontes são C I S A K E V, LiteSpeed e SecurityWeek.
+
+O V L L M publicou o Eagle três ponto um, em colaboração com os times Eagle e Torch Spec.
+O avanço é em decodificação especulativa.
+O problema técnico é desvio de atenção, ou attention drift.
+Isso aparece quando a especulação fica mais profunda, ou quando entrada, contexto e concorrência mudam.
+A proposta fala em normalização F C e feedback de hidden state pós norm.
+Parece ótimo para servir modelo mais rápido.
+Mas teste com entradas reais, contexto longo e usuários concorrentes antes de prometer ganho para alguém.
+As fontes são V L L M e MarkTechPost.
+
+O Zig registrou no devlog de 26 de maio uma mudança grande no sistema de build.
+A mudança separa o processo que configura o grafo do processo que executa o grafo.
+O arquivo build ponto Zig passa por um configurador pequeno em modo debug.
+Esse configurador serializa o grafo de build.
+Depois, um executor otimizado faz o trabalho em release mode.
+É uma nota da branch main e prévia de release notes.
+Então vale acompanhar e testar, não tratar como garantia final para todo projeto.
+A fonte deste destaque é o Zig Devlog.
+
+Agora, o acompanhamento de tendências do dia.
+
+As histórias de hoje são separadas.
+A Microsoft descreveu uma campanha de download malicioso.
+O BadHost é uma falha de middleware web.
+A Anthropic publicou arquitetura de contenção.
+O Deep S W E fala de benchmark.
+E o curl fala de gente recebendo relatório demais.
+Elas não formam uma campanha única nem um problema com uma raiz só.
+
+Mesmo assim, elas rimam no lugar onde a engenharia fica menos glamourosa.
+Quando I A entra no caminho de download, a fonte do binário importa.
+Quando agente encosta em arquivo e rede, limite de ambiente importa.
+Quando benchmark vira vitrine de modelo, verificador importa.
+Quando relatório de segurança fica barato de produzir, triagem de mantenedor importa.
+
+O ensaio sobre memória de agente coloca mais uma peça nesse quadro.
+Agente que lembra coisa também precisa de proveniência, conflito, esquecimento e busca responsável.
+Caso contrário, a memória vira uma gaveta com etiqueta bonita.
+Nessa gaveta, fatos antigos, palpites e contradições moram juntos, todos falando com a mesma confiança.
+
+Para quem está construindo ou usando essas ferramentas, o caminho saudável é tratar agente como sistema em produção cedo demais para o conforto.
+Isolar, escopar credencial, validar fonte, medir comportamento, rastrear decisão e manter rollback continuam sendo tarefas meio sem brilho.
+Também são as tarefas que impedem a mágica de virar chamado às três da manhã.
+
+As fontes do fechamento são Microsoft Security Blog, BadHost, Anthropic Engineering, Deep S W E e o ensaio "agent memory: an anatomy".
