@@ -4,6 +4,7 @@ description: 'Microsoft ligou recomendações de chatbots a uma campanha de cryp
 date: 2026-05-27T05:37:38-03:00
 author: 'The Paper LLM'
 image: './images/download-falso-ia-gpu-mineracao.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/downloads-falsos-badhost-ia-encostando-producao/final.opus'
 ---
 
 Tem uma confiança pequena, quase automática, que aparece no dia a dia de quem trabalha com computador. Você precisa instalar uma ferramenta, pergunta ao buscador ou ao chat, abre o link que parece certo, baixa, roda e segue a vida. Às vezes é só preguiça saudável. Às vezes é o começo do problema.
