@@ -1,0 +1,252 @@
+Codex no compilador, skills de agentes e setecentas e sessenta mil requisições.
+
+Tem uma parte do trabalho de software que quase nunca fica bonita no anúncio: provar.
+Provar que o programa fez o que parecia fazer.
+Provar que o pacote instalado não trouxe um presente escondido.
+Provar que o tráfego que chegou no servidor veio de gente, robô, crawler ou tentativa de invasão.
+Provar que uma configuração de banco, simples no exemplo da documentação, não virou pressão em produção.
+
+Esse trabalho sempre existiu, só ganhou mais vizinhos barulhentos.
+A diferença é que agora tem mais coisa sendo gerada, sugerida, instalada e automatizada em volta dele.
+Código chega mais rápido, relatório chega maior, agente chama ferramenta e bot abre pull request.
+Dashboard mostra uma parte da realidade e deixa outra parte batendo direto no servidor.
+
+A parte cara virou separar o que aconteceu de verdade do que só pareceu organizado.
+
+Hoje isso aparece em quatro lugares bem diferentes.
+Um engenheiro usou agentes para ajudar a caçar falhas silenciosas em compiladores.
+Um relatório novo olhou para skills de agentes como uma cadeia de suprimentos.
+Um estudo de caso brasileiro mostrou que analytics de JavaScript não contam tudo que um site paga para servir.
+E um texto sobre PostgreSQL lembrou que replicação lógica parece simples até você enxergar o pipeline inteiro no banco.
+
+O assunto parece espalhado, mas a pergunta é parecida: quando a máquina produz mais ação, quem paga a verificação?
+
+Primeiro: Codex e Claude ajudaram a achar miscompiles em L L V M, P T X A S e L L V M para [EY1 EH1 M D IY1] G P U.
+
+A história mais forte do dia veio da Semi Analysis.
+Justin Lebar descreveu um fluxo de trabalho usando Codex e Claude para ajudar em fuzzing e inspeção de código de compiladores.
+Os alvos citados incluem L L V M, o P T X A S da NVIDIA e o caminho de L L V M para [EY1 EH1 M D IY1] G P U.
+
+Miscompile é um daqueles bugs que dão vontade de fingir que não existem.
+O seu código parece certo, o compilador aceita e o binário sai.
+Só que a transformação feita no meio muda o comportamento.
+Às vezes o erro só aparece em uma combinação específica de otimização, arquitetura, tipo de dado e azar.
+É uma falha silenciosa, e falha silenciosa entra na sala sem fazer barulho e senta no sofá.
+
+O uso interessante de I A aqui passa longe da fantasia de que o modelo virou engenheiro de compilador.
+A fonte descreve agentes ajudando em tarefas repetitivas e caras.
+Eles geram programas aleatórios, mudam casos de teste, procuram caminhos suspeitos no código e evitam cair sempre no mesmo bug.
+Também ajudam a reduzir um exemplo quebrado até ele virar um reproducer menor.
+
+Essa última parte importa muito.
+Encontrar um comportamento estranho é só o começo.
+Um mantenedor precisa de um caso pequeno, claro e repetível.
+Se o relatório chega gigante, misturado e cheio de variação inútil, a triagem vira uma segunda investigação.
+O agente pode ajudar nessa faxina, desde que tenha um harness decente e alguém do domínio acompanhando.
+
+No caso do L L V M, a conversa passa por inst combine, uma área ligada a otimizações internas.
+No caso do P T X A S, a dificuldade aumenta porque o compilador é fechado.
+Quando você não consegue ver nem corrigir o código do outro lado, evitar duplicata e continuar fuzzing fica mais chato.
+Apertar gerar bug e esperar a cesta sair cheia seria cômodo demais para o universo permitir.
+
+O que muda, no fim, é economia de verificação.
+Trabalho de verificação que antes era tedioso demais, caro demais ou esquecido pode virar orçamento de agente.
+Esse orçamento inclui tokens, tempo de máquina, harness, revisão humana e fila de triagem.
+Ainda é custo, só que talvez passe a caber em mais lugares.
+
+Para times comuns, a lição é mais humilde do que parece.
+Antes de pedir para um agente reescrever um sistema, talvez valha pedir para ele procurar comportamento quebrado.
+Isso vale em volta de testes, parsers, compiladores, serializadores e caminhos críticos.
+Geração de código ficou barata.
+Comportamento verificado continua sendo a parte que salva a terça-feira.
+
+As fontes deste bloco são Semi Analysis e Fuzz X no Git Hub.
+
+Agora, skills de agentes começam a parecer dependências com permissão.
+
+Um relatório técnico publicado no arXiv em vinte e sete de maio olhou para outro pedaço da mesma fase.
+O tema é o ecossistema de skills para agentes.
+O título do relatório é Technical Report: Exploring the Emerging Threats of the Agent Skill Ecosystem.
+Os autores dizem ter analisado três mil novecentas e oitenta e quatro skills em marketplaces importantes.
+
+Os números chamam atenção nesse recorte.
+O relatório fala em setenta e seis payloads maliciosos confirmados.
+Ele também diz que treze vírgula quatro porcento das skills analisadas tinham pelo menos um problema crítico.
+Esse recorte é segundo os próprios autores.
+Entre as classes citadas aparecem roubo de credencial, instalação de backdoor e downloads suspeitos.
+Também aparecem prompt injection e exfiltração de dados.
+
+Skill pode soar como uma coisinha fofa de produtividade.
+Um arquivo de instrução, uma receita, um atalho.
+Só que, dependendo do ambiente, ela também pode carregar código, chamar ferramenta e baixar coisa.
+Ela pode receber permissão e influenciar o que o agente faz com arquivos e credenciais.
+Aí o nome simpático vira embalagem, e o risco parece mais com dependência.
+
+No dia vinte e cinco, falamos de TrapDoor mexendo em Claude ponto M D e no arquivo ponto cursor rules.
+Aquela história passava por pacotes em registries e arquivos de instrução.
+A novidade agora é olhar para a própria skill instalável como item de cadeia de suprimentos.
+
+Isso não significa que toda skill é malware esperando um café desatento.
+Significa que popularidade, nome bonito e promessa de produtividade não bastam como sinal de confiança.
+Quem instala skill precisa pensar como pensa em pacote.
+Quem publicou, o que mudou, de onde baixa, se roda script e que permissões pede.
+Também importa qual versão está presa no projeto e que acesso ela recebe no runtime.
+
+Para time que usa agente com acesso a repositório, shell, navegador, arquivos locais ou serviços internos, o controle começa simples.
+Começa meio sem glamour: revisar código da skill e fixar versão.
+Evitar atualização remota silenciosa.
+Rodar em ambiente isolado e reduzir credenciais.
+Separar token de experimento de token de produção.
+Registrar ação executada fecha o básico.
+
+É o mesmo filme da cadeia de suprimentos, só que agora o pacote pode falar com confiança.
+Ele também pode ler contexto e pedir ferramenta.
+Software adora reciclar problemas antigos com interface nova.
+
+As fontes deste bloco são arXiv e o contexto de ecossistema publicado pela Snyk.
+
+Agora, setecentas e sessenta mil requisições mostraram o que Google Analytics e Plausible não veem no servidor.
+
+O terceiro bloco é menos grande laboratório e mais vida real de quem mantém site.
+Um autor no TabNews publicou um estudo de caso com cerca de três meses de dados em vinte e dois sites WordPress.
+No total, foram setecentas e sessenta mil requisições capturadas.
+
+A graça está na diferença entre visita humana e tráfego que o servidor realmente atende.
+Google Analytics e Plausible são úteis para entender público, página, origem e comportamento de navegador.
+Eles não foram feitos para contar tudo que bate no backend.
+Crawler, robô, tentativa de login, varredura de caminho e chamada sem JavaScript entram nessa conta.
+Também entra requisição que nunca carregou pixel nenhum.
+
+No dataset do autor, crawlers de I A apareceram como categoria visível.
+A publicação fala em cerca de quinze mil hits desse tipo ao longo da medição.
+No breakdown, apareceram user agents como G P T Bot, O A I Search Bot, Claude Bot e Perplexity Bot.
+Também foram relatadas cerca de oitenta e nove vírgula cinco mil requisições automatizadas de atacante.
+Isso dá algo perto de doze porcento do tráfego total naquele conjunto.
+
+Segura a vontade de transformar isso em estatística universal da internet.
+São vinte e dois sites WordPress de um operador, não um censo global.
+Mesmo assim, como estudo de caso, é muito bom para acordar aquela parte do cérebro.
+Principalmente a parte que só olha pageview e acha que o servidor ficou em paz.
+
+A implementação descrita mistura um pequeno pixel assíncrono em JavaScript.
+Ela também usa um beacon no shutdown do WordPress para pegar requisições que o pixel não vê.
+Entram ainda partições mensais no MariaDB e agregação horária.
+Também aparecem detalhes de performance de usuário real, como Web Vitals, com L C P, I N P e C L S.
+
+Para quem tem blog, página de curso, site institucional, documentação ou WordPress em V P S, isso vira observabilidade de pobre.
+E digo isso no melhor sentido.
+Logs do [EH1 N JH AH0 N] [EH1 K S] ou OpenLiteSpeed, registros do Cloudflare e um endpoint simples já mostram muita coisa.
+Hooks do WordPress e agregação barata também ajudam.
+Você começa a separar gente, crawler, brute force em W P login ponto P H P e chamadas a X M L R P C.
+Também separa barulho em admin ajax e probes que nem chegam perto do dashboard de marketing.
+
+Também ajuda a conversar com custo.
+Crawler que não converte pode gastar C P U.
+Ataque automatizado pode pressionar P H P, banco e cache.
+Web Vital ruim pode aparecer só para usuário real, enquanto seu gráfico bonito mostra média confortável.
+O servidor não quer saber se a requisição entrou no relatório executivo.
+Ele serviu, gastou recurso e pronto.
+
+As fontes deste bloco são TabNews e SysWP Radar no WordPress ponto org.
+
+Agora vamos para replicação lógica no PostgreSQL, que é um pipeline dentro do banco.
+
+A Fastware, ligada à Fujitsu, publicou um texto para quem quer entender e contribuir nesse subsistema.
+No exemplo simples, replicação lógica parece um publish subscribe de banco.
+Você publica mudanças de uma tabela ou de um conjunto de tabelas.
+Depois cria uma assinatura do outro lado e espera que os dados sigam caminho.
+Para explicar no começo, esse modelo ajuda.
+Para operar e mexer no código de verdade, ele é pequeno demais.
+
+Por baixo, tem pipeline de verdade.
+Primeiro o banco gera W A L, o log de mudanças.
+Depois entra a decodificação lógica, que transforma aquelas mudanças em algo mais próximo de linha e tabela.
+Em seguida vêm streaming, workers de apply no subscriber e sincronização inicial ou complementar.
+Cada etapa tem vida própria, estado próprio e jeitos próprios de quebrar o humor do D B A.
+
+O texto da Fastware fala com contribuidores.
+Por isso aparecem detalhes como snapshots históricos de catálogo, rel cache, buscas em catálogo e comportamento específico de worker.
+A tradução para quem está operando é esta: uma decisão pequena no caminho quente pode custar caro.
+Principalmente se roda para cada mudança replicada.
+Consulta de catálogo desnecessária, cache mal usado ou comportamento diferente entre versões pode virar latência.
+Também pode virar erro de apply ou surpresa em upgrade.
+
+Isso importa porque replicação lógica não vive só em laboratório.
+Ela aparece em migração entre versões, integração com analytics e troca gradual de arquitetura.
+Também aparece em multi-região e na manutenção de sistemas que não podem parar para um P G dump com café longo.
+Quando funciona, parece mágica educada.
+Quando começa a atrasar, cada etapa do pipeline ganha voz.
+
+Para backend e D B A, o texto é um convite a pensar por estágio.
+O problema está no publisher ou no subscriber?
+Na geração do W A L, na decodificação, no streaming, no apply worker ou na sincronização?
+É bug, gargalo, incompatibilidade entre versões, carga de dados ou expectativa errada sobre o que a replicação lógica promete?
+
+E, antes de sair mexendo em configuração como quem gira botão de rádio antigo, perfil.
+O próprio artigo fala de contribuição em performance, bug fix, refatoração e feature nova.
+Isso pede entender o caminho inteiro.
+Banco de dados também é software distribuído quando quer.
+Às vezes ele só veste uma camiseta com elefante para parecer mais calmo.
+
+As fontes deste bloco são Fastware, Fujitsu e a documentação do PostgreSQL.
+
+Agora, os destaques rápidos de hoje.
+
+A NVIDIA anunciou o CUDA treze ponto três em vinte e sete de maio.
+A versão traz CUDA Python um ponto zero, CUDA Tile para C mais mais e o Compile I Q.
+A NVIDIA fala em ganho de até quinze porcento em kernels selecionados de G E M M e attention.
+Ótimo para acompanhar, mas número de fornecedor precisa encontrar seu próprio kernel antes de virar promessa.
+As fontes são o NVIDIA Developer Blog e a Phoronix.
+
+A Canonical apresentou o Workshop.
+É uma ferramenta para descrever ambientes de desenvolvimento em YAML e rodar isso em containers L X D não privilegiados.
+Ele pode compor kits como Ollama, OpenCode, NVIDIA CUDA e [EY1 EH1 M D IY1] ROCm.
+Também pode pedir acesso a recursos do host, como display e S S H agent.
+A parte boa é reprodutibilidade.
+A parte sensível é revisar exatamente que ponte o ambiente abre para a máquina real.
+As fontes são Canonical e O M G Ubuntu.
+
+Artificial Analysis e IBM publicaram o I T Bench A A, começando por tarefas de S R E em incidentes Kubernetes.
+A fonte relata modelos de fronteira abaixo de cinquenta porcento.
+Os placares de topo ficaram em quarenta e sete porcento e quarenta e seis porcento.
+O benchmark usa cinquenta e nove tarefas com logs, traces, métricas, eventos, alertas e topologia.
+Benchmark depende do desenho, mas aqui funciona como banho frio útil em marketing de agente que vai operar tudo sozinho.
+A fonte é o blog da Hugging Face, com IBM Research.
+
+A NVIDIA também publicou o Dynamo Snapshot para reduzir cold start de workloads de inferência em Kubernetes.
+A ideia usa conceitos de checkpoint e restore, com C R I U e CUDA checkpoint.
+O objetivo é evitar G P U alocada e parada enquanto a réplica sobe.
+Parece uma direção boa para custo e S L A.
+Mas ainda deve ser lida como história técnica cedo demais para virar milagre de autoscaling.
+A fonte é o NVIDIA Developer Blog.
+
+Um ensaio da Mendral provocou com a ideia de que você não deveria atualizar dependências no automático em 2026.
+A frase é feita para cutucar, mas a leitura responsável é melhor.
+Update de dependência é contribuição de código não confiável.
+Então precisa de revisão de origem, mantenedor, script de install, diff transitivo, reachability e comportamento no C I.
+Congelar pacote vulnerável também dá ruim.
+Só troca o tipo de sofrimento.
+A fonte deste destaque é a Mendral.
+
+Por fim, o acompanhamento de tendências do dia.
+
+O padrão que atravessa o dia é que agentes estão deixando de ser só caixa de chat.
+Eles começam a ganhar runtime, protocolo de registro, app com interface, S D K de arquivo, ambiente de desenvolvimento e política de permissão.
+Quando isso acontece, a pergunta muda de qual prompt eu escrevo para qual fronteira esse sistema respeita.
+
+O A X se apresenta como um runtime distribuído de agentes em prévia inicial.
+Ele fala em Kubernetes, suporte a M C P e A dois A, auditoria e políticas.
+O auth ponto M D, da WorkOS, propõe um jeito em Markdown para registro e descoberta de agentes.
+O Skybridge descreve apps M C P como aplicações React que podem rodar em Claude, ChatGPT, V S Code e clientes compatíveis.
+O Files S D K aponta para ferramentas prontas de acesso a arquivos, incluindo modos de leitura e gates de aprovação.
+
+Nenhum desses nomes precisa virar padrão amanhã para o sinal importar.
+A direção já é suficiente: agente passa a ter identidade, arquivo, app, permissão, log, rollback e superfície para usuário.
+A parte que parece produto novo também é parte do controle operacional.
+
+Para avaliar essa leva sem cair em vitrine de ferramenta, dá para usar uma checklist simples.
+De onde veio, que escopo tem, onde roda, que arquivo enxerga e qual rede acessa.
+Também importa como registra ação, como revoga permissão, como mede acerto e como volta atrás quando dá ruim.
+O resto é detalhe importante, mas detalhe em cima dessa mesa.
+
+As fontes deste bloco são A X, WorkOS sobre auth ponto M D, Skybridge, Files S D K e Canonical Workshop.
