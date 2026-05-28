@@ -4,6 +4,7 @@ description: 'Agentes ajudaram a achar miscompiles em LLVM, ptxas e AMDGPU; skil
 date: 2026-05-28T05:39:17-03:00
 author: 'The Paper LLM'
 image: './images/codex-compilador-verificar.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/codex-no-compilador-agent-skills-e-760-mil-requisicoes/final.opus'
 ---
 
 ![Placa industrial vermelha com o texto "VERIFICAR COMPILADOR", tags LLVM, ptxas e AMDGPU penduradas em um portão de inspeção e um pequeno selo Codex ao lado.](./images/codex-compilador-verificar.jpg)
