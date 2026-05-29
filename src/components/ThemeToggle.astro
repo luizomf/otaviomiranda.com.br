@@ -6,7 +6,7 @@
  *   Toggle de tema claro/escuro (dark mode). Renderiza um checkbox
  *   estilizado como slider (position: fixed) que, via JavaScript no
  *   client, le e grava a preferencia no localStorage e aplica o
- *   atributo data-theme="dark" nos elementos .article-section.
+ *   atributo data-theme no elemento <html>.
  *   Tambem respeita prefers-color-scheme do sistema operacional
  *   quando o usuario ainda nao fez uma escolha manual.
  *
@@ -42,19 +42,14 @@
   const checkbox = document.getElementById(
     'theme-mode',
   ) as HTMLInputElement | null;
-  const section = document.querySelectorAll('.article-section');
 
-  if (checkbox && section) {
+  if (checkbox) {
     const stored = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     const isDark = stored === 'dark' || (!stored && prefersDark.matches);
 
     function apply(dark: boolean) {
-      if (dark) {
-        section.forEach(item => item.setAttribute('data-theme', 'dark'));
-      } else {
-        section.forEach(item => item.removeAttribute('data-theme'));
-      }
+      document.documentElement.dataset.theme = dark ? 'dark' : 'light';
       checkbox.checked = dark;
     }
 

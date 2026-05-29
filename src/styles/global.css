@@ -1,6 +1,58 @@
 /* ===============================
    CSS Design Tokens
 ================================ */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: optional;
+  src: url('/fonts/space-mono/space-mono-latin-400-normal.woff2')
+    format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: optional;
+  src: url('/fonts/space-mono/space-mono-latin-700-normal.woff2')
+    format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  font-style: italic;
+  font-weight: 400;
+  font-display: optional;
+  src: url('/fonts/space-mono/space-mono-latin-400-italic.woff2')
+    format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  font-style: italic;
+  font-weight: 700;
+  font-display: optional;
+  src: url('/fonts/space-mono/space-mono-latin-700-italic.woff2')
+    format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
 /*
  * What this does:
  *   Defines the shared design token contract for the site. The top of :root
@@ -27,10 +79,12 @@
   --layout-avatar-size: var(--space-1200);
   --layout-media-column-width: var(--space-1600);
 
-  --font-family-text:
-    ui-monospace, SFMono-Regular, 'SF Mono', Consolas, Menlo, 'Liberation Mono',
-    'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', 'Jetbrains Mono',
-    'Source Code Pro', Monaco, monospace, 'Courier New';
+  --font-family-fallback-mono:
+    'Courier New', ui-monospace, SFMono-Regular, 'SF Mono', Consolas, Menlo,
+    'Liberation Mono', 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono',
+    'Source Code Pro', Monaco, monospace;
+  --font-family-mono: 'Space Mono', var(--font-family-fallback-mono);
+  --font-family-text: var(--font-family-mono);
   --font-family-display: var(--font-family-text);
   --font-family-code: var(--font-family-text);
 
@@ -960,13 +1014,14 @@ button:disabled {
  */
 
 .article-section {
-  transition:
-    background-color var(--motion-fast),
-    color var(--motion-fast),
-    border-color var(--motion-fast);
+  border-top: var(--border-width-100) solid transparent;
+  border-bottom: var(--border-width-100) solid transparent;
 }
 
-.article-section[data-theme='dark'] {
+:is(
+  .article-section[data-theme='dark'],
+  html[data-theme='dark'] .article-section
+) {
   color: var(--color-text-high-on-dark);
   background-color: var(--color-surface-dark-canvas);
   color-scheme: dark;
@@ -975,31 +1030,54 @@ button:disabled {
   border-bottom: var(--border-width-100) solid var(--color-border-dark-strong);
 }
 
+html[data-theme='dark'],
+html[data-theme='dark'] body,
 html:has(.article-section[data-theme='dark']),
 body:has(.article-section[data-theme='dark']) {
   background-color: var(--color-surface-dark-canvas);
 }
 
-.article-section[data-theme='dark'] .article a {
+:is(
+    .article-section[data-theme='dark'],
+    html[data-theme='dark'] .article-section
+  )
+  .article
+  a {
   color: var(--color-link-on-dark);
   text-decoration: underline;
 }
 
-.article-section[data-theme='dark'] .article a:hover {
+:is(
+    .article-section[data-theme='dark'],
+    html[data-theme='dark'] .article-section
+  )
+  .article
+  a:hover {
   color: var(--color-link-on-dark-hover);
   text-decoration: none;
 }
 
-.article-section[data-theme='dark'] .post-meta {
+:is(
+    .article-section[data-theme='dark'],
+    html[data-theme='dark'] .article-section
+  )
+  .post-meta {
   color: var(--color-text-soft-on-dark);
 }
 
-.article-section[data-theme='dark'] blockquote {
+:is(
+    .article-section[data-theme='dark'],
+    html[data-theme='dark'] .article-section
+  )
+  blockquote {
   color: var(--color-text-strong-on-dark);
   background-color: var(--color-surface-dark-elevated);
 }
 
-.article-section[data-theme='dark']
+:is(
+    .article-section[data-theme='dark'],
+    html[data-theme='dark'] .article-section
+  )
   :where(p, li, blockquote, figcaption, h1, h2, h3, h4, h5, h6)
   code {
   color: var(--color-text-high-on-dark);
@@ -1007,20 +1085,56 @@ body:has(.article-section[data-theme='dark']) {
   border-color: var(--color-border-dark-soft);
 }
 
-.article-section[data-theme='dark'] hr {
+:is(
+    .article-section[data-theme='dark'],
+    html[data-theme='dark'] .article-section
+  )
+  hr {
   border: var(--border-width-100) solid transparent;
   border-top: var(--border-width-100) solid var(--color-border-dark-strong);
   border-bottom: var(--border-width-100) solid var(--color-border-dark-soft);
 }
 
-.article-section[data-theme='dark'] nav.nav,
-.article-section[data-theme='dark'] footer.nav,
-.article-section[data-theme='dark'] .section-line,
-.article-section[data-theme='dark'] .section-eyeball,
-.article-section[data-theme='dark'] .blog-post-link.blog-post-link,
-.article-section[data-theme='dark'] .blog-post-description,
-.article-section[data-theme='dark'] .blog-post-date,
-.article-section[data-theme='dark'] .blog-pagination-current {
+:is(
+    .article-section[data-theme='dark'],
+    html[data-theme='dark'] .article-section
+  )
+  nav.nav,
+:is(
+    .article-section[data-theme='dark'],
+    html[data-theme='dark'] .article-section
+  )
+  footer.nav,
+:is(
+    .article-section[data-theme='dark'],
+    html[data-theme='dark'] .article-section
+  )
+  .section-line,
+:is(
+    .article-section[data-theme='dark'],
+    html[data-theme='dark'] .article-section
+  )
+  .section-eyeball,
+:is(
+    .article-section[data-theme='dark'],
+    html[data-theme='dark'] .article-section
+  )
+  .blog-post-link.blog-post-link,
+:is(
+    .article-section[data-theme='dark'],
+    html[data-theme='dark'] .article-section
+  )
+  .blog-post-description,
+:is(
+    .article-section[data-theme='dark'],
+    html[data-theme='dark'] .article-section
+  )
+  .blog-post-date,
+:is(
+    .article-section[data-theme='dark'],
+    html[data-theme='dark'] .article-section
+  )
+  .blog-pagination-current {
   color: var(--color-text-on-dark);
 
   a {
@@ -1032,7 +1146,11 @@ body:has(.article-section[data-theme='dark']) {
   }
 }
 
-.article-section[data-theme='dark'] .blog-post-link.blog-post-link {
+:is(
+    .article-section[data-theme='dark'],
+    html[data-theme='dark'] .article-section
+  )
+  .blog-post-link.blog-post-link {
   text-decoration: none;
 }
 

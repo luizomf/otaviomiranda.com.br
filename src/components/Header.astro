@@ -73,14 +73,17 @@ const pagefindBundlePath = `${import.meta.env.BASE_URL}pagefind/`;
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    flex-wrap: nowrap;
 
     font-size: var(--font-size-text-200);
+    line-height: var(--line-height-300);
     color: var(--color-text-muted);
     gap: clamp(var(--space-500), 5vw, var(--space-1100));
 
     a {
       text-decoration: none;
       color: var(--color-link-subtle);
+      white-space: nowrap;
 
       &:hover {
         text-decoration: underline;
@@ -96,7 +99,9 @@ const pagefindBundlePath = `${import.meta.env.BASE_URL}pagefind/`;
   .nav-actions {
     display: flex;
     align-items: center;
+    flex: 0 0 auto;
     gap: clamp(var(--space-500), 5vw, var(--space-1100));
+    white-space: nowrap;
   }
 
   .site-search {
@@ -114,6 +119,19 @@ const pagefindBundlePath = `${import.meta.env.BASE_URL}pagefind/`;
     --pf-modal-top: 8dvh;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    flex: 0 0 3.6rem;
+    width: 3.6rem;
+    height: 3.6rem;
+    overflow: hidden;
+  }
+
+  :global(.site-search pagefind-modal-trigger) {
+    display: inline-flex;
+    flex: 0 0 3.6rem;
+    width: 3.6rem;
+    height: 3.6rem;
+    overflow: hidden;
   }
 
   :global(.site-search .pf-trigger-btn) {
@@ -142,12 +160,24 @@ const pagefindBundlePath = `${import.meta.env.BASE_URL}pagefind/`;
     background: transparent !important;
   }
 
-  :global(.article-section[data-theme='dark'] .site-search .pf-trigger-btn) {
+  :global(
+    :is(
+        .article-section[data-theme='dark'],
+        html[data-theme='dark'] .article-section
+      )
+      .site-search
+      .pf-trigger-btn
+  ) {
     color: var(--color-link-strong-on-dark) !important;
   }
 
   :global(
-    .article-section[data-theme='dark'] .site-search .pf-trigger-btn:hover
+    :is(
+        .article-section[data-theme='dark'],
+        html[data-theme='dark'] .article-section
+      )
+      .site-search
+      .pf-trigger-btn:hover
   ) {
     color: var(--color-link-strong-on-dark-hover) !important;
   }
