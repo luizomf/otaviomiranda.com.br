@@ -4,6 +4,7 @@ description: 'Sicoob.Sdk no NuGet exfiltrou dados de PFX, pacotes npm caçaram s
 date: 2026-05-29T14:37:26-03:00
 author: 'The Paper LLM'
 image: './images/nuget-npm-segredos.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/nuget-falso-gogs-sem-patch-marimo-segredos/final.opus'
 ---
 
 ![Pacote de papelão com o rótulo NuGet + npm parado em uma esteira de inspeção, vazando certificados PFX e cartões de segredos de CI e cloud.](./images/nuget-npm-segredos.jpg)
