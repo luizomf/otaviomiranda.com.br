@@ -1,0 +1,244 @@
+NuGet falso, Gogs sem patch e Marimo perto dos segredos.
+
+A gente instala um S D K para não escrever integração na mão.
+Sobe um servidor Git próprio porque o time precisa andar.
+Deixa um notebook de dados na rede interna por algumas horas.
+Aceita um pacote N P M que roda script no install, porque a build já faz tanta coisa que mais uma etapa parece normal.
+
+O problema é que esses atalhos costumam ficar perto dos segredos.
+P F X de banco, token de C I, chave de cloud, repositório privado, arquivo ponto env, sessão de navegador.
+Tudo isso mora no mesmo bairro da produtividade.
+Quando a ferramenta é de desenvolvimento, a gente tende a chamar de ambiente.
+Atacante chama isso de caminho.
+
+E o caminho de hoje passa por lugares bem familiares para quem programa.
+Um pacote no NuGet fingiu ser S D K do Sicoob.
+Outra campanha usou pacotes N P M parecidos com nomes reais para procurar credenciais.
+Uma falha sem patch público colocou instâncias Gogs em alerta.
+Um servidor Marimo exposto virou pivô até banco interno.
+A Sysdig avaliou que um agente de L L M participou do pós-exploit.
+No meio da tensão, a Kog apareceu com um número enorme de inferência.
+E também trouxe uma aula involuntária sobre largura de banda de memória.
+
+Então a edição tem segurança, sim.
+Mas a história maior é confiança operacional.
+O que você instala, e o que você deixa exposto?
+O que pode ler seus segredos no ambiente?
+E quem revisa isso antes de o incidente ganhar horário próprio na agenda?
+
+Primeiro, o Sicoob ponto S D K no NuGet e typosquats N P M transformaram install em caça a segredo.
+
+A Socket encontrou no NuGet um pacote chamado Sicoob ponto S D K.
+As versões iam de dois ponto zero ponto zero até dois ponto zero ponto quatro.
+O pacote se apresentava como S D K para integrações com o Sicoob.
+Para leitor brasileiro, o nome chama atenção na hora.
+É contexto financeiro local, com chance real de aparecer em integração de empresa.
+Não é uma marca qualquer perdida em pacote obscuro.
+
+O peso da história está no material que o pacote lia.
+Segundo a Socket, o artefato publicado no NuGet buscava I Ds de cliente.
+Também buscava senhas de P F X e conteúdo de certificado P F X.
+Depois, enviava esses dados por Sentry.
+P F X pode carregar material usado para autenticar integrações.
+Em integração bancária, isso sai da categoria pacote esquisito.
+E entra na categoria talvez precise girar credencial agora.
+
+Tem um detalhe especialmente desagradável.
+O repositório público no "Git Hub" parecia mais limpo do que o pacote publicado.
+A lógica de exfiltração estava na D L L distribuída pelo NuGet.
+Ela não estava no código que alguém veria numa leitura rápida da fonte.
+Esse desencontro entre repositório e artefato quebra uma confiança preguiçosa.
+É aquela que todos nós já usamos alguma vez: olhar o "Git Hub", achar bonito, instalar e seguir.
+
+A Socket diz que o NuGet bloqueou o pacote depois do reporte.
+Ainda assim, quem instalou precisa tratar como exposição de credencial.
+Não como curiosidade de segurança.
+Dependendo do escopo, autorização e controles do lado Sicoob, o material pode ser perigoso.
+P F X e I D de cliente podem abrir caminho para impersonação de integração.
+
+A Microsoft publicou outro caso, separado, que rima com o mesmo problema.
+A empresa identificou quatorze pacotes N P M typosquat.
+Eles foram publicados em uma janela de cerca de quatro horas.
+Os pacotes abusavam de hooks de ciclo de vida do N P M para rodar durante a instalação.
+E procuravam segredos como credenciais A W S, tokens do HashiCorp Vault e segredos do "Git Hub" Actions.
+Também buscavam tokens de publicação N P M.
+Os usuários e repositórios foram removidos depois do aviso da Microsoft ao N P M.
+
+Juntar esses dois casos não quer dizer que existe um único ator por trás de tudo.
+A semelhança está no gesto: o install virou momento de coleta.
+A aplicação nem precisa importar o pacote para o estrago começar.
+Se o script de instalação rodou perto de token, P F X, metadata de cloud ou pipeline de C I, talvez já baste.
+
+Para quem mantém projeto, o cuidado fica bem menos poético.
+Confira publicador, e compare artefato e fonte quando o pacote mexe com segredo.
+Desconfie de nome parecido demais, audite scripts de instalação.
+E não use resposta de inteligência artificial ou resultado de busca como selo de confiança.
+Se um pacote desse tipo passou pelo ambiente, gire P F X, tokens e credenciais alcançáveis.
+É chato, mas mais chato é descobrir pelo log de alguém de fora.
+
+As fontes deste bloco são Socket, Microsoft Security Blog e The Hacker News.
+
+Agora, Gogs segue com execução remota de código sem patch público, e cadastro aberto piora a história.
+
+A Rapid7 divulgou uma vulnerabilidade crítica no Gogs, a plataforma self-hosted de Git.
+A falha permite execução remota de código por um usuário autenticado.
+Ela recebeu C V S S versão quatro, nota nove ponto quatro, na análise da Rapid7.
+Na publicação de vinte e oito de maio, seguia sem patch público do projeto.
+
+Autenticado pode soar menos assustador do que deveria.
+O Gogs vem com cadastro aberto por padrão.
+E também sem limite padrão de criação de repositórios.
+Em uma instância exposta desse jeito, o requisito pode virar algo bem simples.
+Criar uma conta normal, criar ou controlar um repositório e chegar ao fluxo vulnerável.
+
+O bug aparece no caminho de "Rebase before merging".
+A explicação curta é que dados controlados pelo atacante podem entrar no uso de git rebase.
+E entram de um jeito que vira injeção de argumento.
+A Rapid7 cita Gogs zero ponto quatorze ponto dois e zero ponto quinze ponto zero mais dev no material técnico.
+O detalhe de exploração fica na fonte.
+Aqui, o que importa para defesa é que o processo do Gogs pode acabar executando comando.
+E esse comando roda com os privilégios do usuário do servidor.
+
+Para quem roda um Gogs pequeno em V P S, homelab, empresa ou legado herdado, o impacto é bem concreto.
+Pode envolver repositórios privados, tokens, chaves S S H, hashes de senha e até alteração de código.
+Git self-hosted costuma parecer infraestrutura pequena.
+Até a gente lembrar que ele guarda a história e o futuro do sistema ao mesmo tempo.
+
+Enquanto não há correção pública, a mitigação é reduzir superfície.
+Desabilite cadastro com a opção disable registration.
+Limite ou remova criação de repositórios com a opção max creation limit.
+Revise quem tem conta nesse servidor.
+Audite configurações de rebase antes de merge.
+E procure atividade estranha em logs, tokens e chaves.
+Desligar rebase em repositórios ajuda em parte.
+Mas isso não deve virar sensação de proteção completa.
+Principalmente quando usuários não confiáveis conseguem criar repositório.
+
+Se a instância está na internet e ninguém sabe bem quem cuida dela, esse é o momento de descobrir.
+Isolar o serviço, colocar atrás de V P N, migrar para alternativa mantida ou desligar cadastro público pode ser chato.
+Mas execução remota de código sem patch em servidor de Git costuma cobrar juros piores.
+
+As fontes deste bloco são Rapid7 e SecurityWeek.
+
+Agora, Marimo mostrou como um notebook exposto pode virar ponte para banco interno.
+
+No dia vinte e sete, falamos de contenção de agentes e credenciais com escopo pequeno.
+A história do Marimo coloca esse assunto em uma cena menos abstrata.
+Ferramenta de desenvolvimento exposta, terminal acessível demais, segredos por perto e movimento lateral depois.
+
+A falha é a C V E 2026, trinta e nove nove oito sete.
+O N V D registra que versões do Marimo anteriores à zero ponto vinte e três ponto zero tinham execução remota de código.
+Essa execução vinha antes de autenticação.
+Ela era ligada ao endpoint Web Socket do terminal, que não validava autenticação como deveria.
+A correção está na versão zero ponto vinte e três ponto zero.
+
+A Sysdig descreveu uma cadeia em que um Marimo vulnerável e alcançável pela internet levou a coleta de credenciais.
+Depois disso, houve acesso a banco interno.
+No caminho aparecem coisas que todo ambiente de desenvolvimento tende a acumular.
+Credenciais A W S, arquivos ponto env, chaves S S H, senha de banco e contexto para entender o próximo passo.
+Esse contexto pode ajudar uma pessoa, ou uma ferramenta, a decidir para onde ir depois.
+
+O pedaço novo e delicado é a atribuição do pós-exploit.
+A Sysdig avaliou que a fase depois da entrada inicial teve sinais de agente de L L M dirigindo a intrusão.
+A avaliação se baseia em timing, estrutura dos comandos e comportamento observado.
+Vale segurar o trailer de cinema.
+A parte confirmada é a vulnerabilidade, a sequência descrita e a mitigação.
+A parte de agente é uma avaliação técnica da Sysdig.
+É forte o bastante para prestar atenção, mas ainda deve ser citada como avaliação.
+
+Mesmo assim, a consequência para quem opera notebook, dashboard ou ferramenta interna é simples de enxergar.
+Servidor de notebook não deveria morar exposto na internet com terminal e segredo por perto.
+Isso vale para Marimo, Jupyter, painel caseiro e ferramenta de E T L.
+Também vale para app de dados feito para só a equipe usar.
+E vale para qualquer coisa que entregue shell com um sorriso.
+
+Atualize Marimo para zero ponto vinte e três ponto zero ou posterior.
+Restrinja acesso de rede ao terminal.
+Desative o terminal quando ele não for necessário.
+Coloque autenticação e controle de origem na frente.
+Gire credenciais alcançáveis e procure sinais de movimento lateral se houve exposição.
+O nome da ferramenta muda; o erro de arquitetura costuma ser bem parecido.
+
+As fontes deste bloco são Sysdig, N V D e The Hacker News.
+
+Depois de tanto segredo vazando, a Kog colocou três mil tokens por segundo na mesa.
+E fez isso com uma boa aula de largura de banda.
+
+Depois de tanto segredo vazando, um pouco de física de data center ajuda a respirar.
+A Kog Labs publicou uma prévia técnica do Kog Inference Engine, ou K I E.
+O número chamativo é de três mil tokens de saída por segundo, por requisição.
+O teste usou um nó com oito GPUs [EY1 EH1 M D IY1] M I trezentos X.
+No mesmo texto, a empresa fala em dois mil e cem tokens por segundo em oito NVIDIA H duzentos.
+
+Antes de deixar o número sair correndo sozinho, vale olhar o cenário.
+O teste é com batch size um, F P dezesseis e sem speculative decoding.
+Ele usa um modelo de dois bilhões de parâmetros.
+É uma prévia técnica de fornecedor, em hardware de datacenter, com modelo pequeno.
+Não é promessa geral para qualquer modelo grande, qualquer placa e qualquer workload.
+Pronto, já coloquei o capacete no benchmark.
+
+Ainda assim, a explicação é útil.
+Em geração autoregressiva, uma única requisição fica esperando o próximo token.
+Nesse cenário, o gargalo muitas vezes passa pela largura de banda de memória.
+Também passa pelo overhead do software, não só por flops brutos.
+Para agente que precisa pensar, chamar ferramenta, ler resultado e gerar mais texto, cada token atrasado estica o loop.
+
+A Kog diz atacar isso com co-design entre arquitetura de modelo, runtime e código G P U de baixo nível.
+Também entra na conta a comunicação entre GPUs.
+O texto fala em persistent monokernel, coletivos customizados e K C C L.
+A ideia é reduzir camadas tradicionais que custam tempo no caminho.
+Em vez de depender só de um stack genérico de inferência, a proposta vai para perto do metal.
+
+Mesmo que quase ninguém lendo isso tenha oito M I trezentos X no quarto, a imagem mental vale.
+Throughput para servir muitos usuários e latência de uma requisição esperando token não são a mesma conversa.
+Um benchmark lindo em lote alto pode ser ótimo para custo agregado.
+E pode ser ruim para aquele agente que precisa completar um raciocínio comprido agora.
+
+Então dá para guardar duas coisas ao mesmo tempo.
+O número da Kog precisa de reprodução externa, outros modelos e outros workloads.
+A aula de sistema já serve hoje.
+Desempenho de L L M é memória, runtime, comunicação, modelo e fila de uso conversando.
+Às vezes, conversando alto demais.
+
+A fonte deste bloco é Kog Labs.
+
+Nos destaques rápidos de hoje, o Google falou de proteção para sessão no Chrome.
+
+O Google diz que "Device Bound Session Credentials", ou D B S C, ficou geralmente disponível no Chrome para Windows.
+A ativação padrão vale para usuários Google Workspace.
+O rollout começou em vinte e cinco de maio de 2026.
+E pode levar até sessenta dias.
+A ideia é prender a sessão ao dispositivo que autenticou.
+Isso reduz replay de cookie roubado em outra máquina.
+Malware ainda ativo no dispositivo original continua sendo problema de endpoint.
+Não de nomenclatura bonita para vender segurança.
+
+As fontes deste destaque são Google Workspace Updates e BleepingComputer.
+
+No acompanhamento de tendências do dia, a pressão em revisão de código voltou para a mesa.
+
+No dia vinte e seis, falamos de pull requests tardios no Linux sete ponto um, R C cinco.
+Agora, a Phoronix relata que o pull request de networking continuou significativamente maior do que o normal.
+Isso vale para esse ponto do ciclo.
+Paolo Abeni ligou parte do volume a ferramentas como Claude Code, ChatGPT Codex e agentes de código.
+
+Esse é o pedaço menos vendável da automação.
+Quando gerar patch, relatório ou sugestão fica barato, a revisão vira gargalo principal.
+O mantenedor ainda precisa entender o caso, separar correção real de barulho e pedir evidência.
+Também precisa encaixar no ciclo e assumir o risco.
+Ferramenta que encontra mais coisa pode ajudar muito.
+Também pode entregar uma fila maior para gente que já estava sem tempo.
+
+Rust for Linux entra nessa conversa sem precisar virar briga de linguagem.
+No material da corrode com Greg Kroah-Hartman e Alice Ryhl, a linha é interoperabilidade com C.
+Também é adoção por drivers e subsistemas novos, não reescrita total do kernel.
+Rust ajuda quando tira certas classes de erro da mesa antes da revisão.
+Ele não elimina arquitetura errada, teste ruim, mudança tardia nem patch gerado sem dono.
+
+Para times menores, a tradução é direta.
+Comprar geração de código sem comprar revisão é só mudar o gargalo de lugar.
+Se agente vai abrir P R, ele precisa entregar caso pequeno, teste, contexto, limite e dono humano.
+Senão a produtividade vira fila.
+E fila também é dívida técnica, só que com notificação.
+
+As fontes deste acompanhamento são Phoronix, corrode Rust Consulting e LinuxTeck.
