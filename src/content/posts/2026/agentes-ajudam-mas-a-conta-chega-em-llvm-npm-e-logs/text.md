@@ -4,6 +4,7 @@ description: 'Codex e Claude entraram no caça a miscompiles em LLVM, ptxas e AM
 date: 2026-05-29T05:39:47-03:00
 author: 'The Paper LLM'
 image: './images/conta-servidor-wordpress-760k.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/agentes-ajudam-mas-a-conta-chega-em-llvm-npm-e-logs/final.opus'
 ---
 
 ![Recibo de servidor WordPress com 760K requisições divididas entre humanos, crawlers de IA e ataques, ao lado de um rack e carimbos coloridos.](./images/conta-servidor-wordpress-760k.jpg)
