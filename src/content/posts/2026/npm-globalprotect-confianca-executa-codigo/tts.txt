@@ -1,0 +1,256 @@
+N P M e Global Protect lembram que confiança também executa código.
+
+Sábado é um dia especialmente ruim para descobrir que uma coisa auxiliar tinha poder demais.
+O instalador de dependência parecia só baixar biblioteca.
+Só que ele podia rodar script antes de qualquer linha da sua aplicação aparecer na tela.
+A V P N parecia só a porta de entrada controlada da empresa.
+Mas, se uma exceção de autenticação fica mal configurada e sem patch, essa porta vira assunto de emergência.
+O agente parecia só ter mais ferramentas para trabalhar melhor.
+Depois de alguns conectores, cada descrição de ferramenta ocupa contexto, aumenta custo e confunde a escolha.
+
+E migração de dados também entra nessa conta.
+Ela costuma ser vendida como troca de caminho.
+Quem já mexeu nisso sabe que o caminho antigo também alimenta relatório, modelo, dashboard e sistema esquecido.
+Esquecido, pelo menos, até quebrar.
+
+A edição de hoje gira em torno desse desconforto.
+Ajuda técnica passa a ter permissão de produção.
+Instalar, conectar, escolher ferramenta e mover dado são verbos comuns.
+O risco aparece quando eles são tratados como detalhes administrativos.
+Porque, nesses lugares, código roda, credencial circula e decisão vira estado real.
+
+O primeiro caso vem da Microsoft, com pacotes N P M maliciosos tentando se passar por dependências internas.
+Depois entra uma falha explorada no Global Protect, da Palo Alto Networks.
+Em seguida, o Hermes Agent mostra uma solução interessante para agentes com ferramentas demais.
+E a Meta entrega uma aula menos urgente, mas muito aproveitável, sobre migração de dados sem downtime.
+
+Primeiro, a Microsoft encontrou quarenta e cinco pacotes N P M abusando de dependency confusion.
+
+Ontem falamos de NuGet falso e pacotes N P M caçando segredos.
+O caso novo da Microsoft muda o mecanismo.
+Sai o pacote parecido com nome público conhecido.
+Entra o pacote publicado em escopo que parece interno de empresa.
+
+A campanha descrita pela Microsoft usou quarenta e cinco pacotes N P M maliciosos em três grupos.
+Foram vinte e seis em uma conta, sete em outra e mais doze em uma onda de vinte e nove de maio.
+A ideia era explorar dependency confusion.
+Se a empresa usa pacote privado em escopo interno, mas o registry permite cair no N P M público, entra o risco.
+Um pacote falso, com nome compatível e versão maior, pode ganhar a resolução.
+
+Um detalhe deixa a armadilha mais fácil de visualizar.
+A Microsoft cita versões infladas, como cem ponto cem ponto cem.
+Esse número parece feio de propósito, quase cutucando o resolvedor de dependência.
+Se o ambiente procura a maior versão disponível e o registry privado não está travado, a embalagem falsa chega antes.
+
+Os pacotes rodavam código em post install.
+Esse é o ponto que muita gente esquece quando fala que só instalou.
+No mundo do N P M, instalar pode executar.
+A Microsoft descreve coleta de informações do ambiente de desenvolvimento e de build.
+Também cita detecção de C I e C D, tentativas de evitar alguns cenários e um modo de reconhecimento.
+Esse modo vinha com uma flag Recon Only, que poderia ser trocada depois para uma fase mais agressiva.
+
+A leitura equilibrada é tratar install como execução de código perto de segredo.
+Em empresa com registry privado, revise o arquivo ponto N P M R C.
+Prenda escopos internos ao registry certo e evite upgrade automático nos escopos afetados.
+Confira lockfiles e logs de build desde vinte e oito de maio.
+Quando o projeto permite, use N P M install com ignore scripts, ou configure ignore scripts como true.
+É um sacrifício que pode quebrar build, então precisa de julgamento.
+
+Se um pacote suspeito rodou em máquina de dev ou pipeline, o trabalho passa para credencial.
+Token de N P M, credencial de cloud, segredo de C I e variável exposta não ficam magicamente menos vazados.
+O pacote dizer que só estava reconhecendo o terreno não limpa o alcance que ele teve.
+Gire o que ficou ao alcance e procure persistência em hooks, scripts de shell, tarefas de build e configs do repositório.
+
+A fonte deste bloco é o Microsoft Security Blog.
+
+Agora, C V E 2026, zero dois cinco sete no Global Protect entrou no K E V com exploração limitada.
+
+O segundo alerta é menos sobre pacote de dev e mais sobre borda de rede.
+A Palo Alto Networks publicou orientação para a C V E 2026, zero dois cinco sete.
+A falha fica no PAN O S e no Prisma Access, envolvendo Global Protect em configurações específicas.
+
+A condição importa para priorizar.
+A vulnerabilidade depende de portal ou gateway Global Protect com cookies de Authentication Override habilitados.
+Também depende de uma configuração específica de certificado.
+Nem todo firewall PAN O S com o logotipo piscando ficou automaticamente igual.
+Só que o serviço afetado fica justamente na entrada da rede.
+Quando V P N de borda tem bypass de autenticação, a pergunta muda.
+Ela deixa de girar em torno do C V S S e passa para patch, mitigação e caça de acesso suspeito.
+
+A Palo Alto diz estar ciente de tentativas limitadas de exploração contra dispositivos sem patch e sem mitigação.
+A CISA adicionou a C V E ao catálogo K E V em vinte e nove de maio de 2026.
+Segundo a CISA, a falha pode burlar restrições de segurança e estabelecer conexão V P N não autorizada.
+Para órgãos federais cobertos pela regra da CISA, a data de ação listada é primeiro de junho de 2026.
+
+O número de severidade também pede leitura adulta.
+A pontuação citada pela Palo Alto fica em uma faixa que não carrega o selo crítico no grito.
+Mesmo assim, exploração real em V P N exposta pesa mais do que a etiqueta sozinha.
+Uma porta de entrada dispensa marketing de apocalipse para merecer prioridade.
+
+Para quem opera esse ambiente, a ação vem da tabela oficial da Palo Alto.
+Atualize PAN O S e Prisma Access para versões corrigidas.
+Aplique mitigação se o patch não puder entrar no mesmo dia.
+Desabilite Authentication Override quando fizer sentido.
+Ou use certificado dedicado somente para os cookies desse recurso.
+Depois disso, vale caçar sinais de conexão suspeita, principalmente onde havia Global Protect exposto.
+O foco é a combinação afetada, com a configuração específica descrita pela Palo Alto.
+
+As fontes são Palo Alto Networks, CISA K E V e The Hacker News.
+
+Agora vamos para agentes, mas sem jogar uma sopa de siglas logo de cara.
+O problema é simples: se um agente tem ferramentas demais, ele precisa carregar descrições demais.
+Cada conector, comando e parâmetro ocupa espaço no contexto.
+O modelo passa a ler um cardápio enorme antes de decidir qual garfo usar.
+
+O Hermes Agent, da Nous Research, lançou Tool Search para lidar com isso.
+A ideia é disclosure progressivo.
+Em vez de mostrar todos os esquemas de ferramentas logo de início, o sistema mostra três ferramentas-ponte.
+Elas são tool search, tool describe e tool call.
+Primeiro o modelo procura a ferramenta certa.
+Depois pede a descrição completa.
+Só então chama a ferramenta real.
+
+A ligação com M C P, o Model Context Protocol, é direta.
+Servidores M C P podem trazer catálogos grandes de ferramentas.
+O Hermes ativa o modo automático quando os esquemas adiáveis consumiriam pelo menos dez porcento da janela de contexto.
+A busca usa B M vinte e cinco sobre nome, descrição e parâmetros tokenizados, com fallback por substring.
+
+O detalhe engraçado, no melhor sentido, é esse.
+No meio do hype de agente moderno, a peça central é uma técnica clássica de busca textual.
+B M vinte e cinco segue útil mesmo sem jaqueta prateada.
+
+As próprias docs do Hermes citam números publicados pela Anthropic.
+Neles, Opus quatro teria saído de quarenta e nove porcento para setenta e quatro porcento com busca de ferramentas.
+Esse número ajuda a explicar por que a abordagem interessa, mas não fecha a discussão.
+A documentação também avisa que a recuperação pode falhar.
+Se o modelo procura com a palavra errada, o erro só mudou de lugar.
+Se a descrição é ruim, ou se a ferramenta certa ficou escondida demais, o erro também só mudou de lugar.
+
+Também há custo operacional aqui.
+A primeira chamada pode exigir turnos extras.
+Alterar o conjunto de ferramentas invalida cache.
+Ferramentas adiadas perdem parte do benefício de prompt cache.
+Para quem usa Codex, Claude Code, servidores M C P ou agentes internos, a leitura boa é engenharia de harness.
+Meça tokens de schema, separe ferramenta central de ferramenta rara e teste se a busca acha o que precisa.
+Também registre quando ela erra, porque ferramenta escondida demais vira outro tipo de bug.
+
+As fontes são Hermes Agent Docs e MarkTechPost.
+
+A Meta migrou ingestão C D C com shadow, checksum e rollback.
+
+Depois de pacote malicioso, V P N explorada e agente carregando ferramenta demais, a história da Meta parece mais calma.
+O post original da engenharia da Meta é de doze de maio.
+A InfoQ trouxe o assunto de volta em trinta de maio.
+Não chega como sirene de sábado.
+Chega como uma boa peça de arquitetura para guardar.
+
+A Meta descreve uma migração de ingestão de dados em escala de vários petabytes por dia.
+Ela saiu de pipelines fragmentados, mantidos por clientes internos.
+E foi para um serviço centralizado e autogerenciado de data warehouse.
+A origem citada é My S Q L com dados de grafo social.
+O destino alimenta analytics, sistemas internos e cargas que não podem simplesmente ficar sem dado.
+Porque alguém decidiu migrar rapidinho não basta como plano de continuidade.
+
+O padrão útil não depende de você ter petabytes no quintal.
+A Meta organizou a transição em fases: shadow, reverse shadow e cleanup.
+Primeiro, o sistema novo roda ao lado do antigo e compara resultado.
+Depois, ele passa a assumir produção enquanto o antigo ainda serve como referência e caminho de volta.
+Só depois de validar, limpar e ganhar confiança, o legado vai embora.
+
+As validações citadas incluem contagem de linhas, checksums, critérios de latência e consumo de recurso.
+Também entram dashboards, porque migração invisível demais vira aposta.
+Como a história envolve Change Data Capture, rollback e propagação de dado ruim entram no desenho desde o começo.
+Capturar mudança é só metade da vida.
+A outra metade é decidir o que acontece quando a mudança errada também foi capturada com muita eficiência.
+
+Para quem migra Postgres, My S Q L, fila, E T L, analytics ou sync entre serviços menores, a tradução é prática.
+Rode o novo caminho ao lado do velho, compare saída automaticamente e tenha critério de corte.
+Preserve rollback e só comemore depois do cleanup.
+Migração sem downtime não nasce de coragem.
+Nasce de redundância chata e verificação repetida.
+
+As fontes são Engineering at Meta e InfoQ.
+
+Nos destaques rápidos de hoje, o V T Code apareceu como um agente de código de terminal.
+Ele é escrito principalmente em Rust e tem licença M I T.
+O repositório mostrava release zero ponto cento e quinze ponto zero em trinta de maio de 2026.
+Também trazia referências a Agent Skills, M C P, Agent Client Protocol, subagentes e provedores locais como Ollama.
+Parece bom para observar padrões de agente no terminal.
+Para repositório real, teste permissões e comandos antes de entregar o volante.
+A fonte deste destaque é o repositório V T Code no Git Hub.
+
+O MOSS T T S versão um ponto cinco está no Hugging Face com licença Apache dois ponto zero.
+O projeto lista trinta e um idiomas, incluindo português.
+O card fala em síntese multilíngue com tags de idioma e clonagem de voz mais estável.
+Também cita clonagem zero shot e controle explícito de pausas.
+Esse controle usa marcações de pausa, sem precisar ler a sintaxe no áudio.
+É candidato interessante para teste local de voz.
+Mas rode isolado, confira custom code, qualidade, velocidade e consentimento antes de chamar de stack de produção.
+A fonte deste destaque é o card do OpenMOSS Team no Hugging Face.
+
+No PostgreSQL, compute query I D tem padrão auto.
+Isso pode deixar identificadores de consulta vazios se nenhum módulo pedir a computação.
+Um exemplo é o P G stat statements.
+Se seus logs, P G stat activity, explain ou log line prefix dependem de query I D sempre presente, avalie a mudança.
+A opção é compute query I D em on, recarregando com cuidado.
+O padrão existe por motivo operacional.
+A mudança precisa ter motivo também.
+As fontes são The Build e a documentação do PostgreSQL.
+
+O dax é um toolkit de shell scripting para Deno e Node ponto J S, inspirado no Z X.
+A graça está em escrever scripts portáveis com escape automático de interpolação em template literal.
+A documentação cita helpers para prompts, requests, path, e saídas em text, JSON e lines.
+Também destaca ausência de dependência nativa, etapa de compilação ou post install.
+Ainda é shell: se abrir escape hatch bruto, o cuidado volta para sua mão.
+A fonte deste destaque é a documentação do dax.
+
+IBM e Red Hat anunciaram o Project Lightwell em vinte e oito de maio.
+O compromisso divulgado fala em cinco bilhões de dólares e mais de vinte mil engenheiros.
+A proposta é uma clearinghouse empresarial para segurança de open source.
+Pode virar capacidade útil de validação, patch e coordenação upstream.
+Também é anúncio de fornecedor e programa comercial.
+A parte que precisamos acompanhar é governança, acesso por assinatura e relação com comunidades.
+As fontes são IBM Newsroom e Axios.
+
+O Linux pode ganhar um caminho bem curioso com USB quatro Stream e o driver thunderbolt stream.
+A ideia foi reportada pela Phoronix a partir do trabalho no branch de Thunderbolt.
+O objetivo é expor dispositivos como dev tbstream X para transferência direta entre máquinas.
+Isso funcionaria via USB quatro ou Thunderbolt.
+Interessa para backup, resgate e laboratório sem montar rede tradicional.
+Mas ainda é material de kernel em desenvolvimento.
+A expectativa é a janela do Linux sete ponto dois, se tudo entrar a tempo.
+As fontes são Phoronix e kernel ponto org.
+
+A Bishop Fox detalhou a C V E 2026, vinte e dois cinco cinco sete na UniFi Network Application.
+É uma path traversal sem autenticação ligada ao captive portal de convidado, em condições de portal customizado.
+O risco é ler backups que podem conter credenciais administrativas e de dispositivos.
+A orientação é atualizar para dez ponto um ponto oitenta e nove, ou dez ponto dois ponto noventa e sete.
+Também vale nove ponto zero ponto cento e dezoito ou posterior.
+No UniFi Express, use quatro ponto zero ponto treze ou posterior.
+Se o patch atrasar, restrinja portas guest e admin.
+E gire segredos se backup pode ter vazado.
+A fonte deste destaque é a análise da Bishop Fox.
+
+Agora, acompanhamento de tendências do dia.
+
+A tendência do dia é que agente está deixando de ser resposta bonita e virando infraestrutura de execução.
+Isso aparece no Hermes Tool Search, que tenta esconder ferramentas até elas serem necessárias.
+Aparece no V T Code, com terminal, protocolos, políticas e subagentes.
+E aparece em datasets como AgentTrove, que organiza um vírgula sete milhão de traces agentic.
+Esses dados servem para treinamento e análise.
+
+O banho frio vem do C V E Bench.
+O autor avaliou cinco modelos em vinte vulnerabilidades reais, com condições de prompt diferentes.
+Ele reportou melhor taxa geral de cinquenta porcento para o GPT cinco ponto cinco.
+Com advisory completo, o melhor resultado citado foi sessenta porcento.
+É um benchmark específico, pequeno e dependente do harness.
+Então não serve para declarar guerra contra agentes.
+Serve para lembrar que patch de segurança pela metade pode parecer trabalho concluído.
+Pelo menos até alguém rodar um teste que presta.
+
+O conjunto aponta para uma cobrança menos glamourosa.
+Busca de ferramenta, logs, traces, testes escondidos, política de execução, qualidade de feedback e rollback.
+Modelo maior ajuda em algumas tarefas.
+Um loop bagunçado continua sendo um loop bagunçado, só que com conta maior.
+
+As fontes da tendência são C V E Bench, AgentTrove, Hermes Agent Docs e V T Code.
