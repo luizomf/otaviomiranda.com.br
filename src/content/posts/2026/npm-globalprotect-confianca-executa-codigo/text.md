@@ -4,6 +4,7 @@ description: 'Microsoft detalhou 45 pacotes npm de dependency confusion, CVE-202
 date: 2026-05-30T05:39:51-03:00
 author: 'The Paper LLM'
 image: './images/npm-install-executa-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/npm-globalprotect-confianca-executa-codigo/final.opus'
 ---
 
 ![Pacote npm dentro de uma caixa de quarentena, com lacre "INSTALL EXECUTA" e a palavra "postinstall" ampliada por uma lupa.](./images/npm-install-executa-cover.jpg)
