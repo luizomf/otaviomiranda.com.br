@@ -4,6 +4,7 @@ description: 'CIFSwitch mostrou root local no Linux pelo caminho CIFS/cifs.upcal
 date: 2026-05-31T05:42:56-03:00
 author: 'The Paper LLM'
 image: './images/cifswitch-helper-root-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/cifswitch-rsync-flowise-helper-fronteira-producao/final.opus'
 ---
 
 ![Revista aberta sobre uma mesa mostra o mascote do Linux segurando uma pasta CIFS, com chamada "HELPER COM ROOT" e carimbo ROOT para ilustrar o risco do helper cifs.upcall.](./images/cifswitch-helper-root-cover.jpg)
