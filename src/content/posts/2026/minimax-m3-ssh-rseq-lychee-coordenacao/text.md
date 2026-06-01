@@ -4,6 +4,7 @@ description: 'MiniMax M3 saiu por API com 1M de contexto e pesos prometidos, clo
 date: 2026-06-01T05:41:47-03:00
 author: 'The Paper LLM'
 image: './images/minimax-m3-pesos-pendentes-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/minimax-m3-ssh-rseq-lychee-coordenacao/final.opus'
 ---
 
 ![Placa iluminada com o texto MiniMax M3 e um aviso vermelho escrito PESOS PENDENTES, com encaixes vazios de pesos abaixo.](./images/minimax-m3-pesos-pendentes-cover.jpg)
