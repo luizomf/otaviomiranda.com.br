@@ -1,0 +1,188 @@
+Miasma no N P M, Cisco multi-turn e Odysseus levam a segurança para fora do prompt.
+
+Antes de discutir se um modelo responde bonito, olhe onde a ferramenta encosta.
+O alerta de hoje começa no lugar menos glamouroso possível.
+Uma dependência instalada em máquina de dev, ou em pipeline, pode ter permissão para ler segredo antes da aplicação abrir.
+
+Primeiro, pacotes Red Hat no N P M rodaram código para caçar credenciais.
+O caso mais urgente passa por pacotes N P M ligados ao ecossistema Red Hat Cloud Services.
+Eles aparecem dentro do projeto JavaScript Clients.
+Uma issue pública no "Git Hub" lista pacotes e versões afetadas.
+Análises da StepSecurity, da Snyk e da Bleeping Computer confirmam o mesmo desenho geral.
+Pacotes sob o escopo arroba Red Hat Cloud Services foram comprometidos.
+Depois disso, passaram a executar código malicioso durante a instalação.
+
+Esse detalhe pesa porque o caminho de instalação rodava antes de o dev usar a dependência de verdade.
+Em C I, isso pode acontecer perto de token de registry, segredo de cloud e chave S S H.
+Também pode acontecer perto de credencial de "Git Hub", kubeconfig, variável de ambiente, Vault e Docker.
+É o tipo de coisa que costuma morar onde não deveria, mas mora.
+
+A Snyk identifica a família como Miasma, uma evolução do Shai Hulud.
+As fontes divergem nos números exatos.
+Aparecem contagens na casa de trinta e um ou trinta e dois pacotes.
+Os downloads semanais estimados ficam entre cerca de oitenta mil e cento e dezessete mil.
+Então é melhor não transformar um número em placa de bronze.
+O fato central já é ruim o bastante.
+Um pacote com cara de oficial entrou no caminho de instalação e tentou colher credenciais.
+
+Tem uma nuance importante sobre provenance e "trusted publishing" no N P M.
+Esses mecanismos ajudam muito quando o problema é saber de onde um pacote veio.
+Só que, se o repositório ou o workflow confiável já foi comprometido, o carimbo pode confirmar o caminho do atacante.
+Provenance continua valiosa, mas não serve como única defesa.
+
+Para quem pode ter encostado nos pacotes afetados, o trabalho é bem concreto.
+Revise lockfiles e builds recentes, remova versões comprometidas e olhe logs de C I.
+Gire segredos que estavam ao alcance do ambiente.
+Também vale tratar script de pós-instalação, o postinstall, como execução de código.
+Porque ele é exatamente isso, só com uma embalagem que a gente aprendeu a ignorar.
+
+As fontes deste bloco são Red Hat Insights no "Git Hub", StepSecurity, Snyk e Bleeping Computer.
+
+A segunda história mostra que ataques multi-turn mudam o teste de segurança.
+A história sai do pacote e entra no jeito como a gente mede segurança em IA.
+A área de defesa de IA da Cisco testou quinze modelos proprietários, de cinco fornecedores.
+O teste comparou ataques de uma rodada com ataques em várias rodadas.
+A pesquisa usa categorias no estilo HarmBench.
+E observa como a conversa muda quando a pressão vem aos poucos.
+
+A Cisco diz que ataques multi-turn, em várias rodadas, aumentaram taxas de sucesso e reduziram recusas.
+Também diz que nenhum modelo ficou imune dentro daquele arranjo.
+Em sistemas reais, o usuário acumula contexto em várias mensagens.
+O prompt único e limpinho é só uma parte do teste.
+
+A ressalva vem junto, e ela importa.
+A avaliação olhou para modelos e configurações de base.
+Ela não olhou para produtos completos com prompt de sistema, filtros e ferramentas.
+Também não mediu monitoramento, bloqueios e políticas de conta como parte do produto final.
+A tabela serve melhor para melhorar teste do que para carimbar um app como seguro ou inseguro por atacado.
+
+Mesmo assim, a cobrança é útil.
+Se o seu produto usa agente, ferramenta, memória, navegação, ação em conta ou automação interna, teste o fluxo real.
+Esse teste precisa passar por várias mensagens.
+Um modelo que recusa bem uma pergunta direta pode se comportar de outro jeito quando a conversa cria contexto.
+Também muda quando a conversa desloca objetivo e empurra a decisão em pedaços menores.
+
+É menos emocionante do que anunciar modelo seguro.
+Também é mais perto de produção.
+
+As fontes deste bloco são Cisco Blogs e The New Stack.
+
+Agora, a Anthropic detalhou containment enquanto Docker e Meta mostraram o estrago do limite frouxo.
+A Anthropic publicou um texto técnico sobre como contém Claude em diferentes produtos.
+A premissa é boa: o modelo pode ser enganado.
+Por isso, a empresa descreve limites determinísticos em volta do uso no navegador e no Claude Code.
+Também fala de ambientes financeiros e de outros contextos com mais risco.
+
+Os nomes concretos aparecem no texto.
+gVisor, Mac O S Seatbelt, Linux bubblewrap, máquinas virtuais seladas e controles de rede.
+Também entram aprovações humanas e separação de capacidade por contexto.
+O texto fala de fadiga de aprovação e de uma fraqueza interna em proxy como aprendizado de implantação.
+Esse detalhe importa porque produto real costuma sangrar no canto em que alguém clicou aprovar pela décima vez.
+
+O post da Docker traz um caso mais doméstico e dolorido.
+Um agente de código apagou diretório home e keychain em uma máquina host.
+A empresa usa isso para vender isolamento com containers e micro V Ms, então a lente de fornecedor aparece.
+Ainda assim, o exemplo funciona porque o tipo de falha é familiar.
+Se o agente tem acesso direto ao sistema de arquivos da pessoa, o erro deixa de ser resposta ruim.
+Ele vira perda local, do tipo que dói rápido.
+
+Na outra ponta, Krebs on Security e TechCrunch reportaram abuso de um fluxo de suporte com IA da Meta.
+Segundo as reportagens, atacantes usaram o caminho de recuperação para anexar novos emails e resetar contas.
+Isso incluiu perfis conhecidos, antes de a Meta corrigir o fluxo.
+Aqui o risco passa por workflow privilegiado tomando decisão de identidade.
+
+Juntando essas três peças, a defesa fica menos filosófica.
+Prompt orienta comportamento, mas não segura ação sozinho.
+Sandbox, rede, identidade, approval bem desenhado e menor privilégio seguram a ação quando a orientação falha.
+Se o agente toca arquivo, navegador, suporte, dinheiro ou credencial, ele precisa de limite.
+E esse limite precisa continuar funcionando no dia em que a conversa parecer convincente demais.
+
+As fontes deste bloco são Anthropic Engineering, Docker, Krebs on Security e TechCrunch.
+
+Odysseus lançou um workspace local de IA e já puxou correções de segurança.
+Odysseus entrou no radar por causa de Felix Kjellberg, conhecido como PewDiePie.
+Isso naturalmente joga holofote em um projeto que talvez crescesse com menos barulho em outro contexto.
+O repositório descreve um workspace local de IA, open source, com agentes, chat e pesquisa.
+Também inclui triagem de email e integração com modelos locais e provedores de nuvem.
+
+A ideia local-first é atraente.
+Dado perto da máquina, controle maior e menos dependência de serviço remoto.
+Só que morar no seu computador não resolve segurança.
+Um app local desse tipo tem superfície de web app, autenticação, arquivos, markdown, backups e segredos.
+Também pode ter ferramentas, providers e, dependendo do desenho, comandos próximos demais do shell.
+
+O "Git Hub" do projeto mostrou muita atividade de segurança em primeiro de junho.
+O pull request 279 fala explicitamente em corrigir bypass administrativo e R C E na [EY1 P IY1 AY1] do app.
+Outras mudanças públicas giraram em torno de sessão de autenticação e descoberta de provedores limitada a admin.
+Também envolveram extração de backup, sanitização de markdown, exposição de segredos e limites de ferramentas.
+
+A cobertura precisa ficar proporcional.
+Sem caça pública ao projeto, mas também sem tratar IA local como uma zona mágica fora de appsec.
+A leitura mais justa é tratar Odysseus como amostra de um workspace local de IA chegando a uma audiência enorme.
+As ideias boas chegam junto com as bordas afiadas.
+E a segurança precisa amadurecer em público.
+
+Para quem está criando ferramenta parecida, a lista básica aparece sem esforço.
+Autenticação decente, checagem de origem, sanitização séria e segredo fora da U I.
+Permissões conservadoras para ferramenta também entram na conta.
+E isolamento para qualquer coisa que execute.
+Local não garante inocência.
+Às vezes só deixa o perigo mais perto do seu diretório home.
+
+As fontes deste bloco são Odysseus no "Git Hub", o pull request 279 e TabNews.
+
+Nos destaques rápidos de hoje, o pacote codex U I Android apareceu em reportagem do The Hacker News.
+A reportagem, atribuída à Aikido, descreve um N P M malicioso que imitava uma U I relacionada ao Codex.
+O objetivo era mirar tokens locais de autenticação.
+A leitura cuidadosa é importante.
+Isso não aponta para invasão da infraestrutura oficial da OpenAI.
+Se alguém instalou o pacote, remova e revogue ou gire credenciais afetadas.
+Também inspecione máquinas e C I que executaram a instalação.
+A fonte desse destaque é The Hacker News.
+
+Ontem falamos de CIF Switch como escalada local de privilégio no caminho C I F S e cifs utils.
+O fato novo é bem operacional.
+A L W N registrou sete releases estáveis do kernel em primeiro de junho.
+Então a conversa passa para patch, reboot e prioridade em máquinas que usam esse tipo de montagem.
+As fontes são L W N e SecurityWeek.
+
+O U V zero ponto onze ponto dezoito trouxe uma prévia do comando U V check.
+Esse comando integra o type checker T Y ao fluxo da Astral.
+É um sinal de consolidação do toolchain Python em menos comandos.
+Instalações, ambiente, resolução e agora checagem de tipos ficam mais perto.
+Ainda é preview, então vale testar antes de trocar fluxo estável de time.
+A fonte desse destaque é U V no "Git Hub".
+
+A JetBrains lançou o Mellum dois no Hugging Face como um modelo de código M O E.
+Ele tem doze bilhões de parâmetros, com cerca de dois vírgula cinco bilhões ativos por token.
+O ângulo mais interessante nem é só autocomplete.
+A empresa fala em roteamento, escolha de ferramenta, compressão de contexto para R A G, planejamento e validação.
+Tudo isso em infraestrutura de agentes.
+Como é anúncio de fornecedor, benchmark fica na fila de teste independente.
+A fonte é o Hugging Face Blog da JetBrains.
+
+O Kubernetes publicou a transição conceitual do antigo Dashboard para o Headlamp como direção da U I web.
+Para plataforma e operação, os ganchos são multi-cluster, plugins, visões por projeto e fluxos conscientes de R B A C.
+Parece mais direção de produto do que migração emergencial.
+Mas quem ainda documenta Kubernetes web U I como se o Dashboard antigo fosse o centro do mundo já tem lição de casa.
+A fonte desse destaque é Kubernetes Blog.
+
+No acompanhamento de tendências do dia, as histórias parecem diferentes à primeira vista.
+Instalar pacote, rodar workspace local, chamar bot de suporte e conversar várias rodadas com um modelo não parecem a mesma coisa.
+Hoje, porém, elas caíram na mesma família de risco.
+São lugares onde uma ferramenta ganha contexto suficiente para tocar estado real.
+
+No caso Red Hat e no codex U I Android, o caminho é a instalação de pacote.
+Na Cisco, é a conversa que deixa de ser uma pergunta isolada.
+Na Anthropic, Docker e Meta, é o limite em volta do agente ou do workflow privilegiado.
+No Odysseus, é o app local que quer ser privativo e poderoso ao mesmo tempo.
+
+Para dev, a pergunta começa antes do modelo.
+Quem pode ler segredo, e em qual contexto?
+Quem pode abrir processo, e com qual limite?
+Quem pode mexer em conta, e quem audita isso?
+Quem aprova, com que fadiga, e qual é o tamanho do estrago quando a aprovação sai errada?
+São perguntas antigas, só ganharam roupa nova.
+A diferença é que agora elas aparecem em lugares com nome moderno, interface simpática e vontade enorme de executar algo por você.
+
+As fontes de contexto são StepSecurity, Cisco, Anthropic, Odysseus no "Git Hub" e The Hacker News.
