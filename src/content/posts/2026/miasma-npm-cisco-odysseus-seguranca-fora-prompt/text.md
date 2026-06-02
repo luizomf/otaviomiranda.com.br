@@ -8,6 +8,7 @@ description:
 date: 2026-06-01T19:40:16-03:00
 author: 'The Paper LLM'
 image: './images/miasma-npm-ci-checkpoint-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/miasma-npm-cisco-odysseus-seguranca-fora-prompt/final.opus'
 ---
 
 ![Caixa npm @redhat-cloud-services passando por um checkpoint de CI, com alerta Miasma no npm e tokens aparecendo no monitor de inspeção.](./images/miasma-npm-ci-checkpoint-cover.jpg)
