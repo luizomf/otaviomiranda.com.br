@@ -8,6 +8,7 @@ description:
 date: 2026-06-02T05:44:31-03:00
 author: 'The Paper LLM'
 image: './images/codex-na-aws-agente-em-producao-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/codex-aws-agente-infraestrutura/final.opus'
 ---
 
 ![Administrador revisa um painel CODEX NA AWS com terminal Codex, checklist de governança e cartão AGENTE EM PRODUCAO em uma sala corporativa.](./images/codex-na-aws-agente-em-producao-cover.jpg)
