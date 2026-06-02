@@ -1,0 +1,197 @@
+Codex na A W S mostra o agente virando infraestrutura.
+
+Quando uma ferramenta sai do experimento e entra no caminho de compra, deploy e permissão da empresa, a conversa muda.
+Hoje o agente de código aparece menos como demo bonita e mais como algo que precisa caber em cloud, arquitetura, patch e auditoria.
+
+Começando pelo Codex na A W S.
+
+A Open A I anunciou em primeiro de junho que seus modelos frontier e o Codex estão geralmente disponíveis na A W S.
+Para dev, o nome que chama mais atenção é "Codex on Amazon Bedrock".
+É o agente de engenharia de software da Open A I entrando por um caminho que muitas empresas já usam para aprovar serviço.
+Esse caminho também conversa com cobrança, compliance, governança e região de implantação.
+
+Esse detalhe brilha menos que benchmark, mas costuma decidir adoção.
+Um time pode gostar muito de um agente de código e ainda travar numa pergunta simples.
+Quem compra, quem paga, onde roda, que região pode usar e que política interna aprova?
+E, claro, quem responde quando o fluxo mexe em repositório de verdade?
+
+O anúncio também fala em disponibilidade para regiões Commercial e Gov Cloud.
+Isso importa para empresas que não conseguem tratar I A como ferramenta solta no cartão de crédito de alguém.
+Quando a integração aparece dentro da A W S, a avaliação conversa com a burocracia que já existe.
+Burocracia ruim atrapalha. Burocracia boa impede gasto misterioso com permissão demais.
+
+A fonte confirma disponibilidade e posicionamento.
+Preço, isolamento, comportamento do "control plane", custo por fluxo de trabalho e qualidade em repositório real ainda ficam para avaliação.
+Governança também fica para cada empresa validar no próprio ambiente.
+
+O texto da Open A I também coloca Daybreak, modelos cibernéticos e Codex Security como direção futura.
+Dá para acompanhar com o pé no chão: por enquanto, isso aparece como disponibilidade futura.
+Ainda falta pacote técnico público para comparar no detalhe.
+A fonte deste bloco é a Open A I.
+
+Agora, os conflitos de merge entram como sinal de arquitetura.
+
+Adam Tornhill publicou uma leitura boa sobre uma irritação bem conhecida: conflito de merge.
+A tese dele é que, em fluxos com agentes trabalhando em paralelo, o conflito repetido pode dizer algo sobre o desenho do sistema.
+Não é só Git, P R empilhado ou fila de merge.
+
+Em projeto grande, dá para sentir isso rápido.
+Se duas tarefas que deveriam ser independentes mudam sempre a mesma função, talvez a independência exista só no card.
+O código está contando outra história.
+Em agente de código, essa fricção aparece mais cedo porque várias mudanças podem chegar com velocidade de máquina.
+Mesmo assim, elas ainda batem no mesmo arquivo, na mesma função ou no mesmo limite de domínio mal cortado.
+
+Tornhill sugere olhar para análise comportamental de código.
+Isso inclui hotspots, análise de coordenação e change coupling.
+Hotspot é o lugar que muda muito e costuma doer.
+Coordenação mostra onde muita gente, ou muitos agentes, precisam encostar ao mesmo tempo.
+Change coupling procura arquivos ou partes do sistema que mudam juntos com frequência.
+É como se essas partes estivessem presas por uma fita que ninguém assumiu no desenho.
+
+O exemplo citado no texto é uma função chamada extract Tool Stats.
+O nome é só detalhe. O padrão importa mais.
+Uma função vira depósito de caminhos de produto, depois todo mundo precisa mexer nela.
+E aí o conflito de merge vira sintoma visível de uma fronteira ruim.
+
+Ferramentas como merge queue e resolvedor de conflito ajudam.
+Elas reduzem atrito e podem ser necessárias em time grande.
+Só que tratam a colisão depois que ela apareceu.
+Quando o conflito volta sempre no mesmo canto, vale olhar antes para módulo, domínio, fluxo de produto e responsabilidade.
+Às vezes o melhor fix para o agente é uma fronteira que um humano também entende melhor.
+A fonte deste bloco é Adam Tornhill.
+
+Na segurança de desktop Linux, a pauta é X ponto Org e X Wayland.
+
+O X ponto Org publicou um aviso de segurança em dois de junho com nove problemas no X ponto Org X server e no X Wayland.
+As correções saíram no xorg server vinte e um ponto um ponto vinte e três.
+Também saíram no X Wayland vinte e quatro ponto um ponto doze.
+Para quem usa Linux, a parte direta é acompanhar o pacote da distribuição e atualizar quando o update chegar.
+
+Mesmo em desktop moderno, X Wayland ainda importa.
+Ele é a ponte que deixa aplicação X onze rodar em sessão Wayland.
+A notícia, então, ainda encosta no ambiente atual.
+
+As classes citadas no aviso incluem estouro de buffer na stack, uso depois de liberar memória e acessos fora dos limites.
+O aviso diz que oito achados foram creditados a Anonymous, trabalhando com a Trend A I Zero Day Initiative.
+O nono achado, ligado a D R I dois, foi creditado a Peter Hutterer, da Red Hat.
+
+Para quem rastreia o advisory por identificador, são oito IDs Z D I CAN.
+Eles começam em três zero um três seis e vão até três zero um seis oito.
+O caso separado envolve D R I dois, nas chamadas Get Buffers e Get Buffers With Format.
+
+O próprio advisory diz que identificadores C V E foram pedidos, mas não chegaram a tempo da divulgação.
+Então o caminho mais confiável é seguir o advisory da distro antes de depender de busca por C V E.
+E o crédito ligado à Trend A I Z D I precisa de leitura proporcional.
+Auditoria assistida por I A está entrando no trabalho normal de encontrar bug em infraestrutura antiga.
+
+Não vi fonte verificada afirmando exploração ativa.
+Mesmo assim, memória corrompida em componente gráfico usado por sistemas reais merece patch sem drama e sem fantasia.
+As fontes são o advisory do X ponto Org, os anúncios do xorg server e do X Wayland, e a Phoronix.
+
+No lado dos agentes, Agent Red Bench e Skill Harm tratam integração e skill como dependência.
+
+Ontem à noite, falamos de Miasma no N P M como pacote comprometido no caminho de instalação.
+A novidade aqui é que a mesma cabeça de supply chain começa a subir uma camada.
+A dependência agora pode ser uma integração S A A S, uma resposta de ferramenta ou uma skill que o agente decide reaproveitar.
+
+O Agent Red Bench olha para injeção indireta de prompt em agentes que usam integrações empresariais.
+A fonte fala em duzentos e quinze cenários, vinte e quatro integrações, nove famílias funcionais e cinco tipos de ataque.
+Os exemplos de ambiente passam por coisas estilo Gmail, Salesforce e Jira.
+É justamente onde o agente lê conteúdo que o usuário não escreveu e pode estar perto de ação de conta.
+
+Os autores reportam ataques sem proteção variando de trinta e dois a oitenta e um porcento no painel de oito modelos.
+Também reportam que o Agent Red Guard reduziu a taxa média do painel de sessenta e nove vírgula nove porcento para dois vírgula quatro porcento.
+O falso positivo reportado ficou em zero vírgula trinta e sete porcento.
+Isso é benchmark dos autores; a prevalência real no mundo continua sem confirmação.
+Ainda assim, a forma do problema é bem concreta.
+Conteúdo vindo de ferramenta precisa ser tratado como entrada não confiável.
+
+O Skill Harm vai para outro canto da mesma sala.
+Ele trata skills de agente como superfície privilegiada.
+Também descreve cenários de envenenamento com payload fixo e com skill que se altera para usos futuros.
+O paper fala em oitocentas e setenta e nove amostras de ataque em setenta e uma skills.
+A taxa de sucesso chega a oitenta e seis vírgula três porcento no "fixed payload poisoning".
+No "self mutating poisoning", chega a sessenta e nove vírgula três porcento.
+
+Os dois papers são preprints no arxiv, com números de benchmark e sem prova de prevalência real.
+Para dev, o ensinamento vem antes do susto do percentual.
+Se um agente pode ler Gmail, mexer em arquivo, chamar Jira, operar Salesforce, carregar skill ou escrever memória persistente, a revisão precisa passar do prompt do sistema.
+Também precisa de menor privilégio, aprovação nos pontos certos, revisão de skills e monitoramento.
+E precisa de uma fronteira clara entre dado externo e instrução executável.
+As fontes são Agent Red Bench e Skill Harm no arxiv.
+
+Agora, os destaques rápidos de hoje.
+
+Primeiro, Thunderbolt I B verbs é uma experiência de vinte e oito de maio que voltou a circular agora.
+Ela expõe um link USB quatro, ou Thunderbolt, como dispositivo parecido com InfiniBand para R D M A em inferência distribuída local.
+O autor relata cerca de quarenta e oito gigabits por segundo por direção.
+Também relata noventa e cinco gigabits por segundo bidirecional em dois mini computadores Strix Halo, com cento e vinte e oito gigabytes.
+Mas ele avisa que o código foi gerado com I A, provavelmente tem falhas, é pesquisa e deve ficar fora de máquina de produção.
+A fonte deste destaque é Hellas A I.
+
+A NVIDIA publicou o Jet Pack sete ponto dois para Jetson com Nemo Claw em um comando.
+Também há skills de agente no lado do dispositivo e do B S P.
+O pacote fala em suporte ao Yocto Project, M I G no Jetson Thor e Super Mode no Jetson A G X Orin de trinta e dois gigabytes.
+É mais um sinal de agente entrando em stack de I A de borda.
+Mas vem de blog de fornecedor e ainda traz aquele padrão de instalar por script remoto no shell.
+Leia o roteiro antes de colar no terminal.
+A fonte é o NVIDIA Technical Blog.
+
+O G W S, C L I do Google Workspace, é interessante pelo desenho.
+Ele lê o Google Discovery Service em runtime, gera superfície de comando dinamicamente e fala em saída JSON estruturada.
+Também inclui material para agentes e M C P.
+O read me do projeto diz que ele não é produto oficialmente suportado pelo Google.
+Ele exige setup de projeto e O Auth, e está em desenvolvimento ativo.
+As fontes são o repositório do C L I do Google Workspace e a InfoQ.
+
+O Warpgate zero ponto vinte e quatro ponto zero adicionou Web S S H com múltiplas abas no navegador.
+Também trouxe transferência de arquivo via Z Modem, tickets self service, roles padrão e gravação opcional de S C P.
+Para quem cuida de V P S, bastion e acesso de time pequeno, é uma peça para observar.
+Browser S S H e gravação de sessão pedem política bem pensada, não só entusiasmo com interface.
+A fonte é o release do Warpgate no "Git Hub".
+
+O SANS I S C registrou uma onda de phishing usando anexos S V G com redirecionamento em JavaScript.
+A mensagem defensiva é simples.
+S V G recebido por email deve ser tratado como conteúdo ativo de navegador, não como imagem inocente.
+Gateway, sandbox e bloqueio de anexo fazem mais sentido do que abrir para ver o desenho.
+A fonte é o SANS Internet Storm Center.
+
+Christophe Pettus lembrou uma regra prática de Postgre S Q L que evita muita aflição.
+As constantes C P U tuple cost, C P U index tuple cost e C P U operator cost são globais e relativas no planner.
+Quase sempre devem ficar nos defaults.
+Quando o plano parece estranho, olhe antes para estatísticas, ANALYZE e default statistics target.
+Também olhe para estatísticas estendidas e custo de armazenamento, como random page cost.
+A fonte deste destaque é o The Build.
+
+A Jane Street publicou em vinte e seis de maio o strace U I.
+É uma T U I para tornar o strace mais navegável com filtros interativos.
+Ela também traz IDs curtos para processos, rastreamento de file descriptors e fluxo testável com expect tests.
+É de vinte e seis de maio, mas combina com o momento.
+Terminal voltou a ser uma ótima superfície para ferramenta de dev.
+Isso vale inclusive quando o agente trabalha perto de shell, S S H e logs.
+A fonte deste destaque é a Jane Street.
+
+Fechando, a tendência do dia é bem material.
+
+Codex entra em caminho corporativo de cloud.
+Conflito de merge deixa de ser só aborrecimento e vira evidência de acoplamento.
+Skills de agente parecem dependências.
+Jet Pack coloca skills no mundo de dispositivo.
+G W S tenta fazer C L I legível para gente e máquina.
+Warpgate mexe em acesso remoto.
+Até S V G de email lembra que dado externo pode virar comportamento ativo.
+
+Isso desloca a pergunta sobre agentes.
+O modelo responder bem continua importante.
+Só que produção costuma quebrar depois da resposta.
+Quebra no arquivo que foi alterado, no pacote que foi instalado e na integração que trouxe conteúdo.
+Também quebra no ticket de acesso, no custo da chamada, na região permitida e na permissão aprovada com pressa.
+
+Para dev, o pedido é inventário honesto.
+Primeira pergunta: o que o agente pode ler, e o que ele pode executar?
+Depois: qual skill persiste, e qual C L I entrega JSON previsível?
+Qual fluxo precisa de aprovação humana?
+Qual componente antigo ainda está no desktop porque uma aplicação precisa dele?
+Responder isso é menos glamouroso do que trocar o modelo no seletor.
+Também é mais perto do lugar onde o incidente nasce.
+As fontes de contexto são Open A I, Adam Tornhill, Agent Red Bench, Skill Harm, NVIDIA e Warpgate.
