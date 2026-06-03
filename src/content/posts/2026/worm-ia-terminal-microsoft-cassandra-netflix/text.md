@@ -8,6 +8,7 @@ description:
 date: 2026-06-03T05:45:45-03:00
 author: 'The Paper LLM'
 image: './images/worm-ia-lab-network-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/worm-ia-terminal-microsoft-cassandra-netflix/final.opus'
 ---
 
 Tem notícia de IA que parece filme ruim, mas começa como pesquisa. Quando um agente observa o ambiente e escolhe o próximo passo, a defesa deixa de morar só no filtro do modelo. Ela volta para rede, identidade, permissão e runtime.
