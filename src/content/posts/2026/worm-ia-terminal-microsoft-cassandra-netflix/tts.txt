@@ -1,0 +1,215 @@
+Um worm de I A no laboratório, o Terminal da Microsoft e a Cassandra da Netflix.
+
+Tem notícia de I A que parece filme ruim, mas começa como pesquisa.
+Quando um agente observa o ambiente e escolhe o próximo passo, a defesa muda de lugar.
+Ela deixa de morar só no filtro do modelo.
+E volta para rede, identidade, permissão e runtime.
+
+Pesquisadores mostram um worm de I A que adapta o ataque em laboratório.
+Um paper novo no arXiv, com contexto público da Universidade de Toronto, descreve uma prova de conceito.
+É um worm movido por agente de I A.
+O desenho pesa mais que o susto.
+Em vez de carregar uma lista fixa de ataques, o sistema observa o alvo.
+Depois, monta uma estratégia para aquele ambiente.
+
+Isso muda a conversa de defesa.
+Um worm tradicional costuma ter caminhos mais previsíveis.
+A proposta do paper trabalha com raciocínio por alvo.
+A rede de teste inclui Linux, Windows e dispositivos I O T.
+Os autores também dizem que máquinas comprometidas podem rodar modelos de pesos abertos localmente.
+Nesse caso, elas não dependem de uma [EY1 P IY1 AY1] comercial.
+
+Essa parte merece café forte.
+Recusa de modelo, limite de chamada e política de provedor ajudam em um cenário específico.
+Elas ajudam quando o atacante precisa passar por aquele provedor.
+Quando o modelo roda localmente, a fronteira volta para o sistema.
+Entram segmentação de rede, correção de vulnerabilidades e menor privilégio.
+Entram também isolamento de credenciais, controle de saída e monitoramento de comportamento estranho.
+Principalmente em ferramentas locais.
+
+As fontes usadas aqui não confirmam malware ativo no mundo real.
+É preprint e laboratório, então o tom precisa ser sóbrio.
+Também não faz sentido transformar a notícia em receita de ataque.
+Para dev e ops, o recado é mais simples e mais chato.
+Se a sua defesa depende de o modelo não aceitar fazer isso, ela está incompleta.
+Máquina, rede e identidade ainda precisam segurar a bronca.
+
+As fontes deste bloco são o paper no arXiv e a notícia da Universidade de Toronto.
+
+A Microsoft colocou um agente dentro do Terminal com suporte a A C P.
+A Microsoft lançou o Intelligent Terminal zero ponto um.
+Ele é um fork experimental e open source do Windows Terminal, com integração nativa de agente.
+Ele não substitui o Windows Terminal principal.
+Por enquanto, é uma aplicação separada.
+É versão zero ponto um mesmo, com cara de laboratório de produto.
+
+O gancho técnico é o Agent Client Protocol, ou A C P.
+O agente padrão é o "Git Hub" Copilot [S IY1 EH1 L AY1].
+Mas a proposta é permitir agentes compatíveis com A C P.
+Com isso, o terminal deixa de ser só o lugar onde você cola erro para perguntar algo.
+Ele passa a ser uma superfície que já conhece sessão, comando, falha e contexto do shell.
+
+O pacote inclui barra de status do agente, painel acoplado e detecção automática de erro.
+Também inclui gerenciamento de sessões e tarefas de fundo abrindo novas abas.
+Há ainda um detalhe de transição.
+A Microsoft diz que o Terminal Chat no Canary foi depreciado.
+
+O lado bom é óbvio para quem vive entre shell, repo, S S H e log.
+O lado delicado também aparece logo depois.
+Quando o terminal passa contexto para um agente, a pergunta muda de forma.
+Qual contexto, com qual aprovação e em qual sessão?
+Com que histórico, e com qual limite entre sugira e execute?
+O A C P pode virar uma peça interessante de portabilidade.
+Mas a maturidade ainda precisa aparecer no uso real.
+Especialmente fora do caminho padrão com Copilot.
+
+A fonte deste bloco é o blog Windows Command Line, da Microsoft DevBlogs.
+
+A Netflix dividiu partições largas no Cassandra sem tratar isso como mágica.
+A Netflix publicou uma história de banco de dados útil porque ela começa no lugar certo.
+O lugar é sintoma de produção.
+Em cargas de séries temporais usando Cassandra quatro ponto xis, algumas chaves válidas cresceram demais.
+Elas acumulavam partições grandes demais.
+Em português sem carinho excessivo, uma fatia do dado crescia tanto que ler aquilo ficava lento e caro.
+
+O efeito aparecia em leituras de vários segundos.
+Também aparecia em timeouts, pressão de garbage collection, C P U alta e filas de threads.
+"Wide partition" é um nome técnico elegante para uma coisa que muita gente já sentiu de outro jeito.
+Uma chave, um cliente, um tenant ou uma dimensão qualquer virou concentrador de dor.
+
+A primeira resposta da Netflix foi menos dramática.
+Ela ajustou as fatias futuras de tempo.
+Mirou densidade na faixa de dois a dez mebibytes.
+E adicionou retornos parciais para não obrigar uma consulta problemática a derrubar tudo.
+
+Depois veio o desenho mais delicado.
+A Netflix passou a detectar partições largas no caminho de leitura.
+O sistema emite eventos no Kafka.
+E divide partições imutáveis de forma assíncrona.
+O pipeline usa planejamento, checkpoint, checksums, metadados e Bloom filters para rotear leituras.
+
+A Netflix atribui ao desenho uma queda importante de latência.
+Essas partições saíram de leituras na casa de segundos para poucas dezenas de milissegundos.
+A cauda ficou por volta de duzentos milissegundos, ou melhor.
+
+Copiar isso como feature universal de Cassandra seria receita ruim.
+A história é uma arquitetura da Netflix para um problema da Netflix.
+Mas a ideia envelhece bem para engenharia.
+Primeiro reduza o estrago com o menor drama possível.
+Depois migre com validação, rota de volta e métrica.
+Banco não perdoa heroísmo improvisado por muito tempo.
+
+A fonte deste bloco é o Netflix Tech Blog.
+
+A Trellis usa Radix Attention para não recalcular o mesmo prompt.
+Quando um modelo local responde, uma parte do custo aparece antes da geração visível.
+Ele precisa processar o prompt de entrada.
+Essa etapa é chamada de "prefill".
+Em chat e agente, esse prompt muitas vezes começa igual.
+Tem instrução de sistema longa, template, ferramentas, regras e contexto repetidos em várias sessões.
+
+O post da Trellis fala desse desperdício.
+A implementação usa Radix Attention para reaproveitar prefixos comuns.
+A explicação curta é que uma árvore radix organiza pedaços compartilhados do prompt.
+Um K V cache paginado em blocos deixa sessões diferentes apontarem para partes já calculadas.
+Assim, o sistema evita recomputar e realocar tudo de novo.
+
+Esse tipo de assunto parece detalhe interno.
+Mas vira dinheiro, memória e latência quando agente repete prompt comprido o dia inteiro.
+Na fonte, aparecem blocos de trinta e dois tokens.
+Também aparecem cache paginado, contagem de referência e foco na fase de "prefill".
+
+A cautela também precisa aparecer.
+A Trellis diz que, no cenário demonstrado, os nós ficaram de trinta a quarenta porcento mais rápidos.
+Eles também usaram menos memória.
+Só que o benchmark é sintético.
+Ele usa Tiny Llama de um vírgula um bilhão de parâmetros, em Q quatro zero, num Mac M um.
+E o resultado vem do próprio projeto.
+A fonte mostra outro movimento.
+Inferência local está entrando em engenharia de cache, memória e concorrência.
+
+A fonte deste bloco é a Trellis, da Unfold M L.
+
+Agora, os destaques rápidos de hoje.
+No dia primeiro de junho, a gente falou de Miasma no N P M como pacote comprometido no caminho de instalação.
+A novidade agora é a análise mais completa da Microsoft.
+Ela descreve a campanha contra o escopo arroba Red Hat Cloud Services no N P M.
+Segundo a empresa, foram mais de noventa versões comprometidas.
+E fica aquele lembrete chato para segurança.
+Provenance ajuda, mas não prova que o workflow confiável estava limpo.
+Revise lockfiles e builds, remova versões ruins e gire segredos alcançáveis.
+Também olhe tokens de C I que ficaram alcançáveis.
+As fontes são Microsoft Security Blog e Red Hat Insights no "Git Hub".
+
+Um pesquisador publicou uma divulgação sobre roubo de token envolvendo "Git Hub ponto dev".
+O caminho passa por V S Code webviews e token O Auth do "Git Hub".
+O ponto sensível é o acesso amplo a repositórios.
+A leitura defensiva é tratar editor no navegador como superfície privilegiada.
+Tenha cuidado com links não confiáveis de "Git Hub ponto dev".
+Limpe dados locais do site se estiver preocupado.
+E acompanhe correção ou orientação oficial.
+As fontes são Ammar Askar e Risky Biz News.
+
+O Node ponto J S vai mudar o calendário de releases a partir da linha vinte e sete.
+O anúncio oficial é de dez de março.
+Então trate isso como planejamento relembrado em junho.
+A regra nova é um major por ano.
+Todo release vira L T S, e haverá canal alpha para teste antecipado.
+A versão vinte e sete ponto zero ponto zero está prevista para abril de 2027.
+O L T S dessa linha está previsto para outubro de 2027.
+Para times J S e T S, isso mexe em Dockerfile, matriz de C I e teste de biblioteca.
+As fontes são Node ponto J S e InfoQ.
+
+O Real Claw Bench tenta aproximar benchmark de agente do trabalho feio em repositório.
+O paper transforma sessões reais do Open Claw em duzentas e oitenta e uma tarefas executáveis.
+Essas tarefas vêm com ambientes reconstruídos e verificadores determinísticos.
+O melhor sistema avaliado resolveu sessenta e cinco vírgula oito porcento delas.
+É preprint, não ranking eterno.
+Mas ajuda a furar demo limpa demais.
+A fonte é o paper do Real Claw Bench no arXiv.
+
+A Microsoft mantém um Coreutils for Windows baseado em Rust.
+Ele junta uutils Coreutils, findutils e grep em um binário multi call.
+A instalação pode ser feita via Win Get.
+O projeto está em preview e é honesto sobre atritos.
+Há conflito com comandos do PowerShell, C R L F e diferenças em A C L.
+Também há exigência de PowerShell sete ponto quatro.
+E há ausência de comandos presos demais a conceitos POSIX.
+A fonte é o projeto Microsoft Coreutils no "Git Hub".
+
+O pg stat statements continua sendo uma das primeiras extensões que muita gente ativa no PostgreSQL.
+Mas o post da boring S Q L lembra que ela entrega contadores agregados.
+Ela não entrega uma fotografia completa do workload.
+Fique de olho no contador pg stat statements info ponto dealloc.
+Também acompanhe stats reset.
+A tabela pode expulsar entradas.
+Ela também não registra planos, distribuição de percentil noventa e nove ou queries com falha.
+E não entrega visão do cluster inteiro por mágica.
+A fonte é a boring S Q L, de Radim Marek.
+
+Agora, o acompanhamento de tendências do dia.
+O padrão aparece no lugar da autorização.
+Várias histórias perguntam quem deixa o software agir quando ele para de só responder.
+O worm de laboratório mexe com rede e identidade.
+O terminal da Microsoft mexe com shell e sessão.
+O Real Claw Bench pergunta se o agente consegue terminar tarefa real.
+Não só parecer bonito no prompt.
+
+Três preprints ajudam a dar nome para essa direção.
+O Agent lib O S trata agente como "Agent Process".
+Ele fala de identidade, linhagem, capacidades, checkpoints e fila de aprovação humana.
+Também fala de eventos e auditoria.
+O P R O V E usa servidores M C P com estado vivo.
+São trezentas e quarenta e três ferramentas e recompensas programáticas.
+A ideia é treinar uso de ferramenta em várias etapas.
+O Real Claw Bench, citado acima, puxa a avaliação para ambiente reconstruído.
+E também para verificador determinístico.
+
+Tudo isso ainda é paper, protótipo ou experimento.
+Mesmo assim, a pergunta que fica é bem de engenharia.
+O que o agente pode ler, executar, lembrar, retomar e provar?
+Se o seu agente já abre terminal, usa M C P, guarda memória ou roda perto do C I, vale desenhar essa autoridade.
+Vale desenhar antes da primeira emergência.
+Depois da primeira emergência, o desenho costuma sair com caligrafia pior.
+
+As fontes de contexto são Agent lib O S, P R O V E, Real Claw Bench, o paper do worm no arXiv e Microsoft DevBlogs.
