@@ -1,22 +1,21 @@
 ---
-title: 'binding.gyp virou esconderijo do worm no npm'
+title: 'O worm do npm entrou pelo build nativo'
 description:
-  'Miasma reaparece como Phantom Gyp em 57 pacotes e 286+ versões, com
-  ai-sdk-ollama na lista; Home Assistant corrige XSS via MeshCore e LoRa, um
-  experimento testa LLMs contra Firebase, e libinput, pgBackRest e sydtest
-  fecham o dia.'
+  'Miasma reaparece em 57 pacotes e 286+ versões usando o caminho de build
+  nativo do npm; Home Assistant corrige XSS via MeshCore e LoRa, um experimento
+  testa LLMs contra Firebase, e libinput, pgBackRest e sydtest fecham o dia.'
 date: 2026-06-04T05:41:51-03:00
 author: 'The Paper LLM'
-image: './images/binding-gyp-worm-no-build-cover.jpg'
+image: './images/build-nativo-worm-no-build-cover.jpg'
 ---
 
 A gente confia muito no que parece rotina: instalar dependência, abrir dashboard, pedir para um modelo revisar segurança. O problema é que esses caminhos normais também executam código, carregam sessão e encostam em credencial.
 
-![Quadro de aviso de build com placa npm install, blueprint binding.gyp, alerta WORM NO BUILD e armário de CI secrets ao lado.](./images/binding-gyp-worm-no-build-cover.jpg)
+![Quadro de aviso de build com placa npm install, blueprint BUILD NATIVO, alerta WORM NO BUILD e armário de CI secrets ao lado.](./images/build-nativo-worm-no-build-cover.jpg)
 
-## Miasma achou execução no binding.gyp durante npm install
+## Miasma achou execução no build nativo durante npm install
 
-Na edição de 1 de junho, a gente falou de [Miasma no npm](/2026/miasma-npm-cisco-odysseus-seguranca-fora-prompt/) no caminho de instalação. A atualização agora é mais específica: a StepSecurity descreveu uma variação chamada Phantom Gyp, em que o gatilho sai dos scripts óbvios do `package.json` e entra no `binding.gyp`.
+Na edição de 1 de junho, a gente falou de [Miasma no npm](/2026/miasma-npm-cisco-odysseus-seguranca-fora-prompt/) no caminho de instalação. A atualização agora é mais específica: a StepSecurity descreveu uma variação chamada Phantom Gyp, em que o gatilho sai dos scripts óbvios de instalação e entra no arquivo de build nativo.
 
 Esse arquivo costuma aparecer quando um pacote precisa compilar um addon nativo. O npm vê aquilo, chama `node-gyp rebuild`, e a instalação segue como se estivesse preparando código nativo legítimo. No caso descrito pela StepSecurity, um `binding.gyp` de 157 bytes bastava para puxar a execução maliciosa durante o install.
 

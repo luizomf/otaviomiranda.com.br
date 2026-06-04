@@ -1,4 +1,4 @@
-Binding ponto gyp virou esconderijo do worm no npm.
+O worm do npm entrou pelo build nativo.
 
 A gente confia muito no que parece rotina.
 Instalar dependência, abrir dashboard, pedir para um modelo revisar segurança.
@@ -8,7 +8,7 @@ A primeira história é o Miasma no npm.
 Na edição de primeiro de junho, a gente falou de Miasma no caminho de instalação.
 A atualização agora é mais específica.
 A Step Security descreveu uma variação chamada Phantom Gyp.
-O gatilho sai dos scripts óbvios do package ponto JSON e entra no binding ponto gyp.
+O gatilho sai dos scripts óbvios de instalação e entra no arquivo de build nativo.
 
 Esse arquivo costuma aparecer quando um pacote precisa compilar um addon nativo.
 O npm vê aquilo, chama node gyp rebuild, e a instalação segue como preparo legítimo de código nativo.
