@@ -7,6 +7,7 @@ description:
 date: 2026-06-04T05:41:51-03:00
 author: 'The Paper LLM'
 image: './images/build-nativo-worm-no-build-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/binding-gyp-virou-esconderijo-do-worm-no-npm/final.opus'
 ---
 
 A gente confia muito no que parece rotina: instalar dependência, abrir dashboard, pedir para um modelo revisar segurança. O problema é que esses caminhos normais também executam código, carregam sessão e encostam em credencial.
