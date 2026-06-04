@@ -1,0 +1,174 @@
+Binding ponto gyp virou esconderijo do worm no npm.
+
+A gente confia muito no que parece rotina.
+Instalar dependência, abrir dashboard, pedir para um modelo revisar segurança.
+O problema é que esses caminhos normais também executam código, carregam sessão e encostam em credencial.
+
+A primeira história é o Miasma no npm.
+Na edição de primeiro de junho, a gente falou de Miasma no caminho de instalação.
+A atualização agora é mais específica.
+A Step Security descreveu uma variação chamada Phantom Gyp.
+O gatilho sai dos scripts óbvios do package ponto JSON e entra no binding ponto gyp.
+
+Esse arquivo costuma aparecer quando um pacote precisa compilar um addon nativo.
+O npm vê aquilo, chama node gyp rebuild, e a instalação segue como preparo legítimo de código nativo.
+No caso descrito pela Step Security, um binding ponto gyp de cento e cinquenta e sete bytes bastava.
+Esse arquivo pequeno puxava a execução maliciosa durante o install.
+
+Segundo a empresa, até a análise publicada, a campanha atingia cinquenta e sete pacotes.
+Ela também atingia mais de duzentas e oitenta e seis versões maliciosas.
+A lista inclui o pacote server S D K da Vapi A I e o A I S D K Ollama.
+No caso do A I S D K Ollama, a Step Security aponta versões específicas.
+São as versões três ponto oito ponto cinco, dois ponto dois ponto um, um ponto um ponto um e zero ponto treze ponto um.
+Esse detalhe dói porque muita gente trata integração com modelo local como zona mais segura por natureza.
+O modelo pode estar na sua máquina, mas a cola que liga tudo ainda pode vir do npm.
+
+A carga citada pela análise passa por um index ponto J S ofuscado de quatro vírgula cinco megabytes.
+Ela baixa Bun versão um ponto três ponto treze e procura credenciais de ambiente de dev e C I.
+O computador da pessoa é só uma parte do alcance.
+Em "Git Hub" Actions e outros runners com segredo por perto, um install de dependência pode alcançar tokens.
+Isso inclui token de "Git Hub", cloud, Vault, Kubernetes e registry antes de a aplicação sequer rodar.
+
+Para defesa, o trabalho chato é o correto.
+Revise lockfiles e logs de instalação.
+Troque versões afetadas por versões limpas ou alternativas confiáveis.
+Procure sinais estranhos no build e gire segredos que ficaram acessíveis ao ambiente de instalação.
+Scanner e revisão também precisam olhar o binding ponto gyp e o comportamento de build nativo.
+Não basta olhar scripts de pré-instalação e pós-instalação.
+
+Os números ainda podem mudar.
+A atualização publicada já basta.
+Supply chain continua sendo supply chain, inclusive quando o pacote serve para plugar modelo local em produto bonito.
+As fontes deste bloco são Step Security e Microsoft Security Blog.
+
+A segunda história envolve MeshCore, X S S e Home Assistant.
+MeshCore é uma rede de mensagens que usa LoRa, um rádio de longo alcance e baixa banda.
+O rádio só transporta o texto.
+A falha descrita por Sasha Romijn aparece quando esse conteúdo externo entra em um painel sem escape adequado.
+
+O componente afetado é o meshcore card, usado via H A C S.
+MeshCore anuncia nós com um campo de nome de trinta e dois bytes.
+Esses nomes podiam ser renderizados no dashboard como H T M L.
+Com um nome preparado para isso, bastava o painel com o card ser visualizado.
+A partir daí, JavaScript podia rodar na sessão do frontend.
+
+O advisory no "Git Hub" registra C V E 2026, quarenta e cinco três dois três.
+Ele também registra um identificador G H S A, C V S S nove vírgula seis, e correção no meshcore card zero ponto três ponto três.
+Versões anteriores a zero ponto três ponto três entram na área afetada.
+A interação do usuário também importa.
+Alguém precisa abrir ou visualizar o dashboard.
+Só que, em Home Assistant O S ou Supervised, uma sessão administrativa no frontend fica perto de coisa sensível.
+Ela fica perto de add ons, tokens e automações de casa.
+A palavra casa deixa a coisa menos abstrata.
+
+A pesquisadora também cita variantes panel versão dois e sites analisadores que ainda pareciam expostos.
+A ressalva é que nem toda variante foi verificada em runtime.
+Para quem usa esse caminho, a ação direta é atualizar o card.
+Também vale evitar variantes sem correção clara.
+E tratar qualquer nome de nó, dispositivo ou contato vindo de rádio como entrada não confiável.
+
+Tem um detalhe quase didático no meio da história.
+O analisador CoreScope tinha uma função chamada safe Esc.
+Ela checava um global inexistente e, quando não encontrava, devolvia a entrada sem escape.
+A autora aponta isso como uma aparente alucinação de L L M.
+A cautela aqui é proporcional.
+Uma função com nome de segurança não garante segurança.
+As fontes deste bloco são Sasha Romijn e "Git Hub" Advisory Database.
+
+A terceira história é um experimento de mil e quinhentos dólares com L L Ms contra Firebase.
+Kasra Rahjerdi montou um experimento simples de entender e difícil de exagerar com honestidade.
+Ele criou um app falso em React Native com Expo.
+O backend era Python com Fast [EY1 P IY1 AY1], e parecia bem protegido.
+Mas havia uma camada Firebase e Firestore vulnerável.
+O caminho certo era usar informações no google services ponto JSON.
+Com isso, dava para acessar dados privados direto pelo Firebase.
+
+Isso é muito parecido com erro real de produto.
+A [EY1 P IY1 AY1] oficial parece segura, mas o cliente mobile entrega uma pista.
+Essa pista aponta para uma camada de dados com regra de autorização frouxa.
+Quem só testa o backend bonito pode passar reto pelo buraco.
+
+O autor relata ter gasto cerca de mil e quinhentos dólares.
+A intenção era fazer dez rodadas por modelo.
+O limite era de dez dólares por rodada, com janela de duas horas.
+Ele também deixa a cautela na mesa.
+Avaliação científica ficou fora da proposta.
+O relato é self report, houve limite de custo e a conta da OpenAI tinha aprovação para pesquisa de segurança.
+Já ajuda bastante quando o próprio experimento não finge ser oráculo.
+
+Nos resultados reportados, GPT cinco ponto cinco resolveu sete de dez rodadas.
+Deepseek V quatro Pro resolveu três de dez.
+Claude Sonnet quatro ponto seis e Claude Opus quatro ponto oito resolveram duas de dez cada.
+Outros modelos ficaram em zero nas rodadas completas.
+Gemini três ponto um Pro Preview teve recusa imediata no desenho testado.
+
+Os erros do experimento contam bastante.
+Alguns modelos encontravam Firebase, mas insistiam no caminho da [EY1 P IY1 AY1] protegida.
+Outros recusavam cedo demais ou tarde demais.
+Pelo relato, o desafio era persistir no caminho certo.
+A arquitetura escondia o bug em uma camada que parecia secundária.
+
+Para dev, o trabalho depois da leitura é bem menos divertido que ranking de modelo.
+Revise regras de Firebase, Firestore, Supabase e qualquer data layer direto pelo cliente.
+L L M pode ajudar a explorar hipótese, fazer checklist e olhar logs.
+Ele não substitui teste explícito de autorização.
+Isso vale especialmente quando o dado está a um arquivo de configuração de distância.
+A fonte deste bloco é Kasra Rahjerdi.
+
+Agora entram os destaques rápidos.
+O libinput corrigiu um caminho local para root via u dev.
+O advisory upstream fala em texto de atributo de dispositivo sem escape sendo importado como propriedades extras.
+As versões corrigidas, segundo a fonte primária, são libinput um ponto trinta e um ponto três.
+Também há correção no libinput um ponto trinta ponto quatro.
+O pré-requisito envolve dispositivo u input ou u hid malicioso, muitas vezes só acessível por root.
+Mas regras como steam devices, antimicro X e kde connect D no Fedora podem mudar esse alcance.
+Atualize pelo pacote da distro.
+As fontes são freedesktop ponto org advisory, freedesktop ponto org announce e Phoronix.
+
+Relatos ligados à Sophos mostram agentes acelerando laboratório de evasão de E D R.
+Leia como pesquisa ofensiva assistida por IA.
+Não leia como malware autônomo rodando solto em vítima.
+Segundo Help Net Security e BleepingComputer, o ambiente usava Cursor, Claude Opus quatro ponto cinco, M C P e Ludus.
+O objetivo era desenvolver e testar quase oitenta módulos e mais de setenta técnicas.
+Os testes miravam ambientes Sophos, CrowdStrike e Microsoft Defender.
+A própria Sophos teria visto que algumas alegações internas de sucesso não batiam com os dados revisados.
+As fontes são Help Net Security e BleepingComputer.
+
+O pgBackRest funcionou com P G T D E, mas backup criptografado cobra a conta em outro lugar.
+O teste de pgstef usou pgBackRest dois ponto cinquenta e oito ponto zero.
+Também usou Percona Server for PostgreSQL dezoito, P G T D E e OpenBao como provedor de chaves.
+O arquivamento assíncrono funcionou.
+Mas o autor precisou desativar a checagem de cabeçalho de arquivo e a checagem de checksum por página.
+Dados criptografados também comprimem mal.
+Eles reduzem a eficiência de backup incremental por bloco.
+Antes de comemorar T D E, teste restore, chaves e retenção no seu próprio ambiente.
+A fonte é pgstef no Planet PostgreSQL.
+
+O sydtest colocou mutation testing como juiz externo para testes gerados por IA.
+A novidade é de Haskell, mas a lógica vale fora dele.
+O sistema muda o código de propósito e espera que a suíte falhe.
+Se a mudança sobrevive, o teste não pegou um erro simulado.
+Se a mudança morre, o teste pelo menos gritou naquele caso.
+O sydtest agora oferece mutation testing geralmente disponível.
+Ele inclui checks em Nix e relatórios legíveis por humano ou máquina.
+A fonte deste destaque é CS SYD.
+
+A tendência do dia liga essas histórias por uma ideia bem prática.
+Quando uma ferramenta gera código, conduz teste, analisa segurança ou renderiza dado externo, precisa existir verificação fora da conversa.
+
+No MeshCore, o nome de um nó vindo do rádio deveria ter sido tratado como texto hostil no ponto de renderização.
+No CoreScope, uma função chamada safe Esc parecia prometer escape e devolvia entrada crua em um caminho importante.
+No experimento do Firebase, os modelos precisavam abandonar a [EY1 P IY1 AY1] segura.
+Eles precisavam insistir na camada de dados onde a autorização realmente falhava.
+
+Mutation testing entra como exemplo menor e bom.
+Ele não pergunta se o teste parece bonito.
+Ele quebra o código e vê se a suíte percebe.
+C I determinístico, regras de autorização testadas diretamente, sanitização no limite certo e sandbox em volta de agente fazem papel parecido.
+São controles sem poesia, o que costuma ser uma qualidade.
+
+Para quem usa IA no fluxo de desenvolvimento, vale separar ajuda de prova.
+Um modelo pode sugerir, resumir, achar caminho estranho e economizar tempo.
+A checagem que protege build, dashboard, banco e credencial precisa sobreviver.
+Ela precisa sobreviver mesmo quando a resposta parece convincente demais.
+As fontes de contexto são Sasha Romijn, CS SYD e Kasra Rahjerdi.
