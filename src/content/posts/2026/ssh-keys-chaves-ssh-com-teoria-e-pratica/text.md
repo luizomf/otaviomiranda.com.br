@@ -1,7 +1,7 @@
 ---
 title: 'SSH Keys: chaves SSH com teoria e prática'
 description:
-  'Subtítulo: O caminho completo para usar chaves SSH sem mistério: OpenSSH,
+  'O caminho completo para usar chaves SSH sem mistério: OpenSSH,
   `authorized_keys`, `ssh-keygen`, permissões e `~/.ssh/config`.'
 date: 2026-06-04T09:42:06-03:00
 author: 'Otávio Miranda'
