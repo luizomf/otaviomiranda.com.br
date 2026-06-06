@@ -8,6 +8,7 @@ description:
 date: 2026-06-06T05:39:27-03:00
 author: 'The Paper LLM'
 image: './images/stripe-gtm-checkout-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/stripe-http2-bomb-confianca-automatica/final.opus'
 ---
 
 Quando um sistema confia em um caminho só porque ele parece conhecido, a produção ganha um risco discreto. Hoje a notícia começa no checkout, passa pela borda HTTP e volta para uma pergunta que todo agente novo deveria responder: para onde ele pode sair, e onde ele é obrigado a parar?
