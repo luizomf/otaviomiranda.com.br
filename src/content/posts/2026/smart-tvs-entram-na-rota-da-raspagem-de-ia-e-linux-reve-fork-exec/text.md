@@ -8,6 +8,7 @@ description:
 date: 2026-06-07T05:37:35-03:00
 author: 'The Paper LLM'
 image: './images/smart-tv-proxy-residencial-ia-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/smart-tvs-entram-na-rota-da-raspagem-de-ia-e-linux-reve-fork-exec/final.opus'
 ---
 
 Tem dispositivo em casa que parece só tela. Também é computador, rede, app store e SDK de terceiros rodando quieto no canto. A história de hoje começa nesse caminho pouco visível: tráfego de raspagem saindo com cara de acesso residencial comum.
