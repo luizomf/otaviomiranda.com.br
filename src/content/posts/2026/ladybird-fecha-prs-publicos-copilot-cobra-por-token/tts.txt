@@ -1,0 +1,193 @@
+Ladybird fecha os pull requests públicos, enquanto o Copilot passa a cobrar por token.
+
+Mandar um pull request sempre foi o gesto que define participar de open source.
+Na sexta-feira, um dos projetos mais observados do momento anunciou que esse gesto, sozinho, não vale mais nada para ele.
+
+O Ladybird parou de aceitar pull requests públicos por causa da IA.
+
+O anúncio saiu em cinco de junho no site do Ladybird, assinado por Andreas Kling, fundador do projeto e criador do Serenity O S.
+A regra nova é direta: daqui em diante, só mantenedores colocam código na árvore do navegador.
+Todos os pull requests públicos abertos serão fechados.
+E não vai existir canal paralelo de patch: nada de mandar diff por issue, comentário, email ou fork tratado como fila de revisão.
+
+O motivo é o que a IA fez com o significado de um patch.
+Durante décadas, um pull request volumoso e bem escrito funcionava como prova indireta de esforço e boa-fé.
+Afinal, ninguém gastava semanas produzindo código de qualidade para um projeto que pretendia sabotar.
+Geração automática derrubou esse custo.
+Hoje, contribuição plausível em volume é barata, e o sinal que ela carregava quebrou.
+
+Para um navegador, errar essa avaliação custa caro demais.
+O Ladybird vai rodar input hostil da internet inteira, e uma única vulnerabilidade bem disfarçada basta.
+O texto de Kling também lembra que o open source já viu campanhas pacientes e bem financiadas para conquistar a confiança de mantenedores e abusar dela depois.
+Quem acompanhou as últimas semanas de worms em pacotes N P M e configs de agente por aqui sabe de onde vem essa preocupação.
+
+O código continua público sob licença open source, e os próprios mantenedores usam IA todos os dias.
+O projeto segue querendo bug reports, casos reduzidos de bug, testes de sites, discussão de standards e reports de segurança.
+O que fechou foi a porta do commit vindo de fora.
+A questão para eles deixou de ser se o patch é bom, e virou quem responde por esse código depois.
+
+A mudança acompanha a preparação do primeiro alpha, que ainda não tem data anunciada.
+Para quem mantém projeto crítico, nasce um precedente citável.
+Para quem contribui, fica uma pergunta aberta: como se constrói confiança quando o patch deixou de ser prova de trabalho?
+
+A fonte deste bloco é o anúncio no site do Ladybird.
+
+Copilot por token e teto na Uber: o subsídio da IA começa a aparecer na fatura.
+
+Duas publicações de hoje contam a mesma história por lados opostos.
+O podcast "Equity", do TechCrunch, discutiu o que vem sendo chamado de "Tokenpocalypse".
+É o momento em que o custo real de rodar modelos para de se esconder atrás da assinatura mensal.
+E o arquiteto de T I holandês Gerben Wierda publicou uma análise estimando quanto custaria, em preço de [EY1 P IY1 AY1], o uso que cabe dentro de um plano de cem dólares.
+
+Do lado do negócio, a Microsoft mudou o "Git Hub" Copilot de mensalidade flat para cobrança por token no fim de maio.
+A Uber estourou o orçamento interno de IA em quatro meses e impôs teto de gasto por funcionário.
+A Anthropic protocolou pedido de I P O no início de junho, e o painel do TechCrunch espera ver fatores de risco ligados a custo de token nos documentos.
+O apelido Tokenpocalypse, aliás, nasceu dentro de uma empresa e chegou ao podcast via Reddit.
+O painel ainda lembra que o preço de vinte dólares do ChatGPT original foi um número cuspido, sem estratégia por trás.
+E que o setor inteiro roda subsidiado por dinheiro de investidor.
+
+Do lado do dev, Wierda fez as contas em cima do próprio uso.
+Pelas estimativas dele, saturar um plano Claude Max de cem dólares com "agentic coding" consumiria tokens que custariam mais de mil dólares no preço de [EY1 P IY1 AY1].
+Uma tarefa de alto esforço sairia por volta de setenta e cinco dólares.
+Ele viu uma única query consumir cerca de um milhão de tokens, uns vinte e cinco dólares em preço de [EY1 P IY1 AY1].
+E chegou a gastar vinte dólares em vinte minutos quando estourou os limites do plano.
+No uso pessoal medido, o fator de subsídio dele deu cerca de duas vezes e meia.
+O teto estimado, em uso saturado, chegaria perto de doze vezes.
+
+O autor faz questão do aviso: são estimativas declaradas, parte produzida com ajuda do próprio Claude, ancoradas nas estatísticas de uso de uma pessoa.
+Nenhum desses números é dado auditado da Anthropic ou da Open A I.
+O que está bem sustentado é a direção: subsídio alto, cobrança por token chegando e I P O forçando transparência.
+
+Um detalhe técnico explica parte do susto.
+Os tokens de raciocínio, aqueles que o modelo gasta pensando antes de responder, são cobrados como tokens de saída.
+No caso do Opus, vinte e cinco dólares por milhão de tokens.
+O caro não é o primeiro rascunho do código.
+É a recursão invisível de revisão, retry e backtracking que o agente executa enquanto você toma café.
+
+Leio essa parte de um lugar pouco neutro, admito: cada parágrafo que escrevo aqui também é token girando no medidor de alguém.
+
+O conselho prático que as duas fontes dividem: meça custo por tarefa concluída, não por token.
+Se o seu time depende de assinatura subsidiada, vale se preparar para tetos como o da Uber e preços por uso como o do Copilot se espalharem.
+Quanto loop e quanto retry um agente pode fazer virou também decisão de orçamento.
+
+As fontes deste bloco são o TechCrunch e a análise do Gerben Wierda.
+
+O criador do Redis aposta em agente como Q A: cobrir linhas não é cobrir estados.
+
+Salvatore Sanfilippo, o antirez, publicou hoje o texto "A New Era for Software Testing".
+A posição dele tem duas metades.
+Na primeira, ele acha que, para escrever código novo, a saída automática ainda não alcança a qualidade estrutural do melhor software feito à mão.
+A segunda é a aposta: em Q A e teste, segundo ele, o agente é ganho puro, sem trade-off.
+
+O método cabe em um arquivo só.
+Um markdown instrui o agente a trabalhar como engenheiro de Q A, com endpoints S S H, chaves e caminhos declarados logo no começo.
+A primeira tarefa do agente é olhar os commits desde a última release, para concentrar a verificação no que de fato mudou.
+
+Os exemplos vêm dos projetos dele.
+No "DwarfStar", a engine de inferência do antirez para modelos de pesos abertos, o agente confere inferência distribuída entre dois MacBooks.
+Ele também procura regressão de velocidade sem baseline fixa, tratando o desempenho como alvo móvel.
+No outro exemplo, o agente constrói uma aplicação de teste grande usando arrays no Redis.
+Ele monta replicação e persistência como em produção e simula dias de uso pesado, caçando comportamento estranho.
+É um app de exercício do autor, não um teste oficial do projeto Redis.
+
+A frase que sustenta o argumento: cobrir todas as linhas não é cobrir todos os estados.
+Teste de integração de verdade, com timing, réplicas e inspeção do resultado, sempre foi caro de montar, e por isso vive sendo adiado.
+O agente remove essa fricção logística.
+De quebra, pega o que suíte nenhuma mede: feature que se comporta de um jeito surpreendente, documentação que falta, aspereza de uso.
+
+O caveat é dele mesmo: é relato de prática, não estudo, e a conclusão vem com linguagem de "feeling".
+Q A automático talvez suba a régua de qualidade das releases o bastante para compensar parte da bagunça do código gerado rápido.
+Para quem já tem Claude Code ou Codex instalado, é um experimento de fim de semana: um arquivo markdown e a instrução de desconfiar do seu próprio código.
+
+A fonte deste bloco é o blog do antirez.
+
+O "morerandom" alimenta o gerador de aleatoriedade do homelab com microfone, câmera e WASM.
+
+Para fechar, um projeto assumidamente desnecessário e delicioso.
+O post "Entropy", publicado hoje no blog arch ponto dog, apresenta o morerandom, um serviço caseiro para alimentar o pool de entropia das máquinas de um homelab.
+
+De passagem, o texto ensina coisas que muita gente usa sem saber.
+Dá para escrever direto no arquivo dev barra random para contribuir com o pool.
+Random e urandom quase não diferem depois do boot.
+E o kernel re-semeia o gerador mais ou menos a cada minuto.
+
+A montagem é um parquinho técnico.
+O servidor do projeto é escrito em Rust.
+Plugins em WASM, via Extism, deixam qualquer linguagem contribuir entropia.
+O autor adicionou captura de microfone e câmera, que é a versão de apartamento da parede de lâmpadas de lava que a Cloudflare ficou famosa por manter.
+Outras máquinas do homelab buscam bytes aleatórios por G R P C, com um timer diário do system D, e escrevem no próprio pool local.
+
+Tem até um cuidado de design honesto no meio da brincadeira.
+Para não vazar o que microfone e câmera capturam, toda a coleta passa por um hash "Blake" três, que semeia um stream ChaCha vinte.
+Esse stream é re-semeado a cada minuto, misturando bytes do próprio stream.
+É o mesmo desenho do random ponto C do kernel.
+O autor recomenda a talk do Jason Donenfeld sobre a modernização dessa parte do Linux para quem quiser ir fundo.
+
+Os avisos vêm do próprio autor: ele não é criptógrafo, quem controla as entradas pode influenciar o seed, e isso não deve ser a única fonte de entropia de máquina nenhuma.
+Como projeto para aprender internals do kernel, sistema de plugin e R P C de uma vez só, é difícil achar coisa melhor para um domingo.
+
+A fonte é o post no blog arch ponto dog.
+
+Agora, os destaques rápidos de hoje.
+
+O Twig corrigiu uma execução de P H P arbitrário que passava por cima do sandbox.
+A falha C V E 2026, quarenta e seis seis quatro zero, permitia que um template fornecido pelo atacante injetasse P H P no código compilado.
+Esse código era executado no carregamento do template, antes de qualquer checagem de segurança rodar.
+O bypass do Sandbox Extension era completo, mesmo com sandbox global e allowlist vazia.
+O cenário de risco é aplicação que aceita template de usuário; quem só roda templates escritos pelo próprio time não está na linha de frente.
+A correção está no Twig três ponto vinte e seis ponto zero, lançado junto com um lote de outras falhas de sandbox, e o Debian já publicou atualização.
+As fontes são o advisory do Symfony e o anúncio da versão nova do Twig.
+
+A CISA diz que a falha de negação de serviço no SolarWinds "Serv-U" já está sendo explorada.
+A C V E 2026, vinte e oito três um oito, entrou no catálogo K E V.
+Um POST sem autenticação, com o cabeçalho de compressão deflate, faz o servidor de arquivos exaurir recursos na descompressão e cair.
+É indisponibilidade, não invasão, mas derrubar a transferência de arquivos da empresa já dói o suficiente.
+A correção é a versão quinze ponto cinco ponto quatro, hotfix um, e as agências federais americanas têm prazo até dezenove de junho.
+A cobertura cita mais de doze mil instâncias expostas na internet, número do Shodan, não da CISA.
+As fontes são o BleepingComputer e o The Hacker News.
+
+Malware em quase dois mil sites WordPress recebia ordens por perfis da Steam.
+O relatório da GoDaddy Security, publicado nesta semana, rastreia desde julho de 2025 uma campanha com cerca de mil novecentos e oitenta sites infectados.
+Em vez de servidor de comando e controle, que blocklist pega, as instruções ficavam em seis caracteres Unicode invisíveis dentro de comentários públicos de perfil da Steam.
+Decodificados, eles reconstroem o endereço de um JavaScript disfarçado de biblioteca legítima, injetado em todas as páginas do site.
+O domínio malicioso imita um "hello my world" escrito errado; o endereço exato aparece neutralizado no post escrito.
+A Steam não foi invadida; perfis públicos viraram mural de recados.
+Para quem opera WordPress, valem três cuidados.
+Integridade de arquivos P H P e J S, baseline de conexões de saída mesmo para domínio confiável, e restauração de backup limpo.
+O backup limpo importa porque a persistência usa backdoor com cookie de autenticação.
+As fontes são a GoDaddy Security e o BleepingComputer.
+
+A nuvem da Amazon, a A W S, abriu o Extend D B, que fala o protocolo do Dynamo D B em cima do Postgres.
+É um adaptador em Rust, ainda na versão zero ponto um, sob licença Apache.
+A aplicação continua falando Dynamo D B com os mesmos S D K de sempre, o Extend D B traduz, e o Postgres guarda os dados.
+É um binário único, com T L S obrigatório e autenticação Sig V quatro com credencial local.
+A camada de storage é plugável, então backends como Cassandra ou My S Q L podem aparecer sem mexer no core.
+O uso óbvio é dev local, C I, e dados que precisam ficar dentro da infraestrutura própria.
+Os limites também estão na cobertura: um engenheiro da A W S compara o estágio atual ao Dynamo D B Local.
+E um relato de usuário citado pela Info Q fala em uns trezentos milissegundos de P noventa em escrita sob carga concorrente; relato de Reddit, não benchmark oficial.
+O anúncio da A W S é do fim de maio; a cobertura da Info Q saiu hoje.
+As fontes são a Info Q e o anúncio da A W S.
+
+Para fechar os rápidos, uma leitura de engenharia: fila não conserta sobrecarga.
+O texto do Peter Mbanugo é de onze de abril, então entra aqui como estudo para guardar, não como notícia.
+A tese aguenta releitura: fila sem limite não resolve sobrecarga sustentada, só garante que a falha será catastrófica em vez de pequena.
+Isso porque a Lei de Little, a relação matemática entre chegada, fila e tempo de espera, não negocia.
+O ciclo é conhecido: usuário expira, dá refresh, realimenta a fila, e o servidor queima C P U em requests que ninguém espera mais.
+A conclusão dura é que descartar dados é obrigatório.
+A escolha real é entre descarte explícito, com "load shedding" e "backpressure" respondendo na hora, ou implícito, quando o kernel mata o processo sem pedir licença.
+Os exemplos de código promovem o framework do próprio autor, o Tina, então leve o princípio e avalie a ferramenta por conta própria.
+A fonte é o blog do Peter Mbanugo.
+
+Tendência do dia: o gargalo saiu do teclado e foi para a revisão e a fatura.
+
+No dia cinco, falamos do ensaio "Code is Cheaper", sobre o custo de entender código que ficou barato de gerar.
+Hoje apareceram as duas pontas que faltavam nessa conta.
+A análise de custos sugere que nem a geração era barata de verdade: alguém pagava a diferença, e esse alguém começou a repassar.
+E o antirez mostra onde o esforço liberado rende mais: verificação, justamente o trabalho que times pulam há décadas por falta de tempo.
+
+Se as duas leituras estiverem certas, o formato do trabalho com agente muda.
+Menos loop infinito de geração, porque cada retry passa a ter preço visível na fatura.
+E mais investimento em Q A automático, o uso com melhor retorno relatado por quem testou de verdade.
+Vale acompanhar se as próximas mudanças de preço e os próximos relatos de prática continuam apontando para o mesmo lugar.
+
+As fontes de contexto são o TechCrunch, a análise do Gerben Wierda e o blog do antirez.
