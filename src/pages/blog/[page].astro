@@ -93,13 +93,20 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
               <a href={getEntryHref(post)} class='blog-post-link'>
                 {post.data.title}
               </a>
+
+              <div class='blog-post-meta'>
+                {post.data.author && (
+                  <span class='blog-post-author'>{post.data.author}</span>
+                )}
+                {dateLabel && dateTime && (
+                  <time datetime={dateTime} class='blog-post-date'>
+                    {dateLabel}
+                  </time>
+                )}
+              </div>
+
               {post.data.description && (
                 <p class='blog-post-description'>{post.data.description}</p>
-              )}
-              {dateLabel && dateTime && (
-                <time datetime={dateTime} class='blog-post-date'>
-                  {dateLabel}
-                </time>
               )}
             </li>
           ))
@@ -154,41 +161,44 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
     list-style: none;
   }
 
-  .blog-header {
-    margin-bottom: clamp(var(--space-600), 5vw, var(--space-900));
-  }
-
   .blog-archive-body {
     padding-bottom: var(--space-section-bottom);
   }
 
   .blog-post-item {
-    margin-bottom: var(--space-500);
-    padding-bottom: var(--space-500);
+    margin-bottom: var(--space-600);
+    padding-bottom: var(--space-600);
   }
 
   .blog-post-link.blog-post-link {
     display: block;
-    font-size: var(--font-size-text-500);
+    font-size: var(--font-size-text-600);
     font-weight: 700;
     color: var(--color-text-strong);
     text-decoration: none;
-    padding: 1rem 0;
+    padding: 1.3rem 0;
   }
 
   .blog-post-description {
     color: var(--color-text-subtle);
-    font-size: var(--font-size-body-sm);
+    font-size: var(--font-size-body);
     margin: 0;
     padding-bottom: var(--space-300);
   }
 
-  .blog-post-date {
+  .blog-post-meta {
+    display: flex;
+    gap: 1.3rem;
+    margin: 1.3rem 0;
+    flex-wrap: wrap;
     font-size: var(--font-size-label);
     color: var(--color-text-soft);
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.05em;
+  }
+
+  .blog-post-date {
   }
 
   .blog-pagination {
