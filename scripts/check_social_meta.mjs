@@ -18,6 +18,11 @@ const SITE_URL = new URL(
   process.env.SITE_URL ?? 'https://otaviomiranda.com.br',
 );
 const MAX_SOCIAL_IMAGE_BYTES = 5 * 1024 * 1024;
+const DEFAULT_PAGE_TITLE =
+  'Otávio Miranda | Cursos de Programação Python, JS e Full Stack';
+const DEFAULT_PAGE_DESCRIPTION =
+  'Aprenda programação de verdade com Otávio Miranda. Cursos de Python, JavaScript, TypeScript e Full Stack focados em projetos reais. Mais de 300 mil alunos.';
+const BLOG_PAGINATION_PATH_PATTERN = /^blog\/(?<page>\d+)\/index\.html$/;
 
 async function pathExists(filePath) {
   try {
@@ -46,9 +51,17 @@ function getMetaContent($, selector) {
   return $(selector).attr('content')?.trim();
 }
 
+function getRootRelativePath(filePath) {
+  return path.relative(ROOT_DIR, filePath);
+}
+
+function getDistRelativePath(filePath) {
+  return path.relative(DIST_DIR, filePath).split(path.sep).join('/');
+}
+
 async function validateImageUrl({ filePath, label, value }) {
   const errors = [];
-  const relativePath = path.relative(ROOT_DIR, filePath);
+  const relativePath = getRootRelativePath(filePath);
 
   if (!value) {
     return [`${relativePath}: missing ${label}`];
@@ -99,6 +112,78 @@ async function main() {
   for (const filePath of htmlFiles) {
     const html = await fs.readFile(filePath, 'utf8');
     const $ = cheerio.load(html);
+    const relativePath = getRootRelativePath(filePath);
+    const distRelativePath = getDistRelativePath(filePath);
+    const documentTitle = $('title').first().text().trim();
+    const description = getMetaContent($, 'meta[name="description"]');
+    const ogTitle = getMetaContent($, 'meta[property="og:title"]');
+    const ogDescription = getMetaContent($, 'meta[property="og:description"]');
+    const twitterTitle = getMetaContent($, 'meta[name="twitter:title"]');
+    const twitterDescription = getMetaContent(
+      $,
+      'meta[name="twitter:description"]',
+    );
+
+    if (!documentTitle) errors.push(`${relativePath}: missing <title>`);
+    if (!description) {
+      errors.push(`${relativePath}: missing meta description`);
+    }
+
+    const textTags = [
+      { label: 'og:title', value: ogTitle, expected: documentTitle },
+      {
+        label: 'og:description',
+        value: ogDescription,
+        expected: description,
+      },
+      {
+        label: 'twitter:title',
+        value: twitterTitle,
+        expected: documentTitle,
+      },
+      {
+        label: 'twitter:description',
+        value: twitterDescription,
+        expected: description,
+      },
+    ];
+
+    for (const tag of textTags) {
+      if (!tag.value) {
+        errors.push(`${relativePath}: missing ${tag.label}`);
+      } else if (tag.expected && tag.value !== tag.expected) {
+        errors.push(
+          `${relativePath}: ${tag.label} does not match page metadata`,
+        );
+      }
+    }
+
+    const blogPaginationMatch = distRelativePath.match(
+      BLOG_PAGINATION_PATH_PATTERN,
+    );
+    if (blogPaginationMatch?.groups?.page) {
+      const pageLabel = `Página ${blogPaginationMatch.groups.page}`;
+
+      if (documentTitle === DEFAULT_PAGE_TITLE) {
+        errors.push(`${relativePath}: blog pagination uses home title`);
+      }
+
+      if (description === DEFAULT_PAGE_DESCRIPTION) {
+        errors.push(`${relativePath}: blog pagination uses home description`);
+      }
+
+      if (!documentTitle.includes(pageLabel)) {
+        errors.push(
+          `${relativePath}: blog pagination title must include "${pageLabel}"`,
+        );
+      }
+
+      if (!description?.includes(pageLabel)) {
+        errors.push(
+          `${relativePath}: blog pagination description must include "${pageLabel}"`,
+        );
+      }
+    }
 
     const tags = [
       {

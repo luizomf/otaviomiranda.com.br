@@ -65,9 +65,11 @@ const paginatedPosts = page.data.map((post: CollectionEntry<'posts'>) => ({
   dateLabel: getEntryDateLabel(post),
   dateTime: getEntryDateTimeAttr(post),
 }));
+const blogPageTitle = `Blog - Página ${page.currentPage} de ${page.lastPage} | Otávio Miranda`;
+const blogPageDescription = `Página ${page.currentPage} de ${page.lastPage} do blog do Otávio Miranda, com tutoriais e notas sobre programação, Linux, DevOps, segurança, IA e engenharia de software.`;
 ---
 
-<BaseLayout>
+<BaseLayout title={blogPageTitle} description={blogPageDescription}>
   <Header />
 
   <ThemeToggle />
