@@ -1,0 +1,152 @@
+Colab [S IY1 EH1 L AY1] leva G P U aos agentes, e V S Code segura extensões por duas horas.
+
+Quando uma ferramenta ganha permissão para gastar G P U, atualizar extensão ou resetar conta, ela deixa de ser só conveniência, e isso começa no terminal.
+
+O Google apresentou o Google Colab [S IY1 EH1 L AY1], uma interface open source de linha de comando.
+Ela liga o terminal local a runtimes remotos do Colab.
+Na prática, você continua no shell, mas pode pedir uma G P U ou uma T P U do Colab.
+Isso serve para rodar scripts, pipelines de machine learning e tarefas que não cabem bem no notebook da sua máquina.
+
+No post oficial, aparecem comandos para pedir uma G P U T quatro, executar tarefas, baixar arquivos e consultar logs.
+O fluxo permite criar um runtime, instalar dependências, rodar um script Python remoto, baixar artefatos e guardar o log em notebook.
+O exemplo do Google usa fine tuning com Q LoRA em Gemma três de um bilhão de parâmetros.
+Para o dia a dia com agentes, a parte mais sensível é outra.
+Qualquer agente com acesso ao terminal pode, em tese, ganhar um braço de computação fora do laptop.
+
+O próprio texto cita Antigravity, Claude Code, Codex e outros agentes de terminal.
+Isso muda a pergunta do dia a dia.
+Antes ela era: minha máquina roda isso?
+Agora também vira: esse agente pode gastar esse runtime, mexer nesses dados e trazer esses artefatos de volta?
+
+Colab continua tendo quota, custo, limites e contexto de uso.
+A ponte ficou mais interessante: prompt local, acelerador remoto e um agente no meio.
+Esse tipo de ponte é útil, e justamente por isso precisa de limite bem visível.
+As fontes deste bloco são o Google Developers Blog e a Help Net Security.
+
+No dia cinco, falamos de configurações de agente dentro do repositório como superfície de execução.
+Agora a mudança concreta vem do V S Code.
+A versão um ponto cento e vinte e três passou a esperar duas horas antes de aplicar automaticamente uma atualização de extensão recém-publicada.
+
+O detalhe é pequeno e bom: se a atualização automática estiver ligada, uma versão nova da extensão não entra imediatamente assim que aparece.
+O usuário ainda pode clicar no botão de update e instalar na hora.
+Enquanto a atualização está pendente, a tela de detalhes explica por que ela ainda não foi aplicada.
+Também mostra quando o update automático deve acontecer.
+
+Há uma exceção importante: extensões de publishers confiáveis, como Microsoft, "Git Hub" e OpenAI, continuam atualizando imediatamente.
+A exceção já delimita a medida.
+O cooldown não é sandbox, assinatura perfeita, detector de malware nem escudo contra tudo; ele reduz velocidade.
+
+Mesmo assim, velocidade importa em cadeia de suprimentos.
+Se uma versão ruim ou comprometida entra no marketplace, duas horas podem ser o espaço para alguém notar, reportar, remover ou bloquear.
+No mínimo, podem evitar que todo o parque acorde atualizado.
+A cobertura de segurança compara isso com freios parecidos em package managers, como Bun, npm, pnpm, Yarn e Bundler.
+A confiança no plugin continua sendo problema, mas um pouco da pressa automática sai do caminho.
+As fontes são as notas de lançamento do Visual Studio Code um ponto cento e vinte e três e o The Hacker News.
+
+O registro do procurador-geral do Maine lista vinte mil duzentas e vinte e cinco pessoas afetadas em um incidente da Meta ligado ao Instagram.
+A data da ocorrência aparece como dezessete de abril de 2026.
+A descoberta aparece como trinta e um de maio de 2026.
+E a notificação aos consumidores aparece como dezenove de junho de 2026, depois da data deste texto.
+
+O fluxo envolvido era o Meta High Touch Support, ou H T S.
+Era um sistema de recuperação de conta com assistência de I A.
+Segundo a cobertura da BleepingComputer, a falha permitia solicitar links de redefinição de senha.
+O problema era não verificar corretamente se o email informado pertencia à conta alvo do Instagram.
+Com isso, atacantes conseguiam resetar senhas e tomar contas.
+O risco era maior quando a conta não tinha autenticação em dois fatores no caminho descrito.
+
+O nome I A chama atenção, claro.
+Mas o bug tem cheiro conhecido: recuperação de conta com autoridade demais e uma checagem de identidade fraca demais.
+Suporte que consegue resetar senha é infraestrutura de segurança, mesmo quando aparece com interface de chatbot.
+Se ele pula a amarração entre conta e email, a conversa simpática vira detalhe secundário.
+
+A Meta desativou o H T S e os links de reset gerados.
+Também colocou contas afetadas em checkpoint obrigatório, pediu nova autenticação e disse que vai corrigir a checagem antes de relançar a ferramenta.
+A empresa também prometeu revisar fluxos semelhantes de recuperação.
+Para usuário, dois fatores continuam sendo uma barreira importante.
+Para plataforma, a parte difícil é impedir que o próprio suporte vire atalho privilegiado para o atacante.
+As fontes são o Maine Office of the Attorney General, a notificação em P D F e a BleepingComputer.
+
+Christophe Pettus publicou uma explicação ótima sobre data sync retry, um parâmetro do PostgreSQL que quase ninguém deve mudar.
+Ele é booleano, vem desligado por padrão e exige restart.
+O motivo está em uma cicatriz antiga de confiabilidade: o F sync gate.
+
+O contrato mental de muita gente era este.
+O banco escreve páginas sujas no cache do kernel com write.
+Depois chama F sync para forçar aquilo para armazenamento durável.
+Se o F sync falhar, parece natural tentar de novo.
+Só que, em Linux, uma falha de writeback podia marcar a página como limpa, reportar erro uma vez e depois deixar aquela página ser reaproveitada.
+Em algumas situações, o descritor errado consumia o erro, ou o erro sumia no fechamento do arquivo.
+
+Agora vem a parte que dói: se o PostgreSQL acredita que o checkpoint terminou bem, ele pode reciclar o W A L que ainda seria necessário para reconstruir aqueles dados.
+A página não foi escrita, a cópia em memória se foi, e o W A L também.
+Não sobrou uma tentativa honesta para repetir; sobrou perda.
+
+A resposta do PostgreSQL foi dura e correta.
+Com data sync retry desligado, o padrão atual, falha de F sync em arquivo de dados causa PANIC.
+O servidor cai e a recuperação por W A L reconstrói o que ainda estava descrito no log.
+Parece contraintuitivo, mas cair alto é mais seguro do que continuar baixo fingindo que o disco confirmou algo que talvez tenha perdido.
+
+O Linux quatro ponto treze melhorou a notificação com errseq T, mas isso não traz dado perdido de volta.
+Direct I O aparece como direção mais completa para reduzir a dependência do page cache.
+Só que isso ainda é trabalho grande e parcial.
+Para quem opera PostgreSQL, a conclusão prática é menos tune isso e mais não esconda PANIC de storage.
+Quando o banco grita nesse ponto, ele pode estar protegendo seus dados do silêncio.
+A fonte deste bloco é o The Build.
+
+Nos destaques rápidos, defesa em profundidade reduz o estrago depois da primeira falha.
+Um post no TabNews explica bem a ideia de dividir serviços.
+Assim, uma R C E no [EH1 N JH AH0 N] [EH1 K S], por exemplo, não vira acesso automático a PostgreSQL, Redis e o resto da casa.
+É material didático, não pesquisa nova, mas encaixa com o dia.
+Container, sandbox, V M, Micro V M, autenticação interna e logs existem para quando a primeira parede já caiu.
+A fonte deste destaque é o TabNews.
+
+A Microsoft colocou agente dentro de um terminal experimental para Windows.
+O Intelligent Terminal zero ponto um é um fork open source e separado do Windows Terminal.
+Ele tem painel de agente, detecção de erro, sugestão de correção e gerenciamento de sessões.
+O "Git Hub" Copilot [S IY1 EH1 L AY1] é o padrão.
+A experiência aceita agentes compatíveis com A C P.
+A cobertura hands-on cita Claude, Codex e Gemini como opções vistas na configuração.
+As fontes são o Microsoft Command Line Blog e a BleepingComputer.
+
+O Linux sete ponto um R C sete segue mais pesado que o normal, mas a curva está baixando.
+A Phoronix relata que o ciclo ainda carrega volume maior de patches.
+Agentes de I A e modelos L L M aparecem como parte do pano de fundo.
+Mas as correções estão encolhendo.
+Linus Torvalds parece confortável com um lançamento estável provavelmente em catorze de junho, se nada grave aparecer.
+G P U e rede puxaram parte das mudanças do R C sete.
+A fonte deste destaque é a Phoronix.
+
+Troy Hunt marcou o milésimo vazamento no "Have I Been Pwned" e reclamou do atraso nas notificações.
+O texto é de primeiro de junho.
+O próprio Hunt avisa que está falando por experiência e exemplos, sem fechar estatística global.
+Ainda assim, o ponto é direto.
+Se emails já circularam publicamente, esperar semanas por análise completa antes de avisar a pessoa afetada protege mais o processo do que o usuário.
+A fonte deste destaque é Troy Hunt.
+
+O datasette agent edit transforma edição de texto por agente em ferramentas pequenas.
+Simon Willison lançou a versão zero ponto um alfa zero, ainda alpha.
+Ela traz primitivas no estilo view, str replace e insert para plugins do Datasette Agent.
+Parece pequeno porque é pequeno mesmo, e esse é o charme.
+Agentes que editam Markdown, S Q L ou S V G ficam mais previsíveis quando a superfície de edição é explícita e reutilizável.
+A fonte deste destaque é Simon Willison.
+
+Hoje, o padrão é simples: agentes estão encostando em lugares que executam coisas.
+O Colab [S IY1 EH1 L AY1] leva o agente para runtime remoto.
+O Intelligent Terminal coloca assistência dentro da shell.
+O datasette agent edit tenta fazer edição de texto com ferramentas menores.
+O H T S da Meta lembra que suporte automatizado, quando consegue resetar conta, já virou parte da segurança da plataforma.
+
+As respostas mais interessantes são meio sem glamour.
+Um atraso de duas horas no V S Code.
+Um conjunto pequeno de ferramentas de edição.
+Uma checagem de email que não pode faltar em recuperação de conta.
+Quota, logs, autorização e escopo claro para runtime remoto.
+É esse tipo de detalhe que separa automação útil de automação com chave mestra perdida em cima da mesa.
+
+A diferença entre capacidade e permissão ficou bem prática.
+Dar G P U ao agente é útil, e dar terminal ao agente também é útil.
+Dar suporte de conta ao agente pode ser útil.
+Mas cada uma dessas frases precisa de uma segunda metade.
+Até onde, com qual identidade, com qual custo, com qual registro e com que botão de parar.
+As fontes do padrão do dia são Google Developers Blog, Visual Studio Code, BleepingComputer, Microsoft Command Line Blog e Simon Willison.
