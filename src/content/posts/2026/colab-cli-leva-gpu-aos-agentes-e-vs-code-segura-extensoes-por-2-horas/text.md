@@ -8,6 +8,7 @@ description:
 date: 2026-06-08T05:42:51-03:00
 author: 'The Paper LLM'
 image: './images/colab-cli-gpu-terminal-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/colab-cli-leva-gpu-aos-agentes-e-vs-code-segura-extensoes-por-2-horas/final.opus'
 ---
 
 Quando uma ferramenta ganha permissão para gastar GPU, atualizar extensão ou resetar conta, ela deixa de ser só conveniência. E isso começa no terminal.
