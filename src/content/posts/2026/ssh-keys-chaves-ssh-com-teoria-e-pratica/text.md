@@ -410,7 +410,7 @@ Por isso existe o arquivo de configuração do cliente:
 Esse arquivo não é do servidor. Ele fica na máquina que inicia a conexão. Nele
 eu posso criar um apelido para o host:
 
-```sshconfig
+```ssh_config
 Host two
     HostName 10.0.0.3
     User otavio
@@ -450,7 +450,7 @@ host `two`, use `id_two` e pronto.
 Do outro lado, no `two`, eu poderia criar uma configuração parecida para entrar
 no `one`:
 
-```sshconfig
+```ssh_config
 Host one
     HostName 10.0.0.2
     User otavio

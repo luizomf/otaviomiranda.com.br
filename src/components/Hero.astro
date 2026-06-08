@@ -86,27 +86,31 @@ import PillLink from './PillLink.astro';
   }
 
   .hero-title {
+    --hero-title-width: 14ch;
+
+    display: inline-block;
+    box-sizing: content-box;
     margin: 0 auto;
     margin-top: 1rem;
     margin-bottom: 2rem;
-    font-size: var(--font-size-display-fluid);
+    font-size: var(--font-size-hero-title);
     white-space: nowrap;
     border-right: 1rem solid currentcolor;
     overflow: hidden;
     animation:
-      typewritter 20s steps(20, end) alternate infinite,
+      typewritter 20s steps(14, end) alternate infinite,
       blinking-caret 0.75s step-end infinite;
   }
 
   .hero-line {
-    margin: 1.5rem 0;
-    line-height: 1.5;
+    margin: 0;
+    line-height: 1.3;
     font-size: var(--font-size-text-500);
     color: var(--color-text-subtle-on-dark);
   }
 
   .hero-links {
-    margin: clamp(var(--space-900), 4vw, var(--space-1500)) auto;
+    margin: clamp(var(--space-1200), 4vw, var(--space-1500)) auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -126,7 +130,7 @@ import PillLink from './PillLink.astro';
     }
 
     7% {
-      width: 100%;
+      width: var(--hero-title-width);
     }
   }
 

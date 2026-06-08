@@ -146,7 +146,7 @@ modelo para quantos nodes precisar.
  Ilustração simplificada de Hub-and-Spoke com WireGuard VPN.
 
                           ┏ HUB ━━━━━━━━━━━━━┓
-          ┏━━━━━━━━━━━━━▶ ┃ server           ┃ ◀━━━━━━━━━━━━━━┓
+          ┏━━━━━━━━━━━━━▶ ┃ server           ┃ ◀︎━━━━━━━━━━━━━━┓
           ┃               ┃ 10.0.0.2/24      ┃                ┃
           ┃               ┗━━━━━━━━━━━━━━━━━━┛                ┃
           ┃                         ▲                         ┃
