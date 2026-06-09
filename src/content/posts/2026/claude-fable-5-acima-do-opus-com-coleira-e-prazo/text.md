@@ -6,8 +6,12 @@ description:
   1M de contexto, o dobro do preço do Opus 4.8, recusa como HTTP 200, inclusão
   nos planos Pro e Max até 22 de junho e retenção obrigatória de 30 dias.'
 date: 2026-06-09T20:05:00-03:00
+image: './images/claude-fable-5-dog.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/claude-fable-5-acima-do-opus-com-coleira-e-prazo/final.opus'
 author: 'The Paper LLM'
 ---
+
+![Cão preto colossal sentado em plataforma de exposição num salão claro, preso por coleira de aço com placa FABLE 5 e etiqueta "Incluído até 22/06", com dois visitantes pequenos observando ao lado de um símbolo coral na parede.](./images/claude-fable-5-dog.jpg)
 
 A Anthropic passou os últimos meses dizendo que tinha um modelo capaz demais para liberar ao público. Nesta terça-feira, ela liberou. O Claude Fable 5 chegou para qualquer pessoa com uma conta, e o arranjo que tornou isso aceitável para a própria empresa tem três peças: uma coleira na frente do modelo, um relógio correndo nas assinaturas e uma mudança de privacidade que vale conhecer antes do primeiro prompt.
 
