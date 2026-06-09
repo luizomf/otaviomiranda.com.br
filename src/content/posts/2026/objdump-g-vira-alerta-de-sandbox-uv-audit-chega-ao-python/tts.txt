@@ -1,0 +1,201 @@
+Objdump com menos g vira alerta de sandbox; U V audit chega ao Python.
+
+A notícia mais incômoda do dia é simples: o código que você não roda diretamente ainda passa por ferramentas que rodam.
+Analisador de binário, gerenciador de pacote e agente no shell também entram na conta de confiança.
+
+O primeiro alerta vem do objdump com a opção menos g, em builds multi-alvo do Binutils.
+A Calif publicou, em 8 de junho, o O O B dump, uma falha de execução arbitrária de código nesse caminho.
+O caso passa pelo GNU Binutils, mais exatamente pela biblioteca B F D.
+O problema aparece quando ela processa relocações de um objeto F R trinta criado para explorar uma checagem de limites ausente.
+
+Na rotina de desenvolvimento, objdump parece só uma ferramenta de inspeção, mas faz trabalho pesado de parser.
+Ele lê formatos complexos, interpreta metadados, passa por backends de arquitetura e pode receber arquivo hostil.
+Isso pode acontecer em C I, S D K, laboratório de malware, engenharia reversa ou pipeline que analisa binários de terceiros.
+
+A exposição realista pesa mais em builds customizados, toolchains de S D K, imagens de C I e compilações com suporte amplo de alvo.
+Um exemplo é compilar com enable targets igual a all, quando a ferramenta passa a carregar muito mais backend do que o necessário.
+Em instalações comuns, o backend F R trinta pode nem estar presente.
+
+Mesmo assim, a lição operacional é pequena e boa: atualize o Binutils nas imagens que analisam artefatos.
+Também vale evitar suporte a todos os alvos quando você não precisa disso.
+E análise de binário não confiável deve rodar dentro de isolamento.
+Contêiner já ajuda; seccomp, AppArmor, Bubblewrap ou uma V M ajudam mais quando o arquivo veio de fora.
+
+A correção entrou rápido pelo processo público do Binutils.
+O resto é hábito de engenharia: ferramenta que parseia arquivo hostil merece a mesma desconfiança de P D F, ZIP e imagem esquisita.
+As fontes desse bloco são a Calif e a documentação do GNU Binutils.
+
+A segunda notícia é que o U V ganhou auditoria de vulnerabilidade e um check opcional de malware.
+A Astral colocou duas proteções novas no U V, ainda em preview.
+A primeira é o comando U V audit, que varre dependências em busca de vulnerabilidades conhecidas e status adversos de projeto.
+A segunda é um check leve de malware em operações como U V sync, ativado por uma variável de ambiente.
+Essa variável é a U V malware check, com valor um.
+
+Isso muda o lugar da defesa dentro do fluxo de instalação.
+Em vez de tratar auditoria como etapa separada que alguém lembra de rodar no C I, o gerenciador de pacote avisa mais cedo.
+Ele avisa mais perto do momento em que a dependência entra no ambiente.
+Para Python, isso conversa com o susto recente de pacotes que executam coisa no install, no startup hook ou no notebook.
+
+A própria Astral deixa o freio puxado.
+As duas features são instáveis, dependem da atualização dos avisos públicos e não pegam uma publicação maliciosa nos primeiros minutos.
+Se ninguém ainda registrou o problema, o alerta não tem de onde sair.
+É por isso que cooldown de dependência e revisão de lockfile continuam fazendo sentido.
+
+Para projeto real, eu testaria em ambiente pequeno.
+Rode U V audit, veja o ruído, entenda o que quebra e avalie a variável de malware onde o custo de consulta compensa.
+A proteção funciona como trava adicional no caminho em que pacote vira código executado.
+Ela ainda está longe de resolver cadeia de suprimentos sozinha.
+A fonte desse bloco é a Astral.
+
+A terceira história é a A W S mostrando agente de código como infraestrutura isolada.
+Ontem falamos do Colab C L I levando runtime remoto para agentes.
+A publicação da A W S vai por outro caminho: em vez de focar G P U ou T P U, ela descreve onde o agente mora enquanto trabalha.
+
+O artigo sobre Amazon Bedrock AgentCore Runtime parte de uma dor conhecida.
+Quando um agente roda no seu laptop, ele costuma enxergar seu shell, seus arquivos, suas chaves S S H e seus tokens.
+Ele também pode enxergar sua V P N e a rede que você deixou aberta.
+Se você abre várias sessões, ainda pode ganhar colisão de porta, branch, banco local e workspace.
+
+A arquitetura mostrada pela A W S coloca cada sessão em uma micro V M Linux isolada.
+Ela tem filesystem persistente, shell via P T Y, estado retomável e comandos determinísticos.
+Em volta disso entram Identity, Gateway com ferramentas via Model Context Protocol e observabilidade no CloudWatch.
+A lista de exemplos cita agentes de terminal como Claude Code, Codex, Kiro, OpenCode, Gemini C L I e Cursor C L I.
+
+Mesmo para quem não pretende usar A W S, o desenho serve como checklist.
+Onde fica o filesystem do agente?
+Qual identidade ele usa para chamadas de [EY1 P IY1 AY1]?
+O token está dentro do prompt, do ambiente ou em um cofre externo?
+O log de ferramenta existe separado da resposta bonita do modelo?
+Dá para fechar o laptop e retomar sem transformar tudo em uma sessão S S H eterna com privilégio demais?
+
+O freio aqui é simples: isso é produto gerenciado, com custo, lock-in e promessas de segurança que precisam de avaliação própria.
+Micro V M não resolve prompt injection, pacote malicioso nem repositório comprometido por mágica.
+Ela só deixa uma pergunta antiga mais explícita: se o agente vai executar, onde ele pode quebrar coisas?
+As fontes desse bloco são o A W S Machine Learning Blog e a documentação do AgentCore Runtime.
+
+A Apple AFM três coloca inteligência artificial local na conta de NAND, D RAM e roteamento.
+A Apple apresentou a terceira geração dos Apple Foundation Models em 8 de junho.
+O detalhe que vale olhar com calma é o jeito como a empresa está contornando uma restrição chata de dispositivo local: memória.
+
+O AFM três Core Advanced é descrito como um modelo esparso de vinte bilhões de parâmetros para uso no dispositivo.
+Segundo a Apple, ele não ativa tudo de uma vez.
+Dependendo do pedido, usa algo na faixa de um a quatro bilhões de parâmetros ativos.
+Os pesos completos ficam em NAND, e blocos especialistas vão para a D RAM quando precisam.
+
+Isso explica melhor a briga de local versus nuvem.
+Rodar inteligência artificial no telefone ou no notebook envolve largura de banda, latência, energia e memória disponível.
+Também envolve dados que talvez precisem ficar no aparelho.
+A saída da Apple mistura roteamento, ativação esparsa, integração com hardware e modelos maiores em Private Cloud Compute quando necessário.
+
+Simon Willison destacou a parte que interessa a devs com um pouco de ceticismo saudável.
+Depois das promessas de Apple Intelligence em 2024, convém esperar o comportamento real nas betas.
+Ainda assim, Core A I, extensões PyTorch da Apple e modelos com visão de tela são peças que podem virar [EY1 P IY1 AY1] útil.
+
+Arquiteturalmente, AFM três é um sinal forte de que inteligência artificial local depende de movimentar menos peso.
+Também depende de escolher melhor o que ativar.
+Como produto para usuário final, ainda falta ver no aparelho, com app real, latência real e erro real.
+As fontes desse bloco são Apple Machine Learning Research e Simon Willison.
+
+O Python três ponto quinze congelou recursos e entrou na fase boa para quebrar em teste.
+A primeira beta saiu em 7 de maio e marcou o congelamento de recursos.
+A própria página do Python ponto org trata a versão como preview.
+Então o recado para mantenedores é outro: o conjunto de mudanças já está maduro o bastante para começar a bater nos seus testes.
+
+Entre os itens listados aparecem lazy imports, frozen dict, sentinel, encoding U T F oito como padrão e profiler por amostragem.
+Também aparecem melhorias no J I T e trabalho de A B I estável para builds free threaded.
+É uma pilha de ajustes que encostam em startup, extensão C, empacotamento, observabilidade e compatibilidade.
+
+O resumo de junho da Real Python ainda puxa contexto de ecossistema.
+Ele cita httpx dois, discussões em torno de Pydantic e relatos de bugs encontrados com ajuda de inteligência artificial.
+Esses relatos envolvem extensões C do Python e também o Firefox.
+Esses números são contexto citado pela Real Python, não auditoria nossa.
+Eles servem mais para mostrar onde a comunidade está gastando atenção do que para declarar uma nova era da qualidade automática.
+
+Para times, o caminho é simples e um pouco sem glamour: rode a beta fora de produção.
+Teste wheels, extensões, encoding, profiling, ferramentas de lint e dependências que mexem com import.
+Se algo quebrar agora, ainda dá para reportar antes do release candidate endurecer mais o comportamento.
+As fontes desse bloco são Python ponto org, Real Python e a documentação do Python três ponto quinze.
+
+Agora, os destaques rápidos de hoje.
+
+Mellum dois entrou na fila dos modelos locais para testar com calma.
+A JetBrains abriu o Mellum dois como modelo M O E de doze bilhões de parâmetros, sob Apache dois ponto zero.
+Ele tem cerca de dois vírgula cinco bilhões de parâmetros ativos por token.
+O foco declarado está em roteamento, R A G, subagentes e uso privado ou local.
+Um teste no Reddit falou em cento e onze tokens por segundo numa R X sete mil e novecentos X T com llama ponto C P P e Vulkan.
+Mas o próprio relato é não científico.
+Se o seu harness precisa de modelo auxiliar rápido, vale medir nos seus prompts.
+As fontes são JetBrains, arXiv e a comunidade r barra LocalLLaMA no Reddit.
+
+Shai-Hulud voltou em pacotes científicos do P Y P I, agora com gancho de startup.
+No dia 4, falamos do worm entrando pelo build nativo no N P M.
+A novidade agora é a onda reportada em dezenove pacotes científicos do P Y P I, com trinta e sete releases maliciosas.
+O caso envolve arquivo ponto P T H e payload JavaScript com Bun, que pode rodar quando o Python inicia.
+Para quem instalou pacote afetado, o caminho é procurar arquivo ponto P T H estranho e reconstruir ambiente limpo.
+Também é hora de girar segredos de Git Hub, N P M, P Y P I, cloud e Kubernetes.
+As fontes são BleepingComputer, Socket e Dark Reading.
+
+Gogs zero ponto quatorze ponto três corrigiu uma R C E autenticada no caminho de rebase.
+A análise da Rapid7 descreve injeção de argumento no git rebase usado no fluxo de pull request.
+O caminho afetado é o de rebase before merging.
+Gogs zero ponto quatorze ponto dois e zero ponto quinze ponto zero dev foram confirmados como afetados.
+A correção saiu em zero ponto quatorze ponto três no dia 7.
+Se a instância permite cadastro e criação de repositório com pouca barreira, a palavra autenticada perde parte do conforto.
+Atualize, restrinja registro e criação de repositório, e desative rebase merge se precisar ganhar tempo.
+As fontes são Rapid7, Rapid7 Vulnerability Database e BleepingComputer.
+
+O C V E 2026, vinte e três um um um, no Linux é local, mas local pode ser suficiente.
+A Ubuntu descreve a falha em N F tables como um use after free.
+Ela permite que um usuário local sem privilégio chegue a root, e a cobertura de 8 de junho destaca exploração pública.
+O enquadramento correto é pós-comprometimento.
+Pense em container host, C I runner e V P S com shell exposto demais.
+Patch, reboot e revisão de user namespaces continuam sendo trabalho de base.
+As fontes são Ubuntu Security e The Hacker News.
+
+O boletim S B vinte e seis, cento e cinquenta e nove, da CISA pede triagem seletiva.
+No meio do barulho semanal aparecem itens de stack de desenvolvimento.
+A lista inclui Apache MINA, S S H D git do Apache MINA S S H D, Solr BasicAuth e redirect no AsyncHttpClient.
+Também aparece uma falha de escrita de arquivo no A W S Kiro I D E antes da versão zero ponto onze.
+A leitura útil é procurar o que existe no seu inventário e ir para o aviso do fornecedor.
+O boletim inteiro não precisa virar tarefa cega.
+A fonte desse destaque é a CISA.
+
+No PostgreSQL, DateStyle mistura saída bonita com entrada perigosa.
+Christophe Pettus lembrou que DateStyle controla o formato de saída e também a ordem usada para interpretar data ambígua.
+Isso inclui ordens como M D Y, D M Y e Y M D.
+Deixe a saída em ISO, envie data ISO ou não ambígua pela aplicação, e faça formatação com to char na borda de apresentação.
+Uma data como zero um, zero dois, 2026, não merece fé religiosa.
+A fonte desse destaque é The Build.
+
+O Fedora quarenta e quatro ganhou imagens RISC V comunitárias com kernel Generic e Omni.
+A cobertura da Phoronix fala em imagens para container, server e cloud.
+O caminho Generic fica mais perto de um kernel Linux seis ponto dezenove upstream.
+Já o Omni tenta cobrir mais placas com enablement que ainda não subiu para o upstream.
+É bom para experimentar Vision Five dois, Milk V, Orange Pi e companhia.
+Mas ainda é imagem alternativa comunitária.
+A fonte desse destaque é a Phoronix.
+
+Bambuddy transforma impressora Bambu Lab em caso de controle local.
+O projeto se apresenta como um command center self hosted para Bambu Lab.
+Ele tem Docker, Proxy Mode, acesso remoto consciente de Tailscale e fluxo sem Bambu Cloud em alguns modos.
+Mesmo para quem não imprime nada em três D, o padrão é familiar.
+A comunidade tenta recuperar um plano de controle local.
+Se você usa, audite como qualquer serviço que consegue comandar hardware na sua rede.
+As fontes são Git Hub, Bambuddy e Tailscale.
+
+No acompanhamento de tendências, a conversa sobre agente de código está saindo da caixa de prompt.
+Ela está entrando no ambiente ao redor da caixa.
+Command Center se apresenta como uma ferramenta para refatoração, walkthrough e revisão guiada de diffs grandes.
+A thread do LocalLLaMA mostra gente comparando Pi, OpenCode, Hermes, Claude Code, loops de Bash e sistemas próprios.
+As comparações passam por permissão, provedor, latência e verificação.
+
+O AgentCore reforça essa mesma direção por um lado mais infra.
+Quando agente pode editar arquivo, rodar comando e manter sessão, o harness vira arquitetura.
+Isso significa worktree separado, diff revisável, ferramenta limitada, log de ação, identidade com escopo e um jeito decente de desfazer.
+
+As fontes ainda têm muito produto e relato anedótico.
+Nenhuma delas prova que um harness específico é superior.
+Mas o problema está bem desenhado para quem lidera time.
+Antes de autorizar uma fila de agentes mexendo no repositório, decida onde eles trabalham.
+Também decida como o humano revisa e o que fica registrado quando o modelo acerta ou erra.
+As fontes desse acompanhamento são Command Center, r barra LocalLLaMA no Reddit e A W S Machine Learning Blog.
