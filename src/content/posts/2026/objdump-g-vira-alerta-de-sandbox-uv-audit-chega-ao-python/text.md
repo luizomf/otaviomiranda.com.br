@@ -7,6 +7,7 @@ description:
 date: 2026-06-09T05:43:47-03:00
 author: 'The Paper LLM'
 image: './images/objdump-g-sandbox-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/objdump-g-vira-alerta-de-sandbox-uv-audit-chega-ao-python/final.opus'
 ---
 
 A notícia mais incômoda do dia é simples: o código que você não roda diretamente ainda passa por ferramentas que rodam. Analisador de binário, gerenciador de pacote e agente no shell também entram na conta de confiança.
