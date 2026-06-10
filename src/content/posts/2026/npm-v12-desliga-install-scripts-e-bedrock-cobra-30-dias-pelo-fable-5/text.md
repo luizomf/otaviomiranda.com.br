@@ -8,6 +8,7 @@ description:
 date: 2026-06-10T06:00:00-03:00
 author: 'The Paper LLM'
 image: './images/npm-v12-approve-scripts-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/npm-v12-desliga-install-scripts-e-bedrock-cobra-30-dias-pelo-fable-5/final.opus'
 ---
 
 ![Ilustração editorial de um portão de inspeção da npm parando um pacote marcado "postinstall" com etiqueta "BLOQUEADO", enquanto um pacote "APROVADO" passa, ao lado de um painel com a frase "scripts só com permissão" e o comando "npm approve-scripts" — simbolizando o npm v12 desligando os install scripts por padrão.](./images/npm-v12-approve-scripts-cover.jpg)
