@@ -1,0 +1,154 @@
+O npm versão doze vai parar de rodar seus install scripts, e o Bedrock cobra trinta dias pelo Fable cinco.
+A pauta de hoje gira quase toda em torno de confiança.
+Confiança em quem roda script na sua máquina, em quem guarda seus dados, e em quem fechou, ou não, a falha que prometeu fechar.
+A mudança que mais gente vai sentir no terminal abre a lista.
+
+Vamos começar pelo npm versão doze, que vai desligar os install scripts e bloquear dependências remotas por padrão.
+Quando você instala um pacote, ele pode rodar comandos seus na sua máquina antes mesmo de você importar uma linha.
+Isso é o postinstall e seus parentes, e por anos foi o atalho favorito de quem distribui código malicioso por dependência.
+O npm decidiu virar esse padrão de cabeça para baixo.
+
+Pelo changelog oficial do "Git Hub", o npm versão doze vai parar de executar os scripts de preinstall, install e postinstall por padrão.
+Isso inclui os scripts equivalentes vindos de dependências do tipo git, file e link.
+O node gyp, que recompila partes nativas na hora da instalação, também deixa de rodar sozinho.
+E dependências apontando para um repositório git ou para uma URL remota passam a ser bloqueadas.
+Para liberar, você precisa usar as opções allow git ou allow remote na hora de instalar.
+
+Na prática, a confiança deixa de ser automática e passa a ser uma lista que você monta.
+Atualize agora para o npm onze ponto dezesseis ponto zero, ou mais novo, porque essa versão já mostra avisos do que vai mudar.
+Depois rode o comando npm approve scripts para construir um allowlist no seu package ponto JSON.
+Esse allowlist guarda os pacotes que você realmente quer deixar rodar script.
+Se o seu projeto depende de compilação nativa, vale fazer isso com calma antes do release, estimado para julho de 2026.
+A mudança foi anunciada lá em fevereiro, mas é agora que ela está perto o suficiente para mexer com o build de quem não viu o aviso.
+
+Quanto vai quebrar depende inteiramente de quanto a sua árvore de dependências usa script de instalação.
+O que dá para dizer é que descobrir isso em julho, no meio de um deploy, é pior do que descobrir essa semana.
+Agora dá tempo de montar o allowlist sem pressa.
+A fonte deste bloco é o changelog do "Git Hub".
+
+Agora, o AWS Bedrock passa a exigir trinta dias de retenção para o Claude Fable cinco.
+Ontem a gente falou do lançamento do Claude Fable cinco, o modelo da Anthropic que chegou acima do Opus.
+Ele veio com classificadores de segurança na frente e a já comentada retenção obrigatória de trinta dias.
+A novidade de hoje é como isso aparece para quem rodava esses modelos dentro da própria conta de nuvem, achando que os dados não saíam dali.
+
+Times de saúde, governo e setores regulados escolheram o Amazon Bedrock justamente por uma garantia: o zero data retention.
+É o acordo em que o provedor se compromete a não guardar nada do que entra e sai do modelo.
+Com o Fable cinco, e o irmão sem travas, o Mythos cinco, essa garantia não vale mais.
+O blog da própria AWS e a central de ajuda da Anthropic confirmam que esses modelos retêm prompts e respostas por até trinta dias.
+Existe ainda a opção de compartilhar esse tráfego com a Anthropic para detecção de abuso e possível revisão humana.
+A política entrou em vigor no dia nove.
+
+O ponto que muda a decisão de quem cuida de compliance é a comparação direta.
+O Fable cinco não roda sob zero data retention, mas o Opus quatro ponto oito, o Sonnet quatro ponto seis e o Haiku quatro ponto cinco ainda rodam.
+O modelo mais novo vem com uma regra de dados diferente da dos outros.
+E isso não é exclusividade do Bedrock: o mesmo arranjo aparece no acesso via Google Cloud e via Microsoft Foundry.
+
+Isso não é vazamento nem coleta escondida: é uma política de retenção declarada, com finalidade de segurança.
+Os dados são apagados depois de trinta dias, a não ser que sejam sinalizados para investigação.
+Mas, para quem tem requisito contratual duro de não retenção, a escolha ficou concreta.
+Ou você aceita os trinta dias do Fable cinco, ou fica nos modelos anteriores sob zero retention, ou olha para algo self-hosted.
+Não dá para simplesmente trocar o identificador do modelo e seguir como se nada tivesse mudado no contrato.
+As fontes são a AWS, a Anthropic e a Cybernews.
+
+A Microsoft soltou um Patch Tuesday recorde, mas um zero-day do Defender continua aberto.
+A Microsoft fechou junho com um dos maiores Patch Tuesday de que se tem notícia.
+Pela contagem do SANS Internet Storm Center, foram duzentas e quatro correções, trinta e oito delas críticas, com três falhas que já eram conhecidas antes do patch.
+Os números variam um pouco conforme a fonte e o método de contagem, então o seguro é tratar como mais de duzentas.
+Entre os itens pesados estão uma falha crítica de execução remota no http ponto sys, e uma bomba de compressão no HTTP dois que pode derrubar serviço.
+
+A parte mais incomum é a origem de três zero-days.
+Um pesquisador que se identifica como Nightmare Eclipse divulgou de propósito as falhas batizadas de GreenPlasma, MiniPlasma e YellowKey.
+Foi um protesto contra a forma como o centro de resposta da Microsoft, o M S R C, lidou com a divulgação.
+GreenPlasma e MiniPlasma são escalada de privilégio que entrega SYSTEM, o nível mais alto no Windows.
+A YellowKey mexe no ambiente de recuperação do Windows e permite contornar a criptografia do BitLocker.
+Mas ela exige acesso físico à máquina, o que reduz bastante o alcance no mundo real.
+Essas três já foram corrigidas neste Patch Tuesday.
+
+O que ainda não fechou é o que merece atenção.
+Existe um zero-day no Microsoft Defender, apelidado de RoguePlanet, que é uma race condition.
+É uma corrida entre dois eventos que, quando o atacante ganha, entrega SYSTEM mesmo em Windows dez e onze completamente atualizados.
+Tem prova de conceito pública, e a empresa de segurança ThreatLocker reproduziu o ataque.
+Por ser race condition, ele não funciona toda vez. É meio ora pega, ora não.
+Aplicar o Patch Tuesday segue sendo a primeira coisa a fazer hoje.
+Só não confunda atualizei tudo com estou seguro, porque pelo menos essa porta do Defender continua aberta enquanto não sai correção.
+As fontes são o SANS I S C e a Bleeping Computer.
+
+Seis falhas no protobuf ponto J S abrem caminho para execução de código no Node ponto J S.
+Tem uma biblioteca que muita gente usa sem pensar para empacotar e desempacotar dados entre serviços.
+É o protobuf ponto J S, a implementação em JavaScript do Protocol Buffers, aquele formato de serialização do Google.
+A pesquisa da Cyera, batizada de Proto6, mostrou seis falhas nela, e a mais grave transforma um esquema de dados em código que roda.
+
+O mecanismo é mais simples de entender do que parece.
+A biblioteca tratava a definição do schema e seus metadados como coisa confiável.
+Por causa de uma falha do tipo prototype pollution, dava para injetar uma string que a biblioteca acabava compilando como função.
+Ou seja: dado que deveria só descrever a forma da mensagem vira JavaScript executado dentro do seu processo.
+Essa é a C V E 2026, quarenta e quatro dois nove um, a de execução remota de código.
+Aqui vale uma correção que estava bagunçada por aí.
+Houve outro C V E, o 2026 quarenta e quatro dois oito nove, que circulou como se fosse a R C E.
+Na verdade ele é uma falha de negação de serviço por recursão sem limite.
+
+Quem precisa se preocupar são os serviços Node que decodificam protobuf ou geram código a partir de schemas.
+E isso pega mais gente do que parece, porque o protobuf ponto J S aparece dentro de bibliotecas do Google Cloud, de projetos como o Baileys e de pipelines de C I barra C D.
+A correção é direta: atualize a biblioteca para a versão sete ponto cinco ponto seis ou oito ponto zero ponto dois.
+E atualize a ferramenta de linha de comando para a versão um ponto dois ponto um ou dois ponto zero ponto dois.
+As versões afetadas são as sete ponto cinco ponto cinco ou anteriores, e as oito ponto zero ponto zero e oito ponto zero ponto um.
+Se a sua aplicação aceita schema ou payload vindo de fora, trate isso como entrada não confiável.
+É o hábito que essa classe de falha sempre cobra de volta.
+As fontes são a Cyera e a The Hacker News.
+
+Agora, os destaques rápidos para hoje.
+O Gemma quatro doze B para de ouvir quando o prompt de sistema cresce demais.
+O novo modelo unificado da Google ouve, vê e lê na mesma passada, e roda num laptop de dezesseis gigabytes.
+Mas desenvolvedores relataram um limite: quando o prompt de sistema fica grande, na faixa de vinte e um mil tokens, ele deixa de prestar atenção no áudio.
+Ele responde como se não houvesse som.
+O comportamento foi reproduzido em v L L M, llama ponto c p p e LiteRT-LM, o que dá credibilidade, mas ainda é relato de comunidade, sem confirmação oficial.
+O contorno que funciona é usar o modelo menor, o E quatro B, como front-end de áudio antes de passar o texto para o doze B.
+As fontes são o r barra LocalLLaMA e o Google DeepMind.
+
+O compilador do React ganhou um porte oficial em Rust dentro do repositório principal.
+A Meta mergeou no repo do React a versão em Rust do React Compiler, que espelha a arquitetura do compilador em TypeScript.
+Ela traz grafo de fluxo de controle e S S A, e expõe uma API de árvore de sintaxe no estilo do Babel para ferramentas como SWC e OXC consumirem direto.
+É a tendência de reescrever ferramenta de frontend em linguagem de sistema chegando num lugar central.
+O ganho prático no dia a dia ainda depende de maturidade e adoção, então número de performance fica para depois.
+A fonte é o React no "Git Hub".
+
+O Chrome corrigiu um zero-day do V8 que já estava sendo explorado.
+O identificador é o C V E 2026, onze seis quatro cinco, um acesso a memória fora dos limites no motor V8, que executa JavaScript no navegador.
+A Google confirma exploração ativa no mundo real.
+A correção saiu na versão cento e quarenta e nove ponto zero ponto sete oito dois sete ponto um zero três, dentro de um boletim com setenta e quatro falhas.
+Atualizar o Chrome agora é a ação simples e certa.
+A fonte deste bloco é a The Hacker News.
+
+O OpenSSL fechou um use-after-free de alta severidade com risco de R C E.
+O identificador é o C V E 2026, quarenta e cinco quatro quatro sete, uma falha de uso de memória depois de liberada no OpenSSL.
+O OpenSSL é a biblioteca que sustenta T L S em quase tudo que fala HTTPS, e a falha pode levar a execução remota de código.
+Se você mantém servidores ou bibliotecas que dependem de OpenSSL, vale planejar a atualização para a versão corrigida indicada no advisory oficial.
+A fonte é o próprio OpenSSL.
+
+O worm Miasma trocou de tática e agora dispara ao abrir o repositório no agente de IA.
+No dia oito, a gente comentou esse mesmo verme de supply chain entrando pela cadeia de pacotes.
+A novidade é mais sutil e mais incômoda.
+A conta do gpt-pilot, uma ferramenta de desenvolvimento com IA de mais de trinta e três mil estrelas, foi comprometida.
+O payload agora vem em arquivos de configuração que disparam quando você abre o repositório no Claude Code, no Cursor, no Gemini C L I ou no VS Code.
+Tudo isso antes de você rodar qualquer código.
+O alvo são credenciais de AWS, npm, "Git Hub", Kubernetes, Vault e S S H.
+O "Git Hub" desativou setenta e três repositórios da Microsoft no Azure por causa disso.
+O detalhe que chega a ser engraçado é o que barrou o commit malicioso no C I.
+Foi o ruff, um linter de Python, que reclamou porque o arquivo não batia com o estilo do projeto.
+As fontes são a StepSecurity, em dois relatos sobre o gpt-pilot e os setenta e três repositórios.
+
+Para fechar, o acompanhamento de tendências do dia.
+Tem um fio ligando boa parte da pauta de hoje, e ele passa pela pergunta de quando vale rodar modelo local e quando ainda compensa pagar API.
+Na comunidade do r barra LocalLLaMA, a leitura que foi se firmando é que modelos locais de porte médio, como o Qwen e o próprio Gemma quatro, têm um nicho claro.
+Eles se saem bem em tarefa curta e estruturada.
+Falo de extrair informação, classificar, chamar ferramenta.
+Onde eles ainda derrapam é no agente de longo horizonte, aquele que navega uma base de código grande e precisa se autocorrigir em vários passos seguidos.
+Esse é o terreno onde os modelos de fronteira fechados continuam na frente.
+
+Isso conversa com dois itens do dia.
+O teto de atenção do Gemma quatro doze B mostra um limite concreto de rodar tudo em uma só passada local.
+E a retenção de trinta dias do Fable cinco mostra o custo do outro lado: o modelo de ponta vem com regra de dados que nem todo mundo pode aceitar.
+É uma síntese de conversa de quem está testando isso na mão, não veredito de mercado.
+Mas a forma híbrida aparece sozinha quando você junta as peças.
+Modelo local para subtarefa de alto volume, e modelo pago para a lógica pesada que ele ainda não segura.
+A fonte é o r barra LocalLLaMA.
