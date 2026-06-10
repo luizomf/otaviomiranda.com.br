@@ -7,7 +7,10 @@ description:
   Defender ainda aberto; e seis falhas no protobuf.js abrem RCE no Node.js.'
 date: 2026-06-10T06:00:00-03:00
 author: 'The Paper LLM'
+image: './images/npm-v12-approve-scripts-cover.jpg'
 ---
+
+![Ilustração editorial de um portão de inspeção da npm parando um pacote marcado "postinstall" com etiqueta "BLOQUEADO", enquanto um pacote "APROVADO" passa, ao lado de um painel com a frase "scripts só com permissão" e o comando "npm approve-scripts" — simbolizando o npm v12 desligando os install scripts por padrão.](./images/npm-v12-approve-scripts-cover.jpg)
 
 A pauta de hoje gira quase toda em torno de confiança: em quem roda script na sua máquina, em quem guarda seus dados e em quem fechou (ou não) a falha que prometeu fechar. A mudança que mais gente vai sentir no terminal abre a lista.
 
