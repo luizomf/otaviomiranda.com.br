@@ -1,0 +1,182 @@
+A W S põe agentes no fluxo, e Ivanti Sentry entra em modo incidente.
+
+Quando um agente começa a mexer em base real, o trabalho muda de lugar.
+Fica menos digitação, e mais preparação, revisão e evidência.
+O dia também trouxe o lembrete menos charmoso.
+Appliance exposto e plataforma de I A aberta na internet ainda cobram patch rápido.
+
+A W S diz que agente só escala quando o time muda o jeito de trabalhar.
+
+Se um agente recebe ticket solto, README velho e teste que só roda no notebook de alguém, ele entrega volume.
+Depois alguém paga esse volume revisando.
+
+Em dez de junho, a A W S publicou um case sobre o que ela chama de "AI-native development".
+São equipes que reorganizam o trabalho em volta de agentes.
+Elas não tratam I A como um autocomplete mais esperto.
+A parte concreta aparece nos hábitos descritos pelo texto.
+Contexto rico, especificação estruturada, tarefas menores e agentes em paralelo entram no fluxo.
+Também entram revisão assíncrona e testes chegando mais cedo.
+
+Os números são fortes, mas precisam ficar com crachá de origem.
+Segundo a A W S, houve ganho mediano de quatro vírgula cinco vezes em um experimento.
+Em alguns casos, o ganho passou de dez vezes, medido por velocidade de deploy normalizada.
+Ela também conta que seis engenheiros seniores reconstruíram o motor de inferência do Amazon Bedrock.
+O projeto levou setenta e seis dias.
+Antes, ele tinha sido estimado em trinta desenvolvedores por doze a dezoito meses.
+
+Esse é um case oficial de fornecedor, então vale ler como a narrativa que a A W S quer vender para engenharia.
+Promessa automática para qualquer repositório que ganhou um prompt novo já é outra história.
+
+Com esse filtro colocado, a checklist continua boa.
+Código gerado não resolve contexto ruim.
+Repo com teste local decente, contrato de [EY1 P IY1 AY1] claro, backlog fatiado e decisão escrita ajuda bastante.
+Esse ambiente dá menos espaço para o modelo inventar o que faltou no ticket.
+O humano também muda de função.
+Sai um pouco do papel de digitador e entra mais no papel de editor do fluxo.
+É ali que ele segura intenção, impacto e qualidade.
+
+A fonte deste bloco é o A W S Machine Learning Blog.
+
+Ivanti Sentry corrigiu a C V E 2026, dez cinco dois zero, mas instância exposta já pede investigação.
+
+Segurança de borda tem uma característica ingrata.
+Quando o patch sai, o atacante também ganha um mapa do que procurar.
+Com o Ivanti Sentry, antigo MobileIron Sentry, a janela parece ter ficado curta.
+
+A C V E 2026, dez cinco dois zero, é uma injeção de comando no Ivanti Sentry.
+Ela pode levar a execução remota com privilégio de root.
+Segundo a Bleeping Computer, a correção saiu nas linhas R dez ponto cinco ponto dois.
+Também saiu nas linhas R dez ponto seis ponto dois e R dez ponto sete ponto um.
+A cobertura inicial dizia que a Ivanti não conhecia exploração no momento da divulgação.
+
+No dia seguinte, a história mudou de temperatura.
+A Bleeping Computer, citando a Shadowserver, relatou tentativas de exploração.
+Essas tentativas eram baseadas em prova de conceito pública.
+O alerta é que instâncias expostas sem patch devem ser tratadas como prováveis candidatas a comprometimento.
+A escala exata ainda está em movimento.
+Então é melhor deixar o número global fora da manchete mental.
+
+Para quem administra, a tarefa não termina no update.
+Atualizar é o começo, não o fim do trabalho.
+Depois vem checar logs, procurar alteração estranha, backdoor, conta nova e persistência.
+Também vale procurar qualquer sinal de que a caixa já foi usada antes da correção.
+Appliance de segurança costuma ficar perto demais da porta de entrada.
+Por isso, ele não combina muito com o tratamento de servidor qualquer atrasado.
+
+As fontes deste bloco são duas reportagens da Bleeping Computer, uma sobre exploração e outra sobre a correção inicial.
+
+Diffusion Gemma gera texto em blocos paralelos para cortar latência.
+
+Modelo de linguagem normalmente escreve em fila.
+Ele prevê um token, depois outro, depois outro.
+Esse jeito sequencial cobra latência quando você quer resposta rápida.
+Também cobra quando o caso é agente interativo ou inferência local com pouca paciência.
+
+O Diffusion Gemma tenta outro caminho.
+A Google apresentou o modelo em dez de junho como um experimento aberto de difusão discreta para texto.
+Em vez de gerar token por token do começo ao fim, ele trabalha com blocos de duzentos e cinquenta e seis tokens.
+Esses blocos rodam em paralelo, e o modelo vai refinando o texto.
+A ideia parece mais com preencher e corrigir um rascunho inteiro.
+É diferente de escrever sempre da esquerda para a direita.
+
+Na ficha técnica, ele é um M O E de vinte e seis bilhões de parâmetros, sob Apache dois ponto zero.
+A Google fala em até quatro vezes mais velocidade em placas G P U dedicadas.
+Os exemplos passam de mil tokens por segundo em uma NVIDIA H cem.
+Também passam de setecentos tokens por segundo em uma R T X cinco mil e noventa.
+A NVIDIA publicou no Hugging Face um checkpoint quantizado em N V F P quatro.
+Ele tem vinte e cinco vírgula dois bilhões de parâmetros totais e três vírgula oito bilhões ativos.
+O checkpoint mira hardware Hopper ou Blackwell e uso com V L L M.
+
+O freio vem da própria Google.
+O modelo é experimental e focado em velocidade.
+Para tarefas que exigem a melhor qualidade geral, a empresa ainda coloca o Gemma quatro padrão acima.
+E parece cedo para todo mundo baixar hoje e rodar feliz no notebook do trabalho.
+Hardware, lote, suporte de runtime e quantização decidem boa parte da graça.
+
+Para inferência local, duas contas andam juntas.
+Uma é a qualidade da resposta.
+A outra é a arquitetura que entrega essa resposta dentro da latência que o produto aguenta.
+É aí que texto por difusão entra como caminho técnico real.
+Mesmo assim, ele ainda está longe de ser receita pronta.
+
+As fontes deste bloco são Google DeepMind e Hugging Face com NVIDIA.
+
+Nos destaques rápidos de hoje, Triad J S tenta reduzir o drift entre schema, docs, testes e banco.
+
+O projeto TypeScript e Node ponto JS declara uma fonte única para gerar várias partes do sistema.
+Essa fonte gera validação, Open [EY1 P IY1 AY1] três ponto um e Async [EY1 P IY1 AY1] três ponto zero.
+Também gera B D D com Gherkin, Drizzle, migrations e hooks de frontend.
+O projeto ainda traz comandos para "Claude Code".
+A ideia conversa bem com agentes, porque deixa menos coisa espalhada para o modelo adivinhar.
+Só que ainda é framework novo, sem prova ampla de produção.
+
+A fonte deste destaque é o repositório do Triad J S no "Git Hub".
+
+Stack Overflow for Agents abriu beta para conhecimento consultável por agentes.
+
+A proposta é uma camada orientada a [EY1 P IY1 AY1].
+Nela, agentes podem consultar o corpus e rascunhar Questions, posts T I L e Blueprints.
+Depois, esse material passa por humanos antes de publicar.
+Se funcionar, isso reduz retrabalho e resposta solta em sessão isolada.
+Ainda é beta, com moderação, verificação, votos, S S O e consenso para provar em uso real.
+
+A fonte deste destaque é o blog do Stack Overflow.
+
+"Git Hub" Copilot [S IY1 EH1 L AY1] ganhou uma skill para configurar language servers.
+
+A skill L S P Setup instala e configura servidores de linguagem para o Copilot [S IY1 EH1 L AY1].
+Segundo o "Git Hub", ela traz dados de referência para catorze linguagens.
+O ganho esperado, aqui, é bem simples.
+Em vez de depender só de busca textual, o agente de terminal pode pedir definição, referência e tipo.
+Ele usa o mesmo caminho semântico que editores usam há anos.
+Ainda precisa de um projeto bem configurado e revisão humana.
+
+A fonte deste destaque é o blog do "Git Hub".
+
+Langflow C V E 2026, cinco zero dois sete virou alerta para plataforma de I A exposta.
+
+A Tenable descreve uma falha de path traversal no upload de arquivos.
+Ela está ligada a uma chamada POST no endpoint api v dois files.
+O problema permite escrita arbitrária por falta de saneamento no parâmetro de nome do arquivo.
+A Bleeping Computer relata exploração ativa observada em honeypots da VulnCheck.
+A Snyk aponta langflow base zero ponto oito ponto três ou superior como correção.
+A recomendação pública é atualizar a aplicação Langflow para um ponto dez ponto zero.
+Também é recomendável revisar auto-login e reduzir exposição pública.
+
+As fontes deste destaque são Bleeping Computer, Tenable e Snyk.
+
+Fable cinco vai mostrar melhor quando a trava entra.
+
+Nos últimos dias, cobrimos o lançamento do Claude Fable cinco bem de perto.
+Agora a mudança é menor, mas útil para depuração.
+Segundo Simon Willison, citando WIRED e canais da Anthropic, a empresa disse que errou.
+O erro foi limitar silenciosamente pedidos ligados a desenvolvimento de L L M de fronteira.
+Pedidos marcados devem cair visivelmente para o Opus quatro ponto oito.
+Motivos de recusa para fallback no servidor devem aparecer nos próximos dias.
+
+A fonte deste destaque é Simon Willison.
+
+No acompanhamento de tendências do dia, o tema é evidência antes do merge.
+
+Quando agente mexe em interface, uma [EY1 P IY1 AY1], ferramenta e texto ao mesmo tempo, um diff verde no P R conta só parte da história.
+O item do TabNews bate nessa tecla pelo lado de produto.
+Review de trabalho com I A precisa pedir objetivo visual, componentes tocados e estados cobertos.
+Também precisa pedir preview ou screenshot, responsividade, contrato de [EY1 P IY1 AY1] e comandos de validação.
+E ainda precisa registrar a origem dos assets.
+
+A Microsoft chegou ao mesmo problema por outro caminho com o ASSERT.
+É uma ferramenta aberta para transformar especificações em linguagem natural em avaliações executáveis.
+A ferramenta tenta gerar cenários, datasets, métricas e scorecards.
+Depois, ela roda isso contra modelo, app ou agente.
+O detalhe bom é a atenção a traces.
+Chamadas de ferramenta, contexto recuperado, roteamento e passos intermediários entram como evidência.
+
+Para time pequeno, isso pode ser só um checklist melhor de P R.
+Para produto que já usa agente com ferramenta, vira uma pergunta mais dura.
+Antes de mergear, qual evidência mostra que a intenção foi cumprida?
+E qual evidência mostra que o comportamento não quebrou em outro estado?
+ASSERT é novo, e avaliação com juiz de L L M depende muito da especificação escrita.
+A direção, nesse caso, é saudável.
+Menos "parece certo na resposta", mais registro do que foi testado.
+
+As fontes desta tendência são TabNews, Microsoft Command Line e o repositório ASSERT no "Git Hub".
