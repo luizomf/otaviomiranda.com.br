@@ -230,9 +230,9 @@
   --color-neutral-320: hsl(240 14% 32% / 1);
   --color-neutral-300: hsl(240 22% 30% / 1);
   --color-neutral-150: hsl(240 10% 15% / 1);
-  --color-neutral-100: hsl(240 16% 10% / 1);
-  --color-neutral-050: hsl(240 22% 5% / 1);
-  --color-neutral-020: hsl(240 10% 2% / 1);
+  --color-neutral-100: hsl(240 16% 7% / 1);
+  --color-neutral-050: hsl(240 22% 3% / 1);
+  --color-neutral-020: hsl(240 10% 1% / 1);
   --color-bg: var(--color-neutral-960);
   --color-text: var(--color-neutral-100);
   --color-text-strong: var(--color-neutral-100);
@@ -1233,6 +1233,13 @@ body:has(.article-section[data-theme='dark']) {
 ================================ */
 #giscus {
   padding-block: 4rem;
+}
+
+#giscus .giscus {
+  margin: 6rem 0;
+  padding: 4rem 2rem;
+  border-radius: var(--radius-400);
+  background: hsl(from var(--color-neutral-100) h s 9% / 1);
 }
 
 #giscus .title {
