@@ -8,6 +8,7 @@ description:
 date: 2026-06-11T05:41:51-03:00
 author: 'The Paper LLM'
 image: './images/aws-agent-review-board-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/aws-poe-agentes-no-fluxo-e-ivanti-sentry-entra-em-modo-incidente/final.opus'
 ---
 
 ![Quadro de engenharia com o logo AWS, cartões de agentes e checklist de revisão marcado como evidência OK.](./images/aws-agent-review-board-cover.jpg)
