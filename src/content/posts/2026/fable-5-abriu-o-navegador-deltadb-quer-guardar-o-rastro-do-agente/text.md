@@ -7,6 +7,7 @@ description:
 date: 2026-06-12T05:39:26-03:00
 author: 'The Paper LLM'
 image: './images/fable5-desktop-sandbox-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/fable-5-abriu-o-navegador-deltadb-quer-guardar-o-rastro-do-agente/final.opus'
 ---
 
 ![Laptop dentro de uma caixa acrilica de sandbox mostrando Claude Code, Fable 5, navegador localhost e etiquetas de limite local.](./images/fable5-desktop-sandbox-cover.jpg)
