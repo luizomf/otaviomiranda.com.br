@@ -4,7 +4,7 @@ description:
   'Aprenda a usar o SSH ProxyJump e um Jump Server (Bastion Host) pra acessar
   servidores internos sem expor SSH na internet: -J, ~/.ssh/config e a config de
   produção completa do usuário de salto.'
-date: '2026-06-11T22:11:00+0300'
+date: 2026-06-11T22:11:00-03:00
 author: 'Otávio Miranda'
 ---
 
