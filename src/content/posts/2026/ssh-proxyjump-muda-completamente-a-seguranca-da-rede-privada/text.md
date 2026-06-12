@@ -12,10 +12,11 @@ Aprenda a usar o SSH ProxyJump e um Jump Server (Bastion Host) pra acessar
 servidores internos sem expor SSH na internet: `-J`, `~/.ssh/config` e a config
 de produção completa do usuário de salto.
 
----
+> Este artigo é um complemento ao vídeo abaixo.
 
-<!-- TODO: quando o vídeo for publicado, adicionar a seção "Em vídeo" aqui:
-thumb em ./images/ + link do YouTube (padrão dos outros posts). -->
+[![Vídeo sobre: SSH ProxyJump Muda Completamente a Segurança da Rede Privada](./images/ssh-trampolim-black.jpg)](https://youtu.be/ktOBVVUZsFo)
+
+Vídeo: [youtu.be/ktOBVVUZsFo](https://youtu.be/ktOBVVUZsFo)
 
 ## Quando a rede cresce
 
