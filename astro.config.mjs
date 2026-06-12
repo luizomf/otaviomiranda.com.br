@@ -21,6 +21,7 @@ import { defineConfig } from 'astro/config';
 
 import pagefind from 'astro-pagefind';
 import sitemap from '@astrojs/sitemap';
+import { bundledLanguages } from 'shiki';
 
 function removeMarkdownHtmlComments() {
   return tree => {
@@ -59,8 +60,19 @@ export default defineConfig({
     remarkPlugins: [removeMarkdownHtmlComments],
     shikiConfig: {
       // Tema que se assemelha ao legacy dark highlighter
-      theme: 'github-dark-high-contrast',
+      // theme: 'github-dark-high-contrast',
+      theme: 'tokyo-night',
       wrap: true, // Forca a quebra de linha em telas pequenas ao inves de scroll infinito
+      langAlias: {
+        mjs: 'javascript',
+        actionscript: 'javascript',
+        conf: 'ini',
+        ssh_config: 'ssh-config',
+        sshd_config: 'ssh-config',
+        'sshd-config': 'ssh-config',
+        ssh: 'ssh-config',
+        sshd: 'ssh-config',
+      },
     },
   },
 

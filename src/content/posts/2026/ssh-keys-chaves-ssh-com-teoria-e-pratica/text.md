@@ -3,7 +3,7 @@ title: 'SSH Keys: chaves SSH com teoria e prática'
 description:
   'O caminho completo para usar chaves SSH sem mistério: OpenSSH,
   `authorized_keys`, `ssh-keygen`, permissões e `~/.ssh/config`.'
-date: 2026-06-04T09:42:06-03:00
+date: '2026-06-04T09:42:06-03:00'
 author: 'Otávio Miranda'
 ---
 
@@ -136,7 +136,7 @@ arquivo começando com `00-` quando quero que ele entre cedo na ordem.
 
 Um exemplo simples de configuração:
 
-```conf
+```ssh_config
 Port 22
 ListenAddress 0.0.0.0
 
