@@ -286,8 +286,14 @@ Como eu disse, eu não afrouxaria o servidor inteiro. Eu criaria um usuário
 dedicado só pra salto, aquela catraca que nem shell tem:
 
 ```bash
-sudo useradd -s /usr/sbin/nologin -m -p "$(openssl rand -hex 128)" jumper
+sudo useradd -m -s /usr/sbin/nologin jumper
+sudo passwd -l jumper
 ```
+
+Eu não passaria senha pelo `useradd -p` aqui. Essa opção espera uma senha já
+criptografada/hash, não uma string aleatória crua, e ainda pode expor esse valor
+na lista de processos enquanto o comando roda. Pra esse usuário, eu prefiro
+travar a senha e liberar só a chave pública no `authorized_keys`.
 
 E no `sshd_config` eu travaria tudo nesse usuário com `Match User`, liberando só
 o TCP Forwarding pro destino certo:
