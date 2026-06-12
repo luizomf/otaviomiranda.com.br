@@ -1,0 +1,175 @@
+Fable cinco abriu o navegador; Delta D B quer guardar o rastro do agente.
+
+Quando o agente sai da caixa de chat, abre navegador, sobe servidor local e mexe em arquivo, a conversa muda.
+Qualidade da resposta ainda importa, mas limite, rastro e confiança passam a morar no mesmo pacote.
+
+Claude Fable cinco mostrou que agente local precisa de limite local.
+
+No dia nove, a gente olhou o lançamento do Claude Fable cinco bem de perto.
+Agora o fato novo está em outro lugar: o comportamento desse modelo quando ganha ferramentas reais no desktop.
+
+Simon Willison colocou o Fable cinco para corrigir um bug de CSS no Datasette Agent usando o Claude Code.
+O que chamou atenção foi a iniciativa do agente.
+Ele abriu navegadores, criou H T M L de teste, usou o pacote pyobjc framework Quartz e chamou o screen capture.
+Também injetou JavaScript em templates, subiu um pequeno servidor local para contornar CORS e verificou screenshots do Safari.
+
+Útil, sem dúvida. Só que essa utilidade pede limite técnico no computador de trabalho.
+Willison estimou que a sessão custaria cerca de doze dólares e onze centavos no preço cheio de [EY1 P IY1 AY1].
+Mas o custo mais delicado é outro: um agente sem sandbox, com acesso a repositório, navegador e shell.
+Nesse cenário, ele vira automação local com bastante autoridade.
+
+O benchmark independente da Endor Labs baixa um pouco a temperatura.
+Em duzentas tarefas de correção de vulnerabilidade, o Fable cinco marcou cinquenta e nove vírgula oito porcento em Func Pass.
+Ele também marcou dezenove vírgula zero porcento em Sec Pass.
+A Endor encontrou sinais de cola em trinta e oito de duzentos casos, principalmente memória de treino.
+Ainda assim, o modelo resolveu quatro instâncias que nenhum par modelo-agente anterior do benchmark tinha resolvido.
+
+Também apareceu a parte de transparência.
+A The Verge relata que a Anthropic pediu desculpas por guardrails invisíveis ligados a suspeitas de destilação.
+A empresa disse que esses casos agora devem cair de forma visível para o Opus quatro ponto oito.
+Para quem integra modelo, falha visível é menos elegante.
+Mas ela dá mais auditoria do que resposta alterada por baixo do tapete.
+
+No fim, o desenho é menos mágico.
+Agente forte precisa de workspace limitado, teste rodando, revisão humana, log de ferramenta e orçamento observado.
+O modelo pode abrir o navegador por você.
+A decisão de deixar ele mexer na casa continua sendo sua.
+
+As fontes deste bloco são Simon Willison, Endor Labs e The Verge.
+
+A biblioteca adjacency agents corta a lista de ferramentas antes do modelo escolher.
+
+Quem mexe com agente acaba trombando numa pergunta meio chata.
+Quantas ferramentas você mostra para o modelo de uma vez?
+Quando a lista cresce, nomes parecidos viram armadilha.
+O modelo escolhe a ferramenta errada, passa argumento torto ou tenta resolver no chute o que o backend já sabia.
+
+Um autor no TabNews descreveu uma solução simples de explicar e difícil de acertar em produção.
+A ideia é remover as ferramentas impossíveis antes de chamar o L L M.
+A plataforma citada tem trinta e oito ferramentas distribuídas em sete subagentes.
+A biblioteca adjacency agents monta uma lista permitida por turno usando contexto confiável do backend.
+Esse contexto inclui estado do usuário, capacidades e transições válidas.
+
+A lista de ferramentas vira parte da gramática entregue ao modelo.
+Se o estado do usuário impede cancelar pedido naquele momento, a ferramenta fica fora.
+Se uma ação depende de uma etapa anterior, ela só aparece quando a etapa existir.
+Depois ainda entram validação com Pydantic, política padrão de negar ferramenta sem regra.
+Também entram adaptadores para provedores como OpenAI, Anthropic e Ollama.
+
+Nos testes do autor, com cerca de duas mil e quinhentas execuções, o GPT O S S cento e vinte B teve uma queda grande.
+A confusão genuína de ferramenta caiu de nove vírgula sete porcento para zero vírgula sete porcento.
+Isso aconteceu quando a filtragem por adjacência entrou.
+A ressalva importa: em modelos mais fracos, forçar tool choice deslocou parte do problema para argumentos malformados.
+Nos modelos GPT O S S testados, esse outro problema chegou perto de vinte porcento.
+
+Por estar em M V P, versão zero ponto um ponto zero, o repositório vale mais pelo padrão de arquitetura.
+Ferramenta inválida some antes da chamada, e o servidor continua validando tudo antes de executar.
+
+As fontes deste bloco são TabNews e Git Hub.
+
+Zed quer registrar o trabalho que acontece antes do commit.
+
+Git registra muito bem o que chegou ao commit.
+Só que uma parte cada vez maior do trabalho nasce antes disso.
+Tem conversa com agente, tentativa descartada, edição pequena, review visual e refatoração meio guiada.
+Tem também correção que passa por várias mãos antes de virar snapshot.
+
+O Zed apresentou o Delta D B como uma camada de versionamento para esse intervalo.
+A proposta é gravar deltas finos com identidade estável e guardar mensagens e edições lado a lado.
+Em vez de ver apenas que esta linha mudou, a ferramenta quer deixar rastreável o caminho até aquela linha.
+Esse caminho pode passar por uma conversa, um agente ou uma edição direta.
+
+O texto do Nathan Sobo também fala de worktrees replicadas sem conflito, no estilo C R D T.
+A ideia é permitir que múltiplos humanos e agentes editem os mesmos arquivos em máquinas diferentes.
+Isso combina com o restante do dia.
+Quando o agente participa do código, o histórico que interessa começa antes do git commit.
+
+Git continua sendo Git, e esse limite também importa.
+O próprio Zed fala em beta nas próximas semanas, com fluxo de produção amplo ainda por provar.
+Mesmo assim, a direção é interessante.
+Se agentes vão produzir mais mudanças entre commits, as ferramentas precisam guardar melhor esse meio do caminho.
+
+A fonte deste bloco é o blog do Zed.
+
+Agora, os destaques rápidos de hoje.
+
+Dropbox usa M C P e Dash para trazer threat model para o pull request.
+A empresa descreveu um sistema que busca threat models via Dropbox Dash e Model Context Protocol.
+O objetivo é comparar implementação com intenção de segurança.
+Em cento e cinquenta reviews do último ano e meio, o Dropbox diz que oitenta porcento tinham ligação semântica com mudanças de código.
+Mas só doze porcento citavam explicitamente o documento.
+Sessenta e nove porcento das conexões só apareceram por busca semântica.
+O julgamento final continua humano.
+A fonte deste bloco é o Dropbox Tech.
+
+Homebrew seis ponto zero ponto zero adiciona confiança explícita para taps e sandbox no Linux.
+A versão nova introduz tap trust, porque taps de terceiros podem carregar Ruby sem sandbox antes de você perceber.
+No Linux, o Homebrew também passa a usar Bubblewrap em fluxos de build, teste e pós-instalação.
+Ele também torna a interface interna em JSON o padrão.
+É mais atrito onde antes tinha código rodando fácil demais.
+A fonte deste bloco é o Homebrew Blog.
+
+Miasma ainda aparece vivo em branches laterais.
+No dia cinco, falamos do Miasma mirando agentes em repositórios.
+A atualização da SafeDep é que a limpeza falhou em muito lugar.
+A empresa diz ter encontrado oitenta e seis de cento e vinte e três repositórios da lista original ainda infectados.
+Esse retrato era de onze de junho e envolvia payloads espalhados por seiscentas e sessenta e cinco branches.
+Antes de abrir repo suspeito no VS Code, Cursor, Claude Code ou Gemini, vale checar todas as branches.
+Também vale tratar ponto Claude, ponto Gemini, ponto Cursor, ponto VS Code e setup ponto J S do Git Hub como superfície de execução.
+A fonte deste bloco é a SafeDep.
+
+A U R remove commits maliciosos e bane contas envolvidas.
+Mantenedores do Arch relataram limpeza de commits maliciosos no A U R, banimento de contas e pedidos de concentração dos relatos.
+Para usuário, o lembrete é simples e meio desconfortável.
+P K G Build também é código que você executa.
+Se um pacote apareceu na confusão, espere a limpeza e leia o arquivo de build antes de instalar.
+A fonte deste bloco é a lista A U R general do Arch Linux.
+
+Cohere abriu o North Mini Code para agentes de terminal.
+O North Mini Code um ponto zero é um modelo M O E de código.
+Ele tem trinta bilhões de parâmetros totais, três bilhões ativos e contexto de duzentos e cinquenta e seis mil tokens.
+A geração máxima é de sessenta e quatro mil tokens, com pesos no Hugging Face sob Apache dois ponto zero.
+A Cohere mira geração de código, engenharia com agentes e tarefas de terminal, inclusive integração com OpenCode.
+Como o mínimo citado é uma H cem em F P oito, e os números são da própria empresa, a leitura pede calma.
+Ele entra melhor como candidato para teste do que como vencedor antecipado.
+A fonte deste bloco é a Cohere.
+
+Check Point corrigiu bypass de autenticação em V P N com I K E versão um.
+A watchTowr analisou a C V E 2026, cinquenta sete cinco um.
+É um bypass de autenticação com C V S S nove ponto três em fluxos de Remote Access V P N com I K E versão um da Check Point.
+A empresa cita hotfixes de oito de junho.
+As condições envolvem clientes legados, I K E versão um permitido e autenticação por certificado de máquina não obrigatória.
+Também há relatos de exploração no mundo real desde sete de maio.
+Para administradores, a rota pública é aplicar orientação da Check Point, reduzir exposição legada e investigar gateway exposto.
+A fonte deste bloco é a watchTowr Labs.
+
+A F UNIX teve uma falha técnica no coletor de lixo do kernel Linux.
+A C V E 2025, quarenta dois um quatro envolve o garbage collector de sockets A F UNIX.
+O detalhe técnico passa pela inicialização de S C C index em unix add edge.
+Em alto nível, um índice antigo podia fazer um socket vivo parecer morto e limpar a fila de recebimento errada.
+O registro é de 2025 e o explainer público é de abril de 2026.
+Então fica como contexto técnico: pegue correções de kernel pelo canal da sua distribuição.
+As fontes deste bloco são Unix GC Remastered e N V D.
+
+Agora, o acompanhamento de tendências do dia.
+
+Ontem a gente falou do DiffusionGemma como uma tentativa de acelerar geração de texto mexendo na arquitetura do modelo.
+Ele trabalha com blocos de duzentos e cinquenta e seis tokens em paralelo, num M O E de vinte e seis bilhões.
+A Google fala em até quatro vezes de velocidade em G P Us dedicadas.
+Também fala em mais de mil tokens por segundo em H cem e mais de setecentos em R T X cinquenta noventa.
+
+Hoje o delta mais concreto veio do runtime.
+O llama ponto C P P recebeu o pull request número dezoito mil e trinta e nove com suporte a Eagle três.
+Esse suporte é para decodificação especulativa.
+Em vez de esperar só o modelo principal produzir token por token, a técnica usa um caminho especulativo.
+Esse caminho adianta candidatos e deixa o modelo maior confirmar ou rejeitar.
+A descrição do pull request fala em ganhos de duas a três vezes em alguns modelos densos suportados.
+Mas o ganho foi fraco, ou até virou piora, em alguns casos de modelos M O E.
+
+Juntando as duas histórias, velocidade local continua sendo uma conta cheia de asterisco.
+Arquitetura do modelo, speculator ou draft model, quantização, runtime e hardware mandam juntos.
+A própria Google avisa que o ganho do DiffusionGemma pode não aparecer igual em Macs com memória unificada.
+O Eagle três também depende de modelo compatível.
+Para quem roda agente local, é bom sinal, mas ainda é teste de bancada antes de virar expectativa de produto.
+
+As fontes deste bloco são Google Blog e o pull request do llama ponto C P P no Git Hub.
