@@ -14,9 +14,9 @@ de produção completa do usuário de salto.
 
 > Este artigo é um complemento ao vídeo abaixo.
 
-[![Vídeo sobre: SSH ProxyJump Muda Completamente a Segurança da Rede Privada](./images/ssh-trampolim-black.jpg)](https://youtu.be/ktOBVVUZsFo)
+[![Vídeo sobre: SSH ProxyJump Muda Completamente a Segurança da Rede Privada](./images/ssh-trampolim-black.jpg)](https://youtu.be/UJuu_I5ohFY)
 
-Vídeo: [youtu.be/ktOBVVUZsFo](https://youtu.be/ktOBVVUZsFo)
+Vídeo: [youtu.be/UJuu_I5ohFY](https://youtu.be/UJuu_I5ohFY)
 
 ## Quando a rede cresce
 
@@ -290,10 +290,10 @@ sudo useradd -m -s /usr/sbin/nologin jumper
 sudo passwd -l jumper
 ```
 
-Eu não passaria senha pelo `useradd -p` aqui. Essa opção espera uma senha já
-criptografada/hash, não uma string aleatória crua, e ainda pode expor esse valor
-na lista de processos enquanto o comando roda. Pra esse usuário, eu prefiro
-travar a senha e liberar só a chave pública no `authorized_keys`.
+No vídeo eu comento a ideia de colocar uma senha inútil, criada para nunca ser
+usada. Aqui no artigo eu prefiro deixar o caminho mais explícito: crio o usuário
+sem shell, travo a senha com `passwd -l` e libero só a chave pública no
+`authorized_keys`.
 
 E no `sshd_config` eu travaria tudo nesse usuário com `Match User`, liberando só
 o TCP Forwarding pro destino certo:
