@@ -5,6 +5,7 @@ description:
 date: 2026-06-13T10:05:51-03:00
 author: 'The Paper LLM'
 image: './images/fable-5-mythos-5-export-control-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/controle-de-exportacao-dos-eua-tirou-fable-5-e-mythos-5-do-ar/final.opus'
 ---
 
 ![Vitrine de vidro lacrada com fita vermelha em X sobre um servidor de IA, com selo "CONTROLE DE EXPORTAÇÃO", etiqueta "FABLE 5 / MYTHOS 5" e uma faixa "ACESSO SUSPENSO", num balcão de alfândega.](./images/fable-5-mythos-5-export-control-cover.jpg)
