@@ -1,0 +1,165 @@
+O workspace virou fronteira: A U R sequestrado, FFmpeg auditado e Fable 5 suspenso.
+
+Tem coisa que só parece pequena até rodar no computador de quem desenvolve.
+Instalar pacote, abrir repositório, deixar um modelo fixo no fluxo do produto: tudo isso virou fronteira.
+O sábado bateu bastante nesse ponto, e a gente começa pelo caminho mais direto.
+Pelo script que roda antes do deploy existir.
+
+Primeiro, o A U R teve adoções maliciosas em massa e levou o risco para a máquina do dev.
+Quem usa Arch conhece bem o A U R: ele é útil, enorme e comunitário.
+Justamente por isso, depende de uma camada de confiança que some fácil no dia a dia.
+Um arquivo P K G Build carrega comandos que podem rodar no build, na instalação ou na atualização do pacote.
+Em 12 de junho, o Arch Linux publicou um aviso sobre adoções e atualizações maliciosas em alto volume no A U R.
+A Step Security batizou a campanha de "Atomic Arch" e diz que mais de quatrocentos pacotes foram afetados.
+O caminho é conhecido e continua perigoso: pacote órfão ou confiável muda de dono.
+Depois ganha dependência maliciosa ou lógica de instalação alterada.
+E o usuário executa a receita achando que está só atualizando uma ferramenta normal.
+
+O detalhe chato é o que sai da máquina depois disso.
+A análise fala em roubo de chaves S S H, tokens de "Git Hub" e N P M, credenciais de nuvem.
+Também cita sessões de navegador e tokens de comunicação de desenvolvedor.
+Se isso rodou dentro de W S L, máquina de trabalho ou runner self hosted, o estrago passa do Arch pessoal.
+Ele encosta em repositório, C I e produção.
+A Step Security também cita persistência via E B P F nos cenários com privilégio elevado.
+Então esse ponto depende do ambiente e do nível de permissão usado.
+
+Para quem usa A U R, o caminho defensivo é revisar instalações e atualizações recentes.
+Também vale ler P K G Build como quem lê script de shell e comparar pacotes suspeitos com avisos públicos.
+Execução confirmada deve ser tratada como possível exposição de segredo.
+Em máquina com muito acesso, rotação de credenciais e rebuild limpo podem sair mais baratos.
+Melhor isso do que tentar adivinhar até onde o payload chegou.
+A lição passa do Arch: a cadeia de pacotes também começa no arquivo que a sua máquina aceita executar.
+As fontes deste bloco são Arch Linux e Step Security.
+
+Agora, Fable 5 e Mythos 5 perderam acesso depois de uma diretiva dos Estados Unidos.
+No dia 9, a gente falou do lançamento do Claude Fable 5, com salvaguardas, retenção e barulho.
+Agora a novidade é outra: acesso.
+A Anthropic publicou que recebeu, em 12 de junho, às cinco e vinte e um da tarde na costa leste, uma diretiva.
+Era uma diretiva de controle de exportação do governo americano.
+Ela envolvia o acesso de pessoas estrangeiras ao Fable 5 e ao Mythos 5.
+Segundo a empresa, o efeito prático foi remover o acesso aos dois modelos para todos os clientes.
+A Anthropic também afirma que os outros modelos continuam sem impacto.
+
+Esse tipo de notícia parece distante até algum serviço depender exatamente daquele identificador de modelo.
+Se um produto escolheu Fable 5 para um fluxo específico, agora precisa checar fallback.
+Também precisa checar roteamento, teste de regressão e contrato de compliance.
+Nesse caso, o identificador carrega qualidade de resposta, disponibilidade e regra política no mesmo pacote.
+
+A empresa discorda da base técnica da diretiva.
+A Anthropic diz que a preocupação envolve um jailbreak estreito, não universal.
+Também diz que capacidades comparáveis existem em outros modelos públicos.
+A carta do governo não apareceu nas fontes públicas usadas aqui.
+Então esse trecho precisa ficar atribuído: é a posição pública da Anthropic, junto com a cobertura secundária.
+Não é a justificativa completa do regulador.
+O que dá para afirmar agora é isto: dois modelos saíram do alcance, outros ficaram disponíveis.
+E plano de contingência deixou de ser detalhe bonito em diagrama.
+A causa técnica completa ainda depende de documentos públicos mais claros.
+As fontes deste bloco são Anthropic e The Hacker News.
+
+O próximo bloco é o FFmpeg, onde a Depth First diz que um agente encontrou vinte e uma falhas zero day.
+Processar mídia de gente desconhecida parece comum demais para assustar.
+Só que por baixo de player, pipeline de vídeo, thumbnail, upload e transcodificação existe muito parser antigo.
+Esses parsers lidam com formato esquisito.
+FFmpeg é uma dessas peças: aparece em todo canto e lê entrada que nem sempre merece confiança.
+
+A Depth First diz que seu agente autônomo de segurança encontrou vinte e uma vulnerabilidades zero day no FFmpeg.
+Oito já tinham identificadores C V E atribuídos no momento da publicação, segundo a empresa.
+A própria Depth First fala em cerca de mil dólares de custo de [EY1 P IY1 AY1] para a rodada.
+Ela descreve o alvo como um projeto com aproximadamente um vírgula cinco milhão de linhas de C.
+
+Melhor segurar a empolgação no tamanho certo.
+A história envolve um sistema especializado, com validação e geração de entradas reproduzíveis.
+Também envolve foco em classes de parser, demuxer e depacketizer.
+Se esse fluxo ficar barato e repetível, mantenedores vão receber mais achados.
+Isso também significa mais triagem, correção e priorização na fila.
+
+Para defesa, o básico é acompanhar correções do FFmpeg pelo upstream ou pela distribuição.
+Também é isolar processamento de mídia não confiável e evitar conversão com privilégio alto.
+Mídia é entrada não confiável.
+E agente de segurança já está produzindo volume de relatório que mantenedor humano precisa encarar.
+As fontes deste bloco são Depth First e The Hacker News.
+
+Do outro lado da mesa, a Cohere lançou o "North Mini Code" em 9 de junho.
+É um modelo de código voltado a agentes, terminal e fluxos de engenharia.
+Pelos dados da empresa, ele é um "Mixture of Experts" com trinta bilhões de parâmetros totais.
+São três bilhões de parâmetros ativos por token.
+A documentação lista contexto de 256 mil tokens e saída máxima de 64 mil tokens.
+O identificador do modelo é north mini code um zero.
+A Cohere também diz que o modelo sai sob Apache dois ponto zero.
+Ele aparece em caminhos como Hugging Face, [EY1 P IY1 AY1] da Cohere, Model Vault e OpenRouter.
+
+Para times que querem avaliar código com mais controle de dados, custo ou soberania, isso entra no radar.
+O hardware mínimo ainda é sério: a própria Cohere lista uma H cem em F P oito.
+E números de benchmark e throughput continuam sendo números da fornecedora até alguém medir no próprio fluxo.
+O melhor uso do North Mini Code é como candidato de avaliação.
+Ele vale para tarefas de código, agentes de terminal, geração e revisão em ambiente com fronteira mais clara.
+Alternativa concreta vale mais do que torcida com README bonito.
+As fontes deste bloco são Cohere e Cohere Docs.
+
+Nos destaques rápidos de hoje, o Miasma continua vivo em branches e configurações de agente.
+No dia 5, a gente falou do Miasma mirando agentes em repositórios.
+A Safe Dep diz que a varredura de 11 de junho encontrou oitenta e seis de cento e vinte e três repos ainda infectados.
+Também encontrou seiscentos e sessenta e cinco branches em cinquenta e seis contas.
+Antes de abrir repo suspeito em V S Code, Cursor, Claude Code ou Gemini, o caminho seguro é varrer sem checkout.
+Olhe scripts de setup no ponto "Git Hub" e configurações de Claude, Gemini, Cursor e V S Code.
+As fontes deste destaque são Safe Dep e Step Security.
+
+Homebrew seis ponto zero ponto zero apertou confiança em taps e sandbox no Linux.
+A versão anunciada em 11 de junho introduz tap trust e exige confiança explícita para taps de terceiros.
+Isso acontece antes de avaliar ou rodar código.
+Ela torna a [EY1 P IY1 AY1] JSON interna o padrão.
+Também adiciona sandbox com Bubblewrap em etapas de build, teste e pós-instalação no Linux.
+Os taps oficiais continuam confiáveis por padrão.
+O ganho está em reduzir código rodando fácil demais fora desse caminho.
+A fonte deste destaque é Homebrew.
+
+DeltaDB segue como sinal de que o histórico antes do commit virou produto.
+Ontem a gente olhou o DeltaDB como tentativa de registrar deltas finos.
+Ele também registra mensagens de agentes e estado de worktree antes do commit no Git.
+A ressalva segue a mesma: a Zed fala em acesso inicial nas próximas semanas.
+Isso complementa Git e C I em vez de aposentar os dois hoje.
+A fonte deste destaque é Zed Blog.
+
+Open S S F explicou por que proveniência válida não fecha a conta do Mini Shai Hulud.
+A análise diz que pacotes tinham atestação válida, mas nasceram de um contexto de build comprometido.
+O caminho envolvia pull request target, cache do P N P M e extração de token O I D C na cadeia.
+A diferença importante é entre S L S A Build L dois e S L S A Build L três.
+O Build L dois amarra pacote a fonte e sistema de build.
+O Build L três exige isolamento mais forte do ambiente.
+A fonte deste destaque é Open S S F.
+
+Dropbox usou M C P e Dash para trazer threat model para o review de pull request.
+A empresa descreveu um sistema que busca threat models durante revisão de código.
+Depois compara implementação com requisitos de segurança documentados.
+Nos dados internos citados, só doze porcento dos pull requests de implementação linkavam a revisão original.
+Enquanto isso, busca semântica encontrou ligação em oitenta porcento dos design reviews.
+O julgamento final continua com humanos.
+A fonte deste destaque é Dropbox Tech.
+
+P G K part tenta proteger Postgres contra full scan em tabela particionada.
+A extensão anunciada pela HexaCluster força uso de chave de partição.
+Ela traz modo de auditoria, blacklist, whitelist e comportamento via S Q L State.
+Isso vale para consultas que escapam da poda de partição.
+É ferramenta para testar em ambiente controlado.
+Especialmente onde O R M ou query manual pode esquecer o predicado certo em tabela grande.
+As fontes deste destaque são HexaCluster e Planet PostgreSQL.
+
+Acompanhando as tendências do dia, A U R, Miasma, Homebrew e S L S A aparecem por caminhos diferentes.
+O elo é o lugar onde a confiança falha.
+Antes do código chegar em produção, alguém instala, abre, constrói, assina ou revisa alguma coisa.
+Esse pedaço do fluxo sempre teve autoridade demais.
+Um P K G Build roda comando antes de você perceber.
+Configuração de editor e agente pode disparar tarefa.
+Cache de build pode influenciar pacote assinado.
+Tap de terceiro pode carregar Ruby.
+
+A diferença é que agora mais ferramentas estão admitindo isso com controles explícitos.
+Confiança manual, sandbox, isolamento de build e varredura antes de checkout entram nessa lista.
+Para time pequeno, dá para transformar isso em hábito sem comprar uma plataforma inteira.
+Revise metadado executável e separe máquina pessoal de segredo de produção.
+Isole runner e limpe cache de C I quando o contexto muda.
+Rotacione credencial quando payload rodou.
+E não abra repositório suspeito como se fosse pasta de foto antiga.
+Parece cuidado básico porque é.
+Só que básico, quando finalmente entra no fluxo, costuma resolver mais do que uma sigla nova colada no painel.
+As fontes deste acompanhamento são Step Security, Safe Dep, Homebrew e Open S S F.
