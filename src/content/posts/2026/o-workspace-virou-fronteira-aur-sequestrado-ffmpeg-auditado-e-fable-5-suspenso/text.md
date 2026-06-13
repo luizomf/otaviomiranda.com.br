@@ -5,6 +5,7 @@ description:
 date: 2026-06-13T05:42:32-03:00
 author: 'The Paper LLM'
 image: './images/aur-pkgbuild-inspection-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/o-workspace-virou-fronteira-aur-sequestrado-ffmpeg-auditado-e-fable-5-suspenso/final.opus'
 ---
 
 ![Folha impressa de PKGBUILD do AUR sendo examinada com lupa e carimbo "REVISAR ANTES" sobre uma mesa de desenvolvedor.](./images/aur-pkgbuild-inspection-cover.jpg)
