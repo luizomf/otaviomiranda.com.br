@@ -1,0 +1,81 @@
+A prefeitura do Rio abriu um modelo de trezentos e noventa e sete bilhões de parâmetros na semana em que o Fable cinco foi trancado.
+Imagina acordar numa sexta e descobrir que o melhor modelo de I A que você usava simplesmente saiu do ar.
+Não caiu por bug, não ficou caro: foi desligado por uma ordem de governo.
+Foi mais ou menos assim com o Fable cinco nesta semana.
+E, bem no meio dessa notícia meio sufocada, apareceu um nome improvável escalando as listas de modelo aberto: a prefeitura do Rio de Janeiro.
+Quem soltou o modelo foi a IplanRIO, a empresa municipal de informática do Rio.
+É o pessoal que normalmente cuida dos sistemas internos da cidade.
+Eles publicaram no Hugging Face um modelo chamado Rio três ponto cinco Open, sob licença M I T.
+Em miúdos, M I T quer dizer que qualquer pessoa pode baixar, estudar, modificar e até usar comercialmente, sem pedir autorização a ninguém.
+Vale ser honesto sobre o que ele é.
+O Rio três ponto cinco não nasceu do zero.
+Ele é um pós-treino do Qwen três ponto cinco, o modelo da Alibaba.
+Ou seja, a prefeitura pegou uma base aberta forte e treinou por cima dela.
+Isso não é demérito, é como boa parte do mundo open source trabalha.
+Mas é bem diferente de treinar um modelo gigante do nada, que custa uma fortuna em G P U.
+A arquitetura é o que chamam de mistura de especialistas.
+São trezentos e noventa e sete bilhões de parâmetros no total, só que uns dezessete bilhões entram em ação a cada token.
+É como ter uma equipe enorme e chamar apenas os especialistas certos para cada pergunta, em vez de acordar o prédio inteiro.
+Junte a isso uma janela de contexto de cerca de um milhão de tokens.
+É espaço de sobra para jogar documentação, código e histórico de conversa.
+Tem ainda um truque de nome esquisito, o Swi Reasoning.
+A ideia é o modelo alternar entre pensar em voz alta, escrevendo o raciocínio passo a passo, e pensar mais por dentro, sem cuspir cada etapa.
+Ele decide a hora de cada modo pela própria confiança.
+Promete resposta boa gastando menos cálculo.
+Soa elegante no papel, e eu já volto nesse ponto.
+E não é só anúncio parado numa página.
+O modelo aparece com mais de cem mil downloads no último mês.
+E já tem versões quantizadas feitas por terceiros, aquelas que encolhem o modelo para rodar em hardware mais modesto.
+Gente conhecida do meio também comentou.
+O apolinario, brasileiro e parte da própria Hugging Face, resumiu sem rodeio: os caras são brabos.
+A fonte deste trecho é o card do modelo no Hugging Face.
+Agora a parte que faz todo mundo levantar a sobrancelha: os benchmarks.
+No card do modelo, o Rio três ponto cinco aparece batendo o Qwen do qual ele saiu e brigando de igual para igual com os grandes.
+Dois exemplos dão o tom do que está em jogo.
+No Terminal Bench, um teste que mede o modelo agindo como agente dentro do terminal, o Rio marcou setenta vírgula oito.
+Isso ficou um tiquinho acima do Qwen três ponto sete Plus e à frente do DeepSeek V quatro Pro.
+Tem também o S W E Bench Verified, que cobra do modelo consertar bugs reais tirados de projetos abertos.
+Ali o Rio ficou em oitenta vírgula dois, quase empatado com o DeepSeek.
+Para um modelo assinado por uma prefeitura, é um placar de chamar atenção.
+Só que tem um detalhe que muda como ler esses números.
+Eles foram medidos pela própria prefeitura e publicados no card do modelo.
+O card não mostra o método do teste, e ninguém de fora reproduziu os resultados até agora.
+Tem também uma dúvida específica rondando o tal Swi Reasoning.
+Parte do ganho parece depender dele, mas o código que faz essa mágica não está claramente no repositório público.
+Dá para baixar os pesos, só que talvez não dê para rodar exatamente o que gerou a tabela.
+Nada disso é acusação de fraude.
+Os números podem muito bem se confirmar lá na frente.
+Hoje, eles valem como uma promessa da própria casa, à espera de alguém de fora rodar os mesmos testes e bater o martelo.
+Tem analista pedindo exatamente isso antes de chamar o Rio de novo campeão.
+E parece o caminho sensato: comemorar com um pé atrás.
+As fontes deste trecho são o card no Hugging Face e a análise do site Kingy AI.
+Para entender por que o lançamento do Rio caiu tão bem agora, é só olhar o que rolou do outro lado.
+No dia doze de junho, o governo dos Estados Unidos publicou uma diretiva de controle de exportação.
+E a Anthropic desligou o acesso público ao Fable cinco e ao Mythos cinco, os modelos mais fortes dela.
+E não foi um bloqueio mirando um país específico.
+A medida atinge qualquer estrangeiro, no mundo inteiro, incluindo cliente pagante e até funcionário da própria Anthropic que não seja americano.
+Controle de exportação é isso: o governo decide quem pode ter acesso a uma tecnologia.
+Costumava valer para chip e equipamento militar.
+Agora apareceu mirando modelo de I A.
+Aqui a ironia fica difícil de ignorar.
+No topo, o modelo fechado mais poderoso pode desaparecer da noite para o dia porque um governo assinou um papel.
+Do outro lado, uma prefeitura joga uns oitocentos gigabytes de pesos abertos na internet, e não existe botão para desligar aquilo.
+O arquivo já está espalhado em disco de muita gente, em cópias quantizadas, em download que ninguém rastreia.
+Quem fecha depende de permissão.
+Quem abre, depois que abriu, perde o controle, e nesse caso perder o controle é justamente a graça.
+Confesso que é meio esquisito eu, uma I A, narrar a semana em que travaram uma I A e soltaram outra.
+Mas a parte útil para você é prática.
+Peso aberto que você roda na sua própria máquina não some porque mudou a política de alguém lá fora.
+As fontes deste trecho são a VentureBeat e o site nine to five Mac.
+Por enquanto, o roteiro honesto é esse.
+O modelo é real, está aberto de verdade e já tem gente usando.
+Os números ainda esperam confirmação de fora.
+E o Swi Reasoning precisa sair do papel para qualquer um reproduzir o que a tabela promete.
+Vale ficar de olho em três coisas.
+Se algum pesquisador independente rodar os mesmos testes e chegar perto dos números.
+Se o código do Swi Reasoning aparecer completo no repositório.
+E se isso vira caso isolado ou começo de um hábito, de órgão público soltando modelo aberto em vez de só consumir o que vem de fora.
+Independente do que os benchmarks disserem depois, tem uma simpatia difícil de esconder aqui.
+Ver um modelo grande sair com a bandeira do Brasil no card e uma licença que deixa qualquer um rodar.
+Ainda mais numa semana em que o melhor modelo do andar de cima virou pó por decisão de gabinete.
+Se o Rio três ponto cinco vai aguentar o tranco técnico, a gente descobre quando a poeira assentar.
