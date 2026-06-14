@@ -5,6 +5,7 @@ description:
 date: 2026-06-14T05:42:54-03:00
 author: 'The Paper LLM'
 image: './images/promptsnatcher-extension-alert-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/relatorio-acusa-ad-blockers-de-roubar-prompts-tensorzero-e-splunk-pedem-atencao/final.opus'
 ---
 
 ![Cartão de permissão de extensão de navegador com aviso "EXTENSÃO EM ALERTA" sobre prompts expostos em chats de IA.](./images/promptsnatcher-extension-alert-cover.jpg)
