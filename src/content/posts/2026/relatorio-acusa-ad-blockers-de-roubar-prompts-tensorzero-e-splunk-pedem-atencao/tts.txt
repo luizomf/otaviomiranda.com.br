@@ -1,0 +1,132 @@
+Relatório acusa bloqueadores de anúncio de roubar prompts; TensorZero e Splunk pedem atenção.
+
+Quando trabalho sensível cabe numa aba do navegador, extensão deixa de ser detalhe visual e vira parte da sala.
+A primeira história de hoje começa justamente aí: dois bloqueadores que, segundo um relatório, coletavam conversas de I A enquanto ainda bloqueavam anúncios.
+
+O relatório PromptSnatcher acusa dois bloqueadores de anúncio de roubar conversas de I A.
+A Malicious Extension Sentry publicou o relatório PromptSnatcher, também ligado ao nome Panel 231.
+O relatório fala de duas extensões vendidas como bloqueadores de anúncio.
+A primeira é Smart Adblocker, com cerca de 80 mil usuários.
+A segunda é Adblock for Browser, com cerca de 10 mil usuários, segundo o relatório.
+
+Ferramentas legítimas de bloqueio de anúncio existem, claro.
+Mas aqui o caso é específico: extensões com permissão ampla no navegador, aparência funcional e acesso a páginas sensíveis.
+É o tipo de página onde muita gente cola código, log, texto de cliente, plano de produto e pergunta que deveria ficar no trabalho.
+
+Segundo o relatório, as extensões capturavam prompts, conversas e metadados de conta e modelo.
+Isso acontecia em serviços como ChatGPT, Claude, Gemini, Copilot, Grok, Perplexity, DeepSeek e Meta A I.
+A captura passava por fluxos de rede do navegador, incluindo chamadas fetch, X H R e WebSocket.
+E podia ser ajustada por configuração remota.
+O relatório também diz que variantes para Firefox declaravam não coletar dados, mesmo com comportamento equivalente.
+
+O detalhe chato é que elas ainda bloqueavam anúncios de verdade.
+Para a pessoa usando o navegador, a extensão parecia cumprir o que prometia.
+Só que, se a aba de I A virou parte do ambiente de trabalho, a higiene do navegador também virou segurança de I A.
+Revisar extensões instaladas, remover bloqueadores suspeitos ou desnecessários, e preferir permissões menores virou manutenção do ambiente.
+
+O padrão de defesa já aparece no próprio caso.
+Extensão com permissão demais em cima de abas que agora carregam contexto sensível demais.
+Fontes deste bloco: Malicious Extension Sentry e discussão no Reddit.
+
+TensorZero arquivou o repositório, mas o código continua sob Apache dois ponto zero.
+O repositório público do TensorZero no Git Hub foi arquivado pelo dono.
+Isso quer dizer que o código continua visível, mas o projeto entrou no modo somente leitura do Git Hub.
+Para um projeto de infraestrutura, essa diferença importa.
+O upstream deixou de parecer um lugar saudável para correção, revisão e release.
+
+O contraste chamou atenção porque a própria TensorZero anunciou, em agosto de 2025, uma rodada seed de sete vírgula três milhões de dólares.
+A rodada foi liderada pela FirstMark e mirava uma stack open source de L L M Ops.
+O arquivo readme descrevia uma base em Rust para gateway de L L M, observabilidade, avaliação, otimização e experimentação.
+Quando isso entra no caminho crítico de um produto, deixa de ser brinquedo rápido de fim de semana.
+
+Nos comentários do Hacker News, uma pessoa se identificando como cofundador e C E O da TensorZero disse que a equipe decidiu encerrar a empresa.
+Também disse que o seed foi levantado em 2024 e anunciado quase um ano depois.
+O repositório segue disponível sob Apache dois ponto zero, mas não será mantido ativamente pela empresa original.
+
+A leitura útil fica na due diligence.
+Olhe licença, sinais de manutenção, quantidade de mantenedores, plano de migração e capacidade de rodar por conta própria.
+Também pese a dependência real de uma empresa só.
+Dinheiro e estrelas ajudam na vitrine.
+Patch seis meses depois depende de gente mantendo o projeto.
+Fontes deste bloco: Git Hub, TensorZero, comentário no Hacker News e discussão no Hacker News.
+
+EvilValet mostrou chaves de teste do A O S P na atualização do Honda Civic.
+O pesquisador Juniper Spring publicou o EvilValet em 14 de junho.
+Ele olhou para o sistema de entretenimento da décima geração do Honda Civic.
+A descoberta central é simples de explicar e ruim de ver em produção.
+O caminho de atualização da head unit parece confiar em chaves de teste públicas do Android Open Source Project, as chaves de teste do A O S P.
+
+O ataque descrito passa pelo caminho físico de atualização por U S B.
+O carro precisa estar ligado, a pessoa precisa acessar a porta U S B da cabine, e o update precisa ser aceito pelo recovery Android do sistema.
+O autor diz que conseguiu montar uma atualização personalizada, assinada com a chave pública de teste e aceita pelo recovery.
+
+O cenário correto é local, com acesso físico.
+Uma pessoa com tempo dentro da cabine, como manobrista, oficina ou serviço de instalação, pode tentar instalar código arbitrário em unidades afetadas.
+O pesquisador confirmou a própria unidade e pelo menos um arquivo de update europeu.
+Mas ele não cravou que todas as variantes de head unit e update estão provadas.
+
+O texto também liberou ferramentas como O T A builder e A P K rebuilder, com aviso de risco de softbrick.
+Para quem projeta sistema embarcado, a lembrança é velha e continua atual.
+Chave de teste pública não pode virar âncora de confiança em atualização de produção.
+A exigência de acesso físico limita o risco, mas a assinatura fraca continua sendo assinatura fraca.
+Fontes deste bloco: Juniper Spring e discussão no Hacker News.
+
+Splunk corrige C V E 2026, vinte dois cinco três, sem workaround público.
+A Splunk publicou o aviso S V D 2026, zero seis zero três para essa falha crítica no Splunk Enterprise.
+A falha fica ligada ao endpoint do sidecar de Postgres.
+A pontuação C V S S é nove vírgula oito.
+Segundo o aviso, a falha é de autenticação ausente.
+Ela permite que um atacante não autenticado crie ou trunque arquivos arbitrários.
+
+Para quem opera Splunk Enterprise, a parte importante é versão e ação.
+A orientação pública é atualizar para releases corrigidas.
+Isso inclui dez ponto quatro ponto zero, dez ponto dois ponto quatro, dez ponto zero ponto sete, ou versões mais novas da linha aplicável.
+A Splunk lista o Splunk Cloud como não afetado, porque ele não usa sidecars de Postgres.
+
+O aviso também diz que não há mitigação, workaround nem detecção listada.
+Esse é o tipo de frase que encurta a conversa dentro do time.
+Se o ambiente está na faixa afetada, patch vira prioridade.
+A análise da watchTowr dá mais contexto técnico e observa nuances de implantação.
+Isso inclui diferença no cenário on prem em Windows.
+
+Para operação, a tarefa é curta e séria: inventariar versão, checar se o deployment usa o caminho afetado e aplicar atualização.
+Quando o fornecedor diz crítica e sem workaround, o painel de observabilidade vira item de mudança planejada com pressa.
+Fontes deste bloco: Splunk Advisory, watchTowr Labs e The Hacker News.
+
+Agora, os destaques rápidos de hoje.
+
+Terraform M C P Server um ponto zero chegou à disponibilidade geral para H C P Terraform e Terraform Enterprise.
+A HashiCorp diz que o servidor funciona com clientes compatíveis com M C P.
+Entre eles estão Claude Code, Git Hub Copilot, I B M Bob e outros.
+Ele expõe documentação, chamadas de [EY1 P IY1 AY1] do Registry, dados de workspace e explicação de planos.
+As credenciais continuam no ambiente, e a autorização existente do Terraform continua valendo.
+Mas o repositório avisa que dados de Terraform podem chegar ao cliente M C P ou ao L L M.
+Cliente não confiável continua sendo má ideia.
+Fontes deste destaque: HashiCorp, Git Hub e InfoQ.
+
+P K G C L I tenta deixar o terminal do PackageKit menos áspero.
+Matthias Klumpp apresentou o P K G C L I como uma C L I mais agradável que P K con e P K mon.
+Ele inclui verbos como show, search, list updates e what provides.
+Também traz saída colorida e modo global JSON, emitindo linhas de JSON.
+Ele apareceu primeiro como P K G C T L no PackageKit um ponto três ponto três.
+E foi renomeado para P K G C L I no PackageKit um ponto três ponto quatro, por conflito com o Arch.
+A utilidade depende de a sua distro empacotar versões novas do PackageKit.
+Fontes deste destaque: Matthias Klumpp e PackageKit News.
+
+G L M cinco ponto dois apareceu no G L M Coding Plan, com configuração para ferramentas de código.
+A documentação da Z ponto A I diz que o G L M cinco ponto dois está disponível para usuários do plano.
+Ela mostra caminhos para Claude Code, OpenClaw e OpenCode.
+O exemplo inclui uma variante de contexto de um milhão de tokens.
+Também mostra context window de um milhão e max tokens de cento e trinta e um mil e setenta e dois.
+O acesso por [EY1 P IY1 AY1], o chatbot e a disponibilidade open source aparecem como promessa para depois.
+Por enquanto, o fato verificável é acesso e configuração.
+Não trate benchmark como conclusão independente aqui.
+Fontes deste destaque: Z ponto A I Docs, Z ponto A I no X e Hacker News.
+
+Fable cinco e Mythos cinco ganharam um capítulo sobre a Amazon, como reportagem.
+Ontem, a gente detalhou a suspensão do Fable cinco e do Mythos cinco.
+Agora, TechCrunch e W S J reportam que Andy Jassy e pesquisadores da Amazon levantaram preocupações antes da pressão do governo americano.
+A base confirmada continua sendo a nota da Anthropic.
+Ela diz que a empresa recebeu uma diretiva sobre acesso de estrangeiros.
+Também diz que os dois modelos foram desligados, e que os outros seguiram sem impacto.
+Fontes deste destaque: Anthropic, TechCrunch, The Wall Street Journal e The New Stack.
