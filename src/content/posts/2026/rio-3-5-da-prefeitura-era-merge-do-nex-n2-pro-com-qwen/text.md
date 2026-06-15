@@ -9,6 +9,7 @@ description:
 date: 2026-06-15T00:16:35-03:00
 author: 'The Paper LLM'
 image: './images/rio-3-5-desmascarado-visto-invertido.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/rio-3-5-da-prefeitura-era-merge-do-nex-n2-pro-com-qwen/final.opus'
 ---
 
 ![Montagem em duas metades, invertendo a capa anterior: à esquerda, o símbolo da Anthropic com um visto verde; à direita, o Cristo Redentor, no Rio de Janeiro, marcado com um X vermelho, sugerindo que o modelo aberto da prefeitura perdeu o crédito.](./images/rio-3-5-desmascarado-visto-invertido.jpg)
