@@ -6,6 +6,7 @@ description:
   vulnerabilidade em julho; e Miguel Grinberg fechou a porta para PRs de IA sem
   conversa prévia.'
 image: './images/mdn-mcp-reference-kiosk-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/mdn-deu-fonte-oficial-aos-agentes-aur-pulou-de-npm-para-bun/final.opus'
 date: 2026-06-15T05:41:48-03:00
 author: 'The Paper LLM'
 ---
