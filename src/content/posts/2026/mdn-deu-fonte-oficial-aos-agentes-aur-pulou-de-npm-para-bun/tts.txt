@@ -1,0 +1,170 @@
+M D N deu fonte oficial aos agentes, e o ataque ao A U R pulou de N P M para Bun.
+
+IA no editor só parece mágica até encostar no trabalho real.
+Depois disso, precisa de documentação confiável e pacote que não rode código escondido.
+Também precisa de fila de segurança com gente descansada.
+E precisa de mantenedor que ainda consiga dizer: antes do pull request, conversa comigo.
+
+M D N lançou um servidor M C P experimental para agentes de código.
+
+M D N publicou em 15 de junho um servidor M C P experimental.
+Ele coloca documentação web e dados de compatibilidade de navegadores no caminho dos agentes de código.
+M C P, aqui, é a ponte que deixa uma ferramenta consultar uma fonte externa em formato combinado.
+Assim, o agente não depende só da memória do modelo, nem de uma raspagem improvisada da página.
+
+Para quem escreve front-end, a dor é bem concreta.
+Um agente pode responder com confiança sobre uma [EY1 P IY1 AY1] que mudou.
+Também pode errar suporte de navegador que saiu ontem.
+Ou tropeçar numa diferença pequena entre Chrome, Firefox e Safari.
+Com o M C P, a M D N quer dar acesso direto à documentação.
+Também quer abrir o banco de compatibilidade que muita gente já consulta manualmente.
+
+O anúncio cita clientes e I D Es compatíveis.
+Entram na lista V S Code, Zed, Cursor, Claude Code, Codex [S IY1 EH1 L AY1] e Antigravity [S IY1 EH1 L AY1].
+Também aparecem Claude Desktop e outras opções de uso.
+O repositório mostra um endpoint remoto da própria M D N.
+E também mostra opções locais para quem prefere controlar esse caminho.
+
+Nos testes da própria M D N com Claude Code Opus quatro ponto sete, as perguntas sobre suporte melhoraram.
+As respostas também ficaram perto de duas vezes mais rápidas com o M C P ligado.
+Mas esse é teste da própria casa, com comportamento não determinístico de modelo.
+Entra como sinal interessante, não como placar independente.
+
+O aviso mais importante é o de privacidade.
+M D N descreve o servidor como experimental.
+E avisa que pode armazenar dados de consulta durante o experimento.
+O repositório também fala em um cabeçalho de opt-out específico da Mozilla para certos usos.
+Em projeto real, a regra é simples: não mande contexto sensível pelo caminho só porque a fonte é boa.
+
+As fontes deste bloco são M D N Web Docs e o repositório mdn barra mcp no "Git Hub".
+
+O ataque ao A U R cresceu e passou de N P M para Bun.
+
+No dia 13, falamos do A U R sequestrado na campanha Atomic Arch.
+Agora a atualização pública é outra.
+Segundo a Risky Business, a campanha cresceu na direção de mil e novecentos pacotes.
+E parte do payload saiu do caminho via N P M para rodar por scripts em Bun.
+
+O A U R é poderoso justamente porque um arquivo P K G build pode descrever como buscar um pacote.
+Ele também pode descrever como construir e instalar um pacote comunitário.
+Só que esse arquivo também pode rodar código.
+Quando um pacote órfão ou confiável muda de dono e recebe lógica maliciosa, a armadilha fica fácil.
+O usuário pode executar a atualização achando que só está trazendo uma ferramenta de volta para a vida.
+
+O Arch Linux já tinha confirmado em 12 de junho adoções e atualizações maliciosas em alto volume no A U R.
+A StepSecurity descreveu a onda inicial com mais de quatrocentos pacotes.
+A novidade da Risky Biz é o aumento de escala e a troca de rota.
+Sair de um payload esperado por algumas detecções e usar Bun muda o terreno.
+Principalmente para quem estava procurando só o padrão anterior.
+
+O risco vai além do pacote instalado.
+As análises falam em tentativa de coleta de chaves S S H.
+Também falam em tokens do "Git Hub", tokens do N P M e credenciais de cloud.
+Entram ainda dados de navegador e credenciais de apps Electron.
+Algumas análises também tratam persistência, inclusive via E B P F, como algo a checar.
+Se o script rodou numa máquina cheia de acesso, remover o pacote pode ser pouco.
+
+Para quem usa A U R, a resposta sensata é revisar instalações recentes.
+Também vale comparar pacotes suspeitos com avisos públicos e evitar upgrade no automático.
+Execução confirmada deve ser tratada como possível exposição de segredo.
+Rotacionar credenciais e reconstruir o ambiente pode doer menos do que adivinhar até onde o script chegou.
+Os números ainda estão se movendo, e atribuição fechada não apareceu.
+
+As fontes deste bloco são Risky Business, Arch Linux e StepSecurity.
+
+O curl vai pausar reports de vulnerabilidade durante julho.
+
+Daniel Stenberg avisou que o curl não vai aceitar nem processar reports de vulnerabilidade em julho de 2026.
+A submissão pelo "Hacker One" pausa em primeiro de julho, à meia-noite no horário C E S T.
+Esse é o horário de verão da Europa Central.
+A fila volta em 3 de agosto, às nove da manhã.
+O caminho por email de segurança também não será processado nesse intervalo.
+
+Isso chama atenção porque curl é infraestrutura de base.
+Ele aparece em sistema operacional, container, ferramenta de C I, aplicação interna e firmware.
+Também aparece num monte de lugar onde ninguém lembra dele até quebrar.
+Só que a fila de segurança tem corpo e agenda.
+Tem gente lendo, reproduzindo, discutindo escopo e escrevendo advisory.
+E tem gente aguentando relatório ruim junto com relatório importante.
+
+A pausa também mexe no calendário.
+O curl oito ponto vinte e dois ponto zero foi empurrado para 2 de setembro de 2026.
+Issues e pull requests no "Git Hub" continuam abertos.
+Contratos de suporte pagos seguem cobertos.
+A fila pública de vulnerabilidade para por um mês, com exceções explícitas.
+
+Para pesquisadores, a consequência é planejar envio fora da janela.
+Para empresas que precisam de garantia de atendimento, o próprio Stenberg aponta o caminho de contrato pago.
+A leitura mais honesta é meio desconfortável.
+Dependência crítica também depende de gente que precisa parar.
+
+As fontes deste bloco são Daniel Stenberg e a documentação de segurança do curl.
+
+Miguel Grinberg passou a exigir conversa antes de pull request com L L M.
+
+Miguel Grinberg publicou um texto dizendo que a quantidade de contribuições que recebe aumentou.
+Ele também diz que quase todas agora chegam com ajuda de modelos L L M.
+O alvo dele é o pull request de passagem, sem conversa.
+Esse tipo de contribuição transfere para o mantenedor o trabalho de descobrir se existe problema real.
+Também empurra para o mantenedor a dúvida sobre a solução fazer sentido.
+E ainda exige descobrir se alguém humano entendeu a mudança.
+
+A reação foi mexer nas regras de contribuição.
+Antes de abrir pull request, a pessoa precisa discutir a mudança em uma issue.
+Pull requests sem conversa prévia podem ser fechados a critério do mantenedor.
+
+Esse é um caso pequeno o bastante para ser concreto.
+E grande o bastante para doer em muita gente.
+Se você usa IA para contribuir em projeto aberto, leve contexto junto.
+Explique o problema com suas palavras, combine a direção, rode teste, aceite revisão e apareça depois.
+Mantenedor não deveria virar validador gratuito de patch gerado.
+
+Para esse mantenedor, pull request sem conversa prévia pode ser fechado antes de virar mais trabalho de triagem e revisão.
+
+As fontes deste bloco são Miguel Grinberg e a discussão no "Hacker News".
+
+Agora, os destaques rápidos de hoje.
+
+Linux sete ponto um saiu com N T F S, Apple Silicon e Steam Deck na lista.
+A cobertura pública aponta Linux sete ponto um como release estável.
+Ela cita trabalho em N T F S e relatório de bateria para Apple Silicon.
+Também cita correção de áudio no Steam Deck O L E D.
+Há melhorias de energia no driver [EY1 EH1 M D IY1] p state, Intel FRED e remoção de código legado.
+Para a maioria das pessoas, isso entra pela distro, sem corrida manual atrás de kernel novo.
+As fontes são OMG Ubuntu e Phoronix.
+
+PlanetScale lembra que delete gigante em Postgres cobra juros.
+O texto explica que grandes operações de delete deixam tuplas mortas.
+Isso aumenta o trabalho do auto vacuum e pressiona replicação.
+Normalmente, também não devolve espaço ao sistema operacional de imediato.
+Para limpeza periódica grande, a recomendação é desenhar retenção com partições.
+Quando couber, também entram drop table ou truncate.
+Isso exige desenho de schema e cuidado com locks.
+Delete comum continua sendo a ferramenta certa para deleções normais.
+A fonte desse destaque é PlanetScale.
+
+Pony E X L três leva inferência E X L três para Apple Silicon, ainda em alfa.
+O projeto usa M L X, M L X L M e Metal para rodar pesos E X L três quantizados em Macs.
+Ele mantém pesos low-bit trellis comprimidos e decodifica durante a inferência.
+O readme mostra tabelas para modelos Qwen três ponto seis.
+Mas os números são do próprio projeto.
+Para quem brinca com modelo local em Mac, é item de teste.
+Para produção, o próprio repositório ainda diz alfa e chama conversão de experimental.
+As fontes são Pony E X L três, ExLlama V três e o fórum LocalLLaMA no Reddit.
+
+Agora, o acompanhamento de tendências do dia.
+
+Juntando essas histórias, o padrão é bem operacional.
+Agentes precisam de contexto oficial, prova verificável e limites humanos.
+M D N entra como fonte confiável dentro do loop.
+A Jane Street publicou que a programação com agentes deixou métodos formais mais atraentes.
+O motivo é que verificar comportamento pode virar gargalo quando modelo escreve mais código.
+O curl mostra que triagem de segurança ainda passa por pessoas.
+Miguel Grinberg mostra a mesma pressão chegando na porta dos mantenedores.
+
+Para hoje, já basta uma prática chata e útil.
+Ligue o agente a fontes oficiais.
+Rode checagens determinísticas quando o risco pede.
+E trate quem revisa como parte do trabalho, não como extensão gratuita do prompt.
+
+As fontes finais são M D N Web Docs, Jane Street, Daniel Stenberg e Miguel Grinberg.
