@@ -1,0 +1,71 @@
+A prefeitura do Rio confirmou que o Rio três ponto cinco é uma mistura do Nex N dois Pro com o Qwen.
+A gente fechou o post de ontem sobre o Rio três ponto cinco prometendo descobrir o resto quando a poeira baixasse.
+Pois ela baixou rápido, em menos de um dia.
+Poucas horas depois de a prefeitura soltar esse modelo aberto de 397 bilhões de parâmetros, uma empresa chamada Nex foi olhar os pesos.
+A Nex reconheceu o próprio modelo ali dentro, e agora a página oficial do Rio admite como ele foi montado.
+Quem quiser conferir é só abrir a página do modelo no "Hugging Face".
+O texto que está lá agora diz, com todas as letras, que o Rio é uma mistura de dois modelos abertos.
+De um lado, o Nex N dois Pro, da empresa Nex.
+Do outro, o Qwen três ponto cinco, de 397 bilhões de parâmetros, da Alibaba.
+Depois de juntar os dois, eles dizem ter feito uma etapa de destilação.
+Destilação, aqui, é treinar o modelo final imitando um modelo mais forte.
+Misturar os pesos de dois modelos é uma técnica de verdade, tem até nome, "model merging".
+Não é gambiarra nem é nada proibido.
+Ontem a gente já tinha contado que o Rio não nasceu do zero, que vinha treinado por cima do Qwen.
+O que faltou na nossa versão, e que ninguém de fora sabia, era o segundo ingrediente da receita: o Nex.
+O card antigo simplesmente não citava ele.
+Tem também a parte constrangedora.
+No mesmo aviso, a prefeitura conta que subiu o arquivo errado na primeira vez.
+Em vez do modelo final, já destilado, foi parar no ar a versão crua da mistura.
+Eles pediram desculpas, disseram lamentar a confusão e prometeram subir a versão certa assim que der.
+Esse detalhe pesa, porque foi justamente a versão crua que entregou o jogo.
+A fonte deste bloco é o card do modelo no "Hugging Face".
+Agora a pista que estourou tudo, e ela é boa demais.
+A Nex conta que, quando você tira o "system prompt", o modelo muda de comportamento.
+O "system prompt" é aquele texto inicial que manda o modelo agir como assistente da prefeitura.
+Sem ele, o Rio passa a se apresentar sozinho como Nex, da Nex A G I.
+Pela medição deles, isso acontece em setenta e nove porcento das vezes.
+Como Rio, ele não se apresenta nenhuma vez.
+O modelo ainda recita a história de origem da Nex, igualzinha.
+A segunda evidência é menos engraçada e mais difícil de rebater.
+A Nex abriu uma issue pública no "Git Hub" com a conta fechada.
+Peso por peso, nas sessenta camadas do modelo, o Rio bate como uma mistura fixa.
+É mais ou menos sessenta porcento de Nex e quarenta porcento de Qwen.
+Eles resumiram isso no título da issue, que já virou meio meme.
+O Rio é aproximadamente zero vírgula seis de Nex, mais zero vírgula quatro de Qwen.
+Dá para separar o que é fato e o que é a régua de quem está reclamando.
+A conta do sessenta quarenta e o número dos setenta e nove porcento são medições da própria Nex.
+E a Nex é parte interessada, claramente irritada.
+Mas o ponto principal, de que o Rio tem o Nex misturado dentro, não depende só da palavra deles.
+O card atualizado da prefeitura agora diz a mesma coisa.
+Quando o acusado e o acusador concordam no essencial, dá para confiar no essencial.
+A fonte deste bloco é a issue no "Git Hub" da Nex.
+É tentador chamar isso de roubo.
+Só que o Nex N dois Pro também é aberto, e isso muda a conversa.
+Tanto que o recado público da Nex não foi tirem isso do ar.
+Foi outro: no mundo do código aberto, crédito importa.
+Eles até brincaram que ficaram lisonjeados de a cidade do Rio usar o trabalho deles.
+Misturar e destilar modelos abertos é jogo limpo.
+O escorregão foi de transparência.
+O card original vendia o Rio como um trabalho em cima do Qwen.
+E não dizia que boa parte da receita vinha de outro modelo, com nome e dono.
+E aqui a cautela do post de ontem envelheceu bem.
+A gente tinha segurado a empolgação com os benchmarks, porque eram medidos pela própria casa.
+Ninguém de fora tinha reproduzido aqueles números.
+Pois é, e o motivo ficou ainda mais claro agora.
+Quando o modelo no ar é, em boa parte, outro modelo já conhecido, aquela tabela de recordes perde o brilho.
+O Kingy A I, que já pedia auditoria, agora pergunta na manchete se aquilo foi lançamento sério ou número à espera de auditoria.
+As fontes aqui são o Kingy A I e o nosso post de ontem.
+Por enquanto, o que dá para cravar é pouco e honesto.
+A prefeitura confirmou a mistura, pediu desculpas pela versão errada e prometeu subir a correta.
+Essa versão correta, até agora, não apareceu.
+E a issue da Nex segue aberta até agora.
+Tem ainda a tal versão final destilada, que seria o argumento da prefeitura.
+Seria a forma de dizer que o modelo, no fim das contas, é coisa própria.
+Só que ninguém de fora viu essa versão ainda para julgar.
+Continua valendo a simpatia de ver um órgão público brincando de soltar modelo aberto.
+Bem melhor do que só consumir o que vem de fora.
+Só que abrir um modelo vem com a parte chata no pacote.
+Qualquer pessoa baixa os pesos, faz a conta e descobre de quem é a letra.
+Dessa vez, a conta bateu num nome que não estava nos créditos.
+Se a versão corrigida mudar esse retrato, a gente volta para contar.
