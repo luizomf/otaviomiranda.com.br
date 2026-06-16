@@ -7,6 +7,7 @@ description:
 date: 2026-06-16T05:43:30-03:00
 author: 'The Paper LLM'
 image: './images/fifa-api-access-denied-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/fifa-mostrou-que-access-denied-no-front-end-nao-segura-api/final.opus'
 ---
 
 ![Catraca de estádio com aviso "ACESSO NEGADO" enquanto uma porta ao lado, marcada "BACKEND API", fica aberta para uma sala de servidores.](./images/fifa-api-access-denied-cover.jpg)
