@@ -1,0 +1,157 @@
+FIFA mostrou que "access denied" no front-end não segura [EY1 P IY1 AY1].
+
+Quando uma tela diz "sem permissão", a [EY1 P IY1 AY1] ainda precisa concordar.
+A história da FIFA hoje começa exatamente aí, no meio de sistemas de Copa do Mundo.
+
+Uma conta do "FIFA Agent Platform" chegou onde o backend deveria barrar.
+
+Um pesquisador publicou que se cadastrou no "FIFA Agent Platform", o portal público para agentes.
+Segundo ele, a conta acabou no mesmo tenant Microsoft Entra usado por aplicações internas da FIFA.
+A página do "Football Data Platform" mostrou que ele não tinha papel atribuído.
+Mas esse aviso ficava no cliente. Quando ele mexeu no fluxo do navegador, o backend continuou respondendo.
+
+Segundo o relato, a brecha levou ao painel de gerenciamento de streaming em produção para a Copa do Mundo de 2026.
+Sem entrar em rota, credencial ou detalhe operacional, a categoria do problema já basta.
+Um usuário externo, vindo de cadastro público, alcançou uma área que deveria ter autorização de servidor.
+
+A correção é básica e chata, como quase toda correção boa de autorização.
+Cadastro público não deveria dividir raio de explosão com aplicação interna sensível.
+Uma tela Angular dizendo que faltavam papéis orienta o usuário.
+Quem protege rota é backend, com checagem real de papel, escopo e tenant em cada chamada.
+
+O pesquisador diz que avisou FIFA, MediaKind, H B S, CISA e F B I.
+Ele também diz que o problema foi corrigido, embora relate não ter recebido resposta direta.
+Não há, por enquanto, confirmação pública da FIFA nas fontes abertas usadas para este texto.
+Então leia como divulgação de pesquisador, não como comunicado oficial do fornecedor.
+Também não apareceu prova pública de abuso além do acesso reportado.
+
+A fonte deste bloco é bobdahacker.
+
+Fable 5 voltou pela porta da defesa de software.
+
+No dia 13, a gente detalhou a suspensão do Fable 5 e do Mythos 5.
+Aquilo veio depois de uma diretiva de controle de exportação dos Estados Unidos.
+O bloqueio já ficou contado. Hoje o fato novo é a crítica técnica que apareceu por cima dele.
+
+Katie Moussouris, da Luta Security, diz que a Anthropic compartilhou com ela um paper de terceiros.
+Segundo a leitura pública dela, esse compartilhamento foi em caráter privado.
+O fluxo testado se parece com trabalho defensivo normal.
+Ele envolve revisar código vulnerável, corrigir o trecho e criar scripts para testar se o patch segurou.
+Esse "achar, corrigir e testar" faz parte do cotidiano de segurança de software.
+Isso vale especialmente quando a equipe tenta transformar uma falha conhecida em correção confiável.
+
+Na própria nota, a Anthropic confirma a diretiva sobre acesso de estrangeiros ao Fable 5 e ao Mythos 5.
+A empresa também diz que desligou os dois modelos para todos os clientes para cumprir a ordem.
+Enquanto isso, outros modelos da Anthropic continuaram disponíveis.
+
+O limite continua grande: a carta do governo e o paper completo de terceiros não estão públicos.
+Dá para discutir o que Luta, Simon Willison e Anthropic colocaram em aberto.
+Mas não dá para julgar o processo inteiro por dentro.
+Para quem usava Fable 5 em revisão de vulnerabilidade, correção assistida ou geração de teste de patch, o risco mudou.
+Ele deixou de ser só qualidade de resposta. Virou disponibilidade política.
+
+Se uma ferramenta crítica aponta para um único modelo restrito, vale ter fallback e teste de regressão.
+Também vale ter resposta clara para a pergunta chata: o que acontece se esse identificador sumir amanhã?
+
+As fontes são Luta Security, Anthropic e Simon Willison.
+
+Ver I B M C junta L L M local com verificação simbólica.
+
+O Ver I B M C é uma pesquisa nova para uma dor antiga de verificação formal: descobrir invariantes de loop.
+Em português menos assustado, invariantes são condições que precisam continuar verdadeiras a cada volta de um for ou while.
+Se você consegue provar isso, fica mais perto de provar que o programa respeita certas propriedades.
+
+O caminho do paper é bom porque evita tratar o modelo como oráculo.
+Primeiro entram geração simbólica determinística e o E S B M C, uma ferramenta de verificação.
+Depois, modelos de pesos abertos rodam localmente para refinar candidatos, recebendo feedback do verificador.
+O L L M sugere, o verificador reclama, e o ciclo tenta melhorar.
+
+Nos números dos autores, a melhor configuração resolveu 431 de 499 problemas.
+Isso veio depois de excluir vinte e um casos com overflow inevitável, e dá oitenta e seis vírgula quatro porcento.
+Antes de qualquer chamada ao modelo, a síntese simbólica já tinha resolvido setenta e cinco problemas.
+O estudo testou cinco famílias de benchmark e modelos locais de sete a cento e vinte bilhões de parâmetros.
+Também testou variações de cadeia e árvore de pensamento.
+
+O detalhe prático é a privacidade.
+Todo o fluxo descrito roda em uma máquina local, sem mandar o código para uma [EY1 P IY1 AY1] de nuvem.
+Para código sensível, isso muda a conversa.
+O modelo local pode não ser o mais poderoso do planeta.
+Mas ele trabalha perto de uma ferramenta determinística e não leva o repositório para fora.
+
+Ainda é paper, com números do benchmark dos autores, não produto pronto para plugar no C I e ir embora.
+Mesmo assim, a arquitetura é uma boa pista de como usar L L M em tarefa séria.
+Ferramenta formal fazendo cobrança, modelo ajudando onde a busca manual dói.
+
+A fonte deste bloco é o arXiv.
+
+OpenCode no homelab ficou melhor quando foi obrigado a abrir P R.
+
+Depois de duas histórias com clima de incidente, vem uma arquitetura pequena e útil.
+Um autor publicou como montou uma plataforma de desenvolvimento com I A para o próprio homelab.
+A interface web do OpenCode roda em ambiente separado, com acesso ao Git, escrevendo mudanças em branches.
+Produção mesmo, só depois de review e merge.
+
+Esse é o pedaço que interessa.
+O agente ajuda a ler release notes, atualizar containers, mexer em Docker Compose e adicionar health checks.
+Mas ele não sai executando mudança direto no servidor como se fosse dono da casa.
+Ele prepara branch, abre P R, e o fluxo de Git Ops aplica depois que um humano aprova.
+
+O autor usa Arcane para gerenciar stacks Docker Compose em estilo Git Ops.
+Ele também cita uma limitação chata: o ciclo de feedback com logs de C I no Forgejo ainda é imperfeito.
+Esse detalhe deixa o texto mais confiável, porque mostra a fricção real.
+Agente bom em infra não precisa de senha de produção no primeiro encontro.
+
+Para V P S pequena, laboratório caseiro ou time enxuto, o desenho é copiável como ideia.
+Dê ao agente um ambiente de trabalho, não a chave do deploy.
+Git, P R e Git Ops ficam como a fronteira onde a automação precisa pedir passagem.
+
+A fonte deste bloco é o blog R S G M.
+
+Agora, algumas notas rápidas de segurança e infra.
+
+Cisco Catalyst S D W A N Manager entrou na fila de patch com C V E explorada.
+É outro caso Cisco S D W A N, diferente do que apareceu no dia 5.
+A C V E 2026, vinte dois seis dois, permite escrita arbitrária de arquivo pela interface web.
+Mas a Cisco descreve um pré-requisito importante: atacante autenticado com permissão de escrita.
+Não há workaround, a CISA colocou a falha no catálogo K E V, e a Cisco lista correções.
+As versões corrigidas são vinte ponto nove ponto nove ponto dois, e vinte ponto doze ponto sete ponto dois.
+A lista também inclui vinte ponto quinze ponto quatro ponto cinco, e vinte ponto quinze ponto cinco ponto três.
+As fontes são Cisco, CISA e The Hacker News.
+
+Uma oferta falsa no LinkedIn virou armadilha de N P M install.
+O relato é simples e bem útil: uma persona de recrutador mandou um repositório para revisão.
+O autor analisou tudo numa V P S descartável, com ferramentas em modo leitura, antes de executar qualquer coisa.
+A armadilha passava pelo package ponto JSON.
+O script prepare pode rodar automaticamente durante N P M install.
+Para repositório desconhecido, principalmente vindo de vaga, cliente ou "só dá uma olhada rapidinho", leia scripts antes.
+Isole o ambiente e trate instalação como execução de código.
+As fontes são Roman Imankulov e Hacker News.
+
+Lite L L M corrigiu uma cadeia de falhas em gateway de I A.
+A Obsidian descreveu três registros C V E nessa cadeia.
+Dois deles são C V E 2026, quarenta e sete um zero um; e C V E 2026, quarenta e sete um zero dois.
+O terceiro é C V E 2026, quarenta dois um sete.
+Essa cadeia poderia levar um usuário de baixo privilégio a admin e execução remota de código.
+Lite L L M costuma ficar no centro do roteamento entre aplicação e provedores de modelo.
+Então o alvo guarda chaves, configurações e tráfego sensível.
+A marca de correção é a versão um ponto oitenta e três ponto quatorze stable, ou mais nova.
+Não há confirmação pública de exploração ativa nas fontes usadas aqui.
+É item de upgrade e auditoria de segredo para quem expôs esse tipo de proxy.
+As fontes são Obsidian Security, Git Hub do Lite L L M e The Hacker News.
+
+A fronteira de confiança está descendo para lugares menos bonitos.
+
+O fio do dia passa por uma pergunta prática: qual camada realmente manda?
+
+Na FIFA, a tela negou, mas o backend respondeu.
+No Fable 5, a escolha do modelo virou dependência de política pública.
+No homelab com OpenCode, o agente só fica aceitável quando Git e P R seguram a porta.
+No caso do LinkedIn, o risco aparece antes do app rodar, no ciclo de instalação do pacote.
+No Lite L L M, o gateway que parecia só "ponte de modelo" vira ponto central de segredo.
+
+Prompt ajuda. Aviso na U I ajuda. Convenção ajuda.
+Mas produção gosta mesmo é de controle que aguenta requisição, credencial, script, patch e deploy.
+E esse controle precisa aguentar quando ninguém está olhando.
+Chato? Sim, e é justamente por isso que funciona melhor.
+
+As fontes finais são bobdahacker, Luta Security, R S G M's Blog, Roman Imankulov e Obsidian Security.
