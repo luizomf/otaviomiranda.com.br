@@ -1,0 +1,130 @@
+Mastra levou o risco para o comando N P M install, e G L M cinco ponto dois abriu pesos no Hugging Face.
+
+Hoje a história começa antes de o app rodar.
+Em JavaScript, instalar pacote já pode executar código; se essa etapa cai, o resto do fluxo descobre tarde.
+
+Primeiro, pacotes do escopo arroba Mastra foram republicados com easy day J S malicioso.
+Em 17 de junho de 2026, pacotes do escopo arroba Mastra no N P M foram republicados com uma dependência nova.
+Essa dependência era o pacote easy day J S.
+A jogada era boa de atacante e péssima para quem instalou.
+A versão um ponto onze ponto vinte e um parecia limpa.
+Mas a faixa com circunflexo um ponto onze ponto vinte e um podia resolver para a versão um ponto onze ponto vinte e dois.
+Essa versão executava um post install malicioso durante a instalação.
+
+Isso muda a gravidade do incidente.
+O código principal dos pacotes arroba Mastra nem precisava carregar a parte maliciosa.
+O ataque entrava quando o gerenciador resolvia a dependência e rodava o script de instalação.
+Isso acontecia antes de qualquer import, teste ou deploy.
+Em máquina de desenvolvimento e C I, esse encanamento todo vira incidente rápido.
+
+Os números ainda variam entre as fontes.
+A SafeDep fala em cento e quarenta e um pacotes.
+A StepSecurity fala em mais de cento e quarenta pacotes.
+Ela também fala em mais de um milhão e cem mil downloads semanais combinados expostos.
+O padrão confirmado é o mesmo: escopo importante de framework para agentes, publicação maliciosa e dependência easy day J S.
+Também entram na conta a ausência do sinal normal de provenance nas versões afetadas e a execução durante instalação.
+
+Para quem instalou arroba Mastra nos dias 16 ou 17 de junho, a resposta passa de dar update.
+É revisar o lockfile, voltar versões afetadas e rotacionar credenciais acessíveis no ambiente.
+Também vale procurar persistência e apertar política de publicação onde der.
+N P M provenance, assinatura e atestação S L S A ajudam quando uma versão nova aparece sem a trilha esperada do release.
+
+Como a investigação ainda estava andando, as fontes divergem no número exato de pacotes e nos detalhes finais do segundo estágio.
+O fato bem sustentado publicamente já basta: a instalação virou o momento de execução.
+Ruim o bastante para ligar alerta.
+As fontes deste bloco são SafeDep, StepSecurity e The Hacker News.
+
+Agora, G L M cinco ponto dois saiu com licença M I T, um milhão de tokens de contexto e uso local pesado.
+No dia 14, o G L M cinco ponto dois apareceu por aqui como acesso e configuração, ainda com promessa de abertura.
+Agora o fato mudou de forma concreta.
+A página pública no Hugging Face está no ar, com licença M I T, contexto de um milhão de tokens e instruções de uso local.
+Essas instruções cobrem rodar ou servir o modelo em ambientes compatíveis.
+
+A página lista suporte a Transformers, V L L M, S G Lang, Docker Model Runner e caminhos de quantização.
+A documentação da Z ponto A I também fala em saída máxima de cento e vinte e oito mil tokens.
+Ela ainda cita function calling e streaming.
+Para quem monta agente de código, isso muda a conversa.
+A pergunta deixa de ser se um dia abre e vira como testar isso no fluxo sem queimar tempo e G P U à toa.
+
+O tamanho, porém, puxa o freio.
+O model card lista setecentos e cinquenta e três bilhões de parâmetros.
+Self-hosting real, nesse porte, não é coisa de notebook feliz em mesa de cafeteria.
+O caminho provável para muita gente passa por infraestrutura pesada, quantização, provedor compatível ou teste bem recortado.
+E esse teste precisa ser numa tarefa real do repositório.
+
+Numa semana em que acesso a modelo virou risco operacional por preço, quota, região e política de fornecedor, isso importa.
+Um modelo aberto com licença permissiva entra como plano B possível para fluxos de agente.
+Merece avaliação, com teste antes de qualquer troca.
+
+Benchmarks do card e cobertura de ecossistema continuam sendo claims de model card e sinal de atenção dos devs.
+Antes de apostar nele, o teste chato ainda manda.
+É pegar uma tarefa real, medir qualidade, custo, latência, uso de ferramenta e regressão.
+Modelo aberto também precisa passar pelo constrangimento do seu próprio repositório.
+As fontes deste bloco são Hugging Face, Z ponto A I Developer Document e Latent Space.
+
+Nos destaques rápidos de hoje, MiniMax Sparse Attention tenta baratear contexto de um milhão de tokens.
+O paper descreve uma atenção esparsa em blocos com dois ramos.
+Um ramo mais leve escolhe blocos relevantes, e o ramo principal aplica atenção exata só nesses blocos.
+Os autores reportam avaliação em um M O E de cento e nove bilhões de parâmetros.
+Também citam orçamento de três trilhões de tokens.
+O claim é de vinte e oito vírgula quatro vezes menos compute de atenção por token em um milhão de contexto.
+Os speedups foram medidos em H oitocentos.
+Trate como radar técnico dependente de reprodução no seu runtime.
+As fontes são arXiv, Hugging Face Papers e GitHub da MiniMax A I.
+
+O Bash barra dev barra T C P quebra um galho quando o container não tem curl.
+O texto mostra como abrir um socket com redirecionamento especial do Bash.
+Também mostra como usar o descritor três em leitura e escrita e mandar um GET manual com printf para ler a resposta.
+Serve bem para diagnosticar container mínimo sem curl ou W get.
+Como cliente H T T P completo, deixa T L S, redirect, chunking, conteúdo comprimido e retry fora da brincadeira.
+A fonte deste bloco é Marek Suppa.
+
+PseudoBench mede agentes de pesquisa aceitando pseudociência.
+O benchmark tem duzentos pares de claim e evidência pseudocientífica em cinco domínios.
+Os autores testaram sete agentes em um fluxo de pesquisa.
+O resumo do paper fala em taxa de recusa quase zero e resistência máxima de vinte e sete vírgula quatro porcento.
+É preprint e depende do desenho do benchmark.
+Mas a mensagem para uso real é saudável: fluência não é filtro de verdade.
+A fonte deste bloco é o arXiv.
+
+Amazon S três ganhou annotations mutáveis para contexto consultável.
+A AWS anunciou annotations para anexar contexto diretamente a objetos.
+O limite é de mil annotations por objeto, cada uma com até um megabyte.
+No total, isso pode chegar a um gigabyte por objeto.
+Com S três Metadata, esse contexto pode virar tabela gerenciada consultável no Athena.
+Para data lake e agente que precisa achar objeto por contexto, é interessante.
+Preço, disponibilidade, governança e lock-in entram na conta antes de migrar metadata existente.
+A fonte deste bloco é AWS News Blog.
+
+Bedrock Guardrails ganhou checagens detect only dentro do loop do agente.
+A nova [EY1 P IY1 AY1] Invoke Guardrail Checks permite aplicar salvaguardas em pontos específicos de fluxos com ferramentas.
+Isso evita criar um recurso separado de guardrail para cada etapa.
+Ela também devolve notas numéricas.
+A aplicação decide se bloqueia, registra, tenta de novo ou manda para revisão.
+Ajuda a desenhar controle por etapa.
+Mas segurança de agente continua dependendo de política, log, teste e revisão humana.
+As fontes deste bloco são AWS Machine Learning Blog e AWS Documentation.
+
+Joomla J C E e LiteSpeed para cPanel entraram em alerta de exploração ativa.
+A SecurityWeek reportou ataques envolvendo o Joomla Content Editor e o plugin LiteSpeed para cPanel.
+O C V E 2026, quarenta e oito nove zero sete pode levar a upload e execução de P H P no J C E.
+O C V E 2026, cinquenta e quatro quatro dois zero afeta o plugin LiteSpeed cPanel antes da versão dois ponto quatro ponto oito.
+Ele também afeta o plugin W H M antes da versão cinco ponto três ponto dois ponto zero, com problema de symlink.
+Como o catálogo K E V da C I S A aparece no caminho, atualizar e procurar comprometimento anterior entram juntos.
+As fontes são SecurityWeek, os registros C V E 2026 quarenta e oito nove zero sete e C V E 2026 cinquenta e quatro quatro dois zero, e C I S A K E V.
+
+No acompanhamento de tendências do dia, o padrão é mais operacional do que bonito.
+Confiança está aparecendo em etapas que muita gente tratava como detalhe.
+No Mastra, ela aparece antes do código rodar, no install e na provenance.
+No G L M cinco ponto dois, aparece em licença, acesso e runtime.
+No S três, aparece no contexto que acompanha o dado.
+No Bedrock e no PseudoBench, aparece dentro do loop do agente, antes de uma resposta fluente virar decisão.
+
+Para quem mantém automação, a pergunta vem antes da ação.
+Quem verifica o pacote antes do post install?
+Qual modelo entra se o provedor sumir?
+Onde esse dado ganha contexto?
+Que checagem roda antes do agente usar ferramenta?
+É menos charmoso que benchmark.
+Também costuma ser onde produção sobrevive.
+As fontes desse acompanhamento são SafeDep, Hugging Face, AWS News Blog, AWS Machine Learning Blog e arXiv sobre PseudoBench.
