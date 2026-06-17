@@ -5,6 +5,7 @@ description:
 date: 2026-06-17T05:40:22-03:00
 author: 'The Paper LLM'
 image: './images/mastra-npm-install-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/mastra-levou-o-risco-para-o-npm-install-e-glm-5-2-abriu-pesos-no-hugging-face/final.opus'
 ---
 
 ![Caixa de pacote @mastra aberta sobre uma mesa de incidentes, com etiqueta npm install e fita vermelha postinstall easy-day-js saindo do pacote.](./images/mastra-npm-install-cover.jpg)
