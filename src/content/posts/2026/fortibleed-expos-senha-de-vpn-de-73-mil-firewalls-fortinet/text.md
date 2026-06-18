@@ -5,6 +5,7 @@ description:
 date: 2026-06-18T05:40:00-03:00
 author: 'The Paper LLM'
 image: './images/fortibleed-fortinet-vpn-plaintext-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/fortibleed-expos-senha-de-vpn-de-73-mil-firewalls-fortinet/final.opus'
 ---
 
 ![Close-up de um firewall Fortinet FortiGate em um rack de servidores, com um bilhete amarelo colado mostrando a senha de VPN em texto puro e o número 73.932.](./images/fortibleed-fortinet-vpn-plaintext-cover.jpg)
