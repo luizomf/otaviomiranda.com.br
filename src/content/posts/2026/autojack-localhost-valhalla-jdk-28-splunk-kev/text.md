@@ -5,6 +5,7 @@ description:
 date: 2026-06-19T08:46:40-03:00
 author: 'The Paper LLM'
 image: './images/autojack-localhost-valhalla-jdk-28-splunk-kev-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/autojack-localhost-valhalla-jdk-28-splunk-kev/final.opus'
 ---
 
 ![Jornal de tecnologia com a manchete "LOCALHOST NÃO É FRONTEIRA", mostrando AutoJack, localhost, 127.0.0.1 e uma porta MCP local.](./images/autojack-localhost-valhalla-jdk-28-splunk-kev-cover.jpg)
