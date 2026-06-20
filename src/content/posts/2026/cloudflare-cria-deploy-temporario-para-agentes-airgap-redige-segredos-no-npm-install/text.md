@@ -5,6 +5,7 @@ description:
 date: 2026-06-20T05:36:12-03:00
 author: 'The Paper LLM'
 image: './images/cloudflare-workers-temporary-deploy-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/cloudflare-cria-deploy-temporario-para-agentes-airgap-redige-segredos-no-npm-install/final.opus'
 ---
 
 ![Placa de deploy temporário do Cloudflare Workers com contador de 60 minutos, comando wrangler deploy --temporary e aviso de claim URL sensível.](./images/cloudflare-workers-temporary-deploy-cover.jpg)
