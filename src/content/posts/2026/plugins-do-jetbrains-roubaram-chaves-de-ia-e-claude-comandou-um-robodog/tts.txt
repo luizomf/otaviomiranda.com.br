@@ -1,0 +1,158 @@
+Plugins do JetBrains roubaram chaves de inteligência artificial, e Claude comandou um robodog.
+
+Plugin de I D E virou superfície de vazamento de credencial.
+Quando ele pede chave de inteligência artificial e roda no ambiente onde você trabalha, já está perto demais de coisa sensível.
+
+A JetBrains removeu quinze plugins que roubavam chaves de inteligência artificial.
+A JetBrains confirmou que recebeu, em dezesseis de junho, relatos sobre quinze plugins de terceiros no Marketplace.
+Esses plugins eram feitos para roubar chaves de provedores de inteligência artificial.
+Eles se vendiam como assistentes de código, revisão, mensagens de commit, caça a bugs e geração de testes.
+Exatamente o tipo de plugin que um dev curioso instala achando que está só melhorando o fluxo de trabalho.
+
+A Aikido descreveu plugins capazes de funcionar como prometido e, ao mesmo tempo, exfiltrar a chave.
+Isso acontecia quando o usuário salvava as configurações.
+As chaves citadas envolviam provedores como OpenAI, DeepSeek e SiliconFlow.
+
+A reação da JetBrains foi remover os quinze plugins, bloquear sete contas de publicadores e desabilitar remotamente as extensões afetadas.
+Essa desativação remota acontecia quando a I D E fosse reiniciada.
+A orientação para quem instalou ou usou esses plugins antes de dezessete de junho é tratar as chaves inseridas como expostas.
+Na prática: revogar, rotacionar e remover qualquer plugin de origem duvidosa.
+
+O número que circulou é de aproximadamente setenta mil instalações somadas.
+Ele ajuda a dimensionar o susto, mas não deve ser lido como setenta mil vítimas únicas.
+Contagem de download e instalação em marketplace pode inflar, repetir máquina, pegar instalação antiga ou medir curiosidade.
+Ainda assim, para time que deixa plugin de I D E receber chave de produção, a conta operacional é bem real.
+
+Também tem uma lição chata e útil sobre confiança.
+Selo de vendedor verificado, página bonita e plugin que parece funcionar ajudam na aparência.
+Mas eles não auditam código de verdade.
+I D E, extensão e chave de inteligência artificial agora fazem parte da cadeia de suprimentos do desenvolvimento.
+Se o plugin recebe segredo, trate como integração sensível.
+
+As fontes deste bloco são JetBrains Blog, Aikido Security, StepSecurity e BleepingComputer.
+
+Claude Opus quatro ponto sete comandou um robodog rápido, com freio humano no caminho.
+A Anthropic publicou, em dezoito de junho, a segunda fase do "Project Fetch".
+Foi um experimento em que Claude Opus quatro ponto sete, rodando via "Claude Code", controla um robodog comercial em tarefas físicas.
+A parte chamativa é a velocidade.
+Nas quatro tarefas concluídas tanto pelos humanos sem Claude quanto pelo time com Claude, a Anthropic reporta ganhos grandes.
+Foram trinta e sete vírgula sete vezes mais rapidez contra o time sem Claude.
+E dezoito vírgula nove vezes contra o time com Claude.
+
+O modelo também escreveu bem menos código.
+Foram cerca de mil e quarenta e cinco linhas, contra dez mil trezentas e nove linhas do time com Claude no experimento anterior.
+Para quem vive medindo produtividade de agente só por "ele escreveu arquivo e rodou teste", esse número é tentador.
+Só que o próprio texto da Anthropic segura a empolgação.
+
+Só que havia uma pessoa no caminho.
+Um pesquisador conectou o laptop, digitou o prompt, aprovou comandos e liberou a passagem de uma tarefa para outra.
+E quando a tarefa exigiu controle físico mais fino, como pegar uma bola de praia de forma confiável, o resultado continuou falhando.
+
+O ganho publicado aparece mais na orquestração do que na robótica geral.
+O modelo monta código, chama ferramenta, ajusta plano e usa componentes existentes com bastante autonomia.
+Já política de movimento, feedback físico fechado e ação segura no mundo real continuam pedindo outro nível de validação.
+
+Para dev que está colocando agente perto de hardware, infraestrutura ou produção, a imagem é boa.
+Quanto mais rápido o agente fica, mais importantes ficam os pontos de aprovação, logs, limites de comando e rollback.
+Velocidade sem freio só parece eficiência até encostar em algo caro.
+
+A fonte deste bloco é a Anthropic Research.
+
+Bayer PRINCE mostra agente de pesquisa com estado, retries e observabilidade.
+No site do Martin Fowler, Sarang Kulkarni e a Thoughtworks publicaram um estudo sobre o PRINCE.
+O PRINCE é uma plataforma da Bayer para dados de pesquisa pré-clínica.
+O caso é interessante porque sai da demo solta e entra no desenho de sistema.
+Ele envolve pergunta em linguagem natural, relatórios, dados estruturados, arquivos P D F, validação e revisão humana.
+
+O PRINCE combina RAG agentivo e Text to S Q L.
+A ideia é responder perguntas sobre estudos pré-clínicos navegando tanto em documentos quanto em bases estruturadas.
+O backend usa Fast [EY1 P IY1 AY1].
+A orquestração passa pelo LangGraph.
+E o estado do workflow fica persistido em Postgres S Q L por meio de um checkpointer do próprio LangGraph.
+
+Esse detalhe do estado importa bastante.
+Se um agente falha no meio, precisa tentar de novo, trocar modelo, validar dados ou explicar de onde veio uma resposta.
+Para isso, alguém precisa conseguir olhar o caminho percorrido.
+O artigo também cita OpenSearch, Athena e Dynamo D B no ecossistema de dados.
+Além disso, cita Langfuse, CloudWatch e RAGAS para observabilidade e avaliação.
+
+O workflow descrito tem etapas de clarificação, planejamento e reflexão, pesquisa, validação de dados e síntese final.
+Parece burocrático quando escrito assim.
+Mas é justamente o tipo de burocracia que separa um chatbot esperto de uma ferramenta que alguém consegue operar numa empresa regulada.
+
+Outro detalhe bom: o texto diz que janelas de contexto maiores não eliminaram a necessidade de disciplina de contexto.
+Colocar mais texto dentro do modelo ajuda até certo ponto.
+Depois disso, ainda precisa escolher fonte, cortar ruído, guardar estado, avaliar resposta e deixar pessoa revisar quando o risco pede.
+
+O limite também precisa ficar na mesa.
+PRINCE é um caso de domínio controlado, com dados e objetivos bem definidos.
+A leitura mais segura é menor e mais valiosa.
+Em produção, o trabalho aparece no estado, validação, observabilidade e revisão humana.
+
+A fonte deste bloco é MartinFowler.com.
+
+Loupe mostra que privacidade no i O S passa por sinais pequenos.
+A Mysk abriu o código do Loupe, um app para i O S e iPad O S que mostra o que um aplicativo nativo consegue observar no dispositivo.
+A proposta é jogar luz em sinais que costumam ficar invisíveis quando privacidade vira só uma pergunta.
+Apareceu prompt de permissão, ou não apareceu?
+
+O app organiza as leituras em três grupos: "Passive", "Needs Permission" e "Advanced".
+No grupo passivo entram coisas como idioma, fuso horário, tela e bateria.
+São informações que parecem pequenas demais para preocupar sozinhas.
+O problema aparece quando elas se acumulam.
+
+Na parte avançada, o repositório cita sondagem de esquemas de U R L com a chamada can open U R L.
+Também cita persistência no Keychain atravessando reinstalações.
+Isso ajuda a explicar por que fingerprinting não depende só de um identificador óbvio.
+Vários valores pouco únicos, quando combinados, podem aproximar bastante a identidade de um dispositivo.
+
+O README diz que as leituras ficam no próprio aparelho, a menos que a pessoa exporte explicitamente.
+O código-fonte está sob licença M I T, mas nome, logo e assets de design não entram nessa licença.
+Também há uma observação de que a versão para Mac está quase completa, mas ainda não está polida.
+E não há release publicada no "Git Hub".
+
+Para quem desenvolve app, Loupe serve como material de aula e revisão.
+É uma ferramenta de demonstração, não uma divulgação de falha nova.
+A revisão passa pelo modal de permissão, pela necessidade real de cada sinal coletado e pelo que a combinação deles pode contar sobre alguém.
+
+A fonte deste bloco é o repositório mysk-research barra Loupe, no "Git Hub".
+
+Agora, os destaques rápidos de hoje.
+
+Michał Zalewski, o lcamtuf, mostrou o efeito "cem mil porquês" dos prompts parecidos.
+Ele publicou um ensaio usando cerca de cento e cinquenta capas de livros da Amazon encontradas numa busca por "cem mil whys".
+A ideia era mostrar como saídas de inteligência artificial podem convergir em títulos, layouts e manias parecidas.
+Isso acontece quando muita gente usa prompts semelhantes.
+A leitura boa para devs e criadores é tratar prompt padrão como risco de qualidade e distribuição.
+Também vale o cuidado para não transformar sinais nebulosos em acusação.
+A fonte é o Substack "lcamtuf's thing".
+
+O Linux removeu a função S T R N copy do kernel depois de seis anos de limpeza.
+Linus Torvalds mergeou, em dezenove de junho, a remoção dessa função para o ciclo do Linux sete ponto dois.
+O registro fala em seis anos de trabalho, trezentos e sessenta e dois commits e setenta contribuidores.
+Também inclui remoção de implementações por arquitetura em alpha, M sessenta e oito K, Power P C, X oitenta e seis e xtensa.
+A história vale para quem escreve C e acompanha kernel.
+A semântica de terminação N U L e preenchimento com zero era fonte de confusão.
+As substituições dependem do caso, com nomes como S T R S copy, S T R S copy pad, S T R to mem pad, mem copy and pad, ou mem copy.
+Isso é limpeza interna do kernel, sem mudança direta na função S T R N copy da lib C de aplicações comuns.
+As fontes são Linux kernel Git mirror e Phoronix.
+
+No acompanhamento de tendências do dia, o foco volta para agentes.
+Os itens de agente de hoje ficam mais interessantes quando a gente olha para a camada em volta do modelo.
+No "Project Fetch", a Anthropic mostra um agente mais rápido controlando ferramenta física.
+Mas ele ainda aparece com aprovação humana e limites claros de controle.
+No PRINCE, a Bayer e a Thoughtworks mostram estado, validação, retries e observabilidade como parte do produto desde o desenho.
+
+O Hermes Agent entrou nessa mesma linha com a versão zero ponto dezessete ponto zero.
+As notas oficiais falam em subagentes assíncronos.
+A função delegate task, com background igual a true, despacha trabalho em segundo plano e devolve um handle imediatamente.
+A release também cita janelas para acompanhar subagentes ao vivo.
+É o tipo de recurso que parece pequeno até você imaginar uma ferramenta de código com várias tarefas longas acontecendo ao mesmo tempo.
+
+O desenho que aparece é parecido com sistema distribuído pequeno.
+Tem estado, logs, fronteira de ferramenta, aprovação, observabilidade e trabalho delegado.
+Modelo melhor ajuda bastante nesse cenário.
+Mas quando ele começa a mexer em I D E, [EY1 P IY1 AY1], banco, hardware ou shell, a engenharia em volta deixa de ser acabamento.
+Ela vira superfície principal do produto.
+
+As fontes deste bloco são Anthropic Research, MartinFowler.com e o repositório NousResearch Hermes Agent, no "Git Hub".
