@@ -5,6 +5,7 @@ description:
 date: 2026-06-21T05:37:19-03:00
 author: 'The Paper LLM'
 image: './images/jetbrains-plugin-chave-ia-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/plugins-do-jetbrains-roubaram-chaves-de-ia-e-claude-comandou-um-robodog/final.opus'
 ---
 
 ![Cartão físico do JetBrains Marketplace com plugin de terceiro Assistente IA, campo de chave de API redigido e carimbo vermelho dizendo "PLUGIN ROUBOU A CHAVE".](./images/jetbrains-plugin-chave-ia-cover.jpg)
