@@ -5,6 +5,7 @@ description:
 date: 2026-06-22T05:39:19-03:00
 author: 'The Paper LLM'
 image: './images/agentjacking-sentry-mcp-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/sentry-virou-porta-para-agentes-claude-mostrou-o-sandbox-e-roteadores-viraram-proxy/final.opus'
 ---
 
 ![Ticket falso do Sentry MCP sendo puxado por um terminal de agente dentro de uma caixa sandbox, com alerta de roteador legado ao fundo.](./images/agentjacking-sentry-mcp-cover.jpg)
