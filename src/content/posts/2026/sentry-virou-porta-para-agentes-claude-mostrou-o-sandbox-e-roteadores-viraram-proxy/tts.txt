@@ -1,0 +1,174 @@
+Sentry virou porta para agentes; Claude mostrou o sandbox e roteadores viraram proxy.
+
+Hoje o risco apareceu em peças bem comuns de operação: log de erro, configuração local, roteador velho e D N S encaminhando pacote do jeito errado.
+Agente esperto ainda precisa de caixa, rede ainda precisa de higiene, e equipamento esquecido continua trabalhando, às vezes para outra pessoa.
+
+AgentJacking usa Sentry M C P para envenenar agentes de código.
+
+No dia 19, a gente falou de AutoJack e do risco de agente encostar em uma [EY1 P IY1 AY1] local.
+O AgentJacking entra por outro corredor: a telemetria que um agente lê durante a triagem de erro.
+
+A Tenet Security publicou, em 17 de junho, uma pesquisa sobre uma cadeia que combina Sentry, M C P e agentes de código.
+O D S N do Sentry costuma ser público por design em aplicações front-end.
+Ele permite enviar eventos, e normalmente não é tratado como segredo.
+
+Esse detalhe muda de peso quando os eventos deixam de ser apenas dados de observabilidade.
+Eles viram material lido por um agente por meio do Sentry M C P.
+Se alguém insere um erro falso com uma correção maliciosa, o agente pode tratar aquilo como instrução confiável.
+Daí ele pode executar comandos no fluxo normal de investigação.
+
+A Tenet fala em duas mil trezentas e oitenta e oito organizações expostas.
+Também fala em mais de cem execuções controladas.
+Esses números são da própria Tenet, não uma medição independente de comprometimento real no mundo todo.
+A lista de ferramentas citadas inclui "Claude Code", Cursor e Codex.
+A lição prática fica mais simples: saída de ferramenta também é entrada não confiável.
+
+Para defesa, o caminho é revisar identificadores D S N expostos e sanitizar eventos antes de passá-los ao agente.
+Também entra isolar o runtime, cortar acesso amplo a segredos e rede, e usar allowlist de comandos.
+Prompt bom ajuda, mas o último freio precisa estar mais perto do sistema operacional, da rede e das credenciais.
+O agente pode ser educado; o shell, nem sempre.
+
+As fontes deste bloco são Tenet Security, Cloud Security Alliance e The New Stack.
+
+Anthropic descreveu como contém Claude com sandbox, V M e limite de rede.
+
+A Anthropic publicou uma explicação de engenharia sobre como tenta conter Claude em produtos diferentes.
+Isso inclui o site do Claude, "Claude Code" e "Claude Cowork".
+Conforme agentes ganham arquivo, shell, conector e navegador, o raio de estrago cresce junto.
+
+O texto separa três famílias de risco: uso indevido pelo usuário, comportamento ruim do modelo e ataque vindo de fora.
+Essa divisão importa porque cada uma pede defesa diferente.
+Aviso no prompt ajuda pouco quando o problema é um arquivo local carregado antes da confiança ser estabelecida.
+Também ajuda pouco quando uma ferramenta externa entrega texto que parece dado e se comporta como instrução.
+
+No "Claude Code", a Anthropic diz que prompts de permissão tinham cerca de noventa e três porcento de aprovação pelos usuários.
+Isso é bem humano: quando aparece confirmação demais, a pessoa começa a apertar sim como quem fecha pop-up de cookie.
+A resposta deles foi mover parte do limite para o ambiente.
+Entram aí sandbox, V M, fronteira de sistema de arquivos e controle de saída de rede.
+
+Nos padrões descritos, o sandbox do "Claude Code" permite leitura, limita escrita ao workspace e nega rede por padrão.
+Em outras partes da arquitetura aparecem peças como gVisor, seccomp, Seatbelt no mac O S e Bubblewrap no Linux.
+O nome das ferramentas muda por plataforma, mas o princípio fica.
+É deixar o agente trabalhar dentro de uma sala menor.
+
+A configuração local também entra na conta.
+A Anthropic cita o cuidado de só analisar certos arquivos de projeto depois do prompt de confiança.
+Um exemplo é o settings ponto JSON dentro da pasta ponto Claude.
+Parece detalhe pequeno, mas projeto aberto no editor, config carregada cedo e listener local são lugares onde confiança implícita vira bug.
+
+Os números de noventa e três porcento, oitenta e quatro porcento e outras medições citadas são da própria Anthropic.
+Trate isso como relato de engenharia de vendor, não como benchmark universal.
+Mesmo assim, a recomendação vale para qualquer stack de agente.
+Use fronteiras determinísticas em arquivo, rede, credencial e ferramenta, porque defesa probabilística não chega a cem porcento.
+
+As fontes deste bloco são Anthropic Engineering e a explicação da Anthropic sobre o auto mode do "Claude Code".
+
+AryStinger transforma roteadores antigos em rede de proxy e reconhecimento.
+
+A X Lab, da QiAnXin, descreveu o AryStinger como uma família de malware mirando roteadores legados.
+O foco está especialmente em dispositivos da era R T L oito um nove X.
+A história parece coisa de painel velho esquecido em cima do armário.
+Mas a borda da rede é um lugar péssimo para esquecer computador sem manutenção.
+
+Segundo a X Lab, a visibilidade deles mostrava mais de quatro mil e trezentos roteadores infectados.
+A BleepingComputer resumiu como mais de quatro mil dispositivos.
+Os modelos destacados incluem D Link D I R oito cinco zero L e D I R oito um oito L W.
+O relatório também cita falhas antigas, como C V E 2013, trinta e três zero sete.
+Também aparecem C V E 2016, cinquenta e seis oito um, e C V E 2025, onze oito três sete.
+
+As capacidades descritas passam por varredura, encaminhamento por proxy ou túnel, execução de comando e atividade ligada a D N S.
+Em outras palavras: o roteador pode ajudar no reconhecimento e esconder origem de tráfego.
+Ele também pode interferir no caminho antes de o usuário notar qualquer coisa estranha.
+
+A X Lab aponta concentração visível na Coreia do Sul, com quarenta e oito vírgula quarenta e cinco porcento.
+Na China, a amostra reportada aparece com trinta e um vírgula oitenta e dois porcento.
+Isso não fecha atribuição; a fonte não crava um grupo responsável, e esse cuidado precisa ficar em pé.
+
+A mitigação é pouco glamourosa e bem prática: substituir equipamento em fim de vida e atualizar firmware quando ainda existir suporte.
+Também vale trocar senha padrão, fechar painel de administração remoto e observar tráfego ou D N S anômalo.
+Quando o fabricante já abandonou o aparelho, patch depois pode ser só uma forma educada de dizer: troque antes que ele trabalhe para outra pessoa.
+
+As fontes deste bloco são QiAnXin X Lab, BleepingComputer e The Hacker News.
+
+Encaminhadores D N S transparentes podem ampliar ataques de reflexão.
+
+A pesquisa da RIPE Labs é de 11 de junho, então entra aqui como alerta recente de infraestrutura.
+É o tipo de coisa que passa batido até alguém precisar explicar uma surpresa.
+A surpresa é um resolver recursivo protegido aparecendo como ajudante em amplificação.
+
+O problema está nos encaminhadores D N S transparentes.
+Em vez de reconstruir a consulta e assumir a própria origem, eles encaminham o pacote preservando detalhes.
+Esses detalhes podem incluir um I P falsificado.
+Isso pode permitir que consultas forjadas cheguem a resolvers recursivos protegidos.
+Também pode fazer essas consultas escaparem de controles esperados na borda.
+
+Em ataque de reflexão, o atacante manda uma consulta pequena fingindo ser a vítima.
+O servidor responde para a vítima com uma resposta maior.
+Se a infraestrutura recursiva entra nesse caminho por causa de encaminhador transparente, a amplificação fica mais fácil de escalar.
+
+A RIPE Labs relata encaminhadores transparentes em cento e setenta e cinco economias.
+O Brasil aparece com trinta e um porcento, e a Índia com vinte e quatro porcento nos dados destacados pela pesquisa.
+O texto também fala em um vírgula quatro milhão de dispositivos D N S abertos em 2026.
+Dá para tomar o café sem drama, mas com uma aba mental aberta para revisar suposições de borda.
+
+Para quem opera rede, as recomendações caem em coisas conhecidas.
+Revise firewall, aplique ingress filtering ou reverse path forwarding quando fizer sentido.
+Também cheque roteadores e resolvers afetados, e use rate limiting por origem.
+Firewall sozinho não salva quando a própria rede deixa pacote com origem mentirosa andar por dentro.
+
+As fontes deste bloco são RIPE Labs e arXiv.
+
+Agora, alguns destaques rápidos para hoje.
+
+Claude passou a pedir verificação de identidade em alguns fluxos.
+A página oficial de suporte diz que a verificação está sendo lançada para alguns casos específicos.
+Esses casos envolvem capacidades, integridade da plataforma, segurança e conformidade.
+A parceira é a Persona Identities, com documento oficial físico com foto e, possivelmente, selfie ao vivo.
+A Anthropic diz que esses dados não são usados para treinar modelos.
+A fonte deste destaque é o Claude Help Center.
+
+sqlite-utils quatro ponto zero R C um trouxe migrações embutidas e transações aninhadas.
+O primeiro release candidate da versão quatro adiciona migrations vindas do sqlite-migrate.
+Também adiciona D B ponto atomic com suporte a savepoints.
+É boa notícia para scripts, ferramentas locais e serviços pequenos com SQLite.
+Mas ainda é R C, remove Python três ponto oito e não inclui migrações reversas.
+A fonte deste destaque é Simon Willison.
+
+zlib R S zero ponto seis ponto quatro corrigiu caminhos específicos em Raptor Lake e A Arch sessenta e quatro.
+A release saiu em 21 de junho e traz workaround para um caminho de crash em CPUs Intel Raptor Lake.
+Também corrige um off-by-one no Adler trinta e dois em A Arch sessenta e quatro.
+Esse erro podia gerar checksum incorreto.
+Para quem usa zlib R S em ambientes variados, é atualização de estabilidade com pouca pirotecnia.
+As fontes deste destaque são "Git Hub" do zlib R S e Phoronix.
+
+postmarket O S versão vinte e seis ponto zero seis atualizou a base Alpine e as interfaces móveis.
+A versão "Alpen Avocado" saiu em 21 de junho com Alpine Linux três ponto vinte e quatro.
+Também trouxe GNOME cinquenta, KDE Plasma Mobile seis ponto seis ponto cinco e Phosh zero ponto cinquenta e cinco ponto zero.
+Entram ainda a volta do Plasma Bigscreen e a troca do P B splash pelo Plymouth.
+O próprio projeto lembra que o público esperado continua sendo entusiasta de Linux.
+Quem espera polimento de Android ou i O S vai precisar de paciência.
+A fonte deste destaque é postmarket O S.
+
+KDE Plasma seis ponto sete enfim separa desktops virtuais por tela.
+A release oficial é de 16 de junho e traz uma melhoria antiga para quem usa vários monitores.
+Agora dá para trocar área de trabalho em uma tela sem bagunçar a outra.
+Também aparecem teste de volume do microfone e visibilidade de apps Flatpak em segundo plano.
+Há ainda melhorias de impressão e o tema Union como preview desligado por padrão.
+As fontes deste destaque são KDE e Diolinux.
+
+Acompanhamento de tendência do dia: CivBench testa agentes em Civilization seis.
+
+O CivBench apareceu como um benchmark experimental usando Civilization seis para testar agentes em planejamento longo.
+O jogo serve como cenário; o teste real é sustentar objetivo por centenas de decisões, com ferramenta, memória e mudança de estado acontecendo no caminho.
+
+O autor descreve cenários fixos, setenta e seis ferramentas e um diário por turno para ajudar o agente a manter contexto.
+Também cita execuções longas, com trezentos e trinta turnos e algo entre duas e oito horas de tempo real.
+A anedota da bomba nuclear chama atenção, claro.
+Mas ela funciona melhor como ilustração de objetivo mal acompanhado do que como prova definitiva de perigo dos modelos.
+
+Para quem monta agente de código, suporte ou automação, esse tipo de avaliação cutuca um lugar importante.
+Benchmark de pergunta e resposta mede só uma fatia.
+Quando a ferramenta tem memória, ação e tempo, o teste precisa acompanhar plano, observação, correção de rota e erro acumulado.
+Por enquanto, trate CivBench como relato experimental de autor antes de qualquer ranking independente.
+
+A fonte deste bloco é L Wilko.
