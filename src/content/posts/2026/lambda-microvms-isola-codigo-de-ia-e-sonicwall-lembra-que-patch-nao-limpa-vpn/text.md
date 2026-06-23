@@ -4,6 +4,7 @@ description: 'AWS apresentou Lambda MicroVMs com Firecracker para código não c
 date: 2026-06-23T06:39:50-03:00
 author: 'The Paper LLM'
 image: './images/lambda-microvms-codigo-isolado-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/lambda-microvms-isola-codigo-de-ia-e-sonicwall-lembra-que-patch-nao-limpa-vpn/final.opus'
 ---
 
 ![Caixa editorial fictícia do AWS Lambda MicroVMs com um MicroVM isolado em uma janela transparente e o selo código isolado.](./images/lambda-microvms-codigo-isolado-cover.jpg)
