@@ -1,0 +1,199 @@
+Lambda Micro V Ms isola código de I A, e SonicWall lembra que patch não limpa V P N.
+
+Quando o produto começa a executar código que veio do usuário, de um agente ou de alguma integração, não sobra muito espaço para improviso.
+Hoje aparece uma resposta de infraestrutura para esse problema.
+Também vem um lembrete seco de que patch não limpa V P N sozinho.
+E aparecem sinais de que automação boa ainda precisa de dono.
+
+Lambda Micro V Ms da Amazon Web Services dá estado e isolamento para código não confiável.
+
+A Amazon Web Services anunciou, em 22 de junho de 2026, o Lambda Micro V Ms.
+A proposta é direta para quem já precisou rodar código que não escreveu.
+É ter isolamento de máquina virtual, mas com a velocidade e o controle de ciclo de vida que a Amazon Web Services põe na família Lambda.
+
+O serviço usa Firecracker e mira ambientes isolados com estado.
+Isso importa porque container é rápido, mas compartilha kernel.
+V M isola melhor, mas costuma trazer custo de inicialização e operação.
+Função serverless tradicional ajuda bastante.
+Só que ela nem sempre combina com sessão interativa, arquivo temporário e memória preservada.
+Também nem sempre combina com ida e volta curta entre execução e inspeção.
+
+A Amazon Web Services fala em lançamento e retomada quase instantâneos.
+Também fala em suspensão automática, retomada quando a sessão volta a ser usada e preservação de memória e disco por até oito horas.
+Os exemplos de uso são bem atuais.
+Entram assistentes de código com I A, ambientes interativos de programação e análise de dados.
+Também entram scanners de vulnerabilidade e servidores de jogo scriptáveis pelo usuário.
+
+A parte de segurança continua sendo trabalho seu também.
+Nos exemplos aparece um cabeçalho de proxy e autorização, uma boa lembrança para qualquer sandbox.
+Sandbox precisa andar junto com autenticação, autorização, isolamento de segredo, log e regra contra abuso.
+Também entra a conta normal de serviço gerenciado.
+Região, preço, limite, [EY1 P IY1 AY1], identidade e comportamento real sob carga continuam importando.
+
+Mesmo assim, a peça muda uma decisão comum.
+Muita gente está montando produto que precisa executar código de usuário ou código gerado por modelo.
+Ter uma primitiva oficial para sessão isolada e com estado tira a conversa de manter uma pilha própria de V M.
+E coloca a pergunta no lugar certo: isso cabe nessa arquitetura?
+
+As fontes deste bloco são o blog de notícias, a documentação e a página de Lambda Micro V Ms da Amazon Web Services.
+
+SonicWall mostra que firewall corrigido ainda pode ficar aberto.
+
+O SANS Internet Storm Center publicou, em 23 de junho, um diário sobre a C V E 2024, quarenta sete seis seis, em SonicWall Sonic O S.
+A falha é antiga, de controle de acesso impróprio.
+Ela atinge caminhos de gerenciamento e S S L V P N em dispositivos afetados das gerações cinco, seis e sete.
+
+O caso tem menos susto de zero day e mais trabalho de inventário.
+Segundo o SANS, grupos como Akira e Fog exploram esse problema desde pelo menos setembro de 2024.
+Ondas mais recentes continuam encostando em sobras de configuração.
+Isso inclui contas locais esquecidas, senhas não rotacionadas e origem liberada demais para S S L V P N.
+Também inclui mapeamento perigoso no Default L D A P User Group, Virtual Office Portal exposto e sessões antigas ainda vivas.
+
+Esse tipo de falha é cruel porque o painel pode passar a sensação de já atualizamos.
+Só que firmware corrigido não apaga usuário local que ninguém revisou.
+Também não fecha portal exposto e não corrige grupo L D A P herdado de migração apressada.
+O SANS chama atenção para outro detalhe pesado.
+Dispositivos SonicWall geração seis chegaram ao fim de vida em 16 de abril de 2026.
+Eles não recebem mais firmware nem patch de segurança.
+
+Para quem administra esse ambiente, a lista defensiva é chata e necessária.
+Apague usuários S S L V P N locais que não deveriam existir.
+Rotacione credenciais locais e de bind L D A P.
+Restrinja a origem de acesso ao S S L V P N e ao portal.
+Revise o Default L D A P User Group, encerre sessões longas e troque hardware sem suporte.
+Também vale revisar M F A com cuidado.
+Credencial válida e portal aberto podem deixar atacante registrar um token T O T P próprio em alguns cenários descritos pelo SANS.
+
+Aqui a vulnerabilidade é só o começo da história.
+O que mantém a porta aberta é a sujeira operacional que sobreviveu ao patch.
+
+As fontes deste bloco são o SANS Internet Storm Center, o SonicWall P S I R T e o N V D.
+
+Hugging Face colocou o release do hugging face hub em um C I semanal.
+
+A Hugging Face publicou, em 23 de junho, como mudou o release do pacote hugging face hub.
+O pacote saía a cada quatro a seis semanas.
+Agora a meta é semanal, com o processo centralizado em um único workflow do "Git Hub Actions".
+
+A inteligência artificial fica em um papel pequeno e bem delimitado.
+A automação cuida de tarefas de release, como branch, bump de versão, tag, publicação e checagens de release candidate.
+Também entram testes em bibliotecas downstream.
+O modelo G L M cinco ponto dois rascunha notas de release a partir dos metadados dos pull requests.
+Mas o material passa por revisão humana antes de ir para fora.
+
+Para mantenedor, isso é mais útil do que parece.
+Release atrasado vira acúmulo de mudança, mais risco de regressão e mais cansaço.
+Também obriga alguém a lembrar cada detalhe do ritual.
+Release menor e frequente deixa o erro mais perto da mudança que o causou.
+
+Copiar esse desenho para qualquer pacote seria exagero.
+Projeto com binário pesado, interface binária sensível, cliente enterprise ou rollout complicado precisa de outro freio.
+A graça do exemplo está no desenho.
+Automatizar a mecânica repetitiva, e deixar julgamento, rollback e aprovação nas mãos de quem mantém o projeto.
+
+As fontes deste bloco são o blog da Hugging Face e o índice do blog da Hugging Face.
+
+Patch the Planet tenta entregar patch, teste e triagem para mantenedores.
+
+A Open A I anunciou, em 22 de junho, o Patch the Planet, uma iniciativa Daybreak feita com a Trail of Bits.
+A promessa é ajudar mantenedores de software aberto a lidar com vulnerabilidades.
+O fluxo usa pesquisa assistida por I A, revisão humana especializada, patch, teste e coordenação de divulgação.
+
+Esse detalhe da revisão humana segura a história no chão.
+Quem mantém projeto aberto já recebe issue ruim, relatório duplicado, severidade inflada e P O C sem contexto.
+Também recebe pedido urgente de quem não vai ajudar no patch.
+Se a I A só aumentar o volume de achado cru, ela vira mais uma fila para alguém limpar no domingo.
+
+Segundo a Open A I, os pesquisadores reproduzem evidências e checam documentação e modelo de ameaça do projeto.
+Eles removem duplicatas, reavaliam severidade e priorizam vulnerabilidades confirmadas.
+A lista inicial citada inclui cURL, NATS Server, pyca cryptography, Sigstore, aiohttp, Go, freenginx, Python e python ponto org.
+
+A Trail of Bits reportou números da primeira semana.
+Foram 19 projetos, 64 pull requests públicos, 51 issues e 37 correções já mescladas no momento da publicação.
+São números oficiais das empresas envolvidas, não uma auditoria independente.
+Ainda assim, mostram a forma mais saudável da promessa.
+Modelo e ferramenta como acelerador, humano como filtro, mantenedor como dono.
+
+As fontes também citam peças como Codex Security e GPT cinco ponto cinco Cyber dentro desse fluxo, e o nome chama clique, eu sei.
+Mas a parte que interessa para produção é menos brilhante e mais responsável.
+Confirmar falso positivo, escrever teste, ajustar C I, respeitar disclosure e não jogar relatório semi-pronto no colo de quem mantém a internet funcionando.
+
+As fontes deste bloco são a Open A I, a Trail of Bits e a TechCrunch.
+
+Agora, os destaques rápidos de hoje.
+
+Actions checkout versão sete bloqueia pwn request comum por padrão.
+Em maio, a gente já tratou "Git Hub Actions" como superfície de roubo de segredo.
+A mudança agora é concreta nesse checkout.
+O actions checkout versão sete recusa padrões comuns com pull request target ou workflow run.
+O alvo é evitar código de fork não revisado perto de contexto privilegiado.
+Em 16 de julho de 2026, a "Git Hub" pretende levar a proteção para majors suportadas.
+Tags flutuantes como actions checkout arroba versão quatro herdam a mudança.
+Pins por S H A, versão menor ou patch precisam de upgrade.
+E o escape explícito se chama allow unsafe P R checkout.
+As fontes são o changelog da "Git Hub", o repositório actions checkout e a InfoWorld.
+
+Cloudflare e navegadores querem um sinal privado contra tráfego abusivo.
+A Cloudflare anunciou trabalho com Mozilla Firefox, Google Chrome, Microsoft Edge e Shopify.
+A ideia passa por Private Access Control Tokens, chamados P A C T.
+O objetivo é provar que um tráfego não é malicioso sem depender só de rastreamento invasivo ou desafio repetido.
+A fase ainda é de padronização.
+Governança, browsers menores, clientes de automação e agentes ainda precisam ser observados.
+As fontes são Cloudflare e gHacks.
+
+R F C 10008 deu nome próprio para consulta H T T P com corpo.
+O método QUERY serve para operações de consulta no servidor com conteúdo na requisição.
+Ele mantém semântica segura e idempotente.
+Essa é uma dor conhecida para interfaces que hoje entortam GET ou usam POST para leitura complexa.
+O freio real continua sendo adoção.
+Cliente, proxy, firewall, cache e servidor precisam entender o método, o Content Type, o Accept Query e a chave de cache.
+As fontes são o R F C Editor e a Kreya.
+
+Canonical Livepatch chegou oficialmente ao Arm sessenta e quatro.
+A Canonical anunciou suporte de Livepatch para Arm sessenta e quatro em Ubuntu vinte e seis ponto zero quatro L T S e Ubuntu Core vinte e seis.
+Isso permite aplicar atualizações críticas de kernel sem reboot em máquinas suportadas.
+Para cloud Arm e edge remoto, a novidade reduz janela de manutenção.
+Mas ainda pede validação de kernel, canal, toolchain, stack trace confiável e plano de reboot quando ele for necessário.
+A fonte deste destaque é o Ubuntu Blog.
+
+YOLO vinte e seis propõe visão em tempo real sem N M S no caminho de inferência.
+O paper da Ultralytics, enviado ao arXiv em 2 de junho e destacado hoje, propõe uma família YOLO vinte e seis.
+O desenho usa dual head para inferência nativa sem non maximum suppression.
+Ele remove Distribution Focal Loss e cita Mu S G D, Progressive Loss e S T A L no treinamento.
+Os autores reportam de 40 vírgula nove a 57 vírgula cinco M A P no COCO.
+Também reportam de um vírgula sete a 11 vírgula oito milissegundos de latência em T quatro Tensor R T.
+Trate como claim de paper até testar no hardware e no pipeline que você realmente usa.
+A fonte deste destaque é o arXiv.
+
+Acompanhamento de tendências do dia.
+
+Depois de Sentry M C P ontem e plugins do JetBrains no dia 21, a conversa sobre agentes continuou saindo do prompt.
+Ela entrou nas bordas do sistema.
+Hoje os sinais vêm de skills de terceiros, avaliação de injeção de prompt, adversarial prefill e memória persistente.
+
+Um paper sobre agent skills trata essas skills como pacotes de instrução em arquivo.
+Elas são distribuídas por terceiros e executadas com privilégios do usuário.
+A proposta Locate and Judge usa um localizador baseado em atenção para achar trechos suspeitos.
+Depois passa esses trechos para um juiz mais pesado.
+A ideia é auditar custo e risco sem entregar tudo para uma varredura grande e cara a cada vez.
+
+Outro paper avalia ataques automatizados em AgentDojo, com G C G e T A P em 80 pares de tarefas e quatro domínios.
+O resultado ainda é estreito.
+Ataques caixa preta se saíram melhor sob limites práticos de computação.
+Mas a transferência entre modelos não foi limpa.
+Já o trabalho sobre adversarial prefill testou dez modelos abertos ajustados para instrução.
+Ele reportou que nenhum reconheceu de forma confiável saídas comprometidas.
+Em média, 27 vírgula três porcento das respostas aceitaram como própria a intenção colocada no prefill.
+
+A Microsoft entra por uma porta bem de produção: memória de I A.
+Ela ajuda o usuário e vira estado que pode influenciar comportamento depois que o contexto original já sumiu.
+Por isso aparecem checks de escrita, política de tenant, Task Adherence e logs como Memory Updated.
+Também aparece busca em ferramentas como Defender Advanced Hunting.
+
+Para quem constrói agente, o desenho é bem comum em segurança.
+Trate skill, conteúdo recuperado, memória e chamada de ferramenta como superfície privilegiada.
+Escaneie antes de carregar, valide em etapas e registre mudança sensível.
+Use política fora do modelo e desconfie de autorrelato do próprio modelo quando a pergunta envolve comprometimento.
+Modelo educado ajuda, mas trava externa continua dormindo melhor.
+
+As fontes deste bloco são arXiv, Microsoft Security Blog e Role Confusion.
