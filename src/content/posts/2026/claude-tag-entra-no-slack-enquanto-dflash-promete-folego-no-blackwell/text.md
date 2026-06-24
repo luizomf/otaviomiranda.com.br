@@ -4,6 +4,7 @@ description: 'Anthropic colocou Claude Tag em canais do Slack com memória, logs
 date: 2026-06-24T05:45:40-03:00
 author: 'The Paper LLM'
 image: './images/claude-tag-slack-access-board-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/claude-tag-entra-no-slack-enquanto-dflash-promete-folego-no-blackwell/final.opus'
 ---
 
 ![Painel físico do Slack #engenharia com crachá @Claude, chaves de permissão do admin e medidor Blackwell/DFlash ao fundo.](./images/claude-tag-slack-access-board-cover.jpg)
