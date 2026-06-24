@@ -1,0 +1,144 @@
+Claude Tag entra no Slack enquanto D Flash promete fôlego no Blackwell.
+
+Quando um agente entra no canal do time, ele deixa de ser só conversa privada.
+Precisa de permissão, memória com limite, custo visível e log para alguém conferir depois.
+
+Claude Tag coloca arroba Claude em canais do Slack com permissão de admin.
+
+A Anthropic apresentou, em 23 de junho de 2026, o Claude Tag.
+A ideia começa no Slack: usuários dos planos Claude Enterprise e Team podem marcar arroba Claude.
+Isso vale em canais escolhidos, para delegar tarefas ali mesmo, com o contexto do time por perto.
+
+Isso muda a cara do uso. Em vez de cada pessoa carregar uma conversa isolada, o agente trabalha junto.
+Ele atua em um espaço compartilhado, pode acompanhar o histórico daquele canal e planejar trabalho.
+Também pode responder depois e, quando o comportamento ambiente estiver ligado, trazer atualizações.
+Nesse modo, ele não precisa esperar uma pergunta direta para aparecer com algo novo.
+
+O controle em volta dele é a parte séria do lançamento.
+Segundo a Anthropic, admins escolhem quais canais, ferramentas, dados e codebases o Claude Tag pode acessar.
+As memórias ficam escopadas aos canais e aos casos de uso configurados.
+Canais privados não entram na leitura só porque alguém chamou o bot em outro lugar.
+
+Também há limite de gasto em tokens e logs para mostrar o que o Claude fez e quem pediu a tarefa.
+Esse tipo de trilha fica bem menos opcional quando o agente sai da aba individual.
+Agora ele passa a mexer em trabalho de equipe, e alguém precisa conseguir reconstruir o caminho.
+Vale para automação que abriu issue, pesquisou dado interno, leu repositório ou resumiu conversa sensível.
+
+A Anthropic diz ainda que sessenta e cinco porcento do código do time de produto dela sai do Claude Tag interno.
+É um número chamativo, mas é métrica da própria empresa, num ambiente que ela controla.
+Use como contexto, não como prova de que todo time vai repetir a conta na segunda-feira.
+
+Num piloto, eu olharia menos para a demo e mais para as bordas.
+Canal pequeno, ferramenta explícita, dado mínimo, limite de custo, log revisável e migração consciente.
+Isso inclui o app antigo do Claude no Slack, que o Claude Tag substitui com opt-in de trinta dias.
+Agente compartilhado é útil. Agente compartilhado sem dono vira reunião que aprendeu a chamar [EY1 P IY1 AY1].
+
+As fontes deste bloco são Anthropic e Latent Space.
+
+D Flash acelera inferência no Blackwell, mas as quinze vezes precisam de bancada.
+
+A NVIDIA publicou, em 23 de junho, o D Flash, um caminho de aceleração para inferência de modelos de linguagem.
+O problema é conhecido por quem serve modelo: o texto sai token por token.
+E essa sequência briga com latência, custo de G P U e quantidade de usuários simultâneos.
+
+O D Flash usa um modelo leve de difusão em blocos para rascunhar vários tokens futuros de uma vez.
+Depois, o modelo principal verifica esses tokens.
+O ganho prometido vem daí: adiantar trabalho sem trocar o modelo que o usuário vê por outro mais esperto.
+
+Na manchete grande do post, a NVIDIA fala em mais de quinze vezes mais throughput no GPT O S S cento e vinte B.
+Esse teste roda em Blackwell, dentro de uma faixa de interatividade alta, contra decodificação autoregressiva.
+O texto também cita ganhos em Llama três ponto um, oito B; Gemma quatro, trinta e um B, no V L L M.
+Também aparecem Qwen três, oito B, no S G Lang.
+
+Essa conta depende do cenário.
+Benchmark de vendor é bom para descobrir o que testar, não para atualizar planilha de capacidade sem medir nada.
+Modelo, prompt, batch, limite de latência, quantização, hardware e framework mudam o resultado.
+O número maior faz barulho, mas a pergunta boa é mais chata: isso melhora o meu tráfego real?
+
+Os caminhos citados incluem Tensor R T L L M, S G Lang e V L L M.
+A NVIDIA também aponta o repositório do projeto.
+Para times que já operam workload de I A, especialmente código, raciocínio e agente interativo, vale acompanhar.
+Trate até quinze vezes como hipótese de teste antes de produção.
+
+As fontes deste bloco são o NVIDIA Technical Blog e o repositório D Flash no Git Hub.
+
+Cisco Unified C M tem C V E 2026, vinte, dois três zero, reportada em exploração.
+
+Agora a parte menos divertida do dia: Cisco Unified Communications Manager e Unified C M S M E.
+A C V E 2026, vinte, dois três zero, afeta ambientes com o serviço Web Dialer habilitado.
+A própria Cisco diz que o Web Dialer vem desativado por padrão.
+Mas esse tipo de por padrão nem sempre descreve a sua instalação de cinco anos atrás.
+
+A falha é uma S S R F, ou falsificação de requisição pelo servidor.
+Ela é causada por validação imprópria em certas requisições H T T P.
+Segundo o advisory da Cisco, um atacante remoto não autenticado pode enviar requisições criadas para explorar o problema.
+Com isso, ele pode gravar arquivos no sistema operacional por baixo.
+Esses arquivos poderiam ser usados depois para escalar privilégio até root.
+
+A Cisco lançou atualizações em 3 de junho de 2026 e informa que não há workaround.
+Isso empurra a decisão para um lugar simples, embora trabalhoso.
+Inventariar Unified C M e Unified C M S M E, conferir se Web Dialer está ativo e aplicar a versão corrigida.
+Também vale olhar a exposição de rede.
+
+A novidade vem das reportagens.
+SecurityWeek e BleepingComputer reportam exploração observada pela Defused depois de uma prova de conceito disponível.
+A Cisco é a fonte primária para a vulnerabilidade e as correções.
+A exploração ativa, pelo material visto aqui, vem dessa cobertura de segurança.
+Por isso a linguagem correta é reportada em exploração, não Cisco confirmou campanha ativa.
+
+Para quem mantém esse tipo de telefonia corporativa, o item sai da fila genérica de patch.
+Ele vira verificação com cara de incidente.
+Saber se o serviço existe, se está habilitado e se a versão foi corrigida já é bastante.
+
+As fontes deste bloco são Cisco Security Advisory, SecurityWeek e BleepingComputer.
+
+Qwen AgentWorld simula ambientes antes de soltar o agente.
+
+Um agente não erra só porque respondeu uma frase ruim.
+Ele erra porque chamou ferramenta na hora errada ou interpretou estado de ambiente do jeito errado.
+Também pode esquecer uma consequência ou achar que o mundo mudou quando nada mudou.
+Benchmark de pergunta e resposta mede uma parte pequena disso.
+
+O Qwen AgentWorld, submetido ao arXiv em 23 de junho, tenta atacar esse pedaço.
+A proposta é criar modelos de mundo em linguagem para simular ambientes de agentes.
+Em português comum: um modelo que tenta prever como o ambiente reage quando o agente age.
+Isso acontece antes de colocar esse agente no ambiente real.
+
+O paper apresenta os modelos Qwen AgentWorld trinta e cinco B A três B e Qwen AgentWorld trezentos e noventa e sete B A dezessete B.
+Também descreve mais de dez milhões de trajetórias de interação com ambientes.
+O pipeline tem três etapas, com C P T, S F T e R L.
+O repositório lista sete domínios: M C P, busca, terminal, engenharia de software, Android, web e sistema operacional.
+
+O nome AgentWorldBench entra como benchmark desse trabalho.
+Segundo o paper, ele foi construído a partir de interações reais de cinco modelos de fronteira.
+Essas interações vieram de nove benchmarks já existentes.
+O repositório diz que o modelo trinta e cinco B A três B e o AgentWorldBench foram liberados em 24 de junho.
+Os pesos foram publicados no Hugging Face e no ModelScope.
+
+Isso é pesquisa fresca, com resultado reportado pelos autores.
+Ainda não dá para trocar staging, teste de integração ou aprovação humana por um simulador bonito.
+Mas a direção é interessante.
+Antes de deixar um agente mexer em terminal, navegador, M C P ou app Android, faz sentido avaliar a leitura dele.
+Também faz sentido treinar essa leitura do ambiente antes do agente chegar no mundo real.
+
+Para dev, fica a ideia: o mundo do agente também precisa de teste.
+Não só a resposta final, mas a cadeia de estado, ferramenta e consequência.
+
+As fontes deste bloco são arXiv e o repositório Qwen AgentWorld no Git Hub.
+
+Agora, destaques rápidos para hoje.
+
+Mistral O C R quatro devolve texto com estrutura para R A G.
+A Mistral anunciou, em 23 de junho, o O C R quatro, com texto extraído e caixas de posição.
+O lançamento também traz classificação de blocos e pontuação de confiança.
+Isso interessa para pipelines de R A G e agentes porque P D F não é só texto corrido.
+Tabela, assinatura, equação e rodapé precisam continuar identificáveis depois da extração.
+O produto suporta cento e setenta idiomas em dez grupos linguísticos.
+Também tem opção self hosted em container único para clientes enterprise.
+O preço anunciado é de quatro dólares por mil páginas na [EY1 P IY1 AY1].
+No Batch [EY1 P IY1 AY1], o preço é de dois dólares por mil páginas.
+No Document A I, o preço anunciado é de cinco dólares por mil páginas.
+Os benchmarks são da própria Mistral.
+E a empresa também alerta que usos de alto risco precisam de controles adequados.
+
+A fonte deste bloco é a Mistral AI.
