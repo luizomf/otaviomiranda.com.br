@@ -1,0 +1,217 @@
+npm e "Git Hub" Actions lembram que C I também é produção; TypeScript sete troca o motor para Go.
+
+Quando o build recebe segredo, publica pacote e decide deploy, ele já está em produção.
+Mesmo rodando num runner descartável, a consequência prática é a mesma.
+Hoje isso apareceu em pacote npm recém-publicado, ação de terceiro e tag que muda de lugar.
+E o pior: essa mudança pode não aparecer no diff do seu aplicativo.
+
+A primeira história junta npm, "Git Hub" Actions e tags mutáveis como risco real de produção no C I.
+Em maio, falamos de "Git Hub" Actions como superfície de produção.
+Agora o delta é bem concreto.
+A StepSecurity publicou, em 25 de junho, que 20 pacotes npm da Leo Platform foram comprometidos.
+A leva coordenada de versões maliciosas foi publicada em 24 de junho.
+Segundo a empresa, essas versões saíram dentro de uma janela de três segundos.
+Elas carregavam um kit voltado a roubo de credenciais de C I e C D.
+A soma dos pacotes gira em torno de treze mil e seiscentos downloads por semana.
+O número não tem cara de catástrofe do ecossistema inteiro.
+Mas C I com segredo por perto não precisa de milhões de instalações para virar dor de cabeça.
+
+A StepSecurity também descreveu, no dia 24, comprometimentos em duas ações do "Git Hub".
+Uma era a ação mawesome, do simonecorsi.
+A outra era a semantic release action, do codfish.
+Nos dois casos, ela reportou commits maliciosos empurrados para o repositório.
+Também reportou tags de versão apontando para outro lugar.
+Quem usava a ação por tag podia rodar código diferente sem mudar uma linha no repositório da aplicação.
+
+Essa é a parte que costuma parecer detalhe até quebrar.
+Tag é apelido mutável; hash completo de commit é endereço bem mais específico.
+Em caminho crítico de build, publicação, deploy e release, isso não é preciosismo de segurança; é controle de mudança.
+
+O contexto de Snyk sobre Phantom Gyp e Miasma lembra outra porta.
+Pacote npm pode executar coisa na instalação por caminhos que não aparecem como script óbvio no package ponto JSON.
+O arquivo binding ponto gyp, por exemplo, entra no fluxo de build nativo e pode virar veículo de execução.
+Se isso acontece dentro de um runner com token de "Git Hub", chave de registro ou segredo de cloud, a história muda.
+Com credencial de release por perto, o pacote deixa de ser só dependência.
+
+Para reduzir o estrago, o caminho é chato e bom.
+Pine ações críticas por hash completo de commit.
+Reduza permissão do token do runner.
+Use lockfile com disciplina e crie uma espera mínima antes de consumir versão recém-publicada em C I.
+Controle scripts de instalação quando fizer sentido.
+Se uma referência afetada rodou durante a janela ruim, trate segredo acessível como exposto.
+Investigue antes de seguir vida.
+As fontes deste bloco são StepSecurity sobre Leo Platform e sobre as ações mawesome e semantic release action.
+Também entra a análise da Snyk sobre Phantom Gyp e Miasma.
+
+A próxima história é a acusação da Anthropic contra operadores ligados à Alibaba e à família Qwen.
+Os números são grandes, então a linguagem precisa ficar com o pé no chão.
+Reuters e Business Insider reportaram que a Anthropic enviou uma carta, em 10 de junho.
+A carta foi enviada a senadores dos Estados Unidos.
+Nela, a empresa acusa operadores ligados à Alibaba e à família Qwen de usar Claude em escala.
+A acusação é que esse uso buscava extrair capacidades do modelo.
+
+Pelos relatos públicos, a Anthropic fala em mais de vinte e oito vírgula oito milhões de trocas com Claude.
+Esse volume teria acontecido entre 22 de abril e 5 de junho de 2026.
+Os relatos também falam em quase vinte e cinco mil contas fraudulentas.
+A suspeita atribuída à empresa é que esse volume teria servido para melhorar outros modelos.
+Mais especificamente, capacidades de engenharia de software e raciocínio agente.
+
+Distillation, nesse contexto, é uma ideia simples de explicar e difícil de policiar.
+Você consulta um modelo forte muitas vezes.
+Guarda as respostas e depois usa esse material para treinar ou ajustar outro modelo.
+É como pedir ajuda ao aluno mais avançado da sala em todos os exercícios.
+Só que com interface de modelo, conta falsa e planilha de custo no meio.
+
+As reportagens públicas não trazem comprovação independente da conduta atribuída à Alibaba.
+Também não dá para afirmar, com essas fontes, que um modelo específico ganhou uma capacidade específica por causa disso.
+O fato jornalístico aqui é a acusação da Anthropic.
+E também os números reportados a partir da carta.
+
+Para dev, a história sai rápido da geopolítica e cai em arquitetura.
+Saídas de modelo viraram ativo estratégico.
+Nesse cenário, a [EY1 P IY1 AY1] de modelo virou superfície de abuso.
+Custo também virou peça de desenho de sistema.
+Isso pesa ainda mais quando modelos open-weight mais baratos pressionam o preço de modelos fechados.
+Open-weight também não é sinônimo automático de open-source.
+É outro tipo de abertura, com outra conversa de licença, execução e controle.
+
+Podemos esperar mais verificação de identidade, limite de taxa e detecção de abuso.
+Também devem aparecer mais contratos com cláusula sobre distillation e roteamento de modelo por custo.
+Quem monta agente de código também entra nessa conta.
+Cada chamada grande demais vira dinheiro, risco e sinal para alguém monitorar.
+As fontes deste bloco são Reuters, Business Insider e James O'Claire.
+
+Agora vem TypeScript sete R C trocando o motor para Go sem trocar a linguagem.
+O TypeScript sete ponto zero R C já está disponível pelo canal TypeScript arroba R C.
+A mudança por baixo é grande: a Microsoft portou o compilador para Go.
+A promessa oficial é manter a semântica do TypeScript seis.
+Ao mesmo tempo, a Microsoft quer ganhar velocidade com código nativo e paralelismo de memória compartilhada.
+
+O número que chama atenção é muitas vezes cerca de dez vezes mais rápido, segundo a Microsoft.
+Use isso como motivo para testar.
+Não use como desculpa para atualizar C I sem medir.
+Código grande, plugin, monorepo, configuração de editor e tipo de erro podem mudar bastante a sensação real.
+
+A migração também tem freio explícito.
+O suporte de editor passa pelo "Language Server Protocol".
+Então a história não fica presa só ao V S Code.
+Ao mesmo tempo, a interface programática estável não deve chegar antes do TypeScript sete ponto um.
+Para ferramenta que usa a interface antiga, a própria Microsoft aponta um caminho de convivência.
+Esse caminho passa pelo pacote de compatibilidade TypeScript seis e pelo comando tsc seis.
+
+O post oficial é de 18 de junho.
+Para quem vive com tsc segurando feedback em projeto grande, o R C merece uma branch de teste.
+Meça type-check, editor, C I, integração com bundler e tudo que encosta na interface do compilador.
+Se a promessa chegar perto no seu projeto, o ganho é menos glamour.
+É mais café que não esfria esperando erro de tipo.
+A fonte deste bloco é o Microsoft DevBlogs.
+
+Agora, Cisco Catalyst S D WAN aparece com acesso root e rastros apagados.
+Ontem a Cisco apareceu aqui por Unified C M.
+Hoje é outro produto, outra falha e outro tipo de lição operacional.
+O caso junta Cisco Catalyst S D WAN, o C V E 2026, vinte dois quatro cinco, e a análise da Mandiant.
+
+A Mandiant, no blog do Google Cloud, diz que identificou um invasor mirando infraestrutura S D WAN.
+O alvo descrito era um provedor de comunicação.
+O caminho público passa pela exploração do C V E 2026, vinte dois quatro cinco.
+Essa falha permitia escalar de acesso administrativo para root em controladores Cisco Catalyst S D WAN.
+
+A Cisco trata o problema como falha de escalada de privilégio em controladores Catalyst S D WAN.
+O advisory da Cisco aponta versões corrigidas.
+Ele não traz workaround, então sobra pouco espaço para criatividade.
+Inventarie versão, aplique correção e entenda se houve acesso antes do patch.
+
+A parte que mais pesa na análise da Mandiant vem depois.
+O invasor teria apagado e restaurado arquivos e configurações modificadas.
+Isso mexe justamente na trilha que alguém usaria para reconstruir o incidente.
+Dispositivo de rede costuma ter confiança demais e telemetria de endpoint de menos.
+Quando algo assim cai, o time não pode olhar para o appliance como se fosse só uma caixa preta que roteia pacote.
+
+Para defesa, a lista fica bem direta.
+Faça patch nos controladores afetados.
+Procure peering não autorizado.
+Procure contas locais suspeitas, restauração estranha de configuração e alteração de administrador padrão.
+Também confira exposição de certificado ou credencial.
+E o limite importa: isso não é uma notícia sobre todo Cisco da internet.
+É um caso específico de Catalyst S D WAN, com exploração observada em um ambiente de provedor.
+O escopo público ainda é limitado.
+As fontes deste bloco são Google Cloud com Mandiant, Cisco Security Advisory e BleepingComputer.
+
+Nos destaques rápidos, Python sem G I L está mais perto do teste real.
+A L W N resumiu a fala de Thomas Wouters na PyCon U S 2026 sobre free-threaded Python.
+A penalidade de execução single-thread vem caindo de Python três ponto treze para três ponto quatorze.
+Um caminho de A B I mais estável deve ajudar wheels e extensões.
+Ainda não é hora de declarar o G I L morto para todo mundo.
+É hora de medir workload, memória, latência e dependências com build free-threaded.
+Isso vale antes que o padrão mude lá na frente.
+A fonte desse destaque é L W N ponto net.
+
+A Cloudflare abriu OAuth self-managed e tratou revogação como confiabilidade.
+Clientes agora podem criar clientes OAuth para acesso delegado às interfaces da Cloudflare.
+Isso reduz dependência de token cru em integração que precisa de consentimento e revogação.
+A engenharia por trás também interessa.
+O texto fala em Hydra, criação de índice concorrente, estratégia blue-green e fila de replay de revogações.
+A ideia é não ressuscitar acesso que já tinha sido cortado.
+A fonte desse destaque é o Cloudflare Blog.
+
+A P E P oitocentos e trinta e dois quer parar a adivinhação de ambiente Python.
+Brett Cannon explicou a proposta de descoberta de virtualenv com python envs.
+Ela também inclui uma tabela workflow no pyproject ponto TOML.
+E inclui um "Workflow Server Protocol" via JSON R P C em entrada e saída padrão.
+A ideia mira editores e agentes de I A também.
+Escolher o interpretador errado em projeto Python é um jeito educado de perder meia tarde.
+Ainda é proposta em discussão.
+A fonte desse destaque é Brett Cannon.
+
+Node ponto JS vinte e seis ponto quatro ponto zero mexe em loaders, V F S e rede no canal Current.
+A release de 24 de junho trouxe package maps para loaders.
+Também trouxe buffers fornecidos pelo chamador em read file.
+Veio ainda um subsistema mínimo node V F S.
+A lista inclui compressão de certificado T L S e ajuste fino de keepalive T C P.
+As opções mexem em intervalo e contagem de keepalive.
+É Current, não L T S; bom para autor de ferramenta testar.
+Ruim para sair atualizando produção só porque a lista ficou bonita.
+A fonte é o Node ponto JS Blog.
+
+Token de agente já entrou na revisão de arquitetura.
+A InfoWorld reportou o alerta da Gartner.
+Custos de token para coding agents podem chegar perto de números de folha de pagamento.
+A ressalva é que a comparação usa média global e varia por país e uso real.
+Um texto técnico separado mostrou exemplos menores, mas bem concretos.
+Neles, interfaces nativas como URL Search Params e Form Data reduzem código gerado e tokens de saída.
+Orçamento, roteamento por tarefa, higiene de contexto e estilo de código agora fazem parte da conta.
+As fontes são InfoWorld e jimmont ponto com.
+
+No acompanhamento de tendências do dia, a conversa de agentes continua saindo da caixa de prompt.
+No dia 22, falamos de Sentry, M C P e sandbox de Claude.
+No dia 23, falamos de Lambda Micro V Ms.
+O padrão de hoje é menos modelo esperto e mais infraestrutura.
+Sessão durável, segredo local, banco com limite, gateway M C P e controle fora do agente entram no desenho.
+
+O Latent Space chamou esse movimento de meta harness.
+O nome pode soar como categoria inventada em reunião longa.
+Mas as peças verificáveis são familiares.
+Go Micro fala em runtime com service discovery, workflows duráveis e gateway M C P.
+Também fala em gateway Agent to Agent e deploy por S S H.
+Flue vende um harness em TypeScript para agentes duráveis.
+O pacote inclui recuperação de sessão, sandbox e ferramentas.
+
+Tabularis entra pela porta do banco.
+É um workspace S Q L desktop com suporte a M C P, PostgreSQL, My S Q L, Maria D B e S Q Lite.
+Ele mantém credenciais no keychain do sistema.
+Hasp entra pela porta do segredo.
+É um cofre local criptografado que tenta entregar segredo para comando e ferramenta.
+A promessa é fazer isso sem colocar o valor dentro do contexto do agente.
+
+O paper "Unfireable Safety Kernel" leva a conversa para controle de execução.
+A tese é que defesa dentro do runtime do agente pode ser alcançada por entrada influenciada.
+A proposta passa por separação de processo e checagem antes da ação.
+Também passa por comportamento fail closed e evidência verificável fora do modelo.
+As fontes citam Rust e claims de prova com S M T e Kani.
+Mas isso ainda é pesquisa, não selo mágico de produção.
+
+O padrão já importa antes de existir vencedor claro.
+Se o agente vai abrir terminal, consultar banco, chamar M C P ou mexer em deploy, alguém precisa decidir o básico.
+Onde fica o segredo, quem aprova ação irreversível e como recuperar sessão quebrada.
+E que log sobrevive quando o modelo acha que estava tudo certo.
+As fontes são Latent Space, Go Micro, Flue, Tabularis, Hasp e arXiv.
