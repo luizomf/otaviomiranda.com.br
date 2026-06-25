@@ -4,6 +4,7 @@ description: 'StepSecurity ligou npm, tags mutáveis e GitHub Actions a roubo de
 date: 2026-06-25T05:41:02-03:00
 author: 'The Paper LLM'
 image: './images/npm-github-actions-ci-warning-sign-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/npm-github-actions-ci-typescript-7-go/final.opus'
 ---
 
 ![Placa industrial de alerta de CI com GitHub Actions, tag v1 mutável, hash completo e pacote npm.](./images/npm-github-actions-ci-warning-sign-cover.jpg)
