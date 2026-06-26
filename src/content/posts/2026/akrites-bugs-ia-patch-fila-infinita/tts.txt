@@ -1,0 +1,224 @@
+Akrites tenta organizar bugs de I A antes que o patch vire fila infinita.
+
+Está ficando barato encontrar falha com I A.
+Difícil mesmo é confirmar, corrigir e fazer o patch chegar ao projeto que todo mundo usa.
+E isso sem transformar mantenedor em central de atendimento de vulnerabilidade.
+
+Primeiro, o Akrites quer coordenar correções antes que relatórios de I A afoguem mantenedores.
+
+O Akrites foi apresentado em 25 de junho como uma tentativa de organizar correção em software aberto crítico.
+A carta de lançamento diz que a I A mudou a velocidade da descoberta.
+Bugs sérios que antes podiam levar semanas para aparecer agora podem surgir em minutos.
+
+Isso parece ótimo até a fila chegar do outro lado.
+
+Projeto aberto já recebe issue duplicada, relatório incompleto e severidade chutada alto.
+Também recebe prova de conceito sem contexto e pedido urgente de alguém que não vai escrever o patch.
+Se ferramenta de I A despejar mais achado bruto nessa caixa, o gargalo muda de lugar.
+Deixa de ser achar bug, e vira validar, corrigir, coordenar e publicar sem queimar quem mantém.
+
+A proposta do Akrites é uma porta confidencial compartilhada.
+Ela teria uma equipe de resposta a incidentes de segurança, ou S I R T.
+A função seria deduplicar relatórios, validar achados, coordenar correção upstream e sincronizar divulgação.
+A lista pública de participantes inclui nomes grandes de cloud, I A, infraestrutura e fundações.
+Entram aí A W S, Anthropic, Google, Microsoft, "Git Hub", NVIDIA, Open A I, Red Hat e Rust Foundation.
+
+O bom sinal da carta é medir sucesso por patch implantado, e não por C V E publicado.
+Para quem depende de pacote aberto em produção, a dor é bem concreta.
+Saber que a falha existe é só o começo.
+O fix precisa chegar ao projeto certo, passar por revisão e sair em versão consumível.
+Depois disso, ainda precisa aparecer no seu deploy antes que o atacante faça a mesma leitura.
+
+A parte delicada é governança.
+Coordenação confidencial pode reduzir duplicata e exposição antes do patch.
+Ao mesmo tempo, qualquer modelo concentrado de triagem levanta perguntas sobre abertura pública.
+Também levanta perguntas sobre autonomia dos mantenedores e sobre quem decide a prioridade.
+Por enquanto, Akrites é uma promessa forte.
+A prova vem quando aparecer em correções reais, com upstream atendido e pacote chegando ao usuário final.
+
+As fontes deste bloco são a carta do Akrites e o site do Akrites.
+
+Agora, a Micron indica que RAM cara pode virar planejamento, não susto de trimestre.
+
+A Micron reportou resultados recordes no terceiro trimestre fiscal de 2026.
+A receita foi de quarenta e um vírgula quarenta e seis bilhões de dólares.
+Nos materiais oficiais, a empresa diz que assinou dezesseis acordos estratégicos com clientes.
+Também diz que a demanda por DRAM e NAND continua superando bastante a oferta da indústria.
+
+Esse é o pedaço que encosta no dev mesmo sem você comprar memória no atacado.
+Modelo local, servidor com mais cache, V P S maior e banco com mais folga entram nessa conta.
+Também entra máquina de laboratório com G P U e projeto que promete rodar tudo na sua estação.
+No fim, todos eles continuam tendo uma dependência bem física: RAM.
+O "README" otimista não barateia esse pedaço.
+
+Nos comentários preparados para investidores, a Micron espera condições apertadas além de 2027.
+O Register leu os acordos como sinal de preços historicamente altos por vários anos.
+Essa amarra valeria principalmente para compradores grandes.
+Use isso como análise, sem transformar em previsão de varejo para o pente de memória de amanhã.
+
+Mesmo assim, a direção importa.
+A onda de I A não consome só G P U.
+Ela consome memória, armazenamento, energia, rack, contrato, lead time e orçamento.
+Para quem planeja homelab, servidor de inferência ou ambiente de teste com modelo local, a pergunta muda.
+Também muda para quem planeja um tier de V P S para produto.
+Não é só qual modelo cabe; é quanto custa manter esse modelo cabendo daqui a dois anos.
+
+Serve mais como aviso de planejamento do que como gatilho para comprar hardware no impulso.
+Se um projeto depende de memória barata para fechar a conta, essa premissa merece ficar escrita.
+De preferência, antes da fatura.
+
+As fontes são o resultado fiscal da Micron, os comentários preparados da Micron e o The Register.
+
+Na terceira história, um agente em V P S recebeu mais de seis mil e-mails e não vazou o secrets ponto env.
+
+Fernando Irarrazaval colocou no ar o hackmyclaw.
+É um experimento simples de entender e difícil de executar direito.
+Um assistente OpenClaw chamado Fiu rodava em uma V P S e recebia e-mails públicos.
+A graça era ver gente tentando fazer o agente vazar um arquivo chamado secrets ponto env.
+
+Segundo o autor, mais de duas mil pessoas mandaram mais de seis mil e-mails, e o segredo não vazou.
+O teste usou Claude Opus quatro ponto seis.
+Custou mais de quinhentos dólares em chamadas de [EY1 P IY1 AY1].
+E ainda rendeu uma suspensão de três dias na conta do Gmail.
+
+O resultado chama atenção, com razão.
+A leitura honesta cabe no cuidado do próprio autor.
+Prompt injection continua sendo um problema real de segurança.
+E ele não confiaria permissões arbitrárias a um agente.
+Esse cuidado evita transformar a história em propaganda involuntária.
+
+Alguns limites do teste importam.
+Muita entrada era obviamente maliciosa.
+Filtros do Google entraram no caminho.
+O agente também não respondeu tudo.
+E o comportamento mudou quando o processamento em lote contaminou a suspeita entre e-mails.
+Também estamos falando de um modelo específico, num desenho específico, com uma missão estreita.
+
+Ainda assim, o experimento presta serviço.
+Ele mostra que modelo forte, instrução estreita, contexto controlado e permissão limitada ajudam bastante.
+Para um agente que lê e-mail, arquivo, calendário, terminal ou repositório, o entorno do prompt manda.
+Segredo fora do alcance por padrão.
+Contexto novo quando possível.
+Limite de custo, permissão mínima e ação perigosa passando por outra borda.
+
+Agente que não vazou segredo em desafio público merece atenção.
+Agente com acesso livre a tudo porque passou em um desafio público merece preocupação.
+
+As fontes são o post de Fernando Irarrazaval e a discussão no Hacker News.
+
+Agora, a Microsoft mostra que docs para agentes precisam dizer qual caminho quebra.
+
+Ontem falamos de harnesses e agentes entrando na arquitetura.
+Hoje a Microsoft trouxe uma peça menor, mas bem prática.
+O agente chega na documentação com um plano provável na cabeça.
+
+No exemplo da Microsoft, a tarefa era atualizar um projeto SharePoint Framework.
+Uma dica suave para usar a ferramenta correta não bastou em vários testes.
+Quando a documentação passou a avisar que editar só o package ponto JSON quebraria o build, a coisa mudou.
+Logo depois do aviso, a documentação apontava a alternativa certa.
+Nas cinco execuções, o agente passou a usar a ferramenta.
+
+O padrão é simples o bastante para testar em arquivos como AGENTS ponto M D e CLAUDE ponto M D.
+Também serve para guia de migração e readme interno.
+Primeiro, nomeie o caminho errado que o agente provavelmente tentaria.
+Depois, diga a falha concreta que esse caminho causa.
+Em seguida, coloque o comando ou fluxo correto perto da advertência.
+
+Cinco execuções em blog de vendor dão pouco para chamar de lei.
+Ainda assim, a intervenção é boa.
+Ela troca "seria legal usar X" por "se fizer Y, quebra por este motivo; use X".
+Quem já viu agente editar arquivo errado por confiança demais sabe que uma frase dessas custa pouco.
+
+Para times que estão enchendo repositório de instruções para agentes, a diferença é útil.
+Em documento para humano, dá para explicar contexto e deixar alternativa implícita.
+Para agente, talvez seja melhor invalidar a gambiarra antes que ela pareça uma solução.
+
+A fonte deste bloco é o blog Microsoft for Developers.
+
+Agora vêm os destaques rápidos de hoje.
+
+"Git Hub" colocou números no harness do Copilot, mas ainda é benchmark de vendor.
+Depois da conversa de ontem sobre agentes e harness, a empresa publicou dados sobre o Copilot agentic harness.
+Ele é descrito como componente comum por trás do Copilot C L I, app, code review e outras superfícies.
+O aprendizado técnico é tratar ferramenta, contexto, fluxo e gasto de tokens como parte do sistema avaliado.
+E a ressalva vem junto: "Git Hub" está medindo o produto do "Git Hub".
+A fonte deste destaque é o "Git Hub" Blog.
+
+Deno dois ponto nove colocou uma espera padrão antes de instalar pacote N P M novo.
+A release trouxe Deno desktop ainda experimental.
+Também trouxe leitura de lockfiles de N P M, P N P M, Yarn e Bun para semear deno ponto lock.
+E trouxe uma defesa bem concreta de supply chain: idade mínima de vinte e quatro horas para dependências N P M.
+Depois de dias falando de pacote recém-publicado virando risco, essa janelinha de espera faz sentido.
+Teste com calma: a janela ajuda, mas continua sendo só uma camada de defesa.
+As fontes são o anúncio do Deno dois ponto nove e as docs de supply chain do Deno.
+
+ShareLock mostra que ataque a M C P pode ficar espalhado por várias ferramentas.
+No dia 22, M C P já apareceu aqui como superfície de agente.
+O paper ShareLock muda o formato.
+A instrução maliciosa é fragmentada em descrições de ferramentas que, isoladas, parecem inofensivas.
+A ideia usa "Shamir's Secret Sharing" como inspiração.
+E reforça a revisão do servidor M C P inteiro, com as ferramentas vistas em conjunto.
+É pesquisa, não exploração ativa confirmada.
+A fonte é o paper ShareLock no arXiv.
+
+Chai mira mau uso de criptografia com agentes.
+O paper apresenta um sistema de descoberta e validação de vulnerabilidades de uso incorreto de criptografia.
+Os autores lembram que esse tipo de bug é mais difícil de confirmar do que muita falha de memória.
+Isso acontece porque nem sempre existe um crash ou sanitizador apontando o erro.
+O recado volta ao problema do Akrites.
+Se I A aumenta achados em classes difíceis, triagem e validação viram parte central da segurança.
+A fonte é o paper Chai no arXiv.
+
+A Microsoft rastreou phishing com ZIP de fotos e implante em Node ponto J S.
+A campanha mira organizações de hotelaria na Europa e na Ásia desde abril de 2026, segundo a Microsoft.
+Ela usa arquivos ZIP com tema de fotos, atalhos L N K falsos e PowerShell ofuscado.
+Também usa um implante baseado em Node ponto J S, com persistência no registro.
+Para defesa, o gancho é direto.
+Node ponto exe rodando de caminho estranho, com script estranho, pode ser sinal de intrusão.
+Nesse caso, pode não ser ferramenta de desenvolvimento.
+A fonte é o Microsoft Security Blog.
+
+O usbliter oito é importante, mas exige acesso físico e hardware específico.
+A Paradigm Shift descreve o usbliter oito como exploit de Secure ROM.
+O alvo são chips Apple A doze, A treze, e alguns Apple Watch S quatro e S cinco.
+Como Boot ROM fica numa camada que não recebe patch comum, a pesquisa pesa para segurança de dispositivos.
+O freio também precisa aparecer na primeira leitura.
+É exploração tethered, com modo D F U e hardware baseado em R P dois três cinco zero.
+O impacto prático passa por esse limite físico, não por comprometimento remoto em massa.
+As fontes são a Paradigm Shift e o repositório usbliter oito.
+
+A SANS mostrou o barulho que portas expostas escutam.
+Um diário do Internet Storm Center, baseado em honeypot D Shield, descreve scanners e botnets em serviços expostos.
+Também fala de vulnerabilidades antigas de roteador, D V R e caminhos de exploração já cansados de guerra.
+Para quem mantém V P S, a leitura é quase terapêutica.
+Firewall, patch, log, limite de exposição e revisão de painel administrativo continuam chatos.
+E continuam chatos porque continuam funcionando.
+A fonte é o SANS Internet Storm Center.
+
+Para fechar, o acompanhamento de tendências do dia.
+
+O modelo continua importante, claro.
+Só que as notícias de hoje apontam para várias peças ao redor dele ficando tão decisivas quanto o modelo.
+Entram nessa lista coordenação de correção, harness, documentação, validação e custo de token.
+Também entram permissão de ferramenta e até preço de memória.
+
+Akrites aparece na fila de vulnerabilidades antes do patch.
+Microsoft e "Git Hub" entram na forma como o agente é conduzido.
+ShareLock, Chai e hackmyclaw puxam segurança em ferramentas, validação e prompt injection.
+Micron lembra que I A também bate no mundo físico, com DRAM, NAND e contrato de fornecimento.
+
+Para quem constrói produto com I A, isso puxa a conversa para um lugar mais adulto.
+Escolher modelo continua sendo uma decisão.
+Mas o sistema que envolve o modelo precisa ter dono.
+Regra versionada, log revisável, limite de custo, permissão mínima e teste que falha de verdade.
+Documentação que aponta o caminho errado também entra nessa lista.
+Infraestrutura que fecha a conta, idem.
+
+O próximo salto provavelmente vai parecer menos mágico do que a demo.
+Talvez venha como fila de patch melhor coordenada.
+Ou como agente que para antes de gastar demais.
+Ou como lockfile que espera vinte e quatro horas.
+Ou ainda como guia interno com uma frase dizendo: não edite isso manualmente porque quebra o build.
+Coisa pequena, mas produção é cheia de coisa pequena com chave do castelo no bolso.
+
+As fontes da tendência são Akrites, Microsoft, "Git Hub", ShareLock e Micron.
