@@ -73,6 +73,8 @@ Fonte: [Microsoft for Developers](https://developer.microsoft.com/blog/your-agen
 
 ## Destaques rápidos para hoje
 
+- **A OpenAI confirmou o GPT-5.6 em Sol, Terra e Luna, mas o governo dos EUA segurou a fila.** Ainda hoje saiu o anúncio oficial: preview restrito a cerca de 20 organizações aprovadas, via API e Codex, com a Casa Branca pedindo para limitar o acesso antes do público. É a primeira vez que o governo dos EUA pede para segurar um modelo de fronteira antes da liberação geral. Abrimos um post dedicado com os detalhes. Fonte: [GPT-5.6 chegou em Sol, Terra e Luna](/2026/gpt-5-6-sol-terra-luna-governo-segurou-o-lancamento/).
+
 - **GitHub colocou números no harness do Copilot, mas ainda é benchmark de vendor.** Depois da [conversa de ontem sobre agentes e harness](/2026/npm-github-actions-ci-typescript-7-go/), a empresa publicou dados sobre o GitHub Copilot agentic harness, descrito como componente comum por trás do Copilot CLI, app, code review e outras superfícies. O aprendizado técnico é tratar ferramenta, contexto, fluxo e gasto de tokens como parte do sistema avaliado, além do nome do modelo. A ressalva vem junto: GitHub está medindo o produto do GitHub. Fonte: [GitHub Blog](https://github.blog/ai-and-ml/github-copilot/evaluating-performance-and-efficiency-of-the-github-copilot-agentic-harness-across-models-and-tasks/).
 
 - **Deno 2.9 colocou uma espera padrão antes de instalar pacote npm novo.** A release trouxe `deno desktop` ainda experimental, leitura de lockfiles de npm, pnpm, yarn e Bun para semear `deno.lock`, e uma defesa bem concreta de supply chain: idade mínima de 24 horas para dependências npm por padrão. Depois de dias falando de pacote recém-publicado virando risco, essa janelinha de espera faz sentido. Teste com calma: a janela ajuda, mas continua sendo só uma camada de defesa. Fontes: [Deno 2.9](https://deno.com/blog/v2.9) e [docs de supply chain do Deno](https://docs.deno.com/runtime/packages/supply_chain/).
@@ -147,7 +149,7 @@ omitted_briefing_items:
   - PRISM malware detection dataset: niche ML-security item crowded out.
   - AI children's books, body horror edition: AI culture story, weak fit for technical roundup.
   - Papermark accuses Corgi of AGPL copying: social accusation source chain, avoided without stronger primary evidence.
-  - OpenAI GPT-5.6 slow-roll reports: secondary-only reporting and overlaps recent governance coverage.
+  - OpenAI GPT-5.6 slow-roll reports: initially secondary-only; after the official OpenAI announcement it was promoted to a dedicated single-topic post and linked here as a quick hit (/2026/gpt-5-6-sol-terra-luna-governo-segurou-o-lancamento/).
   - JetBrains malicious AI plugins StepSecurity follow-up: repeat of June 21 public post without new public delta.
   - Podman 6.0: good Linux item but weaker than selected Deno release.
 -->
