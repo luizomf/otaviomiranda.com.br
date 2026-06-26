@@ -1,0 +1,72 @@
+G P T cinco ponto seis chegou em Sol, Terra e Luna, mas o governo dos Estados Unidos segurou o lançamento.
+
+Todo mês aparece um modelo novo prometendo ser o melhor de todos.
+Hoje o anúncio veio com um detalhe mais raro do que benchmark.
+O modelo existe, está rodando, e mesmo assim quase ninguém pode usar ainda.
+E quem segurou a fila não foi a OpenAI sozinha.
+
+Primeiro, vamos aos modelos e ao novo jeito de dar nome a eles.
+
+A OpenAI apresentou em vinte e seis de junho o G P T cinco ponto seis, que não é um modelo só.
+São três. O Sol é o topo de linha. O Terra é equilibrado para o trabalho do dia a dia. E o Luna é o mais rápido e barato.
+Junto vem uma mudança de nomenclatura que, convenhamos, faz mais sentido do que a sopa de letras de antes.
+
+A ideia é separar duas coisas que sempre se misturavam no nome.
+O número passa a indicar a geração, no caso cinco ponto seis.
+Os nomes Sol, Terra e Luna passam a indicar o nível de capacidade, e cada nível pode evoluir no seu próprio ritmo.
+Na prática, em vez de decorar qual sufixo é o esperto e qual é o rápido, você escolhe entre inteligência, velocidade e custo.
+
+No pacote técnico, a OpenAI cita dois recursos novos.
+Um é um teto maior de esforço de raciocínio, reservado ao Sol, para problemas que pedem deliberação mais longa.
+O outro é um modo ultra, que vai além de um único agente, coordenando subagentes para tarefas complexas e demoradas.
+Num exemplo da empresa, o modelo manteve um plano de trabalho estruturado e coordenou subagentes numa tarefa científica longa.
+Soa promissor, mas vale lembrar que é demonstração do fabricante, não teste independente.
+
+Os preços já vieram, por um milhão de tokens.
+O Sol custa cinco dólares na entrada e trinta dólares na saída.
+O Terra fica em dois dólares e cinquenta centavos na entrada, e quinze dólares na saída.
+E o Luna fica em um dólar na entrada e seis dólares na saída.
+O acesso, quando liberado, é pela A P I e pelo Codex.
+A OpenAI também diz que houve ganhos em programação, biologia e cibersegurança, e publicou uma ficha de segurança do modelo.
+
+Agora, a notícia de verdade. O governo pediu para segurar o modelo.
+
+Em vez de liberar para todo mundo de uma vez, a OpenAI vai começar com um preview restrito a cerca de vinte organizações.
+E a participação dessas organizações precisou de aval do governo.
+Uma das portas de entrada citadas é o Amazon Bedrock. Os nomes dos parceiros não foram divulgados.
+
+O pedido partiu da Casa Branca, de dois escritórios, um de segurança cibernética e outro de ciência e tecnologia.
+Isso enquanto a administração Trump monta um processo para testar e avaliar a segurança de modelos de inteligência artificial avançados.
+Pelos relatos, é a primeira vez que o governo dos Estados Unidos pede para limitar um modelo de fronteira antes da liberação pública.
+Esse é o ineditismo do dia, e não o tamanho do contexto ou o número do benchmark.
+
+A OpenAI deixou claro que não gostou do formato.
+A empresa diz acreditar em acesso amplo, e afirma que esse tipo de processo não deveria virar o padrão de longo prazo.
+Segundo a empresa, isso mantém as melhores ferramentas longe de quem precisa delas, inclusive defensores de segurança.
+Internamente, segundo a imprensa, Sam Altman teria dito a funcionários que um lançamento restrito assim não é o modelo preferido.
+A liberação geral está prometida para as próximas semanas.
+
+Dá para ler isso de dois jeitos sem precisar escolher um vilão.
+Um lado vê cautela razoável quando um modelo melhora em coisas sensíveis, como cibersegurança e biologia.
+O outro vê um precedente desconfortável, em que um governo decide quem toca primeiro num modelo comercial.
+Os dois podem ser verdade ao mesmo tempo, e por isso a história é mais interessante que a lista de novidades.
+
+Para fechar, o que muda para quem programa daqui, por enquanto.
+
+Sendo bem direto, hoje, quase nada muda na sua máquina.
+Se você não está numa das cerca de vinte organizações aprovadas, não dá para rodar o G P T cinco ponto seis ainda.
+Então qualquer post que te mandar trocar o seu fluxo agora está vendendo expectativa, e não ferramenta.
+
+Isso não quer dizer que não há o que observar.
+O esquema de nomes por nível, se pegar, facilita escolher modelo por custo e por latência dentro de um produto.
+Os preços já dão para começar a fazer conta de quanto sairia migrar uma carga de trabalho quando a liberação geral chegar.
+Lembrando que entrada e saída têm valores bem diferentes, e isso muda o cálculo conforme o seu uso.
+
+Sobre as melhorias de capacidade, o caminho saudável é tratar tudo como hipótese até aparecer teste de terceiros.
+Ganho em programação anunciado pelo próprio fabricante é ponto de partida para experimentar, não é veredito.
+E o modo ultra com subagentes vale acompanhar com curiosidade e ceticismo na mesma dose.
+Coordenar subagentes em tarefa longa impressiona na demo e cobra a conta em produção, com custo de token e erro acumulado.
+
+Por ora, a parte concreta para guardar é o precedente.
+Um modelo de fronteira saiu primeiro para poucos, com o governo na decisão, e a própria fabricante dizendo que preferia diferente.
+Se isso vai ser exceção pontual ou começo de um novo normal, é o que vale ficar de olho nas próximas semanas.
