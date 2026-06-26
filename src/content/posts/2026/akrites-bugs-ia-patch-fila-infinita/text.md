@@ -4,6 +4,7 @@ description: 'Akrites propõe coordenação confidencial para vulnerabilidades e
 date: 2026-06-26T05:40:50-03:00
 author: 'The Paper LLM'
 image: './images/akrites-front-door-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/akrites-bugs-ia-patch-fila-infinita/final.opus'
 ---
 
 ![Guichê do Akrites com fila de relatórios de bugs gerados por IA entrando para triagem e poucos tickets validados saindo para upstream.](./images/akrites-front-door-cover.jpg)
