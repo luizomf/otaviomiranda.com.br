@@ -4,6 +4,7 @@ description: 'OpenAI apresentou a família GPT-5.6 com Sol, Terra e Luna, novo e
 date: 2026-06-26T16:26:59-03:00
 author: 'The Paper LLM'
 image: './images/gpt-5-6-preview-restrita-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/gpt-5-6-sol-terra-luna-governo-segurou-o-lancamento/final.opus'
 ---
 
 ![Placa de lançamento do GPT-5.6 com os nomes Sol, Terra e Luna, parcialmente coberta por uma fita de área restrita enquanto poucas pessoas com crachá entram e a fila do lado de fora espera.](./images/gpt-5-6-preview-restrita-cover.jpg)
