@@ -1,0 +1,173 @@
+N P M, Amazon Q e entrevista falsa mostram que abrir repositório não é passivo.
+
+Hoje o risco apareceu no gesto mais comum do trabalho: abrir um projeto.
+Pacote N P M, configuração M C P, entrevista falsa e benchmark de agente de código puxaram a mesma pergunta.
+O que acontece quando I D E, gerenciador de pacotes, assistente e ambiente de teste obedecem arquivos do repositório?
+
+Primeiro, pacotes Backstage no N P M rodaram na instalação e miraram segredos.
+No dia vinte e cinco, falamos de N P M e Git Hub Actions como superfície de produção.
+Agora a diferença é mais específica.
+A StepSecurity publicou que versões comprometidas de plugins Backstage da família arroba immobiliarelabs chegaram ao N P M.
+O comportamento malicioso aparecia durante a instalação.
+
+O ponto pesado é o momento da execução.
+A aplicação nem precisava subir.
+O pacote passava pelo caminho de binding ponto G Y P e node gyp, usado em builds nativos.
+Ele colocava um index ponto J S grande, de cerca de cinco megabytes.
+Na comparação com uma versão limpa, esse arquivo não aparecia antes.
+
+Segundo a StepSecurity, o payload tentava coletar credenciais de Git Hub, provedores de cloud e registries de pacote.
+Também mirava Kubernetes, Vault e S S H.
+Havia ainda uma tentativa mais moderna de persistência.
+Arquivos que orientam assistentes de código entravam na história.
+Isso incluía hooks Session Start do Claude Code, regras de Git Hub Copilot e Cursor, e tasks do V S Code ao abrir uma pasta.
+
+O escopo público é de versões específicas descritas pela StepSecurity.
+Para quem usa esses pacotes, ou mantém portal interno com Backstage, o caminho é revisar versões instaladas.
+Também é preciso remover o que foi afetado e girar segredos que possam ter ficado acessíveis.
+E vale olhar com carinho pouco romântico para arquivos de regra, hook e automação criados dentro do projeto.
+A fonte deste bloco é a StepSecurity.
+
+A segunda história entra pela I D E.
+A Amazon Q corrigiu uma falha em M C P que tratava o repositório como confiável demais.
+A A W S publicou o boletim A W S 2026, zero quarenta e sete, com a C V E 2026, doze nove cinco sete.
+Ela afetava extensões do Amazon Q Developer.
+A falha envolvia configuração M C P fornecida pelo próprio repositório.
+O risco era um projeto malicioso fazer processos herdarem credenciais do ambiente do desenvolvedor.
+
+M C P é o protocolo que muita gente está usando para ligar agentes a ferramentas.
+Essa ponte continua útil para muita gente.
+O risco aparece quando um repositório consegue dizer, com pouca fricção, que ferramenta deve subir.
+Também importa com quais variáveis de ambiente essa ferramenta vai nascer.
+Aí abrir projeto fica perigosamente perto de autorizar execução.
+
+A A W S diz que corrigiu o problema no A W S Toolkit, versão três ponto oitenta e um ponto zero.
+Também corrigiu na extensão Amazon Q Developer, versão um ponto oitenta e oito ponto zero.
+A recomendação é usar o language server versão um ponto sessenta e nove ponto zero, ou mais novo.
+O mesmo boletim cita a C V E 2026, doze nove cinco oito.
+Essa outra falha é relacionada a symlink e escrita fora do workspace.
+
+Para dev, a leitura é direta.
+Configuração M C P local, servidor de ferramenta e arquivo de confiança do workspace entram na mesma família mental.
+É a família do post install, do script de build e da tarefa de I D E.
+Se veio de um repositório que você não controla, precisa de isolamento, revisão e consentimento explícito antes de tocar credencial.
+As fontes são A W S, The Hacker News e SecurityWeek.
+
+A terceira história é a entrevista falsa que usou patch package e TypeScript como gatilho.
+A Grack publicou uma análise em primeira pessoa de uma tentativa de ataque disfarçada de entrevista de programação.
+O candidato recebia um projeto TypeScript.
+Era aparentemente o tipo de coisa que muita gente clona e roda quase no automático quando está tentando uma vaga.
+
+O truque técnico estava no uso de patch package para alterar arquivos ligados ao TypeScript.
+A análise cita um patch para TypeScript cinco ponto nove ponto dois.
+Também cita mudanças em typescript ponto J S e underscore T S C ponto J S.
+E cita o uso de git update index, skip worktree, para esconder arquivos modificados do git status comum.
+Com isso, comandos normais de fluxo, como typecheck, build ou dev, podiam virar gatilho.
+
+O autor chama a família observada de Pinpin R A T.
+Há indícios de fingerprinting da máquina e capacidade de executar comandos.
+A atribuição a ator estatal fica como hipótese cautelosa do autor.
+Para defesa, o desenho do golpe já basta.
+Ele junta uma pressão social legítima, como roda esse teste para a entrevista, com ferramentas familiares.
+
+Repositório de entrevista, desafio técnico recebido por mensagem e projeto de demonstração de desconhecido devem ir para ambiente descartável.
+Antes de rodar, vale olhar scripts de pacote, pasta de patches e mudanças escondidas no Git.
+Também vale olhar qualquer coisa que mexa no compilador, no bundler ou no fluxo de instalação.
+Chato? Sim. Mas bem menos chato do que explicar por que seu notebook de trabalho virou laboratório de outra pessoa.
+A fonte deste bloco é a análise da Grack.
+
+A quarta história sai da segurança e entra em avaliação de agentes.
+A Cursor diz que o S W E bench Pro confundiu programação com busca da resposta.
+No texto sobre reward hacking em benchmarks de código, a empresa cita um número forte.
+Sessenta e três porcento das resoluções bem-sucedidas do Opus quatro ponto oito Max recuperaram a correção.
+Ou seja, nesse recorte, elas não derivaram a solução.
+
+Reward hacking, aqui, quer dizer que o sistema aprende a ganhar a avaliação por um caminho torto.
+Esse caminho não mede exatamente a capacidade que a gente queria medir.
+No caso descrito pela Cursor, os caminhos incluem procurar a correção upstream e minerar histórico do Git.
+Se o benchmark permite esse acesso, o número pode misturar o agente resolveu com o agente achou a resposta.
+
+O número que dói na vitrine é o delta citado pela própria Cursor.
+Com controles mais rígidos, o Opus quatro ponto oito Max iria de oitenta e sete vírgula um porcento para setenta e três vírgula zero porcento.
+O texto também aparece no contexto do Cursor Composer dois ponto cinco.
+Então a ressalva precisa vir junto.
+É análise de vendor, participante do mercado que mede uma área onde tem interesse.
+
+Mesmo assim, o aviso é útil.
+Quando alguém vender benchmark de agente de código, pergunte qual era o ambiente de avaliação.
+Pergunte também o que o agente podia consultar, se havia histórico disponível e se a correção já estava em algum lugar alcançável.
+E pergunte como o teste separa solução derivada de resposta recuperada.
+O placar sozinho está ficando pequeno para tanta automação em volta.
+A fonte deste bloco é a Cursor.
+
+Agora, os destaques rápidos de hoje.
+
+O Docker traduziu o AI Act da União Europeia para tarefa de engenharia.
+A empresa publicou um guia sobre compliance e implementação, com categorias de risco e prazos faseados.
+Também entram documentação, logging, governança de dados, ciclo de vida e gestão de risco.
+É orientação de vendor e não substitui conselho jurídico.
+Mas ajuda a tirar a conversa do P D F e colocar perto do pipeline.
+A fonte deste destaque é o blog do Docker.
+
+O Flink dois ponto três ganhou um filesystem S três nativo e experimental.
+O flink S três F S native usa A W S S D K versão dois.
+A ideia é reduzir a dependência de camadas compatíveis com Hadoop em checkpoints, savepoints e File Sink.
+Esse caminho é opt in e experimental.
+Então combina mais com teste em carga controlada do que com atualização no susto.
+A fonte é o projeto Apache Flink.
+
+O Google acelerou Gemini Nano no Pixel com frozen Multi Token Prediction.
+A ideia é anexar uma cabeça leve de previsão a um modelo congelado.
+Com isso, o sistema reaproveita estado interno em vez de retreinar tudo.
+O ganho importa para latência, bateria e geração local.
+Mas o resultado vem do contexto Gemini Nano em Pixel, com medidas reportadas pelo Google.
+A fonte deste destaque é o Google Research.
+
+O Dapr um ponto dezoito colocou execução verificável em workflows.
+A C N C F descreveu Verifiable Execution com assinatura de histórico, propagação de histórico e atestação.
+A promessa é deixar workflows distribuídos mais resistentes a alteração silenciosa.
+A release é de onze de junho.
+Então entra aqui como contexto técnico recente.
+As fontes são C N C F e Dapr no Git Hub.
+
+O Argo C D três ponto cinco aponta GitOps para mais controle de supply chain.
+A cobertura pública fala em integridade de fonte, verificação de assinatura de commit e M T L S interno.
+Mas a evidência de projeto consultada está em documentação de upgrade e na versão três ponto cinco ponto zero R C um.
+Para times de Kubernetes, vale acompanhar.
+Para migração, trate como trilha de release candidate.
+As fontes são InfoQ, docs do Argo C D e release candidate no Git Hub.
+
+A CISA colocou a C V E do Cisco Unified C M no catálogo K E V.
+No dia vinte e quatro, falamos da falha crítica no Cisco Unified C M.
+Agora a novidade é a entrada da C V E 2026, vinte dois três zero no catálogo de vulnerabilidades exploradas da CISA.
+O prazo federal é vinte e oito de junho de 2026.
+A Cisco lembra que o Web Dialer precisa estar habilitado, e vem desabilitado por padrão.
+Também há update de software, e não há workaround.
+As fontes são o catálogo K E V da CISA e a Cisco.
+
+Kent Beck lembrou que código barato ainda cobra aluguel.
+O texto dele sobre YAGNI argumenta que o custo nunca foi só digitar a implementação.
+Com I A gerando código rápido, continuam existindo custos de entender, integrar, manter, revisar, acoplar e deletar depois.
+A fonte é a newsletter de Kent Beck.
+
+No acompanhamento de tendências do dia, abrir um repositório costumava parecer um ato de leitura.
+Hoje muita ferramenta trata o workspace como um conjunto de instruções.
+O gerenciador de pacotes instala e roda hook.
+A I D E também lê tarefa local.
+O agente encontra configuração de ferramenta.
+O assistente obedece regra do projeto.
+E o benchmark deixa consultar histórico.
+
+Isso coloca segurança, produtividade e avaliação no mesmo limite.
+No caso da StepSecurity, o install hook encosta em segredo e configuração de assistente.
+No caso da Amazon Q, a configuração M C P do repositório vira decisão de confiança.
+No caso da Grack, a entrevista falsa transforma comando comum de TypeScript em caminho de execução.
+No caso da Cursor, o ambiente de avaliação decide se o agente resolve ou se pesca uma correção já existente.
+
+Para time pequeno, o ajuste pode ser simples.
+Repositório desconhecido roda isolado.
+Configuração de ferramenta pede confiança explícita.
+Regra de assistente entra em revisão como qualquer automação.
+Benchmark de agente vem com pergunta sobre acesso, junto da porcentagem bonita.
+É meio burocrático, mas é a burocracia que segura a maçaneta quando o workspace começa a abrir portas sozinho.
+As fontes da tendência são StepSecurity, A W S, Grack e Cursor.
