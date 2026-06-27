@@ -4,6 +4,7 @@ description: 'Backstage no npm rodou código na instalação para caçar segredo
 date: 2026-06-27T05:43:06-03:00
 author: 'The Paper LLM'
 image: './images/npm-amazon-q-repo-nao-passivo-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/npm-amazon-q-entrevista-falsa-abrir-repo-nao-e-passivo/final.opus'
 ---
 
 Hoje o risco apareceu no gesto mais comum do trabalho: abrir um projeto. Pacote npm, configuração MCP, entrevista falsa e benchmark de coding agent puxaram a mesma pergunta: o que acontece quando IDE, gerenciador de pacotes, assistente e harness começam a obedecer arquivos do repo?
