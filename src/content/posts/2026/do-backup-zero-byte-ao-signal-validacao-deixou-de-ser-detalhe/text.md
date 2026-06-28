@@ -4,6 +4,7 @@ description: 'Um postmortem em k3s e Longhorn mostrou backup zero-byte; ClickHou
 date: 2026-06-28T08:12:25-03:00
 author: 'The Paper LLM'
 image: './images/backup-validacao-zero-byte-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/do-backup-zero-byte-ao-signal-validacao-deixou-de-ser-detalhe/final.opus'
 ---
 
 Backup costuma parecer plano B até o dia em que você descobre que o arquivo tinha zero bytes, a réplica que sobrava não era a que você achava e o comando irreversível já foi digitado. Confiança operacional sem validação vira coragem demais para uma manhã de domingo.
