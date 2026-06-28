@@ -1,0 +1,184 @@
+Do backup zero byte ao Signal, validação deixou de ser detalhe.
+
+Backup costuma parecer plano B, até o dia em que você descobre que o arquivo tinha zero bytes.
+A réplica que sobrava não era a que você achava, e o comando irreversível já foi digitado.
+Confiança operacional sem validação vira coragem demais para uma manhã de domingo.
+
+Primeira história: uma migração de disco quase formatou a última réplica viva do banco.
+
+Um relato brasileiro no TabNews, publicado em 28 de junho, descreveu uma manutenção com cara de tarefa pequena.
+Era a troca de disco em um cluster local com K três S e Longhorn, com janela estimada de uns 20 minutos.
+O incidente quase terminou com a última réplica viva de uma base sendo formatada.
+
+Pelo relato do autor, quatro erros se encadearam.
+Os discos estavam montados por nomes de dispositivo, como dev barra alguma coisa.
+Esses nomes podem mudar quando a máquina reinicia, ou quando o hardware aparece em outra ordem.
+A operação foi feita no nó físico errado.
+Um comando de formatação entrou no disco errado.
+E o status "zero faulted" do Longhorn foi lido como sinal verde para agir.
+Só que esse status não garantia que aquela réplica podia sumir sem consequência.
+
+O banco principal do produto, segundo o autor, não foi afetado.
+A janela de perda envolvia algumas horas de dados operacionais de uma fila de tarefas.
+Era algo recriável, ou recuperável em parte.
+Mesmo assim, o caso vale por ser pequeno e concreto.
+Produção também quebra por suposição pequena.
+
+A recuperação veio porque existia um P G dump válido daquela manhã.
+Também veio porque uma pergunta de validação apareceu antes de sobrescrever o caminho que ainda podia salvar o caso.
+O detalhe desconfortável é que dois backups anteriores tinham zero bytes.
+O monitoramento confiava na saída do comando, não no tamanho e no conteúdo do arquivo.
+
+Para quem mexe com V P S, homelab, Kubernetes pequeno ou banco em produção, a lista fica bem prática.
+Monte disco por U U I D, use a opção no fail quando fizer sentido, e migre um nó por vez.
+Olhe onde as réplicas realmente estão, confirme tamanho e conteúdo do backup, e respire antes de comandos destrutivos.
+A segunda pessoa na sala pode ser outra pessoa mesmo, ou uma conversa com I A.
+Mas a pergunta que importa continua humana: qual máquina, qual disco, qual réplica, qual backup?
+
+A fonte deste bloco é o TabNews.
+
+Agora, o WAL RUS tenta deixar backup de PostgreSQL mais previsível em memória.
+
+A ClickHouse publicou no dia 25 o WAL RUS, uma implementação em Rust para backup de PostgreSQL e arquivamento de WAL.
+O nome conversa com o WAL G, ferramenta madura e bastante conhecida nesse espaço.
+Mas a motivação publicada pela ClickHouse é memória previsível.
+
+Em ambientes apertados, um processo de backup brigando por memória com o próprio PostgreSQL pode virar problema de produção.
+Segundo o benchmark da ClickHouse, o WAL G chegou perto de dois vírgula oito gigabytes de memória virtual de pico.
+No mesmo teste, o WAL RUS ficou abaixo de um gigabyte, com vazão de arquivamento comparável.
+Como é número de fabricante, serve como referência a testar antes de adotar.
+O tipo de métrica, porém, é o que operador de banco quer ver antes de colocar algo num servidor pequeno.
+
+O projeto tenta reduzir o atrito de migração usando variáveis de configuração no estilo WAL G.
+Também promete arquivos de backup compatíveis.
+Entram ainda worker pools limitados, pipeline em streaming, compressão L Z quatro e suporte a WAL summaries do PostgreSQL 17.
+Esse suporte aos WAL summaries serve para backups incrementais.
+A ClickHouse diz que pretende upstreamar essa parte para o WAL G.
+
+O pé no chão aqui é simples: WAL G continua maduro e testado em muitos lugares.
+O WAL RUS merece atenção onde arquivamento de WAL pesa na memória, especialmente em caixas pequenas.
+Mas ainda precisa passar pelo teste mais chato e mais útil: restauração real no seu ambiente.
+
+As fontes deste bloco são ClickHouse e "Git Hub".
+
+Agora, FBI e CISA alertam para golpe que pede a chave de backup do Signal.
+
+O FBI e a CISA atualizaram em 26 de junho um alerta sobre atores ligados à inteligência russa.
+O alvo do alerta são aplicativos comerciais de mensagem.
+A novidade mais sensível é o foco na "Backup Recovery Key" do Signal.
+O golpe não precisa quebrar a criptografia do aplicativo se consegue convencer alguém a entregar a chave que abre o backup.
+
+O alerta cita atividades rastreadas publicamente como U N C cinco sete nove dois e U N C quatro dois dois um.
+Os alvos descritos incluem autoridades governamentais, militares, figuras políticas e jornalistas.
+Também incluem pessoas relevantes na Ucrânia.
+Para usuário comum do Signal, a lição de higiene também serve.
+Backup, P I N, código e dispositivo vinculado merecem o mesmo cuidado que senha.
+
+Segundo o P S A, se a chave de recuperação for entregue, os invasores podem ler mensagens privadas e de grupo do histórico.
+Também podem assumir a conta.
+Um detalhe ruim: a chave continua útil mesmo se a vítima criar uma nova conta com o mesmo número de telefone.
+A mitigação indicada é gerar uma nova "Backup Recovery Key" depois de suspeita de exposição.
+
+O comportamento seguro é simples de falar e difícil de obedecer quando a pressão social vem bem montada.
+Suporte legítimo não pede código, P I N nem chave de recuperação dentro do chat.
+Revise dispositivos vinculados, remova o que não reconhece e trate pedido de chave como tentativa de roubo.
+Isso vale ainda que o pedido venha com cara de suporte.
+
+As fontes deste bloco são FBI I C três, CISA e Cyber Sec Brazil.
+
+Agora, IP Crawl mostra webcams abertas que deveriam estar atrás de V P N.
+
+O IP Crawl se apresenta como um atlas vivo de webcams abertas na internet pública.
+A página mostrava treze mil novecentas e onze câmeras, com estados de imagem ao vivo ou snapshot.
+Também oferecia um verificador defensivo chamado "Am I Being Watched?".
+
+O ponto para quem administra rede é exposição.
+Câmera, D V R, painel administrativo e serviço R T S P ou H T T P não deveriam ficar acessíveis sem proteção forte.
+Isso significa autenticação forte e controle de rede.
+
+Para quem mantém casa, escritório, laboratório ou cliente pequeno, isso encosta em hábitos conhecidos.
+V P N, firewall, proxy reverso autenticado, senha fora do padrão e revisão periódica de exposição continuam úteis.
+São coisas sem glamour, mas com função.
+
+O site é chamativo porque transforma abstração em quantidade visível.
+O que a gente faz com isso é menos chamativo: procurar o próprio ambiente e fechar o que não deveria estar público.
+Também é uma boa hora para parar de tratar câmera barata como se fosse lâmpada inteligente sem consequência.
+
+A fonte deste bloco é IP Crawl.
+
+Agora, os destaques rápidos de hoje.
+
+A configuração enable hash join, no PostgreSQL, é ferramenta de diagnóstico, não nova superstição global.
+Se o Explain Analyze mostra Hash Join com Batches maior que um, a tabela hash derramou em lotes.
+Desligar enable hash join só na sessão ajuda a comparar plano.
+O conserto real costuma passar por work mem, hash mem multiplier, estatísticas com Analyze ou índices.
+A fonte deste destaque é The Build.
+
+A AWS colocou um FinOps Agent em preview para investigar anomalias de custo.
+A página da AWS diz que ele escuta eventos do Cost Anomaly Detection e cruza isso com CloudTrail.
+Ele também responde perguntas de custo e pode levar achados para Jira ou Slack.
+Agente que mexe com dinheiro de nuvem deve começar como ajudante com aprovação.
+Não como gerente autônomo do cartão corporativo.
+As fontes deste destaque são AWS e InfoQ.
+
+A Microsoft U E F I C A 2011 expirou no dia 27 de junho, e o shim precisa ficar em dia.
+A leitura calma é manutenção de Secure Boot.
+Debian e outras distribuições vêm preparando binários shim assinados com C A antigas e novas.
+Para máquinas importantes, mantenha shim, F W U P D e updates da distro atualizados.
+Também vale validar o estado antes da próxima surpresa.
+As fontes deste destaque são Steve McIntyre e Debian Wiki.
+
+O YARA X ganhou limite de C P U e reforço ao lidar com regras compiladas de fora.
+A versão um ponto dezoito adicionou a opção cpu limit para varreduras pela linha de comando.
+A versão um ponto dezenove corrigiu comportamento indefinido ao desserializar regras vindas de dados binários não confiáveis.
+Para quem roda varredura em C I ou máquina limitada, são pequenas mudanças com cheiro de operação real.
+As fontes deste destaque são YARA X, nas versões um ponto dezoito e um ponto dezenove, e SANS I S C.
+
+O Nourish experimenta um desktop Wayland como canvas infinito.
+O projeto é um compositor jovem com zoom e pan.
+Ele usa Vulkan com fallback G L E S e um motor Wayland em Rust.
+Parece divertido para testar em ambiente separado.
+Antes de pensar em desktop principal, vale tratar como experimento Fedora first.
+As fontes deste destaque são "Git Hub" e Phoronix.
+
+A A C L versão um ponto zero tenta escrever licença source available para a era da I A.
+A Auditable Commercial License fala em direito de auditoria e limites para serviço hospedado.
+Também fala em proteção contra uso em treinamento de I A e conversão para Apache dois ponto zero depois de quatro anos.
+O nome certo importa: source available não é open source.
+E nada aqui substitui análise jurídica de verdade.
+A fonte deste destaque é Auditable Commercial License.
+
+Agora, o acompanhamento de tendências do dia.
+
+Modelos locais estão ficando mais parecidos com peças pequenas de infraestrutura.
+A Liquid A I lançou o L F M dois ponto cinco, duzentos e trinta M, para tarefas de borda.
+A proposta inclui extração de dados, uso de ferramentas e fluxos agentic.
+Nos números próprios da empresa, ele chega a duzentos e treze tokens por segundo em um Galaxy S vinte e cinco Ultra.
+Também chega a quarenta e dois tokens por segundo em um Raspberry Pi cinco.
+É tarefa pequena demais para chamar um modelo caro toda vez.
+
+O outro pedaço é decidir quando usar o quê.
+O Wayfinder Router roteia prompts entre modelo local e hospedado.
+Ele usa uma pontuação estrutural determinística, offline, sem chamar outro modelo para decidir.
+O readme é honesto ao dizer que pistas lexicais ficaram desligadas por padrão.
+Segundo o projeto, elas não generalizaram bem em teste cego.
+Esse tipo de caveat aumenta a confiança, porque roteador ruim vira economia falsa bem rápido.
+
+No hardware, as pontas estão se espalhando.
+A Modular diz que o MAX vinte e seis ponto quatro, e versões nightly, agora rodam muitos modelos em G P Us Apple silicon.
+Isso vale de M um a M cinco, segundo a Modular.
+Mas a Modular ainda não publicou benchmark direto contra M L X ou outros frameworks.
+No extremo homelab caro, um guia para [EY1 EH1 M D IY1] Strix Halo junta dois nós para inferência distribuída.
+O guia usa V L L M, Ray, R C C L e RoCE versão dois.
+Ele cita latência de R D M A em torno de cinco microssegundos, contra dezenas de microssegundos em T C P sobre I P.
+Legal, mas nichado e com lista de hardware que já separa curiosidade de plano de compra.
+
+Também apareceu compressão agressiva.
+O Clark Air Sana um ponto seis B anuncia cerca de um vírgula oitenta e cinco bits por peso.
+O artefato anunciado tem trezentos e setenta e quatro megabytes, contra três vírgula vinte e um gigabytes em F P dezesseis.
+Só que qualidade visual é coisa que precisa ver, não só ler no model card.
+Modelos pequenos, roteadores e plumbing local estão amadurecendo.
+O uso mais realista é virar trabalhador barato para tarefas estreitas.
+
+As fontes da tendência são Liquid A I, Wayfinder Router, Modular e o guia [EY1 EH1 M D IY1] Strix Halo R D M A.
+Também entra Clark Air Sana um ponto seis B.
