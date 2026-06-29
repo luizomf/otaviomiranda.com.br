@@ -1,0 +1,145 @@
+O mesmo currículo foi de 66 a 99 no A T S aberto da Hacker Rank.
+
+Quando a gente entrega julgamento para um modelo, espera que a mesma entrada receba uma resposta parecida.
+Aqui a confiança escorrega: um currículo igual, rodado várias vezes, mudou de destino conforme a execução.
+
+A primeira história é o mesmo currículo indo de 66 a 99 no agente de contratação da Hacker Rank.
+
+Dan Kinsky pegou o agente de contratação aberto da Hacker Rank e fez uma checagem simples.
+Era o mesmo currículo, o mesmo comando, em cem execuções.
+O resultado publicado foi de 66 a 99 pontos.
+
+Esse intervalo fica feio no gráfico, e pior ainda quando vira decisão.
+Segundo o texto, se a empresa usasse corte em 85 pontos, o mesmo candidato passaria ou cairia dependendo da rodada.
+É o tipo de automação que parece objetiva até a pessoa perceber que a catraca está girando com vento.
+
+O repositório da Hacker Rank ajuda a entender a arquitetura.
+O fluxo lê P D F de currículo, usa modelo para extrair dados estruturados, enriquece com Git Hub e calcula notas por categoria.
+A parte mais checklist da extração, como habilidades técnicas, apareceu bem mais estável no relato.
+As categorias subjetivas, como experiência e projetos, balançaram muito mais.
+
+Por isso o caso interessa além de recursos humanos.
+A gente está colocando L L M para avaliar patch, bug, candidato, issue, triagem, resposta de agente e qualidade de tarefa.
+Se o avaliador muda bastante com a mesma entrada, ele precisa de rubricagem forte e exemplos de calibração.
+Também precisa de repetição de teste, relatório de variância e revisão humana antes de decidir coisa séria.
+
+O experimento tem limite: é de um autor, em uma ferramenta e configuração específicas.
+Ele também não mede todo avaliador de IA.
+Ainda assim, o achado publicado é forte.
+Extrair informação e julgar informação são trabalhos diferentes.
+Misturar os dois sem medir instabilidade é pedir para a automação vestir paletó de certeza.
+
+As fontes deste bloco são Dan Unparsed e o repositório hiring agent da Hacker Rank.
+
+Agora, Routely mostra que webhook bom precisa de túnel, histórico e replay.
+
+Webhook parece callback simples até você depender dele para pagamento, assinatura, entrega ou integração entre sistemas.
+A requisição chega do lado de fora, o bug mora no local host, o provedor tenta de novo no tempo dele.
+E o log que você precisava sumiu.
+Aí o "é só receber um POST" envelhece mal.
+
+Um texto brasileiro no TabNews apresentou o Routely como uma ferramenta para juntar três partes que costumam ficar separadas.
+Ele fala de túnel público para a máquina local, persistência das requisições e manipulação antes do serviço em desenvolvimento.
+
+A base técnica é um WebSocket persistente entre uma interface de linha de comando local e um servidor público.
+Isso aparece no relato do autor.
+O servidor recebe o webhook, manda a requisição pelo túnel para o local host e devolve a resposta.
+A interface local também acompanha eventos no terminal.
+Enquanto isso, o serviço guarda histórico recente, com limite citado de mil requisições por conta.
+
+A camada de manipulação é onde o caso fica mais interessante para arquitetura.
+O texto cita validação H M A C, mudança de payload, header e método.
+Também cita chamadas externas de enriquecimento, condicionais e janelas de idempotência.
+Traduzindo a parte chata que salva produção: dá para verificar assinatura e reproduzir falha.
+Também dá para ajustar entrada de teste e evitar processar duas vezes o mesmo evento como se fosse novo.
+
+Como o texto é do próprio autor da ferramenta, fica melhor tratar a publicação como explicação de projeto.
+Não dá para transformar isso em prova de adoção ou confiabilidade ampla.
+O desenho do problema já vale a conversa.
+Para testar webhook direito, receber a primeira requisição é só o começo.
+Você quer capturar, observar, transformar, repetir e explicar por que aquela tentativa falhou.
+E quer fazer isso sem depender da boa vontade do painel do provedor.
+
+As fontes deste bloco são TabNews e Routely.
+
+Agora, G L M cinco ponto dois foi bem na Semgrep, e o harness mudou o placar.
+
+No dia 17, falamos de G L M cinco ponto dois abrindo pesos no Hugging Face.
+Agora a novidade vem de um benchmark de segurança publicado pela Semgrep.
+
+A empresa testou modelos em detecção de I D O R.
+Essa é uma classe de falha em que o sistema deixa alguém acessar objeto de outro usuário.
+O acesso acontece por referência previsível ou mal protegida.
+No grupo com um harness prompt only usando Pydantic A I, a Semgrep reportou G L M cinco ponto dois com 39 porcento de F um.
+É um número bom naquele recorte.
+Isso pesa ainda mais porque o modelo é oferecido com licença M I T no Hugging Face.
+Também há contexto anunciado de um milhão de tokens e caminhos de execução local como S G Lang, V L L M e Transformers.
+
+Só que o próprio resultado corta a comemoração fácil.
+O harness multimodal da Semgrep ficou acima no quadro geral.
+Segundo a publicação, GPT cinco ponto cinco marcou 61 porcento, e Opus quatro ponto oito marcou 53 porcento.
+Em português sem maquiagem: a forma como você entrega contexto, arquivos, sinais e ações ao modelo pesa muito.
+Ela pode pesar tanto quanto o nome do modelo escolhido.
+
+Também tem a fonte, que pede um pouco de cuidado.
+A Semgrep é fonte primária do teste, mas é empresa do mercado de segurança medindo uma tarefa onde tem interesse.
+E ela mesma avisa que estamos olhando para uma tarefa, um dataset e condições específicas.
+Para time que pensa em usar modelo aberto em análise de código, a pergunta boa é operacional.
+Consigo reproduzir esse tipo de teste no meu código?
+Consigo medir falso positivo, medir custo e comparar o harness antes de trocar ferramenta?
+
+G L M cinco ponto dois merece ir para bancada de teste.
+Isso vale principalmente em fluxos internos onde custo e execução local contam.
+A tabela é começo de conversa.
+Sozinha, ela não mostra o encanamento que carregou a água.
+
+As fontes deste bloco são Semgrep, Hugging Face e Z A I.
+
+Agora entram os destaques rápidos para hoje.
+
+Herdr leva sessões de agente para um multiplexador de terminal.
+A documentação descreve workspaces, abas, painéis, detach e reattach.
+Também fala de estados como blocked, working, done e idle para agentes.
+A lista inclui Codex, Claude Code, Git Hub Copilot por linha de comando, Cursor Agent e Devin por linha de comando.
+Linux e macOS aparecem como caminhos estáveis.
+Windows ainda aparece como preview.
+A fonte é o repositório do Herdr no Git Hub.
+
+O H T T P ganhou o método QUERY na R F C dez mil e oito.
+A ideia é carregar conteúdo na requisição, como muita gente faz com POST.
+Mas o objetivo é preservar semântica segura e idempotente para consultas complexas.
+O R F C também fala de cache, Content Type, Accept Query, Content Location e Location.
+Antes de redesenhar uma interface em produção, ainda precisa ver suporte real.
+Isso inclui framework, cliente, proxy e C D N.
+As fontes são o R F C Editor e o TabNews.
+
+No acompanhamento de tendências do dia, P F G um Sophon aparece como whitepaper de junho de 2026.
+Não apareceu benchmark independente, produto disponível, tape out confirmado ou servidor que alguém aqui possa comprar e medir.
+
+Mesmo assim, o whitepaper é útil como peça de conversa sobre a parede de memória da IA.
+A PhantaField descreve uma proposta com 330 gigabytes de D R A M no próprio die.
+Ela diz que não usa H B M externo.
+A proposta usa uma plataforma monolítica três D, com 32 camadas.
+O documento também cita dois mil e cem tera FLOPS em B F 16.
+E cita quatro mil e duzentos tera FLOPS em F P 8.
+Além disso, fala de desempenho alto em decode de modelo de 80 bilhões de parâmetros.
+Tudo isso continua sendo alegação do documento.
+
+O motivo para olhar com calma é que a pergunta por trás dele aparece em todo lugar.
+Quanto custa mover peso, cache e contexto pela memória?
+Em inferência batch one, em servidor local e em modelo com contexto longo, caber na memória e servir bem são promessas diferentes.
+Latência, largura de banda, kernel, cache K V, interconexão e custo por byte começam a mandar na conta.
+
+A página Stanford D A M ajuda a puxar a discussão para o chão.
+Ela acompanha preços históricos e atuais de D R A M, NAND e H B M.
+Mas também deixa claro que H B M tem estimativas com ressalvas.
+Isso acontece inclusive pela falta de um mercado spot público.
+É bom para tirar a conversa do slide de FLOPS e levar para custo de memória, disponibilidade e metodologia.
+
+O fio do dia fica bem concreto.
+Avaliador de IA precisa medir variância, agente de código precisa de harness e webhook precisa de replay.
+Consulta H T T P precisa dizer sua semântica.
+E inferência de modelo precisa tratar memória como primeira classe.
+Automação bonita só funciona quando o encanamento aguenta.
+
+As fontes da tendência são PhantaField e Stanford D A M.
