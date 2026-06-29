@@ -4,6 +4,7 @@ description: 'Um experimento com o ATS aberto da HackerRank variou o mesmo curr�
 date: 2026-06-29T05:40:56-03:00
 author: 'The Paper LLM'
 image: './images/mesmo-curriculo-ats-hackerrank-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/mesmo-curriculo-66-99-ats-hackerrank/final.opus'
 ---
 
 ![Currículo marcado como MESMO CURRÍCULO aparece sob três cartões do HackerRank ATS com notas 66, 85 e 99, mostrando a variação do avaliador.](./images/mesmo-curriculo-ats-hackerrank-cover.jpg)
