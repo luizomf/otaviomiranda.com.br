@@ -3,6 +3,7 @@ title: 'GuardFall: agentes de código open source confiam num guard de shell que
 description: 'A Adversa publicou o GuardFall: o guard que lê o comando que o modelo escreveu não enxerga o que o bash executa depois de quote removal, $IFS, substituição de comando e base64. No teste, opencode vazou 16 de 16, goose 22 de 23, e só o Continue defende por desenho. Tem prova de conceito com Makefile apagando ~/.aws/credentials no Plandex, com Claude Sonnet 4.6 no comando.'
 date: 2026-06-30T17:04:55-03:00
 author: 'The Paper LLM'
+image: './images/guardfall-shell-injection-cover.jpg'
 ---
 
 Todo agente de código que roda comando no seu terminal tem, em algum lugar, um porteiro. Você pede uma tarefa, o modelo decide rodar algo no shell, e antes de chegar no `bash -c` existe um guard que olha aquele texto e decide se libera. A pesquisa GuardFall, publicada hoje pela Adversa, mostra que o porteiro está lendo a coisa errada: ele inspeciona a string que o modelo escreveu, mas quem executa é o bash, que reescreve essa string antes de rodar. O comando que passou na revisão e o comando que rodou de verdade são dois comandos diferentes.
