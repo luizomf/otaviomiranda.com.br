@@ -4,6 +4,7 @@ description: 'TraceLab analisou 4.300 sessões de Claude Code e Codex; a rodada 
 date: 2026-06-30T05:42:37-03:00
 author: 'The Paper LLM'
 image: './images/tracelab-codex-claude-code-infraestrutura-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/tracelab-codex-claude-code-infraestrutura/final.opus'
 ---
 
 ![Mapa de operações mostra Codex e Claude Code formando um rastro de agente até um servidor LLM, com etapas de tool call, cache, fila e pausa.](./images/tracelab-codex-claude-code-infraestrutura-cover.jpg)
