@@ -1,0 +1,209 @@
+Trace Lab mede Codex e "Claude Code" como carga de infraestrutura.
+
+Hoje a conversa sai do botão mágico e vai para a sala de máquinas.
+Quando agente de código vira rotina, entram custo, espera, ferramenta e estado.
+
+Trace Lab mediu quatro mil e trezentas sessões de "Claude Code" e Codex.
+O objetivo era entender o custo de servir agentes como carga de infraestrutura.
+Trace Lab é um daqueles trabalhos que parecem menos chamativos do que um modelo novo.
+Mas ele encosta direto no problema que aparece quando a brincadeira vira produção.
+Os autores coletaram cerca de quatro mil e trezentas sessões de agentes de código.
+No total, foram aproximadamente trezentos e cinquenta mil passos de L L M.
+Também entraram na conta quatrocentas e trinta mil chamadas de ferramenta.
+Essas sessões vieram do uso cotidiano de "Claude Code" e Codex.
+Isso tira o trabalho da bancada do benchmark feito só para deixar tabela bonita.
+E coloca a análise mais perto de uma carga real, que até pouco tempo atrás ficava meio invisível.
+Servir esse tipo de agente não se parece muito com servir um chat curto.
+As sessões têm ciclos longos, contexto grande e respostas muitas vezes pequenas.
+Elas também têm chamadas de ferramenta que chegam em caudas pesadas.
+Algumas ações são rápidas; outras esperam arquivo, shell, busca ou humano voltando do café.
+O artigo também fala de prefix cache, que é reaproveitar cálculo quando o começo do contexto se repete.
+Isso ajuda, mas não resolve tudo.
+Trace Lab cita caminhos como reduzir overhead de chamada de ferramenta.
+Também fala em melhorar prefill olhando melhor para o que entrou no contexto.
+Outro caminho é prever latência de ferramenta com mais semântica.
+E tem o cuidado com K V cache quando há pausa humana no meio do caminho.
+Para quem usa agente de código, isso explica por que tokens por segundo é uma medida pequena.
+A sensação de velocidade também depende de ferramenta, cache, fila e pausa.
+Depende ainda da política do servidor e de quanto o sistema sabe continuar sem recalcular o mundo inteiro.
+A ressalva é importante: o conjunto é valioso, mas não vira lei universal.
+Ele vem do uso dos próprios autores e precisa ser comparado com outros ambientes.
+Mesmo assim, já melhora a conversa.
+Pelo menos agora temos rastro público para discutir custo de agente sem ficar só no chute.
+As fontes deste bloco são arXiv e o repositório Trace Lab.
+
+Agents A um aposta em trajetórias longas antes de pedir modelo maior.
+Agents A um chega por outro caminho.
+A proposta dos autores é um modelo agentic de trinta e cinco bilhões de parâmetros.
+Ele usa Mixture of Experts, em vez de vender só mais parâmetros.
+O trabalho insiste em aumentar o horizonte do agente: agir, observar e buscar conhecimento externo.
+Também entram nessa conta receber verificação e continuar.
+O número que chama atenção é o tamanho médio das trajetórias geradas.
+Elas chegam a cerca de quarenta e cinco mil tokens.
+Isso quer dizer que o treino olha para mais do que a resposta final.
+Ele tenta ensinar o caminho, com ações intermediárias, observações e resultados de verificadores.
+Para agente que usa ferramenta, esse caminho costuma ser tão importante quanto a resposta bonita no final.
+A receita descrita tem três partes.
+Primeiro, vem o ajuste supervisionado em domínio amplo, chamado full domain supervised fine tuning.
+Depois, entram modelos professores por domínio.
+Por fim, aparece a destilação on policy com múltiplos professores, roteada por domínio.
+Essa parte cobre seis áreas heterogêneas.
+Traduzindo sem transformar em aula, o modelo aprende com professores diferentes.
+E aprende com trajetórias que lembram melhor o trabalho de agente.
+Ele não fica só na pergunta e resposta.
+Os autores comparam o Agents A um com modelos muito maiores.
+Entre eles aparecem Kimi K dois ponto seis e DeepSeek V quatro pro.
+O artigo fala em desempenho competitivo com modelos de um trilhão de parâmetros.
+Isso aparece em alguns benchmarks de longo horizonte.
+Mas deve ser lido como alegação do artigo, não como veredito independente.
+Ainda falta ver reprodução externa, custo operacional e comportamento fora da bancada dos autores.
+A direção é interessante para agentes.
+Para quem monta agentes locais ou internos, vale observar trajetória, verificador e professor de domínio.
+Também vale observar feedback de ferramenta com a mesma seriedade usada para olhar o nome do modelo.
+Rodar um modelo é só uma parte do trabalho.
+Fazer ele trabalhar direito por muitas etapas é outra conversa.
+As fontes deste bloco são arXiv, Hugging Face e "Git Hub".
+
+Outer Shell quer abrir aplicativos gráficos pelo S S H sem expor painel público.
+Quem já subiu ferramenta em V P S conhece o ritual.
+A aplicação roda em uma porta, e você pensa em proxy reverso.
+Depois vêm T L S, autenticação, firewall, talvez V P N e talvez um painel no Shodan.
+Às vezes tudo isso é correto para produção.
+Às vezes era só um utilitário pequeno que precisava aparecer para você, não para a internet.
+Outer Shell propõe uma saída curiosa.
+A ideia é rodar aplicativos gráficos como pequenos servidores H T T P.
+Geralmente eles ficam ligados a sockets de domínio Unix, protegidos por permissões de arquivo.
+O acesso passa pelo S S H, e o navegador companheiro se chama Outer Loop.
+Se a experiência funcionar bem, o ganho operacional é fácil de entender.
+Um aplicativo administrativo pode ficar privado no servidor.
+Ele não precisa abrir localhost na porta três mil para o mundo.
+Também não precisa criar uma cerimônia inteira de publicação.
+A criptografia fica na camada do S S H.
+E o aplicativo aparece como interface gráfica para quem já tem acesso ao servidor.
+Isso combina muito com laboratório, V P S e máquina remota de desenvolvimento.
+Também merece calma antes de virar padrão.
+O texto original apresenta um projeto aberto e promissor.
+Mas eu colocaria na bancada de experimento antes de deixar virar porta oficial de administração.
+Ainda assim, a pergunta é boa.
+Nem todo aplicativo de servidor precisa nascer como dashboard público.
+Às vezes a interface gráfica pode morar atrás da mesma porta protegida por chave S S H.
+Essa mesma porta já usa usuário e permissão.
+A fonte deste bloco é Marcus Lewis.
+
+Postgres dezenove mira a armadilha das sequências em replicação lógica.
+Banco pode parecer replicado e ainda guardar uma pegadinha.
+No Postgres, a replicação lógica mantém linhas de tabela em sincronia.
+Mas até o Postgres dezoito, ela não replicava o estado das sequências.
+A tabela chega do outro lado sem avisar muito.
+O contador que gera o próximo I D pode ficar para trás.
+O problema aparece na hora mais antipática: failover, switchover ou migração.
+O subscriber começa a receber escrita e chama uma sequência atrasada.
+Com isso, ele tenta gerar um valor que já existe.
+O resultado pode ser violação de chave duplicada.
+Em caso pior, se o desenho do sistema deixar passar, vira dano de integridade mais sutil.
+O post da Fastware e da Fujitsu diz que o Postgres dezenove muda esse ponto.
+Ele introduz sincronização nativa de sequências na replicação lógica.
+O fluxo inclui publicar sequências junto com tabelas.
+Também inclui atualizar o estado no subscriber e usar um worker de sincronização.
+O texto cita comandos para publicar e atualizar sequências na subscription.
+Também menciona o uso de L S N da página da sequência no publisher.
+Isso não dispensa ensaio de failover.
+Mas ajuda a fechar uma lacuna clássica: dado replicado inclui mais do que linha.
+Identificador gerado também é estado.
+E estado esquecido costuma aparecer exatamente quando a equipe está com pressa.
+Para quem faz upgrade por replicação lógica, esse detalhe merece radar.
+Isso vale também para quem usa P G create subscriber.
+E vale para banco em V P S, Kubernetes ou ambiente gerenciado.
+Repetir failover em ambiente de teste continua sendo a parte menos glamourosa e mais barata da história.
+A fonte deste bloco é Fastware, da Fujitsu.
+
+Nos destaques rápidos de hoje, a Apple publicou mac O S Tahoe vinte e seis ponto cinco ponto dois.
+A página de segurança de vinte e nove de junho lista correções do WebKit.
+Ela cita C V E 2026, quarenta e três sete um cinco.
+Também cita C V E 2026, quarenta e três sete um seis.
+E cita C V E 2026, quarenta e três sete zero sete.
+Os créditos incluem Anthropic Claude e Open A I Codex Security.
+Para usuário e admin, a leitura continua simples.
+Atualize quando aplicável, sem inventar exploração ativa que a Apple não confirmou.
+As fontes são Apple Support e The Hacker News.
+
+A Microsoft encontrou uma extensão Chromium falsa com cara de Perplexity.
+A extensão abusava de marca ligada à Perplexity A I.
+Ela interceptava busca e passava tráfego por infraestrutura intermediária.
+A Microsoft diz que reportou o caso ao Google e que a extensão foi removida.
+Se aparecer algo como perplexity hífen A I ponto online, trate como indicador de abuso.
+Não trate isso como link para clicar.
+Extensão de navegador também é código privilegiado.
+A fonte é Microsoft Security Blog.
+
+Git dois ponto cinquenta e cinco melhora manutenção de repositório grande.
+A versão deixa git repack escrever cadeias incrementais de multi pack index.
+Ela combina isso com repacking geométrico.
+Também permite hooks configurados em paralelo quando são declarados como seguros.
+E leva o fsmonitor embutido ao Linux via inotify.
+Para repositório pequeno talvez passe batido.
+Para monorepo, Forgejo, Gitea ou histórico pesado, essas peças podem economizar tempo real.
+A fonte é o blog do "Git Hub".
+
+V S Code um ponto cento e vinte e seis abre pastas desconhecidas primeiro em Restricted Mode.
+No dia vinte e sete, falamos que abrir repositório não é passivo.
+Agora o delta é bem prático para o usuário.
+A versão diz que pastas novas abrem em modo restrito, com banner de confiança.
+Isso permite inspecionar antes de liberar tarefas, extensões e automações.
+Ajuda, mas não substitui V M, container ou sandbox para código realmente suspeito.
+As fontes são Visual Studio Code e InfoWorld.
+
+A CISA alertou sobre firmware Daktronics em placas e painéis.
+O aviso I C S A vinte e seis, cento e setenta e seis, zero quatro cobre versões antigas.
+As linhas afetadas incluem V F C D M P cinco mil, D M P cinco mil e D M P oito mil.
+As falhas incluem path traversal, upload arbitrário de arquivo e credenciais padrão ou embutidas.
+Entre os identificadores estão C V E 2026, vinte e oito sete zero um.
+Também aparecem C V E 2026, trinta e três cinco seis zero.
+E C V E 2026, trinta e um nove dois oito.
+Para defesa, o caminho é firmware corrigido e senha padrão trocada.
+A interface de gestão também deve ficar fora da internet pública.
+As fontes são CISA e SecurityWeek.
+
+V L L M colocou micro-agentes dentro do roteador de inferência.
+O Semantic Router descreve receitas limitadas.
+Entre elas estão Confidence, Ratings, ReMoM, Fusion e Workflows.
+Ele entrega ao cliente uma resposta compatível com a [EY1 P IY1 AY1] da Open A I.
+Enquanto isso, o roteador gerencia loops internos.
+O post reporta noventa e dois vírgula seis no LiveCodeBench.
+Também reporta noventa e seis vírgula zero no G P Q A Diamond.
+E reporta cinquenta vírgula zero no "Humanity's Last Exam" para V S R Closed.
+São números do próprio projeto, bons para testar, não para tatuar na arquitetura.
+A fonte desta nota é o projeto V L L M.
+
+Um walkthrough de CUDA mostra a viagem de uma função até o hardware.
+O texto acompanha um kernel simples de soma de vetores.
+A viagem começa no N V C C e passa por P T X, S A S S, fatbin e cubin.
+Depois entram runtime, driver, chamada ioctl e pushbuffer.
+Também aparecem G P F I F O, Q M D, doorbell register e warps.
+É bastante sigla, sim, mas a recompensa é boa.
+GPU não roda uma função CUDA no vácuo.
+Existe compilador, fila, metadado e escalonamento por baixo.
+A fonte desta nota é Fergus Finn.
+
+Memória de agente começa a parecer estado de produção.
+Memória de agente está deixando de ser só lembrar preferências.
+Quando um agente acumula estado por dias, projetos e pessoas, a coisa muda.
+Esse estado começa a parecer banco de dados, log de auditoria e política de permissão.
+Também parece área de incidente ao mesmo tempo.
+O survey "Always-On Agents" analisou um corpus codificado de quatrocentos e trinta e cinco trabalhos.
+Ele organizou o tema em eixos como autoridade, escopo e mutabilidade.
+Também entram proveniência, recuperabilidade e acionabilidade.
+A leitura incômoda é que muita pesquisa fala mais de acumular e recuperar estado.
+Ela fala menos de governar, recuperar ou abandonar esse estado quando algo dá errado.
+Os trabalhos relacionados deixam o risco menos abstrato.
+Um artigo trata trajetórias de chamadas de ferramenta como evidência contra envenenamento de memória.
+Outro fala de falha de entity binding.
+É quando o agente liga uma ação ao objeto ou pessoa errada.
+Um terceiro discute principal loyalty.
+Em uma interação com várias partes, a pergunta é a quem o agente deve servir.
+Memória continua útil quando tem governança.
+Só precisa ser tratada como estado de produção.
+Isso pede auditoria, rollback, esquecimento, permissão, proveniência e regra clara de quem manda.
+Se o agente guarda tarefa, preferência, credencial, promessa e contexto de cliente, histórico não basta.
+Ficou no histórico não é plano de governança.
+As fontes da tendência são Always-On Agents, Forensic Trajectory Signatures, Entity Binding Failures e Principal Loyalty.
