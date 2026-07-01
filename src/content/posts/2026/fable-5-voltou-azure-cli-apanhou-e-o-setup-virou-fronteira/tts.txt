@@ -1,0 +1,164 @@
+Fable cinco voltou, Azure [S IY1 EH1 L AY1] apanhou e o setup virou fronteira.
+
+Algumas mudanças parecem pequenas no painel de controle.
+Liberar um modelo de novo, ligar M F A, ou deixar um agente rodar o setup.
+Depois, elas aparecem como custo, conta invadida, ou comando rodando no lugar errado.
+Hoje o fio é esse: ferramenta útil também precisa de limite bem desenhado.
+
+Primeiro: Fable cinco volta em primeiro de julho, e Sonnet cinco vira padrão para Free e Pro.
+No dia treze, a gente falou que os Estados Unidos tinham colocado Fable cinco e Mythos cinco sob controle de exportação.
+Agora a mudança é concreta: a Anthropic diz que esses controles foram retirados em trinta de junho.
+Com isso, o Claude Fable cinco volta globalmente em primeiro de julho.
+
+O retorno vale para Claude Platform, Claude ponto ai, Claude Code e Claude Cowork.
+Para planos Pro, Max, Team e alguns Enterprise, o Fable cinco entra até cinquenta porcento do limite semanal de uso até sete de julho.
+Depois disso, passa para créditos de uso.
+É uma volta com limite de uso, data de transição e cobrança para acompanhar de perto.
+
+A A W S diz que o Fable cinco volta ao Amazon Bedrock em primeiro de julho.
+Ali, a camada de segurança chama atenção.
+No texto da A W S, o trabalho com a Anthropic aparece dentro do "Project Glasswing".
+Ele vem com guardrails mais fortes e redirecionamento para Opus quatro ponto oito quando uma regra dispara.
+Para operação, isso muda a experiência.
+Guardrail pode bloquear, trocar o modelo em uso, ou gerar falso positivo.
+Quem depende de um modelo específico precisa medir esse caminho inteiro, não só ler o cartão de lançamento.
+
+No mesmo pacote de anúncios, a Anthropic lançou o Claude Sonnet cinco em trinta de junho.
+Ele está disponível em todos os planos e virou o modelo padrão para Free e Pro.
+O preço introdutório fica em dois dólares por milhão de tokens de entrada.
+Para saída, fica em dez dólares por milhão de tokens até trinta e um de agosto de 2026.
+Depois, sobe para três dólares na entrada e quinze dólares na saída.
+
+Token barato no anúncio não fecha a conta sozinho.
+A própria Anthropic avisa que o Sonnet cinco usa um tokenizer atualizado.
+Dependendo do conteúdo, a mesma entrada pode virar entre o mesmo volume e um vírgula trinta e cinco vez mais tokens.
+Em agente, uma tarefa pode chamar ferramenta, reler contexto e dar várias voltas.
+Essa diferença aparece na fatura.
+Antes de trocar o padrão do time, vale medir tarefa real.
+Isso inclui prompt, ferramentas, redirecionamento de modelo, número de turnos e custo final.
+As fontes deste bloco são Anthropic, sobre o retorno do Fable cinco, Anthropic, sobre o Sonnet cinco, e o blog de Machine Learning da A W S.
+
+Agora, Azure [S IY1 EH1 L AY1] levou oitenta e um milhões de tentativas, e M F A mal escopado não segurou.
+Huntress publicou uma investigação de "password spray" contra autenticação da Microsoft.
+O alvo era o caminho do Azure [S IY1 EH1 L AY1].
+Entre doze e vinte e seis de junho de 2026, a empresa observou mais de oitenta e um milhões de tentativas de login.
+Essas tentativas foram contra contas de clientes.
+Segundo a Huntress, pelo menos setenta e oito contas Microsoft, em sessenta e quatro organizações, foram comprometidas.
+
+"Password spray" não é adivinhação sofisticada de senha por usuário.
+É tentar poucas senhas comuns em muitas contas.
+Assim, o ataque não parece uma força bruta óbvia em uma conta só.
+A parte que dói aqui é que algumas organizações tinham M F A ligado.
+Mas a política não cobria o caminho usado pelo atacante.
+
+O fluxo citado é "Resource Owner Password Credentials", ou R O P C.
+Nesse modo, usuário e senha vão direto para o endpoint de token.
+Eles não passam pela experiência interativa normal que costuma acionar desafio de M F A.
+Se a "Conditional Access Policy" não cobre o app, o tipo de cliente, o usuário ou a origem certa, sobra uma porta lateral.
+A empresa fica com uma placa dizendo que tem M F A, mas uma entrada sem a mesma regra.
+
+O trabalho para admin é menos glamouroso que comprar ferramenta nova.
+Bloqueie ou restrinja autenticação legada e R O P C quando possível.
+Amplie Conditional Access para todos os apps e tipos de cliente relevantes.
+Restrinja Azure [S IY1 EH1 L AY1] para quem não precisa.
+Gire credenciais expostas e monitore falhas no endpoint de token.
+Também vale lembrar a ressalva.
+Os números são da visibilidade da Huntress, não uma contagem global de todos os tenants Microsoft.
+As fontes deste bloco são Huntress, The Hacker News e Microsoft Learn.
+
+Agora, repo limpo ainda pode virar ataque quando o agente roda o setup por você.
+No dia vinte e sete, a gente falou que abrir repo não é passivo.
+A novidade agora deixa esse limite mais concreto.
+A Mozilla zero D I N demonstrou uma prova de conceito.
+Nela, um repositório com aparência limpa conduz um agente de código pelo setup e pela recuperação de erro.
+O resultado pode chegar a execução perigosa.
+
+A parte ruim não precisa estar plantada como um arquivo malicioso óbvio dentro do repositório.
+A cadeia descrita pela zero D I N usa instruções de setup, comportamento prestativo do agente e dados buscados em tempo de execução.
+Entre os exemplos citados, aparece um canal fora do repo por registro D N S T X T.
+Para defesa, importa perceber que instalar dependência e corrigir erro de ambiente viraram primeira fronteira de segurança.
+
+Isso pega Claude Code, Cursor, Copilot, Gemini [S IY1 EH1 L AY1], e qualquer ferramenta que tente ajudar demais em um projeto desconhecido.
+A ajuda é justamente o risco nessa sessão.
+O agente lê a falha, decide o próximo comando e tenta fazer o projeto funcionar.
+Se a sessão está na sua máquina normal, com seus tokens, chaves e variáveis de ambiente, o estrago não precisa pedir crachá.
+
+Ainda é uma prova de conceito, não uma campanha ampla confirmada.
+Mesmo assim, a política defensiva já é aplicável.
+O primeiro contato com repositório desconhecido vai para container, V P S descartável, ou ambiente isolado.
+O agente deve inspecionar arquivos de setup antes de agir.
+Comandos de shell e rede precisam de plano e aprovação explícita.
+Segredo só entra quando a tarefa realmente precisa dele.
+É menos mágico, mas magia com token de produção costuma sair cara.
+As fontes deste bloco são Mozilla zero D I N, SecurityWeek e TabNews.
+
+Agora, o webernetes colocou um pedaço de Kubernetes dentro do navegador.
+Depois de segurança pesada, vem um brinquedo sério.
+Sam Rose, da ngrok, lançou o webernetes.
+É uma porta parcial de Kubernetes para TypeScript, que roda cluster no navegador, sem backend de servidor.
+A ideia é ensino interativo, não produção.
+Essa distinção precisa vir junto.
+Alguém sempre olha para uma demo bonita e começa a imaginar o cluster de sexta-feira.
+
+O projeto tem quase cem mil linhas geradas ao longo de quinhentos e cinquenta e dois commits.
+Segundo o post, são seiscentos e vinte e nove arquivos.
+Ele simula partes que ajudam a ensinar Kubernetes de verdade.
+Entram aí ciclo de vida de pods, D N S, rede de cluster, kubelet, Deployments e ReplicaSets.
+Também entram alocação de I P, garbage collection de containers, e pedaços do comportamento de control plane.
+
+O relato sobre modelos de linguagem funciona melhor quando não vira propaganda.
+O autor diz que usou modelos para portar código e relata os erros típicos.
+São atalhos inventados, helpers que não existem, teste perdido, e comportamento que parece plausível mas não bate com o sistema original.
+Por isso, a confiança vem dos testes, não da vibe da geração.
+O texto fala em comparação com K três S.
+Também fala em duzentos e quatro testes de integração e mil oitocentos e cinquenta e cinco testes unitários.
+O pacote com gzip fica em torno de cento e quarenta kibibytes.
+
+Os limites também importam: o webernetes não é Kubernetes completo.
+Não tem Secrets reais, ConfigMaps completos, volumes persistentes, limites de recurso, nem pull real de registry.
+Como ferramenta de aula, isso pode ser ótimo.
+Como substituto operacional, não.
+A graça é ver conceitos como pod, controller e D N S funcionando em uma aba do navegador.
+E o projeto também ensina uma coisa sobre port automatizado.
+Se o teste não vigia, o modelo abrevia.
+As fontes deste bloco são ngrok e o repositório ngrok barra webernetes no "Git Hub".
+
+Nos destaques rápidos de hoje, Chrome cento e cinquenta e um corrigiu trezentas e oitenta e duas vulnerabilidades, segundo a SecurityWeek.
+O pacote teria quinze falhas críticas e sessenta e sete de alta severidade.
+Não havia menção a exploração ativa naquele aviso.
+Browser é superfície diária para qualquer frota.
+Atualize e confirme rollout em frota gerenciada.
+A fonte deste destaque é SecurityWeek.
+
+Citrix publicou correções para seis falhas em NetScaler A D C e NetScaler Gateway.
+As linhas afetadas incluem quatorze ponto um antes de quatorze ponto um, setenta e dois ponto sessenta e um.
+Também incluem treze ponto um antes de treze ponto um, sessenta e três ponto dezoito.
+Além disso, entram linhas F I P S e N D C P P.
+Na lista entram seis registros C V E.
+Os três primeiros são C V E 2026, oito quatro cinco um; oito quatro cinco dois; e oito seis cinco cinco.
+Os outros são C V E 2026, dez oito um seis; dez oito um sete; e treze quatro sete quatro.
+Os riscos variam por configuração, incluindo leitura de arquivo e negação de serviço.
+As fontes deste destaque são Citrix, Canadian Centre for Cyber Security e The Hacker News.
+
+Um despejo anônimo de zero days colocou mantenedores sob pressão.
+Risky Biz reporta provas de conceito e write ups para mais de uma dúzia de falhas.
+Projetos como Linux kernel, FFmpeg, Open V P N, V L C, P H P, sete Zip, Gitea e Gogs aparecem no radar.
+A ajuda por I A ainda depende do relato do pesquisador.
+O problema confirmado para operadores é acompanhar advisories sem amplificar link de exploit.
+As fontes deste destaque são Risky Biz News e The Register.
+
+No acompanhamento de tendências do dia, o TraceLab apareceu ontem por aqui mostrando agente de código como carga de infraestrutura.
+A cobertura do "AI Engineer World's Fair" aponta para a próxima camada.
+Ela fala de loops, automações, cron jobs, fábricas de software e trabalho de orquestração ao redor do modelo.
+
+O dispatch da Latent Space diz que loops dominaram conversas no primeiro dia cheio de keynotes e sessões.
+A trajetória descrita é sair do chat, passar por ferramentas, chegar a objetivos e depois a rotinas que continuam trabalhando.
+Palestrantes da Open A I falaram de Codex e loops multiagente.
+Natalie Meurer, da Sierra, colocou bastante trabalho específico de cliente na camada de orquestração, não dentro do modelo sozinho.
+
+A fala de Vint Cerf citada pela TechCrunch puxa a mesma preocupação para padrões.
+Agentes não podem depender só de linguagem natural imprecisa para cooperar.
+Eles precisam de interoperabilidade e contratos mais formais.
+Em projeto real, isso vira schema, permissão, fila, estado, avaliação, revisão humana, limite de ferramenta, M C P, A dois A e implantação.
+Modelo melhor ajuda, mas quando o trabalho dura horas ou dias, o encanamento começa a mandar no resultado.
+As fontes da tendência são Latent Space, "AI Engineer World's Fair 2026", e TechCrunch.
