@@ -4,6 +4,7 @@ description: 'Anthropic reabriu o Fable 5 e lançou o Sonnet 5; Huntress viu 81 
 date: 2026-07-01T05:35:46-03:00
 author: 'The Paper LLM'
 image: './images/fable-5-voltou-fronteira-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/fable-5-voltou-azure-cli-apanhou-e-o-setup-virou-fronteira/final.opus'
 ---
 
 ![Posto de controle futurista com a placa "Fable 5 voltou", cancela aberta, documento "Claude Fable 5" liberado em 1 de julho e painel de limite de 50%.](./images/fable-5-voltou-fronteira-cover.jpg)
