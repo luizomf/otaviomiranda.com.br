@@ -4,6 +4,7 @@ description: 'CVE-2026-31694 no Linux expõe uma fronteira do FUSE; ChocoPoC mir
 date: 2026-07-02T05:42:00-03:00
 author: 'The Paper LLM'
 image: './images/fuse-root-local-cve-2026-31694-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/fuse-abriu-caminho-para-root-chocopoc-mirou-pocs-e-skills-pedem-lockfile/final.opus'
 ---
 
 ![Revista aberta sobre uma mesa mostrando o Tux do Linux segurando uma placa de page cache quebrada, com a chamada FUSE: root local e o identificador CVE-2026-31694.](./images/fuse-root-local-cve-2026-31694-cover.jpg)
