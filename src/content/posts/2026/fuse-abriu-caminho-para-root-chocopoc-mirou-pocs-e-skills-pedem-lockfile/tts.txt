@@ -1,0 +1,189 @@
+FUSE abriu caminho para root, Choco P O C mirou provas de conceito e skills pedem lockfile.
+
+Hoje começa no Linux, com uma daquelas falhas que parecem pequenas até encostar na fronteira do kernel.
+O nome é FUSE, e o resultado público foi escalada local até root.
+
+FUSE aceitou uma entrada grande demais e abriu caminho para root local.
+
+FUSE é a ponte que permite implementar sistema de arquivos no espaço de usuário.
+Isso evita colocar tudo direto dentro do kernel.
+Ela aparece em montagem de arquivos remotos, apps de desktop, integração com nuvem e ferramentas de desenvolvimento.
+Também aparece em bastante coisa que parece só conveniência.
+
+A falha recebeu o identificador C V E 2026, trinta e um seis nove quatro.
+Ela fica no cache de leitura de diretório do FUSE.
+Em linguagem menos apertada: é o caminho que guarda registros de diretório, os dirents, quando um programa lista uma pasta.
+Segundo a análise da Cyberstan, um daemon FUSE conseguia entregar uma entrada serializada maior que uma página de memória.
+
+O kernel checava o espaço restante na página atual.
+Mas deixava passar o registro inteiro quando ele já nascia maior que uma página de memória.
+No caminho de adicionar dirent ao cache do FUSE, isso podia virar uma escrita controlada além da borda da página.
+Eram vinte e quatro bytes controlados. Poucos bytes, lugar ruim.
+
+O detalhe do page cache importa porque o kernel passa a confiar em dados que chegaram por uma rota controlável.
+A demonstração pública transforma isso em escalada local de privilégio, chegando a root.
+O escopo é local, com atacante sem privilégio na própria máquina.
+As fontes públicas não apontam exploração remota em massa.
+
+A correção no mainline entrou em vinte de abril de 2026.
+O trabalho real agora é acompanhar os pacotes da sua distribuição.
+Para desktop Linux, laboratório, V P S de teste ou máquina de desenvolvedor com FUSE habilitado, fica o lembrete.
+Mesmo em userland, FUSE toca uma fronteira real do kernel.
+
+As fontes deste bloco são Cyberstan, N V D e Ubuntu Security.
+
+Choco P O C mira pesquisadores com prova de conceito falsa e dependência no índice de pacotes do Python.
+
+No dia vinte e sete, a gente falou que abrir repositório não é passivo.
+Choco P O C leva esse aviso para outro canto da rotina.
+É a pressa de testar uma prova de conceito para uma C V E nova.
+
+O relatório da Yes We Hack com a Sekoia descreve repositórios falsos de prova de conceito.
+Eles eram voltados a pesquisadores de vulnerabilidade e pentesters.
+A parte visível do repositório podia parecer limpa o bastante para passar no olhei rápido.
+O malware vinha por uma cadeia de dependência Python.
+
+O caminho citado passa por pacotes como frint e skytext.
+A lógica maliciosa ficava escondida em uma extensão nativa.
+Ela não aparecia no script que o pesquisador abria para entender a prova de conceito.
+Esse é o tipo de golpe que acerta justamente quem sabe mexer com segurança.
+A pressão do tempo joga contra a revisão cuidadosa.
+
+O payload recebeu o nome Choco P O C.
+Ele é descrito como um R A T em Python, capaz de exfiltrar arquivos, executar comandos e buscar segredos.
+A fonte fala em aproximadamente dois mil e quatrocentos downloads do pacote skytext.
+Mas isso não deve ser lido como duas mil e quatrocentas máquinas comprometidas.
+Download não é infecção confirmada.
+
+O caminho defensivo é chato e familiar.
+Prova de conceito nova roda em V M ou container descartável.
+Sem chave S S H real, sem token de cliente, sem sessão de navegador valiosa e sem diretório pessoal montado por preguiça.
+Também vale olhar a árvore de dependências antes de instalar.
+Desconfie de pacote recém-nascido no Py P I, o índice de pacotes do Python.
+E gire segredo se algo suspeito já rodou no ambiente errado.
+
+As fontes deste bloco são Yes We Hack com Sekoia, The Hacker News e BleepingComputer.
+
+Skills de agente começam a precisar de manifesto, auditoria e lockfile.
+
+A palavra skill parece inofensiva.
+Parece só um pedacinho de instrução, uma receita para o agente trabalhar melhor.
+Só que, quando uma skill depende de outra skill, ela começa a se comportar como dependência de produção.
+Isso também vale quando depende de um pacote, de um serviço externo, de uma ferramenta local ou de uma convenção escondida.
+
+O paper "Skills Are Not Islands" chama isso de "Agent Skill Supply Chains".
+Os autores analisaram mais de um vírgula quarenta e três milhão de skills.
+Eles descrevem um ambiente pronto para ativação, mas pobre em governança.
+Esse é um jeito educado de dizer: dá para copiar e usar rápido.
+Mas nem sempre dá para saber direito de onde veio, em qual versão está, o que puxa junto e qual comportamento foi herdado.
+
+A analogia com package lock, S B O M e auditoria de dependência encaixa bem.
+A proposta do trabalho passa por manifestos tipados de dependência.
+Também passa por registros no estilo lockfile, gerenciamento de clusters de dependências e comandos de auditoria com aviso de risco.
+O nome técnico que aparece no estudo é Skill Dep Analyzer.
+
+O trabalho ainda é pesquisa, sem padrão fechado nem produto que resolveu o assunto.
+Para operação, a ideia prática é simples.
+Quando times instalam skills em Codex, Claude Code, Cursor, fluxos com M C P e automações internas, a skill deixa de ser instrução solta.
+Ela vira artefato com versão, origem, revisão e limite.
+
+Mesmo sem drama, o risco dá trabalho.
+Uma skill pode depender de ferramenta ausente, chamar serviço errado ou carregar comportamento antigo.
+Também pode esconder suposição de permissão ou induzir o agente a usar caminho inseguro.
+Quem já sofreu com dependência transitiva em projeto normal conhece a música.
+
+A fonte deste bloco é o paper no arXiv.
+
+Snowflake coloca processo em volta dos coding agents.
+
+A Snowflake entra aqui como história de processo.
+O Stack Overflow publicou uma conversa do "Leaders of Code" com Vivek Raghunathan, da Snowflake.
+O tema era transformar uso de I A para código em prática repetível de engenharia.
+
+A conversa passa longe do milagre de uma ferramenta sozinha.
+A entrevista descreve uma sequência em cinco estágios.
+Experimentar, codificar padrões, reduzir caos, otimizar o loop externo e repensar times.
+O trecho mais útil está nesse meio do caminho.
+É quando a equipe para de tratar cada sessão de agente como improviso e começa a criar padrões compartilhados.
+
+Entre os exemplos citados aparecem quatorze padrões de design para I A.
+Também aparecem uso de worktrees do Git, agentes orquestradores, skills versionadas e métricas de resultado.
+Isso conversa bastante com o bloco anterior.
+Se agente vira rotina, conhecimento reutilizável precisa ser tratado como algo que muda, quebra e deve ser revisado.
+
+Os números chamam atenção, mas precisam ficar com etiqueta.
+Segundo a própria conversa publicada pelo Stack Overflow, a Snowflake teria reduzido validação de release de quinze dias para um dia.
+Uma equipe de três pessoas teria entregue melhoria de quarenta vezes no compilador de queries.
+E cerca de noventa e cinco porcento dos engenheiros usariam coding agents semanalmente.
+
+Esses números são relatos de empresa, não benchmark independente.
+Ainda assim, a direção é útil para tech lead e dev trabalhando em equipe.
+Medir linha de código gerada é vaidade fácil.
+Medir tempo de validação, qualidade de revisão, isolamento por worktree, taxa de rollback, bugs escapados e custo por fluxo chega mais perto do que importa.
+
+As fontes deste bloco são o Stack Overflow Blog e o vídeo Snowflake Summit no YouTube.
+
+Ransomware só no navegador depende de uma permissão que parece rotina.
+
+A pesquisa da Check Point começa com uma situação esquisita.
+Uma amostra incompleta gerada com ajuda do DeepSeek apontou para uma técnica viável.
+O risco vinha de uma [EY1 P IY1 AY1] legítima.
+É uma daquelas interfaces que existem para facilitar um fluxo real do produto.
+
+O alvo é a "File System Access" [EY1 P IY1 AY1] em navegadores baseados em Chromium.
+Depois que o usuário concede acesso a uma pasta pelo seletor do navegador, um site pode listar arquivos dentro daquele escopo.
+Também pode modificar e sobrescrever esses arquivos.
+A prova de conceito da Check Point mostra como isso pode virar ransomware só no navegador.
+O risco fica mais claro com isca de ferramenta de imagem ou foto.
+
+Os limites precisam ficar claros.
+Não há payload nativo, não há A P K, não há exploit de browser e não há root.
+O ataque depende de engenharia social e de permissão concedida pelo usuário.
+Também não há confirmação pública de uso amplo dessa técnica exata no mundo real.
+
+Mesmo assim, a lição pega porque a permissão parece normal.
+Escolha a pasta das fotos para editar não soa como: este site poderá bagunçar um pedaço da sua vida.
+Para usuário, o cuidado é não dar pasta inteira a web app aleatório.
+Para quem cria produto, o cuidado é tratar acesso de diretório como permissão sensível.
+Isso pede texto claro, escopo mínimo e testes pensando no abuso, não só no fluxo feliz.
+
+As fontes deste bloco são Check Point Research, The Hacker News e The Register.
+
+Agora, os destaques rápidos para hoje.
+
+O repo server do Argo C D precisa de isolamento de rede enquanto a correção não chega.
+A Synacktiv divulgou uma cadeia de execução de código no repo server do Argo C D.
+Nos relatos públicos, no momento da divulgação, ainda não havia C V E nem patch.
+O requisito importante é alcance aos caminhos internos de G R P C e Redis.
+Então a ação é verificar Network Policy, firewall interno e configuração do Helm.
+Vale olhar especialmente a opção Network Policy ponto create.
+As fontes são Synacktiv, The Hacker News e a documentação do Argo C D.
+
+FortiBleed voltou como continuidade, agora com link atribuído a ransomware.
+No dia dezoito, a gente cobriu o vazamento de credenciais de V P N em firewalls Fortinet.
+A novidade é que a S O C Radar e a BleepingComputer ligam a campanha a operações I N C e Lynx.
+Como o white paper técnico completo ainda é mencionado como futuro, o caminho prático continua básico.
+Girar credenciais, revisar acesso V P N e admin, reforçar M F A e procurar movimento lateral.
+As fontes são S O C Radar e BleepingComputer.
+
+Acompanhamento de tendências do dia.
+
+As histórias de hoje se encontram em um lugar simples: ferramenta conveniente agindo com autoridade de alguém.
+A prova de conceito roda com a autoridade do pesquisador.
+A skill roda com a autoridade do agente.
+O site mexe na pasta que o usuário liberou.
+O repo server do Argo C D trabalha perto do caminho de deploy.
+Quando essa autoridade fica implícita, a fronteira some.
+
+Os controles são conhecidos, e bem pouco misteriosos.
+Prova de conceito suspeita vai para ambiente descartável.
+Skill precisa de manifesto, versão, origem e auditoria.
+Chave e token precisam de escopo pequeno.
+Serviço interno precisa de rede restrita.
+Permissão de pasta no navegador precisa ser rara, explícita e fácil de entender.
+
+A saída é o tipo de disciplina que a gente já aprendeu em pacote, C I, chave S S H e banco de dados.
+Proveniência, menor privilégio e histórico de mudança.
+É meio sem glamour, e normalmente segurança boa tem essa mania.
+
+As fontes da tendência são Yes We Hack com Sekoia, arXiv, Check Point Research e Synacktiv.
