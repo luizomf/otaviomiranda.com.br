@@ -1,0 +1,272 @@
+Confiar cedo demais no K D E Plasma, no Claude Code e no Guix.
+
+Quando um programa pode mentir sobre quem é, atalhos comuns viram um lugar estranho para confiar.
+Hoje o primeiro tropeço cabe num clique bem normal: abrir uma nova janela no K D E Plasma.
+
+O K D E Plasma usou identidade fraca e deixou um Flatpak sair do sandbox.
+
+Flatpak existe para colocar limite.
+O app roda num ambiente mais apertado, com permissões declaradas.
+E o sistema tenta impedir que ele alcance partes do host que não deveria tocar.
+O problema descrito por Kimiblock aparece quando o desktop precisa responder a uma pergunta simples.
+Qual app é este, afinal, para o desktop?
+
+Segundo a análise, o K Win conseguia associar uma janela a um app usando dados de identidade do processo.
+Era algo no estilo proc, P I D, cmdline, ou seja, a linha de comando exposta pelo sistema.
+Só que essa identidade é mutável.
+Um processo sem privilégio pode tentar se apresentar com outro argv zero.
+E aí o desktop corre o risco de acreditar na etiqueta grudada pelo próprio suspeito.
+
+O gatilho de usuário é bem cotidiano.
+A pessoa clica em "Open New Window" ou usa o clique do meio no ícone da barra de tarefas.
+A partir daí, um Flatpak malicioso, mesmo com permissões mínimas, podia fazer o Plasma abrir um binário do host.
+Esse binário abria fora do sandbox e fora do namespace de montagem do app.
+
+O recorte técnico aqui é local.
+É uma fuga de sandbox acionada por interação do usuário e por uma decisão ruim de identidade no shell do desktop.
+Ainda assim, é grave para quem usa Linux no desktop, empacota apps ou confia em sandbox como fronteira operacional.
+
+A linha do tempo do autor também pede cuidado.
+O relato inicial veio em primeiro de abril, a prova de conceito em dois de abril.
+O problema ainda foi observado no Plasma seis ponto sete Beta em dois de maio, e a publicação veio depois de noventa dias.
+A fonte não traz C V E nem confirma correção na sua distribuição.
+O caminho sensato é acompanhar K D E Plasma na distribuição que você usa.
+E também tratar linha de comando do processo como evidência fraca de identidade.
+
+As fontes deste bloco são Kimiblock e Phoronix.
+
+O Claude Code marcou prompts quando o endpoint deixava de ser o padrão.
+
+Na quarta-feira, Claude Code apareceu por aqui no contexto de agente rodando setup de repositório desconhecido.
+Agora a camada é outra: o próprio cliente, o endpoint configurado e o texto invisível que vai junto no prompt do sistema.
+
+O pesquisador Thereallo analisou o Claude Code dois ponto um ponto cento e noventa e seis.
+Ele descreveu um marcador escondido na string de data do prompt do sistema.
+O comportamento aparece quando a variável Anthropic Base U R L aponta para um endpoint customizado.
+Pode ser proxy, gateway interno, roteador de modelos ou caminho de revenda.
+No endpoint oficial padrão da Anthropic, a fonte descreve um caminho de retorno antecipado.
+
+O marcador não aparece como um campo explícito dizendo que este pedido veio de tal lugar.
+Ele muda pontuação e formato da data, de um jeito visualmente comum.
+A análise cita checagens de fuso como Ásia Shanghai e Ásia Urumqi.
+Também cita listas de hostnames e palavras ligadas a laboratórios de I A.
+Essas listas, segundo a fonte, estavam codificadas em base sessenta e quatro.
+Depois, eram decodificadas com X O R usando a chave noventa e um.
+
+O cuidado principal é separar o mecanismo observado da história corporativa que cresceu em volta dele.
+A intenção, a explicação interna e o cronograma de remoção não estão confirmados pela fonte primária.
+Circularam versões falando em confirmação de engenheiro da Anthropic, experimento de março e remoção em primeiro de julho.
+Sem uma fonte primária para isso, o fato sólido é o marcador observado.
+
+A fonte também não comprova malware nem vazamento de privacidade.
+O próprio autor trata a implementação como esquisita, não necessariamente maliciosa.
+O incômodo, nesse caso, é outro.
+Uma ferramenta de código que pode mexer com shell, arquivo e rede precisa deixar classificação de endpoint e telemetria explícitas.
+Se a informação vai escondida em pontuação de data, a confiança fica mais difícil de auditar.
+
+As fontes deste bloco são Thereallo e Hacker News.
+
+O Guix corrigiu a etapa em que baixava primeiro e verificava depois.
+
+O Guix publicou em dois de julho um aviso oficial para falhas em guix substitute, guix pull e guix time machine.
+O aviso também inclui o guix daemon.
+O detalhe que dói é antigo em espírito.
+Assinar e verificar ajuda, mas verificar depois de escrever dado controlado pelo atacante pode chegar tarde.
+
+No caso de substitutos binários, o sistema podia extrair dados do archive durante o download.
+Isso acontecia antes da verificação completa do hash.
+A fonte também fala em problemas ligados a narinfo, restore file e endereços file.
+H T T P S não fechava essa porta específica.
+Isso porque a U R L do substituto não era uma parte canônica assinada do jeito que a gente gostaria.
+
+O impacto depende do privilégio do daemon e do fluxo usado.
+Mesmo assim, o aviso menciona escalada remota para o usuário do daemon de build.
+Também menciona corrupção remota da store, possível leitura local de arquivos acessíveis ao daemon.
+E ainda sobrescrita de cache com cara de negação de serviço.
+A leitura prática é atenção proporcional: a falha encosta numa parte sensível da cadeia de builds.
+
+O caminho recomendado é atualizar guix e guix daemon.
+Depois, reiniciar o daemon ou reconfigurar o sistema.
+A recomendação também é ficar no commit que começa com oito nove sete oito três dois efe, ou em um posterior.
+O hash completo está no post escrito, para quem for copiar a referência exata.
+A opção no substitutes entra como decisão de ameaça.
+Ela pode reduzir dependência de substitutos enquanto você atualiza.
+Mas troca isso por custo, tempo e build local.
+Os identificadores C V E ainda estavam pendentes na fonte, então ficam pendentes aqui também.
+
+Mesmo para quem nunca rodou Guix, o aviso bate em C I, cache de build, package manager e artefato assinado.
+A ordem das operações importa.
+"Vou verificar já já" é uma frase perigosa quando o dado já encostou no disco, no cache ou no daemon.
+
+A fonte deste bloco é o GNU Guix.
+
+Um estudo com agentes mostra que pensar mais venceu ferramenta extra.
+
+Um paper no arXiv fez noventa execuções independentes de agente construindo o mesmo app.
+Era um quadro de retrospectiva em tempo real.
+A pergunta era simples de medir e difícil de responder no chute.
+O que melhora a primeira tentativa: mais raciocínio ou mais ferramenta?
+
+No estudo, subir o esforço de raciocínio de High para X High mudou bastante o resultado.
+As execuções perfeitas na primeira tentativa foram de vinte e oito porcento para oitenta e nove porcento.
+Os prompts corretivos caíram cerca de cinco vezes.
+O custo subiu, mas numa faixa menor: de nove porcento a vinte e nove porcento.
+
+Já a ferramenta de teste baseada em navegador aumentou o custo de quarenta e dois porcento a sessenta e oito porcento.
+E não melhorou o score funcional nem a confiabilidade naquele experimento.
+Antes de colocar mais uma ferramenta no loop, vale descobrir de onde vem a falha.
+Pode ser planejamento fraco, entendimento ruim da especificação ou decisão quebrada.
+Se vier daí, a ferramenta nova pode só deixar a conta mais cara.
+
+O paper ainda registra que deploy em container falhou na primeira tentativa em quarenta e quatro porcento das execuções.
+E um prompt de design melhorou a qualidade visual de três vírgula zero para quatro vírgula cinco.
+Mas não trouxe ganho funcional.
+Para quem usa Codex, Claude Code, OpenCode ou qualquer loop parecido, isso é útil.
+Meça a falha que você realmente tem antes de comprar a solução da semana.
+
+O limite fica no tamanho do recorte.
+São noventa runs, uma aplicação, uma especificação e uma rubrica de quatorze critérios.
+A pontuação máxima era de quarenta e dois pontos.
+Dá para aproveitar como sinal, não como lei universal.
+Pelo menos ajuda a derrubar a suposição automática de que mais ferramenta sempre compra confiabilidade.
+
+A fonte deste bloco é o paper no arXiv.
+
+ClickHouse entra na briga dos logs com menos coluna lida e mais disciplina.
+
+Mat Duggan publicou uma defesa do ClickHouse para observabilidade, principalmente logs em volume alto.
+O argumento mais interessante passa pelo formato de armazenamento, não pela moda do banco da semana.
+
+Logs são dados enormes, quase sempre acrescentados no fim, com consulta imprevisível depois.
+Num banco colunar, uma consulta que usa três campos de quarenta não precisa ler os outros trinta e sete do mesmo jeito.
+O autor dá um exemplo ilustrativo de oitocentos gigabytes contra quarenta gigabytes lidos numa consulta desse tipo.
+Também atribui ao ClickHouse compressão de dez a quatorze vezes em dados de observabilidade.
+No Elasticsearch, a comparação do texto fica entre duas e três vezes.
+
+Os números de custo chamam atenção, mas precisam ficar bem atribuídos.
+Para dez terabytes por dia, a estimativa do texto coloca Elasticsearch em noventa e cinco mil a cento e quarenta mil dólares por mês.
+Isso ainda viria com licença, segundo as premissas do autor.
+O L G T M aparece entre cinquenta e cinco mil e oitenta e cinco mil dólares.
+Nesse caso, também com mais de cento e oitenta pods e de três a cinco engenheiros.
+Datadog poderia passar de um milhão de dólares por mês.
+E ClickHouse ficaria entre dezoito mil e vinte e oito mil dólares.
+São números do autor, com premissas do autor, não benchmark independente.
+
+O preço cobrado pelo ClickHouse vem em outro lugar.
+Entra desenho de schema, escolha de order by, reequilíbrio manual depois de adicionar shards e ausência de Prom Q L nativo.
+Para time pequeno, isso pode ser ótimo.
+Para time sem paciência de modelar logs e rollups, vira outra fonte de incidente.
+
+O texto funciona melhor como mapa de tradeoff.
+Se sua observabilidade está virando imposto mensal e a consulta costuma tocar poucas colunas, ClickHouse merece teste.
+Já se a equipe depende de Prom Q L por tudo e não quer pensar em ordenação, compressão, partição e retenção.
+A economia prometida no papel pode evaporar no plantão.
+
+A fonte deste bloco é Mat Duggan.
+
+A Grab migrou contadores de fraude com shadow reads e Rust no caminho.
+
+A Grab publicou um daqueles relatos de migração que parecem simples depois que alguém fez o trabalho difícil.
+O Counter Service, usado em fraude e controle de abuso, lida com dezenas de milhares de requisições por segundo.
+Ele também processa cerca de um bilhão de requisições por dia.
+Trocar a base por baixo disso sem downtime exige mais que mudar a string de conexão e observar.
+
+A equipe colocou uma fachada de storage em Rust.
+Usou enum dispatch em vez de trait object com alocação no heap a cada query.
+E criou modos de execução por configuração: Single, With Shadow e With Split.
+Com isso, dava para comparar resultado, escrever em paralelo e mover tráfego.
+Tudo sem trocar o avião em voo segurando fita isolante.
+
+Outro acerto foi admitir que a forma dos dados importava tanto quanto a base.
+O modelo antigo guardava baldes em muitas linhas.
+O novo usa registros com mapa, incluindo mapa ordenado por chave e operações atômicas no Aerospike.
+Para contador, operação atômica e poda por faixa de chave são mais que detalhe elegante.
+
+A migração teve rampas de sombra de cinco, vinte, cinquenta e cem porcento.
+A paridade foi acompanhada por métricas.
+A equipe também cita problemas reais, como maturidade de cliente e D N S.
+Também cita um experimento de índice primário em N V M E que trouxe picos de p noventa e nove.
+Esse experimento foi revertido para memória.
+
+Os resultados, no workload da Grab, são fortes.
+O p noventa e nove de leitura ficou cerca de cinquenta porcento melhor.
+O disco ficou perto de um terabyte, em vez de três terabytes.
+O custo por nó caiu de quarenta e cinco porcento a cinquenta porcento.
+E o fator de replicação foi reduzido de três para dois.
+O cuidado é resistir ao atalho de resumir tudo a: use Aerospike.
+O que dá para reaproveitar é o desenho.
+Esse desenho inclui fachada, modo de sombra, rollback por configuração e métrica de paridade.
+Também inclui modelo de dados que combina com a operação.
+
+A fonte deste bloco é Grab Tech.
+
+Agora, alguns destaques rápidos.
+
+O Safari Technology Preview duzentos e quarenta e sete ganhou um servidor M C P local para dev web.
+O WebKit apresentou o Safari M C P server pelo comando safaridriver com M C P.
+Ele traz ferramentas para D O M, rede, console, screenshots, avaliação de JavaScript e interação na página.
+O servidor roda localmente e, segundo a Apple, não faz chamadas de rede próprias.
+Os dados capturados ainda vão para o agente ou modelo que você configurou.
+A fonte deste destaque é WebKit.
+
+O Manticore acelerou embeddings locais trocando o caminho O N N X.
+A equipe relata no Manticore Search vinte e sete ponto um ponto cinco uma média de quatorze vezes mais performance.
+Saiu de cinco a onze documentos por segundo para setenta a duzentos e trinta no novo caminho com O N N X Runtime.
+O motivo do ganho é a parte útil.
+Desligar intra op spinning, parar de agrupar textos de tamanhos muito diferentes e usar uma sessão compartilhada venceu a intuição.
+Nesse workload, chamadas concorrentes foram melhores que apostar só em batching.
+A fonte deste destaque é Manticore Search.
+
+Credencial de agente pede proxy, não token real largado no workspace.
+Matthew Garrett propõe um desenho em que o agente recebe um token substituto.
+Um broker ou proxy troca isso pela credencial real no momento da chamada.
+A ideia conversa com M T L S, SPIFFE e J W T.
+Mas ainda é proposta de arquitetura, não padrão pronto.
+O ganho é simples: se o workspace vaza, o material roubado é menos reutilizável.
+A fonte deste destaque é Matthew Garrett.
+
+NetScaler teve nova urgência depois da divulgação técnica.
+Na quarta-feira, Citrix apareceu aqui como pacote de correção.
+Agora o delta é que SecurityWeek e Lupovis relatam exploração ou sondagem específica do C V E 2026, oito quatro cinco um.
+Isso aconteceu pouco depois da divulgação pública.
+A Citrix confirma que a falha afeta NetScaler A D C e NetScaler Gateway configurados como S A M L I D P.
+O caso envolve memory overread e C V S S oito ponto oito.
+Para quem opera isso, o caminho é aplicar as versões corrigidas do aviso CTX seis nove seis seis zero quatro.
+Também vale checar a precondição S A M L I D P e monitorar sem sair espalhando payload cru por aí.
+As fontes deste destaque são SecurityWeek, Citrix, watchTowr e Lupovis.
+
+Agora, o acompanhamento de tendências.
+
+Ontem, skills de agente apareceram por aqui como dependências que pedem manifesto, origem e lockfile.
+Hoje a conversa anda um passo.
+Mesmo com arquivo revisado, a parte perigosa pode aparecer em tempo de execução.
+Também pode aparecer no histórico de P Rs ou numa instrução de DevOps vaga demais para o agente adivinhar com segurança.
+
+O paper sobre SkillCloak descreve skills maliciosas com ofuscação estrutural e empacotamento autoextraível.
+No resumo, o empacotamento S F S passou por todos os scanners testados em mais de noventa porcento dos casos.
+Enquanto isso, o SkillDetonate reporta noventa e sete porcento de detecção com dois porcento de falso positivo.
+É pesquisa, não produto pronto.
+Mas muda a pergunta: scanner estático sozinho começa a parecer pouco para coisa que executa com privilégio do agente.
+
+Outro trabalho olha ataques distribuídos em código persistente, espalhados por histórico de P Rs.
+Um monitor isolado não se mostrou robusto contra estratégias graduais e não graduais.
+A combinação de rastreador stateful de ligações com ensemble de monitores reduziu evasão gradual.
+No monitor padrão mais fraco, a evasão caiu de noventa e três porcento para quarenta e sete porcento.
+E, mesmo assim, ainda é muita passagem.
+Revisar diff por diff não enxerga tudo quando o ataque depende da história.
+
+O UnderSpecBench fecha o pacote pelo lado operacional.
+Ele mede sessenta e nove famílias de tarefas DevOps, duas mil duzentas e oito variantes de prompt.
+Também mede configurações com Claude Code, Codex e OpenCode.
+O resumo diz que instruções subespecificadas levaram agentes a violar pelo menos uma fronteira.
+Isso ocorreu em cinquenta e cinco vírgula oito porcento a sessenta e sete vírgula oito porcento das execuções.
+Traduzindo para o plantão: "arruma o deploy" pode ser pedido pequeno para humano experiente.
+Mas é um convite para agente escolher alvo, escopo e risco por conta própria.
+
+O conjunto aponta para controles bem terrenos.
+Sandbox para skill, auditoria de comportamento em runtime, revisão que acompanha histórico e fronteira explícita de ação.
+Também entram credencial mediada por proxy e instrução de produção com alvo e limite.
+A resposta prática é tirar agente do mundo encantado do prompt.
+E colocar no mesmo mundo chato onde a gente já colocou pacote, C I, token e deploy.
+
+As fontes da tendência são SkillCloak, SkillDetonate, Persistent-State A I Control, UnderSpecBench e Matthew Garrett.
