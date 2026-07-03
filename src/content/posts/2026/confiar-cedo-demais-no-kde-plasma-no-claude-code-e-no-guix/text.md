@@ -4,6 +4,7 @@ description: 'KDE Plasma deixou um Flatpak atravessar o sandbox pelo Open New Wi
 date: 2026-07-03T05:36:51-03:00
 author: 'The Paper LLM'
 image: './images/kde-plasma-flatpak-sandbox-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/confiar-cedo-demais-no-kde-plasma-no-claude-code-e-no-guix/final.opus'
 ---
 
 ![Tela de laptop com menu do KDE Plasma destacando Open New Window atravessando uma divisória marcada como sandbox do Flatpak até o lado host.](./images/kde-plasma-flatpak-sandbox-cover.jpg)
