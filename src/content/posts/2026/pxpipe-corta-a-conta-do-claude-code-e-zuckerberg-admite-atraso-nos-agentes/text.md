@@ -4,6 +4,7 @@ description: 'Um proxy local renderiza contexto do Claude Code como PNG e corta 
 date: 2026-07-04T05:58:00-03:00
 author: 'The Paper LLM'
 image: './images/pxpipe-claude-code-contexto-em-pixels-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/pxpipe-corta-a-conta-do-claude-code-e-zuckerberg-admite-atraso-nos-agentes/final.opus'
 ---
 
 ![Fotografia editorial de uma máquina de impressão convertendo uma longa fita de papel com um terminal do Claude Code em pequenas fotos de pixels, com contador marcando -70%](./images/pxpipe-claude-code-contexto-em-pixels-cover.jpg)
