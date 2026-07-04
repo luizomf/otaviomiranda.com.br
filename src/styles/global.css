@@ -185,7 +185,7 @@
   --color-neutral-990: hsl(240 10% 99% / 1);
   --color-neutral-960: hsl(240 14% 96% / 1);
   --color-neutral-950: hsl(240 22% 95% / 1);
-  --color-neutral-900: hsl(240 22% 90% / 1);
+  --color-neutral-900: hsl(240 22% 98% / 1);
   --color-neutral-850: hsl(240 22% 85% / 1);
   --color-neutral-800: hsl(240 22% 80% / 1);
   --color-neutral-740: hsl(240 10% 74% / 1);
@@ -198,7 +198,7 @@
   --color-neutral-320: hsl(240 14% 32% / 1);
   --color-neutral-300: hsl(240 22% 30% / 1);
   --color-neutral-150: hsl(240 10% 15% / 1);
-  --color-neutral-100: hsl(240 16% 7% / 1);
+  --color-neutral-100: hsl(240 16% 0% / 1);
   --color-neutral-050: hsl(240 22% 3% / 1);
   --color-neutral-020: hsl(240 10% 1% / 1);
   --color-bg: var(--color-neutral-960);
