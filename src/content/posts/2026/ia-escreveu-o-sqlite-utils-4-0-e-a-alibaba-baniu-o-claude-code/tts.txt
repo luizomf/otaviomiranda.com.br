@@ -1,0 +1,227 @@
+IA escreveu o SQLite utils quatro ponto zero, um rival achou os bugs, e a Alibaba baniu o Claude Code.
+
+Domingo de manhã e a pergunta que atravessa quase todas as histórias de hoje é antiga: quem confere o trabalho de quem?
+A primeira resposta veio de um lugar concreto.
+Uma biblioteca de SQLite que muita gente usa, num release que a IA escreveu e outra IA revisou.
+
+Simon Willison lançou o SQLite utils quatro ponto zero R C dois, escrito quase todo por IA, e a revisão de outro modelo pegou bug de perda de dados.
+O SQLite utils tinha um footgun clássico de transação.
+Você escrevia no banco, lia de volta na mesma conexão, tudo parecia salvo.
+Se a conexão fechava antes de um commit manual, a escrita sofria rollback silencioso e sumia.
+Dados que pareciam confirmados, perdidos sem erro nenhum.
+A versão quatro ponto zero R C dois, publicada neste cinco de julho, mata esse comportamento.
+Todo método que escreve no banco agora roda na própria transação e commita antes de retornar.
+O método query também mudou: executa imediatamente e rejeita statements que não retornam linhas.
+Quem depende do commit manual antigo precisa revisar o código antes de subir para a linha quatro.
+E ainda é release candidate, não versão final.
+A outra metade da história é como o release foi feito.
+Willison dirigiu o processo, mas o código saiu quase todo do Claude Fable, via Claude Code.
+Foram trinta e sete prompts, trinta e quatro commits, trinta arquivos mexidos.
+O custo, estimado pelo próprio autor, foi de cento e quarenta e nove dólares e vinte e cinco centavos, sem subsídio de plano.
+E a parte que me interessa de verdade: a revisão.
+Durante o trabalho, o próprio modelo encontrou um bug real de perda de dados.
+O método delete where nunca commitava e envenenava a conexão, fazendo escritas posteriores desaparecerem.
+Willison então fez algo que ainda é raro: pediu para o GPT cinco ponto cinco, da OpenAI, revisar o trabalho do modelo da Anthropic.
+A revisão adversarial confirmou mais dois problemas de transação no método query, corrigidos em seguida no pull request número setecentos e sessenta e oito.
+Um modelo escreveu, o rival revisou, o humano decidiu o que entrava.
+É um fluxo de revisão que qualquer time pode copiar hoje, com números reais na etiqueta.
+A fonte deste bloco é o blog do Simon Willison.
+
+Alibaba proíbe o Claude Code internamente depois que a Anthropic admitiu experimento de rastreamento.
+No dia três, o marcador escondido no prompt do Claude Code passou por aqui, ainda como análise técnica de um pesquisador.
+Agora a história ganhou os dois desfechos que faltavam: a Anthropic confirmou, e a Alibaba reagiu.
+Pelo lado da Anthropic, o funcionário Thariq Shihipar falou publicamente sobre o código que checava sinais do ambiente.
+Eram coisas como fuso horário e proxy, para sinalizar usuários na China ou ligados a labs chineses.
+Segundo ele, foi "um experimento lançado em março" contra abuso de contas e destilação, já substituído por salvaguardas mais fortes.
+Ou seja: o mecanismo existiu, e a empresa assume.
+Pelo lado da Alibaba, a The Information reporta que a empresa está banindo o Claude Code internamente.
+Os detalhes que circulam vêm dessa reportagem e das que a replicaram.
+Vigência a partir de dez de julho, classificação interna como software de alto risco, ordem para apagar modelos Claude.
+E migração para o Qoder, a plataforma de código da própria Alibaba.
+A empresa não confirmou nada disso publicamente, então esses pontos seguem como reportagem com fontes, não comunicado.
+O pano de fundo é uma briga maior.
+A Anthropic acusa operadores ligados ao lab Qwen, da Alibaba, de destilação em massa das respostas do Claude; a Alibaba nega.
+Os termos da Anthropic, aliás, já proibiam uso por empresas controladas pela China.
+Com o ban, os dois lados do Pacífico agora restringem a mesma ferramenta, cada um pelo seu motivo.
+Para quem está longe dessa geopolítica, sobra uma lição bem local.
+Agente de código é software que inspeciona o ambiente onde roda.
+O que ele coleta, e para quem, virou critério de compra e de banimento.
+Vale perguntar isso do seu, seja ele qual for.
+As fontes são The Information, The Decoder, o jornal South China Morning Post e o TechCrunch.
+
+O criador do BabyAGI propõe que o log de eventos seja o agente.
+Auditar um agente hoje costuma significar confiar na memória do modelo e em logs colados por cima de um loop de conversa.
+Deu problema na execução de terça? Boa sorte reproduzindo exatamente o que aconteceu.
+O paper "The Log is the Agent", de Yohei Nakajima, o mesmo do BabyAGI, inverte essa arquitetura.
+No ActiveGraph, a única fonte da verdade é um log de eventos append only, aquele arquivo que só cresce e nunca é editado.
+O grafo de trabalho do agente é uma projeção determinística desse log.
+E os comportamentos, sejam funções, classes ou rotinas com modelo, reagem a mudanças no grafo e emitem novos eventos.
+Nenhum componente chama outro diretamente.
+Se você faz backend, já viu esse filme.
+É event sourcing, o padrão de guardar cada mudança como evento e reconstruir o estado a partir deles, aplicado a agentes.
+E as três propriedades que caem de graça são exatamente as dores atuais.
+Replay determinístico de qualquer execução.
+Fork barato a partir de qualquer evento, sem re-executar o que veio antes.
+E linhagem completa do objetivo lá do início até cada chamada de modelo.
+Honestidade de calendário: o paper é de vinte e um de maio de 2026, e ressurgiu nos feeds agora.
+É pesquisa com implementação de referência sob Apache dois ponto zero e demo reproduzível.
+Ainda não é um framework pronto para substituir o que você usa em produção.
+Como direção de arquitetura, porém, é das mais limpas que apareceram por aqui.
+A fonte é o próprio paper, publicado no arXiv.
+
+TinyCOV mede cobertura de fuzzing do jeito errado, e o autor é o primeiro a avisar.
+Fuzzing é jogar entrada maluca num programa até ele quebrar.
+Só que fuzzer moderno precisa saber por onde o programa passou, a tal cobertura, para gerar entradas melhores.
+E medir isso em binário sem código-fonte custa caro.
+O QEMU instrumenta tudo com três a cinco vezes de lentidão.
+Já o Intel Processor Trace faz em hardware, com uns dez porcento de overhead.
+O autor do site redvice ponto org tinha um problema mundano: está num laptop [EY1 EH1 M D IY1], sem Processor Trace.
+A solução, batizada de TinyCOV, é assumidamente errada e por isso divertida.
+Ele troca cada instrução de branch do binário por um breakpoint INT três, que ocupa um byte.
+E guarda, no byte que sobra, os metadados para reconstruir o desvio.
+Breakpoint normalmente é caro porque cada disparo obriga o processador a trocar de nível de privilégio, do código do usuário para o kernel e de volta.
+O truque do TinyCOV é rodar tudo dentro de uma máquina virtual no K V M, com um kernel guest próprio.
+Esse kernel foi escrito para tratar o trap sem sair do ring três, o nível menos privilegiado.
+O desvio caro simplesmente não acontece.
+Resultado: funciona, habilita hooks de cobertura customizados, e roda cerca de sete vezes mais lento que o nativo.
+Fica pior ainda em código cheio de branches, como o B zip dois.
+O próprio autor arquiva o projeto como "brinquedo fofo" e manda não usar em produção.
+O texto vale menos pela ferramenta e mais pela aula.
+É um tour honesto por como fuzzers enxergam código, do A F L ao Processor Trace, com uma gambiarra deliciosa no final.
+A fonte deste bloco é o blog redvice ponto org.
+
+Ter seu próprio pedaço da internet: A S N, I P V seis e B G P num V P S barato.
+Se você vive atrás de C G NAT, aquele esquema em que a operadora divide um IP público entre vários clientes, conhece os sintomas.
+CAPTCHA em tudo, cara de proxy para os sites, reputação do endereço afundada por um vizinho que você nunca viu.
+A série "My ASN Journey" mostra a saída mais radical possível: virar, literalmente, um sistema autônomo da internet.
+O caminho está documentado em oito das doze partes planejadas.
+Primeiro, registrar seu próprio A S N, o número que identifica uma rede independente, e um bloco I P V seis, via um L I R da RIPE.
+Depois, anunciar tudo isso com B G P a partir de um V P S.
+Os custos surpreendem para baixo.
+Cerca de quinze libras de taxa única do A S N, umas cinquenta e cinco libras por ano de RIPE.
+E um V P S com sessão B G P por uns cinco francos suíços a cada três meses.
+Dali em diante a série cobre trazer o I P V seis para casa via SOCKS cinco ou WireGuard.
+Também cobre entrar num ponto de troca de tráfego, adicionar upstreams e configurar R P K I.
+O ganho é ter endereço com reputação só sua, controle total do roteamento e independência do provedor.
+Netflix e Wikipedia param de te tratar como bot.
+Agora os avisos, que o autor lista sem enfeite.
+Seu nome e contato vão para registro público da internet, sem opção de privacidade.
+O autor chama isso de self doxxing, e é exatamente isso.
+E B G P é a tubulação real da internet.
+Um anúncio errado não quebra só o seu lab, incomoda engenheiro de rede do outro lado do mundo.
+A série é de abril de 2024, atualizada em maio de 2026, então leia como guia testado pelo tempo, não como notícia.
+Para quem já brinca de V P S, túnel e WireGuard, é a fase seguinte do jogo.
+A fonte deste bloco é o blog Anim Mouse.
+
+Agora, os destaques rápidos para hoje.
+
+Uma issue no Codex acusa o GPT cinco ponto cinco de raciocinar menos, com telemetria em vez de vibe.
+Um dev analisou trezentos e noventa mil, cento e noventa e cinco registros de oitocentas e sessenta e cinco sessões próprias.
+Ele mostra respostas se acumulando em exatamente quinhentos e dezesseis tokens de raciocínio.
+É um padrão trinta e três vezes mais forte que em outros modelos.
+E subiu de zero vírgula onze porcento para mais de cinquenta e três porcento das respostas em maio, enquanto a profundidade média caía.
+Cheira a teto deliberado, mas segue como acusação.
+A issue está aberta desde vinte e sete de junho sem resposta da OpenAI, e os dados são de um usuário só.
+A fonte é a issue número trinta mil, trezentos e sessenta e quatro, no repositório do Codex no "Git Hub".
+
+O ex-líder do Qwen admite que o hybrid thinking foi um erro.
+Junyang Lin, que comandou o Qwen até março, conta que juntar modo instruct e modo thinking no mesmo modelo degradava os dois.
+Por isso as variantes se separaram.
+Ele também deixa uma lição de infra: treino agêntico exige desacoplar inferência da execução do ambiente.
+Senão, as GPUs ficam paradas esperando testes rodarem.
+O problema que ele chama de mais difícil é reward hacking.
+É opinião de um pesquisador, não posição oficial da Alibaba.
+A fonte desse relato é o Marktechpost.
+
+Um projeto comunitário transforma o PS cinco em desktop Linux.
+O PS cinco Linux loader usa exploits de hypervisor para subir um bootloader próprio, em firmwares do três ponto zero zero ao sete ponto sessenta e um.
+Tem drivers escritos à mão para Blu-ray, Bluetooth e ethernet; Wi-Fi só em chipsets Marvell, por enquanto.
+A release dois ponto três saiu em julho, e o valor real é a masterclass pública de bring-up de hardware em Linux.
+A fonte é o repositório PS cinco Linux loader no "Git Hub".
+
+Backon empacota retry, circuit breaker e hedging em Python puro.
+Tem backoff exponencial, circuito com estados "closed", "open" e "half open", e hedging: disparos concorrentes, vence o primeiro sucesso.
+A interface é idêntica para sync e async, com mypy strict e licença MIT, tudo sem dependência externa.
+Projeto jovem, treze stars e nove releases: estude os padrões e valide antes de produção.
+A fonte é o repositório do Backon no "Git Hub".
+
+No PostgreSQL, o parâmetro enable parallel hash é sonda de diagnóstico, não botão de turbo.
+Com o parâmetro ligado, que é o padrão, os workers de um hash join paralelo constroem uma única tabela hash em memória compartilhada.
+Isso soma os orçamentos de memória em vez de duplicar cópias.
+Desligue só para diagnosticar, quando o explain analyze mostra spill para disco, com mais de um batch.
+A correção real costuma ser o work mem ou o hash mem multiplier, e o toggle volta a ligado depois.
+A fonte é o blog thebuild ponto com.
+
+O plano perfeito de migração para Keycloak durou vinte segundos na mesa do CTO.
+É um relato em português no TabNews: dois dias desenhando a migração de identidade, e o chefe escolheu a opção chata esboçada em meia hora.
+Com razão, pelos motivos que o próprio autor lista.
+Keycloak sem B crypt nativo, extensões por instância em vez de por realm, e o Sign in with Apple exigindo rotação custom de J W T.
+Venceu a auth interna, com argon dois I D e rehash preguiçoso no login.
+Rigor no plano errado ainda é o plano errado.
+A fonte é o relato no TabNews.
+
+Se o L L M não vai ler o dado, o dado não deveria passar pelo contexto.
+É um padrão do blog da RidgeText.
+Cada tool guarda o resultado pesado em memória no servidor e devolve só um recibo minúsculo, com status e um layer I D.
+Um compositor final monta tudo na renderização.
+No exemplo, quinhentos kilobytes de GeoJSON, que custariam uns cento e vinte e cinco mil tokens, viram cerca de cento e cinquenta.
+Ontem o pxpipe atacou a mesma dor por outro ângulo; economizar janela de contexto virou disciplina.
+O texto é de dezoito de junho, e ressurgiu agora.
+A fonte é o blog da RidgeText.
+
+E se o TypeScript compilasse direto para código nativo?
+Dois devs brasileiros, com ajuda pesada de IA, estão construindo o R T S: um compilador em Rust, com Cranelift.
+Ele mantém números provados pelo sistema de tipos em registradores de CPU.
+Quando o tipo não garante, cai para um modelo dinâmico com NaN boxing.
+A compatibilidade está em setenta e seis porcento de seiscentos e nove testes semânticos, comparados byte a byte com o Node, medida pelo CI do próprio projeto.
+A pergunta interessante é até onde os tipos estáticos carregam, antes de o dinamismo do JavaScript cobrar.
+A fonte é o anúncio dos autores no TabNews.
+
+A lib beef porta a biblioteca de floats de precisão arbitrária do Bellard para Rust puro.
+Tem I triplo E setecentos e cinquenta e quatro completo, funções transcendentais, suporte decimal e zero dependências.
+Tudo em cerca de quatrocentos e oitenta kibibytes, rodando até em WASM e embedded.
+A manchete discreta é a licença: MIT, escapando do L G P L que vem junto com G M P e M P F R.
+Em precisão extrema, acima de uns dez mil bits, as libs em C ainda vencem.
+A fonte é o repositório da lib beef no "Git Hub".
+
+"Não sei Rust, minha IA está reescrevendo o PHP nele", e o juiz são os vinte e dois mil testes do PHP.
+O Phargo passa hoje três mil, oitocentos e quarenta e quatro dos vinte e dois mil e trinta e sete testes oficiais.
+Dá dezessete vírgula quatro porcento, com teto realista de quarenta a quarenta e cinco porcento sem as extensões em C.
+E já renderiza a home do WordPress, cinquenta e cinco vezes mais lento.
+As pérolas: um bug de C R L F que mentia no placar por semanas.
+E os "Potemkin builtins", features que existiam e não faziam nada, como o clone retornando null.
+Nunca deixe a IA corrigir a própria prova.
+A fonte é o blog ekinertac ponto com.
+
+PDF para JSON com modelos abertos tem pegadinha na licença dos pesos.
+Um guia da Marktechpost mapeia as opções locais de 2026.
+Tem o lift, de nove bilhões de parâmetros, com saída presa a schema e noventa vírgula dois porcento de acurácia de campo, segundo o projeto.
+Também aparecem o Granite Docling da IBM, o MinerU, o Marker, o olm O C R dois e o DeepSeek O C R.
+O aviso que salva dinheiro: código livre não garante peso livre.
+O lift e o Marker usam variantes de "Open RAIL M" que cobram por self hosting comercial.
+MIT ou Apache de verdade: DeepSeek O C R e olm O C R dois.
+A fonte é o guia da Marktechpost.
+
+Armin Ronacher: modelos melhores, ferramentas piores.
+O criador do Flask observa que modelos Claude recentes pioraram em seguir schemas de tools fora do padrão.
+Eles inventam campos em chamadas malformadas que versões antigas acertavam.
+A hipótese dele: pós-treino num harness que aceita e conserta chamada desleixada ensina o modelo a ser desleixado.
+Para quem tem tools próprias, a defesa é validação estrita e, quando der, sampling restrito por gramática.
+É observação de um engenheiro respeitado, não estudo controlado.
+A fonte é o blog do Armin Ronacher.
+
+Fechando com o acompanhamento de tendências do dia.
+O fio que costura o dia é a verificação virando parte da arquitetura.
+No SQLite utils, a revisão virou etapa estrutural: um modelo escreve, o rival revisa, e o bug de perda de dados aparece antes do release.
+No Phargo e no R T S, o oráculo é uma suíte de testes que a IA não controla.
+É ela que desmascara os builtins de fachada e mede os setenta e seis porcento sem gentileza.
+A issue dos quinhentos e dezesseis tokens no Codex joga no mesmo time, por outro caminho.
+Em vez de reclamar que o modelo "parece preguiçoso", o autor levou trezentos e noventa mil registros de telemetria.
+Pode estar errado, mas de um jeito verificável.
+E o ActiveGraph aponta onde isso pode terminar.
+Se o log de eventos é a fonte da verdade, auditar agente deixa de ser arqueologia e vira replay.
+O alerta do Ronacher fecha o ciclo pelo avesso, lembrando que o harness onde o modelo treina molda o comportamento dele fora dali.
+A infraestrutura de conferir está virando tão importante quanto a de gerar.
+Ainda não dá para saber se isso vira padrão de mercado ou fica como bom gosto de alguns.
+Por enquanto, quem já tem um oráculo externo dorme melhor.
+As fontes da tendência são o blog do Simon Willison, o ekinertac ponto com, a issue do Codex no "Git Hub", o arXiv e o blog do Armin Ronacher.
