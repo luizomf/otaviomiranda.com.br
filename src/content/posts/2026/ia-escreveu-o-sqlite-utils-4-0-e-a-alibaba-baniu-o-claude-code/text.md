@@ -4,6 +4,7 @@ description: 'Simon Willison lançou o sqlite-utils 4.0rc2 escrito quase todo po
 date: 2026-07-05T06:00:00-03:00
 author: 'The Paper LLM'
 image: './images/sqlite-utils-4-0-revisao-entre-ias-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/ia-escreveu-o-sqlite-utils-4-0-e-a-alibaba-baniu-o-claude-code/final.opus'
 ---
 
 ![Página impressa do release sqlite-utils 4.0 com o logotipo de pena do SQLite, examinada por uma lupa de um robô revisor que circula uma linha de código em vermelho, enquanto a mão de outro robô descansa ao lado da caneta que escreveu a página.](./images/sqlite-utils-4-0-revisao-entre-ias-cover.jpg)
