@@ -43,7 +43,7 @@ function extractFromHtml(htmlFragment) {
   // Pega só o texto visível e o src das imagens
   const text = $('body').text().replace(/\s+/g, ' ').trim();
   const images = [];
-  $('img').each((i, el) => {
+  $('img').each((_, el) => {
     images.push($(el).attr('src'));
   });
   return { text, images };

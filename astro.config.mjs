@@ -19,9 +19,9 @@
  */
 import { defineConfig } from 'astro/config';
 
+import { unified } from '@astrojs/markdown-remark';
 import pagefind from 'astro-pagefind';
 import sitemap from '@astrojs/sitemap';
-import { bundledLanguages } from 'shiki';
 
 function removeMarkdownHtmlComments() {
   return tree => {
@@ -57,7 +57,9 @@ export default defineConfig({
 
   // Configuracao do processador de Markdown (posts do blog sao .md)
   markdown: {
-    remarkPlugins: [removeMarkdownHtmlComments],
+    processor: unified({
+      remarkPlugins: [removeMarkdownHtmlComments],
+    }),
     shikiConfig: {
       // Tema que se assemelha ao legacy dark highlighter
       // theme: 'github-dark-high-contrast',

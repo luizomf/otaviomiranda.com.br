@@ -19,8 +19,9 @@
  *   O `schema: z.object(...)` define O QUE cada arquivo deve conter no frontmatter.
  *   Exportar `collections` e obrigatorio para o Astro registrar as colecoes.
  */
-import { z, defineCollection } from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 // Colecao "posts": cada .md em src/content/posts/ deve ter este frontmatter
 const postsCollection = defineCollection({
@@ -32,19 +33,16 @@ const postsCollection = defineCollection({
     title: z.string(),
     description: z.string(),
     date: z.coerce.date({
-      errorMap: () => ({
-        message: 'Frontmatter `date` is required and must be a valid date.',
-      }),
+      error: 'Frontmatter `date` is required and must be a valid date.',
     }),
     author: z
       .string({
-        required_error: 'Frontmatter `author` is required.',
-        invalid_type_error: 'Frontmatter `author` must be a string.',
+        error: 'Frontmatter `author` is required and must be a string.',
       })
       .trim()
       .min(1, 'Frontmatter `author` cannot be empty.'),
     image: z.string().optional(),
-    audio: z.string().url().optional(),
+    audio: z.url().optional(),
   }),
 });
 
