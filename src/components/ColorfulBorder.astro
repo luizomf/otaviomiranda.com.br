@@ -102,7 +102,7 @@ const { class: className } = Astro.props;
       justify-content: center;
       align-items: center;
 
-      > * {
+      > :global(*) {
         padding: clamp(var(--space-200), 3vw, var(--space-300))
           clamp(var(--space-400), 3vw, var(--space-900));
       }
