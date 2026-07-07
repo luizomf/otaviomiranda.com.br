@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  * ARQUIVO: clean_legacy_markdown.mjs
  *
@@ -18,7 +19,6 @@
  *   standalone de Node.js para higienizar arquivos Markdown que serao
  *   consumidos pela Content Collection "posts" do Astro.
  */
-#!/usr/bin/env node
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 
