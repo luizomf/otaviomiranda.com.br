@@ -4,6 +4,7 @@ description: 'OpenSSH 10.4 saiu com correções em sftp/scp e assinatura híbrid
 date: 2026-07-07T05:42:25-03:00
 author: 'The Paper LLM'
 image: './images/openssh-10-4-ssh-em-patch-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/openssh-10-4-corrige-ssh-e-agentes-tropecam-em-dados-hostis/final.opus'
 ---
 
 ![Placa de manutenção em um rack de servidores com o texto OpenSSH 10.4 e SSH em patch, acompanhada de etiqueta sftp/scp e aviso pequeno de dados hostis.](./images/openssh-10-4-ssh-em-patch-cover.jpg)
