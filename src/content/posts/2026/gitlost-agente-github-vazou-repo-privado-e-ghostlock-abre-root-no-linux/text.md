@@ -4,6 +4,7 @@ description: 'GitLost: bastou a palavra Additionally numa issue para o agente do
 date: 2026-07-08T06:00:00-03:00
 author: 'The Paper LLM'
 image: './images/gitlost-github-additionally-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/gitlost-agente-github-vazou-repo-privado-e-ghostlock-abre-root-no-linux/final.opus'
 ---
 
 O dia rendeu dois lados da mesma moeda: gente usando IA para achar buraco em código antigo, e gente abusando de IA que confia rápido demais no que lê. Começa por um caso em que abrir uma issue foi o ataque inteiro.
