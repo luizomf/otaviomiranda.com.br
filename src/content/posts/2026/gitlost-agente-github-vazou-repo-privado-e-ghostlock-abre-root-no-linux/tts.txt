@@ -1,0 +1,152 @@
+Uma issue fez o agente do "Git Hub" vazar um repositório privado, e um bug de quinze anos abre root no Linux.
+O dia rendeu dois lados da mesma moeda. De um lado, gente usando IA para achar buraco em código antigo.
+Do outro, gente abusando de IA que confia rápido demais no que lê.
+Começa por um caso em que abrir uma issue foi o ataque inteiro.
+Primeiro caso: a palavra "Additionally" fez o agente do "Git Hub" vazar um repositório privado.
+O "Git Hub" tem uma automação em que você descreve tarefas em Markdown e um agente executa. São os Agentic Workflows.
+A ideia é boa. Em vez de escrever um workflow cheio de YAML, você pede em texto e o agente cuida do resto.
+Por trás disso pode estar o Claude ou o Copilot fazendo o trabalho.
+O problema é o de sempre com agente. Ele lê texto e às vezes não distingue conteúdo para processar de ordem para obedecer.
+Os pesquisadores da Noma abriram uma issue num repositório público, com um texto preparado.
+O agente leu a issue como se fosse instrução. Foi até um repositório privado ao qual tinha acesso de leitura.
+Pegou o "README" de lá e colou como comentário público.
+Nenhuma senha, nenhum commit, nenhum acesso especial. Só uma issue, que qualquer pessoa pode abrir.
+O detalhe que dá arrepio é como o guardrail caiu.
+O modelo tende a recusar quando o pedido soa suspeito.
+Bastou emendar a instrução com um "Additionally", aquele e mais uma coisinha de quem já está no meio da conversa.
+Com isso ele parou de recusar e simplesmente continuou a tarefa.
+Uma palavra reenquadrou o pedido de "isso parece errado" para "beleza, próximo passo".
+A Noma divulgou isso ao "Git Hub" no dia seis de julho.
+A página deles não traz identificador C V E nem status final de correção, então esse pedaço fica em aberto.
+Faz par com o que comentamos ontem sobre agentes tropeçando em dados hostis.
+Lá era teoria e paper. Aqui é um leak concreto de repositório privado.
+Se você usa essa automação, a pergunta prática é onde a entrada não confiável encosta nas permissões do agente.
+Pode ser uma issue, um comentário ou um "README".
+Escopo de leitura cruzada entre repositórios é arma carregada quando o gatilho é texto que estranhos escrevem.
+A fonte deste bloco é a Noma Security.
+Segundo caso: o GhostLock, um bug de quinze anos que leva usuário comum a root no Linux em segundos.
+Enquanto isso, do lado humano da caça a bugs, apareceu o GhostLock.
+É o C V E dois mil e vinte e seis, quatro três quatro nove nove.
+É uma falha de use-after-free que estava no kernel Linux desde dois mil e onze, e ninguém tinha relido com atenção.
+Use-after-free é quando o kernel libera um pedaço de memória e continua usando o ponteiro que aponta para ele.
+É como beber de um copo que já foi lavado e guardado.
+Aqui isso mora no código de priority inheritance de futex.
+É uma peça que ajuda threads a não travarem umas às outras esperando um lock.
+O efeito prático assusta pela facilidade.
+Qualquer usuário logado na máquina vira root em torno de cinco segundos.
+E o exploit que os pesquisadores mediram acerta em noventa e sete porcento das vezes.
+Pior: ele também escapa de container.
+Ou seja, o processo que deveria estar preso na caixa consegue sair dela e mandar no host.
+É por isso que a prioridade não é o seu desktop pessoal, e sim as máquinas compartilhadas.
+Pense em VPS, runners de CI, qualquer caixa multi-tenant onde alguém sem privilégio já tem uma conta.
+Quem achou foi a Nebula Security, usando uma ferramenta de IA chamada VEGA.
+E o Google pagou noventa e dois mil, trezentos e trinta e sete dólares pelo achado, no programa kernelCTF.
+A nota é sete ponto oito, alta e não crítica, porque o atacante precisa já estar logado na máquina.
+Não há relato de exploração em massa por aí, mas o exploit é público.
+Tem uma pegadinha na correção que vale ouro.
+O bug foi corrigido em abril, só que o primeiro patch introduziu um bug de crash.
+Esse novo bug é o C V E dois mil e vinte e seis, cinquenta e três um seis seis.
+Então instalar um kernel corrigido não basta. Você quer a versão final, não o primeiro build que apareceu.
+E a distribuição do patch está desigual entre distros.
+Algumas versões de Ubuntu LTS ainda estavam em processo no começo de julho.
+Não é a primeira vez no mês que a mesma classe de bug volta.
+No dia quatro, o Bad Epoll fez papel parecido, por outro caminho do kernel.
+Código velho e muito usado continua sendo um bom lugar para procurar.
+As fontes são o The Hacker News e o NVD.
+Terceiro assunto: a engenharia de não perder um webhook, com fila, retry e idempotência.
+Muda o assunto e agora é arquitetura pura, daquelas que aparecem numa sexta à noite.
+Um artigo do Rupelio no TabNews conta a cena que todo mundo que integra pagamento já viveu.
+O cliente pagou, o gateway jura que mandou o webhook, e o seu sistema não registrou nada.
+Aí você fica debugando sistema distribuído no horário em que deveria estar longe do computador.
+O primeiro conserto é separar receber de processar.
+Quando o webhook chega, você grava o evento cru e responde com um duzentos na hora, sem fazer mais nada.
+O processamento pesado fica para um worker rodando por trás.
+Isso resolve um problema silencioso.
+Se você processa tudo na mesma requisição e demora, o remetente estoura o timeout, acha que falhou e reenvia.
+Aí vem a segunda dor, a duplicata.
+E aqui está a parte que mais gente erra.
+Para não processar o mesmo evento duas vezes, você precisa de idempotência.
+Ou seja, garantir que repetir a operação não muda o resultado.
+O truque é escolher a chave certa. Deduplique pelo id estável do recurso, o id do pedido ou da venda.
+E nunca deduplique pelo id da tentativa de entrega.
+Muitos gateways trocam o id do envelope a cada reenvio, então quem confia nele acha que é sempre um evento novo.
+Com o id do pedido gravado numa coluna com constraint unique, a duplicata nem entra no banco: o próprio banco recusa.
+O resto é higiene de fila. Se o processamento falha, você tenta de novo com backoff exponencial.
+A ideia é esperar cada vez mais entre as tentativas.
+Algo como um minuto, depois cinco, depois quinze, depois uma hora.
+O que estourar todas as tentativas cai numa dead-letter queue.
+É uma fila separada de não deu, alguém precisa olhar isso na mão, em vez de sumir.
+E guardar o payload completo de cada evento salva o seu domingo quando precisar reprocessar.
+O artigo fecha oferecendo uma ferramenta do próprio autor.
+Mas os padrões valem sozinhos, e você monta com fila, worker e banco que já usa.
+A fonte deste bloco é o TabNews, do Rupelio.
+Quarto assunto: o Slopfix, dez mil dólares por semana só para deletar código que a IA escreveu demais.
+Fecha o bloco principal com um serviço que é meio provocação, meio sintoma.
+A odra.dev vende um serviço chamado Slopfix.
+Por dez mil dólares, três engenheiros seniores passam uma semana encolhendo uma base de código que inflou nas mãos de IA.
+O número que eles citam é sair de algo como cem mil linhas para trinta e cinco mil, mantendo a mesma funcionalidade.
+A tese é que o agente, depois de um tempo, para de enxergar o todo e começa a duplicar.
+Por exemplo, quatorze formatadores de data que fazem quase a mesma coisa.
+Ou um mini framework caseiro que já existia pronto como biblioteca.
+O que me fez parar foi o preço por resultado.
+Eles cobram medindo linhas de verdade com o scc, contando só linhas que não são em branco nem comentário.
+E o contrato proíbe code golf, aquele truque de espremer código em uma linha ilegível só para o placar melhorar.
+Tem até conta de reembolso. Se prometem cortar cinquenta porcento e entregam vinte, você paga quarenta porcento da tarifa.
+No fim eles devolvem a base menor com um arquivo "CLAUDE" ponto M D, regras de lint e checks de CI.
+A ideia é que o problema não volte sozinho na semana seguinte.
+E não é discurso anti-IA, o que seria fácil e chato.
+Eles próprios usam Claude Code no trabalho, só que com coleira muito curta, como descrevem.
+É a continuação natural de uma conversa que tivemos no dia cinco.
+Naquele dia, a IA escreveu o sqlite-utils e outra IA revisou.
+Escrever código deixou de ser o gargalo.
+E impedir que a base desabe sob o próprio peso virou trabalho que dá para cobrar caro.
+Se isso vira mercado de verdade ou fica como serviço de nicho, dá para observar nos próximos meses.
+A fonte deste bloco é a odra.dev.
+Agora, os destaques rápidos para hoje.
+A CISA marcou quatro falhas como exploradas, e a que interessa a quem roda agente é a do Langflow.
+Três delas são nota dez: Adobe ColdFusion, Joomlack e JoomShaper SP Page Builder.
+Mas a que vale o seu tempo é o C V E dois mil e vinte e seis, cinquenta e cinco dois cinco cinco, do Langflow.
+A nota dele é seis ponto um, e o problema é este.
+Um usuário autenticado consegue rodar o flow de outro tenant só informando o id do flow da vítima.
+Plataforma de agente guarda mais segredo do que a máquina onde ela roda, como chave de L L M e credencial de cloud.
+Então trate como cofre e aplique o patch. A fonte é o The Hacker News.
+Roteadores Tenda têm uma senha secundária embutida no firmware, e não há patch.
+Vários modelos, depois que o login normal falha, aceitam uma segunda senha guardada em texto puro no próprio firmware.
+Isso é um backdoor literal, embutido de fábrica.
+Não tem correção porque o fabricante não foi localizado, então a mitigação é de rede: isolar e segmentar o aparelho.
+Serve de lição sobre por que caminho de autenticação secundário embutido é um anti-pattern.
+A fonte deste ponto é o CERT slash CC.
+Alguém escreveu um backend de Clang e portou Doom para uma VM de bytecode caseira.
+O autor usou o Claude para gerar um parser de I R textual em uns vinte minutos.
+E o port do Doom ficou de pé em pouco mais de uma hora.
+A parte que os números contam bem é a otimização, de vinte e sete para oitenta e seis fps.
+Esse ganho veio do trabalho de design humano, não do boilerplate.
+A IA acelerou a parte mecânica, mas o ganho real seguiu manual.
+A fonte é o Pointers Gone Wild.
+O PDU lê os arquivos do PostgreSQL direto para resgatar dados quando o servidor não sobe.
+PDU quer dizer PostgreSQL Data Unloader.
+Ele abre os arquivos de heap e TOAST na unha para reconstruir os metadados.
+E ainda puxa linhas deletadas dos registros de WAL, o log de escrita do banco, mesmo com o servidor sem iniciar.
+É ferramenta de recuperação offline e open source.
+É o tipo de coisa que você espera nunca precisar, e agradece existir no dia que precisa.
+A fonte deste ponto é o PostgreSQL News.
+Para fechar, o acompanhamento de tendências do dia.
+Se você juntar as histórias de hoje, a IA aparece nos dois lados da mesa de segurança.
+De um lado, ela ajudou a Nebula a achar o GhostLock, um bug que dormia no kernel há quinze anos.
+Do outro, o GitLost mostra que agente que confia no texto que lê é uma superfície de ataque nova.
+A mesma capacidade que draga bug antigo também obedece a uma issue maliciosa.
+E tem um terceiro fio nessa linha, que precisa de cuidado na hora de contar.
+Circula a ideia de que agentes de código alucinam nomes de pacote e de repositório.
+E que atacantes registram esses nomes antes, para plantar código malicioso.
+A família do ataque é real e tem nome: slopsquatting, ou phantom squatting, reportada por mais de um veículo.
+Já houve caso concreto de pacote alucinado se espalhando.
+A ação prática cabe num aviso simples.
+Não deixe o agente clonar ou instalar automaticamente aquele repositório em alta que ele sugeriu.
+Confira o owner e o caminho exatos antes.
+E aqui o cuidado é com os números.
+Uma reportagem recente citou percentuais chamativos e nomes de instituições ligados a uma variante desse ataque.
+Mas a fonte primária ficou inacessível, e essas cifras específicas não deram para confirmar em nenhuma fonte alcançável.
+Então trate a tendência como real e verificada.
+E trate os números específicos como confira antes de repetir no ar.
+A postura chata aqui é a correta.
+As fontes da tendência são o The Hacker News e o Cybernews.
