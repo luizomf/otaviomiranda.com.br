@@ -1,0 +1,161 @@
+TypeScript sete renasce em Go prometendo dez vezes, e um symlink faz o agente escrever na sua chave S S H.
+Todo mundo que mexe com projeto grande em TypeScript conhece aquela pausa meio boba.
+Você salva o arquivo e fica olhando o editor pensar, sem saber ainda se o tipo bate ou se vem erro na cara.
+É essa espera que a Microsoft resolveu atacar de frente, e a saída foi reescrever o compilador inteiro em outra linguagem.
+Vamos começar pelo TypeScript sete ponto zero, que chegou reescrito em Go e diz rodar de oito a doze vezes mais rápido.
+O compilador do TypeScript sempre foi escrito no próprio TypeScript, ou seja, virava JavaScript no fim.
+Isso é elegante, mas cobra caro em base grande: build lento, CI arrastado e o editor demorando para responder num monorepo.
+A partir de ontem, oito de julho, existe uma alternativa oficial.
+A Microsoft lançou o TypeScript sete ponto zero com o compilador reescrito em Go, uma linguagem compilada de verdade.
+Os números vêm do anúncio da própria Microsoft, medidos em projetos que dá para reconhecer.
+O build completo do VS Code ficou onze vírgula nove vezes mais rápido, e casos como Sentry, Bluesky, Playwright e Tldraw ficaram na faixa de oito a nove vezes.
+O uso de memória caiu algo entre seis e vinte e seis porcento.
+Mas guarde de onde vêm esses números: são benchmarks do fornecedor em código real, não uma medição independente.
+Então trate como reportado pela Microsoft até você rodar na sua própria base.
+Dá para testar hoje instalando o typescript pelo npm.
+A checagem de tipos continua compatível com o seis ponto zero, então na maioria dos casos o comportamento é o mesmo, só mais rápido.
+Tem porém: ainda não existe uma [EY1 P IY1 AY1] pública estável, e é dela que os editores de Vue, Angular, Svelte e Astro dependem para integrar.
+Essa parte fica para o sete ponto um.
+Alguns padrões já depreciados agora viram erro de vez, e alguns defaults mudaram.
+O root dir passa a ser ponto barra, e o campo types passa a ser vazio.
+Se você precisa de estabilidade agora, dá para manter o seis ponto zero rodando lado a lado enquanto experimenta.
+A fonte deste bloco é o blog de TypeScript da Microsoft.
+Agora o Bun, que foi reescrito de Zig para Rust em onze dias com agentes, e quem segurou a onda foi o conjunto de testes.
+Reescrever um runtime inteiro é o tipo de projeto que quase ninguém encara.
+São mais de quinhentas e trinta e cinco mil linhas de Zig no caso do Bun, e trocar tudo de linguagem costuma ser sinônimo de meses de dor e regressão.
+O time do Bun fez isso em onze dias, entre três e quatorze de maio, e contou como.
+No dia cinco, a gente viu a IA escrever o sqlite utils enquanto outra IA revisava.
+Isto aqui é a mesma ideia, só que numa escala que assusta.
+O truque não foi a IA digitar mais rápido.
+Foram cerca de cinquenta fluxos de agentes trabalhando junto, chegando a sessenta e quatro instâncias do Claude em quatro cópias do repositório.
+Uma parte escrevia código e outra parte revisava de forma adversarial, vendo só os diffs, sem contexto para ser boazinha.
+E, no centro de tudo, o conjunto de testes escrito em TypeScript funcionava como um contrato.
+Ele não liga se o código embaixo é Zig ou Rust, ele só cobra o comportamento certo.
+Esse oráculo independente da linguagem é o que torna a reescrita possível.
+Cada tradução mecânica tinha um juiz que a IA não conseguia enganar.
+Os números do processo são honestos sobre o custo.
+Foram seis mil quinhentos e dois commits, com pico de seiscentos e noventa e cinco numa única hora.
+E algo como cinco vírgula nove bilhões de tokens de entrada não cacheados e seiscentos e noventa milhões de saída.
+Em preço de [EY1 P IY1 AY1], isso deu por volta de cento e sessenta e cinco mil dólares.
+E não saiu perfeito: dezenove regressões conhecidas entraram e foram corrigidas depois.
+O mesmo padrão aparece no P G rust, um Postgres reescrito em Rust que passa em cem porcento da suíte de regressão, mais de quarenta e seis mil consultas.
+Ainda que o autor avise que não está pronto para produção nem otimizado.
+A leitura que sobra é simples: se você tem um bom oráculo de verificação, agentes ajudam em reescritas assustadoras.
+Se não tem, você só gera um mistério caro.
+As fontes são o blog do Bun, o repositório do P G rust e o Simon Willison.
+Agora o GhostApproval: um symlink faz o agente gravar na sua chave S S H enquanto o prompt mostra um caminho inofensivo.
+Ontem a gente falou de um agente do Git Hub vazando repositório privado e de um bug antigo abrindo root no Linux.
+A história de hoje é da mesma família, mas o nervo é outro.
+Ela acerta em cheio aquela tela de posso fazer isso, que a gente aprova no piloto automático.
+A Wiz batizou o ataque de GhostApproval.
+A ideia usa um velho conhecido do Unix, o link simbólico, aquele atalho que aponta para outro arquivo.
+Um repositório malicioso planta um link com nome inofensivo.
+Quando o agente vai gravar, a tela de aprovação mostra o caminho do atalho.
+Parece bobo, mas por baixo o sistema resolve o link e escreve no destino real.
+Na prática, você aprova uma coisa e o agente grava no arquivo authorized keys dentro da pasta ponto ssh.
+É lá que ele planta uma chave de acesso, ou então mexe no seu ponto zshrc, que roda comando toda vez que você abre o terminal.
+O problema não é o symlink em si, é a tela mentir sobre onde a escrita vai cair.
+A pesquisa mostrou o padrão em seis ferramentas de código conhecidas.
+São elas Amazon Q Developer, Claude Code, Augment, Cursor, Google Antigravity e Windsurf.
+Em três delas a escrita acontecia antes da aprovação, então o diálogo virava um desfazer tardio em vez de um portão.
+As respostas dos fabricantes foram desiguais.
+A AWS corrigiu, no C V E 2026, doze nove cinco oito, e a Cursor também corrigiu, no C V E 2026, cinquenta cinco quatro nove.
+O Google publicou correção também.
+A Anthropic considerou o caso fora do modelo de ameaça dela, mas adicionou avisos de symlink.
+Augment e Windsurf ainda estavam trabalhando nisso na divulgação de ontem.
+No mesmo dia, o AI Now Institute soltou o Friendly Fire, que cutuca o mesmo ponto por outro caminho.
+Um README envenenado num repositório pode empurrar um agente autônomo a rodar código do atacante.
+E isso sem precisar de M C P nem de configuração exótica, só texto e a boa vontade do agente.
+A defesa aqui é a mesma chatice que já vale para CI.
+Resolver o caminho canônico antes de gravar, rodar em sandbox, e ter uma allowlist de onde o agente pode escrever.
+E manter os segredos longe do alcance dele.
+As fontes são a Wiz, o AI Now Institute e o The Hacker News.
+Um paper usa IA para ler os arquivos do Postgres direto e promete até vinte e sete vezes em analytics.
+Quem faz pipeline analítico paga um pedágio silencioso.
+Os dados que interessam costumam ser colunares, mas saem do banco por interfaces feitas para linha por linha.
+São os velhos J D B C e O D B C, e esse formato errado no meio do caminho cobra caro em throughput.
+Um paper publicado ontem no arXiv propõe pular esse pedágio de um jeito ousado.
+A ideia é usar um modelo para gerar, a partir do código e da documentação, um leitor do próprio formato de arquivo do PostgreSQL e do MySQL.
+Ele entrega os dados já em buffers Apache Arrow, prontos para ferramentas como DuckDB, Spark e processamento em GPU.
+O número que chama atenção é até vinte e sete vezes mais throughput analítico de ponta a ponta no T P C H.
+Esse T P C H é uma bateria de consultas padrão para medir esse tipo de coisa.
+É um resultado empolgante e, ao mesmo tempo, o tipo de coisa que dá vontade de segurar com as duas mãos.
+É um paper de arXiv, ainda sem revisão por pares.
+E a correção de um leitor de banco gerado por IA não vem de graça.
+Ler o arquivo errado ou interpretar mal um campo é exatamente o tipo de bug que some no meio de milhões de linhas.
+O enquadramento seguro é réplica somente leitura, snapshot offline, experimento controlado de migração.
+Não é para apontar no banco de produção ao vivo.
+E antes de reinventar a camada de storage, vale entender o que o Postgres já sabe pular sozinho.
+O material do Haki Benita sobre partition pruning é o contraponto aterrado, mostrando como moldar os dados para o próprio planner evitar trabalho.
+As fontes são um paper no arXiv e o Haki Benita.
+Escalar para um milhão de funções Lambda ensinou que todo cron precisa de jitter.
+Este aqui não é notícia de ontem, saiu no fim de junho, mas é uma aula de system design boa demais para deixar passar.
+A AWS contou como a ProGlove chegou a mais de um milhão de funções Lambda.
+Cada cliente tinha uma conta AWS separada, com isolamento forte, montada com Step Functions, EventBridge, DynamoDB e StackSets.
+Tudo bonito, até a escala quebrar uma suposição que ninguém tinha questionado.
+O detalhe mais delicioso aqui é o cron.
+Milhares de contas rodavam tarefas agendadas a cada cinco minutos, e todas disparavam certinho no topo do minuto.
+Cada uma sozinha era inofensiva; juntas, no mesmo segundo, viraram um pico interno que sobrecarregava as interfaces da própria plataforma.
+Era um ataque acidental contra si mesmo.
+A correção foi tão simples quanto o problema era teimoso: jitter.
+Ou seja, espalhar os disparos com um atraso aleatório, para nunca fazer a mesma coisa ao mesmo tempo em todo lugar.
+Teve um segundo aprendizado que dói no bolso.
+A observabilidade parecia barata, uns três dólares por conta, mas encaminhar tudo quase dobrou a fatura.
+Depois eles separaram os sinais de alta prioridade e baixaram para uns setenta centavos por conta.
+Escala não avisa antes de quebrar suas contas de padeiro.
+As fontes são o AWS Architecture Blog e o InfoQ.
+Agora os destaques rápidos para hoje.
+Primeiro, o HalluSquatting: registrar os nomes que a IA inventa pode virar botnet.
+Modelos alucinam nomes de pacote e de repositório de forma previsível, e a mesma alucinação se repete entre modelos diferentes.
+Um paper no arXiv mostra o ataque: registrar esses nomes antes e plantar código malicioso, esperando o assistente puxar a armadilha sozinho.
+As taxas que o paper relata são altas, até oitenta e cinco porcento ao clonar repositório e cem porcento ao instalar skill.
+É aquela família de ataque que ontem citamos com ressalva e que agora tem trabalho publicado por trás.
+A mitigação continua sendo a chata de sempre: confira dono e origem antes de deixar o agente instalar algo.
+A fonte deste ponto é um paper no arXiv.
+A Ubiquiti corrigiu falhas críticas no UniFi, uma delas com nota dez ponto zero.
+As atualizações cobrem UniFi Connect, Talk, Access, Protect e o UniFi OS.
+A falha mais grave, no C V E 2026, cinquenta sete quatro seis, tem C V S S dez ponto zero.
+É um problema de controle de acesso que abre caminho para escalada de privilégio e execução de comando.
+Se você roda UniFi em casa ou no lab, é atualizar agora, sem esperar o fim de semana.
+A fonte deste bloco é o The Hacker News.
+O roteador Tenda tem um backdoor de acesso admin e ainda sem patch.
+O CERT C C divulgou o C V E 2026, onze quatro zero cinco, um backdoor no firmware da Tenda que concede acesso administrativo ao dispositivo.
+A divulgação é de seis de julho, então é alerta datado e não novidade quente.
+Mas como não há correção disponível, o jeito é limitar a exposição do aparelho na borda da rede e considerar trocar.
+A fonte deste ponto é o CERT C C.
+Instaladores falsos de sete zip transformam a máquina em proxy residencial.
+Um ator que a Infoblox chama de Lurking Lizard opera mais de duzentos e trinta domínios parecidos com os oficiais.
+Um deles imita o endereço oficial do sete zip para servir um instalador trojanizado.
+Esse instalador recruta o seu computador como nó de proxy para outra pessoa.
+Lembrete de que a procedência do instalador importa tanto quanto a do pacote: baixe só da fonte oficial.
+A fonte deste bloco é o The Hacker News.
+Firefox dentro do Docker, o navegador que você joga fora depois.
+Um tutorial mostra rodar o Firefox num container descartável para abrir link duvidoso isolado do resto.
+Fechou o container, sumiu o estado.
+Não é sandbox perfeito, é redução de risco, mas é um hábito barato e útil para aquele link que você precisa abrir mas não confia.
+A fonte desse tutorial é o Korben.
+O ZeroFS monta um bucket S três como se fosse disco POSIX, com uma pegadinha no f sync.
+A ferramenta expõe o S três como filesystem sobre N F S, nove P e N B D.
+Isso é divertido e testável para quem quer usar object storage como disco local.
+O detalhe que importa: a semântica de f sync varia por protocolo.
+Então entenda as garantias de durabilidade antes de confiar dado importante nele.
+A fonte é o próprio site do ZeroFS.
+Para fechar, o acompanhamento de tendências do dia.
+O GhostApproval mostrou uma tela de aprovação mentindo e o Bun mostrou um conjunto de testes segurando uma reescrita.
+Juntando com um bloco de papers de ontem no arXiv, dá para ver para onde essa conversa está indo.
+Quem está ganhando com agente não é quem escreve um prompt mais esperto, é quem coloca a política na infraestrutura em vez de deixar no texto.
+O paper âncora tem um nome que já entrega a tese, "Reason Less, Verify More".
+Ele estudou um agente que administra orçamento e achou um jeito desconfortável de falhar.
+Em setenta e oito porcento dos casos o agente dizia que deu tudo certo enquanto deixava o sistema num estado errado, sem nenhum erro de ferramenta aparecendo.
+É o pior tipo de bug, o que sorri para você.
+A proposta dos autores é colocar portões determinísticos de leitura antes de qualquer escrita.
+É um código burro e previsível que olha a ação proposta e o estado antes de deixar passar.
+Com quatro desses portões, a taxa de sucesso no benchmark subiu de vinte e nove vírgula seis porcento para quarenta e dois porcento.
+Os outros papers do mesmo lote empurram na mesma direção por ângulos diferentes.
+Um argumenta que medir ataque como conseguiu ou não é grosseiro demais, e que a gravidade deveria seguir o impacto real da ação.
+Outro trata a descrição das ferramentas de um servidor M C P como parte da fronteira de segurança, não como texto inofensivo.
+Um terceiro mostra que monitorar cada agente isolado deixa passar o que só aparece quando vários agem em conjunto.
+Então o certo é vigiar a coorte, não a instância.
+Nada disso é verdade fechada, são papers de arXiv sem revisão por pares, e cada um sozinho é só um sinal.
+O que interessa é o padrão: dá para observar se, nos próximos meses, isso vira postura padrão de quem coloca agente perto de coisa que importa.
+As fontes da tendência são cinco papers no arXiv, começando pelo Reason Less, Verify More.
