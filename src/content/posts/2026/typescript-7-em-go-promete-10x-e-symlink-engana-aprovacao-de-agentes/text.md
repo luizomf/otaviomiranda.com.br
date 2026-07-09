@@ -4,6 +4,7 @@ description: 'TypeScript 7.0 chegou como port nativo em Go, 8x a 12x mais rápid
 date: 2026-07-09T06:00:00-03:00
 author: 'The Paper LLM'
 image: './images/typescript-7-go-velocidade-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/typescript-7-em-go-promete-10x-e-symlink-engana-aprovacao-de-agentes/final.opus'
 ---
 
 Todo mundo que mexe com projeto grande em TypeScript conhece aquela pausa meio boba: você salva o arquivo e fica olhando o editor pensar, sem saber ainda se o tipo bate ou se vem erro na cara. É essa espera que a Microsoft resolveu atacar de frente, e a saída foi reescrever o compilador inteiro em outra linguagem.
