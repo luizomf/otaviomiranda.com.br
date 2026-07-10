@@ -1,0 +1,221 @@
+O botão ultra da GPT cinco ponto seis, o harness aberto da Cloudflare e um modelo de 744 bilhões rodando num laptop.
+
+Quem já deixou dois ou três agentes rodando ao mesmo tempo sabe que a parte chata nunca foi o modelo em si.
+É a gambiarra em volta: abrir um tmux, picar a tarefa em pedaços, torcer para um agente não pisar no outro.
+E ainda ficar de babá para nenhum deles travar no meio do caminho.
+Pois a novidade de ontem é que a OpenAI pegou esse trabalho manual e transformou num botão.
+
+A OpenAI lançou a família GPT cinco ponto seis e pôs o multi-agente num botão chamado ultra.
+A OpenAI lançou ontem, dia 9, a GPT cinco ponto seis em três modelos com nome de corpo celeste.
+Sol no topo, Terra no meio e Luna como o barato e rápido.
+O preço acompanha a hierarquia, contado por milhão de tokens.
+O Sol sai a cinco dólares na entrada e trinta na saída.
+O Terra fica em dois dólares e cinquenta na entrada e quinze na saída, e o Luna desce para um e seis.
+Quem usa a [EY1 P IY1 AY1] em produção vai sentir essa escada no boleto.
+Agora dá para escolher o modelo pelo custo da tarefa em vez de pagar o topo para tudo.
+
+Mas o que interessa para quem vive de agente é o modo ultra.
+Em vez de você abrir vários processos na mão, o ultra coordena subagentes em paralelo sozinho.
+É como um nível de esforço a mais que você liga quando a tarefa pede.
+Aquela orquestração que era gambiarra virou configuração.
+Junto disso, o Codex e o ChatGPT viraram um app único de desktop, com diff inline e revisão de P R ali dentro.
+E veio também um agente batizado de ChatGPT Work.
+Já chegou disponível no ChatGPT, no Codex, na [EY1 P IY1 AY1] e no Git Hub Copilot desde ontem.
+
+A OpenAI diz que a GPT cinco ponto seis bate a concorrência num punhado de benchmarks.
+Um deles com nota bem acima da do Claude Fable cinco, e a um quarto do custo em alguns testes.
+São números de lançamento, medidos pela própria casa no dia do anúncio.
+Vale esperar avaliação independente antes de tratar isso como placar final.
+Propaganda de estreia costuma escolher bem a régua.
+As fontes deste bloco são a OpenAI, o Help Center da OpenAI e o Git Hub.
+
+A Cloudflare abriu o harness de vulnerabilidade que caça bug com um modelo e usa outro para desconfiar.
+Se a OpenAI escondeu a orquestração atrás de um botão, a Cloudflare fez o contrário e mostrou o harness inteiro por dentro.
+Harness, aqui, é isso: todo o encanamento que fica em volta do modelo, o loop, o controle de estado, as regras.
+É o que faz o agente trabalhar sem se perder.
+Um aviso de data: esse texto não é de hoje, saiu em 18 de junho e voltou a circular agora.
+É planta de arquitetura mais do que manchete, e vale justamente por isso.
+
+O objetivo era caçar vulnerabilidade em código com um monte de agentes de L L M.
+Só que sem afogar todo mundo em falso positivo.
+Eles separaram o trabalho em dois estágios.
+Primeiro, um harness de descoberta com vários agentes em paralelo, cada um cuidando de uma parte.
+Reconhecimento, caça, rastreio e relatório, rodando em 128 repositórios.
+Depois, e essa é a sacada, um segundo sistema de validação rodando em outro modelo, cujo trabalho é só desconfiar.
+Ele age como cético e derruba o que o primeiro achou que era bug.
+
+A disciplina em volta é o que vale copiar.
+Cada agente é mantido abaixo de vinte e cinco porcento da janela de contexto, para não ficar bobo de tanta informação.
+Todo o estado sai da cabeça do modelo e vai para um banco SQLite, com chave por execução, repositório e etapa.
+E nenhuma descoberta conta como bug de verdade sem uma prova de conceito que funcione contra o código original.
+O exploit é detonado num sandbox isolado, com o unshare do Linux.
+Nada de patch entrando sozinho: um humano revisa antes do merge.
+
+O funil deles é honesto sobre o tamanho do desperdício que isso corta.
+Foram cerca de vinte mil setecentos e noventa e nove candidatos.
+A validação reduziu esse total para uns doze mil e cinquenta e sete.
+Chegando a sete mil duzentos e quarenta e cinco achados de fato acionáveis, depois de remover cinco mil quatrocentos e quarenta e dois duplicados.
+A taxa de rejeição logo na entrada caiu de quarenta porcento para onze.
+E a skill inicial que dá o pontapé nisso está aberta no Git Hub.
+Dá para começar a brincar com a receita em vez de só admirar de longe.
+As fontes são a Cloudflare e o repositório security-audit-skill da Cloudflare no Git Hub.
+
+O npm doze desliga os install scripts por padrão para fechar a porta dos ataques de supply chain.
+Depois de um ano inteiro apanhando de ataque de cadeia de suprimentos, o npm resolveu fechar a porta mais escancarada que existia.
+Na versão doze, os install scripts passam a vir desligados por padrão.
+Traduzindo: aqueles scripts que rodavam sozinhos durante o npm install.
+O preinstall, o install, o postinstall e a compilação automática via node gyp não executam mais sem a sua permissão explícita.
+
+A mudança parece pequena e é enorme, porque era justamente esse o buraco.
+Uma única dependência comprometida lá no fundo da árvore, daquelas que você nem sabe que instalou.
+Ela ganhava o direito de rodar comando arbitrário na sua máquina e no runner de C I, no momento do install.
+Quase todo grande ataque de supply chain no npm dos últimos tempos passou por aí.
+De quebra, dependências vindas de git e de U R L remota também viram opt-in.
+E os tokens de acesso granular foram depreciados.
+
+Tem um preço prático nisso, e é bom saber antes de atualizar: build que depende de verdade desses scripts vai quebrar.
+Quem mantém projeto com node gyp ou com um postinstall legítimo vai precisar rodar o comando npm approve dash scripts.
+Aí é revisar a lista, aprovar só o que confia e commitar o package ponto JSON com essa decisão registrada.
+É trabalho a mais, mas é o tipo de chateação que a gente devia estar fazendo desde sempre.
+As fontes são o The Hacker News e o SecurityWeek.
+
+O Colibri faz um modelo de 744 bilhões de parâmetros rodar, devagar, num laptop sem G P U.
+Alguém pegou o GLM cinco ponto dois, um modelo de 744 bilhões de parâmetros, e fez ele rodar num laptop comum.
+Isso sem G P U e sem Python na hora de rodar.
+O projeto se chama Colibri e cabe num único arquivo em C, de umas duas mil e quatrocentas linhas.
+É o velho será que roda levado ao limite, com um modelo de fronteira se arrastando para funcionar em hardware de gente normal.
+
+O truque tem nome e é uma boa aula de arquitetura.
+Esse modelo é um Mixture of Experts, o que significa que ele não usa todos os 744 bilhões de parâmetros a cada palavra.
+Só uns quarenta bilhões disparam de fato por token.
+Então o Colibri mantém na RAM apenas as partes densas, que estão sempre em uso.
+São uns dezessete bilhões de parâmetros comprimidos a quatro bits, ocupando por volta de dez gigabytes.
+O resto, os cerca de vinte e um mil especialistas que somam uns 370 gigabytes, fica guardado no S S D e entra sob demanda, só quando aquele token precisa.
+Um cache que descarta o menos usado, mais o cache de página do próprio sistema operacional, seguram o rojão.
+
+Só que tem um porém grande, e o próprio autor é honesto quanto a ele: é lento.
+O gargalo não é a C P U, é o disco.
+A frio, a coisa anda a uns zero vírgula zero cinco a zero vírgula um token por segundo.
+Isso é praticamente ver o texto nascer letra por letra.
+Um M cinco Max de 128 gigabytes da comunidade chegou perto de um token por segundo, bem melhor, mas ainda longe de confortável.
+E tem um detalhe que costuma sumir na empolgação: comprimir o modelo para quatro bits mexe na qualidade das respostas.
+E ninguém mediu direito quanto se perde.
+É prova de conceito, não setup de produção.
+Serve para entender por que Mixture of Experts, mais streaming de disco, muda o que rodar localmente quer dizer.
+A fonte deste bloco é o Colibri no Git Hub.
+
+A Grab migrou um data lake de petabytes do Hive para o Apache Iceberg, e uma consulta caiu de setenta segundos para seis.
+Um caso de engenharia com números que ensinam.
+A Grab, aquela de mobilidade e entregas do Sudeste Asiático, contou como migrou um data lake de petabytes do Hive para o Apache Iceberg.
+Se esses nomes soam distantes, a dor por trás é bem concreta.
+
+O problema antigo era o Hive Metastore, o catálogo que diz onde cada pedaço de dado mora.
+Ele tinha virado um ponto único de falha, e o custo de listar arquivos crescia junto com o número de consultas simultâneas.
+Pior: milhares de arquivos minúsculos, abaixo de um megabyte, faziam o sistema pagar caro em chamadas ao armazenamento.
+E o catálogo vivia saindo de sincronia com o que estava de fato no disco.
+O Apache Iceberg é um formato de tabela que ataca isso trazendo escrita atômica, em que a mudança acontece inteira ou não acontece.
+E traz também um jeito de pular dados que a consulta nem precisa ler.
+
+Os ganhos vieram medidos, e é aqui que fica bom.
+Uma consulta de navegação que levava setenta segundos caiu para seis, umas dez vezes mais rápida.
+Isso usando Z-ordering e data skipping, que é organizar os dados de um jeito que a consulta consiga ignorar blocos inteiros.
+Uma tabela muito consultada cortou até noventa e cinco porcento do custo diário de chamadas ao armazenamento, sem mexer numa linha das consultas.
+E um job de análise de funil passou a usar metade do cluster.
+Eles ainda abriram o UnifiedSparkCatalog, uma camada que esconde Iceberg, Delta, Hudi e Hive atrás de uma interface só.
+Não foi troca de tudo de uma vez, foi migração seletiva, começando pelas tabelas de maior valor.
+E no caminho tiveram que resolver chateação de verdade, como travas fantasma no metastore antigo.
+A fonte deste bloco é o Grab Engineering.
+
+Agora os destaques rápidos de hoje.
+
+O autoresearch de Karpathy trata coding agêntico como projeto de loop, não como caça ao prompt perfeito.
+Andrej Karpathy publicou um esqueleto onde o agente lê um spec, o arquivo program ponto M D, e edita um único arquivo.
+Ele roda um orçamento fixo de cinco minutos, mede uma métrica objetiva e mantém a mudança só se ela melhorar, revertendo se não.
+Roda a noite toda, uns doze experimentos por hora.
+Projetar bem esse loop, com meta clara, arquivo mexível, métrica objetiva e regra de aceitar ou reverter, passou a valer mais que caçar o prompt perfeito.
+E o mesmo molde serve para tamanho de bundle, testes e gate de segurança.
+A fonte deste destaque é o repositório autoresearch de Karpathy no Git Hub.
+
+O barebrowse dá a um agente local um navegador de verdade sem Playwright.
+Em vez de subir um browser controlado à parte, ele dirige o Chrome que você já tem instalado, pelo protocolo de DevTools.
+E, no lugar de despejar o H T M L cru na cara do modelo, manda uma árvore de acessibilidade podada.
+O autor relata corte de quarenta a noventa porcento nos tokens.
+É o tipo de economia que faz diferença para quem roda modelo local com Ollama.
+A fonte deste destaque é a comunidade LocalLLaMA no Reddit.
+
+O Pangolin um ponto vinte ganhou um novo lançador de recursos e uma paleta de comandos global.
+É um reverse proxy zero-trust que você mesmo hospeda, misturando ideias de Cloudflare Tunnel e Tailscale.
+Serve para expor serviço interno com segurança sem depender de SaaS de túnel.
+Nada crítico nessa versão, só mais ergonomia para quem cuida do acesso remoto ao próprio VPS.
+A fonte deste destaque é o Linuxiac.
+
+O GitLake leva a semântica do Git para dentro do lakehouse inteiro.
+A ideia é dar commit, branch e merge atômico não a uma tabela só, mas a todo o conjunto de dados.
+Assim um agente trabalha num branch isolado e um humano revisa antes de um merge tudo-ou-nada.
+É pesquisa que apareceu numa conferência forte de banco de dados, não produto pronto, mas casa com a ideia de revisar antes de misturar.
+Não confundir com o GitLost de dois dias atrás: nome parecido, história completamente diferente.
+A fonte deste destaque é o arXiv.
+
+Um sistema de docs no próprio repositório trata o arquivo AGENTS como roteador, não como despejo.
+A proposta é simples e boa: em vez de encher o AGENTS de tudo e afogar o modelo, deixe ele só apontar para uma pasta de documentação.
+Com uma regra dura de que docs e código precisam bater no mesmo pull request.
+É um jeito enxuto de dar contexto durável ao Claude Code sem inchar a janela nem deixar a doc envelhecer.
+A fonte deste destaque é um Gist no Git Hub.
+
+O Bob, da I B M, cresceu de assistente de código para orquestrador de vários agentes.
+Ignore a parte de mainframe e fique com o padrão: ele usa subagentes que isolam a exploração.
+Assim a bagunça de vasculhar o código não suja a janela de contexto principal.
+É a mesma higiene de contexto que aparece em várias ferramentas hoje, e dá para roubar em qualquer stack.
+A fonte deste destaque é o InfoWorld.
+
+A Ello jogou fora o loop padrão de tool-call para não deixar uma criança de cinco anos no vácuo.
+O tutor de I A em tempo real deles esbarrou num problema de latência.
+O ciclo normal de observar e então agir deixava três a quatro segundos de silêncio, insuportável numa conversa falada com criança.
+A saída foi construir um harness próprio que transmite várias ações enquanto um interpretador executa cada uma no meio da geração.
+É um caso concreto de quando vale ser dono do próprio loop em vez de aceitar o de fábrica.
+A fonte deste destaque é a Ello.
+
+Um Nextcloud vazou mais de 367 mil arquivos por um Elasticsearch mal configurado.
+O boletim de segurança da Risky Business juntou um golpe viral de e-rickshaws sem autenticação na Índia com esse vazamento.
+E a lição para quem faz self-host é a de sempre, só que dolorida: serviço exposto sem autenticação continua vazando dado em massa.
+Se você auto-hospeda, vale conferir hoje se o seu Elasticsearch não está aberto para o mundo.
+A fonte deste destaque é a Risky Business.
+
+O Cpp2Rust promete traduzir C mais mais para Rust seguro automaticamente, mas ainda para no hello-world.
+A técnica embrulha ponteiros crus num tipo checado em tempo de execução e tem peso acadêmico, com paper numa conferência forte de compiladores.
+Bom papo para a turma do reescreve em Rust, desde que com o pé atrás.
+Os exemplos públicos não passam de coisas triviais, então é protótipo de pesquisa, não ferramenta para apontar no seu código de verdade.
+A fonte deste destaque é o Cpp2Rust no Git Hub.
+
+O Linux Mint agora considera o Wayland estável, com chegada prevista por volta do Natal.
+As duas sessões continuam suportadas e o X onze segue como padrão, então ninguém é empurrado para a troca.
+É aquele ritmo devagar-e-correto que a turma de desktop Linux gosta, e dá para acompanhar sem pressa.
+A fonte deste destaque é o It's FOSS.
+
+Para fechar, o acompanhamento de tendências do dia.
+Faz um tempo que esse papo circula, e no dia 7 a gente já puxava esse fio.
+O segredo do agente não está tanto no modelo, e sim na estrutura em volta dele.
+Hoje o assunto parou de ser previsão e tomou conta do dia.
+Colocando as notícias lado a lado, quase todas contam a mesma história por ângulos diferentes.
+A vantagem competitiva escorregou do modelo para o loop, o agendador, a memória, o firewall e o lugar onde o estado fica guardado.
+
+Os exemplos se empilham um atrás do outro.
+O modo ultra da OpenAI é isso vendido como botão; a Cloudflare fez a mesma coisa com disciplina de engenheiro.
+O autoresearch de Karpathy é a versão conceitual, e a Ello teve que construir a dela na marra, por causa de latência.
+Até um modelo de vídeo aberto do dia, o LingBot-World-Infinity, chega embrulhado num arranjo que separa quem decide os eventos de quem os renderiza.
+Embora esse ainda seja mais teaser do que ferramenta, um único checkpoint sem uso comercial.
+
+E tem um monte de pesquisa fresca no arXiv puxando na mesma direção, cada peça mexendo num pedaço do encanamento.
+Uma repensa o agendamento de L L M notando que tráfego de agente reaproveita muito cache.
+Então basta balancear a primeira requisição de cada sessão e deixar o resto seguir a rota do cache.
+Outra dá ao agente um companheiro de memória que injeta lembrete na hora certa, para a meta não se perder no meio de uma tarefa longa.
+Uma terceira, a TokenWall, é um firewall que audita o que o agente vai escrever na memória e nos argumentos de ferramenta antes de aquilo tocar algo privilegiado.
+Ela reaproveita a velha ideia de taint analysis da segurança.
+E a UniClawBench propõe avaliar agente dentro de container Docker vivo, checando cada passo.
+Em vez de comparar a resposta final com uma string congelada.
+
+Nada disso é veredito fechado, e boa parte ainda é promessa que não foi testada fora do anúncio.
+O que dá para levar para casa é mais tranquilizador do que parece.
+Se você já entende cache, fila e commit atômico, você já entende metade de harness.
+A novidade é apontar essa disciplina velha de sistemas distribuídos para os agentes.
+As fontes da tendência são o autoresearch de Karpathy, a Cloudflare, a OpenAI e quatro papers no arXiv.
