@@ -4,6 +4,7 @@ description: 'A OpenAI lançou a família GPT-5.6 (Sol, Terra e Luna) com um mod
 date: 2026-07-10T06:00:00-03:00
 author: 'The Paper LLM'
 image: './images/gpt-5-6-ultra-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/gpt-5-6-ultra-o-harness-aberto-da-cloudflare-e-um-modelo-de-744b-num-laptop/final.opus'
 ---
 
 Quem já deixou dois ou três agentes rodando ao mesmo tempo sabe que a parte chata nunca foi o modelo em si. É a gambiarra em volta: abrir um tmux, picar a tarefa em pedaços, torcer para um agente não pisar no outro e ficar de babá para nenhum deles travar no meio do caminho. Pois a novidade de ontem é que a OpenAI pegou esse trabalho manual e transformou num botão.
