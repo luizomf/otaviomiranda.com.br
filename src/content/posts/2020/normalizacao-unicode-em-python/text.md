@@ -5,7 +5,7 @@ description:
   NFKD, você vai aprender tudo o que precisa saber sobre o padrão Unicode em si
   e Python.'
 date: 2020-08-20
-author: 'Luiz Otávio Miranda'
+author: 'Otávio Miranda'
 ---
 
 Além da **normalização Unicode** e das formas de normalização NFC, NFD, NFKC e
@@ -99,8 +99,8 @@ digitar seus códigos em Python 🤷‍♂️ (U+1F937).
 [documentação oficial do Python](https://docs.python.org/3.9/howto/unicode.html).
 
 As strings (`str`) em Python contêm caracteres Unicode desde a versão 3.0. Isso
-quer dizer que quaisquer valores entre aspas simples, duplas ou triplas são salvos
-em Unicode. De fato, o Python 🐍 suporta até mesmo identificadores com
+quer dizer que quaisquer valores entre aspas simples, duplas ou triplas são
+salvos em Unicode. De fato, o Python 🐍 suporta até mesmo identificadores com
 caracteres Unicode.
 
 ```python
@@ -354,8 +354,10 @@ Então, só pra recapitular tudo:
 - Também sabe que Unicode foi feito pensando em compatibilidade com padrões já
   existentes (ascii, latin, etc). Vamos voltar nesse assunto já já;
 - Viu que UTF-8 é uma das codificações de caracteres do Unicode;
-- Está ciente de que UTF-8 é, de longe, uma das codificações mais usadas no mundo;
-- E deveria estar usando UTF-8 nos seus códigos (é muito provável que já esteja).
+- Está ciente de que UTF-8 é, de longe, uma das codificações mais usadas no
+  mundo;
+- E deveria estar usando UTF-8 nos seus códigos (é muito provável que já
+  esteja).
 
 Uma coisa que eu ainda não te falei é sobre a normalização e por que isso
 existe.
