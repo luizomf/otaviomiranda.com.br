@@ -8,19 +8,19 @@ date: 2020-08-20
 author: 'Luiz Otávio Miranda'
 ---
 
-Além da **normalização Unicode** e as formas de normalização NFC, NFD, NFKC e
+Além da **normalização Unicode** e das formas de normalização NFC, NFD, NFKC e
 NFKD, você vai aprender tudo o que precisa saber sobre o padrão Unicode em si e
-Python.
+em Python.
 
 Falando sobre a normalização Unicode em si, que provavelmente é o que te trouxe
 aqui: normalizar é o ato de transformar strings
 ([textos no padrão unicode](https://pt.wikipedia.org/wiki/Unicode)) para uma
 forma normal onde os caracteres sempre terão a mesma representação binária em
 todo o seu programa. Isso facilita a comparação, indexação e ordenação de
-strings já que, em um sistema “normalizado”, essas operações são é mais
+strings já que, em um sistema “normalizado”, essas operações são mais
 confiáveis.
 
-Frequentemente você verá emojis no meio do texto com um código na frete. Eu
+Frequentemente você verá emojis no meio do texto com um código na frente. Eu
 espero que você entenda isso ao terminar sua leitura, porque eu não costumo
 escrever assim, ok? 🤐 (U+1F910).
 
@@ -31,7 +31,7 @@ contexto para discutirmos ao longo de todo o artigo. Porém, não se preocupe se
 não entender nada agora. Prometo que vou explicar tudo o que você vai ver a
 seguir 🙏 (U+1F64F).
 
-### Porque precisamos de normalização?
+### Por que precisamos de normalização?
 
 No padrão Unicode, caracteres são representados por **code points** (códigos de
 identidade do caractere). Mas, alguns desses caracteres são representados mais
@@ -58,7 +58,7 @@ False
 
 A **normalização unicode** vai resolver este problema mantendo apenas uma forma
 normal dos “**á**s” apresentados acima. Ou “`U+00E1`” ou “`U+0061`” +
-“`U+0301`“. No entanto, para entender porque precisamos de normalização unicode
+“`U+0301`“. No entanto, para entender por que precisamos de normalização unicode
 em nosso sistema, precisamos entender o Padrão Unicode como um todo.
 
 ## Unicode – o básico do básico
@@ -81,7 +81,7 @@ por representar uma sequência de **code points** (qualquer string no padrão
 Unicode) como um conjunto de **code units** na memória do computador, que então
 são mapeados para bytes de 8-bits.
 
-Apesar do padrão Unicode disponibilizar um conjunto razoavelmente grande de
+Apesar de o padrão Unicode disponibilizar um conjunto razoavelmente grande de
 sistemas de codificação de caracteres, como UTF-7, UTF-8, UTF-EBCDIC, UTF-16 e
 UTF32, a codificação mais usada atualmente é a **UTF-8** (UTF sendo
 [Unicode Transformation Format](https://pt.wikipedia.org/wiki/UTF-8) e 8 sendo o
@@ -98,8 +98,8 @@ digitar seus códigos em Python 🤷‍♂️ (U+1F937).
 **Dica 💡** (U+1F4A1)**:** Boa parte do trecho a seguir foi baseada na
 [documentação oficial do Python](https://docs.python.org/3.9/howto/unicode.html).
 
-As strings (`str`) em Python contém caracteres Unicode desde a versão 3.0. Isso
-quer dizer que qualquer valor entre aspas simples, duplas ou triplas são salvas
+As strings (`str`) em Python contêm caracteres Unicode desde a versão 3.0. Isso
+quer dizer que quaisquer valores entre aspas simples, duplas ou triplas são salvos
 em Unicode. De fato, o Python 🐍 suporta até mesmo identificadores com
 caracteres Unicode.
 
@@ -276,7 +276,7 @@ decodificar esses bytes usando a codificação correta antes de fazer qualquer
 outra coisa.
 
 Depois de decodificar, eu poderia codificar novamente usando o **codec** que eu
-preferir, contando que ele suporte os caracteres que eu estiver usando (usa
+preferir, contanto que ele suporte os caracteres que eu estiver usando (use
 sempre **UTF-8**, pelo amor de Deus 😬 – U+1F62C).
 
 Por exemplo, se eu quero codificar de UTF-8 para
@@ -295,7 +295,7 @@ Basicamente, isso foi uma conversão de **UTF-8** para **latin_1**. Tenha noçã
 de que sempre que essas conversões ocorrem, uma codificação de caracteres deve
 suportar a outra. O Unicode foi criado para ser compatível com todas as
 codificações existentes. No entanto, apenas no sentido de “qualquer codificação”
-convertido para “Unicode”. Você pode ter problemas ao converter no sentido
+convertida para “Unicode”. Você pode ter problemas ao converter no sentido
 contrário, de Unicode para “qualquer codificação”, porque o padrão Unicode
 suporta muito mais caracteres do que qualquer outra codificação de caracteres
 que você quiser utilizar.
@@ -313,7 +313,7 @@ contrário ocorreriam erros também.
 **Mais dicas:** se você precisa detectar a codificação de caracteres de algo que
 não tem a mínima ideia como foi codificado, use
 [chardet.detect](https://pypi.org/project/chardet/). Ele não vai acertar em 100%
-dos casos, mas já me salvou de muitas enrascadas; Se você precisa saber quais
+dos casos, mas já me salvou de muitas enrascadas. Se você precisa saber quais
 codecs de codificação o Python suporta, veja
 [Python Specific Encodings](https://docs.python.org/3.9/library/codecs.html#standard-encodings).
 
@@ -329,9 +329,9 @@ Para o segundo argumento você pode enviar os seguintes valores:
   [UnicodeDecodeError](https://docs.python.org/3/library/exceptions.html#UnicodeDecodeError);
 - `'replace'` – Usa o caractere U+FFFD (REPLACEMENT CHARACTER) no lugar do
   caractere que não pôde ser convertido;
-- `'ignore'` – Simplesmente pula o caractere que não pode ser convertido;
+- `'ignore'` – Simplesmente pula o caractere que não pôde ser convertido;
 - `'backslashreplace'` – que insere uma sequência `\xNN` no lugar do caractere
-  que não pode ser convertido;
+  que não pôde ser convertido;
 - `'xmlcharrefreplace'` – que insere uma referência para um caractere
   [XML](https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references)
   (isso só funciona com `encode`).
@@ -352,12 +352,12 @@ Então, só pra recapitular tudo:
 
 - Você conheceu os code points do Unicode;
 - Também sabe que Unicode foi feito pensando em compatibilidade com padrões já
-  existente (ascii, latin, etc). Vamos voltar nesse assunto já já;
+  existentes (ascii, latin, etc). Vamos voltar nesse assunto já já;
 - Viu que UTF-8 é uma das codificações de caracteres do Unicode;
-- Está ciente que UTF-8 é, de longe, uma das codificações mais usadas no mundo;
-- E deveria estar usando UTF-8 nos seus código (é muito provável que já esteja).
+- Está ciente de que UTF-8 é, de longe, uma das codificações mais usadas no mundo;
+- E deveria estar usando UTF-8 nos seus códigos (é muito provável que já esteja).
 
-Uma coisa que eu ainda não te falei é sobre a normalização e o porquê isso
+Uma coisa que eu ainda não te falei é sobre a normalização e por que isso
 existe.
 
 Na verdade, todas as voltas foram para fazer você entender o que é Unicode de
@@ -424,7 +424,7 @@ Esses caracteres que podem ser combinados com outros caracteres são chamados de
 existem muitos deles.
 
 Mas, como nem tudo são flores (🥀 – U+1F940), isso gerou o problema de ter mais
-de um caractere representando a mesma coisa. Aquela probleminha que te mostrei
+de um caractere representando a mesma coisa. Aquele probleminha que te mostrei
 no início, sobre os “**á**s”. Te falei que ia dar problema, não falei 😁
 (U+1F601)?
 
@@ -441,7 +441,7 @@ falar “esses dois caracteres são iguais”. Então, na equivalência canônic
 mais outros milhares de caracteres que podem ser combinados em vários idiomas
 diferentes.
 
-Sabendo disso, você poder utilizar mais de uma forma normal em todo o seu
+Sabendo disso, você pode utilizar mais de uma forma normal em todo o seu
 programa: **NFC** e **NFD** (tem mais duas, mas é questão de compatibilidade,
 segura aí que a gente já fala sobre isso).
 
@@ -467,7 +467,7 @@ Por exemplo:
 # O         t         á         v	      i         o
 ```
 
-Da pra perceber ali que a letra “**á**” do meu nome, sempre será mantida como
+Dá pra perceber ali que a letra “**á**” do meu nome sempre será mantida como
 **U+00E1** com esse tipo de normalização. Mesmo eu dizendo explicitamente que
 quero a string `'Ot\u0061\u0301vio'`.
 
@@ -513,7 +513,7 @@ por **compatibilidade**.
 
 Por exemplo, em alguns contextos, o símbolo **TM** pode ter o mesmo significado
 que ™ (TRADE MARK SIGN, U+2122). Nesse caso, ambos TM e ™ são definidos como
-caracteres compatíveis, mas que NÃO TEM **equivalência canônica**.
+caracteres compatíveis, mas que NÃO TÊM **equivalência canônica**.
 
 Isso quer dizer que nem **NFC**, nem **NFD** vão normalizar esses dois valores.
 
@@ -527,7 +527,7 @@ E só pra deixar claro isso pra você, caso ainda não tenha ficado:
 Agora que vem a pergunta de 1 milhão de dólares: qual a forma normal entre TM e
 ™? Depende! Em qual contexto?
 
-Vou te dar um exemplo: nós sabemos que seres humanos tem uma preguiça danada de
+Vou te dar um exemplo: nós sabemos que seres humanos têm uma preguiça danada de
 digitar as coisas corretamente, certo? Imagine que a minha marca fosse **OM™** e
 eu quisesse que no meu sistema de busca, essa marca fosse encontrada. Você acha
 que as pessoas digitariam **OMTM** ou **OM™**? Eu acho que OMTM (caso não
@@ -799,7 +799,7 @@ Portanto, não há motivos para entrarmos em detalhes sobre
 ## Mais sobre Unicode e Normalização Unicode
 
 Eu sei que esse assunto talvez passe despercebido para vários desenvolvedores e
-desenvolvedoras mundo a fora e não é culpa deles (ou nossa, também passei por
+desenvolvedoras mundo afora e não é culpa deles (ou nossa, também passei por
 isso). Em nosso meio, a maioria dos cursos, faculdades e livros que você lê para
 aprender a programar, infelizmente não tratam desse assunto, ou, se tratam, é de
 maneira superficial. Porém, como você pôde ver, eu fiz questão de deixar todos
