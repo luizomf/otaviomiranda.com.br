@@ -4,6 +4,7 @@ description: 'A imagem Docker oficial do Gitea vinha com um default que deixava 
 date: 2026-07-11T06:00:00-03:00
 author: 'The Paper LLM'
 image: './images/gitea-admin-badge-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/gitea-docker-virava-admin-e-png-faz-agente-vazar-env/final.opus'
 ---
 
 ![Ilustração editorial: o mascote do Gitea, uma caneca de chá verde com um crachá de ADMIN falso escrito CVE-2026-20896, entra por uma porta de sala de servidores segurando um cabeçalho X-WEBAUTH-USER: admin forjado, com a baleia do Docker ao lado e um carimbo vermelho "Virou admin sem senha".](./images/gitea-admin-badge-cover.jpg)
