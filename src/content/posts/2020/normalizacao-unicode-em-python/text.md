@@ -3,14 +3,17 @@ title: 'Normalização Unicode em Python'
 description:
   'Além da normalização Unicode e as formas de normalização NFC, NFD, NFKC e
   NFKD, você vai aprender tudo o que precisa saber sobre o padrão Unicode em si
-  e Python.'
-date: 2020-08-20
+  e Python. Typos atualizados de 6 anos após a publicação (parabéns 🤷‍♀️).'
+date: '2026-07-10T11:59:59'
 author: 'Otávio Miranda'
 ---
 
 Além da **normalização Unicode** e das formas de normalização NFC, NFD, NFKC e
 NFKD, você vai aprender tudo o que precisa saber sobre o padrão Unicode em si e
 em Python.
+
+> **Publicado** em _20/08/2020_.  
+> **Atualizado** em _10/07/2026_ (`fix typos 🤷‍♀️`).
 
 Falando sobre a normalização Unicode em si, que provavelmente é o que te trouxe
 aqui: normalizar é o ato de transformar strings
