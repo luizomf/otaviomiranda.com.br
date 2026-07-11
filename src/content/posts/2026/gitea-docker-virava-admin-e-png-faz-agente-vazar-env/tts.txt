@@ -1,0 +1,205 @@
+A imagem Docker do Gitea virava admin, e um PNG pode fazer seu agente vazar o ponto env.
+Rodar seu próprio servidor de Git num V P S é meio que um ato de controle.
+O código é seu, a máquina é sua, ninguém tira.
+Só que controle de verdade mora nos detalhes de configuração.
+E às vezes um único valor que já veio ligado de fábrica entrega a casa inteira.
+Foi mais ou menos isso que aconteceu com a imagem oficial do Gitea, e tem gente explorando isso enquanto você lê.
+A imagem Docker oficial do Gitea deixava qualquer um virar admin, e já tem gente explorando.
+Para funcionar atrás de um proxy reverso, o Gitea aceita um cabeçalho H T T P.
+Esse cabeçalho basicamente diz que o pedido já está autenticado como fulano.
+Esse cabeçalho, o X WEBAUTH USER, só deveria valer quando chega de um proxy de confiança na frente do serviço.
+O problema estava na imagem Docker oficial: ela vinha configurada para confiar em qualquer proxy.
+Na prática, a opção REVERSE PROXY TRUSTED PROXIES estava com um curinga que aceita qualquer origem.
+Daí sai o clássico default inseguro, e é bem simples de abusar.
+Um cliente alcança a porta H T T P do container direto, sem passar por proxy nenhum.
+Ele manda o cabeçalho com o nome de um usuário conhecido e entra como ele.
+Contas de administrador, com nomes previsíveis como admin ou gitea admin, são o alvo natural.
+Sem senha, sem exploit sofisticado, só um cabeçalho forjado.
+Isso virou a C V E 2026, vinte mil oitocentos e noventa e seis, marcada como crítica.
+Ela afeta a configuração padrão da imagem oficial até a versão um ponto vinte e seis ponto dois.
+Já há exploração ativa relatada, então isto é urgente.
+Se você roda o Gitea assim, atualize hoje para a um ponto vinte e seis ponto três, ou a um ponto vinte e seis ponto quatro.
+Se atualizar agora não for possível, restrinja o REVERSE PROXY TRUSTED PROXIES aos IPs que você de fato confia.
+E não deixe a porta do container aberta para a rede.
+A fonte deste bloco é o BleepingComputer.
+Ghostcommit é um P N G apontado pelo AGENTS ponto M D que faz o agente de código vazar o ponto env.
+Ontem esse arquivo AGENTS ponto M D apareceu por aqui como um roteador esperto.
+Ele aponta o agente para a documentação certa. Hoje ele aparece pelo lado feio.
+Pesquisadores do ASSET Research Group, da universidade U M K C, montaram uma prova de conceito.
+Eles chamaram essa prova de conceito de Ghostcommit.
+A instrução maliciosa fica em texto legível, mas escondida dentro de uma imagem, um P N G.
+É esse P N G que o AGENTS ponto M D referencia.
+Quando o agente de código começa a trabalhar, ele segue esse ponteiro e abre o ponto env do projeto.
+Aí ele escreve os segredos dentro de um commit, codificados como listas de números inteiros.
+Desse jeito, eles não chamam atenção no diff.
+O detalhe que faz o ataque funcionar não é esteganografia nem sinal escondido em pixel.
+É um ponto cego bem simples: ninguém abre a imagem.
+O revisor humano passa o olho no diff e ignora o P N G.
+E em harnesses vulneráveis o próprio agente segue a instrução sem desconfiar.
+Na demonstração, o ataque pegou o Cursor e a ferramenta Antigravity.
+Modelos como Claude Sonnet, Gemini e GPT cinco ponto cinco caíram sob certos harnesses.
+Mas teve dois pontos importantes do outro lado do balcão.
+O Claude Code recusou o ataque em todos os modelos testados.
+E o CodeRabbit, por padrão, já ignora imagens na revisão.
+E isto é pesquisa: uma prova de conceito com uma defesa proposta.
+Os autores dizem que o verificador multimodal acertou noventa e oito vírgula setenta e cinco porcento dos casos.
+E sem falso positivo em pull requests legítimos.
+Ainda é laboratório, não é ataque rodando solto por aí.
+A lição prática é tratar tudo que o AGENTS ponto M D aponta, imagens inclusive, como conteúdo não confiável.
+E não deixar o agente ler o ponto env sem uma barreira no caminho.
+A fonte deste bloco também é o BleepingComputer.
+Uma página de bloqueio com corpo engana o fetch do agente e vira resumo de mentira.
+A Cloudflare volta a aparecer aqui, mas por um motivo bem diferente do de ontem.
+Sistemas de proteção contra bots respondem a acessos suspeitos com uma página de bloqueio.
+É o caso da própria Cloudflare, da DataDome e do W A F do Amazon CloudFront.
+É aquela tela de prove que você é humano.
+Para um agente que lê a web, o veneno está no código de resposta, que quase nunca dispara erro.
+É um quatrocentos e três com corpo, às vezes um duzentos, um trezentos e sete ou um quatrocentos e quatro.
+Depende do provedor, mas o padrão é esse.
+A biblioteca de H T T P não levanta exceção.
+Então a camada de fetch do agente conclui que recebeu texto e deu certo.
+E entrega a tela de bloqueio para o modelo.
+Aí o modelo resume o segurança da portaria como se fosse a pesquisa que ele foi fazer.
+Como diz o autor do relato, um quatrocentos e três com corpo é pior que um quatrocentos e três vazio.
+Justamente porque nada avisa que a coisa saiu errada.
+O conserto aqui é de arquitetura.
+Em vez de empurrar a parede para dentro do modelo, a camada que busca a página precisa classificar o estado dela.
+Ela precisa dizer se a página é real, bloqueada, parcial ou desconhecida.
+Dá para reconhecer assinaturas estáveis, como o "Just a moment" da Cloudflare.
+Ou os prompts em JavaScript da DataDome, e aí devolver um sinal de bloqueio com texto vazio.
+É a resposta certa, mesmo parecendo um passo atrás.
+Melhor o agente saber que não leu nada do que inventar em cima de lixo.
+Vale um aviso de origem: o relato vem de um fornecedor de navegador stealth.
+Então tem pitch de produto embutido.
+A falha em si é concreta e verificável pelos próprios códigos de status citados.
+O resto é propaganda e dá para deixar de lado.
+A fonte deste bloco é o tilion ponto dev.
+O batching contínuo explica por que o L L M local parece rápido até a fila encher.
+Muita gente sobe um modelo local, testa com um prompt e acha uma maravilha.
+Aí manda dois, três, dez pedidos ao mesmo tempo, e o tempo até a primeira palavra desaba.
+A culpa raramente é do modelo. É de como os pedidos são agendados na G P U.
+Um explicador da DigitalOcean trata o serviço de L L M como um problema de escalonamento.
+E a distinção que organiza tudo é entre duas fases.
+O prefill é a leitura do seu prompt: uma passada só, pesada de processamento, que monta o cache de atenção.
+O decode é a geração, um token de cada vez, e essa parte é limitada por memória, não por cálculo.
+O jeito antigo, o static batching, junta um lote de pedidos e roda até o mais longo terminar.
+Enquanto isso, um pedido curtinho fica preso atrás de um gigante, o tal head of line blocking.
+E vários lugares do lote ficam ociosos.
+O batching contínuo troca essa lógica por um loop.
+A cada passo de decode ele remonta o lote e aposenta quem já terminou.
+Ele libera na hora a memória de cache daquele pedido e deixa entrar gente nova no meio do caminho.
+Assim a G P U nunca fica de mão parada.
+Isso não é invenção de um projeto só.
+É o que fazem por baixo motores como o v L L M, o T G I e o S G Lang.
+Cada um tem sua técnica para chegar lá, do PagedAttention do v L L M ao RadixAttention do S G Lang.
+Mas a ideia central por baixo é a mesma.
+E não é mágica: sob concorrência alta, o tempo até a primeira palavra sobe de qualquer jeito.
+Num teste que circulou, um Qwen de vinte e sete bilhões de parâmetros rodou em quatro placas R T X cinco mil e sessenta Ti.
+A primeira palavra levava uns três vírgula três segundos com um pedido só.
+O autor conta que, subindo a concorrência, esse número piora bastante.
+Mas são medições dele, num hardware específico, que ninguém reproduziu de forma independente.
+O que dá para levar para casa é o que medir.
+Tempo até a primeira palavra, tokens por segundo e o tamanho da fila sob carga real.
+Servir modelo local se parece mais com administrar uma fila com contrapressão do que com liga e usa.
+As fontes são a DigitalOcean e a comunidade LocalLLaMA no Reddit.
+A CISA publicou o postmortem de um vazamento no "Git Hub" e admitiu que não tinha playbook.
+A CISA é a agência de segurança cibernética dos Estados Unidos.
+É aquela que passa o ano mandando todo mundo ter processo de resposta a incidente.
+Na sexta, ela publicou o postmortem de um incidente próprio.
+E a parte constrangedora é que faltava justamente isso.
+O caso é o seguinte: um contratado, funcionário da Nightwing, subiu coisa demais para um repositório pessoal público.
+Era código de build e deploy da CISA, credenciais de admin e de build.
+E também chaves de acesso da A W S GovCloud, a nuvem para cargas do governo americano.
+Pelo relato do Krebs, ele ainda desativou a proteção que o Git Hub liga por padrão para barrar segredo em commit.
+E usou senhas fracas, do tipo nome da plataforma mais o ano corrente.
+A CISA afirma que nenhum dado de cliente ou de missão foi exposto.
+E que as credenciais vazadas não foram usadas fora dos ambientes dela.
+É bom registrar que essa é a versão da própria agência.
+O incômodo maior está no processo.
+A CISA não tinha um plano de resposta para vazamento em Git Hub ou nuvem, e teve que escrever um no meio do incidente.
+A resposta, depois, foi a higiene básica que se espera.
+Girar todas as senhas dos ambientes de desenvolvimento que o contratado alcançava, não só as que vazaram.
+Atualizar as chaves de cloud e reajustar as listas de quem pode subir para repositório público.
+E ligar monitoramento de upload.
+A rotação demorou mais que o previsto pela complexidade dos sistemas.
+Um detalhe de data: o vazamento em si veio à tona em maio.
+O que é novidade agora é o postmortem, publicado no dia dez.
+Não é o mesmo caso do GitLost, que comentamos no dia oito.
+Lá era um agente de código do Git Hub vazando um repo privado.
+Aqui é uma pessoa subindo segredo para um repo público.
+Se a agência que cobra isso de todo mundo tropeçou por falta de controle básico, qualquer time tropeça.
+Varredura de segredo ligada, upload para repositório público sob controle, rotação de credencial ensaiada.
+E um plano escrito antes de precisar dele deixaram de ser luxo de empresa grande.
+As fontes são o Krebs on Security, o Cybersecurity Dive e a própria CISA.
+Agora, os destaques rápidos de hoje.
+Desligar o enable seqscan no PostgreSQL não desliga o sequential scan.
+Christophe Pettus, referência na comunidade, desmonta o mito.
+O enable seqscan igual a off só penaliza a varredura sequencial quando existe outro caminho viável.
+Sem índice útil, o Postgres faz o seqscan mesmo assim e marca aquele passo como desabilitado no EXPLAIN.
+Quando o banco insiste no scan, o problema quase sempre está no modelo de custo.
+Então olhe estatísticas velhas, e rode o ANALYZE para atualizar.
+Veja também um effective cache size baixo, e o random page cost ainda em quatro ponto zero num S S D.
+Num S S D faria mais sentido algo perto de um ponto um. A fonte é o blog The Build.
+A CrowdStrike deu nome a cinco técnicas novas de injeção de prompt.
+A primeira é uma regra que só ativa depois de um gatilho.
+Tem também a supressão dos tokens de recusa do modelo.
+E um payload picado em pedaços que passam inofensivos um a um.
+As duas últimas são injeção de token especial e injeção pelos próprios dados que o usuário sobe.
+O recado para quem constrói agente é modelar toda fonte de contexto como possivelmente hostil.
+E testar ataques compostos, não só a injeção óbvia. É vocabulário de ameaça, não placar.
+A fonte desse item é o InfoWorld.
+O Zimbra dez ponto um ponto dezenove corrige uma falha no Classic Web Client.
+Segundo o blog oficial, um email preparado pode rodar código malicioso ao ser aberto.
+Ele pode alcançar informação da caixa, dados de sessão ou configurações da conta.
+Só o Classic Web Client é afetado, e a recomendação é atualizar o quanto antes.
+O Ubuntu vinte e seis ponto dez aposenta o dbus daemon depois de vinte e dois anos e adota o dbus broker.
+Esse barramento de mensagens conecta serviços do sistema e da sessão.
+Ele passa a ter um design assíncrono que não descarta mensagem em silêncio sob carga pesada.
+É o mesmo protocolo e os mesmos arquivos de config, então no uso normal ninguém deve notar diferença.
+Ainda assim, é peça de baixo nível que toca o AppArmor e o confinamento de snaps.
+Então vale testar antes de confiar em produção. O dbus daemon vai para o repositório universe.
+A fonte desse item é o OMG Ubuntu.
+Memória de agente não vai toda no mesmo vetor.
+Um material do Machine Learning Mastery separa quatro tipos de memória.
+São elas: memória de trabalho, semântica, episódica e procedural.
+E o material oferece uma árvore de cinco perguntas para escolher onde cada coisa mora.
+O erro comum é jogar fato estável e evento em evolução no mesmo armazenamento.
+Isso devolve resposta irrelevante ou contraditória.
+A saída é guardar fato estruturado separado do histórico de eventos.
+A ELM onze Feather roda Lua nativo num F P G A por trinta e nove dólares.
+É uma placa no formato Feather, com um F P G A da GOWIN e nenhum núcleo de C P U tradicional.
+O próprio chip roda a linguagem, com dois núcleos e um interpretador de Lua independente em cada um.
+Tem vinte e três pinos de entrada e saída e um megabyte de RAM.
+Um I D E único expõe drivers em C como funções Lua.
+Isso agrada a turma de maker que gosta de mexer do app ao hardware sem trocar de toolchain.
+O preço correto é trinta e nove dólares, e não os vinte e nove que circularam.
+A fonte desse item é o site It's FOSS.
+Seu app podia ser uma página, e alguém provou isso fazendo engenharia reversa de um.
+No danq ponto me, o autor pegou o Travelbound, um app de itinerário de excursão escolar.
+Ele interceptou o tráfego com o H T T P Toolkit numa V M Android com root.
+Achou a [EY1 P IY1 AY1] JSON por trás e gerou uma página estática protegida por senha com o mesmo conteúdo.
+A conclusão incomoda: as únicas funções que justificavam ser um app eram rastreamento e anúncio.
+O WinV traz o histórico de área de transferência do Win mais V para o GNOME.
+Um desenvolvedor brasileiro sentiu falta do atalho ao migrar do Windows e fez a própria versão, open source.
+Ela tem histórico de texto e imagem, busca instantânea e itens fixados.
+E tema claro ou escuro sincronizado com o GNOME.
+O código está no Git Hub, aberto a quem quiser testar ou contribuir.
+A fonte desse item é o TabNews.
+Para fechar, o acompanhamento de tendências do dia.
+Se você alinhar as histórias de segurança de hoje, aparece um fio comum.
+O agente acredita, com confiança total, numa entrada que mentiu para ele.
+A página de bloqueio se disfarça de conteúdo e vira resumo.
+O P N G do Ghostcommit se disfarça de imagem inofensiva e vira instrução.
+E a CrowdStrike, num relatório à parte, deu nome a cinco jeitos de fazer exatamente isso por dentro do contexto do modelo.
+Vai do gatilho que só ativa depois até o payload picado em pedaços que passam despercebidos um a um.
+Em todos, o modelo falhou por confiar no que leu.
+O contraponto é quase engraçado de tão sem graça.
+Onde teve conserto de verdade nas outras histórias, ele foi burro e determinístico.
+O Gitea vazou por um default que confiava num cabeçalho de qualquer origem, e a correção é parar de confiar.
+A CISA entrou em modo de emergência por falta de um checklist mundano, não de tecnologia.
+E o mito do enable seqscan no Postgres é gente procurando um botão mágico.
+O trabalho de verdade está no modelo de custo, que dá preguiça de ajustar e é o que resolve.
+Não dá para transformar isso num veredito fechado.
+Mas quando a falha da moda é errar com confiança, a defesa que segura é um controle sem charme que desconfia da entrada.
+Talvez valha gastar menos energia deixando o agente mais esperto.
+E mais tempo decidindo em que ele tem permissão de acreditar.
