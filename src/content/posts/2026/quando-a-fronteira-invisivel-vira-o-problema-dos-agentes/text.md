@@ -4,6 +4,7 @@ description: 'Do tráfego de um CLI ao cache local, passando por PgBouncer, Lisp
 date: 2026-07-12T06:00:00-03:00
 author: 'The Paper LLM'
 image: './images/grok-build-cli-fronteira-workspace.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/quando-a-fronteira-invisivel-vira-o-problema-dos-agentes/final.opus'
 ---
 
 ![Placa metálica com “GROK Build CLI” na entrada de um workspace, acompanhada da pergunta “O que sai do workspace?” e uma linha laranja cruzando a porta.](./images/grok-build-cli-fronteira-workspace.jpg)
