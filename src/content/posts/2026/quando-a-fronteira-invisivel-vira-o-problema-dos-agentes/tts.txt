@@ -1,0 +1,248 @@
+Quando a fronteira invisível vira o problema dos agentes.
+
+Hoje teve uma coleção de histórias que parecem separadas.
+Um agente manda dados para fora, um cache muda a vida de um modelo local e um pooler de banco é espremido por uma CPU.
+Mas todas têm a mesma graça: o gargalo real costuma morar na fronteira que a gente não estava olhando.
+
+É o tipo de dia que vale menos pela promessa de IA mágica e mais pela engenharia que faz a coisa ser verificável.
+Tráfego, estado, permissões, filas e limites de conexão entram nessa conta.
+Vamos ao que chamou atenção.
+
+Um relatório sobre o "Grok Build" [S IY1 EH1 L AY1] acende o alerta para o que sai do workspace.
+
+Um pesquisador publicou uma análise de rede do "Grok Build" [S IY1 EH1 L AY1] versão zero ponto dois ponto noventa e três.
+Ele usou proxy, repositório descartável e segredos-canário falsos.
+É uma investigação independente, não uma declaração da [EH1 K S] [EY1 AY1] nem uma auditoria de terceiros.
+Essa distinção importa bastante aqui.
+
+Segundo o relatório, quando o CLI leu um arquivo de ambiente, os canários apareceram numa requisição de turno do modelo e num upload de estado de sessão.
+Num experimento em que o agente recebeu a instrução de não ler arquivos, o autor diz ter recuperado um canário deliberadamente não lido num bundle Git capturado.
+Junto dele, estava o histórico Git.
+
+O relatório aponta dois endpoints relevantes: um de respostas e outro de armazenamento.
+Ele também nomeia o bucket GCS observado como "grok code session traces".
+
+O número que dá escala ao caso vem do teste com um repositório grande.
+Foram cinco vírgula dez gibibytes de tráfego de armazenamento, contra cento e noventa e dois kilobytes de tráfego de turnos do modelo.
+O autor também relata que, no binário testado, a opção "Improve the model" não desligou o upload de trace.
+
+Nada disso prova que repositórios estejam sendo usados para treinar modelo, nem estabelece uma política de retenção.
+Na leitura do próprio pesquisador, o material demonstra transmissão, aceitação de upload e armazenamento observados naquele cenário.
+Já é suficiente para uma lição útil: trate o diretório de trabalho de um agente como uma fronteira de exposição de dados.
+Ele não é uma extensão inocente do seu terminal.
+
+Na prática, deixe credenciais fora do repositório e use fixtures descartáveis para experiências.
+Leia a documentação de privacidade de verdade e observe o tráfego de saída antes de entregar código sensível a um agente.
+O ponto não é demonizar agentes; é pedir evidência sobre o que eles carregam consigo.
+A fonte deste bloco é a análise de rede do pesquisador.
+
+Quando o "PgBouncer" vira o gargalo antes do "PostgreSQL".
+
+"PgBouncer" é pequeno, conhecido e, por processo, roda numa thread só.
+Em pouca concorrência isso não é drama algum.
+Mas a equipe do "ClickHouse" encontrou o momento em que um único processo deixa uma máquina com vários cores praticamente parada, enquanto ele próprio bate no teto.
+
+A solução descrita para o "ClickHouse Managed Postgres" é direta e elegante.
+Eles usam um processo "PgBouncer" por core disponível, todos ouvindo a mesma porta com a opção "S O reuse port".
+Assim, o kernel distribui novas conexões.
+
+Uma requisição de cancelamento pode cair no processo errado.
+Por isso, eles usam o mecanismo de peering do "PgBouncer" para chegar ao processo que de fato possui a sessão.
+E os limites de conexão são divididos pela frota, para que multiplicar processos não acabe multiplicando conexões até derrubar o "PostgreSQL".
+
+Os resultados são do próprio "ClickHouse", num ambiente específico.
+Era uma máquina c sete i ponto quatro x large, com dezesseis V CPUs, "PostgreSQL" separado e um terceiro host rodando "pgbench".
+A carga era só de consultas e usava transaction pooling.
+
+Nesse teste, o processo único chegou perto de oitenta e sete mil transações por segundo.
+Dezesseis processos chegaram a aproximadamente trezentas e trinta e seis mil, com duzentos e cinquenta e seis clientes.
+O processo sozinho ficou por volta de noventa e sete porcento de CPU, enquanto a frota ocupou cerca de oito cores.
+
+Não leia isso como ganhe quatro vezes mais em todo banco.
+É uma medição de fornecedor, em configuração e carga bem definidas.
+Aliás, o texto observa que, sem carga suficiente para paralelizar, uma instância só pode ser levemente mais rápida.
+
+A parte boa da história é outra.
+Um componente de infraestrutura aparentemente trivial pode ser o pedaço serial que impede o resto da máquina de trabalhar.
+
+Também é uma explicação prática de três coisas que às vezes aparecem como siglas soltas.
+"S O reuse port" distribui a aceitação de conexão.
+Peering preserva o cancelamento correto numa frota.
+E orçamento de conexões impede que a escala do pooler vire sobrecarga no banco.
+A fonte é a arquitetura e o benchmark publicados pelo "ClickHouse".
+
+Em inferência local, o cache pode importar mais que o modelo.
+
+O autor do "qMLX" conta como foi rodar "Qwen" três ponto cinco, de cento e vinte e dois bilhões de parâmetros, para um coding agent local.
+O teste foi feito num M três Ultra de noventa e seis gigabytes.
+A parte interessante não é uma disputa de benchmarks.
+É a autópsia de três problemas de cache que faz qualquer pessoa que trabalha com prompts longos balançar a cabeça.
+
+Primeiro, um identificador que mudava cedo no prompt de sistema impedia reutilização byte a byte.
+Depois, uma geração interrompida não persistia os tokens do assistente que já tinham sido transmitidos.
+Então o próximo turno não conseguia reaproveitar aquele prefixo.
+
+Por fim, checkpoints de background sem chave enchiam o armazenamento e expulsavam checkpoints bons.
+O diretório problemático tinha vinte e sete gigabytes de dados que não voltariam a casar com nada.
+
+No modelo de atenção híbrida usado ali, há uma limitação adicional.
+O estado recorrente de S S M não pode ser rebobinado.
+Por isso, na janela normal relatada pelo autor, foram zero acertos no cache de memória e cento e nove no cache de disco.
+
+É uma boa lembrança de que ter cache não responde à pergunta importante.
+Qual estado pode ser retomado, em que nível e sob qual chave?
+
+As medições são de uma máquina e de um fork pessoal, então merecem o rótulo certo.
+Nesse M três Ultra, o prefill de um prompt repetido de trinta e dois K caiu de oitenta e oito segundos sem cache para zero vírgula sessenta e quatro segundo com cache.
+Isso dá cento e trinta e sete vezes, segundo o autor.
+
+Ele também relata cerca de cinquenta e cinco tokens por segundo em contexto curto e vinte e oito tokens por segundo em sessenta e quatro K.
+Prefill e decode não são a mesma coisa.
+Um throughput agregado bonito pode coexistir com uma resposta em streaming que ainda parece lenta.
+
+Para quem quer uma regra operacional simples, eu ficaria com esta.
+Estabilize o prefixo do prompt, persista o histórico completo e trate a política de eviction como parte do produto.
+Antes de trocar de modelo ou comprar hardware, talvez seja aí que esteja a latência que o usuário realmente sente.
+A fonte é o postmortem de cache do "qMLX".
+
+Um agente em Lisp de cem linhas mostra o loop e a faca sem cabo.
+
+Há algo refrescante em tirar a fantasia da palavra agente.
+Neste experimento em "Common Lisp", a estrutura é quase constrangedoramente simples.
+Chama o modelo; se ele pedir uma ferramenta, acrescenta o resultado à conversa; e repete até vir uma resposta final.
+
+O loop mostrado tem oito linhas, e o exemplo completo fica em torno de cem.
+Ele usa "S B C L", "dexador", "shasht" e um modelo via "OpenRouter".
+A única ferramenta recebe uma forma Lisp e a avalia.
+
+O autor mostra o modelo criando uma função de Fibonacci.
+Depois de ganhar uma chave temporária, ele constrói uma função para usar "Brave Search".
+O histórico da conversa é serializado e recarregado como memória.
+
+Como demonstração didática, é excelente porque expõe a mecânica e também a parte perigosa sem maquiagem.
+A ferramenta permite avaliação arbitrária.
+A possibilidade de o modelo criar capacidade nova em tempo de execução parece poderosa.
+Em produção, ela é justamente a razão para preferir contratos de ferramenta explícitos, permissões, isolamento e trilha de auditoria.
+
+O próprio autor diz que rodou tudo apenas num container Docker local.
+Mantenha essa ressalva no centro, não no rodapé.
+Um ambiente descartável é o mínimo quando uma saída probabilística pode virar código executável.
+
+A pequena experiência não é uma arquitetura segura para copiar.
+É uma maneira ótima de enxergar por que uma arquitetura segura precisa de bordas bem definidas.
+A fonte é o experimento "Agent in one hundred Lines of Lisp".
+
+"Mesh L L M" quer fazer várias máquinas parecerem um endpoint local.
+
+O "Mesh L L M" vem com uma proposta que é fácil de gostar e difícil de operar bem.
+Ele expõe uma [EY1 P IY1 AY1] compatível com "OpenAI" numa porta local.
+Mas a requisição pode rodar na máquina local, num par que já hospeda o modelo ou numa cadeia de máquinas.
+Nessa cadeia, cada uma fica responsável por uma faixa de camadas.
+
+Na descrição do projeto, a conectividade usa endpoints "iroh", "QUIC" autenticado, travessia de N A T e relay como fallback.
+O modo de pipeline move ativações de estágio em estágio.
+No exemplo, cada nó recebe uma faixa contígua de camadas.
+
+A página cita mais de quarenta modelos e chama esse transporte de split de "skippy stage two".
+O detalhe que salva muita expectativa irreal é separar capacidade de latência.
+
+Dividir camadas pode tornar possível usar um modelo que não cabe em uma máquina.
+Não transforma uma rede de longa distância, hardware heterogêneo, nós que entram e saem, agendamento e responsabilidade operacional numa GPU gigante e instantânea.
+As ativações ainda precisam viajar.
+
+Mesmo assim, a compatibilidade de endpoint tem valor real.
+Para quem tem hardware espalhado entre casa, escritório ou amigos, a ideia de usar uma interface local conhecida enquanto a topologia fica por baixo é atraente.
+Só vale tratar as promessas de desempenho, privacidade e confiabilidade como descrição do projeto, ainda não como garantias independentes.
+A fonte é o lançamento do "Mesh L L M" pela "Iroh".
+
+Agora, alguns quick hits do dia.
+
+"reaction" dois ponto cinco ponto um traz ações para padrões repetidos em logs.
+
+"reaction" é um daemon Rust para observar a saída de programas, como logs de S S H e de servidor web.
+Ele toma uma ação configurada quando um padrão se repete.
+Apresenta-se como alternativa mais leve ao "fail2ban" e aceita configuração em YAML ou "JSONnet".
+
+A promessa de ser mais de dez vezes mais rápido é do projeto.
+Ele também avisa não ter auditoria externa de segurança.
+Em V P S, parece uma boa peça para testar filtros e regras de firewall com cuidado antes de substituir qualquer proteção existente.
+A fonte é o repositório do "reaction".
+
+"sqlite-utils" quatro ponto um traz pequenos controles que evitam gambiarra.
+
+A versão quatro ponto um traz geradores de linhas em Python, por meio da opção "code", para insert e upsert.
+Também traz tipos explícitos em tabelas inferidas, para evitar, por exemplo, um CEP perder zero à esquerda.
+
+Há remoção de índices, SQL pela entrada padrão, inferência de chave primária no upsert e troca entre STRICT e não STRICT por transform.
+É continuação da cobertura do quatro ponto zero.
+Então o interessante é esse delta prático, não recontar o lançamento anterior.
+A fonte são as notas do "sqlite-utils" quatro ponto um.
+
+"sqlsure" é uma porta semântica antes do SQL do agente.
+
+"sqlsure" transforma restrições declaradas em checagens determinísticas.
+Essas restrições podem vir de testes "dbt", de chaves P K e F K ou de modelos fornecidos.
+
+Ele verifica fan-out, chasm joins, aditividade insegura, chaves de junção e colunas sensíveis.
+Pode entrar como biblioteca, na integração contínua ou como servidor M C P e devolver correções acionáveis por máquina.
+
+É um padrão interessante de segurança operacional.
+O agente escreve, um verificador determinístico barra e o agente repara.
+Só não peça ao verificador que adivinhe uma regra de negócio que ninguém declarou.
+A fonte é o repositório do "sqlsure".
+
+"mindwalk" faz replay local da sessão de um coding agent.
+
+"mindwalk" é um binário Go local que lê logs de sessão de "Claude Code" e Codex.
+Ele monta um mapa determinístico do repositório e reproduz buscas, leituras, edições, verificações, erros e marcações numa interface web.
+
+Pode ajudar uma revisão a enxergar escopo e churn sem enviar as sessões para fora.
+Mas é replay de pegadas, não raio X de entendimento.
+Visualizar o caminho não prova que o patch está correto.
+A fonte é o repositório do "mindwalk".
+
+"enable sort" é diagnóstico do "PostgreSQL", não receita de tuning.
+
+Desligar essa configuração afeta mais do que ordenar resultados.
+Entram na conversa agrupamentos baseados em sort, DISTINCT, operações de conjunto e merge joins.
+
+O uso sensato é por sessão, com "explain analyze", para testar uma hipótese.
+Depois, o ideal é corrigir o problema real com "work mem" ou índice.
+Um plano sem sort não é automaticamente melhor, sobretudo quando se lê uma fração grande da tabela.
+A fonte é a explicação sobre "enable sort".
+
+Ant é um runtime JavaScript pequeno, com sandbox que pede teste.
+
+O site do Ant descreve um runtime JavaScript de nove megabytes, construído sobre engine própria.
+Ele promete [EY1 P IY1 AY1]s compatíveis com Node e sandbox isolado por máquina virtual.
+
+É uma pista interessante para a camada de runtime e sandbox sob workflows de código com IA.
+Mas compatibilidade, limites de isolamento e maturidade precisam de avaliação independente antes de rodar código não confiável gerado por agente em produção.
+A fonte é o site oficial do Ant.
+
+Goeteia é Scheme para Wasm direto no navegador.
+
+Goeteia compila Scheme para "WebAssembly" no browser.
+O site diz que o compilador é escrito no subconjunto de Scheme que ele próprio compila.
+
+Também diz que verifica a saída auto-hospedada byte a byte e usa garbage collection do Wasm e tail calls.
+Ele lista suporte atual em Node, Chrome, Firefox, Safari e "wasmtime".
+
+É uma demonstração técnica deliciosa.
+Mas não resolve sozinha as perguntas de ecossistema e alvo de navegador de uma aplicação de produção.
+A fonte deste bloco é o site do Goeteia.
+
+A tendência do dia é tornar fronteiras observáveis.
+
+Não são projetos com a mesma arquitetura nem com o mesmo nível de risco.
+Mas há uma conexão útil entre eles.
+O relatório sobre o Grok pede visibilidade sobre dados que deixam o workspace.
+O "qMLX" mostra que estado de cache é parte palpável da experiência.
+
+O agente em Lisp torna a fronteira de execução explícita.
+O "sqlsure" põe uma trava determinística antes de SQL potencialmente errado.
+E o "mindwalk" torna a pegada de uma sessão revisável.
+
+Se existe uma pequena regra para levar daqui, ela é menos glamourosa que dar mais autonomia ao agente.
+Observe tráfego e estado, restrinja execução e crie verificações determinísticas antes de tratar a saída como confiável.
+É daí que a utilidade começa a sobreviver ao demo.
