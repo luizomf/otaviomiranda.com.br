@@ -86,7 +86,9 @@ export function getEntryDateLabel(
 ): string | undefined {
   const frontmatterDate = getEntryFrontmatterDate(entry);
   if (frontmatterDate) {
-    return frontmatterDate.toLocaleDateString(locale, { timeZone: 'UTC' });
+    return frontmatterDate.toLocaleDateString(locale, {
+      timeZone: 'America/Sao_Paulo',
+    });
   }
 
   const year = getEntryYearFallback(entry);
