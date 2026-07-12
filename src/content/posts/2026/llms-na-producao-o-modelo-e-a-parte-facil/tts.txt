@@ -1,0 +1,174 @@
+L L Ms na produção: o modelo é a parte fácil.
+
+Tem dia em que a notícia parece uma fila de modelos novos.
+Hoje, a parte interessante está em volta deles: o contrato de uma ferramenta, a métrica que decide se algo passou, o cache que ninguém olhou e o contexto operacional.
+É esse contexto que transforma uma sugestão plausível numa ação perigosa.
+
+Isso aparece tanto num modelo de visão que agora roda no "Workers AI" quanto em um teste de migração de agente.
+Também aparece numa plataforma interna da Azure, num projeto de banco de dados e numa experiência pequena de otimização com "Claude Code".
+O modelo continua importante, claro, mas ele não assina sozinho a parte difícil do sistema.
+
+O Moondream três ponto um chegou ao "Workers AI" para tarefas visuais mais objetivas.
+
+A Cloudflare disponibilizou, em oito de julho, o Moondream três ponto um no "Workers AI".
+É um modelo multimodal sparse M O E, com nove bilhões de parâmetros no total e dois bilhões ativos por inferência.
+A janela de contexto é de trinta e dois mil tokens.
+
+O ponto prático não é decorar a ficha técnica.
+O modelo expõe quatro tipos de tarefa que combinam melhor com um produto do que o clássico "descreva esta imagem": consultar, legendar, apontar e detectar.
+Em especial, coordenadas e caixas estruturadas podem virar uma etapa de automação, sem obrigar outra parte do sistema a interpretar uma resposta em prosa.
+Isso abre espaço para validar screenshots, extrair elementos de documentos, fazer uma moderação inicial ou criar uma interface que sabe onde algo apareceu na imagem.
+
+A Cloudflare publicou medições de percentil cinquenta, incluindo a ida e volta da rede, para uma imagem simples com um único assunto.
+Foram aproximadamente setecentos e setenta milissegundos para consulta e quatrocentos e oitenta milissegundos para legenda.
+Para apontar, cento e quarenta e cinco milissegundos; para detecção, cento e sessenta milissegundos.
+São números da própria Cloudflare, naquele cenário específico.
+Eles ajudam a imaginar um protótipo na borda, mas não funcionam como benchmark geral.
+
+Para quem já está no Workers, o atrativo é menos um "vision model" mágico e mais não precisar subir e operar um servidor de inferência para testar uma ideia.
+A diferença entre parâmetros totais e ativos também importa aqui.
+O tamanho anunciado não é, por si só, uma previsão de custo ou latência em cada chamada.
+
+As fontes deste bloco são Cloudflare e Moondream.
+
+A troca de modelo da Ploy virou uma auditoria da própria estrutura de testes.
+
+A Ploy contou como migrou seu agente de criação de sites para G P T cinco ponto seis Sol como padrão, depois de compará-lo internamente com Claude Opus.
+O relato diz que os builds concluídos ficaram dois vírgula dois vezes mais rápidos e vinte e sete porcento mais baratos.
+O resultado teria sido comparável ou melhor na avaliação de trabalho concluído.
+
+O número é interessante, mas a parte boa da história é outra.
+Segundo a empresa, cerca de um terço das falhas da primeira comparação vinha de suposições da estrutura de testes, o "harness", construída para o modelo que já estava lá.
+Uma incompatibilidade de schema fazia de cinquenta e dois a sessenta e quatro porcento das leituras de arquivo do G P T retornarem vazias.
+Isso acontecia mesmo quando a chamada parecia ter sucesso.
+Depois de uma transformação de schema, a Ploy relata zero leituras vazias e cerca de trinta porcento menos chamadas de ferramenta.
+
+Cache também entrou na conta.
+Na configuração descrita, o aproveitamento da primeira chamada teria saído de algo próximo de zero para oitenta e três vírgula sete porcento.
+Havia um prefixo estático de vinte e nove mil tokens.
+É o tipo de detalhe que troca uma corrida de cavalos por uma investigação de cabo solto atrás do rack.
+
+É um relatório de produção da própria Ploy, com ambiente e amostras próprios.
+Uma tabela, por exemplo, cita onze execuções de Opus e dez de G P T.
+O valor do caso está em mostrar que uma troca de modelo pede revisão de schemas de ferramentas, critérios de pontuação, orçamento de chamadas e cache.
+Às vezes, o modelo novo só chegou numa casa montada para outro morador.
+
+A fonte deste bloco é a Ploy.
+
+O "Brain" da Azure começa pelo mapa do mundo, não pelo agente.
+
+A Microsoft descreveu o Brain, sistema interno que sustenta a visão de saúde operacional da Azure.
+A escala explica por que isso não cabe numa tela com alertas.
+A empresa fala em centenas de serviços distribuídos em mais de oitenta regiões.
+
+O Brain reúne indicadores padronizados de serviço, monitores de domínio e contexto como deployments, volume de suporte e dependências entre serviços.
+A partir dessa leitura, a Microsoft diz que o sistema pode alimentar declarações de indisponibilidade e avisos mais direcionados aos clientes.
+Também pode alimentar roteamento de incidentes, travas de rollout e ferramentas de diagnóstico.
+
+É tentador chamar tudo isso de agente de operações e encerrar a conversa, mas a arquitetura interessante vem antes.
+Topologia, estado de execução, intenção, histórico e impacto no cliente formam um modelo compartilhado do ambiente.
+Sem isso, um agente pode até navegar por muitas [EY1 P IY1 AY1] e ainda operar só em pedaços da realidade, com confiança demais para o que consegue enxergar.
+
+O texto da Microsoft fala em melhorias qualitativas.
+Não publica uma taxa geral de confiabilidade, nem afirma que toda a Azure esteja coberta ou que a remediação seja autônoma.
+Ainda assim, o desenho é transferível.
+I A generativa não substitui a fundação de dados, sinais e relações que permite decidir se um alerta é incidente, ruído ou consequência de outra falha.
+
+As fontes deste bloco são Microsoft Azure e The New Stack.
+
+O Regre S Q L dois ponto zero quer fazer o C I enxergar o plano, não só as linhas.
+
+Uma migração pode manter exatamente as mesmas linhas no resultado e, mesmo assim, transformar uma consulta saudável em uma âncora.
+O Regre S Q L dois ponto zero parte desse problema.
+Em vez de testar apenas a semântica da consulta, a proposta é comparar o comportamento do plano de execução com uma baseline, usando estatísticas de produção.
+
+O autor descreve o uso do comando Explain e de snapshots de estatísticas.
+Isso inclui a exportação apenas de estatísticas no PostgreSQL dezoito, além de registros de buffers, spills, fluxo de linhas e a medida chamada Q error.
+Tempo entra como sinal auxiliar, porque ambiente, carga e cache fazem do cronômetro um juiz meio temperamental.
+
+No exemplo apresentado, a remoção de um índice muda um plano "Bitmap Heap Scan" para "Seq Scan", sem alterar o resultado da consulta.
+O demonstrativo mostra três mil oitocentos e noventa e oito buffers reais, contra uma baseline de cento e nove.
+Ele acusa o desvio com um limite configurado de cento e dois porcento.
+É uma demonstração do autor e da ferramenta, não a prova de que o método reproduz cada condição de produção nem um substituto para teste de performance completo.
+
+Para migrações feitas por humanos apressados e agentes diligentes demais, a ideia é simples e útil: tornar regressão de plano uma falha revisável no C I.
+Há um cuidado nada glamouroso, porém essencial.
+Estatísticas de produção são metadados operacionais sensíveis.
+A cópia, o acesso e o ambiente de teste precisam ser controlados, em vez de irem parar em qualquer notebook como fixtures de tutorial.
+
+A fonte deste bloco é o RegreSQL dois ponto zero.
+
+Dez iterações de compressão mostram o valor de uma gaiola bem feita.
+
+Elliot C. Smith montou um experimento deliberadamente estreito.
+Era um scaffold em Rust para compressão, um benchmark e dez iterações separadas de "Claude Code" com Sonnet quatro ponto seis.
+Cada rodada podia fazer uma hipótese, mudar o código e medir de novo.
+O objetivo era observar se um loop de pesquisa melhora algo sob regras claras, não provar inteligência geral.
+
+As regras eram boas porque davam pouca margem para autoengano.
+A descompressão precisava ser bit a bit idêntica ao original.
+Compressão e descompressão tinham limite de trezentos segundos.
+O maior arquivo tinha cerca de cento e cinquenta megabytes.
+Ao final, o resultado foi comparado com ferramentas conhecidas e com um dataset novo, em vez de apenas comemorar o placar do conjunto que guiou as mudanças.
+
+O autor estima cerca de quatro dólares por iteração pelo contador de uso da ferramenta.
+Esse valor, os resultados e a velocidade do loop variam com hardware, prompt, dataset e modelo.
+O experimento não pretende ranquear modelos.
+O formato, porém, é reutilizável: objetivo mensurável, invariantes rígidos, timeout, mudanças pequenas e uma avaliação que não estava presente em todas as decisões.
+
+Para deixar um agente mexer nisso sem virar uma sessão espírita de benchmark, a receita é menos dramática: construa uma gaiola com uma régua dentro.
+
+As fontes deste bloco são o relato do experimento e o repositório "agent-compression".
+
+Agora, algumas notas rápidas.
+
+Gleam troca caixas por arenas no formatter.
+
+Giacomo Cavalieri, integrante do núcleo do Gleam, relata ter trocado caixas "Box" individuais da árvore recursiva do pretty-printer por referências apoiadas em arenas.
+Ele também passou a guardar em cache fragmentos repetidos.
+No projeto medido por ele, o pretty-printer ficou vinte e quatro porcento mais rápido.
+O comando "gleam format" ganhou treze porcento, e o pico de memória caiu de oito vírgula quatro megabytes para sete vírgula seis megabytes.
+Os números pertencem àquele benchmark do autor, mas o caso lembra que árvores pequenas, alocadas aos montes, ainda cobram aluguel.
+
+A fonte deste bloco é Giacomo Cavalieri.
+
+George Hotz gosta de L L Ms, mas não da religião em volta deles.
+
+Em texto assumidamente pessoal e provocativo, George Hotz diz que agentes de código se tornaram ferramentas úteis para ele.
+Ao mesmo tempo, rejeita marketing de FOMO, promessas de superinteligência e argumentos contra open source.
+É opinião, não evidência empírica ou previsão confirmada, com todas as farpas que isso traz.
+Ainda serve de contraponto a uma temporada de lançamentos em que toda demo parece pedir que você escolha entre pânico e salvação.
+
+A fonte deste bloco é George Hotz.
+
+Para o ritual, use [EY1 P IY1 AY1]; para a investigação, use M C P.
+
+Um artigo do The New Stack propõe uma divisão útil para resposta a incidentes.
+Ações determinísticas e repetíveis ficam em [EY1 P IY1 AY1].
+Trabalho exploratório, que reúne contexto de várias ferramentas, pode usar M C P.
+O autor é executivo de uma empresa de gestão de incidentes.
+Ele não apresenta isso como padrão de protocolo ou benchmark e diz explicitamente que M C P não substitui [EY1 P IY1 AY1].
+A pergunta que sobra é boa: em qual parte desse fluxo o comportamento precisa ser previsível, auditável e igual toda vez?
+
+A fonte deste bloco é The New Stack.
+
+Nathan Lambert vê pressão sobre o ecossistema de modelos abertos.
+
+Nathan Lambert argumenta que disputas políticas podem remodelar o cenário de modelos abertos.
+Ele cita distilação, incentivos de mercado e restrições de laboratórios de fronteira.
+Ele fala especificamente dos próximos seis meses.
+Motivações, políticas e cronogramas seguem discutíveis, porque é uma análise, não um relatório de fatos consumados.
+Para equipes que dependem de pesos abertos ou de uma pilha local, a leitura põe em cena um risco de disponibilidade que costuma ficar fora do desenho da arquitetura.
+
+A fonte deste bloco é Interconnects.
+
+A tendência do dia é que a segurança de um agente mora no ambiente.
+
+A conexão mais sólida entre as histórias de hoje está no ambiente que decide se uma ação merece confiança.
+A Ploy encontrou vieses de schema, avaliação e cache antes de chegar a uma conclusão sobre modelos.
+O experimento de compressão impôs objetivo, invariantes e validação separada.
+O Brain da Azure organiza sinais e dependências antes de oferecer operações assistidas.
+O Regre S Q L transforma o plano que realmente roda em algo testável.
+
+Para quem está colocando agentes em produção, a pergunta mais produtiva amanhã cedo é simples: que evidência faria esta ação ser aceitável?
+Se a resposta depende de um campo que a ferramenta não retorna, de uma métrica que não existe ou de um contexto que vive na cabeça de alguém, ainda falta construir o chão.
