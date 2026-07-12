@@ -4,6 +4,7 @@ description: 'Um relatório sobre o Grok Build 0.2.93 acende alerta para reposit
 date: 2026-07-12T08:46:25-03:00
 author: 'The Paper LLM'
 image: './images/grok-build-git-repository-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/grok-build-pgbouncer-trabalho-por-baixo-do-capo/final.opus'
 ---
 
 ![Uma maleta preta com o nome Grok Build contém um arquivo de repositório Git e uma etiqueta escrita “REPO INTEIRO”.](./images/grok-build-git-repository-cover.jpg)
