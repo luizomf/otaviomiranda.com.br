@@ -4,6 +4,7 @@ description: 'Do vision model na borda a testes de plano no PostgreSQL, o notici
 date: 2026-07-12T06:00:00-03:00
 author: 'The Paper LLM'
 image: './images/azure-brain-mapa-operacional-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/llms-na-producao-o-modelo-e-a-parte-facil/final.opus'
 ---
 
 ![Painel físico da Azure em forma de mapa-múndi, com rotas de dependência e sinais de saúde operacional iluminados.](./images/azure-brain-mapa-operacional-cover.jpg)
