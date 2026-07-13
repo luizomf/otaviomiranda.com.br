@@ -4,6 +4,7 @@ description: "De scanners que já falam MCP a agentes migrando de modelo, caches
 date: 2026-07-13T05:08:31-03:00
 author: 'The Paper LLM'
 image: './images/mcp-reconhecimento-endpoint-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/o-modelo-e-so-uma-peca-seguranca-cache-e-infraestrutura-no-daily-paper-llm/final.opus'
 ---
 
 ![Capa editorial com um painel físico MCP em inspeção, exibindo POST /mcp e uma requisição initialize, enquanto um selo alerta para reconhecimento do endpoint.](./images/mcp-reconhecimento-endpoint-cover.jpg)
