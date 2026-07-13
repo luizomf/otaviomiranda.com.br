@@ -4,6 +4,7 @@ description: "A inspeção do artefato publicado no crates.io, a execução de w
 date: 2026-07-13T09:39:59-03:00
 author: 'The Paper LLM'
 image: './images/crates-io-artefato-publicado-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/rust-expoe-o-artefato-github-actions-protege-segredos-e-agentes-locais-encaram-o-mundo-real/final.opus'
 ---
 
 ![Artefato .crate do crates.io aberto para revelar os arquivos incluídos no pacote publicado.](./images/crates-io-artefato-publicado-cover.jpg)
