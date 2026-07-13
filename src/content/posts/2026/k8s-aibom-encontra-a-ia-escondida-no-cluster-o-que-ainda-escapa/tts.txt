@@ -1,0 +1,194 @@
+K oito S A I B O M encontra a inteligência artificial escondida no cluster: o que ainda escapa.
+É fácil aprovar uma arquitetura de inteligência artificial no diagrama e perder o que realmente entrou em produção.
+Um container muda, um modelo aparece num argumento de linha de comando e começa a caça ao inventário de onde a inteligência artificial está rodando.
+O Google abriu uma ferramenta para observar esse estado vivo no Kubernetes.
+Ela não resolve tudo: além de registrar o que reconhece, admite o que não conseguiu identificar.
+Hoje também há identidade delegada para agentes e provas formais em criptografia com Rust.
+Outra mudança obriga uma migração para passkeys, e um experimento da Meta levou a política de escalonamento para fora do kernel.
+
+O K oito S A I B O M procura o que já está rodando no cluster.
+O Google abriu o código do K oito S A I B O M, um controlador que procura sinais de uso de inteligência artificial.
+Para isso, ele observa os recursos de carga de trabalho de um cluster Kubernetes.
+A diferença para um inventário feito durante a construção está no momento da fotografia.
+Ele examina o estado em execução, onde imagens trocadas, configurações e serviços fora do caminho esperado já podem ter mudado a paisagem.
+A ferramenta roda como um único Deployment sem privilégios.
+Ela inspeciona imagens de container, variáveis de ambiente e argumentos em busca de ambientes de execução e frameworks.
+Também identifica bancos vetoriais.
+O resultado é um documento determinístico no formato Cyclone D X um ponto seis, voltado a componentes de aprendizado de máquina.
+Para times de plataforma e segurança, a vantagem é procurar a chamada inteligência artificial escondida.
+Isso é feito sem injetar contêineres auxiliares, os sidecars, e sem alterar a especificação dos pods.
+A instalação dispensa DaemonSets privilegiados e também não depende de E B P F para observar o sistema.
+O controlador complementa scanners de construção, mas não os substitui.
+O Google chama os documentos de adequados para auditoria e descreve registros imutáveis no armazenamento.
+Essas são propriedades declaradas do desenho, não uma certificação de conformidade.
+Ao todo, há três níveis de confiança.
+Declared indica que o componente apareceu de forma explícita.
+Inferred marca o que foi deduzido por padrões.
+Já Unresolved avisa que existem sinais, mas não há identidade suficiente.
+Os casos não resolvidos continuam pedindo revisão humana.
+Uma imagem pode revelar a família do ambiente de execução e ainda esconder o peso ou a versão exata do modelo.
+O inventário pode ficar no status de um recurso customizado, seguir para o Cloud Storage ou ser enviado por webhook.
+A fonte deste bloco é o Google Cloud.
+
+Um agente com múltiplos tenants pode agir por você sem fingir que é você.
+Quando um agente chama uma ferramenta em nome de um usuário, repassar o mesmo bearer token para todos os serviços parece simples.
+Isso também mistura destinatários e amplia o estrago caso a credencial escape.
+A A W S publicou uma implementação de troca de tokens em nome do usuário.
+Ela funciona no Amazon Bedrock AgentCore Gateway e segue o padrão OAuth dois ponto zero.
+O comportamento adotado está definido na R F C oito mil seiscentos e noventa e três.
+O fluxo preserva o identificador do usuário no campo sub.
+Depois, troca a audiência registrada em aud para o serviço que receberá a próxima chamada.
+O ator intermediário fica registrado separadamente.
+Antes de acionar a ferramenta, os componentes Gateway e Identity fazem a troca.
+O resultado é um token destinado à [EY1 P IY1 AY1] que será chamada.
+Assim, o serviço final distingue quem pediu a ação de qual componente a executou.
+A receita não vale para qualquer cenário.
+Em um sistema de um único tenant, com a mesma audiência de ponta a ponta, o encaminhamento direto pode bastar.
+Os servidores de autorização do tipo Org, oferecidos pela Okta, não têm o suporte necessário a audiência e escopo customizados.
+A arquitetura também exige desativar D Pop nesse repasse.
+Isso aumenta a importância de tokens curtos e da proteção do segredo usado pelo delegante.
+O repositório de referência foi prometido para depois da publicação e não fazia parte da evidência inspecionada.
+O exemplo usa a Okta como serviço de autorização.
+A empresa fictícia Acme recebe um servidor separado, e a outra empresa do exemplo, chamada Globex, recebe o seu próprio servidor.
+O [EY1 P IY1 AY1] Gateway valida emissor, audiência e escopo.
+No desenho completo, a audiência é conferida em três pontos independentes.
+Para equipes com agentes de múltiplos tenants, esse caminho evita a personificação por conta de serviço.
+Também evita o encaminhamento inseguro de uma credencial recebida de outro contexto.
+A fonte deste bloco é o blog de aprendizado de máquina da A W S.
+
+A Microsoft põe provas formais ao lado do Rust de produção.
+Rust elimina várias classes de erro de memória, mas não prova que uma função criptográfica calculou exatamente o algoritmo do padrão.
+A Microsoft publicou implementações em Rust para a biblioteca SymCrypt.
+O pacote inclui especificações e provas formais para M L KEM e também cobre o algoritmo SHA três.
+Esse código já é usado em versões de teste do Windows Insider.
+A biblioteca SymCrypt atende o Windows e também está na distribuição Azure Linux.
+O processo usa Aeneas para traduzir um modelo do código Rust.
+A tradução produz uma representação para o assistente de provas Lean.
+A partir daí, o assistente verifica se a implementação corresponde à especificação formal, desde que as precondições declaradas sejam verdadeiras.
+As provas desta primeira entrega cobrem por completo o código Rust desses dois algoritmos.
+Otimizações para xis oitenta e seis, sessenta e quatro bits, precisam de modelos explícitos.
+O mesmo vale para a arquitetura A Arch sessenta e quatro, inclusive seus intrínsecos e a seleção de implementação.
+Essas camadas não ganham passe livre por serem mais rápidas.
+Formalmente verificado não é sinônimo de sem falhas.
+A prova vale para o teorema escrito, a especificação formalizada e os modelos considerados confiáveis.
+Ela não garante que a especificação esteja completa.
+Também não elimina automaticamente canais laterais nem aposenta testes ou auditorias.
+A expansão para o algoritmo A E S G C M está em andamento.
+O mesmo vale para Frodo KEM e para o esquema M L D S A.
+Nenhum deles faz parte do conjunto já concluído.
+Há ainda um uso sóbrio de agentes.
+Eles podem sugerir passos e escrever trabalho de prova, mas a aceitação não depende da eloquência do modelo.
+O pequeno kernel do Lean confere o resultado de maneira determinística.
+Aqui, uma tarefa trabalhosa pode ser automatizada dentro de uma fronteira em que a máquina recusa uma saída errada.
+A fonte deste bloco é a Microsoft Research.
+
+Passkeys viram o caminho padrão no Entra, e o telefone ganha prazo.
+A partir de primeiro de setembro de 2026, a Microsoft pretende começar a tornar passkeys a experiência padrão de autenticação.
+A mudança será aplicada no Entra I D.
+Conforme a implantação chegar a cada organização, usuários com S M S ou chamada de voz habilitados serão ativados para passkeys.
+O convite de cadastro aparecerá durante o fluxo de autenticação multifator.
+O suporte inclui passkeys sincronizadas e vinculadas ao dispositivo.
+Para administradores, porém, a data mais importante vem depois.
+Em primeiro de fevereiro de 2027, a Microsoft encerrará sua própria entrega de códigos por S M S e voz.
+Isso não torna telefone tecnicamente impossível.
+Organizações que ainda precisarem desse canal poderão contratar um provedor compatível da Security Store.
+Elas terão de pagar os custos de telecomunicações.
+A implantação será gradual por organização, então primeiro de setembro não significa uma virada simultânea para todos.
+Também é preciso separar duas decisões.
+Nesse calendário, passkeys se tornam o padrão.
+A aposentadoria anunciada atinge a entrega nativa de S M S e voz pela Microsoft.
+Quem precisa conservar esses métodos terá uma rota paga para planejar e operar.
+O calendário deixa pouco espaço para tratar a mudança como um ajuste cosmético.
+A Microsoft planeja divulgar provedores e preços em dezoito de setembro.
+A configuração desses parceiros começa em trinta de outubro.
+Antes disso, vale levantar usuários afetados, testar o cadastro e a recuperação, escolher um grupo piloto e explicar a mudança.
+Isso importa principalmente onde há dispositivos compartilhados, exigências regulatórias ou dependência de alternativa por telefone.
+A fonte deste bloco é o blog de segurança da Microsoft.
+
+A Meta trocou a política de escalonamento sem manter um kernel próprio.
+Ao levar sua frota de anúncios para o Linux seis ponto nove, a Meta encontrou uma regressão.
+A causa relatada foi o comportamento do E E V D F, introduzido no kernel seis ponto seis.
+O serviço processa, em média, mais de cinco milhões de requisições por segundo.
+Uma política genérica de escalonamento esbarrou nas necessidades particulares de uma carga enorme e sensível à latência de cauda.
+A saída foi usar sched ext, mecanismo que permite definir a política de escalonamento fora do kernel.
+Essa política é escrita com B P F e distribuída a partir do espaço do usuário.
+A implementação divide C P Us de forma flexível conforme a sensibilidade à latência e ajusta os grupos com heurísticas de carga.
+Como a política não exige recompilar o kernel, a frota avançou sem carregar uma versão própria só para essa carga.
+O mecanismo entrou no Linux upstream na versão seis ponto doze.
+Os números foram medidos e publicados pela própria Meta.
+A redução inicial de vinte e oito porcento vale para uma etapa específica, não para o serviço inteiro.
+A medição foi feita no maior tipo de servidor [EY1 EH1 M D IY1] Bergamo usado pela empresa.
+A economia de energia também deriva de efeitos internos, não de uma medição universal que outro operador possa copiar.
+O mecanismo abre espaço para experimentar sem bifurcar o kernel, mas a decisão continua dependendo de benchmark com a carga real.
+Segundo a Meta, a primeira política reduziu em vinte e oito porcento o P noventa e nove da etapa de recuperação de anúncios.
+A empresa também relata economia de três vírgula vinte e oito megawatts.
+Ela ainda relata alta de um vírgula um porcento na quantidade ponderada de anúncios ranqueados.
+Evoluções posteriores teriam cortado mais sessenta porcento do P noventa e nove.
+Elas também teriam reduzido em dezoito porcento os timeouts no caminho crítico.
+A fonte deste bloco é a publicação Engineering at Meta.
+
+Agora, notas rápidas para levar no café.
+O S Q S completa vinte anos sem deixar de ser um amortecedor de falhas.
+O Amazon S Q S foi lançado em treze de julho de 2006.
+Ele chegou junto da primeira geração de serviços de computação, representada pelo E C dois.
+O armazenamento de objetos S três também fazia parte daquele início.
+O retrospecto de vinte anos mantém a ideia original: desacoplar produtores e consumidores para absorver picos e isolar falhas.
+Desde outubro de 2022, novas filas recebem criptografia S S E S Q S por padrão.
+Entre as adições recentes está o redrive, que recoloca em circulação mensagens de uma fila de erros.
+Também chegaram filas justas, chamadas de fair queues, e mais escala para o modo F I F O.
+Limites variam por região e modo.
+Em regiões selecionadas, filas F I F O chegaram a até setenta mil transações por segundo, por ação de [EY1 P IY1 AY1], em novembro de 2023.
+O limite de mensagens em voo subiu para cento e vinte mil em 2024.
+O cliente estendido de Python fala em até dois gigabytes, mas guarda o conteúdo no S três.
+Pela fila S Q S segue apenas uma referência, não uma mensagem nativa de dois gigabytes.
+O conteúdo nativo alcançou um mebibyte em 2025.
+A fonte deste bloco é o A W S News Blog.
+
+O Argo C D gerenciado atravessa a rede privada até o Git.
+A capacidade gerenciada de Argo C D não entra diretamente na rede privada do cliente.
+Essa rede é a V P C do cliente, enquanto a capacidade faz parte do Amazon E K S.
+Para acessar um Git Hub Enterprise Server privado, a A W S documentou uma ponte.
+O mesmo caminho aceita uma instalação autogerenciada do GitLab.
+A ligação usa o serviço CodeConnections.
+O host da conexão fica na rede do cliente.
+Para usá-lo, o Argo C D assume uma função I A M.
+O suporte descrito é para esses servidores nomeados, não para qualquer host Git.
+Certificados emitidos por uma autoridade privada pedem configuração explícita.
+Manter o repositório de GitOps privado ainda exige trabalho de rede.
+São necessários roteamento e D N S.
+A saída H T T P S deve estar liberada pela porta quatrocentos e quarenta e três.
+Também são necessárias permissões administrativas para instalar a integração no servidor Git.
+O procedimento exige a ferramenta A W S C L I na versão dois ponto xis ou mais nova.
+Para alta disponibilidade, a A W S recomenda múltiplas sub-redes e zonas de disponibilidade.
+A fonte deste bloco é o A W S Containers Blog.
+
+Um draft quer entregar I P v quatro sem manter A R P no primeiro salto.
+O draft van Mook intarea I P v seis resolved gateway, na versão três, propõe usar um endereço sentinela.
+Esse endereço é cento e noventa e dois ponto zero ponto zero ponto onze.
+O D H C P v quatro continua distribuindo uma opção comum de roteador.
+Hosts atualizados resolvem o próximo salto pela tabela de vizinhos I P v seis.
+O pacote I P v quatro permanece nativo de ponta a ponta, sem tradução ou túnel.
+Máquinas antigas ainda podem usar A R P e coexistir durante a transição.
+O mecanismo ainda é um draft individual, com apresentação prevista para o I E T F cento e vinte e seis.
+Não é R F C nem comportamento garantido.
+A ideia complementa a R F C oito mil novecentos e cinquenta.
+Também conversa com outro trabalho do I E T F sobre a entrega entre os dois protocolos.
+Nesse desenho, o tráfego I P v quatro usa uma rede I P v seis.
+Se for padronizada e implementada, a ideia pode reduzir estado de dois protocolos e gambiarras de gateway barra trinta e dois.
+A experiência é atribuída ao autor e não foi reproduzida aqui.
+Ele relata um ambiente anterior com dez mil servidores e máquinas virtuais.
+Esse ambiente gerava cerca de quinhentos mil pedidos A R P por segundo.
+A fonte deste bloco é o RIPE Labs.
+
+O Logseq dois ponto zero abre o primeiro beta da versão baseada em banco.
+O Logseq lançou o Desktop App dois ponto zero ponto um em treze de julho.
+Esse é o primeiro beta público da chamada versão D B.
+Já dá para experimentar a nova geração, mas o próprio projeto a chama de beta inicial.
+O projeto também pede backup de dados importantes e relatos de problemas.
+As notas não trazem um inventário completo de funcionalidades ou do caminho de migração.
+Portanto, versão D B não autoriza inferir detalhes de arquitetura ausentes no release.
+Para quem tem uma base de notas importante, o teste sensato é feito numa cópia ou ambiente separado.
+O número da versão é dois ponto zero ponto um, mas a maturidade ainda não é dois ponto zero.
+A página oferecia vinte e nove artefatos para desktop.
+Também havia pacotes para Android.
+A fonte deste bloco são as releases do Logseq no Git Hub.
