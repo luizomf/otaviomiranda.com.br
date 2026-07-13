@@ -1,4 +1,4 @@
-O modelo é só uma peça: segurança, cache e infraestrutura no Daily Paper LLM.
+Scanners já falam M C P: os riscos que começam fora do modelo de I A.
 
 A notícia mais importante de hoje talvez não seja sobre um modelo novo.
 Ela aparece nas bordas: no endpoint que aceita M C P sem autenticação e no executor que interpreta um esquema.

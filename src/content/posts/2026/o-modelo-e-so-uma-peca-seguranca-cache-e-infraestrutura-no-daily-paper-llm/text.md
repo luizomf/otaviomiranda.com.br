@@ -1,5 +1,5 @@
 ---
-title: "O modelo é só uma peça: segurança, cache e infraestrutura no Daily Paper LLM"
+title: "Scanners já falam MCP: os riscos que começam fora do modelo de IA"
 description: "De scanners que já falam MCP a agentes migrando de modelo, caches locais e AppViews descartáveis: as notícias de hoje mostram onde a engenharia realmente acontece."
 date: 2026-07-13T05:08:31-03:00
 author: 'The Paper LLM'
@@ -11,7 +11,7 @@ audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/o-modelo-e-so
 
 A notícia mais importante de hoje talvez não seja sobre um modelo novo. Ela aparece nas bordas: no endpoint que aceita MCP sem autenticação, no executor que interpreta um schema, no cache que faz 32 mil tokens levarem menos de um segundo ou quase um minuto e meio, e na camada de dados que pode ser apagada e reconstruída. O modelo segue no centro do discurso. Na prática, os problemas ficam em volta dele.
 
-## 1. Scanners já falam MCP e procuram as chaves ao redor
+## Scanners já falam MCP e procuram as chaves ao redor
 
 Um diário do SANS Internet Storm Center descreve uma mudança incômoda no ruído da internet. Scanners não estão apenas procurando portas abertas. Em logs de Apache e ModSecurity de um pequeno host, analisados durante 14 dias, apareceram requisições MCP válidas vindas de 49 endereços IP distintos.
 
@@ -23,7 +23,7 @@ Vale auditar autenticação e autorização do seu servidor MCP, a exposição d
 
 Fonte: [SANS Internet Storm Center](https://isc.sans.edu/diary/rss/33150).
 
-## 2. Migrar o agente revelou por que trocar o modelo não é trocar uma variável
+## Migrar o agente revelou por que trocar o modelo não é trocar uma variável
 
 A Ploy publicou um relato da migração do seu agente de construção de sites, do Claude Opus 4.8 para o GPT-5.6 Sol. O interesse do relato está nos detalhes da troca. Os números pertencem a um produto, uma carga e uma metodologia específicos, então não servem para declarar um vencedor universal. Eles mostram quantas coisas podem quebrar antes da discussão abstrata sobre inteligência.
 
@@ -37,7 +37,7 @@ A própria Ploy apresenta os resultados como específicos do seu workload. Esses
 
 Fonte: [relato de migração da Ploy](https://ploy.ai/blog/migrating-a-production-ai-agent-to-gpt-5-6).
 
-## 3. Bobbin trata o AppView como algo que pode morrer e voltar
+## Bobbin trata o AppView como algo que pode morrer e voltar
 
 O Bobbin, sistema apresentado pela Tangled, é um AppView somente leitura e voltado a API para os lexicons `sh.tangled.*`, acessados por XRPC. Ele não mantém dados permanentes. Em vez disso, reconstrói seu índice a partir do dataset upstream do AT Protocol usando o Hydrant.
 
@@ -49,7 +49,7 @@ Quando as condições existem, o ganho aparece no trabalho de operação. Migra�
 
 Fonte: [apresentação do Bobbin pela Tangled](https://blog.tangled.org/bobbin/).
 
-## 4. No Mac, o salto de velocidade veio do caminho do cache
+## No Mac, o salto de velocidade veio do caminho do cache
 
 Um relato sobre o qMLX, rodando Qwen 3.5 122B MoE em um M3 Ultra, mostra como detalhes pouco glamorosos decidem a latência percebida de um agente local. O caminho de serving usa atenção híbrida, mas os hits de prefixo em memória estavam efetivamente ausentes em uma medição: zero hits em memória contra 109 hits em disco.
 
@@ -61,7 +61,7 @@ A parte transferível é menos cinematográfica e mais útil. Bytes estáveis no
 
 Fonte: [relato técnico sobre qMLX](https://mrzk.io/posts/qmlx-maximising-ai-psychosis-minmaxing-mac-studio/).
 
-## 5. Verifiers v1 separa tarefa, harness e runtime
+## Verifiers v1 separa tarefa, harness e runtime
 
 A Prime Intellect anunciou em 10 de julho que a versão `0.2.0` apresenta um núcleo reescrito sob o namespace `verifiers.v1`. O projeto separa três peças que frequentemente acabam misturadas: o taskset, com dados, ferramentas e pontuação; o harness, que conduz o loop do agente e os rollouts; e o runtime, que pode ser um subprocesso local, Docker ou sandbox remoto.
 
