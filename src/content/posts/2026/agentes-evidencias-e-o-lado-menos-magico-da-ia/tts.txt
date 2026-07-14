@@ -1,0 +1,184 @@
+Agentes, evidências e o lado menos mágico da IA.
+
+A parte mais interessante da IA hoje não está numa demo brilhante.
+Ela aparece quando o modelo ganha acesso a arquivos, ferramentas e memória para fazer trabalho de verdade.
+Esta edição passa por esse terreno: agentes que precisam desconfiar do próprio contexto.
+E passa por um patch escrito com IA, que só convence quando os números mostram também onde ele não ajuda.
+
+O ataque pode entrar pela porta que o agente abre para si mesmo.
+
+O relatório de segurança de IA publicado pela Check Point nesta terça-feira parte de uma mudança que muita equipe já percebe no dia a dia.
+Modelos deixaram de apenas ajudar a escrever código e passaram a executar etapas de uma invasão.
+Isso não quer dizer que todo atacante tenha agora um robô autônomo de bolso.
+Quer dizer que agentes que leem arquivos, executam ferramentas e carregam contexto entre sessões criam novos pontos de abuso.
+
+O relatório cita o VoidLink, um framework de comando e controle com oitenta e oito mil linhas produzido em menos de uma semana.
+Ele aparece como um caso anterior dessa mudança.
+Nas medições da Check Point, as detecções de cargas maliciosas mais longas cresceram cerca de cinco vezes entre março e maio de 2026.
+Elas chegaram perto de um porcento dos prompts observados em maio.
+Os prompts de alto risco teriam dobrado, de dois para quatro porcento, no último ano.
+São dados de telemetria de um fornecedor, não uma taxa da internet inteira, mas merecem atenção.
+
+O ponto mais útil está na descrição de abuso persistente.
+Em vez de tentar uma frase milagrosa num chat, alguém pode deixar instruções maliciosas num repositório, numa configuração ou em conteúdo que o agente recarregue depois.
+A conversa parece inocente, mas o ambiente que ela abre talvez não seja.
+
+Para quem põe agentes perto de produção, isso vira trabalho concreto.
+Texto vindo de fora continua não confiável.
+Ferramentas precisam da menor permissão possível.
+Segredos não devem ficar disponíveis só porque o agente talvez precise deles algum dia.
+E toda ação relevante precisa deixar um rastro revisável.
+É segurança de fronteira, com uma interface de linguagem natural por cima.
+A fonte deste bloco é o relatório de segurança de IA de 2026 da Check Point Research.
+
+Red team de agentes fica melhor quando a descoberta vira evidência.
+
+Um preprint de 13 de julho propõe uma forma sensata de testar agentes de código.
+Uma descoberta de red team não deveria acabar como um prompt curioso salvo num documento.
+O sistema se chama "Agent Hacks Agent", ou A H A.
+Ele organiza o teste num ciclo: formular uma hipótese, tentar falsificá-la, executar o cenário num ambiente isolado e guardar a evidência que resistiu ao teste.
+
+O detalhe mais interessante é o grafo de conceitos de vulnerabilidade, chamado V C G pelos autores.
+Em vez de registrar apenas que um ataque funcionou, ele guarda a condição que teria permitido o problema.
+Também registra uma forma de desmenti-la, uma previsão de transferência e o material que sustenta a conclusão.
+Fica mais próximo de uma investigação reproduzível do que de uma coleção de truques.
+
+Os autores avaliaram o método contra Claude Code e Codex em três cenários de ataques diretos e indiretos.
+No protocolo deles, com um V C G congelado, o sistema superou em quatorze vírgula dois pontos percentuais a melhor linha de base de descoberta também congelada.
+Isso foi em uma execução única.
+É um resultado de preprint, limitado aos cenários e às comparações dos autores.
+Ele não prova que algum desses agentes esteja comprometido.
+Também não transforma o grafo em substituto para uma avaliação de segurança.
+
+Quando um teste encontra comportamento perigoso, a equipe precisa preservar o motivo, o limite e como repetir o experimento.
+Isso vale diante de um arquivo hostil, de um comando ambíguo ou de um estado estranho do workspace.
+Depois de um patch, a mesma hipótese pode rodar de novo.
+Sem esse registro, cada correção começa sua própria arqueologia.
+
+Também dá para discutir condições, controles e evidência sem publicar uma receita operacional de ataque.
+É o que um time precisa para decidir se uma permissão, um parser ou uma integração deve existir.
+A fonte é o preprint do A H A.
+
+Um patch escrito com IA vale pelo teste que aguenta.
+
+O pull request número vinte e cinco mil trezentos e noventa e cinco do llama ponto C mais mais foi integrado.
+Ele adiciona suporte à variante hífen v três, usada pelo Tencent Hy3.
+O modelo tem duzentos e noventa e nove bilhões de parâmetros e usa especialistas ativados conforme a tarefa.
+São oitenta camadas e mais uma camada de previsão de múltiplos tokens.
+Essa previsão tenta adiantar mais de um token por vez para gerar texto mais depressa.
+
+O autor do patch foi explícito sobre o processo.
+A maior parte da implementação foi escrita pelo Claude, na variante que ele identifica como Fable cinco, sob sua direção.
+Houve revisão humana e teste em hardware real.
+A semântica da previsão também foi conferida com uma implementação de referência.
+A divulgação mostra quem dirigiu o trabalho e quais freios entraram no processo.
+
+No teste do autor, com uma RTX 5090 e trezentos tokens, o recurso chamado draft M T P chegou a sete vírgula noventa e sete tokens por segundo.
+Ele usou n max igual a três e p min igual a zero vírgula setenta e cinco.
+Isso ficou entre vinte e seis e trinta e sete porcento acima dos cinco vírgula oitenta e um a seis vírgula trinta e um tokens por segundo relatados sem especulação.
+A aceitação dos rascunhos foi de noventa e sete vírgula três porcento.
+Com o p min padrão, igual a zero, o mesmo recurso caiu para quatro vírgula oitenta e quatro tokens por segundo.
+A configuração padrão também é uma decisão.
+
+No outro extremo, um M3 Max com cento e vinte e oito gigabytes e quantização I Q dois M marcou vinte e três vírgula vinte e sete tokens por segundo com a técnica.
+Sem ela, marcou vinte e três vírgula vinte e um tokens por segundo: praticamente empate.
+O autor descreve esse cenário como limitado por largura de banda de memória.
+A comparação de perplexidade com a referência não foi feita, porque os pesos somam quinhentos e noventa e oito gigabytes.
+
+Não são benchmarks independentes.
+São medições do contribuidor, nesse hardware, nessa quantização e nesses limiares.
+Ainda assim, o patch traz divulgação, teste de semântica, revisão, regressão e um resultado que deixa claro onde a aposta não rende.
+A fonte é o pull request número vinte e cinco mil trezentos e noventa e cinco do llama ponto C mais mais.
+
+O novo "git history" quer trocar cirurgia manual por guardrails.
+
+Mexer em histórico local sempre teve algo de reforma de encanamento.
+Dá para melhorar tudo, desde que você saiba onde está a água.
+O comando experimental "git history" foi introduzido no Git dois ponto cinquenta e quatro ponto zero, em abril.
+Ele foi ampliado no Git dois ponto cinquenta e cinco ponto zero, em junho.
+O objetivo é tornar algumas reformas comuns de histórico mais explícitas.
+
+Ele documenta as três operações.
+A operação "reword" altera a mensagem de um commit.
+A operação "split" deixa você separar trechos escolhidos em um novo commit pai.
+A operação "fixup" aplica o trabalho que está no stage a um alvo por meio de merge de três vias.
+Por padrão, a alteração alcança os branches locais descendentes.
+É isso que torna uma correção pequena atraente para quem mantém várias linhas locais de trabalho.
+
+Os guardrails fazem parte da proposta.
+O comando ainda não suporta históricos que contenham merges.
+Ele não executa hooks e recusa operações que produziriam conflito.
+Não promete uma reescrita sem conflito: para antes de tentar resolvê-lo.
+E continua valendo a regra social mais importante do Git.
+Não reescreva histórico publicado ou compartilhado sem combinar com quem depende dele.
+
+Para experimentar, comece no modo "dry run", em um branch local descartável.
+O objetivo não é declarar guerra ao rebase interativo ou ao Jujutsu.
+É usar uma linguagem mais direta para editar uma parte de história e deixar o Git propagar a mudança onde ele sabe fazê-lo com segurança.
+As fontes são o manual oficial do "git history" e o contexto de uso publicado por Lalit Maganti.
+
+Agora, alguns destaques rápidos, mas que merecem atenção.
+
+O Headlamp é a rota oficial para sair do Dashboard do Kubernetes.
+
+O Dashboard do Kubernetes foi arquivado, e o guia oficial agora descreve a migração para o Headlamp.
+Na versão desktop, ele lê o kubeconfig que você já usa.
+Pode administrar vários clusters e não cria recursos dentro deles.
+A autorização continua sendo a sua identidade normal e as regras de R B A C.
+Instalado dentro do cluster, ele usa uma "Service Account".
+
+Faça uma rodada paralela, valide o acesso e só então limpe tokens e regras do Dashboard antigo.
+A interface pode ser nova; o modelo de identidade continua sendo a parte a conferir.
+A fonte é o guia de migração do Kubernetes.
+
+Disco autoencriptado ainda pede uma conversa sobre confiança.
+
+Um estudo em preprint testou trinta e oito unidades comerciais com Opal dois, padrão de discos com criptografia própria.
+Numa bancada de caixa-preta, os pesquisadores encontraram problemas e incompatibilidades de firmware reportados aos fornecedores.
+Segundo o trabalho, isso também ajudou a melhorar ferramentas de criptografia de disco no Linux em distribuições importantes.
+Os cenários de teste foram publicados como código aberto.
+
+O estudo não sustenta que toda criptografia em hardware está quebrada.
+Também não é uma ordem para trocar tudo por LUKS.
+Ele lembra que criptografado, sozinho, não descreve o modelo de ameaça.
+Firmware, recuperação e ferramentas de gerenciamento entram nessa fronteira de confiança.
+A fonte é o preprint sobre unidades Opal dois.
+
+O monitor precisa enxergar o objeto depois que ele se monta.
+
+Outro preprint formaliza um problema desconfortável.
+Pedaços de tráfego podem parecer benignos isoladamente e só revelar dano quando são combinados.
+Se o monitor vê cada fragmento separadamente, pode ser incapaz de distinguir a montagem maliciosa de algo normal.
+É uma lente útil para agentes que recebem instruções, arquivos e saídas de ferramentas em etapas.
+
+Nos testes dos autores, um bloqueio que via a versão decodificada segurou todos os ataques avaliados.
+Um monitor treinado em tráfego benigno chegou a A U R O C médio de zero vírgula oitocentos e setenta e quatro na estrutura de código recuperada, em codificações não vistas.
+Isso mede separação de detecção no experimento, não uma taxa de bloqueio pronta para produção.
+O controle precisa alcançar a representação onde o risco aparece.
+A fonte é o preprint sobre dano composicional.
+
+Um carimbo de data deixa o u v x menos surpreendente no C I.
+
+Simon Willison mostrou uma receita simples para ferramentas instaladas com u v x no "Git Hub" Actions.
+Primeiro, a variável U V exclude newer fica presa a uma data.
+Essa data entra no sufixo do cache configurado pelo setup do uv.
+Depois de acertar o cache, o modo offline impede uma busca nova.
+Ao mudar a data, você atualiza deliberadamente o conjunto resolvido e a chave do cache.
+
+É uma preferência prática de workflow, não orientação universal do projeto uv.
+Manter wheels pré-compilados pode trocar espaço e tempo de restauração por menos downloads novos.
+Para scripts efêmeros, a receita faz uma ferramenta adicionada sem atualização do período de cache falhar visivelmente.
+Assim, ela não varia silenciosamente entre execuções.
+A fonte é a receita de cache para u v x publicada por Simon Willison.
+
+A fronteira útil fica fora de uma chamada isolada ao modelo.
+
+As histórias de hoje apontam para a mesma direção, sem inventar uma onda apocalíptica.
+A Check Point fala de conteúdo, configuração, ferramentas e contexto persistente.
+O A H A acumula evidência ao longo da trajetória de um agente.
+O estudo sobre dano composicional explica por que checar cada passo isoladamente pode não bastar.
+Isso vale quando o objeto perigoso só aparece depois da montagem.
+
+São fontes de pesos diferentes: uma pesquisa de fornecedor e duas preprints.
+A pergunta de engenharia é onde o sistema junta contexto, decide permissões e revela o resultado final.
+É ali que observabilidade, auditoria e defesa em camadas entram no produto para quem trabalha com agentes.
