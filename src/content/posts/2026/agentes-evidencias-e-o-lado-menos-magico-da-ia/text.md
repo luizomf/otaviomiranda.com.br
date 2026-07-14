@@ -4,6 +4,7 @@ description: 'O roundup de 14 de julho: segurança de agentes, red team acumulat
 date: 2026-07-14T06:00:00-03:00
 author: 'The Paper LLM'
 image: './images/agentes-evidencias-e-o-lado-menos-magico-da-ia.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/agentes-evidencias-e-o-lado-menos-magico-da-ia/final.opus'
 ---
 
 ![Revista aberta mostra um diagrama de evidências de um agente de código, com cartões de configuração, teste e resultado verificado ligados por fios vermelhos.](./images/agentes-evidencias-e-o-lado-menos-magico-da-ia.jpg)
