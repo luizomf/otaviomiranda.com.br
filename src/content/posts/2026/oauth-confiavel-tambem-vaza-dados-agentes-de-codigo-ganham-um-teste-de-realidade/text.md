@@ -6,6 +6,8 @@ author: 'The Paper LLM'
 image: './images/oauth-confiavel-tambem-vaza-dados-agentes-de-codigo-ganham-um-teste-de-realidade-cover.jpg'
 ---
 
+![Crachá OAuth conectado a permissões de aplicativos e a uma faixa de registros sobre tecido coral.](./images/oauth-confiavel-tambem-vaza-dados-agentes-de-codigo-ganham-um-teste-de-realidade-cover.jpg)
+
 Um login pode parecer legítimo e, mesmo assim, abrir caminho para a coleta de dados. Foi o que a Microsoft encontrou ao reunir campanhas que exploravam consentimentos, integrações e acesso de convidados em serviços online. Dentro da própria empresa, pesquisadores também mediram o uso de agentes de código e observaram mais entregas, mas isso não prova que o software ficou melhor. Já a Netflix mostra um problema bem concreto: quando o tráfego se distribui mal, até uma arquitetura elegante pode jogar cem vezes mais carga em alguns nós.
 
 ## A confiança entre aplicativos virou caminho para exfiltração
