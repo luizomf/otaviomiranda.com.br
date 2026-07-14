@@ -1,0 +1,143 @@
+OAuth confiável também vaza dados; agentes de código ganham um teste de realidade.
+Um login pode parecer legítimo e, mesmo assim, abrir caminho para a coleta de dados.
+Foi o que a Microsoft encontrou ao reunir campanhas que exploravam consentimentos, integrações e acesso de convidados em serviços online.
+Dentro da própria empresa, pesquisadores também mediram o uso de agentes de código e observaram mais entregas.
+Mas isso não prova que o software ficou melhor.
+Já a Netflix mostra um problema concreto: quando o tráfego se distribui mal, uma arquitetura elegante pode jogar cem vezes mais carga em alguns nós.
+A confiança entre aplicativos virou caminho para exfiltração.
+Não é preciso roubar uma senha ou instalar malware para entrar numa aplicação corporativa.
+Em um relatório publicado em 13 de julho, a Microsoft descreveu três caminhos observados entre meados de 2025 e meados de 2026.
+Em todos eles, os invasores exploravam a confiança já concedida a um aplicativo, uma integração externa ou um visitante.
+No primeiro caminho, o atacante telefonava para a vítima e a convencia a autorizar um aplicativo malicioso.
+Esse aplicativo se apresentava como o Salesforce Data Loader.
+Como o consentimento liberava chamadas de [EY1 P IY1 AY1], o aplicativo herdava os privilégios do usuário.
+Depois disso, o tráfego podia se passar por uma operação normal, sem a anomalia tradicional de um login suspeito.
+O segundo caminho passava por integrações confiáveis.
+Tokens e conexões comprometidos mantinham o acesso aos dados e permitiam extraí-los por fluxos que o serviço já esperava.
+O relatório cita incidentes relacionados a Salesloft Drift, em agosto de 2025.
+Também cita Gainsight, em novembro daquele ano, e Klue, em junho de 2026.
+Portanto, não basta revisar contas humanas.
+Uma conexão de terceiro esquecida pode continuar funcionando quando ninguém mais se lembra de quem a aprovou.
+No terceiro caminho, os invasores aproveitavam permissões de convidado mal configuradas para consultar dados pelas interfaces do serviço.
+Entre elas, estavam endpoints Aura e Graph Q L.
+Segundo a Microsoft, essa atividade não resultou de uma vulnerabilidade inerente ao Salesforce.
+O problema estava nas permissões expostas e nas relações de confiança, e não numa falha universal da plataforma.
+A atribuição exige cuidado, especialmente neste caso.
+O relatório descreve atividade com técnicas sobrepostas às comumente associadas ao ShinyHunters.
+Mas isso não comprova que o grupo esteve por trás de cada incidente.
+O material publicado também não permite estimar a quantidade de vítimas nem o volume total de dados.
+Na prática, as equipes precisam revisar aplicativos conectados, consentimentos, permissões de convidados e integrações de terceiros.
+Consultas e exportações fora do padrão também merecem atenção, mesmo quando a autenticação parece correta.
+A Microsoft diz que trabalhou com a Salesforce para aumentar a granularidade dos eventos disponíveis em sua ferramenta de monitoramento.
+A tarefa é descobrir quais sistemas ainda podem agir em nome de cada usuário.
+A fonte desta história é o Microsoft Security Blog.
+Agora, mais pull requests não encerram a discussão sobre agentes de código.
+Um novo estudo acompanhou a adoção de agentes que trabalham pelo terminal entre dezenas de milhares de engenheiros da Microsoft.
+Os autores associaram o uso das ferramentas a aproximadamente vinte e quatro porcento mais pull requests mesclados.
+A comparação foi feita com um cenário contrafactual estimado.
+O número chama atenção, mas não significa vinte e quatro porcento mais produtividade.
+O trabalho é um preprint e ainda não passou por revisão por pares.
+Ele acompanha um rollout no início de 2026, com uma janela posterior de 5 de janeiro a 29 de abril.
+A análise de adoção se concentra no Copilot [S IY1 EH1 L AY1], e a de resultados inclui também o Claude Code.
+O período termina antes de uma mudança interna que restringiria o Claude Code para a maioria dos engenheiros.
+Essa mudança prejudicaria a comparação.
+Segundo os pesquisadores, o primeiro uso se espalhou principalmente pela exposição social.
+Ver colegas usando a ferramenta teve mais relação com a tentativa inicial.
+A permanência apareceu mais associada à atividade de código do que a características demográficas ou de carreira.
+Para o estudo, retenção significa ter atividade em pelo menos cinco dos 14 dias seguintes ao primeiro uso.
+O aumento estimado de entregas persistiu durante a janela de quatro meses.
+Só que pull request mesclado mede output, não qualidade.
+Essa métrica não mostra quantos bugs entraram nem quanto trabalho de manutenção veio depois.
+Também não mostra se o cliente recebeu mais valor ou se a empresa economizou dinheiro.
+O próprio artigo deixa em aberto a qualidade do software produzido com o throughput adicional.
+O desenho observacional também tem limites.
+Quem adota cedo pode ter tarefas, hábitos ou motivação diferentes.
+As ferramentas talvez se encaixem melhor em certos tipos de trabalho.
+Além disso, o ambiente da Microsoft favorece uma integração mais próxima com um dos produtos estudados.
+Essa população já tinha acesso a outras formas de assistência do "Git Hub" Copilot.
+Por isso, não dá para generalizar o resultado para empresas que estão começando do zero.
+Quem conduz um rollout precisa olhar além do número de licenças ativadas.
+É preciso acompanhar uso repetido, custo de tokens e fluxo de entregas.
+Também é preciso medir separadamente defeitos, manutenção e impacto para o usuário.
+Os autores declaram ter usado assistência de inteligência artificial no código de análise e numa versão inicial do texto.
+Segundo eles, houve verificação e responsabilidade humanas.
+Isso descreve o método, mas, por si só, não confirma nem invalida os resultados.
+As fontes são o resumo do preprint no arXiv e a versão integral do estudo.
+Na próxima história, a Netflix precisou redistribuir o tráfego duas vezes.
+Um mapa de dependências parece simples até os dados chegarem de forma muito desigual.
+A Netflix detalhou como construiu sua topologia de serviços com fluxos de rede, métricas entre processos e rastreamento distribuído.
+As três camadas ficam fisicamente separadas.
+A interface de consulta pode acessá-las isoladamente ou combiná-las para responder quem depende de quem.
+Os fluxos de rede têm um problema próprio.
+Eles registram saltos por balanceadores, proxies e tradução de endereços.
+Enquanto isso, a equipe precisa reconstruir a relação lógica entre aplicações.
+O primeiro estágio agrega os registros em janelas de cinco minutos.
+O segundo redistribui os dados e resolve os intermediários.
+No terceiro, o sistema redistribui novamente, enriquece o resultado e o persiste.
+Essa segunda redistribuição não fazia parte do desenho inicial.
+Com dois estágios, o agrupamento por intermediário levava alguns nós a receber até cem vezes o tráfego típico.
+Esses hot nodes acumulavam trabalho e ameaçavam o pipeline inteiro.
+As métricas entre processos, por outro lado, já chegam particionadas no nível da aplicação.
+Por isso, elas podem passar por um pipeline de apenas um estágio.
+Quando o armazenamento ou as etapas seguintes ficam lentos, os fluxos reativos propagam backpressure até os consumidores do Kafka.
+Em vez de deixar a fila interna crescer sem limite ou derrubar o processamento, o sistema reduz o ritmo de entrada e aceita o atraso.
+Embora o artigo fale em atualização próxima do tempo real, isso costuma representar dezenas de minutos.
+Sob pressão, pode demorar ainda mais.
+Nesse fluxo, a equipe também trocou g R P C por eventos enviados pelo servidor, os S S E.
+As medições internas mostraram que serialização, pools de conexões e memória custavam mais do que o trabalho útil naquele padrão de uso.
+A decisão vale para esse sistema, com dados já agregados e enviados continuamente.
+O artigo não recomenda abandonar g R P C de forma geral.
+Segundo a Netflix, a plataforma processa milhões de registros de fluxo por segundo e responde consultas em menos de um segundo.
+Esses números não foram reproduzidos externamente.
+A arquitetura também usa hashing consistente e descoberta dinâmica para acompanhar mudanças no número de instâncias e nas implantações.
+Para outros sistemas, a lição concreta é medir o particionamento real antes de escolher o protocolo ou o número de agregadores.
+A fonte desta história é o Netflix TechBlog.
+Agora, algumas notas rápidas, começando pelo Java sem o pico de inicialização, mas com capacidade fixa.
+A A W S comparou quatro modos de execução para aplicações Java.
+O teste reuniu 240 mil requisições em três cargas, com Spring Boot quatro ponto zero ponto seis sobre Java 25.
+Em Managed Instances, a máquina virtual permanece viva entre chamadas.
+Assim, compilação otimizada, pools e heap podem amadurecer em vez de recomeçar a cada invocação.
+A empresa relata melhora de dezoito a trinta porcento na mediana.
+No percentil 99, a melhora relatada vai de vinte e sete a quarenta e um porcento em relação ao modo padrão.
+As configurações de computação eram diferentes, porém, e os resultados são do próprio fornecedor.
+Managed Instances cobra por instância e combina melhor com tráfego sustentado.
+Antes de migrar, é preciso repetir o teste com a carga, a concorrência, a versão e o custo reais.
+Sem cold start descreve aqui o caminho depois do provisionamento.
+Não significa ausência de inicialização ou de operação.
+A fonte desta nota é o A W S Compute Blog.
+Na nota seguinte, um segundo middleware fez um tipo válido virar objeto vazio.
+No S D K TypeScript do Inngest, a composição de dois middlewares podia reduzir o retorno da função step run a um objeto vazio.
+O programa rodava corretamente, e a falha estava na análise estática.
+Bastava uma propriedade opcional num objeto aninhado para disparar o problema.
+A transformação Jsonify preservava a marca de campo opcional.
+Ao ler os valores do tipo mapeado, ela deixava undefined entrar na união usada para selecionar chaves.
+A segunda aplicação ampliava o erro.
+A correção passou a filtrar as chaves diretamente com remapeamento.
+Testes que acessam uma propriedade concreta também revelaram o defeito melhor do que comparações entre aliases ainda não resolvidos.
+Esse caso pertence à implementação em questão, não a todo uso de tipos mapeados.
+A fonte desta nota é o Inngest Blog.
+Na próxima nota, a Prefect anuncia um acordo para comprar a Dagster Labs.
+A Prefect anunciou um acordo para adquirir a Dagster Labs.
+Integrantes da equipe adquirida devem se juntar à compradora.
+A empresa afirma que Dagster e Dagster Plus continuarão recebendo investimento.
+Também afirma que os clientes atuais não precisam tomar nenhuma medida imediata.
+No anúncio, Dagster aparece como camada de resultados, Prefect como execução e Fast M C P como acesso numa futura plataforma para agentes.
+Essa é a direção declarada pelo comprador.
+Manutenção, compatibilidade e integração ainda não são resultados observados.
+Preço e cronograma de fechamento também não foram divulgados.
+Usuários podem acompanhar o roadmap, a governança do código aberto e os contratos.
+Não há motivo, por enquanto, para iniciar uma migração que não foi anunciada.
+A fonte desta nota é a Prefect.
+Por fim, um jogo de terminal deixa o SQLite calcular cada pixel.
+DOOM Q L é um jogo de tiro original, inspirado no gênero de Doom.
+Nele, o SQLite calcula movimento, colisão, inimigos, combate e o quadro de pixels.
+Uma consulta devolve a imagem visível.
+O programa em Python leva teclas, tempo e tamanho do terminal ao banco e depois imprime o resultado.
+A lógica do jogo e o desenho ficam nas consultas e nas views.
+O projeto também inclui um inspetor somente leitura.
+Os eventos de auditoria são gravados na mesma transação da ação, então um rollback desfaz ambos.
+O arquivo README declara 36 testes para comportamento, determinismo, renderização e separação entre banco e host.
+Não houve execução local nesta apuração.
+Além disso, o repositório tinha apenas dois commits quando foi inspecionado.
+É um experimento legível sobre estado transacional, não uma recomendação de banco para engines de jogos.
+As fontes são o repositório do DOOM Q L e a nota de Simon Willison.
