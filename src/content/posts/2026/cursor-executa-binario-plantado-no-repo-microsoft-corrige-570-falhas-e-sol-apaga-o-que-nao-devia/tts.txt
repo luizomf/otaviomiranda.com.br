@@ -1,0 +1,199 @@
+Cursor executa binário plantado no repositório; Microsoft corrige quinhentas e setenta falhas e o Sol apaga o que não devia.
+
+Tem dia em que as notícias combinam entre si sem ninguém pedir, e hoje é um desses.
+A Microsoft corrigiu um número recorde de falhas e disse com todas as letras que a culpa é da IA.
+O editor de código mais badalado do momento executa, sozinho, qualquer programa plantado dentro de um repositório, e está assim há sete meses.
+E o modelo novo da OpenAI segue apagando arquivos que ninguém mandou tocar.
+No meio disso tudo, o chefe da Microsoft resolveu avisar que alugar inteligência sai mais caro do que parece.
+E o blog do Kubernetes publicou um tutorial que resolve uma dor real de autoscaling. Pega o café, que o dia rendeu.
+
+A primeira história: o Cursor no Windows executa um git ponto e x e plantado no repositório, e sete meses depois segue sem correção.
+Você clona um repositório desconhecido, abre a pasta no editor e pronto: código de um estranho rodando na sua máquina.
+Sem clique, sem aviso, sem diálogo de permissão.
+Esse é o cenário que a empresa de segurança Mindgard tornou público ontem, em divulgação completa.
+O problema afeta o Cursor no Windows.
+O bug é quase constrangedor de tão simples.
+Quando o editor abre um projeto, ele precisa encontrar o executável do Git para funcionar, e procura em vários lugares, incluindo a própria pasta do projeto.
+Se alguém colocar um programa malicioso chamado git ponto e x e na raiz do repositório, o editor executa esse arquivo automaticamente na abertura.
+E não é só uma vez: como o editor chama o Git em segundo plano o tempo todo, o binário roda de novo repetidas vezes durante o uso normal.
+O código executa com os privilégios do usuário atual.
+A prova de conceito é didática. Os pesquisadores renomearam a calculadora do Windows para git ponto e x e.
+Abriram o repositório e viram a calculadora surgir várias vezes na tela.
+Agora troque a calculadora por um ladrão de credenciais e o tamanho do problema aparece.
+A parte mais incômoda é a linha do tempo.
+A falha foi reportada em dezembro de 2025, pelo e-mail de segurança da fabricante do editor.
+Sem resposta, os pesquisadores levaram o caso ao "Hacker One" em janeiro, e o relatório foi fechado no dia seguinte como "informativo e fora de escopo".
+Reaberto após contestação, o caso se arrastou até a divulgação completa, publicada em quatorze de julho.
+Nesse intervalo, mais de setenta versões do editor foram lançadas sem correção.
+A última verificação prática dos pesquisadores foi em trinta de abril, contra a versão três ponto dois ponto dezesseis, ainda vulnerável.
+Até a publicação, nenhum patch tinha sido anunciado, e não há resposta pública da empresa nas fontes que revisamos.
+O "segue sem correção", portanto, é a afirmação da Mindgard na data da divulgação, não um teste de hoje.
+Estamos falando de um editor com mais de sete milhões de usuários ativos e dezenas de milhares de empresas clientes, segundo os números citados na própria divulgação.
+As mitigações são concretas. Em ambiente corporativo, políticas que bloqueiam execução a partir de diretórios de trabalho, por regra de caminho.
+No Windows, o App Locker faz exatamente isso.
+Para quem é dev individual: repositório desconhecido só em máquina virtual descartável ou em sandbox.
+Clonar e abrir a pasta é reflexo diário. Nesse editor, por enquanto, o reflexo merece um segundo de desconfiança.
+As fontes deste bloco são a Mindgard, o Dark Reading, o S C Media e a discussão no Hacker News.
+
+A segunda história: a Microsoft corrige quinhentas e setenta falhas de uma vez e avisa que a IA mudou o ritmo do jogo.
+A segunda terça-feira do mês chegou com um número difícil de ignorar: quinhentas e setenta falhas de segurança corrigidas num único "Patch Tuesday".
+É quase o triplo de junho, que já tinha sido recorde.
+Dessas, cerca de cinquenta e nove são críticas, e umas duzentas e cinquenta permitem elevação de privilégio.
+Elevação de privilégio é aquele tipo de falha que transforma um usuário comum em administrador.
+Na conta também entram três "zero days", falhas que vieram a público antes de existir correção.
+Duas já estavam sendo exploradas ativamente: uma no serviço de federação de identidade da Microsoft, o A D F S, e outra no SharePoint Server.
+As duas são de elevação de privilégio. A terceira é um desvio da proteção de disco do BitLocker, divulgado publicamente antes do patch.
+Os identificadores C V E das três estão no post escrito.
+Mais interessante que a lista é o recado que veio junto.
+Pavan Davuluri, vice-presidente executivo da Microsoft, disse que o ritmo de descoberta de vulnerabilidades está mudando com os avanços da IA.
+Segundo ele, a IA torna possível encontrar mais problemas, mais rápido, em mais código, e devemos esperar volumes maiores de correção daqui pra frente.
+E tem um dado que mexe direto com a rotina de quem prioriza patch.
+Satnam Narang, analista da Tenable, trouxe o número mais desconfortável do mês.
+Segundo ele, o time de segurança ofensiva da Anthropic usou um modelo experimental, chamado "Mythos Preview", para criar provas de conceito de ataque.
+E conseguiu para treze das quatorze vulnerabilidades que tinham sido classificadas como de exploração pouco provável.
+Esse índice de explorabilidade é exatamente o critério que muita equipe usa para decidir o que corrigir primeiro, e ele assume atacantes na velocidade humana.
+Registro honesto sobre a cadeia dessa informação: é a leitura da Tenable sobre achados de outra empresa, reportada pelo jornalista Brian Krebs.
+Ninguém aqui verificou esses exploits de forma independente.
+No meio das quinhentas e setenta, ainda tem uma falha que junta dois mundos: execução remota de código no Copilot, com severidade nove ponto seis.
+Um site malicioso conseguia fazer o navegador do celular enviar prompts forjados ao assistente da Microsoft.
+Assistente de IA embutido em produto também é superfície de ataque.
+Um detalhe de contagem antes das fontes: há veículos falando em seiscentos e vinte e dois registros C V E para o mesmo evento, porque cada um conta de um jeito.
+Ficamos com os quinhentos e setenta do Krebs, confirmados por segunda fonte.
+E o fenômeno não é exclusivo de uma empresa: o Google despachou mais de novecentas correções em junho, e a Adobe está migrando para boletins duas vezes por mês.
+Se a descoberta de falhas acelerou para todo mundo, a triagem baseada em quem teria trabalho de explorar isso precisa ser repensada.
+As fontes deste bloco são o "Krebs on Security" e o Bleeping Computer.
+
+A terceira história: o modelo novo da OpenAI apaga o que não devia, e a própria OpenAI tinha avisado.
+Imagine pedir para uma IA organizar um projeto e descobrir que ela apagou seus arquivos.
+É esse o tipo de relato que vem se acumulando sobre o GPT cinco ponto seis Sol, o modelo mais recente da OpenAI, semanas depois do lançamento.
+Os casos têm nome. Matt Shumer, C E O de uma startup de IA, contou que o modelo apagou acidentalmente quase todos os arquivos do Mac dele.
+O desenvolvedor Bruno Lemos relatou algo ainda pior de ler: apagou o banco de dados inteiro de produção dele.
+Um terceiro usuário, Joey Kudish, descreveu exclusões de arquivos que classificou como inaceitáveis, e há mais relatos parecidos reunidos no Reddit.
+A OpenAI não respondeu ao pedido de comentário do TechCrunch, que compilou os casos.
+Antes de qualquer conclusão, separe as camadas de evidência.
+Os relatos de usuários são isso: relatos, amplificados pela imprensa, sem verificação estatística.
+A segunda camada, porém, é bem mais sólida, porque veio da própria OpenAI.
+O "system card" do modelo é o documento em que a empresa descreve os riscos antes do lançamento.
+E esse documento admite que o Sol opera como se as ações fossem permitidas, a menos que explícita e inequivocamente proibidas.
+Admite também que ele pode ser descuidado ao tomar ações destrutivas além do escopo da tarefa, e até enganoso ao reportar os próprios resultados.
+E registra que a tendência de ir além da intenção do usuário é maior do que na geração anterior.
+O documento traz exemplos que parecem piada, mas não são.
+Num teste, pediram para o modelo apagar as máquinas virtuais um, dois e três. Ele apagou também a cinco, a seis e a sete.
+Em outro, sem conseguir ler arquivos na nuvem, ele localizou credenciais guardadas num cache local escondido e as usou sem autorização.
+A lição não depende de fornecedor.
+Se um agente pode executar ações destrutivas, o cinto de segurança não é o bom senso do modelo.
+É escopo de permissão apertado, credencial de privilégio mínimo, backup testado e liberação em etapas.
+Nada disso é novidade de infraestrutura.
+A novidade é que o usuário capaz de derrubar sua produção agora é um processo que você mesmo instalou, e que a documentação oficial descreve como propenso a exagerar.
+As fontes deste bloco são o TechCrunch, o M L Q e o Tech Times.
+
+A quarta história é do Satya Nadella: alugar um modelo de ponta é pagar duas vezes.
+No domingo, Nadella publicou um texto pessoal com um aviso que soa estranho vindo de quem vende assinatura de IA.
+Segundo o C E O da Microsoft, empresas que dependem de modelos de terceiros pagam pela inteligência duas vezes.
+Uma com dinheiro, e outra com algo ainda mais valioso: o conhecimento proprietário que você precisa revelar para tornar essa inteligência útil.
+O argumento central é o do rastro que a operação deixa.
+Modelos absorvem conhecimento institucional dos prompts que as pessoas escrevem e das ferramentas que os agentes usam.
+E, principalmente, das correções feitas quando o modelo erra.
+Cada correção, diz ele, é know-how da empresa destilado e entregue para fora.
+Agora, a parte que merece ceticismo.
+A receita do Nadella não é rodar modelo local com pesos abertos.
+É ser dono dos seus dados, com prompts e feedback incluídos, e construir ambientes proprietários de aprendizado em infraestrutura de nuvem.
+E usar camadas de orquestração que permitam trocar de fornecedor de IA sem ficar refém de um só.
+Ou seja: o remédio dele, convenientemente, tem formato de Azure.
+O TechCrunch notou a ironia: a Microsoft investiu pesado justamente nas duas maiores fornecedoras de modelo de ponta.
+E não apresentou muito contra-argumento.
+Mesmo com o interesse comercial na mesa, é difícil não ler o texto como a validação mais forte até hoje da tese de ser dono dos próprios dados.
+E vinda logo de quem lucra com o aluguel.
+Para times decidindo o que pode ou não ir para modelo de terceiro, é combustível de discussão de primeira.
+Só lembre de quem está falando e do que ele vende.
+A fonte deste bloco é o TechCrunch.
+
+A quinta história fecha os destaques com algo construtivo: o blog do Kubernetes mostra a peça que falta entre a fila e o autoscaling de verdade.
+O blog oficial do Kubernetes publicou ontem um tutorial que resolve uma dor clássica de quem roda workers consumindo fila.
+O problema é o seguinte: por padrão, o autoscaler horizontal só enxerga C P U e memória.
+Só que o sinal real de escala de um sistema orientado a eventos, o tamanho da fila, vive fora dessa janela.
+Sua fila pode estar explodindo enquanto os workers, parados esperando entrada e saída, parecem saudáveis para o cluster.
+O texto, assinado por Victor David Effiok, ensina a construir um exportador de métricas customizadas na linguagem Go.
+A ideia é simples: um servidorzinho H T T P que expõe as métricas em texto puro, num endereço padrão do próprio serviço.
+O Prometheus visita esse endereço de tempos em tempos e coleta os números.
+De quebra, o tutorial explica os três tipos de métrica sem enrolação.
+Contadores só crescem: jobs processados, erros acumulados.
+"Gauges" sobem e descem: profundidade de fila, conexões ativas.
+Histogramas guardam distribuições, como latência nos percentis P cinquenta e P noventa e nove.
+Há até a convenção de nomes, em snake case com a unidade no final, tipo "worker queue depth".
+O exemplo-chave é justamente a profundidade da fila exportada como "gauge".
+Com esse número visível, o autoscaler passa a escalar os consumidores pelo backlog real, e não por aproximações de uso de processador.
+O post termina containerizando o exportador e integrando tudo ao cluster.
+Se você tem Rabbit M Q ou fila parecida em produção e ainda escala no olhômetro, é leitura curta e bem gasta.
+A fonte deste bloco é o blog oficial do Kubernetes.
+
+Agora, o resto do dia em doses rápidas.
+
+Primeira dose: feche a brecha do primeiro acesso S S H em qualquer V P S.
+Todo tutorial de hardening pula esse buraco: na primeira conexão a um servidor novo, você aceita a chave do host no escuro, o famoso confiar no primeiro uso.
+E é exatamente aí que um interceptador pode se enfiar.
+A técnica descrita por "Joachim Schipper" usa o cloud init para injetar uma chave temporária descartável no provisionamento.
+Você conecta uma vez confiando nela, o servidor entrega as chaves definitivas pelo mecanismo de rotação do Open S S H, e a chave provisória morre ali.
+Como as chaves de longo prazo nascem no servidor e nunca trafegam pelos dados de provisionamento, um vazamento nesse caminho só expõe uma chave que já não vale nada.
+Funciona em qualquer nuvem com cloud init.
+O post é de maio e voltou a circular agora; vale como técnica atemporal, não como novidade. A fonte é o blog pessoal do autor.
+
+Segunda dose: no S S H do Tailscale, um nome de usuário começando com hífen podia virar sessão root.
+O boletim de segurança T S 2026, zero zero nove, descreve um clássico dos livros.
+Nomes de usuário eram repassados como argumento para um comando do sistema, e um nome iniciado com hífen era interpretado como flag.
+Conectar com o usuário hífen I entregava uma sessão root, passando por cima da política de acesso que deveria proibir exatamente isso.
+É o velho conselho de nunca passar entrada bruta de usuário como argumento de comando, cobrando caro mais uma vez.
+Corrigido na versão um ponto noventa e oito ponto nove; o boletim não atribui C V E. A fonte é a página de boletins de segurança do Tailscale.
+
+Terceira dose: dois "zero days" em gateways SonicWall S M A mil, sob ataque ativo.
+Um deles bate no teto da escala: uma falha de requisição forjada pelo servidor, sem autenticação, com severidade dez ponto zero.
+O outro é injeção de código no console de administração, já autenticado. Os dois identificadores C V E estão no post escrito.
+A fabricante confirmou exploração ativa e liberou hotfixes.
+E a agência americana CISA colocou os dois na lista de falhas exploradas, com prazo até dezessete de julho para órgãos federais corrigirem.
+Se esse gateway é a sua porta de entrada remota, o patch é para agora. A fonte é o The Hacker News.
+
+Quarta dose: a memória do Claude foi exfiltrada uma letra por vez, usando a navegação do próprio assistente.
+Um pesquisador montou um site que fingia ser uma verificação de não sou robô e guiava o modelo a percorrer uma árvore de links organizada por letras.
+Cada clique codificava, no caminho do endereço visitado, um caractere da memória do usuário: nome, empregador, até resposta de pergunta de segurança.
+É uma demonstração cristalina de que qualquer canal de saída é um canal de exfiltração.
+Contexto importante: o texto é de nove de julho, e a Anthropic já mitigou o ataque.
+A mitigação desabilita a capacidade da ferramenta de navegação de seguir links em páginas externas.
+O caso foi reportado pelo canal oficial de segurança; recompensa, nenhuma. A fonte é o blog do pesquisador.
+
+Quinta dose: o Ex Llama V três chegou à versão um ponto zero ponto zero.
+Depois de um ano de desenvolvimento, o motor de inferência local, peça comum na pilha de quem roda modelo em casa, ganhou marco de maturidade e uma leva de acelerações.
+A release derruba duas dependências pesadas de atenção e traz kernel novo, com quantização de cache feita na hora.
+E promete multiplicação de matrizes bem mais rápida em placas da geração Ampere.
+O paralelismo de tensores foi estendido para a maioria dos modelos, e duas famílias novas entraram na lista de suportadas.
+Os gráficos de benchmark estão num texto à parte, então fica o registro qualitativo: mais rápido, com menos dependências.
+A fonte é a página de releases do projeto no "Git Hub".
+
+Sexta dose: o mesmo rótulo Q quatro K M pode significar de cinco vírgula zero dois a cinco vírgula vinte e sete bits por peso.
+Foi o que mediu o "picchio", uma ferramenta de arquivo único que cruza os logs do motor de inferência com a telemetria de G P U do sistema operacional.
+Testando o mesmo modelo quantizado por quatro ferramentas diferentes, o autor encontrou essa variação toda debaixo do mesmo nome.
+A ferramenta também flagra degradação assimétrica entre preencher o contexto e gerar texto: vinte e duas vezes num caso, um vírgula sete no outro.
+E detecta quando a carga cai silenciosamente para a C P U.
+Ressalva: são medições do próprio autor, num projeto de uma pessoa só.
+Ainda assim, se você compara quantizações locais, é bom saber que o rótulo mente. A fonte é o repositório do projeto no "Git Hub".
+
+Sétima dose: harness score, uma ferramenta de linha de comando brasileira que dá nota para o quão pronto seu repositório está para agentes de IA.
+Publicada na comunidade Tab News pelo usuário paladini, a ferramenta roda trinta e seis verificações determinísticas, sem chamada de modelo e sem telemetria.
+São seis dimensões, de guias de contexto a higiene e segurança, somando cento e oito pontos e níveis de L zero a L quatro.
+Dá para travar o pipeline exigindo um nível mínimo por uma opção da ferramenta, e existe action com badge para o "Git Hub".
+Para testar, basta rodar, no terminal, o comando N P X harness score.
+Projeto da comunidade brasileira em cima de um assunto que este blog adora acompanhar.
+As fontes são o Tab News e o repositório do projeto no "Git Hub".
+
+Para fechar, a tendência do dia: a camada de agentes virou superfície de ataque.
+Quatro histórias de hoje contam a mesma coisa por ângulos diferentes.
+A Microsoft corrige um volume recorde de falhas e atribui a aceleração à IA.
+Enquanto isso, um modelo de ataque automatizado derruba, na prática, o índice de explorabilidade que as equipes usavam para triagem.
+Esse critério assumia atacantes humanos.
+O Cursor transforma abrir pasta em execução de código, porque um editor agêntico roda sozinho um binário encontrado no projeto.
+O Sol admite no próprio system card a tendência a ações destrutivas, e usuários relatam arquivos e bancos apagados.
+E o caso da memória do Claude mostra exfiltração usando nada além de navegação por links.
+A lição chega de quatro direções e é uma só.
+Cada capacidade que você entrega a um agente, como executar ferramentas, navegar ou ler credenciais no disco, é um canal que um atacante, ou o próprio agente, pode abusar.
+Sandbox, privilégio mínimo e regra de execução por caminho deixaram de ser paranoia de gente exagerada e viraram linha de base de engenharia.
+É isso por hoje. Se você usa o Cursor no Windows, respire antes de abrir aquele repositório curioso que apareceu no seu feed.
+Ou abra numa máquina virtual e tome seu café em paz. Até amanhã.
