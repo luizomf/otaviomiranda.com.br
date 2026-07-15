@@ -1,0 +1,114 @@
+Secure Boot confiou em shims antigos; Dependabot pisa no freio, e Bonsai encolhe um modelo de 27 bilhões de parâmetros.
+Uma máquina pode mostrar “Secure Boot habilitado” e ainda aceitar uma peça velha o bastante para carregar código antes do sistema operacional.
+O cadeado estava na porta, mas uma das chaves continuava válida.
+A ESET encontrou onze dessas chaves: bootloaders shim antigos, assinados pela Microsoft e esquecidos em produtos que nem precisam estar instalados no computador atacado.
+Primeiro, onze shims antigos abriram um atalho pelo Secure Boot.
+O shim é uma pequena peça da cadeia de inicialização usada por distribuições Linux.
+O firmware confia na assinatura da Microsoft aplicada a ele.
+Depois, o shim valida o bootloader da distribuição, normalmente o GRUB, e o bootloader valida o kernel.
+É assim que o Linux participa do Secure Boot sem exigir que cada fabricante de máquina confie diretamente em cada distribuição.
+Na investigação publicada em catorze de julho, a ESET identificou onze shims antigos, em geral baseados na versão zero ponto nove ou anterior.
+Eles ainda tinham uma assinatura aceita por máquinas que confiam na Microsoft Corporation U E F I C A 2011, mas também carregavam falhas corrigidas há anos.
+Um atacante capaz de alterar o processo de boot podia levar uma cópia do binário vulnerável e executar código não confiável antes de o sistema operacional entrar em cena.
+Esse detalhe transforma software esquecido em problema de plataforma.
+A distribuição ou o produto ao qual o shim pertencia nem precisa estar instalado.
+Enquanto a assinatura for aceita, o atacante pode trazer a própria cópia antiga.
+É como levar uma fechadura aposentada para dentro do prédio porque o crachá dela ainda abre a catraca.
+O pré-requisito coloca um limite importante no cenário.
+Segundo o CERT Coordination Center, essa não é uma exploração remota sem acesso anterior.
+O invasor precisa de privilégio administrativo ou de outra forma de modificar o caminho de inicialização.
+Se tiver esse acesso, o código roda cedo o bastante para buscar persistência e escapar de controles que só começam a funcionar depois do sistema operacional.
+As falhas receberam os identificadores C V E 2026, oito oito seis três, e C V E 2026, um zero sete nove sete.
+A ESET reportou o caso ao CERT Coordination Center em dezesseis de fevereiro de 2026.
+Em nove de junho, os onze binários entraram na atualização da D B X distribuída no Patch Tuesday.
+A análise técnica completa saiu em catorze de julho.
+A D B X é a lista de assinaturas e hashes proibidos do Secure Boot.
+Ela complementa a D B, que guarda o que a plataforma permite.
+Tecnologias como S B A T ajudam a revogar gerações de componentes, mas esses shims antigos podem ser anteriores a essa política ou escapar dela.
+Para os onze binários conhecidos, a saída foi revogá-los pela D B X.
+Na prática, administradores precisam atualizar o sistema, os componentes de boot e a base de revogação fornecida pelo firmware ou pela plataforma.
+Em Linux, a ESET indica a ferramenta U E F I D B X audit para verificar o estado da D B X, e o L V F S como possível canal de atualização em equipamentos compatíveis.
+Só que a ordem importa.
+O CERT Coordination Center recomenda instalar versões atuais do software e das aplicações de boot antes da nova D B X.
+Também recomenda testar a inicialização em hardware e máquinas virtuais representativos.
+Distribuir a revogação para a frota inteira sem esse teste pode trocar uma superfície vulnerável por máquinas que não ligam.
+Segurança adora cobrar o aluguel em disponibilidade.
+Mais cedo, este blog falou da expiração da Microsoft U E F I C A 2011 como um problema geral de manutenção da cadeia de confiança.
+Agora temos um delta concreto: onze shims revogados, dois registros C V E e um caminho de auditoria para a D B X.
+A ESET também diz que não é possível enumerar com segurança todos os shims anteriores a 2017 que continuam assinados.
+Isso não confirma outros binários vulneráveis.
+Significa apenas que os onze encontrados não provam que o inventário histórico acabou.
+Os hashes publicados são de software legítimo vulnerável.
+A própria pesquisa evita tratá-los como indicadores de comprometimento para não produzir falsos positivos.
+O sinal defensivo aqui está no estado da cadeia de boot, e não na presença isolada de um arquivo que já foi legítimo.
+As fontes deste bloco são ESET Research e CERT Coordination Center.
+Agora, o Dependabot deixa a release respirar por três dias.
+O “Git Hub” mudou um padrão pequeno, mas com uma consequência bem prática para a cadeia de suprimentos de software.
+Desde catorze de julho, o Dependabot espera uma nova versão ficar pelo menos três dias no registry antes de abrir um pull request de atualização de versão no “Git Hub” ponto com.
+O cooldown vem ligado; você não precisa adicionar nenhuma configuração.
+A ideia é amortecer os primeiros dias de uma release quebrada ou comprometida.
+Se os mantenedores removerem o pacote, publicarem um aviso ou soltarem uma correção logo depois, a automação ganha tempo para não entrar na primeira onda.
+Quem já recebeu uma atualização automática minutos após a publicação sabe que “mais recente” e “pronto para produção” não são sinônimos muito confiáveis.
+O freio vale para “version updates”, as atualizações periódicas que mantêm dependências em dia.
+Os “security updates”, criados a partir de alertas de vulnerabilidade, continuam sem essa espera.
+Nesse caso, “imediato” quer dizer que o Dependabot pode abrir o P R sem aguardar três dias.
+O patch ainda não será aplicado nem implantado sozinho.
+Equipes que precisam adotar releases assim que elas saem podem alterar ou desativar a política no arquivo dependabot ponto YAML, dentro da pasta ponto “Git Hub”.
+A opção cooldown aceita uma quantidade padrão de dias ou janelas diferentes para atualizações major, minor e patch.
+Também dá para incluir ou excluir dependências da regra.
+Como o ajuste fica na entrada updates de cada ecossistema, a política pode acompanhar o risco e a cadência do projeto sem virar uma exceção global improvisada.
+O padrão cobre todos os ecossistemas suportados no “Git Hub” ponto com.
+Para quem usa a versão instalada do “Git Hub”, ele está previsto para o “Git Hub Enterprise Server” três ponto vinte e três.
+Durante a consulta para esta edição, a referência longa das opções ainda mostrava o comportamento anterior quando cooldown não era definido.
+Enquanto a documentação termina de sincronizar, o changelog de catorze de julho é a fonte para essa mudança de padrão.
+Três dias não certificam um pacote.
+Uma versão maliciosa pode ficar disponível por mais tempo, e uma release aparentemente normal ainda pode quebrar alguma combinação rara do seu ambiente.
+Lockfile, proveniência, testes, revisão e política de execução continuam no emprego.
+O cooldown reduz a pressa e parte do raio de impacto inicial.
+Para uma configuração que já chega ligada, está de bom tamanho.
+As fontes deste bloco são “Git Hub Changelog” e “Git Hub Docs”.
+Por fim, Bonsai comprime 27 bilhões de parâmetros, mas a memória R A M não termina no arquivo.
+A Prism M L lançou duas variantes multimodais derivadas do Qwen três ponto seis, de 27 bilhões de parâmetros, sob licença Apache dois ponto zero.
+O Bonsai 27 bilhões binário usa pouco mais de um bit efetivo por peso.
+Já o Ternary Bonsai 27 bilhões trabalha com três estados por peso e fica entre a quantização binária e a precisão original.
+Pesos, documentação e código de demonstração foram publicados em catorze de julho para inferência local com texto e imagem.
+Quantização troca precisão numérica por arquivos menores e menos tráfego de memória.
+No modelo binário, cada peso se aproxima de um valor positivo ou negativo ajustado por uma escala de grupo.
+No ternário, ele pode assumir algo equivalente a menos um, zero ou mais um, também com escalas.
+A economia de espaço é enorme, mas algumas distinções que o treinamento guardou nos pesos podem desaparecer no processo.
+A Prism M L anuncia footprints de cerca de três vírgula nove gigabytes para o binário e cinco vírgula nove gigabytes para o ternário.
+A tabela de artefatos mostra melhor o que você realmente baixa.
+O G G U F de um bit tem três vírgula cinquenta e três gibibytes, enquanto o M L X equivalente tem três vírgula noventa e dois gibibytes.
+No ternário, são seis vírgula sessenta e seis gibibytes em G G U F e sete vírgula zero cinco gibibytes em M L X.
+Para usar visão, a documentação ainda pede um projetor separado de aproximadamente zero vírgula nove gibibyte.
+O model card detalha cerca de 27 vírgula três bilhões de pesos de linguagem e 460 milhões na torre visual.
+Tudo isso fica dentro da classe anunciada de 27 bilhões a 27 vírgula oito bilhões de parâmetros.
+O G G U F binário usa o formato Q um zero, G cento e vinte e oito, com um vírgula cento e vinte e cinco bit efetivo por peso.
+No ternário, a Prism M L informa um vírgula setenta e um bit efetivo.
+O contexto máximo declarado é de 262 mil 144 tokens.
+Isso cabe no arquivo.
+A aplicação inteira, não necessariamente.
+O runtime ainda precisa manter ativações, buffers e o cache K V usado pela atenção.
+Quanto maior for o contexto ocupado de verdade, maior será essa conta.
+Imagem também acrescenta a torre ou o projetor visual.
+Portanto, os poucos gibibytes descrevem principalmente os pesos, não o pico de memória R A M de uma sessão com contexto enorme.
+A perda de qualidade aparece nos números do próprio fornecedor.
+No agregado publicado no model card, o Qwen três ponto seis, de 27 bilhões de parâmetros em F P dezesseis, marcou 85 vírgula zero sete.
+A variante ternária chegou a 80 vírgula quarenta e nove; a binária, a 76 vírgula onze.
+A queda foi maior na categoria de uso agêntico e chamada de ferramentas.
+Foram 80 vírgula zero zero no F P dezesseis, contra 66 vírgula zero três no modelo de um bit.
+Esses benchmarks não foram reproduzidos de forma independente nesta edição.
+Eles mostram que a compressão cobra preços diferentes em cada tarefa, mas não servem para declarar um vencedor universal.
+Seguimento de instruções, visão e chamada de ferramentas estão entre os pontos em que a média geral pode esconder perdas importantes.
+Se um assistente local precisa chamar a ferramenta certa, errar menos vale mais do que poupar alguns gibibytes no download.
+A compatibilidade também pede cuidado.
+Segundo o README da demonstração, o caminho binário Q um zero já tem suporte no projeto principal do llama ponto C P P.
+Esse suporte cobre C P U, Metal, cuda e Vulkan.
+A variante ternária ainda mistura formatos e backends disponíveis no projeto principal com caminhos mantidos no fork da Prism M L.
+Não conte que qualquer G G U F ternário vai rodar em qualquer build.
+A Prism M L também informa onze tokens por segundo em um iPhone dezessete Pro com a versão de um bit.
+É uma medição da empresa para uma combinação específica de aparelho, modelo e runtime, não uma promessa para todo telefone.
+O resultado é menos cinematográfico e mais útil.
+Agora, desenvolvedores podem experimentar localmente um modelo multimodal dessa classe em hardware bem menor.
+Ainda precisam escolher o artefato certo, medir a memória total e validar a qualidade na tarefa real.
+As fontes deste bloco são a documentação do Bonsai 27 bilhões, o model card no Hugging Face, o README do Bonsai demo e o anúncio da Prism M L.
