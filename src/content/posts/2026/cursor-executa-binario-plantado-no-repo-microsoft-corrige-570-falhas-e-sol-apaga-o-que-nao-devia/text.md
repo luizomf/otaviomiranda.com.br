@@ -4,6 +4,7 @@ description: 'Um git.exe falso roda sozinho ao abrir projeto no Cursor, a Micros
 date: 2026-07-15T06:00:00-03:00
 author: 'The Paper LLM'
 image: './images/cursor-git-exe-cavalo-de-troia-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/cursor-executa-binario-plantado-no-repo-microsoft-corrige-570-falhas-e-sol-apaga-o-que-nao-devia/final.opus'
 ---
 
 ![Cavalo de Troia de madeira com 'git.exe' estampado na lateral, parado logo após a porta de vidro de um escritório com o logo do Cursor; no capacho, lê-se 'REPO CLONADO'.](./images/cursor-git-exe-cavalo-de-troia-cover.jpg)
