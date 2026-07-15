@@ -1,0 +1,105 @@
+Zoom pede patch, Inkling pede cluster e agentes abrem o capô.
+Tem atualização que chega com recurso novo.
+A do Zoom chegou com um motivo mais urgente: corrigir uma falha crítica que pode levar à tomada de conta sem autenticação no Windows.
+Um dia depois, o aviso mudou de escopo e retirou o Meeting S D K da lista de produtos afetados.
+Para quem administra máquinas, essa revisão evita dois problemas: deixar um cliente vulnerável ou perder tempo atualizando o inventário errado.
+Passado o alarme imediato, o restante do dia abriu o capô da inteligência artificial.
+A Thinking Machines publicou um modelo de pesos abertos que cabe em cluster, não em esperança.
+A [EH1 K S] [EY1 AY1] liberou o código do agente Grok Build, mas deixou clara a fronteira entre o harness e o modelo.
+Já o Lemonade onze ganhou voz, geração três D e roteamento local.
+E ganhou também uma mudança no Docker capaz de acordar permissões antigas no pior momento possível.
+Primeiro, o Zoom corrige uma falha crítica e retira o Meeting S D K do escopo.
+O Zoom publicou em quatorze de julho o boletim Z S B vinte e seis zero quatorze, para a C V E 2026, cinquenta e três quatro um dois.
+Segundo a empresa, uma validação inadequada de entrada pode permitir que uma pessoa sem autenticação tome uma conta por acesso de rede.
+A vulnerabilidade recebeu C V S S nove ponto oito.
+O vetor declarado descreve um ataque remoto, de baixa complexidade, sem privilégio prévio e sem interação da vítima.
+A prioridade é alta, mas o boletim não dá material para imaginar como seria a exploração.
+O Zoom não detalhou protocolo, gatilho nem o caminho técnico do ataque.
+Segundo a Bleeping Computer, também não havia indicação pública de exploração ativa no momento da reportagem.
+Isso é ausência de relato, não garantia de que ninguém esteja explorando a falha.
+No Zoom Workplace para Windows, são afetadas as versões anteriores à sete ponto zero ponto zero.
+No V D I Client para Windows, usado em desktops virtuais, o mínimo corrigido depende do ramo mantido.
+Os pisos são sete ponto zero ponto dez, seis ponto seis ponto quinze ou seis ponto cinco ponto dezoito.
+Na prática, é preciso conferir o ramo instalado e atualizar cada cliente até o piso de segurança correspondente.
+O detalhe mais importante veio na revisão um ponto um, publicada em quinze de julho.
+O Zoom removeu o Meeting S D K for Windows da lista de produtos afetados.
+A descrição do boletim ainda cita o S D K, uma inconsistência que ficou na própria página.
+A tabela de revisão e a lista atual de produtos, porém, apontam para o escopo reduzido.
+Por isso, o inventário do S D K não deve ser tratado como vulnerável apenas com base na primeira versão do aviso.
+As fontes deste bloco são o boletim de segurança Z S B vinte e seis zero quatorze, do Zoom, e a Bleeping Computer.
+Agora, o Inkling abre novecentos e setenta e cinco bilhões de parâmetros e pede um cluster para chamar de seu.
+A Thinking Machines lançou em quinze de julho o Inkling, seu primeiro modelo da família com pesos publicados sob a licença Apache dois ponto zero.
+Ele recebe texto, imagem e áudio, gera texto e aceita um contexto máximo de um milhão de tokens.
+Como os pesos estão no Hugging Face, dá para baixar, servir e ajustar o modelo.
+Só que a palavra “baixar” está fazendo bastante trabalho nessa frase.
+O Inkling tem novecentos e setenta e cinco bilhões de parâmetros no total e ativa quarenta e um bilhões por token.
+É um modelo “Mixture of Experts”, ou M O E.
+Em vez de passar cada token pela rede inteira, o roteador escolhe seis dos duzentos e cinquenta e seis especialistas, além de dois especialistas compartilhados.
+Isso reduz a computação de cada passo, mas não faz os demais parâmetros sumirem do armazenamento nem da memória distribuída.
+O model card descreve sessenta e seis camadas e estima pelo menos dois terabytes de V R A M agregada para rodar o checkpoint em B F dezesseis.
+Com a variante N V F P quatro, que usa precisão menor para consumir menos memória, ainda são seiscentos gigabytes.
+Os exemplos documentados usam oito G P Us do tipo B trezentos ou dezesseis do tipo H duzentos, em B F dezesseis.
+Para N V F P quatro, os exemplos usam quatro B trezentos ou oito H duzentos.
+Você pode hospedar essa inteligência artificial por conta própria, desde que a sua “própria máquina” tenha crachá de data center.
+A empresa diz que pré-treinou o modelo com quarenta e cinco trilhões de tokens, incluindo dados de texto, imagem, áudio e vídeo.
+O anúncio também traz uma ressalva rara e bem-vinda.
+A própria Thinking Machines afirma que o Inkling não é o modelo de maior desempenho disponível, seja aberto ou fechado.
+A proposta é servir como uma base ampla para customização.
+Os benchmarks publicados são testes do próprio fornecedor, feitos sob suas condições e com seu esforço de avaliação.
+Eles ajudam a entender a proposta, mas não são uma reprodução independente nem sustentam um ranking absoluto.
+O Inkling Small também continua em preview, com os pesos completos ainda em teste.
+Portanto, não é um lançamento integral já disponível.
+Mais cedo, falamos da prévia T M L Interaction Small.
+Desta vez, o avanço é concreto: há um checkpoint principal publicado, acompanhado de licença, arquitetura e requisitos de execução.
+Os pesos abertos aumentam o que uma equipe pode estudar e adaptar.
+Os números mostram que tipo de equipe, e de infraestrutura, consegue fazer isso hoje.
+As fontes deste bloco são o model card do Inkling e a apresentação do modelo, ambos da Thinking Machines.
+Em seguida, o Grok Build publica o agente em Rust, não os pesos do modelo.
+A [EH1 K S] [EY1 AY1], apresentada agora no material como Space [EH1 K S] [EY1 AY1], tornou público o repositório do Grok Build.
+O primeiro commit apareceu em quinze de julho, com a mensagem “Publish harness and T U I open source”.
+O commit indica que era uma sincronização inicial do monorepo.
+A implementação é em Rust, e o código próprio usa a licença Apache dois ponto zero.
+O repositório contém o agente de código.
+Isso inclui a interface de terminal em tela cheia, ou T U I, o runtime agêntico e as ferramentas para editar arquivos e executar comandos.
+Também inclui ferramentas para buscar na web e acompanhar tarefas longas.
+Dá para usá-lo de forma interativa, no modo headless para scripts e C I, ou por meio do Agent Client Protocol.
+Esse protocolo integra o agente a editores e outros clientes.
+Há binários para mac O S, Linux e Windows.
+Para compilar localmente, a documentação pede Rust e o compilador de Protocol Buffers, chamado protoc.
+Abrir o harness permite examinar e adaptar a parte que expõe as ferramentas e controla o fluxo de execução.
+Os pesos do modelo que responde por trás dele não foram abertos.
+A página do produto diz que o serviço usa hoje o Grok quatro ponto cinco.
+Já a documentação também apresenta o modelo de [EY1 P IY1 AY1] grok build zero ponto um.
+A autenticação e a inferência ainda podem depender de um serviço separado.
+A governança também é mais fechada do que a expressão “open source” pode sugerir numa leitura rápida.
+O repositório é um espelho sincronizado periodicamente a partir do monorepo e não aceita contribuições externas.
+Componentes vendorizados continuam sob suas próprias licenças, inclusive ports de ferramentas do Codex e do OpenCode.
+A Apache dois ponto zero cobre o código da [EH1 K S] [EY1 AY1], mas não apaga os avisos de terceiros.
+Para quem desenvolve ferramentas, ainda há material de verdade para auditar, compilar e modificar.
+Só precisa chamar a peça aberta pelo nome certo: o capô do agente foi levantado; o motor de inferência continua em outro lugar.
+As fontes deste bloco são o repositório da organização xai org para o Grok Build, o commit inicial do projeto e a página Open Source da [EH1 K S] [EY1 AY1].
+Por fim, o Lemonade onze ganha voz e três D, mas muda a chave do volume Docker.
+O Lemonade publicou a versão onze ponto zero ponto zero em quinze de julho.
+O servidor local ganhou uma rota de requisição POST para geração três D na versão um da [EY1 P IY1 AY1], com Trellis ponto dois.
+Também ganhou recursos de texto para fala pelo backend Open M O S S, incluindo clonagem e design de voz.
+Como consentimento não vem embutido na clonagem, quem habilitar o recurso ainda precisa cuidar da autorização e do risco de personificação.
+A release também adicionou o roteamento por collection ponto router às interfaces de [EY1 P IY1 AY1] de chat, completions e responses.
+A rota escolhida aparece no corpo, no campo x underscore lemonade underscore route, ou no cabeçalho x hífen lemonade hífen route.
+Assim dá para ver qual combinação de engine e modelo atendeu à chamada, em vez de deixar essa decisão escondida dentro do servidor.
+O Model Scope passou a ser o segundo registro remoto, ao lado do Hugging Face.
+E o Fast Flow L M ganhou instalação automática no Linux.
+O projeto publicou pacotes para Windows, Ubuntu vinte e quatro ponto zero quatro ou posterior, Debian treze, Fedora quarenta e três e quarenta e quatro, e mac O S.
+Também há artefatos embutíveis para Ubuntu, Windows e mac O S.
+É uma lista ampla, mas inteligência artificial local não garante que todo backend rode bem em qualquer hardware.
+Ainda é preciso escolher uma combinação compatível de engine, modelo e artefato.
+Para quem já usa Docker, talvez a parte mais importante esteja nas breaking changes.
+O container agora roda sem root, com U I D dez mil e um.
+Além disso, o cache saiu da pasta oculta cache do usuário root e foi para a pasta cache dentro de opt lemonade.
+Tirar o root reduz o impacto potencial de um comprometimento.
+Mas os volumes persistentes criados pela versão antiga podem continuar com um ownership incompatível.
+Durante a atualização, volumes nomeados talvez precisem ser recriados ou receber chown para o novo usuário.
+É o tipo de melhoria de segurança que merece aplauso depois da migração, não antes de conferir se o serviço ainda consegue escrever no próprio cache.
+Os recursos e as compatibilidades vêm das notas do projeto; não houve benchmark independente nesta apuração.
+A versão aumentou bastante a [EY1 P IY1 AY1] local.
+Mas o uso em produção ainda pede testes do backend escolhido, da aceleração disponível e, desta vez, das permissões do volume.
+A fonte deste bloco são as notas de lançamento do Lemonade onze ponto zero ponto zero.
