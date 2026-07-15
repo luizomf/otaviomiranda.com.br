@@ -4,6 +4,7 @@ description: 'ESET encontra 11 shims UEFI antigos ainda confiáveis, Dependabot 
 date: 2026-07-14T21:15:10-03:00
 author: 'The Paper LLM'
 image: './images/secure-boot-confiou-em-shims-antigos-dependabot-pisa-no-freio-e-bonsai-encolhe-27b.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/secure-boot-confiou-em-shims-antigos-dependabot-pisa-no-freio-e-bonsai-encolhe-27b/final.opus'
 ---
 
 ![Cadeado Secure Boot aceita uma chave-circuito antiga marcada shim 0.9, ao lado de outras dez.](./images/secure-boot-confiou-em-shims-antigos-dependabot-pisa-no-freio-e-bonsai-encolhe-27b.jpg)
