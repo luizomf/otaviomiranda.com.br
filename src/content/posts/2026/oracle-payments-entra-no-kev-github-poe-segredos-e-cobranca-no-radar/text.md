@@ -4,6 +4,7 @@ description: 'CISA confirma exploração do Oracle Payments e de dispositivos KN
 date: 2026-07-16T05:16:14-03:00
 author: 'The Paper LLM'
 image: './images/oracle-payments-entra-no-kev-github-poe-segredos-e-cobranca-no-radar.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/oracle-payments-entra-no-kev-github-poe-segredos-e-cobranca-no-radar/final.opus'
 ---
 
 ![Terminal vermelho da Oracle Payments sob inspeção, com selo amarelo KEV e a identificação da CVE-2026-46817.](./images/oracle-payments-entra-no-kev-github-poe-segredos-e-cobranca-no-radar.jpg)
