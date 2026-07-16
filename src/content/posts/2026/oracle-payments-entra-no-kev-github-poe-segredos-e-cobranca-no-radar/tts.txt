@@ -1,0 +1,101 @@
+Oracle Payments entra no K E V; "Git Hub" põe segredos e cobrança no radar.
+Instalar a correção hoje bloqueia novas explorações bem-sucedidas dessa falha, mas não apaga o que pode ter acontecido ontem.
+Essa diferença ficou especialmente importante para quem mantém o Oracle E-Business Suite.
+Uma falha crítica no módulo de pagamentos já tinha patch desde maio, teve tentativas de exploração observadas em junho e agora entrou no catálogo da CISA.
+Enquanto esse caso pede pressa, o "Git Hub" trouxe dois avisos mais próximos da rotina de desenvolvimento.
+O "secret scanning" ganhou detectores e um campo útil para automações.
+Já o "Code Quality" começa a cobrar em quatro dias, e a nova estimativa de licença mostra apenas uma parte da conta.
+No Oracle Payments, é preciso aplicar o patch e investigar o passado.
+Em 15 de julho, a CISA adicionou a falha C V E 2026, quarenta e seis oito um sete, ao catálogo de vulnerabilidades conhecidas como exploradas, o K E V.
+Entrar nessa lista significa que a agência aceitou evidência de exploração no mundo real.
+Para quem administra o Oracle E-Business Suite, a falha vai direto para o começo da fila.
+A vulnerabilidade está no componente "File Transmission" do Oracle Payments, o módulo que centraliza fluxos de pagamento.
+Um atacante com acesso de rede à interface H T T P pode comprometer o componente sem credenciais.
+A matriz da Oracle dá nota C V S S nove ponto oito e descreve um ataque remoto de baixa complexidade, sem privilégio e sem interação do usuário.
+O problema afeta as versões doze ponto dois ponto três a doze ponto dois ponto quinze do E-Business Suite.
+O patch faz parte do "Critical Security Patch Update" publicado pela Oracle em 28 de maio.
+Um mês depois, em 27 de junho, a empresa de inteligência de ameaças Defused observou tentativas contra seus ambientes de detecção.
+O relato, reproduzido pela Help Net Security, apontava uma única origem e uma prova de conceito direcionada, não uma varredura ampla.
+A entrada no K E V confirma a exploração, mas a CISA não informa quantas vítimas existem nem descreve uma campanha.
+Para órgãos federais dos Estados Unidos sujeitos à diretiva B O D vinte e seis zero quatro, o prazo registrado é 18 de julho de 2026.
+A data não é uma obrigação legal universal.
+Para as demais equipes, o recado operacional continua claro: aplique o pacote de maio e revise a exposição das interfaces do E-Business Suite.
+Também procure indícios de comprometimento anterior.
+São dois trabalhos diferentes.
+O patch corrige a falha e bloqueia novas explorações bem-sucedidas por esse caminho.
+Logs, triagem forense e rotação de credenciais cuidam da possibilidade de alguém já ter passado por ela.
+Atualizar e encerrar o chamado seria confortável, mas incidente não respeita muito o botão de "concluído".
+No K E V, o possível uso em ransomware aparece como desconhecido.
+Não há base para ligar essa falha a ransomware.
+As fontes deste bloco são o alerta e o catálogo K E V da CISA, o "Critical Security Patch Update" da Oracle e o alerta da agência de cibersegurança de Singapura.
+A Help Net Security também é fonte deste bloco.
+O "Git Hub" amplia o radar para chaves de [EY1 P IY1 AY1].
+Nesta semana, o "Git Hub" começou a distribuir melhorias no "secret scanning" e no monitoramento de vazamentos públicos.
+As mudanças, anunciadas em 15 de julho, afetam tanto a detecção no repositório quanto as integrações que recebem alertas por webhook.
+Dois tipos explícitos de segredo entraram nos detectores: a chave de [EY1 P IY1 AY1] do API Club e a chave de [EY1 P IY1 AY1] da Resend.
+A Resend também passou a fazer parte do programa de parceiros.
+Quando uma credencial é encontrada em um repositório público, o "Git Hub" pode encaminhá-la ao emissor.
+O emissor decide se revoga a chave ou avisa o administrador.
+A "push protection" agora bloqueia a chave de [EY1 P IY1 AY1] do Volcengine Ark por padrão nos repositórios com "secret scanning" habilitado.
+Isso inclui os repositórios públicos gratuitos.
+A diferença prática está no momento em que cada recurso age.
+O bloqueio tenta impedir que a chave entre no histórico do Git.
+Um alerta avisa que uma ocorrência já foi encontrada.
+Se a credencial chegou a ficar exposta, apagar a linha não resolve.
+Ainda é preciso revogar ou rotacionar a chave e conferir se houve uso indevido.
+Para quem automatiza a triagem, o webhook de alerta do "secret scanning" agora traz o campo chamado "secret category".
+O valor "default" cobre padrões de provedores e padrões personalizados.
+Já o valor "generic" agrupa padrões genéricos e segredos detectados por I A.
+Dá para separar filas e políticas sem manter uma tabela local com cada detector.
+Mas a categoria não informa se um alerta genérico veio de uma regra comum ou de I A.
+É classificação, não bola de cristal.
+O monitoramento público também ganhou cartões que resumem vazamentos atribuídos à atividade de membros ou a domínios verificados.
+Esses cartões trazem contagens para ajudar na priorização.
+O anúncio fala em distribuição ao longo da semana, sem informar um percentual.
+Por isso, contas diferentes podem receber as mudanças em momentos diferentes.
+A fonte deste bloco é o Changelog do "Git Hub" sobre melhorias no "secret scanning" e no monitoramento público.
+O "Code Quality" mostra a licença antes de começar a cobrar.
+Em 20 de julho, o "Git Hub Code Quality" sai da prévia gratuita e entra em disponibilidade geral paga.
+Organizações que deixaram o recurso habilitado têm quatro dias para decidir se o ganho compensa os medidores que vêm junto.
+O "Git Hub" adicionou à área de cobrança e licenciamento uma estimativa de committers ativos, licenças consumidas e pagamento mensal.
+Na tabela pública, a licença custa dez dólares por committer ativo ao mês.
+"Ativo" significa que a pessoa teve um commit enviado a algum repositório habilitado nos últimos 90 dias.
+Bots executados como "Git Hub Apps" não entram nessa conta.
+Os committers também são deduplicados conforme as regras da organização ou do enterprise.
+Portanto, o cálculo não é dez dólares vezes a quantidade de commits.
+A tela ajuda, mas não prevê a fatura inteira.
+Ela cobre a licença por committer, deixando de fora os minutos do "Git Hub Actions" usados na análise com Code Q L.
+Também ficam de fora os créditos consumidos por recursos de I A e os descontos contratuais.
+Segundo a documentação de cobrança, cada crédito de I A equivale a um centavo de dólar.
+Runners próprios evitam o custo dos minutos hospedados, mas não removem a licença nem um possível consumo de I A.
+Essa divisão existe porque o "Code Quality" combina peças diferentes.
+Ele reúne análise determinística com Code Q L, findings, score e rulesets, além de recursos baseados em modelo.
+A ferramenta pode comentar em pull requests, sugerir correções e impor limites de qualidade.
+Ela está disponível para repositórios de organizações no "Git Hub Team" e no "Enterprise Cloud", mas não no "Enterprise Server".
+Administradores precisam abrir a estimativa, conferir quais repositórios estão habilitados e escolher o escopo antes da transição.
+Se a organização não quiser o serviço pago, deve desabilitá-lo antes de 20 de julho.
+E cuidado para não tratar a prévia da licença como conta final.
+Actions e I A continuam chegando por outras linhas.
+As fontes deste bloco são o Changelog do "Git Hub" sobre a estimativa de licença e o anúncio da disponibilidade geral.
+A documentação de cobrança e a visão geral do "Code Quality" também são fontes.
+No K N X, a primeira chave pode se transformar em risco de bloqueio.
+A segunda vulnerabilidade adicionada ao K E V em 15 de julho é mais antiga e atinge um público específico.
+A falha C V E 2023, quatro três quatro seis, afeta dispositivos de automação que usam o protocolo K N X com a "Connection Authorization Option" um.
+Ela afeta dispositivos que ainda não têm uma B C U Key definida.
+A B C U Key protege o acesso administrativo ao dispositivo.
+Nesse cenário, alguém que alcance o equipamento pela rede ou fisicamente pode apagar a configuração e definir uma chave própria.
+O proprietário perde o acesso e, dependendo do dispositivo, pode ficar sem mecanismo de reset.
+O impacto documentado é de disponibilidade e bloqueio, com nota C V S S sete ponto cinco.
+O advisory não dá base para falar em execução de código ou roubo de dados.
+A falha é conhecida desde 2023.
+A novidade é que a CISA recebeu relatos de exploração ativa e colocou a vulnerabilidade no K E V.
+O prazo é 29 de julho de 2026 para ativos federais aplicáveis.
+A agência não publicou ator, vítima, cronologia nem técnica observada, e o possível uso em ransomware permanece desconhecido.
+O risco também não se estende a todo produto K N X.
+Ele depende da opção um, da implementação e da ausência de uma B C U Key já configurada.
+Para integradores e responsáveis por automação predial ou industrial, a resposta começa pelo inventário.
+Identifique os dispositivos nesse perfil, reduza a exposição à internet, separe a rede de controle e defina e documente as chaves conforme o checklist do K N X.
+O acesso remoto deve passar por uma V P N atualizada.
+E a segmentação continua necessária.
+Tirar o equipamento da internet não impede que alguém dentro da rede corporativa, ou diante do painel, consiga alcançá-lo.
+As fontes deste bloco são o alerta da CISA de 15 de julho, o advisory industrial I C S A vinte e três, duzentos e trinta e seis, zero um, e o catálogo K E V da CISA.
