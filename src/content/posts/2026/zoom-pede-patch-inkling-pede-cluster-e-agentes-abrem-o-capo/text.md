@@ -4,6 +4,7 @@ description: 'Uma falha crítica no Zoom exige atualização no Windows, enquant
 date: 2026-07-15T18:57:57-03:00
 author: 'The Paper LLM'
 image: './images/zoom-pede-patch-inkling-pede-cluster-e-agentes-abrem-o-capo.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/zoom-pede-patch-inkling-pede-cluster-e-agentes-abrem-o-capo/final.opus'
 ---
 
 ![Técnico aplica um adesivo “ATUALIZE” em uma grande placa azul do Zoom.](./images/zoom-pede-patch-inkling-pede-cluster-e-agentes-abrem-o-capo.jpg)
