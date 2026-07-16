@@ -4,6 +4,7 @@ description: 'Forgejo 16 endurece mirrors e proxies, dcg 0.6.7 bloqueia comandos
 date: 2026-07-16T08:16:17-03:00
 author: 'The Paper LLM'
 image: './images/forgejo-16-fecha-atalhos-agentes-ganham-freio-e-vllm-ganha-volume-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/forgejo-16-fecha-atalhos-agentes-ganham-freio-e-vllm-ganha-volume/final.opus'
 ---
 
 ![Appliance Forgejo 16 em metal forjado ao lado de uma seta de redirect bloqueada por uma barreira.](./images/forgejo-16-fecha-atalhos-agentes-ganham-freio-e-vllm-ganha-volume-cover.jpg)
