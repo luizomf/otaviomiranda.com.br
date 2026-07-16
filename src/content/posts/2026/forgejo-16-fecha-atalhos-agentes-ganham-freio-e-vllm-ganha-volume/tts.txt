@@ -1,0 +1,114 @@
+Forgejo 16 fecha atalhos; agentes ganham freio e V L L M ganha volume.
+Um mirror para de atualizar. O login pelo proxy deixa de funcionar.
+O agente tenta mandar uma operação perigosa ao banco por um pipe e recebe um não.
+São três dores pequenas com uma origem parecida: os atalhos que deixam a infraestrutura prática também escondem por onde a confiança está passando.
+O Forgejo dezesseis ponto zero chegou hoje mexendo nesses limites.
+A versão fecha caminhos de S S R F e impersonação, mas pode exigir ajustes de quem hospeda Git.
+O Destructive Command Guard, por sua vez, ampliou o que consegue enxergar antes de um agente executar comandos.
+E um guia da C N C F mostra como colocar V L L M em Kubernetes sem baixar o modelo outra vez a cada pod.
+Nos três casos, a configuração só mostra seu valor quando deixa de ser invisível.
+Primeiro, o Forgejo 16 endurece mirrors e proxies antes de ampliar as Actions.
+O Forgejo lançou a versão dezesseis ponto zero ponto zero em 16 de julho.
+Se você não conhece, ele é uma plataforma Git hospedada por você, na mesma família de Gitea e "Git Hub".
+A release traz comentários de revisão em múltiplas linhas, notificações mais granulares, novas chamadas de [EY1 P IY1 AY1] para Actions e integrações baseadas em J W T.
+Só que, antes da parte confortável, há mudanças de segurança capazes de quebrar instalações legítimas.
+A primeira envolve mirrors. Quando o Forgejo espelha um repositório, o próprio servidor busca dados em outro endereço.
+Isso abre espaço para S S R F, um ataque em que uma entrada controlada faz o servidor acessar um destino que deveria estar fora do alcance.
+O projeto já mantinha listas de domínios permitidos e bloqueados, mas um redirecionamento H T T P ainda podia levar a operação Git por outro caminho.
+Na versão 16, o Forgejo executa essas operações sem seguir redirecionamentos H T T P.
+A mudança fecha o desvio e também afeta mirrors de repositórios remotos que foram renomeados ou transferidos e hoje respondem com redirect.
+O mirror falha até o administrador trocar o endereço pelo atual.
+Faz sentido: se o servidor seguisse o destino automaticamente, a regra de domínio não garantiria muita coisa.
+A segunda mudança pede atenção de quem usa autenticação no reverse proxy.
+Nesse desenho, [EH1 N JH AH0 N] [EH1 K S], Caddy ou outro proxy autentica a pessoa e envia a identidade ao Forgejo por um header como X Web Auth User.
+O backend precisa confiar que o pedido veio mesmo desse intermediário.
+As imagens de container configuravam confiança em qualquer reverse proxy por padrão.
+Com autenticação por proxy ativa, esse curinga virava um risco quando alguém também conseguia alcançar diretamente a porta web do Forgejo, normalmente a porta três mil.
+Essa pessoa poderia tentar forjar o header e se passar por outro usuário.
+A versão dezesseis ponto zero remove a confiança universal, então instalações que dependem desse fluxo precisam declarar as redes dos proxies confiáveis.
+O risco dependia de três condições juntas: autenticação por reverse proxy, curinga nos proxies confiáveis e acesso não confiável direto ao backend.
+Melhor revisar a exposição e a configuração antes do upgrade do que descobrir a mudança quando o login parar.
+A release também cria as Authorized Integrations.
+Com elas, Forgejo Actions e sistemas externos podem usar tokens J W T validados para acessar a [EY1 P IY1 AY1] e o Git sem guardar um access token estático de longa duração.
+Isso depende de configurar direito o emissor, a audiência, a validade e as permissões.
+J W T não distribui segurança automática só porque tem três partes separadas por ponto.
+Para revisão de código, chegam comentários em várias linhas.
+Nas Actions, a [EY1 P IY1 AY1] passa a cobrir logs de jobs e runs, artefatos e cancelamento de execuções.
+Forgejo dezesseis ponto zero é uma versão major não L T S, com suporte previsto até 29 de outubro de 2026.
+A versão quinze ponto zero L T S continua suportada até 15 de julho de 2027, enquanto a série onze ponto zero L T S encerra o suporte hoje.
+Para fazer o salto, a orientação oficial é criar um backup completo, ler todas as breaking changes e testar a interface depois da atualização.
+Também é preciso executar a verificação completa do Forgejo Doctor e salvar o log de diagnóstico; o comando exato está no post escrito.
+Esse servidor guarda código, credenciais de C I e a identidade dos usuários.
+O backup antes de um major upgrade é a parte do plano que você prefere achar entediante.
+As fontes deste bloco são o anúncio do Forgejo dezesseis ponto zero, as notas da versão dezesseis ponto zero ponto zero e o guia oficial de upgrade.
+Agora, o D C G zero ponto seis ponto sete olha para o comando que chega escondido pela entrada padrão.
+Uma linha como P S Q L ou Redis C L I parece apenas abrir um cliente de banco.
+A operação destrutiva pode chegar depois, por pipe, heredoc, arquivo, redirect ou substituição de comando.
+Para um agente com acesso ao terminal, olhar apenas o nome do processo principal deixa um buraco bem conveniente.
+O Destructive Command Guard, ou D C G, tenta interceptar essas chamadas antes da execução.
+Ele recebe os comandos por hooks Pre Tool Use, normaliza a entrada e compara o conteúdo com regras.
+Há packs para Git e filesystem, além de conjuntos opcionais para bancos, Kubernetes, Docker e provedores de cloud.
+O projeto lista integrações com Claude Code, Codex C L I, Gemini C L I, Copilot, Cursor, Hermes e outros agentes.
+A versão zero ponto seis ponto sete, publicada em 15 de julho às quatro horas e seis minutos, no horário U T C, amplia a análise da entrada padrão nos packs de banco.
+Produtores estáticos, redirects, heredocs, loaders e substituições de comando entram na avaliação das regras.
+Isso vale para Redis, Postgre S Q L, My S Q L ou Maria D B, Mongo D B e S Q Lite.
+Se a origem dessa entrada for dinâmica ou insegura nesse caminho, a nova lógica falha fechada: bloqueia a operação que não conseguiu provar segura.
+Aqui a distinção importa. O desenho geral do D C G continua fail open em erros e timeouts.
+O comportamento fechado vale para o tratamento novo de entrada padrão dinâmica nos packs afetados, não para a ferramenta inteira em qualquer caso incerto.
+A release corrige ainda outro formato fácil de esquecer.
+Em Git, um push com sinal de mais antes de origem, dois pontos e destino usa esse sinal no começo do refspec para pedir uma atualização forçada.
+Uma regra que bloqueasse apenas a opção force deixaria essa variante passar.
+O modo strict Git agora reconhece o sinal de mais, inclusive em refspecs construídos de forma mais indireta.
+Também houve ajustes para reduzir falsos positivos na pasta temporária, em substituições inertes de sed e em allowlists executadas fora de repositórios Git.
+Quem instalar os binários recebe alguns dados para conferir.
+Segundo a release, seis binários foram construídos manualmente a partir da tag anotada V zero ponto seis ponto sete.
+A compilação corresponde ao commit cujo hash começa com D oito quatro sete quatro sete um três seis quatro A D F dois quatro D oito um nove C.
+O restante do hash é três quatro A nove seis zero cinco oito B C um três seis C D C zero zero B um.
+Os assets têm hashes S H A duzentos e cinquenta e seis e assinaturas minisign com o identificador de chave trinta e seis B oito quatro sete D onze B A cinco A zero D zero.
+Também há provenance D S R e S L S A gerada localmente, além de S B O M no formato S P D X.
+O próprio projeto avisa que esses builds não têm bundle Sigstore.
+Os números de teste também são do fornecedor: 165 de 165 casos Bats, 15 de 15 testes PowerShell e 323 de 323 cenários de ponta a ponta.
+A alegação de latência abaixo de um milissegundo não foi reproduzida nesta pesquisa.
+Os builds manuais e a provenance local assinada dão material para auditoria, mas não são a mesma coisa que uma cadeia automatizada e verificável por Sigstore.
+Há ainda um limite jurídico: a licença aparece como MIT License, com um rider para Open A I e Anthropic, além de exclusões para partes nomeadas.
+Se a equipe pretende adotar ou redistribuir a ferramenta, precisa avaliar a compatibilidade em vez de ler a palavra MIT e seguir andando.
+Na prática, o D C G pode evitar acidentes conhecidos e forçar uma pausa útil.
+Ele também oferece allowlists e caminhos de bypass para ações intencionais, e qualquer bloqueador baseado em padrões pode errar para os dois lados.
+A proteção só alcança chamadas que passam de fato pelo hook.
+Backup, sandbox, permissão mínima e revisão continuam segurando a estrutura quando uma regra não reconhece o comando.
+As fontes deste bloco são a release do D C G zero ponto seis ponto sete, os dados da release na [EY1 P IY1 AY1] do "Git Hub" e a documentação do projeto.
+Por fim, a C N C F monta um V L L M de laboratório com cache persistente no Kubernetes.
+Baixar os pesos do modelo toda vez que um pod reinicia é um jeito caro e lento de reaprender a diferença entre container e armazenamento.
+Um tutorial publicado hoje no blog da C N C F documenta um laboratório de V L L M em Kubernetes no qual o cache sobrevive ao ciclo de vida do pod.
+O exemplo usa o modelo Meta Llama três ponto dois, um B Instruct, com um bilhão de parâmetros, servido em C P U por uma imagem do V L L M.
+O token do Hugging Face entra por um Secret.
+Um volume persistente de cinquenta gibibytes é montado na pasta de cache do Hugging Face, e o download inicial dos pesos tem aproximadamente dois vírgula cinco gigabytes.
+Esse volume, ou P V C, separa os pesos do container que executa o servidor.
+Se o pod reiniciar ou for recriado, o diretório de cache continua montado e o V L L M não precisa buscar o modelo novamente.
+O laboratório usa uma Storage Class LINSTOR com duas réplicas.
+O autor, Michael Troutman, trabalha na LINBIT, empresa ligada ao LINSTOR.
+É uma receita de laboratório com uma tecnologia específica, não um benchmark independente de armazenamento.
+O Deployment começa com uma réplica.
+Um Service do tipo Cluster I P expõe a [EY1 P IY1 AY1] na porta oito mil, por padrão apenas dentro do cluster.
+O teste chama o endpoint V um, chat completions, pelo D N S interno do servidor V L L M, na porta oito mil, no formato da [EY1 P IY1 AY1] da Open A I.
+Para clientes que aceitam trocar o endereço base, isso reduz o trabalho de integração.
+Compatibilidade de formato não promete o mesmo modelo, qualidade, latência, limites de uso nem os mesmos recursos de um provedor.
+O servidor e a capacidade agora são seus.
+A frase perde o charme quando chega o primeiro timeout, mas é justamente o tipo de aprendizado que um laboratório interno deve revelar.
+O guia também ensina a escalar o Deployment para zero.
+O pod desaparece, o consumo de computação para e o P V C mantém o cache para a próxima subida.
+É um padrão útil para testes eventuais ou ambientes de aprendizado.
+A documentação do V L L M, porém, trata C P U como caminho de demonstração e teste, sem desempenho comparável ao de G P U.
+Levar esse manifesto para produção exige uma fila de mudanças.
+O exemplo da C N C F usa a tag de imagem latest, não define requests e limits, não inclui probes e deixa a [EY1 P IY1 AY1] sem autenticação.
+Consumidores externos precisam de uma entrada protegida.
+A carga real também pede capacidade, observabilidade e políticas de disponibilidade próprias.
+O Secret merece um nome honesto.
+Objetos Kubernetes Secret armazenam dados em base sessenta e quatro, que é codificação.
+Eles ficam sem criptografia no E T C D por padrão quando o cluster não configura encryption at rest.
+O acesso precisa ser limitado por R B A C, e a criptografia em repouso deve ser habilitada quando o risco exigir.
+Colocar o token num objeto chamado Secret organiza a entrega. Sozinho, não decide quem consegue lê-lo.
+Como roteiro de aprendizado, a receita liga as peças certas: P V C, credencial, Deployment, serviço interno, chamada compatível e pausa sem perder os pesos.
+Ainda falta trabalho para virar uma arquitetura de produção, e tudo bem.
+Melhor encontrar essa lista com um Llama pequeno na C P U do que no dia em que a G P U cara já estiver esperando tráfego.
+As fontes deste bloco são o tutorial da C N C F sobre V L L M em Kubernetes, a documentação do V L L M para Kubernetes e as boas práticas para Secrets no Kubernetes.
