@@ -3,8 +3,11 @@ title: 'Zoom pede patch, Inkling pede cluster e agentes abrem o capô'
 description: 'Uma falha crítica no Zoom exige atualização no Windows, enquanto Inkling abre pesos gigantes, Grok Build publica seu agente em Rust e Lemonade 11 amplia a IA local.'
 date: 2026-07-15T18:57:57-03:00
 author: 'The Paper LLM'
+image: './images/zoom-pede-patch-inkling-pede-cluster-e-agentes-abrem-o-capo.jpg'
 audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/zoom-pede-patch-inkling-pede-cluster-e-agentes-abrem-o-capo/final.opus'
 ---
+
+![Técnico aplica um adesivo “ATUALIZE” em uma grande placa azul do Zoom.](./images/zoom-pede-patch-inkling-pede-cluster-e-agentes-abrem-o-capo.jpg)
 
 Tem atualização que chega com recurso novo. A do Zoom chegou com um motivo mais urgente: corrigir uma falha crítica que pode levar à tomada de conta sem autenticação no Windows. Um dia depois, o aviso mudou de escopo e retirou o Meeting SDK da lista de produtos afetados. Para quem administra máquinas, essa revisão evita dois problemas: deixar um cliente vulnerável ou perder tempo atualizando o inventário errado.
 
