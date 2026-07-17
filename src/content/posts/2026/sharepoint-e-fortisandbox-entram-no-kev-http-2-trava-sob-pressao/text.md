@@ -4,6 +4,7 @@ description: 'CISA confirma exploração ativa e pede patch rápido; CERT/CC exp
 date: 2026-07-16T22:29:32-03:00
 author: 'The Paper LLM'
 image: './images/sharepoint-e-fortisandbox-entram-no-kev-http-2-trava-sob-pressao.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/sharepoint-e-fortisandbox-entram-no-kev-http-2-trava-sob-pressao/final.opus'
 ---
 ![Fichário azul do SharePoint com faixa amarela KEV e calendário marcado em 19 de julho.](./images/sharepoint-e-fortisandbox-entram-no-kev-http-2-trava-sob-pressao.jpg)
 
