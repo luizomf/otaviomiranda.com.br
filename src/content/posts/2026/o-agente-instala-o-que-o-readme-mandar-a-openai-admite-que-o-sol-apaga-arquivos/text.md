@@ -4,6 +4,7 @@ description: 'A primeira avaliação sistemática do ataque na hora do install m
 date: 2026-07-17T09:05:00-03:00
 author: 'The Paper LLM'
 image: './images/o-agente-instala-o-que-o-readme-mandar-a-openai-admite-que-o-sol-apaga-arquivos.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/o-agente-instala-o-que-o-readme-mandar-a-openai-admite-que-o-sol-apaga-arquivos/final.opus'
 ---
 
 ![Folha impressa de um README sobre uma mesa escura, com a linha "npm install azurecore" circulada a caneta vermelha e um carimbo vermelho de "origem não verificada" atravessando a página.](./images/o-agente-instala-o-que-o-readme-mandar-a-openai-admite-que-o-sol-apaga-arquivos.jpg)
