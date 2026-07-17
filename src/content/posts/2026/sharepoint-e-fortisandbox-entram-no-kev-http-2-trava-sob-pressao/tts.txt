@@ -1,0 +1,170 @@
+SharePoint e FortiSandbox entram no K E V; H T T P dois trava sob pressão.
+Três dias é pouco para descobrir quais servidores existem, aprovar uma janela de manutenção e ainda investigar se alguém chegou antes.
+Mesmo assim, esse é o prazo colocado no catálogo da CISA para uma nova falha explorada do SharePoint e duas do FortiSandbox.
+As três entraram na lista em 16 de julho, já com correções disponíveis.
+Para os órgãos federais civis dos Estados Unidos, o prazo termina no dia 19.
+A pressa tem um motivo: o K E V não reúne uma vulnerabilidade só porque a nota C V S S assusta.
+Para entrar na lista, precisa existir evidência de exploração real.
+O prazo não vira obrigação automática nos demais ambientes, mas certamente muda a prioridade da conversa.
+Nesta edição também tem uma condição de negação de serviço em implementações H T T P dois e instrumentação de Go durante o build.
+Tem ainda sandboxes distribuídas numa escala alegada de um milhão e duas cadeias de roubo de credenciais que começam pedindo ajuda à própria vítima.
+SharePoint e FortiSandbox ganham prazo curto depois da exploração.
+A CISA adicionou ao catálogo K E V a C V E 2026, cinquenta e oito seis quatro quatro, do SharePoint Server.
+Também entraram a C V E 2026, vinte e cinco zero oito nove, e a C V E 2026, trinta e nove oito zero oito, do FortiSandbox.
+As três permitem execução remota de código ou comandos.
+O uso em campanhas de ransomware aparece como desconhecido, o que significa apenas que a agência ainda não confirmou essa ligação.
+No SharePoint, a C V E 2026, cinquenta e oito seis quatro quatro, é uma falha crítica de desserialização, com C V S S nove ponto oito.
+Desserializar é reconstruir um objeto a partir de dados armazenados ou recebidos.
+Se a aplicação aceita estado ou tipos controlados por alguém não confiável, essa reconstrução pode acabar executando código no servidor.
+O aviso da Microsoft marca exploração detectada e oferece atualizações para SharePoint Subscription Edition, 2019 e 2016.
+Os builds corrigidos são, respectivamente, dezesseis ponto zero ponto 19725 ponto 20384 e dezesseis ponto zero ponto 10417 ponto 20153.
+O terceiro build é dezesseis ponto zero ponto 5556 ponto 1005.
+Só que a própria página traz uma inconsistência importante.
+O resumo e o vetor de severidade descrevem um atacante sem autorização ou privilégios.
+Já a seção de perguntas frequentes fala em alguém autenticado com ao menos a função de Site Owner.
+Enquanto o fornecedor não alinhar essas duas partes, não dá para afirmar o pré-requisito com segurança.
+Ontem, falamos do Patch Tuesday e de outra falha no SharePoint.
+Agora, o que mudou foi o estado da C V E 2026, cinquenta e oito seis quatro quatro.
+Em 14 de julho, a CISA ainda dizia que ela não era conhecida como explorada.
+No dia 15, o M S R C revisou o registro para “Exploitation Detected”.
+No dia 16, ela entrou no K E V.
+Para quem acompanhava o aviso anterior, aplicar o patch continua sendo a primeira medida, mas não a única.
+A CISA também orienta ativar o A M S I em Full Mode, evitar a exposição direta do SharePoint à internet e investigar o ambiente.
+A recomendação é fazer essa investigação antes de girar as chaves de máquina do I I S, para preservar a chance de entender o que aconteceu.
+As duas falhas do FortiSandbox atingem a interface web ou a [EY1 P IY1 AY1] com requisições H T T P preparadas para chegar a comandos do sistema operacional.
+Segundo o advisory, a C V E 2026, vinte e cinco zero oito nove, não exige autenticação.
+Ela afeta FortiSandbox cinco ponto zero ponto zero a cinco ponto zero ponto cinco.
+Também afeta as versões quatro ponto quatro ponto zero a quatro ponto quatro ponto oito.
+A correção está na versão cinco ponto zero ponto seis ou posterior e na quatro ponto quatro ponto nove ou posterior, conforme a linha.
+Instalações Cloud ou PaaS nas versões cinco ponto zero ponto quatro e cinco ponto zero ponto cinco também precisam chegar à cinco ponto zero ponto seis ou posterior.
+A C V E 2026, trinta e nove oito zero oito, tem escopo menor.
+Ela afeta FortiSandbox quatro ponto quatro ponto zero a quatro ponto quatro ponto oito e foi corrigida na quatro ponto quatro ponto nove.
+Segundo a Fortinet, as linhas cinco ponto zero e PaaS cinco ponto zero não são afetadas por essa falha específica.
+Os dois advisories da Fortinet ainda mostram “Known Exploited: No”.
+Esse dado ficou para trás em relação ao K E V de 16 de julho, que trouxe a confirmação oficial posterior de exploração.
+Na prática, o caminho é inventariar as versões, aplicar as correções e revisar sinais de exposição ou comprometimento.
+E isso sem esperar que as páginas concordem entre si.
+Catálogo de segurança também sofre com consistência eventual; o invasor, infelizmente, não espera a replicação terminar.
+As fontes deste bloco são o catálogo K E V da CISA, o registro da falha no M S R C e dois advisories da Fortinet.
+Também foi consultado o alerta de hardening do SharePoint publicado pela CISA.
+Implementações H T T P dois acumulam trabalho quando o cliente para de receber.
+Uma conexão H T T P dois pode carregar vários fluxos ao mesmo tempo.
+Para evitar que um lado envie mais dados do que o outro consegue receber, o protocolo usa janelas de controle de fluxo.
+O cliente informa quanto ainda aguenta e amplia essa janela com mensagens Window Update.
+A nota V U número 885548, publicada pelo CERT C C em 16 de julho, descreve o problema em implementações que não lidam bem com um cliente que trava essa janela.
+Um atacante remoto e sem autenticação pode começar com janela zero ou simplesmente parar de atualizá-la.
+Mesmo sem conseguir transmitir a resposta, servidores vulneráveis continuam gerando e guardando o conteúdo.
+A conta fica bem desigual: para o cliente, manter streams parados custa pouco.
+No servidor, cada stream pode ocupar memória, worker ou conexão.
+Repetido em escala, isso pode provocar encerramento por falta de memória, uso intenso de swap, instabilidade, crash ou exaustão de recursos.
+Uma implementação segura precisa limitar o acúmulo e encerrar fluxos ou conexões que permanecem travados.
+A divulgação associa três identificadores.
+São a C V E 2026, cinquenta e nove sete seis dois, a C V E 2026, cinquenta e nove um sete três, e a C V E 2026, quarenta e quatro nove zero nove.
+A divulgação também reúne o estado de 118 fornecedores.
+Os três identificadores não afetam necessariamente todos os produtos.
+A própria entrada do I E T F reforça que o problema está nas implementações, e não na especificação H T T P dois inteira.
+A matriz aberta pelo CERT C C deixa essa diferença bem visível.
+Go, G R P C, H A Proxy, N G H T T P dois e Cloudflare aparecem como não afetados, por exemplo.
+Apache H T T P Server e Ubuntu ainda constavam como desconhecidos na revisão consultada.
+Desabilitar H T T P dois no susto pode trocar um diagnóstico específico por uma indisponibilidade criada em casa.
+Antes disso, descubra qual servidor, proxy ou gateway realmente termina a conexão e qual versão ele executa.
+No Apache Traffic Server, a correção de controle de streams chegou às versões nove ponto dois ponto quatorze e dez ponto um ponto três.
+Para NetScaler, um dos builds corrigidos é quatorze ponto um, setenta e dois ponto sessenta e um, ou posterior.
+Outro é treze ponto um, sessenta e três ponto dezoito, ou posterior.
+Na linha FIPS, há o quatorze ponto um FIPS, quatorze ponto um, setenta e dois ponto sessenta e um, ou posterior.
+Para treze ponto um FIPS ou N D C P P, o build é treze ponto um ponto trinta e sete ponto 272, ou posterior.
+Fora dos H T T P Strict Profiles, o CERT C C informa que também é preciso configurar o parâmetro Http dois Small Window Timeout.
+O valor recomendado é 30 segundos, conforme o perfil.
+Só atualizar, sem conferir essa configuração, pode deixar a mitigação incompleta.
+No começo de junho, cobrimos o H T T P dois Bomb, ligado à C V E 2026, quarenta e nove nove sete cinco.
+Aquele caso envolvia H Pack e controle de fluxo em outras stacks.
+A nota nova trata de outro caso, com três identificadores C V E diferentes.
+O problema agora se concentra no buffering enquanto o envio está parado, com uma matriz oficial de fornecedores e correções.
+A fonte deste bloco é a nota V U número 885548 do CERT C C.
+OpenTelemetry injeta telemetria no build de Go e corrige a estreia.
+Instrumentar uma aplicação costuma exigir alteração no código, bibliotecas adicionais ou um agente conectado em tempo de execução.
+Em Go, esse último caminho é menos natural.
+A linguagem gera binários estáticos e não oferece os mesmos pontos de extensão encontrados em ambientes como Java e ponto Net.
+Em 16 de julho, o OpenTelemetry anunciou como estável uma alternativa que funciona durante a compilação.
+A ferramenta otel C usa o mecanismo tool exec do toolchain para interceptar etapas do compilador.
+Assim, ela insere traces e métricas na aplicação, nas dependências e até em partes suportadas da biblioteca padrão.
+Não é E B P F nem um agente separado rodando ao lado do programa.
+A instrumentação já vai compilada no binário.
+A troca inicial parece pequena no papel.
+Depois de instalar a ferramenta com Go Install, você pode fazer o build chamando otel C, Go Build, e indicando o arquivo de saída.
+O post escrito contém os comandos completos.
+A mesma substituição cabe no estágio de compilação de um Dockerfile.
+Mas “sem alterar o código-fonte” ainda exige mudar o build.
+A equipe também precisa configurar o exportador e validar cobertura, compatibilidade, comportamento e overhead.
+A linha versão um trouxe regras para Mongo D B, Gin, o S D K de Go da Open A I, Kafka e informers do Kubernetes.
+Também trouxe integração de contexto com slog e logrus.
+A cobertura automática aumentou, mas ainda não alcança todo o ecossistema.
+Spans manuais continuam úteis para representar operações de negócio e bibliotecas que ainda não têm regra.
+A estreia precisou de uma correção quase imediata.
+A versão um ponto zero ponto zero, publicada em 14 de julho, foi retraída porque o comando otel C pin escrevia caminhos incorretos de módulos no arquivo Go ponto mod.
+A versão um ponto zero ponto um saiu 26 minutos depois.
+Ela corrigiu os caminhos canônicos e marcou a versão ruim como retraída no próprio módulo.
+Se você chegou pelo anúncio da “primeira versão estável”, confirme se o ambiente está na versão um ponto zero ponto um.
+Eu começaria testando num serviço pequeno antes de transformar essa mudança de build em padrão da plataforma.
+As fontes deste bloco são o anúncio da instrumentação durante a compilação e as releases um ponto zero ponto um e um ponto zero ponto zero do OpenTelemetry.
+Modal distribui o agendamento para criar sandboxes em outra escala.
+Uma sandbox de agente parece simples quando você olha a [EY1 P IY1 AY1]: pede um ambiente isolado, executa código e descarta.
+Por baixo, alguém precisa escolher um worker, reservar recursos, criar o ambiente, registrar o estado e devolver um endereço.
+Quando a taxa sobe, cada etapa coordenada vira uma fila compartilhada.
+Em 16 de julho, a Modal apresentou o backend V dois de Sandboxes para tirar parte desse caminho do centro.
+Em vez de consultar e atualizar o Postgres durante cada criação, schedulers horizontais usam o estado em memória para escolher um worker.
+O pedido vai por R P C direto, e o próprio worker decide se ainda pode aceitar a sandbox.
+As atualizações voltam por Redis Streams, enquanto a persistência acontece de forma assíncrona, fora do caminho crítico.
+A arquitetura troca coordenação global forte por um estado que pode chegar atrasado.
+Se um scheduler enxergar capacidade antiga e mandar trabalho demais, o worker rejeita a criação e o sistema tenta de novo.
+Isso reduz as operações compartilhadas por sandbox, mas joga mais complexidade para reconciliação, observabilidade e tratamento das recusas.
+O banco não desaparece; ele só deixa de participar do momento mais sensível à latência.
+Num teste da própria Modal, a V dois criou um milhão de sandboxes em menos de um minuto.
+A mediana de tempo até interação ficou abaixo de meio segundo.
+A empresa também diz que a capacidade anterior chegava a 50 mil sandboxes concorrentes por cliente e que opera milhões por dia.
+São números do fornecedor, sem reprodução independente nesta apuração.
+O post reconhece limites como um Redis Stream único e contenção no kernel ou na rede.
+Isso inclui o lock R T N L, que pode alongar a cauda de latência.
+A expressão “sem limite prático” é linguagem de engenharia do produto, não uma garantia física recém-descoberta.
+A V dois já está disponível para teste, mas continua beta e experimental.
+A documentação recomenda seu uso para cargas acima de 20 criações por segundo ou 10 mil sandboxes simultâneas.
+Em Python, o caminho passa pela função experimental de criação de Sandbox.
+O sublinhado no nome já faz uma gentileza rara e avisa o tamanho do compromisso.
+Também falta paridade com a V um.
+G P Us, tags e snapshots de memória ainda não são suportados.
+Também ficam de fora a criação por nome, o modal shell, connect tokens, túneis sem criptografia, domínios personalizados e sistemas de arquivos em rede.
+Para equipes que executam código de agentes, reinforcement learning ou muitos jobs isolados, o backend é uma opção para testar alta concorrência.
+A decisão de migrar depende menos do número redondo de um milhão.
+Depende mais de a carga tolerar uma [EY1 P IY1 AY1] experimental, estado distribuído e a lista atual de ausências.
+As fontes deste bloco são o post de engenharia da Modal e a documentação das Sandboxes V dois.
+A C R Stealer transforma a vítima no primeiro executor.
+Uma página falsa mostra uma verificação e pede que a pessoa copie um comando e cole no Windows.
+Parece suporte técnico, mas é a própria vítima que abre o caminho de que o malware precisava.
+Essa técnica se chama ClickFix e aparece no começo de duas cadeias recentes do A C R Stealer documentadas pela Microsoft.
+No relatório publicado em 16 de julho, o Defender Experts descreve um aumento de atividade observado entre o fim de abril e meados de junho de 2026.
+As duas cadeias roubam credenciais de navegadores, cookies, tokens e documentos, embora sigam caminhos diferentes.
+A primeira usa conteúdo remoto por Web D A V, PowerShell e um loader Python, além de mecanismos de persistência.
+Em um subconjunto dos casos, dados em blockchain provavelmente serviam como ponto morto para resolver um payload ou endereço de comando e controle.
+A observação vale para esse subconjunto, não para todo A C R Stealer.
+A segunda cadeia passa por M S H T A e PowerShell, esconde um payload nos pixels de uma imagem JPEG e executa conteúdo em memória.
+M S H T A e Run D L L trinta e dois são binários legítimos do Windows.
+Por isso, o abuso consegue se misturar a ferramentas já presentes no sistema.
+O Web D A V também pode fazer conteúdo remoto parecer um caminho montado ou local.
+O alvo final inclui os bancos de credenciais dos navegadores.
+A D P A P I protege segredos vinculados ao usuário ou à máquina.
+Mas um malware executado no contexto certo pode chamar as mesmas rotinas de descriptografia disponíveis para aquele usuário.
+A criptografia protege o dado em repouso; uma sessão comprometida continua comprometida.
+A Microsoft diz que as duas cadeias são representativas, não exaustivas.
+A empresa atribui o caso ao A C R Stealer pelo comportamento observado e por inteligência aberta.
+A Red Canary dá um contexto independente.
+Ela viu o malware em campanhas ClearFake e o colocou empatado na sexta posição entre as ameaças mais frequentes em seus ambientes de clientes em abril.
+O ranking descreve a amostra da empresa, não a prevalência no mundo inteiro.
+Em maio, citamos uma avaliação anterior de possível A C R Stealer numa página falsa de Claude.
+Agora há um relatório primário com duas cadeias observadas em 2026, suas técnicas e medidas de defesa.
+Para o usuário, a regra mais útil é desconfiar de páginas encontradas em buscas ou anúncios que mandam copiar e executar comandos para concluir uma verificação.
+Na defesa, procure uso anômalo de Web D A V, PowerShell ofuscado, M S H T A, Run D L L trinta e dois e tarefas agendadas.
+Procure também uso anômalo de D P A P I e acesso às bases de credenciais dos navegadores.
+O relatório publica quatro domínios associados, mas eles estão desativados de propósito no post escrito.
+São Looksta ponto I C U, Contrite ponto Quirksturdy ponto I C U, Enhanceblabber ponto C C e Deep Harborio ponto com.
+Indicador de ataque não precisa virar link clicável.
+As fontes deste bloco são o relatório de segurança da Microsoft sobre o A C R Stealer e o Intelligence Insights da Red Canary.
