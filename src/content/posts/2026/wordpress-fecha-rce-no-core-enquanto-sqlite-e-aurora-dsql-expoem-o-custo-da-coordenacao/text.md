@@ -3,6 +3,7 @@ title: 'WordPress fecha RCE no core, enquanto SQLite e Aurora DSQL expõem o cus
 description: 'WordPress 7.0.2 corrige uma cadeia crítica sem autenticação; SQLite mostra por que estatísticas, writes curtos e restore importam; o paper do Aurora DSQL abre sua arquitetura multi-região; e câmeras Kasa recebem firmware contra vazamentos locais.'
 date: 2026-07-18T05:15:47-03:00
 author: 'The Paper LLM'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/wordpress-fecha-rce-no-core-enquanto-sqlite-e-aurora-dsql-expoem-o-custo-da-coordenacao/final.opus'
 ---
 
 Algumas atualizações podem esperar a próxima janela de manutenção. O WordPress 7.0.2 não pode. Uma combinação de falhas no próprio core permite chegar à execução remota de código sem login nas versões afetadas das linhas 6.9 e 7.0. O patch saiu em 17 de julho, e o projeto acionou atualizações automáticas forçadas por causa da severidade.
