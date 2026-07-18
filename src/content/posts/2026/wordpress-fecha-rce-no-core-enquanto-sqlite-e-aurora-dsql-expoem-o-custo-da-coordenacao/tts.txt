@@ -1,0 +1,159 @@
+WordPress fecha execução remota de código no core, enquanto SQLite e Aurora D S Q L expõem o custo da coordenação.
+Algumas atualizações podem esperar a próxima janela de manutenção.
+O WordPress sete ponto zero ponto dois não pode.
+Uma combinação de falhas no próprio core permite chegar à execução remota de código sem login nas versões afetadas das linhas seis ponto nove e sete ponto zero.
+O patch saiu em 17 de julho, e o projeto acionou atualizações automáticas forçadas por causa da severidade.
+Depois desse incêndio, a conversa muda de escala, mas continua esbarrando no mesmo problema: coordenar trabalho.
+SQLite precisa conciliar leitores, um único escritor e backups num servidor pequeno.
+O Aurora D S Q L tenta coordenar transações entre regiões sem pagar uma viagem de rede a cada passo.
+E duas câmeras da T P Link mostram que até a rede local precisa de limites bem definidos.
+Primeiro, o WordPress corrige uma cadeia de execução remota de código sem autenticação no core.
+O problema principal combina duas falhas.
+A primeira causa uma confusão de rota no recurso de chamadas em lote da [R EH1 S T] [EY1 P IY1 AY1], usado para agrupar várias operações.
+A segunda é uma injeção S Q L no parâmetro author not in, usado pelo W P Query.
+Nas versões em que as duas peças podem ser encadeadas, um atacante sem autenticação consegue executar código no servidor.
+O risco está no WordPress padrão, não naquele plugin abandonado que alguém instalou seis anos atrás e esqueceu no painel.
+Segundo a Searchlight Cyber, que descobriu a cadeia e a batizou de W P two shell, uma instalação sem plugins pode ser explorada anonimamente.
+A empresa ainda não publicou todos os detalhes técnicos, para dar tempo de os administradores corrigirem suas instalações.
+Até agora, as fontes primárias consultadas não confirmam exploração ativa em campo.
+É bom prestar atenção às versões.
+A cadeia de execução remota afeta WordPress seis ponto nove ponto zero até seis ponto nove ponto quatro.
+Ela também afeta as versões sete ponto zero ponto zero e sete ponto zero ponto um.
+As correções estão, respectivamente, nas versões seis ponto nove ponto cinco e sete ponto zero ponto dois.
+A injeção S Q L também atinge a linha anterior, da versão seis ponto oito ponto zero até a seis ponto oito ponto cinco.
+Nessa linha, a falha foi corrigida na versão seis ponto oito ponto seis.
+O aviso oficial limita a combinação que termina em execução de código às versões seis ponto nove ou superiores.
+A beta dois do WordPress sete ponto um já traz as duas correções.
+Os identificadores ajudam a cruzar scanner, inventário e alerta interno.
+A confusão da rota batch associada à execução de código aparece como C V E 2026, sessenta e três zero três zero.
+Ela também aparece como G H S A, F F nove F, J F quatro dois, seis seis dois Q.
+A injeção S Q L é a C V E 2026, sessenta zero um três sete.
+Ela também é identificada como G H S A, F P P sete, X dois X dois, dois M J F.
+A ação segura é atualizar agora.
+Instalações sete ponto zero ponto zero e sete ponto zero ponto um devem ir para sete ponto zero ponto dois.
+Instalações entre seis ponto nove ponto zero e seis ponto nove ponto quatro devem ir para seis ponto nove ponto cinco.
+Instalações entre seis ponto oito ponto zero e seis ponto oito ponto cinco devem ir para seis ponto oito ponto seis.
+Essa última versão corrige a injeção S Q L na linha seis ponto oito.
+Como contenção emergencial, a Searchlight recomenda bloquear acesso anônimo às duas formas da rota batch.
+Uma delas é o caminho W P JSON, batch, versão um.
+A outra usa o parâmetro rest route para chegar a batch, versão um.
+O bloqueio pode interromper integrações legítimas.
+Ele serve para ganhar tempo quando o patch não pode entrar imediatamente, mas não substitui a atualização das falhas.
+Se a atualização automática já rodou, confirme a versão instalada.
+A notificação, sozinha, não prova que a atualização entrou.
+Se ela não rodou, a falta de exploração pública confirmada também não é motivo para deixar essa janela aberta.
+O próprio projeto tomou a medida pouco comum de forçar a atualização por causa do potencial de impacto.
+As fontes deste bloco são o anúncio do WordPress sete ponto zero ponto dois e os avisos de segurança das duas falhas no "Git Hub".
+Também foram consultadas a pesquisa da Searchlight Cyber e a orientação temporária publicada pela empresa.
+Agora, o SQLite em produção cobra estatísticas, escritas curtas e restauração testada.
+SQLite é muito bom em eliminar peças.
+Para muita aplicação pequena, um arquivo local e uma biblioteca resolvem o que viraria serviço, usuário, porta, monitoramento e plantão.
+A conta reaparece quando esse arquivo começa a receber busca textual, limpeza periódica, vários workers e backup de verdade.
+Julia Evans publicou em 17 de julho algumas notas sobre seu quarto site em produção com SQLite.
+Num caso com cerca de quatro mil linhas, uma consulta de busca textual com F T S cinco levava aproximadamente cinco segundos.
+Depois de executar Analyze, o tempo caiu para perto de zero vírgula zero cinco segundo.
+Foi uma melhora de aproximadamente cem vezes naquele workload.
+Esse resultado não é um benchmark geral do SQLite.
+A própria autora não confirmou o plano exato e trata o comportamento acidentalmente quadrático como sua melhor hipótese.
+O relato mostra algo mais simples: até uma base pequena pode escolher um caminho muito ruim quando o otimizador não conhece a distribuição dos dados.
+Analyze coleta estatísticas que o planejador de consultas usa, em tabelas como SQLite stat um.
+Para aplicações modernas, a documentação recomenda chamar Pragma optimize periodicamente.
+Isso é preferível a executar uma análise completa às cegas em toda conexão.
+Desde o SQLite três ponto quarenta e seis ponto zero, lançado em 23 de maio de 2024, esse comando limita automaticamente o escopo do trabalho.
+Assim, a operação permanece rápida.
+O segundo problema apareceu nas exclusões.
+Evans tinha um busy timeout de cinco segundos.
+Uma limpeza longa segurava o único caminho de escrita até outro writer atingir o timeout e derrubar o worker.
+A saída foi apagar em lotes menores e liberar o lock com mais frequência.
+O modo W A L melhora a convivência: leitores podem continuar enquanto há uma escrita em andamento.
+Ainda assim, existe apenas um writer por arquivo W A L.
+Os processos também precisam estar na mesma máquina.
+Além disso, uma transação que envolve bancos anexados não é atômica como conjunto.
+W A L ajuda bastante.
+Só não transforma SQLite num banco distribuído depois de uma linha no arquivo de configuração.
+Quebrar uma operação grande em lotes reduz a contenção, mas traz outra responsabilidade.
+O processo precisa lidar com progresso parcial e repetição.
+Se o worker parar no lote 37, a execução seguinte deve conseguir continuar ou repetir sem corromper o resultado.
+O backup fecha a terceira ponta.
+Evans usou Vacuum Into com restic e S três para gerar snapshots.
+Ela teve episódios de falta de memória e começou a testar o Litestream para replicação incremental.
+Ela também conta que ainda não havia testado a restauração.
+Essa última parte vale mais que qualquer diagrama bonito: criar uma cópia e validar a recuperação são coisas diferentes.
+Para um serviço pequeno em Django, a lista fica bem concreta.
+Mantenha as estatísticas do planner e observe quanto duram as escritas.
+Use lotes quando uma manutenção longa segura o lock, acompanhe checkpoints e teste a restauração.
+Se o produto precisa de muitos escritores concorrentes, talvez o limite não esteja pedindo mais um pragma.
+Talvez esteja pedindo Postgre S Q L.
+As fontes deste bloco são o relato de Julia Evans e a documentação do SQLite sobre Analyze, Pragma optimize e o modo W A L.
+No Aurora D S Q L, a coordenação vai para o commit entre regiões.
+No SQLite, o limite mais visível é ter um escritor por vez no mesmo host.
+O Aurora D S Q L parte do outro extremo: é um S Q L serverless ativo-ativo, com endpoints de leitura e escrita em várias regiões e consistência forte.
+Na arquitetura descrita por seis engenheiros da A W S, o processamento de queries, o armazenamento, a coordenação de transações e a replicação ficam separados.
+Esses serviços escalam horizontalmente, e não há um componente único comandando tudo.
+A versão um do paper entrou no arXiv em 14 de julho.
+A versão dois, que é a atual, saiu no dia 16.
+O documento mostra uma parte interessante da engenharia do produto.
+Ele explica como evitar uma rodada entre regiões a cada comando sem abrir mão de uma visão consistente dos dados.
+Cada transação roda num Postgre S Q L customizado, dentro de uma Firecracker Micro V M dedicada.
+O D S Q L aproveita parser, otimizador, executor e protocolo do Postgre S Q L.
+Mas ele não usa o armazenamento nem o processamento transacional do Postgre S Q L.
+Essa diferença é importante.
+Compatibilidade com Postgre S Q L não quer dizer que há um Postgre S Q L inteiro escondido atrás do endpoint.
+A documentação declara compatibilidade com Postgre S Q L 16, dentro das capacidades oferecidas pelo serviço.
+As leituras usam controle de concorrência por múltiplas versões, o M V C C.
+Na prática, a transação recebe uma fotografia consistente e consegue ler sem coordenar cada statement com as outras regiões.
+As escritas permanecem locais durante a execução.
+A conversa distribuída mais cara fica para o commit.
+É nessa hora que entra o controle otimista de concorrência, ou O C C.
+Componentes chamados adjudicators decidem os conflitos de escrita, enquanto o Journal ordena as transações e as torna duráveis.
+Depois, Crossbars reorganizam o fluxo por shard de armazenamento.
+Numa configuração multi-região, o desenho permite compartilhar uma rodada de comunicação.
+Essa rodada cobre a decisão de consistência e a durabilidade do commit.
+A ideia é reduzir viagens de rede no caminho comum.
+Nos microbenchmarks do paper, transações simples por chave primária tiveram o percentil 99 local em torno de dois milissegundos para Select.
+Para Update, o percentil 99 local ficou em torno de três milissegundos.
+O Commit ficou perto de 30 milissegundos no cenário multi-região e sete vírgula quatro milissegundos em uma região.
+Esses números não descrevem automaticamente seu e-commerce, E R P ou sistema de pagamentos.
+Os autores trabalham na A W S, o paper apresenta um produto da própria empresa e os testes usam operações simples.
+Nesta apuração, também não há reprodução independente das alegações de milhões de transações por segundo.
+A A W S anuncia disponibilidade de noventa e nove vírgula noventa e nove porcento em uma região.
+Em configuração multi-região, a disponibilidade anunciada é de noventa e nove vírgula novecentos e noventa e nove porcento.
+São números do fornecedor.
+O caveat técnico mais importante está na consistência.
+O padrão é strong snapshot isolation, equivalente ao Repeatable Read do Postgre S Q L, e não serializabilidade.
+Duas transações podem ler a mesma fotografia, alterar dados diferentes e, juntas, violar uma regra que nenhuma delas viu sendo quebrada.
+Esse fenômeno se chama write skew.
+Conflitos de escrita também podem abortar no commit e exigir retry.
+Hoje, o serviço não oferece Read Committed.
+Para quem trabalha com arquitetura, o paper deixa a troca bem clara.
+Leituras sem coordenação e escritas locais reduzem round trips.
+O commit concentra conflito, ordenação e durabilidade.
+A aplicação ganha S Q L multi-região com endpoints ativos, inclusive na região de São Paulo.
+Mas ela ainda precisa cuidar dos retries e das invariantes sensíveis a write skew.
+A documentação também avisa que clusters multi-região não atravessam continentes.
+As fontes deste bloco são o paper "Aurora D S Q L: Scalable, Multi-Region O L T P", versão dois, e a documentação do Amazon Aurora D S Q L.
+Por fim, a T P Link atualiza câmeras Kasa que vazavam dados na rede local.
+A T P Link publicou correções para duas falhas nas câmeras Kasa E C 70 versão quatro e E C 71 versão quatro.
+A divulgação foi coordenada com a pesquisa original, datada de 16 de julho.
+Na C V E 2026, noventa e sete sete zero, uma chave criptográfica fixa no firmware pode permitir um ataque.
+Um atacante na rede local pode interceptar a comunicação e obter credenciais administrativas.
+O fabricante deu à falha nota oito vírgula seis no C V S S quatro ponto zero.
+A correção indicada está no firmware dois ponto quatro ponto zero, build 20260520, release 4191.
+A segunda falha, C V E 2026, treze dois três zero, expunha geolocalização na resposta do mecanismo de descoberta local, sem autenticação.
+Ela recebeu nota cinco vírgula três.
+O pesquisador Christopher Childress demonstrou que uma E C 71 com firmware dois ponto três ponto vinte e seis respondia a um pacote U D P na porta 9999.
+A resposta continha coordenadas e identificadores do dispositivo.
+Quando ele validou o firmware dois ponto quatro ponto um, essa resposta já havia sido removida.
+A T P Link associa a correção ao firmware dois ponto quatro ponto um, build 20260621, release 76536.
+Sem autenticação, nesse caso, não significa aberto para qualquer pessoa na internet.
+O aviso descreve um atacante numa rede adjacente ou local.
+Essas fontes não dão base para afirmar comprometimento remoto direto pela internet.
+O fabricante confirma apenas E C 70 versão quatro e E C 71 versão quatro.
+A possibilidade de outros modelos compartilharem um histórico semelhante de protocolo foi levantada pelo pesquisador.
+Mas essa possibilidade não foi verificada no mesmo escopo.
+Quem tem uma dessas câmeras deve instalar o firmware mais recente, de preferência dois ponto quatro ponto um ou posterior.
+Essa versão cobre as correções publicadas.
+Também é importante manter os dispositivos I O T numa rede segmentada.
+A segmentação reduz o número de pessoas e máquinas que alcançam a interface local.
+Mas ela não remove uma chave embutida no firmware antigo nem substitui a atualização.
+As fontes deste bloco são o aviso da T P Link e a pesquisa técnica de Christopher Childress publicada no "Git Hub".
