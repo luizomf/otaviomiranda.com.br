@@ -1,0 +1,79 @@
+Bun troca Zig por Rust; Gitea um ponto vinte e sete pede patch e teste no C I.
+Você pode ter recebido uma runtime inteira reescrita sem instalar nada por conta própria.
+O Claude Code já vem com o Bun em Rust, resultado de uma tradução grande feita por um engenheiro com dezenas de workflows do próprio Claude Code.
+A frase parece encomendada para começar uma discussão sobre agentes antes do café.
+Mas a parte útil dessa história é bem menos mágica: compilador, um milhão de verificações, revisão adversarial e supervisão humana.
+Enquanto isso, quem mantém Git dentro de casa tem uma atualização mais direta para planejar.
+O Gitea um ponto vinte e sete corrige uma falha crítica de autorização e inclui várias outras correções de segurança.
+A versão também muda de forma incompatível a execução de workflows reutilizáveis.
+Agora, vamos ao Bun um ponto quatro, que troca Zig por Rust e já roda no Claude Code.
+O Bun reúne runtime para JavaScript e TypeScript, gerenciador de pacotes, bundler e executor de testes.
+Segundo o projeto, a versão um ponto três ponto quatorze foi a última implementada em Zig.
+A um ponto quatro ponto zero será a primeira em Rust.
+Durante a apuração, ela ainda estava no canal canary, sem lançamento estável para todo mundo.
+A troca acontece por baixo da interface usada pelo Claude Code, então não há migração manual para quem usa a ferramenta.
+O port já está no Claude Code dois ponto um ponto cento e oitenta e um, lançado em dezessete de junho, e nas versões posteriores.
+No relato oficial, um engenheiro fez a tradução em onze dias, com cerca de cinquenta workflows dinâmicos do Claude Code rodando continuamente.
+Foram seis mil setecentos e setenta e oito commits.
+Erros de compilação e falhas nos testes viravam filas de trabalho.
+Alguns loops geravam código, outros comparavam as implementações em Zig e Rust, e outros faziam revisão adversarial.
+Quando aparecia uma classe nova de erro, o engenheiro ajustava os loops e acompanhava o resultado.
+Essa diferença importa porque ele não soltou um pedido para o modelo recriar a runtime do zero.
+O trabalho foi uma tradução mecânica de uma base existente, guiada por documentação, invariantes e uma suíte independente da linguagem.
+Segundo o autor, essa suíte executou um milhão de assertions, ou verificações, sem remover ou pular testes.
+O processo também teve comparação lado a lado e correções manuais.
+Nesse caso, o agente virou uma quantidade pouco razoável de braços trabalhando sobre trilhos que alguém precisou construir e vigiar.
+Mesmo com toda essa automação, a engenharia continuou lá.
+Rust também oferece outras ferramentas para encontrar problemas.
+A linguagem mantém as verificações dos limites de acesso, mesmo em builds de release.
+O mecanismo chamado "Drop" cuida da limpeza automática quando um valor deixa de ser usado.
+O post do Bun associa essas propriedades à descoberta de erros durante o port e à redução de vazamentos.
+Tanto a relação de causa quanto o tamanho desse efeito são interpretações do próprio projeto.
+Os números publicados pelo Bun chamam atenção.
+A equipe diz que a versão um ponto quatro ponto zero corrige cento e vinte e oito bugs reproduzíveis na um ponto três ponto quatorze.
+Também reduz o binário em cerca de vinte porcento no Linux e no Windows e melhora entre dois e cinco porcento as cargas de trabalho apresentadas.
+Na telemetria de produção do Claude Code no Linux, o tempo mediano de inicialização caiu de quinhentos e dezessete para quatrocentos e sessenta e quatro milissegundos.
+Isso representa uma redução de aproximadamente dez porcento.
+São medições do fornecedor, não benchmarks reproduzidos de forma independente.
+E a frase "um engenheiro em onze dias" inclui preparação, testes extensos, monitoramento e revisão.
+O número não descreve trabalho humano ausente.
+Pelo menos uma parte da história ganhou confirmação externa: o software distribuído contém o novo port.
+Em dezenove de julho, Simon Willison rodou o comando strings no binário local do Claude Code.
+Essa ferramenta extrai sequências legíveis de um executável.
+Ele encontrou a identificação "Bun versão um ponto quatro ponto zero, mac O S, ARM sessenta e quatro" e quinhentos e sessenta e três nomes de arquivos Rust.
+A inspeção é simples, não uma auditoria completa, e não confirma os ganhos de desempenho.
+Ela sustenta um ponto específico: o Bun em Rust já chegou ao artefato do Claude Code.
+Não está restrito a um anúncio ou ramo de desenvolvimento.
+As fontes deste bloco são o post "Rewriting Bun in Rust", do Bun, e a análise de Simon Willison sobre o Claude Code usar o Bun escrito em Rust.
+Agora, o Gitea um ponto vinte e sete, que corrige uma falha crítica e muda workflows reutilizáveis.
+O Gitea um ponto vinte e sete ponto zero saiu em treze de julho.
+Para quem hospeda a própria forge Git, essa atualização junta dois trabalhos que merecem ser feitos com calma: corrigir falhas de segurança e validar mudanças no C I.
+O caso mais urgente é a C V E 2026, cinquenta e oito quatro quatro três.
+Ela também é identificada pelo advisory G H S A, X X J V, sete cinco dois H, três V P dois.
+A falha tem severidade crítica e nota C V S S nove vírgula seis.
+Ela afeta as versões até a um ponto vinte e seis ponto quatro e foi corrigida especificamente na um ponto vinte e sete ponto zero.
+O problema é um desvio de escopo de autorização.
+Um token limitado a repositórios públicos podia atualizar o ramo de origem de um pull request privado.
+Portanto, a credencial podia alterar conteúdo privado e afetar a integridade e, potencialmente, a disponibilidade do repositório.
+As notas da versão um ponto vinte e sete também listam correções em controle de acesso, migração, tokens e metadados privados.
+A lista ainda inclui Git L F S, redirecionamentos de mirrors, OAuth, Actions e travessia de diretórios.
+A Linuxiac contou quarenta e cinco identificadores C V E corrigidos.
+A publicação citou casos de escalada de privilégio, requisições forjadas pelo servidor, desvios de autorização, exposição de repositórios e negação de serviço.
+Essa contagem é da publicação.
+As notas oficiais não informam um total, enquanto a [EY1 P IY1 AY1] pública exibia quarenta e seis advisories publicados em treze de julho.
+A diferença pode ser apenas de escopo, inclusive porque nem todo advisory daquele mês recebeu necessariamente seu primeiro patch nessa versão.
+No Gitea Actions, os workflows reutilizáveis passam a ser analisados e expandidos pelo servidor como jobs separados.
+Workflows compartilhados evitam repetir YAML e, na versão um ponto vinte e sete, também podem ficar no escopo do proprietário ou no escopo global.
+Só que o próprio lançamento classifica a mudança na execução como incompatível.
+Subir a imagem nova e descobrir a semântica no pipeline principal é um teste, mas não dos bons.
+O Actions também ganhou o recurso "continue on error", para que uma falha esperada não derrube indevidamente o status geral.
+Também ganhou suporte à variável GITHUB STEP SUMMARY, com a qual um job pode escrever Markdown no resumo da execução.
+A versão melhora a limpeza depois de cancelamentos e traz ajustes na execução e na visualização.
+Fora do C I, o Gitea agora renderiza notebooks Jupyter em arquivos com a extensão ponto I P Y N B.
+Também permite associar vários projetos a uma issue ou pull request.
+Além disso, publica uma especificação Open [EY1 P IY1 AY1] três ponto zero em um endpoint JSON próprio.
+O caminho prudente para atualizar começa pelo backup do banco, dos repositórios, anexos, configuração e secrets.
+Depois da instalação, teste login, clone e push, hooks, L F S e os pipelines críticos.
+Quem ainda está na versão um ponto vinte e seis ponto quatro ou anterior tem uma falha de segurança concreta para corrigir.
+Quem usa workflows reutilizáveis também tem um bom motivo para não fazer a atualização no automático.
+As fontes deste bloco são as notas de lançamento do Gitea um ponto vinte e sete ponto zero, o advisory da C V E 2026, cinquenta e oito quatro quatro três, e a Linuxiac.
