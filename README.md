@@ -1,6 +1,6 @@
 # Otávio Miranda — Blog & Personal Site
 
-Source code for [otaviomiranda.com.br](https://otaviomiranda.com.br).
+Source code for the [otaviomiranda.com.br](https://otaviomiranda.com.br) website.
 
 This is an open lab. Read the code, open issues, submit posts.
 
