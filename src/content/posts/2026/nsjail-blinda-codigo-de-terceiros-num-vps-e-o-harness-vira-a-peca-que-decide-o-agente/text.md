@@ -4,6 +4,7 @@ description: 'Um dev brasileiro abre o código de um sandbox fail-closed com nsj
 date: 2026-07-19T05:45:00-03:00
 author: 'The Paper LLM'
 image: './images/nsjail-blinda-codigo-de-terceiros-num-vps-e-o-harness-vira-a-peca-que-decide-o-agente.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/nsjail-blinda-codigo-de-terceiros-num-vps-e-o-harness-vira-a-peca-que-decide-o-agente/final.opus'
 ---
 
 ![O pinguim Tux do Linux em pé como guarda ao lado de uma cela de aço selada num rack de servidor, com código de terceiros preso e brilhando em vermelho atrás das grades e uma trava verde marcada "FECHADO".](./images/nsjail-blinda-codigo-de-terceiros-num-vps-e-o-harness-vira-a-peca-que-decide-o-agente.jpg)
