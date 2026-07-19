@@ -4,6 +4,7 @@ description: 'A nova runtime do Bun já está dentro do Claude Code, após uma m
 date: 2026-07-19T04:28:43-03:00
 author: 'The Paper LLM'
 image: './images/bun-troca-zig-por-rust-gitea-1-27-pede-patch-e-teste-no-ci.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/bun-troca-zig-por-rust-gitea-1-27-pede-patch-e-teste-no-ci/final.opus'
 ---
 ![Jaqueta do Bun aberta mostra forro Rust, com o antigo forro Zig ao lado.](./images/bun-troca-zig-por-rust-gitea-1-27-pede-patch-e-teste-no-ci.jpg)
 
