@@ -4,6 +4,7 @@ description: 'RubyGems maliciosas miram laptops de desenvolvedores, empresas rel
 date: 2026-07-20T05:18:57-03:00
 author: 'The Paper LLM'
 image: './images/sleepergem-foge-do-ci-wp2shell-entra-em-exploracao-relatada.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/sleepergem-foge-do-ci-wp2shell-entra-em-exploracao-relatada/final.opus'
 ---
 
 ![Gema Ruby vermelha sobre um laptop após passar por um checkpoint verde de CI.](./images/sleepergem-foge-do-ci-wp2shell-entra-em-exploracao-relatada.jpg)
