@@ -1,0 +1,143 @@
+SleeperGem foge do C I; W P dois Shell entra em exploração relatada.
+O pipeline terminou verde. Ótimo. Só tem um problema: o pacote malicioso pode ter reconhecido o C I e ficado quieto.
+No laptop do desenvolvedor, perto das chaves S S H, dos tokens de cloud e das credenciais Git, o comportamento era outro.
+Foi essa a escolha da campanha SleeperGem, encontrada em três pacotes do Ruby Gems publicados entre 18 e 19 de julho.
+A pergunta deixa de ser apenas “a build passou?” e vira “o que rodou na máquina de quem escreveu o código?”.
+E tem outra verificação urgente nesta manhã: poucos dias depois do patch, empresas de segurança já relatam exploração da cadeia W P dois Shell no WordPress.
+Primeiro, a SleeperGem reconhece o C I e espera pelo laptop.
+StepSecurity e Aikido analisaram três gems usadas como carregadores da mesma campanha.
+Ruby Gems é o registro de pacotes do ecossistema Ruby.
+O Bundler registra as versões escolhidas no arquivo Gemfile ponto lock, então é por esse arquivo que a busca começa.
+As versões apontadas são git credential manager, da dois ponto oito ponto zero à dois ponto oito ponto três.
+Também estão na lista Dendreo, versões um ponto um ponto três e um ponto um ponto quatro.
+E, por fim, fastlane plugin run tests firebase testlab, versão zero ponto três ponto dois.
+Segundo a StepSecurity, o carregador procurava cerca de 30 variáveis de ambiente ligadas a sistemas de integração contínua.
+Se encontrasse sinais de C I, parava antes de ativar o segundo estágio.
+Ou seja, instalar a dependência numa pipeline e não ver nada suspeito não reproduzia o que podia acontecer numa estação de trabalho.
+Fora do C I, o código baixava um segundo estágio de um caminho hospedado numa instância pública de Forgejo.
+A StepSecurity descreve a instalação de um daemon nativo, além de persistência por serviço system D de usuário e cron.
+Assim, o processo voltava depois de uma reinicialização.
+A análise também encontrou um caminho de escalada capaz de criar um shell set U I D disfarçado de ping seis.
+Mas isso só acontecia quando a condição de privilégio prevista pelo script fosse satisfeita.
+O daemon ainda não foi completamente caracterizado.
+A StepSecurity observou o servidor que distribuía o payload, mas diz que o comportamento de rede do binário precisa de uma análise separada.
+Portanto, não dá para dizer que os pesquisadores viram credenciais sendo exfiltradas.
+Já dá para dizer que código persistente chegou perto de segredos valiosos numa máquina de desenvolvimento.
+É motivo suficiente para tratar o incidente com seriedade.
+A sequência de versões mostra como a campanha evoluiu.
+No pacote que imitava o Git Credential Manager, a versão dois ponto oito ponto dois baixava o segundo estágio, mas deixava a execução comentada.
+A versão dois ponto oito ponto três ativou a cadeia.
+A Aikido relata quatro versões rápidas desse pacote, duas versões novas de Dendreo e uma atualização do plugin de fastlane depois de anos parado.
+O plugin somava 574 mil 661 downloads no momento da análise.
+Esse é o histórico total do pacote, não a quantidade de vítimas.
+Durante a apuração, as versões maliciosas já tinham sumido do inventário público atual.
+Dendreo voltou a mostrar a versão um ponto um ponto dois.
+O plugin de fastlane voltou à versão zero ponto três ponto um, publicada em 2019.
+E a [EY1 P IY1 AY1] de git credential manager respondia com erro 404.
+Isso combina com remoção, ou yank, embora a [EY1 P IY1 AY1] não explique o motivo.
+Também não limpa uma máquina onde alguma dessas versões já foi instalada.
+Para começar a investigação, procure as versões afetadas em todos os arquivos Gemfile ponto lock, inclusive em branches e repositórios menos ativos.
+Encontrar uma delas no lockfile confirma a dependência, não a execução.
+A exposição depende de a gem ter sido instalada ou carregada e do ambiente em que isso ocorreu.
+Se uma versão afetada rodou numa estação, os pesquisadores recomendam tratar a máquina e os segredos ao alcance dela como comprometidos.
+Nesse caso, remova a persistência, investigue os artefatos e rotacione as credenciais.
+Os caminhos locais relatados ficam na pasta pessoal do usuário, dentro da estrutura local share g c m, e incluem o executável git credential manager e um arquivo ponto env.
+Outro artefato relatado é um ping seis na pasta local de binários administrativos do sistema.
+O caminho remoto usado no ataque foi git ponto disroot ponto org, dentro da conta git ecosystem.
+O domínio hospeda um Forgejo público legítimo, então bloquear o serviço inteiro sem considerar o caminho e a conta usados na campanha não faz sentido.
+Recentemente a gente falou de pacotes N P M e instalações induzidas por README.
+Agora o carregador tenta parecer inofensivo justamente onde a equipe costuma inspecionar as dependências.
+O C I verde ainda ajuda. Só não serve mais de álibi.
+As fontes deste bloco são StepSecurity, Aikido Security e as interfaces do Ruby Gems para Dendreo e para o plugin de fastlane.
+Agora, W P dois Shell já aparece em relatos de exploração.
+No sábado, explicamos a correção da cadeia W P dois Shell no WordPress.
+Naquele momento, as fontes primárias consultadas não confirmavam exploração ativa.
+Agora Patchstack, Hexastrike e WatchTowr disseram à SecurityWeek que observaram tentativas ou incidentes de exploração durante o fim de semana.
+Provas de conceito públicas também apareceram.
+Essa atribuição precisa ficar clara.
+O relato de exploração vem da SecurityWeek e das empresas ouvidas pela reportagem.
+As páginas oficiais do WordPress, da Searchlight e da Cloudflare consultadas nesta apuração não afirmam ter telemetria própria de exploração em campo.
+A falha combina duas peças no núcleo do WordPress.
+O endpoint batch da [EY1 P IY1 AY1] R E S T agrupa requisições.
+Uma confusão de rota deixa acessível uma injeção S Q L no parâmetro author not in, usado pelo W P Query.
+Nas versões afetadas das linhas seis ponto nove e sete ponto zero, a cadeia chega à execução remota de código sem autenticação.
+O atacante não precisa ter conta, e a exploração não depende de um plugin vulnerável.
+O mapa das versões exige atenção.
+WordPress seis ponto nove ponto zero até seis ponto nove ponto quatro deve ser atualizado para seis ponto nove ponto cinco.
+WordPress sete ponto zero ponto zero e sete ponto zero ponto um deve ser atualizado para sete ponto zero ponto dois.
+WordPress seis ponto oito ponto zero até seis ponto oito ponto cinco deve ir para seis ponto oito ponto seis, que corrige a injeção S Q L nessa linha.
+O aviso de segurança não inclui a linha seis ponto oito na cadeia de execução remota.
+A cadeia é identificada por C V E 2026, sessenta e três zero três zero, e G H S A, F F nove F, J F quatro dois, seis seis dois Q.
+A injeção S Q L é a C V E 2026, sessenta zero um três sete, também identificada por G H S A, F P P sete, X dois X dois, dois M J F.
+O WordPress publicou os patches em 17 de julho, recomendou atualização imediata e acionou atualizações automáticas forçadas para as versões afetadas.
+Mesmo assim, confira a versão que está instalada.
+Uma tentativa de atualização automática não prova que o patch chegou a todos os sites.
+Se a instalação ficou exposta e sem correção nessa janela, o novo relato é motivo para investigar o servidor como potencialmente comprometido.
+Só atualizar e tocar o dia não resolve essa dúvida.
+A Cloudflare implantou regras de W A F contra a injeção e a execução de código em 17 de julho, às 17 horas e três minutos, no horário U T C.
+Isso inclui o plano gratuito quando o tráfego passa pelo W A F.
+Como contenção temporária, a Searchlight também recomenda bloquear as duas formas da rota batch.
+Uma forma fica no caminho W P JSON, batch, versão um. A outra usa o parâmetro rest route com o valor batch, versão um.
+W A F e bloqueio de rota podem reduzir a exposição, mas ainda podem sofrer bypass ou quebrar integrações.
+Nenhum dos dois corrige o WordPress ou remove um comprometimento anterior.
+As fontes deste bloco são WordPress, os avisos de segurança publicados no Git Hub, SecurityWeek, Cloudflare e Searchlight.
+Em seguida, Harness Score transforma o ambiente do agente em gate.
+Ontem falamos de harness engineering como o trabalho feito ao redor do modelo.
+O Harness Score um ponto zero transforma esse vocabulário numa ferramenta brasileira concreta.
+É um scanner determinístico que examina os artefatos do repositório e devolve nível, pontuação e sugestões de melhoria.
+“Harness”, neste caso, é o ambiente que orienta e restringe o agente.
+A conta inclui arquivos de contexto como Agents ponto M D e Claude ponto M D, além de regras com escopo, skills, hooks, ferramentas, testes, lint, tipos e C I.
+O scanner verifica fatos no sistema de arquivos e na configuração.
+Ele não pede a opinião de outro modelo, então o mesmo commit deve gerar o mesmo resultado.
+Isso permite criar uma baseline, comparar mudanças e bloquear a pipeline abaixo de um nível mínimo.
+A versão um ponto zero ponto zero saiu em 15 de julho e ainda aparecia como latest no N P M durante a apuração.
+Segundo o projeto, o scanner tem 36 checagens, 108 pontos, seis dimensões e níveis de L zero a L quatro.
+A execução não chama L L M, não usa rede e não tem dependências de runtime.
+O pacote requer Node ponto J S 18 ou superior.
+O comando inicial é N P X harness score.
+A opção JSON produz uma saída que outras ferramentas conseguem consumir.
+No exemplo do projeto, a opção min level três transforma o nível em gate.
+Os códigos de saída diferenciam aprovação, falha do gate e erro de uso.
+O scanner também reconhece artefatos equivalentes de Cursor, Claude Code, Windsurf, Cline, Continue, Codex e outros ambientes.
+Tem uma pegadinha operacional aqui: se o pacote não estiver em cache, o N P X pode baixá-lo da rede e executá-lo.
+Para ter uma pipeline reproduzível, eu fixaria a versão nas dependências de desenvolvimento, em vez de rodar sempre o pacote que estiver publicado naquele momento.
+O score também precisa ser lido pelo que ele mede.
+O próprio autor diz que a ferramenta verifica a infraestrutura disponível, não a qualidade dos testes, a verdade das regras ou a correção funcional do software.
+Ela também não verifica práticas que ficam fora do repositório.
+Checagens baseadas em presença ou padrão podem dar falsos positivos e falsos negativos.
+E, nesta apuração, não apareceu estudo independente que associe um score alto a menos defeitos ou a agentes melhores.
+O uso é mais modesto, mas bem prático: transformar ausências em algo visível e repetível.
+“Existe teste?” não responde “o teste presta?”.
+Ainda assim, é uma pergunta muito melhor para automatizar do que “esse repositório parece responsável?”.
+As fontes deste bloco são o repositório paladini barra harness score no Git Hub, a versão um ponto zero ponto zero e o registro do pacote no N P M.
+Por fim, um certificado atribuído ao Fable desafia uma conjectura de 1939.
+A última história também passa por verificação, mas troca arquivos de configuração por álgebra.
+Levent Alpöge, matemático que trabalha na Anthropic, publicou numa rede social uma aplicação polinomial de três variáveis complexas em outras três.
+Ele atribui o trabalho ao “Fable” e apresenta o objeto como um possível contraexemplo à Conjectura Jacobiana.
+Formulada por O. H. Keller em 1939, a conjectura trata de mapas polinomiais complexos com determinante jacobiano constante e diferente de zero.
+Ela pergunta se todo mapa assim precisa ter uma inversa também polinomial.
+O jacobiano é a matriz das derivadas parciais do mapa.
+Um determinante não nulo garante invertibilidade local; a conjectura tenta estender essa propriedade para uma afirmação global.
+O mapa publicado tem grau máximo sete.
+Alpöge afirma que o determinante jacobiano é sempre menos dois e fornece três entradas distintas com a mesma saída.
+As entradas seriam zero, zero e menos um quarto; um, menos três meios e treze meios; e menos um, três meios e treze meios.
+As três produziriam a saída menos um quarto, zero e zero.
+É isso que torna o certificado interessante.
+Uma função com inversa precisa ser injetiva, ou seja, entradas diferentes não podem terminar no mesmo resultado.
+Se o polinômio publicado realmente mantém o determinante em menos dois e contém essa colisão, ele contradiz a conclusão da conjectura.
+A checagem mínima é finita: derive o determinante e substitua os três pontos.
+Alpöge incluiu links de cálculo na sequência da publicação, e a apuração reproduziu as duas propriedades localmente com SymPy.
+Ainda não dá para escrever “I A resolveu a matemática” na manchete.
+O post saiu em 20 de julho, às duas horas e 19 minutos, no horário U T C, poucas horas antes desta edição começar a circular.
+Não foi localizado paper, preprint, revisão por pares, comunicado da Anthropic ou validação pública independente de um especialista.
+A reprodução algébrica local confere o objeto apresentado, mas não substitui a revisão pública.
+Correções e contexto adicional ainda podem aparecer.
+A autoria também não está bem delimitada.
+Alpöge credita o Fable, porém não publicou prompts, transcrição, versão do modelo ou a divisão exata entre o trabalho humano e o da I A.
+Por enquanto, a história é mais estreita: um matemático publicou um possível contraexemplo atribuído ao sistema.
+E entregou um certificado compacto que outras pessoas podem tentar confirmar ou refutar.
+Já tínhamos falado do Fable cinco e da necessidade de controlar agentes.
+Desta vez existe algo melhor que uma demonstração de palco: um objeto explícito.
+Pode virar um resultado histórico, receber uma correção rápida ou esbarrar num detalhe que muda a interpretação.
+Seja qual for o caso, o próximo passo é o mesmo: abra a álgebra.
+As fontes deste bloco são a publicação de Levent Alpöge num mirror público, a Encyclopedia of Mathematics e a página pessoal de Alpöge.
