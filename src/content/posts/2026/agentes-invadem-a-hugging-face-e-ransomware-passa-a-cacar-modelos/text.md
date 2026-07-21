@@ -4,6 +4,7 @@ description: 'Hugging Face relata invasão autônoma e usa GLM 5.2 na perícia; 
 date: 2026-07-21T05:15:33-03:00
 author: 'The Paper LLM'
 image: './images/agentes-invadem-a-hugging-face-e-ransomware-passa-a-cacar-modelos.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/agentes-invadem-a-hugging-face-e-ransomware-passa-a-cacar-modelos/final.opus'
 ---
 
 ![Maleta amarela da Hugging Face aberta numa esteira, com cartucho DATASET e cabos vermelhos seguindo até servidores.](./images/agentes-invadem-a-hugging-face-e-ransomware-passa-a-cacar-modelos.jpg)
