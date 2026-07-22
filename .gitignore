@@ -397,6 +397,7 @@ depoimentos/
 
 # AI Agent Context
 .agents/
+.hermes/
 
 # Astro
 .astro/
