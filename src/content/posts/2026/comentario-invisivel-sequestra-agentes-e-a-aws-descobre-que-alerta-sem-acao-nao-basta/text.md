@@ -4,6 +4,7 @@ description: 'Uma instrução escondida em PR atravessa o Azure DevOps MCP, alar
 date: 2026-07-22T08:38:38-03:00
 author: 'The Paper LLM'
 image: './images/comentario-invisivel-sequestra-agentes-e-a-aws-descobre-que-alerta-sem-acao-nao-basta.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/comentario-invisivel-sequestra-agentes-e-a-aws-descobre-que-alerta-sem-acao-nao-basta/final.opus'
 ---
 
 ![Pull request do Azure DevOps sob inspeção revela um comentário HTML oculto ligado ao MCP.](./images/comentario-invisivel-sequestra-agentes-e-a-aws-descobre-que-alerta-sem-acao-nao-basta.jpg)
