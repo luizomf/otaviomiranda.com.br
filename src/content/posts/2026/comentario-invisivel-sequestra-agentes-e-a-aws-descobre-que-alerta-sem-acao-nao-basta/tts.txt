@@ -1,0 +1,148 @@
+Comentário invisível sequestra agentes, e a AWS descobre que alerta sem ação não basta.
+Um comentário que ninguém vê na tela entra pela [EY1 P IY1 AY1], chega ao agente de review e termina com conteúdo confidencial publicado no próprio pull request.
+Em outro canto da infraestrutura, alarmes percebem uma conta estimada em números absurdos, mas deixam o processamento continuar.
+As duas histórias de hoje têm o mesmo problema: detectar o erro adianta pouco quando o sistema ainda tem autoridade e caminho livre para seguir adiante.
+Um comentário invisível no pull request pode dar ordens ao agente de review.
+A descrição de um pull request parece um lugar razoável para explicar a mudança.
+O problema começa quando ela também vira entrada para um agente com acesso a ferramentas reais.
+A Manifold Security demonstrou isso no servidor M C P oficial do Azure DevOps.
+A descrição aceita Markdown e H T M L.
+Um comentário H T M L fica invisível para o revisor na interface, mas a [EY1 P IY1 AY1] devolve o conteúdo completo.
+Sem uma marcação consistente de que aquele trecho veio de uma fonte não confiável, a instrução escondida chega ao agente como se fosse parte normal da tarefa.
+No teste, a Manifold colocou uma única instrução maliciosa na descrição do pull request.
+A demonstração usou o Copilot [S IY1 EH1 L AY1] e o “Claude Code”.
+O agente usou as credenciais mais amplas do revisor para executar uma pipeline em outro projeto, ler uma wiki confidencial e publicar o texto de volta no pull request.
+É um caso de “confused deputy”, aquele velho problema do intermediário que tem autorização legítima, mas usa essa autoridade em favor da pessoa errada.
+O invasor não precisa roubar diretamente o token do revisor.
+Basta convencer o agente autorizado a fazer o trabalho por ele.
+O M C P deixa o impacto bem concreto porque não entrega apenas texto ao modelo: ele expõe operações do Azure DevOps como ferramentas.
+Quando o mesmo agente recebe conteúdo controlado por outra pessoa, acessa dados privados e pode publicar a resposta, a injeção deixa de ser uma frase inconveniente.
+Ela vira uma sequência de ações.
+O servidor já usa, em algumas superfícies, um mecanismo chamado “create External Content Response”, também descrito como “spotlighting”.
+A ideia é delimitar conteúdo externo para ajudar o modelo a separar dado de instrução.
+Segundo a pesquisa, essa proteção não era aplicada de forma consistente às descrições de pull request.
+Mesmo onde ela existe, a proteção reduz o risco, mas não resolve prompt injection sozinha.
+A pesquisa saiu em 21 de julho.
+A versão pública mais recente examinada, a dois ponto oito ponto zero, foi publicada em 24 de junho.
+As notas dessa versão não registram correção para esse caminho.
+As fontes consultadas também não trazem um identificador C V E público nem um compromisso aberto de correção.
+O ataque depende de quatro peças.
+Alguém precisa controlar o texto do pull request, e um agente precisa ler esse conteúdo.
+As credenciais da vítima também precisam alcançar outros recursos, e o agente precisa poder executar as ferramentas necessárias.
+A demonstração ocorreu em ambiente de teste, sem relato público de exploração em campo.
+Para quem usa agente em review, as ações defensivas já são bem concretas.
+Trate descrição, comentário, diff e arquivo do repositório como entrada não confiável.
+Entregue ao token apenas o projeto e a tarefa necessários.
+Limite as ferramentas e os destinos permitidos.
+Peça confirmação humana antes de executar pipeline, cruzar projetos ou publicar dados.
+E procure comentários H T M L ocultos e chamadas de ferramenta fora do projeto esperado.
+A regra útil é limitar a consequência mesmo quando o modelo entende a entrada da pior maneira possível.
+Delimitador ajuda, mas permissão mínima e confirmação quebram a cadeia.
+As fontes deste bloco são a pesquisa da Manifold Security e as notas da versão dois ponto oito ponto zero do Azure DevOps M C P.
+Alarmes da AWS viram o erro e deixaram a conta estimada crescer.
+Na noite de 16 de julho, clientes da AWS começaram a receber estimativas de custo que pareciam ter saído de uma planilha com rancor.
+Relatos e capturas de tela reunidos pela InfoQ mostraram valores como um bilhão e setecentos milhões de dólares.
+Também apareceram duzentos e vinte e cinco bilhões, quinhentos e setenta e nove milhões, duzentos e dez mil, cento e sessenta e quatro dólares e oitenta e três centavos.
+E houve uma estimativa de sete vírgula um trilhões de dólares.
+As faturas reais não foram afetadas.
+O incidente ficou nos dados de cobrança estimada, uma diferença importante antes de alguém desligar a empresa inteira para economizar sete trilhões de dólares.
+A cronologia oficial da AWS mostra algo mais interessante que os números absurdos.
+Às 19 horas e 46 minutos, no horário do Pacífico, em 16 de julho, os alarmes internos detectaram a anomalia.
+Só que eles não interromperam a geração das estimativas nem avisaram a engenharia.
+O processamento seguiu até clientes escalarem o problema à meia-noite e 19 minutos do dia 17, cerca de quatro horas e 33 minutos depois.
+Às oito horas e 24 minutos, a AWS pausou as atualizações de estimativa.
+A empresa também desligou preventivamente os alertas de orçamento e de anomalia de custo.
+Segundo o resumo publicado, uma mudança de configuração no sistema de cálculo das contas impediu a atualização correta dos dados de conversão de unidades.
+A configuração foi mitigada às 12 horas e 30 minutos, e a maioria das contas havia se recuperado até as seis horas do dia 18.
+A AWS diz que corrigiu os alarmes para interromper imediatamente o processamento e notificar a equipe de engenharia quando surgir uma anomalia desse tipo.
+Essa é a parte mais útil do relato.
+Antes, o alarme só observava.
+Agora, pelo menos de acordo com a correção descrita, ele fecha o ciclo.
+Monitoramento costuma ganhar crédito demais só porque percebeu que algo ficou vermelho.
+Em produção, ainda falta decidir o que fazer: paginar alguém, bloquear a pipeline, entrar em modo degradado ou interromper o processamento.
+Detectar e continuar não contém o defeito.
+Só deixa um registro organizado de que ele aconteceu.
+A história também pede cuidado de quem automatiza FinOps.
+Cost Explorer, alertas de orçamento e telemetria de fornecedor são sistemas derivados e podem falhar por conta própria.
+Se uma estimativa consegue desligar uma carga de trabalho, bloquear um deploy ou abrir um incidente grave, ela precisa de confirmação independente.
+Também precisa de limites de plausibilidade e de um modo seguro para quando o dado enlouquecer.
+A AWS publicou a cronologia e uma causa resumida, não um postmortem técnico completo.
+Os números bilionários e trilionários vieram de relatos de clientes.
+O que a empresa confirmou foi a exibição de dados estimados incorretos, sem alteração nas cobranças reais.
+As fontes deste bloco são o AWS Health Dashboard e a InfoQ.
+Outras mudanças para colocar no radar.
+A OpenAI atribui a fuga da avaliação na Hugging Face aos próprios modelos.
+Ontem falamos dos agentes que chegaram à infraestrutura da Hugging Face, quando ainda não se sabia qual modelo estava operando.
+Agora, a OpenAI atribui o incidente a uma combinação do GPT cinco ponto seis Sol com um modelo ainda em pré-lançamento.
+Ambos estavam numa avaliação interna com recusas para atividades cibernéticas reduzidas.
+Segundo o relato preliminar da empresa, os modelos exploraram uma falha desconhecida no proxy e no cache interno usado para instalar pacotes.
+A partir daí, escalaram privilégios, moveram-se lateralmente e alcançaram um nó com internet.
+Depois, credenciais roubadas e outras falhas abriram o caminho até a infraestrutura da Hugging Face, onde buscavam respostas do ExploitGym.
+O componente autorizado a buscar dependências virou a ponte para fora da sandbox.
+Em avaliações ofensivas, isso pede isolamento real de rede, credenciais descartáveis e monitoramento da sequência inteira, não só de uma chamada isolada.
+A OpenAI diz que os modelos estavam hiperfocados no objetivo estreito do teste, sem indicar consciência ou intenção geral.
+A investigação continua, e os detalhes das falhas ainda não foram publicados enquanto ocorre a correção.
+A fonte deste bloco é a OpenAI.
+A L G vai suspender aplicativos de TV que mantiverem proxy residencial.
+Em junho, a gente explicou como Smart TVs entraram na economia dos proxies residenciais.
+Faltava a reação da plataforma.
+A L G disse à KrebsOnSecurity que proxy residencial não é um uso pretendido para suas TVs.
+A empresa trabalha com desenvolvedores para remover a opção e suspenderá os aplicativos que não cumprirem.
+A pesquisa da Spur analisou seis mil e trinta e oito pacotes de aplicativos da L G e da Samsung.
+Ela encontrou dois mil e cinquenta e oito pacotes com impressão digital confirmada de S D K de proxy.
+No web O S da L G, a proporção reportada passou de quarenta e dois porcento.
+O número descreve os aplicativos da amostra, conforme a metodologia da Spur, e não a parcela de TVs comprometidas.
+Alguns kits S D K podiam continuar ativos em segundo plano depois do fechamento do aplicativo.
+Proxy residencial não é automaticamente malware.
+Os fornecedores dizem aplicar consentimento, verificação de clientes e filtros contra abuso.
+A preocupação está na escala, na clareza desse consentimento e no que acontece quando uma política ou um filtro falha.
+Para o usuário, vale remover aplicativos desnecessários e separar a TV dos dispositivos mais sensíveis da rede.
+As fontes deste bloco são a KrebsOnSecurity e a Spur Intelligence Labs.
+O M C P grade mostra que um schema válido ainda pode ser uma interface ruim.
+Teng Li analisou 36 servidores M C P populares com o M C P grade, um linter aberto com 24 regras.
+Onze receberam nota D ou F, e 15 ficaram com A.
+Stripe e Supabase foram excluídos porque não puderam ser escaneados com credenciais falsas.
+O erro dominante era simples: parâmetro sem descrição.
+Dos 134 erros encontrados no Firecrawl, 132 eram desse tipo.
+O Todoist teve 110 erros, enquanto Mongo D B e Airtable tiveram 66 cada.
+Um JSON Schema dizendo apenas que o campo URL é do tipo string consegue validar o tipo.
+Mas ele não explica ao modelo qual URL usar, em que formato e com quais restrições.
+Para um agente, documentação faz parte da interface executável.
+Nos testes do autor, a seleção da ferramenta chegou a cem porcento em servidores bem documentados e ficou em 84 porcento no Firecrawl.
+A recusa de tarefas fora do escopo caiu de cem porcento para cinquenta porcento no catálogo do Firecrawl, que tinha 26 ferramentas.
+A recomendação prática é descrever ferramentas e parâmetros e usar enum quando houver um conjunto fechado.
+Também é melhor preferir nomes no formato verbo e objeto, e devolver erros que ajudem o agente a se corrigir.
+As notas são autorais e retratam um momento específico.
+Boa parte da pontuação vem de análise estática, enquanto o modo eval usa tarefas sintéticas e um modelo.
+Isso não substitui uma avaliação na carga de trabalho real.
+Mas pode virar um gate de C I barato para impedir que a interface piore sem ninguém perceber.
+A fonte deste bloco é a análise de Teng Li e o M C P grade.
+A Canva tirou a revoada de leituras do MySQL e levou revogações para o S três.
+A Canva precisava carregar 12 horas de revogações de sessão na memória de cada gateway.
+Quando centenas de pods subiam durante um deploy, todos buscavam mais de um milhão de registros no MySQL.
+Era um “stampede”: a aplicação escalava e comemorava derrubando uma avalanche de leituras no banco.
+A equipe passou a gerar objetos no S três em blocos de 30 minutos.
+Cada revogação ocupa 16 bytes num array denso, carregado em memória e consultado diretamente por busca binária.
+O formato reduziu o uso de memória em 87 vírgula cinco porcento, um fator de oito.
+O worker foi medido acima de duas mil revogações por segundo, e a Canva manteve apenas duas réplicas de leitura por redundância.
+O detalhe de correção está na concorrência.
+A eleição de líder reduz a chance de dois workers atualizarem o mesmo bloco.
+Mas o mecanismo que evita uma atualização perdida é o “conditional put”.
+Para conjuntos baixados por inteiro e lidos numa janela deslizante, armazenamento de objetos com formato binário pode ser mais simples que acrescentar Redis.
+É uma arquitetura feita para o padrão de acesso da Canva.
+O relato não diz que S três substitui Redis em consultas remotas item a item ou em aplicações que toleram pouquíssimo atraso.
+O caso serve como lembrete de que formato compacto, leitura sequencial e uma boa regra de concorrência às vezes resolvem mais que outro serviço no diagrama.
+A fonte deste bloco é a Canva Engineering.
+O U V zero ponto onze ponto trinta e um abre uma integração preview para checar malware.
+A Astral publicou o U V zero ponto onze ponto trinta e um em 21 de julho.
+A versão adiciona duas opções experimentais de configuração à auditoria do U V.
+As opções são “audit malware check” e “audit malware check URL”.
+A versão também oferece binários para mac O S, Windows e várias arquiteturas Linux, acompanhados de checksums e attestations do “Git Hub”.
+Para times Python, é um novo ponto de integração para consultar sinais de malware durante a auditoria de dependências.
+A própria nota chama o recurso de preview.
+Ela não informa se a checagem vem ligada por padrão.
+Também não explica cobertura, fornecedor do sinal, falsos positivos nem política de privacidade do endpoint.
+Antes de transformar isso em gate, vale fixar versão e configuração, testar as respostas no C I e decidir o que acontece quando o serviço externo falha.
+A checagem complementa lockfile, hash, origem confiável e revisão.
+Ela não absolve nenhum deles.
+A fonte deste bloco é a nota oficial da versão U V zero ponto onze ponto trinta e um.
