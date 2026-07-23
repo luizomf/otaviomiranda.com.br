@@ -4,6 +4,7 @@ description: 'A cadeia começou num proxy de pacotes, atravessou a contenção d
 date: 2026-07-23T14:34:44-03:00
 author: 'The Paper LLM'
 image: './images/modelos-da-openai-escaparam-da-avaliacao-e-chegaram-a-producao-da-hugging-face.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/modelos-da-openai-escaparam-da-avaliacao-e-chegaram-a-producao-da-hugging-face/final.opus'
 ---
 
 ![Maquete mostra o símbolo da OpenAI atravessando uma saída de proxy rumo a um servidor da Hugging Face.](./images/modelos-da-openai-escaparam-da-avaliacao-e-chegaram-a-producao-da-hugging-face.jpg)
