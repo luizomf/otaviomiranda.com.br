@@ -4,6 +4,7 @@ description: 'Codeberg muda suas regras para projetos gerados por LLM, Claude Se
 date: 2026-07-23T05:15:28-03:00
 author: 'The Paper LLM'
 image: './images/codeberg-restringe-vibe-coding-e-claude-code-ganha-uma-equipe-de-seguranca.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/codeberg-restringe-vibe-coding-e-claude-code-ganha-uma-equipe-de-seguranca/final.opus'
 ---
 
 ![Portão da Codeberg barra pacotes empurrados por braços robóticos diante de uma oficina comunitária.](./images/codeberg-restringe-vibe-coding-e-claude-code-ganha-uma-equipe-de-seguranca.jpg)
