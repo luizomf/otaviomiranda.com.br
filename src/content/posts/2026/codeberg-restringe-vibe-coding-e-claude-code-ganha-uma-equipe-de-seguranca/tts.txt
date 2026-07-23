@@ -1,0 +1,131 @@
+Codeberg restringe vibe coding, e Claude Code ganha uma equipe de segurança.
+Uma forge comunitária paga por disco, banco de dados, C I e gente para manter tudo de pé.
+Aí chegam crawlers disparando consultas caras, repositórios produzidos em escala sem comunidade e mais código do que alguém consegue revisar.
+A Codeberg decidiu que essa conta não precisa ser aceita como efeito colateral.
+Seus membros aprovaram uma restrição a projetos mantidos com uso pesado de modelos de linguagem.
+No mesmo dia, a Anthropic colocou vários agentes para procurar falhas dentro do “Claude Code”.
+A combinação é curiosa.
+De um lado, uma comunidade limita software gerado sem supervisão.
+Do outro, uma ferramenta tenta aprofundar essa supervisão.
+A palavra importante nas duas histórias não é I A.
+É responsabilidade.
+A Codeberg vai restringir projetos produzidos majoritariamente por L L M.
+Os membros da Codeberg E V aprovaram duas moções depois de um período de votação de 14 dias, encerrado em 22 de julho.
+A primeira diz que a associação não usará código nem dados hospedados de usuários e projetos para treinar I A generativa.
+A segunda vai mudar os termos de uso para proibir o que a própria Codeberg chama de projetos “vibe-coded”.
+Essa segunda proposta recebeu 358 votos favoráveis, 144 contrários e 14 abstenções.
+Segundo a associação, perto de metade dos membros ativos participou.
+Os números deixam claro que a decisão não foi unânime, mesmo antes da parte mais complicada: definir o que conta como uso excessivo de L L M.
+A Codeberg é uma forge comunitária baseada em Forgejo, com hospedagem de repositórios e recursos de integração contínua sustentados por uma associação.
+Disco, consultas ao banco e capacidade de C I são compartilhados.
+Quando um projeto usa esses recursos em escala sem formar uma comunidade humana correspondente, a discussão sobre autoria acaba chegando à conta do servidor.
+A associação cita os chamados “ghost projects”.
+É software gerado e mantido de forma autônoma, sem supervisão humana significativa, comunidade ativa ou cuidado proporcional ao espaço e ao C I que consome.
+A associação também relata crawlers percorrendo filtros, páginas e revisões históricas repetidamente.
+Um git clone baixa o repositório direto.
+Já uma sequência de consultas pela interface pode dar muito mais trabalho ao aplicativo e ao banco para buscar dados parecidos.
+Pelas diretrizes iniciais, a Codeberg não pretende banir qualquer linha escrita com assistência de I A.
+Projetos com comunidade ativa, histórico anterior à adoção ampla de modelos L L M ou contribuições pontuais feitas com ajuda dessas ferramentas provavelmente não serão afetados.
+O alvo declarado é o software produzido e mantido majoritariamente por L L M, sobretudo quando opera quase sozinho ou consome infraestrutura de forma desproporcional.
+Os critérios ainda são informais.
+A Codeberg também diz que não fará uma deleção em massa imediata nem tentará classificar todos os repositórios com uma varredura automática exaustiva.
+Fica uma zona cinzenta bem real entre “usei um agente para refatorar este módulo” e “o agente abriu uma fábrica de projetos que ninguém acompanha”.
+Os novos termos terão de transformar a intenção aprovada em regra aplicável.
+Para quem hospeda código ali, a consequência prática é deixar clara a parte humana do projeto: revisão, manutenção, comunidade e responsabilidade pelo que entra no repositório.
+Não para encenar atividade e passar por um detector.
+Esses são justamente os sinais que separam colaboração assistida de uma esteira autônoma abandonada.
+As afirmações mais amplas sobre confiança, custo de hardware e impacto dos modelos L L M são a posição política e operacional da associação.
+O fato verificável é mais estreito: os membros votaram, as duas moções passaram e a Codeberg anunciou que mudará seus termos.
+A fonte deste bloco é a Codeberg News.
+O Claude Security põe vários agentes para tentar refutar cada falha.
+A Anthropic publicou o claude-security zero ponto dez ponto zero, plugin oficial que roda dentro de uma sessão do “Claude Code”.
+Ele analisa o repositório inteiro ou apenas as mudanças, monta um modelo de ameaças, procura vulnerabilidades e prepara correções para revisão.
+Quem usa a ferramenta ainda decide se aplica cada patch.
+A análise começa com um mapa do sistema.
+O plugin identifica componentes, pontos de entrada, destinos sensíveis e fronteiras de confiança antes de procurar defeitos.
+Com esse contexto, ele tenta responder algo que uma regra isolada costuma perder.
+Um caminho perigoso recebe mesmo uma entrada controlada por alguém e chega a uma operação capaz de causar impacto?
+Depois, agentes exploradores levantam candidatos.
+Cada achado incluído no relatório passa por verificadores independentes, instruídos a tentar refutá-lo.
+A intensidade da verificação é calculada no código do plugin, não fica apenas por conta de uma promessa escrita no prompt.
+“Independente”, aqui, precisa de legenda.
+São agentes verificadores dentro do mesmo produto, não uma auditoria humana externa.
+A Anthropic também avisa que os scans são não determinísticos: duas execuções podem entregar resultados diferentes, e uma falha real ainda pode escapar.
+O plugin acrescenta uma revisão profunda, mas não aposenta S A S T, análise de dependências, testes ou revisão humana.
+A segurança adoraria um botão final.
+Ganhou mais um botão útil.
+Ao encontrar algo, o Claude Security grava os resultados em Markdown e JSON Lines dentro de um diretório com marca de tempo.
+Para preparar a correção, trabalha sobre uma cópia temporária do repositório.
+Outros agentes revisam as mudanças, e os patches ficam em arquivos próprios, identificados pela falha e com extensão patch.
+O job não mexe no checkout nem no índice do usuário.
+A aplicação é explícita, por exemplo, com o comando git apply.
+A instalação documentada usa o comando de plugin para instalar claude-security a partir de claude-plugins-official e, depois, recarrega os plugins.
+O comando principal chama claude-security.
+A versão zero ponto dez ponto zero entrou no repositório oficial em um commit de 22 de julho, às 16 horas, 17 minutos e 51 segundos, no horário U T C.
+O limite operacional mais importante aparece antes do primeiro achado.
+O scan herda as permissões da sessão do “Claude Code” e não cria isolamento.
+Arquivos como CLAUDE ponto M D, o conteúdo da pasta ponto claude, hooks e a configuração local do Git continuam no ambiente.
+Abrir um repositório desconhecido com uma ferramenta poderosa não o torna confiável só porque a tarefa se chama “security scan”.
+A própria Anthropic recomenda usar “sandbox-runtime” com código desconhecido.
+Essa fronteira precisa existir no processo e no sistema operacional.
+Ela não pode depender de o modelo interpretar corretamente cada arquivo que encontrar.
+Também faz sentido limitar as credenciais e ferramentas disponíveis durante a análise.
+O plugin procura vulnerabilidades no projeto, mas a sessão continua dentro da superfície de ataque.
+Para times que já usam “Claude Code”, a novidade poupa o trabalho de montar uma análise contextual em outro serviço e entrega patches num formato revisável.
+O ganho parece maior quando o relatório entra no fluxo que já existe, com triagem humana e validações determinísticas.
+Parece menor quando vira um oráculo caro rodando no mesmo ambiente privilegiado de desenvolvimento.
+As fontes deste bloco são o README do Claude Security Plugin for Claude Code, da Anthropic, e o manifesto e o histórico oficiais do plugin, no “Git Hub”.
+Agora, um radar rápido.
+O Py P I fecha releases para novos arquivos depois de 14 dias.
+Uma versão no Py P I pode reunir o pacote-fonte e vários wheels para diferentes sistemas e versões do Python.
+Agora, 14 dias depois do primeiro upload, o “Warehouse” rejeita arquivos novos naquela release.
+Isso reduz a chance de alguém roubar um token ou comprometer o workflow e anexar um artefato malicioso a uma versão antiga e confiável.
+Se o mantenedor precisar acrescentar um wheel depois da janela, terá de publicar uma nova versão.
+Em maio, a regra ainda era uma proposta.
+O patch foi mesclado em 8 de julho e anunciado no dia 22.
+Numa análise citada pelo projeto, 56 de 15 mil pacotes publicaram wheel C P 314 depois do prazo.
+O Py P I diz não conhecer abuso anterior desse vetor.
+Também avisa que a regra não torna releases criptograficamente imutáveis e ainda não oferece semântica ou [EY1 P IY1 AY1] pública para consultar o estado fechado.
+A fonte deste bloco é o Py P I Blog.
+O “Git Hub” cria bug bounty V I P e limita a entrada de reports sem reputação.
+A partir de 27 de julho, o programa público pagará 250 dólares para severidade baixa, dois mil dólares para média, cinco mil dólares para alta e dez mil dólares para crítica.
+Um grupo V I P permanente, somente por convite, terá faixas de mil dólares, sete mil e quinhentos dólares, 20 mil dólares e 30 mil dólares ou mais.
+Pesquisadores abaixo do limiar de “signal” no HackerOne terão até quatro submissões iniciais.
+Esse indicador usa o histórico de reports válidos e úteis para controlar a vazão da fila.
+O “Git Hub” atribui a mudança ao volume de envios de baixo esforço e gerados por I A, mas não publicou uma contagem auditável deles.
+A regra não fecha a porta para todo pesquisador novo, e cada achado ainda precisa passar por avaliação técnica.
+A fonte deste bloco é o “Git Hub” Blog.
+A Poolside lança o Laguna S dois ponto um e abre parte da fábrica de experimentos.
+O modelo de pesos abertos é um “Mixture-of-Experts” com 118 bilhões de parâmetros totais, oito bilhões ativos por token e contexto anunciado de até um milhão de tokens.
+Ativar só parte dos parâmetros reduz o custo de computação por token.
+Mas memória, quantização, cache e implementação ainda decidem se ele cabe e funciona bem no ambiente local.
+A Poolside diz ter concluído o ciclo em menos de nove semanas, publicado as trajetórias das tentativas usadas nos resultados e montado 409 mil ambientes de pós-treino.
+Desses, 83 mil são de terminal e 168 mil de engenharia de software.
+O cofundador Eiso Kant afirma que menos de 70 pesquisadores executam entre dez mil e 20 mil experimentos por mês.
+Segundo ele, o trabalho usa dados imutáveis e código versionado para reproduzir runs.
+É uma pista de engenharia interessante para times de I A, mas os números de produtividade e os benchmarks vêm da empresa ou de seu cofundador.
+Antes de adotar, ainda precisa testar no próprio ambiente.
+As fontes deste bloco são a Poolside, no texto “Introducing Laguna S 2.1”, e a entrevista com Eiso Kant no Latent Space.
+As plataformas estão convertendo pressão de automação em regras.
+Codeberg, “Git Hub” e Py P I mexeram em controles diferentes entre 22 e 23 de julho.
+As datas próximas chamam atenção, mas as três decisões não formam uma campanha coordenada.
+Muito menos significam que o software livre baniu I A.
+A Codeberg mexe em hospedagem e C I para conter custo computacional e projetos que consomem recursos sem formar uma comunidade responsável.
+O “Git Hub” mexe numa fila humana: usa reputação e um limite inicial para reduzir o volume que chega à triagem do bug bounty.
+O Py P I mexe no inventário de artefatos, reduzindo a mutabilidade tardia de uma release que já ganhou confiança entre consumidores.
+Os gargalos são diferentes.
+Limites de recurso controlam o trabalho absorvido pela infraestrutura.
+Reputação controla o trabalho que chega às pessoas.
+Fechar uma release controla por quanto tempo seu conjunto de arquivos pode mudar.
+A automação acelerou a produção de projetos, reports e pacotes.
+As plataformas estão criando regras para aproximar o custo e a consequência de quem publica.
+O Py P I merece uma distinção.
+O projeto não atribui sua janela de 14 dias a reports gerados por I A.
+Ali, o vetor é supply chain, principalmente roubo de credenciais ou comprometimento do workflow de publicação.
+A medida entra na mesma tendência por também limitar uma externalidade ampliada pela automação, não por compartilhar o diagnóstico da Codeberg ou do “Git Hub”.
+Três mudanças operacionais independentes estabelecem uma tendência, ainda que específica.
+Não há uma única “política contra I A” surgindo em todo o open source.
+Há algo bem mais concreto.
+Serviços mantidos por comunidades e empresas estão escolhendo onde pôr freios.
+Isso acontece quando geração, rastreamento ou publicação em escala joga o custo para a infraestrutura e para outras pessoas.
+As fontes deste bloco são a Codeberg News, o “Git Hub” Blog e o Py P I Blog.
