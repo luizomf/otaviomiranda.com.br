@@ -1,0 +1,159 @@
+Claude Opus 5 custa metade do Fable, mas a migração pede atenção.
+
+Trocar o nome de um modelo na configuração leva alguns segundos.
+Descobrir depois que ele passou a raciocinar por padrão, gastou mais tokens que o esperado e rejeitou uma combinação antiga de parâmetros leva um pouco mais.
+O Claude Opus 5 chegou hoje com essa mistura: preço-base conhecido, capacidades maiores e uma migração que parece simples até a gente olhar o comportamento da [EY1 P IY1 AY1].
+
+A Anthropic posiciona o novo Opus para coding com agentes, tarefas longas e trabalho profissional.
+Ele custa o mesmo que o Opus 4.8 e, por token, metade do Fable 5.
+Para equipes que acharam o Fable caro, o teste ficou bem mais interessante.
+Ainda assim, benchmark do fornecedor não é cheque em branco.
+Antes de apontar a produção para o modelo Claude Opus 5, é preciso medir custo por tarefa, ferramentas, subagentes, latência e salvaguardas.
+
+O Opus 5 reduz o preço sem tentar substituir todo o Fable.
+
+A Anthropic lançou o Claude Opus 5 em 24 de julho de 2026.
+O modelo já está disponível nos produtos Claude e na [EY1 P IY1 AY1], com o identificador Claude Opus 5.
+Ele virou o padrão para assinantes do Claude Max e, segundo a empresa, é o modelo mais forte oferecido no Claude Pro.
+
+O preço-base é de cinco dólares por milhão de tokens de entrada e vinte e cinco dólares por milhão de tokens de saída.
+São os mesmos valores do Opus 4.8 e metade dos dez dólares e cinquenta dólares cobrados pelo Fable 5.
+Quando o Fable apareceu por aqui, o pacote combinava contexto grande, desempenho de ponta e uma coleira operacional mais apertada.
+Agora temos uma opção mais barata, sem requisito geral de retenção de dados e com classificadores de cibersegurança que, segundo a Anthropic, intervêm menos.
+
+O Opus 5 não é simplesmente Fable pela metade do preço.
+A própria Anthropic ainda coloca Fable e Mythos à frente em partes do trabalho de longa duração e de segurança cibernética.
+A comparação que ajuda começa pelo workload, não pelo sobrenome do modelo.
+
+Na [EY1 P IY1 AY1], o Opus 5 tem uma janela de contexto de um milhão de tokens e pode gerar até cento e vinte e oito mil tokens.
+A primeira medida diz quanto material cabe na requisição ou conversa.
+A segunda é o teto da saída inteira, incluindo raciocínio e resposta visível.
+Não é uma promessa de que produzir cento e vinte e oito mil tokens será útil ou barato.
+
+As fontes deste bloco são o anúncio de apresentação do Claude Opus 5, da Anthropic, e a documentação da plataforma Claude sobre as novidades do modelo.
+
+Thinking ligado por padrão muda a conta da migração.
+
+A troca mínima do Opus 4.8 para o Opus 5 é quase um drop-in: basta mudar o identificador do modelo.
+O comportamento padrão, porém, mudou.
+Quando a requisição omite o campo thinking, o Opus 5 ativa o chamado adaptive thinking.
+Nesse modo, o próprio modelo decide quando raciocinar e quanto trabalho dedicar a essa etapa.
+
+Numa integração que usava o Opus 4.8 sem thinking, isso pode mexer no consumo de tokens, na latência e no custo real.
+O parâmetro max tokens limita o total usado pelo raciocínio e pela resposta final.
+Aquele teto que antes parecia folgado pode virar gargalo quando parte dele é consumida antes mesmo de o texto visível começar.
+
+O modelo também aceita a escada completa de effort: low, medium, high, x high e max.
+Esse parâmetro sinaliza quanto trabalho o modelo deve gastar, mas não é um orçamento rígido.
+A documentação mantém high como uma base razoável e recomenda reservar bastante max tokens para x high e max.
+
+Uma combinação quebra de forma explícita: desativar thinking com effort em x high ou max retorna erro H T T P 400.
+Com high ou menos, o tipo disabled no campo thinking continua aceito.
+A Anthropic recomenda manter o raciocínio ligado e reduzir o effort quando possível.
+Desligar o thinking também pode fazer o modelo imprimir uma chamada de ferramenta como texto ou expor tags X M L internas em alguns casos.
+
+É mudança para teste de contrato, não só para uma chamada feliz no playground.
+Eu cobriria pelo menos as combinações de parâmetros, o limite de saída, custo, latência, chamadas de ferramentas, verbosidade e delegação para subagentes.
+Modelo novo costuma passar no teste “responda olá”.
+Produção, infelizmente, tem imaginação maior.
+
+As fontes deste bloco são a documentação da plataforma Claude sobre as novidades do Opus 5 e o guia de migração do Opus 4.8 para o Opus 5.
+
+Velocidade, cache e ferramentas também entram no Q A.
+
+Para quem prefere pagar mais e esperar menos, o Opus 5 estreia um Fast mode.
+A Anthropic reporta uma velocidade cerca de duas vírgula cinco vezes maior que a do modo padrão, pelo dobro do preço.
+São dez dólares por milhão de tokens de entrada e cinquenta dólares por milhão de tokens de saída.
+O recurso chega como research preview e, no lançamento, está restrito à [EY1 P IY1 AY1] do Claude.
+A documentação não oferece o recurso por Amazon Bedrock, Google Cloud ou Microsoft Foundry.
+
+O prompt cache agora aceita prefixos menores.
+O mínimo caiu de mil e vinte e quatro tokens no Opus 4.8 para quinhentos e doze no Opus 5.
+Isso pode ajudar integrações com instruções recorrentes que antes não alcançavam o tamanho necessário para cache.
+A economia concreta, claro, ainda depende do padrão das chamadas.
+
+Duas funções beta acompanham o modelo.
+A primeira permite adicionar ou remover ferramentas no meio da conversa sem invalidar todo o prompt cache.
+Para isso, ela usa o cabeçalho chamado mid conversation tool changes, com a data primeiro de julho de 2026.
+A segunda cria um modo de fallback padrão no servidor.
+Ela é habilitada pelo cabeçalho server side fallback, também com a data primeiro de julho de 2026.
+Os nomes datados lembram que beta não é decoração: o cliente precisa enviar o cabeçalho certo e tolerar mudanças de contrato.
+
+O guia de migração também traz duas ausências: web fetch e Priority Tier não são suportados no Opus 5 no lançamento.
+Se a aplicação depende de uma delas, trocar o identificador deixa de ser migração e vira descoberta de requisito em horário comercial.
+
+Um roteiro curto de validação fica assim.
+Primeiro, medir custo e latência com thinking e effort nos níveis realmente usados.
+Também é preciso ajustar max tokens para o orçamento conjunto de raciocínio e resposta.
+Depois, testar chamadas de ferramentas, cache e trabalho delegado a subagentes.
+Vale confirmar se web fetch ou Priority Tier fazem parte do fluxo.
+E é preciso separar Fast mode da configuração de provedores cloud, onde ele ainda não está disponível.
+
+As fontes deste bloco são a documentação da plataforma Claude sobre as novidades do Opus 5 e o guia de migração do Opus 4.8 para o Opus 5.
+
+Os benchmarks são promissores e continuam sendo da Anthropic.
+
+A Anthropic diz que o Opus 5 alcançou estado da arte no Frontier-Bench versão zero ponto um.
+Segundo a empresa, ele mais que dobrou o desempenho do Opus 4.8 nesse teste, com menor custo por tarefa.
+No CursorBench três ponto dois, usando effort máximo, o modelo teria ficado a zero vírgula cinco ponto percentual do pico do Fable 5 por metade do custo por tarefa.
+
+Os resultados justificam uma avaliação, mas não encerram a avaliação.
+A maior parte dos testes do system card foi feita internamente.
+O harness, o nível de effort e o desenho da tarefa variam.
+E preço por token não é a mesma coisa que custo por tarefa: um modelo mais barato pode usar mais tokens ou demorar mais; outro mais caro pode terminar com menos tentativas.
+
+O Frontier-Bench citado ainda tem condições importantes.
+Foi uma execução interna no mini S W E agent sobre G K E, com média de cinco tentativas por tarefa.
+Quando os classificadores recusaram pedidos, o teste usou Opus 4.8 como fallback.
+O número continua válido dentro desse teste, mas serve mal para comparação direta.
+Pior ainda seria copiar a tabela para uma apresentação como se ela fosse uma medição neutra do universo.
+
+O retrato mais seguro é este: de acordo com a Anthropic, os maiores avanços sobre o Opus 4.8 aparecem em coding com agentes, uso de computador e trabalho prolongado.
+Para descobrir se o avanço sobrevive ao seu repositório, às suas ferramentas e ao seu orçamento, só rodando a tarefa completa.
+
+As fontes deste bloco são o anúncio de apresentação do Claude Opus 5, da Anthropic, e o System Card do Claude Opus 5, também da Anthropic.
+
+Segurança permite encontrar falhas, mas restringe a exploração.
+
+O Opus 5 tem uma política específica para trabalho de cibersegurança.
+A Anthropic permite buscar vulnerabilidades em código-fonte.
+Já pentest, geração de exploits e análise de binários podem acionar bloqueios.
+Para equipes defensivas, a diferença é prática: localizar uma falha num repositório e demonstrar sua exploração não recebem o mesmo tratamento.
+
+Nos produtos Claude ponto A I, Claude Code e Claude Cowork, pedidos de cyber sinalizados caem por padrão para o Opus 4.8.
+A aplicação precisa distinguir esse fallback de uma resposta produzida pelo modelo solicitado originalmente.
+Isso importa principalmente se ela compara resultados, registra auditoria ou depende de um comportamento específico do Opus 5.
+
+Segundo a Anthropic, os novos classificadores intervêm cerca de 85 porcento menos que os do Fable 5.
+A empresa também diz que o Opus 5 se aproxima do Mythos 5 para encontrar vulnerabilidades, mas continua substancialmente atrás dele na capacidade de explorá-las.
+Esses resultados vêm das avaliações e da taxonomia da própria Anthropic.
+
+Equipes com uso defensivo legítimo que esbarram nessas restrições podem recorrer ao Cyber Verification Program.
+Participantes já aprovados recebem acesso a uma variante menos restritiva, quando disponível.
+O programa exige retenção de dados habilitada, não funciona no Bedrock nem no Vertex A I e não libera usos proibidos.
+São requisitos diferentes: o acesso geral ao Opus 5 não exige retenção, mas a participação no programa exige.
+
+Uma fonte deste bloco é o anúncio de apresentação do Claude Opus 5, da Anthropic.
+A outra é a central de ajuda do Claude sobre salvaguardas de cyber em tempo real no Claude Opus e no Sonnet.
+
+Mais preciso não quer dizer mais confiável em toda resposta.
+
+O System Card aplica ao Opus 5 as proteções A S L três e o classifica como C B um, não C B dois.
+A Anthropic também conclui que o modelo não cruza seu limiar para capacidade automatizada de pesquisa e desenvolvimento em inteligência artificial.
+Esses rótulos são avaliações de risco da empresa, feitas segundo a metodologia dela.
+Não são certificações externas.
+
+O documento traz um caveat fácil de perder no meio dos gráficos.
+O Opus 5 foi mais preciso no geral, mas alucinou afirmações factuais ligeiramente mais que o Opus 4.8.
+A avaliação também encontrou respostas confiantes sobre pontos dos quais o modelo não tinha certeza.
+
+Os ganhos reportados continuam ali.
+O que não dá é concluir que um modelo melhor em média precisa de menos verificação em cada tarefa.
+Para coding, o teste continua sendo teste.
+Para trabalho profissional, a fonte continua sendo fonte.
+E, quando a resposta vier segura demais, talvez seja uma boa hora de conferir se a razão acompanhou a confiança.
+
+Na prática, o Opus 5 parece ocupar este espaço: aproxima parte da capacidade dos modelos mais caros sem repetir o preço-base deles.
+O valor real vai aparecer depois da migração, quando a equipe medir a tarefa inteira e descobrir quanto thinking, effort, ferramenta, fallback e revisão humana entraram na conta.
+
+A fonte deste bloco é o System Card do Claude Opus 5, da Anthropic.
