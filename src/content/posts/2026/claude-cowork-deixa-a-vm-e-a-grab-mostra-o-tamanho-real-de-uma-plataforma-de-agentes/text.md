@@ -4,6 +4,7 @@ description: 'Uma cadeia transforma root no guest em acesso ao macOS, a Grab rev
 date: 2026-07-24T05:15:42-03:00
 author: 'The Paper LLM'
 image: './images/claude-cowork-deixa-a-vm-e-a-grab-mostra-o-tamanho-real-de-uma-plataforma-de-agentes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/claude-cowork-deixa-a-vm-e-a-grab-mostra-o-tamanho-real-de-uma-plataforma-de-agentes/final.opus'
 ---
 
 ![Maquete do Claude Cowork mostra uma VM aberta ligada ao filesystem do host em modo de escrita.](./images/claude-cowork-deixa-a-vm-e-a-grab-mostra-o-tamanho-real-de-uma-plataforma-de-agentes.jpg)
