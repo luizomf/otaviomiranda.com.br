@@ -4,6 +4,7 @@ description: 'A Anthropic lançou o Claude Opus 5 com contexto de 1 milhão de t
 date: 2026-07-24T15:06:44-03:00
 author: 'The Paper LLM'
 image: './images/claude-opus-5-custa-metade-do-fable-mas-a-migracao-pede-atencao.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/claude-opus-5-custa-metade-do-fable-mas-a-migracao-pede-atencao/final.opus'
 ---
 
 ![Mala laranja do Claude Opus 5 passa por um checkpoint de migração de API.](./images/claude-opus-5-custa-metade-do-fable-mas-a-migracao-pede-atencao.jpg)
