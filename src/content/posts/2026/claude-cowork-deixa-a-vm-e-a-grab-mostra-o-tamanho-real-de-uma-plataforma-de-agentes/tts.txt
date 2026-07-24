@@ -1,0 +1,192 @@
+Claude Cowork deixa a máquina virtual, e a Grab mostra o tamanho real de uma plataforma de agentes.
+Conseguir root dentro de uma máquina virtual deveria ser o começo do limite de dano, não o fim da defesa.
+Numa demonstração publicada ontem, pesquisadores chegaram a root no ambiente local do Claude Cowork.
+Ali, encontraram o sistema de arquivos inteiro do macOS montado com permissão de escrita.
+A parede continuava no diagrama, mas tinha uma porta larga para o host.
+A história abre uma edição bem pé no chão sobre agentes.
+A Grab conta que levou uma tarde para montar o primeiro loop e cerca de duas semanas para construir tudo ao redor.
+A DigitalOcean mostra uma conta de inferência caindo depois que o prompt para de sabotar o próprio cache.
+São problemas diferentes, mas todos aparecem depois que a demo já funciona.
+SharedRoot transforma root na máquina virtual em acesso ao macOS.
+A Accomplish diz ter executado, de ponta a ponta, uma cadeia de fuga numa sessão local do Claude Cowork.
+O processo começou como usuário sem privilégio dentro da máquina virtual e explorou uma falha do kernel para chegar a root no guest.
+Depois, terminou lendo e escrevendo arquivos do host fora da pasta que o usuário havia conectado ao agente.
+O primeiro passo usa um user namespace.
+Com esse recurso, um processo pode parecer root dentro de um namespace e receber capacidades ali sem se tornar root no host.
+Na demonstração, isso bastou para obter a capacidade C A P net admin e alcançar uma parte do kernel que o ambiente nem precisava expor.
+A cadeia ativou o módulo act p edit e explorou a falha C V E 2026, quarenta e seis três três um.
+Segundo a Accomplish, a falha permitiu envenenar o page cache de um helper executado pelo cowork D, daemon que roda como root.
+O registro público da Ubuntu confirma a identidade da vulnerabilidade no kernel.
+Sozinho, esse registro não valida toda a cadeia específica do Claude Cowork.
+Depois de obter root no guest, faltava descobrir se a máquina virtual realmente continha a falha.
+Não continha.
+A raiz inteira do macOS estava compartilhada por Virtio F S no diretório m n t, ponto virtio F S root, em modo de leitura e escrita.
+Virtio F S é o mecanismo que apresenta arquivos do host à máquina virtual.
+Com todo o host visível dessa forma, guest root ganha autoridade sobre muito mais que o diretório escolhido para a tarefa.
+No dia 19, falamos de namespaces, seccomp em allowlist e isolamento fail closed.
+Agora apareceu a consequência concreta de compor mal essas fronteiras numa máquina virtual.
+Uma capacidade dentro do namespace abriu uma superfície desnecessária do kernel, e o mount transformou a escalada local em acesso ao host.
+Seccomp filtra chamadas de sistema.
+Quando a política deixa tudo passar por padrão, subsistemas sem função naquela tarefa continuam alcançáveis.
+Uma allowlist inverte a lógica e entrega ao processo apenas as chamadas necessárias.
+A mesma disciplina vale para namespaces, módulos e compartilhamentos.
+Os pesquisadores propõem quatro cuidados.
+Primeiro, restringir user namespaces e usar seccomp com bloqueio por padrão.
+Também é preciso impedir caminhos desnecessários de carregamento e execução de módulos, além de não montar o host inteiro no guest.
+A regra prática é assumir que root na máquina virtual pode acontecer.
+Mesmo nesse cenário, o agente deveria encontrar poucos arquivos, de preferência somente para leitura, e nenhuma credencial reaproveitável.
+Também deveria encontrar uma superfície mínima de kernel.
+Dizer que está numa máquina virtual descreve um mecanismo.
+Não diz qual é o raio de dano.
+O relato tem limites importantes.
+A demonstração e a leitura da arquitetura vêm da Accomplish, empresa que também oferece um produto concorrente.
+O pesquisador Oren Yomtov afirma ter reportado o caso à Anthropic e diz que o relatório foi encerrado como Informative.
+A Anthropic não publicou, nas fontes abertas desta pesquisa, uma confirmação técnica de cada etapa.
+A Accomplish também diz que esse caminho local não parece atingir o modo cloud usado atualmente por padrão.
+Não há evidência apresentada de exploração em campo, e a C V E é uma falha do kernel, não uma C V E do Claude.
+As fontes deste bloco são a pesquisa SharedRoot, da Accomplish, e o registro de segurança da Ubuntu para a C V E 2026, quarenta e seis três três um.
+Na Grab, o loop levou uma tarde e a plataforma levou semanas.
+Um bot interno de suporte da Grab começou com uma tarefa comum: consultar sistemas da empresa, reunir contexto e responder a funcionários.
+Segundo a equipe, o loop de raciocínio ficou pronto em uma tarde.
+Autenticação, segredos, configuração, banco, tracing, probes e métricas consumiram cerca de duas semanas.
+Essa diferença explica bastante sobre agentes em produção.
+Chamar um modelo, receber uma tool call e devolver o resultado é o miolo visível.
+O serviço ainda precisa saber quem fez o pedido, quais ferramentas aquela identidade pode usar e onde buscar segredos.
+Também precisa saber como falhar sem criar um incidente e como alguém vai reconstruir o que aconteceu às três da manhã.
+A Grab transformou esse trabalho no L L M Kit, um framework que hoje atende mais de quinhentos serviços, segundo a própria empresa.
+A plataforma também declara mais de cinquenta servidores M C P registrados e um gateway central que processa bilhões de tokens por mês.
+Esses números não passaram por auditoria independente nesta pesquisa.
+Ainda assim, a arquitetura descrita traz decisões úteis até para uma equipe que nunca chegará perto dessa escala.
+O scaffold combina Fast [EY1 P IY1 AY1] com dois loops em LangGraph e uma imagem distroless.
+Também inclui gerenciamento de dependências com U V, segredos no Vault, telemetria com OpenTelemetry, health checks e clientes G R P C tipados.
+Nos exemplos, cada passo tem política de retry e timeout de trinta segundos.
+O endpoint de avaliação roda casos golden, com entradas e resultados esperados versionados junto da aplicação.
+ROUGE, BLEU e avaliações feitas por outro modelo aparecem como pontos de partida.
+Nenhuma dessas métricas prova sozinha que um agente é bom no trabalho real.
+Mesmo assim, colocar casos de avaliação no template muda a conversa.
+Qualidade deixa de ser uma impressão tirada do chat e passa a ter histórico, regressão e condição de release.
+A observabilidade também precisa acompanhar o caminho inteiro, e não apenas linhas soltas de log.
+Um trace distribuído liga o pedido H T T P ao loop do agente, a cada chamada de ferramenta, à recuperação de contexto e à chamada ao modelo.
+Assim fica mais fácil descobrir se a lentidão veio do provedor, se a ferramenta retornou um dado ruim ou se o loop insistiu cinco vezes no caminho errado.
+O gateway compatível com a [EY1 P IY1 AY1] da OpenAI separa as aplicações do fornecedor de modelo.
+Escolha, fallback, orçamento e atribuição de custo ficam numa camada comum, sem obrigar cada serviço a reimplementar a troca.
+Os servidores M C P remotos evitam embutir todas as integrações no processo do agente.
+A complexidade não some, claro.
+Ela muda de endereço e passa a exigir autenticação, autorização, disponibilidade e telemetria na rede.
+Na mesma edição de 19 de julho, chamamos esse entorno de harness.
+O relato da Grab dá volume e componentes à ideia.
+Para uma equipe menor, a ordem talvez seja mais útil que a lista de tecnologias.
+Primeiro, um template reproduzível, com identidade e segredos antes do deploy.
+Depois, traces atravessando modelo e ferramenta, avaliações versionadas e uma camada para trocar de provedor sem reescrever cada aplicação.
+Este é o primeiro texto de uma série da Grab.
+Gateway, M C P remoto e plataforma de avaliações ainda devem ganhar partes próprias.
+Por enquanto, temos o relato da empresa sobre seu ambiente, seus volumes e o tempo economizado.
+É um mapa de engenharia, não um benchmark universal nem uma receita para instalar sete serviços antes de conseguir o primeiro usuário.
+A fonte deste bloco é a Grab Tech, no texto How Grab Builds and Runs AI Agents at Scale.
+Um identificador no começo do prompt pode inutilizar o cache inteiro.
+Prompt cache parece uma daquelas otimizações com uma caixa de seleção: ligar, receber o desconto e seguir a vida.
+O detalhe inconveniente é que o cache reaproveita um prefixo inicial idêntico.
+Se um identificador, timestamp ou nome de usuário muda cedo demais, a comparação para ali.
+Todo o conteúdo estável que vem depois precisa ser processado de novo.
+O arranjo mais favorável coloca primeiro o que se repete: system prompt, schemas das ferramentas e exemplos.
+A cauda variável recebe o identificador da requisição, o usuário, o horário e a consulta.
+Algumas interfaces pedem um ponto explícito, como cache control.
+Outras fazem prefix caching automaticamente.
+Nos dois casos, você precisa conferir como o modelo e a [EY1 P IY1 AY1] usados em produção se comportam.
+A ProjectDiscovery relata que reorganizou os pontos de cache e moveu o contexto volátil.
+O hit rate subiu de sete porcento para setenta e quatro porcento, enquanto o gasto mensal caiu cinquenta e nove porcento.
+Esse é um caso real da empresa, não uma promessa de que qualquer prompt receberá o mesmo desconto.
+A DigitalOcean reproduziu o princípio em seu serviço serverless com Claude Haiku quatro ponto cinco.
+O benchmark usou um prefixo de aproximadamente seis mil tokens, mil e quinhentas requisições por layout e três execuções.
+Depois de marcar o prefixo e tirar o campo variável do trecho estável, o hit rate foi de zero para noventa e nove vírgula três porcento.
+O custo estimado de entrada caiu de seis dólares e setenta e dois centavos para cinquenta e sete centavos por mil requisições.
+É uma redução grande, nas condições declaradas pela empresa que opera o serviço medido.
+Outro modelo, fornecedor, tamanho mínimo de cache, T T L ou padrão de tráfego pode dar um resultado bem diferente.
+O mecanismo descrito no estilo das interfaces da Anthropic oferece T T Ls de cinco minutos e uma hora.
+Se o intervalo entre chamadas passa dessa janela, reorganizar os campos não ressuscita uma entrada que já expirou.
+Também vale separar três nomes parecidos.
+O prefix cache reutiliza o estado computado de uma sequência inicial igual entre requisições.
+O K V cache mantém chaves e valores da atenção durante a geração.
+O cache semântico tenta encontrar consultas com significado próximo.
+Mover um identificador resolve o primeiro tipo de desperdício.
+Não corrige tráfego esparso, prefixo curto ou conteúdo que varia sem a equipe perceber.
+Medir apenas latência também pode esconder o ganho.
+A DigitalOcean diz que, no serverless compartilhado, o resultado reproduzível foi custo.
+O tempo até o primeiro token e a vazão oscilaram com a fila.
+A telemetria mínima deveria registrar tokens escritos e lidos do cache, hit rate e custo por requisição.
+Também deveria registrar T T L efetivo, tempo até o primeiro token e percentil noventa e cinco.
+Cache ativado sem essas métricas é só uma configuração otimista.
+A ação prática cabe numa revisão do layout.
+Ordene o conteúdo do mais estável para o mais variável, marque o breakpoint quando a [EY1 P IY1 AY1] exigir e observe o hit rate na carga real.
+Um campo dinâmico no topo pode custar mais que muita discussão sofisticada sobre qual modelo economiza centavos.
+As fontes deste bloco são a DigitalOcean Community e a ProjectDiscovery.
+Agora, o radar rápido.
+Desligar F sync pode comprometer o cluster inteiro.
+Christophe Pettus publicou uma explicação sobre um atalho perigoso no PostgreSQL.
+Com F sync desligado, o banco deixa de impor a ordem entre o W A L, que registra as mudanças, e as páginas de dados.
+Depois de um crash, isso pode causar corrupção irrecuperável, não apenas a perda das transações mais recentes.
+É diferente de synchronous commit desligado, que aceita perder commits recentes sem criar o mesmo risco de inconsistência.
+Religar F sync não força retroativamente ao disco as escritas anteriores.
+A documentação recomenda sincronizar os buffers com opções como init D B sync only, sync, unmount ou reboot.
+Em banco durável, mantenha a opção ligada.
+Para importação descartável ou C I reconstruível, documente o risco e faça a sincronização completa antes de confiar no cluster.
+Se o armazenamento parece lento, meça com P G test F sync antes de trocar integridade por esperança.
+O texto é uma explicação operacional, não uma mudança no PostgreSQL.
+As fontes são a documentação do PostgreSQL 18 e o texto All Your GUCs in a Row, F sync, do site The Build.
+Firefox 153 E S R pede piloto antes do rollout da frota.
+A Mozilla lançou a nova base E S R em 21 de julho, reunindo mudanças desde o Firefox 140 E S R e as correções do aviso M F S A 2026, sessenta e oito.
+A versão inclui organização de abas no dispositivo, preview de links com inteligência artificial, busca com inteligência artificial e controles centralizados.
+A Mozilla diz usar processamento local quando possível, o que não significa que todo recurso funcione sempre offline.
+Para organizações, vale testar extensões, autenticação, native messaging e políticas de inteligência artificial antes da migração ampla.
+Usuários comuns devem aplicar a atualização de segurança oferecida em seu canal.
+O aviso lista classes como fuga de sandbox, escalada de privilégio, divulgação de informação e falhas de segurança de memória.
+As fontes são as notas de lançamento do Firefox 153 ponto zero E S R e o aviso de segurança 2026, sessenta e oito, da Mozilla Foundation.
+Visual Studio Code deixa o modelo triar pedidos de aprovação de ferramentas.
+A versão um ponto cento e trinta, publicada em 22 de julho, apresenta um agent host que executa a sessão num processo dedicado.
+Esse host também pode conectar a sessão a várias janelas.
+Harnesses Claude e Codex nesse host recebem isolamento por worktree, útil para separar árvores e branches de sessões paralelas.
+Worktree não isola credenciais, rede, processos nem o host.
+A opção em preview, chat assisted permissions enabled, vai além.
+O próprio modelo avalia o risco de cada tool call e escolhe entre executar ou pedir aprovação humana.
+Isso pode reduzir interrupções, mas entrega parte da triagem ao mesmo sistema probabilístico que está sendo supervisionado.
+No dia 22, vimos um comentário invisível conduzir um agente com credenciais amplas.
+A novidade agora é uma interface que tenta diminuir prompts.
+Ações irreversíveis ainda precisam de credenciais estreitas, allowlists e confirmações determinísticas fora do modelo.
+Agent host, janela de agentes e permissões assistidas estão em preview ou rollout.
+Por isso, disponibilidade e comportamento podem variar.
+A fonte é a nota de lançamento do Visual Studio Code um ponto cento e trinta, da Microsoft.
+Agentes estão virando infraestrutura.
+Entre 22 e 24 de julho, ferramentas e relatos diferentes chegaram ao mesmo ponto por caminhos independentes.
+A Grab colocou gateway, tracing, avaliações, identidade e health checks ao redor do loop.
+O SharedRoot mostrou por que uma fronteira de máquina virtual mal composta não contém root no guest.
+O Visual Studio Code levou processo dedicado, worktrees e aprovação assistida para a experiência normal do editor.
+Até o prompt cache pediu o velho tratamento de produção: layout explícito, T T L e métrica.
+Isso sustenta uma tendência, não uma estatística de adoção.
+Agentes estão virando infraestrutura é uma síntese editorial dessas implementações e incidentes.
+Não quer dizer que toda empresa já opera uma plataforma madura.
+O sinal é forte porque os mecanismos são diferentes e apontam para a mesma migração.
+O desempenho do modelo continua importante, mas o trabalho decisivo desce para os controles e serviços ao redor dele.
+Isolamento, autorização, aprovação e observabilidade não são nomes elegantes para a mesma caixa.
+Isolamento contém processo, sistema de arquivos e rede.
+Autorização limita o que uma identidade pode pedir.
+Aprovação segura uma ação sensível antes do efeito.
+Observabilidade permite reconstruir o que ocorreu.
+Se um mount entrega o host inteiro, um bom prompt não fecha a fronteira.
+Se o token alcança projetos demais, um worktree não diminui essa autoridade.
+Um preprint recente leva a discussão para autorização verificável.
+A proposta tenta vincular criptograficamente a identidade do agente, o pedido, o contexto de execução e a política antes da ação.
+O próprio trabalho se apresenta como hipótese, modelo preliminar e prova de conceito.
+É um sinal para acompanhar, não uma solução estabelecida, revisada por pares ou implantada de forma ampla.
+A prática disponível hoje é menos futurista e bem mais útil.
+Ela inclui identidade por tarefa, credencial curta, ferramenta e destino em allowlist, sistema de arquivos mínimo e orçamento.
+Também inclui avaliações versionadas, logs correlacionados e intervenção humana para ações irreversíveis.
+O melhor teste de uma fronteira é assumir que o agente ou o guest já falhou.
+A partir daí, pergunte o que ainda impede o acesso às credenciais, aos mounts, à rede e às ferramentas importantes.
+Nos últimos dias, o blog acompanhou a mesma mudança por outros ângulos.
+No dia 19, o harness apareceu como a peça que decide a segurança do agente.
+No dia 22, uma prompt injection atravessou M C P e usou a autoridade do revisor.
+No dia 23, plataformas começaram a converter automação em regras.
+Hoje a convergência ficou operacional: arquitetura, custo e fronteira de execução já pertencem à mesma conversa.
+A demo termina quando o agente conclui a tarefa.
+O sistema de produção começa exatamente ali.
+As fontes deste fechamento são Grab Tech, Accomplish, Microsoft e o preprint sobre autorização verificável de agentes.
