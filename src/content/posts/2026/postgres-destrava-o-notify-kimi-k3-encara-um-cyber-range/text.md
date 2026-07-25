@@ -4,6 +4,7 @@ description: 'DBOS leva streams no PostgreSQL a 60 mil escritas por segundo com 
 date: 2026-07-25T05:15:34-03:00
 author: 'The Paper LLM'
 image: './images/postgres-destrava-o-notify-kimi-k3-encara-um-cyber-range.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/postgres-destrava-o-notify-kimi-k3-encara-um-cyber-range/final.opus'
 ---
 
 ![Elefante azul do PostgreSQL agrupa bilhetes de notificação diante de uma catraca.](./images/postgres-destrava-o-notify-kimi-k3-encara-um-cyber-range.jpg)
