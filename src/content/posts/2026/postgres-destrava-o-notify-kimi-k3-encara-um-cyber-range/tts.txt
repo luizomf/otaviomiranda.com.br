@@ -1,0 +1,92 @@
+Postgres destrava o notify, e Kimi K três encara um cyber range.
+Tem uma diferença grande entre fazer uma coisa funcionar e fazê-la aguentar todo mundo usando ao mesmo tempo.
+Hoje isso aparece em dois lugares bem diferentes.
+De um lado, o PostgreSQL entrega eventos sem mandar cada commit para a mesma catraca.
+Do outro, um modelo de inteligência artificial tenta atravessar uma rede simulada com dezenas de etapas.
+Os números chamam atenção, claro, mas o caminho até eles conta a parte mais interessante da história.
+A D B O S tira cada escrita da fila global do notify.
+Usar PostgreSQL como parte de um sistema de eventos é tentador.
+O dado já está ali, a equipe conhece S Q L, e adicionar outro serviço à produção nunca traz só o serviço.
+Vêm junto deploy, monitoramento, retenção, custo e aquela documentação nova que alguém vai precisar descobrir às três da manhã.
+A complicação começa quando listen e notify precisam atender mais do que um fluxo modesto.
+O listen mantém uma sessão esperando sinais de um canal, e o notify publica o sinal quando a transação confirma.
+Segundo a D B O S, a primeira implementação de streams da empresa disparava um notify a cada escrita e parava em até duas mil e novecentas escritas por segundo.
+A tabela não era o gargalo.
+Transações com notify precisam pegar um lock exclusivo global durante o commit, inclusive no trecho que chega ao F sync.
+O lock preserva a ordem das notificações conforme os commits, mas obriga cada transação a esperar a anterior.
+O banco perde a chance de agrupar commits, e uma feature leve vira a catraca única do estádio inteiro.
+A D B O S resolveu mudar o papel da notificação.
+A tabela continuou como fonte de verdade, enquanto os sinais passaram a ser acumulados em memória e descarregados em lote numa transação.
+Assim, várias notificações percorrem juntas o caminho serializado, em vez de uma por evento.
+Só que memória cai, processo reinicia, e Murphy também acompanha changelog.
+Se a aplicação morrer antes de esvaziar o lote, o dado continua na tabela.
+Um polling periódico busca o que ficou para trás.
+Como ele serve para recuperar sinais perdidos, e não como caminho normal de baixa latência, pode rodar com pouca frequência.
+No benchmark da própria D B O S, com leitores concorrentes, o desenho chegou a até sessenta mil escritas de stream por segundo.
+É cerca de vinte vezes o resultado anterior, com latência reportada entre quinze e cem milissegundos.
+No limite, a C P U do PostgreSQL ficou saturada.
+A empresa também publicou o código e a infraestrutura usados para medir inserts, workflows, filas e throughput de streams.
+Pelo menos a bancada está aberta para inspeção e reprodução.
+Ainda são números da D B O S, em hardware e workload específicos, sem reprodução independente nesta apuração.
+O patch citado para o PostgreSQL dezenove melhora o caso com muitos canais e listeners específicos.
+Mas, segundo a empresa, ele não remove o lock global responsável pelo gargalo.
+O limite operacional pesa ainda mais.
+Nesse desenho, notify é um sinal, não uma fila durável ou perfeitamente ordenada.
+A durabilidade fica na tabela, e a recuperação depende do polling.
+Isso pode evitar um broker em alguns sistemas, mas não faz do PostgreSQL um equivalente geral a Kafka, Rabbit M Q ou Bull M Q.
+Retenção, replay, particionamento, backpressure, ordenação e rotina operacional ainda decidem a arquitetura.
+Para um time que já grava eventos no banco e só precisa acordar consumidores com baixa latência, há um caminho concreto.
+Mantenha o evento durável, agrupe os avisos e assuma que alguma notificação vai se perder.
+Se os requisitos forem além disso, a catraca melhorou, mas o estádio continua o mesmo.
+As fontes deste bloco são a D B O S e o repositório público do benchmark.
+Agora, o Kimi K três avança no ataque, mas não fecha a exploração.
+O Kimi K três foi lançado em dezesseis de julho, com a abertura dos pesos prevista para o dia vinte e sete.
+Nós já cobrimos a arquitetura do modelo e essa promessa.
+Agora apareceu algo mais útil do que outra tabela do fabricante.
+Os institutos de segurança de inteligência artificial do Reino Unido e dos Estados Unidos publicaram uma avaliação preliminar das capacidades cibernéticas do modelo.
+Um dos testes foi o Exploit Bench, com quarenta e uma vulnerabilidades recentes do motor JavaScript V oito.
+O teste não se limita a perguntar se o modelo explorou a falha.
+Ele separa etapas como provocar um crash, conseguir leitura ou escrita arbitrária, desviar o fluxo e chegar à execução arbitrária de código.
+O Kimi K três marcou trinta e dois porcento, contra vinte e quatro porcento do G L M cinco ponto dois.
+Isso não quer dizer que ele comprometeu trinta e dois porcento das máquinas, e nem havia máquinas reais nessa conta.
+No resultado mais forte, execução arbitrária de código, o Kimi ficou em zero das quarenta e uma amostras.
+Os modelos mais capazes avaliados chegaram, em média, a vinte de quarenta e uma.
+A segunda parte colocou o modelo no T L O, um cyber range com trinta e duas etapas, quatro sub-redes e cerca de vinte hosts.
+Um cyber range é uma rede simulada e controlada.
+Ele ajuda a repetir uma cadeia de ataque, mas tem bem menos caos do que produção.
+O Kimi chegou, em média, ao passo dezessete e concluiu o cenário em uma de dez tentativas, com limite de cem milhões de tokens.
+Os modelos fechados mais capazes dos Estados Unidos alcançaram, em média, o passo vinte e oito vírgula cinco.
+A distância importa, só que o ambiente também.
+O T L O entrega acesso inicial e um caminho intencional, usa hosts vulneráveis, não tem defesa ativa e não pune o modelo por gerar alertas.
+É quase uma rede dizendo: pode entrar, enquanto aponta o corredor.
+Capacidade nesse ambiente não demonstra exploração real, autorização ou intenção fora do laboratório.
+A comparação agregada também não é perfeitamente simétrica.
+O Kimi foi medido de forma seletiva, e seu score vem de um único benchmark com quarenta e uma tarefas, o que aumenta o intervalo de confiança.
+Outros modelos têm resultados em mais domínios, e os modelos fechados foram testados com as salvaguardas de sistema desativadas.
+A própria avaliação é preliminar.
+Para equipes de segurança, o resultado fica bem longe tanto de inteligência artificial já invade tudo quanto de não consegue fazer nada.
+O Kimi superou outro modelo com pesos abertos no Exploit Bench e completou uma longa cadeia pelo menos uma vez.
+Mesmo assim, não conseguiu execução arbitrária de código em nenhuma das quarenta e uma amostras e falhou na maioria das tentativas de rede.
+Já é motivo para avaliar permissões e ambientes com cuidado se os pesos forem abertos, caso a previsão para vinte e sete de julho se confirme.
+Ainda não é motivo para tratar um benchmark controlado como incidente de produção.
+A fonte deste bloco é a avaliação do N I S T, do C A I S I dos Estados Unidos e do A I S I do Reino Unido.
+No radar rápido, a Zalando levou o fan-out para dentro do processo, mas não recomenda copiar.
+Num estudo de caso publicado originalmente em vinte e três de junho e recirculado agora, a empresa contou como mudou uma rota interna do proxy Skipper.
+Essa rota abria até cem chamadas paralelas.
+O cliente reproduziu X X Hash sessenta e quatro e cem nós virtuais para manter o mesmo anel de consistent hashing e não dividir os caches durante o canário.
+Com toggles de um porcento a cem porcento e fallback para o proxy, a Zalando diz ter removido mais de um milhão de requests por segundo do Skipper no pico.
+A frota associada caiu de mais de cinquenta pods para oito.
+E o custo diário caiu de cerca de quatrocentos e cinquenta dólares para cento e dez dólares.
+Os números são da própria empresa, e o módulo continua interno.
+Para quase todo mundo, a recomendação da Zalando ainda é usar um proxy maduro como Skipper ou Envoy.
+Internalizar discovery, R B A C, watchers, staleness e balanceamento no hot path só compensou nesse caso extremo.
+A fonte deste bloco é a Zalando Engineering.
+Por fim, Buz tenta manter o Bun em Zig, mas ainda é projeto de bancada.
+Depois de o Bun um ponto quatro migrar oficialmente para Rust, um mantenedor anunciou, em vinte e quatro de julho, um fork do último commit anterior à mudança.
+Segundo o autor, o Buz já acompanha o Zig atual e moveu o grafo para build ponto Zig.
+Também faz builds incrementais em menos de um segundo e removeu mais de onze mil linhas de código morto.
+Ele também importou testes novos do Bun em Rust e admite que muitos ainda falham.
+Compatibilidade com Bun um ponto quatro ponto zero é um objetivo futuro, não o estado atual.
+Desempenho e limpeza de bugs também seguem como alegações sem validação independente.
+Por enquanto, quem usa Bun em produção deve continuar no upstream.
+A fonte deste bloco é o anúncio do Buz no Ziggit.
