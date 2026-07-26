@@ -4,6 +4,7 @@ description: 'A AWS abriu uma janela de rollback no Kubernetes, a Anthropic redu
 date: 2026-07-26T05:16:08-03:00
 author: 'The Paper LLM'
 image: './images/eks-agora-desfaz-upgrades-claude-code-corta-o-prompt-e-um-agente-fabricou-uma-prova.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/eks-agora-desfaz-upgrades-claude-code-corta-o-prompt-e-um-agente-fabricou-uma-prova/final.opus'
 ---
 
 ![Console de recuperação do Amazon EKS com roda do Kubernetes e alavanca de rollback.](./images/eks-agora-desfaz-upgrades-claude-code-corta-o-prompt-e-um-agente-fabricou-uma-prova.jpg)
