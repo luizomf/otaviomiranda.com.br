@@ -1,0 +1,134 @@
+E K S agora desfaz upgrades; Claude Code corta o prompt e um agente fabricou uma prova.
+Upgrade de cluster costuma ter um momento meio religioso: a mudança termina, os painéis continuam verdes e todo mundo tenta acreditar que nada estranho vai aparecer na segunda-feira.
+A A W S agora oferece uma saída oficial quando a fé acaba.
+Essa janela de rollback abre a edição, mas não resolve sozinha o problema das outras histórias.
+Sistema confiável precisa de caminho de volta, contexto enxuto e teste que não aceite como verdade a versão produzida pelo próprio agente.
+O E K S abre sete dias para desfazer o upgrade do Kubernetes.
+A A W S lançou o Amazon E K S Version Rollback.
+O recurso permite reverter o control plane de um cluster que recebeu um upgrade no próprio ambiente para a versão minor anterior do Kubernetes.
+Se o cluster passou da versão N para N mais um, por exemplo, a operação pode levá-lo de volta para N.
+Você tem sete dias para iniciar o rollback e só pode voltar uma versão.
+Isso faz diferença para quem mantém Kubernetes porque upgrade de versão não costuma falhar de um jeito educado e imediato.
+Uma [EY1 P IY1 AY1] pode ter mudado, um controller pode reagir mal ou uma incompatibilidade pode aparecer apenas sob carga real.
+Antes, o E K S não tinha um caminho oficial para voltar o control plane.
+Agora tem, em todas as regiões onde o serviço opera e sem custo adicional pelo recurso em si.
+A A W S reverte o servidor de [EY1 P IY1 AY1] e os outros componentes gerenciados do control plane.
+Os dados do E T C D, os workloads e os volumes persistentes ficam como estão.
+Você não precisa restaurar o cluster inteiro, mas o restante do ambiente também não volta no tempo.
+Os add-ons não são revertidos automaticamente.
+Os grupos gerenciados de nodes e os nodes autogerenciados ou híbridos também exigem uma ação separada.
+No E K S Auto Mode, os worker nodes voltam antes do control plane.
+O Fargate, por sua vez, não suporta rollback de worker node.
+Mudanças incompatíveis feitas pela equipe nos recursos do cluster continuam lá.
+E, se a versão anterior estiver em extended support, a cobrança de suporte estendido pode reaparecer.
+A ordem importa por causa do version skew, a diferença de versões permitida entre o kubelet dos workers e o servidor de [EY1 P IY1 AY1].
+Em alguns cenários, os nodes precisam voltar primeiro para que o control plane antigo não encontre um data plane novo demais.
+Então isso se parece menos com um botão de “desfazer” e mais com um procedimento de recuperação que finalmente ganhou apoio oficial.
+Antes da operação, o E K S usa Rollback Readiness Insights para verificar compatibilidade de [EY1 P IY1 AY1], saúde do cluster, version skew e add-ons.
+Estados de erro ou desconhecido bloqueiam o fluxo por padrão.
+Existe a opção force, mas ela ignora apenas esses insights.
+Ela não atravessa a janela de sete dias nem apaga incompatibilidades estruturais.
+Forçar, nesse caso, significa assumir o risco do alerta, não convencer o Kubernetes de que o alerta estava de mau humor.
+O comando reutiliza a [EY1 P IY1 AY1] de atualização de versão e informa o nome do cluster e a versão anterior do Kubernetes.
+O post escrito contém o comando completo.
+Na prática, registre a data do upgrade, revise os insights cedo e mantenha um plano explícito para nodes e add-ons.
+Sete dias parecem bastante até a regressão depender do tráfego de terça, do batch de quarta e da pessoa certa voltar de folga na quinta.
+As fontes deste bloco são o Amazon E K S User Guide e o A W S What’s New.
+Claude Code troca instrução acumulada por contexto sob demanda.
+Mais cedo, o blog cobriu o lançamento, o preço e os cuidados de migração do Claude Opus cinco.
+Agora a Anthropic publicou uma consequência prática da nova geração.
+Segundo a empresa, ela removeu mais de oitenta porcento do system prompt do Claude Code para modelos como Opus cinco e Fable cinco, sem perda mensurável em suas avaliações de programação.
+O número chama atenção, mas não é uma receita para cortar quatro de cada cinco linhas do arquivo Claude ponto M D.
+As avaliações citadas são internas e não foram detalhadas no post.
+Elas não mostram que qualquer repositório, harness ou conjunto de regras manterá a qualidade depois da mesma redução.
+O resultado depende do modelo, das ferramentas e das tarefas reais do time.
+A orientação da Anthropic acompanha uma mudança de capacidade.
+Quando os modelos precisavam de condução mais rígida, fazia sentido acumular regras, exemplos de uso de ferramenta e instruções preventivas no contexto inicial.
+Em modelos mais capazes, esse material pode começar a brigar consigo mesmo.
+Regras antigas entram em conflito, exemplos viram trilhos desnecessários e a informação útil precisa disputar atenção com um manual inteiro antes de a tarefa começar.
+A empresa recomenda três mudanças.
+A primeira é dar mais espaço para julgamento contextual, em vez de cobrir tudo com regras rígidas.
+A segunda é melhorar a interface da ferramenta, em vez de gastar prompt explicando como contornar uma interface confusa.
+A terceira é usar progressive disclosure.
+Nesse último caso, as instruções especializadas ficam fora do contexto base e só entram quando a tarefa precisa delas.
+Num repositório, a ideia é manter o arquivo Claude ponto M D leve e concentrado no que o agente dificilmente descobriria sozinho.
+Pode ser uma armadilha específica de build ou uma convenção que parece errada, mas é intencional.
+Procedimentos longos de verificação, deploy ou migração podem virar skills carregadas sob demanda.
+A Anthropic também levou essa análise para o comando doctor do Claude Code, que ajuda a avaliar o tamanho de skills e arquivos Claude ponto M D.
+Context engineering, aqui, vai além do prompt digitado no terminal.
+Inclui system prompt, memória, referências, definições de ferramentas, skills e instruções do repositório.
+Tirar texto dessa pilha pode reduzir conflitos e o custo de contexto.
+Também pode remover uma regra crítica se alguém fizer a limpeza empolgado apenas com o número.
+O caminho seguro é tratar a simplificação como mudança de código.
+Escolha tarefas reais, compare antes e depois, procure regressões e preserve invariantes verificáveis.
+Uma regra de segurança ou contrato não deixa de ser necessária porque ocupa tokens.
+A lição não é “prompt curto sempre vence”.
+Instrução precisa justificar o aluguel que paga dentro do contexto.
+A fonte deste bloco é o Claude Blog.
+Um vídeo convincente não provou que o bug existia.
+Dan Luu pediu a um agente para fazer o bisect de uma regressão.
+Recebeu algo que parecia um ótimo pacote de verificação: um vídeo produzido com Playwright mostrando o problema.
+Ao tentar reproduzir o caso manualmente, descobriu que o agente havia construído um ambiente artificial para fabricar o resultado, em vez de demonstrar a regressão no sistema real.
+O episódio é um relato em primeira pessoa.
+Luu não publicou artefatos para reprodução independente e não fixa a versão do GPT ou Codex usada.
+Ele lembra apenas que isso ocorreu por volta de meados de 2025 e pode ter envolvido a versão cinco ponto zero ou cinco ponto um.
+Mesmo assim, a falha soa familiar para quem já viu um teste passar depois que alguém mudou, junto com o código, a definição do que significava passar.
+Agente, executor e critério de sucesso não deveriam ser a mesma coisa.
+Se o modelo pode alterar o ambiente, escrever o teste, escolher o recorte da evidência e explicar o resultado, uma saída bonita corre o risco de validar só a história que ele montou.
+Vídeo, relatório e teste ainda são artefatos úteis.
+A aparência de auditoria não os transforma num oráculo independente.
+Luu defende gerar muitos casos a partir de propriedades que precisam continuar verdadeiras.
+Esse é o território de fuzzing e property-based testing.
+Em vez de pedir ao modelo “encontre mais bugs” e aceitar exemplos inventados livremente, a equipe define invariantes, controla o gerador e executa combinações num ambiente observável.
+Na experiência relatada por ele, pedir mais testes ao agente encontrou menos bugs e produziu mais falsos positivos do que fuzzing bem orientado.
+O processo ainda depende de trabalho humano.
+Só muda onde esse trabalho fica.
+Alguém com conhecimento do domínio precisa entender como o sistema costuma falhar, escolher propriedades úteis e separar defeito real de ruído.
+Luu cita a experiência histórica da Centaur, onde cerca de mil máquinas geravam e executavam testes para aproximadamente vinte projetistas lógicos e vinte engenheiros de teste.
+A escala de execução não tornou a triagem dispensável; tornou a triagem um trabalho próprio.
+Num pipeline de código, dá para separar quatro peças.
+O gerador cria entradas.
+O executor roda a versão exata do sistema.
+O oráculo verifica propriedades independentes.
+E a telemetria guarda commit, ambiente, seed, comandos e artefatos.
+Depois que uma falha é confirmada, ela é minimizada, torna-se reproduzível e entra na suíte fixa de regressão.
+O desenho precisa mudar conforme o domínio, e a revisão continua necessária quando o risco exige.
+A consequência prática é menor e mais dura: não peça ao agente apenas para confirmar que o trabalho dele funciona.
+Dê a ele um portão cuja fechadura fica do lado de fora.
+A fonte deste bloco é Dan Luu.
+Agora, o radar rápido.
+A Fly ponto I O coloca Sprites no centro da empresa.
+A Fly ponto I O declarou “computers for agents” como novo foco, anunciou uma nova captação e passou o cargo de C E O de Kurt Mackey para Scott Johnston.
+Mackey segue como advisor e no board.
+A nova iteração de Sprites combina compute com disco durável de cem gigabytes, checkpoint e clonagem de drives.
+Connectors promete fazer chamadas autenticadas sem entregar ao agente um segredo diretamente reutilizável.
+Segundo a empresa, Fly Machines e a plataforma como serviço continuam disponíveis.
+Clonagem, escala e segurança ainda são alegações do fornecedor, e os recursos mais sofisticados estão em beta.
+Workload sensível pede avaliação de isolamento, custo e dependência antes da mudança.
+A fonte deste bloco é a Fly ponto I O.
+A Cloudflare separa crawler de busca, agente e treinamento.
+Clientes, inclusive do plano Free, já podem aplicar controles distintos a Search, Agent e Training.
+Em 15 de setembro de 2026, novos domínios terão Agent e Training bloqueados por padrão nas páginas com anúncios, enquanto Search continuará permitido.
+Crawlers com vários usos recebem a regra mais restritiva.
+Isso pode afetar Googlebot, Applebot e BingBot quando eles também forem classificados para treinamento.
+A classificação depende da Cloudflare, o padrão não vale para o domínio inteiro e sinais no arquivo robots ponto T X T expressam preferência sem bloquear tráfego sozinhos.
+Revise as regras e a indexação observada antes da data.
+A fonte deste bloco é a Cloudflare.
+Himalaya dois ponto zero leva Gmail e Microsoft Graph ao terminal.
+A versão dois ponto zero ponto zero do cliente de e-mail adicionou backends R E S T para Gmail e Microsoft Graph com OAuth dois ponto zero e bearer token.
+Também adicionou geração de JSON Schema para validar saídas estruturadas e um proxy local por socket Unix para sessões I M A P e S M T P pré-autenticadas.
+É uma major release e mexe na automação.
+A árvore de comandos I M A P foi achatada e executar Himalaya sem subcomando agora abre o wizard.
+As integrações ganham contratos melhores, mas atualizar o binário sem migrar scripts pode mudar o comportamento ou quebrar o fluxo.
+O socket local também precisa continuar protegido.
+A fonte deste bloco é a release do projeto no “Git Hub”.
+Inflect Micro versão dois põe T T S pequeno para rodar localmente.
+O modelo de pesos abertos de Owen Song tem nove milhões, trezentos e cinquenta e seis mil, quinhentos e treze parâmetros.
+Os pesos F P trinta e dois ocupam trinta e sete vírgula cinquenta e três megabytes, e o modelo gera áudio mono de vinte e quatro quilohertz em C P U ou CUDA.
+O autor mediu seis vírgula vinte e oito vezes o tempo real num ambiente de oito V C P Us e trinta e dois gigabytes.
+O teste usou quatro threads e excluiu a primeira passagem de cache.
+Isso significa produzir seis vírgula vinte e oito segundos de áudio por segundo nas condições publicadas, mas não garante a mesma velocidade em qualquer laptop.
+Há integração por Python e uma exportação O N N X separada, mas a voz é única e em inglês.
+A adaptação para outro idioma ou voz não foi validada.
+Os pesos estão abertos sob Apache dois ponto zero, enquanto partes do corpus e da receita completa de treinamento continuam privadas.
+A fonte deste bloco é a página do modelo no Hugging Face.
