@@ -1,0 +1,126 @@
+Fastjson abre R C E em fat jars; Netflix mostra os tropeços do serving de L L M.
+Dependência transitiva tem um talento especial para sumir do nosso mapa mental sem sair do artefato de produção.
+Nesta manhã, vale procurar uma delas: versões recentes do Fastjson um ponto x podem permitir execução remota de código em aplicações empacotadas como fat jar do Spring Boot.
+Já existem relatos de tentativas de exploração, há mitigação disponível e o ramo antigo continua sem um release corrigido.
+Depois do inventário e da contenção, a conversa desce uma camada.
+A Netflix abriu a arquitetura interna que usa para servir modelos grandes.
+Ela contou o tipo de problema que aparece quando diferentes componentes precisam concordar sobre o significado de “compatível”.
+Esses componentes são o [T R AY1 T AH0 N], o V L L M, uma [EY1 P IY1 AY1] compatível com a da OpenAI e a carga real.
+Fastjson um ponto x exige inventário e mitigação imediata.
+O projeto Fastjson publicou, em 21 de julho, um aviso sobre a C V E 2026, dezesseis sete dois três.
+Uma entrada JSON controlada pelo atacante pode chegar à resolução de tipos e, em condições específicas, terminar em execução remota de código.
+O N V D deu à falha nota C V S S três ponto um de nove vírgula zero, classificada como crítica.
+O escopo importa: o aviso oficial delimita as versões um ponto dois ponto sessenta e oito até um ponto dois ponto oitenta e três, inclusive.
+A aplicação também precisa rodar como executable fat jar do Spring Boot, com AutoType e SafeMode desligados.
+A equipe do projeto afirma ter verificado o caminho completo no Spring Boot dois, três e quatro, com J D K oito, onze, dezessete e vinte e um.
+Um fat jar reúne a aplicação e suas dependências num executável iniciado com o comando Java, usando a opção jar.
+A interação da biblioteca com esse layout faz parte do gatilho descrito pelo mantenedor.
+Encontrar o pacote no grafo de dependências é o começo da triagem.
+Depois, ainda é preciso confirmar a versão, o empacotamento e a configuração do processo exposto.
+Fastjson transforma JSON em objetos Java.
+O AutoType permite que o conteúdo indique tipos e já aparece desligado nessa condição.
+Mesmo assim, a falha contorna a proteção esperada e chega à resolução de tipos controlada pelo atacante.
+Segundo o projeto, informar uma classe alvo na função JSON ponto parseObject também não basta.
+Campos declarados como Object ou Map ainda podem transportar o conteúdo malicioso.
+Para quem continua no ramo um ponto x, a ação mais direta é habilitar o SafeMode.
+Na J V M, isso é feito ativando como verdadeira a propriedade fastjson parser safeMode.
+Em código, o projeto documenta o uso da configuração global do parser para habilitar o SafeMode.
+O código exato está no post escrito.
+O SafeMode rejeita o campo arroba type antes que ele alcance o caminho vulnerável.
+Outra alternativa oficial é trocar a dependência pelo build da Alibaba, Fastjson um ponto dois ponto oitenta e três, sem AutoType.
+As duas opções são mitigações, não uma correção lançada para o ramo um ponto x.
+O fastjson dois não é afetado e é o destino recomendado, mas essa migração pede teste de compatibilidade.
+Trocar a coordenada no Maven às pressas pode apenas mudar o problema de lugar.
+O inventário precisa cobrir dependências diretas e transitivas no grafo completo do Maven ou Gradle.
+Aquela biblioteca que ninguém lembra de ter instalado pode continuar embutida no jar final.
+Produção costuma trazer esse tipo de lembrança sem muita delicadeza.
+Também há sinais de atividade em campo.
+A ThreatBook diz ter capturado tentativas de exploração.
+Na reprodução da empresa, a execução remota completa aconteceu com Spring Boot em fat jar e J D K oito.
+No cenário com Tomcat embarcado, houve busca remota, com efeito de S S R F, mas não execução completa.
+A Imperva relata tentativas contra organizações de finanças, saúde, computação, varejo e outros setores.
+Quase todas ocorreram nos Estados Unidos, além de casos em Singapura e Canadá.
+Esses dados vêm da telemetria dos próprios fornecedores.
+Não são uma contagem pública de organizações comprometidas.
+A cronologia também merece atenção.
+A ThreatBook publicou seu relato em 22 de julho.
+Em 23 de julho, o bloco S S V C da C I S A, registrado pelo N V D, ainda indicava ausência de exploração.
+A Imperva publicou sua telemetria em 24 de julho.
+Na consulta feita para esta edição, o N V D mantinha o status da vulnerabilidade como “Deferred”.
+Os relatos não deixam de existir por causa disso, mas cada observação precisa continuar ligada à fonte e à data certa.
+Em ambientes expostos, ativar a mitigação resolve apenas a primeira parte.
+Revise instalações e builds recentes, confirme onde o jar vulnerável rodou e procure sinais de comprometimento.
+Havendo suspeita, o caso é de investigação de incidente, não só de uma configuração atrasada.
+A prioridade é reduzir a superfície sem transformar um aviso específico em pânico sobre qualquer versão do Fastjson.
+As fontes deste bloco são o aviso de segurança do Alibaba fastjson dois, a [EY1 P IY1 AY1] de C V Es do N V D, a equipe de pesquisa da ThreatBook e a Imperva Threat Research.
+Netflix encontrou os vazamentos entre Triton e V L L M.
+Mais cedo, vimos como uma plataforma de agentes da Grab mede cache de prompts e custos.
+O relato recente da Netflix fica uma camada abaixo.
+Ele acompanha o caminho que carrega o modelo, administra a G P U, recebe a requisição e produz cada token, em vez de tratar da orquestração do agente.
+A plataforma interna deixa na camada J V M o roteamento e as integrações que a Netflix já usa.
+Modelos pequenos, voltados à C P U, podem rodar dentro desse processo.
+Os maiores vão para o Model Scoring Service, ou M S S.
+Nele, o NVIDIA Triton cuida do ciclo de vida dos modelos, do batching e dos recursos de G P U; o V L L M executa a inferência.
+Um control plane em Java administra deployment, versionamento, health checks, autoscaling e rollout em várias regiões.
+A divisão parece boa: a empresa mantém uma interface estável para as aplicações enquanto troca ou evolui o motor por baixo.
+Só que Triton e V L L M continuam tendo versões, extensões e comportamentos próprios.
+A integração não faz essas diferenças sumirem.
+No máximo, deixa um lugar bem organizado para encontrá-las.
+A Netflix escolheu o V L L M como caminho principal depois de reavaliar cargas de embeddings, prefill, geração autorregressiva e modelos customizados.
+Um dos primeiros problemas de produção apareceu justamente na fachada compatível com a [EY1 P IY1 AY1] da OpenAI.
+O frontend do Triton aceitava o campo response format, mas jogava fora seu valor antes de a requisição chegar ao V L L M.
+A chamada parecia válida e, ainda assim, podia devolver JSON malformado.
+A equipe passou a manter uma subtree própria do frontend e a traduzir o campo para guided decoding.
+Esse tipo de decodificação limita os tokens permitidos em cada passo, para que a resposta já saia no formato exigido.
+Na prática, aceitar o mesmo payload não garante o mesmo comportamento.
+“Compatível com OpenAI” descreve o contrato da [EY1 P IY1 AY1], não a paridade completa escondida atrás dela.
+A observabilidade tinha um vazamento parecido.
+A ponte nativa do Triton expunha só nove das mais de quarenta métricas do V L L M.
+Throughput de tokens, uso do K V cache e taxa de acerto do prefix cache ficavam de fora.
+Para juntar as duas visões, a Netflix criou um endpoint de métricas combinado.
+O K V cache guarda o estado de atenção usado durante a geração, enquanto o prefix cache tenta reaproveitar prefixos já processados.
+Sem métricas de ocupação, acerto e throughput dessas camadas, você percebe que o serviço está lento.
+Mas não consegue distinguir saturação, desperdício ou pouca reutilização.
+Painel verde com metade dos instrumentos tranquiliza mais do que informa.
+O constrained decoding esbarrou em outro limite.
+A primeira implementação rodava processadores Python por requisição, em série e sob o G I L.
+O filtro de tokens ficou preso à C P U e não acompanhou a escala da geração.
+No quarto trimestre de 2025, quando migrou para o V L L M V um, a Netflix passou a processar requisições em lote.
+Também reescreveu o trecho mais quente em C mais mais, com múltiplas threads.
+Esse filtro mantém estado; por isso, se o servidor interrompe uma requisição para dar lugar a outra e a retoma depois, precisa reconstruir ou sincronizar esse estado.
+Essa reconstrução ou sincronização considera o histórico de tokens.
+Sem isso, a restrição de formato pode voltar num ponto diferente daquele em que a geração parou.
+Pequeno na [EY1 P IY1 AY1], grande no runtime.
+O post original saiu em 17 de julho e voltou a circular agora.
+É um estudo de caso da própria Netflix, não um benchmark reproduzível nem uma plataforma pronta para instalar.
+Também não traz números universais de custo, latência ou capacidade.
+Não dá para tirar dali um ganho mágico e carregá-lo para outro cluster.
+O que dá para levar é uma lista de testes.
+Quem serve modelos localmente precisa validar Triton e V L L M juntos e comparar a semântica real da [EY1 P IY1 AY1].
+Também precisa preservar as métricas do motor e testar preempção e retomada quando o decoder mantém estado.
+A abstração continua útil, mas não apaga as diferenças que existem abaixo dela.
+A fonte deste bloco é o Netflix Technology Blog, no artigo “In-House L L M Serving at Netflix”.
+Agora, vamos aos destaques do radar rápido.
+[W AA1 T AH0 JH] leva desperdício de tokens para traces e integração contínua.
+A versão zero ponto um ponto um, publicada no Python Package Index em 26 de julho, é uma ferramenta de linha de comando open source.
+Ela lê exports O T L P em JSON de aplicações de inteligência artificial generativa instrumentadas com OpenTelemetry.
+Roda offline, sem chave de [EY1 P IY1 AY1], calcula custos e procura oito padrões.
+Entre eles estão mudança frequente de prefixo, chamadas redundantes de ferramenta e loops sem convergência.
+O resultado pode virar relatório, badge ou gate de integração contínua por score, custo e achados.
+Para uma equipe que já gera traces, isso dá um caminho concreto para barrar regressões antes do merge.
+O projeto ainda é novo: seu teste de não convergência usa dez loops sintéticos do próprio autor.
+E o exemplo de quarenta e quatro vírgula sete porcento de economia vem de uma simulação pequena.
+Reduzir tokens também não prova melhora de qualidade, e o baseline precisa ser atualizado depois dos merges.
+Nós já falamos sobre prefix cache e telemetria de custo; agora há uma ferramenta para testar esse gate nos traces reais da equipe.
+As fontes são o repositório da ferramenta e o Python Package Index.
+P G Sim City transforma o Postgre S Q L numa cidade em três dimensões.
+O protótipo versão zero ponto um é de Nikolay Samokhvalov.
+Ele representa backends, shared buffers, W A L, checkpoints, autovacuum e standby como partes de uma cidade que você pode explorar.
+O pacote estático usa TypeScript, Vite e three ponto J S, versão r cento e oitenta e cinco.
+Ele não executa código do Postgre S Q L, não interpreta S Q L nem faz chamadas de rede.
+Seus mil e vinte e quatro frames de buffer são uma escala visual, não o tamanho literal de uma instância.
+A ideia ajuda a explicar por que checkpoints afetam a latência, transações antigas seguram o X min e um standby acumula lag.
+O próprio autor avisa, porém, que o modelo não foi revisado e provavelmente contém erros.
+Animação nenhuma serve como prova de timing, cardinalidade ou regra operacional.
+Para rodar localmente, o projeto pede Node ponto J S vinte ou mais recente e um navegador com Web G L dois.
+A fonte é o repositório Nikolay S, P G Sim City, no Git Hub.
