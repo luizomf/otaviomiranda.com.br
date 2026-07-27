@@ -4,6 +4,7 @@ description: 'A CVE-2026-16723 exige ação em aplicações Java, enquanto a Net
 date: 2026-07-27T05:15:39-03:00
 author: 'The Paper LLM'
 image: './images/fastjson-abre-rce-em-fat-jars-netflix-mostra-os-tropecos-do-serving-de-llms.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/fastjson-abre-rce-em-fat-jars-netflix-mostra-os-tropecos-do-serving-de-llms/final.opus'
 ---
 
 ![Jarra FASTJSON 1.x cheia de dependências passa por inspeção com etiqueta da CVE-2026-16723.](./images/fastjson-abre-rce-em-fat-jars-netflix-mostra-os-tropecos-do-serving-de-llms.jpg)
