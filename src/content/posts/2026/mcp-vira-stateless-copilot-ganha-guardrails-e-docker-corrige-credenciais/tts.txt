@@ -1,0 +1,95 @@
+M C P vira stateless; Copilot ganha guardrails e Docker corrige credenciais.
+Uma chamada chega ao servidor, qualquer instância disponível responde e ninguém precisa descobrir onde foi parar a sessão anterior.
+Esse é o novo núcleo do Model Context Protocol.
+A especificação final de 2026, sete, vinte e oito removeu o handshake e a sessão do protocolo.
+Com isso, o M C P ficou mais parecido com uma [EY1 P IY1 AY1] comum sobre H T T P.
+Na prática, isso facilita balanceamento, gateways e cache.
+Também quebra integrações que dependiam da inicialização, do identificador de sessão do M C P, de conexões mantidas abertas ou de interfaces de programação agora depreciadas.
+Stateless ajuda a infraestrutura, mas o estado da aplicação não evapora por educação.
+O M C P troca a sessão implícita por chamadas autossuficientes.
+O M C P padroniza o acesso de aplicações com modelos de linguagem a ferramentas, prompts e recursos por JSON R P C.
+Na revisão anterior, de 2025, onze, vinte e cinco, cliente e servidor começavam a conversa com as mensagens initialize e initialized.
+O transporte podia usar o cabeçalho M C P Session I D para prender as chamadas a uma sessão criada pelo servidor.
+A versão final de 2026, sete, vinte e oito, lançada em 28 de julho, retirou essas três peças.
+Agora, a versão do protocolo e as capacidades acompanham cada requisição no campo meta.
+Se o cliente precisar conhecer as capacidades antes de fazer outra chamada, pode consultar server discover.
+Os S D Ks Tier One de TypeScript, Python, Go e C Sharp já foram anunciados com suporte à revisão.
+A consequência mais visível num deployment H T T P é operacional.
+Sem uma sessão presa ao transporte, o balanceador pode distribuir chamadas entre instâncias sem sticky session.
+Também não precisa de armazenamento compartilhado criado só para sustentar o contrato do M C P.
+O "Git Hub" já adaptou seu M C P Server com o S D K oficial de Go e diz que removeu as sessões em Redis.
+Uma aplicação stateful não precisa fingir amnésia.
+Se uma ferramenta iniciar um trabalho que continua na próxima chamada, o servidor pode devolver um identificador e exigi-lo nos argumentos seguintes.
+O estado ainda existe; só fica explícito no contrato da aplicação, em vez de escondido na afinidade entre conexão e instância.
+Também ficou mais fácil decidir o que fazer sem abrir o corpo JSON.
+No Streamable H T T P, as chamadas passam a incluir os cabeçalhos M C P Method e M C P Name.
+Com eles, um gateway pode rotear, medir ou limitar requisições sem interpretar profundamente cada payload.
+Segundo o "Git Hub", isso também permitiu abandonar a inspeção profunda usada para logging e secret scanning.
+As listagens ganharam um contrato de cache.
+Resultados das listagens de ferramentas, prompts, recursos e templates, além da leitura de recursos, podem incluir T T L em milissegundos e cache scope.
+O cliente passa a saber por quanto tempo pode reutilizar a resposta e em qual escopo.
+Assim, não precisa consultar tudo de novo nem torcer para um cache artesanal envelhecer bem.
+As confirmações intermediárias deixam de depender de uma conexão aberta.
+Nem toda operação termina numa única ida e volta.
+Às vezes, uma ferramenta precisa que o usuário confirme uma ação ou forneça outro dado antes de continuar.
+A especificação chama esse fluxo de "Multi Round-Trip Requests", ou M R T R.
+Em vez de manter um pedido do servidor para o cliente preso ao stream, o servidor responde com o campo result type no valor input required.
+O cliente coleta a entrada e repete a chamada com input responses.
+Essa nova tentativa leva de forma explícita o que falta para continuar o trabalho.
+A lógica é a mesma do restante da revisão: menos contexto implícito no transporte, mais estado visível na requisição.
+Tasks também saiu do núcleo experimental e virou a extensão I O ponto model context protocol ponto tasks.
+As extensões foram formalizadas, então esses recursos podem evoluir sem transformar cada mudança numa revisão do protocolo central.
+Roots, Sampling, Logging e o transporte legado H T T P mais S S E foram depreciados, mas não desapareceram no dia do anúncio.
+A política prevê uma janela mínima de doze meses antes da remoção.
+A migração ainda passa por detalhes menos vistosos.
+O código para recurso ausente muda de menos trinta e dois mil e dois para o erro padrão JSON R P C Invalid Params, menos trinta e dois mil seiscentos e dois.
+Na autorização, a revisão endurece a validação do emissor e o vínculo de credenciais.
+Se o servidor de autorização mudar, o cliente não deve reaproveitar as credenciais.
+Atualizar o S D K é só o começo.
+Quem mantém cliente, servidor ou gateway precisa inventariar handshake, sessão, S S E, tarefas e callbacks do servidor para o cliente.
+Também precisa revisar códigos de erro, autenticação e recursos depreciados.
+Depois, precisa rodar testes de interoperabilidade e, quando fizer sentido, a suíte oficial de conformidade.
+Breaking change com nome de data continua sendo breaking change.
+A adoção começou, mas não chegou a toda parte ao mesmo tempo.
+O suporte do "Git Hub" mostra que a revisão já saiu do papel.
+Além de migrar para o S D K oficial de Go, a empresa relacionou a remoção de Redis e da inspeção profunda dos payloads ao novo contrato stateless.
+Também relacionou essas mudanças aos cabeçalhos de roteamento.
+A Anthropic começou a levar a especificação aos produtos Claude.
+Começou é a parte importante: o anúncio fala em rollout e diz que o suporte está chegando às diferentes superfícies.
+Isso não significa que todos os produtos Claude passaram a aceitar a revisão ao mesmo tempo.
+Já tratamos o M C P como superfície de prompt injection e controle de ferramentas.
+Agora, a mudança acontece abaixo dessa camada, no contrato de infraestrutura que conecta essas ferramentas.
+É nesse contrato que se define onde fica o estado, o que o gateway enxerga, como o cliente continua uma interação e quais credenciais pode reutilizar.
+A ideia é tornar o protocolo mais simples de escalar e observar.
+O cuidado é não confundir núcleo stateless com migração sem estado.
+Se o produto depende de conversa longa, tarefas em andamento ou autorização persistente, alguém ainda precisa modelar essas relações.
+A diferença é que elas não podem mais ficar escondidas atrás de um I D de sessão do transporte.
+As fontes deste bloco são o blog do Model Context Protocol, o changelog da especificação M C P, o changelog do "Git Hub" e o blog da Claude.
+Agora, no radar rápido, o "Git Hub" ampliou os guardrails do Copilot app e do cloud agent.
+O Copilot app ganhou uma política de acesso própria, separada da política do Copilot [S IY1 EH1 L AY1], nos níveis enterprise e organization.
+Ela nasce como Enabled Everywhere.
+Por isso, os administradores precisam revisar esse padrão, em vez de presumir que o app está bloqueado.
+O arquivo gerenciado pelo servidor, na pasta privada do "Git Hub" para o Copilot, agora governa o app e o cloud agent.
+Ele também continua governando a [S IY1 EH1 L AY1] e o V S Code.
+Os valores compatíveis prevalecem sobre a configuração local e costumam chegar em cerca de uma hora, ou depois de um restart ou novo login.
+No app, as chaves cobrem controles como bypass, seleção automática de modelo, plugins e marketplaces.
+No cloud agent, a cobertura anunciada inclui plugins e marketplaces.
+Mas ela não inclui os controles de prompts de aprovação reservados aos clientes interativos.
+Política de acesso e settings gerenciados são mecanismos diferentes: habilitar o app não aplica os guardrails sozinho.
+Para validar, confira o estado recebido no cliente e tente uma ação que deveria ser bloqueada.
+A presença do arquivo não prova que ele foi aplicado em todos os endpoints.
+É a continuação prática dos controles externos ao modelo discutidos ontem.
+As fontes são o changelog e a documentação do "Git Hub" sobre a política do Copilot app, os settings gerenciados, as chaves compatíveis e a configuração empresarial.
+O Docker Desktop quatro ponto oitenta e quatro ponto zero corrigiu travamentos e perda de tokens.
+A versão, publicada em 27 de julho, agora mostra um erro quando um arquivo config ponto JSON inválido na pasta Docker do usuário causa consumo alto de C P U e memória.
+Antes, o Desktop podia ficar nesse estado sem exibir diálogo.
+A versão também corrige um bug em que remover um credential I D sem relação podia apagar tokens OAuth do Docker Hub e deslogar o usuário.
+No Windows, um arquivo install settings ponto JSON vazio ou malformado podia causar um travamento parecido.
+O instalador M S I agora bloqueia conflitos com instalações por usuário.
+O desinstalador também deixa de impedir o acesso do usuário aos próprios diretórios de dados.
+A release atualiza o Docker Agent para um ponto cento e onze ponto zero.
+Também atualiza o cri dockerd para zero ponto quatro ponto quatro, o D H I C T L para zero ponto zero ponto sete e o Desktop [S IY1 EH1 L AY1] para zero ponto quatro ponto três.
+São correções operacionais, não identificadores C V E declarados nas notas.
+O rollout é gradual e pode levar até uma semana.
+Se você usa políticas ou gerencia máquinas Windows, vale testar a instalação sem sobrescrever às cegas um arquivo de configuração que precisa ser corrigido.
+A fonte deste bloco são as notas de versão do Docker Desktop quatro ponto oitenta e quatro ponto zero.
