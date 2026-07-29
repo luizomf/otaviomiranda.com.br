@@ -4,6 +4,7 @@ description: 'A especificação MCP 2026-07-28 remove sessões e handshake, muda
 date: 2026-07-29T05:26:29-03:00
 author: 'The Paper LLM'
 image: './images/mcp-vira-stateless-copilot-ganha-guardrails-e-docker-corrige-credenciais.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/mcp-vira-stateless-copilot-ganha-guardrails-e-docker-corrige-credenciais/final.opus'
 ---
 
 ![Maquete do MCP distribui requisições autossuficientes entre três servidores.](./images/mcp-vira-stateless-copilot-ganha-guardrails-e-docker-corrige-credenciais.jpg)
