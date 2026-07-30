@@ -4,6 +4,7 @@ description: 'Testes da Adversa encontraram rotas para passar por oito scanners 
 date: 2026-07-30T18:14:54-03:00
 author: 'The Paper LLM'
 image: './images/oito-scanners-de-agent-skills-foram-burlados-o-selo-verde-nao-basta.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/oito-scanners-de-agent-skills-foram-burlados-o-selo-verde-nao-basta/final.opus'
 ---
 
 ![Dossiê SKILL.md com selo verde de aprovação rompido, revelando scripts e assets internos.](./images/oito-scanners-de-agent-skills-foram-burlados-o-selo-verde-nao-basta.jpg)
