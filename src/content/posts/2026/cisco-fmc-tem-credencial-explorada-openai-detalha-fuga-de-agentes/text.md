@@ -4,6 +4,7 @@ description: 'A Cisco corre para corrigir uma conta estática no plano de gerenc
 date: 2026-07-30T05:16:12-03:00
 author: 'The Paper LLM'
 image: './images/cisco-fmc-tem-credencial-explorada-openai-detalha-fuga-de-agentes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/cisco-fmc-tem-credencial-explorada-openai-detalha-fuga-de-agentes/final.opus'
 ---
 
 ![Chave azul do Cisco Secure FMC inserida na porta de uma sala de controle, com etiqueta da CVE-2026-20316.](./images/cisco-fmc-tem-credencial-explorada-openai-detalha-fuga-de-agentes.jpg)
