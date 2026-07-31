@@ -1,0 +1,131 @@
+Templates do V P S ponto org expõem segredos, e Rails corrige falha crítica.
+O botão prometia uma instalação com um clique.
+A aplicação era instalada assim, mas banco, senha e chave podiam ficar em condições que ninguém escolheria numa configuração manual.
+Segundo um alerta do CERT C C, templates do V P S ponto org para Supabase e Zulip foram distribuídos com valores previsíveis e proteções perigosamente abertas.
+Ainda não há patch nem resposta do fornecedor.
+Quem usou esses templates precisa agir.
+E o caso abre uma sequência bem prática: o Rails corrigiu uma falha crítica no processamento de imagens, enquanto Google e Vercel mostraram dois limites diferentes para automação.
+Um contém os agentes dentro do sistema; o outro contém a fatura.
+Agora, os templates do V P S ponto org que deixam Supabase e Zulip com configurações padrão perigosas.
+Um template de V P S não é só um instalador simpático.
+Ele define containers, portas, segredos, regras do host e configurações da aplicação.
+Se todas as instalações começam com a mesma credencial, o valor pode até se chamar segredo, mas já nasceu público.
+Na nota V U número 243636, o CERT C C descreve duas falhas.
+A C V E 2026, dezesseis cinco zero três, afeta o template de Supabase.
+O Postgre S Q L fica associado a todas as interfaces, no endereço zero ponto zero ponto zero ponto zero e porta 5432.
+Além disso, o superusuário postgres usa uma senha previsível.
+Isso não quer dizer que toda instância esteja acessível pela internet.
+A conexão remota depende de a porta publicada estar alcançável.
+Nas instalações expostas, porém, essa configuração pode entregar o controle administrativo do banco.
+Também há uma pegadinha para quem olhou o U F W, viu uma política restritiva e foi dormir tranquilo.
+Quando publica portas, o Docker cria suas próprias regras de N A T e iptables.
+Dependendo da configuração efetiva do host, o tráfego pode ser encaminhado antes do bloqueio esperado no U F W.
+Por isso, a revisão precisa incluir os sockets abertos, a publicação do container e as regras reais de iptables ou nftables.
+Firewall imaginário protege mais ou menos o mesmo que senha imaginária.
+A C V E 2026, dezesseis cinco zero quatro, está no template do Zulip.
+Segundo o CERT C C, ele usa uma secret key com o valor changeme, a senha de banco zulip e a opção disable H T T P S ativada com true.
+Se essas configurações continuarem lá, a chave pode permitir falsificação ligada a sessão e autenticação.
+Com o H T T P S desligado, o tráfego fica sem criptografia.
+A nota foi publicada e atualizada em 31 de julho.
+O CERT C C havia enviado a notificação em 5 de junho, mas diz que não conseguiu contatar o V P S ponto org.
+O estado do fornecedor e das duas falhas com C V E aparece como desconhecido.
+Não havia patch nem declaração da empresa no momento da publicação.
+Esses detalhes, portanto, vêm do CERT C C, não de uma confirmação do V P S ponto org.
+Quem instalou Supabase ou Zulip por esses templates deve considerar que pode ter ocorrido exposição.
+O trabalho defensivo é verificar quais portas realmente ficaram alcançáveis e restringir o banco e os outros serviços de backend com firewall e segmentação.
+Também é preciso habilitar H T T P S e trocar senhas e chaves.
+Fechar a porta agora não invalida uma credencial que alguém possa ter visto antes.
+O Postgre S Q L também deve ouvir apenas nas interfaces em que for necessário, nunca na internet pública por conveniência.
+A fonte deste bloco é a nota de vulnerabilidade V U número 243636, do CERT C C.
+Agora, a falha em que o Active Storage com Vips pode ler arquivos do servidor.
+Um upload de avatar parece uma operação bem limitada: chega uma imagem, o servidor cria uma miniatura e segue a vida.
+Na C V E 2026, sessenta e seis zero seis seis, essa transformação atravessa uma fronteira bem mais séria.
+A falha também tem o identificador G H S A, X R nove X, R sete oito C, cinco H R M.
+Aplicações Rails que usam Active Storage com o processador Vips e aceitam imagens não confiáveis podem permitir a leitura de arquivos acessíveis ao processo da aplicação.
+O Active Storage delega o processamento ao libvips.
+Essa biblioteca entende mais formatos e operações do que as imagens comuns da web.
+Alguns loaders são marcados como unfuzzed, ou seja, não são adequados para receber conteúdo hostil sem restrições.
+O Active Storage não bloqueava essas operações.
+A configuração relevante usa Vips por padrão.
+Basta a aplicação produzir variantes para criar a condição; o código não precisa pedir de propósito uma transformação exótica.
+O efeito diretamente documentado é a leitura arbitrária de arquivos.
+A possível execução remota de código, que rendeu ao caso o apelido Kinda Rails to Shell, depende de combinar essa leitura com os segredos encontrados.
+Não é execução remota de código automática em toda aplicação afetada.
+Mesmo assim, o alcance potencial justifica o rótulo crítico.
+O processo pode ler variáveis de ambiente e arquivos com secret key base, master key e credenciais de storage, banco ou serviços externos.
+Esse material pode abrir caminho para falsificação de sessão, acesso a outros sistemas, movimento lateral e, em alguns ambientes, execução de código.
+O advisory saiu em 29 de julho com as versões corrigidas do Active Storage.
+As versões são sete ponto dois ponto três ponto dois, oito ponto zero ponto cinco ponto um e oito ponto um ponto três ponto um.
+A análise da Ethiack também exige libvips oito ponto treze ou superior.
+Se o libvips continuar abaixo da versão oito ponto treze, atualizar apenas o Rails não protege a instalação desse vetor.
+Times com Rails sete ou oito, upload direto, avatar ou geração de thumbnail precisam conferir três coisas.
+São elas: a gem Active Storage, o processador de variantes configurado no Active Storage e a versão do libvips realmente carregada no ambiente.
+Segundo a Ethiack, Rails seis ponto X só entra no alcance com uma configuração não padrão.
+Essa nuance evita declarar qualquer aplicação antiga como afetada por decreto.
+Depois do patch vem a parte desagradável, mas necessária: trocar tudo que o processo conseguia ler e expirar as sessões.
+Alterar a secret key base invalida cookies assinados ou criptografados, Global I Ds assinados e endereços do Active Storage.
+Não mantenha um segredo possivelmente vazado como fallback de rotação.
+Isso deixaria viva justamente a chave que precisava morrer.
+Como paliativo, ruby Vips dois ponto dois ponto um ou mais recente permite bloquear conteúdo não confiável com a função Vips block untrusted ativada.
+Isso é feito por meio da opção Vips block untrusted, desde que o libvips seja compatível.
+Abaixo da versão oito ponto treze, esse mecanismo não existe.
+Se a atualização imediata for impossível, o workaround indicado é remover a dependência.
+Os responsáveis retiveram a cadeia técnica e o payload até, no máximo, 28 de agosto, para dar tempo à aplicação dos patches.
+Não há motivo defensivo para preencher essa janela com uma prova de conceito.
+As fontes deste bloco são o advisory de segurança do Rails e a análise Kinda Rails to Shell, da Ethiack.
+Agora, como o Chrome cerca os agentes antes de aceitar suas correções.
+Mais cedo, mostramos o que aconteceu quando uma avaliação do Claude manteve a internet real aberta.
+Agora, o Chrome Security Team publicou um contraponto operacional.
+Seus agentes procuram e corrigem vulnerabilidades, mas trabalham com a rede e as capacidades limitadas pelo sistema.
+A segurança não depende de o modelo interpretar bem uma frase no prompt.
+O sistema de execução do Chrome entrega ao Gemini o histórico e arquivos Security M D como contexto.
+Como a saída dos modelos não é determinística, ele repete as execuções em vez de confiar numa resposta sortuda.
+Depois, um agente crítico recebe um contexto separado para contestar os achados.
+Assim, a mesma linha de raciocínio não cria uma hipótese e a aprova sem resistência.
+O isolamento acontece abaixo da conversa.
+Os modelos analisam código-fonte em repouso, dentro de máquinas sem acesso geral à internet.
+As requisições de rede são interceptadas e passam por uma lista de destinos permitidos.
+Subagentes não podem modificar o sistema nem acessar conteúdo fora dos diretórios definidos.
+Uma frase pode ser mal interpretada.
+Uma rota ausente continua ausente.
+Encontrar a vulnerabilidade é só o começo do pipeline.
+Outros agentes propõem correções e escrevem testes.
+Depois, esse material passa pela matriz de plataformas e por revisão antes de chegar à integração contínua.
+Segundo o Google, os marcos 149 e 150 do Chrome corrigiram mil e setenta e dois bugs de segurança, mais que os 23 marcos anteriores somados.
+Em maio, a integração executada a cada 24 horas teria bloqueado mais de 20 vulnerabilidades antes da produção, incluindo uma classificada como S um mais.
+Os números são do próprio Google.
+O post não informa o custo, a taxa de falsos positivos nem um denominador completo que permita comparar a eficiência do sistema de forma independente.
+O time também diz que fuzzing e pesquisadores externos continuam necessários.
+O modelo entrou como uma nova camada do programa de segurança, não como substituto do programa inteiro.
+Há ainda o gargalo de entregar a correção.
+O chamado patch gap começa quando uma correção fica visível na árvore open source e termina quando chega às máquinas.
+Nesse intervalo, atacantes podem estudar a diferença no código e reconstruir a falha.
+O Chrome está testando duas versões de segurança por semana e pesquisando dynamic patching.
+Essa técnica substitui processos filhos, como Renderer e G P U, sem reiniciar o navegador inteiro na maioria dos casos.
+Os dois trabalhos ainda estão em fase de piloto ou pesquisa; não são promessa de disponibilidade geral.
+Para outras equipes, a parte transferível é menos cinematográfica que inteligência artificial encontra mil bugs, mas bem mais útil.
+Ela inclui documentar fronteiras de confiança, negar internet geral, liberar apenas destinos específicos e repetir execuções.
+Também inclui separar crítico de gerador, limitar diretórios e testar os patches numa matriz real.
+Agente com shell não precisa de fé.
+Precisa de uma sala que continue trancada quando ele errar.
+A fonte deste bloco é o texto Stronger with every update, do Google Chrome Security Team.
+Por fim, a Vercel coloca um disjuntor financeiro no seu gateway de inteligência artificial.
+Nem todo limite de agente protege arquivos ou rede.
+Às vezes, ele precisa proteger o cartão.
+A Vercel ampliou os budgets do AI Gateway para três escopos: equipe, projeto e chave de [EY1 P IY1 AY1].
+Uma requisição sujeita a vários limites precisa passar em todos.
+Se o teto global da equipe ou o teto local do projeto estiver esgotado, a chamada é rejeitada.
+Com isso, dá para conter o pior caso sem manter um middleware próprio para somar cada uso.
+Os budgets podem ser diários, semanais, mensais, que é a opção padrão, ou cumulativos, sem renovação.
+Os alertas por e-mail podem ser enviados quando o gasto chega a cinquenta, setenta e cinco e cem porcento do valor, mas servem apenas como aviso.
+Quem bloqueia o tráfego é o budget.
+Projetos e chaves podem herdar configurações padrão; um limite explícito substitui o padrão naquele escopo.
+O recurso não otimiza prompts, escolhe modelos nem corrige uma tempestade de novas tentativas.
+Ele impede que o gasto medido ultrapasse o limite configurado.
+Isso também cria um modo de falha: ao atingir o teto, o cliente recebe rejeições e precisa tratá-las sem disparar ainda mais tentativas.
+Há outra ressalva: gastos com B Y O K, quando a equipe fornece sua própria chave do provedor, ficam fora da conta por padrão.
+O painel pode mostrar o limite respeitado enquanto parte da despesa continua em outro lugar.
+O anúncio descreve um recurso do próprio fornecedor e não traz S L A para a precisão ou a latência da medição.
+Para equipes com vários agentes, o budget funciona como um disjuntor financeiro.
+Ele não torna o consumo eficiente, mas evita que uma automação ruim descubra sozinha qual era o limite do cartão.
+A fonte deste bloco é o changelog da Vercel sobre budgets e alertas de gasto no AI Gateway.
