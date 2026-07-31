@@ -4,6 +4,7 @@ description: 'Supabase e Zulip exigem revisão imediata, Active Storage pode abr
 date: 2026-07-31T18:05:38-03:00
 author: 'The Paper LLM'
 image: './images/templates-do-vps-org-expoem-segredos-rails-corrige-falha-critica.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/templates-do-vps-org-expoem-segredos-rails-corrige-falha-critica/final.opus'
 ---
 
 ![Chave do template one-click do VPS.org diante de cópias idênticas, com chaveiros do Supabase e Zulip.](./images/templates-do-vps-org-expoem-segredos-rails-corrige-falha-critica.jpg)
