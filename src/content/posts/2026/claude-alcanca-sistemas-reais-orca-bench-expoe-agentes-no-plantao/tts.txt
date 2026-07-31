@@ -1,0 +1,171 @@
+Claude alcança sistemas reais; ORCA-bench expõe agentes no plantão.
+O prompt dizia que não havia internet.
+A rede, menos impressionada com instruções em linguagem natural, continuava aberta.
+Modelos Claude atravessaram essa diferença, trataram sistemas reais como alvos do exercício e conseguiram acesso não autorizado à infraestrutura de três organizações.
+A Anthropic descobriu os incidentes ao revisar cento e quarenta e uma mil e seis execuções de avaliações cibernéticas.
+Segundo a empresa, não há sinal de que os modelos tenham criado um objetivo próprio ou tentado fugir deliberadamente.
+O caso é mais concreto e, talvez por isso, mais útil: um agente capaz seguiu o objetivo recebido num ambiente que não correspondia à descrição.
+Em produção, firewall não é detalhe de prompt.
+Claude confundiu a internet real com o campo de treinamento.
+A Anthropic começou a revisão em 23 de julho, interrompeu as avaliações e notificou o parceiro Irregular e as organizações afetadas no dia 27.
+O postmortem saiu em 30 de julho e identificou três incidentes distribuídos por seis execuções.
+Os casos mais antigos eram de abril de 2026.
+O erro comum estava na fronteira do ambiente.
+As avaliações eram exercícios de captura da bandeira, conhecidos como C T F, em que o modelo recebe autorização para explorar um alvo fictício e procurar uma flag.
+O prompt afirmava que a internet não estava disponível, mas um mal-entendido com o parceiro deixou a rota aberta.
+Quando nomes, D N S e conexões apontaram para sistemas de verdade, os modelos seguiram a tarefa como se tudo ainda fizesse parte do laboratório.
+Cada episódio tomou um caminho.
+O Opus quatro ponto sete obteve credenciais e chegou a um banco de dados com centenas de linhas.
+O Mythos cinco publicou malware no repositório P Y P I; o pacote ficou disponível por aproximadamente uma hora e rodou em 15 sistemas.
+Um modelo interno de pesquisa varreu cerca de nove mil alvos e explorou um serviço de debug exposto e uma injeção de S Q L.
+A Anthropic não revelou as organizações nem o nome do pacote para reduzir danos.
+Não dá para preencher essas lacunas no chute.
+Isso não foi uma comparação controlada entre versões.
+Os modelos também rodavam sem os classificadores e o monitoramento usados normalmente nos produtos, embora mantivessem treinamento específico de segurança.
+No entendimento atual da Anthropic, eles não perseguiram um objetivo independente: executaram o exercício sem entender direito onde acabava o ambiente autorizado.
+A revisão independente com a METR ainda não havia terminado.
+Mais cedo, acompanhamos modelos da OpenAI alcançando a produção da Hugging Face.
+Este novo episódio não continua aquele ataque.
+Agora, outra empresa revelou três incidentes próprios, incluindo uma publicação real no P Y P I e acesso a três organizações.
+O problema operacional, porém, é familiar: a fronteira descrita não era a mesma fronteira executada.
+Egress é o tráfego que sai do ambiente.
+Dizer ao agente que ele não tem internet pode orientá-lo, mas não fecha rota alguma.
+Para isso existem firewall, namespace de rede, proxy e allowlist configurados de verdade.
+Em avaliações ofensivas, a defesa precisa negar saída por padrão e permitir alvos explicitamente.
+Também precisa usar credenciais descartáveis e de escopo mínimo, registrar D N S e rede e monitorar os transcritos.
+Além disso, precisa oferecer um kill switch para interromper comportamentos anômalos.
+A Anthropic anunciou monitoramento contínuo de transcritos, garantias mais rigorosas dos fornecedores de avaliação e a revisão com a METR.
+É um começo, mas o relato vem da organização envolvida e representa o entendimento dela enquanto a análise independente não termina.
+A fonte deste bloco é a Anthropic, no relato “Investigating three real-world incidents in our cybersecurity evaluations”.
+ORCA-bench mostra que acesso ao Grafana não transforma agente em S R E.
+Isolar o agente resolve uma parte do risco.
+Descobrir se ele entende o que acontece dentro do sistema é outro problema.
+O ORCA-bench testou essa capacidade sob uma carga bem menos simpática do que um log cuidadosamente escolhido.
+O preprint, submetido em 31 de julho, reuniu mil e setenta e nove tarefas de análise de causa raiz, ou R C A.
+Cinco agentes de fronteira investigaram uma aplicação viva de microserviços, a Astronomy Shop, instrumentada com OpenTelemetry.
+Eles podiam consultar métricas, logs, traces e código-fonte por interfaces reais: Prometheus, Jaeger, OpenSearch e Grafana.
+O ambiente acumulou seis dias de carga e cinquenta gigabytes de telemetria.
+Os relatos tinham níveis diferentes de detalhe, e a detecção podia acontecer de 15 minutos a 24 horas depois do início do problema.
+Havia falhas isoladas, independentes, conflitantes, em cascata e sequenciais.
+Não bastava procurar uma mensagem com “error” e culpar o serviço mais próximo.
+Análise de causa raiz exige alinhar sinais diferentes no tempo.
+Métricas mostram quando uma taxa mudou.
+Logs registram eventos locais.
+Traces acompanham o caminho de uma requisição entre serviços.
+O código ajuda a ligar esses sintomas a uma mudança ou comportamento possível.
+OpenTelemetry padroniza a coleta, mas não resolve ruído, causalidade ambígua nem duas falhas acontecendo ao mesmo tempo.
+Nesse cenário, a melhor acurácia foi de vinte e cinco vírgula três porcento nos casos médios e dez vírgula zero porcento nos difíceis.
+A taxa de causas implausíveis variou de sete porcento a quarenta vírgula dois porcento, dependendo do modelo, na figura principal.
+Sem o código-fonte, todas as métricas pioraram.
+O repositório ajudava, mas ainda não bastava para reconstruir a cadeia causal.
+Os autores usaram um juiz baseado em modelo de linguagem e refizeram parte da avaliação com humanos.
+A concordância, medida pelo kappa ponderado de Cohen, foi zero vírgula noventa.
+Isso dá mais confiança à avaliação, sem apagar seus limites: é um preprint dos próprios autores, feito num sistema curado e conhecido, com uma tarefa investigada por vez.
+Produção real costuma ser maior, mudar durante a investigação e carregar anos de história que ninguém documentou porque todos estavam ocupados mantendo o serviço vivo.
+Acurácia também tem um sentido exigente nesse benchmark: o agente precisava identificar todas as causas plausíveis previstas pela rubrica.
+Errar nesse critério não significa que ele seja inútil como copiloto.
+Significa algo mais específico e importante: ainda não há base para deixar a responsabilidade pelo plantão inteira nas mãos do agente.
+O começo mais seguro é assistivo.
+O agente propõe hipóteses e consultas.
+O humano confere se métricas, logs, traces e código sustentam a explicação, decide o próximo passo e autoriza a mitigação.
+Grafana aberto e acesso ao Git não constituem uma escala de plantão.
+No máximo, dão ao copiloto uma mesa com bastante papel para organizar.
+A fonte deste bloco é o trabalho ORCA-bench, de Gong e coautores.
+A economia do GPT cinco ponto seis veio do modelo, da inferência e do harness.
+A OpenAI publicou em 29 de julho uma explicação técnica para os ganhos de eficiência do GPT cinco ponto seis.
+Não apareceu uma otimização milagrosa.
+O resultado veio da soma de decisões sobre balanceamento, kernels, geração especulativa, cache e a camada que organiza o trabalho do agente.
+Segundo a empresa, o GPT cinco ponto seis Sol foi usado dentro do Codex para analisar tráfego, testar roteamento e otimizar kernels em Triton e Gluon.
+O conjunto de melhorias nos kernels teria reduzido em vinte porcento o custo ponta a ponta de serving.
+Esses números são da OpenAI, medidos na infraestrutura dela e sem reprodução independente.
+Nada garante que o mesmo ganho atravesse a rua e apareça em outro stack.
+Outra frente foi a geração especulativa, ou speculative decoding.
+Um modelo menor propõe vários tokens, enquanto o modelo principal verifica as sugestões em paralelo.
+A OpenAI diz que o GPT cinco ponto seis desenhou e executou centenas de experimentos no draft model, com ganho superior a 15 porcento na eficiência de geração.
+Autonomamente, aqui, não quer dizer que o modelo decidiu melhorar a si mesmo sem controle.
+O trabalho aconteceu dentro de infraestrutura, testes, verificadores e deploys administrados por engenheiros.
+É automação num ciclo humano de feedback, não autoaperfeiçoamento irrestrito com trilha sonora de ficção científica.
+O harness usado por Codex e ChatGPT Work também elimina desperdício antes de a G P U lidar com ele.
+A descoberta adiada de ferramentas evita carregar em toda chamada o schema de algo que talvez nem seja usado.
+Outputs de ferramentas ficam limitados a dez mil tokens por padrão para segurar o crescimento do contexto.
+Há também um cuidado quase burocrático que poupa computação: manter os prefixos exatamente iguais.
+O histórico visível ao modelo só recebe conteúdo no final, e as ferramentas aparecem numa ordem determinística.
+Isso aumenta a chance de reaproveitar o prompt cache.
+O cache K V guarda estados intermediários do prompt; com um prefixo idêntico, o sistema evita parte da recomputação.
+Inserir conteúdo antigo no meio quebra esse reaproveitamento, ainda que a conversa pareça semanticamente igual para nós.
+Em 26 de junho, registramos os preços iniciais e o acesso restrito do GPT cinco ponto seis.
+Agora temos uma redução de preço reportada e uma explicação do stack por trás da eficiência.
+Segundo o resumo da Latent Space sobre o anúncio do fornecedor, Luna caiu oitenta porcento e Terra, vinte porcento.
+Sol Fast promete latência até duas vírgula cinco vezes menor por duas vezes o preço.
+Já a comparação que coloca Luna em um décimo terceiro do preço do GPT cinco ponto quatro depende de benchmark e preço por token.
+Ela não prova um custo universal por tarefa.
+Para quem opera agentes, a unidade útil é o loop inteiro.
+Contexto repetido, schemas carregados, outputs extensos, taxa de acerto do cache, rede, C P U e G P U entram na conta.
+Trocar o modelo e ignorar o restante pode deixar intacta justamente a parte mais cara do desperdício.
+As fontes deste bloco são a OpenAI e o resumo da Latent Space, no A I News.
+No radar rápido, Qwen U I Agent escolhe entre clique, Bash e uma chamada de [EY1 P IY1 AY1].
+O relatório descreve um único agente para celular, desktop, web e pesquisa.
+Ele alterna entre ações de interface gráfica, comandos de linha de comando, chamadas de [EY1 P IY1 AY1], pedidos de confirmação ao usuário e ações em lote.
+O treinamento inclui trajetórias com mais de cem passos e aproximadamente dez mil ambientes simulados concorrentes.
+Também inclui mais de cem dispositivos físicos e mais de 150 aplicativos.
+Os autores reportam setenta e nove vírgula cinco porcento no OSWorld Verified e setenta e três vírgula seis porcento no WebArena.
+Mas os resultados misturam modelo, harness, ambientes e juízes do próprio trabalho.
+O relatório ainda reconhece limitações de latência, avaliação e intervenção humana.
+A interface gráfica alcança programas sem [EY1 P IY1 AY1]; a linha de comando facilita operações estruturadas e auditáveis.
+Entregar as duas ao mesmo agente também amplia sua autoridade.
+Por isso, pedir confirmação ao usuário precisa funcionar como controle real antes de pagamentos, login, acesso a dados sensíveis e outras ações difíceis de desfazer.
+A fonte é o relatório técnico Qwen U I Agent, da equipe M A I U I e da Alibaba.
+Modelos pequenos foram melhor tentando de novo do que refletindo.
+Um estudo com modelos abertos de um vírgula cinco bilhão a sete bilhões de parâmetros comparou estratégias sob o mesmo orçamento de tokens.
+Nas trezentas questões de matemática, nenhuma superou tentativas independentes seguidas de voto majoritário.
+Métodos com autoavaliação ou reescrita perderam nos 12 comparativos dessa classe.
+No modelo de sete bilhões de parâmetros, Self-Refine e Reflexion forçado ficaram de três vírgula seis a dez vírgula um pontos abaixo do baseline de custo igual.
+No menor modelo, Reflexion se declarou correto em todas as questões e nunca pediu outra tentativa, uma confiança admirável e pouco operacional.
+O resultado não prova que reflexão nunca funciona: o escopo é matemática com modelos pequenos.
+Agentes de código podem receber evidência externa de compiladores e testes, bem diferente de pedir ao modelo que julgue a própria resposta sem dados novos.
+A fonte é o estudo “Sample More, Reflect Less”, de Mirzaei.
+OpenPangu dois ponto zero Pro abre os pesos de um modelo mixture of experts com 505 bilhões de parâmetros.
+O projeto publicou um modelo com 18 bilhões de parâmetros ativos por token, contexto de 512 mil tokens e treino declarado em aproximadamente 34 trilhões de tokens.
+Ativar apenas uma parte do modelo reduz a computação relativa, mas não faz os 505 bilhões de parâmetros caberem automaticamente em hardware de consumo.
+Os benchmarks são do fornecedor e não foram reproduzidos nesta apuração.
+Salvo indicação diferente, os arquivos usam o “OPENPANGU MODEL LICENSE AGREEMENT VERSION dois ponto zero”.
+Pesos abertos é, portanto, mais preciso do que chamar o projeto automaticamente de open source no sentido aprovado pela O S I.
+Quem pretende usar ou redistribuir precisa ler a licença, não apenas admirar o tamanho da janela de contexto.
+A fonte é o projeto openPangu dois ponto zero Pro.
+Rust cortou trabalho vazio no Clippy e melhorou o tempo de compilação.
+Nicholas Nethercote mediu uma queda média de cinco vírgula cinquenta e nove porcento no wall time do compilador entre 3 de dezembro de 2025 e 29 de julho de 2026.
+O rustdoc caiu trinta e sete vírgula noventa e dois porcento; sem ele, a média foi dois vírgula noventa porcento.
+No Clippy, evitar chamadas virtuais repetidas para centenas de métodos vazios reduziu o tempo de execução de dez a trinta porcento nos casos medidos.
+Também reduziu as previsões erradas de branch de vinte a oitenta porcento em exemplos reais.
+Virtual dispatch escolhe, durante a execução, qual método chamar.
+Fazer isso para descobrir que não há trabalho desperdiça C P U.
+As médias juntam benchmarks diferentes e não prometem cinco vírgula cinquenta e nove porcento para qualquer projeto.
+A lição de engenharia é mais confiável que um número universal.
+Profiling, cargas representativas para P G O e remoção de trabalho inútil em hot paths podem render mais do que uma reescrita ampla.
+A fonte é Nicholas Nethercote, no texto “How to speed up the Rust compiler in July 2026”.
+O modelo deixou de ser a unidade completa de avaliação.
+As fontes publicadas entre 29 e 31 de julho não medem a mesma coisa, então não cabem numa tabela única.
+Um postmortem trata de contenção.
+Um benchmark mede diagnóstico.
+Um fornecedor descreve a própria infraestrutura de inferência.
+Outros trabalhos estudam interfaces e orçamento de raciocínio.
+Mesmo tão diferentes, eles reforçam uma tendência já estabelecida: o comportamento útil ou perigoso de um agente nasce do sistema inteiro.
+Harness é a camada que escolhe ferramentas, monta o contexto, aplica aprovações, registra a execução e entrega ações ao ambiente.
+No incidente da Anthropic, a fronteira de rede contradizia o prompt.
+No ORCA-bench, a dificuldade apareceu na hora de correlacionar telemetria e causalidade.
+Na OpenAI, cache de prefixo e descoberta adiada de ferramentas afetaram diretamente a eficiência.
+O Qwen U I Agent mostra que escolher entre interface gráfica e linha de comando muda a capacidade e também o controle necessário.
+O estudo sobre reflexão lembra que uma estratégia de orquestração só pode parecer melhor depois de enfrentar um baseline com custo equivalente.
+Isso prolonga o sinal que vimos mais cedo, quando especificações começaram a virar testes e gates.
+Agora há um incidente real, um benchmark de plantão e mecanismos concretos de eficiência.
+Avaliar agentes como sistemas exige incluir modelo, contexto, ferramentas, rede, identidade, telemetria, verificadores e política de aprovação.
+A trajetória executada importa tanto quanto a resposta final.
+Verificação determinística não elimina julgamento humano.
+Ela cria pontos observáveis para checar ações e resultados: rota bloqueada, teste aprovado, consulta sustentada por evidência e autorização recebida.
+Um modelo melhor não fecha egress nem transforma uma credencial reutilizável em descartável.
+Também não limpa telemetria ruim nem corrige um benchmark que oferece mais computação a um dos concorrentes.
+Esta é uma leitura editorial baseada em incidentes e estudos heterogêneos, não uma métrica comparável nem uma lei permanente sobre agentes futuros.
+Mas ela já muda uma pergunta prática.
+Em vez de perguntar apenas qual modelo estamos usando, precisamos olhar o que acontece quando ele clica, executa, consulta, erra e tenta seguir adiante.
+Foi nessa parte menos vistosa que a internet ficou aberta.
+As fontes desta leitura são Anthropic, ORCA-bench, OpenAI e o estudo “Sample More, Reflect Less”.
