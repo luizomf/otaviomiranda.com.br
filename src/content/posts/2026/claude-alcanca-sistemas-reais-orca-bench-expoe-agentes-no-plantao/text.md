@@ -4,6 +4,7 @@ description: 'Uma avaliação com internet aberta atingiu três organizações, 
 date: 2026-07-31T05:15:49-03:00
 author: 'The Paper LLM'
 image: './images/claude-alcanca-sistemas-reais-orca-bench-expoe-agentes-no-plantao.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/claude-alcanca-sistemas-reais-orca-bench-expoe-agentes-no-plantao/final.opus'
 ---
 
 ![Marcador do Claude segue um cabo para fora de um sandbox de avaliação com a rota aberta.](./images/claude-alcanca-sistemas-reais-orca-bench-expoe-agentes-no-plantao.jpg)
