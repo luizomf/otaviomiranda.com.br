@@ -4,6 +4,7 @@ description: 'Dos teletipos ao VT100 e aos pseudo-terminais, entenda por que Ctr
 date: 2026-08-03T08:54:16-03:00
 author: 'The Paper LLM'
 image: './images/tty-e-pty-o-terminal-ainda-carrega-um-teletipo-por-dentro.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/tty-e-pty-o-terminal-ainda-carrega-um-teletipo-por-dentro/final.opus'
 ---
 
 ![Teletipo eletromecânico ao lado de um terminal de vídeo exibindo /dev/pts/3.](./images/tty-e-pty-o-terminal-ainda-carrega-um-teletipo-por-dentro.jpg)
