@@ -1,0 +1,163 @@
+N-central pede hotfix, R A G perde autoridade e T L S um ponto dois congela.
+Quando um servidor de administração remota é comprometido, o problema não termina nele.
+Esse servidor já tem acesso às máquinas dos clientes.
+Por isso, a nova correção do N-central exige mais do que atualizar uma versão.
+O primeiro patch deixou outro caminho de autenticação aberto, e há relatos de invasores usando o controle central para alcançar endpoints gerenciados.
+A manhã também trouxe três problemas que parecem inofensivos até a produção começar a reclamar.
+Busca por similaridade não sabe, sozinha, qual documento manda.
+Uma transação parada no Postgre S Q L ainda pode segurar recursos.
+E um objeto JavaScript pode atravessar um JSON perfeitamente válido e voltar com outro significado.
+No meio disso, a I E T F colocou o T L S um ponto dois em modo de manutenção.
+Software envelhece. Seria bom se nossos contratos envelhecessem melhor.
+O N-central corrige o caminho que o primeiro patch deixou aberto.
+A N Able publicou em 2 de agosto o build 2026 ponto três ponto um ponto sete, um hotfix de emergência para o N-central.
+A falha, identificada como C V E 2026, dezoito cinco sete sete, é um caminho alternativo de bypass de autenticação.
+Esse caminho sobrou da correção incompleta da C V E 2026, dezoito cinco cinco seis.
+Segundo o registro mantido pela própria N Able, as versões até a 2026 ponto três são afetadas.
+O novo build é o primeiro listado como não afetado.
+A falha permite tomada de conta pela rede, sem privilégio prévio ou interação do usuário.
+Ela recebeu pontuação C V S S quatro ponto zero de oito vírgula dois, classificada como alta, e sua maturidade de exploração aparece como "ATTACKED".
+A empresa recomenda atualizar o quanto antes.
+As instâncias hospedadas, chamadas N C O D, entram no calendário automático informado pela N Able.
+Quem opera o N-central por conta própria precisa instalar o hotfix.
+Aqui, o número completo faz diferença.
+Em um trecho, o aviso usa a forma abreviada 2026 ponto três ponto um, mas identifica o build corrigido como 2026 ponto três ponto um ponto sete.
+É esse o valor que deve orientar o inventário e a validação da equipe.
+O N-central é uma plataforma de monitoramento e administração remota, ou R M M.
+M S Ps e times de T I usam um único plano de controle para operar muitas máquinas.
+Se esse plano for invadido, o raio do problema é bem maior do que o de um servidor comum.
+Segundo o The Hacker News, em reportagem baseada em informações atribuídas à N Able e à Huntress, os atacantes usaram o recurso "Take Control".
+Foi assim que eles chegaram aos endpoints administrados.
+Depois, registraram túneis de saída da Cloudflare como serviços persistentes.
+Em um caso acompanhado pela Huntress, uma conta de parceiro expôs nove organizações, com um endpoint atingido em cada uma.
+Esse número descreve apenas aquele caso, não uma contagem global de vítimas.
+A Cloudflare também não foi comprometida. O serviço de túnel dela foi usado no ataque.
+O túnel de saída explica por que aplicar o patch não encerra a investigação.
+Ele pode manter acesso remoto sem abrir uma porta de entrada no firewall.
+Se o invasor já instalou um serviço numa máquina gerenciada, fechar o caminho pelo N-central não remove a persistência daquele endpoint.
+Quem suspeita de comprometimento precisa atualizar o servidor e examinar as máquinas que ele conseguia alcançar.
+Registros do "Take Control" ajudam nessa análise, mas não provam um ataque sozinhos, porque administradores legítimos usam o mesmo recurso.
+A urgência é real. O atalho para investigar, infelizmente, não veio no hotfix.
+As fontes deste bloco são o registro C N A da N Able para a C V E 2026, dezoito cinco sete sete, o aviso de status do N-central e o The Hacker News.
+Um teste pequeno mostra onde o R A G confunde relevância com autoridade.
+Joaquín Ruiz publicou um experimento local em torno de uma pergunta útil.
+O que acontece quando a busca encontra um texto parecido, mas não sabe se ele está atual, obsoleto ou incompleto?
+O repositório foi criado e recebeu o último push em 29 de julho.
+Os metadados registram uma atualização em primeiro de agosto.
+O teste compara três maneiras de recuperar o mesmo conjunto de conhecimento sintético sobre uma empresa fictícia.
+A primeira usa R A G vetorial clássico, com Chroma sobre 60 documentos bagunçados, divididos em 85 trechos.
+A segunda usa um pacote curado no "Open Knowledge Format", ou O K F, formato proposto pelo Google.
+Esse pacote tem nove conceitos e uma ferramenta chamada "leer concepto".
+Na terceira maneira, o agente recebe as duas ferramentas e escolhe entre R A G e O K F.
+O modelo usado foi o Qwen três, de oito bilhões de parâmetros, rodando localmente com Ollama.
+O R A G gerou embeddings com "nomic embed text" e recuperou cinco trechos por consulta.
+Mantendo o mesmo modelo, hardware e conjunto de sete perguntas, o R A G acertou duas.
+O O K F acertou seis, assim como o modelo híbrido.
+Só que o placar nem é a parte mais interessante.
+Nos casos que dependiam de validade temporal, um documento depreciado de 2023 apareceu com distância de cosseno melhor do que a fonte vigente.
+Aumentar a quantidade de trechos recuperados só trouxe mais ruído.
+A pergunta principal continuou sem resposta: qual documento tem autoridade agora?
+Busca vetorial mede proximidade semântica.
+Ela não converte automaticamente vigente, canônico e depreciado em regras.
+Um texto antigo e detalhado pode render vários trechos muito parecidos com a consulta.
+Com isso, ele ocupa o contexto antes da definição curta que realmente vale.
+O O K F leva parte desse trabalho para conceitos curados, relações e metadados de validade.
+O controle aumenta, junto com o trabalho de manutenção.
+O híbrido mostrou outro detalhe: somar ferramentas também soma decisões.
+Ele respondeu a uma pergunta sobre um incidente raro que o O K F não cobria.
+Mas errou um caso de informação dividida entre tabelas que o O K F sozinho acertou.
+O agente escolheu a ferramenta errada. Então o roteador também precisa entrar no teste.
+Dar mais botões ao agente não ensina qual deles apertar.
+O experimento tem limites claros.
+Os resultados são do repositório, não do Google.
+Foi o próprio autor quem conduziu o teste, usando um corpus sintético e sete perguntas escolhidas para provocar classes específicas de falha.
+Também foram usados um único modelo, uma estratégia de divisão e avaliação manual.
+O próprio autor avisa que trocar o modelo muda os números.
+Logo, o placar de seis a dois não prova que conhecimento estruturado vence R A G em qualquer sistema.
+Ele levanta uma hipótese prática que podemos testar no nosso domínio: autoridade e validade talvez precisem de representação explícita.
+Para assistentes internos, faz sentido testar documentos conflitantes, políticas vencidas, homônimos, fatos separados e perguntas fora da base.
+Um embedding melhor pode ajudar a encontrar material. Ainda não decide qual é a fonte oficial.
+O repositório também não declara licença.
+Então, conseguir reproduzir o experimento não dá permissão automática para copiar o código.
+As fontes deste bloco são o README do experimento "RAG versus OKF" e os metadados do repositório no "Git Hub".
+O Postgre S Q L pode encerrar a transação que ficou dormindo.
+Uma conexão aparece como inativa na visão de atividade do Postgre S Q L, mas ainda mantém uma transação aberta.
+Parece não estar fazendo nada.
+Mesmo assim, pode continuar segurando locks e snapshots, bloquear uma alteração de tabela e deixar consultas comuns em fila atrás dela.
+Depois de uma escrita, ou nos níveis "repeatable read" e "serializable", a conexão também pode prender o horizonte de transações.
+Isso impede o vacuum de remover tuplas mortas mais novas.
+O parâmetro "idle in transaction session timeout" limita esse sono perigoso.
+Depois de cada comando, se a sessão ficar silenciosa com uma transação aberta, o Postgre S Q L inicia o temporizador.
+Quando o prazo vence, o banco desfaz a transação, libera os recursos e fecha a conexão.
+Ao tentar usar o socket novamente, o cliente recebe o código S Q L State vinte e cinco P zero três.
+Christophe Pettus publicou essa orientação na noite de 2 de agosto no horário do Pacífico, quando já era 3 de agosto em U T C.
+Ele recomenda cinco minutos como proteção global para cargas O L T P.
+Também mostra, no post escrito, um comando que configura um limite mais curto, de um minuto, por função de usuário para aplicações com pool.
+Esses números são conselhos operacionais, não padrões seguros para qualquer carga.
+Uma sessão interativa ou um job em lote pode precisar de outro limite.
+E, como o parâmetro tem contexto de usuário, a própria sessão pode redefini-lo para zero.
+Ele funciona como cinto de segurança contra vazamento acidental, não como contenção de cliente hostil.
+Tem outra diferença fácil de deixar passar.
+O relógio mede cada intervalo sem comandos, e não a idade total da transação.
+Se a aplicação emitir uma instrução a cada quatro minutos, um timeout de cinco minutos nunca será atingido.
+Para limitar a duração completa, o Postgre S Q L dezessete ou posterior oferece o parâmetro "transaction timeout".
+Já o parâmetro "idle session timeout", disponível desde o Postgre S Q L catorze, cuida de sessões ociosas sem transação aberta.
+Essas sessões não seguram os mesmos recursos.
+Ativar o limite troca uma pane lenta por uma falha explícita.
+O pool precisa descartar a conexão morta.
+A aplicação, por sua vez, precisa decidir se pode repetir com segurança a unidade desfeita.
+Sem esse tratamento, o banco faz a parte dele e o próximo erro só muda de endereço.
+A fonte deste bloco é o artigo de Christophe Pettus no The Build, sobre o parâmetro "idle in transaction session timeout".
+O T L S um ponto dois entra em manutenção, não em desligamento imediato.
+A I E T F publicou a R F C nove oito cinco um, uma especificação "Standards Track" de julho de 2026.
+Ela congela a evolução de recursos do T L S um ponto dois.
+Daqui em diante, as mudanças ficam restritas a correções urgentes de segurança aprovadas pelo grupo de trabalho de T L S.
+As outras exceções são novos identificadores do protocolo A L P N e novos rótulos de T L S Exporter.
+O desenvolvimento criptográfico segue no T L S um ponto três ou em versões posteriores.
+A R F C não deprecia o T L S um ponto dois nem determina seu desligamento imediato.
+Também não fecha os registros da I A N A.
+Em vez disso, muda as instruções para que novas entradas normalmente apontem para T L S um ponto três ou posterior.
+As exceções para A L P N e Exporter Labels continuam.
+O D T L S ficou explicitamente fora dessa decisão.
+Já falamos da aposentadoria de trocas de chave antigas no T L S um ponto dois.
+Desta vez, a mudança é mais ampla.
+A versão inteira deixa de receber recursos novos, embora ainda possa receber manutenção crítica.
+Para infraestrutura, isso pede planejamento, não sirene.
+É hora de inventariar clientes, proxies, balanceadores e serviços internos que ainda negociam T L S um ponto dois.
+Negociam é a palavra que importa aqui.
+Uma configuração pode anunciar suporte ao T L S um ponto três enquanto um cliente antigo continua puxando a conexão para um ponto dois.
+A R F C também diz que o trabalho pós-quântico do grupo será especificado apenas para T L S um ponto três ou posterior.
+Isso não significa que o T L S pós-quântico já esteja universalmente pronto e implantado.
+Significa que o T L S um ponto dois não receberá essa evolução.
+A compatibilidade ainda mantém sistemas antigos funcionando por algum tempo, mas não cria um caminho novo para eles.
+A fonte deste bloco é a R F C nove oito cinco um da I E T F.
+JSON válido ainda pode devolver outro objeto ao JavaScript.
+Um texto explicativo publicado em 3 de agosto volta a uma armadilha antiga.
+Aplicar JSON stringify e depois JSON parse parece uma viagem de ida e volta.
+Para vários valores do JavaScript, é uma viagem só de ida, com um sósia esperando no desembarque.
+O inteiro nove zero zero sete um nove nove dois cinco quatro sete quatro zero nove nove três, por exemplo, passa da faixa exata segura do tipo Number.
+Se ele nasce como literal JavaScript, perde precisão antes mesmo do JSON stringify.
+Um texto JSON pode carregar todos os dígitos corretamente, mas o JSON parse volta a arredondar o valor quando o converte para Number.
+A limitação está no número do JavaScript, não na sintaxe JSON.
+O Big Int consegue representar esse inteiro, mas a serialização padrão o rejeita.
+Para identificadores grandes, uma saída comum é definir uma string decimal no contrato.
+I D costuma ser um rótulo opaco mesmo.
+Fingir que ele precisa fazer aritmética só cria uma oportunidade bastante elegante de corrompê-lo.
+Outros valores mudam de forma sem lançar erro.
+Uma propriedade com undefined desaparece do objeto.
+Funções e símbolos também são omitidos em objetos, mas viram null dentro de arrays.
+No topo, JSON stringify de undefined devolve o valor JavaScript undefined, não um texto JSON.
+Uma Date válida chama sua conversão para JSON e vira uma string U T C comum.
+O instante pode sobreviver, mas não há uma marca dizendo ao consumidor que ele deve reconstruir uma Date.
+O offset e a intenção do fuso original também somem.
+N A N e infinitos viram null.
+Map, Set, expressão regular e Error, por padrão, acabam como objetos vazios.
+Um reviver esperto, tentando adivinhar o passado, não resolve o contrato.
+Produtor e consumidor precisam combinar uma representação explícita e validada.
+Isso pode ser uma string decimal para I Ds grandes, semântica declarada para timestamps e codificação com tags para tipos que não existem no JSON.
+Também precisam combinar significados distintos para ausência e null.
+Isso pesa ainda mais em [EY1 P IY1 AY1]s de atualização parcial.
+Nelas, não altere o campo e limpe o campo não podem virar o mesmo estado por acidente.
+JSON tem um modelo de dados menor do que o runtime do JavaScript.
+O serializador não consegue inventar o contrato que a [EY1 P IY1 AY1] deixou de escrever.
+A fonte deste bloco é Gábor Koós, no texto "Your JSON Is Lying to You".
