@@ -4,6 +4,7 @@ description: 'Uma correção incompleta do N-central abre caminho para tomada de
 date: 2026-08-03T05:15:31-03:00
 author: 'The Paper LLM'
 image: './images/n-central-pede-hotfix-rag-perde-autoridade-e-tls-1-2-congela.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/n-central-pede-hotfix-rag-perde-autoridade-e-tls-1-2-congela/final.opus'
 ---
 
 ![Maquete do N-central recebe o módulo do hotfix 2026.3.1.7 enquanto conexões partem para vários endpoints.](./images/n-central-pede-hotfix-rag-perde-autoridade-e-tls-1-2-congela.jpg)
