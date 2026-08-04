@@ -1,0 +1,125 @@
+Open A I diz que Astra avançou dez problemas matemáticos e publica as provas.
+Dez resultados matemáticos importantes apareceram de uma vez.
+Junto deles, vieram duzentas e quarenta e nove páginas de argumentos e certificados que um verificador consegue conferir passo a passo.
+É um pacote que merece atenção, mas também aquela sobrancelha levantada na altura correta.
+A Open A I diz que uma versão interna do Astra, seu próximo grande modelo ainda não lançado, produziu os argumentos.
+Humanos escolheram os problemas e prepararam os manuscritos com ajuda do mesmo sistema, que também formalizou as provas em Lean.
+Dá para examinar bastante coisa no material público.
+O que não dá é repetir o processo que levou às soluções.
+Segundo a Open A I, foi o Astra que gerou os argumentos.
+A empresa anunciou em três de agosto uma coleção de dez resultados em matemática e ciência da computação teórica.
+O paper e os metadados do repositório datam o pacote técnico de primeiro de agosto.
+As áreas vão de geometria em alta dimensão e teoria de códigos a grupos, álgebras de operadores, complexidade, computação quântica, reticulados e combinatória.
+Aqui é bom separar bem as etapas.
+Segundo a Open A I, o Astra gerou os argumentos matemáticos.
+Depois, pesquisadores prepararam os textos com ajuda do modelo, e o sistema converteu os argumentos em certificados Lean.
+A empresa assume a responsabilidade pela correção, pede que a comunidade matemática revise e contextualize os resultados e faz uma afirmação explícita.
+Segundo ela, os argumentos vieram do sistema, não dos autores humanos.
+O Astra continua indisponível.
+A Open A I não publicou os prompts completos, o sistema de execução, o hardware, as tentativas que falharam ou as execuções separadas de cada problema.
+Os percursos explicativos do raciocínio também foram reconstruídos depois.
+Um modelo leu as cadeias originais e os papers para produzir a explicação pública.
+Eles ajudam a entender a proposta, mas não são o registro bruto da descoberta.
+Por enquanto, não há uma [EY1 P IY1 AY1] nem material suficiente para repetir o processo.
+As fontes deste bloco são a Open A I e o The New Stack.
+Os dez resultados atravessam áreas bem diferentes.
+O título, dez avanços, coloca trabalhos bem diferentes dentro do mesmo pacote.
+O paper apresenta os seguintes resultados.
+O primeiro é a força assintótica exata do programa linear de Cohn–Elkies para empacotamento de esferas.
+O segundo traz limites exponencialmente melhores para códigos binários e esféricos.
+O terceiro é a construção explícita de um grupo não sófico.
+O quarto apresenta contraexemplos para a rigidez de Connes.
+O quinto traz limites inferiores para o permanente em modelos específicos de circuitos aritméticos.
+O sexto estabelece repetição exponencial para todo jogo entre dois participantes, finito e com emaranhamento quântico.
+O sétimo trata da dificuldade de aproximação do problema do vetor mais próximo, ou C V P, em distância euclidiana.
+O oitavo é o limite preciso de volume de Ehrhart.
+O nono apresenta um limite inferior superexponencial para números de Ramsey multicoloridos.
+E o décimo traz contraexemplos para duas conjecturas de teoria extremal de grafos.
+Alguns desses nomes parecem uma reunião que esqueceu de convidar as vogais.
+Os exemplos ajudam a entender melhor o que saiu dali.
+No empacotamento de esferas, a pergunta é quão densamente esferas iguais podem preencher um espaço de muitas dimensões.
+O paper afirma ter obtido a primeira melhora desde 1978 no expoente geral de alta dimensão.
+Na notação do trabalho, ele passa de zero vírgula cinco nove nove zero cinco cinco sete seis, e assim por diante, para zero vírgula seis zero quatro quatro, e assim por diante.
+O capítulo sobre códigos também reivindica as primeiras melhorias gerais de expoente desde 1977 e 1978.
+Códigos binários e esféricos estudam quantas palavras ou pontos bem separados cabem num espaço.
+É uma questão ligada a geometria, correção de erros e teoria da informação.
+Na parte quântica, o resultado trata de repetição paralela.
+A ideia é exigir que os participantes vençam várias cópias independentes de um jogo com emaranhamento e verificar se a chance de sucesso cai exponencialmente.
+Segundo o paper, esse comportamento vale para todo jogo finito entre dois participantes com emaranhamento.
+Há ainda um limite de Ehrhart igual a n mais um, elevado a n, dividido por n fatorial.
+E há um resultado de Ramsey no qual R, subscrito k, de três, é igual a k elevado a teta de k.
+Esses capítulos e os contraexemplos em grafos são resultados assintóticos e teóricos.
+Não vão virar uma biblioteca nova para instalar na aplicação de terça-feira.
+A fonte deste bloco é o paper, Ten Advances in Mathematics and Theoretical Computer Science.
+Complexidade e criptografia exigem leitura sem atalhos.
+Dois capítulos são especialmente fáceis de transformar numa manchete maior que o teorema.
+O resultado sobre o permanente melhora limites inferiores em modelos restritos de computação aritmética.
+Circuitos sem divisão precisam de pelo menos ômega de n ao quadrado, vezes log de log de n, portas.
+Fórmulas têm estrutura em árvore e não reaproveitam resultados da mesma forma.
+Elas precisam de ômega de n à quarta, dividido por log de n, ocorrências de variáveis nas folhas.
+O próprio paper avisa: isso não estabelece que V P é diferente de V N P para circuitos gerais.
+No capítulo de reticulados, o Astra teria encontrado uma redução determinística em tempo polinomial a partir de três SAT.
+Ela estabelece dificuldade de aproximação por um fator n elevado a um sobre quatrocentos para o problema do vetor mais próximo em distância euclidiana.
+O trabalho também dá um fator n elevado a um sobre duzentos para decodificação binária.
+Para C V P em normas éle p, racionais e fixas, o fator é n elevado a um sobre duzentos p.
+C V P pede o ponto de um reticulado mais próximo de um alvo.
+O problema tem conexões fundamentais com a teoria de complexidade em torno da criptografia baseada em reticulados, inclusive a pós-quântica.
+O resultado publicado, porém, é um teorema de dificuldade de aproximação no pior caso.
+Ele não quebra criptografia de reticulados nem fornece um ataque prático contra um sistema criptográfico.
+Esses limites não diminuem a notícia.
+Só deixam cada afirmação do tamanho que a evidência sustenta, uma unidade de medida bem mais útil.
+A fonte deste bloco é o paper, Ten Advances in Mathematics and Theoretical Computer Science.
+As provas em Lean deixam a alegação aberta à inspeção.
+Para quem está fora dessas especialidades, o repositório público talvez seja a parte mais concreta.
+A Open A I disponibilizou um módulo Lean para cada área.
+Também incluiu instruções para baixar o cache da math lib e compilar tudo com Lake.
+Os comandos exatos estão no post escrito.
+Um deles baixa o cache pelo executável do Lake, e o outro compila o alvo chamado All.
+Lean não pergunta se uma demonstração é bonita ou importante.
+Definições, enunciados e termos de prova são codificados para que um kernel pequeno confira se cada passo obedece às regras lógicas.
+Um termo sorry seria um buraco aceito provisoriamente no lugar de uma obrigação ainda não provada.
+Segundo os metadados fornecidos pela Open A I, não há nenhum nos resultados principais.
+O mesmo arquivo registra doze declarações principais, apesar das dez áreas.
+Códigos binários e esféricos aparecem separados, assim como os dois resultados de grafos.
+Os únicos axiomas listados para essas declarações são propext, Classical ponto choice e Quot ponto sound.
+A formalização teria consumido uma semana de tempo corrido e aparece com o status agent reviewed.
+Tudo isso vem dos metadados da própria Open A I, não de uma auditoria externa.
+Esta pesquisa inspecionou o material público, mas não compilou e verificou localmente todos os módulos.
+Também não encontrou uma revisão matemática independente e pública dos dez argumentos.
+O repositório inclui configurações do Comparator para exportar e conferir as provas com outra implementação, como o nanoda.
+Assim, a verificação não depende apenas de um kernel.
+Mesmo quando passa, ela prova o enunciado codificado em relação às regras, aos axiomas e ao verificador usados.
+Ela não diz se o enunciado formal representa fielmente toda a interpretação informal, se o resultado é novo ou quanto ele importa para aquela área.
+As fontes são o repositório Ten Proofs da Open A I e os metadados da formalização.
+O projeto usa uma versão anterior ao patch do Lean.
+Há mais um detalhe técnico que merece cuidado.
+O projeto fixa o Lean quatro ponto trinta e dois ponto zero.
+Em vinte e oito de julho, antes da publicação do pacote da Open A I, saiu o Lean quatro ponto trinta e dois ponto dois.
+Essa versão trouxe a correção recente de uma falha de soundness no kernel.
+Já falamos no site sobre esse bug do Lean.
+Ele podia fazer o kernel de referência aceitar uma prova de False, atingindo a base de confiança do sistema.
+Leonardo de Moura, cofundador do Lean, explicou que o bug do kernel de referência era diferente daquele encontrado no antigo nanoda.
+É justamente por isso que verificadores independentes são úteis.
+Uma implementação pode recusar uma construção que outra aceitou por engano.
+Não há evidência de que os certificados da Open A I explorem essa falha.
+E o uso fixo da versão quatro ponto trinta e dois ponto zero não torna as provas inválidas por si só.
+O caminho sensato é reconstruir os artefatos com cuidado e rodar os verificadores independentes atuais.
+A prova formal reduz bastante o espaço para erro, mas a versão do verificador continua fazendo parte da história.
+As fontes são a versão fixada pelo projeto ten-proofs, o postmortem de Leonardo de Moura e o lançamento do Lean quatro ponto trinta e dois ponto dois.
+Os dois mil dólares não são o preço desta pesquisa.
+A Open A I estima que os tokens usados para encontrar as soluções custariam aproximadamente dois mil dólares, se fossem cobrados pelas tarifas da [EY1 P IY1 AY1] do Sol.
+A comparação sugere um custo de inferência relativamente baixo para problemas tão ambiciosos.
+Ainda assim, esse valor não é o preço do Astra nem o custo completo do trabalho.
+O Astra não tem preço de uso anunciado.
+A conta também deixa de fora treinamento, hardware, trabalho humano, preparação dos manuscritos, formalização, tentativas fracassadas e o restante da estrutura de pesquisa.
+Não há contagem de tokens por problema nem informação suficiente para reproduzir o benchmark.
+Os dois mil dólares são uma conversão contrafactual da quantidade relatada de tokens pela tabela de outro modelo.
+O resultado sobre rigidez de Connes também pede cuidado com a ideia de dez descobertas independentes.
+O capítulo reconhece que Shuoxing Zhou desenvolveu em paralelo outro contraexemplo, em parte com ajuda do GPT cinco ponto seis Sol.
+A comunidade ainda precisa avaliar a precedência, a novidade e o significado do trabalho em cada área.
+Mesmo com esses limites, é um fluxo de pesquisa incomum para um anúncio de inteligência artificial.
+Há argumentos atribuídos ao modelo, manuscritos extensos, código formal e caminhos para verificadores independentes.
+Só que a máquina que teria encontrado as soluções continua fechada, enquanto quase toda a avaliação inicial vem da organização que a construiu.
+Agora os matemáticos podem atacar os enunciados, reconstruir as provas e descobrir onde cada resultado realmente pousa.
+A conversa sai um pouco do modelo afirmou e entra num terreno em que outras pessoas conseguem conferir bastante coisa, mas ainda não tudo.
+As fontes são o anúncio da Open A I, o paper técnico e a análise do The New Stack.
