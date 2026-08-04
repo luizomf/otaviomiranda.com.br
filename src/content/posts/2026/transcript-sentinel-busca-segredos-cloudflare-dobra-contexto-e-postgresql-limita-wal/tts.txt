@@ -1,0 +1,181 @@
+Transcript Sentinel busca segredos, Cloudflare dobra contexto e Postgre S Q L limita W A L.
+O agente termina a tarefa, o código parece limpo e o scanner do repositório não encontra nenhuma credencial.
+Só ficou um detalhe: o agente pode ter guardado o segredo no histórico da conversa, num log de sessão ou em algum arquivo JSON Lines perdido no diretório do usuário.
+O Git nunca viu o arquivo. O computador viu tudo.
+Uma ferramenta nova tenta iluminar esse canto.
+É um projeto minúsculo, ainda sem validação independente, mas aponta para uma mudança útil de hábito.
+Quando ferramentas locais conversam com shells, [EY1 P IY1 AY1]s e arquivos, auditar apenas o repositório já não cobre a superfície inteira.
+Primeiro, o Transcript Sentinel procura segredos onde o Git não entra.
+O Transcript Sentinel foi publicado em três de agosto.
+É uma ferramenta em Go, com interface de terminal, que examina dados locais de agentes.
+Segundo o README, ela procura credenciais em transcrições, históricos de chat, logs de sessão e arquivos de estado.
+Dá para usar os locais conhecidos por padrão ou indicar um diretório específico com a opção dir.
+As regras declaradas incluem chaves de OpenAI, Anthropic, "Git Hub", AWS, Slack, Stripe, Discord, Google e Heroku, além de chaves privadas.
+A ferramenta também classifica os resultados por confiança e remove duplicatas.
+Assim, consegue cobrir Claude Code, Codex, Gemini e Copilot sem presumir que tudo o que importa esteja na pasta do projeto.
+O motivo é simples. Scanners de repositório costumam procurar no conteúdo acompanhado pelo Git.
+Um agente, por sua vez, pode persistir prompts e saídas de ferramentas em caches, arquivos JSON Lines e diretórios na pasta pessoal do usuário.
+A chave talvez nunca tenha entrado num commit, mas ainda pode estar legível no disco.
+Um resultado encontrado, porém, não prova que a credencial seja válida.
+Esta pesquisa não reproduziu os scans nem confirmou as capacidades anunciadas pelo autor.
+Expressões regulares podem acusar uma string inocente e deixar um segredo real passar.
+O repositório tinha só duas estrelas no momento da consulta.
+Foi criado em três de agosto, às vinte e uma horas e trinta e cinco minutos, no horário U T C.
+O push observado mais recente chegou pouco depois da meia-noite de quatro de agosto.
+A licença é Apache dois ponto zero. Ainda é cedo para confundir utilidade potencial com maturidade.
+Se o scanner encontrar algo, revise sem exibir o valor completo, confirme o vazamento, revogue ou rotacione a credencial e depois ajuste retenção e permissões.
+Criptografia de disco também entra nessa conversa.
+Em testes ou demonstrações, use dados sintéticos e controlados.
+Ninguém precisa criar um incidente real para provar que o detector de incidentes abre.
+As fontes deste bloco são o README do Transcript Sentinel e os metadados do repositório no "Git Hub".
+Agora, a Cloudflare troca memória por mais requisições simultâneas.
+A Cloudflare publicou três otimizações que implementou no S G Lang.
+São elas: cache de contexto em F P oito para o Kimi K dois ponto seis e pesos I N T quatro para o G L M cinco ponto dois.
+A terceira é uma verificação de integridade para as páginas desse cache.
+Os números ajudam a mostrar por que o benchmark de uma única requisição conta só parte da história.
+Durante a geração, o servidor mantém as chaves e os valores dos tokens anteriores no chamado cache K V.
+Esse cache cresce com o contexto e com a quantidade de requisições residentes.
+Os pesos do modelo também ocupam memória, mas são outra pressão e pedem outra estratégia de compressão.
+No Kimi K dois ponto seis, a Cloudflare trocou B F dezesseis por F P oito no formato E quatro M três e reduziu o cache K V pela metade.
+A capacidade reportada subiu de aproximadamente 686 mil para um vírgula trinta e sete milhão de tokens.
+Nos testes de decode em G P Us H duzentos desagregadas, B F dezesseis continuou mais rápido sob o mesmo nível de concorrência.
+Mas ele ficou sem memória ao chegar a trinta e duas requisições.
+F P oito alcançou sessenta e quatro requisições e dois mil cento e noventa e dois tokens por segundo.
+Isso representa cerca de quarenta e um porcento acima do pico de throughput em B F dezesseis.
+Cada requisição não ficou magicamente mais rápida.
+O servidor ganhou espaço para manter mais trabalho simultâneo.
+Essa diferença interessa a quem mede custo por token e capacidade total, em vez de olhar apenas para a latência isolada.
+A empresa também separou os dois momentos da inferência.
+O prefill, que processa o prompt inicial, tende a depender mais de computação.
+O decode, que produz os tokens seguintes, pressiona mais a largura de banda da memória.
+Por isso, a Cloudflare manteve B F dezesseis no pool de prefill e aplicou F P oito onde a capacidade adicional de decode ajudava.
+Nos pesos do G L M cinco ponto dois, a quantização I N T quatro reduziu o checkpoint de 705 gigabytes em F P oito para 421 gigabytes.
+Com paralelismo tensorial de oito vias, o consumo informado caiu de cerca de 88 gigabytes para 52 gigabytes por G P U.
+A terceira mudança trata de outro risco.
+A Cloudflare associou uma tag mutável a cada página física do cache K V.
+Antes das operações suportadas de decode, o sistema verifica se o mapeamento esperado ainda corresponde à página.
+Se encontrar uma divergência, ele aborta a requisição.
+Isso evita que uma página reutilizada ou mapeada incorretamente entregue o estado de outra requisição.
+Os testes são da própria Cloudflare e usam modelos, kernels e hardware específicos.
+A afirmação de que não houve perda de precisão também depende da suíte usada pela empresa.
+Algumas métricas variaram ligeiramente entre F P oito e I N T quatro.
+Não dá para transportar esses percentuais diretamente para Ollama, V L L M ou uma G P U local.
+O que dá para levar é o método: medir latência, concorrência, memória e custo por token separadamente.
+Às vezes, perder uma corrida deixa o servidor atender o dobro de corredores.
+A fonte deste bloco é o blog da Cloudflare.
+Agentes também podem ser fiscalizados sem outro agente dando nota.
+Um preprint publicado em três de agosto propõe observar a telemetria de cada etapa de um agente, detectar anomalias e combinar o sinal com verificações determinísticas.
+Quando algo falha, o sistema volta a um checkpoint e tenta executar novamente.
+Nos dois mil oitocentos e vinte e três episódios avaliados, um ensemble de E S N e CUSUM detectou setenta e um porcento das falhas.
+O orçamento foi de cinco porcento de falso alarme.
+A área sob a curva, ou A U R O C, chegou a zero vírgula oitocentos e setenta e dois.
+O monitor procura mudanças temporais compatíveis com loops e cascatas sem chamar um modelo maior para julgar cada passo.
+Quando o código comum conseguia conferir a resposta, o resultado foi mais forte.
+Os verificadores recalcularam totais e confirmaram chamadas obrigatórias.
+Com uma checagem de cobertura, chegaram a noventa e seis porcento no cenário reportado, sem falsos positivos naquele conjunto.
+Esse “sem falsos positivos” descreve o experimento.
+Não é garantia para qualquer agente que alguém resolva colocar em produção numa sexta-feira.
+O rollback seguido de outra execução recuperou quarenta e cinco porcento das falhas, contra dezesseis porcento no controle.
+A taxa geral de sucesso passou de cinquenta e dois porcento para setenta e três porcento.
+A significância reportada foi de p igual a zero vírgula zero zero zero cinco.
+O custo ficou em aproximadamente duzentos microssegundos por etapa e uma chamada adicional de modelo por execução.
+A consequência para a arquitetura é prática.
+Somas, campos obrigatórios, limites, chamadas esperadas e outras invariantes podem ser verificados de forma determinística.
+Assim, o L L M juiz fica reservado para o que realmente exige interpretação semântica.
+Há dois limites importantes. O primeiro é que o detector estatístico não transferiu bem para outra implantação sem calibração.
+A A U R O C foi zero vírgula quinhentos e vinte e sete a frio e zero vírgula oitocentos e oitenta e cinco depois da recalibração.
+Cada implantação precisa construir seu próprio baseline saudável.
+O segundo limite é que rollback só é seguro quando existem checkpoints e os efeitos são idempotentes ou compensáveis.
+Repetir uma chamada que cobra um cartão, envia uma mensagem ou apaga um arquivo pode duplicar o estrago em vez de reparar a execução.
+O trabalho é uma versão inicial, de um único autor, e ainda não passou por revisão por pares.
+Mesmo assim, traz uma separação sensata: estatística para notar comportamento estranho, código para conferir o que pode ser recalculado e modelos para o restante.
+Um agente não precisa contratar outro agente para conferir se dois mais dois continuam quatro.
+A fonte é o preprint “Real-Time Detection and Repair of L L M Agent Failures”.
+O Swiftlet faz o modelo caber, mas manda a conta para o S S D.
+Modelos com mistura de especialistas não usam todos os parâmetros a cada token.
+Um roteador escolhe alguns blocos especializados, os chamados experts.
+O Swiftlet aproveita essa característica para executar em Apple Silicon modelos Qwen maiores que a memória RAM disponível.
+O runtime usa Swift e Metal, e mantém em memória as partes densas, como atenção, roteadores, embeddings e experts compartilhados.
+Do S S D, lê apenas os experts esparsos escolhidos para o token.
+As leituras usam a chamada pread em blocos binários de tamanho fixo, com um cache limitado que considera frequência e recência.
+O S S D vira mais uma camada da hierarquia de memória.
+Não vira RAM grátis: disco ainda cobra em latência e throughput.
+Para o Qwen três ponto seis, 35 B, A três B, em I N T quatro, o autor reporta um arquivo de 18 gigabytes.
+O pico é de dois vírgula seis gigabytes de RAM, com velocidade entre sete e onze tokens por segundo num Mac com M cinco.
+No Qwen três Next, 80 B, A três B, são 42 gigabytes em disco e quatro vírgula três gigabytes de RAM.
+A velocidade fica entre quatro vírgula cinco e cinco tokens por segundo no mesmo tipo de máquina.
+O número grande no nome também precisa de contexto.
+Cerca de três bilhões de parâmetros ficam ativos por token.
+O modelo de 80 bilhões roteia para dez entre 512 experts por camada.
+O modelo de 35 bilhões escolhe oito entre 256.
+O próprio autor avisa que a lembrança de fatos se parece mais com a de um modelo pequeno.
+Capacidade total, parâmetros ativos e qualidade percebida medem coisas diferentes.
+O README ainda reporta um teste no iPhone dezessete.
+O modelo de 35 bilhões usaria cerca de dois vírgula cinco gigabytes e produziria um token por segundo.
+A versão com “Experimental Models”, porém, continuava em revisão na App Store.
+Ela ainda não está disponível de forma geral.
+Os requisitos declarados são Apple Silicon com Mac O S quatorze ou I O S dezessete em diante.
+Os benchmarks são do autor e não foram reproduzidos nesta pesquisa.
+M cinco, iPhone dezessete e modelos futuros tornam a comparação especialmente dependente do ambiente.
+O projeto mostra que “rodar” e “rodar rápido” são verbos parecidos apenas no anúncio.
+A fonte é o README do Swiftlet.
+O Postgre S Q L dezoito pode parar de guardar W A L para quem não volta.
+Um slot de replicação faz uma promessa ao consumidor: o Postgre S Q L mantém o W A L que ele ainda pode pedir.
+Isso ajuda um subscriber ou standby atrasado, mas sai caro quando o consumidor foi abandonado.
+O diretório P G underline W A L continua crescendo para alguém que talvez nunca volte.
+No Postgre S Q L dezoito, o parâmetro idle replication slot timeout permite invalidar um slot inativo por mais tempo que o período configurado.
+A verificação acontece durante os checkpoints.
+Portanto, atingir o prazo não invalida o slot no mesmo instante. Isso pode ficar para o checkpoint seguinte.
+O valor padrão é zero, com o recurso desabilitado.
+Um número sem unidade representa segundos.
+Slots sincronizados a partir do servidor primário e slots que não reservam W A L não entram nesse timeout.
+A invalidação protege o servidor primário, mas quebra a continuidade do consumidor.
+Um subscriber lógico precisa ser ressincronizado.
+Um standby físico depende de encontrar o arquivo de W A L em outro lugar ou precisa ser reconstruído.
+O timeout deve exceder as interrupções planejadas e vir acompanhado de alertas.
+Segundo Christophe Pettus, um reinício também pode reinicializar o campo inactive since.
+Esse detalhe vem da análise dele, não da documentação oficial.
+Existe um limite complementar.
+O parâmetro max slot W A L keep size controla quantos bytes um slot pode reter no checkpoint.
+Ele usa menos um por padrão, ou seja, não impõe limite de tamanho.
+O timeout ajuda contra abandono lento.
+O teto em bytes ajuda durante uma tempestade de escritas.
+Ambos são proteções finais, não substitutos para monitorar slots, atraso e disco.
+Configurar o limite é escolher deliberadamente qual pane aceitar.
+Pode ser reconstruir um consumidor que sumiu ou arriscar encher o disco do primário para preservar a chance de ele voltar.
+O Postgre S Q L dezoito permite que essa promessa tenha prazo.
+Escolher um prazo razoável ainda é responsabilidade nossa, porque banco de dados não ganhou a configuração “faça o certo”.
+As fontes são a documentação do Postgre S Q L dezoito e a análise operacional de Christophe Pettus.
+Agora, os destaques rápidos para hoje.
+O primeiro é o xPress, que tenta consertar drafts antes da verificação.
+No speculative decoding, um modelo barato propõe vários tokens e o modelo-alvo verifica quais pode aceitar.
+Drafters por difusão trabalham em paralelo.
+Mas a independência entre as posições pode produzir tokens plausíveis quando vistos separadamente e uma sequência ruim quando lidos em conjunto.
+O xPress adiciona um refinador causal leve ao bloco pronto antes da verificação, sem voltar a gerar tudo token por token.
+Em testes com Qwen três, 8 B, e sete benchmarks, os autores reportam aumento médio de cerca de trinta porcento no tamanho aceito.
+O aumento chega a cinquenta e seis porcento, com throughput médio um vírgula três vez maior e pico de um vírgula sete vez sobre o dFlash.
+É um preprint versão um, e os resultados e as condições pertencem aos autores e ao modelo avaliado.
+A fonte é o preprint “xPress: Parallel Refinement for Diffusion Drafters”.
+O segundo destaque é o Qwen C U A, que usa a tela sem receber o mapa da interface.
+O Qwen C U A é um agente de uso de computador que observa capturas de tela e age por teclado e mouse.
+Ele não usa DOM, metadados de acessibilidade nem [EY1 P IY1 AY1]s específicas de cada aplicação.
+Sua estrutura mantém até vinte capturas de tela ativas e compacta o histórico visual anterior para lidar com execuções longas.
+O modelo é uma mistura de especialistas com 397 bilhões de parâmetros e 17 bilhões ativos.
+Os autores reportam treinamento com quase cem mil C P Us virtuais, dezenas de milhares de ambientes simultâneos e cerca de quarenta mil tarefas verificáveis.
+A pontuação informada no O S World Verified foi de oitenta e seis vírgula dois.
+Essa escala ajuda a entender tanto o resultado quanto seu limite.
+O relatório não implica pesos práticos para execução local nem segurança geral em ações irreversíveis.
+O uso visual de computadores reduz a dependência de integrações por aplicativo, mas ainda precisa lidar com estado longo e telas ambíguas.
+Todos os números vêm dos autores.
+A fonte é o relatório “Qwen C U A: Native Computer Use for Almost Everything”.
+O terceiro destaque é o Antares, que reduz o modelo para localizar código vulnerável.
+O Antares apresenta modelos de 350 milhões, um bilhão e três bilhões de parâmetros treinados para explorar repositórios e localizar implementações vulneráveis.
+A abordagem combina ajuste fino supervisionado de raciocínio e exploração com aprendizado por reforço baseado em recompensas verificáveis.
+Segundo os autores, o Antares três B se aproxima do GPT cinco ponto cinco e supera modelos de pesos abertos mais de duzentas vezes maiores.
+Ele também executa quinhentas tarefas em cerca de quinze minutos numa H cem.
+O custo amortizado reportado fica abaixo de dois segundos e de dois milésimos de dólar por tarefa.
+Os resultados vêm de um preprint e não foram reproduzidos nesta pesquisa.
+Um modelo especializado pequeno pode baratear a triagem privada ou em C I.
+Ainda assim, localizar um arquivo ou trecho não confirma que a falha seja explorável nem produz uma correção segura.
+A equipe precisa medir os falsos positivos no próprio código e manter revisão humana.
+A fonte é o relatório “Antares: Foundation Models for Agentic Vulnerability Localization”.
