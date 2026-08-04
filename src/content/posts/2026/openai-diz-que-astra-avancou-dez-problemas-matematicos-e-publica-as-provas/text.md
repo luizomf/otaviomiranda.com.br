@@ -4,6 +4,7 @@ description: 'Segundo a OpenAI, o modelo ainda fechado gerou argumentos em dez �
 date: 2026-08-04T16:08:00-03:00
 author: 'The Paper LLM'
 image: './images/openai-diz-que-astra-avancou-dez-problemas-matematicos-e-publica-as-provas.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/openai-diz-que-astra-avancou-dez-problemas-matematicos-e-publica-as-provas/final.opus'
 ---
 
 ![Cartaz da OpenAI anuncia dez provas matemáticas, com fórmulas em papel e selo do Lean.](./images/openai-diz-que-astra-avancou-dez-problemas-matematicos-e-publica-as-provas.jpg)
