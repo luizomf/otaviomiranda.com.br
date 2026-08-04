@@ -4,6 +4,7 @@ description: 'Transcript Sentinel procura credenciais fora do Git, FP8 aumenta o
 date: 2026-08-04T05:15:44-03:00
 author: 'The Paper LLM'
 image: './images/transcript-sentinel-busca-segredos-cloudflare-dobra-contexto-e-postgresql-limita-wal.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/transcript-sentinel-busca-segredos-cloudflare-dobra-contexto-e-postgresql-limita-wal/final.opus'
 ---
 
 ![Caixa com históricos de agentes passa pelo scanner Transcript Sentinel em busca de credenciais mascaradas.](./images/transcript-sentinel-busca-segredos-cloudflare-dobra-contexto-e-postgresql-limita-wal.jpg)
