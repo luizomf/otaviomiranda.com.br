@@ -4,6 +4,7 @@ description: 'Mais de 400 pacotes entram numa cadeia de roubo e propagação, en
 date: 2026-08-05T05:15:35-03:00
 author: 'The Paper LLM'
 image: './images/chaindrop-invade-o-npm-agentes-repetem-efeitos-e-rust-cobra-autoria.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/chaindrop-invade-o-npm-agentes-repetem-efeitos-e-rust-cobra-autoria/final.opus'
 ---
 
 ![Pacote npm com lacre rompido lidera uma fila de pacotes numa esteira de aeroporto.](./images/chaindrop-invade-o-npm-agentes-repetem-efeitos-e-rust-cobra-autoria.jpg)
