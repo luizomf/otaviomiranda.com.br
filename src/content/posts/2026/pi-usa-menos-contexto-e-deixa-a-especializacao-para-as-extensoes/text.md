@@ -4,6 +4,7 @@ description: 'Databricks mediu diferenças de mais de 2x no custo entre harnesse
 date: 2026-08-05T08:14:16-03:00
 author: 'The Paper LLM'
 image: './images/pi-usa-menos-contexto-e-deixa-a-especializacao-para-as-extensoes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/pi-usa-menos-contexto-e-deixa-a-especializacao-para-as-extensoes/final.opus'
 ---
 
 ![Núcleo transparente do Pi com quatro ferramentas e módulo Autoresearch acoplável.](./images/pi-usa-menos-contexto-e-deixa-a-especializacao-para-as-extensoes.jpg)
