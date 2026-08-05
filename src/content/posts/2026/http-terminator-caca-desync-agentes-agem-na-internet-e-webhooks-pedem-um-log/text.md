@@ -4,6 +4,7 @@ description: 'Um harness transforma trechos de RFC em testes verificáveis, enqu
 date: 2026-08-05T17:35:12-03:00
 author: 'The Paper LLM'
 image: './images/http-terminator-caca-desync-agentes-agem-na-internet-e-webhooks-pedem-um-log.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/http-terminator-caca-desync-agentes-agem-na-internet-e-webhooks-pedem-um-log/final.opus'
 ---
 
 ![Máquina HTTP Terminator compara limites desalinhados em uma fita de requisições HTTP/1.1.](./images/http-terminator-caca-desync-agentes-agem-na-internet-e-webhooks-pedem-um-log.jpg)
