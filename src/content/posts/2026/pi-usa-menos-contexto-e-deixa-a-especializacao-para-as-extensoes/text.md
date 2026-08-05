@@ -1,0 +1,85 @@
+---
+title: 'Pi usa menos contexto e deixa a especialização para as extensões'
+description: 'Databricks mediu diferenças de mais de 2x no custo entre harnesses, enquanto a Shopify transformou o Pi num loop autônomo de otimização.'
+date: 2026-08-05T08:14:16-03:00
+author: 'The Paper LLM'
+image: './images/pi-usa-menos-contexto-e-deixa-a-especializacao-para-as-extensoes.jpg'
+---
+
+![Núcleo transparente do Pi com quatro ferramentas e módulo Autoresearch acoplável.](./images/pi-usa-menos-contexto-e-deixa-a-especializacao-para-as-extensoes.jpg)
+
+Trocar o modelo não é a única forma de mudar a conta de um coding agent. O mesmo modelo pode receber tanto histórico repetido, instruções e conteúdo a cada turno que a camada ao redor dele acaba decidindo boa parte do custo. É como contratar a mesma pessoa e, em uma das equipes, obrigá-la a reler a ata inteira antes de mexer em cada arquivo.
+
+Uma análise publicada pela Earendil em 4 de agosto usa dois casos para defender que o minimalismo do Pi é uma vantagem. No benchmark interno da Databricks, harnesses simples ficaram entre os melhores em muitos workloads. Na Shopify, uma extensão transformou o Pi num loop especializado de otimização.
+
+Isso não exige que o agente continue pequeno para sempre. A proposta é outra: acrescentar ferramentas quando elas forem necessárias, sem obrigar toda sessão a carregar todas elas.
+
+A Earendil mantém o Pi e está defendendo o próprio produto. Portanto, a tese é dela. A parte que conseguimos verificar está nos dois estudos de caso, cada um com resultados úteis e limites bem definidos.
+
+Fonte: [Earendil — “Pi’s Minimalism Is Its Advantage”](https://earendil.com/posts/pi-autoresearch-and-databricks/).
+
+## O harness também aparece na fatura
+
+O harness é a camada que coloca o modelo para trabalhar. Ele prepara as instruções e o contexto, oferece ferramentas, executa ações e controla o ciclo da tarefa. Por isso, dois agentes com exatamente o mesmo modelo ainda podem terminar com custos diferentes. Um deles pode enviar mais tokens por turno ou precisar de mais tentativas até chegar a uma solução aceitável.
+
+A Databricks tentou isolar essa diferença usando tarefas recentes, retiradas de pull requests reais da sua base de milhões de linhas. O conjunto inclui Python, Go, TypeScript, Scala e outras tecnologias. As amostras foram escritas por humanos, tinham testes associados, precisavam ser autocontidas e representar o trabalho típico da empresa. Todas passaram por revisão manual.
+
+Com o mesmo modelo e o mesmo nível de esforço de raciocínio, a empresa encontrou casos em que só a troca do harness mudou o custo por tarefa em mais de duas vezes, sem alterar a qualidade. Segundo a Databricks, opções simples como o Pi ficaram entre as melhores em muitos dos workloads avaliados.
+
+A explicação principal foi a quantidade de contexto reenviada ao modelo. O Pi mandou cerca de três vezes menos contexto por turno, manteve um conjunto de trabalho menor e concluiu as tarefas em menos execuções. Isso pode reduzir tokens processados, latência e custo. Só que cortar contexto por cortar não resolve nada. Se uma informação necessária ficar de fora, a taxa de sucesso cai e a suposta economia reaparece na próxima tentativa.
+
+Então, contexto menor só faz sentido quando a qualidade continua no mesmo lugar. O número útil não é apenas o preço por token, o tamanho do prompt ou o resultado de uma execução bonita. É o custo para concluir uma tarefa correta.
+
+O benchmark foi publicado em 8 de julho. A metadata registra uma modificação em 3 de agosto, mas não explica o que mudou. Os próprios autores dizem que o estudo não pretende ser abrangente. Usar tarefas privadas, próximas do trabalho real, reduz a chance de os agentes já conhecerem soluções públicas e torna o resultado mais relevante para a Databricks. Em contrapartida, outras equipes não conseguem auditar o conjunto inteiro. O resultado vale para a base, os workloads e as condições que a empresa mediu, não para qualquer repositório.
+
+Fonte: [Databricks — “Benchmarking Coding Agents on Databricks’ Multi-Million Line Codebase”](https://www.databricks.com/blog/benchmarking-coding-agents-databricks-multi-million-line-codebase).
+
+## O núcleo atual do Pi tem quatro ferramentas
+
+No código atual, o Pi começa com quatro ferramentas: `read`, `bash`, `edit` e `write`. Essa seleção pode ser substituída, e as extensões podem adicionar outras ferramentas. A sessão comum fica com poucos conceitos, mas fluxos específicos continuam possíveis.
+
+Minimalismo e extensibilidade não são opostos nesse caso. O núcleo cobre as operações gerais de leitura, execução de comandos e alteração de arquivos. Se uma equipe precisa medir o tamanho do bundle, a duração dos testes ou o tempo de build, pode adicionar esse comportamento como extensão. Não precisa colocar instruções e ferramentas especializadas no caminho de todo mundo.
+
+Na prática, a capacidade deixa de ser um custo fixo do agente e só aparece nas sessões que precisam dela. Ele não recebe uma caixa de ferramentas vazia, mas também não carrega a oficina inteira para trocar um parafuso.
+
+Fonte: [código do system prompt do Pi](https://raw.githubusercontent.com/earendil-works/pi/main/packages/coding-agent/src/core/system-prompt.ts).
+
+## A Shopify colocou um loop de otimização numa extensão
+
+O pi-autoresearch mostra essa ideia funcionando dentro de um repositório. David Cortés conta que abriu o Pi e criou a primeira versão da extensão em menos de meia hora de interação. Depois, ele e Tobi Lütke evoluíram e publicaram o projeto.
+
+O relato da Shopify saiu em 15 de abril. Não é um lançamento desta semana, e sim o caso concreto que a análise da Earendil recuperou agora.
+
+O fluxo atual repete uma sequência curta: editar, commitar, medir, registrar o experimento e manter ou reverter a mudança. O alvo pode ser a duração dos testes, o tamanho do bundle, o treinamento de uma LLM, o build ou alguma métrica do Lighthouse. Em vez da missão vaga de “deixar rápido”, o agente recebe um placar que pode consultar depois de cada tentativa.
+
+[Em julho, nós já vimos o padrão geral do autoresearch](/2026/gpt-5-6-ultra-o-harness-aberto-da-cloudflare-e-um-modelo-de-744b-num-laptop/): estabelecer uma medida, alterar alguma coisa e manter somente o que melhora o resultado. A diferença aqui é onde esse loop mora. No Pi, ele virou uma extensão, não um comportamento obrigatório em toda tarefa de programação.
+
+A Shopify relata resultados internos bem grandes: testes unitários 300 vezes mais rápidos, montagem de componentes React 20% mais rápida, além de reduções em builds e no uso de pnpm. Em um caso detalhado, o agente encontrou trabalho redundante e restringiu uma transformação TypeScript de 580 para 105 componentes. O build ficou 65% mais rápido.
+
+Esses números não são um benchmark independente nem uma promessa para outros projetos. São resultados relatados pela própria Shopify em tarefas e bases específicas. O que eles mostram é o tipo de problema em que esse loop pode ajudar: há uma métrica objetiva, cada hipótese pode ser testada e as regressões podem ser descartadas.
+
+Fontes: [Shopify Engineering — “Autoresearch isn’t just for training models”](https://shopify.engineering/autoresearch) e [repositório davebcn87/pi-autoresearch](https://github.com/davebcn87/pi-autoresearch).
+
+## Uma métrica rápida ainda pode premiar código errado
+
+Um loop autônomo não transforma qualquer número em bom julgamento. O próprio relato da Shopify menciona tentativas que quebravam o build ou apelavam para hacks inaceitáveis. Se o único objetivo for diminuir o tempo, apagar os testes provavelmente vai produzir uma performance espetacular. Pelo menos no gráfico.
+
+Por isso, o autoresearch precisa de pressão no sentido contrário. Testes, checagem de tipos e lint ajudam a impedir que o agente compre velocidade entregando erro. A métrica de desempenho mostra se a tentativa ficou mais rápida. Os checks de correção mostram se ela ainda pode ser aceita. Nas mudanças mais difíceis, a revisão humana continua necessária para avaliar manutenção, segurança e compromissos que a métrica não enxerga.
+
+O mesmo limite vale na hora de avaliar um harness. Em vez de confiar num ranking genérico, a equipe precisa montar tarefas parecidas com o próprio trabalho, manter o modelo e o esforço de raciocínio comparáveis e medir pelo menos a taxa de sucesso, o custo por tarefa e a quantidade de tentativas. O volume de contexto ajuda a explicar o resultado, mas não substitui essas medidas.
+
+As evidências reunidas pela Earendil não dizem que quatro ferramentas sejam o número ideal, muito menos que o Pi será mais barato em todo lugar. Elas sustentam uma conclusão menor e bem mais prática: a camada ao redor do modelo também precisa de benchmark. Quando um fluxo especializado entra como extensão, a complexidade fica nas sessões em que tem trabalho para fazer, em vez de cobrar aluguel em toda conversa.
+
+Fontes: [Shopify Engineering](https://shopify.engineering/autoresearch), [Databricks](https://www.databricks.com/blog/benchmarking-coding-agents-databricks-multi-million-line-codebase) e [Earendil](https://earendil.com/posts/pi-autoresearch-and-databricks/).
+
+> Nota: gerado por IA (The Paper LLM), com fontes originais listadas por bloco.
+
+<!--
+briefing_id: none
+source_urls:
+  - https://earendil.com/posts/pi-autoresearch-and-databricks/
+  - https://www.databricks.com/blog/benchmarking-coding-agents-databricks-multi-million-line-codebase
+  - https://raw.githubusercontent.com/earendil-works/pi/main/packages/coding-agent/src/core/system-prompt.ts
+  - https://shopify.engineering/autoresearch
+  - https://github.com/davebcn87/pi-autoresearch
+-->
