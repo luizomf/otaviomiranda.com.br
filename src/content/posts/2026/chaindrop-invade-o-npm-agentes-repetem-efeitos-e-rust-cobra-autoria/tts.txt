@@ -1,0 +1,199 @@
+ChainDrop invade o N P M, agentes repetem efeitos e Rust cobra autoria.
+
+Instalar uma dependência ainda parece uma operação local: o pacote entra, o build roda e a vida segue.
+O ChainDrop mostra o tamanho real dessa confiança.
+O código executado durante a instalação pode alcançar credenciais da estação, assumir pacotes do mantenedor e chegar ao C I.
+É ali que tokens, identidade e artefatos ficam todos na mesma mesa.
+
+A Microsoft documentou mais de quatrocentos pacotes N P M comprometidos nessa campanha.
+As outras notícias de hoje continuam perto da mesma pergunta, mesmo quando mudam de assunto.
+Quanto um sistema consegue executar, repetir e mandar para revisão antes que alguém perceba o custo escondido?
+
+ChainDrop transforma a instalação em caminho de propagação.
+
+A Microsoft Threat Intelligence publicou em quatro de agosto a anatomia do ChainDrop.
+Segundo a empresa, a campanha inseriu um script malicioso de preinstall em mais de quatrocentos pacotes N P M de publicadores sem relação entre si.
+O script roda antes de a instalação terminar e carrega com Bun uma carga JavaScript ofuscada.
+Depois, procura credenciais de N P M, Git Hub, A W S, Kubernetes, Vault, S S H e outros serviços.
+
+Bun foi o runtime usado pelo código da campanha, não a causa do problema.
+E um script de lifecycle, sozinho, também não prova comprometimento.
+O risco está no acesso que esse código herda ao rodar dentro da máquina do desenvolvedor ou do runner.
+
+Com as credenciais de N P M roubadas, o ChainDrop tenta assumir outros pacotes do mesmo mantenedor, inserir a carga e republicá-los.
+Assim, a propagação deixa de depender de uma única biblioteca popular: cada conta alcançada abre outro conjunto de pacotes.
+A StepSecurity encontrou a mesma estrutura geral, com preinstall, Bun e um segundo estágio ofuscado de aproximadamente setecentos e dez kilobytes.
+Também encontrou coleta de credenciais e comunicação de comando e controle por um dead drop em Ethereum.
+
+O alcance passa do registry.
+A Microsoft descreve atividade em Git Hub Actions e tentativas de persistência nas configurações de ferramentas de desenvolvimento, incluindo Claude e V S Code.
+Em C I, um script de dependência pode tocar tokens, identidade O I D C, cache e artefatos.
+A fronteira entre baixar código e deixar código entrar no pipeline desaparece bem na nossa frente, sem nem pedir crachá.
+
+O Paper L L M já havia acompanhado o Mini Shai-Hulud entrando pelo C I.
+O relatório de quatro de agosto amplia bastante aquele retrato.
+Agora há o nome ChainDrop, mais de quatrocentos pacotes de publicadores diferentes, o escopo das credenciais procuradas e uma orientação completa para depois da execução.
+
+Essa orientação merece atenção.
+Se uma versão afetada rodou, remover o pacote ou corrigir o lockfile não é suficiente para considerar o ambiente limpo.
+A Microsoft recomenda tratar a estação ou o runner como comprometido e rotacionar os segredos a partir de uma máquina limpa.
+Também recomenda reconstruir sistemas e artefatos usando entradas confiáveis.
+
+Para reduzir a exposição, dá para limitar scripts de lifecycle, diminuir o uso de tokens duradouros e fixar versões conhecidas.
+Também vale desconfiar de releases sem commit, tag ou pull request correspondente.
+Provenance ajuda a confirmar como um artefato foi produzido.
+Só não garante que o workflow ou o ambiente produtor estivessem limpos.
+
+A campanha continua ativa, então a lista e a contagem podem mudar.
+Os mais de quatrocentos pacotes são a fotografia publicada pela Microsoft.
+Isso não indica que todo o N P M ou qualquer instalação de Bun esteja infectada.
+
+As fontes deste bloco são Microsoft Threat Intelligence e StepSecurity.
+
+Salvar o estado não salva o efeito.
+
+Um agente grava um checkpoint, chama uma [EY1 P IY1 AY1] para cobrar um cliente e cai antes de registrar que a cobrança terminou.
+Na retomada, lê o estado anterior e chama a [EY1 P IY1 AY1] de novo.
+O fluxo voltou exatamente ao ponto salvo.
+O cartão, infelizmente, não voltou no tempo com ele.
+
+O preprint “Resume Means Resume” tenta transformar esse problema em um contrato verificável.
+Ele define condições para execução de efeitos, forks, validade de checkpoints, consumo de interrupções e recuperação determinística.
+Depois aplica probes, sem depender de respostas aleatórias de modelos, a versões fixadas de cinco frameworks.
+São eles: LangGraph um ponto dois ponto nove, LlamaIndex Workflows dois ponto vinte e dois ponto dois e Crew A I um ponto quinze ponto dois.
+A lista continua com pydantic graph um ponto cento e sete ponto um e AutoGen.
+
+A distinção é simples, mas fácil de esquecer.
+Serializar o estado diz de onde o fluxo deve continuar.
+Isso não desfaz uma escrita no banco, uma mensagem enviada ou uma chamada externa que já respondeu.
+Se o processo cai entre produzir o efeito e registrar sua conclusão, a recuperação pode repetir esse efeito.
+
+Nos testes descritos, o autor reporta violação silenciosa das regras de fork e validade no LangGraph um ponto dois ponto nove.
+Também reporta replay que não aparece no estado do Crew A I um ponto quinze ponto dois.
+Há ainda divergência em relação ao comportamento documentado no LlamaIndex.
+E o pydantic graph um ponto cento e sete ponto um não conseguiu recuperar o crash intermediário usado no probe.
+
+Esses resultados são específicos às versões, configurações e testes descritos.
+O trabalho é um preprint de um único autor.
+A implementação chamada Remit, junto de parte do artefato de reprodução, continua privada até a publicação.
+Isso limita a verificação independente por enquanto e também impede tratar os resultados como um veredito permanente sobre os projetos.
+
+A consequência arquitetural independe do framework.
+Se o agente escreve, cobra, publica ou envia, checkpoint não pode fazer o papel de transação.
+O efeito externo precisa de proteção própria: chave de idempotência, ledger durável, outbox transacional ou compensação desenhada para replay e crash.
+Sem isso, a recuperação pode ser perfeitamente determinística e ainda fazer a coisa errada duas vezes.
+
+A fonte deste bloco é o preprint “Resume Means Resume”, no arXiv.
+
+Rust adota política de L L M e cobra autoria humana.
+
+Cinco equipes do projeto Rust adotaram uma política para contribuições assistidas por L L M no monorepo rust lang Rust.
+O anúncio saiu em cinco de agosto.
+O escopo é esse repositório, não o projeto Rust inteiro, e a política também não declara uma posição geral contra modelos.
+
+A regra exige que a pessoa assuma a autoria, entenda o código enviado e consiga participar da discussão sobre ele.
+Também tenta evitar uma dinâmica que qualquer mantenedor reconhece rápido.
+Alguém copia o comentário da revisão para o modelo, cola a resposta de volta e vira apenas um proxy humano entre duas pontas que não carregam a responsabilidade pelo patch.
+
+O Rust aponta três problemas.
+Os sinais tradicionais de esforço e entendimento ficaram menos confiáveis.
+A geração em volume piora uma capacidade de revisão que já é limitada.
+E retransmitir respostas mecanicamente consome o tempo de quem mantém o projeto.
+O anúncio registrava mil duzentos e oitenta e um pull requests abertos, uma boa medida do tamanho da fila em que esses patches chegam.
+
+Já havíamos falado da proposta ainda aberta no Rust Forge.
+Agora a decisão mudou de estado: cinco equipes anunciaram a adoção.
+
+Para quem contribui, o recado é assumir o patch e demonstrar que o entende.
+Para equipes que recebem código, o caso expõe uma conta menos confortável.
+Gerar mais mudanças sem aumentar revisão, testes e responsabilidade pode reduzir o throughput real.
+Código sintaticamente convincente ficou barato.
+Entender o desenho e cuidar das consequências continua no orçamento humano.
+
+A fonte deste bloco é o Inside Rust Blog.
+
+L L M zero ponto trinta e dois separa texto, raciocínio e ferramentas no terminal.
+
+Simon Willison lançou em quatro de agosto o L L M zero ponto trinta e dois.
+A ferramenta de terminal ganhou suporte a traces de raciocínio e ferramentas hospedadas pelo provedor.
+Também ganhou suporte à Open A I Responses [EY1 P IY1 AY1] e a uma interface Python que trata a resposta como uma sequência de eventos mistos.
+
+Uma resposta moderna já não é apenas uma string.
+No mesmo fluxo podem chegar texto, raciocínio, chamadas de ferramenta e anexos.
+A nova função stream events expõe essas partes como eventos tipados.
+Assim, cada integração não precisa inventar um parser para descobrir o que acabou de sair do modelo.
+
+Na linha de comando, o raciocínio vai para a saída de erro, a standard error.
+O texto final continua na saída padrão, a standard output, e entra em pipes sem carregar todo o material intermediário.
+É uma decisão pequena com cheiro de Unix.
+Cada canal mantém uma função, e o próximo comando não precisa separar conversa interna de saída útil usando fé e expressão regular.
+
+O log em SQLite também passou a armazenar mensagens com endereçamento por conteúdo.
+Em vez de repetir conversas completas, o sistema identifica o conteúdo e reduz a duplicação no histórico.
+Um plugin separado, chamado L L M chat completions server, expõe um endpoint compatível com a [EY1 P IY1 AY1] da Open A I.
+
+Nesse caso, compatível descreve a interface, sem prometer paridade completa entre provedores, modelos ou ferramentas.
+Ainda assim, representar texto, tools, mídia e raciocínio como eventos descreve melhor o que um agente realmente produz.
+
+A fonte deste bloco é Simon Willison, no anúncio do L L M zero ponto trinta e dois.
+
+WebKit encontra três saídas fora do proxy da aplicação.
+
+Configurar um proxy dentro do navegador parece uma ordem ampla: passe o tráfego por aqui.
+Uma pesquisa da Mysk, publicada em quatro de agosto, mostra três caminhos do WebKit que podem sair por outra camada.
+Com isso, eles podem revelar o resolvedor D N S ou o I P real.
+
+O primeiro é o D N S prefetch, que pode antecipar a resolução usando o serviço normal do sistema.
+O segundo aparece em WebAuthn Related Origin Requests, quando a requisição é delegada ao serviço de credenciais do sistema.
+O terceiro é o WebTransport, que pode abrir uma conexão H T T P três sobre QUIC diretamente com o servidor.
+Segundo os pesquisadores, os mesmos caminhos também alcançam o iCloud Private Relay.
+
+Os três casos têm a mesma origem arquitetural.
+Um proxy configurado na aplicação só cobre as stacks que recebem essa configuração.
+Um serviço do sistema ou um transporte que abre a própria conexão pode usar outro socket.
+Já uma V P N de sistema opera abaixo dessas [EY1 P IY1 AY1] e não foi afetada nos testes dos autores.
+
+A divulgação veio da Mysk, fabricante do Psylo, um navegador baseado em WebKit e afetado pelo problema.
+O Psylo um ponto três ponto um passou a desativar WebAuthn e WebTransport por padrão, com reativação por site, ou silo.
+Seus usuários já têm essa mitigação, mas a página não cita resposta nem correção da Apple.
+
+O resultado não vale automaticamente para qualquer configuração de WebKit, Tor ou V P N.
+O Onion Browser no nível Silver já bloqueava WebTransport, e uma V P N de sistema segue outro desenho.
+A consequência prática é específica.
+Quem depende de proxy no nível da aplicação não pode presumir que todo recurso web atravessa a mesma camada de rede.
+
+A fonte deste bloco é a pesquisa da Mysk.
+
+Destaques rápidos para hoje.
+
+A Fortinet analisou uma campanha Windows em que componentes adulterados do QuickFox usavam JavaScript no renderer Electron.
+A cadeia também usava loaders e D L L side-loading para instalar o implante F D M T P.
+A atividade observada remonta a agosto de 2025 e perfilava processos ligados a ferramentas empresariais, de desenvolvimento e cripto.
+JavaScript dentro de Electron é normal por si só.
+O sinal de risco está na cadeia formada por arquivo adulterado, download, loaders e comunicação de comando e controle.
+A página diz que os componentes foram removidos no QuickFox três ponto cinquenta e nove ponto seis.
+Mas sua seção de indicadores lista como afetadas versões maiores que três ponto zero ponto trinta e cinco e menores que três ponto cinquenta e cinco ponto seis.
+Como a própria fonte traz números incompatíveis, o caminho seguro é instalar a versão atual e investigar execuções anteriores.
+Também é preciso revisar a telemetria e os segredos da máquina.
+A atualização remove o componente, mas não limpa retroativamente um host já comprometido.
+A atribuição ao Mustang Panda também é uma avaliação da Fortinet.
+A fonte é a Fortinet FortiGuard Labs.
+
+A Mistral lançou em quatro de agosto o Shieldstral, um classificador multimodal de segurança com três bilhões de parâmetros e pesos Apache dois ponto zero.
+Ele recebe políticas em linguagem natural durante a inferência e avalia texto, imagem e combinações de prompt e resposta.
+Segundo a empresa, roda em uma G P U de dezesseis gigabytes e alcança desempenho comparável ou superior ao de modelos até sete vezes maiores.
+Os benchmarks são do fornecedor, não uma garantia de segurança em produção.
+Para equipes, o atrativo é testar um moderador local e adaptável sem enviar todo o conteúdo a um serviço remoto.
+Falsos positivos, falsos negativos, políticas e idiomas ainda precisam ser avaliados no domínio real.
+Um classificador probabilístico pode aplicar e registrar uma política, mas não deve ser a única fronteira de autorização.
+A fonte é a Mistral A I.
+
+O preprint ReCite descreve um sistema para encontrar referências obsoletas a funções nos comentários do kernel Linux e propor reparos.
+Os autores reportam oitocentas e sessenta e nove ocorrências, setenta e cinco patches enviados upstream e cinquenta aceitos.
+Nesse número, aceito inclui mudanças na árvore de um mantenedor, não necessariamente presentes em todas as versões estáveis.
+E os dados vêm do próprio preprint.
+Mesmo com a ressalva, há algo interessante aqui.
+Uma tarefa estreita, com patches pequenos e validação humana no fluxo real de manutenção, produziu mudanças que os mantenedores conseguiram revisar.
+É uma aplicação bem menos cinematográfica de I A e automação.
+Talvez por isso tenha conseguido entrar no kernel.
+A fonte é o preprint “We Must Have Missed This Comment”, sobre o ReCite.
