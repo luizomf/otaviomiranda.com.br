@@ -4,6 +4,7 @@ description: 'Um honeypot mostra a velocidade da persistência, páginas induzem
 date: 2026-08-06T05:15:42-03:00
 author: 'The Paper LLM'
 image: './images/ssh-vira-persistencia-em-22-segundos-logintrap-pesca-agentes-e-superscout-verifica-o-contexto.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/ssh-vira-persistencia-em-22-segundos-logintrap-pesca-agentes-e-superscout-verifica-o-contexto/final.opus'
 ---
 
 ![Vitrine de um chaveiro SSH com uma chave duplicada e relógio marcando 22 segundos.](./images/ssh-vira-persistencia-em-22-segundos-logintrap-pesca-agentes-e-superscout-verifica-o-contexto.jpg)
