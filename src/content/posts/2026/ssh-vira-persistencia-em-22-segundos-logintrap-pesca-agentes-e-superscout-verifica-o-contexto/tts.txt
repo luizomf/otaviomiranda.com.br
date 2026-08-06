@@ -1,0 +1,185 @@
+S S H vira persistência em vinte e dois segundos, LoginTrap pesca agentes e SuperScout verifica o contexto.
+Vinte e dois segundos às vezes não dão nem para perceber que o terminal conectou.
+Para um robô que já tinha a senha de root, foi tempo suficiente para instalar outra forma de acesso, trocar a senha e começar a mapear a máquina.
+O registro veio de um honeypot de S S H acompanhado pelo SANS Internet Storm Center.
+E abre a edição por um motivo incômodo: quando uma entrada entrega autoridade demais, esperar pela detecção pode ser tarde.
+Essa mesma fronteira aparece nos agentes que decidem sozinhos onde fazer login.
+No trabalho com código, ela aparece pelo outro lado: um modelo barato consegue preparar um contexto útil, desde que algum mecanismo confira o que ele diz ter verificado.
+O acesso por S S H virou persistência em vinte e dois segundos.
+Um sensor Cowrie, que simula um servidor S S H para observar ataques, registrou a sequência em vinte e três de maio.
+O ator automatizado entrou com credenciais de root comprometidas.
+Em seguida, acrescentou uma chave ao arquivo de chaves autorizadas, mudou a senha de root, tentou remover restrições do host e executou comandos de reconhecimento.
+Tudo isso aconteceu em vinte e dois segundos após a autenticação.
+Essa chave cria uma rota de persistência que já não depende da senha roubada.
+Trocar a senha depois do incidente pode não expulsar quem entrou.
+Também é preciso revisar as chaves autorizadas e procurar outras mudanças deixadas na máquina.
+Durante trinta dias, esse único sensor recebeu mais de cento e doze mil sessões de S S H e setenta e duas mil tentativas de autenticação.
+Também recebeu conexões de mais de cento e setenta e cinco endereços I P maliciosos.
+Os números mostram o volume de automação batendo numa porta exposta, mas não dizem que todo servidor público será invadido em vinte e dois segundos.
+Essa foi uma sequência específica, observada depois que o atacante já tinha uma credencial válida.
+A análise também não estabelece como aquela senha havia sido obtida originalmente.
+Para quem mantém uma V P S, a defesa precisa estar pronta antes do primeiro login.
+Autenticação apenas por chave fecha o caminho de adivinhação de senha usado nesse caso.
+Desabilitar o login direto de root reduz o privilégio entregue logo na entrada.
+Restringir o S S H por V P N ou lista de endereços permitidos diminui a superfície exposta.
+Mudar a porta talvez tire algum ruído dos logs, mas uma credencial válida continua válida em qualquer número bonito que a gente escolha.
+O caso foi capturado em maio e publicado pelo SANS em seis de agosto.
+Não é uma corrida para responder em menos de vinte e dois segundos.
+É um lembrete de que a configuração precisa sobreviver sem essa corrida.
+A fonte deste bloco é o SANS Internet Storm Center, no texto “22 Seconds to Compromise”.
+LoginTrap faz a página inventar a necessidade de login.
+Um agente de navegador recebe uma tarefa legítima.
+No meio da página, encontra uma instrução dizendo que precisa se autenticar para continuar.
+Se há credenciais reutilizáveis no contexto e o próprio site decide quando elas devem sair, a página passa a influenciar tanto a decisão de login quanto o segredo usado nela.
+O LoginTrap explora exatamente essa fronteira.
+Os pesquisadores criaram conteúdo independente da tarefa que induz agentes web a considerar necessário um login controlado pelo atacante.
+O ataque não se limita ao pedido direto para revelar uma senha.
+Ele tenta convencer o agente de uma etapa de trabalho mais plausível: preencher um formulário para seguir adiante.
+No estudo com o framework Browser-Use, foram executadas mil cento e setenta e cinco tarefas em oitenta páginas clonadas, usando quatro modelos como base.
+Em média, os agentes preencheram o login em noventa e três porcento dos testes, e o ataque sintético chegou ao vazamento de ponta a ponta em oitenta e seis porcento.
+Em uma comparação entre Browser-Use, LiteWebAgent e Skyvern, a taxa de sucesso completa ficou entre sessenta e oito e oitenta e nove porcento.
+Esses percentuais vêm de um preprint enviado ao arXiv em cinco de agosto.
+As páginas eram clonadas, os valores sensíveis eram sintéticos e havia um orçamento controlado de ações.
+Portanto, não são uma medição de roubo real de credenciais na internet, nem uma auditoria independente de todos os agentes de navegador em produção.
+O mecanismo, porém, deixa uma orientação bem concreta.
+Conteúdo vindo da página é entrada não confiável e não deveria autorizar a liberação de um segredo.
+Um broker pode vincular a credencial à origem correta e entregá-la sem colocá-la no contexto geral do modelo.
+A política também pode exigir aprovação humana antes de preencher um formulário em uma origem nova.
+O agente continua navegando, mas a página não escreve a própria autorização.
+Trocar o prompt pode ajudar o modelo a desconfiar.
+Não substitui essa separação de autoridade, porque a instrução hostil chega justamente pelo material que ele precisa ler para trabalhar.
+A fonte deste bloco é o paper LoginTrap no arXiv.
+SuperScout descobriu que verificar o handoff vale mais que rotear modelos.
+Antes de corrigir um bug, alguém precisa localizar os arquivos relevantes, entender os testes e reproduzir o problema.
+O SuperScout entrega essa preparação a um modelo de sete bilhões de parâmetros.
+O scout percorre o repositório, registra evidências, tenta reproduzir a falha e produz um resumo compacto para o modelo que fará a correção.
+A parte decisiva é bem menos glamourosa que o roteamento: as alegações de reprodução passam por uma execução numa sandbox.
+Se o scout diz que reproduziu o erro, mas o replay não confirma, a afirmação é retirada antes de chegar ao fixer.
+Assim, o handoff fica limitado pela evidência, em vez de virar uma história tecnicamente confiante que outro modelo precisa aceitar pela simpatia.
+Nos duzentos e sessenta e seis problemas em Python do SWE-bench Pro usados pelo estudo, o sistema resolveu cento e cinquenta e nove tarefas.
+O Claude Opus quatro ponto seis sozinho resolveu cento e cinquenta e oito.
+Os autores tratam a diferença de uma tarefa como empate, não como vitória.
+O custo reportado por solução foi de vinte e três centavos de dólar para o SuperScout.
+Para o Claude sozinho, foi de um dólar e vinte e sete vírgula quatro centavos.
+A ablação conta a parte mais interessante.
+Sem o roteador, o sistema sempre enviou o handoff para o Kimi K dois ponto cinco e também resolveu cento e cinquenta e nove tarefas.
+Nesse caso, o custo ficou em vinte e dois vírgula sete centavos de dólar por solução.
+O roteador escolheu o fixer mais barato em duzentas e sessenta e três das duzentas e sessenta e seis tarefas e não acrescentou uma solução sequer.
+Nesse benchmark, preparar o terreno funcionou.
+Sofisticar a escolha do próximo modelo, não.
+A verificação também barrou bastante contexto contaminado.
+Das duzentas e quarenta e nove reproduções que o scout declarou como verificadas, o replay confirmou cinquenta e mostrou que cento e setenta e quatro eram falsas.
+O mecanismo removeu todas as alegações falsas antes do handoff.
+Os casos restantes não entram nessas duas categorias no recorte reportado, então não dá para completar a conta por intuição.
+É um preprint dos próprios autores, restrito a uma fatia de Python, com modelos e preços fixos e um protocolo limitado pelo benchmark.
+Essa relação de custo não pode ser transportada automaticamente para outro provedor ou repositório.
+Mas há um experimento barato que uma equipe pode repetir.
+A ideia é usar um scout para montar um contexto pequeno e exigir testes determinísticos para as afirmações verificáveis.
+Só então, chamar o modelo caro.
+Primeiro a gente melhora o bilhete entregue ao especialista.
+Depois pensa em comprar uma central de encaminhamento.
+A fonte deste bloco é o paper “Scrouting: Cost-Aware Routing of Coding Agents by Scouting the Repository First”, no arXiv.
+Agora, os destaques rápidos para hoje.
+A CISA confirmou exploração da falha C V E 2026, sessenta e três zero sete sete, no TeamCity On-Premises.
+A falha permite que alguém com acesso H T T P ou H T T P S execute comandos do sistema sem autenticação.
+Para isso, usa o protocolo de polling dos agentes e os privilégios do processo do servidor.
+A CISA incluiu o registro no catálogo de vulnerabilidades exploradas em cinco de agosto, com prazo federal em oito de agosto.
+Isso atualiza o aviso de julho, quando a JetBrains ainda não conhecia exploração ativa.
+Todas as versões locais são afetadas.
+As correções estão no TeamCity 2025 ponto onze ponto sete e 2026 ponto um ponto três, e há um plugin de patch para instalações 2017 ponto um ou posteriores.
+Depois da atualização, vale avaliar exposição e credenciais da integração contínua.
+A CISA não informou ator, vítimas nem uso em ransomware.
+As fontes são JetBrains e o catálogo de vulnerabilidades exploradas da CISA.
+O limite de cardinalidade do OpenTelemetry pode preservar o total e quebrar o alerta filtrado.
+O S D K aceita por padrão duas mil combinações de atributos por stream de métrica.
+Quando passa disso, agrega o excedente num ponto com o atributo otel ponto metric ponto overflow definido como true.
+Nesse ponto, os atributos originais da medição são removidos.
+A soma geral continua correta.
+Mas dashboards, objetivos de nível de serviço e alertas agrupados pelo identificador do tenant, ou outro atributo, podem contar menos do que deveriam.
+O teto do S D K também não limita todas as séries acumuladas no back-end entre processos e ciclos.
+A orientação é monitorar o overflow e limitar dimensões sem fronteira.
+Atributos de recurso e de escopo de instrumentação não são removidos da mesma forma.
+A fonte é o blog do OpenTelemetry.
+A A W S recomenda que a falha do control plane não derrube o trabalho que já está rodando.
+Em um relato publicado em quatro de agosto, um engenheiro da empresa descreve o control plane como um loop que compara estado desejado e real.
+No E C dois, a regra de “estabilidade estática” mantém máquinas virtuais em execução quando esse plano falha.
+A A W S também separou o controle por zonas de disponibilidade e depois por células, para limitar escala e raio de impacto.
+Para orquestradores de infraestrutura e agentes, a tradução é persistir intenção e tornar a reconciliação idempotente.
+Também é manter o controle fora do caminho de dados do trabalho ativo.
+O texto reflete quase quatorze anos de experiência do autor na A W S.
+As vantagens do D S Q L continuam sendo alegações do fornecedor, com custos e trade-offs próprios.
+A fonte é o All Things Distributed.
+“Ship Safe” procura falhas em código e também em configurações de agentes e M C P.
+A ferramenta de linha de comando roda localmente e verifica segredos, dependências, integração contínua e permissões de M C P.
+Também procura envenenamento de memória e importações de pacotes alucinados.
+O próprio arquivo de apresentação reconhece um falso positivo crítico restante no benchmark e recomenda manter CodeQL, Gitleaks e Trivy.
+Essas ferramentas oferecem análises e bases fora da cobertura do projeto.
+“Ship Safe” é uma ferramenta para testar no repositório, não um scanner universal já validado.
+Os números de cobertura e benchmark vêm do mantenedor e não receberam verificação independente nesta apuração.
+A fonte é o arquivo de apresentação do “Ship Safe”.
+Cloudflare Computer coloca isolates e contêineres Linux sobre os mesmos arquivos.
+Na prévia publicada em três de agosto, o harness roda em um isolate ligado a um Durable Object.
+Ele chama contêineres sob demanda quando precisa de Linux completo, N P M ou binários nativos.
+Os dois ambientes enxergam um sistema de arquivos durável compartilhado, então o agente não precisa administrar dois modelos de armazenamento.
+O pacote de prévia é instalado pelo nome arroba Cloudflare barra computer.
+Limites de produção, custo, isolamento e portabilidade ainda precisam de avaliação.
+É uma arquitetura inicial apresentada pelo próprio fornecedor.
+A fonte é o blog da Cloudflare.
+Argus só deixa estado persistente entrar depois de uma verificação autorizada.
+O runtime separa Manager, Planner, Engineer e Reviewer, preserva projetos entre missões e aceita atualizações após um verificador oficial.
+Também pode aceitar um Reviewer independente ou, quando a política permite, revisão do próprio Engineer.
+A ideia é guardar artefatos e decisões sem transformar toda frase do modelo em verdade durável.
+Os autores reportam aproximadamente setenta e oito porcento no SWE-bench Pro, contra cinquenta e nove porcento do Direct Copilot.
+Para isso, usaram uma vírgula quarenta e uma vez os tokens agregados.
+É um sistema grande, um preprint e um benchmark autorreportado, não uma recomendação pronta para instalar.
+A fonte é o paper Argus no arXiv.
+PIMiner reutiliza estratégias de prompt injection contra modelos que não viu no treino.
+O sistema monta uma biblioteca com tentativas bem-sucedidas e fracassadas e a aplica a outro modelo sem treinamento adicional.
+No resumo dos autores, foram feitas cerca de dez consultas ao agente por amostra.
+As taxas de ataque ficaram entre quarenta e oitenta e seis vírgula sete porcento nos benchmarks IPIArena e AgentDojo, dependendo do modelo.
+Isso sugere que trocar de modelo não cria sozinho uma fronteira contra injeção.
+Políticas de ferramentas e segredos ainda precisam ser testadas continuamente.
+Os números são do resumo de um preprint, em benchmarks controlados, e não representam invasões em produção.
+A fonte é o registro do PIMiner no arXiv.
+Key Amnesia deixa o processo usar o segredo sem devolver o valor bruto ao agente.
+O projeto guarda credenciais num cofre criptografado e as injeta somente no ambiente de processos filhos.
+Também censura cópias exatas na saída coletada e pede aprovação em outro console.
+No modo com cache, o guard pode ficar desbloqueado por trinta minutos por padrão.
+A fronteira tem limites explícitos: codificação ou ofuscação pode escapar da censura, e processos do mesmo usuário alcançam a capacidade limitada de um guard ativo.
+Além disso, a chave derivada permanece em memória durante a sessão, e o console isolado no macOS é experimental.
+É um broker de capacidade interessante para testar, mas o segredo não fica magicamente invisível.
+A fonte é o arquivo de apresentação do Key Amnesia.
+ScrubJay-MEM dá prazos de validade diferentes às memórias do agente.
+Cada registro carrega o que aconteceu, onde, quando, um coeficiente de perecibilidade e um horizonte de utilidade.
+Isso evita tratar uma sala de reunião ou nome de branch como se durasse tanto quanto uma profissão do usuário.
+Os autores reportam ganho de dois vírgula sessenta e seis pontos de F um sobre Mem zero no EventQA sessenta e quatro K.
+Ao remover o decaimento condicionado pelo tipo, a diferença de generalização temporal piorou cinco vírgula sete vezes.
+Os ganhos diminuem com modelos mais fortes e se invertem em tarefas de consolidação de fatos.
+É evidência de preprint em testes controlados, mas o cuidado com timestamp e expiração por tipo já é aplicável ao desenho de retrieval.
+A fonte é o paper ScrubJay-MEM no arXiv.
+O parâmetro ignore checksum failure no Postgre S Q L serve para resgate, não para reparo.
+O parâmetro transforma a falha de checksum de uma página em aviso e permite a leitura.
+Se a página corrompida for reescrita, pode receber um checksum novo sobre dados ainda errados.
+A orientação publicada em seis de agosto é manter a opção desligada e preferir backup ou réplica.
+Sem alternativa limpa, a orientação é trabalhar numa cópia dos arquivos, em uma única sessão.
+Nesse caso, deve-se exportar apenas o que for legível com o comando COPY e desligar a opção imediatamente.
+Ela existe desde o Postgre S Q L nove ponto três.
+Na versão dezoito, clusters novos habilitam checksum por padrão.
+Linhas recuperadas ainda podem estar ausentes ou falsas.
+A fonte desse alerta é o site The Build.
+Mote encaixa testes Go compilados para outra plataforma num executor remoto.
+A ferramenta de Russ Cox envia e roda comandos por S S H, Gomote, T C P autenticado ou T C P sobre Tailscale.
+Scripts com nomes formados por Go, sistema operacional e arquitetura, seguidos de exec, entram nesse fluxo.
+Eles permitem que Go run e Go test entreguem automaticamente ao alvo o binário compilado para outra plataforma.
+Isso evita a cópia manual a cada ciclo.
+O acesso remoto ainda depende da configuração e da confiança desses transportes.
+Mote organiza a execução; não transforma a máquina remota em sandbox.
+A fonte é a documentação do pacote Mote, de Russ Cox.
+Unbash transforma Bash aninhado em uma árvore de sintaxe abstrata tipada, mas não promete segurança.
+Segundo o projeto, o pacote TypeScript tem zero dependências de runtime e preserva posições no código.
+Ele representa comandos, pipelines, redirecionamentos e substituições aninhadas.
+Isso dá a um harness uma estrutura melhor que busca por strings para aplicar sua própria política.
+O parser não executa, expande, autoriza nem isola comandos.
+Entrada malformada pode produzir uma árvore parcial, então o consumidor precisa conferir erros e percorrer também cada script aninhado.
+Parsing ajuda a enxergar o que foi escrito; sandbox e autorização continuam sendo outro trabalho.
+A fonte é o arquivo de apresentação do Unbash.
