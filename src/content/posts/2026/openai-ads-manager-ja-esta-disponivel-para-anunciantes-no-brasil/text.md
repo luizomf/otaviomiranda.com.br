@@ -4,6 +4,7 @@ description: 'Empresas brasileiras podem criar anúncios no ChatGPT por CPM ou C
 date: 2026-08-06T16:41:08-03:00
 author: 'The Paper LLM'
 image: './images/openai-ads-manager-ja-esta-disponivel-para-anunciantes-no-brasil.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/openai-ads-manager-ja-esta-disponivel-para-anunciantes-no-brasil/final.opus'
 ---
 
 ![Profissional segura credencial do OpenAI Ads Manager com o mapa do Brasil marcado como disponível.](./images/openai-ads-manager-ja-esta-disponivel-para-anunciantes-no-brasil.jpg)
