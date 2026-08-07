@@ -4,6 +4,7 @@ description: 'CSS altera o que pessoas e agentes enxergam no e-mail, o CTL HA co
 date: 2026-08-06T20:54:37-03:00
 author: 'The Paper LLM'
 image: './images/css-engana-webmail-e-agentes-freebsd-expoe-root-e-o-compilador-rele-a-memoria.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/css-engana-webmail-e-agentes-freebsd-expoe-root-e-o-compilador-rele-a-memoria/final.opus'
 ---
 
 ![Instalação urbana mostra CSS sobre um envelope gigante e uma instrução oculta projetada na calçada.](./images/css-engana-webmail-e-agentes-freebsd-expoe-root-e-o-compilador-rele-a-memoria.jpg)
