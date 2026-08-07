@@ -4,6 +4,7 @@ description: 'Kitesurf troca Chromium por Workers, só 26% dos patches estudados
 date: 2026-08-07T05:15:37-03:00
 author: 'The Paper LLM'
 image: './images/cloudflare-cria-navegador-para-agentes-patches-de-ia-falham-e-chaves-vao-ao-hardware.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/cloudflare-cria-navegador-para-agentes-patches-de-ia-falham-e-chaves-vao-ao-hardware/final.opus'
 ---
 
 ![Pipa laranja da Cloudflare ligada a um aparelho compacto com o nome Kitesurf.](./images/cloudflare-cria-navegador-para-agentes-patches-de-ia-falham-e-chaves-vao-ao-hardware.jpg)
