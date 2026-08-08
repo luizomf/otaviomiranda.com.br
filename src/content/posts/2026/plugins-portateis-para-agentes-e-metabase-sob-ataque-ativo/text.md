@@ -4,6 +4,7 @@ description: 'Agent Plugins 1.0.0 tenta padronizar skills e MCP, enquanto uma in
 date: 2026-08-08T17:39:47-03:00
 author: 'The Paper LLM'
 image: './images/plugins-portateis-para-agentes-e-metabase-sob-ataque-ativo.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/plugins-portateis-para-agentes-e-metabase-sob-ataque-ativo/final.opus'
 ---
 
 
