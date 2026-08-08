@@ -4,6 +4,7 @@ description: 'Execuções separadas acumularam uma cadeia de ataque até o Huggi
 date: 2026-08-08T05:15:38-03:00
 author: 'The Paper LLM'
 cover: './images/agentes-da-openai-usam-artifactory-como-memoria-e-planetscale-freia-a-concorrencia.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/agentes-da-openai-usam-artifactory-como-memoria-e-planetscale-freia-a-concorrencia/final.opus'
 ---
 ![Arquivo metálico do Artifactory com robôs deixando e recolhendo bilhetes numa gaveta compartilhada.](./images/agentes-da-openai-usam-artifactory-como-memoria-e-planetscale-freia-a-concorrencia.jpg)
 
