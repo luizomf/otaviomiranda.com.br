@@ -1,0 +1,124 @@
+Plugins portáteis para agentes e Metabase sob ataque ativo.
+
+Empacotar a mesma ferramenta de novo para cada agente é um desperdício meio besta.
+A especificação [EY1 JH AH0 N T] Plugins um ponto zero ponto zero quer acabar com essa parte.
+Ela define um pacote portátil para skills e servidores M C P.
+A confiança continua sendo problema de cada cliente.
+Arrumaram a mala; a alfândega ainda é por conta da casa.
+
+Enquanto isso, o Metabase confirmou exploração ativa de uma injeção de S Q L com C V S S dez.
+Se você mantém uma instância exposta, atualizar a imagem é só o começo.
+O próprio aviso trata a exposição pública como possível comprometimento.
+Patch fecha a falha, mas credencial roubada continua sabendo onde você mora.
+
+[EY1 JH AH0 N T] Plugins cria um pacote comum, não uma confiança comum.
+
+A especificação [EY1 JH AH0 N T] Plugins um ponto zero ponto zero define um pacote com plugin ponto JSON obrigatório na raiz.
+Nesta primeira versão, cabem exatamente dois tipos de componente: [EY1 JH AH0 N T] Skills e servidores M C P.
+As skills ficam, cada uma, numa pasta dentro do diretório skills, em um arquivo SKILL ponto M D.
+A configuração dos servidores vai no M C P ponto JSON, também na raiz.
+
+Para quem publica ferramentas, isso evita reempacotar a mesma peça para clientes diferentes.
+A skill preserva o formato SKILL ponto M D.
+Já o M C P ponto JSON pode apontar para um servidor executado por comando local, via entrada e saída padrão, ou para um endpoint remoto.
+O cliente precisa conferir os caminhos e rejeitar qualquer referência que escape da raiz do plugin.
+Portabilidade é bonita até um ponto ponto barra sair para passear.
+
+O próprio projeto chama a especificação de um piso pequeno de interoperabilidade, que padroniza o pacote.
+Distribuição, instalação, permissões, experiência de uso e recursos específicos continuam sob controle de cada cliente.
+Na prática, dois aplicativos podem abrir o mesmo plugin e aplicar regras completamente diferentes para instalar uma skill ou executar um comando M C P.
+Também podem usar regras diferentes para enviar headers ou acessar um endpoint remoto.
+
+E essa diferença não é perfumaria.
+Um diretório comum organiza a supply chain.
+Mas as instruções da skill, os executáveis locais, os endereços da web e as credenciais de M C P continuam sendo entradas que o cliente precisa validar e limitar.
+A especificação diz onde as coisas moram.
+Ela não vira uma política compartilhada de contenção por osmose.
+
+A versão canônica é a um ponto zero ponto zero, ainda marcada como Working Draft.
+Segundo o projeto, o comitê técnico inicial reúne mantenedores ligados a Amazon, Cursor, Microsoft, Open A I e Vercel.
+É um começo forte para compatibilidade.
+Permissões e isolamento iguais entre os clientes ficaram fora da promessa.
+
+As fontes deste bloco são a especificação [EY1 JH AH0 N T] Plugins um ponto zero ponto zero e a documentação oficial do [EY1 JH AH0 N T] Plugins.
+
+Metabase pede patch e resposta a incidente.
+
+O Metabase publicou o advisory G H S A, V W F quatro, M sete J oito, W C J F, em 6 de agosto, e o atualizou no dia 7.
+A falha deixa uma pessoa sem autenticação injetar S Q L no banco da própria aplicação.
+Segundo a empresa, o ataque pode dar acesso de administrador à instância, permitir mudanças de configuração e roubar credenciais armazenadas de bancos conectados.
+Também pode permitir a consulta e a exportação dos dados ao alcance do Metabase.
+
+A vulnerabilidade recebeu C V S S dez ponto zero.
+Ela está sob exploração ativa confirmada pelo Metabase e ainda não tem C V E no advisory.
+Para quem opera a ferramenta em Docker ou V P S, o estrago pode atravessar o dashboard.
+O banco da aplicação guarda usuários, sessões, configurações, chaves de [EY1 P IY1 AY1] e segredos das conexões.
+Se o atacante toma essa camada, ganha o mesmo crachá que o Metabase usa para entrar nos outros bancos.
+
+Os builds corrigidos são xis ponto cinquenta e oito ponto vinte e quatro, xis ponto cinquenta e nove ponto vinte e um, e xis ponto sessenta ponto dezessete.
+Também estão corrigidos os builds xis ponto sessenta e um ponto onze, xis ponto sessenta e dois ponto nove, e xis ponto sessenta e três ponto cinco.
+Siga esses números explícitos.
+Nos ramos xis ponto cinquenta e oito a xis ponto sessenta e dois, o metadata encerra os intervalos afetados um patch antes do que a lista de correções faria esperar.
+Essa fresta entre os números não prova que a versão intermediária esteja segura.
+Atualize para o build que o advisory aponta como corrigido.
+
+Se a atualização imediata for impossível, o Metabase recomenda bloquear temporariamente o endpoint api session reset password.
+É uma contenção provisória. Para instâncias que deixaram esse endpoint público, a sequência indicada começa por controlar a exposição e instalar o build corrigido.
+Depois, é preciso revogar sessões, revisar contas e chaves de [EY1 P IY1 AY1], e trocar as credenciais dos bancos conectados.
+Também é preciso conferir os logs do ingresso, do Metabase e dos data warehouses.
+
+O patch interrompe novas tentativas por esse caminho.
+Sessões, contas, chaves e senhas que já tenham vazado continuam funcionando até a revogação ou a troca.
+Por isso o comunicado pede resposta a incidente.
+O clássico docker pull seguido de pensamentos positivos ficou pequeno para este caso.
+
+A fonte deste bloco é o Git Hub Security Advisory do Metabase, G H S A, V W F quatro, M sete J oito, W C J F.
+
+Destaques rápidos para hoje.
+
+Pesquisadores relatam exfiltração de Jira e Confluence pelo Atlassian Rovo.
+Segundo a PromptArmor, uma instrução escondida num arquivo não confiável pode levar o agente a buscar conteúdo privado.
+Depois, o agente pode enviar esse conteúdo pela ferramenta de acesso a endereços da web, sem uma aprovação humana separada.
+Desligar a busca web não desliga essa rota.
+A pesquisadora diz que avisou a Atlassian em 23 de maio, recebeu confirmação em 25 de maio e publicou o relato em agosto ainda sem confirmação de correção.
+Esta apuração não encontrou advisory público da Atlassian nem reprodução independente.
+Por isso, a exploração e o estado do patch seguem como alegações da PromptArmor.
+Trate o conteúdo conectado como entrada não confiável e reduza o alcance de dados, conectores e saída de rede.
+A fonte deste destaque é a PromptArmor.
+
+Claude Code dois ponto um ponto duzentos e vinte e quatro permite que sessões independentes troquem mensagens.
+Em sessões elegíveis no mac O S e Linux, List Agents encontra os pares, e Send Message manda texto.
+Dá para passar uma descoberta ou um alerta entre worktrees sem fazer o velho copia e cola.
+A mensagem não carrega arquivos nem histórico da conversa.
+Sessões na web ou em outra máquina podem responder por Remote Control, mas não iniciar o contato.
+É coordenação entre agentes. Telepatia e resolução automática de conflito continuam indisponíveis.
+A fonte deste destaque é a documentação do Claude Code.
+
+Linux corrigiu um uso depois da liberação de memória, acessível remotamente, no processamento S C T P A S C O N F.
+A falha C V E 2026, sessenta e quatro cinco seis quatro, recebeu C V S S nove ponto oito.
+Uma sequência malformada no caminho que altera endereços de uma associação S C T P pode liberar o transporte em uso e depois reutilizar o ponteiro pendurado.
+Os pontos corrigidos são seis ponto seis ponto cento e quarenta e oito, seis ponto doze ponto cento e um, e seis ponto dezoito ponto quarenta e dois.
+Também foram corrigidos sete ponto um ponto seis e sete ponto dois R C cinco.
+Sistemas que usam ou expõem S C T P com A D D I P e A S C O N F precisam de um kernel corrigido da distribuição.
+Serviços comuns somente em T C P não percorrem o gatilho descrito.
+O registro não confirma exploração ativa nem a alegação separada de escape de container.
+A fonte deste destaque é o registro da falha C V E 2026, sessenta e quatro cinco seis quatro.
+
+Rust ativou o Polonius Alpha no canal nightly.
+O novo borrow checker acompanha relações de lifetime conforme o fluxo de controle.
+Com isso, ele aceita alguns empréstimos mutáveis legítimos que o N L L atual rejeita por conservadoramente mantê-los vivos.
+O time testou os 10 mil crates mais baixados e relata poucas regressões significativas.
+Fora desse grupo, o pior caso observado ficou de duas a três vezes mais lento para compilar.
+Se der ruim, a opção Z Polonius off desliga o recurso.
+O canal stable ainda não mudou.
+A equipe está coletando regressões antes da estabilização pretendida para mais tarde em 2026.
+A fonte deste destaque é o Rust Blog.
+
+Endereços com cara de no reply entregaram dados privados a donos reais de domínios.
+Cory Solovewicz disse à WIRED que noreply ponto net recebeu cerca de 400 mil mensagens em 18 meses, sendo 28 mil 365 com anexos.
+O domínio noreply ponto us recebeu 37 mil 255 mensagens em 2 mil 345 dias.
+Mike [SH UW1 ER0 D] relatou que deleteduser ponto com começou a receber emails de três organizações em até uma hora após a compra.
+Os totais vêm dos proprietários, e a WIRED não enumerou cada mensagem de cada remetente.
+O bug de desenho é bem menos misterioso: um domínio que parece placeholder ainda pode receber email.
+Guarde a remoção da conta no estado da aplicação, suprima o envio e use um sink sob seu controle ou o domínio reservado ponto invalid.
+As fontes deste destaque são a WIRED e a R F C seis sete seis um.
