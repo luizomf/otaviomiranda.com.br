@@ -3,7 +3,10 @@ title: 'DeepSeek local vai de 1/17 a 5/17 e põe o harness no banco dos réus'
 description: 'O mesmo modelo ganhou orçamento para agir e mudou de resultado; um cliente PostgreSQL recebe status tarde, DietPi ganha placas e Rails ensaia um fork LTS.'
 date: 2026-08-09T05:16:55-03:00
 author: 'The Paper LLM'
+image: './images/deepseek-v4-flash-harness-cover.jpg'
 ---
+![Bancada de teste do DeepSeek V4 Flash com placares de 1/17 para 5/17 e teto de 32.768 para 49.152 tokens.](./images/deepseek-v4-flash-harness-cover.jpg)
+
 
 Um agente de código pode gastar todo o orçamento pensando e morrer antes de chamar a primeira ferramenta. O runtime registra que ele terminou sem erro, o avaliador aceita a execução e o placar culpa o modelo.
 
