@@ -1,0 +1,106 @@
+DeepSeek local vai de um de dezessete a cinco de dezessete e põe o harness no banco dos réus.
+
+Um agente de código pode gastar todo o orçamento pensando e morrer antes de chamar a primeira ferramenta.
+O runtime registra que ele terminou sem erro, o avaliador aceita a execução e o placar culpa o modelo.
+Pronto, fabricamos um fracasso com documentação e tudo.
+
+Michael Asper encontrou esse problema ao rodar o DeepSeek V quatro Flash zero sete três um localmente no "SlopCodeBench".
+Em duas execuções sobre os mesmos testes, a pontuação estrita saiu de um de dezessete para cinco de dezessete.
+Depois, o teto de saída aumentou e outras partes da configuração mudaram.
+O salto não elege uma causa única.
+Ele deixa uma pergunta bem mais incômoda: o benchmark estava medindo os pesos ou a tubulação inteira ao redor deles?
+
+O DeepSeek ganhou espaço para chegar até a ferramenta.
+As duas execuções passaram pelos mesmos três problemas, dezessete checkpoints e três mil quinhentas e sessenta e nove execuções de teste cada.
+Na primeira, em sete de agosto, o limite máximo de saída era de trinta e dois mil setecentos e sessenta e oito tokens.
+Onze dos dezessete loops bateram no teto.
+Em alguns deles, o raciocínio foi cortado antes de qualquer chamada de ferramenta.
+
+No dia seguinte, o limite subiu para quarenta e nove mil cento e cinquenta e dois tokens.
+Os encerramentos pelo teto caíram de onze para três.
+A pontuação estrita passou de um de dezessete para cinco de dezessete, enquanto a pontuação core foi de dois de dezessete para dez de dezessete.
+Em resumo, no dia sete de agosto, o teto foi de trinta e dois mil setecentos e sessenta e oito tokens, com um resultado strict de um de dezessete e core de dois de dezessete.
+Nesse dia, onze dos dezessete loops terminaram no teto.
+No dia oito, o teto foi de quarenta e nove mil cento e cinquenta e dois tokens, com strict de cinco de dezessete e core de dez de dezessete.
+Dessa vez, três dos dezessete loops terminaram no teto.
+
+A multiplicação da pontuação chama atenção, mas o mecanismo é a parte útil.
+Um modelo de raciocínio pode consumir toda a saída elaborando a solução.
+Se o teto chega antes da ação, o agente não edita arquivo, não roda teste e não entrega patch.
+Ele ficou sem pista antes de decolar.
+
+Mesmo assim, os artefatos desses checkpoints truncados e sem ação apareciam com estado igual a ran, sem erro, e com a política marcada como aprovada.
+Tecnicamente, o loop rodou e não violou a política.
+Também não fez porra nenhuma.
+Num benchmark de agentes, isso precisa aparecer como falha de infraestrutura, separado do caso em que o modelo age e produz a solução errada.
+
+O placar melhor não aponta um único culpado.
+Dá vontade de jogar todo o ganho na conta dos dezesseis mil trezentos e oitenta e quatro tokens extras.
+O experimento não permite essa conclusão.
+A reserva de compactação e a quantização também mudaram entre as execuções.
+A segunda usou um quant comunitário Q dois Q quatro imatrix de noventa e um gigabytes.
+O teto maior explica mecanicamente a queda nos truncamentos.
+O restante da melhora não pode ser atribuído só a ele.
+
+A amostra é pequena: três problemas, dezessete checkpoints e nenhum problema resolvido por inteiro em qualquer uma das execuções.
+A análise expõe uma falha no processo de medição.
+Ela não demonstra que essa quantização local equivale ao DeepSeek hospedado, nem estabelece o desempenho geral do modelo.
+
+O ambiente usou pi zero ponto oitenta e quatro ponto zero, Python três ponto doze, contexto de cento e trinta e um mil e setenta e dois tokens e seed quarenta e dois.
+Isso não é decoração de ficha técnica.
+Um benchmark de agente mede pesos e quantização, servidor, janela de contexto, compactação, protocolo das ferramentas, timeout, harness e regra de pontuação.
+Mudou uma dessas peças? Então o nome do modelo já não identifica sozinho o sistema testado.
+
+Em outra análise, falamos de loops que podem destruir patches.
+O caso de agora é mais específico: o teto de saída matou mecanicamente loops do DeepSeek local.
+O avaliador classificou as execuções sem ação de um jeito que escondia essa diferença.
+
+Se você compara agentes locais, registre pelo menos o limite de saída, a reserva para compactação e a quantização.
+Registre também o motivo do encerramento e a identidade do modelo realmente servido.
+E dê nome completo ao custo: zero dólar significa que não houve cobrança por token.
+O hardware local ainda consome computação, energia e aquela tarde que você jurou que usaria para outra coisa.
+A fonte desta análise é o relato de Michael Asper, "Running DeepSeek V4 Flash 0731 locally on SlopCodeBench".
+
+Agora, os destaques rápidos de hoje.
+
+O PostgreSQL pode demorar a atualizar o status que um cliente ocioso enxerga após a promoção.
+Desde o PostgreSQL quatorze, in hot standby e default transaction read only chegam ao cliente por mensagens de status de parâmetro, chamadas "Parameter Status".
+Se uma réplica vira primária enquanto a sessão está quieta, o valor em cache só muda na resposta ao próximo comando.
+O estado interno do servidor já mudou, e um comando SHOW consulta esse valor atual.
+Poolers e roteadores precisam considerar essa janela.
+Não chega uma notificação assíncrona, e target session attrs é avaliado na conexão, sem redirecionar uma sessão já aberta.
+As fontes são a documentação do protocolo PostgreSQL e a explicação de Christophe Pettus.
+
+DietPi dez ponto seis ganhou imagens para Orange Pi quatro Pro, Orange Pi Zero três W e Odroid M um, M um S e M dois.
+As Orange Pi com Allwinner A sete três três ainda usam Linux seis ponto seis e U-Boot do fornecedor, enquanto o suporte mainline segue pendente.
+Imagem oficial do DietPi não invoca suporte upstream por decreto.
+A versão também adapta o instalador ao Immich versão três.
+Em instâncias existentes, os componentes duzentos e quinze e duzentos e dezesseis podem ser reinstalados pelo DietPi Software.
+O comando completo para fazer isso está no post escrito.
+A fonte são as notas de lançamento do DietPi dez ponto seis.
+
+Amiko quer virar um fork comunitário L T S compatível com Rails oito ponto x.
+Lucas Dohmen propõe manter essa linha, portar correções de segurança e melhorias compatíveis, e permitir a troca de gems com poucas substituições.
+Por enquanto, existem a comunidade e experimentos de implementação.
+O primeiro release ainda não existe, Amiko é um nome provisório, e escopo e viabilidade podem mudar.
+"Rails is done" é a avaliação de Dohmen sobre a maturidade do core, não uma posição oficial do Rails.
+É uma iniciativa para acompanhar.
+Ainda não há versão para colocar no calendário de migração.
+A fonte é o texto "Rails is done", de Lucas Dohmen.
+
+FastLanes transpõe os dados para decodificar deltas em paralelo.
+O "Unified Transport Layout" organiza mil e vinte e quatro valores em cadeias independentes e contíguas, modeladas sobre registradores virtuais de mil e vinte e quatro bits.
+A implementação pode quebrar as operações em vetores físicos de cento e vinte e oito, duzentos e cinquenta e seis ou quinhentos e doze bits.
+Ela pode usar S S E, NEON ou A V X sem amarrar o formato a uma largura específica.
+A explicação mostra como o layout abre esse paralelismo.
+Ela não traz benchmark novo, nem promete número de aceleração.
+As fontes são a explicação de David Anderson e o paper FastLanes no P V L D B.
+
+Gerar código ficou mais barato.
+Decidir onde ele cabe continua caro.
+Waldek Mastykarz compara os modelos a processadores de texto: eles facilitam a produção quando o problema está claro.
+Ownership, história, segurança, consumidores e restrições de um sistema maduro continuam nas mãos da equipe.
+É uma tese técnica do autor, não um benchmark de produtividade.
+A consequência prática é deixar invariantes, fronteiras, contratos e decisões legíveis para humanos e agentes.
+Gerar uma função depressa não decide onde o estado mora, nem quais integrações ela pode quebrar.
+A fonte é o texto "Coding is solved misses the point", de Waldek Mastykarz.
