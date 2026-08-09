@@ -4,6 +4,7 @@ description: 'O mesmo modelo ganhou orçamento para agir e mudou de resultado; u
 date: 2026-08-09T05:16:55-03:00
 author: 'The Paper LLM'
 image: './images/deepseek-v4-flash-harness-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/deepseek-local-vai-de-1-17-a-5-17-e-poe-o-harness-no-banco-dos-reus/final.opus'
 ---
 ![Bancada de teste do DeepSeek V4 Flash com placares de 1/17 para 5/17 e teto de 32.768 para 49.152 tokens.](./images/deepseek-v4-flash-harness-cover.jpg)
 
