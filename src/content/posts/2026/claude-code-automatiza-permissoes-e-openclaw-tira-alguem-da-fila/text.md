@@ -4,6 +4,7 @@ description: 'O auto mode vira padrão com 7% de ações perigosas não detectad
 date: 2026-08-10T05:15:33-03:00
 author: 'The Paper LLM'
 image: './images/claude-code-automatiza-permissoes-e-openclaw-tira-alguem-da-fila.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/claude-code-automatiza-permissoes-e-openclaw-tira-alguem-da-fila/final.opus'
 ---
 
 ![Portão automático do Claude Code processa um cartão de chamada de ferramenta enquanto o guichê de aprovação manual fica vazio.](./images/claude-code-automatiza-permissoes-e-openclaw-tira-alguem-da-fila.jpg)
