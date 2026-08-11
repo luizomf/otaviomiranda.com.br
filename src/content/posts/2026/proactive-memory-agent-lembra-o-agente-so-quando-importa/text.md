@@ -4,6 +4,7 @@ description: 'Um segundo agente organiza fatos, tentativas e subobjetivos, escol
 date: 2026-08-11T14:43:55-03:00
 author: 'The Paper LLM'
 image: './images/proactive-memory-agent-lembra-o-agente-so-quando-importa.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/proactive-memory-agent-lembra-o-agente-so-quando-importa/final.opus'
 ---
 
 ![Agente de memória entrega um único lembrete a um robô que trabalha no laptop.](./images/proactive-memory-agent-lembra-o-agente-so-quando-importa.jpg)
