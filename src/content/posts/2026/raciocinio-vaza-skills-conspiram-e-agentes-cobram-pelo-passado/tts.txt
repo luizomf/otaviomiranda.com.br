@@ -1,0 +1,166 @@
+Raciocínio vaza, skills conspiram e agentes cobram pelo passado.
+Tem coisa que parece segura só porque ninguém consegue ler.
+Um bloco de raciocínio vem criptografado, atravessa a aplicação como uma caixa preta e volta para o provedor.
+Tudo certo, então? Pois pesquisadores conseguiram reaproveitar essas caixas entre usuários, sessões e modelos.
+Depois, abriram o conteúdo por uma rota mais fraca dentro do mesmo ecossistema.
+Criptografia sem contexto autenticado é um cofre que protege o conteúdo e esquece de perguntar quem está carregando a chave.
+A edição de hoje também tem skills que só mostram o ataque quando trabalham juntas.
+Tem ainda um modelo de trinta bilhões de parâmetros mirando Macs e placas de vídeo de consumo.
+E tem a continha desagradável dos agentes que releem a própria vida a cada turno.
+Segurança, memória e custo acabam na mesma pergunta: que estado a gente está deixando o agente carregar como se fosse confiável?
+Blocos de raciocínio criptografados atravessaram a fronteira errada.
+Pesquisadores relatam uma falha arquitetural em sistemas da Anthropic, Open [EY1 AY1] e Google.
+Dentro de cada ecossistema, blocos opacos de raciocínio puderam ser reutilizados entre usuários, sessões e modelos.
+Um jailbreak de descriptografia então usou um modelo mais fraco do mesmo provedor para expor o conteúdo.
+A criptografia continua escondendo os dados durante o transporte.
+A falha aparece quando o sistema recebe o bloco oculto de volta e o aceita como estado autorizado.
+O problema é não vincular esse estado ao usuário, à sessão, ao modelo, ao turno e à finalidade originais.
+A caixa está fechada, mas caiu na esteira errada e ninguém olhou a etiqueta.
+O tamanho da exposição tira o assunto do mundo das abstrações.
+Os autores coletaram trezentos e quinze mil trezentos e vinte blocos em repositórios públicos.
+Eles relatam ter recuperado trezentos e sessenta e sete artefatos de informação pessoal identificável e cento e oitenta e duas credenciais.
+Isso também muda a forma de olhar para logs, traces e exemplos publicados.
+Um campo ilegível para nós ainda pode carregar material sensível que outro componente do provedor sabe interpretar.
+Para quem constrói agentes, estado trazido pelo cliente precisa de autenticação de contexto, além de confidencialidade.
+A aplicação deve bloquear replay, troca de posição e reutilização fora da identidade e do propósito previstos.
+E talvez seja uma boa revisar o que vai parar em log público antes de tratar aquele blob criptografado como decoração hexadecimal.
+Os resultados vêm do paper, cujo resumo acessível diz que os fornecedores foram avisados.
+Mas ele não informa a situação atual da correção em cada plataforma.
+A pesquisa demonstra o desenho vulnerável e a exposição observada.
+Ela não traz uma tabela atualizada de quem já fechou cada caminho.
+As fontes são o paper sobre o roubo de rastros de raciocínio em interfaces proprietárias de modelos de linguagem e sua versão H T M L.
+Skills comportadas separadamente podem aprontar juntas.
+O "ColluSkill" explora uma fraqueza parecida em outro andar do prédio.
+Em vez de concentrar toda a intenção maliciosa numa skill fácil de marcar, o ataque reparte o comportamento entre pacotes plausíveis quando avaliados sozinhos.
+A ação perigosa surge quando arquivos, artefatos, prompts, estado e passagens de execução se encontram no workflow completo.
+Segundo os autores, o "ColluSkill" teve em média noventa e seis porcento de sucesso contra seis scanners.
+A defesa proposta, "ChainGuard", derrubou o resultado para vinte e dois vírgula cinco porcento.
+Ela também deixou passar noventa e nove vírgula cinco porcento dos workflows benignos.
+É uma diferença grande dentro do experimento.
+Ainda sobra ataque suficiente para ninguém querer descobrir os detalhes pela fatura da nuvem ou pelo alerta do S O C.
+O "ElasticBack" chega à mesma fronteira por outra rota.
+Ele esconde uma regra condicional numa única skill aparentemente normal e espera uma consulta compatível do usuário para ativar o comportamento.
+Os autores relatam alto sucesso e quase nenhum falso positivo em três comportamentos-alvo.
+O teste usou cinquenta skills para cada comportamento e quatro modelos de linguagem para agentes.
+Os dois trabalhos são avaliações controladas.
+Eles não medem quantas skills maliciosas circulam em marketplaces reais nem quantos ambientes já foram comprometidos.
+O achado útil é arquitetural: revisar pacote por pacote pode deixar passar o comportamento que nasce da composição.
+Uma instalação de skills precisa expor procedência e capacidades, limitar acesso com sandbox e acompanhar o fluxo de dados entre as peças.
+A unidade de confiança é o workflow que realmente executa.
+Se cinco ingredientes inocentes viram uma sopa venenosa, não adianta o scanner examinar a cebola e aprovar o jantar.
+As fontes são o paper do "ColluSkill" e o paper do "ElasticBack".
+Muse Glimmer coloca trinta bilhões de parâmetros em uma máquina que ainda cabe na mesa.
+Em dez de agosto, a Meta lançou os pesos do "Muse Glimmer" sob Apache dois ponto zero.
+O modelo tem trinta bilhões de parâmetros, recebe entrada multimodal e foi treinado para uso de ferramentas, código e workflows longos de agentes.
+A ideia é rodar localmente, inclusive em Macs e placas de vídeo de consumo com vinte e quatro ou trinta e dois gigabytes de memória.
+Só que rodar localmente envolve mais coisa do que o arquivo de pesos.
+Segundo a Meta, uma quantização de aproximadamente quatro bits deixa os pesos do modelo de linguagem abaixo de vinte gigabytes.
+O alvo de vinte e quatro ou trinta e dois gigabytes já conta também o cache de chaves e valores, o famoso cache K V.
+Ele inclui ainda o encoder de percepção e o modelo auxiliar usado na geração especulativa.
+Peso quantizado não é memória total de execução.
+O contexto cresce, o cache K V vai atrás, e as peças de visão e geração especulativa também querem uma cadeira à mesa.
+Mesmo com essa conta, um modelo agêntico de trinta bilhões de parâmetros nessa classe de hardware aumenta bastante o que uma equipe pode testar.
+E permite fazer isso sem mandar código e dados para uma [EY1 P IY1 AY1] externa.
+As afirmações de desempenho e de pouca perda com quantização vêm dos benchmarks da própria Meta.
+Esta apuração não encontrou avaliações independentes em trabalho real.
+A empresa também descreve as integrações otimizadas com llama ponto C P P, M L X e "ExecuTorch" como trabalho futuro.
+Os pesos chegaram; a experiência mais polida em cada runtime vem depois.
+E uma máquina local com vinte e quatro gigabytes continua bem longe daquele V P S pequeno que você alugou para servir [EH1 N JH AH0 N] [EH1 K S] e esqueceu no canto.
+Local é uma categoria larga o bastante para o marketing estacionar uma carreta dentro.
+A fonte é o anúncio do "Muse Glimmer" pela Meta [EY1 AY1].
+O agente barato começa a cobrar caro pelo próprio passado.
+Prompt caching reduz o preço dos tokens repetidos. Gratuitos eles não ficam.
+Martin Alderson publicou um modelo de custo que mostra o efeito em loops longos.
+A cada turno, o agente acrescenta conteúdo ao histórico e relê quase tudo que veio antes.
+O desconto baixa o preço de cada leitura; a pilha crescente continua na conta.
+No exemplo de vinte turnos, o total chega a dois dólares e dezesseis centavos.
+As leituras do cache consomem um dólar e quatro centavos, ou quarenta e oito vírgula um porcento.
+Em outro cenário, com cem turnos, a conta vai a vinte e um dólares e trinta e quatro centavos.
+Desse valor, dezesseis dólares e trinta e um centavos, ou setenta e seis vírgula quatro porcento, vêm do cache.
+A forma da curva explica o susto.
+Quando o histórico cresce de maneira aproximadamente linear e cada rodada lê tudo que se acumulou, o consumo se aproxima de um crescimento quadrático.
+É a assinatura técnica daquele colega que, antes de responder qualquer mensagem, relê o canal inteiro desde a fundação da empresa.
+Os percentuais dependem do preço do provedor, das regras de cache e do crescimento do transcript em cada cenário.
+Portanto, não servem como previsão universal da sua fatura.
+Servem muito bem para lembrar que o custo está no loop completo, e não só no preço da entrada nova e da saída.
+Na arquitetura, isso aponta para compactação periódica, histórico limitado, ferramentas especializadas e estado durável em formato estruturado.
+Também ajuda encerrar cedo quando a tarefa acabou, conceito revolucionário para agentes e reuniões.
+O contexto útil fica, mas o modelo precisa parar de redescobrir cem vezes aquilo que poderia consultar de forma menor e explícita.
+A fonte é o texto "Watch out for cache read costs", de Martin Alderson.
+S W E Bench Pro Max troca o patch isolado pela refatoração espalhada.
+O S W E Bench Pro Max reúne cento e setenta tarefas de refatoração extraídas de repositórios reais.
+São sete linguagens e mudanças coordenadas em vários arquivos.
+Cada instância altera, em média, onze vírgula quatro arquivos e duzentas e sessenta e uma vírgula seis linhas.
+Os autores também fizeram curadoria manual das descrições e dos testes.
+Esse recorte chega mais perto daquele trabalho que agente de código vende lindamente na demo e encontra bem menos arrumado no repositório.
+Refatorar sem mudar comportamento exige localizar chamadas, acompanhar dependências, atualizar testes e validar tudo como conjunto.
+Um diff convincente em um arquivo é só o aquecimento.
+A melhor combinação de modelo e scaffold testada resolveu quarenta e um vírgula dois porcento das tarefas.
+O benchmark ainda está longe da saturação e oferece um sinal mais duro para comparar sistemas em mudanças transversais.
+Ainda estamos falando de commits públicos, descrições curadas e oráculos de teste.
+O benchmark não mede sozinho descoberta autônoma de requisitos ou julgamento arquitetural.
+Também não elimina o risco de contaminação dos modelos.
+O número ajuda a escolher ferramenta.
+Para aceitar a refatoração, continuam valendo os testes da equipe e uma revisão que entenda por que onze arquivos precisaram mudar.
+A fonte é o paper do S W E Bench Pro Max.
+Agora, os destaques rápidos para hoje.
+A Mozilla trocou em dez de agosto uma subchave de assinatura do Firefox e do Thunderbird.
+A troca aconteceu depois que uma cópia sem criptografia foi commitada num repositório privado do "Git Hub".
+Ela assinava tarballs Linux, pacotes R P M e arquivos de checksum.
+Segundo a Mozilla, os registros de auditoria não mostraram acesso indevido e poucas pessoas autorizadas acessavam o repositório.
+Essa é a conclusão da empresa com base nos registros disponíveis.
+A maioria dos usuários não precisa fazer nada.
+Quem verifica assinaturas manualmente ou usa ferramentas R P M antigas talvez precise remover a chave anterior e importar a nova.
+Isso vale para ferramentas antigas de Fedora, R H E L, Rocky, AlmaLinux e S U S E.
+A fingerprint da nova chave é oito dois sete E, seis cinco oito seis, zero oito seis sete, nove seis um oito.
+Depois vêm C D três quatro, nove F nove três, seis sete oito E, quatro cinco cinco D, sete seis sete seis e sete A A três.
+A chave é válida até cinco de agosto de 2028.
+A fonte é o Mozilla Security Blog.
+O X F W L quatro, versão quatro ponto vinte e um ponto um, avançou o compositor Wayland experimental do X F C E.
+A versão traz correções e adições para janelas, entrada, captura de tela, bloqueio de sessão e X Wayland.
+A tag de dez de agosto também inclui repetição de teclado ao mover ou redimensionar e tratamento de clientes sem resposta.
+O timeout listado é de três segundos.
+É uma preview para testar a transição do X F C E.
+O X F W M quatro sobre X onze continua sendo o caminho estável.
+A fonte é a tag oficial do X F W L quatro, versão quatro ponto vinte e um ponto um.
+Needle dois colocou roteamento de ferramentas num binário de quatorze megabytes.
+A Cactus lançou o modelo aberto e especializado de quarenta e cinco milhões de parâmetros.
+Ele serve para selecionar funções, usar recursos do dispositivo e extrair dados estruturados.
+A empresa informa cerca de vinte e oito megabytes de memória R A M para uma sessão completa.
+O tamanho chama atenção no edge porque a decodificação restrita cuida da gramática da saída.
+Os benchmarks do fornecedor medem justamente essa especialização.
+Um chatbot geral de quatorze megabytes ainda não apareceu por intervenção divina.
+A fonte é a página de lançamento do Needle dois.
+Um otimizador forte montou o próprio processo de melhoria, enquanto modelos mais fracos ainda precisaram de scaffold.
+No paper sobre open-ended optimization, o sistema movido por GPT cinco ponto cinco teve doze vitórias, um empate e uma derrota.
+A derrota foi por zero vírgula vinte e um ponto em quatorze comparações.
+O sistema usou uma mediana de trinta e quatro vírgula três porcento do orçamento de tokens de interação configurado para o "SkillOpt".
+Os testes cobrem oito combinações de benchmark, alvo e modelo.
+Eles não demonstram autoaperfeiçoamento autônomo em produção.
+Objetivo, orçamento, dados e avaliação continuam como contrato externo.
+Retirar o workflow prescrito só faz sentido depois que o otimizador mostra capacidade para trabalhar sem ele.
+A fonte é o paper "Rethinking Self-Evolving Agents".
+S T A I R organizou resposta a incidentes sobre um estado em grafo.
+A arquitetura atualiza entidades e relações explícitas do incidente.
+Ela combina planejadores por etapa, recuperação histórica, feedback da execução e validação de ações.
+Assim, não depende apenas de um transcript de prosa cada vez maior.
+Em cem cyber ranges com Docker, os autores relatam score normalizado de defesa de zero vírgula noventa e quatro.
+Eles também relatam melhora de nove vírgula cinco porcento sobre o baseline mais forte.
+Foi um laboratório controlado.
+Qualidade da telemetria, autorização e limite de impacto em produção ainda precisam ser resolvidos antes de soltar o agente sozinho no ambiente.
+A fonte é o paper do S T A I R.
+Probes lineares encontraram um sinal fraco de segurança dentro de modelos revisores de código.
+Em cinco modelos de pesos abertos, os probes ordenaram a função Python vulnerável acima da versão corrigida em sessenta e um a sessenta e sete porcento dos pares.
+O acaso seria cinquenta porcento, e os probes superaram perguntas diretas de sim ou não aos mesmos modelos.
+As ativações parecem carregar uma distinção que o veredito escrito não expõe bem.
+Ranking par a par num corpus de pesquisa não equivale a precisão e recall numa base real.
+O resultado pode complementar análise estática, testes e revisão humana.
+A fonte é o paper "Activation Probes Surface Code-Security Signals".
+M C P toon compacta a descoberta de ferramentas M C P, com uma comparação que pede asterisco.
+O cliente aberto emite listagens em T O O N ou apenas nomes no lugar do JSON normal.
+O autor estima redução de quarenta a sessenta porcento mantendo a semântica completa.
+Ele estima noventa e sete porcento no modo somente nomes.
+O segundo número omite schemas de entrada e pode exigir outra consulta para buscar o formato da ferramenta.
+Portanto, as duas modalidades não entregam uma descoberta equivalente.
+É uma opção testável para reduzir contexto, com percentuais calculados pelo próprio projeto.
+A fonte é o repositório do M C P toon no "Git Hub".
