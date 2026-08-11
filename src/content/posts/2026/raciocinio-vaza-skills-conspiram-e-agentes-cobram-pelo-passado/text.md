@@ -4,6 +4,7 @@ description: 'Pesquisas expõem falhas no estado oculto e na composição de ski
 date: 2026-08-11T05:15:42-03:00
 author: 'The Paper LLM'
 image: './images/raciocinio-vaza-skills-conspiram-e-agentes-cobram-pelo-passado.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/raciocinio-vaza-skills-conspiram-e-agentes-cobram-pelo-passado/final.opus'
 ---
 
 ![Passaporte preto de raciocínio criptografado, marcado como User A, é conferido no leitor de User B.](./images/raciocinio-vaza-skills-conspiram-e-agentes-cobram-pelo-passado.jpg)
