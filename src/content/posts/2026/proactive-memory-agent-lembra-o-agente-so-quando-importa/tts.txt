@@ -1,0 +1,103 @@
+"Proactive Memory Agent" lembra o agente só quando importa.
+Um agente passa vinte minutos investigando um erro, encontra a causa, tenta duas correções e anota um requisito importante.
+Três chamadas depois, toma uma decisão como se nada daquilo tivesse acontecido.
+A informação continua no transcript. Só parou de mandar no comportamento.
+Yifan Wu e coautores deram um nome ao sumiço: degradação do estado comportamental, ou "behavioral state decay".
+A proposta coloca um segundo agente para acompanhar o trabalho, organizar o que importa e decidir, antes da próxima ação, se vale lembrar o colega ou ficar quieto.
+Sim, chegamos à inteligência artificial que diz para outra inteligência artificial: você já tentou isso.
+Quem nunca trabalhou em equipe que atire o primeiro ticket duplicado.
+A informação está no contexto. O agente só não usa.
+Quando a gente fala de memória para agentes, o primeiro suspeito costuma ser o armazenamento.
+A janela encheu, o contexto foi compactado ou uma mensagem antiga ficou para trás.
+O paper descreve outro caso: requisitos, fatos do ambiente, tentativas, diagnósticos e subobjetivos continuam no histórico, mas deixam de influenciar a próxima decisão.
+Um transcript longo mistura descoberta importante, saída de ferramenta, conversa, hipótese abandonada e repetição.
+Está tudo ali. Só que despejar ainda mais texto no prompt pode transformar memória em arquivo morto: muito bem guardado e completamente inútil na hora de agir.
+O Proactive Memory Agent acrescenta uma pergunta à recuperação: isso precisa entrar na próxima chamada agora?
+Ficar em silêncio é uma ação explícita.
+A memória pode deixar o agente trabalhar quando não tem nada útil para acrescentar, uma habilidade que seria bem-vinda em muita reunião.
+A fonte deste bloco é a seção um do paper "Remember When It Matters".
+Um agente cuida do banco e escolhe a hora de cutucar.
+A arquitetura mantém o agente que executa a tarefa e adiciona um agente de memória com duas fases.
+Primeiro, ele edita um banco estruturado. Pode salvar, atualizar ou apagar informações em três grupos.
+O primeiro grupo é um estado privado, com progresso e riscos que não precisam entrar no prompt de ação.
+O segundo reúne memórias de conhecimento, com requisitos e fatos relativamente estáveis do ambiente.
+O terceiro reúne memórias procedurais, com tentativas, erros, diagnósticos e soluções.
+Depois, o agente de memória consulta o banco e escolhe entre produzir um lembrete específico ou não intervir.
+Se houver lembrete, ele entra como contexto transitório apenas na próxima chamada do agente de ação. O banco inteiro fica fora do caminho.
+Essa divisão tenta manter o componente no próprio emprego.
+A primeira chamada mexe na memória. A segunda decide entre lembrete e silêncio.
+Assim, ele tem menos espaço para virar outro planejador geral disputando o volante. Tem uma cerca.
+Modelo de linguagem, como gato, ainda merece supervisão perto de qualquer limite desenhado no chão.
+Na configuração principal dos experimentos, o agente de memória recebe a descrição da tarefa, as oito mensagens mais recentes e o banco estruturado.
+Ele roda no primeiro passo e em todos os seguintes.
+O plug and play dos autores quer dizer que o modelo e a política do agente de ação continuam sem alteração ou novo treinamento.
+Ainda sobra integração para o harness: chamar outro modelo, persistir o banco e injetar o lembrete.
+As fontes são a seção três, sobre arquitetura, e a seção quatro ponto um, sobre configuração experimental, do paper.
+O agente mais fraco ganhou mais.
+Nos resultados dos autores, Claude Sonnet quatro ponto cinco saiu de trinta e sete vírgula seis porcento para quarenta e cinco vírgula nove porcento.
+Isso aconteceu na métrica pass at one do Terminal Bench dois ponto zero.
+São oito vírgula três pontos percentuais de ganho.
+A comparação considerou oitenta e cinco tarefas válidas das oitenta e nove configuradas.
+Quatro tarefas saíram por falhas de Docker sem relação com o comportamento do agente.
+No Tau ao quadrado Bench, Sonnet passou de cinquenta e cinco vírgula zero porcento para sessenta e um vírgula oito porcento em duzentas e setenta e oito tarefas.
+Eram cinquenta tarefas de airline, cento e quatorze de retail e cento e quatorze de telecom.
+Nos dois benchmarks, Claude Opus quatro ponto seis fazia o papel de agente de memória.
+Quando Opus quatro ponto seis também virou o agente de ação, a diferença encolheu.
+O Terminal Bench foi de quarenta e três vírgula cinco porcento para quarenta e cinco vírgula nove porcento, mais dois vírgula quatro pontos.
+No Tau ao quadrado Bench, foi de sessenta e seis vírgula dois porcento para sessenta e oito vírgula sete porcento, mais dois vírgula cinco pontos.
+Dentro desses experimentos, a memória produziu um delta maior sobre o baseline mais baixo do Sonnet.
+Isso ainda é um resultado dos autores, não uma lei universal sobre modelos fortes e fracos.
+As ablações deixam o desenho mais interessante.
+Manter o banco e escolher quando intervir produziu resultados mais equilibrados entre os domínios do que quatro alternativas.
+As alternativas eram expor tudo, forçar lembrete em cada passo, orientar sem banco ou recuperar as dez entradas mais próximas com Mem zero.
+O modo que sempre injetava lembrete ficou zero vírgula três ponto à frente no micro average.
+Os próprios autores tratam essa diferença como variação esperada, e não como superioridade robusta.
+Essa rodada de ablação tem números próprios.
+O sistema completo aparece, por exemplo, com cinquenta e sete vírgula zero porcento em retail e sessenta e um vírgula dois porcento na média ponderada.
+Na comparação principal, os valores são cinquenta e oito vírgula oito porcento e sessenta e um vírgula oito porcento.
+São execuções e condições diferentes.
+Misturar as colunas para deixar o placar bonito seria uma demonstração bastante criativa de degradação do estado editorial.
+O Tau ao quadrado Bench também usa uma única conversa amostrada por episódio, e o paper não apresenta intervalos de confiança nem repetições completas.
+Diferenças pequenas não sustentam um ranking definitivo.
+O trabalho permanece no preprint versão um, publicado em nove de julho, e esta apuração não encontrou validação independente.
+As fontes são a tabela um, com os resultados principais, e a tabela dois, com as ablações, do paper.
+Uma memória menor ajudou, mas a receita não veio junto.
+Os autores também fizeram um experimento preliminar com um modelo de memória de pesos abertos.
+Treinaram o Qwen três ponto cinco, vinte e sete B, com S F T e G R P O.
+Mantiveram o Qwen três ponto cinco, cento e vinte e dois B, A dez B, congelado como agente de ação e avaliaram a transferência no conjunto retido do Terminal Bench.
+A métrica pass at one reportada foi de trinta e sete vírgula seis porcento para quarenta e um vírgula um porcento.
+Isso representa um ganho de três vírgula cinco pontos percentuais.
+O resultado sugere que dá para especializar a função de memória em vez de entregá-la sempre a um modelo proprietário maior.
+Só que o repositório não publica os pesos nem a receita completa desse Qwen treinado.
+Dá para conferir o número no paper. O material público dos autores ainda não permite reproduzi-lo.
+A fonte é a seção quatro ponto cinco e a tabela quatro do paper.
+O código chegou depois e mostrou onde a memória mora.
+Em dez de julho, mencionamos rapidamente o companheiro de memória que injeta lembretes na hora certa.
+Quatro dias depois, os autores publicaram a implementação sob Apache dois ponto zero, com configuração do Terminal Bench e trajetórias para inspeção.
+O código implementa as duas fases, as operações no banco e duas respostas: contexto para ação e nenhuma intervenção.
+Quando o banco passa do limite configurado, um filtro B M vinte e cinco reduz o material antes da chamada.
+A tal memória do agente fica bem menos mística quando aparece no código: estado persistido, seleção lexical, duas inferências e um ponto exato para inserir contexto.
+O projeto exige Python três ponto doze ou mais recente e usa Lite L L M.
+O runner do Terminal Bench trabalha com Harbor e Enroot, além de trazer uma alternativa documentada em Docker.
+Há também cinco pares de trajetórias, cada um com baseline e versão com memória, para comparar onde uma intervenção mudou o caminho.
+Até a apuração de onze de agosto, o repositório continuava apenas com o commit inicial de quatorze de julho.
+O read me ensina a reproduzir o Terminal Bench, mas não o Tau ao quadrado Bench.
+Já dá para abrir, inspecionar e testar o padrão.
+Reproduzir todos os resultados do paper com um comando e uma quantidade simbólica de fé ainda não entrou no pacote.
+As fontes são a implementação do agente de memória, o read me do projeto e o commit inicial de quatorze de julho, todos no Git Hub.
+Lembrar melhor também entra na fatura.
+Para agentes de coding ou automações longas, esse padrão oferece um lugar explícito para requisitos, fatos do ambiente, tentativas e subobjetivos.
+Ele pode reduzir repetição e decisões que contradizem descobertas anteriores sem despejar o passado inteiro em cada chamada.
+A conta chega junto.
+Na configuração principal, o agente de memória faz outra inferência no primeiro passo e em todos os seguintes.
+Isso adiciona tokens, latência, persistência e outro modelo capaz de errar.
+O paper relata lembretes que repetem informação, transformam hipótese em certeza ou provocam verificações desnecessárias.
+Eu compararia pelo menos três configurações no workload real: baseline, banco sempre exposto e intervenção seletiva.
+Acerto sozinho conta metade da história.
+Também entram chamadas extras, tokens, latência, frequência de intervenções, repetições evitadas e regressões causadas por lembretes ruins.
+Os ganhos mudaram conforme o benchmark e a força do agente de ação.
+Seu repositório não assinou contrato para se comportar como uma tabela do paper.
+A melhor ideia talvez seja colocar o silêncio na interface.
+Memória boa aparece quando consegue mudar a próxima decisão.
+No resto do tempo, deixa o agente trabalhar.
+A fonte deste bloco é o paper "Remember When It Matters".
