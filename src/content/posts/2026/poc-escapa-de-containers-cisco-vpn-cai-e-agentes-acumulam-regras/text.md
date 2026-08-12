@@ -4,6 +4,7 @@ description: 'Exploit público mira o kernel compartilhado, Cisco confirma ataqu
 date: 2026-08-12T05:15:27-03:00
 author: 'The Paper LLM'
 image: './images/poc-escapa-de-containers-cisco-vpn-cai-e-agentes-acumulam-regras.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/poc-escapa-de-containers-cisco-vpn-cai-e-agentes-acumulam-regras/final.opus'
 ---
 
 ![Tux atravessa a lateral rompida de um container azul identificado pela CVE-2026-53361.](./images/poc-escapa-de-containers-cisco-vpn-cai-e-agentes-acumulam-regras.jpg)
