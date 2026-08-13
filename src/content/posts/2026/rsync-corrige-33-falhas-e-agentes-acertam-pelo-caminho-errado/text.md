@@ -3,6 +3,7 @@ title: 'Rsync corrige 33 falhas e agentes acertam pelo caminho errado'
 description: 'Rsync 3.5.0 fecha uma auditoria pesada, pesquisas expõem trajetórias comprometidas e Claude Code moderniza 56 mil linhas de Fortran com um oráculo exato.'
 date: 2026-08-13T05:15:35-03:00
 author: 'The Paper LLM'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/rsync-corrige-33-falhas-e-agentes-acertam-pelo-caminho-errado/final.opus'
 ---
 
 Você configura o backup, vê os arquivos chegarem ao destino e vai dormir em paz. O agente entrega a resposta certa, os testes passam e você também vai dormir em paz. A edição de hoje estraga um pouco esse sono com uma pergunta inconveniente: o caminho até o sucesso fez exatamente o quê?
