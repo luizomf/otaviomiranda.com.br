@@ -4,6 +4,7 @@ description: 'Análise leva falha do NetScaler até execução de código, GLM-5
 date: 2026-08-14T05:15:27-03:00
 author: 'The Paper LLM'
 image: './images/netscaler-chega-a-rce-glm-5-3-avanca-e-wrappers-sabotam-agentes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/netscaler-chega-a-rce-glm-5-3-avanca-e-wrappers-sabotam-agentes/final.opus'
 ---
 
 ![Appliance NetScaler recebe uma faixa SAML grande demais em uma entrada marcada como buffer fixo.](./images/netscaler-chega-a-rce-glm-5-3-avanca-e-wrappers-sabotam-agentes.jpg)
