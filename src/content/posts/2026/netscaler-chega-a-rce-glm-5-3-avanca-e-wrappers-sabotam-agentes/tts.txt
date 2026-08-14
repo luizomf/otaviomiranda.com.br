@@ -1,0 +1,228 @@
+NetScaler chega a R C E, GLM cinco ponto três avança e wrappers sabotam agentes.
+
+Você recebe uma entrada SAML, normaliza a assinatura e copia o resultado para um buffer de tamanho fixo.
+Então, o que poderia dar errado?
+
+Segundo uma nova análise da watchTowr, dá para começar com um estouro de memória e terminar executando código remotamente, sem autenticação, num NetScaler.
+
+A edição também traz o GLM cinco ponto três, que manteve o modelo-base e concentrou os ganhos no pós-treinamento.
+Além disso, duas pesquisas mostram um problema em comum.
+Às vezes, o agente fez tudo certo e o wrapper estragou o comando.
+Em outras, ele corrigiu uma falha e ressuscitou outra que já estava resolvida.
+
+O painel mostra verde. A infraestrutura pede os recibos.
+
+A falha do NetScaler chega à execução remota de código.
+
+A watchTowr publicou em 14 de agosto uma análise técnica de uma falha de estouro de memória no NetScaler A D C e Gateway.
+Os pesquisadores acreditam que o bug seja a C V E 2026, oitenta e quatro cinco dois, publicada pelo N V D em 30 de junho.
+Mas eles não conseguem ligar com certeza cada C V E da Citrix ao pesquisador creditado.
+Essa identificação é uma avaliação da watchTowr, e não uma correspondência confirmada pela Citrix.
+
+O caminho demonstrado começa antes da autenticação, durante o processamento de SAML.
+A canonicalização normaliza a parte SignedInfo de uma assinatura antes de verificá-la.
+No build analisado, o NetScaler copiava dados grandes e controlados pelo atacante para um buffer de tamanho fixo no packet engine, sem conferir o tamanho.
+A watchTowr levou o estouro no heap até execução de código.
+
+O N V D registra um impacto mais limitado, com negação de serviço ou comportamento imprevisível, e atribui à falha o C V S S versão três ponto um de nove vírgula oito.
+A demonstração de R C E vem da análise nova da watchTowr.
+
+Para quem defende o ambiente, basta o pedaço útil da história.
+Um appliance exposto para autenticação virou a porta de entrada demonstrada, e o caminho analisado alcançava equipamentos configurados com SAML.
+Não precisamos transformar a correção numa aula prática de exploit.
+
+As linhas afetadas são NetScaler A D C e Gateway quatorze ponto um, anteriores à quatorze ponto um, setenta e dois ponto sessenta e um.
+Também está afetada a linha treze ponto um, em versões anteriores à treze ponto um, sessenta e três ponto dezoito.
+Para FIPS ou N D c P P treze ponto um, a primeira versão fora da faixa afetada é a treze ponto um, trinta e sete ponto duzentos e setenta e dois.
+
+Se você opera um desses appliances, confira o build que está realmente instalado e atualize para uma versão corrigida.
+Borda de rede é um lugar péssimo para guardar um “depois eu vejo”.
+
+As fontes são o registro da C V E 2026, oitenta e quatro cinco dois, no N V D, e a análise técnica da watchTowr Labs.
+
+GLM cinco ponto três avança no pós-treinamento sem trocar o modelo-base.
+
+A Z ponto A I lançou o GLM cinco ponto três em 14 de agosto usando o mesmo modelo-base do GLM cinco ponto dois.
+Segundo a empresa, os ganhos vieram do pós-treinamento em ambientes mais longos, etapa que molda o comportamento depois que a base já foi treinada.
+
+Em outras palavras, a Z ponto A I tentou extrair mais capacidade do mesmo alicerce.
+Desta vez, o número novo pintado na porta não esconde outro alicerce.
+
+A [EY1 P IY1 AY1] e o Coding Plan já estão disponíveis.
+Os pesos públicos foram prometidos para dali a duas semanas, então a execução local ainda precisa esperar.
+Na [EY1 P IY1 AY1], o modelo aceita esforço de raciocínio low, high e max.
+A opção de desativar o raciocínio saiu.
+
+Nos benchmarks publicados pela Z ponto A I, o Terminal Bench três ponto zero subiu de quatro vírgula seis para vinte e oito vírgula três.
+A comparação vai do GLM cinco ponto dois ao GLM cinco ponto três.
+O DeepSWE versão um ponto um passou de quarenta e seis vírgula dois para sessenta e seis vírgula nove.
+No CyberGym, o resultado foi de setenta e sete vírgula dois porcento para oitenta e quatro vírgula cinco porcento.
+A medição usou mil quinhentas e sete tarefas, com Pass arroba um de uma única execução e Claude Code dois ponto um ponto duzentos e sete no arranjo divulgado.
+
+Os números são do fornecedor e dependem do harness, do nível de esforço, dos limites de tokens e da forma como os timeouts foram normalizados.
+Vários resultados vêm de uma única execução.
+Para quem usa agente de código, a [EY1 P IY1 AY1] já permite testar o modelo no próprio repositório.
+O placar é um convite para abrir o terminal, não um contrato assinado pelo seu código.
+
+O avanço no CyberGym também aumenta uma capacidade de uso duplo.
+Ela serve para avaliação e defesa e fortalece tarefas ofensivas.
+A [EY1 P IY1 AY1] chegou agora.
+Pesos, execução local, controles de ambiente e validação independente ficam para depois.
+
+A fonte é o anúncio do GLM cinco ponto três pela Z ponto A I.
+
+QuoteBench encontra o bug entre o agente e o shell.
+
+O agente gera um comando Bash correto.
+O harness pega o texto, enfia dentro de S S H, de sh com a opção c, de integração contínua ou de um wrapper de container, e entrega outra coisa ao shell.
+Aspas, variáveis e metacaracteres passam por mais um parser e mudam de significado.
+
+Depois, o benchmark culpa o modelo.
+O modelo nem sabia que havia outra catraca no corredor.
+
+O QuoteBench foi criado para isolar esse problema.
+São cinquenta e seis tarefas de uma única tentativa, divididas em quatorze famílias derivadas de incidentes, com validação exata do estado final.
+Status de saída zero não encerra a conversa.
+Arquivo, valor e efeito precisam terminar exatamente como a tarefa pediu.
+
+Os autores reproduziram a mesma saída do modelo por dois caminhos.
+Em oito configurações avaliadas na mesma janela, um parser adicional deliberadamente sem escape derrubou bastante a taxa de sucesso.
+A queda ficou entre cinquenta e cinco vírgula quatro e setenta e três vírgula dois pontos percentuais.
+Quando os agentes eram avisados dessa fronteira, seis configurações recuperaram de trinta vírgula quatro a sessenta vírgula sete pontos.
+
+O experimento isola um parser defeituoso específico e colocado ali de propósito.
+Ele não mede a frequência desse erro em produção.
+Mesmo assim, a lição operacional é boa.
+Preserve as fronteiras dos comandos, faça escape no ponto de interpolação, documente o caminho inteiro de execução e valide o estado final.
+
+Comando não é água mineral lacrada.
+Cada wrapper pode cozinhar a string outra vez.
+Quando o harness esconde essa transformação, o benchmark mede modelo e encanamento com o mesmo nome e manda a conta inteira para o modelo.
+
+A fonte é o paper do QuoteBench.
+
+O agente corrige o Terraform e quebra uma regra que já passava.
+
+Correção iterativa de infraestrutura como código costuma seguir um ciclo simpático.
+O agente edita o Terraform, recebe as falhas de terraform validate e Checkov, corrige de novo e repete até o placar melhorar.
+
+Aí, a última edição resolve a regra atual e traz de volta uma falha de segurança que já tinha sumido.
+O placar subiu de um lado e abriu um buraco do outro.
+
+Um novo estudo analisou cinco mil novecentas e sessenta e oito linhas do tempo de cenários, com quatro mil quatrocentas e quarenta transições e trinta checks C I S do Checkov.
+Pela detecção inclusiva, houve regressão em treze vírgula oito porcento dos cenários.
+Como esse número contém artefatos de medição em resultados com vários recursos, o critério estrito e conservador é o mais útil: três vírgula três porcento.
+
+Entre as causas classificadas, reestruturações de recursos responderam por setenta e nove porcento.
+As transições com regressão também tiveram duas vírgula seis vezes mais churn.
+Diff grande não prova defeito, mas nesse conjunto ele funcionou como um ótimo alarme para o humano largar a caneca e prestar atenção.
+
+O recorte tem limites bem definidos.
+Os dados foram coletados em dezembro de 2024 com Gemini dois ponto zero Flash e Mistral Large.
+As configurações tiveram execuções únicas e algumas execuções teóricas ficaram ausentes.
+Portanto, os três vírgula três porcento descrevem o critério conservador desse estudo, naquele arranjo.
+Não são a taxa universal dos agentes atuais.
+
+Em produção, guarde o melhor artefato já validado.
+Rode os checks de política depois de cada mudança, compare o resultado por recurso e mande reestruturações extensas para revisão.
+Um relatório cumulativo lembra que o agente passou em algum momento.
+O deploy recebe o arquivo que sobrou no final.
+
+A fonte é o paper “Does Fixing Break Security?”.
+
+GAIA zero ponto vinte e três põe a autorização em todas as portas.
+
+A [EY1 EH1 M D IY1] lançou o GAIA zero ponto vinte e três com um hub de agentes no terminal e suporte a skills.
+A parte mais interessante da release está nas portas laterais.
+Confirmações para ações com consequência agora valem no terminal, na [EY1 P IY1 AY1] local e nos caminhos via M C P.
+Quando a classificação fica incerta, o sistema falha fechado.
+
+Esse desenho corrige um erro arquitetural comum.
+Uma confirmação bonita na interface gráfica serve para pouca coisa quando a mesma ferramenta mutável continua acessível por outro transporte.
+A autorização precisa acontecer logo antes da execução e cobrir todo caminho que chega ao efeito.
+
+A versão também prende o M C P no endereço local cento e vinte e sete ponto zero ponto zero ponto um por padrão.
+Ela exige token de autenticação e bloqueia origens arbitrárias com credenciais.
+Servidores M C P passam a ser iniciados sem shell.
+O diretório oculto gaia, dentro da pasta pessoal do usuário, recebeu proteção.
+E o SQL fornecido pelo modelo fica impedido de executar comandos de banco.
+
+Assinaturas, checksums, níveis de confiança e auditoria estática das skills adicionam camadas de controle.
+Nenhuma delas prova que uma skill é segura.
+Conteúdo não verificado ainda exige confiança explícita.
+
+Segurança de agente adora um botão de “permitir”.
+O GAIA zero ponto vinte e três pelo menos tenta colocar esse botão em todas as entradas, em vez de deixá-lo apenas naquela usada durante a demo.
+
+Usuários do GAIA devem atualizar para a versão zero ponto vinte e três ponto zero, que depende do Lemonade Server onze ponto cinco ponto zero.
+Para quem mantém outro harness, a release oferece uma checklist bem concreta para o limite de execução.
+Transporte diferente continua sujeito à mesma política.
+
+A fonte são as notas de lançamento do [EY1 EH1 M D IY1] GAIA zero ponto vinte e três ponto zero.
+
+Agora, os destaques rápidos para hoje.
+
+PostgreSQL dezoito pode voltar à entrada e saída síncrona quando a fila de workers enche.
+Com o método de entrada e saída configurado como worker, o próprio backend solicitante executa a operação quando a fila de submissão satura.
+A pressão aparece como AioWorkerSubmissionQueue.
+A quantidade de workers de entrada e saída começa em três, aceita de um a trinta e dois e muda por reload.
+Já a troca do método entre sync, worker e io uring exige restart. Dimensione sob carga.
+O desempenho e a disponibilidade de io uring dependem de build, kernel, política de segurança, container e workload.
+As fontes são a documentação do PostgreSQL dezoito e o guia da The Build.
+
+DeepSeek dividiu o preço da [EY1 P IY1 AY1] versão quatro entre pico e fora de pico.
+A empresa lançou o V quatro Pro com esforço de raciocínio low, high e max, e anunciou desconto de cinquenta porcento fora do pico.
+Jobs que toleram espera agora podem entrar na agenda.
+A conta real precisa separar entrada em cache, entrada sem cache e saída.
+Os valores absolutos aparecem numa imagem no anúncio oficial.
+A fonte é a documentação da [EY1 P IY1 AY1] da DeepSeek.
+
+OpenTelemetry mostra como eventos de entidades viram um inventário temporal da infraestrutura.
+O guia oficial trata esses eventos como logs O T L P e recomenda armazenamento append-only, identidade imutável e dois tempos separados.
+Um marca quando a realidade mudou, e o outro, quando o sistema soube da mudança.
+Relações chegaram na especificação um ponto cinquenta e oito ponto zero e permitem projetar hosts, serviços e vínculos como grafo.
+O modelo e as convenções continuam em desenvolvimento, então os nomes dos atributos podem mudar.
+As fontes são o guia do OpenTelemetry e a especificação de eventos de entidades.
+
+L L M Gemini zero ponto trinta e três separa raciocínio e ferramentas em eventos tipados.
+A release preserva thought signatures, reproduz corretamente históricos sem estado e expõe Google Search, contexto de U R L e execução de código como ferramentas do servidor.
+Isso funciona inclusive junto de funções locais.
+Ela exige L L M zero ponto trinta e dois ou posterior.
+Quem alternar entre Gemini Embedding dois e Gemini Embedding zero zero um terá de gerar os embeddings novamente, pois os espaços vetoriais são incompatíveis.
+A fonte é a release do L L M Gemini zero ponto trinta e três.
+
+SQLite Utils quatro ponto dois ponto um corrige o crash introduzido pela quatro ponto dois.
+A versão quatro ponto dois ampliou a transformação de tabelas para preservar checks, restrições únicas, índices e comentários.
+Ela também passou a preservar estado de autoincremento e chaves estrangeiras compostas durante reconstruções de tabela.
+Só que saiu sem o pacote typing extensions e podia cair com a mensagem “No module named typing extensions”.
+Instale a corretiva quatro ponto dois ponto um.
+As fontes são o changelog da versão quatro ponto dois e a correção na quatro ponto dois ponto um.
+
+AutoDesign melhorou um harness de geração de pôsteres a partir de papers.
+Um metaotimizador usou feedback de rollouts para ajustar prompts, ferramentas, regras de iteração e validação ao redor do agente.
+No PosterBench dos autores, com cem papers, o sistema marcou setenta e oito vírgula trinta e dois.
+Em sete configurações controladas, o harness aprendido elevou a média de cinquenta e quatro vírgula noventa e nove para sessenta e sete vírgula trinta e nove.
+O resultado vale para esse benchmark de pôsteres e ainda não demonstra ganho geral em agentes de código.
+A fonte é o paper do AutoDesign.
+
+StateBridge faz agentes trocarem estados internos em vez de texto.
+O método alinha vetores de forma fechada e ortogonal, depois coloca os estados ocultos finais de um modelo como prefixo contínuo do outro.
+Os autores relatam melhor resultado ou empate em vinte e dois de vinte e seis pares de modelo e tarefa.
+O teste usou quatro modelos de duas famílias em matemática, código e perguntas e respostas.
+A técnica exige acesso aos estados internos, acopla remetente e receptor e perde a auditabilidade da mensagem em texto.
+A fonte é o paper do StateBridge.
+
+Mimir versão um oferece um modelo de raciocínio de um bilhão de parâmetros para teste local.
+A Danish Foundation Models treinou o modelo do zero com uma mistura de cento e sessenta e um datasets e publicou os pesos no Hugging Face.
+Os autores avaliaram vinte benchmarks de inglês, matemática, código e dinamarquês.
+As comparações concretas foram principalmente contra modelos pequenos, como Qwen três ponto cinco, quatro B, e Gemma quatro E dois B.
+“Frontier” é o posicionamento dos autores, não uma equivalência geral com os maiores modelos fechados.
+A fonte é o paper do Mimir versão um.
+
+Reduced Matrix Multiplication corta partes da multiplicação conforme a entrada.
+O R M M escolhe fatias informativas durante a inferência, sem alterar os pesos, e usa uma taxa de retenção para negociar precisão e custo.
+Os autores testaram modelos de um bilhão a setenta bilhões de parâmetros.
+Eles mediram ganhos de tempo com kernels próprios em NVIDIA A cem, sobretudo em sequências longas.
+O ganho depende de kernel, modelo, tarefa, componente, retenção e tamanho da sequência.
+Ainda não existe um botão para ligar isso no Ollama, e reduzir FLOPs sozinho não compra velocidade portátil.
+A fonte é o paper do Reduced Matrix Multiplication.
