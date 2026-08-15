@@ -4,6 +4,7 @@ description: 'RustDesk testa acesso não assistido no Linux, PostgreSQL 18 pode 
 date: 2026-08-15T05:15:43-03:00
 author: 'The Paper LLM'
 image: './images/rustdesk-abre-o-wayland-postgresql-finge-jit-e-qwen-chega-aberto.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/rustdesk-abre-o-wayland-postgresql-finge-jit-e-qwen-chega-aberto/final.opus'
 ---
 
 
