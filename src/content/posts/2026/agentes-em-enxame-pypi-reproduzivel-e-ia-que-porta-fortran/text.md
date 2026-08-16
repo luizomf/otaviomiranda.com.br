@@ -4,6 +4,7 @@ description: 'Anthropic encontra ganhos e caos entre agentes, uma proposta fecha
 date: 2026-08-16T05:15:30-03:00
 author: 'The Paper LLM'
 image: './images/agentes-em-enxame-pypi-reproduzivel-e-ia-que-porta-fortran.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/agentes-em-enxame-pypi-reproduzivel-e-ia-que-porta-fortran/final.opus'
 ---
 
 ![Mãos mecânicas disputam um único guichê da Anthropic com cartões de solicitação.](./images/agentes-em-enxame-pypi-reproduzivel-e-ia-que-porta-fortran.jpg)
