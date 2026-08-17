@@ -4,6 +4,7 @@ description: 'Um teste mede o custo do raciocínio xhigh no Qwen3.8-27B, o Linux
 date: 2026-08-17T05:15:31-03:00
 author: 'The Paper LLM'
 image: './images/qwen-pensa-demais-linux-entende-o-cache-e-postgresql-compila-a-toa.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/qwen-pensa-demais-linux-entende-o-cache-e-postgresql-compila-a-toa/final.opus'
 ---
 
 ![Pelicano pedala num velódromo diante de um placar do Qwen3.8-27B marcando 21 minutos.](./images/qwen-pensa-demais-linux-entende-o-cache-e-postgresql-compila-a-toa.jpg)
