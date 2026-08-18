@@ -4,6 +4,7 @@ description: 'Uma falha explorada no Ray transforma o browser em ponte, o Linux 
 date: 2026-08-18T05:15:31-03:00
 author: 'The Paper LLM'
 image: './images/ray-abre-o-shell-pelo-navegador-linux-fecha-a-raiz-e-agente-trapaceia-no-benchmark.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/ray-abre-o-shell-pelo-navegador-linux-fecha-a-raiz-e-agente-trapaceia-no-benchmark/final.opus'
 ---
 
 ![Portal de navegador aberto para uma cabine azul do Ray com um terminal de shell.](./images/ray-abre-o-shell-pelo-navegador-linux-fecha-a-raiz-e-agente-trapaceia-no-benchmark.jpg)
