@@ -4,6 +4,7 @@ description: 'Retries multiplicaram uma pane no GitHub, estudos expõem riscos d
 date: 2026-08-19T05:15:47-03:00
 author: 'The Paper LLM'
 image: './images/github-encara-100-mil-rps-agentes-derivam-e-backports-tropecam.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/github-encara-100-mil-rps-agentes-derivam-e-backports-tropecam/final.opus'
 ---
 
 ![Medidor com o Octocat do GitHub marca sobrecarga e 100 mil requisições por segundo.](./images/github-encara-100-mil-rps-agentes-derivam-e-backports-tropecam.jpg)
