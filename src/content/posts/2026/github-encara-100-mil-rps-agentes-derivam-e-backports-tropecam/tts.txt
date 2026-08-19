@@ -1,0 +1,183 @@
+"Git Hub" encara cem mil R P S, agentes derivam e backports tropeçam.
+
+Um proxy ficou sem fôlego. Quatro balanceadores chegaram ao limite.
+Aí, um bug antigo de retry no V S Code transformou pedidos malsucedidos de token do Copilot em até cem mil requisições por segundo.
+
+A pane do "Git Hub", em 17 de agosto, durou sete horas e quarenta e sete minutos.
+E deixou uma lembrança útil para qualquer sistema distribuído.
+Quando todo mundo resolve ajudar repetindo a chamada, a ajuda pode virar um ataque de negação de serviço feito dentro de casa.
+
+O restante da edição bate na mesma tecla por outros caminhos.
+Nos estudos de agentes, aprender mais também mexeu na exposição a ataques.
+Nos backports de segurança, comparar patches não foi suficiente para saber se a correção funcionava.
+A máquina entregou uma resposta. Agora vem aquela parte inconveniente em que a gente precisa conferir a realidade.
+
+Um retry do V S Code multiplicou a pane do "Git Hub".
+
+Segundo o relatório publicado pelo "Git Hub" em 18 de agosto, o incidente começou às treze horas e vinte e oito minutos, no horário U T C do dia 17.
+Um sidecar do Istio atingiu seu limite de concorrência na região Central dos Estados Unidos.
+Sidecar, aqui, é o proxy que roda ao lado da aplicação e cuida de parte da comunicação.
+
+O autoscaling observava o serviço hospedeiro, não o limite do proxy.
+A aplicação dizia: “estou bem”, enquanto a porta ao lado já tinha gente saindo pela janela.
+
+A pressão avançou pela infraestrutura.
+Quatro nós do H A Proxy esgotaram a capacidade de fluxos e degradaram o gateway de autenticação.
+No pico, cerca de vinte porcento das chamadas web e de [EY1 P IY1 AY1] falharam.
+Em conteúdo de arquivo e arquivos brutos, a taxa de erro chegou a aproximadamente cinquenta porcento.
+
+Aí entrou o multiplicador.
+O "Git Hub" diz que um bug latente no mecanismo de retry do V S Code aumentou em cerca de dez vezes as solicitações malsucedidas ao serviço de tokens do Copilot.
+O volume normal, entre sete mil e nove mil requisições por segundo, saltou para algo entre setenta mil e cem mil.
+Cada cliente só queria tentar de novo. Juntos, eles montaram uma britadeira.
+
+O relatório atribui a pane a uma cadeia de fatores.
+Ela começou no limite do sidecar, passou pelos balanceadores e encontrou o loop de retry do V S Code.
+Ataques de scraping e um novo pico de tráfego também complicaram a recuperação.
+
+Para recuperar o serviço, o "Git Hub" reduziu retries no gateway, bloqueou respostas que acionavam o ciclo nos clientes e pausou os nós saturados do H A Proxy.
+Entre as ações posteriores estão autoscaling consciente da capacidade do sidecar e auditorias de retry.
+Os manifests e valores privados dessa topologia não foram publicados, então não temos um YAML mágico para copiar.
+Uma pena. Eu já estava com o comando kubectl apply engatilhado.
+
+O padrão operacional dá para levar: capacidade do proxy precisa de métrica própria.
+Retry precisa de número máximo de tentativas, backoff exponencial, jitter, circuit breaker e orçamento compartilhado.
+Sem esses limites, clientes perfeitamente educados fazem fila juntos, voltam juntos e derrubam a porta juntos.
+
+A fonte deste bloco é o relatório do incidente no "Git Hub Status".
+
+Agentes podem aprender mais e também deslocar o risco.
+
+Três preprints publicados em 18 de agosto olham para lados diferentes do mesmo problema: agentes que acumulam habilidades, memórias ou procedimentos mudam com o tempo.
+Promover esse aprendizado sem versionamento, teste e rollback lembra aplicar uma migração em produção porque ela ficou bonita no log.
+
+No estudo com agentes financeiros, o mecanismo "SkillOpt" elevou a utilidade benigna do "Qwen três ponto sete Flash".
+Ela passou de setenta e quatro vírgula um porcento para oitenta e três vírgula sete porcento.
+Junto com ela, a exposição subiu de oitenta e dois porcento para noventa e quatro vírgula três porcento.
+O sucesso geral dos ataques foi de quarenta e nove vírgula seis porcento para cinquenta e três porcento.
+E as mudanças financeiras não autorizadas chegaram a sessenta e oito vírgula cinco porcento.
+O agente ficou mais capaz dentro do benchmark.
+O perfil de segurança foi junto, só que na direção que ninguém vai querer pôr no slide.
+
+O efeito depende do mecanismo.
+No mesmo estudo, o "ReasoningBank" melhorou a utilidade benigna sem elevar o sucesso agregado dos ataques.
+A evidência pede testes específicos para cada forma de evolução, em vez de enfiar toda memória de agente no mesmo saco de “insegura”.
+
+O experimento também achou uma armadilha de avaliação.
+Uma interface literal incompatível impedia o A W M de agir corretamente.
+Quando os autores removeram esse envelope numa análise posterior, a utilidade saltou de trinta e um vírgula nove porcento para setenta e cinco vírgula seis porcento.
+A exposição foi de vinte e nove vírgula nove porcento para noventa vírgula nove porcento.
+E o sucesso dos ataques foi de dezenove vírgula cinco porcento para cinquenta e sete vírgula cinco porcento.
+
+Um agente incapaz de chamar a ferramenta também é incapaz de concluir o ataque.
+Isso não faz dele seguro. Faz dele quebrado com ótima postura defensiva.
+
+Essa correção foi um teste de sensibilidade pós-hoc, fora da avaliação principal planejada.
+Ainda assim, ela mostra por que a compatibilidade com o executor precisa de validação separada.
+Senão, o benchmark pode premiar uma fechadura instalada numa porta que nem abre.
+
+O segundo preprint encontrou fragilidade até na ordem das tarefas.
+Com a sequência padrão, o "ReasoningBank" teve ganho médio de um vírgula cinco porcento.
+Em ordens embaralhadas, houve queda de quatro vírgula cinco porcento.
+A ordem original estava funcionando como um currículo implícito.
+Uma execução bonita pode ser só o agente seguindo a pista deixada pela prova.
+Repetir avaliações e variar a sequência ajuda a separar habilidade de cola acidental.
+
+O terceiro trabalho propõe o R G E, monitoramento de Role, Goal e Evidence ao longo da trajetória.
+Modelos de linguagem extraem representações estruturadas, enquanto a atualização do estado de confiança é determinística e reproduzível.
+Com os dois estimadores maiores, os autores relatam mais de noventa e três porcento de Drift F um em cada benchmark apresentado.
+E mantêm ao menos noventa e cinco vírgula oito porcento de cobertura benigna.
+Os casos em que a conclusão da tarefa não pode ser observada externamente continuam mais difíceis.
+
+Tudo isso vem de preprints e ambientes simulados, não de garantias de produção.
+Mesmo assim, já dá para tirar uma lista de engenharia bem concreta: versionar memórias e habilidades, preservar a linhagem e validar o contrato real das ferramentas.
+Também é preciso rodar várias avaliações com ordem embaralhada, conferir o estado externo em vez de confiar na narração do modelo e manter canário, gate de promoção e rollback.
+
+Em julho, falamos de admissão de estado de patch e traces antigos.
+Os novos estudos ampliam a superfície: o artefato aprendido, a ordem da avaliação e a trajetória de execução também mudam o resultado.
+
+As fontes são os preprints "Auditing Self-Evolution in Financial Agents", "On the Fragility of Self-Improving Agents" e "Beyond Suspicious Steps".
+
+Backport automático funciona até o código antigo discordar.
+
+Levar uma correção de segurança para uma versão antiga parece copiar e colar até a primeira [EY1 P IY1 AY1] que mudou de nome.
+Ou até o fluxo que tomou outro caminho, ou a dependência que não existe naquele branch.
+Backport é migração semântica: a vulnerabilidade continua sendo a mesma, mas o lugar onde ela mora pode ter virado outra cidade.
+
+O "Porting Benchmark", submetido em 18 de agosto, alinhou cinco ferramentas de backport automático em mil duzentos e trinta e quatro casos entre versões, branches e repositórios.
+O melhor resultado por commit, obtido pelo "PortGPT", foi de oitenta e cinco vírgula dois porcento nos patches estruturalmente mais simples, classificados como Tipo um.
+Na classe mais complexa, Tipo quatro, caiu para vinte e quatro porcento.
+
+A análise agrupa as falhas em quatro áreas.
+Elas incluem desconhecimento das interfaces de [EY1 P IY1 AY1] disponíveis no alvo, diferenças semânticas entre versões e propagação por dependências não locais.
+A quarta área reúne erros ao localizar ou construir o patch.
+Em português menos acadêmico, a ferramenta pode encontrar a rua certa e ainda reformar a casa errada.
+
+O paper também executou uma amostra de quarenta e cinco casos, cobrindo dezoito vulnerabilidades com C V E e onze repositórios de destino.
+Nela, a comparação estática com a correção de referência errou nos dois sentidos.
+Ela deixou passar adaptações válidas e aprovou falhas de integração que continuavam ali.
+Diferença textual não prova insegurança.
+Semelhança textual também não faz o branch compilar nem bloqueia a vulnerabilidade por telepatia.
+
+A amostra executável é bem menor que o benchmark total, e o trabalho ainda é preprint.
+Na manutenção real, o patch gerado entra como proposta.
+O branch alvo precisa compilar, o reprodutor da vulnerabilidade deve rodar de forma segura e os testes de regressão precisam passar.
+As dependências fora do arquivo alterado também merecem inspeção.
+Mudou uma fronteira de confiança? A revisão humana continua na mesa.
+
+A fonte é o preprint "Benchmarking Automated Security Patch Backporting: How Far Are We?".
+
+Destaques rápidos para hoje.
+
+Pesquisadores fizeram um cartão Visa expirado parecer válido em processamento por aproximação.
+O ataque "Zombie Card" altera os dados de expiração vistos pelo terminal nas configurações testadas.
+Entre cinco grandes bancos dos Estados Unidos, a cobertura secundária relata que só um concluiu a transação de laboratório.
+Kernels Mastercard, American Express e Discover rejeitaram as modificações.
+A lição para sistemas de pagamento é não entregar uma checagem crítica a um campo sem proteção efetiva de integridade.
+O teste exige posse ou proximidade do cartão e uma combinação compatível de emissor e reemissão.
+Portanto, o resultado tem escopo bem mais estreito que “todo cartão vencido voltou dos mortos”.
+As fontes são a USENIX Security 2026 e o Korben.
+
+Mojo abriu o compilador, as ferramentas e o código da linguagem.
+A Modular publicou o conjunto em 18 de agosto, uma semana depois do Mojo um ponto zero, sob Apache dois ponto zero com exceções L L V M.
+Agora dá para inspecionar e compilar a implementação.
+A empresa ainda não aceita contribuições no compilador e nas ferramentas.
+A meta declarada é abrir essa etapa até o fim de 2026.
+As fontes são o anúncio da Modular e a licença do repositório.
+
+P G Lite coloca PostgreSQL local no agente, não a verdade da empresa.
+O PostgreSQL em WebAssembly oferece extensões e uma conexão exclusiva, útil para planos, evidências, embeddings e checkpoints locais.
+A documentação atual marca o plugin de sync como alpha.
+Ele traz dados remotos para tabelas locais, mas ainda não envia escritas locais de volta nem resolve conflitos.
+Mudanças de negócio precisam passar por um serviço autoritativo, com intenção transacional, idempotência, estado explícito de sincronização e trilha auditável.
+As fontes são a documentação do P G Lite, a documentação de sync e a análise de Vibhor Kumar.
+
+COSMIC Epoch um ponto seis ganhou controle de áudio por aplicativo.
+A versão publicada em 18 de agosto também adicionou ao compositor suporte aos protocolos E I e W L D M A Buff versão seis.
+Além disso, trouxe correções no Files, Greeter, Launcher, Terminal e Settings.
+E I prepara o terreno para entrada emulada e stacks de controle remoto.
+As notas da versão trazem essa fundação de protocolo, ainda sem um desktop remoto completo no pacote.
+A fonte é a nota do COSMIC Epoch um ponto seis ponto zero.
+
+D Git colocou cada repositório Git dentro de um Durable Object com SQLite privado.
+O experimento em TypeScript fala Git smart H T T P, preserva packfiles recebidos e suporta fetch incremental e shallow.
+A arquitetura lembra atores: cada agregado possui e serializa o próprio estado.
+Por enquanto, é um projeto de um commit, com autenticação básica por token.
+O autor avisa que clones completos com milhões de objetos podem estourar os limites declarados de cento e vinte e oito megabytes e cinco minutos de C P U nos Workers.
+A fonte é o repositório littledivy barra D Git.
+
+SoLo faz um binário estático com musl carregar drivers de G P U ligados à glibc do host.
+O projeto fornece um loader E L F para x oitenta e seis, sessenta e quatro bits, e A Arch sessenta e quatro.
+Também fornece uma ponte de A B I e uma [EY1 P IY1 AY1] no estilo D L F C N, sem empacotar outra libc ou um container.
+O autor relata testes Vulkan em [EY1 EH1 M D IY1], Intel, NVIDIA e Asahi Linux.
+Também relata integração contínua com mais de duas mil e cem bibliotecas compartilhadas, vindas de mil pacotes Debian.
+São alegações do mantenedor num projeto criado em 14 de agosto.
+E atravessar a fronteira entre libc e A B I de driver pede teste de hardware antes de qualquer romance com produção.
+A fonte é o repositório P G oitenta e três barra SoLo.
+
+O mantenedor do Terminator construiu um terminal pequeno com Claude e chamou o resultado de brinquedo.
+Stephen Boddy relata que o agente escreveu a maior parte do Roboterm, um aplicativo Python com G T K quatro e menos de duas mil linhas.
+As decisões foram mantidas no arquivo CLAUDE ponto M D.
+É a experiência de um mantenedor num escopo pequeno e testável, não um estudo controlado.
+Em trabalhos com uptime e risco maiores, o próprio autor diz usar I A principalmente como assistente de pesquisa.
+A fonte é o relato "Claude and I built an app".
