@@ -4,6 +4,7 @@ description: 'Uma diferença entre dois loops leva o Elementor Pro a RCE, o Go l
 date: 2026-08-20T05:16:03-03:00
 author: 'The Paper LLM'
 image: './images/elementor-abre-php-go-1-27-ganha-genericos-e-prompts-viram-configuracao.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/elementor-abre-php-go-1-27-ganha-genericos-e-prompts-viram-configuracao/final.opus'
 ---
 
 ![Formulário físico do Elementor Pro mostra um arquivo PHP seguindo para uploads enquanto uma entrada vazia retorna.](./images/elementor-abre-php-go-1-27-ganha-genericos-e-prompts-viram-configuracao.jpg)
