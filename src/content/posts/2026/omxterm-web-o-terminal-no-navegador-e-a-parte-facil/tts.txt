@@ -1,0 +1,124 @@
+O M X Term Web: o terminal no navegador é a parte fácil.
+Você abre uma aba, vê o cursor piscando e pronto: parece que o terminal foi morar no navegador.
+Só parece. O shell continua em outra máquina, atrás de uma conexão S S H.
+Enquanto isso, um servidor no meio recebe credenciais, escolhe o destino, abre a sessão e depois tenta fechar a lojinha sem deixar um pequeno incêndio operacional.
+É nesse servidor do meio que o O M X Term Web fica interessante.
+O M V P open source criado por Otávio Miranda usa X Term ponto J S na interface e um broker em Node ponto J S para chegar a um host S S H real.
+A tela é a parte bonita. O trabalho pesado está em decidir quem pode abrir a conexão, em qual máquina, confiando em qual chave e por quanto tempo.
+O navegador desenha o terminal, mas o shell mora no alvo.
+O O M X Term Web tem três atores. O frontend em React usa X Term ponto J S para desenhar a tela, capturar o teclado e acompanhar o tamanho da janela.
+O broker usa Fastify, WebSocket e a biblioteca S S H dois.
+Na outra ponta está o servidor escolhido pelo usuário, onde o S S H cria o pseudoterminal, ou P T Y, e executa o processo interativo.
+Essa separação desfaz uma confusão comum: X Term ponto J S é um emulador de terminal no frontend.
+Ele interpreta a saída e mantém a grade visual. Bash, Z shell ou qualquer outro shell não aparece ali por osmose.
+A própria documentação do X Term ponto J S descreve o uso normal como uma ligação entre a entrada e a saída do componente e uma interface de pseudoterminal.
+No O M X Term, os bytes fazem uma viagem. O navegador envia eventos pelo WebSocket, e o broker traduz a conversa para o canal S S H.
+No host remoto, o processo interativo enxerga um lado do P T Y, enquanto o controlador lê e escreve pelo outro.
+A janela é só o pedaço que você vê. A autoridade para alcançar a máquina está espalhada pelo caminho inteiro.
+É como instalar uma campainha com vídeo e descobrir que o projeto difícil sempre foi decidir quem abre o portão.
+As fontes deste bloco são o README do O M X Term Web e o README oficial do X Term ponto J S.
+Antes do S S H, existe uma fila de decisões.
+A conexão não pula do formulário direto para o S S H. Primeiro, o usuário passa por um token de acesso.
+O broker cria cookies de sessão e dispositivo. Depois vêm a sondagem da chave do host e a emissão de um ticket de terminal.
+Em seguida, ocorre o upgrade para WebSocket e, finalmente, a conexão S S H com o P T Y remoto.
+Esse ticket dura sessenta segundos, vale uma vez e fica vinculado à sessão, ao dispositivo e ao Origin esperado.
+Assim que é consumido corretamente, ele some. Isso reduz replay e dificulta o sequestro de WebSocket entre sites, o tal Cross-Site WebSocket Hijacking.
+Como o navegador entrega cookies automaticamente, uma página de outra origem não deveria herdar a mesma autoridade só porque conseguiu iniciar uma conexão.
+O Origin tem uma função bem específica. Scripts e bots fora do navegador conseguem forjar esse header.
+Por isso, ele participa do controle sem virar uma identidade universal de qualquer cliente que saiba soletrar H T T P S.
+E tem um detalhe operacional daqueles que gostam de esperar a sexta-feira: o ticket viaja na query string do upgrade WebSocket.
+Ele expira rápido, tem uso único e está amarrado ao contexto, mas o proxy pode registrar a U R L inteira.
+A aplicação evita esse conteúdo no log de auditoria. A borda e o proxy também precisam omitir as query strings.
+Segredo curto ainda é segredo. Só corre mais depressa.
+As fontes deste bloco são os documentos Como o O M X Term Web funciona e Expondo o O M X Term Web publicamente.
+O fingerprint observado ainda precisa de confiança.
+Antes de pedir autenticação, o broker sonda a chave do host e mostra o fingerprint ao usuário.
+Quando abre a conexão de verdade, calcula o fingerprint outra vez e compara com o valor aceito.
+Uma troca entre a sondagem e a abertura do S S H aparece nessa conferência.
+Agora vem a pegadinha: as duas observações passam pelo mesmo caminho.
+Se essa rota já estiver interceptada, a sonda pode mostrar a chave do intermediário, e a conexão seguinte pode encontrar a mesmíssima chave.
+A coincidência confirma consistência naquela rota. A identidade original da máquina precisa de outra fonte.
+Por isso, a documentação pede que o fingerprint seja comparado com uma fonte independente.
+É o mesmo princípio descrito pelo Open S S H: fingerprints ajudam a verificar chaves de host quando a confiança não vem toda do canal que você está tentando verificar.
+O M V P não persiste o arquivo de hosts conhecidos. A memória de confiança fica com a pessoa e vale para aquela sessão.
+É uma escolha simples e explícita para o estágio atual, acompanhada do custo: o usuário precisa buscar a confirmação por outro canal sempre que necessário.
+Conveniência e memória de confiança não brotam espontaneamente porque o terminal ganhou C S S.
+As fontes são a documentação de confirmação da chave do host do O M X Term Web e o manual do Open S S H.
+A proteção contra S S R F depende da configuração.
+O broker recebe do usuário o host ao qual fará S S H. Com isso, ele também pode virar uma ponte para endereços acessíveis apenas pelo servidor.
+Essa classe de problema é S S R F: uma entrada externa convence o backend a iniciar uma conexão de rede em nome dela.
+O projeto oferece uma lista de destinos permitidos por C I D R.
+Com a variável O M X Term S S H Allowed C I D R configurada, todos os resultados da resolução D N S precisam ser válidos.
+Eles também precisam estar na faixa permitida da família exata, I P versão quatro ou I P versão seis.
+O broker escolhe o primeiro I P canônico aprovado e o fixa para a conexão, sem resolver o nome outra vez na hora de conectar.
+Essa combinação reduz destinos fora da política e a janela para D N S rebinding.
+A palavra importante é configurada. Sem a variável, a política declarada é unrestricted, preservando o uso local da demonstração.
+Hosts internos ficam acessíveis conforme a rede do broker.
+Quem expõe o serviço precisa desenhar a fronteira de saída do próprio ambiente.
+O código não adivinha qual sub-rede guarda o banco de produção e qual guarda a cafeteira inteligente do escritório.
+A fonte deste bloco é o arquivo do O M X Term Web que implementa a política de saída do S S H.
+Soltar referências da chave não apaga a memória.
+O material de autenticação atravessa a requisição do ticket e passa algum tempo na memória do broker.
+Para encurtar a retenção de referências conhecidas, o projeto fixa a biblioteca S S H dois exatamente na versão um ponto dezessete ponto zero.
+Ele também aplica uma adaptação própria durante a etapa posterior à instalação.
+A adaptação mexe em arquivos internos da dependência porque a versão original não oferece o ponto de extensão necessário.
+O script confere versão, integridade e hashes dos arquivos completos.
+Se a estrutura mudar ou o contrato esperado não existir durante a execução, o processo falha.
+Melhor quebrar com barulho do que continuar trabalhando em cima de uma suposição vencida.
+O preço vem junto. Na prática, o projeto mantém uma espécie de fork reaplicado dentro da pasta de dependências do Node.
+Atualizar a biblioteca S S H dois exige revisar a adaptação e seus hashes.
+Trocar o número no package ponto JSON e admirar o C I verde de longe não encerra o serviço.
+A garantia também tem um limite preciso: o mecanismo libera referências conhecidas, sem prometer apagar fisicamente a chave da memória R A M.
+Strings imutáveis, cópias feitas pelo V oito, o coletor de lixo, alocações nativas do Open S S L, swap e dumps ficam fora.
+Reduzir a retenção descreve o que existe. Zeroização de memória exigiria um contrato que esse ambiente de execução não oferece.
+As fontes são o script de adaptação do material de autenticação da biblioteca S S H dois e a documentação sobre os limites do descarte de credenciais.
+Encerrar a sessão também faz parte do produto.
+Um terminal interativo produz fluxo contínuo nos dois sentidos.
+Se o navegador envia mais rápido do que o S S H consome, o broker acumula trabalho.
+Se a conexão desaparece sem fechar a sessão remota, acumula estado também.
+O projeto lida com isso usando limite de carga por mensagem, heartbeat e limites de mensagens, bytes e fila.
+Também agrupa eventos de redimensionamento e destrói a sessão S S H quando o WebSocket desconecta.
+Os números documentados incluem carga WebSocket de sessenta e quatro kibibytes e heartbeat a cada trinta segundos.
+Também incluem até cinco sessões S S H ativas por sessão e cinquenta WebSockets globais.
+O controle de flood ainda limita mensagens, volume por segundo e fila de entrada.
+O escopo desses controles é o abuso individual e as sessões órfãs dentro da aplicação.
+Ataque distribuído ou volumétrico chega com outra conta.
+Para exposição fora de loopback, a documentação exige H T T P S e W S S terminados num proxy, além de cookies Secure.
+O broker não termina T L S. A configuração de trust proxy, o rate limiting e a higiene dos logs da borda entram nessa fronteira.
+O aplicativo cuida do que chega ao processo. A enchente que lota o link antes disso precisa ser contida em outro lugar.
+As fontes são a documentação de controles de ciclo de vida e abuso e a documentação sobre os limites da exposição pública.
+O M V P escolheu estado em memória e aceita a conta.
+Sessões, dispositivos, sondagens e tickets vivem num único processo.
+O projeto não persiste chaves, perfis, transcrições nem o arquivo de hosts conhecidos.
+Também não oferece contas, armazenamento compartilhado, múltiplas instâncias, reconexão ou retomada.
+Reiniciar o broker derruba as conexões e leva embora o estado temporário.
+Isso simplifica a destruição de sessões e deixa o fluxo estudável. Também tira alta disponibilidade e escala horizontal da mesa por enquanto.
+Uma segunda instância não conhece o ticket emitido pela primeira. Uma sessão caída recomeça do zero.
+Se o broker for comprometido enquanto manipula autenticação, o atacante está exatamente no lugar por onde passam a credencial e a autoridade de conexão.
+O usuário define o privilégio final no host S S H. Uma conta remota poderosa continua poderosa.
+T L S fica com a borda, a confirmação independente do fingerprint fica com o operador, e a disponibilidade fica com a infraestrutura.
+Os controles do projeto reduzem riscos específicos dentro desses limites.
+O estado inspecionado foi o commit seis F E cinco zero D C um, de vinte de agosto de 2026.
+O C I desse S H A passou por instalação, verificação da adaptação, auditoria, lint, checagem de tipos, testes e build.
+O teste completo, do navegador até um S S H real, é opcional e fica fora do job rápido padrão.
+O selo verde confirma a automação configurada. Auditoria independente, pentest e garantia absoluta são trabalhos bem maiores que alguns pixels coloridos.
+As fontes são a documentação dos limites atuais do O M X Term Web e a execução do C I no commit pesquisado.
+O vídeo explica o terminal, e o repositório mostra o recorte atual.
+O projeto começou em vinte e sete de junho de 2026 e recebeu ondas de reforço de segurança nos meses seguintes.
+Em vinte de agosto, Otávio publicou o vídeo Você não sabe nada sobre o terminal.
+Naquela manhã, o repositório principal passou a apontar para o vídeo.
+Enquanto isso, um repositório auxiliar reuniu diagramas, scripts e uma demonstração didática de P T Y usados na gravação.
+A demonstração em Python percorre as operações open P T Y, fork, set S I D, controlling T T Y, dup dois e exec.
+Ela revela a mecânica entre processo e pseudoterminal sem implementar um parser V T ou ANSI completo.
+Os scripts de deploy pertencem ao cenário gravado, são específicos e incluem um reset destrutivo do Docker do host.
+Material didático. Receita para colar no servidor depois do almoço, não.
+O S H A exato executado na gravação não foi identificado.
+O vídeo fornece o enquadramento, e o repositório auxiliar documenta as demonstrações.
+Já o estado técnico desta análise está preso ao commit seis F E cinco zero D C um do projeto principal.
+Ele também está preso ao commit cinco oito seis F nove F um dos materiais.
+Assim, cada controle atual fica atribuído ao código atual, sem ser colocado na boca do vídeo.
+Essa diferença entre aparência e mecanismo é a melhor parte do O M X Term Web.
+X Term ponto J S resolve a superfície com a qual você conversa.
+Logo atrás vêm identidade do host, saída de rede, retenção de credenciais, pressão de fluxo, desligamento e operação.
+Colocar um cursor no browser é rápido. Decidir com segurança aonde ele pode levar você é o projeto de verdade.
+As fontes são os materiais do vídeo no repositório O M X Term Web Video e o vídeo Você não sabe nada sobre o terminal.
