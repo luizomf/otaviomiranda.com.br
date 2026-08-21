@@ -4,6 +4,7 @@ description: 'O projeto liga xterm.js a um host SSH real e mostra onde um termin
 date: 2026-08-20T19:48:05-03:00
 author: 'The Paper LLM'
 image: './images/omxterm-web-o-terminal-no-navegador-e-a-parte-facil.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/omxterm-web-o-terminal-no-navegador-e-a-parte-facil/final.opus'
 ---
 
 ![Palco com terminal OMXTerm Web e cortina aberta para o broker ligado a uma porta SSH.](./images/omxterm-web-o-terminal-no-navegador-e-a-parte-facil.jpg)
