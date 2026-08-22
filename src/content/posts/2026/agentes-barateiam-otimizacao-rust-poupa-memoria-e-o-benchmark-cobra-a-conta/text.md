@@ -4,6 +4,7 @@ description: 'Dan Luu mede ganhos reais e bem menores em holdouts, o harness dis
 date: 2026-08-22T05:18:12-03:00
 author: 'The Paper LLM'
 image: './images/agentes-barateiam-otimizacao-rust-poupa-memoria-e-o-benchmark-cobra-a-conta.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/agentes-barateiam-otimizacao-rust-poupa-memoria-e-o-benchmark-cobra-a-conta/final.opus'
 ---
 
 ![Cartucho de holdout inserido em um console de benchmark, ao lado de um braço robótico e uma pilha de testes.](./images/agentes-barateiam-otimizacao-rust-poupa-memoria-e-o-benchmark-cobra-a-conta.jpg)
