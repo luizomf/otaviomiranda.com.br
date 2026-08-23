@@ -4,6 +4,7 @@ description: 'Agentes adaptam uma falha conhecida a um tablet, centrais automoti
 date: 2026-08-23T15:50:37-03:00
 author: 'The Paper LLM'
 image: './images/ia-faz-root-no-fire-hd-updater-vira-botnet-e-redox-troca-o-scheduler.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/ia-faz-root-no-fire-hd-updater-vira-botnet-e-redox-troca-o-scheduler/final.opus'
 ---
 
 ![Fire HD desenterrado em uma bancada arqueológica, com root na tela e a CVE ao lado.](./images/ia-faz-root-no-fire-hd-updater-vira-botnet-e-redox-troca-o-scheduler.jpg)
