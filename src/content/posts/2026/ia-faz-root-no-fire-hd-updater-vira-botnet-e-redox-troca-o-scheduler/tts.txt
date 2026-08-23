@@ -1,0 +1,146 @@
+IA faz root no Fire H D, updater vira botnet e Redox troca o scheduler.
+Um Fire H D de 2021 ficou parado numa versão antiga do Fire O S.
+Em quatro dias de agosto, três modelos de IA ajudaram o dono a adaptar uma falha conhecida àquele aparelho, até conseguir root repetidamente.
+Foram binários, offsets, tabelas de páginas, revisão entre modelos e mais de quinhentas tentativas.
+O velho “isso exige conhecimento muito específico” acaba de ganhar uma nota de rodapé cara.
+A segurança também foi parar no painel do carro, onde um atualizador privilegiado virou canal para uma botnet.
+Depois, a conversa muda de clima, mas continua girando em torno da mesma pergunta: o que “funcionou” quer dizer na prática?
+Uma pipeline brasileira só aceita a saída que a próxima etapa consegue usar.
+O Redox mede um scheduler mais justo, e um parser encolhe cada nó de 232 para 16 bytes.
+Primeiro, agentes adaptaram uma falha conhecida ao Fire H D 10.
+Eric Pardee conta que seu Fire H D 10 de 2021 ainda rodava o Fire O S sete ponto três ponto dois ponto seis.
+O Kimi K três analisou o kernel dessa versão e encontrou a C V E 2022, trinta e oito um oito um.
+É uma falha de use-after-free no driver de G P U Mali, capaz de dar root ou expor informações.
+A CISA mantém a vulnerabilidade no catálogo de falhas conhecidas e exploradas desde 30 de março de 2023.
+Segundo Pardee, a Amazon levou a correção ao Fire O S sete ponto três ponto dois ponto nove em junho de 2024.
+Use-after-free acontece quando o kernel continua apontando para uma região de memória que já foi liberada.
+Se outro conteúdo controlado ocupar aquele espaço, a referência velha pode acabar lendo ou escrevendo onde não deveria.
+No caso relatado, o exploit conseguiu escrever na memória física pela G P U.
+Ele desativou a imposição do SELinux e substituiu as credenciais do processo para chegar a root.
+Essa frase arrumadinha esconde o inferno habitual.
+O exploit precisava casar com o binário exato, os offsets daquele firmware e o formato de tabela de páginas da MediaTek.
+Houve travamentos, reinicializações físicas, revisão entre modelos e passagem de bastão do Kimi K três para o G L M cinco ponto dois, e depois para o G L M cinco ponto três.
+“Firmware archaeology” nem precisa de tradução: é cavar o passado até encontrar o offset que parou de explodir o tablet.
+Pardee diz que o Kimi trabalhou por cerca de 30 horas, trocou seiscentas e vinte e uma mensagens e custou 164 dólares e 25 centavos.
+O G L M cinco ponto dois acrescentou 21 dólares e 90 centavos.
+O G L M cinco ponto três concluiu a etapa final em oito horas e cinco minutos, dentro de uma assinatura de 80 dólares.
+Entre 13 e 16 de agosto, foram mais de quinhentas tentativas do exploit e um gasto total relatado de 266 dólares e 15 centavos.
+Com root, Pardee removeu pacotes da Amazon do usuário principal usando o comando P M uninstall, para o usuário zero.
+A partição protegida do sistema continuou intacta.
+O resultado vale para aquele Fire H D 10, naquela build, com offsets específicos.
+É uma saga reproduzida no mesmo aparelho, não um script pronto para sair fazendo root em qualquer tablet.
+Também convém manter o calendário no lugar: os modelos adaptaram uma vulnerabilidade pública de 2022, já corrigida upstream.
+Eles não descobriram um zero-day.
+Ainda assim, conseguiram ajudar na inspeção de binários e na adaptação de um exploit a firmware desatualizado.
+Isso envolveu revisão cruzada, validação específica e várias visitas ao botão de ligar.
+Para quem mantém produto, a parte desconfortável é o atraso do patch.
+Para quem usa o aparelho, a defesa é bem menos cinematográfica e bem mais barata que 266 dólares e 15 centavos: instalar a versão corrigida pelo fornecedor.
+As fontes são o relato técnico de Eric Pardee e o catálogo K E V da CISA.
+Agora, o atualizador da central automotiva que virou distribuidor de malware.
+A Kaspersky reconstruiu uma cadeia de malware em três estágios entregue pelo T W Core, aplicativo de sistema que atualiza centrais automotivas Android da DoFun.
+A empresa descobriu a atividade em junho e publicou a análise em 21 de agosto.
+Segundo a equipe, é o primeiro caso documentado de uma cadeia de infecção criada especificamente para centrais desse tipo.
+O problema começa justamente na autoridade do atualizador.
+O T W Core recebe instruções de A P K por M Q T T, e a opção “install Not Exists” permite instalar um pacote que ainda não existe no aparelho.
+A telemetria analisada pela Kaspersky associou instalações do malware ao pacote legítimo C O M ponto T W ponto core.
+Alguém convenceu o porteiro privilegiado a carregar outra porta para dentro. Funcionou.
+A cadeia passa por um dropper chamado “Jar Service”, um segundo downloader e, no fim, componentes usados para fraude de cliques e proxy reverso.
+A central nem precisa guardar o segredo da sua vida para interessar à botnet.
+Conectividade persistente, energia externa e tráfego saindo por um endereço aproveitável por terceiros já bastam.
+A Kaspersky atribui a operação com alta confiança ao MoYu Group, associado à campanha “Bad Box”.
+Tanto a autoria quanto o caráter de “primeiro caso” são conclusões da própria equipe de pesquisa.
+O relatório não traz uma contagem de aparelhos afetados por modelo.
+Também não sustenta generalizações sobre todas as centrais Android ou sobre o Android Automotive inteiro.
+A DoFun informou à Kaspersky que corrigiu os problemas depois da notificação.
+Para fabricantes e operadores de frota, o updater precisa ser tratado como uma fronteira de root remoto.
+Isso exige mensagens e artefatos autenticados, identidades de pacote restritas, instalações registradas e correção do fornecedor aplicada.
+Um atualizador autorizado a instalar qualquer identidade de A P K já é uma loja de aplicativos.
+Só esqueceram da vitrine, do caixa e da segurança.
+A fonte é a análise da Securelist, da Kaspersky.
+Em seguida, uma pipeline que só aceita o arquivo que a próxima etapa consegue usar.
+Iago Cavalcante publicou em 23 de agosto o postmortem de uma pipeline de extração de áudio e vídeo para receitas.
+O primeiro desenho dependia de um provedor.
+Na versão de produção, o sistema pede uma capacidade e percorre uma fila ordenada de candidatos.
+A taxa real de sucesso define a ordem, e o preço serve como desempate.
+Assim, nomes e manias de fornecedores não vazam pela regra de negócio, e a ordem pode mudar conforme as medições.
+O mundo real, como sempre, se recusou a ler a documentação.
+O relato não publica os nomes dos provedores, o volume de tráfego nem as taxas observadas.
+Portanto, temos uma experiência de produção, não um ranking de fornecedores.
+O bug mais caro veio de um “sucesso”.
+Um provedor deixava o log verdinho e baixava arquivos que, às vezes, eram vídeos parciais ou imagens sem som.
+Nesse caso, a função retornou sem erro.
+A próxima etapa recebeu um peso de papel digital.
+A correção foi validar a pós-condição no ponto de consumo.
+Se a etapa seguinte não consegue usar o arquivo, a pipeline tenta o próximo candidato da fila.
+Transporte bem-sucedido diz que a função retornou; sucesso semântico diz que o trabalho pode continuar.
+É esse segundo contrato que paga a conta.
+E há uma conta de verdade envolvida.
+Como os jobs têm entrega de pelo menos uma vez, o mesmo trabalho pode cair em dois workers.
+Uma checagem local de “já fiz isso?” pode correr contra outra execução.
+Unicidade e transação no banco precisam impedir resultado duplicado e cobrança repetida.
+Se todos os candidatos falharem de forma permanente, o crédito volta para o cliente.
+O desenho serve para outras integrações instáveis.
+Fornecedores ficam atrás da capacidade, métricas observadas ordenam a fila, o consumidor valida a saída e o banco arbitra a idempotência.
+O log verde pode comemorar sozinho.
+A fatura não precisa entrar na festa.
+A fonte é o postmortem de Iago Cavalcante no TabNews.
+Depois, o Redox troca a fila global por E E V D F e distribui C P U com mais justiça.
+O Redox O S publicou em 22 de agosto os resultados da troca do Deficit Weighted Round Robin por um scheduler baseado em E E V D F.
+O trabalho do Redox Summer of Code também substituiu a fila global de processos executáveis por filas separadas por núcleo.
+Além disso, removeu buscas lineares de caminhos importantes.
+O E E V D F acompanha quanto tempo de C P U cada tarefa deveria ter recebido e quanto recebeu de fato.
+Essa diferença é chamada de lag.
+Tarefas com lag não negativo ficam elegíveis.
+Entre elas, o scheduler escolhe aquela com o prazo virtual mais próximo.
+Os pesos apertam ou afrouxam esses prazos, distribuindo serviço sem deixar tarefas de peso menor passando fome.
+No teste publicado pelo projeto com 16 processos ocupando C P U, o scheduler antigo teve variância de 389 porcento a 617 porcento em quatro núcleos.
+Com E E V D F, o intervalo caiu para um vírgula zero nove porcento a um vírgula trinta e sete porcento.
+O Redox resumiu a diferença como uma melhora de 782 vezes na justiça da distribuição.
+Em uma carga cheia de esperas e despertares, o E E V D F chegou a cento e sete mil novecentos e quarenta e cinco ciclos de ida e volta por segundo em um núcleo.
+Em quatro núcleos, chegou a cento e nove mil trezentos e oitenta e seis ciclos por segundo.
+O D W R R anterior registrou dois mil cento e noventa e sete, e 765, respectivamente.
+Depois da mudança para filas por núcleo, a troca voluntária de contexto caiu de dois microssegundos para 350 nanossegundos.
+O projeto também destaca um ganho geral de throughput de dois vírgula seis vezes.
+Esses números comparam o Redox atual ao Redox anterior.
+O próprio relatório avisa que a comparação com Linux não é equivalente.
+Linux rodou direto no hardware, enquanto Redox estava no QEMU.
+E parte do ganho veio das filas por núcleo e da remoção das varreduras lineares, além da matemática do E E V D F.
+Mesmo dentro desses limites, saiu uma bela aula de scheduler em forma de patch.
+Medir dívida de C P U melhora a justiça.
+Tirar a fila global reduz contenção, e parar de procurar trabalho linearmente faz uma diferença brutal quando as tarefas vivem acordando.
+Algoritmo bom trabalha melhor quando a estrutura de dados para de puxá-lo pela camisa.
+A fonte é o relatório do Redox Summer of Code, publicado pelo Redox O S.
+Por fim, um nó de Markdown caiu de 232 para 16 bytes.
+No relatório técnico publicado em 22 de agosto, Krzysztof Kowalczyk partiu de uma estrutura C mais mais gerada por IA.
+A estrutura representava todos os tipos de nó de uma árvore de Markdown. Funcionava.
+Também reservava, em cada nó, espaço para oito strings, dois vetores, posições, booleanos e padding, mesmo quando quase nada disso era usado.
+Com isso, cada nó custava 232 bytes.
+A primeira decisão foi alinhar a memória ao tempo de vida da árvore.
+Como todos os nós pertencem ao mesmo documento e podem morrer juntos, um bump arena reserva memória em sequência e libera tudo de uma vez.
+A base estável permitiu trocar ponteiros de 64 bits por offsets de 32 bits.
+As strings passaram a guardar offset e comprimento compactados, e os outros campos foram reorganizados e especializados.
+No fim, o nó ficou com 16 bytes.
+Kowalczyk não declarou vitória olhando apenas para o tamanho da estrutura Node.
+Ele mediu a arena inteira em quatro entradas sintéticas de 64 kilobytes: prosa, listas aninhadas, tabelas G F M e entidades.
+Na linha de base de prosa, a alocação total foi de mil seiscentos e quarenta e seis vírgula um kilobytes, ou 25 vírgula sete vezes o tamanho da fonte.
+É assim que se evita aquela dieta em que a estrutura emagrece e a memória escondida come tudo atrás da cortina.
+A compactação cobra seu preço.
+Um offset de 32 bits limita o espaço da arena que pode ser endereçado diretamente.
+Além disso, todas as referências compactadas dependem da mesma base e do mesmo tempo de vida.
+Os resultados pertencem àquele parser e àquelas quatro formas sintéticas de entrada, não a um campeonato universal de Markdown.
+O método viaja melhor que os números.
+É preciso medir a alocação completa, observar os campos usados por cada variante e aproximar dados acessados juntos.
+Também vale comprimir referências quando o domínio deixa.
+Código gerado pode estar correto e ainda estacionar oito strings vazias em cada nó.
+A IA entregou a A S T; a engenharia foi conferir quanto ela cobrava de aluguel.
+A fonte é o relatório “Optimizing memory use in a Markdown parser”, de Krzysztof Kowalczyk.
+E o destaque rápido de hoje é o [EY1 JH AH0 N T] [L AY1 T N IH0 NG] versão um ponto zero.
+O framework separa o agente em produção do backend de treinamento.
+Com cerca de três mil e quinhentas linhas, ele mantém ferramentas, contexto e interação com o ambiente no harness existente.
+Enquanto isso, o trainer observa as sequências de requisição e resposta do modelo.
+Os autores dizem que o modelo Qwen três ponto cinco, de nove bilhões de parâmetros, subiu de 41 vírgula oito porcento para 56 vírgula quatro porcento no S W E bench Verified.
+Segundo eles, o fluxo usou seis mil exemplos.
+Eles também publicaram os scripts desse fluxo.
+Tanto o benchmark quanto o “compute modesto” são afirmações do paper de 18 de agosto.
+O resumo não informa esse compute em horas de hardware, nem permite transformar o resultado em promessa geral de custo.
+A fonte é o paper do [EY1 JH AH0 N T] [L AY1 T N IH0 NG] versão um ponto zero, publicado no arXiv.
