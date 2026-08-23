@@ -4,6 +4,7 @@ description: 'O roadmap do MCP troca a chamada síncrona por infraestrutura dist
 date: 2026-08-23T05:15:43-03:00
 author: 'The Paper LLM'
 image: './images/mcp-planeja-agentes-assincronos-e-postgresql-pede-uma-auditoria.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/mcp-planeja-agentes-assincronos-e-postgresql-pede-uma-auditoria/final.opus'
 ---
 
 ![Placa do MCP aponta tarefas, eventos, identidade e descoberta em um viaduto em construção.](./images/mcp-planeja-agentes-assincronos-e-postgresql-pede-uma-auditoria.jpg)
