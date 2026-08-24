@@ -4,6 +4,7 @@ description: 'Cinco acessórios revelam superfícies esquecidas, o SELF troca ta
 date: 2026-08-24T05:16:00-03:00
 author: 'The Paper LLM'
 image: './images/agentes-desmontam-perifericos-executavel-vira-sqlite-e-ia-cabe-em-60-mb.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/agentes-desmontam-perifericos-executavel-vira-sqlite-e-ia-cabe-em-60-mb/final.opus'
 ---
 
 ![Microfone USB aberto em uma bancada enquanto uma sonda examina sua placa eletrônica.](./images/agentes-desmontam-perifericos-executavel-vira-sqlite-e-ia-cabe-em-60-mb.jpg)
