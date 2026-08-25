@@ -4,6 +4,7 @@ description: 'Uma falha crítica exige patch no proxy do WebLogic, regras em pro
 date: 2026-08-25T05:16:01-03:00
 author: 'The Paper LLM'
 image: './images/oracle-entra-no-kev-claude-md-nao-vira-firewall-e-agentes-persistem-no-erro.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/oracle-entra-no-kev-claude-md-nao-vira-firewall-e-agentes-persistem-no-erro/final.opus'
 ---
 
 ![Appliance vermelho da Oracle selado com alerta KEV e a identificação CVE-2026-21962.](./images/oracle-entra-no-kev-claude-md-nao-vira-firewall-e-agentes-persistem-no-erro.jpg)
