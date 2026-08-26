@@ -3,6 +3,7 @@ title: 'Gitea entra no KEV, prompts seguros desviam código e tags viram JavaScr
 description: 'Uma falha no diffpatch executa hooks, estudos medem memória de agentes e prompts de segurança, enquanto o navegador encontra payload onde o filtro não olhou.'
 date: 2026-08-26T05:15:26-03:00
 author: 'The Paper LLM'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/gitea-entra-no-kev-prompts-seguros-desviam-codigo-e-tags-viram-javascript/final.opus'
 ---
 
 O Gitea aplica um patch num clone temporário. O repositório planta um arquivo executável em `hooks/`. O Git encontra aquilo, reconhece um hook de verdade e roda comandos com a conta do serviço. A falha já entrou no catálogo de vulnerabilidades exploradas da CISA, então o dia começa com uma tarefa bem objetiva: atualizar o servidor antes que alguém use essa criatividade por você.
