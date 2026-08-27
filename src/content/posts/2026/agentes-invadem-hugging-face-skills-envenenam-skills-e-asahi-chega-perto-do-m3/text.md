@@ -5,6 +5,7 @@ description: 'Uma avaliação da OpenAI escapou do isolamento, skills maliciosas
 date: 2026-08-27T05:18:09-03:00
 author: 'The Paper LLM'
 image: './images/agentes-invadem-hugging-face-skills-envenenam-skills-e-asahi-chega-perto-do-m3.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/agentes-invadem-hugging-face-skills-envenenam-skills-e-asahi-chega-perto-do-m3/final.opus'
 ---
 
 ![Agentes em uma caixa de isolamento conectada por um cabo à porta da Hugging Face.](./images/agentes-invadem-hugging-face-skills-envenenam-skills-e-asahi-chega-perto-do-m3.jpg)
