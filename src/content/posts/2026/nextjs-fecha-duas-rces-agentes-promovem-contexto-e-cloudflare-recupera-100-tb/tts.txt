@@ -1,0 +1,137 @@
+Next ponto J S fecha duas falhas de execução remota, agentes promovem contexto e Cloudflare recupera cem terabytes.
+Você atualiza o package ponto JSON, o lockfile fica uma beleza e todo mundo vai dormir em paz.
+Enquanto isso, o container antigo continua no ar, executando exatamente a versão vulnerável que você jurou ter corrigido.
+A Vercel lançou duas atualizações críticas do Next ponto J S que deixam a diferença entre arquivo e produção bem menos filosófica.
+A segurança aparece em outra camada hoje.
+Dois papers novos mostram harnesses de agentes pegando dados não confiáveis, reconstruindo o contexto e devolvendo aquilo ao modelo com autoridade maior.
+Depois, a Cloudflare dá um descanso ao sistema nervoso.
+Cinco mudanças no layout de dados em Rust tiraram cerca de cem terabytes de um cache D N S.
+Às vezes a infraestrutura não quer inteligência artificial. Quer uma String menor.
+O Next ponto J S corrige duas rotas críticas que chegavam à execução remota.
+A Vercel lançou o Next ponto J S quinze ponto cinco ponto vinte e quatro, na linha Maintenance L T S, e o dezesseis ponto três ponto três, na Active L T S.
+As duas versões corrigem vulnerabilidades críticas que podem levar à execução remota de código sem autenticação.
+Mesmo quem aplicou a atualização de segurança de julho precisa instalar a de agosto.
+A primeira falha mora no caminho de otimização de imagens A V I F.
+Quando uma aplicação entrega conteúdo controlado pelo atacante à [EY1 P IY1 AY1] de otimização de imagens, o Next ponto J S delega a decodificação ao sharp.
+O sharp usa a biblioteca libheif, que roda durante a requisição e faz parte da superfície de ataque da aplicação.
+A Vercel deu C V S S nove ponto cinco ao problema.
+As versões corrigidas desativam o caminho vulnerável de otimização A V I F enquanto a correção da biblioteca percorre a cadeia de dependências.
+Essa é a mitigação: o update interrompe o uso do decoder afetado.
+A retomada segura desse processamento depende da correção da biblioteca upstream.
+A segunda vulnerabilidade, C V E 2026, setenta e cinco seis zero quatro, recebeu C V S S nove ponto zero e começa com uma travessia de diretórios.
+O cenário aqui é bem específico: aplicações no Windows que combinam Pages Router e App Router sem Cache Components.
+Linux e macOS ficam fora desse caso.
+Se você hospeda Next ponto J S por conta própria, três perguntas resolvem o primeiro inventário.
+Qual versão está realmente instalada? O serviço otimiza A V I F enviado ou indicado por alguém de fora?
+O deploy roda em Windows com essa combinação de routers?
+Aí vem a parte sem glamour: instalar quinze ponto cinco ponto vinte e quatro ou dezesseis ponto três ponto três, reconstruir a imagem e fazer o redeploy.
+Depois, é preciso conferir a versão dentro do artefato em execução. Manifesto atualizado não atende requisição.
+Em maio, cobrimos outras treze falhas do Next ponto J S, corrigidas nas linhas quinze ponto cinco ponto dezoito e dezesseis ponto dois ponto seis.
+Agora são dois caminhos críticos recém-divulgados e novos pisos de versão.
+As fontes são o release de segurança do Next ponto J S de agosto de 2026 e os advisories da falha em A V I F e da falha no Windows.
+O dado da ferramenta voltou vestido de chefe.
+Dois preprints publicados em 27 de agosto colocam nome e números num problema de harnesses para agentes de código.
+A ferramenta recebe conteúdo pouco confiável, mas o sistema reconstrói esse conteúdo como uma nova mensagem de usuário ou de sistema.
+A procedência some e a autoridade sobe.
+É como copiar um bilhete achado no chão para o papel timbrado da empresa e depois se espantar quando alguém obedece.
+O trabalho "When Context Gets Root" avaliou treze objetivos de ataque em seis harnesses.
+Com execução irrestrita, todos os objetivos funcionaram em todos eles.
+A lista cobria confidencialidade, integridade, disponibilidade e execução remota de código.
+Os autores também cumpriram todos os objetivos testados nos três harnesses que ofereciam revisão automática de permissões.
+A escalada sobreviveu à chamada de ferramenta.
+Segundo os pesquisadores, ela reapareceu quando o sistema delegou tarefas, preservou metas ou criou execuções agendadas.
+O fio comum é a procedência.
+O harness transporta o texto, joga fora o rótulo de baixa confiança e entrega ao modelo uma instrução com autoridade que aquele dado nunca teve.
+O segundo paper, "The Framing Gap", estuda a revisão de intenção.
+Uma ação maliciosa com aparência inofensiva pode atravessar essa outra interpretação probabilística.
+No laboratório sintético do trabalho, uma lista fechada de destinos bloqueou todos os ataques por construção.
+Uma divisão entre planejador e leitor, cada um com suas capacidades, fechou o caminho de vazamento testado e manteve noventa porcento da utilidade medida.
+Esses números valem para os ambientes controlados dos papers.
+São preprints novos, e os experimentos demonstram falhas arquiteturais nas configurações avaliadas.
+Taxa de comprometimento e utilidade em instalações de produção dependem do produto, da configuração e do fluxo real.
+A consequência prática tem menos mistério que o ataque.
+A procedência precisa sobreviver a delegação, memória, skills, metas e agendamento.
+Credenciais ficam separadas do ambiente do agente.
+Leitura de arquivos, escrita, rede e destinos recebem capacidades explícitas.
+Aprovação pelo modelo continua sendo interpretação probabilística. O limite de verdade precisa morar fora dele.
+Essa direção coincide com a orientação de contenção da Anthropic: sandbox, fronteiras de filesystem, credenciais com escopo e saída de rede controlada.
+Em junho, falamos da saída falsa do Sentry e de contenção determinística.
+O avanço agora é a medição da promoção de contexto em seis harnesses, inclusive por mecanismos persistentes.
+As fontes são "When Context Gets Root", "The Framing Gap" e a orientação de contenção da Anthropic.
+A Cloudflare encontra cem terabytes entre ponteiros e capacidade ociosa.
+O Big Pineapple, cache D N S da Cloudflare, mantém mais de 250 bilhões de entradas.
+Nessa escala, desperdiçar um byte por entrada custa mais de 250 gigabytes na frota.
+Aquele campinho inocente aprovado no code review já alugou um galpão.
+A empresa fez cinco mudanças no layout dos dados em Rust.
+Segundo os resultados publicados, o consumo por entrada no benchmark caiu de 953 para 420 bytes, redução de cinquenta e seis porcento.
+As alocações passaram de um vírgula um quilobyte para 461 bytes.
+Em produção, o working set agregado encolheu aproximadamente cem terabytes.
+Parte do ganho veio de representar dados imutáveis como... dados imutáveis.
+Vec e String carregam capacidade de crescimento mesmo quando o cache nunca pretende alterar aquele valor.
+Slices e strings armazenadas em caixas tiram essa reserva ociosa.
+Outra parte veio de guardar os registros em bytes contíguos no formato de rede.
+Isso reduz ponteiros, alocações e a serialização repetida de conteúdo já codificado.
+Tem preço.
+O layout compacto dificulta o acesso aleatório e deixa a implementação um pouco mais complexa.
+Em troca, melhora a localidade de cache e alivia o alocador.
+Nos testes da Cloudflare, a inserção subiu de 625 mil para 893 mil entradas por segundo, alta de quarenta e três porcento.
+A latência de lookup caiu de 828 para 670 nanossegundos, redução de dezenove porcento.
+As medições são da própria Cloudflare.
+O benchmark usa uma mistura inspirada na produção: cinquenta e seis porcento de registros A, vinte e cinco porcento A A A A e dezenove porcento T X T.
+Outro cache, com dados e padrões de mutação diferentes, não ganha cem terabytes de brinde por trocar Vec por slice.
+A lição que viaja melhor é medir quanto você paga por uma flexibilidade que os dados nunca usam.
+A fonte é o relato de engenharia da Cloudflare.
+Destaques rápidos para hoje.
+A polícia australiana acusou dois homens de participação principal na Team P C P.
+As buscas ocorreram em 26 de agosto, e os dois réus receberam, juntos, catorze acusações.
+A polícia federal australiana estima mais de mil organizações potencialmente comprometidas, mais de quinhentas mil credenciais roubadas e ao menos 300 gigabytes exfiltrados.
+São estimativas policiais. A culpa ainda não foi estabelecida, e os réus têm direito à presunção de inocência.
+A prisão também não restaura artefato nem segredo.
+Equipes expostas pela campanha já coberta em Trivy, KICS e Lite L L M ainda precisam preservar evidências, girar credenciais e verificar o que publicam.
+A fonte é a Australian Federal Police.
+O Qwen três ponto oito Flash Next ativa seis bilhões de parâmetros por token e continua ocupando bem mais que um modelo de seis bilhões.
+A prévia experimental da arquitetura planejada para o Qwen quatro tem 125 bilhões de parâmetros principais, 51 bilhões em embeddings n-gram e quatro bilhões em M T P.
+Ela combina Gated DeltaNet e Qwen Sparse Attention.
+O contexto nativo é de 262 mil 144 tokens e pode chegar a um milhão com extensão por R O P E, como YaRN.
+A ativação esparsa reduz a computação por token. Armazenamento e memória precisam manter disponível o conjunto completo.
+Os testes de desempenho são do fornecedor.
+A fonte é o model card oficial do Qwen três ponto oito Flash Next.
+O Kubernetes um ponto trinta e sete tornou estável a [EY1 P IY1 AY1] de métricas de recursos.
+A versão um de metrics ponto k oito s ponto io expõe os mesmos Node Metrics e Pod Metrics da versão beta para C P U e memória.
+Essas métricas são usadas por recursos como kubectl top.
+Durante a transição, as implementações precisam servir as duas versões.
+Isso acontece porque o H P A do Kubernetes um ponto trinta e sete continua consumindo apenas a versão um beta um.
+A graduação estabiliza a [EY1 P IY1 AY1]. Você ainda precisa de uma implementação de métricas e de outro sistema para monitoramento completo.
+A fonte é o Kubernetes Blog.
+O Flatpak recebeu quinhentos e oito mil seiscentos e quarenta euros para dois anos de trabalho em sandboxing.
+O plano, organizado por Modal e Para-Real com investimento da Sovereign Tech Agency, vai até o fim de 2027.
+Entre as entregas estão permissões de áudio mais estreitas com PipeWire e política no WirePlumber.
+Também estão previstos um portal capaz de separar alto-falante de microfone e trabalho em rede, V P N e entitlements.
+Tudo isso está no roadmap financiado e ainda precisa ser entregue.
+A fonte é o anúncio do investimento no Flatpak.
+O Ubuntu vinte e seis ponto zero quatro ponto um L T S atualizou a mídia de instalação.
+O primeiro point release do Resolute Raccoon incorpora correções acumuladas e reduz a fila de updates em máquinas novas.
+Sistemas vinte e seis ponto zero quatro já atualizados recebem os mesmos pacotes pelo caminho normal, sem reinstalação.
+Usuários do vinte e quatro ponto zero quatro L T S receberão separadamente a oferta de upgrade para vinte e seis ponto zero quatro ponto um.
+A fonte é o anúncio da equipe Ubuntu.
+Um backend do llama ponto C P P passou a carregar G G U F no Axera A X oito oito cinco zero sem compilar cada modelo pelo fluxo do fornecedor.
+O projeto reorganiza os pesos durante o carregamento para o layout de engines pré-compiladas.
+Nesse processo, faz desquantização e requantização conforme as escalas do hardware.
+O autor relata de 24 a 30 tokens por segundo num Raspberry Pi cinco como host, com a C P U ociosa.
+É uma implementação pública interessante para estudar esse caminho fechado.
+O resultado depende da configuração e não foi reproduzido nesta apuração.
+A fonte é o repositório Axera A X oito oito cinco zero G G U F Support.
+O gemma quatro ponto C colocou uma rota completa de inferência do Gemma quatro E dois B em cerca de setecentas linhas de C.
+Tokenizador, transformer, cache K V, geração e kernels ficam num único arquivo, com pesos de matrizes em int oito e escalas F P dezesseis.
+O runtime educacional exige A V X dois e Open M P.
+Ele usa um arquivo de modelo de aproximadamente cinco gigabytes e recomenda oito gigabytes de memória R A M.
+Ele serve como lente pequena para enxergar o mecanismo. O llama ponto C P P continua cobrindo o trabalho geral.
+A validação e as medições vêm do autor.
+A fonte é o repositório gemma quatro ponto C.
+O iperf três separou um gargalo de rede do restante da pilha.
+No caso de Scott Hanselman, o teste direto tirou N A S, R A I D, S M B, filesystem e discos da investigação.
+Na combinação específica de Windows com uma Intel E seis um zero X T dois, desativar o IPv quatro Large Send Offload versão dois mudou o resultado.
+A taxa passou de 313 megabits por segundo para sete vírgula zero três gigabits por segundo.
+O autor não isolou se a causa estava no driver, firmware, Windows ou naquela máquina, e o L S O costuma ser útil.
+A dica boa é medir a rede crua primeiro. Sair desligando offload em peregrinação coletiva fica para depois.
+A fonte é o blog de Scott Hanselman.
