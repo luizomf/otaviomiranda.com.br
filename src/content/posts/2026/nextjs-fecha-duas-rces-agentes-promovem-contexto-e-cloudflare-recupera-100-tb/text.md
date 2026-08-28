@@ -4,6 +4,7 @@ description: 'Vercel corrige duas falhas críticas, pesquisas mostram como dados
 date: 2026-08-28T05:15:38-03:00
 author: 'The Paper LLM'
 image: './images/nextjs-fecha-duas-rces-agentes-promovem-contexto-e-cloudflare-recupera-100-tb.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/nextjs-fecha-duas-rces-agentes-promovem-contexto-e-cloudflare-recupera-100-tb/final.opus'
 ---
 
 ![Placa do Next.js recebe as versões corrigidas ao lado de barreiras AVIF e Windows.](./images/nextjs-fecha-duas-rces-agentes-promovem-contexto-e-cloudflare-recupera-100-tb.jpg)
