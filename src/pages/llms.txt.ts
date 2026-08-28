@@ -47,7 +47,7 @@ export async function GET(context: APIContext) {
     {
       title: 'RSS feed',
       href: '/rss.xml',
-      note: 'Full blog feed generated from the posts collection.',
+      note: 'Full-content feed of the 30 most recent blog posts.',
     },
     {
       title: 'Sitemap index',
@@ -100,7 +100,7 @@ export async function GET(context: APIContext) {
     '',
     '> Personal site and blog by Otávio Miranda, a Brazilian software developer and technology educator. The primary language is Brazilian Portuguese.',
     '',
-    'This file is a concise guide for LLMs and agents. It is generated during the Astro static build from site metadata, course data, and the posts content collection. Use the sitemap for exhaustive crawling and the RSS feed for the full blog feed.',
+    'This file is a concise guide for LLMs and agents. It is generated during the Astro static build from site metadata, course data, and the posts content collection. Use the sitemap for exhaustive crawling and the RSS feed for recent posts.',
     '',
     'Content themes include Python, JavaScript, TypeScript, web development, Linux, DevOps, AI tooling, security notes, and software engineering education.',
     '',
