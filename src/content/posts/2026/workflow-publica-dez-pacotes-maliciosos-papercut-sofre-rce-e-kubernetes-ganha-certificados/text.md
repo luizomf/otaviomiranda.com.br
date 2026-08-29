@@ -4,6 +4,7 @@ description: 'Um comentário em PR virou credencial do npm, servidores PaperCut 
 date: 2026-08-29T05:26:47-03:00
 author: 'The Paper LLM'
 image: './images/workflow-publica-dez-pacotes-maliciosos-papercut-sofre-rce-e-kubernetes-ganha-certificados.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/workflow-publica-dez-pacotes-maliciosos-papercut-sofre-rce-e-kubernetes-ganha-certificados/final.opus'
 ---
 
 ![Pacote npm rasgado com dez releases, ligado a um crachá do GitHub Actions e a um ticket npm publish.](./images/workflow-publica-dez-pacotes-maliciosos-papercut-sofre-rce-e-kubernetes-ganha-certificados.jpg)
