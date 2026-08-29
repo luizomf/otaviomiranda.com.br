@@ -1,0 +1,199 @@
+Workflow publica dez versões maliciosas, PaperCut sofre execução remota de código e Kubernetes ganha certificados.
+Um usuário externo comentou N P M publish num pull request.
+O workflow aceitou, baixou o código do fork, executou os scripts de instalação e ainda tinha permissão para pedir uma credencial O I D C.
+Em 21 minutos, dez versões maliciosas do pacote da 7nohe chamado open [EY1 P IY1 AY1] react query codegen, foram parar no N P M.
+Ninguém precisou roubar a senha do mantenedor.
+A automação entregou uma credencial temporária com carimbo, crachá e toda a cerimônia oficial.
+Hoje também tem correção urgente para PaperCut sob exploração e certificados X ponto 509 para pods no Kubernetes um ponto trinta e sete.
+Tem ainda memória de agentes tratada como estado de programa e um CAPTCHA falso que transforma Windows em porta para a rede interna.
+A fronteira de confiança continua aparecendo nos lugares mais criativos.
+O atacante, infelizmente, também lê documentação.
+Um comentário em pull request virou permissão para publicar no N P M.
+As dez versões maliciosas do pacote da 7nohe chamado open [EY1 P IY1 AY1] react query codegen saíram em duas ondas.
+Isso ocorreu entre vinte horas e vinte horas e 21 minutos, no horário U T C de 28 de agosto.
+Por volta de 23 horas e 11 minutos, todas já tinham sido removidas.
+O mantenedor corrigiu o workflow às 22 horas e 50 minutos.
+A lista inclui as versões zero ponto cinco ponto quatro, zero ponto cinco ponto cinco, um ponto seis ponto três e um ponto seis ponto quatro.
+Inclui também dois ponto dois ponto um, dois ponto dois ponto dois, três ponto zero ponto três e três ponto zero ponto quatro.
+E inclui duas versões canary com o prefixo zero ponto zero ponto zero, seguido de hífen.
+Segundo as análises da SafeDep e da StepSecurity, a última versão segura era a três ponto zero ponto dois, publicada em 11 de agosto.
+Em 29 de agosto, a tag latest apontava novamente para ela.
+O ataque juntou várias decisões que, olhando uma por uma, até parecem convenientes.
+Um workflow disparado por issue comment aceitava o comentário de publicação sem conferir a relação do autor com o projeto.
+Depois, fazia checkout da cabeça do pull request, controlada pelo fork, e rodava P N P M install.
+Os pacotes maliciosos usaram binding ponto gyp, preinstall ou os dois para executar código nessa instalação.
+E tudo isso rodava no contexto privilegiado do repositório base.
+O job também tinha a permissão id token write, justamente a usada para solicitar a identidade O I D C do trusted publishing do N P M.
+Pronto: código não confiável entrou na mesma sala capaz de emitir a credencial de publicação.
+A porta continuou intacta. O crachá saiu na recepção.
+O trusted publishing tira do "Git Hub" aquele token longo do N P M guardado como segredo.
+Isso reduz o risco de roubo de uma credencial estática e transfere a confiança para o workflow autorizado a pedir credenciais curtas.
+Se o workflow executa código vindo de um fork, a proteção fica parecida com o café da firma: existe controle de acesso no papel, mas a cozinha já está cheia.
+Para quem usa o pacote, o unpublish impede novas resoluções normais.
+O que já entrou em lockfiles, caches, artefatos e ambientes de C I continua lá.
+Procure as dez versões e preserve o que encontrar.
+A SafeDep ainda não tinha terminado de decodificar a última camada do payload ofuscado quando publicou a análise.
+Então, o objetivo final ainda podia ser roubo de credenciais, instalação de backdoor ou os dois.
+Arquivo já instalado é evidência, não um problema que o N P M consegue apagar à distância.
+Para mantenedores, o conserto é estrutural: comentário de usuário externo não autoriza release.
+Código de fork não roda em job com id token write, e lifecycle script não entra por acidente no caminho de publicação.
+Em maio, falamos de atividade anterior do Mini Shai-Hulud.
+Desta vez, foi outro pacote, uma nova onda em 28 de agosto e um caminho bem concreto de comprometimento pelo "Git Hub Actions" com O I D C.
+As fontes deste bloco são o relatório de incidente da SafeDep e a análise da StepSecurity.
+PaperCut sob ataque exige isolamento e o segundo patch.
+PaperCut e Huntress confirmaram exploração ativa de servidores PaperCut N G e M F.
+O ataque encadeia duas falhas: a primeira altera configurações sem autenticação.
+A segunda usa uma dessas configurações para carregar bytecode Java e executar código no processo do Application Server.
+A C V E 2026, oitenta e um cinco sete oito, recebeu C V S S oito ponto oito.
+Ela atravessa a barreira de autorização e permite mudar determinadas configurações.
+Já a C V E 2026, oitenta e dois zero sete oito, recebeu C V S S nove ponto quatro.
+Ela transforma o nome configurado de uma classe de driver de banco de dados num caminho para execução arbitrária de Java.
+Uma falha prepara o terreno confiável e a outra executa o que foi colocado ali.
+É o tipo de colaboração entre bugs que ninguém pediu na retrospectiva.
+A Huntress viu exploração limitada em dois ambientes entre 26 e 27 de agosto.
+Os pesquisadores também reproduziram a cadeia completa, antes da autenticação, numa instalação padrão do PaperCut N G, versão vinte e cinco ponto zero ponto onze ponto 75758.
+Nos vestígios recuperados, encontraram comandos de descoberta do sistema.
+Não encontraram malware secundário, outro canal de comando e controle, persistência ou ações posteriores.
+A execução remota foi reproduzida e os ataques aconteceram.
+O objetivo final dos invasores nesses dois casos ainda não apareceu.
+E a ausência dos indicadores publicados não prova que outro servidor saiu ileso.
+O Emergency Patch Release dois chegou em 28 de agosto para as linhas suportadas 24, 25 e 26.
+Segundo a PaperCut, todas as versões do N G e do M F podem ser afetadas.
+Quem opera esses servidores precisa tirar a interface administrativa da internet e instalar o Release dois imediatamente.
+O advisory de 29 de agosto também acompanha problemas pós-patch em consultas de cartão ou I D e em S A M L.
+Use o boletim atualizado para seguir essas correções; reverter para uma versão vulnerável devolve a porta ao atacante.
+Se der, preserve as evidências antes de atualizar ou reiniciar.
+A PaperCut destaca o arquivo server ponto log ausente ou truncado, processos filhos suspeitos de P C app ponto exe e entradas específicas de erro de banco.
+A ordem mais segura é isolar, guardar logs e processos, corrigir e investigar.
+Reiniciar primeiro pode deixar o servidor bonito e a investigação de cueca.
+As fontes deste bloco são o advisory urgente da PaperCut e a análise de exploração da Huntress.
+Kubernetes um ponto trinta e sete padroniza certificados para pods, sem assinar nenhum.
+O Kubernetes um ponto trinta e sete levou Pod Certificates e Cluster Trust Bundles à disponibilidade geral.
+Agora existem interfaces de [EY1 P IY1 AY1] no core e suporte no kubelet para pedir identidades X ponto 509 de workloads.
+O mecanismo também projeta certificado e chave dentro do pod e distribui os certificados das autoridades confiáveis.
+A diferença para o J W T de uma service account importa.
+J W T é um bearer token: quem rouba consegue reapresentar.
+No T L S mútuo, a identidade também depende da posse da chave privada ligada ao certificado.
+Essa chave pode permanecer no workload enquanto o outro lado verifica a assinatura da autoridade certificadora.
+No fluxo novo, o kubelet gera a chave privada e cria um Pod Certificate Request.
+Um assinador devolve a cadeia de certificados.
+O kubelet grava cadeia e chave no filesystem do pod e projeta os certificados correspondentes de Cluster Trust Bundle.
+O bundle informa quais autoridades o workload deve confiar.
+Decidir quem recebe uma identidade continua sendo trabalho do controlador assinador.
+A própria rotação vem no mecanismo.
+Qualquer assinador que entre futuramente no core ficará limitado a certificados de 24 horas.
+Assinadores externos podem emitir certificados de até 91 dias.
+Quando a credencial é renovada, o arquivo projetado muda.
+A aplicação precisa detectar isso por inotify ou polling e recarregar o material.
+Certificado renovado que o processo nunca lê é uma expiração com documentação melhor.
+Tem uma peça grande fora da caixa: o Kubernetes um ponto trinta e sete não traz um assinador de Pod Certificates no core.
+A [EY1 P IY1 AY1] e o encanamento estão estáveis, mas cada equipe ainda precisa instalar um controlador ou produto externo.
+Esse componente terá de avaliar os pedidos e assinar os certificados.
+O Tinycert usado no exemplo do projeto não está pronto para produção.
+Para times de plataforma, a disponibilidade geral entrega uma base comum para identidade com prova de posse e m T L S.
+A implantação ainda envolve escolher e operar o assinador, definir a política de emissão e distribuir a confiança certa.
+Também exige testar se cada aplicação sobrevive à rotação.
+A disponibilidade geral estabiliza o contrato.
+Sua P K I continua acordando você de madrugada por conta própria.
+A fonte deste bloco é a explicação do Kubernetes um ponto trinta e sete sobre Pod Certificates e Cluster Trust Bundles.
+Lemmalog transforma memória de agente em estado derivável.
+O Lemmalog separa duas tarefas que a gente costuma jogar juntas no colo do modelo.
+Um L L M lê código, saída de debugger e texto para extrair fatos estruturados.
+Depois, um mecanismo Datalog deriva conclusões, acompanha dependências, registra a procedência e decide quando uma afirmação deixou de valer.
+A ideia, no fundo, lembra um compilador.
+O modelo funciona como front-end probabilístico, traduzindo material bagunçado para uma representação intermediária.
+O Datalog aplica regras até chegar a um ponto fixo.
+Quando alguém pergunta por que uma conclusão existe, o sistema mostra os fatos e as regras que a sustentam.
+É um pouco melhor que apontar para 104 mil tokens de conversa e desejar boa sorte.
+Retração é uma das partes mais interessantes.
+Duas evidências independentes podem sustentar a mesma conclusão; remover uma delas não deve apagar o resultado que a outra ainda prova.
+O Lemmalog conta essas dependências, invalida conclusões quando o suporte acaba e registra intervalos de validade para fatos que mudam com o tempo.
+Nos testes publicados pelo autor Jordy Zomer, o sistema respondeu a uma divisão de 102 perguntas do LongMemEval.
+O resultado foi F um de zero vírgula 463, mais ou menos zero vírgula 010, e acurácia de zero vírgula 575, mais ou menos zero vírgula 004.
+Ficou atrás do PropMem, com F um de zero vírgula 550, e do SimpleMem, com zero vírgula 480.
+Ainda ficou acima do resultado publicado para contexto completo, zero vírgula 222.
+Também superou a execução do próprio autor com GPT quatro ponto um e contexto completo, que marcou zero vírgula 197.
+O modelo de resposta recebeu cerca de dois mil e setecentos tokens por pergunta, contra aproximadamente 104 mil no contexto completo.
+Isso representa uma redução perto de 38 vezes.
+A extração usou Claude Sonnet quatro ponto seis; depois vieram os leitores e juízes padronizados do benchmark.
+A conta ficou bem pior nas perguntas que exigiam juntar várias sessões.
+O Lemmalog marcou F um de zero vírgula 211, enquanto o PropMem chegou a zero vírgula 582 e o SimpleMem, a zero vírgula 382.
+O diagnóstico do autor é simples: muitas vezes, o sistema nem extraiu os fatos relevantes.
+Datalog organiza, deriva e remove aquilo que recebeu.
+Um fato ignorado pelo L L M continua ignorado.
+E duas entidades reconciliadas de forma errada continuam erradas com uma procedência muito bem organizada.
+Os resultados são do próprio projeto, ainda sem reprodução independente, e cada categoria tem só 17 perguntas.
+Mesmo assim, a divisão de trabalho é útil para quem constrói agentes.
+O modelo interpreta entradas incertas; um sistema determinístico mantém conclusões, tempo, dependências e procedência.
+Memória auditável não torna a extração verdadeira.
+Pelo menos cada certeza passa a ter recibo.
+A fonte deste bloco é o relatório técnico do Lemmalog.
+TerminalFix usa o usuário para abrir um túnel reverso.
+A campanha TerminalFix começa com uma falsa verificação da Cloudflare em sites comprometidos.
+A página copia um comando e manda a vítima abrir o Windows Terminal ou o PowerShell para colá-lo.
+O CAPTCHA não verifica se você é humano.
+Ele verifica se o atacante conseguiu contratar um humano temporário para executar o instalador.
+Segundo a Microsoft, a cadeia baixa um executável legítimo assinado e uma D L L maliciosa chamada dui setenta ponto D L L.
+Pela ordem de busca de bibliotecas do Windows, o programa legítimo carrega a D L L colocada pelo invasor no mesmo diretório.
+Esse D L L sideloading inicia as próximas etapas sem depender de um executável principal gritando "sou malware".
+O ataque recupera fragmentos escondidos em imagens P N G, cria persistência e faz reconhecimento do domínio do Active Directory.
+Também instala um túnel reverso em Python.
+A máquina comprometida abre uma conexão WebSocket criptografada pela porta T C P 443.
+Ela entrega ao atacante um proxy T C P no estilo SOCKS.
+Como a conexão começa de dentro para fora, o túnel alcança partes da rede que recusariam conexões diretas da internet.
+A Microsoft observou o túnel e o reconhecimento.
+Não observou escalada de privilégio, exfiltração ou ransomware nas ações posteriores.
+Essas são consequências possíveis daquele acesso, não fatos observados nesta campanha.
+A primeira regra de defesa cabe numa linha: verificação legítima não manda você colar comando no terminal.
+Um dispositivo atingido precisa ser investigado como possível pivô para a rede, além da infecção local.
+Equipes podem caçar a telemetria publicada pela Microsoft e procurar o endpoint neutralizado gitnow ponto dev, na porta 443.
+Também devem revisar persistência, processos e conexões e conferir até onde aquela identidade chegava na rede interna.
+A fonte deste bloco é a análise da campanha TerminalFix pela Microsoft.
+Agora, os destaques rápidos para hoje.
+O Debian adotou "Responsible Use of Generative AI" como posição oficial.
+A Opção cinco venceu "nenhuma das anteriores" por 281 a 126 e foi a única no conjunto de Schwartz.
+O projeto não endossa nem proíbe I A generativa.
+Quem contribui continua responsável por qualidade, correção, manutenção, testes e conformidade legal.
+A divulgação é recomendada, não obrigatória.
+Material não público exige autorização antes de ir para terceiros, e mudanças automatizadas amplas pedem discussão prévia e supervisão humana.
+Essa é uma política do projeto, não uma decisão jurídica geral sobre copyright ou licenças.
+As fontes são o resultado da resolução e o texto adotado pelo Debian.
+Ubuntu vinte e seis ponto zero quatro ponto um, L T S, já está disponível, mas o upgrade automático do vinte e quatro ponto zero quatro vai esperar.
+A Canonical pretende oferecer a migração pelo Update Manager algumas semanas depois.
+Isso deve acontecer quando aplicar os backports planejados para regressões recentes do rust coreutils.
+A mídia nova já pode ser baixada; o caminho automático de upgrade ainda está fechado.
+Em produção, leia as notas, valide as aplicações e aguarde o fluxo suportado.
+A fonte é o anúncio oficial do Ubuntu vinte e seis ponto zero quatro ponto um.
+Uma combinação de parâmetros pode fazer o PostgreSQL reabrir eternamente o mesmo log grande.
+O parâmetro log rotation size escolhe o nome com base no horário atual.
+Se um log filename diário ainda resolve para o arquivo em uso, o servidor abre o mesmo arquivo em append.
+Esse arquivo continua acima do limite, e a festa se repete.
+A documentação diz que truncar um nome repetido só acontece na rotação por tempo, não por tamanho ou startup.
+Para combinar tamanho com rotação horária, dá para incluir o marcador porcento M no nome.
+Retenção é outro trabalho; rotação não apaga arquivo.
+As fontes são o teste de Christophe Pettus e a documentação do PostgreSQL.
+Samsung colocou unidades de multiplicação e acumulação ao lado dos 16 bancos da L P D D R cinco X.
+A arquitetura L P D D R cinco X P I M, apresentada na Hot Chips, entrega 614 gigabytes por segundo internos.
+O acesso convencional entrega 76 vírgula oito gigabytes por segundo.
+A arquitetura também alcança dois vírgula quatro T O P S por pacote com pesos de quatro bits.
+Linhas reservadas ativam a computação por comandos normais da memória.
+Porém, operações, escala e um operando são transmitidos aos bancos num modelo S I M D restrito.
+Por enquanto, é uma arquitetura apresentada, não um notebook chegando na semana que vem.
+Software, coerência de cache, mudança de modo e multitarefa ainda dão bastante trabalho.
+A fonte é a análise da Chips and Cheese sobre a L P D D R cinco X P I M.
+BOMHort entrou na Open S S F como projeto Sandbox.
+O antigo SeeBOM, sob Apache dois ponto zero, declara ingerir e normalizar S P D X, Cyclone D X e envelopes in toto.
+Também declara correlacionar O S V e C V E, interpretar V E X e rodar por Docker, Kind ou Helm.
+Isso centraliza consultas como "quais artefatos usam o componente afetado?", sem reescanear cada projeto.
+As capacidades e o desempenho foram descritos pelos mantenedores.
+Sandbox significa incubação de governança; ainda não é auditoria de segurança nem selo de produção.
+A fonte é o anúncio do BOMHort na Open S S F.
+Dolphin vinte e seis ponto zero oito e K I O seis ponto vinte e nove cortaram cópias desnecessárias e memória retida.
+O worker local do K I O saiu de um processo para uma thread, mas continuava serializando tudo por socket.
+Ou seja, pagava pedágio sem atravessar fronteira nenhuma.
+A nova fila em memória transfere arrays de bytes sem cópia.
+No benchmark do autor, a cópia de muitos arquivos pequenos ficou mais de duas vezes mais rápida que no K I O seis ponto vinte e cinco.
+O cache de diretórios caiu de dez para três entradas, com timeout de três minutos.
+Ele reteve de duas vírgula oito a três vírgula uma vezes menos memória no percurso por 12 diretórios grandes.
+São medições upstream num harness específico: o ganho cai com arquivos maiores, e C P e R M continuam fazendo menos trabalho.
+A fonte é o relatório de desempenho do K D E.
