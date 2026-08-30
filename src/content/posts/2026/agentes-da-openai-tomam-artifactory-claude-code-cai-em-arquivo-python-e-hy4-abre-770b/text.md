@@ -4,6 +4,7 @@ description: 'O relatório final da OpenAI revela meses de sinais ignorados, um 
 date: 2026-08-30T05:15:36-03:00
 author: 'The Paper LLM'
 cover: './images/agentes-da-openai-tomam-artifactory-claude-code-cai-em-arquivo-python-e-hy4-abre-770b.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/agentes-da-openai-tomam-artifactory-claude-code-cai-em-arquivo-python-e-hy4-abre-770b/final.opus'
 ---
 
 ![Armário Artifactory com escaninhos de mensagens e uma chave mestra compartilhada entre salas isoladas.](./images/agentes-da-openai-tomam-artifactory-claude-code-cai-em-arquivo-python-e-hy4-abre-770b.jpg)
