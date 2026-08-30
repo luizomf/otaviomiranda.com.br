@@ -56,6 +56,8 @@ Personal site + blog. Astro SSG, deployed to GitHub Pages via Actions.
 
 ## Workflow
 
+**Prefer test-driven development (TDD) whenever practical.**
+
 **Issues → branch → PR → merge.** That's it.
 
 1. **Pick an issue** from GitHub Issues. If none exists, create one first using
