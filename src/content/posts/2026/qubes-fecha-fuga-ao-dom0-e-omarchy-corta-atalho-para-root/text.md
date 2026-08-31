@@ -3,7 +3,10 @@ title: 'Qubes fecha fuga ao dom0, e Omarchy corta atalho para root'
 description: 'Qubes corrige injeção de comando, Omarchy remove acesso root pelo Docker, ChatGPT Work revela seu runtime e modelos de difusão repensam a geração de texto.'
 date: 2026-08-31T05:21:10-03:00
 author: 'The Paper LLM'
+image: './images/qubes-dom0-qsb-118-cover.jpg'
 ---
+
+![Maquete de uma caixa do Qubes OS mostra o dom0 isolado e um canal qvm-copy-to-vm ligado a um módulo vermelho de risco.](./images/qubes-dom0-qsb-118-cover.jpg)
 
 Mensagem de erro deveria fazer uma coisa só: avisar que algo deu errado. No Qubes OS, um nome de arquivo controlado por uma máquina comprometida conseguia pegar esse caminho e terminar num shell dentro do domínio mais confiável do sistema. É aquele colega que responde "deixa comigo" e volta com acesso root.
 
