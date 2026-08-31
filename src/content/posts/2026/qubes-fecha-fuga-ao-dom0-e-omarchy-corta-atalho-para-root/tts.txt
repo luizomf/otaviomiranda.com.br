@@ -1,0 +1,195 @@
+Qubes fecha fuga ao dom zero, e Omarchy corta atalho para root.
+Mensagem de erro deveria fazer uma coisa só: avisar que algo deu errado.
+No Qubes OS, um nome de arquivo controlado por uma máquina comprometida conseguia pegar esse caminho e terminar num shell dentro do domínio mais confiável do sistema.
+É aquele colega que responde “deixa comigo” e volta com acesso root.
+A edição de hoje está cheia dessas fronteiras que pareciam pequenas até alguém encostar nelas.
+O grupo Docker do Omarchy dava poder de root a processos comuns do desktop.
+Testes do ChatGPT Work revelaram um runtime com navegador, rede e armazenamento persistente.
+E modelos de difusão estão tentando trocar a obrigação de escrever da esquerda para a direita por várias rodadas de revisão.
+Agora, o Qubes corrige uma injeção de comando no domínio mais confiável.
+O Qubes OS publicou o boletim de segurança Q S B cento e dezoito sobre uma falha que podia transformar o erro de uma cópia de arquivo em execução arbitrária de comando no dom zero.
+Todas as versões do sistema são afetadas.
+Para o Qubes quatro ponto três, a correção está no pacote qubes core dom zero Linux, versão quatro ponto três ponto vinte e dois.
+O dom zero é o domínio administrativo mais confiável do Qubes.
+Ele controla o sistema e fica deliberadamente isolado das máquinas virtuais, ou qubes, onde o trabalho comum acontece.
+A vulnerabilidade furava essa separação pelo lugar menos cinematográfico possível: uma mensagem de erro.
+O cenário começa com uma qube de destino já comprometida.
+O usuário inicia no dom zero uma cópia para essa máquina usando o comando qvm copy to V M.
+Se ocorre um erro, a qube devolve um nome de arquivo para o dom zero apresentar na caixa de diálogo.
+Segundo a equipe de segurança, o código removia caracteres fora de ASCII e aspas duplas, interpolava o restante numa string e passava tudo para a função system.
+Pronto: o nome do arquivo deixa de ser dado e começa a dar ordens ao shell.
+Um destino comprometido podia fabricar esse valor e levar o dom zero a executar um comando arbitrário.
+Do lado das V Ms, a rotina equivalente chama a função exec L P com argumentos separados, em vez de entregar uma linha inteira ao shell, então esse caminho não é afetado.
+A exploração exige duas coisas: a qube de destino já comprometida e uma pessoa iniciando a cópia do dom zero para ela.
+Com isso, uma invasão antes confinada a uma qube pode chegar ao controle do Qubes OS.
+Uma baita promoção de privilégio para um nome de arquivo.
+O boletim é datado de 28 de agosto e foi publicado no dia 29.
+Naquele momento, o pacote corrigido deveria sair do repositório de testes de segurança para o repositório estável, depois dos testes da comunidade.
+A orientação oficial é continuar atualizando o sistema normalmente.
+Aqui, a janela de erro era literalmente uma janela de privilégio.
+A fonte deste bloco é o boletim de segurança cento e dezoito do Qubes.
+Agora, o Omarchy tira o grupo Docker do caminho padrão até root.
+O Omarchy corrigiu outra fronteira de privilégio, desta vez no desktop de desenvolvedor.
+Antes da versão quatro ponto zero ponto um, o usuário padrão entrava no grupo Docker.
+Qualquer processo da sessão com as permissões desse usuário podia controlar o daemon Docker executado como root e, de quebra, modificar o host como root.
+A frase “usar Docker sem sudo” esconde duas arquiteturas bem diferentes.
+No desenho afetado, o daemon continua com privilégio de root e atende comandos pelo socket Unix que fica em var, run, Docker ponto sock.
+Entrar no grupo Docker dá acesso direto a esse socket.
+O próprio Docker trata essa permissão como equivalente a root.
+O modelo de autorização fez exatamente o que prometia; o padrão do sistema é que entregou poder demais.
+O problema estava no tamanho da confiança concedida de saída.
+Navegador, editor, agente de inteligência artificial, script de pacote e qualquer outro processo da sessão herdavam o grupo suplementar.
+Ninguém precisava convencer a pessoa a digitar sudo; bastava conversar com o daemon, que já podia fazer o serviço privilegiado.
+Conveniência é uma delícia até o navegador ganhar a chave da casa.
+O pesquisador demonstrou a consequência montando a raiz do host dentro de um container Alpine e lendo o arquivo de senhas protegidas E T C shadow.
+O teste foi feito no Omarchy três ponto oito ponto quatro, e a divulgação considera afetadas todas as versões anteriores à quatro ponto zero ponto um.
+A configuração havia sido introduzida em primeiro de junho de 2025, reativada no dia 17 daquele mês e removida em 24 de agosto de 2026.
+Os detalhes saíram depois da correção coordenada, em 28 de agosto.
+Usuários devem atualizar para a versão quatro ponto zero ponto um ou posterior e conferir o estado do grupo e da sessão.
+É o tipo de detalhe que faz logout, reinício e verificação parecerem menos burocracia e mais engenharia.
+O modo rootless do Docker segue outro desenho.
+Ele executa daemon e containers dentro de um namespace de usuário, sem um daemon com poderes de root no host.
+Isso reduz o raio de impacto, embora ainda exponha interfaces do kernel ligadas a namespaces.
+Também pode exigir controles mais permissivos de seccomp ou AppArmor em cenários com BuildKit aninhado.
+Também depende da configuração de faixas subordinadas de U I D e G I D.
+Rootless e “usuário no grupo do daemon rootful” entregam uma ergonomia parecida no terminal, mas por caminhos diferentes.
+No rootless, o root sai do daemon.
+Essa é a diferença que importa quando alguma coisa na sessão resolve aprontar.
+As fontes são a divulgação técnica do pesquisador e a documentação do modo rootless do Docker.
+O ChatGPT Work parece menos chat e mais sistema operacional de tarefa.
+No lançamento do ChatGPT Work, a orquestração por subagentes já era parte da história.
+Agora, Simon Willison testou o produto e inventariou o que existe ao redor do modelo.
+O ambiente inclui execução de código com internet, navegador Chrome automatizado, armazenamento persistente, publicação de sites e execução de subagentes.
+Nos testes, o ambiente de código podia acessar a internet com controle configurável por domínio.
+O Work também ofereceu um Chrome completo em modo headless.
+Junte um navegador lendo conteúdo não confiável, arquivos ou credenciais privadas e um canal de saída.
+Aí aparece a combinação que Willison chama de “trifecta letal” para injeção de prompt.
+Willison não demonstrou um ataque; o artigo pergunta como a OpenAI reduz esse risco.
+O inventário já mostra uma superfície na qual o agente consegue ler, agir e se comunicar.
+Isso entra no modelo de ameaças da equipe antes que a interface simpática faça todo mundo esquecer o pequeno detalhe de que a caixa de texto agora tem mãos.
+O armazenamento também muda a conversa.
+Willison observou um volume de workspace compartilhado entre sessões do Work.
+Processos e servidores em localhost não continuavam compartilhados, mas arquivos persistiam.
+Isso permite retomar trabalho e manter artefatos úteis; também permite carregar um arquivo envenenado de uma sessão para outra.
+Memória durável é maravilhosa até lembrar perfeitamente da coisa errada.
+O autor ainda conseguiu enumerar 223 ferramentas registradas, seis vindas dos M C Ps pessoais dele, e 44 skills.
+Ele chegou a esses números por engenharia reversa durante o teste.
+São observações daquele ambiente, sem o peso de uma [EY1 P IY1 AY1] pública ou de um contrato estável de compatibilidade.
+Identidade do modelo, franquias de uso, planos e nomes do produto neste retrato também dependem das observações de Willison.
+Para uma equipe, a leitura útil é tratar o Work como runtime de agente.
+Segredos, permissões de saída, páginas não confiáveis, ações do navegador, ferramentas conectadas e arquivos persistentes fazem parte da fronteira de segurança.
+A caixa de texto é só a recepção do prédio.
+A fonte deste bloco é Simon Willison, no artigo “Understanding ChatGPT Work”.
+Agora, os modelos de difusão revisam o texto antes de bater o martelo.
+Modelos de linguagem tradicionais costumam gerar um token por vez, da esquerda para a direita.
+Cada passo depende do que já foi escolhido.
+Um novo guia do Kuleshov Group explica outra arquitetura: começar com posições mascaradas e refinar várias delas repetidamente até chegar ao texto final.
+Na difusão mascarada, o modelo recebe uma sequência com tokens escondidos.
+A cada rodada, prevê parte dessas posições e pode mascarar outra vez os trechos que ainda merecem revisão.
+O sistema trabalha sobre um bloco e reconsidera decisões antes de entregar o resultado.
+É quase o conceito revolucionário de reler o que escreveu, agora com G P U.
+Isso tenta aproveitar melhor cada passagem pelos pesos do modelo.
+Na decodificação autorregressiva, mover esses pesos pela memória serve para escolher o próximo token.
+Na difusão, uma passagem pode atualizar várias posições.
+O ganho real, porém, depende de arquitetura, hardware, tamanho do lote, quantidade de rodadas e qualidade exigida.
+Manchete de “várias vezes mais rápido” sem esse contexto é benchmark usando nariz de palhaço.
+O comprimento variável exige outro pedaço do desenho.
+A difusão em blocos divide a geração e permite continuar produzindo texto sem fixar toda a sequência antecipadamente.
+Separar encoder e decoder pode evitar trabalho repetido, enquanto destilação tenta reduzir o número de etapas necessárias para chegar ao resultado.
+Mesmo com essas técnicas, a inferência ainda passa por várias rodadas de remoção de ruído ou refinamento.
+A capacidade de revisar posições torna a arquitetura interessante para preenchimento de lacunas e geração com restrições.
+Desempenho em programação, agentes ou tarefas completas continua dependendo de avaliação própria.
+E throughput de tokens mede tokens, não o tempo até a entrega correta aparecer.
+Medusa faz outra coisa: propõe tokens futuros e deixa o modelo-alvo verificar um prefixo válido.
+A difusão começa com uma sequência mascarada ou ruidosa e a refina repetidamente.
+As duas exploram trabalho paralelo, com mecanismos e garantias diferentes.
+A fonte é o guia “How to Build a Diffusion Language Model”, do Kuleshov Group.
+Agora, os destaques rápidos para hoje.
+Scrapers já comem cerca de um quinto da C P U do Kernel ponto org.
+O operador Konstantin Ryabitsev relata perto de seis milhões de pedidos diários por commits aleatórios.
+Sessenta e seis porcento morrem no desafio Anubis, enquanto o restante mantém de 14 a 16 dos 90 núcleos, distribuídos em cinco nós, renderizando páginas.
+A classificação é uma estimativa operacional, porque separar todo bot de todo humano virou uma ciência meio sobrenatural.
+Se você precisa do histórico, clone o repositório uma vez.
+Raspar H T M L de commits repete o trabalho dinâmico por forks e U R Ls.
+A fonte é o texto “Creepy crawlies”, do Kernel ponto org.
+Um teste do Qwen encontrou mais velocidade e entregas que simplesmente não existiam.
+Na mesma máquina, com uma R T X Pro seis mil Blackwell Max Q de 96 gigabytes e o mesmo endpoint V L L M nightly, o autor relata diferenças importantes.
+O Qwen três ponto oito Flash Next N V F P quatro foi cerca de uma vírgula três a uma vírgula nove vezes mais rápido nos caminhos bem-sucedidos.
+Mas, às vezes, ele declarou conclusão sem produzir o artefato prometido.
+O Qwen três ponto oito, 27 B, F P oito, levou vantagem em algumas tarefas simbólicas longas.
+O teste é privado e usa amostras e quantizações diferentes, então o resultado vale para aquele recorte.
+Em pipeline de agente, valide arquivo, schema e invariantes.
+Status e motivo de parada também sabem mentir com convicção.
+A fonte é o relato do teste publicado no Reddit.
+Pangolin um ponto vinte e dois colocou modelos e acesso remoto atrás do mesmo gateway.
+A versão um ponto vinte e dois ponto zero adiciona gateways públicos e privados para inteligência artificial.
+Também traz chaves virtuais, identidade, métricas de custo e tokens e controle de orçamento.
+Também chegaram S S H, R D P e V N C pelo navegador, além de recursos privados S S H e H T T P S, na Community Edition.
+Gateways de inteligência artificial exigem Badger um ponto seis ponto zero ou posterior.
+Os gateways privados pedem Gerbil um ponto cinco ponto zero e clientes lançados depois de 19 de agosto.
+Faça backup antes de atualizar: os mantenedores avisam que voltar de versão pode ser complicado.
+Centralizar segredos também deixa o possível estrago muito bem organizado.
+A fonte são as notas da versão um ponto vinte e dois ponto zero do Pangolin.
+Incus sete ponto quatro reduz a pausa na migração de containers com snapshots incrementais.
+Em armazenamento local Z F S ou Btrfs, a migração quase ao vivo envia a maior parte do sistema de arquivos enquanto o container continua rodando.
+Ela para o workload durante a transferência do delta final.
+Isso encurta a interrupção e dispensa a compatibilidade de estado de processo do C R I U.
+O “quase” está trabalhando na frase: ainda existe uma breve parada final, e o recurso vale para os backends locais Z F S e Btrfs suportados.
+A fonte é o anúncio do Incus sete ponto quatro.
+No Postgre S Q L, configurar o nível log pode esconder erros comuns.
+Christophe Pettus mostrou no Postgre S Q L dezoito ponto seis que a configuração log min messages no nível log manteve mensagens de log.
+Mas ela descartou uma divisão por zero em erro e um comando raise warning.
+Sim, log ocupa uma posição bem contraintuitiva nessa hierarquia.
+Os outros portões decidem se a instrução S Q L acompanha o erro e quanto detalhe entra no registro.
+O padrão warning costuma ser mais seguro.
+Texto de query e detail podem conter dados de clientes, então observabilidade e minimização de dados precisam ser decididas juntas.
+A fonte é o artigo “All Your GUCs in a Row”.
+Linux sete ponto três, release candidate um, abriu a fase de estabilização.
+O Kernel ponto org já lista o tarball, o diff e o repositório da primeira release candidate depois da janela de merge.
+Mantenedores e distribuições já podem começar os testes.
+Servidores de produção ficam nos kernels stable ou longterm até a versão final; coragem sem janela de manutenção costuma ter outro nome.
+A fonte é o arquivo oficial do kernel Linux.
+OpenClaw dois ponto zero reconstruiu a aplicação web e passou a compartilhar sessões.
+Segundo o projeto, o lançamento de 30 de agosto reúne mais de 16 mil pull requests de 933 contribuidores.
+Desses contribuidores, 569 participavam pela primeira vez.
+O lançamento também trouxe setup simplificado e sessões na nuvem que outra pessoa pode acompanhar ou receber com o contexto preservado.
+Os números de escala e as afirmações de confiabilidade vêm do anúncio do projeto; esta apuração não testou a versão.
+Em equipe, sessão compartilhada também pede identidade, acesso, auditoria e alguém sabendo quem ficou com a tarefa quando o agente passou o bastão.
+A fonte é o anúncio “OpenClaw dois ponto zero, Accidentally”.
+A biblioteca wrapture observa chamadas Python reais e injeta falhas sem trocar tudo por mocks.
+A biblioteca de Graham Dumpleton envolve callables, registra argumentos normalizados, retornos e chamadas aninhadas.
+Ela usa os mesmos eventos em asserções, traces de terminal e OpenTelemetry via O T L P.
+A versão atual é a décima primeira alpha, exige Python três ponto doze ou posterior e wrapt dois ponto quatro ponto zero ou posterior.
+O projeto declara mais de mil testes, 150 páginas de documentação e o uso de inteligência artificial para escrever código e texto sob revisão do autor.
+Essas são declarações do próprio projeto, não certificado de estabilidade.
+A fonte é o texto “Introducing wrapture”, de Graham Dumpleton.
+K Veritas Go assina o rastro de um experimento, não a verdade da conclusão.
+A C L I registra snapshots do código, telemetria e claims declarados em relatórios assinados.
+Ela cria vínculos por S H A duzentos e cinquenta e seis, árvores de Merkle e divulgação seletiva de arquivos ou agentes.
+O projeto declara amostragem em torno de 10 hertz e pede Go um ponto vinte e dois ou posterior para compilação.
+Mapas de atividade e atribuição de hardware por processo ficam no Linux.
+A assinatura revela alterações no que foi registrado.
+Uma metodologia ruim ainda pode assinar a própria ruindade com integridade criptográfica impecável.
+A fonte é o projeto K Veritas Go.
+Medusa propõe vários próximos tokens e deixa o modelo-alvo dar a palavra final.
+Os novos guias explicam como cabeças auxiliares criam propostas e uma árvore esparsa compartilha prefixos.
+A atenção em árvore permite ao modelo original aceitar somente um prefixo válido.
+O exemplo com Vicuna sete B tem 64 nós e 42 caminhos da raiz às folhas.
+Na verificação gulosa exata, os tokens confirmados coincidem com a decodificação comum, mesmo quando nenhuma proposta especulativa é aceita.
+E mais tokens por verificação não viram automaticamente o mesmo multiplicador no relógio, porque avaliar a árvore custa mais.
+As fontes são Medusa Parte Um e Medusa Parte Dois.
+OpenSUSE empacotou o driver N P U da Intel e o OpenVINO para três linhas da distribuição.
+O Intel Linux N P U Driver um ponto trinta e cinco ponto zero e o OpenVINO 2026 ponto três ponto um estão disponíveis para três linhas.
+Elas são Tumbleweed, Leap dezesseis ponto zero e Leap dezesseis ponto um.
+O pacote inclui uma correção upstream para um sinal de aborto na inicialização do ResourceCleaner em alguns ambientes Linux.
+Isso simplifica a inferência em C P U, G P U e N P U de máquinas Intel Core Ultra compatíveis.
+A disponibilidade do pacote não mede desempenho nem garante suporte a todo modelo e operador.
+Infelizmente, o gerenciador de pacotes ainda não instala milagres.
+A fonte é o OpenSUSE News.
+Um cabo Ethernet direto move arquivos sem roteador e quase sem cerimônia.
+A nota de Maurycy Ziołkowski configura endereços I P versão seis estáticos nas duas máquinas e usa socat sobre T C P versão seis.
+O teste chegou a cerca de 900 megabits por segundo, ou seis vírgula sete gigabytes por minuto, no equipamento gigabit testado.
+Portas modernas normalmente negociam o enlace direto.
+O stream demonstrado vem cru: sem autenticação, criptografia, verificação de integridade ou retomada.
+Se você não confia completamente na conexão, coloque S S H ou outra camada responsável por esse trabalho.
+A fonte é a nota “transfer files over an ethernet patch cable”, de Maurycy Ziołkowski.
