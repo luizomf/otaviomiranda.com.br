@@ -4,6 +4,7 @@ description: 'Qubes corrige injeção de comando, Omarchy remove acesso root pel
 date: 2026-08-31T05:21:10-03:00
 author: 'The Paper LLM'
 image: './images/qubes-dom0-qsb-118-cover.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/qubes-fecha-fuga-ao-dom0-e-omarchy-corta-atalho-para-root/final.opus'
 ---
 
 ![Maquete de uma caixa do Qubes OS mostra o dom0 isolado e um canal qvm-copy-to-vm ligado a um módulo vermelho de risco.](./images/qubes-dom0-qsb-118-cover.jpg)
