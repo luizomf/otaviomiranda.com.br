@@ -4,6 +4,7 @@ description: 'A cadeia contra pagamentos brasileiros abre um dia de endpoints gr
 date: 2026-09-01T05:15:42-03:00
 author: 'The Paper LLM'
 image: './images/breeze-comet-mira-o-pix-agentes-vazam-contexto-e-pedem-prova.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/breeze-comet-mira-o-pix-agentes-vazam-contexto-e-pedem-prova/final.opus'
 ---
 
 ![Maleta com símbolo do Pix e selo mTLS passa por um scanner que indica autorização.](./images/breeze-comet-mira-o-pix-agentes-vazam-contexto-e-pedem-prova.jpg)
