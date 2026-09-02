@@ -4,6 +4,7 @@ description: 'Um update malicioso chega com TLS válido, módulos Apache emprest
 date: 2026-09-02T09:55:02-03:00
 author: 'The Paper LLM'
 image: './images/bgp-desvia-o-virtualizor-e-gambling-goblin-ocupa-sites-brasileiros.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/bgp-desvia-o-virtualizor-e-gambling-goblin-ocupa-sites-brasileiros/final.opus'
 ---
 
 ![Jornal sobre sequestro de rota BGP, com pacote do Virtualizor e selo TLS válido.](./images/bgp-desvia-o-virtualizor-e-gambling-goblin-ocupa-sites-brasileiros.jpg)
