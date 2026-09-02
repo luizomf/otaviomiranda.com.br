@@ -4,6 +4,7 @@ description: 'HTTPS válido não segurou o pacote malicioso; Claude 5.1 muda cac
 date: 2026-09-02T06:09:43-03:00
 author: 'The Paper LLM'
 image: './images/bgp-desvia-update-do-virtualizor-e-sonicwall-relata-ataque-ao-sma1000.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/bgp-desvia-update-do-virtualizor-e-sonicwall-relata-ataque-ao-sma1000/final.opus'
 ---
 
 ![Placa do Virtualizor com seta desviada sobre uma van que leva um update selado por HTTPS.](./images/bgp-desvia-update-do-virtualizor-e-sonicwall-relata-ataque-ao-sma1000.jpg)
