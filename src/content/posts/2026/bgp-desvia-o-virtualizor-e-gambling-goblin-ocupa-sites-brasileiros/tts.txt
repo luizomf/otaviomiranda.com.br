@@ -1,0 +1,180 @@
+B G P desvia o Virtualizor, e "Gambling Goblin" ocupa sites brasileiros.
+Você pede uma atualização pelo endereço correto, recebe um certificado T L S válido e instala o pacote.
+Tudo certo para uma terça-feira tranquila.
+Só esqueceram de avisar que a rota da internet tinha sido desviada, a validação do certificado caiu no mesmo golpe e o servidor entregou um update malicioso do Virtualizor.
+A fechadura conferiu a chave direitinho.
+O prédio é que tinha mudado de rua.
+Essa distância entre parecer confiável e provar alguma coisa atravessa as histórias de hoje.
+Servidores brasileiros passaram a entregar páginas de aposta e phishing sob domínios legítimos.
+Do lado dos agentes, um novo preprint propõe tirar do prompt as funções de banco de dados, contador, log e memória afetiva da execução.
+Já estava ficando apertado ali dentro.
+O sequestro de rota entregou um update com T L S válido.
+Entre 28 e 30 de agosto, alguém anunciou uma rota B G P não autorizada para um prefixo usado pela infraestrutura da Softaculous.
+Segundo o relatório da Virtualizor, o anúncio passou por dois sistemas autônomos e desviou o tráfego em duas ondas.
+A primeira começou às oito e cinquenta e sete da noite, no horário U T C, do dia 28.
+A rota normal foi restaurada por volta das seis e dez da manhã, também em U T C, no dia 30.
+B G P ajuda as redes a decidir por onde o tráfego vai passar.
+Nesse caso, a rota falsa era mais específica que a rota legítima da Hetzner que cobria o mesmo espaço.
+Como as redes normalmente preferem a rota mais específica, o D N S podia continuar apontando para o endereço certo enquanto os pacotes pegavam o ônibus errado.
+O atacante também conseguiu certificados T L S tecnicamente válidos para nomes da Softaculous e da Virtualizor.
+A validação automatizada da autoridade certificadora percorreu a rota desviada, encontrou a infraestrutura do invasor e aceitou a resposta.
+Para os clientes afetados, nenhum alerta de certificado apareceu.
+H T T P S provou exatamente o que tinha condições de provar.
+A conexão estava criptografada, e aquele endpoint apresentou um certificado aceito.
+A identidade do pacote precisava de outra prova, ligada ao próprio artefato.
+Só que o cliente do Virtualizor ainda não verificava assinaturas criptográficas dos pacotes por um canal independente.
+Assim, o pacote malicioso chegou a um número pequeno de instalações, segundo o fornecedor.
+A palavra pequeno veio sem uma contagem verificável.
+Como as respostas saíram de uma infraestrutura fora dos logs da empresa, a Virtualizor diz que não consegue identificar todos os servidores atingidos.
+Na prática, cada operador precisa conferir a própria máquina em vez de se imaginar fora desse grupo.
+O indicador conhecido é uma unidade inesperada do system D, disfarçada como atualização do Java.
+O nome exato da unidade está no artigo escrito.
+Se ela aparecer, preserve as evidências e trate o host como comprometido.
+Apagar o arquivo e comemorar antes do almoço só ajuda a perder o rastro.
+O fornecedor também orienta revisar chaves S S H, usuários, tarefas agendadas e conexões de saída, além de girar e restringir credenciais de [EY1 P IY1 AY1].
+Em primeiro de setembro, a Virtualizor lançou a versão três ponto dois ponto nove ponto nove, com um analisador de segurança e uma ferramenta de mitigação.
+A atualização entrega a verificação.
+O histórico da máquina ainda precisa ser investigado.
+Na publicação do relatório, a apuração sobre outros produtos da Softaculous continuava aberta.
+A empresa promete adicionar assinatura de código aos pacotes.
+Durante esta apuração, isso ainda era uma remediação prometida, sem confirmação de implantação em todo o catálogo.
+É justamente o canal que faltou.
+Mesmo com rota, servidor e certificado tomados juntos, o update só seria aceito se carregasse a assinatura criptográfica do publicador.
+T L S cuida da conexão.
+A assinatura cuida do artefato.
+Pedir que um único controle responda pelos dois é deixar uma mentira depor como duas testemunhas.
+As fontes deste bloco são o relatório de incidente da Virtualizor e a BleepingComputer.
+"Gambling Goblin" usa o Apache para vestir a camisa do governo.
+A Check Point Research publicou, em 2 de setembro, uma investigação sobre uma campanha acompanhada desde meados de 2025.
+O grupo, batizado pela empresa de "Gambling Goblin", compromete organizações brasileiras, principalmente instituições governamentais e educacionais.
+Depois, usa os domínios dessas vítimas para promover páginas de aposta e phishing.
+O golpe consegue passar longe daquela clássica página inicial piscando que foi invadida.
+Módulos maliciosos entram no Apache, observam os caminhos pedidos e encaminham alguns deles para a infraestrutura do atacante.
+O visitante continua vendo um endereço legítimo, inclusive em domínios do governo brasileiro.
+Enquanto isso, o servidor entrega por proxy reverso o conteúdo escolhido pelo invasor.
+Um dos módulos analisados também troca a política de segurança de conteúdo por regras permissivas.
+Essa política, conhecida como C S P, restringe de onde scripts e outros recursos podem vir.
+Depois de enfraquecida, ela deixa o conteúdo retransmitido carregar o que precisa para funcionar.
+O servidor participa da resposta, altera cabeçalhos e ainda empresta sua reputação ao golpe.
+Serviço completo.
+Uma busca comum por arquivos alterados pode deixar boa parte dessa história passar.
+O módulo roda dentro do servidor web e interfere no caminho entre a requisição e a resposta.
+Por isso, módulos, arquivos de carregamento, regras de proxy e configuração do Apache merecem o mesmo controle de integridade dado ao diretório público da aplicação.
+A cozinha também faz parte do restaurante, mesmo quando a placa na rua continua impecável.
+Segundo a Check Point, o arsenal observado vai bem além do desvio de páginas.
+Ele inclui ferramentas para baixar novas cargas, controlar a máquina, roubar senhas, atacar S S H e reconhecer a rede.
+As capacidades cobrem coleta de dados da configuração de S S H e do histórico do shell, túneis, acesso remoto a arquivos, persistência, movimento lateral e processos mascarados.
+A pesquisa não viu diretamente o acesso inicial.
+Serviços sem correção e credenciais S S H fracas aparecem como avaliação e contexto, sem uma cadeia demonstrada para cada vítima.
+Na resposta ao incidente, exposição e contas entram na revisão.
+Encontrar uma senha ruim não explica automaticamente o caminho inteiro.
+Para operadores Linux, principalmente em governo e educação, a caça inclui módulos e arquivos de carregamento inesperados no Apache.
+Também inclui regras de proxy desconhecidas, nomes de processo disfarçados e anomalias de D N S ou saída de rede.
+O básico entra antes de voltar ao rodapé: corrigir serviços expostos, restringir S S H e auditar contas e chaves.
+A Check Point publicou domínios usados em phishing, endereços parecidos com serviços de desenvolvimento e infraestrutura de comando e controle.
+Os indicadores exatos estão no artigo escrito e na fonte, prontos para caça e correlação, sem transformar o áudio numa lista de caracteres.
+A Check Point atribui a campanha ao "Earth Berberoka" com confiança de média a alta.
+A avaliação cruza malware, infraestrutura, artefatos em chinês e o foco em apostas.
+Em 2022, a Trend Micro documentou um grupo de língua chinesa com esse nome agindo contra sites de jogos em Windows, Linux e mac O S.
+Esse trabalho confirma o perfil histórico do grupo.
+A atribuição da operação brasileira de 2026 continua sendo uma avaliação da Check Point, sem confirmação independente nesta apuração.
+Até agora, o conteúdo observado foi de apostas e phishing.
+O relatório projeta que uma mudança de configuração permitiria entregar malware, mas não apresenta evidência de que essas páginas já tenham feito isso.
+O ocorrido já dá trabalho suficiente.
+Servidores confiáveis viraram infraestrutura do atacante sem abrir mão do domínio que usuários e buscadores aprenderam a respeitar.
+As fontes são Check Point Research e Trend Micro Research.
+O estado do agente sai do prompt e entra num registro de eventos.
+Uma execução longa de agente acumula conversa, chamadas de ferramenta, resultados, decisões, erros e tentativas repetidas.
+Aí alguém pergunta quantas tarefas terminaram ou qual etapa falhou.
+A solução comum é jogar um pedaço do histórico para o modelo e torcer para a resposta ainda estar lá.
+O banco de dados é uma janela de contexto com prazo de validade e cobrança por token.
+Parece prático porque a fatura conceitual chega depois.
+Egor Pakhomov e Erik Nijkamp, da Salesforce A I Research, propõem outro desenho no preprint "Parsing the Stream".
+Cada evento da execução vai para um ledger tipado, que só recebe novos registros e não reescreve os antigos.
+Um redutor determinístico incorpora os eventos ao estado atual.
+Depois, visões compiladas entregam a cada consumidor somente sua projeção.
+Uma serve ao agente que trabalha.
+Outra serve à pessoa que acompanha.
+A semelhança com event sourcing e separação entre escrita e consulta é direta.
+O ledger imutável preserva a origem para auditoria e reprodução.
+A redução transforma a sequência em estado, incluindo contagens, status, proveniência e invariantes.
+As projeções evitam carregar o estoque inteiro de eventos quando a pergunta é pequena.
+Essa divisão também deixa as responsabilidades menos nebulosas.
+O modelo interpreta a situação e toma decisões.
+Código comum faz o bookkeeping que pode ser definido e testado.
+Ao reproduzir o mesmo ledger, o redutor deve chegar ao mesmo estado.
+Idempotência, transições e invariantes saem do campo da fé no prompt e viram comportamento verificável.
+Nos testes de observação dos autores, as visões compiladas consumiram cerca de quatorze a quinze vezes menos tokens de entrada.
+Elas também custaram de cinco a sete vezes menos que a leitura de uma cauda do histórico limitada pelo orçamento.
+A acurácia ficou entre zero vírgula oitenta e cinco e zero vírgula oitenta e sete, contra zero vírgula quarenta e oito para o histórico cru.
+O resultado é forte dentro daquele protocolo, que já nasceu com uma vantagem declarada.
+As perguntas de monitoramento e o esquema de dados foram desenhados juntos.
+A visão sabia representar os fatos cobrados na avaliação.
+Quando uma pergunta de produção depende de uma relação descartada pelo esquema, a compressão barata vira amnésia muito eficiente.
+O segundo experimento deixa esse limite ainda mais claro.
+Em tarefas com dependência sequencial de cento e vinte passos, os mecanismos que guardavam a estatística necessária no estado de cada etapa acertaram trinta de trinta casos.
+O contexto completo acertou oito de trinta.
+Os autores chamam a amostra de trinta de descritiva, porque desenvolveram o benchmark e o sistema juntos.
+Tem ainda um concorrente embaraçosamente simples.
+Um bloco de anotações no prompt empatou com a redução na acurácia dessas tarefas e custou menos.
+O ledger se diferencia pela auditabilidade determinística e pelo reaproveitamento do mesmo estado entre consumidores.
+Para uma execução curta e descartável, uma anotação barata pode resolver sem a fundação de um cartório de eventos.
+O paper relata também uma família de tarefas sensível à ordem na qual a redução fixa deixa de ajudar.
+Esse é o preço da síntese.
+O esquema guarda algumas propriedades e joga outras fora.
+Antes de transformar o padrão em infraestrutura, a equipe precisa descobrir quais perguntas, decisões e operações futuras dependem do detalhe eliminado.
+A implementação pública, chamada Trace Lab, ajuda a fazer essa conta.
+O repositório expõe o código do ledger, da redução e das visões, além de placares, registros de gasto, noventa e nove testes e um corpus sintético regenerável com doze sessões.
+Os doze históricos reais usados pelos autores são pessoais e ficaram de fora.
+Dá para inspecionar o mecanismo e os artefatos sintéticos.
+A evidência baseada nas conversas reais não pode ser reconstruída por completo.
+A ideia útil é separar evento bruto, estado derivado e visão de cada consumidor.
+Ciclo de vida, contagem e invariantes podem morar em código.
+O histórico continua disponível para uma auditoria voltar ao detalhe.
+E o modelo recebe o necessário para a próxima decisão sem reler a autobiografia inteira da execução só para descobrir se já chamou uma ferramenta três vezes.
+As fontes são o preprint "Parsing the Stream" e o repositório público da Salesforce A I Research.
+Agora, os destaques rápidos de hoje.
+A SonicWall corrigiu duas falhas do S M A mil depois de relatar exploração ativa.
+Uma delas permite que um atacante alcance recursos internos antes da autenticação e recebeu pontuação máxima de gravidade.
+A outra permite injeção de comando por um administrador autenticado e recebeu nota sete vírgula oito.
+Nesse segundo caso, a descrição de exploração remota conflita com o vetor local publicado.
+Os modelos seis mil duzentos e dez, sete mil duzentos e dez e oito mil e duzentos V precisam das versões corrigidas.
+Os números exatos das builds estão no artigo escrito.
+Não há solução alternativa.
+A exploração vem de um caso investigado pelo fornecedor, ainda sem cadeia ou indicadores públicos.
+Se houver sinal de invasão, a orientação inclui acionar a SonicWall, reimplantar o equipamento e girar senhas e tokens T O T P.
+As fontes são o boletim de segurança da SonicWall e a BleepingComputer.
+A Anthropic colocou um bloqueador antes da chamada de ferramenta.
+A novidade de 31 de agosto é um classificador em tempo real capaz de barrar uma ação suspeita, encerrar a tarefa e alertar uma pessoa.
+A empresa também reforçou o isolamento e passou a exigir que avaliadores externos usem ambiente sem internet por padrão.
+As chaves devem ficar fora da área isolada, o escopo precisa ser explícito e um monitor deve poder interromper a execução.
+Os incidentes envolveram modelos de pré-lançamento ou configurações com proteções reduzidas.
+A análise completa, com revisão independente da M E T R, ainda não estava pronta.
+A fonte é a publicação da Anthropic sobre seus esforços de alinhamento e segurança.
+O Kubernetes um ponto trinta e sete passou a transmitir leituras grandes do etcd em blocos.
+O recurso "Etcd Range Stream" chegou à fase beta e fica ligado por padrão quando o cluster usa etcd três ponto sete ou posterior.
+O servidor de [EY1 P IY1 AY1] e o etcd processam blocos ajustados ao tamanho dos valores e liberam memória durante o avanço.
+Antes, precisavam montar páginas limitadas pela quantidade de chaves.
+Isso deixa o pico de memória mais previsível na inicialização do cache de observação e nas listas que vão direto ao etcd.
+Versões antigas caem automaticamente no caminho paginado.
+Uma métrica específica confirma o uso, e seu nome completo está no artigo escrito.
+O recurso cobre esse caminho de leitura, não todos os problemas de memória do cluster.
+A fonte é o blog do Kubernetes.
+O "Starlight" zero ponto quarenta e dois trocou TypeScript distribuído por JavaScript compilado e refez o menu móvel.
+O pacote agora leva declarações de tipo separadas.
+Assim, cada consumidor deixa de verificar os arquivos TypeScript da dependência com sua própria configuração.
+O menu usa a [EY1 P IY1 AY1] de popover e funciona mesmo sem JavaScript no cliente.
+Na atualização, rode a ferramenta oficial do Astro e revise plugins de tema, substituições e C S S.
+A marcação, os seletores e o suporte mínimo de navegador mudaram.
+A versão também exige Astro sete ponto dois ponto dez ou posterior e versões mínimas das integrações de Markdown usadas.
+As fontes são o blog do Astro e as notas da versão zero ponto quarenta e dois.
+Por fim, a Percona documentou autenticação O I D C aberta para My [EH1 S] [K Y UW1] [EH1 L].
+O plugin de servidor valida tokens assinados, atualiza chaves pela fonte publicada pelo provedor de identidade e mapeia grupos para papéis de acesso.
+Ele também suporta usuários representados por proxy.
+Os tokens passam apenas por T L S, socket Unix ou memória compartilhada.
+Expiração e grupos são conferidos na conexão.
+Por isso, uma sessão longa pode sobreviver ao token ou manter seus papéis até reconectar.
+A Percona cita a versão oito ponto quatro ponto onze, build onze, e a versão nove ponto sete ponto dois, build dois.
+Mas dizia que elas ainda não tinham sido lançadas quando publicou o artigo.
+Confirme o pacote antes de desenhar a migração no quadro branco.
+As fontes são a documentação do Percona Server para My [EH1 S] [K Y UW1] [EH1 L] e o blog da Percona.
