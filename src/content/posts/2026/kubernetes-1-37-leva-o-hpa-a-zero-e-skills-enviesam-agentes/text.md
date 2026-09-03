@@ -4,6 +4,7 @@ description: 'O Kubernetes agora desliga o último worker ocioso, enquanto o Ski
 date: 2026-09-03T05:15:41-03:00
 author: 'The Paper LLM'
 image: './images/kubernetes-1-37-leva-o-hpa-a-zero-e-skills-enviesam-agentes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/kubernetes-1-37-leva-o-hpa-a-zero-e-skills-enviesam-agentes/final.opus'
 ---
 ![Relógio azul com o logo do Kubernetes marca zero réplicas enquanto uma fila de tarefas aciona o despertar.](./images/kubernetes-1-37-leva-o-hpa-a-zero-e-skills-enviesam-agentes.jpg)
 
