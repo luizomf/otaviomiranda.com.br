@@ -1,0 +1,119 @@
+Kubernetes um ponto trinta e sete leva o H P A a zero, e Agent Skills enviesam agentes.
+Fila vazia, nenhum trabalho chegando, e aquele pod caro continua respirando só para o número mínimo ficar em um.
+No Kubernetes um ponto trinta e sete, o Horizontal Pod Autoscaler, ou H P A, finalmente pode mandar o último worker dormir e acordá-lo quando a demanda voltar.
+Parece só um zero na configuração.
+Como todo zero interessante em produção, ele vem acompanhado de arquitetura, estado e algumas maneiras criativas de ficar indisponível.
+A outra história do dia mexe com algo igualmente traiçoeiro.
+Uma Agent Skill pode entregar a resposta no formato certo, concluir a tarefa e ainda inclinar discretamente a decisão do agente.
+O malware nem precisa saltar da tela quando uma política com cara de conselho sensato consegue colocar o dedo na balança.
+Primeiro, o Kubernetes um ponto trinta e sete deixa o último worker dormir.
+O projeto anunciou em dois de setembro que o recurso de reduzir cargas a zero chegou à fase beta e agora vem habilitado por padrão.
+Um H P A que observa uma métrica de objeto ou uma métrica externa pode reduzir um Deployment a zero réplicas.
+Depois, quando o sinal de demanda mudar, ele pode recriar a capacidade.
+O detalhe central é que a métrica precisa sobreviver aos pods.
+CPU e memória são medidas nos próprios workers.
+Quando o último worker desaparece, essas métricas desaparecem junto, e não sobra sinal para acordá-lo.
+A profundidade de uma fila, por outro lado, continua visível mesmo sem consumidor.
+Por isso, configurar o mínimo em zero exige pelo menos uma métrica de objeto ou uma métrica externa.
+Se houver apenas CPU ou memória, o Kubernetes rejeita a configuração.
+O melhor caso de uso aparece justamente aí.
+Consumidores de fila, trabalhos em lote e workers caros de CPU ou GPU podem dormir enquanto a demanda fica guardada em outro lugar.
+Mas um Service comum do Kubernetes só encaminha requisições para endpoints prontos.
+Ele não guarda o HTTP no balcão até a cozinha abrir.
+Para deixar um backend HTTP inteiro dormindo, você precisa de outra camada capaz de manter as requisições em espera.
+Sem essa camada, a alternativa é deixar pelo menos uma réplica acordada.
+Em julho, nós falamos de métricas de profundidade de fila usadas com workers ainda ativos.
+A novidade da versão um ponto trinta e sete está no último passo.
+O próprio H P A agora consegue remover a réplica final e recuperá-la depois, sem depender de outro scaler para fazer essa travessia.
+O controlador também precisa distinguir uma pausa humana de um zero criado pelo autoscaling.
+Quando o próprio H P A leva a carga até zero, ele registra uma condição chamada Scaled To Zero como verdadeira.
+Assim, sabe que poderá acordar a carga mais tarde.
+Se alguém ajustar o Deployment manualmente para zero, o H P A preserva o significado antigo dessa ação e deixa tudo parado.
+Essa condição chegou na versão um ponto trinta e seis.
+Na versão um ponto trinta e sete, o conjunto passou a beta e ficou habilitado por padrão.
+Na operação, você troca recurso parado por latência de retorno.
+O sistema ainda precisa observar a métrica, agendar um pod e iniciar a aplicação antes de consumir o próximo trabalho.
+Além disso, o H P A mantém por padrão uma janela de estabilização de cinco minutos antes de reduzir a capacidade.
+Meça esse caminho inteiro antes de descobrir o cold start com a fila crescendo e todo mundo perguntando se o cluster está se ajustando.
+Tecnicamente, está.
+Socialmente, talvez não.
+A métrica externa passa a fazer parte da disponibilidade do sistema.
+Se o adaptador não conseguir entregá-la, o H P A marca o escalonamento como inativo.
+Nesse estado, recuperar capacidade pode exigir o conserto do pipeline de métricas ou a recriação manual da capacidade.
+Vale consultar o sinal diretamente pela interface de métricas externas, criar alerta para falhas no adaptador e testar o tempo completo de retorno da aplicação.
+Control planes com versões misturadas exigem ainda mais cuidado.
+O servidor da [EY1 P IY1 AY1] e o controller manager precisam suportar e habilitar o recurso antes que alguém use o mínimo em zero.
+Um controlador antigo, ou com a funcionalidade desligada, pode interpretar aquele zero como uma pausa manual.
+O recurso ainda é beta.
+Por isso, upgrades e downgrades precisam seguir as etapas de migração publicadas pelo projeto.
+A fonte desta história é o blog oficial do Kubernetes.
+Agora, o SkillShift passa na validação enquanto inclina a escolha.
+Agent Skills costumam parecer pacotes de conhecimento, com instruções para executar tarefas, convenções do domínio e exemplos que ajudam o agente a decidir.
+Um novo preprint mostra o outro lado.
+A prosa da skill também funciona como política de comportamento.
+Critérios de ranking, regras de desempate e exemplos podem favorecer uma opção sem jamais escrever a ordem grosseira de sempre escolher aquela opção.
+Os autores chamam esse ataque de "SkillShift".
+Eles criaram skills plausíveis para dois domínios com candidatos fixos: escolha de produtos e seleção de dependências Python.
+Cada domínio teve cinquenta consultas, e cada consulta foi repetida três vezes.
+Nas compras, a alternativa favorecida apareceu em oitenta e um vírgula trinta e três porcento das respostas.
+Na seleção de dependências, ela apareceu em sessenta e três vírgula trinta e três porcento.
+Mesmo assim, cem porcento das saídas passaram pelos testes de validade estrutural e de seleção usados no estudo.
+Validar schema, formato e conclusão da tarefa responde apenas se o agente produziu algo aceitável.
+Fica faltando outra pergunta: quais regras fizeram aquela opção vencer?
+A skill pode alterar silenciosamente a política usada para montar a resposta e ainda entregar tudo arrumadinho.
+É como receber uma planilha com todas as colunas certas e descobrir depois que a fórmula do ranking tinha um patrocinador imaginário.
+O ataque congelado pelos pesquisadores manteve ganho positivo sobre as skills limpas em seis backends de modelos e dois ambientes completos de agente.
+Isso ocorreu sem otimização específica para cada backend, o que indica transferência dentro das condições testadas.
+Mas o alcance continua limitado.
+É um preprint sem reprodução independente, com apenas dois domínios, candidatos fixos, três execuções por consulta e configurações específicas.
+Os scanners também tropeçaram na discrição.
+Nenhum dos seis detectores quantificados conseguiu distinguir as duas skills SkillShift de seus pares limpos nas configurações padrão usadas pelos pesquisadores.
+Quatro dos seis detectores encontraram os controles mais explícitos de injeção direta em cada domínio.
+Uma ordem hostil escancarada oferece ao scanner um alvo bem mais simpático que um conselho de domínio aparentemente razoável.
+E esse resultado vale apenas para as versões e regras testadas.
+Ele não autoriza concluir o mesmo sobre toda edição atual ou hospedada dessas ferramentas.
+O estudo também encontrou uma queda de zero vírgula quinhentos e cinquenta e oito para zero vírgula quinhentos e seis na média de qualidade do código de dependências.
+Essa qualidade foi avaliada por um L L M.
+Os próprios autores não tratam a diferença como prova de degradação funcional.
+Houve uma única chamada do juiz por amostra, sem testes executáveis e sem teste de significância.
+Os cem porcento de saídas válidas dizem apenas que elas passaram pela validação do estudo.
+Esse número, sozinho, não permite decretar que o código parou de funcionar.
+No fim de agosto, nós vimos skills envenenadas gerando descendentes persistentes.
+Antes disso, outro estudo já tinha burlado oito scanners de Agent Skills.
+O diferencial do SkillShift é mais silencioso.
+Ele mede uma preferência escondida enquanto a resposta continua com cara de válida.
+A defesa, portanto, também precisa testar comportamento.
+Proveniência, versões fixadas e revisão das mudanças ajudam a controlar qual política entrou no agente.
+Nos testes de regressão, dá para reordenar candidatos, trocar atributos e renomear opções.
+Se a recomendação acompanha os dados, ótimo.
+Se ela continua apaixonada pelo mesmo candidato depois de trocar tudo de lugar, temos um problema.
+Recomendação e execução também merecem permissões separadas.
+Uma skill que sugere uma biblioteca não precisa instalar pacotes, usar credenciais, publicar artefatos nem acessar a rede sem limite.
+Autoridade estreita reduz o tamanho da ação que uma política enviesada consegue disparar.
+O formulário pode estar perfeito.
+A permissão ainda é problema nosso.
+A fonte desta história é o preprint A Finger on the Scale, publicado no arXiv.
+Agora, dois destaques rápidos para hoje.
+A CISA adicionou sete falhas exploradas ao catálogo de vulnerabilidades conhecidas e exploradas em dois de setembro.
+Na parte de infraestrutura de desenvolvimento e inteligência artificial, o lote inclui falhas no Starlette e no endpoint M C P do Lite L L M.
+Também entram o Kestra de código aberto e o J Frog Artifactory.
+O mesmo lote traz duas falhas do SonicWall S M A mil e uma falha do Sangoma Switchvox.
+Para agências civis federais dos Estados Unidos, o prazo é cinco de setembro nos casos de Kestra, Artifactory, Switchvox e SonicWall.
+Para Starlette e Lite L L M, o prazo é dezesseis de setembro.
+Essas datas são obrigatórias para as agências federais cobertas pela regra.
+Outras equipes devem priorizar inventário, exposição, orientações dos fornecedores e sinais de comprometimento.
+A entrada no catálogo confirma que existe evidência de exploração.
+Ela não informa quantas vítimas existem, qual é a prevalência dos ataques nem quem está por trás deles.
+A fonte é o catálogo de vulnerabilidades conhecidas e exploradas da CISA.
+Por fim, a Cisco corrigiu uma falha de execução remota sem autenticação e como root em modelos específicos do Nexus nove mil.
+O problema atinge equipamentos com o chip Silicon One.
+A falha tem o identificador C V E 2026, vinte dois um dois, e nota C V S S nove ponto oito.
+Ela pode ser acionada remotamente por tráfego preparado para as portas T C P quarenta e três mil duzentos e dez e quarenta e três mil duzentos e onze.
+A exposição fica na instância de roteamento padrão da camada três.
+O ataque também pode derrubar o processo responsável pelo chip e reiniciar o equipamento.
+Nem todo Nexus nove mil é afetado.
+A Cisco orienta conferir o identificador do hardware pelo comando de exibição de módulos e instalar uma versão corrigida do N X O S indicada pelo Software Checker.
+As listas de controle de acesso da infraestrutura e o shield Live Protect podem servir como pontes temporárias.
+Na publicação de dois de setembro, a Cisco não conhecia exploração maliciosa nem anúncio público da falha.
+A urgência vem da exposição crítica, não de um zero day já explorado.
+A fonte deste destaque é o comunicado de segurança da Cisco.
