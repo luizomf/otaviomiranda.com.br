@@ -1,0 +1,162 @@
+GPT seis Astra varia trinta e sete pontos entre configurações, e Casdoor rompe a separação entre organizações.
+Você compra o mesmo modelo, roda o mesmo benchmark e recebe dois resultados separados por trinta e sete vírgula dois pontos percentuais.
+Entre uma execução e outra, trocaram o harness e o nível de raciocínio.
+O nome na caixa continuou GPT seis Astra, mas todo o resto que ajudava o modelo a trabalhar mudou.
+Benchmark de agente é um esporte coletivo que insiste em dar o troféu só para o atacante.
+Essa confusão atravessa as notícias de hoje.
+Um teste diz que a vulnerabilidade foi corrigida porque o crash conhecido sumiu.
+Uma chamada de ferramenta nasce válida e morre no parser.
+E o Casdoor autoriza um objeto enquanto altera outro, numa falha crítica entre organizações.
+Quem olha apenas o resultado final perde justamente a fronteira que quebrou.
+Primeiro, o peso do harness no resultado do GPT seis Astra.
+A OpenAI apresentou o GPT seis Astra como um modelo para trabalhos complexos de ponta a ponta.
+Isso inclui raciocínio, programação, uso do computador, pesquisa e criação de documentos.
+O acesso começou num programa limitado para empresas consideradas confiáveis.
+Depois, deve chegar à [EY1 P IY1 AY1] e aos planos pagos do ChatGPT.
+O modelo tem janela de contexto de um vírgula zero cinco milhão de tokens e saída máxima de 128 mil tokens.
+Na [EY1 P IY1 AY1], o texto custa dez dólares por milhão de tokens de entrada e cinquenta dólares por milhão de tokens de saída.
+Se a requisição passar de 272 mil tokens de entrada, os multiplicadores maiores valem para a solicitação inteira.
+É bastante contexto.
+Também é bastante espaço para enfiar uma arquitetura inteira na fatura e depois culpar o preço do token.
+A parte mais interessante do lançamento veio de uma avaliação separada da ARC Prize Foundation, publicada em três de setembro.
+No benchmark ARC AGI três, na divisão semiprivada, o Astra marcou sessenta e dois vírgula sete porcento com o harness Standard da organização.
+O custo total dessa execução foi de 26 mil e noventa e oito dólares.
+Com o Provider Adapter, o resultado chegou a noventa e nove vírgula nove porcento, por 18 mil 817 dólares.
+O harness é a infraestrutura que organiza a conversa entre o modelo e a tarefa.
+Ele inclui o template, as ferramentas, a retenção de estado, a compactação, as tentativas e a entrega ao avaliador.
+No adapter do provedor, o estado de raciocínio opaco foi preservado entre requisições, e as conversas longas passaram por compactação.
+No harness Standard, o modelo carregava apenas as notas que ele próprio decidia guardar.
+A diferença de trinta e sete vírgula dois pontos mostra que a configuração do sistema mexe muito no placar.
+Mas ela não mede o efeito isolado do harness.
+As execuções também usaram níveis de raciocínio diferentes: máximo no Standard e alto no Provider Adapter.
+Não dá para separar quanto veio do template, da memória, da compactação ou do nível de raciocínio.
+Os valores em dólares são o custo das execuções do benchmark, não uma tabela de preço por tarefa em produção.
+Ainda assim, a conta deixa uma pista útil: um token mais caro pode sair mais barato se o sistema precisar de menos chamadas.
+O token barato vira carnê rapidinho quando a tarefa entra no carrossel de falha, nova tentativa e verificação.
+Por isso, numa avaliação interna, anote bem mais que o nome GPT seis Astra e um percentual bonito.
+Guarde o prompt ou template, o nível de raciocínio, como o estado foi retido, a política de compactação, as ferramentas e o custo por tarefa concluída.
+Inclua novas tentativas, verificações externas e revisão humana.
+Sem esse registro, duas equipes dizem que testaram o mesmo modelo enquanto testaram sistemas diferentes usando o mesmo crachá.
+As fontes deste bloco são a documentação do GPT seis Astra na OpenAI e a avaliação da ARC Prize Foundation.
+Agora, o PatchBench e a diferença entre calar o crash e corrigir a vulnerabilidade.
+Você entrega uma prova de conceito, o agente muda o código e o programa para de cair com aquela entrada.
+Verde.
+Agora falta descobrir se o invasor perdeu o caminho ou se o patch só estendeu um tapete sobre o buraco exato mostrado no teste.
+O "PatchBench" nasceu dessa diferença.
+O estudo preliminar, enviado ao arXiv em três de setembro, avalia agentes que corrigem vulnerabilidades em projetos C e C mais mais.
+Os pesquisadores transplantaram falhas históricas para novos contextos de repositório e fizeram mutações no código.
+Também escolheram casos em que a correção verdadeira fica fora da pilha do crash.
+Depois, validaram tanto a segurança quanto a correção semântica.
+O desenho tenta fechar dois atalhos.
+Um deles é reproduzir um patch histórico que já apareceu nos dados de treino.
+Pela métrica dos autores, em média, vinte e cinco porcento dos patches avaliados tinham semelhança substancial com correções anteriores de desenvolvedores.
+Isso sugere possível memorização.
+Sozinho, esse número não prova que um patch específico foi memorizado.
+O outro atalho é mexer no trecho mais perto do estrondo.
+Segundo os autores, os agentes frequentemente alteraram código presente na pilha para impedir o crash, sem localizar e corrigir a causa da vulnerabilidade.
+Entre onze agentes, três estavam entre os primeiros colocados no A I X C C.
+Validar somente com a prova de conceito original inflou a taxa média de resolução em um fator de um vírgula oitenta e três.
+Uma prova de conceito responde se uma entrada conhecida ainda produz o efeito conhecido.
+Uma correção de segurança precisa restaurar a regra violada e preservar o comportamento esperado pelos outros caminhos.
+Se o defeito está numa fronteira de confiança ou num limite incorreto, silenciar uma chamada na pilha pode deixar essa fronteira aberta.
+O teste passa.
+O atacante agradece a documentação extra.
+Na prática, mantenha a prova de conceito na suíte como regressão e traga companhia.
+Testes semânticos verificam o uso legítimo.
+Casos vizinhos e entradas mutadas procuram caminhos alternativos.
+Fuzzing ajuda onde fizer sentido.
+E a revisão da diferença no código confere se a mudança caiu no limite real de confiança ou de bounds.
+Não tem magia aí.
+Só uma pergunta melhor que: parou de quebrar exatamente deste jeito?
+Os números são da primeira versão do estudo, reportados pelos próprios autores e concentrados em vulnerabilidades de C e C mais mais.
+Transferir os percentuais sem ajuste para qualquer linguagem, repositório ou agente de produção seria chute.
+A lição que sobra é mais simples e bem incômoda.
+Se o critério de sucesso enxerga uma única demonstração, o agente pode otimizar para ela.
+A fonte é o estudo PatchBench, sobre avaliação de agentes de inteligência artificial na correção de vulnerabilidades.
+A terceira história é sobre a chamada de ferramenta que morre entre o template e o parser.
+Um modelo local retorna zero chamadas de ferramenta.
+A equipe olha para o modelo, o treinamento e o prompt.
+Um novo estudo encontrou o cadáver em outro lugar.
+O modelo produzia chamadas completas, mas o adapter do servidor não reconhecia a sintaxe.
+A ferramenta não falhou.
+Nunca chegou a ser chamada.
+O contrato começa no template de chat, que define a forma apresentada ao modelo e influencia a saída gerada.
+Depois, o parser precisa reconhecer essa saída e convertê-la numa chamada estruturada.
+Template e parser podem funcionar perfeitamente com seus pares originais e desandar quando alguém monta o casal errado em produção.
+No estudo "Interface-Induced Trajectory Censoring", Wenbo Wang manteve os pesos, os casos, o método de geração e as sementes aleatórias fixos.
+Nos dados da quarta versão do B F C L, a única troca foi o adapter do servidor.
+As pontuações passaram de zero para zero vírgula noventa e seis e zero vírgula dezenove.
+Uma análise com dois templates e dois parsers localizou o efeito na interação entre eles.
+No tau bench, a troca levou as chamadas aceitas pelo servidor de zero para 636, em 115 tarefas de varejo.
+As tarefas que chegaram a executar alguma ferramenta foram de zero para 103.
+Em outra configuração, durante o treinamento com AgentLoop e um modelo de sete bilhões de parâmetros, 45 de 115 gerações continham uma chamada completa.
+Nenhuma foi aceita, executada ou recebeu uma observação de volta.
+Esse silêncio estraga o diagnóstico inteiro.
+O placar diz que o agente não usa ferramentas, o rastreamento agregado concorda e a equipe começa a discutir retreinamento.
+Enquanto isso, uma string perfeitamente aproveitável está do lado de fora do parser, olhando pela janela.
+Conte cada fronteira na telemetria.
+Registre a saída bruta do modelo, as chamadas sintaticamente completas, as aceitas pelo parser, as execuções iniciadas, os resultados devolvidos e a resposta final.
+O autor também publicou uma verificação prévia de 98 linhas que, segundo o estudo, pegou todos os casos silenciosos analisados.
+As 98 linhas são quase uma piada pronta perto do custo de retreinar um modelo para consertar um cano desconectado.
+No experimento, corrigir o adapter restaurou o parsing.
+A taxa de sucesso das tarefas foi de cinquenta e três para sessenta e dois, uma diferença sem significância estatística.
+O encanamento certo deixa o agente tentar.
+Acertar a tarefa continua sendo outro problema.
+E aqui também temos a primeira versão de um estudo preliminar, escrito por um único autor e medido em adapters, templates, parsers e modelos específicos.
+A fonte é o estudo "Interface-Induced Trajectory Censoring", de Wenbo Wang.
+Em seguida, a falha do Casdoor que cruza organizações.
+No Casdoor, a fronteira quebrou entre a autorização e a operação.
+Em três de setembro, o CERT Coordination Center publicou a falha C V E 2026, quinze seis três zero.
+Ela afeta a versão três ponto cento e quinze ponto zero e anteriores, em ambientes com várias organizações.
+Um administrador de organização sem privilégio global pode executar ações administrativas contra outras organizações.
+O filtro global verifica o objeto indicado pelo identificador na URL.
+Depois da aprovação, os controllers afetados usam os campos de proprietário e nome do corpo JSON para decidir qual objeto adicionar ou remover.
+A camada de política examina o objeto A.
+A lógica de negócio atua no objeto B.
+É o atendente que confere seu documento e entrega a chave do apartamento anotado num post-it diferente.
+Para explorar a falha, o atacante precisa de uma conta autenticada de administrador de organização, marcada como administradora.
+Dentro desse acesso, o isolamento entre organizações deixa de funcionar.
+O pesquisador Louis Sanchez atribuiu nota C V S S de nove vírgula nove.
+Ele diz ter verificado o problema pela última vez na versão três ponto cento e quinze ponto zero e no ramo principal, em doze de julho.
+Tanto a pontuação quanto a estimativa de aproximadamente 25 rotas afetadas vêm do pesquisador.
+O CERT Coordination Center confirma o defeito central e a faixa de versões atingida.
+Na data da publicação, não havia patch conhecido.
+O CERT também informou que não conseguiu falar com o Casdoor para coordenar a correção.
+Por isso, o material disponível ainda não traz uma posição do fornecedor.
+Se você opera Casdoor com várias organizações, trate cada administrador de organização como alguém capaz de atravessar a separação atual.
+Até sair uma correção, reduza as contas administrativas, exija M F A, desligue concessões automáticas de privilégio e crie alertas para ações entre organizações.
+Uma regra no proxy que compare os identificadores pode ajudar como alarme temporário.
+A interface legítima e as ações de administradores globais podem gerar falsos positivos nessa regra.
+A correção de arquitetura é amarrar a autorização ao objeto canônico que a operação realmente recebe.
+Uma nova checagem na camada do objeto acrescenta defesa em profundidade.
+Conferir um nome na porta e executar outro no controller transforma uma política correta numa decoração cara.
+As fontes são o alerta do CERT Coordination Center e o relatório da Voke Cyber sobre a falha do Casdoor.
+E agora, os destaques rápidos de hoje.
+Primeiro, o Postgri [EH1 S] [K Y UW1] [EH1 L] consegue deixar no log quem segurou o lock.
+Na versão dezoito, a opção log lock waits vem desligada e registra esperas que passam do tempo configurado para detectar deadlock.
+A opção log lock failures, também desligada, acrescenta detalhes quando uma consulta tenta obter uma linha sem esperar e falha.
+No Postgri [EH1 S] [K Y UW1] [EH1 L] dezenove beta três, a opção log lock waits deve vir ligada por padrão.
+Ela deve preservar o P I D do bloqueador, a fila de espera e o contexto para análise depois do incidente.
+Reduzir o tempo de detecção só para antecipar o log também faz a busca por deadlocks rodar mais vezes.
+E o log de falhas ainda não cobre bloqueio de tabela sem espera, cancelamentos por tempo limite nem a opção que pula linhas bloqueadas.
+Consultas agressivas e repetidas, sem espera, podem transformar o log num chafariz.
+As fontes são a documentação do Postgri [EH1 S] [K Y UW1] [EH1 L] dezoito e a análise de Christophe Pettus.
+O próximo destaque é o Rust um ponto noventa e oito ponto um.
+Essa versão corrige código inválido gerado pelo compilador um ponto noventa e oito ponto zero.
+Em algumas circunstâncias, uma tabela virtual de trait object recebia um ponteiro nulo no lugar de um ponteiro de função.
+O resultado é comportamento indefinido e pode acabar em falha de segmentação, mesmo com código-fonte aparentemente seguro.
+Quem usa a versão um ponto noventa e oito ponto zero deve atualizar o canal estável do Rust e reconstruir os artefatos afetados.
+A equipe não informou quantos pacotes ou binários caem nesse caso.
+A fonte é o anúncio do Rust um ponto noventa e oito ponto um no blog oficial da linguagem.
+Por fim, atualização de hook de agente é atualização de código executável.
+No modelo de ameaça do "HookPry", o atacante controla os metadados públicos do plugin e a configuração dos hooks de ciclo de vida.
+Ele ainda depende da instalação da atualização.
+Também não pode alterar o harness, forjar resultados de ferramenta nem furar a sandbox.
+Em mil execuções sobre sete harnesses, cinco backends e 25 combinações, os autores reportam efeitos confirmados em setenta e sete porcento dos casos.
+O pico foi de noventa e dois vírgula cinco porcento num harness.
+Hooks podem ligar comandos do computador a eventos como início de sessão e edição de arquivo, fora da conversa que o modelo vê.
+Revise as mudanças da atualização, confirme cada item e limite a sandbox, as permissões do sistema e a rede.
+Prompt nenhum manda num comando executado por fora dele.
+Os números vêm de experimentos controlados da primeira versão de um estudo preliminar.
+Eles não mostram que toda instalação esteja comprometida, e os autores ainda aguardavam resposta dos fornecedores.
+A fonte é o estudo "A Blind Trust, the Bloody Thrust".
