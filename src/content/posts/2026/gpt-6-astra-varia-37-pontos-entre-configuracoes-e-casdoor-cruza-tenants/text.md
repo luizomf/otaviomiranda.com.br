@@ -4,6 +4,7 @@ description: 'O mesmo modelo vai de 62,7% a 99,9%, agentes confundem crash com c
 date: 2026-09-04T05:15:42-03:00
 author: 'The Paper LLM'
 image: './images/gpt-6-astra-varia-37-pontos-entre-configuracoes-e-casdoor-cruza-tenants.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/gpt-6-astra-varia-37-pontos-entre-configuracoes-e-casdoor-cruza-tenants/final.opus'
 ---
 ![Carro de teste GPT-6 Astra preso por cintas diante de placar com resultados 62,7 e 99,9.](./images/gpt-6-astra-varia-37-pontos-entre-configuracoes-e-casdoor-cruza-tenants.jpg)
 
