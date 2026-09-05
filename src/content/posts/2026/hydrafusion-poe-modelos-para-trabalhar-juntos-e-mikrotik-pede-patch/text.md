@@ -4,6 +4,7 @@ description: 'Copilot CLI ganha orquestração entre modelos; Spotify mede a eco
 date: 2026-09-05T05:31:52-03:00
 author: 'The Paper LLM'
 image: './images/hydrafusion-poe-modelos-para-trabalhar-juntos-e-mikrotik-pede-patch.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/hydrafusion-poe-modelos-para-trabalhar-juntos-e-mikrotik-pede-patch/final.opus'
 ---
 
 ![Maleta ilustrativa do Copilot com três módulos do HydraFusion: Single, Cascade e Critique.](https://otaviomiranda.com.br/imgs/posts/2026/hydrafusion-poe-modelos-para-trabalhar-juntos-e-mikrotik-pede-patch.jpg)
