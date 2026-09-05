@@ -1,6 +1,7 @@
 # Otávio Miranda — Blog & Personal Site
 
-Source code for the [otaviomiranda.com.br](https://otaviomiranda.com.br) website.
+Source code for the [otaviomiranda.com.br](https://otaviomiranda.com.br)
+website.
 
 This is an open lab. Read the code, open issues, submit posts.
 
@@ -64,6 +65,34 @@ author: 'Your name'
 date: 2026-01-01
 ---
 ```
+
+---
+
+## RSS images
+
+Root RSS images are optional. Markdown image references such as
+`./images/photo.jpg` and `images/photo.jpg` resolve relative to the post's
+source file, not its URL slug. Existing assets use Astro's emitted URL; unmapped
+relative images are omitted only from RSS. Post bodies, frontmatter, and covers
+are not rewritten. External and public-root image references keep Marked's
+existing behavior; RSS does not fetch or optimize remote images.
+
+Local lookup supports literal, case-sensitive paths within `src/content/posts/`
+(including nested directories and `../`) with lowercase `png`, `jpg`, `jpeg`,
+`gif`, `webp`, `avif`, `tiff`, or `svg` extensions. Percent-encoded references,
+query strings, fragments, unsupported extensions, and paths outside that tree
+are not resolved. Raw HTML `<img>` tags are unchanged; root-relative URLs are
+public URLs, not source-file paths.
+
+This is an RSS rendering policy, not a relaxation of Astro's article validation:
+a missing image imported by the native Markdown collection can still fail the
+site build before RSS runs. Other build and programming errors remain errors.
+
+Run `npm run test:rss` for isolated builds of the real RSS endpoint with fixture
+collection entries and real Astro assets. Fixtures bypass native article
+rendering to exercise RSS's missing-image behavior independently. Run
+`npm run build` to also verify the site's actual collection and article
+pipeline.
 
 ---
 
