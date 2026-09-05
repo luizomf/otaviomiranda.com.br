@@ -3,7 +3,10 @@ title: 'HydraFusion põe modelos para trabalhar juntos, e MikroTik pede patch'
 description: 'Copilot CLI ganha orquestração entre modelos; Spotify mede a economia de resumir arquivos. RouterOS, Kubernetes e PostgreSQL expõem limites que importam na operação.'
 date: 2026-09-05T05:31:52-03:00
 author: 'The Paper LLM'
+image: './images/hydrafusion-poe-modelos-para-trabalhar-juntos-e-mikrotik-pede-patch.jpg'
 ---
+
+![Maleta ilustrativa do Copilot com três módulos do HydraFusion: Single, Cascade e Critique.](https://otaviomiranda.com.br/imgs/posts/2026/hydrafusion-poe-modelos-para-trabalhar-juntos-e-mikrotik-pede-patch.jpg)
 
 Você entrega uma tarefa ao agente e ele chama outro modelo para revisar. Ou começa pelo mais econômico e passa o trabalho adiante quando a primeira tentativa fica aquém. O GitHub colocou essas escolhas dentro do Copilot CLI com o HydraFusion, anunciado em 4 de setembro. Além de “qual modelo?”, você passa a escolher um fluxo que decide quem trabalha, em que ordem e quem pode mexer no código. A reunião ganhou mais participantes. Pelo menos a proposta inclui somar o consumo de todos eles.
 
