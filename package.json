@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "post": "node scripts/new_post.mjs",
+    "test:rss": "node scripts/test_rss_images.mjs",
     "check:css-tokens": "node scripts/check_css_tokens.mjs",
     "check:url-metadata": "node scripts/check_url_metadata.mjs"
   },
