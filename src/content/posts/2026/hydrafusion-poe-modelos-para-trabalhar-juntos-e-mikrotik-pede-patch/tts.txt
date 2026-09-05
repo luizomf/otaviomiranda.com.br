@@ -1,0 +1,227 @@
+HydraFusion põe modelos para trabalhar juntos, e MikroTik pede atualização de segurança.
+
+Você entrega uma tarefa ao agente e ele chama outro modelo para revisar.
+Ou começa pelo mais econômico e passa o trabalho adiante quando a primeira tentativa fica aquém.
+O "Git Hub" colocou essas escolhas dentro do Copilot [S IY1 EH1 L AY1] com o HydraFusion, anunciado em quatro de setembro.
+Além de escolher o modelo, você passa a escolher um fluxo que decide quem trabalha, em que ordem e quem pode mexer no código.
+A reunião ganhou mais participantes. Pelo menos a proposta inclui somar o consumo de todos eles.
+
+O HydraFusion escolhe o modelo e o caminho até a resposta.
+O projeto chegou como prévia de pesquisa para todos os planos do Copilot.
+Para experimentar na ferramenta de linha de comando, o caminho documentado é atualizar, habilitar o modo experimental e selecionar o HydraFusion na escolha de modelo.
+A cobrança soma os tokens de cada modelo participante, na tarifa padrão de cada um.
+Os convidados estão disponíveis no seu plano. Trabalhar de graça já é outra conversa.
+Um roteador decide quem recebe a tarefa.
+O HydraFusion também decide quais etapas executar, quando escalar para outro modelo e como organizar a revisão.
+É um orquestrador: escolhe quem trabalha e monta o fluxo de trabalho.
+O Git Hub descreve três caminhos.
+No primeiro, chamado "Single", um modelo selecionado resolve a tarefa.
+No segundo, chamado "Cascade", um modelo eficiente prepara a solução.
+Uma etapa de avaliação decide se aceita o resultado ou passa o trabalho para outro modelo.
+No terceiro, chamado "Critique", um crítico de outra família de modelos revisa a proposta em modo somente leitura.
+O autor recebe a crítica e faz uma rodada de revisão.
+Nesse último caminho, o crítico aponta problemas sem editar o repositório compartilhado.
+Quem resolve a tarefa usa ferramentas conforme as permissões do ambiente.
+A aprovação de um modelo decide o próximo passo do fluxo; os testes do projeto e a revisão do código verificam o resultado.
+Cada um com seu trabalho.
+Segundo o Git Hub, a implementação põe a execução inteira na conta.
+Isso inclui elaboração, crítica, revisão, escalada, novas tentativas e alternativas acionadas quando um caminho falha.
+Cada etapa trata o limite de tempo e o cancelamento.
+A revisão fica isolada e sem ferramentas, e o sistema não aplica a alteração quando o fluxo é cancelado ou falha na validação.
+Essa proteção tem um escopo específico.
+As permissões do executor com ferramentas ainda precisam limitar o que ele pode afetar fora do repositório.
+O placar chama atenção.
+Na avaliação offline do Git Hub, a melhor configuração ajustada do HydraFusion superou o Opus cinco no TerminalBench dois ponto um.
+Foram quatro vírgula nove pontos percentuais de vantagem, com custo estimado do fluxo completo sessenta e sete porcento menor.
+No DeepSWE, ficou um vírgula cinco ponto abaixo, com custo trinta e seis porcento menor.
+A tarefa mudou, o resultado também.
+É justamente o detalhe que costuma sumir quando um percentual ganha uma imagem bonita.
+As comparações usaram as mesmas entradas, ferramentas, limites, preços e critérios de avaliação, com raciocínio médio.
+Só que as políticas foram ajustadas repetidamente nos próprios conjuntos de avaliação.
+Estamos olhando para a melhor configuração que o fornecedor encontrou nessas condições.
+A própria empresa pede validação mais ampla.
+Ontem falamos de como o ambiente de execução e a configuração mudaram o resultado do GPT seis Astra.
+Agora há um fluxo com vários modelos disponível para experimentar, com escolhas explícitas de execução e cobrança.
+Aquilo que fica em volta do modelo virou uma opção de produto.
+A recomendação inicial do Git Hub é entregar uma tarefa substancial num único prompt de abertura.
+Conversas longas, com várias rodadas, ainda são foco futuro.
+E o conjunto de modelos e fluxos pode mudar durante a prévia.
+No seu projeto, eu compararia custo total e tempo até um resultado validado.
+Medir só a primeira resposta é cronometrar a entrega da massa e declarar a pizza pronta.
+A fonte é o blog do Git Hub, no anúncio do Project HydraFusion.
+
+O Spotify tira leituras grandes do contexto do Claude.
+Dá para dividir o trabalho antes mesmo de começar a solução: quem precisa ler aquele arquivo enorme?
+Dimitri Mazmanov, do Spotify, apresentou em três de setembro o [SH AH1 N T], um plugin para Claude Code.
+Ele encaminha leituras volumosas e geração previsível de código para agentes auxiliares do Portal AiKA.
+O plugin usa mecanismos executados antes das ferramentas para impor o roteamento.
+Assim, não depende só de um conselho no arquivo de instruções do Claude.
+Por padrão, bloqueia a tentativa de ler um arquivo inteiro com mais de trezentas e cinquenta linhas.
+E redireciona o agente para uma rotina de leitura em lote.
+Você pode configurar esse limiar. Leituras direcionadas, com posição inicial e limite, continuam permitidas.
+O agente auxiliar lê o volume e devolve um resumo.
+Quando o Claude precisa editar um trecho específico, pode buscá-lo diretamente.
+Esse bloqueio organiza custo e contexto; não é uma fronteira de segurança contra um agente que tente acessar arquivos de propósito.
+Os exemplos usam Gemini dois ponto cinco Flash, invocado pelo Portal.
+Há um modo de leitura em lote e outro de geração de código.
+O segundo pode escrever diretamente no disco, sem despejar todo o código produzido no contexto do Claude.
+Para isso funcionar, você precisa de uma instância adequada do Portal e da configuração do AiKA.
+O que foi escrito ainda precisa passar por testes e revisão.
+Em quatro cenários num monorepo Java, Mazmanov reportou economia média de cerca de noventa porcento.
+São os tokens que o Claude consumiria lendo arquivos diretamente, em comparação com a leitura dos resumos.
+A conta mede os tokens de leitura em lote do agente principal.
+Tokens do agente auxiliar, latência e verificação também entram no custo da tarefa.
+Os noventa porcento do [SH AH1 N T] e os sessenta e sete porcento do HydraFusion medem coisas diferentes.
+Colocá-los na mesma corrida seria dar uma régua para um e uma calculadora para o outro.
+O relato também mostra o que se perdeu no resumo.
+Os números de linha não eram confiáveis para edição.
+Um agente auxiliar deixou passar um bug sutil no acesso concorrente entre threads.
+Segundo o autor, o Claude encontrou esse bug depois de receber contexto.
+Naquele ambiente, a delegação normalmente acrescentou de dez a trinta segundos.
+Por isso, o roteamento deixa de fora depuração, decisões de arquitetura e código crítico para segurança.
+Ele poupa contexto nas tarefas adequadas e preserva leituras diretas para raciocinar e editar.
+Antes de adotar, eu perguntaria: qual informação sumiu junto com os tokens?
+Resumo econômico que omite o detalhe decisivo pode sair caro com uma eficiência impressionante.
+A fonte é o Spotify Engineering, no relato sobre Portal e [SH AH1 N T] no Claude Code.
+
+A MikroTik pede atualização de segurança. Confira a versão e o acesso S S H.
+Se você administra RouterOS, confira a linha de manutenção antes de escolher o pacote.
+A MikroTik publicou uma atualização importante de segurança em três de setembro.
+Na linha de suporte de longo prazo, a sete ponto vinte e três ponto quatro trouxe a correção.
+E, de brinde, uma regressão no D H C P de I P vê seis.
+A sete ponto vinte e três ponto cinco, publicada no dia quatro, corrige essa regressão.
+Nessa linha, prefira a sete ponto vinte e três ponto cinco ou uma versão posterior aplicável e corrigida.
+Na linha estável, a sete ponto vinte e quatro ponto dois também tem o aviso de segurança.
+Na linha seis, isso vale para a seis ponto quarenta e nove ponto vinte e um.
+Os registros de alterações dessas duas versões são de três de setembro e incluem a refatoração dos processos internos de S S H.
+São opções conforme a linha do equipamento; a lista completa de versões vulneráveis não foi estabelecida.
+A MikroTik recomenda atualizar, diz que a maioria das configurações não está em risco e mantém os detalhes técnicos temporariamente restritos.
+O pesquisador Nick Pratley comparou as versões sete ponto vinte e três ponto três e sete ponto vinte e três ponto quatro.
+Ele publicou sua investigação em quatro de setembro.
+No laboratório dele, uma sessão S S H de somente leitura conseguiu virar administração completa do RouterOS.
+Para isso, o S S H já precisava ter aceitado uma identidade especial.
+Pratley configurou deliberadamente um servidor externo de autenticação RADIUS para conseguir essa aceitação.
+Ele não reproduziu a entrada dessa identidade sem credenciais numa instalação padrão com autenticação local.
+E o laboratório não demonstra que qualquer instalação com RADIUS seja explorável.
+A escalada demonstrada é séria, mas depende daquela condição de entrada: a autenticação já tinha sido vencida.
+As duas etapas fazem trabalhos diferentes.
+Autenticação decide quem entrou. Autorização decide o que essa pessoa pode fazer.
+No caminho analisado, uma entrada de terminal não confiável chegava a um transporte interno antigo de login.
+E substituía um campo de política que deveria ser confiável.
+A sessão entrava para ler e acabava podendo administrar.
+Na versão corrigida, o nome é rejeitado antes de o processo filho de login rodar.
+Os detalhes vêm da análise de binários e da reprodução de Pratley.
+O fornecedor confirma a atualização de segurança e a regressão de D H C P.
+As cadeias inferidas pelo pesquisador ainda não têm confirmação pública da MikroTik.
+Para se defender, atualize a linha suportada, restrinja S S H às redes de gerenciamento e revise a configuração de autenticação externa.
+Se encontrar contas privilegiadas inesperadas ou alterações administrativas suspeitas, preserve as evidências e investigue.
+Limpeza automática não reconstrói o histórico do equipamento.
+O roteador já tem trabalho suficiente encaminhando pacotes; não precisa também encaminhar uma conta de leitura para a diretoria.
+As fontes são os registros de alterações do RouterOS nessas quatro versões e a investigação de Nick Pratley.
+
+Kubernetes um ponto trinta e sete permite tirar o root do nó, com configuração explícita.
+Você tira o root da aplicação, mas a máquina ainda tem componentes que executam os pods, preparam a rede e operam os containers.
+Se essa maquinaria roda como root do host, a autoridade administrativa continua lá. Só mudou de andar.
+O Kubernetes publicou em quatro de setembro a promoção a beta do recurso para executar o kubelet em namespace de usuário.
+A mudança é da versão um ponto trinta e sete.
+O recurso permite executar componentes do nó sob uma conta sem privilégio administrativo no host, dentro de um namespace de usuário do Linux.
+Isso inclui o kubelet, que cuida dos pods no nó, e os runtimes de containers.
+Plugins de rede e o kube-proxy também podem operar nesse ambiente.
+Dentro desse namespace, um processo pode se enxergar como usuário zero, o root.
+Enquanto isso, sua identidade do lado de fora corresponde a uma conta comum.
+É um mecanismo do Linux, diferente dos namespaces organizacionais da [EY1 P IY1 AY1] do Kubernetes.
+Também é diferente da configuração que coloca os pods fora do namespace de usuário do host.
+Nesse caso, os componentes do nó podem continuar como root do host.
+A chave do recurso vem ligada por padrão na um ponto trinta e sete e habilita o suporte.
+Criar o namespace de usuário ao redor dos componentes é trabalho feito fora do Kubernetes.
+Clusters existentes continuam com root até que o ambiente seja configurado para operar sem root.
+No dia três, tratamos do escalonamento automático que pode levar workers a zero.
+A mudança documentada agora fica em outra parte da mesma versão.
+Ela trata dos privilégios dos componentes do nó e da visibilidade sobre como eles estão rodando.
+Ao consultar os dados dos nós, há um campo que informa se estão executando dentro de um namespace de usuário.
+Administradores podem usar essa informação para marcar os nós e aplicar restrições de agendamento.
+Assim, evitam que cargas dependentes de privilégios reais de root sejam agendadas nesses nós.
+O campo mostra o estado. Quem administra configura a política de agendamento.
+O projeto cita clusters locais de teste e ambientes de agentes de programação sob uma conta dedicada entre os casos de uso.
+As ferramentas kind e minikube podem usar runtimes suportados que operam sem root.
+Antes de montar o seu, confira a combinação de host, runtime e drivers de rede e armazenamento.
+Alguns desses drivers exigem privilégios incompatíveis com o ambiente.
+Reduzir essa autoridade limita o dano de alguns escapes de containers ou componentes do nó.
+Vulnerabilidades do kernel continuam fora dessa proteção, e controles como seccomp seguem fazendo parte do endurecimento.
+Para experimentar, dá para começar com uma pergunta bem concreta: quais componentes ainda precisam ser administradores da máquina?
+O privilégio deixa de vir como acompanhamento obrigatório do cluster e passa a exigir justificativa.
+A fonte é o blog do Kubernetes, no anúncio do modo sem root em beta.
+
+O Postgri [EH1 S] [K Y UW1] [EH1 L] pode atrasar a réplica sem cancelar nenhuma consulta.
+A aplicação lê um dado antigo na réplica. Você consulta o contador de conflitos e encontra zero.
+Esse contador registra consultas canceladas.
+Já os logs de espera por conflito mostram o tempo que a aplicação das mudanças ficou esperando.
+Uma consulta pode segurar a replicação por vários segundos e terminar por conta própria, deixando o contador em zero.
+Christophe Pettus explicou esse caso num artigo de quatro de setembro sobre duas configurações de log já existentes no banco.
+Ontem falamos de esperas comuns por locks e falhas quando a operação exige não esperar pelo bloqueio.
+Desta vez, o assunto é recuperação do banco e conflitos que impedem uma réplica de aplicar o registro de alterações, o WAL.
+Uma consulta na réplica pode precisar de uma versão antiga de uma linha que a aplicação do WAL quer remover.
+A aplicação do registro espera. As mudanças seguintes ficam para trás.
+E novas leituras da aplicação podem enxergar um estado desatualizado.
+No exemplo de Pettus, a espera durou aproximadamente treze segundos e terminou quando a sessão conflitante concluiu seu trabalho.
+Nenhuma consulta foi cancelada; o contador de conflitos continuou em zero.
+O log, porém, guardou a causa e a duração da espera.
+O contador respondeu corretamente à pergunta errada. Muito educado da parte dele.
+A configuração de log de esperas por conflito de recuperação vem desligada por padrão.
+Ela registra quando a espera ultrapassa o limiar configurado para a verificação de deadlock.
+Pettus recomenda habilitá-la nas réplicas.
+Ela é especialmente útil quando a configuração permite esperar indefinidamente antes de cancelar consultas.
+Nesse caso, a réplica pode ficar atrasada sem produzir um erro de cancelamento para chamar atenção.
+A outra configuração cuida de uma situação diferente: o banco começa uma recuperação e parece ter ficado quieto.
+É a configuração de intervalo do log de progresso da recuperação.
+Por padrão, ela registra progresso a cada dez segundos nas operações demoradas.
+O intervalo vale separadamente para cada operação, e zero desliga o recurso.
+As mensagens ajudam a distinguir a sincronização de diretórios da aplicação do WAL.
+Pettus alerta que interromper uma recuperação em andamento pode fazer o banco repetir trabalho caro.
+Reiniciar só porque faltou mensagem pode transformar a ansiedade do operador em mais tempo de recuperação.
+Numa réplica já em execução, as linhas de progresso da aplicação do WAL são suprimidas.
+Você acompanha a replicação em andamento com os instrumentos [EH1 S] [K Y UW1] [EH1 L].
+E investiga depois uma espera por conflito com os logs específicos.
+São situações diferentes, cada uma com sua forma de observação.
+Esses recursos estão aí há algumas versões.
+O log de progresso chegou na versão quinze do Postgri [EH1 S] [K Y UW1] [EH1 L], e o de espera por conflito, na quatorze.
+O artigo novo explica como usá-los na operação.
+Manter o progresso ligado e registrar conflitos nas réplicas guarda evidência para o próximo diagnóstico.
+O atraso ainda precisa ser resolvido; pelo menos ele deixa de atravessar o incidente sem deixar bilhete.
+As fontes são o artigo de Christophe Pettus e a documentação de logs do Postgri [EH1 S] [K Y UW1] [EH1 L].
+
+Agora, os destaques rápidos para hoje.
+A CISA adicionou uma falha explorada do Chromium ao catálogo de vulnerabilidades conhecidas e exploradas em quatro de setembro.
+É uma confusão de tipos no V oito, o motor de JavaScript, com execução de código dentro da sandbox.
+As fontes não demonstram escape dessa proteção.
+O Google confirmou exploração em circulação e publicou a correção no dia três.
+Atualize o Chrome para a versão corrigida da linha cento e cinquenta e dois, ou uma versão posterior aplicável.
+O número completo da versão varia conforme o sistema operacional e está no artigo escrito, para você conferir a atualização.
+Nos outros navegadores Chromium, confira a versão corrigida com o respectivo fornecedor.
+As fontes são o catálogo da CISA e o Chrome Releases.
+
+O caso PaperCut avançou de reconhecimento para ferramentas de coleta de credenciais e tentativas de criar contas privilegiadas.
+O relato da Arctic Wolf de quatro de setembro acrescenta essas observações à nossa cobertura de vinte e nove de agosto.
+Isso não estabelece roubo de credenciais em toda instalação afetada.
+Para servidores PaperCut N G e M F expostos, o fornecedor orienta restringir o acesso e instalar o "Emergency Patch Release" três.
+Essa atualização emergencial é cumulativa e deve ser instalada mesmo após correções anteriores.
+A orientação substitui a do Release dois.
+Possíveis alterações de contas e comprometimento prévio continuam exigindo investigação.
+As fontes são a Arctic Wolf e o boletim da PaperCut.
+
+Bun um ponto quatro ponto dois corrige duas regressões da um ponto quatro ponto um em builds e retenção de memória.
+A versão de cinco de setembro resolve colisões de nomes do empacotador que afetavam importações do Elysia.
+E corrige um defeito no AsyncLocalStorage, usado para associar estado à execução assíncrona.
+Temporizadores e promises pendentes podiam manter um contexto externo vivo em memória.
+A consulta ao estado armazenado continuava retornando o valor correto.
+Se você está na um ponto quatro ponto um, valide a atualização especialmente nesses cenários.
+A fonte é o anúncio do Bun um ponto quatro ponto dois.
+
+O D N S público criptografado da Mullvad será encerrado.
+Configurações manuais precisam mudar antes de dois de novembro.
+O anúncio de três de setembro prevê apoio financeiro à Quad nove.
+Os padrões de D N S sobre H T T P S do Mullvad Browser migrarão automaticamente.
+Isso inclui a opção de bloqueio de anúncios fornecida pelo navegador.
+Endereços personalizados e perfis Mullvad de D N S sobre H T T P S instalados no iOS ou macOS precisam de intervenção.
+O encerramento atinge o resolvedor público; o D N S interno da V P N continua sendo outro serviço.
+A fonte é o anúncio da Mullvad.
