@@ -1,0 +1,191 @@
+Magento sofre ataques sem login, e "Beyond O R Ms" põe o [EH1 S] [K Y UW1] [EH1 L] à vista.
+
+O Magento prepara um aviso de pagamento que falhou e, enquanto monta a mensagem, executa código do invasor.
+Ninguém precisa abrir o email.
+Segundo a Sansec, a cadeia chamada "StyleSmuggler" está sendo explorada desde quatro de setembro.
+E ainda não tinha correção oficial identificada na apuração.
+Se você cuida de uma dessas lojas, é hora de interromper o café e conferir a exposição.
+O email pode nem chegar. O invasor já conseguiu executar código no servidor.
+
+A StyleSmuggler usa a renderização de email para executar código.
+A Sansec divulgou em cinco de setembro uma cadeia de execução remota sem autenticação no Magento.
+Primeiro, o atacante consegue gravar código P H P em um arquivo produzido pela própria aplicação.
+Depois, faz o sistema de templates processar esse conteúdo pelo caminho do lembrete de transação de pagamento malsucedida.
+O sistema acaba tratando conteúdo armazenado como código executável.
+O gatilho é a renderização no servidor, inclusive quando o envio do email falha.
+Por isso, a investigação precisa olhar para esse processamento. O ataque funciona sem participação do destinatário.
+
+A Sansec reproduziu a cadeia completa em instalações limpas do Magento Open Source.
+As versões testadas foram a dois ponto quatro ponto sete, a dois ponto quatro ponto oito e a dois ponto quatro ponto nove.
+A primeira vítima descrita usava a dois ponto quatro ponto seis, p quinze, com os patches de julho e agosto aplicados.
+Até a verificação de status dos patches estava limpa.
+A tela verde estava certa sobre as correções conhecidas. O problema era o que ainda não tinha entrado na lista.
+
+A empresa diz que o alcance é maior e inclui versões atuais de Adobe Commerce.
+A reprodução publicada, porém, cobre as versões nomeadas do Magento Open Source.
+O índice oficial da Adobe consultado ainda terminava no boletim de onze de agosto, sem confirmar esse escopo maior.
+Também não havia garantia de que a atualização prevista para oito de setembro, citada pela Sansec, incluiria a correção.
+
+Os ataques já aparecem fora do laboratório.
+A Disrex publicou observações próprias de resposta a incidente.
+Elas incluem tráfego capturado em uma loja comprometida em cinco de setembro e análise do código daquela instalação.
+O total de lojas atingidas e a autoria da campanha continuam desconhecidos.
+Encontrar um implante exige resposta, mas, por si só, não comprova roubo de cartões ou exfiltração em cada vítima.
+
+Se você opera Magento, a prioridade é reduzir a exposição e investigar o que já aconteceu.
+A Sansec recomenda desabilitar temporariamente Graph Q L para quem não usa seu produto "Shield".
+Só que essa [EY1 P IY1 AY1] sustenta lojas com frontend separado e aplicações web progressivas.
+Desligá-la pode interromper esses ambientes, como a Disrex explicou ao "The Hacker News".
+Antes de mexer, confira o que a sua loja precisa dela para fazer.
+
+Os trechos comunitários de mitigação da Disrex também pedem cuidado.
+O próprio repositório avisa que não passaram por revisão e que as regras de Apache não foram testadas ao vivo.
+Já o componente de proteção foi exercitado num ambiente de teste, não numa loja em execução.
+Os autores orientam procurar comprometimento antes de aplicar os trechos e validá-los em um ambiente de homologação.
+Copiar uma mitigação do "Git Hub" continua sendo uma mudança de produção, mesmo quando o README está tentando salvar seu domingo.
+
+Na investigação, olhe além do diretório público da loja.
+A Sansec descreve um processo com nome disfarçado de trabalhador do kernel.
+Descreve também um arquivo oculto sob a pasta pessoal do usuário e persistência por cron.
+Os nomes e caminhos completos desses indicadores estão no artigo escrito.
+São pistas para investigar. A ausência delas não atesta integridade.
+Um scanner limitado ao diretório público pode passar longe do lugar onde o implante está morando.
+
+Preserve evidências e, se encontrar comprometimento, combine contenção com rotação das credenciais expostas.
+A Sansec destaca as credenciais Magento quando o processo suspeito aparece.
+Bloquear novas requisições ainda deixa a persistência instalada para a equipe resolver.
+Estar com o patch de agosto em dia e esperar pelo próximo boletim não dá conta dessa exposição.
+As fontes deste bloco são Sansec, Disrex, o índice de segurança do Adobe Commerce e The Hacker News.
+
+Agora, "Beyond O R Ms" troca acesso genérico por operações da aplicação.
+Você precisa remover alguns registros e devolver os dados removidos.
+O código busca os objetos, percorre a coleção e apaga um por um.
+Parece uma operação pequena, até você olhar o que chegou ao banco.
+Uma consulta de leitura seguida de uma deleção para cada objeto. A mesma intenção, paga em várias prestações.
+
+Esse é o ponto de partida de Beyond O R Ms, ensaio publicado em cinco de setembro pelo autor do Extralite.
+Um O R M faz a ponte entre tabelas relacionais e objetos da linguagem.
+O texto propõe partir das operações de que a aplicação precisa e criar uma interface pequena para elas.
+O [EH1 S] [K Y UW1] [EH1 L] fica guardado atrás dessa interface.
+No exemplo, trocar o loop por um método de deleção em lote já reduz o caminho a duas consultas.
+Uma para buscar e outra para apagar. O próprio autor reconhece essa alternativa.
+Depois, ele usa uma instrução de deleção com "RETURNING", que devolve os registros removidos na mesma operação.
+
+O Postgri [EH1 S] [K Y UW1] [EH1 L] também documenta esse recurso.
+Na deleção, o retorno expõe por padrão o conteúdo da linha removida e evita uma consulta adicional para recuperar esses dados.
+A novidade é o ensaio e a discussão de design. O banco não aprendeu a devolver linhas ontem.
+A conta do exemplo começa com uma consulta mais uma deleção por objeto.
+Depois, passa para duas consultas e, por fim, uma instrução.
+Dá para conferir a redução de operações olhando o código.
+O texto não traz benchmark para transformar essa contagem em ganho de velocidade.
+
+A parte que eu mais aproveitaria vem depois do [EH1 S] [K Y UW1] [EH1 L].
+O autor monta uma interface de acesso aos posts que recebe uma conexão.
+Ela oferece operações como buscar um post por identificador ou listar posts com seus autores.
+Por dentro, pode manter junções e consultas envolvendo várias tabelas.
+Para o restante do programa, entrega hashes comuns do Ruby, estruturas de chave e valor.
+Quem usa essa interface pede uma operação com significado para a aplicação. Os detalhes da consulta ficam lá dentro.
+No desenho apresentado, quem não recebe essa interface não usa esse caminho de acesso ao banco.
+A conexão deixa de ser um controle remoto universal distribuído pela casa, inclusive para quem só queria acender a luz da cozinha.
+
+Você também consegue reunir o [EH1 S] [K Y UW1] [EH1 L] de uma operação em um lugar sem criar uma classe de entidade para cada tipo de linha.
+Na revisão, dá para perguntar quais consultas esta ação pode disparar, e por onde ela chega ao banco.
+Pelo menos essa conversa tem código para conferir.
+A discussão sobre se todo O R M presta ou nenhum presta pode esperar mais um pouco.
+O ensaio não compara sistematicamente as capacidades dos O R Ms.
+O cache automático de instruções que ele menciona para o Extralite também ainda não estava lançado nem tinha benchmark.
+A proposta de interface pode ser aproveitada por conta própria, sem depender dessa promessa de desempenho.
+
+No seu projeto, eu começaria por uma operação cujo acesso ao banco esteja difícil de acompanhar.
+Conte as consultas, identifique quem recebe a conexão e veja se um método com nome claro consegue esconder o trabalho inteiro.
+Isso cabe numa revisão localizada, sem abrir uma migração geral de persistência só porque uma deleção finalmente voltou com o recibo.
+As fontes são o ensaio na Noteflakes e a documentação de retorno de dados do Postgri [EH1 S] [K Y UW1] [EH1 L].
+
+O "Cloud in a Bottle" integra apps e mostra o que cada um pode acessar.
+Você sobe suas aplicações pessoais num servidor virtual e logo aparece outra parte do trabalho.
+Fazer os apps compartilharem login e usarem capacidades uns dos outros.
+Zack Polizzi, da [IH0 M B Y UW1], anunciou em cinco de setembro o Cloud in a Bottle para cuidar dessa integração.
+Segundo ele, o lançamento veio depois de mais de seis meses de desenvolvimento e testes privados.
+
+A plataforma usa uma máquina Ubuntu e um servidor web que encaminha H T T P e H T T P S.
+As aplicações ficam em containers rootless. Nesse modelo, o runtime opera com privilégios reduzidos no host.
+O login da instância pode servir aos apps.
+E interfaces de programação habilitadas explicitamente permitem acesso autorizado a capacidades de outras aplicações.
+O projeto tem licença A G P L três ponto zero e pode ser hospedado por você.
+Há também um serviço gerenciado que, segundo o anúncio, usa o mesmo código.
+O catálogo inicial ainda é pequeno.
+O autor reconhece que os primeiros usuários podem precisar adaptar ou criar apps com alguma familiaridade técnica.
+É para quem aceita mexer na própria nuvem, mas gostaria de receber parte do encanamento montada.
+
+A documentação dá um lugar concreto para conferir a instalação.
+É o manifesto de aplicações do Cloud in a Bottle, na raiz do repositório de cada app.
+Ali ficam a indicação do Dockerfile, a porta de acesso web, recursos e permissões.
+Antes de instalar, eu olharia especialmente o que fica fora da proteção do login e quais dados entram no container.
+O campo de caminhos públicos libera prefixos de caminho sem autenticação.
+Já os mapeamentos extras de portas ligam T C P e U D P do container ao host em todas as interfaces, não só no acesso local.
+Esses mapeamentos nem são necessários para o roteamento web comum da plataforma.
+Você os adiciona quando quer essa exposição extra.
+O login unificado não se estende automaticamente a todo protocolo colocado ali.
+
+Há uma permissão ainda mais abrangente, a de acesso aos dados de todos os apps. Ela vem desativada.
+Quando ligada, monta com leitura e escrita os diretórios permanentes, temporários e de arquivo de todos os apps.
+O nome avisa bastante. A caixinha de acessar todos os dados tem a delicadeza de fazer exatamente o que diz.
+Rootless cuida dos privilégios do runtime no host.
+Quem autoriza esse acesso amplo entre aplicações é o manifesto.
+É ali que você precisa conferir se o app realmente necessita dos dados dos vizinhos.
+As fontes descrevem a arquitetura, mas não trazem uma auditoria independente que permita prometer isolamento absoluto.
+
+O armazenamento tem outro detalhe que merece atenção.
+Os dados da área temporária do app sobrevivem a reinicializações, mas ficam fora de backups e migrações.
+Você pode ver o arquivo voltar depois de um restart e ainda assim ficar sem ele na restauração.
+Ainda está no disco e foi incluído no backup são respostas diferentes.
+A gente costuma lembrar de perguntar as duas juntas no pior momento.
+A proposta reúne instalação, autenticação e integração.
+Se for experimentar, revise caminhos públicos, portas extras e acesso aos dados antes de entregar recursos ao app.
+O manifesto deixa essas escolhas à vista. Melhor ler a permissão ali do que aprender seu significado pelo efeito.
+As fontes são o anúncio de lançamento do Cloud in a Bottle e a especificação do manifesto de aplicações.
+
+Destaques rápidos para hoje.
+O Asahi Linux incorporou os Macs M três ao instalador em seis de setembro, ainda no modo especialista.
+Em vinte e sete de agosto, o suporte estava em preparação.
+Agora você pode experimentar nos MacBooks e iMacs com M três, M três Pro ou M três Max, conforme o modelo.
+O Mac Studio com M três Ultra fica de fora.
+Wi-Fi e decodificação de vídeo por hardware, inclusive A V um, funcionam.
+Mas faltam aceleração três D adequada, suspensão e H D M I nos MacBooks equipados com essa saída.
+Já dá para instalar. No uso diário, essas ausências ainda pesam.
+A fonte é a publicação do Asahi Linux sobre o suporte ao M três.
+
+Workstation e Fusion receberam correção para duas rotas de execução da máquina virtual para a máquina hospedeira.
+O boletim da Broadcom é de três de setembro.
+Quem usa as versões vinte e cinco H dois ou vinte e seis H um deve instalar a vinte e seis H um U um.
+As duas falhas exigem um atacante com administração local dentro da máquina virtual.
+Uma delas também depende do adaptador de rede V M X net três.
+A outra passa pelo serviço de arquivos compartilhados H G F S.
+Ela pode executar código como o processo V M X na máquina hospedeira.
+O boletim não lista uma solução alternativa nem declara exploração ativa.
+Se seu laboratório recebe máquinas virtuais menos confiáveis, priorize o patch.
+A fonte é o boletim de segurança da Broadcom.
+
+Cinco segundos de consulta podem conter só meio segundo de C P U do backend.
+Christophe Pettus mostrou esse caso em cinco de setembro usando contadores já existentes do Postgri [EH1 S] [K Y UW1] [EH1 L].
+O contador de estatísticas da instrução inteira não pode ser ligado junto dos contadores por etapa.
+Eles vêm desligados e exigem superusuário ou privilégio de configuração apropriado.
+O autor recomenda ligar brevemente para diagnóstico e desligar depois.
+A medida deixa de fora a C P U dos trabalhadores paralelos.
+E o pico de memória residente é histórico do processo, não consumo da consulta.
+A diferença entre C P U e relógio ajuda a orientar a investigação.
+Sozinha, não identifica a causa da espera.
+As fontes são a análise de Christophe Pettus e a documentação de estatísticas do Postgri [EH1 S] [K Y UW1] [EH1 L].
+
+Uma proposta experimental de alteração no código quer guardar parte do cache K V na memória RAM para aliviar a memória de vídeo.
+Esse cache mantém o estado de atenção dos tokens já processados.
+A proposta foi aberta em seis de setembro no fork de TheTom, chamado "llama cpp turboquant".
+Ela limita uma alocação CUDA compartilhada entre páginas residentes e espaço de trabalho ativo.
+O restante do cache vem da RAM conforme necessário.
+A proposta vem desligada por padrão e aceita uma sequência por execução.
+O suporte a DeepSeek V quatro foi revertido por uma regressão que afetava a correção dos resultados.
+Ainda é uma proposta aberta de um fork, não uma versão lançada do llama cpp principal.
+O limite cobre essa alocação, não toda a memória da G P U.
+E RAM e transferências continuam entrando na conta.
+O cache mudou de endereço, não deixou de ocupar espaço.
+A fonte é o pull request número trezentos e cinquenta e sete do llama cpp turboquant.
