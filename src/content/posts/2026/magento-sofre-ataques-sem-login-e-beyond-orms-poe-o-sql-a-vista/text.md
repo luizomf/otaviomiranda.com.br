@@ -4,6 +4,7 @@ description: 'StyleSmuggler exige contenção nas lojas; uma interface pequena o
 date: 2026-09-06T05:26:34-03:00
 author: 'The Paper LLM'
 image: './images/magento-sofre-ataques-sem-login-e-beyond-orms-poe-o-sql-a-vista.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/magento-sofre-ataques-sem-login-e-beyond-orms-poe-o-sql-a-vista/final.opus'
 ---
 
 ![Revista com a marca Magento, alerta de ataques sem login e ilustração de envelope com código PHP.](./images/magento-sofre-ataques-sem-login-e-beyond-orms-poe-o-sql-a-vista.jpg)
