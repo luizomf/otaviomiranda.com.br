@@ -1,0 +1,164 @@
+N-central exige novo patch, e "wrapture" mostra o cartão no trace.
+
+Você instalou o hotfix do servidor de gerenciamento e já apareceu outro.
+No N-central, confira o número inteiro.
+A "N-able" publicou o Hotfix quatro para corrigir uma falha crítica que permite executar código antes do login.
+Quem parou no hotfix três ainda precisa atualizar.
+O alvo é justamente o servidor usado para acompanhar e administrar outras máquinas.
+A portaria do prédio estava dispensando identificação.
+
+O N-central precisa do hotfix quatro, mesmo depois do hotfix anterior.
+A correção é o N-central 2026 ponto três, Hotfix quatro, build 2026 ponto três ponto um ponto quatorze.
+A N-able publicou o aviso em seis de setembro, com notas de versão atualizadas no dia cinco.
+Segundo o fornecedor, a falha permite executar código remotamente no servidor sem precisar de uma conta ou de entrar no painel.
+O N-central concentra o monitoramento e o gerenciamento remoto de equipes de T I e prestadores de serviços gerenciados.
+Comece descobrindo quem cuida do servidor e qual build está instalada.
+A N-able diz que já corrigiu as instâncias hospedadas por ela, chamadas N C O D.
+Nesses casos, o cliente não precisa intervir.
+Para quem mantém uma instalação própria, a orientação é atualizar imediatamente.
+O hotfix quatro substitui o três, cujo build termina em treze.
+Esse dígito importa, porque a correção anterior deixa aberta a falha tratada por esta.
+O alvo desse hotfix é o servidor.
+Você não precisa atualizar os agentes das máquinas gerenciadas para proteger contra essa falha.
+A recomendação habitual de mantê-los em dia continua valendo.
+As notas permitem atualização direta a partir das versões 2025 ponto quatro e 2026 ponto um, ponto dois e ponto três.
+Isso inclui os três hotfixes anteriores da versão 2026 ponto três.
+Instalações mais antigas precisam passar por uma versão intermediária suportada.
+Essa lista descreve os caminhos de atualização, não a faixa completa de versões vulneráveis, que não está delimitada ali.
+Confira de onde você está saindo antes de escolher o pacote.
+Os dados completos para identificar a correção e os caminhos de atualização estão no artigo escrito.
+
+E já estão explorando? As fontes públicas divergem.
+A "Huntress" descreve a falha como explorada ativamente.
+Ela também reproduz uma declaração atribuída a um representante da N-able nesse sentido.
+Já os avisos públicos de status e de versão da própria N-able ainda dizem não ter confirmação de exploração em produção.
+No caso investigado pela Huntress, os logs já tinham rotacionado.
+Com o histórico disponível, a empresa não conseguiu atribuir aquele comprometimento a esta falha ou às anteriores.
+O fornecedor já pede urgência no patch.
+Descobrir por onde entraram naquele incidente continua sendo trabalho da investigação.
+Com a dificuldade extra de procurar uma resposta nos registros que sobraram.
+Junto da atualização, a Huntress recomenda revisar logs do appliance em busca de manipulação de [EY1 P IY1 AY1].
+Também recomenda auditar contas e mudanças de permissão, e restringir o console com uma lista de origens permitidas ou V P N.
+O patch fecha a falha, enquanto a revisão de contas e registros procura alterações que podem ter acontecido antes dele.
+Reserve tempo para as duas coisas, especialmente se o console estava exposto.
+As fontes são o aviso da N-able, suas notas de versão e caminhos de atualização, e a investigação da Huntress.
+
+O wrapture acompanha a falha e leva o cartão junto.
+Você quer entender por que um pedido falhou.
+O trace mostra a chamada do serviço, a tentativa de cobrança, a exceção e o tempo gasto. Ótimo.
+Mostra também o argumento com o número completo do cartão.
+O diagnóstico trouxe informação suficiente para resolver um problema e começar outro.
+"Graham Dumpleton" publicou em sete de setembro uma demonstração de rastreamento ao vivo com wrapture.
+É a biblioteca Python que apresentamos em trinta e um de agosto.
+Desta vez, ele acompanha as chamadas enquanto o programa executa e mostra a captura de dados sensíveis.
+E explica um detalhe fácil de perder.
+Esconder uma operação no trace não esconde automaticamente as chamadas feitas dentro dela.
+O serviço do exemplo recebe um pedido, chama o gateway de pagamento e registra a operação no ledger, o componente de registro contábil.
+Dumpleton aplica um binding em cada uma dessas fronteiras.
+Esse binding envolve a chamada escolhida para observar sua execução.
+Os eventos vão para um sink, que recebe o que foi observado.
+No exemplo, é o "Printer", que escreve na saída de erro padrão conforme as chamadas acontecem.
+Nos testes, você pode guardar esses eventos numa sequência para conferir depois.
+Na demonstração ao vivo, eles vão direto para o sink, sem abrir uma captura de teste com a função timeline.
+Você configura quais chamadas observar e para onde mandar os eventos nos pontos de instrumentação.
+Em vez de espalhar mensagens de log pela lógica do pedido.
+Quando o cartão é recusado, dá para seguir a falha.
+A cobrança lança uma exceção de cartão recusado, e a mesma exceção aparece na operação de criação do pedido.
+O método de registro no ledger nunca é chamado.
+O trace mostra a relação entre as operações e onde a sequência parou.
+Argumentos, retornos, exceções e duração ficam disponíveis para consulta.
+
+Só que a primeira saída publicada inclui o argumento completo do cartão.
+Isso acontece nos dados do exemplo controlado do autor, não é um relato de vazamento de clientes.
+Dumpleton corrige a captura configurando a ocultação do argumento do cartão tanto na entrada do pedido quanto na cobrança.
+O valor passa a aparecer como ocultado.
+Repare nos dois bindings.
+O argumento atravessa mais de uma chamada observada, então cada ponto precisa do tratamento adequado.
+A demonstração cobre esse argumento nesses locais.
+Retornos, exceções e outras instrumentações continuam exigindo revisão própria.
+O nome "redact" não espalha bom senso por todo o processo, embora fosse uma [EY1 P IY1 AY1] bastante desejável.
+Depois vem outra escolha. Quanto do fluxo você quer ver?
+O exemplo usa um predicado, uma condição de seleção, para escolher pedidos de um cliente.
+Se ele rejeita a captura da operação principal, as chamadas internas do gateway e do ledger ainda podem gerar eventos.
+Porque têm bindings independentes.
+Na tela, as informações do pedido somem e seus filhos ficam.
+Você encontra uma cobrança sem a operação que explicava de onde ela veio.
+O filtro deixou órfãos no trace.
+Com a opção de filtrar a árvore ativada, a rejeição suprime o rastreamento da árvore inteira daquela operação.
+O pedido continua executando seu código, inclusive as chamadas internas.
+Esse filtro controla o que você observa.
+Autorização e bloqueio de cobrança precisam acontecer na lógica do negócio.
+
+Dumpleton também explica que, sem uma captura de teste ou sink de processo escutando, os bindings aplicados não constroem eventos.
+Quando há alguém escutando, o predicado pode rejeitar a captura antes da construção do evento.
+Isso explica onde o trabalho pode ser evitado, mas o exemplo não sustenta uma promessa de desempenho para qualquer programa.
+Essa escolha sobre conteúdo sensível também aparece no guia de observabilidade de I A generativa do "OpenTelemetry", publicado em maio.
+Por padrão, conteúdo de prompts e argumentos de ferramentas fica fora da captura.
+Registrar o conteúdo completo exige adesão explícita, porque ele pode conter dados sensíveis.
+A demonstração nova do wrapture deixa bem visível o motivo desse cuidado.
+Se for experimentar no seu serviço Python, eu começaria pelas fronteiras que explicam a operação.
+E conferiria a saída, inclusive no caminho de erro.
+Decida quais argumentos podem sair dali e se o filtro deve atingir só a chamada ou toda a árvore.
+Dá para entender por que a cobrança falhou sem guardar o cartão inteiro de lembrança.
+As fontes são a demonstração de Graham Dumpleton e o guia do OpenTelemetry sobre observabilidade de chamadas de I A generativa.
+
+O [K UW1 P] bloqueia o desvio que deixava a credencial fora do cofre.
+Um agente trabalha dentro de uma máquina virtual, edita o projeto e devolve os arquivos ao host, a máquina hospedeira.
+Até aí, tudo como esperado.
+Se uma credencial for gravada dentro do projeto, ela pode pegar a mesma carona.
+Esse caminho dispensa uma fuga espetacular pelo hipervisor. Basta salvar o arquivo no lugar errado.
+A "Trail of Bits" incorporou em sete de setembro uma proteção para esse caso no [K UW1 P].
+É sua ferramenta de linha de comando para executar "Claude Code" e Codex em máquinas virtuais descartáveis.
+O projeto usa "Firecracker" no Linux e Lima no macOS.
+A mudança recusa uma variável de ambiente definida explicitamente para mudar o diretório do Codex.
+Isso acontece quando a configuração gerenciada do Codex usa armazenamento em keyring, o cofre de credenciais da máquina virtual.
+A correção está na versão em desenvolvimento, na seção de mudanças ainda não lançadas.
+O modo de autenticação com conta ChatGPT e o proxy de credenciais também estão nessa seção.
+A versão estável mais recente verificada é a zero ponto cinco ponto quatro, publicada em quatorze de julho.
+Esses recursos e o ajuste novo ainda estão fora dela.
+
+O problema começa com uma configuração aparentemente corriqueira.
+A variável que define o diretório do Codex permite escolher outro lugar para guardar seu estado.
+No cenário documentado pelo projeto, essa mudança podia fazer o login da conta gravar um token de renovação em texto puro.
+Fora da gestão de credenciais, inclusive na pasta de trabalho sincronizada com o host.
+Esse token serve para renovar o acesso da conta.
+A proteção interrompe esse caminho e pede para remover a variável.
+Se você está testando esse modo ainda não lançado, mantenha a localização gerenciada.
+O bloqueio vale para essa configuração com keyring.
+Em outros ambientes, mudar o diretório do Codex continua sendo uma escolha à parte.
+O modelo de confiança do projeto descreve a sincronização da pasta de trabalho como o canal mais amplo da máquina virtual para o host.
+Conteúdo, nomes de arquivos e links simbólicos produzidos dentro da V M são tratados como não confiáveis quando voltam.
+A V M separa a execução, mas tem uma passagem deliberada para devolver o trabalho.
+É por ali que um arquivo de credencial pode virar mais uma alteração do projeto.
+
+Também é preciso distinguir os dois modos de autenticação.
+No proxy opcional, as chaves de acesso às interfaces dos modelos suportados ficam no host.
+A V M recebe um token de capacidade por instância.
+No modo de conta ChatGPT, a credencial renovável fica no keyring dentro da V M.
+Uma máquina virtual comprometida ainda pode usar ou extrair essa credencial quando o cofre puder ser desbloqueado.
+Essa descrição de segurança vem do próprio projeto.
+Não houve uma auditoria independente de isolamento nas fontes usadas aqui.
+O ajuste fecha o caminho documentado que levava o token em texto puro para um diretório não gerenciado.
+A credencial autorizada para uso dentro da máquina virtual continua fazendo parte do estado dela.
+Ao avaliar um ambiente desses para agentes, confira onde o login guarda seus dados e o que a sincronização traz de volta.
+Descartável descreve a V M. Um arquivo que já voltou para o host tem outros planos.
+As fontes são o projeto [K UW1 P], a correção do caminho alternativo de credenciais, seu modelo de confiança e o changelog de sete de setembro.
+
+Destaques rápidos para hoje.
+A OpenAI relata mais de seiscentos dólares por dia em inferência para o pesquisador mediano em uso de agentes.
+Essa conta usa preços de [EY1 P IY1 AY1].
+O relatório de seis de setembro retrata meados de agosto.
+Inclui integrantes da organização de pesquisa que trabalham com infraestrutura, gestão de projetos e suporte, com cobertura incompleta do uso.
+O valor estima o consumo pelos preços de [EY1 P IY1 AY1].
+Não mede a despesa interna efetiva nem um ganho equivalente de produtividade.
+A própria empresa aponta gargalos e dificuldade para converter métricas de código e experimentos em progresso de pesquisa.
+No orçamento dos seus agentes, eu manteria consumo e resultado em colunas separadas.
+A fonte é o relatório da OpenAI sobre aceleração da pesquisa, com a visão de dentro da empresa.
+
+O "Engrim" adicionou acesso entre assistentes e rótulos de origem à memória local de projetos.
+O commit de sete de setembro, identificado como versão um ponto três ponto zero, amplia integrações.
+Também registra de qual agente veio uma entrada no banco de dados local.
+Você pode recuperar decisões selecionadas ao trocar de assistente, em vez de depender de uma única conversa.
+O rótulo é metadado de origem, em alguns casos inferido do nome declarado pelo cliente.
+A autoria não é autenticada, e a memória ainda precisa ser conferida para saber se todas as restrições sobreviveram.
+As fontes são o commit de suporte entre agentes e a documentação do projeto Engrim.
