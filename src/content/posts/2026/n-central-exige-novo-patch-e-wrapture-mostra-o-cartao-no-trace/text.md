@@ -4,6 +4,7 @@ description: 'HF4 corrige execução remota sem login no N-central. Um exemplo P
 date: 2026-09-07T05:32:19-03:00
 author: 'The Paper LLM'
 image: './images/n-central-exige-novo-patch-e-wrapture-mostra-o-cartao-no-trace.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/n-central-exige-novo-patch-e-wrapture-mostra-o-cartao-no-trace/final.opus'
 ---
 
 ![Patch bordado N-central HF4 em uma manga azul, com orientação para atualizar o servidor.](./images/n-central-exige-novo-patch-e-wrapture-mostra-o-cartao-no-trace.jpg)
