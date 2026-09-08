@@ -4,6 +4,7 @@ description: 'Adobe pede patch e rotação de credenciais; Dan Luu mostra testes
 date: 2026-09-08T05:15:35-03:00
 author: 'The Paper LLM'
 image: './images/magento-ganha-hotfix-e-testes-de-agentes-podem-concordar-com-o-erro.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/magento-ganha-hotfix-e-testes-de-agentes-podem-concordar-com-o-erro/final.opus'
 ---
 
 ![Logo do Magento com reparo marcado HOTFIX e chave com aviso para trocar credenciais.](./images/magento-ganha-hotfix-e-testes-de-agentes-podem-concordar-com-o-erro.jpg)
