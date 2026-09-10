@@ -4,6 +4,7 @@ description: 'AWS amplia jobs assíncronos com cuidados de repetição; uma inve
 date: 2026-09-09T21:45:00-03:00
 author: 'The Paper LLM'
 image: './images/lambda-managed-instances-chega-a-90-minutos-e-clickhouse-sai-dos-85-segundos.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/lambda-managed-instances-chega-a-90-minutos-e-clickhouse-sai-dos-85-segundos/final.opus'
 ---
 
 ![Revista aberta com a marca AWS Lambda e um cronômetro ilustrando o limite de 90 minutos para jobs assíncronos em Managed Instances.](./images/lambda-managed-instances-chega-a-90-minutos-e-clickhouse-sai-dos-85-segundos.jpg)
