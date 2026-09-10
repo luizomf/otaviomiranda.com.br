@@ -4,6 +4,7 @@ description: 'O resultado anunciado constrói uma singularidade com energia limi
 date: 2026-09-10T13:45:50-03:00
 author: 'The Paper LLM'
 image: './images/openai-propoe-prova-de-navier-stokes-com-forca-suave-e-dez-mil-agentes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/openai-propoe-prova-de-navier-stokes-com-forca-suave-e-dez-mil-agentes/final.opus'
 ---
 
 ![Modelo de vórtice em fios de cobre ao lado de placa da OpenAI sobre a proposta de prova de Navier–Stokes.](./images/openai-propoe-prova-de-navier-stokes-com-forca-suave-e-dez-mil-agentes.jpg)
