@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "node scripts/check_css_tokens.mjs && astro check && astro build && node scripts/check_social_meta.mjs",
+    "build": "node scripts/check_search_index.mjs --prepare && node scripts/check_css_tokens.mjs && astro check && astro build && node scripts/check_search_index.mjs && node scripts/check_social_meta.mjs",
+    "test:search": "node --test scripts/test_search_index.mjs",
     "lint": "astro check && prettier --check --config .prettierrc.json \"AGENTS.md\" \"PLAN.md\" \"README.md\" \"astro.config.mjs\" \"package.json\" \".github/**/*.{yml,yaml}\" \"public/**/*.{css,js}\" \"scripts/**/*.{js,mjs,ts}\" \"src/**/*.{astro,ts,js,mjs,md,mdx,html,css,json}\"",
     "lint:fix": "prettier --write --ignore-path NUL --config .prettierrc.json \"AGENTS.md\" \"PLAN.md\" \"README.md\" \"astro.config.mjs\" \"package.json\" \".github/**/*.{yml,yaml}\" \"public/**/*.{css,js}\" \"scripts/**/*.{js,mjs,ts}\" \"src/**/*.{astro,ts,js,mjs,md,mdx,html,css,json}\"",
     "preview": "astro preview",
@@ -26,10 +27,16 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "astro": "^7.0.6",
-    "astro-pagefind": "^2.0.1",
+    "astro-pagefind": "2.0.1",
+    "pagefind": "1.5.0",
     "typescript": "^5.9.3"
   },
+  "overrides": {
+    "pagefind": "1.5.0",
+    "@pagefind/component-ui": "1.5.0"
+  },
   "dependencies": {
+    "@pagefind/component-ui": "1.5.0",
     "@astrojs/markdown-remark": "^7.2.1",
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",

@@ -35,7 +35,19 @@ npm run dev        # dev server
 npm run build      # production build
 npm run preview    # preview the build locally
 npm run lint       # Astro check + Prettier
+npm run test:search # search-output guard fixtures
 ```
+
+The production build removes only the previous `dist/pagefind` output before
+building, then checks the generated browser bundle, entry manifest, language
+metadata/WASM, and nonempty index/fragments. A successful Astro exit alone does
+not establish a working search build. Missing search output fails the build; it
+must not be replaced with placeholder files or silently disabled.
+
+Pagefind and its browser component are pinned to `1.5.0`: the `1.5.2` Linux
+ARM64 binary aborts on 16 KiB kernel pages. Keep the wrapper, platform binaries,
+and UI aligned in the lockfile. Test both the Node API and real index generation
+on a 16 KiB host before lifting this compatibility pin.
 
 ---
 
