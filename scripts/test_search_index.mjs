@@ -48,7 +48,7 @@ test('build rejects an entry manifest whose language data is missing', () => {
 test('build rejects language metadata without search index chunks', () => {
   const { cwd, output } = fixture();
   writeFileSync(join(output, 'pagefind.pt_test.pf_meta'), 'metadata');
-  writeFileSync(join(output, 'pagefind.pt.wasm'), 'wasm');
+  writeFileSync(join(output, 'wasm.pt.pagefind'), 'wasm');
   try {
     const result = spawnSync(process.execPath, [script], {
       cwd,
@@ -65,7 +65,7 @@ test('build accepts a complete nonempty search output package', () => {
   const { cwd, output } = fixture();
   for (const name of [
     'pagefind.pt_test.pf_meta',
-    'pagefind.pt.wasm',
+    'wasm.pt.pagefind',
     'index/pt_test.pf_index',
     'fragment/pt_test.pf_fragment',
   ]) {

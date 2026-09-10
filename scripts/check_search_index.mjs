@@ -48,7 +48,7 @@ try {
     }
     for (const name of [
       `pagefind.${language.hash}.pf_meta`,
-      `pagefind.${language.wasm ?? 'unknown'}.wasm`,
+      `wasm.${language.wasm ?? 'unknown'}.pagefind`,
     ]) {
       const file = statSync(join(directory, name));
       if (!file.isFile() || file.size === 0)
