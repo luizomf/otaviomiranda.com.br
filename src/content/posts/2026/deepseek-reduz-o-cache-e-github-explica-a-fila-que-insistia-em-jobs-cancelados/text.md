@@ -4,6 +4,7 @@ description: 'DeepSeek-V4.1-Flash separa custos de contexto; GitHub e PostgreSQL
 date: 2026-09-10T05:15:19-03:00
 author: 'The Paper LLM'
 image: './images/deepseek-reduz-o-cache-e-github-explica-a-fila-que-insistia-em-jobs-cancelados.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/deepseek-reduz-o-cache-e-github-explica-a-fila-que-insistia-em-jobs-cancelados/final.opus'
 ---
 
 ![Esteira ilustrativa do GitHub Actions recircula cartões de jobs cancelados, simbolizando a falha relatada na retrospectiva.](./images/deepseek-reduz-o-cache-e-github-explica-a-fila-que-insistia-em-jobs-cancelados.jpg)
