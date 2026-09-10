@@ -1,0 +1,242 @@
+DeepSeek reduz o cache, e "Git Hub" explica a fila que insistia em jobs cancelados.
+
+Você entrega um contexto enorme ao agente e fica esperando a resposta.
+Antes da primeira palavra, o modelo já tem bastante serviço: processar tudo aquilo que recebeu.
+O novo DeepSeek V quatro ponto um Flash separa esse processamento da geração e promete guardar menos estado de atenção.
+Para quem mantém conversas longas, interessa. Só confira qual memória diminuiu antes de abrir a calculadora.
+Parâmetros ativos, cache e pesos completos aparecem na mesma ficha, mas cada um cobra sua parte da conta.
+
+O DeepSeek V quatro ponto um Flash separa o custo de ler do custo de responder.
+A DeepSeek publicou o modelo com entrada de imagem e texto, saída em texto e contexto de até um milhão de tokens.
+O repositório público foi criado no fim de nove de setembro, no horário de São Paulo. Os pesos têm licença M I T.
+A arquitetura separa etapas do processamento e combina mecanismos para reduzir o estado guardado durante a inferência.
+
+A espera começa no processamento do prompt recebido, chamado de "prefill".
+Depois vem a geração dos tokens seguintes, o "decode".
+Um agente que recebe muito contexto pode gastar recursos consideráveis antes de escrever qualquer coisa.
+A arquitetura causal de codificador e decodificador tem vinte camadas de cada lado.
+Segundo a DeepSeek, ela ativa oito bilhões de parâmetros por token no processamento da entrada e dezesseis bilhões na geração.
+
+A palavra que merece atenção aí é ativos. Esses números descrevem computação por token.
+O conjunto principal tem quinhentos e cinquenta e dois bilhões de parâmetros.
+A ficha lista mais cento e noventa e seis bilhões no mecanismo de memória condicional chamado Engram.
+É esse acervo completo que entra na conversa sobre armazenamento e download.
+Os oito bilhões ativos, sozinhos, não demonstram que o modelo caiba numa G P U doméstica.
+
+Outra parte da conta é o cache K V, o estado de atenção que a geração guarda para reaproveitar computação anterior.
+A DeepSeek descreve um mecanismo chamado C S A dois.
+Ele compartilha estado relacionado ao cache e índices de atenção esparsa entre camadas.
+Com o armazenamento principal de K V em F P quatro, a empresa informa oitocentos e noventa bytes por token de cache global.
+Isso dá aproximadamente um quarto do DeepSeek V quatro Flash.
+
+Já o mecanismo chamado "SWA Bounded Replay" reconstrói o estado recente da atenção por janela deslizante.
+Em vez de persistir esse estado em S S D, ele o reconstrói.
+Nesse caso, a DeepSeek relata uma ocupação de aproximadamente um oitavo da versão anterior para o cache K V persistente.
+São duas economias em componentes distintos: um quarto do cache global e um oitavo do persistente.
+As proporções não se multiplicam.
+Os ganhos reportados pela empresa ficam nesses componentes.
+A redução da memória RAM total, da latência de ponta a ponta e da conta de inferência precisa de medição própria.
+E os pesos precisam entrar no orçamento.
+
+Na integração, tem um detalhe menos vistoso que os bilhões e bem capaz de ocupar sua tarde.
+O lançamento não traz um template de chat no formato Jinja. A DeepSeek fornece um codificador de referência em Python.
+O projeto "deepseek-recipe" oferece bibliotecas Rust com integração para Python, voltadas à conversão e à interpretação do protocolo.
+Inferência, execução de ferramentas e transporte H T T P ficam por sua conta.
+Antes de copiar um comando de servidor, confira se ele entende essa codificação.
+O modelo veio com bilhões de parâmetros e algumas pontas para você ligar.
+
+Eu avaliaria esse lançamento medindo separadamente o processamento da entrada, a geração, o estado persistido e o armazenamento dos pesos.
+Para um agente com muito contexto, a pergunta útil é onde, na sua carga, essa arquitetura poupa trabalho.
+As fontes são a ficha oficial da DeepSeek e os metadados do repositório na "Hugging Face".
+
+O "Git Hub" recuperou capacidade e ainda precisava se livrar dos jobs revogados.
+O servidor volta a ter espaço, mas a fila continua entregando trabalho que já perdeu a validade.
+No relatório de disponibilidade de agosto, publicado em nove de setembro, o Git Hub conta como isso prolongou a recuperação do Actions.
+Os jobs revogados continuavam chegando aos runners, os executores das tarefas.
+
+Já falamos da tempestade de novas tentativas no serviço de tokens de dezessete de agosto.
+Desta vez, o relato detalha uma falha de seis de agosto e um atraso de status do agente de nuvem do Copilot no dia vinte.
+É a explicação recém-publicada de incidentes passados, sem indicação de indisponibilidade nesta manhã.
+
+No dia seis, a troca de pods durante um deploy de rotina reduziu temporariamente a capacidade.
+Os locais restantes ultrapassaram seus limites.
+Segundo a empresa, a reversão do deploy confirmou que a causa era a capacidade perdida durante a substituição, e não o conteúdo publicado.
+Os processos auxiliares da malha de serviços sofreram limitação de C P U e reinícios por falta de memória.
+Daí vieram falhas em cascata de cache, D N S e chamadas de [EY1 P IY1 AY1] entre clusters.
+Na recuperação, apareceu um bug que já existia na atribuição de trabalho.
+Os runners recebiam jobs revogados, tentavam novamente e bloqueavam trabalho válido.
+A infraestrutura recuperava o fôlego. A fila continuava insistindo no que já devia ter terminado.
+
+O Git Hub precisou aumentar a capacidade e limitar a entrada de webhooks.
+Também corrigiu a aquisição de jobs inválidos, drenou filas e elevou limites internos de requisições.
+Alguns runners gerenciados pelos próprios clientes exigiram recuperação manual. Alguns eventos tiveram de ser disparados novamente.
+A recuperação automática dos runners A R C afetados ainda aparece como trabalho futuro no relatório.
+
+Para quem desenha filas, a regra é bem concreta: a atribuição precisa rejeitar trabalho cuja revogação já é definitiva.
+Esperar mais entre tentativas não devolve validade a um job cancelado.
+Reverter o deploy também deixa para você a limpeza do trabalho inválido acumulado.
+Dá para consertar a entrada e continuar servindo o estoque estragado.
+
+No incidente de vinte de agosto, as tarefas do agente de nuvem do Copilot continuavam executando e terminando.
+Quem ficava para trás era a publicação dos status e resultados, com atrasos de sessenta a noventa minutos em alguns casos.
+Segundo o Git Hub, nenhum trabalho de tarefa foi perdido nesse incidente.
+Uma indisponibilidade do banco gerenciado aumentou a latência.
+As partições fixas do processamento em streaming não absorveram esse aumento.
+E uma configuração de armazenamento dificultou a troca para a instância de recuperação.
+O trabalho estava concluído antes que o usuário conseguisse enxergar isso.
+
+Se você mantém um ambiente de execução de agentes, acompanhe três etapas separadamente.
+A execução, a persistência do resultado e a publicação do status.
+Como cuidado de projeto, reexecutar uma tarefa só porque o painel está atrasado pode repetir efeitos.
+O Git Hub não relata duplicação nesse caso.
+Antes de apertar tentar de novo, descubra qual etapa ficou para trás.
+
+A empresa também mudou o monitoramento de pull requests.
+Falhas ao integrar mudanças, revisar e comentar passam a ser medidas separadamente.
+Um volume grande de leituras bem-sucedidas podia esconder um caminho de escrita quebrado.
+O painel estava recebendo votos demais de quem só veio olhar.
+A fonte é o relatório de disponibilidade de agosto de 2026 do Git Hub.
+
+O Postgri [EH1 S] [K Y UW1] [EH1 L] pode aceitar a assinatura e deixar a replicação sem lugar para avançar.
+O comando de criação terminou com sucesso. Beleza. Os dados estão chegando?
+Uma investigação de Christophe Pettus, publicada em nove de setembro, mostra essa separação na versão dezoito do banco.
+Uma assinatura de replicação lógica pode ser criada enquanto o processo que aplica as mudanças falha repetidamente.
+Falta capacidade para registrar progresso.
+
+Ontem, o assunto era o orçamento de memória de manutenção.
+Agora o limite é um parâmetro introduzido na versão dezoito, que controla quantas origens de replicação podem ter seu progresso acompanhado ao mesmo tempo.
+O valor padrão é dez. O nome exato do parâmetro e das estruturas de consulta está no artigo escrito.
+Na replicação lógica, um publicador envia mudanças e um assinante as aplica.
+A origem identifica de onde elas vieram.
+Seu estado de progresso registra até onde o processamento chegou, inclusive para reconstruir essa posição na recuperação.
+Cadastrar essa identidade no catálogo é uma etapa.
+Conseguir espaço na memória compartilhada para acompanhar seu avanço é outra.
+
+O experimento esbarra justamente nessa separação.
+Segundo Pettus, o comando de criar assinatura grava a definição no catálogo e pode retornar sucesso.
+Depois, o processo que aplica as mudanças tenta obter uma entrada de acompanhamento.
+Ele falha por falta de espaço e é iniciado novamente.
+A configuração foi aceita. O processo é que vai descobrir a falta de lugar quando chegar para trabalhar.
+
+Reservar uma entrada por assinatura também pode ser pouco.
+No teste do autor, o limite era dois e havia duas assinaturas.
+Os processos de aplicação conseguiram suas entradas, mas a cópia inicial da segunda assinatura ficou sem terminar.
+O processo de sincronização precisava de outra origem. A tabela continuou marcada no estado de cópia dos dados.
+Por isso, a documentação pede capacidade para as assinaturas mais uma reserva para sincronização de tabelas.
+O tamanho da reserva depende da sincronização concorrente permitida e dos processos disponíveis.
+Contar só as assinaturas deixa de fora o trabalho de colocá-las em dia no início.
+
+Depois da criação, confira os erros dos processos e o progresso das tabelas.
+A consulta de status das origens mostra o estado de progresso acompanhado ativamente. O catálogo registra a identidade.
+E reserve uma janela de reinício: esse parâmetro só muda na inicialização do servidor, não ao recarregar a configuração.
+Segundo o manual, configurar um valor inferior ao número de origens já acompanhadas impede a inicialização.
+
+Pettus encontrou ainda uma armadilha na réplica física, que também reproduz registros de origens.
+No relato, uma réplica com capacidade insuficiente consegue iniciar e atender consultas.
+Ela para quando a reprodução do log de mudanças chega a uma origem que não consegue acompanhar.
+O teste de conexão passa, e o problema está esperando mais adiante no log.
+O autor recomenda aumentar a capacidade nas réplicas físicas antes de aumentá-la no primário.
+Para reduzir, o caminho é inverso: primeiro o primário.
+Essa é uma orientação da investigação, sem anúncio de patch ou de falha de segurança.
+Planeje a ordem e os reinícios junto com a capacidade de sincronização.
+No fim, confira a replicação avançando. É ali que você descobre se o sucesso do [EH1 S] [K Y UW1] [EH1 L] chegou até os dados.
+As fontes são a investigação de Christophe Pettus e a documentação de configuração de replicação da versão dezoito do Postgri [EH1 S] [K Y UW1] [EH1 L].
+
+A Cognition fatora R S A duzentos e sessenta com agentes, G P Us e bastante direção humana.
+Encontrar dois números cujo produto seja um inteiro enorme pode dar um trabalho danado.
+Conferir a multiplicação depois é bem mais simples.
+Eric Lu publicou em nove de setembro os fatores do desafio e contou como usou sessões do Devin para adaptar uma implementação existente a G P Us.
+Multiplicar os fatores publicados produz o número apresentado.
+Já o tempo, os recursos e a participação dos agentes vêm do relato de Lu.
+
+O duzentos e sessenta do nome significa duzentos e sessenta dígitos decimais, não uma chave de duzentos e sessenta bits.
+O cálculo ocorreu entre dezoito de agosto e três de setembro.
+Segundo Lu, o trabalho não afeta de maneira significativa o R S A de dois mil e quarenta e oito bits.
+Ele descreve engenharia de desempenho sobre um algoritmo existente, sem avanço algorítmico relevante.
+
+A base foi o CADO N F S, implementação aberta do algoritmo de fatoração conhecido como G N F S.
+Lu e os agentes modificaram bastante esse fluxo para executar computação nas G P Us.
+A infraestrutura existente já entregava algoritmos definidos, interfaces entre etapas e uma implementação de referência em C P U.
+Isso dava aos agentes partes separadas para otimizar e saídas para comparar.
+A versão nova precisava chegar ao mesmo resultado da referência por outro caminho.
+Se você usa agentes na equipe, aí está um ponto de partida: delimitar cada trabalho e dar a ele um resultado verificável.
+Faça tudo ficar mais rápido ainda deixa muita coisa para o otimismo do agente resolver.
+
+O volume de computação foi grande.
+Lu estima aproximadamente quatro mil e novecentos dias de G P U, avaliados em cerca de quatrocentos mil dólares a preços de mercado.
+Esses dias somam uso de máquinas, em vez de medir dias de calendário.
+O autor diz que o projeto ocupou capacidade ociosa ou fragmentada do cluster, sem custo marginal para ele.
+A disponibilidade veio das sobras. A estimativa de mercado dá uma ideia do valor econômico delas.
+Estava sobrando continua sendo uma descrição curiosa para quatrocentos mil dólares de computação.
+
+Nem toda etapa aproveitava essas sobras do mesmo jeito.
+O peneiramento tinha muitas unidades independentes, que podiam ser interrompidas.
+Mais adiante, a álgebra linear exigia processos coordenados e sofria mais quando os recursos eram retirados.
+Organizar a carga conforme sua tolerância à interrupção fez parte do trabalho.
+
+E o humano ficou fazendo o quê?
+Lu aponta a organização de medições, testes de desempenho e estimadores comparáveis como provavelmente sua maior contribuição.
+Também dirigia os objetivos e a distribuição de recursos, e relata milhares de mensagens humanas ao longo das sessões.
+Ele próprio descarta a descrição de uma iteração autônoma de ponta a ponta.
+O código de referência e as interfaces estáveis permitiram delegar implementação.
+A régua comum permitiu escolher o que merecia continuar.
+Eu levaria essas duas condições para um projeto com agentes antes de abrir mais sessões.
+Se cada um mede progresso de um jeito, você ganha uma sala cheia de otimistas e ainda precisa descobrir qual código ficou melhor.
+A fonte é o relato de Eric Lu sobre a fatoração, publicado pela Cognition.
+
+Agora, os destaques rápidos para hoje.
+O C R A começa a exigir notificações amanhã, onze de setembro.
+A Comissão Europeia confirma a obrigação para fabricantes de produtos abrangidos pela lei, no mercado da União Europeia.
+Eles devem reportar vulnerabilidades ativamente exploradas e incidentes graves de segurança do produto.
+Depois de tomar conhecimento, os prazos são de vinte e quatro horas para o alerta inicial e setenta e duas horas para a notificação completa.
+A preparação já apareceu por aqui em maio. Amanhã começa a aplicação dessa obrigação existente.
+As obrigações gerais ficam para onze de dezembro de 2027.
+Se sua equipe fornece um produto coberto, defina quem responde pela notificação e o caminho até a plataforma.
+A regra não abrange todo bug nem todo repositório de código aberto.
+As fontes são as páginas da Comissão Europeia sobre notificações, escopo e datas do C R A.
+
+O "ShieldCrash" publica uma prova de leitura de arquivos com autoridade de sistema no Windows.
+O pesquisador "MSNightmare" afirma contornar a correção do "ShieldBreak" em Windows com patches de setembro.
+A demonstração descrita no repositório é de leitura arbitrária de arquivos com autoridade SYSTEM.
+A prova completa de obtenção dessa autoridade, com execução de comandos arbitrários, fica como possibilidade futura.
+Na cobertura de dez de setembro, a "SecurityWeek" informa que pediu uma resposta à Microsoft.
+Para defesa, acompanhe a divulgação e a orientação do fornecedor.
+Essas fontes ainda não estabelecem confirmação independente do novo contorno da correção, evidência de exploração ativa ou nova versão corrigida.
+As fontes são o repositório do pesquisador e a cobertura da SecurityWeek sobre a divulgação e os limites da prova.
+
+O V S Code um ponto cento e trinta e sete traz uma prévia de tarefas recorrentes com agentes.
+A versão de nove de setembro permite habilitar a configuração de automações do chat e configurar "Automations" na janela "Agents".
+Você pode usar um modelo de tarefa ou um prompt próprio.
+As tarefas podem rodar sob demanda, a cada hora, diariamente ou semanalmente.
+Dá para experimentar resumos de mudanças e triagem de issues sem digitar o mesmo pedido toda vez.
+O recurso está em prévia, com distribuição gradual.
+A fonte são as notas oficiais dessa versão do V S Code.
+
+O Kubernetes um ponto trinta e sete dá nomes comuns ao estado de manutenção dos nós.
+Na explicação oficial de nove de setembro, condições como manutenção em andamento permitem que controladores e painéis publiquem o que está acontecendo.
+Nesta versão, nenhum componente central lê essas condições para agir.
+A opção alpha chamada "NodeLifecycleConditions" vem desligada, não tem efeito e nem precisa ser habilitada para publicar os sinais.
+Continue usando os mecanismos de cordon, drain e taints para controlar agendamento e remoção de cargas.
+Quem administra ou controla o nó deve definir e limpar o status.
+A placa de em manutenção ganhou padronização. Alguém ainda precisa fazer a manutenção.
+A fonte é a explicação oficial do Kubernetes sobre as condições do ciclo de vida dos nós.
+
+O "Fortunate Recall" dá prazo e substituição explícita às memórias de agentes.
+O preprint de nove de setembro aplica regras determinísticas para substituir, expirar e retirar informações.
+Essas regras usam metadados extraídos por um modelo.
+Mudou para Londres pode substituir uma residência. Pensa em se mudar pede outro tratamento.
+Para quem constrói agentes, é um ciclo de vida das notas salvas para experimentar, separado do cache de inferência do DeepSeek.
+A avaliação é dos próprios autores, e a extração continua decisiva.
+Uma chave de substituição errada pode desativar informação ainda válida.
+A fonte é o preprint Fortunate Recall, com a proposta e suas limitações.
+
+O [EY1 P IY1 AY1] Gateway amplia e redireciona logs de execução de interfaces REST.
+O anúncio da A W S de nove de setembro permite entregar esses logs a "CloudWatch Logs", S três ou "Firehose".
+Os eventos podem ter até um megabyte, em vez do truncamento anterior em um kilobyte.
+Revise painéis e alarmes antes de ativar.
+O grupo automático antigo para de receber logs, salvo se for mantido como destino.
+A configuração dos métodos continua determinando o conteúdo emitido.
+E habilitar o rastreamento dos dados pode incluir informações sensíveis dos pedidos e respostas.
+A mudança vale para logs de execução de interfaces REST, não para todos os logs do [EY1 P IY1 AY1] Gateway.
+A fonte é o anúncio da A W S sobre os novos destinos para logs de execução.
+Cabe mais diagnóstico no evento. Confira o que mais vai junto.
