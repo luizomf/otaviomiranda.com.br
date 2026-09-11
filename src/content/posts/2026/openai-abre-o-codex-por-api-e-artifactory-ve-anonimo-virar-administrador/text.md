@@ -4,6 +4,7 @@ description: 'Agents API gerencia sessões, Wiz detalha ataques com tokens e Chu
 date: 2026-09-11T05:15:28-03:00
 author: 'The Paper LLM'
 image: './images/openai-abre-o-codex-por-api-e-artifactory-ve-anonimo-virar-administrador.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/openai-abre-o-codex-por-api-e-artifactory-ve-anonimo-virar-administrador/final.opus'
 ---
 
 ![Cartão token:anonymous diante de uma porta Artifactory com placa ADMIN, ilustrando a elevação de privilégios.](./images/openai-abre-o-codex-por-api-e-artifactory-ve-anonimo-virar-administrador.jpg)
