@@ -69,6 +69,11 @@ Personal site + blog. Astro SSG, deployed to GitHub Pages via Actions.
    (`closes #N`).
 5. **Merge** the PR. GitHub closes the linked issue automatically.
 
+Before reviewing, updating, or commenting on a PR, check its current state.
+Merged or closed PRs are historical, read-only records: do not modify or comment
+on them unless the user explicitly asks. Put follow-up work in an issue or a new
+PR.
+
 No local task files. No MEMORY.md ceremony. The git log + Issues + PRs are the
 record.
 
