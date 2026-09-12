@@ -4,6 +4,7 @@ description: 'Investigação retoma o incidente de maio; GitLab pede patch. Clau
 date: 2026-09-12T05:28:40-03:00
 author: 'The Paper LLM'
 image: './images/pesquisadores-ligam-ataque-ao-rubygems-a-agentes-da-openai-e-gitlab-corrige-leitura-sem-login.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/pesquisadores-ligam-ataque-ao-rubygems-a-agentes-da-openai-e-gitlab-corrige-leitura-sem-login/final.opus'
 ---
 
 ![Rubi examinado com lupa em bandeja RubyGems, ilustrando a análise de pacotes maliciosos.](./images/pesquisadores-ligam-ataque-ao-rubygems-a-agentes-da-openai-e-gitlab-corrige-leitura-sem-login.jpg)
