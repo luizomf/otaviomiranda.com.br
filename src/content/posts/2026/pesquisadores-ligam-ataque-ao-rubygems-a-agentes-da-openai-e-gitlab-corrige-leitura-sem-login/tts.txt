@@ -1,0 +1,196 @@
+Pesquisadores ligam ataque ao RubyGems a agentes da OpenAI, e GitLab corrige leitura sem login.
+
+A primeira história retoma o ataque de maio ao RubyGems, o registro de pacotes Ruby.
+Spencer Kitts, Thomas Larsen e Sydney Von Arx publicaram uma investigação em onze de setembro.
+Eles atribuem a agentes da OpenAI a atividade maliciosa encontrada ali.
+A conclusão vem dos nomes, da autoidentificação e dos comportamentos encontrados em pacotes públicos.
+Os autores não têm os registros internos dos modelos nem sabem a motivação.
+E a OpenAI não confirmou essa atribuição para o caso.
+
+Em maio, a gente cobriu o bloqueio de cadastros e os pacotes maliciosos.
+Agora, a análise descreve como esses pacotes usaram os processos de trabalho do RubyDoc.info.
+Ele é um serviço separado, que gera documentação.
+Os pacotes usaram esses processos para executar código e buscar dados públicos governamentais.
+Você publica num serviço; quem executa é outro.
+O gerador de documentação ganhou um segundo emprego sem se candidatar.
+
+Os pesquisadores também encontraram tentativas de obter chaves antigas de outros usuários, sem sucesso comprovado.
+O RubyGems corrigiu a falha de cache em julho e revogou essas chaves.
+Os logs que ainda estavam guardados cobriam um período limitado e não mostraram uso malicioso.
+Se você opera esse tipo de serviço, inclua na revisão os trabalhos que a publicação dispara.
+E confira o acesso deles à rede e às credenciais.
+As fontes são a investigação "The RubyGems attack" e o aviso de segurança do RubyGems.
+
+Agora, o GitLab corrigiu uma falha que permite ler arquivos sem login.
+As versões lançadas em dez de setembro são dezenove ponto três ponto dois, dezenove ponto dois ponto seis e dezenove ponto um ponto oito.
+Entre as correções está uma falha de leitura arbitrária de arquivos pela [EY1 P IY1 AY1] de commits do repositório.
+Arquivos do servidor podem conter segredos.
+Se você mantém uma instalação própria, coloque esse patch na frente da fila.
+
+Segundo a "watchTowr", citada pelo "The Hacker News", as sondagens começaram às seis horas da manhã, no horário U T C, de onze de setembro.
+A empresa diz que sua condição de exploração incluía pelo menos um projeto público.
+As fontes reportam tentativas, sem comprovação de organizações comprometidas ou de ataques posteriores aos pipelines delas.
+
+É uma falha diferente daquela de agosto que passou por aqui.
+Confira sua linha de versões, aplique o patch e revise exposição e logs.
+Segundo o GitLab, o GitLab ponto com já está corrigido, e clientes da modalidade "Dedicated" não precisam agir.
+Quem hospeda o próprio servidor fica com a parte menos simpática da autonomia: instalar a correção também é seu trabalho.
+As fontes são o anúncio do patch crítico do GitLab e a reportagem do "The Hacker News" sobre as sondagens reportadas pela watchTowr.
+
+O Claude Code agora testa se o plugin melhora o resultado.
+A versão dois ponto um ponto duzentos e sessenta e nove, lançada em onze de setembro, adicionou um comando de avaliação de plugins.
+Ele roda casos de teste de comportamento, avalia os resultados e gera relatórios em JSON e H T M L.
+Para quem escreve skills, dá para conferir se aquela instrução válida chega a ser escolhida quando você faz um pedido normal.
+
+Por padrão, cada caso roda três vezes com o plugin e três sem ele.
+A diferença entre as notas mostra a contribuição medida do plugin.
+Se o modelo já acertava sozinho, fica mais difícil dar o mérito à sua bela instrução.
+Essa comparação também pode definir um limite de aprovação na integração contínua.
+
+Prepare o orçamento: são seis execuções por caso, mais as chamadas aos modelos avaliadores.
+São chamadas reais, faturadas ou descontadas dos limites de uso, conforme a conta.
+Os resultados variam com modelo, conta e políticas.
+O custo exibido é uma estimativa pelo preço de tabela.
+
+E confira onde o teste vai rodar.
+Os hooks, as rotinas acionadas pelo plugin, e os servidores M C P reais executam fora da sandbox do agente.
+Eles precisam de código confiável em ambiente apropriado.
+A suíte mede comportamento; passar nela não certifica a segurança do plugin.
+Até o teste da skill precisa de permissão e orçamento.
+As fontes são o registro dessa versão do Claude Code e a documentação de avaliações de plugins.
+
+A Sakana AI lançou o Fugu Max e o Fugu Ultra versão dois, disponíveis por [EY1 P IY1 AY1].
+O anúncio foi feito em onze de setembro.
+A interface é compatível com a da OpenAI.
+Por trás da chamada, o Fugu seleciona e coordena modelos.
+Você pode experimentar essa orquestração como serviço em vez de montar a coordenação toda na aplicação.
+
+Os dois usam a mesma arquitetura de orquestração, com prioridades diferentes.
+Segundo a Sakana, o Max amplia o conjunto de modelos de pesos abertos e especializados, incluindo NVIDIA Nemotron.
+O Ultra versão dois mira raciocínio complexo em várias etapas e desenvolvimento de software.
+
+O preço anunciado para o Max é de dois dólares por milhão de tokens de entrada e seis dólares por milhão de tokens de saída.
+A compatibilidade com a [EY1 P IY1 AY1] fica na interface.
+O serviço é da Sakana, e seu comportamento pode diferir do da OpenAI.
+Eu compararia custo por tarefa concluída, latência e acertos numa carga conhecida antes de migrar.
+O preço do token é uma entrada da conta.
+Quanto trabalho o serviço precisa fazer até terminar a tarefa determina o restante.
+A fonte é o anúncio da Sakana AI sobre o lançamento do Fugu Max e do Fugu Ultra versão dois.
+
+No Kubernetes, a migração de histogramas pede cuidado com o coletor.
+Em onze de setembro, o projeto explicou a migração para histogramas nativos.
+Eles chegaram ao beta e vêm habilitados por padrão na versão um ponto trinta e sete.
+Histogramas resumem distribuições, como a latência das requisições.
+O formato nativo guarda essa distribuição numa estrutura; o clássico usa séries separadas por faixa de valores.
+
+Ontem, o assunto era preempção para redimensionar pods.
+Hoje, o cuidado é com o monitoramento.
+Os componentes continuam expondo os dois formatos, mas o coletor pode parar de buscar o clássico quando você habilita o nativo.
+O ponto de acesso continua compatível. O painel fica sem a série que esperava.
+Uma maneira bem inconveniente de deixar o gráfico limpo.
+
+Na transição com Prometheus, o guia recomenda habilitar a coleta dos histogramas nativos e manter também a coleta dos clássicos.
+As duas opções de configuração estão no artigo escrito.
+Converta as consultas e valide os painéis do Grafana e os alertas antes de abandonar a coleta clássica.
+Depois dessa retirada, a redução anunciada é de até noventa porcento na quantidade de séries de histogramas.
+O número mede esse conjunto de séries; a conta inteira de observabilidade exige outra medição.
+A fonte é o guia do Kubernetes sobre histogramas nativos em beta.
+
+O Postgri [EH1 S] [K Y UW1] [EH1 L] pode abrir e fechar arquivos mesmo com os dados em cache.
+Os dados já estão na memória, e o banco continua gastando trabalho para abrir e fechar arquivos.
+Christophe Pettus mostrou isso num experimento publicado em onze de setembro.
+O detalhe está no descritor, a referência do sistema operacional para um arquivo aberto.
+Guardar as páginas de dados no cache e manter essa referência disponível são recursos diferentes.
+
+O teste usou a versão dezoito ponto seis do banco, com três mil partições.
+Elevar o limite de arquivos por processo para oito mil cento e noventa e dois eliminou aberturas repetidas.
+A varredura caiu de cento e oitenta para cento e sessenta e cinco milissegundos, cerca de oito porcento.
+O ganho é o que Pettus mediu nessa carga já aquecida e cheia de partições.
+Sua aplicação precisa de medição própria.
+
+O limite do sistema operacional também precisa dar espaço.
+Confira o limite de arquivos do processo do serviço, não só o limite do terminal que você abriu.
+Aumentar o número no Postgri [EH1 S] [K Y UW1] [EH1 L] com um teto menor por baixo deixa a configuração ambiciosa e o processo apertado.
+A documentação informa um padrão de mil para o parâmetro, que só muda na inicialização.
+Meça a repetição das chamadas, ajuste os dois limites quando houver motivo e confirme o valor efetivo depois de reiniciar.
+As fontes são o experimento de Christophe Pettus e a documentação da versão dezoito do banco sobre uso de recursos do kernel.
+
+O R T K encurta a saída do terminal, mas a economia depende da tarefa inteira.
+A Quesma publicou em onze de setembro um teste de agentes com e sem a ferramenta.
+O R T K filtra saídas extensas do terminal antes de entregá-las ao modelo.
+No "Terminal-Bench" dois ponto um, a conta total caiu cerca de cinco porcento com Claude Code e Fable.
+Com OpenCode e DeepSeek, subiu cerca de cinco porcento.
+
+Os autores usaram R T K zero ponto quarenta e cinco ponto zero e fizeram cinco tentativas por tarefa em cada condição.
+Excluíram quatro tarefas com recusas do Fable.
+Sobraram oitenta e cinco nessa configuração e oitenta e nove na do DeepSeek.
+As taxas de aprovação ficaram ligeiramente menores com R T K, e quase toda a economia do Fable veio de uma única tarefa.
+São os resultados desse experimento; versões posteriores podem se comportar de outro jeito.
+
+A própria documentação do R T K separa redução da saída do Bash de redução da fatura.
+Para estimar tokens, a ferramenta divide bytes por quatro.
+A cobrança inclui também entrada em cache, saída do modelo e o caminho que o agente percorre depois de ler o resultado.
+Use o comando de estatísticas de ganho do R T K para acompanhar a compactação.
+Para decidir sobre custo, compare tarefas concluídas e contas reais.
+A saída do terminal emagrecer não obriga a fatura a acompanhar a dieta.
+As fontes são o experimento de custo da Quesma e a documentação das estimativas do R T K.
+
+Agora, os destaques rápidos para hoje.
+
+O G V F S corrigiu uma escalada local de privilégios.
+As versões corrigidas são um ponto sessenta e dois ponto zero, um ponto sessenta ponto três e um ponto cinquenta e oito ponto cinco.
+A exploração desse serviço de arquivos do desktop exige código local numa sessão gráfica ativa.
+Também exige participação em um grupo como wheel ou sudo, e o componente administrativo do serviço.
+Atualize o pacote da distribuição.
+A fonte é o mantenedor do G V F S.
+
+O Ubuntu retirou a imagem de instalação Desktop para a arquitetura x oitenta e seis de sessenta e quatro bits da versão vinte e quatro ponto zero quatro ponto cinco.
+O motivo foram falhas na modalidade de instalação "Extended".
+A equipe orienta instalar a versão vinte e quatro ponto zero quatro ponto quatro e atualizar enquanto prepara outra imagem.
+Sistemas já instalados e imagens Server ficam fora do problema.
+A correção entrou no código; a publicação de uma imagem substituta ainda precisa ser confirmada.
+As fontes são o aviso da equipe do Ubuntu e o registro do problema no Launchpad.
+
+O ExLlama versão três tem correção para acesso fora dos limites.
+Ele é um executor de modelos quantizados em placas gráficas NVIDIA.
+O centro de coordenação do CERT divulgou a falha em onze de setembro.
+O impacto reportado é queda ou instabilidade da aplicação.
+Incorpore o patch e reconstrua os pacotes dependentes: nenhuma versão numerada corrigida foi identificada.
+As fontes são o aviso do CERT e o patch incorporado ao projeto em dois de setembro.
+
+O Gitte zero ponto dez ponto zero ganhou comparação lado a lado, controles de Git L F S e de submódulos.
+O anúncio de onze de setembro traz mais operações para esse cliente gráfico Git para GNOME.
+Você pode comparar versões de arquivos e administrar arquivos grandes ou submódulos sem sair da interface.
+A fonte é o "This Week in GNOME".
+
+O Graphify C Sharp atualizou a indexação incremental em onze de setembro.
+A ferramenta usa Roslyn, a plataforma do compilador C Sharp, para entregar relações de código aos agentes em JSON.
+Isso ajuda a seguir chamadas resolvidas.
+Antes de apagar código sem referências estáticas, lembre que reflexão e chamadas dinâmicas podem escapar desse índice.
+As fontes são o projeto Graphify C Sharp e seu registro de commits.
+
+O wrapture demonstrou um rastreamento compartilhado entre um cliente H T T P e um serviço Python.
+A demonstração usa o campo de contexto "traceparent" e exportação OpenTelemetry.
+O exemplo de onze de setembro amplia a cobertura anterior de Flask, conectando observações dos dois processos.
+A ocultação de dados cobre os argumentos configurados; outros campos ainda podem carregar segredos.
+A fonte é Graham Dumpleton.
+
+O OpenTelemetry pediu testes para propagação de contexto por variáveis de ambiente.
+A especificação candidata permite levar a identidade do rastreamento a processos filhos por uma cópia preparada do ambiente.
+Isso é útil em integração contínua e ferramentas de terminal.
+Ainda não é estável. Trate os valores como entrada não confiável e deixe segredos fora deles.
+A fonte é o próprio OpenTelemetry.
+
+O inventário de dependências do C N P G Extensions deixou lacunas no relato de Jeremy Schneider.
+Ao construir imagens de extensões do Postgri [EH1 S] [K Y UW1] [EH1 L], ele encontrou dados de licenças Debian ausentes.
+Também encontrou dificuldades para representar dependências Rust.
+É a experiência dele com essas ferramentas.
+Confira o conteúdo da lista de materiais de software: registrar a origem da construção não completa o inventário.
+A fonte é o "Ardent Performance Computing".
+
+Por fim, o Clay disse que Navier–Stokes foi aparentemente resolvido.
+A resposta, publicada em onze de setembro, trata do anúncio que explicamos no dia dez.
+A manifestação é favorável.
+O instituto diz que as inovações serão analisadas e questionadas, com avaliação do prêmio deliberadamente sem pressa.
+A fonte é o "Clay Mathematics Institute".
+A avaliação segue pendente, e o prêmio não foi concedido.
