@@ -1,0 +1,160 @@
+ChatGPT entrega rotas sem recuperar o código, e Check Point pede correção na V P N.
+
+O ChatGPT entrega o mapa, mas não recupera o programa.
+Simon Willison pediu ao ChatGPT Work rotas de corrida de cinco e dez quilômetros usando dados do OpenStreetMap.
+No relato publicado em doze de setembro, o GPT seis Astra, na opção Max, trabalhou por vinte e sete minutos.
+Entregou uma visualização e arquivos G P X e GeoJSON, formatos que guardam trajetos geográficos.
+Depois, Willison pediu o código Python. Não conseguiu obtê-lo.
+O agente sabia fazer o caminho de volta na corrida. No próprio trabalho, ficou devendo.
+
+O código e os detalhes exatos da execução não apareciam na interface.
+Willison suspeita da compactação da conversa, que troca o contexto detalhado por uma representação mais curta.
+A OpenAI não confirmou esse diagnóstico, e o experimento não comprova exclusão no servidor.
+O que ele conseguiu baixar foram os arquivos de rotas.
+
+Se você delega processamento de dados, peça o resultado e a implementação como entregas separadas.
+Eu pediria código e entradas salvos desde o começo, antes de uma eventual compactação.
+Essa precaução ainda precisaria ser testada no caso de Willison.
+Ele também propõe que o sistema guarde o texto anterior à compactação e permita recuperá-lo por ferramentas.
+A fonte é o relato de Simon Willison sobre o experimento com rotas de corrida.
+
+A Check Point corrige duas falhas críticas em produtos de V P N.
+Esses produtos conectam pessoas ou redes à infraestrutura interna.
+A fabricante disponibilizou correções para duas falhas que podem permitir execução remota de código.
+Os boletins foram atualizados em nove de setembro.
+No dia dez, o N C S C dos Países Baixos pediu atualização rápida porque esperava tentativas de exploração em breve.
+Era uma previsão de ataques, ainda sem confirmação de exploração ativa ou relato de código público de exploração naquele alerta.
+
+Uma das falhas envolve a validação de dados de certificados durante a negociação da V P N e permite contornar a autenticação.
+A outra envolve um estouro de memória ao decodificar certificados no formato A S N um.
+Ambas receberam nota de gravidade nove vírgula oito da fabricante.
+A falha está em processar esses dados, não em quebrar a criptografia.
+
+Se você administra esses equipamentos, confira produto e versão na matriz da Check Point.
+Há opções de LivePatch e pacotes de correção para linhas diferentes.
+A versão R oitenta e dois ponto vinte aparece como não afetada.
+Confira se o patch está de fato instalado, mesmo com a atualização automática habilitada.
+Marcar a caixinha é a parte fácil.
+A restrição temporária de pares de conexão entre sites tem escopo limitado e não se aplica ao Spark gerenciado localmente.
+As fontes são os dois boletins da Check Point e o alerta do N C S C dos Países Baixos.
+
+O Linux desliga uma otimização do EROFS para descomprimir os dados corretamente.
+O EROFS é um sistema de arquivos comprimido e somente para leitura.
+O Linux incorporou a correção em doze de setembro.
+O conjunto destinado ao Linux sete ponto três, candidato a lançamento três, desativa a descompressão por janela móvel com L Z quatro.
+Segundo o mantenedor Gao Xiang, a A W S encontrou saída incorreta em conjuntos específicos e raros de dados comprimidos.
+O erro aparece no conteúdo descomprimido.
+O relato não indica que as imagens somente para leitura tenham sido sobrescritas.
+
+Essa otimização reaproveita páginas temporárias para economizar memória.
+O L Z quatro faz referência a dados decodificados recentemente, mas a implementação pode copiar trechos longos de trás para frente.
+Esse comportamento derruba uma suposição usada para reaproveitar a janela.
+O formato permitia uma coisa, e o caminho de cópia exigia mais cuidado.
+
+O patch, publicado originalmente em três de setembro, aceita gastar mais memória durante a descompressão para obter a saída correta.
+Uma reserva de buffers pode aliviar o impacto.
+Economizar memória RAM fica bem menos interessante quando o conteúdo sai errado.
+
+Se você usa EROFS comprimido, confira se o kernel da sua distribuição recebeu o patch e considere esse consumo adicional.
+A correção entrou no repositório principal. A chegada aos pacotes de cada distribuição ainda precisa ser conferida.
+As fontes são o pedido de integração de Gao Xiang, o patch original e a confirmação da integração.
+
+O Postgri [EH1 S] [K Y UW1] [EH1 L] conta a chave e o valor antes de montar seu JSON.
+Christophe Pettus mostrou em doze de setembro por que uma chamada à função que monta um objeto JSON binário falha com cinquenta e um pares de chave e valor.
+Cada par consome dois argumentos. São cento e dois, acima do limite padrão de cem.
+O analisador da consulta rejeita a chamada antes de resolver qual função será usada.
+Aceitar uma quantidade variável de argumentos não dá passe livre nessa portaria.
+
+Ontem, falamos do limite de arquivos abertos.
+Pettus também usou Postgri [EH1 S] [K Y UW1] [EH1 L] dezoito ponto seis neste experimento.
+A demonstração é nova. O limite da interface das funções já existia.
+
+Para transformar uma linha inteira em JSON, Pettus recomenda usar a função de conversão da linha para JSON binário.
+Assim, os campos vão dentro de um único argumento.
+Escolha quais campos entram ou remova as chaves indesejadas, para não expor colunas extras sem querer.
+Juntar tudo num array de texto tem outro efeito: números e booleanos viram strings.
+
+Esse teto não muda com o comando SET.
+Recompilar o servidor para aumentá-lo também exige compatibilizar as funções C das extensões.
+No teste de Pettus, uma extensão compilada para cem argumentos foi rejeitada pelo servidor recompilado para duzentos.
+Eu começaria pela consulta.
+As fontes são o experimento de Christophe Pettus, a documentação das funções JSON do banco e a definição do limite no código.
+
+O buildprof mostra onde o build do Bun fica esperando.
+Lalit Maganti apresentou em doze de setembro o buildprof, ferramenta para registrar processos e atividade de arquivos de um build no Linux.
+Você usa a ferramenta para executar o comando de build e depois examina uma linha do tempo.
+Dá para descobrir quem está demorando antes de abrir a discussão sobre qual linguagem merece a culpa.
+
+Na reprodução do autor, numa máquina virtual com seis núcleos e doze threads, o Bun um ponto três ponto quatorze levou vinte e quatro minutos e vinte e quatro segundos.
+Só a ligação final, etapa que reúne o código compilado, consumiu dezesseis minutos e trinta e cinco segundos.
+
+Maganti preparou o Bun e as dependências WebKit e I C U para usar Thin L T O.
+É uma forma diferente de organizar a otimização durante a ligação.
+O tempo de build daquela versão caiu para quinze minutos e onze segundos.
+Mudar apenas o Bun não bastava. Os arquivos pré-compilados do WebKit continuavam com a configuração anterior.
+
+A comparação deixa de fora o tempo de reconstrução dessas dependências.
+Também falta um controle equivalente com o WebKit reconstruído na configuração antiga.
+Então, não dá para atribuir cada segundo economizado ao Thin L T O.
+O diagnóstico é útil para aquela montagem específica.
+Se for usar a ferramenta, confira as permissões de rastreamento no host ou contêiner.
+Suporte a macOS e Windows ficou para trabalho futuro.
+A fonte é o anúncio de Lalit Maganti, com os experimentos do buildprof.
+
+O Metacarp mantém o último estado válido quando uma mudança falha.
+Veit Heller anunciou em doze de setembro o Metacarp, compilador de Carp escrito na própria linguagem.
+Segundo o autor, ele compila a suíte de referência e a si mesmo.
+Entre gerações de autocompilação, produz código C idêntico, byte a byte.
+
+Para quem integra ferramentas, a interface chama atenção.
+As fases do compilador funcionam como bibliotecas, com modelos de dados, testes e erros estruturados.
+Um editor ou notebook pode receber o diagnóstico diretamente.
+O programa de linha de comando cuida da formatação para o terminal.
+Seu editor não precisa virar leitor de legenda do compilador.
+
+As sessões persistentes carregam a base uma vez, acompanham definições e recompilam as dependências afetadas.
+Se uma alteração candidata falha, a sessão descarta essa alteração e mantém o último estado válido disponível.
+Dá para experimentar sem desmontar o que já funcionava.
+
+Antes de embutir o projeto em outra ferramenta, confira os limites que Heller documenta.
+A compatibilidade ainda é incompleta, há possíveis vazamentos de memória, e caches globais podem interferir entre clientes de compilação em execução.
+A fonte é a apresentação do Metacarp por Veit Heller.
+
+Agora, os destaques rápidos para hoje.
+O Debian treze ponto sete saiu em doze de setembro, reunindo correções de segurança e bugs graves do trixie.
+Quem já usa Debian treze atualiza os pacotes pelos servidores de distribuição configurados, sem reinstalar.
+No anúncio, as novas imagens de instalação ainda estavam previstas para breve.
+A fonte é o anúncio do Debian.
+
+O DietPi dez ponto sete ganhou configuração de múltiplas interfaces de rede.
+Nessa distribuição Linux leve, o novo configurador de rede permite separar uma interface com saída para a internet de outra com endereço fixo para a rede local.
+A configuração antiga é migrada quando você aplica as alterações.
+A fonte é o anúncio da versão do DietPi.
+
+O Solod zero ponto quatro automatiza declarações para chamar bibliotecas C.
+O novo Sobind lê arquivos de cabeçalho e gera essas ligações, poupando trabalho manual.
+Solod traduz um subconjunto de Go para C, com gerenciamento manual de memória e sem o ambiente completo de execução de Go.
+A fonte é o anúncio de Anton Zhiyanov.
+
+A Cognition lançou o S W E dois em dez de setembro.
+O modelo está disponível no Devin Desktop e na versão de linha de comando.
+Adaptado a partir do Kimi K três, o modelo de programação tem três níveis de esforço de raciocínio para você escolher conforme a tarefa.
+Web e Fusion estavam recebendo o modelo gradualmente.
+A fonte é o anúncio da Cognition.
+
+A Anthropic se comprometeu a convidar avaliadores externos para acompanhar suas práticas de segurança por dentro.
+Dario Amodei propõe acesso semelhante ao de funcionários e publicação de conclusões sem controle editorial da empresa, com limites de confidencialidade.
+Por enquanto, é um compromisso anunciado, com a operação ainda por concretizar.
+A fonte é o texto de Dario Amodei.
+
+O Open R G B um ponto zero chegou à versão estável e migrou oficialmente para Qt seis.
+A ferramenta controla a iluminação R G B de hardware compatível, reformulou os perfis e ganhou uma opção de serviço em segundo plano.
+Para instalar os pacotes Linux nos formatos deb ou R P M, confira a dependência de hotplug da biblioteca de acesso a dispositivos H I D.
+O nome exato do pacote está no artigo escrito.
+A fonte é o anúncio do Open R G B.
+
+O KaOS, na versão de setembro de 2026, traz sua segunda imagem estável de instalação com Dinit.
+Esse componente é responsável pela inicialização e pelos serviços. O desktop usa Niri e Noctalia.
+Ainda há componentes derivados do system D.
+Para experimentar esse ambiente Wayland no VirtualBox, o projeto exige controlador V M S V G A e aceleração três D.
+A fonte é o anúncio do KaOS.
