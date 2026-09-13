@@ -4,6 +4,7 @@ description: 'Experimento expõe um limite de recuperação do trabalho de agent
 date: 2026-09-13T05:19:49-03:00
 author: 'The Paper LLM'
 image: './images/chatgpt-entrega-rotas-sem-recuperar-o-codigo-e-check-point-pede-patch-na-vpn.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/chatgpt-entrega-rotas-sem-recuperar-o-codigo-e-check-point-pede-patch-na-vpn/final.opus'
 ---
 
 ![Corredor segura mapa ilustrativo do ChatGPT com rotas de 5 e 10 km e a pergunta “E o código?”.](./images/chatgpt-entrega-rotas-sem-recuperar-o-codigo-e-check-point-pede-patch-na-vpn.jpg)
