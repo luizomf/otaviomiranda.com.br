@@ -1,0 +1,166 @@
+Homebrew reduz suporte a Macs Intel, e H A Proxy recebe alerta para H T T P três.
+
+O Homebrew sete reduz o suporte a Intel e muda a proteção no Linux.
+O projeto lançou a versão sete ponto zero ponto zero em treze de setembro e colocou os Macs Intel no terceiro nível de suporte.
+Com isso, deixa de produzir rotineiramente novos pacotes pré-compilados, os chamados bottles, para essas máquinas.
+O gerenciador continua funcionando nelas até setembro de 2027, e os pacotes já publicados seguem disponíveis.
+Para uma fórmula atualizada, você pode ter de compilar localmente.
+O Mac continua trabalhando; quem começou a se aposentar foi a cozinha dos pacotes.
+
+Já o suporte ao macOS dez ponto quinze terminou nesta versão.
+A atualização automática, ou uma atualização manual do Homebrew, pode trazer a mudança.
+Eu conferiria as máquinas e os trabalhos de integração contínua antes de receber a notícia pelo log de erro.
+
+No Linux, o isolamento troca o Bubblewrap pelo Landlock, mecanismo do kernel que restringe os acessos do processo.
+Sem Landlock, o Homebrew roda sem essa proteção de isolamento.
+O comando de diagnóstico do Homebrew avisa da falta de proteção, e a consulta de configuração mostra a versão da interface disponível.
+Interfaces antigas também podem ficar sem restrições de rede.
+
+O Homebrew também ganhou um comando para consultar vulnerabilidades conhecidas das fórmulas instaladas.
+Ele usa o serviço O S V e registros que levam em conta correções retroportadas, aquelas levadas para versões anteriores.
+Confira também quais repositórios adicionais ficaram fora da análise.
+Uma lista vazia vale para o que a ferramenta conseguiu cobrir.
+A fonte é o anúncio da versão sete ponto zero ponto zero do Homebrew.
+
+O H A Proxy recebeu um registro de vulnerabilidade por uma falha entre H T T P três e H T T P um ponto um.
+O registro saiu em treze de setembro.
+Esse proxy fica entre os clientes e os servidores da aplicação.
+A falha exige uma combinação específica de configurações.
+Na entrada, ele precisa receber H T T P três pelo protocolo QUIC.
+Na saída, precisa encaminhar o tráfego em H T T P um ponto um, em blocos, no modo chamado chunked.
+E precisa reutilizar conexões com o servidor de destino.
+
+Nessa combinação, as duas pontas podem discordar sobre onde uma requisição termina.
+É o chamado "request smuggling".
+Segundo o registro, isso pode permitir contornar as regras H T T P da entrada.
+Também pode interferir nas requisições de outros clientes que compartilham a conexão.
+As fontes não confirmam exploração em ataques reais.
+
+Aqui, vale guardar as faixas de versões afetadas.
+Na linha três ponto três, o problema vai da versão três ponto três ponto zero até a três ponto três ponto quatorze.
+Na linha três ponto quatro, vai da três ponto quatro ponto zero até a três ponto quatro ponto quatro.
+Também afeta as versões de desenvolvimento da linha três ponto cinco, da dev um à dev cinco.
+A linha três ponto dois e as anteriores não têm esse mecanismo.
+Se sua instalação não recebe H T T P três por uma entrada QUIC, falta uma condição necessária à falha.
+
+A correção rejeita quadros truncados de H T T P três.
+Ela já saiu na versão de desenvolvimento três ponto cinco dev seis, em três de setembro.
+Para produção, confira se o pacote suportado que você usa recebeu essa correção, em vez de migrar para uma versão de desenvolvimento.
+O registro também lista desativar a entrada QUIC como alternativa temporária.
+Avalie o impacto no serviço antes de fazer isso.
+As fontes são o registro da vulnerabilidade, o patch do H A Proxy e o histórico de mudanças da linha três ponto cinco.
+
+O Postgri [EH1 S] [K Y UW1] [EH1 L] corta o nome, e a limpeza encontra a partição errada.
+Christophe Pettus mostrou em treze de setembro como um nome de partição comprido pode fazer a rotina de retenção apagar a partição recém-criada.
+No experimento dele, com a versão dezoito ponto seis do banco, o corte do nome removeu a parte que distinguia as datas.
+O comando para apagar a partição antiga acabou apontando para o mesmo nome truncado da nova.
+A faxina encontrou o endereço errado e fez o serviço.
+
+Ontem, falamos do limite de argumentos das funções.
+A demonstração nova da série trata de outro limite que já existia.
+Normalmente, os identificadores têm sessenta e três bytes de espaço, mesmo entre aspas duplas.
+A conta é em bytes. Caracteres que ocupam vários bytes gastam esse espaço mais depressa.
+
+Pettus recomenda reservar primeiro o espaço do sufixo que diferencia os objetos.
+Antes de emitir o comando para o banco, compare o tamanho em bytes do nome candidato com o limite máximo de identificadores.
+O parâmetro que informa esse limite é somente leitura.
+Tentar aumentá-lo por um comando de configuração não resolve.
+
+Esse foi um resultado de laboratório relatado pelo autor.
+Se você gera nomes automaticamente, confira o nome completo antes de enviar o comando.
+O comando pode executar com sucesso e acertar um objeto diferente do que você pretendia.
+Sucesso bem inconveniente.
+As fontes são o texto de Christophe Pettus sobre o limite dos identificadores e a documentação de sintaxe da versão dezoito do banco.
+
+O Navidrome muda identificadores e dá descanso a serviços com falha.
+A versão zero ponto sessenta e quatro ponto zero saiu em doze de setembro.
+Ela muda os identificadores internos da biblioteca de música que você hospeda no próprio servidor.
+A migração mexe em todas as tabelas do banco.
+Faça backup antes de atualizar, como pedem os mantenedores.
+Mesmo com o servidor de pé, clientes que guardam os identificadores antigos podem precisar sincronizar novamente.
+
+As capas passam a ser resolvidas em segundo plano, com imagens provisórias desfocadas.
+As chamadas aos fornecedores externos ganham limite de frequência e um mecanismo de pausa.
+É o chamado "circuit breaker": quando a dependência está falhando, ele pausa as consultas.
+Capas ausentes voltam a ser procuradas aos poucos.
+
+O envio do histórico de músicas ouvidas, chamado scrobbling, também dá intervalos cada vez maiores entre as tentativas durante indisponibilidades.
+E respeita os pedidos do serviço para recuar.
+Se o vizinho caiu, tocar a campainha sem parar dificilmente melhora a situação.
+
+A versão ainda traz uma [EY1 P IY1 AY1] de música compatível com clientes Jellyfin, experimental e desligada por padrão.
+A compatibilidade anunciada fica nessa interface de música, sem promessa de reproduzir um servidor Jellyfin completo.
+Eu começaria a atualização pelo cuidado menos empolgante das notas: o backup do banco.
+A fonte são as notas da versão zero ponto sessenta e quatro ponto zero do Navidrome.
+
+O "GClaude Indexer" corrige o sucesso de uma instalação que nem começou.
+A versão um ponto três ponto zero ganhou um instalador gráfico para Windows em treze de setembro.
+A ferramenta organiza e indexa documentos localmente e usa dependências para reconhecer texto em digitalizações.
+Segundo o autor, um problema na chamada ao PowerShell fazia o assistente anunciar a conclusão da instalação dessas dependências.
+
+A instalação nem tinha começado.
+
+O comando passava pelo interpretador C M D e depois pelo PowerShell.
+Cada um interpretava as aspas, e o caminho padrão com espaços era tratado incorretamente.
+Enquanto isso, um comando separado escrevia o marcador de conclusão de qualquer jeito.
+A cerimônia de entrega estava funcionando melhor que a obra.
+
+O mantenedor diz que removeu o C M D desse caminho e gravou um script PowerShell com caminhos literais.
+Também deixou o próprio script emitir o sinal ao terminar a execução.
+É um cuidado que serve para nossa automação: quem faz o trabalho precisa responder pela conclusão.
+
+Tanto o diagnóstico quanto a correção vêm do mesmo autor, sem reprodução independente nesta cobertura.
+O instalador publicado também não tem assinatura digital e dispara um aviso do SmartScreen.
+Leve isso em conta antes de executá-lo.
+As fontes são as notas da versão um ponto três ponto zero do GClaude Indexer e o relato do autor no TabNews.
+
+Graham Dumpleton propõe prever, mudar e conferir nos exercícios.
+Em quatorze de setembro, ele defendeu exercícios que peçam ao aluno uma previsão e uma verificação observável.
+O exemplo é simples: reduzir um servidor de quatro processos de trabalho para um.
+E perguntar o que acontece com duas requisições simultâneas.
+Você arrisca uma resposta, muda a configuração e confere o resultado antes de seguir.
+
+O projeto wrapture apareceu aqui pela instrumentação de Python.
+Desta vez, o assunto são vinte e quatro oficinas gratuitas sobre o projeto, acessíveis pelo navegador em JupyterLab, no mybinder.
+A inteligência artificial ajudou a planejar a forma de ensinar nesses exercícios.
+
+É uma proposta de educador, ainda sem estudo controlado.
+Dumpleton diz que precisa observar pessoas fazendo os exercícios para avaliar se o ensino funcionou.
+Para escolher um exercício, eu gosto da pergunta que fica.
+Em que momento você descobre se entendeu, antes de copiar o próximo comando?
+A fonte é o artigo de Graham Dumpleton sobre aprendizado prático na era da inteligência artificial.
+
+Agora, os destaques rápidos para hoje.
+O Forgejo recebeu um registro de vulnerabilidade em treze de setembro, por falsificação de identidade na federação opcional.
+São afetadas as versões de treze ponto zero ponto zero até dezesseis ponto zero ponto quatro.
+Nesse hospedador Git, a falha não envolve tomada de contas nem alteração de conteúdo.
+Confira se a federação está habilitada e acompanhe a correção.
+As fontes ainda não confirmam um patch lançado.
+As fontes são o registro da vulnerabilidade e a discussão dos mantenedores do Forgejo.
+
+O [R UW1 N] abriu seu código em doze de setembro, sob G P L versão três ou posterior, permitindo inspeção e modificação.
+É um ambiente gráfico nativo de desenvolvimento, orientado ao teclado. Ele roda fora do terminal.
+Go e Python têm integração de primeira classe, enquanto Rust e Zig seguem em beta na ramificação principal do código.
+As fontes são o anúncio do projeto e seu repositório.
+
+Simon Willison anunciou em quatorze de setembro o "commit-rewriter", versão zero ponto um.
+A ferramenta permite editar mensagens de commits numa interface web.
+Ela cria uma ramificação de backup com data e hora e reescreve todos os commits desde a primeira edição até o mais recente.
+Você mantém o original no backup e fica com um histórico reescrito na ramificação de trabalho.
+A fonte é a publicação de Simon Willison.
+
+Também segundo Simon Willison, o "shot-scraper" um ponto doze passou a gerar capturas de sites em WebP.
+O anúncio foi feito em treze de setembro.
+Na ferramenta de linha de comando, você usa a opção de qualidade para gerar saída com perdas.
+Sem essa opção, o WebP é sem perdas. A escolha fica explícita na automação das capturas.
+
+O Linux sete ponto três, terceiro candidato a lançamento, está disponível para testes desde treze de setembro.
+Depois da integração do patch do sistema de arquivos E R O F S, que contamos ontem, agora você pode baixar o candidato.
+É uma versão de teste. O site oficial do kernel lista a sete ponto dois ponto cinco como estável.
+A fonte é o "Linux Kernel Archives".
+
+O Immich três ponto dois ponto zero trouxe uma nova [EY1 P IY1 AY1] de busca em dez de setembro, na semana passada.
+Integrações com esse gerenciador de fotos e vídeos auto-hospedado podem buscar dentro de álbuns.
+Também podem combinar filtros para exigir todas as condições, ou aceitar uma delas.
+Parte dessas capacidades chegará à interface web depois.
+A fonte são as notas da versão do Immich.
