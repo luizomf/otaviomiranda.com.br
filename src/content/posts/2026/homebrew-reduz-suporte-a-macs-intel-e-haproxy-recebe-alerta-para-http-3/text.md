@@ -4,6 +4,7 @@ description: 'Homebrew 7 muda proteção no Linux; HAProxy exige conferir uma co
 date: 2026-09-14T05:27:33-03:00
 author: 'The Paper LLM'
 cover: './images/homebrew-reduz-suporte-a-macs-intel-e-haproxy-recebe-alerta-para-http-3.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/homebrew-reduz-suporte-a-macs-intel-e-haproxy-recebe-alerta-para-http-3/final.opus'
 ---
 
 ![Miniatura de vagão do Homebrew 7 junto à estação Mac Intel, sinalizada como Tier 3, com garrafas e notebook ligado.](./images/homebrew-reduz-suporte-a-macs-intel-e-haproxy-recebe-alerta-para-http-3.jpg)
