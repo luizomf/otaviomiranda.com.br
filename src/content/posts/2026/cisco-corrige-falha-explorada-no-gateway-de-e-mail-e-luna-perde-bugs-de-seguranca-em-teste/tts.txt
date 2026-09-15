@@ -1,0 +1,189 @@
+Cisco corrige falha explorada no gateway de e-mail, e Luna perde bugs de segurança em teste.
+
+A Cisco corrigiu uma falha que permite executar comandos como root no gateway de e-mail.
+A correção crítica foi publicada em quatorze de setembro e vale para o Secure Email Gateway, equipamento pelo qual passam os e-mails da organização.
+Segundo a empresa, a falha já está sendo explorada.
+O ataque não exige autenticação e usa uma injeção de [EH1 S] [K Y UW1] [EH1 L] no processamento das mensagens.
+Isso permite executar comandos com o privilégio máximo do sistema.
+A falha afeta equipamentos físicos e virtuais, qualquer que seja a configuração.
+Dois outros produtos ficam fora desta falha: o Secure Email and Web Manager e o Secure Web Appliance.
+
+Há versões corrigidas em três linhas do produto, e os números completos das versões estão no artigo escrito.
+A Cisco recomenda migrar para a versão dezesseis ponto cinco ponto zero, build setecentos e oitenta.
+A empresa diz que o Secure Email Cloud já foi atualizado.
+Não há alternativa temporária que resolva a vulnerabilidade.
+
+Se você opera o equipamento, atualize e investigue se alguém já entrou.
+A Cisco recomenda conferir os logs de e-mail de cada membro do cluster e cruzar esses dados com registros externos de rede e firewall.
+Com root, o atacante pode apagar os próprios rastros.
+Você está pedindo atestado de bons antecedentes a uma máquina que ele pode ter controlado.
+
+Em máquinas virtuais suspeitas, preserve evidências antes de reconstruir e renovar credenciais e material criptográfico.
+Para equipamentos físicos suspeitos, acione o suporte T A C da Cisco.
+A CISA também incluiu a falha no catálogo de vulnerabilidades exploradas.
+As fontes são o boletim da Cisco e o alerta da CISA.
+
+Luna custa menos na revisão e encontra menos falhas de segurança.
+A Entelligence comparou GPT cinco ponto seis Luna e GPT seis Astra em cinquenta pull requests públicos, com defeitos colocados de propósito.
+No experimento publicado em quatorze de setembro, Luna teve sessenta e nove achados aceitos por vinte centavos de dólar.
+Astra teve noventa e dois, por cinco dólares e sessenta e seis centavos.
+Esse é o custo total de cada modelo naquele teste.
+
+Nas permissões, a diferença pesa.
+Dos vinte e quatro bugs de segurança do conjunto aceito, Luna encontrou nove e Astra, dezenove.
+Só Astra apontou, por exemplo, códigos de recuperação que não eram marcados como usados no Keycloak, sistema de identidade e acesso.
+É o tipo de detalhe que merece revisão cuidadosa mesmo quando a fatura da inteligência artificial está uma beleza.
+
+Os dois receberam os mesmos prompts e apenas os diffs, os trechos com as alterações de código.
+A Entelligence só aceitou um achado quando dois modelos avaliadores concordaram, e um deles era o próprio Astra.
+O concorrente também estava na banca.
+O código público é anterior aos cortes de conhecimento dos modelos, e falta uma lista exaustiva dos bugs.
+Com esses limites, os números não medem a confiabilidade geral de uma revisão em produção.
+
+A empresa vende ferramentas de revisão.
+Eu usaria o experimento como ponto de partida para avaliar nosso próprio código, olhando separadamente para erros de autorização, falsos positivos e custo.
+A fonte é a comparação de Luna e Astra publicada pela Entelligence.
+
+Kubernetes liga o recurso de qualidade de serviço de memória, mas a proteção depende da configuração.
+O recurso, chamado "Memory QoS", chegou ao beta no Kubernetes um ponto trinta e sete com sua chave ligada por padrão.
+A limitação e a reserva de memória, porém, ainda precisam ser configuradas.
+O projeto explicou essa diferença em quatorze de setembro.
+Em nós Linux com cgroup versão dois, esses controles permitem desacelerar alocações sob pressão e proteger memória contra recuperação pelo kernel.
+
+Na atualização, confira o fator de limitação de memória.
+Na fase alfa, deixar esse campo de fora significava usar zero vírgula nove.
+Agora, o padrão é nulo, e o Kubernetes deixa de configurar o limite usado para desacelerar alocações de memória.
+Para manter o comportamento anterior, declare o valor.
+Configurações já explícitas sobrevivem à atualização.
+O silêncio no arquivo passou a significar outra coisa.
+
+A política de reserva de memória também vem desligada.
+Se você escolher a reserva em camadas, chamada "TieredReservation", a política vale para o nó inteiro.
+Pods da classe Guaranteed recebem proteção forte; os da classe Burstable, uma proteção mais flexível.
+Um pod individual não pode sair dessa política.
+A proteção forte inclui o cache de arquivos.
+Sobra menos memória que o kernel pode recuperar para as cargas vizinhas, então confira quem divide o nó antes de ativá-la.
+A fonte é a publicação do Kubernetes sobre o recurso de memória em beta.
+
+Acronis liga invasão do Gitea a acesso ao Proxmox.
+A Acronis publicou em treze de setembro uma reconstrução da campanha Red [HH EH1 R AH0 N] contra o Gitea, hospedador de repositórios Git.
+A investigação relata roubo de código, persistência por S S H e movimentação para a infraestrutura vizinha.
+Em um ambiente de Taiwan, os atacantes chegaram ao acesso administrativo como root de um cluster Proxmox de três nós.
+O Proxmox gerencia máquinas virtuais.
+O problema já tinha passado dos repositórios de código.
+
+Em vinte e seis de agosto, cobrimos a entrada da falha do Gitea no catálogo de exploração.
+Agora, a Acronis traz registros operacionais recuperados e a identificação de componentes maliciosos.
+A correção no Gitea um ponto vinte e sete ponto um saiu em julho.
+
+A falha afeta versões desde um ponto dezessete e anteriores a um ponto vinte e sete ponto um.
+Para explorá-la, é preciso ter acesso de escrita a um repositório.
+Também são necessários Git dois ponto trinta e dois ou posterior, o recurso diffpatch habilitado e armazenamento temporário adequado.
+Com cadastro aberto, o atacante pode obter esse acesso de escrita sem ter credenciais anteriores.
+
+Se você hospeda Gitea, atualize e procure contas e chaves inesperadas.
+Troque segredos expostos e examine os sistemas que a conta do serviço consegue alcançar.
+A Acronis recomenda reconstruir os servidores com comprometimento confirmado.
+Ferramentas locais adulteradas podem esconder a persistência durante a inspeção.
+A investigação também relata que backups de máquinas virtuais foram iniciados, mas não comprova a exfiltração completa das imagens.
+As fontes são a investigação da Acronis e o aviso de segurança do Gitea.
+
+Kestrel usa Postgres para retomar tarefas após uma queda.
+Raman Varma descreveu em quatorze de setembro como o "Kestrel" usa Postgres para coordenar tarefas recuperáveis sem outro serviço de orquestração.
+O progresso fica salvo no banco.
+Se um worker morre, outro pode continuar a execução a partir dos resultados registrados.
+
+Transações curtas reservam trabalho, pulando linhas que já estão bloqueadas.
+Cada execução tem uma posse temporária, renovada enquanto o worker trabalha.
+Quando ela expira, uma rotina devolve a execução à fila.
+Para quem já opera Postgres, é uma arquitetura a avaliar.
+O autor aponta pressão sobre conexões e manutenção da tabela de fila entre os custos operacionais.
+
+O trecho publicado consulta o resultado anterior, executa a etapa e só depois registra a conclusão.
+Nesse intervalo, um efeito externo pode acontecer e uma queda impedir que o registro seja salvo.
+Na retomada, a etapa pode rodar de novo.
+Essa é uma leitura da sequência mostrada, não um incidente reproduzido.
+
+A chave única impede duplicar o registro de conclusão.
+Já a [EY1 P IY1 AY1] que executa o efeito externo precisa aceitar repetições sem repetir o efeito.
+Guardar um recibo no banco só não obriga o caixa a cobrar uma vez.
+A fonte é o artigo da InfoQ sobre fluxos de trabalho duráveis com Postgres.
+
+A W S separa a sugestão do agente da reserva e do pagamento.
+A empresa publicou em quatorze de setembro uma arquitetura de remarcação de voos em que os agentes propõem opções.
+Código com regras explícitas cuida das reservas e dos pagamentos.
+O "Step Functions" coordena as etapas e tentativas.
+O "Bedrock AgentCore" executa o trabalho dos agentes.
+
+No exemplo detalhado, um agente sugere voos e outro escreve o texto sobre compensação ao passageiro.
+Quem calcula o direito à compensação é código Lambda, consultando tabelas de regras.
+Depois da validação, etapas separadas executam a decisão.
+O agente pode caprichar na mensagem; o valor sai da regra.
+
+Para lidar com repetições, a execução envia identificadores derivados do passageiro e da decisão às interfaces de reserva e pagamento.
+Essas interfaces precisam respeitar os identificadores para evitar duplicação.
+
+É uma arquitetura de referência, sem medição de segurança em produção.
+O exemplo confere a disponibilidade numa etapa e faz a reserva em outra, sem demonstrar uma reserva atômica do inventário.
+Esse intervalo ainda precisa de tratamento no sistema que efetivamente vende o assento.
+A fonte é a publicação da A W S sobre validação com Step Functions e AgentCore.
+
+Agora, os destaques rápidos para hoje.
+
+O Emacs tem correção incompleta para execução de código ao abrir arquivos não confiáveis, avisou o mantenedor em quatorze de setembro.
+O risco envolve diagnósticos do Flymake também fora do modo Lisp, no Emacs vinte e quatro ou posterior, possivelmente anteriores.
+Evite esses diagnósticos em conteúdo não confiável e confira os patches da distribuição.
+A correção está prevista para a versão trinta e um ponto dois, ainda sem confirmação de lançamento.
+A fonte é o aviso na lista O S S Security.
+
+Rustls zero ponto vinte e três ponto quarenta e cinco corrige mensagens de negociação T L S aceitas no nível de criptografia errado.
+Se você usa essa biblioteca T L S para Rust, confira a versão.
+As versões afetadas vão de zero ponto vinte e três ponto treze até zero ponto vinte e três ponto quarenta e quatro.
+Se estiver nessa faixa, atualize a dependência.
+Segundo os mantenedores, a autenticação do histórico da negociação impede um atacante no caminho da rede de usar a falha para alterar ou completar essa negociação.
+A fonte são as notas do Rustls.
+
+O gerenciador de pacotes Python U V mudou códigos de saída na versão zero ponto doze ponto quatorze.
+Falhas esperadas retornam um; falhas operacionais reconhecidas e internas, dois.
+Se sua integração contínua decide o próximo passo pelo código retornado, confira essa distinção nos scripts que chamam o gerenciador.
+A fonte são as notas do U V.
+
+Copilot está recebendo preferências de eficiência, equilíbrio e inteligência na seleção automática.
+As três usam o mesmo conjunto de modelos e escolhem a cada prompt.
+Você orienta custo, qualidade e tempo de resposta; a cobrança segue o modelo escolhido.
+Até a opção inteligência pode escolher um modelo pequeno.
+A fonte é o "Git Hub".
+
+Vercel adicionou autenticação por assinatura nativa à camada de agentes do "AI SDK", quando o executor integrado oferece suporte.
+No modo direto, chamado "direct", credenciais explícitas do provedor no ambiente têm prioridade.
+O modo automático, chamado "auto", segue essa regra quando não há credenciais do Gateway.
+Já o modo "ai-gateway" nunca lê assinaturas nativas.
+Confira qual conta sua integração está usando.
+A fonte é o anúncio da Vercel.
+
+Cilium um ponto vinte adicionou rotas T C P e U D P ao suporte à Gateway [EY1 P IY1 AY1].
+Com essa ferramenta de rede para Kubernetes, você passa a gerenciar esses serviços pelo mesmo modelo usado para H T T P.
+A demonstração reúne os três tipos de entrada num Gateway compartilhado.
+A fonte é o anúncio do projeto na C N C F.
+
+GNU Coreutils nove ponto doze saiu em quatorze de setembro com uma nova opção no comando uname.
+Ela mostra cada informação com rótulo, uma por linha.
+No diagnóstico e no suporte Linux, você pode identificar os campos sem decifrar a posição de cada um.
+A fonte são as notas oficiais do Coreutils.
+
+A F cinco relatou na semana passada sondagens de agosto contra servidores de desenvolvimento Vite, em busca de arquivos de ambiente e credenciais.
+As observações não comprovam roubo em organizações reais.
+Revise portas públicas, mapeamentos Docker e proxies, atualize o Vite e investigue segredos potencialmente expostos para fazer a rotação.
+A fonte é a F cinco Labs.
+
+O modelo "Swift-Qwen", na versão três ponto oito, com vinte e sete bilhões de parâmetros, propõe raciocínio mais curto.
+A perda depende da tarefa.
+No teste da UkisAI, a pontuação no AIME 2026 caiu de noventa e oito vírgula sessenta e sete porcento para noventa e quatro porcento.
+O repositório foi atualizado no domingo.
+Uso comercial acima de um milhão de dólares de receita recorrente anual, incluindo afiliadas, exige licença separada.
+As fontes são o modelo, a licença e os metadados publicados pela UkisAI no Hugging Face.
+
+Yardi comprou a Sidero Labs, anunciou a empresa em quatorze de setembro.
+Para quem usa Talos, Linux mínimo voltado a Kubernetes, a Sidero promete manter a licença M P L dois ponto zero, os repositórios e o processo de contribuição.
+Ela também diz que continuará operando como empresa independente dentro do grupo.
+A fonte é a Sidero Labs.
