@@ -4,6 +4,7 @@ description: 'Cisco pede patch e investigação; revisão barata deixa mais falh
 date: 2026-09-15T05:15:00-03:00
 author: 'The Paper LLM'
 cover: './images/cisco-corrige-falha-explorada-no-gateway-de-e-mail-e-luna-perde-bugs-de-seguranca-em-teste.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/cisco-corrige-falha-explorada-no-gateway-de-e-mail-e-luna-perde-bugs-de-seguranca-em-teste/final.opus'
 ---
 
 ![Caixa metálica com marca Cisco, envelope e aviso para atualizar e investigar o Secure Email Gateway.](./images/cisco-corrige-falha-explorada-no-gateway-de-e-mail-e-luna-perde-bugs-de-seguranca-em-teste.jpg)
