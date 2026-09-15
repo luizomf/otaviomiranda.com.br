@@ -195,8 +195,117 @@ async function boot() {
     },
   });
   editor = monaco.editor.create($('monaco'), {
-    value:
-      '# A little room to think\n\nOpen a Markdown file, or start writing here.\n\nYour words on the left. A little clarity on the right.\n\n## Make yourself at home\n\n- **Write**, **Split**, or **Read** — pick your view.\n- Drop a Markdown file anywhere to open it.\n- Find word wrap and Vim mode in the menu.\n\n> Less interface. More ideas.\n',
+    value: `# A little room to think
+
+**A proper Markdown editor. A comfortable place to read. A little less noise.**
+
+Draft a blog post. Clean up your notes. Read that impossibly long answer from your AI assistant. This is your space to turn a wall of text into something worth spending time with.
+
+> Your words deserve better than a tiny text box.
+>
+> **Welcome to your Markdown workspace.**
+
+---
+
+## One document. Three ways to see it.
+
+Some moments are for writing. Others are for stepping back and seeing the whole picture. Switch views without leaving your document.
+
+| View | What you see | Made for |
+| :--- | :---: | :--- |
+| **Write** | Just the editor | Finding the words |
+| **Split** | Editor + live preview | Watching an idea take shape |
+| **Read** | Just the preview | Reading without distractions |
+
+**Need more room on one side?** Drag the divider. Double-click it to return to an even split. Prefer the keyboard? Focus the divider and use the arrow keys; Enter resets it. On a small screen, the panes stack and the divider moves with them.
+
+## Less interface. More ideas.
+
+Open the menu and turn on **Zen mode**. The toolbar, panel headings, and footer disappear. Your document stays.
+
+Zen works in **every view**. Pair it with your browser's full-screen mode for a workspace that is almost entirely words. A subtle **Exit zen** handle brings the controls back; Escape works too.
+
+> No dashboard to manage. No panels fighting for attention.
+>
+> Just a little room to think.
+
+## A real editor under the hood
+
+Powered by **Monaco**, the editing engine behind VS Code. Not a dressed-up text area.
+
+- **Word wrap** — let long lines breathe instead of scrolling sideways. Toggle it in the menu or press **Alt+Z**.
+- **Find and replace** — including regular expressions, case matching, and whole-word search.
+- **Undo and redo** — because writing is mostly rewriting.
+- **Vim mode** — motions, search, and write commands for people whose fingers already know the way. Even **jj** leaves insert mode.
+- **Frontmatter, on demand** — insert a starter block for your post without losing the ability to undo it.
+- **Synchronized scrolling** — keep the preview alongside your source, or switch it off and explore each pane independently.
+
+Your wrap, Vim, scroll-sync, preview-theme, and split-size preferences are remembered. Make yourself at home.
+
+## Markdown with a little breathing room
+
+Clear headings. Comfortable line lengths. Proper spacing. **Bold when it matters**, *a little emphasis when it helps*, and ~~the words you decided to leave behind~~.
+
+### Give your ideas some structure
+
+1. Start with the question you actually want to answer.
+2. Write the rough version.
+   - Keep the useful details.
+   - Cut the impressive-sounding filler.
+3. Read it as if someone else wrote it.
+4. Make it simpler.
+
+### Keep track of the small victories
+
+- [x] Find a quieter place to write
+- [x] Give the preview room to breathe
+- [x] Stop fighting long lines
+- [ ] Turn that half-finished idea into a finished post
+
+Tables, quotes, nested lists, images, and syntax-highlighted code blocks all have a place here. Switch between a **light preview** and a **dark preview** whenever your eyes ask for a change.
+
+---
+
+## Your files, without the ceremony
+
+**Drag a file anywhere onto the workspace to open it.** Markdown and plain text are welcome: **.md**, **.markdown**, and **.txt**, one file at a time, up to **10 MB**.
+
+Or use **Open file** in the menu. Familiar shortcuts are here too:
+
+| Action | Shortcut |
+| :--- | :--- |
+| Open file | **Cmd/Ctrl+O** |
+| Save | **Cmd/Ctrl+S** |
+| Save as | **Cmd/Ctrl+Shift+S** |
+| Toggle word wrap | **Alt+Z** |
+| Leave zen mode | **Escape** |
+
+Dropped files open as **copies**: Save lets you choose a destination. In browsers that support direct file access, connected files can be saved back to disk and **autosaved every minute once write permission is granted**. Other browsers download a copy instead.
+
+A small dot beside the filename tells you there are unsaved edits. Opening a different document will ask before discarding them. No quiet surprises.
+
+## Local work. Clear boundaries.
+
+No account to create. No document-upload step. Your Markdown is parsed and sanitized in the browser.
+
+A few honest details:
+
+- **Preferences are remembered; document contents are not.** Save your work before closing the tab.
+- Editor libraries and optional syntax highlighting load from external CDNs, so this is not a guaranteed offline workspace.
+- Images embedded in a document may load from external sites.
+- Download-only browsers cannot confirm that a file reached your disk, so unsaved-edit warnings remain.
+- Preview HTML is sanitized: your document is a document, not a place to run scripts.
+
+---
+
+## Start with one sentence.
+
+A tutorial. A README. Tomorrow's post. The note you keep meaning to finish.
+
+Choose **New document** from the menu, drop in something you already wrote, or simply replace these words with your own.
+
+**The workspace is ready. The next idea is yours.**
+`,
     language: 'markdown',
     theme: 'workspace-dark',
     fontSize: 14,
