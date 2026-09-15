@@ -66,6 +66,8 @@ Personal site + blog. Astro SSG, deployed to GitHub Pages via Actions.
 4. **Open a PR** using the PR template and reference the issue in the body
    (`closes #N`).
 5. **Merge** the PR. GitHub closes the linked issue automatically.
+6. **Clean up** locally and remotely following the task-scoped standing
+   authorization in [AGENTS.md](AGENTS.md#post-delivery-cleanup).
 
 No local task files. No MEMORY.md ceremony. The git log + Issues + PRs are the
 record.
@@ -83,7 +85,8 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 ### Safety rules
 
 - Never force-push `main`.
-- No destructive git ops without explicit user confirmation.
+- Destructive git operations outside the standing post-delivery cleanup
+  authorization in AGENTS.md require explicit user confirmation.
 - Never commit `.env` or secrets.
 
 ---

@@ -68,6 +68,7 @@ Personal site + blog. Astro SSG, deployed to GitHub Pages via Actions.
 4. **Open a PR** using the PR template and reference the issue in the body
    (`closes #N`).
 5. **Merge** the PR. GitHub closes the linked issue automatically.
+6. **Clean up** the completed task locally and remotely (see below).
 
 Before reviewing, updating, or commenting on a PR, check its current state.
 Merged or closed PRs are historical, read-only records: do not modify or comment
@@ -76,6 +77,33 @@ PR.
 
 No local task files. No MEMORY.md ceremony. The git log + Issues + PRs are the
 record.
+
+### Post-delivery cleanup
+
+Delivery includes cleanup, not just a merged PR. Once the work is merged:
+
+- Confirm the primary checkout is available to this task before switching or
+  updating it, even if it is clean. If another task owns or actively uses it,
+  leave it untouched and report the return to `main` as blocked pending
+  coordination. Otherwise, switch it to `main` and fast-forward to the remote.
+- Remove the completed task's branches locally and remotely after verifying
+  their work is included in `main`.
+- Remove clean temporary worktrees created for the task, then prune stale
+  worktree and remote-tracking references.
+- Remove task-owned scratch directories and disposable artifacts, including
+  `.scratch`, temporary `run_dir` outputs, test reports, screenshots, and logs.
+  Keep committed deliverables and reusable dependencies/build caches.
+- Stop task-owned servers and watchers; close browser tabs or sessions created
+  for the task unless the owner explicitly wants them left running.
+- Verify the checkout is clean and report any intentionally retained resources
+  or cleanup blockers before calling the task complete.
+
+This is standing authorization for **task-scoped, post-merge cleanup**. It is
+not permission to delete other people's work or every non-`main` branch. Inspect
+ownership, uncommitted changes, and unmerged commits first. If ownership is
+unclear or cleanup could discard unmerged work, preserve it and ask the owner.
+Never force-remove dirty worktrees or use blanket cleanup commands to bypass
+these checks. Preserve `main` and the primary worktree.
 
 ### Commit style
 
@@ -90,7 +118,8 @@ Co-Authored-By: <AGENT_NAME> <noreply@AGENT_COMPANY.com>
 ### Safety rules
 
 - Never force-push `main`.
-- No destructive git ops without explicit user confirmation.
+- Destructive git operations outside the standing post-delivery cleanup
+  authorization require explicit user confirmation.
 - Never commit `.env` or secrets.
 
 ---
