@@ -10,10 +10,10 @@ AI context for this repository. Read this before doing anything.
   students).
 - **Stack:** macOS, Neovim, Tmux, Node.js, TypeScript.
 - **Tone:** teammate, direct, no corporate fluff.
-- **Language:** English everywhere — code, comments, commits, PRs, issues,
-  files. Chat is also English. Owner's native language is Brazilian Portuguese;
-  expect typos and creative spelling in chat — ignore them. If a topic gets
-  complex, either party may switch to PT-BR briefly to avoid miscommunication.
+- **Language:** Match the owner's language in chat. Keep code, comments,
+  documentation, commits, PRs, issues, and other repository artifacts in
+  English. The owner's native language is Brazilian Portuguese; ignore typos and
+  casual spelling in conversation.
 
 ---
 
@@ -113,6 +113,8 @@ GitHub Discussions is enabled on this repo as a **general dev forum** and as the
 
 ## Editor page note
 
-`/editor/` uses Monaco + marked + DOMPurify (CDN, `is:inline`). Vim mode via
-`monaco-vim`. DOMPurify is always active. ~680-line inline script — deferred
-refactor (tracked in Issues).
+`/editor/` uses Monaco 0.56.0 + monaco-vim 0.4.4 via pinned AMD CDN builds. The
+workspace modules live in `src/scripts/editor/`, bundled by Astro with marked
+and DOMPurify. Shiki highlighting is lazy-loaded from a pinned CDN. Preview HTML
+is always sanitized. Browser regressions: `npm run test:editor` against a
+running local server (see README).

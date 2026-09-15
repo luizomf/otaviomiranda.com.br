@@ -173,6 +173,36 @@ Triggered manually via GitHub Actions. Go to **Actions → Deploy to GitHub Page
 
 ## Editor
 
-There's a browser-based Markdown editor at `/editor/` — Monaco + live preview
+The browser-based Markdown workspace at `/editor/` includes:
 
-- File System Access API. Useful for writing posts directly in the browser.
+- Write, split, and read layouts; a draggable divider (double-click to reset).
+- Zen mode in every layout, with an exit handle and Escape shortcut.
+- Word wrap (`Alt+Z`), optional Vim motions, and synchronized scrolling.
+- Light/dark preview with styled tables, quotes, task lists, and highlighted
+  code.
+- Open or drop one `.md`, `.markdown`, or `.txt` file (up to 10 MB).
+- Save (`Cmd/Ctrl+S`), Save as (`Cmd/Ctrl+Shift+S`), and undoable frontmatter
+  insertion.
+
+Dropped files and fallback uploads open as copies: Save asks for a destination.
+On browsers with the File System Access API, connected files autosave every
+minute once write permission is granted. Other browsers download a copy; the
+editor cannot confirm a download completed and keeps unsaved-edit warnings.
+Replacing unsaved content requires confirmation. Preferences, but **not document
+contents**, are stored locally. Save your work before closing the page.
+
+Markdown parsing and sanitization are bundled locally. Monaco, Vim, and optional
+Shiki highlighting load from pinned CDNs; embedded images may contact remote
+hosts. Preview HTML is always sanitized.
+
+### Editor browser tests
+
+With Google Chrome installed, start the local server in one terminal:
+
+```sh
+npm run dev -- --host 127.0.0.1 --port 4321
+```
+
+In another terminal, run `npm run test:editor`. Set `EDITOR_TEST_URL` to test
+another running server, including an Astro preview of the production build.
+Tests use a separate headless browser profile, never your personal tabs.
