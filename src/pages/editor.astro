@@ -1,37 +1,5 @@
 ---
-/**
- * ARQUIVO: editor.astro
- *
- * O QUE FAZ:
- *   Pagina do editor Markdown online. Implementa um editor completo usando
- *   Monaco Editor (o mesmo motor do VS Code) com suporte a Vim motions,
- *   preview em tempo real com syntax highlighting via Shiki, abertura/salvamento
- *   de arquivos .md via File System Access API, auto-save periodico e
- *   insercao automatica de frontmatter. E uma pagina 100% client-side
- *   (todo o JavaScript roda no navegador).
- *
- * USADO EM:
- *   - https://otaviomiranda.com.br/editor/
- *
- * CONCEITO ASTRO:
- *   Pagina com BlankLayout — usa o BlankLayout em vez do BaseLayout para
- *   ter controle total sobre CSS e JS, sem herdar estilos globais do site.
- *
- *   Diretiva is:inline — inline script tags tell Astro to NOT
- *   processar esses scripts (sem bundling, sem tree-shaking). O codigo e
- *   inserido tal qual no HTML final. Isso e necessario aqui porque os scripts
- *   dependem de CDNs externas (Monaco, Marked, DOMPurify) carregadas via
- *   require/AMD, que nao funcionam com o bundler do Astro.
- *
- *   set:html — a diretiva set:html={JSON.stringify(editorSchema)} injeta
- *   HTML bruto (neste caso, JSON-LD para SEO) dentro do script de JSON-LD,
- *   sem escapar os caracteres. E a forma do Astro de fazer innerHTML.
- *
- *   Scoped styles — the final style block generates local-scope CSS
- *   (o Astro adiciona atributos data-astro-cid-* para isolar os estilos).
- *   O seletor :global() e usado para estilizar elementos dentro do preview
- *   que sao gerados dinamicamente pelo JavaScript e nao tem o atributo de escopo.
- */
+/** A distraction-free, client-side Markdown workspace. No site-wide styles. */
 import BlankLayout from '../layouts/BlankLayout.astro';
 
 const editorSchema = {
@@ -44,10 +12,7 @@ const editorSchema = {
   description:
     'Editor Markdown com Monaco, Vim mode e preview em tempo real no navegador.',
   url: 'https://otaviomiranda.com.br/editor/',
-  author: {
-    '@type': 'Person',
-    name: 'Otávio Miranda',
-  },
+  author: { '@type': 'Person', name: 'Otávio Miranda' },
 };
 ---
 
@@ -60,885 +25,849 @@ const editorSchema = {
     type='application/ld+json'
     set:html={JSON.stringify(editorSchema)}
   />
-
-  <div class='editor-shell'>
+  <main
+    class='editor-shell'
+    data-layout='split'
+    lang='en'
+    aria-label='Markdown workspace'
+  >
     <header class='editor-toolbar'>
-      <h1 class='editor-title'>Markdown Editor</h1>
-      <span id='editor-file' class='editor-file'>untitled.md</span>
-      <span id='editor-vim-status' class='editor-vim-status'
-        >Vim: carregando...</span
+      <a class='editor-brand' href='/' aria-label='Otávio Miranda home'
+        >M<span>↓</span></a
       >
-      <div class='editor-actions'>
-        <button id='editor-new' type='button'>Novo</button>
-        <button id='editor-open' type='button'>Abrir</button>
-        <button id='editor-frontmatter' type='button'>Frontmatter</button>
-        <button id='editor-vim-toggle' type='button' data-active='false'>
-          Vim OFF
+      <div class='editor-document'>
+        <h1 id='editor-file'>untitled.md</h1>
+        <span class='editor-subtitle'>Markdown workspace</span>
+      </div>
+      <div class='editor-layouts' role='group' aria-label='Workspace layout'>
+        <button
+          type='button'
+          data-layout='code'
+          aria-label='Editor only'
+          aria-pressed='false'
+          title='Editor only'
+        >
+          <svg viewBox='0 0 20 20' aria-hidden='true'
+            ><rect x='2.5' y='3.5' width='15' height='13' rx='2'></rect><path
+              d='m8 7-3 3 3 3m4-6 3 3-3 3'></path></svg
+          >
+          <span>Write</span>
         </button>
-        <button id='editor-preview-visibility' type='button' data-active='true'>
-          Ocultar Preview
+        <button
+          type='button'
+          data-layout='split'
+          aria-label='Split view'
+          aria-pressed='true'
+          title='Split view'
+        >
+          <svg viewBox='0 0 20 20' aria-hidden='true'
+            ><rect x='2.5' y='3.5' width='15' height='13' rx='2'></rect><path
+              d='M10 4v12'></path></svg
+          >
+          <span>Split</span>
         </button>
-        <button id='editor-save' type='button'>Salvar</button>
-        <button id='editor-save-as' type='button'>Salvar Como</button>
+        <button
+          type='button'
+          data-layout='preview'
+          aria-label='Preview only'
+          aria-pressed='false'
+          title='Preview only'
+        >
+          <svg viewBox='0 0 20 20' aria-hidden='true'
+            ><path d='M2 10s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5Z'></path><circle
+              cx='10'
+              cy='10'
+              r='2'></circle></svg
+          >
+          <span>Read</span>
+        </button>
+      </div>
+      <button
+        id='editor-save'
+        class='editor-save'
+        type='button'
+        title='Save (⌘/Ctrl+S)'
+        disabled>Save</button
+      >
+      <div class='editor-menu-container'>
+        <button
+          id='editor-menu-toggle'
+          class='editor-menu-toggle'
+          type='button'
+          aria-label='Editor menu'
+          aria-expanded='false'
+          aria-controls='editor-menu'
+        >
+          <svg viewBox='0 0 20 20' aria-hidden='true'
+            ><path d='M3 5h14M3 10h14M3 15h14'></path></svg
+          >
+        </button>
+        <div id='editor-menu' class='editor-menu' hidden>
+          <p class='editor-menu-label'>Document</p>
+          <button id='editor-new' type='button' disabled>New document</button>
+          <button id='editor-open' type='button' disabled
+            >Open file <kbd>⌘/Ctrl O</kbd></button
+          >
+          <button id='editor-save-as' type='button' disabled
+            >Save as… <kbd>⇧ ⌘/Ctrl S</kbd></button
+          >
+          <button id='editor-frontmatter' type='button' disabled
+            >Insert frontmatter</button
+          >
+          <hr />
+          <p class='editor-menu-label'>Workspace</p>
+          <button id='editor-zen' type='button' aria-pressed='false' disabled
+            >Zen mode <kbd>Esc to exit</kbd></button
+          >
+          <button id='editor-wrap' type='button' aria-pressed='false' disabled
+            >Word wrap <span class='editor-setting-state'>Off</span></button
+          >
+          <button
+            id='editor-vim-toggle'
+            type='button'
+            aria-pressed='false'
+            disabled
+            >Vim mode <span class='editor-setting-state'>Off</span></button
+          >
+          <button id='editor-sync' type='button' aria-pressed='true' disabled
+            >Sync scrolling <span class='editor-setting-state'>On</span></button
+          >
+          <button
+            id='editor-preview-theme'
+            type='button'
+            aria-pressed='false'
+            disabled
+            >Dark preview <span class='editor-setting-state'>Off</span></button
+          >
+          <p class='editor-menu-hint'>
+            Drop a .md, .markdown or .txt file anywhere to open it. Files stay
+            in your browser; embedded images may load remotely.
+          </p>
+        </div>
       </div>
     </header>
 
     <div class='editor-panes'>
-      <section class='editor-pane editor-pane--code'>
+      <section
+        class='editor-pane editor-pane--code'
+        aria-label='Markdown source'
+      >
+        <div class='editor-pane-heading'>
+          <span>MARKDOWN</span><span id='editor-vim-status'>Vim off</span>
+        </div>
         <div id='editor-monaco' class='editor-monaco'></div>
       </section>
-
-      <section class='editor-pane editor-pane--preview'>
-        <article id='editor-preview' class='editor-preview'></article>
+      <div
+        id='editor-divider'
+        class='editor-divider'
+        role='separator'
+        tabindex='0'
+        aria-label='Resize editor and preview'
+        aria-controls='editor-monaco editor-preview'
+        aria-orientation='vertical'
+        aria-valuemin='20'
+        aria-valuemax='80'
+        aria-valuenow='50'
+        title='Drag to resize · Double-click to reset'
+      >
+      </div>
+      <section
+        class='editor-pane editor-pane--preview'
+        aria-label='Rendered preview'
+        data-theme='light'
+      >
+        <div class='editor-pane-heading'>
+          <span>PREVIEW</span><span>Rendered locally</span>
+        </div>
+        <article
+          id='editor-preview'
+          class='editor-preview'
+          tabindex='0'
+          aria-label='Markdown preview'
+        >
+        </article>
       </section>
     </div>
-  </div>
-
+    <footer class='editor-statusbar'>
+      <span id='editor-status' role='status' aria-live='polite'
+        >Loading editor…</span
+      >
+      <span id='editor-stats'>Markdown · UTF-8</span>
+    </footer>
+    <button
+      id='editor-zen-exit'
+      class='editor-zen-exit'
+      type='button'
+      aria-label='Exit zen mode'
+      title='Exit zen mode (Esc)'
+      hidden>↗ <span>Exit zen</span></button
+    >
+    <div
+      id='editor-drop-overlay'
+      class='editor-drop-overlay'
+      hidden
+      aria-hidden='true'
+    >
+      <div>
+        <strong>Drop to open</strong><span>One Markdown or text file</span>
+      </div>
+    </div>
+  </main>
   <input
     id='editor-open-input'
     type='file'
     hidden
-    accept='.md,.markdown,text/markdown,text/plain'
+    accept='.md,.markdown,.txt,text/markdown,text/plain'
   />
-
-  <script is:inline src='https://cdn.jsdelivr.net/npm/marked/marked.min.js'
-  ></script>
   <script
     is:inline
-    src='https://cdn.jsdelivr.net/npm/dompurify@3.2.7/dist/purify.min.js'
+    src='https://cdn.jsdelivr.net/npm/monaco-editor@0.56.0/min/vs/loader.js'
   ></script>
-  <script
-    is:inline
-    src='https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs/loader.js'
-  ></script>
-  <script is:inline>
-    (() => {
-      if (window.__otavioMarkdownEditorBooted) return;
-      window.__otavioMarkdownEditorBooted = true;
-
-      const fileLabel = document.getElementById('editor-file');
-      const previewEl = document.getElementById('editor-preview');
-      const openInput = document.getElementById('editor-open-input');
-
-      const newButton = document.getElementById('editor-new');
-      const openButton = document.getElementById('editor-open');
-      const frontmatterButton = document.getElementById('editor-frontmatter');
-      const vimToggleButton = document.getElementById('editor-vim-toggle');
-      const previewVisibilityButton = document.getElementById(
-        'editor-preview-visibility',
-      );
-      const vimStatus = document.getElementById('editor-vim-status');
-      const saveButton = document.getElementById('editor-save');
-      const saveAsButton = document.getElementById('editor-save-as');
-      const shellEl = document.querySelector('.editor-shell');
-      const panesEl = document.querySelector('.editor-panes');
-      const codePaneEl = document.querySelector('.editor-pane--code');
-      const previewPaneEl = document.querySelector('.editor-pane--preview');
-
-      const supportsFSApi =
-        'showOpenFilePicker' in window && 'showSaveFilePicker' in window;
-      const AUTO_SAVE_INTERVAL_MS = 60_000;
-      const SHIKI_THEME = 'github-dark-high-contrast';
-      const SHIKI_IMPORT_URL = 'https://esm.sh/shiki@3.14.0?bundle';
-      const SHIKI_LANGS = [
-        'plaintext',
-        'text',
-        'bash',
-        'shell',
-        'sh',
-        'javascript',
-        'typescript',
-        'jsx',
-        'tsx',
-        'json',
-        'python',
-        'html',
-        'css',
-        'yaml',
-        'yml',
-        'markdown',
-        'sql',
-        'nginx',
-        'xml',
-        'apache',
-        'ssh-config',
-      ];
-
-      const nowDate = () => new Date().toLocaleDateString('sv-SE');
-      const frontmatterTemplate = () =>
-        `---\ntitle: ''\ndescription: ''\ndate: ${nowDate()}\nauthor: 'Otávio Miranda'\n---\n\n`;
-
-      let editor;
-      let fileHandle = null;
-      let currentFileName = 'untitled.md';
-      let renderTimer = null;
-      let vimMode = null;
-      let monacoVimModule = null;
-      let vimKeymapsConfigured = false;
-      let vimCommandsConfigured = false;
-      let autoSaveTimerId = null;
-      let lastSavedContent = '';
-      let isSaving = false;
-      let previewVisible = true;
-      let previewRenderNonce = 0;
-      let shikiModulePromise = null;
-      let shikiHighlighterPromise = null;
-      let syncingFromEditor = false;
-      let syncingFromPreview = false;
-
-      const setPreviewVisibilityUiState = () => {
-        if (
-          !previewVisibilityButton ||
-          !shellEl ||
-          !panesEl ||
-          !codePaneEl ||
-          !previewPaneEl
-        ) {
-          return;
-        }
-
-        previewVisibilityButton.dataset.active = previewVisible
-          ? 'true'
-          : 'false';
-        previewVisibilityButton.setAttribute(
-          'aria-pressed',
-          previewVisible ? 'true' : 'false',
-        );
-        previewVisibilityButton.textContent = previewVisible
-          ? 'Ocultar Preview'
-          : 'Mostrar Preview';
-
-        shellEl.classList.toggle('editor-shell--code-only', !previewVisible);
-        panesEl.classList.toggle('editor-panes--code-only', !previewVisible);
-        codePaneEl.classList.toggle('editor-pane--full', !previewVisible);
-        previewPaneEl.hidden = !previewVisible;
-      };
-
-      const setCurrentFileName = fileName => {
-        currentFileName = fileName;
-        fileLabel.textContent = fileName;
-      };
-
-      const stripFrontmatterForPreview = markdown => {
-        const withoutBom = markdown.replace(/^\uFEFF/, '');
-        if (
-          !withoutBom.startsWith('---\n') &&
-          !withoutBom.startsWith('---\r\n')
-        ) {
-          return markdown;
-        }
-
-        return withoutBom.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '');
-      };
-
-      const getScrollProgress = (scrollTop, scrollHeight, viewportHeight) => {
-        const maxScrollTop = Math.max(0, scrollHeight - viewportHeight);
-        if (!maxScrollTop) return 0;
-        return Math.min(1, Math.max(0, scrollTop / maxScrollTop));
-      };
-
-      const syncPreviewScrollToEditor = () => {
-        if (!editor || !previewVisible) return;
-
-        const editorViewportHeight = editor.getLayoutInfo().height;
-        const progress = getScrollProgress(
-          editor.getScrollTop(),
-          editor.getScrollHeight(),
-          editorViewportHeight,
-        );
-
-        const previewMaxScrollTop = Math.max(
-          0,
-          previewEl.scrollHeight - previewEl.clientHeight,
-        );
-        syncingFromEditor = true;
-        previewEl.scrollTop = progress * previewMaxScrollTop;
-        syncingFromEditor = false;
-      };
-
-      const syncEditorScrollToPreview = () => {
-        if (!editor || !previewVisible) return;
-
-        const progress = getScrollProgress(
-          previewEl.scrollTop,
-          previewEl.scrollHeight,
-          previewEl.clientHeight,
-        );
-        const editorViewportHeight = editor.getLayoutInfo().height;
-        const editorMaxScrollTop = Math.max(
-          0,
-          editor.getScrollHeight() - editorViewportHeight,
-        );
-
-        syncingFromPreview = true;
-        editor.setScrollTop(progress * editorMaxScrollTop);
-        syncingFromPreview = false;
-      };
-
-      const getShikiModule = async () => {
-        if (shikiModulePromise) return shikiModulePromise;
-        shikiModulePromise = import(SHIKI_IMPORT_URL).catch(() => null);
-        return shikiModulePromise;
-      };
-
-      const getShikiHighlighter = async () => {
-        if (shikiHighlighterPromise) return shikiHighlighterPromise;
-
-        shikiHighlighterPromise = (async () => {
-          const shiki = await getShikiModule();
-          if (!shiki?.createHighlighter) return null;
-
-          try {
-            return await shiki.createHighlighter({
-              themes: [SHIKI_THEME],
-              langs: SHIKI_LANGS,
-            });
-          } catch (_) {
-            return null;
-          }
-        })();
-
-        return shikiHighlighterPromise;
-      };
-
-      const inferCodeLanguage = codeEl => {
-        const className = codeEl.className || '';
-        const languageClass = className
-          .split(/\s+/)
-          .find(token => token.startsWith('language-'));
-
-        if (!languageClass) return 'plaintext';
-
-        const language = languageClass.replace('language-', '').trim();
-        if (!language) return 'plaintext';
-        return language;
-      };
-
-      const applyShikiToPreview = async renderNonce => {
-        const highlighter = await getShikiHighlighter();
-        if (!highlighter || renderNonce !== previewRenderNonce) return;
-
-        const blocks = Array.from(previewEl.querySelectorAll('pre > code'));
-        for (const codeEl of blocks) {
-          if (renderNonce !== previewRenderNonce) return;
-
-          const preEl = codeEl.parentElement;
-          if (!preEl) continue;
-
-          const source = codeEl.textContent || '';
-          const language = inferCodeLanguage(codeEl);
-
-          let shikiHtml = '';
-          try {
-            shikiHtml = highlighter.codeToHtml(source, {
-              lang: language,
-              theme: SHIKI_THEME,
-            });
-          } catch (_) {
-            shikiHtml = highlighter.codeToHtml(source, {
-              lang: 'plaintext',
-              theme: SHIKI_THEME,
-            });
-          }
-
-          const template = document.createElement('template');
-          template.innerHTML = shikiHtml.trim();
-          const shikiPre = template.content.firstElementChild;
-          if (!shikiPre) continue;
-
-          preEl.replaceWith(shikiPre);
-        }
-
-        syncPreviewScrollToEditor();
-      };
-
-      const renderPreview = () => {
-        if (!editor || !window.marked) return;
-        if (!previewVisible) return;
-        const markdown = stripFrontmatterForPreview(editor.getValue());
-        const renderedHtml = window.marked.parse(markdown);
-        const currentRenderNonce = ++previewRenderNonce;
-
-        const purifier = window.DOMPurify;
-
-        if (purifier?.sanitize) {
-          previewEl.innerHTML = purifier.sanitize(renderedHtml, {
-            USE_PROFILES: { html: true },
-          });
-        } else {
-          // Fail closed: if sanitizer is unavailable, avoid injecting raw HTML.
-          previewEl.textContent = markdown;
-          return;
-        }
-
-        requestAnimationFrame(syncPreviewScrollToEditor);
-        applyShikiToPreview(currentRenderNonce).catch(() => {});
-      };
-
-      const schedulePreviewRender = () => {
-        if (renderTimer) {
-          clearTimeout(renderTimer);
-        }
-        renderTimer = setTimeout(renderPreview, 90);
-      };
-
-      const suggestMarkdownName = name => {
-        if (!name || typeof name !== 'string') return 'untitled.md';
-        return name.endsWith('.md') ? name : `${name}.md`;
-      };
-
-      const downloadFallback = () => {
-        const blob = new Blob([editor.getValue()], {
-          type: 'text/markdown;charset=utf-8',
-        });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = suggestMarkdownName(currentFileName);
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-      };
-
-      const writeHandle = async handle => {
-        const writable = await handle.createWritable();
-        await writable.write(editor.getValue());
-        await writable.close();
-      };
-
-      const markCurrentContentAsSaved = () => {
-        if (!editor) return;
-        lastSavedContent = editor.getValue();
-      };
-
-      const hasUnsavedChanges = () => {
-        if (!editor) return false;
-        return editor.getValue() !== lastSavedContent;
-      };
-
-      const canAutoSaveToFile = () => {
-        return Boolean(supportsFSApi && fileHandle && editor);
-      };
-
-      const autoSaveIfNeeded = async () => {
-        if (!canAutoSaveToFile() || !hasUnsavedChanges() || isSaving) return;
-        isSaving = true;
-        try {
-          await writeHandle(fileHandle);
-          markCurrentContentAsSaved();
-        } catch (_) {
-          // Keep silent; manual save flow remains available.
-        } finally {
-          isSaving = false;
-        }
-      };
-
-      const startAutoSaveLoop = () => {
-        if (autoSaveTimerId) return;
-        autoSaveTimerId = window.setInterval(() => {
-          autoSaveIfNeeded().catch(() => {});
-        }, AUTO_SAVE_INTERVAL_MS);
-      };
-
-      const saveAs = async () => {
-        if (!supportsFSApi) {
-          downloadFallback();
-          markCurrentContentAsSaved();
-          return;
-        }
-
-        const handle = await window.showSaveFilePicker({
-          suggestedName: suggestMarkdownName(currentFileName),
-          types: [
-            {
-              description: 'Markdown',
-              accept: { 'text/markdown': ['.md', '.markdown'] },
-            },
-          ],
-        });
-
-        isSaving = true;
-        try {
-          await writeHandle(handle);
-          fileHandle = handle;
-          setCurrentFileName(
-            handle.name || suggestMarkdownName(currentFileName),
-          );
-          markCurrentContentAsSaved();
-        } finally {
-          isSaving = false;
-        }
-      };
-
-      const save = async () => {
-        if (!editor) return;
-        if (!supportsFSApi) {
-          downloadFallback();
-          markCurrentContentAsSaved();
-          return;
-        }
-
-        if (!fileHandle) {
-          await saveAs();
-          return;
-        }
-
-        isSaving = true;
-        try {
-          await writeHandle(fileHandle);
-          markCurrentContentAsSaved();
-        } finally {
-          isSaving = false;
-        }
-      };
-
-      const insertFrontmatterIfMissing = () => {
-        if (!editor) return;
-        const value = editor.getValue().trimStart();
-        if (value.startsWith('---')) return;
-        editor.setValue(`${frontmatterTemplate()}${editor.getValue()}`);
-      };
-
-      const createNewDocument = () => {
-        fileHandle = null;
-        setCurrentFileName('untitled.md');
-        editor.setValue('');
-        markCurrentContentAsSaved();
-      };
-
-      const openWithFallbackInput = () => {
-        openInput.value = '';
-        openInput.click();
-      };
-
-      const openFromFileSystem = async () => {
-        if (!supportsFSApi) {
-          openWithFallbackInput();
-          return;
-        }
-
-        const [handle] = await window.showOpenFilePicker({
-          multiple: false,
-          types: [
-            {
-              description: 'Markdown',
-              accept: {
-                'text/markdown': ['.md', '.markdown'],
-                'text/plain': ['.txt'],
-              },
-            },
-          ],
-        });
-
-        const file = await handle.getFile();
-        const text = await file.text();
-        fileHandle = handle;
-        setCurrentFileName(file.name || 'untitled.md');
-        editor.setValue(text);
-        markCurrentContentAsSaved();
-      };
-
-      const setVimUiState = ({ enabled, available }) => {
-        if (!vimToggleButton || !vimStatus) return;
-
-        if (!available) {
-          vimToggleButton.disabled = true;
-          vimToggleButton.dataset.active = 'false';
-          vimToggleButton.textContent = 'Vim indisponível';
-          vimStatus.textContent = 'Vim: plugin indisponível';
-          return;
-        }
-
-        vimToggleButton.disabled = false;
-        vimToggleButton.dataset.active = enabled ? 'true' : 'false';
-        vimToggleButton.setAttribute(
-          'aria-pressed',
-          enabled ? 'true' : 'false',
-        );
-        vimToggleButton.textContent = enabled ? 'Vim ON' : 'Vim OFF';
-        vimStatus.textContent = enabled ? '-- NORMAL --' : 'Vim: desativado';
-      };
-
-      const disableVimMode = () => {
-        if (!vimMode) return;
-        vimMode.dispose();
-        vimMode = null;
-        setVimUiState({ enabled: false, available: true });
-      };
-
-      const enableVimMode = () => {
-        if (!editor || !monacoVimModule?.initVimMode || vimMode) return;
-        vimMode = monacoVimModule.initVimMode(editor, vimStatus);
-        setVimUiState({ enabled: true, available: true });
-      };
-
-      const configureVimKeymaps = () => {
-        if (vimKeymapsConfigured) return;
-        const vimApi = monacoVimModule?.VimMode?.Vim;
-        if (!vimApi?.map) return;
-
-        // Faster escape from insert mode, similar to common Neovim setup.
-        vimApi.map('jj', '<Esc>', 'insert');
-        vimKeymapsConfigured = true;
-      };
-
-      const configureVimCommands = () => {
-        if (vimCommandsConfigured) return;
-        const vimApi = monacoVimModule?.VimMode?.Vim;
-        if (!vimApi?.defineEx) return;
-
-        vimApi.defineEx('write', 'w', () => {
-          save().catch(() => {});
-        });
-        vimApi.defineEx('wq', 'wq', () => {
-          save().catch(() => {});
-        });
-
-        vimCommandsConfigured = true;
-      };
-
-      const loadMonaco = () =>
-        new Promise(resolve => {
-          const waitForRequire = () => {
-            if (!window.require) {
-              setTimeout(waitForRequire, 25);
-              return;
-            }
-
-            window.require.config({
-              paths: {
-                vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs',
-                'monaco-vim':
-                  'https://cdn.jsdelivr.net/npm/monaco-vim@0.4.2/dist/monaco-vim',
-              },
-            });
-
-            window.require(
-              ['vs/editor/editor.main'],
-              () => {
-                window.require(
-                  ['monaco-vim'],
-                  monacoVim => {
-                    resolve({ monaco: window.monaco, monacoVim });
-                  },
-                  () => {
-                    resolve({ monaco: window.monaco, monacoVim: null });
-                  },
-                );
-              },
-              () => {
-                resolve({ monaco: window.monaco, monacoVim: null });
-              },
-            );
-          };
-
-          waitForRequire();
-        });
-
-      const boot = async () => {
-        const { monaco, monacoVim } = await loadMonaco();
-        monacoVimModule = monacoVim;
-
-        monaco.editor.defineTheme('otavio-dark', {
-          base: 'vs-dark',
-          inherit: true,
-          rules: [],
-          colors: {
-            // 'editor.background': '#0b1020',
-            // 'editorLineNumber.foreground': '#7680a4',
-            // 'editorLineNumber.activeForeground': '#dbe2ff',
-          },
-        });
-
-        editor = monaco.editor.create(
-          document.getElementById('editor-monaco'),
-          {
-            value:
-              '# Olá mundo!\n\nEste é o mesmo editor que roda no seu VS Code. Use como quiser.',
-            language: 'markdown',
-            theme: 'otavio-dark',
-            fontSize: 14,
-            minimap: { enabled: false },
-            automaticLayout: true,
-            wordWrap: 'off',
-            lineNumbersMinChars: 3,
-            scrollBeyondLastLine: false,
-          },
-        );
-
-        editor.onDidChangeModelContent(schedulePreviewRender);
-        editor.onDidScrollChange(() => {
-          if (syncingFromPreview) return;
-          syncPreviewScrollToEditor();
-        });
-        previewEl.addEventListener('scroll', () => {
-          if (syncingFromEditor) return;
-          syncEditorScrollToPreview();
-        });
-        setPreviewVisibilityUiState();
-        renderPreview();
-
-        if (monacoVimModule?.initVimMode) {
-          configureVimKeymaps();
-          configureVimCommands();
-          enableVimMode();
-        } else {
-          setVimUiState({ enabled: false, available: false });
-        }
-
-        openInput.addEventListener('change', async event => {
-          const file = event.target.files?.[0];
-          if (!file) return;
-          const text = await file.text();
-          fileHandle = null;
-          setCurrentFileName(file.name || 'untitled.md');
-          editor.setValue(text);
-          markCurrentContentAsSaved();
-        });
-
-        newButton.addEventListener('click', createNewDocument);
-        openButton.addEventListener('click', () => {
-          openFromFileSystem().catch(() => {});
-        });
-        frontmatterButton.addEventListener('click', insertFrontmatterIfMissing);
-        vimToggleButton.addEventListener('click', () => {
-          if (!monacoVimModule?.initVimMode) return;
-          if (vimMode) {
-            disableVimMode();
-            return;
-          }
-          enableVimMode();
-        });
-        previewVisibilityButton.addEventListener('click', () => {
-          previewVisible = !previewVisible;
-          setPreviewVisibilityUiState();
-          if (previewVisible) {
-            renderPreview();
-          }
-        });
-        saveButton.addEventListener('click', () => {
-          save().catch(() => {});
-        });
-        saveAsButton.addEventListener('click', () => {
-          saveAs().catch(() => {});
-        });
-
-        window.addEventListener('keydown', event => {
-          const key = event.key.toLowerCase();
-          const ctrlOrCmd = event.metaKey || event.ctrlKey;
-          if (!ctrlOrCmd) return;
-
-          if (key === 's') {
-            event.preventDefault();
-            save().catch(() => {});
-            return;
-          }
-
-          if (key === 'o') {
-            event.preventDefault();
-            openFromFileSystem().catch(() => {});
-          }
-        });
-
-        window.addEventListener('beforeunload', event => {
-          autoSaveIfNeeded().catch(() => {});
-          if (!hasUnsavedChanges()) return;
-          event.preventDefault();
-        });
-
-        window.addEventListener('pagehide', () => {
-          autoSaveIfNeeded().catch(() => {});
-        });
-
-        startAutoSaveLoop();
-      };
-
-      boot();
-    })();
+  <script>
+    import '../scripts/editor/index.js';
   </script>
 </BlankLayout>
 
 <style>
-  *,
-  *::before,
-  *::after {
+  :global(html),
+  :global(body) {
+    margin: 0;
+    height: 100%;
+    background: #15181e;
+  }
+  .editor-shell,
+  .editor-shell * {
     box-sizing: border-box;
   }
-
-  html {
-    font-size: 62.5%;
-  }
-
-  html,
-  body {
-    margin: 0;
-    background: #eee;
-    font-family:
-      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-      'Courier New', monospace;
-  }
-
   .editor-shell {
+    --surface: #1c2028;
+    --border: #303641;
+    --muted: #9ca8b9;
+    --accent: #c3dfa0;
     height: 100vh;
+    height: 100dvh;
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto minmax(0, 1fr) auto;
     overflow: hidden;
+    color: #e4e9f0;
+    font:
+      13px/1.5 system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      sans-serif;
   }
-
+  .editor-shell [hidden] {
+    display: none !important;
+  }
+  button {
+    font: inherit;
+    cursor: pointer;
+    color: inherit;
+  }
+  button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  button:focus-visible,
+  a:focus-visible,
+  article:focus-visible {
+    outline: 2px solid #c3dfa0;
+    outline-offset: -3px;
+  }
+  button svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+  }
   .editor-toolbar {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    gap: 1.2rem;
-    padding: 1.2rem 1.6rem;
-    background: #1e1e1e;
+    gap: 16px;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    background: #15181e;
+    z-index: 10;
   }
-
-  .editor-title {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: #eee;
-    letter-spacing: 0.03em;
-    margin-right: 0.8rem;
-    margin-block: 0;
+  .editor-brand {
+    font:
+      800 22px/1 ui-monospace,
+      monospace;
+    letter-spacing: -3px;
+    text-decoration: none;
+    color: var(--accent);
+    padding: 8px 10px 8px 0;
   }
-
-  .editor-file {
-    font-size: 1.2rem;
-    color: #ccc;
+  .editor-brand span {
+    font-weight: 400;
+  }
+  .editor-document {
+    flex: 1;
+    min-width: 0;
+  }
+  .editor-document h1 {
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 34ch;
-    margin-right: auto;
   }
-
-  .editor-actions {
+  .editor-subtitle {
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .editor-layouts {
     display: flex;
-    gap: 0.8rem;
-    flex-wrap: wrap;
+    padding: 3px;
+    border: 1px solid var(--border);
+    background: #0f1217;
+    border-radius: 8px;
+    gap: 2px;
   }
-
-  .editor-actions button {
-    border: 1px solid transparent;
-    background: #aaa;
-    color: #000;
-    font: inherit;
-    font-size: 1.2rem;
-    font-weight: 700;
-    padding: 0.3rem 0.8rem;
-    border-radius: 999px;
-    cursor: pointer;
+  .editor-layouts button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    border-radius: 5px;
+    padding: 6px 11px;
+    min-height: 32px;
   }
-
-  .editor-actions button:hover {
-    background: #ccc;
+  .editor-layouts button[aria-pressed='true'] {
+    background: #303742;
+    color: #f4f6fa;
+    box-shadow: 0 1px 3px #0004;
   }
-
-  .editor-actions button[data-active='true'] {
-    background: #aabbcc;
+  .editor-layouts button:hover {
+    color: #fff;
   }
-
-  .editor-actions button:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
+  .editor-save {
+    background: var(--accent);
+    color: #1d2c17;
+    border: 0;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-weight: 650;
   }
-
-  .editor-vim-status {
-    font-size: 1.15rem;
-    color: #ccc;
-    border-radius: 999px;
-    padding: 0.4rem 0.8rem;
-    white-space: nowrap;
+  .editor-save:hover {
+    background: #d6edba;
   }
-
-  .editor-panes {
+  .editor-menu-container {
+    position: relative;
+  }
+  .editor-menu-toggle {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-    gap: 1.2rem;
-    padding: 1.2rem;
-    height: 100%;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: transparent;
+  }
+  .editor-menu-toggle:hover,
+  .editor-menu-toggle[aria-expanded='true'] {
+    background: #303742;
+  }
+  .editor-menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 12px);
+    width: min(300px, calc(100vw - 24px));
+    max-height: calc(100dvh - 90px);
+    overflow: auto;
+    padding: 8px;
+    background: #1c2028;
+    border: 1px solid #3c4350;
+    border-radius: 10px;
+    box-shadow: 0 16px 50px #0006;
+  }
+  .editor-menu-label {
+    margin: 8px 10px 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--muted);
+  }
+  .editor-menu button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    padding: 9px 10px;
+    background: transparent;
+    border: 0;
+    border-radius: 5px;
+    gap: 12px;
+  }
+  .editor-menu button:hover {
+    background: #303742;
+  }
+  .editor-menu kbd {
+    font:
+      10px ui-monospace,
+      monospace;
+    color: var(--muted);
+  }
+  .editor-setting-state {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .editor-menu button[aria-pressed='true'] .editor-setting-state {
+    color: var(--accent);
+  }
+  .editor-menu hr {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 8px 2px;
+  }
+  .editor-menu-hint {
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 12px 10px 6px;
+  }
+  .editor-panes {
+    --code-size: 1fr;
+    --preview-size: 1fr;
+    display: grid;
+    grid-template-columns: minmax(0, var(--code-size, 1fr)) 7px minmax(
+        0,
+        var(--preview-size, 1fr)
+      );
     min-height: 0;
   }
-
-  .editor-panes.editor-panes--code-only {
+  .editor-divider {
+    position: relative;
+    cursor: col-resize;
+    background: #15181e;
+    touch-action: none;
+    outline: none;
+  }
+  .editor-divider::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 36px;
+    top: calc(50% - 18px);
+    left: 2px;
+    border-radius: 2px;
+    background: #657084;
+  }
+  .editor-divider:hover,
+  .editor-divider:focus-visible,
+  [data-resizing='true'] .editor-divider {
+    background: #45543b;
+  }
+  .editor-divider:focus-visible::after {
+    background: var(--accent);
+  }
+  [data-resizing='true'] {
+    user-select: none;
+  }
+  .editor-shell:not([data-layout='split']) .editor-divider {
+    display: none;
+  }
+  .editor-shell:not([data-layout='split']) .editor-panes {
     grid-template-columns: minmax(0, 1fr);
   }
-
-  .editor-shell.editor-shell--code-only .editor-panes {
-    padding: 0;
-    gap: 0;
-  }
-
   .editor-pane {
+    display: grid;
+    grid-template-rows: 35px minmax(0, 1fr);
+    min-width: 0;
     min-height: 0;
-    border-radius: 8px;
     overflow: hidden;
-    background: #1e1e1e;
   }
-
-  .editor-pane.editor-pane--full {
-    border-radius: 0;
+  .editor-pane--code {
+    background: #1c2028;
   }
-
+  .editor-pane--preview {
+    border-left: 0;
+  }
+  .editor-pane-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background: #1c2028;
+    border-bottom: 1px solid var(--border);
+    font:
+      10px ui-monospace,
+      monospace;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+  #editor-vim-status {
+    letter-spacing: 0;
+    min-width: 0;
+  }
+  #editor-vim-status :global(input) {
+    width: min(280px, 45vw);
+    padding: 3px 6px;
+    border: 1px solid #657084;
+    border-radius: 3px;
+    background: #15181e;
+    color: #e4e9f0;
+    font:
+      12px ui-monospace,
+      monospace;
+  }
   .editor-monaco {
-    width: 100%;
+    min-width: 0;
     height: 100%;
-    padding: 1rem;
   }
-
-  .editor-shell.editor-shell--code-only .editor-monaco {
-    padding: 0;
-  }
-
   .editor-preview {
-    --editor-border: hsl(240 10% 85% / 1);
-
-    height: 100%;
+    --paper: #fbfaf7;
+    --ink: #30343b;
+    --subtle: #656c76;
+    --rule: #ddded9;
+    --tint: #eeeee8;
+    --link: #25634b;
+    margin: 0;
     overflow: auto;
-    padding: 2.2rem;
-    line-height: 1.7;
-    font-size: 1.6rem;
-    color: #111;
-    background: #fff;
-    box-shadow: 0 0 10px hsla(0 0 5% / 0.5);
+    min-width: 0;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 40px max(32px, calc((100% - 760px) / 2)) 80px;
+    font-size: 16px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+    color-scheme: light;
+    scrollbar-gutter: stable;
   }
-
+  [data-theme='dark'] .editor-preview {
+    --paper: #20242b;
+    --ink: #d8dce3;
+    --subtle: #a7b0bd;
+    --rule: #3a414c;
+    --tint: #2b313a;
+    --link: #bedc9d;
+    color-scheme: dark;
+  }
   .editor-preview :global(*),
   .editor-preview :global(*::before),
   .editor-preview :global(*::after) {
     box-sizing: border-box;
   }
-
+  .editor-preview :global(> :first-child) {
+    margin-top: 0;
+  }
   .editor-preview :global(h1),
   .editor-preview :global(h2),
+  .editor-preview :global(h3),
+  .editor-preview :global(h4),
+  .editor-preview :global(h5),
+  .editor-preview :global(h6) {
+    color: var(--ink);
+    line-height: 1.3;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin: 1.8em 0 0.65em;
+  }
+  .editor-preview :global(h1) {
+    font-size: 2.15em;
+    margin-bottom: 0.8em;
+    letter-spacing: -0.04em;
+  }
+  .editor-preview :global(h2) {
+    font-size: 1.5em;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.4em;
+  }
   .editor-preview :global(h3) {
-    line-height: 1.2;
-    margin-top: 2.4rem;
-    margin-bottom: 1.2rem;
+    font-size: 1.2em;
   }
-
-  .editor-preview :global(p) {
-    margin-top: 0;
-    margin-bottom: 1.2rem;
+  .editor-preview :global(h4) {
+    font-size: 1.05em;
   }
-
+  .editor-preview :global(h5),
+  .editor-preview :global(h6) {
+    font-size: 1em;
+  }
+  .editor-preview :global(p),
+  .editor-preview :global(ul),
+  .editor-preview :global(ol),
+  .editor-preview :global(dl) {
+    margin: 0 0 1.15em;
+  }
+  .editor-preview :global(ul),
+  .editor-preview :global(ol) {
+    padding-left: 1.5em;
+  }
+  .editor-preview :global(li) {
+    padding-left: 0.2em;
+    margin: 0.3em 0;
+  }
+  .editor-preview :global(li > ul),
+  .editor-preview :global(li > ol) {
+    margin-block: 0.35em;
+  }
+  .editor-preview :global(li > p) {
+    margin-bottom: 0.4em;
+  }
+  .editor-preview :global(li::marker) {
+    color: var(--subtle);
+  }
+  .editor-preview :global(blockquote) {
+    margin: 1.5em 0;
+    border-left: 3px solid #86a773;
+    padding: 0.7em 1.2em;
+    background: var(--tint);
+    color: var(--subtle);
+    border-radius: 0 6px 6px 0;
+  }
+  .editor-preview :global(blockquote > :last-child) {
+    margin-bottom: 0;
+  }
+  .editor-preview :global(a) {
+    color: var(--link);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .editor-preview :global(a:hover) {
+    text-decoration-thickness: 2px;
+  }
+  .editor-preview :global(code),
+  .editor-preview :global(kbd),
+  .editor-preview :global(samp) {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+    font-size: 0.86em;
+  }
+  .editor-preview :global(:not(pre) > code) {
+    background: var(--tint);
+    padding: 0.18em 0.38em;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    box-decoration-break: clone;
+  }
   .editor-preview :global(pre) {
-    width: 100%;
+    max-width: 100%;
     overflow-x: auto;
-    border: 1px solid var(--editor-border);
-    border-radius: 0.8rem;
-    padding: 1.2rem;
-    font-size: 1.4rem;
-    background: #ccc;
+    background: #24292e;
+    color: #e1e4e8;
+    padding: 20px;
+    margin: 1.5em 0;
+    border: 1px solid #3a414c;
+    border-radius: 8px;
+    line-height: 1.65;
+    tab-size: 2;
+    overflow-wrap: normal;
   }
-
-  .editor-preview :global(code) {
+  .editor-preview :global(pre code) {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 13px;
+  }
+  .editor-preview :global(table) {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    margin: 1.5em 0;
     font-size: 0.92em;
   }
-
-  .editor-preview :global(a) {
-    color: #77b0ff;
+  .editor-preview :global(th),
+  .editor-preview :global(td) {
+    padding: 0.65em 1em;
+    border: 1px solid var(--rule);
+    text-align: left;
+  }
+  .editor-preview :global([align='center']) {
+    text-align: center;
+  }
+  .editor-preview :global([align='right']) {
+    text-align: right;
+  }
+  .editor-preview :global(th) {
+    background: var(--tint);
+    font-weight: 650;
+  }
+  .editor-preview :global(tr:nth-child(even)) {
+    background: var(--tint);
+  }
+  .editor-preview :global(img),
+  .editor-preview :global(video) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+  .editor-preview :global(hr) {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 2em 0;
+  }
+  .editor-preview :global(input[type='checkbox']) {
+    accent-color: #60804f;
+    margin-right: 0.5em;
+  }
+  .editor-preview :global(details) {
+    border: 1px solid var(--rule);
+    padding: 0.8em 1em;
+    margin: 1.2em 0;
+    border-radius: 6px;
+  }
+  .editor-preview :global(summary) {
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .editor-preview :global(details[open] > summary) {
+    margin-bottom: 0.8em;
+  }
+  .editor-preview :global(kbd) {
+    border: 1px solid var(--rule);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    padding: 0.15em 0.4em;
+  }
+  .editor-preview :global(dt) {
+    font-weight: 650;
+  }
+  .editor-preview :global(dd) {
+    margin-left: 1.5em;
+    margin-bottom: 0.6em;
+  }
+  .editor-statusbar {
+    min-height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 5px 20px;
+    background: #15181e;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 11px;
+  }
+  #editor-status[data-error='true'] {
+    color: #ffaaa0;
+  }
+  #editor-stats {
+    white-space: nowrap;
+  }
+  .editor-shell[data-zen='true'] {
+    grid-template-rows: minmax(0, 1fr);
+  }
+  .editor-shell[data-zen='true'] .editor-toolbar,
+  .editor-shell[data-zen='true'] .editor-statusbar,
+  .editor-shell[data-zen='true'] .editor-pane-heading {
+    display: none;
+  }
+  .editor-shell[data-zen='true'] .editor-pane {
+    grid-template-rows: minmax(0, 1fr);
+  }
+  /* Vim needs a focusable command host even when persistent chrome is hidden. */
+  .editor-shell[data-zen='true'] .editor-pane-heading:has(input) {
+    display: block;
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    z-index: 30;
+    max-width: calc(100vw - 125px);
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+  }
+  .editor-shell[data-zen='true']
+    .editor-pane-heading:has(input)
+    > span:first-child {
+    display: none;
+  }
+  .editor-zen-exit {
+    position: fixed;
+    bottom: 12px;
+    right: 16px;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border: 1px solid #78849380;
+    border-radius: 6px;
+    background: #20242be8;
+    color: #e4e9f0;
+    font-size: 11px;
+    opacity: 0.65;
+  }
+  .editor-zen-exit:hover,
+  .editor-zen-exit:focus-visible {
+    opacity: 1;
+  }
+  .editor-drop-overlay {
+    position: absolute;
+    inset: 76px 12px 40px;
+    z-index: 20;
+    display: grid;
+    place-items: center;
+    background: #15181eed;
+    border: 2px dashed var(--accent);
+    border-radius: 12px;
+    pointer-events: none;
+  }
+  .editor-drop-overlay div {
+    display: grid;
+    gap: 8px;
+    text-align: center;
+  }
+  .editor-drop-overlay strong {
+    font-size: 28px;
+    color: var(--accent);
+  }
+  .editor-drop-overlay span {
+    color: var(--muted);
+  }
+  @media (max-width: 700px) {
+    .editor-toolbar {
+      gap: 8px;
+      padding: 10px 12px;
+    }
+    .editor-brand {
+      display: none;
+    }
+    .editor-layouts button {
+      padding: 6px 8px;
+    }
+    .editor-layouts button span {
+      display: none;
+    }
+    .editor-save {
+      padding: 8px 12px;
+    }
+    .editor-shell[data-layout='split'] .editor-panes {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: minmax(0, var(--code-size, 1fr)) 7px minmax(
+          0,
+          var(--preview-size, 1fr)
+        );
+    }
+    .editor-divider {
+      cursor: row-resize;
+    }
+    .editor-divider::after {
+      height: 3px;
+      width: 36px;
+      left: calc(50% - 18px);
+      top: 2px;
+    }
+    .editor-pane--preview {
+      border-left: 0;
+    }
+    .editor-preview {
+      padding: 24px;
+    }
+    .editor-pane-heading {
+      padding-inline: 12px;
+    }
+    .editor-statusbar {
+      padding-inline: 12px;
+    }
   }
 </style>

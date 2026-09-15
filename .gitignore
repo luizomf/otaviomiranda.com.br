@@ -3,6 +3,10 @@
 ### MISC
 learn/
 
+# Browser test artifacts
+/test-results/
+/playwright-report/
+
 # macOS
 .DS_Store
 
