@@ -1,0 +1,188 @@
+Plugins do NetworkManager abrem caminho para root, e Gemini três ponto oito Live conversa enquanto chama ferramentas.
+
+Plugins de V P N do NetworkManager podem dar acesso de administrador mesmo sem usar a conexão.
+Michael Catanzaro divulgou, em quinze de setembro, falhas em quatro projetos desses plugins.
+O NetworkManager gerencia conexões de rede no Linux.
+Com uma configuração maliciosa, um usuário local sem privilégios administrativos pode chegar a root.
+Basta ter o plugin afetado instalado, mesmo que você nunca se conecte por ele.
+O pacote esquecido continua cumprindo expediente.
+
+As falhas estão nos plugins, mantidos separadamente, e não no NetworkManager em si.
+Eles interpretam perfis de conexão e interagem com programas privilegiados.
+O risco está nessa passagem entre o usuário comum e o administrador.
+
+Dois dos projetos, o vpnc e o fortisslvpn, estão arquivados.
+Catanzaro recomenda remover o vpnc e migrar para o libreswan.
+Para quem tem o fortisslvpn, a recomendação é remover e migrar para o openconnect.
+Já o S S T P está sem mantenedor.
+O iodine tem uma proposta de correção aberta, ainda sem integração confirmada.
+
+A divulgação trata de escalada local de privilégio e não confirma exploração em ataques reais.
+Se você usa Linux, confira os plugins instalados e os patches da sua distribuição.
+O aviso não fornece uma versão corrigida universal.
+A fonte é a divulgação de Michael Catanzaro sobre as falhas nos plugins de V P N.
+
+O Gemini três ponto oito Live continua falando enquanto as ferramentas trabalham.
+O Google anunciou o modelo em quinze de setembro, junto de uma variante chamada "Extended Thinking", para interfaces de voz.
+Segundo a empresa, os modelos mantêm a conversa enquanto chamadas a ferramentas e a interfaces de programação rodam em segundo plano.
+Se você desenvolve atendimento por voz, pode responder ao usuário enquanto espera o serviço da aplicação terminar.
+
+O Live mira escala e custo.
+Já o Extended Thinking foi projetado para raciocinar e falar ao mesmo tempo em tarefas com várias etapas.
+O anúncio também descreve entrada visual quase em tempo real e troca de idioma durante a conversa.
+São capacidades anunciadas pelo Google.
+Não temos medição independente de qualidade ou latência nesta cobertura.
+
+A distribuição começou pela [EY1 P IY1 AY1] do Gemini e pelo Google AI Studio.
+A oferta empresarial inclui prévia privada.
+Eu conferiria as condições de acesso antes de planejar a integração.
+
+Na aplicação, a confirmação de uma reserva ou de um pagamento continua dependendo da conclusão da operação.
+Conversar durante a consulta é útil.
+Uma voz tranquila dizendo “estou cuidando disso” ainda está no gerúndio.
+A fonte é o anúncio do Google sobre o Gemini três ponto oito Live e o Extended Thinking.
+
+A Acronis alerta para exploração de um plugin de backup do cPanel.
+Em quinze de setembro, a empresa divulgou uma falha nas permissões de arquivos das integrações de backup para painéis de hospedagem no Linux.
+Alguém com baixos privilégios locais pode usá-la para elevar seu acesso.
+A Acronis relata exploração limitada e direcionada em instalações de cPanel e W H M.
+
+Ao BleepingComputer, a empresa disse que baseou sua avaliação num único relato de cliente potencialmente afetado.
+O Plesk também tem versões vulneráveis, mas o aviso de exploração cita especificamente cPanel e W H M.
+Não há indicadores públicos nem uma cronologia detalhada do incidente.
+
+Se você administra essas integrações, confira os builds corrigidos para cada painel.
+No cPanel e W H M, a correção também é identificada como versão um ponto nove ponto três, H F três.
+Para o Plesk, há um build corrigido próprio.
+Os números completos dos builds estão no artigo escrito, para você comparar com a instalação.
+As correções já estavam disponíveis antes desse alerta.
+A Acronis pede instalação imediata da atualização para cPanel.
+
+Quem precisa da atualização é o complemento da Acronis, que tem seu próprio ciclo de correção.
+Atualizar só o painel deixa o plugin esperando a vez.
+As fontes são o boletim de segurança da Acronis, seu aviso de atualização para cPanel e W H M, e o relato do BleepingComputer.
+
+O Fedora quarenta e cinco Beta exige assinatura de pacotes e troca o console.
+A versão de testes saiu em quinze de setembro, com duas mudanças para conferir antes do upgrade estável.
+A primeira torna obrigatória, por padrão, a assinatura válida dos pacotes.
+Isso afeta a autenticidade dos pacotes instalados.
+A segunda substitui o console antigo do kernel pelo kmscon.
+Muda a implementação do console do sistema, mas sua escolha de shell continua a mesma.
+
+Se sua equipe distribui pacotes internos sem assinatura, confira o fluxo de instalação.
+O pacote que “sempre funcionou” vai precisar apresentar documento.
+Teste também o acesso pelo console nos ambientes que vocês mantêm.
+
+No desktop, o projeto oo7 substitui mecanismos de armazenamento de segredos como GNOME Keyring e KWallet.
+O Fedora CoreOS ganha o serviço system D oomd para lidar com pressão de memória.
+Também ganha suporte a swap em memória RAM comprimida, o zram.
+
+Ainda é uma versão de testes, e algumas variantes de imagem de instalação estavam indisponíveis no anúncio.
+Dá para usar a beta para descobrir incompatibilidades antes de levar esses padrões à produção.
+A fonte é o anúncio do Fedora Linux quarenta e cinco Beta, na Fedora Magazine.
+
+A Trail of Bits questiona o que conta como patch de inteligência artificial bem-sucedido.
+Em quinze de setembro, a empresa publicou uma crítica ao estudo "FLAWED", da 1Password.
+Também lançou duas skills, voltadas à revisão e à validação.
+Em agosto, cobrimos o experimento original.
+Agora, a empresa traz uma reanálise e um procedimento para conferir os patches.
+
+A Trail of Bits selecionou testes que permitiam execução, sem instruções de conserto errado.
+Excluiu também os classificados como consulta a patches originais.
+Nesse recorte, oitenta e seis porcento bloquearam o exploit fornecido, aquela demonstração do ataque.
+Já os vinte e seis porcento de correções limpas do estudo original tinham outra exigência.
+Era preciso resolver a vulnerabilidade sem alterar o comportamento da aplicação.
+A seleção dos testes e o critério de sucesso mudaram.
+São percentuais que respondem a perguntas diferentes.
+
+A Trail of Bits também participa do trabalho em disputa: coordena o "Patch the Planet" com a OpenAI.
+E reconheceu que seu próprio patch para o freenginx deixou um caminho vulnerável e introduziu um crash na limpeza.
+
+As duas skills propõem reproduzir o bug, testar outra manifestação da causa e procurar regressões.
+Uma é voltada à validação depois do patch; a outra, ao percurso de revisão.
+Build quebrado conta como inconclusivo.
+Se o teste nem rodou, a comemoração está adiantada.
+As fontes são a crítica e as ferramentas da Trail of Bits, além da metodologia e dos resultados originais da 1Password.
+
+Um projeto de inventários de componentes para Postgres refez a verificação para quem recebe a imagem.
+Jeremy Schneider relatou a mudança em quinze de setembro.
+Ele refez a geração desses inventários, conhecidos pela sigla S B O M, para seus contêineres de extensões do Postgres.
+A implementação anterior exigiria comandos de validação diferentes conforme o caminho de construção.
+Um deles usava imagens Debian; o outro passava pelo P G R X, usado no desenvolvimento de extensões em Rust.
+
+No dia doze, falamos das lacunas nesses inventários.
+A mudança agora está na interface de verificação.
+Quem recebe a imagem deve conseguir conferi-la sem estudar primeiro como ela foi construída.
+A cozinha pode ter duas receitas; o consumidor não precisa de dois manuais para conferir a embalagem.
+
+Schneider reconstruiu a solução usando o mecanismo de geradores personalizados de inventários do Docker.
+A maior parte da lógica ficou num módulo gerador, com uma interface de plugins prevista para P G R X.
+
+O trabalho segue em andamento.
+A refatoração de P G R X e o envio ao projeto original ainda estavam nos próximos passos.
+A funcionalidade não foi entregue em todas as imagens do CloudNativePG.
+A fonte é o relato de Jeremy Schneider sobre o redesenho dos inventários para Postgres.
+
+Agora, os destaques rápidos para hoje.
+
+Java vinte e sete chegou à disponibilidade geral em quinze de setembro.
+O G um passa a ser o coletor de memória padrão em todos os ambientes.
+Os cabeçalhos compactos dos objetos vêm habilitados.
+Teste esses novos padrões no seu serviço.
+A concorrência estruturada continua em prévia, já na sétima.
+A fonte é o Open J D K.
+
+O Google aponta indícios de possível exploração limitada de uma falha no modem do Pixel.
+Em aparelhos suportados, instale o nível de patch de cinco de setembro de 2026 ou posterior.
+O boletim saiu em quinze de setembro e cobre o Pixel, não todos os Androids.
+As fontes são o Google e o BleepingComputer.
+
+O Firefox cento e cinquenta e seis corrige falhas de gravidade alta.
+A Mozilla anunciou as correções em quinze de setembro.
+Há escalada de privilégio no Firefox para Android e acesso a memória já liberada em codecs de áudio e vídeo.
+Atualize o navegador; o boletim não confirma exploração em ataques reais.
+A fonte é a Mozilla.
+
+No Kubernetes um ponto trinta e sete, os gerenciadores de recursos por pod foram anunciados em beta.
+Eles permitem dedicar recursos ao contêiner principal.
+Para os auxiliares leves, os sidecars, mantêm um conjunto compartilhado, isolado por pod.
+A opção que ativa esses gerenciadores vem desligada: você precisa habilitá-la para testar.
+A fonte é o blog do Kubernetes.
+
+O processador de atributos Kubernetes do OpenTelemetry chegou à versão estável um ponto zero ponto zero.
+Ele acrescenta metadados das cargas de trabalho à telemetria.
+A migração muda nomes das convenções semânticas e traz incompatibilidades.
+Se você já usa o componente, confira o guia antes de atualizar.
+A fonte é o OpenTelemetry.
+
+Swift seis ponto quatro saiu com a Subprocess um ponto zero.
+É uma biblioteca estável para executar outros programas em diferentes plataformas.
+A linguagem permite chamadas assíncronas em defer, usado na limpeza ao sair de um escopo.
+Também oferece proteção dessa limpeza contra cancelamento.
+Bom para quem escreve ferramentas de terminal e servidores.
+A fonte é o blog do Swift.
+
+Um guia da A W S detalha os limites da réplica regional do Cognito, serviço de identidade.
+A réplica permite autenticação e leitura; escritas seguem na região principal.
+Quem usa códigos temporários de aplicativo autenticador, o T O T P, também depende da principal.
+Teste esses fluxos no seu plano de recuperação.
+A fonte é o blog de segurança da A W S.
+
+A Cloudflare anunciou uma preferência contra treinamento de inteligência artificial que preserva acesso para busca.
+Ela sinaliza a escolha a robôs de uso misto e depende dos compromissos dos operadores.
+O Bing ainda exige recusa separada.
+Segundo a Cloudflare, o suporte do Bing pelo arquivo de regras para robôs está previsto para o início de 2027.
+A fonte é a Cloudflare.
+
+O pgAssistant três ponto oito ponto zero compara coletas consecutivas do ambiente Postgres.
+A comparação inclui configuração, tempo de consultas e volume de chamadas.
+Você pode examinar o que mudou depois dos ajustes.
+Essas correlações, porém, não provam a causa da melhora nem que uma recomendação foi implementada.
+A fonte é o anúncio do pgAssistant.
+
+Uma auditoria do "SWE-bench" não encontrou separação estatística entre vizinhos dos trinta primeiros da categoria Verified.
+Isso no teste aplicado aos resultados publicados.
+O benchmark avalia resolução de problemas de software.
+O resultado limita a certeza sobre pequenas diferenças no ranking, sem provar equivalência entre agentes.
+Avalie também nas suas tarefas.
+A fonte é o paper no arXiv.
