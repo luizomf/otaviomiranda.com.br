@@ -309,7 +309,8 @@ Choose **New document** from the menu, drop in something you already wrote, or s
     language: 'markdown',
     theme: 'workspace-dark',
     fontSize: 14,
-    fontFamily: '"SFMono-Regular", Consolas, "Liberation Mono", monospace',
+    fontFamily: '"FiraMono Nerd Font", "SFMono-Regular", Consolas, monospace',
+    fontLigatures: false,
     lineHeight: 23,
     padding: { top: 20, bottom: 20 },
     minimap: { enabled: false },
@@ -320,6 +321,11 @@ Choose **New document** from the menu, drop in something you already wrote, or s
     overviewRulerLanes: 0,
     hideCursorInOverviewRuler: true,
   });
+  // Refresh Monaco's cached fallback metrics after the self-hosted face loads.
+  document.fonts.load('14px "FiraMono Nerd Font"').then(
+    () => monaco.editor.remeasureFonts(),
+    () => {}, // Keep the usable system fallback if the font request fails.
+  );
   editor.onDidChangeModelContent(() => {
     clearTimeout(renderTimer);
     renderTimer = setTimeout(renderPreview, 120);

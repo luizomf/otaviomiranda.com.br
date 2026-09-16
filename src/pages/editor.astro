@@ -1,6 +1,7 @@
 ---
 /** A distraction-free, client-side Markdown workspace. No site-wide styles. */
 import BlankLayout from '../layouts/BlankLayout.astro';
+import '../styles/fonts.css';
 
 const editorSchema = {
   '@context': 'https://schema.org',
@@ -637,7 +638,12 @@ const editorSchema = {
   .editor-preview :global(code),
   .editor-preview :global(kbd),
   .editor-preview :global(samp) {
-    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+    font-family: 'FiraMono Nerd Font', 'SFMono-Regular', Consolas, monospace;
+    font-variant-ligatures: none;
+    font-feature-settings:
+      'liga' 0,
+      'calt' 0,
+      'dlig' 0;
     font-size: 0.86em;
   }
   .editor-preview :global(:not(pre) > code) {

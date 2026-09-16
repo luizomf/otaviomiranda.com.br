@@ -51,6 +51,13 @@ on a 16 KiB host before lifting this compatibility pin.
 
 ---
 
+## Fonts
+
+The site self-hosts full Fira Mono Nerd Font WOFF2 faces; editor code uses the
+same family without programming ligatures. See
+[font provenance, licenses, conversion, and size tradeoffs](public/fonts/fira-mono-nerd/README.md).
+Run `npm run test:fonts` for asset and integration guards.
+
 ## Writing a post
 
 ### Quick way
