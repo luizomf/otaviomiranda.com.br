@@ -1,0 +1,26 @@
+/* Full, self-hosted fonts. Provenance and licenses: public/fonts/fira-mono-nerd/. */
+@font-face {
+  font-family: 'FiraMono Nerd Font';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/fira-mono-nerd/FiraMonoNerdFont-Regular.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'FiraMono Nerd Font';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/fira-mono-nerd/FiraMonoNerdFont-Medium.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-family: 'FiraMono Nerd Font';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/fira-mono-nerd/FiraMonoNerdFont-Bold.woff2') format('woff2');
+}

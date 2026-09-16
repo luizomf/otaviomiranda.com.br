@@ -1,21 +1,8 @@
+@import './fonts.css';
+
 /* ===============================
    CSS Design Tokens
 ================================ */
-@font-face {
-  font-family: 'Fira Code';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/fira-code/FiraCode-Regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Fira Code';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/fira-code/FiraCode-Bold.woff2') format('woff2');
-}
 
 /*
  * What this does:
@@ -48,7 +35,7 @@
     ui-monospace, SFMono-Regular, 'SF Mono', Consolas, Menlo, 'Liberation Mono',
     'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', 'Source Code Pro', Monaco,
     monospace, 'Courier New';
-  --font-family-mono: 'Fira Code', var(--font-family-fallback-mono);
+  --font-family-mono: 'FiraMono Nerd Font', var(--font-family-fallback-mono);
   --font-family-text: var(--font-family-mono);
   --font-family-display: var(--font-family-text);
   --font-family-code: var(--font-family-text);
@@ -324,6 +311,11 @@ body {
 
 body {
   font-family: var(--font-family-body);
+  font-variant-ligatures: none;
+  font-feature-settings:
+    'liga' 0,
+    'calt' 0,
+    'dlig' 0;
   font-optical-sizing: auto;
   line-height: var(--line-height-body);
   font-size: var(--font-size-body);
