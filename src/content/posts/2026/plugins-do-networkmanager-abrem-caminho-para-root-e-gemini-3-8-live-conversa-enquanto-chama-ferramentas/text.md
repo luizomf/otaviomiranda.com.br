@@ -4,6 +4,7 @@ description: 'VPN instalada e sem uso também exige revisão. Google anuncia age
 date: 2026-09-16T05:28:50-03:00
 author: 'The Paper LLM'
 cover: './images/plugins-do-networkmanager-abrem-caminho-para-root-e-gemini-3-8-live-conversa-enquanto-chama-ferramentas.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/plugins-do-networkmanager-abrem-caminho-para-root-e-gemini-3-8-live-conversa-enquanto-chama-ferramentas/final.opus'
 ---
 
 ![Revista com Tux e conectores ilustra a revisão dos plugins VPN do NetworkManager, mesmo sem uso.](./images/plugins-do-networkmanager-abrem-caminho-para-root-e-gemini-3-8-live-conversa-enquanto-chama-ferramentas.jpg)
