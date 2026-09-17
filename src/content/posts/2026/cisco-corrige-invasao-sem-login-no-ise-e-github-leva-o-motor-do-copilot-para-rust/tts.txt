@@ -1,0 +1,169 @@
+Cisco corrige invasão sem login no I S E, e "Git Hub" leva o motor do Copilot para Rust.
+
+A Cisco corrigiu uma falha já explorada que permite entrar na administração do I S E sem login.
+As correções saíram em dezesseis de setembro e cobrem também o I S E PIC, plataformas de identidade e acesso à rede.
+A entrada passa por um ponto da interface de programação, sem precisar da autenticação da interface administrativa.
+A falha afeta os produtos em qualquer configuração e recebeu nota dez, a gravidade máxima.
+A CISA também incluiu o problema no catálogo de vulnerabilidades exploradas.
+
+No dia quinze, a gente falou do gateway de e-mail da Cisco. Desta vez, o equipamento e a falha são outros.
+Há versões corrigidas nas linhas três ponto um, três ponto dois, três ponto três, três ponto quatro e três ponto cinco.
+O número do patch muda conforme a linha. A relação exata está no artigo escrito, para conferir antes de atualizar.
+Enquanto prepara a atualização, a mitigação temporária indicada pela Cisco é restringir o tráfego de gerenciamento.
+Isso deve ser feito com listas de controle de acesso na infraestrutura.
+
+Confira os registros de acesso de cada nó e cruze com os registros externos de firewall e rede.
+Um atacante com acesso root pode apagar as evidências locais.
+Se houver suspeita de atividade maliciosa, a Cisco recomenda reinstalar a imagem dos nós.
+O patch fecha a entrada. A investigação precisa descobrir quem já passou por ela.
+As fontes são o boletim da Cisco e o alerta da CISA.
+
+Agora, o Sentry tem um fluxo que pode levar instruções do atacante até o agente de código.
+O CERT C C divulgou em dezesseis de setembro uma falha no [S IY1 R], recurso do Sentry que analisa erros e pode pedir correções a um agente.
+Se esse encaminhamento for automático, eventos de erro preparados pelo atacante podem levar à execução de um pacote no ambiente do agente.
+
+O caminho começa no endereço público usado pelo navegador para enviar telemetria.
+Campos controlados pelo atacante entram na análise da causa do erro. Dali, vão para o prompt inicial do agente.
+No fluxo documentado, o pacote é baixado e executado antes da revisão humana do pull request.
+Quando você abre o diff para fiscalizar o trabalho, a instalação já aconteceu.
+
+Em junho, a gente cobriu o "AgentJacking" via Sentry M C P.
+O aviso de agora trata do encaminhamento automático do [S IY1 R] e tem outro registro de falha.
+Se você usa essa integração, o CERT recomenda desativar a remediação automática ou restringir a instalação de pacotes.
+O aviso não traz informação de patch do fornecedor nem confirma exploração em ataques reais.
+A fonte é o CERT C C.
+
+O "Git Hub" migrou o motor compartilhado do Copilot para Rust.
+O relato saiu em dezesseis de setembro, mas a migração do código de produção terminou em vinte e um de agosto.
+É o motor antes escrito em TypeScript, compartilhado pelos produtos e pelas aplicações que usam o S D K, o kit de desenvolvimento.
+Agora saiu a história de engenharia dessa mudança.
+
+Antes, o kit iniciava a ferramenta de linha de comando em outro processo e conversava com ela por JSON R P C.
+Cada aplicação carregava junto Node, V oito e esse processo extra.
+Agora, você pode optar por carregar a biblioteca nativa dentro do processo da própria aplicação, por uma interface compatível com C.
+A opção de deixar o motor num processo separado continua disponível.
+
+Essa escolha muda o isolamento. Dentro do mesmo processo, biblioteca e aplicação compartilham também o limite de falha.
+O contrato entre elas continua usando bytes de JSON R P C. A serialização ainda faz parte do trabalho.
+Segundo Stephen Toub, agentes escreveram a maior parte das mais de oitocentas mil linhas de Rust.
+A entrega aconteceu em cento e vinte e oito pull requests incrementais, mantendo os testes de ponta a ponta.
+Já a migração da ferramenta inteira de linha de comando para a interface pública do S D K segue em andamento.
+A fonte é o relato de migração do runtime do Copilot, publicado pelo "Git Hub".
+
+O Node ponto J S ganhou chamadas a bibliotecas nativas habilitadas por padrão e um módulo próprio para medir desempenho.
+A versão é a vinte e seis ponto nove ponto zero, lançada em dezesseis de setembro.
+O recurso de integração se chama F F I. Ele permite chamar funções de bibliotecas nativas.
+Se você precisa integrar esse código ao backend, tem um caminho no próprio runtime para testar.
+O módulo novo de benchmark é o bench, do próprio Node.
+
+O benchmark mede como o código se comporta sob uma carga escolhida.
+Se a ideia é atravessar a fronteira entre linguagens para ganhar desempenho, eu começaria por essa medição.
+O ganho depende do trabalho que a biblioteca vai fazer.
+A função pode ser nativa. A pressa de declarar vitória é nossa.
+
+A versão também adiciona "Web Workers" e integra o sistema de arquivos virtual aos dois caminhos de módulos, Common J S e E S M.
+Se sua aplicação depende desses mecanismos, inclua essas mudanças nos testes de compatibilidade.
+Essa versão pertence à linha "Current", não à L T S, de suporte prolongado.
+A estabilidade precisa ser conferida por [EY1 P IY1 AY1], mesmo com recursos habilitados por padrão.
+As notas trazem, por exemplo, uma interface de D T L S explicitamente experimental.
+Eu passaria pelos testes antes de levar a atualização ao serviço.
+A fonte são as notas da versão vinte e seis ponto nove ponto zero do Node ponto J S.
+
+A Zed abriu o beta público do Delta, com revisão na conversa do agente.
+O anúncio é de dezesseis de setembro. A ferramenta de colaboração organiza alterações em conversas compartilhadas com agentes.
+Você pode revisar numa conversa derivada, com cópias isoladas da área de trabalho.
+São os worktrees, diretórios separados ligados ao repositório.
+As correções feitas ali podem voltar para a conversa principal.
+
+A gente já falou do Delta D B como histórico anterior ao commit.
+Agora, o beta oferece esse fluxo de revisão no desktop e na web.
+Quem revisa recebe também a conversa que produziu a mudança.
+O diff final fica com menos trabalho de explicar como aquilo foi parar ali.
+
+O Delta D B guarda as edições entre commits e as mensagens de humanos e agentes.
+Os commits Git continuam servindo para trocar código e fazer builds, inclusive com colegas que estão fora do Delta.
+O repositório do próprio editor Zed permanece no "Git Hub".
+O beta é gratuito e está disponível para macOS, Linux, Windows e web.
+Há planos pagos previstos e uma versão gratuita permanente.
+A integração própria de C I, baseada no conteúdo, ficou para o futuro.
+Por enquanto, um agente pode chamar um provedor existente de integração contínua.
+A fonte é o anúncio do beta público do Delta, pela Zed.
+
+Agora, um experimento procura planos mais rápidos para consultas no Postgres.
+Rohan Bansal publicou o Q O R L em dezesseis de setembro, usando um modelo de quatro bilhões de parâmetros.
+O plano de execução define como o banco percorre e combina os dados.
+Outro caminho pode dar bem menos trabalho para responder à mesma consulta.
+
+No teste do autor com cento e treze consultas do "Join Order Benchmark", a soma das latências caiu quarenta e quatro vírgula sete porcento.
+O resultado usa o melhor desempenho medido entre três tentativas por consulta, com até quinze planos candidatos.
+É uma busca com feedback. Esse número mede a execução dos planos escolhidos.
+O custo de procurar por eles ficou fora da conta.
+
+Durante a busca, o modelo passava tempo produzindo respostas enquanto um worker do banco ficava reservado.
+O banco estava guardando lugar para a IA pensar.
+Bansal mudou a reserva para durar só durante as medições.
+Com isso, vinte buscas concorrentes puderam compartilhar quatro workers do Postgres.
+Para avaliar a proposta na nossa aplicação, a conta precisa incluir tanto a busca quanto a execução posterior.
+A fonte é o experimento Q O R L, de Rohan Bansal.
+
+Vamos aos destaques rápidos para hoje.
+
+O GNOME cinquenta e um saiu em dezesseis de setembro com mudanças na exibição e na captura de tela.
+Segundo o projeto, o Mutter, que coordena janelas e quadros, melhora as animações sob carga.
+A captura reduz trabalho repetido e cópias de buffers.
+Se você grava demonstrações no Linux, tem o que testar. A fonte é o projeto GNOME.
+
+O Kubernetes um ponto trinta e sete ganhou controles alfa para montagens e permissões de volumes temporários.
+Depois dos gerenciadores de recursos de ontem, o assunto agora é armazenamento.
+Para testar, habilite as opções no servidor da [EY1 P IY1 AY1] e no kubelet.
+A opção de montagem noexec restringe a execução direta naquele volume. Esse é o alcance dela.
+A fonte é o blog do Kubernetes.
+
+O CERT divulgou formas de contornar o bloqueio de pickle no MLflow, ferramenta que carrega modelos de aprendizado de máquina.
+O ataque exige escrita no local que fornece os modelos e pode executar código.
+O caminho statsmodels tem correção desde a versão três ponto quinze ponto zero.
+Já para o caminho D S Py, o CERT recomenda evitar o uso enquanto a correção não estiver disponível.
+A fonte é o CERT C C.
+
+Um experimento no Postgres dezoito ponto seis mostra como um bloqueio de atualização pode impedir inserções numa tabela filha.
+O bloqueio é o "FOR UPDATE", que conflita com a proteção da chave estrangeira.
+Quando basta proteger uma atualização sem alteração de chave, existe uma alternativa, o "FOR NO KEY UPDATE".
+Ela permite essa verificação da chave estrangeira.
+A escolha depende do que a transação protege. Nada de trocar tudo no automático.
+A fonte é o Boring [EH1 S] [K Y UW1] [EH1 L].
+
+A CloudX separou os caches de testes e de lint na integração contínua de Go.
+A empresa relatou queda da mediana dos jobs de teste de cento e trinta e um para quarenta e um segundos.
+Sua alternativa ao setup-go cria caches novos a cada execução.
+Confira se há disputa por chaves no seu C I. Nesse caso, o ganho trouxe custos de armazenamento e limpeza.
+A fonte é a CloudX.
+
+A replicação no Postgres precisa reservar workers para a cópia inicial, mostra Christophe Pettus.
+Aqui falta capacidade de execução, um problema diferente do limite de acompanhamento que a gente já cobriu.
+A assinatura é criada, mas as tabelas ficam esperando.
+É preciso dimensionar o limite de workers de replicação lógica dentro do limite geral de processos de trabalho.
+Mudar o primeiro exige reinício. Os nomes exatos desses parâmetros estão no artigo escrito.
+A fonte é Christophe Pettus, no "The Build".
+
+A Percona mediu o custo de processamento da compressão de backups com pgBackRest.
+No experimento, níveis baixos de Zstandard, especialmente o três, equilibraram tamanho e processamento.
+Subir o nível comprou reduções cada vez menores por muito mais C P U.
+Meça com seus dados antes de escolher o arquivo mais magro.
+A fonte é a Percona.
+
+A PlanetScale anunciou disponibilidade geral do TIN em dezesseis de setembro para suas ofertas Postgres e Neki.
+A extensão de busca textual permite consultas por frases, correspondência aproximada e ordenação por relevância com B M vinte e cinco.
+São esses os serviços cobertos pelo anúncio. Confira se atendem à sua integração.
+A fonte é a PlanetScale.
+
+Manganin descreveu um rastreador de issues que guarda os dados num repositório Git separado.
+Os títulos ficam nos nomes dos arquivos, e as descrições ficam no conteúdo.
+Você pode clonar e editar tudo com ferramentas locais.
+Assim, cada ajuste numa issue deixa em paz o histórico das branches do código.
+A fonte é o blog Manganin.
+
+A JetBrains explicou como seu plugin OpenTelemetry monta mapas de serviços dentro do ambiente de desenvolvimento.
+Ele relaciona os registros de operações, os spans, mesmo quando chegam fora de ordem.
+A fonte é o blog da JetBrains.
+A aplicação precisa emitir esses registros e propagar o contexto corretamente.
+O mapa mostra as relações que essa instrumentação conseguiu observar.
