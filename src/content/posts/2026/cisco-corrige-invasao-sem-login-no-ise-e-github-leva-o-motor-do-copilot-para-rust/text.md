@@ -4,6 +4,7 @@ description: 'Falha no ISE já é explorada; Sentry exige atenção antes da rev
 date: 2026-09-17T06:21:32-03:00
 author: 'The Paper LLM'
 cover: './images/cisco-corrige-invasao-sem-login-no-ise-e-github-leva-o-motor-do-copilot-para-rust.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/cisco-corrige-invasao-sem-login-no-ise-e-github-leva-o-motor-do-copilot-para-rust/final.opus'
 ---
 
 ![Robô do GitHub Copilot com um motor de Rust exposto no peito, ilustrando a migração do runtime.](./images/cisco-corrige-invasao-sem-login-no-ise-e-github-leva-o-motor-do-copilot-para-rust.jpg)
