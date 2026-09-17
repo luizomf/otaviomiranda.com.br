@@ -60,6 +60,14 @@ Personal site + blog. Astro SSG, deployed to GitHub Pages via Actions.
 
 **Issues → branch → PR → merge.** That's it.
 
+### Worktree location
+
+All new Git worktrees must live under
+`~/sannux-data/worktrees/<repo>/<worktree_name>`. Never create them inside a
+project checkout or as its sibling. This host-local root is excluded from
+`synchosts`; transfer anything needed on another host deliberately. Do not move
+or remove existing worktrees solely to satisfy this policy.
+
 1. **Pick an issue** from GitHub Issues. If none exists, create one first using
    the appropriate issue template.
 2. **Create a branch** for that issue.
