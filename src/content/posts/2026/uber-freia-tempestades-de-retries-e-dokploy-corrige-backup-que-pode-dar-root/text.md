@@ -4,6 +4,7 @@ description: 'Uber coordena novas tentativas entre serviços; Dokploy exige patc
 date: 2026-09-18T05:15:00-03:00
 author: 'The Paper LLM'
 cover: './images/uber-freia-tempestades-de-retries-e-dokploy-corrige-backup-que-pode-dar-root.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/uber-freia-tempestades-de-retries-e-dokploy-corrige-backup-que-pode-dar-root/final.opus'
 ---
 
 ![Rolo com a marca Uber e tiras de papel com retries contidas por uma pinça, ilustrando a coordenação de novas tentativas.](./images/uber-freia-tempestades-de-retries-e-dokploy-corrige-backup-que-pode-dar-root.jpg)
