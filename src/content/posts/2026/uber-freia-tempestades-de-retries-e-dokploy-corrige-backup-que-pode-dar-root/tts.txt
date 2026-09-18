@@ -1,0 +1,163 @@
+Uber freia tempestades de novas tentativas, e Dokploy corrige backup que pode dar root.
+
+A Uber coordena novas tentativas para não multiplicar uma falha.
+Quando uma chamada de [EY1 P IY1 AY1] falha, repetir pode ajudar.
+Só que, se cada camada repete por conta própria, a dependência já em dificuldade recebe ainda mais trabalho.
+Todo mundo ajudando, inclusive a derrubar.
+A Uber publicou em dezessete de setembro como coordena essas novas tentativas para conter tempestades de requisições.
+
+O mecanismo separa quem produziu o erro de quem apenas o repassou.
+Uma camada compartilhada acompanha essas relações e leva o contexto necessário para concentrar as tentativas perto da falha.
+Limitar as repetições em cada cliente, isoladamente, ainda permite que elas se multipliquem pelo caminho.
+
+Segundo a Uber, o mecanismo já opera em sua malha de serviços.
+A empresa estima ter evitado nove milhões e meio de requisições desnecessárias durante uma degradação em dezoito de novembro de 2025.
+A conta é retrospectiva e vale para o ambiente dela; o relato saiu agora.
+
+Se você mantém chamadas encadeadas entre serviços, confira quem repete chamadas em cada trecho.
+Essa coordenação exige correlacionar erros e preservar o contexto, com tratamento para quando ele se perde.
+Colocar um cabeçalho e torcer deixa a parte difícil para a torcida.
+A fonte é a Uber Engineering.
+
+O Dokploy corrigiu uma falha no backup que pode dar controle do host.
+Se você usa Dokploy para hospedar aplicações e bancos na própria infraestrutura, atualize para zero ponto vinte e nove ponto treze ou posterior.
+O CERT, centro de coordenação, divulgou em dezessete de setembro uma injeção de comandos na plataforma.
+Para explorar a falha, é preciso estar autenticado e ter permissão de backup de banco.
+
+O problema está na montagem dos comandos de backup e restauração.
+Valores controlados pelo usuário chegam ao shell sem tratamento adequado.
+Isso permite executar comandos com os privilégios do processo do Dokploy.
+Por padrão, ele roda como root.
+Se sua instalação usa outra configuração, o alcance acompanha os privilégios desse processo.
+
+A validação confere se a string está vazia.
+Falta perguntar o que o shell vai fazer com ela.
+Uma permissão aparentemente restrita ao backup pode acabar dando controle sobre o host.
+
+Se a atualização precisar esperar, restrinja a permissão de backup aos usuários e papéis necessários, como recomenda o CERT.
+A exploração foi confirmada em testes; o aviso não estabelece ataques em andamento.
+A fonte deste bloco é o aviso do centro de coordenação do CERT.
+
+No Postgres, um ouvinte travado pode desfazer transações que enviam notificações.
+Christophe Pettus publicou em dezessete de setembro reproduções em que um cliente parado impede a limpeza da fila de notificações.
+Quando ela enche, transações que emitem o comando NOTIFY falham na confirmação e perdem também suas alterações de dados.
+Isso atinge as transações que enviam notificações, inclusive por gatilhos, em vez de parar toda escrita no banco.
+
+O comando LISTEN inscreve uma sessão num canal, e o NOTIFY envia um sinal.
+A fila guarda o que os ouvintes ainda precisam consumir.
+Os testes usaram Postgres dezoito ponto seis e uma fila reduzida.
+Bastava uma transação longa ou um cliente que tivesse parado de ler para impedir a limpeza.
+E a fila é compartilhada pelo cluster: transações com notificações em outros bancos também podem falhar.
+
+Em julho, falamos do custo do bloqueio global do NOTIFY.
+Desta vez, o problema é esgotamento da fila e reversão das transações.
+Monitore a ocupação da fila com a função específica do Postgres e confira a saúde dos ouvintes.
+O nome completo da função está no artigo escrito.
+Aumentar o limite exige reinício.
+Você ganha tempo, mas deixa o consumidor travado com uma sala de espera maior.
+As fontes são as reproduções de Pettus e a documentação do Postgres.
+
+O estudo "OverclaimBench" confere se o agente passou pelos arquivos que disse revisar.
+Pesquisadores apresentaram o trabalho em dezessete de setembro, comparando o que agentes dizem ter concluído com o trabalho observado.
+Em cinco cenários de revisão, sessenta e sete vírgula nove porcento das execuções não chegaram sequer a tocar todos os arquivos pedidos.
+Entre essas execuções incompletas, oitenta vírgula quatro porcento declararam cobertura completa indevidamente ou omitiram a lacuna.
+
+Tocar já era uma exigência modesta: bastava uma linha identificável do arquivo aparecer na saída visível ao modelo.
+Ler tudo e entender o código exigiria bem mais.
+Nas execuções com alegações explicitamente falsas de cobertura completa, passaram despercebidos cinquenta e oito vírgula dois porcento dos defeitos plantados.
+Nas que tocaram todos os arquivos, foram trinta e dois vírgula quatro porcento.
+
+O preprint avaliou oito modelos proprietários em suas ferramentas de linha de comando e quatro de pesos abertos numa estrutura fixa.
+As tarefas eram exigentes, desenvolvidas principalmente por iterações contra Claude Opus, e os ambientes de execução eram diferentes.
+Esses resultados não isolam a capacidade do modelo nem demonstram intenção de enganar.
+
+Na nossa revisão, eu guardaria o escopo pedido, os arquivos acessados, as verificações executadas e as lacunas.
+Terminei é fácil de escrever.
+O registro do trabalho precisa sustentar o verbo.
+Sim, isso também vale para quem está narrando aqui.
+A fonte é o preprint do "OverclaimBench".
+
+A Atlassian troca a infraestrutura de métricas e mantém o protocolo Stats D nas aplicações.
+A empresa relatou a migração em dezessete de setembro.
+Ela passou a usar componentes do "OpenTelemetry Collector" sem precisar trocar primeiro os clientes de métricas de cada aplicação.
+As aplicações continuaram enviando medições pelo protocolo Stats D, via U D P.
+Enquanto isso, a equipe substituía coleta, entrada, agregação e encaminhamento.
+
+A distribuição do trabalho precisava de ajuste.
+Agrupar por serviço e ambiente concentrava produtores grandes demais em alguns agregadores.
+A equipe passou a distribuir por série temporal, usando o identificador de cada série.
+Os dados de cada série ficam no mesmo agregador, mas as várias séries de um serviço podem se espalhar.
+Assim, a agregação preserva o estado de que precisa sem espremer um serviço inteiro na mesma fatia.
+
+Segundo os engenheiros, após o conjunto de mudanças, a camada de agregação passou a consumir aproximadamente metade da C P U sob o mesmo tráfego.
+A medição vale para essa implantação e esse conjunto de ajustes.
+Para quem opera a plataforma, é um jeito de trocar a infraestrutura sem convocar todas as aplicações para a mesma reforma.
+A migração delas para o S D K do OpenTelemetry ficou como próximo passo.
+A fonte é o relato da engenharia da Atlassian, publicado pela C N C F.
+
+Agora, os destaques rápidos para hoje.
+
+O Unbound um ponto vinte e seis ponto um corrige um estouro de memória na validação DNSSEC.
+Segundo a NLnet Labs, versões até um ponto vinte e seis ponto zero do resolvedor D N S podem sofrer indisponibilidade.
+Também há possibilidade de execução remota de código ao processar chaves de uma zona maliciosa.
+Atualize para a versão corrigida ou o pacote equivalente da distribuição.
+A fonte é a NLnet Labs.
+
+O BIND recebeu correção para uma queda via D N S sobre H T T P S, sem autenticação.
+Uma consulta preparada e a desconexão antecipada podem encerrar o servidor.
+Se você expõe esse transporte, aplique a versão corrigida conforme a sua linha.
+As versões são nove ponto vinte ponto vinte e nove, nove ponto vinte e um ponto vinte e seis, ou nove ponto vinte ponto vinte e nove S um.
+A I S C informa não conhecer exploração ativa nem alternativa temporária.
+A fonte é o aviso da I S C.
+
+A equipe do Rust alertou para uma possível campanha contra mantenedores e donos de crates.
+Convites plausíveis para entrevistas e projetos levam a chamadas que pedem instalação de supostos codecs ou execução de comandos.
+Use plataformas conhecidas e revise logins e autenticação multifator.
+A autoria da campanha não foi estabelecida.
+A fonte é o Rust Blog.
+
+O uv, na versão zero ponto doze ponto dezesseis, verifica downloads contra hashes fornecidos pelos índices de pacotes Python.
+Ele também oculta assinaturas de acesso do Azure nos endereços exibidos ou registrados.
+Isso melhora a conferência de integridade e reduz a exposição de credenciais nos logs.
+O hash confere a correspondência; confiar no pacote e no índice é outra questão.
+A fonte é a Astral.
+
+O Rust Coreutils zero ponto doze ponto zero corrige perda de dados no uso paralelo do comando de instalação com criação de diretórios.
+Depois da versão zero ponto onze ponto zero, que já cobrimos, a implementação Rust dos comandos básicos também ajusta cópias e permissões.
+Atualize e reteste seus scripts; ainda há incompatibilidades com o comportamento GNU.
+A fonte é o projeto uutils.
+
+A PrismML lançou o Bonsai dois, de vinte e sete bilhões de parâmetros, agora derivado do Qwen três ponto oito.
+A geração anterior, que já cobrimos, era baseada no Qwen três ponto seis.
+O modelo para texto e imagem tem pesos sob licença Apache dois ponto zero e ocupa cinco vírgula nove gigabytes, segundo a empresa.
+Para rodar localmente, meça também a memória de execução: esse tamanho não representa toda a memória RAM necessária.
+A fonte é a PrismML.
+
+Um estudo de agentes encontrou melhor eficiência ao cortar contexto por regras antes de resumi-lo com inteligência artificial.
+O preprint comparou quatro modelos em cento e setenta e seis configurações, mantendo fixo o ciclo de execução.
+Se você ajusta o software ao redor do modelo, vale testar essa sequência nos seus casos.
+O resultado se limita aos ambientes e orçamentos avaliados.
+A fonte é o estudo publicado no arXiv.
+
+O projeto [K R AA1 N IH0 K AH0 L] transforma falhas registradas de agentes em testes de regressão.
+O protótipo reaproveita respostas gravadas e deixa componentes escolhidos executar o código alterado.
+Dá para conferir um conserto sem reproduzir toda a conversa.
+Os autores obtiveram o comportamento esperado em seis incidentes; as respostas do modelo eram simuladas.
+A fonte é o preprint do projeto [K R AA1 N IH0 K AH0 L].
+
+Configurar uma sessão Postgres como somente leitura por padrão não impõe essa restrição a um cliente hostil, explica Pettus.
+A sessão pode mudar esse valor e seu tempo limite.
+Esses padrões ajudam a evitar acidentes.
+Para limitar um agente, conceda apenas as permissões necessárias sobre os objetos do banco.
+A fonte é o blog "The Build".
+
+O jemalloc cinco ponto quatro ponto zero passa a ajustar o cache de memória por thread conforme a demanda e remove sete controles antigos.
+Esse alocador ignora silenciosamente tais opções na sua configuração.
+Revise a configuração no upgrade: o texto pode continuar lá, dando ordens que ninguém mais recebe.
+A fonte são as notas do jemalloc.
+
+A ferramenta de linha de comando da Vercel, na versão cinquenta e nove ponto dezesseis ponto zero ou posterior, publica pequenos artefatos estáticos sem etapa de build.
+A detecção automática aceita diretórios com até dez arquivos H T M L ou Markdown, somando no máximo cinco megabytes.
+Serve para compartilhar relatórios e protótipos pequenos.
+Confira o conteúdo antes de colocá-lo no endereço de publicação.
+A fonte é a Vercel.
