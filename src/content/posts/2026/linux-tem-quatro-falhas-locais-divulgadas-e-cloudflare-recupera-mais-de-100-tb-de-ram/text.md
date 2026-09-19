@@ -4,6 +4,7 @@ description: 'Kernel exige conferir patches da distribuição; Cloudflare encolh
 date: 2026-09-19T05:15:00-03:00
 author: 'The Paper LLM'
 cover: './images/linux-tem-quatro-falhas-locais-divulgadas-e-cloudflare-recupera-mais-de-100-tb-de-ram.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/linux-tem-quatro-falhas-locais-divulgadas-e-cloudflare-recupera-mais-de-100-tb-de-ram/final.opus'
 ---
 
 ![Tux em placa metálica com aviso sobre quatro falhas locais no Linux.](./images/linux-tem-quatro-falhas-locais-divulgadas-e-cloudflare-recupera-mais-de-100-tb-de-ram.jpg)
