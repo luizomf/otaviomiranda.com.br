@@ -1,0 +1,160 @@
+Linux tem quatro falhas locais divulgadas, e Cloudflare recupera mais de cem terabytes de memória RAM.
+
+Quatro falhas no Linux podem levar um usuário local a root.
+Asim Manizada divulgou as falhas no kernel em dezoito de setembro, com demonstrações em que um usuário local chegou a root nos sistemas testados.
+As correções já haviam chegado ao kernel nas semanas anteriores.
+Se você administra máquinas compartilhadas ou hosts de contêineres, confira os patches da distribuição e o kernel que está rodando.
+
+Três dessas falhas têm caminhos de corrupção que dependem de namespaces de usuário e rede sem privilégios, ou de permissões específicas.
+Os namespaces permitem criar ambientes isolados.
+Já a quarta, chamada "DiagSpill", exige suporte ao protocolo S C T P e ao componente de diagnóstico dele.
+Ela não tem aquela exigência de namespaces ou permissões.
+Por isso, desabilitar namespaces sem privilégios deixa caminhos descobertos.
+E as demonstrações completas de root têm dependências adicionais.
+
+Contêineres compartilham o kernel do host.
+O pesquisador relata a possibilidade de corromper esse kernel sob os pré-requisitos relevantes.
+Mas não demonstrou fuga de contêiner nem estabeleceu exploração em ataques reais.
+
+Na hora de conferir a correção, olhe os boletins da sua distribuição.
+Ela pode aplicar o patch mantendo uma numeração anterior à versão corrigida do kernel original.
+Comparar só o número pode dar um susto desnecessário.
+Ou uma tranquilidade bem mal informada.
+A fonte é a divulgação de Asim Manizada na lista O S S Security.
+
+Agora, a Cloudflare encolheu o mapa do cache e recuperou mais de cem terabytes de memória RAM.
+A empresa relatou essa economia na frota em dezoito de setembro, depois de encolher estruturas do "Pingora Backend Router".
+Esse roteador escolhe o servidor de destino usando um anel de hashes para distribuir requisições entre caches.
+Assim, há menos mudanças de destino quando servidores entram ou saem.
+
+Cada ponto passou de oito para seis bytes, uma economia de vinte e cinco porcento nessa estrutura.
+Só diminuir um campo deixava espaços de alinhamento no Rust.
+O tipo emagreceu; a estrutura continuou ocupando a mesma cadeira.
+Foi preciso mudar sua representação.
+
+A equipe também reduziu em noventa porcento a quantidade de hashes gerados por servidor.
+Fez isso depois de estudar as colisões e o ganho cada vez menor na distribuição.
+Esse percentual mede a redução na contagem de hashes.
+Já os mais de cem terabytes são a economia total medida pela empresa.
+
+Só que trocar esse mapa poderia mandar requisições para caches ainda vazios e sobrecarregar a origem.
+Na migração, a Cloudflare manteve os dois anéis e selecionou requisições de forma consistente pelo hash.
+Foi ampliando a mudança por datacenter, acompanhando cache e origem.
+Havia a possibilidade de voltar atrás antes de remover o mapa antigo.
+A fonte é a Cloudflare Engineering.
+
+No Postgres, aumentar o limite de workers pode ficar só na configuração.
+Christophe Pettus mostrou em dezoito de setembro por que aumentar o limite de processos auxiliares de manutenção pode não acelerar a criação de índices.
+Esse parâmetro define um teto por comando.
+O banco também considera o tamanho da tabela, a memória e os workers disponíveis no conjunto compartilhado.
+
+Nos exemplos com Postgres dezoito ponto seis, o cálculo normal exige trinta e dois megabytes de memória de manutenção por participante.
+O processo líder também entra nessa conta.
+Os sessenta e quatro megabytes padrão permitem apenas um worker, embora o teto padrão seja dois.
+Você autorizou mais gente; o orçamento só pagou uma cadeira extra.
+A opção da tabela que define a quantidade de workers paralelos pode contornar esse cálculo de memória.
+Já o VACUUM manual segue outras regras.
+
+Numa restauração paralela, cada sessão da ferramenta de restauração do Postgres faz seus próprios pedidos.
+Dimensione memória e workers levando em conta os comandos concorrentes.
+Para ver quem realmente começou a trabalhar, observe a visão de atividade do banco, agrupando os processos pelo identificador do líder.
+A mensagem de depuração da criação do índice mostra quantos workers foram pedidos, não necessariamente quantos foram iniciados.
+A fonte é Christophe Pettus, no The Build.
+
+A CrowdSec ligou uma cópia de repositórios ao acesso mantido de um ex-funcionário.
+A empresa publicou em dezoito de setembro a investigação de um vazamento de aproximadamente cento e setenta repositórios privados do "Git Hub".
+A cópia aconteceu em vinte e dois de maio.
+A empresa soube da publicação do material em dezesseis de setembro.
+O acesso era de um ex-funcionário e tinha sido mantido para ele terminar trabalhos pendentes.
+A remoção veio em vinte e cinco de maio.
+
+Segundo a CrowdSec, o ataque à cadeia de pacotes do TanStack comprometeu esse ex-funcionário e levou ao roubo de um token OAuth.
+Esse token permite autorizar operações Git sem outro login interativo.
+A empresa diz que o "Git Hub" ajudou a rastrear o ciclo de vida do token.
+
+A investigação da própria CrowdSec não encontrou alteração de código nem comprometimento de integração contínua ou infraestrutura.
+Houve exposição de e-mails de oitenta e três usuários.
+Também foram expostos nomes, e-mails e contexto de investimento de cinquenta e um potenciais investidores.
+
+Se você mantém exceções no desligamento de alguém, dê prazo e responsável a elas.
+E, ao responder a um pacote comprometido, revogue também os tokens expostos.
+Remover o pacote deixa a credencial roubada funcionando.
+A fonte é o relatório de incidente da CrowdSec.
+
+Um pesquisador encontrou histórico Git numa cópia do projeto feita pelo ZCode.
+Ferstar publicou em dezoito de setembro uma investigação desse agente de programação para desktop da Zhipu.
+Ao examinar artefatos locais e o cliente, encontrou um snapshot criptografado do projeto.
+O manifesto dessa cópia incluía objetos do Git, cache de L F S e registros locais de movimentação das referências do Git.
+O histórico pode guardar conteúdo que já sumiu dos arquivos atuais.
+
+O pesquisador também identificou um fluxo de envio em segundo plano que negocia credenciais e manda o pacote para armazenamento na nuvem.
+Segundo sua análise, a opção "Optimize Experience" controlava a autorização de treinamento.
+Já a opção "Repo Snapshot Indexing" controlava a indexação no servidor.
+Aquele fluxo de captura e envio continuava funcionando independentemente delas.
+
+O arquivo destacado estava pendente, com tentativas de upload falhas.
+Isso não comprova transferência bem-sucedida nem uso para treinamento.
+O relato se limita à inspeção do pesquisador, sem reprodução independente ou resposta do fornecedor verificada.
+
+Antes de abrir um repositório privado ali, confira o alcance da captura.
+O conteúdo visível no editor pode ser só uma parte da bagagem.
+A fonte é a investigação de Ferstar.
+
+E agora, os destaques rápidos para hoje.
+O Claude Code, na versão dois ponto um ponto duzentos e setenta e sete, passa a ler o arquivo de instruções AGENTS ponto M D.
+Isso acontece quando não há um arquivo CLAUDE ponto M D no projeto.
+Dá para compartilhar instruções entre agentes sem duplicar o arquivo.
+A seleção fica em "Project instructions", na configuração.
+O recurso ainda não está disponível em Bedrock, Vertex ou Foundry.
+A fonte é o changelog oficial do Claude Code.
+
+A CISA incluiu três outras falhas do Linux no catálogo de vulnerabilidades exploradas em dezoito de setembro.
+São diferentes das quatro divulgadas pelo pesquisador no começo desta edição.
+Para estas três, há evidência de exploração.
+Priorize as correções indicadas pelos fornecedores.
+Os identificadores completos estão no artigo escrito.
+A fonte é o catálogo de vulnerabilidades exploradas da CISA.
+
+O Warpgate zero ponto vinte e nove ponto zero adiciona aprovação administrativa de sessões.
+Também traz uma política global de cadastro de segundo fator.
+Esse gateway de acesso à infraestrutura amplia os controles depois do acesso por S S H no navegador, que já cobrimos.
+A política permite exceções para autenticação única.
+E o upgrade traz mudanças incompatíveis na [EY1 P IY1 AY1].
+Confira suas automações. A fonte é a publicação da versão pelo Warpgate.
+
+O Google abriu uma prévia de busca por relevância B M vinte e cinco no AlloyDB e no Cloud [EH1 S] [K Y UW1] [EH1 L].
+Ela é voltada ao Postgres dezessete ou superior.
+A extensão de busca textual permite testar busca por palavras junto da vetorial no banco.
+É uma prévia distinta do TIN da PlanetScale, que já cobrimos.
+A fonte é o Google Cloud.
+
+O uv zero ponto doze ponto dezessete corrige a seleção de pacotes incompatíveis com o macOS mínimo configurado.
+Depois dos hashes da versão zero ponto doze ponto dezesseis, agora o gerenciador Python ajusta a seleção para os ambientes exigidos.
+Ele impede a escolha de versões cujos pacotes pré-compilados exijam um macOS mais novo.
+Atualize e confira a resolução para seu alvo de implantação.
+A fonte é a publicação da versão pela Astral.
+
+Comparações entre "Wild" e "Mold" mudam com o ambiente do build.
+Foi o que mostrou David Lattimore, desenvolvedor do Wild.
+Esses linkers juntam objetos compilados no executável.
+Sistema de arquivos, reaproveitamento da saída e criação de processos alteraram os resultados, sem um vencedor universal.
+Meça nas condições do seu pipeline.
+A fonte é a análise de Lattimore.
+
+O Google descreveu uma revisão de segurança que combina agentes com verificações programáticas do código.
+A triagem percorre a estrutura e as chamadas para conferir se o caminho suspeito é alcançável.
+As correções propostas passam por humanos.
+É um jeito concreto de validar achados da inteligência artificial antes de aceitá-los.
+A fonte é o Google Cloud.
+
+A NVIDIA detalhou como o AIPerf separa geração de carga e processamento de resultados em processos diferentes.
+A ferramenta mede inferência de modelos e permite configurar padrões de chegada das requisições.
+Ao testar seu servidor, confira também se o cliente de carga virou o gargalo da medição.
+A fonte é a NVIDIA.
+
+O M C P handler dois ponto dois ponto zero ganhou integração experimental com Web M C P.
+Um script na página expõe ferramentas M C P selecionadas explicitamente a agentes de navegador.
+Ele reaproveita as ferramentas do servidor.
+As chamadas usam a autoridade do usuário conectado.
+O padrão web ainda é proposto; confira a compatibilidade antes de planejar a integração.
+A fonte é a Vercel.
