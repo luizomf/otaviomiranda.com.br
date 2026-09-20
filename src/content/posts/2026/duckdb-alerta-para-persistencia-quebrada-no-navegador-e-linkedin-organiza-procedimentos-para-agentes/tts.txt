@@ -1,0 +1,111 @@
+DuckDB alerta para persistência quebrada no navegador, e LinkedIn organiza procedimentos para agentes.
+
+O DuckDB aponta uma versão que cria o arquivo, mas não guarda os dados.
+Em dezoito de setembro, o projeto publicou um guia para manter bancos analíticos no navegador.
+Logo ali tem uma armadilha na edição chamada DuckDB-Wasm, que roda dentro do navegador.
+A versão um ponto trinta e três ponto um, dev cinquenta e sete ponto zero, cria arquivos sem gravar o conteúdo.
+Você vê o arquivo e acha que salvou. O banco entregou a embalagem.
+
+DuckDB é um banco [EH1 S] [K Y UW1] [EH1 L] voltado a análises.
+Para os dados sobreviverem a recargas e reinícios, o guia usa o O P F S, um armazenamento privado de cada origem do site.
+Assim, o banco não fica só na memória.
+Na versão com problema, o endereço usado para acessar esse armazenamento fica malformado.
+Os autores testaram duas versões funcionando.
+Uma é a um ponto trinta e dois ponto zero.
+A outra é a um ponto trinta e três ponto um, dev sessenta e quatro ponto zero.
+A recomendação é fixar a versão um ponto trinta e dois ponto zero, ou usar uma versão de desenvolvimento corrigida.
+
+Depois de lotes de escrita, a orientação é executar o comando "CHECKPOINT".
+Ele grava os dados no arquivo principal do banco.
+Dá para reaproveitar as análises locais depois de recarregar a página ou reiniciar o navegador.
+Mas o navegador ainda pode remover esse armazenamento, inclusive numa limpeza.
+Para backup, mantenha uma cópia de referência fora dali.
+A fonte é o guia de engenharia do DuckDB.
+
+O LinkedIn entrega procedimentos ao agente conforme a tarefa.
+Ajay Prakash explicou esse desenho numa apresentação publicada pela InfoQ em dezenove de setembro.
+São os chamados playbooks, procedimentos reutilizáveis com instruções para executar uma tarefa.
+Eles incluem comandos, dependências, diagnóstico e verificação.
+É o caminho das pedras do repositório, organizado para consulta.
+
+Cada playbook tem nome, descrição e instruções, e pode apontar para procedimentos menores.
+O agente carrega os trechos relevantes aos poucos.
+Você pede uma tarefa específica e ele recebe o que precisa, sem levar o manual da empresa inteiro de brinde.
+
+Segundo Prakash, um servidor local reúne os procedimentos do repositório e de uma coleção central.
+A conexão usa M C P, protocolo para integrar ferramentas e conteúdo aos agentes.
+Descobrir o que existe, consultar os parâmetros e executar são etapas separadas.
+Isso evita despejar todo o catálogo no contexto de uma vez.
+
+No exemplo de resposta a incidentes, uma pessoa confirma e verifica antes da mitigação.
+Ferramentas passam pela revisão de segurança. Os playbooks passam por revisão de código.
+Se você seguir esse desenho relatado pelo LinkedIn, revisar as instruções entra no trabalho junto com a automação.
+A fonte é a apresentação de Ajay Prakash na InfoQ.
+
+O Postgres pode planejar dois processos auxiliares e executar sem nenhum.
+Christophe Pettus mostrou uma consulta assim em dezenove de setembro.
+Ontem falamos dos limites na criação de índices.
+Agora, a investigação mostra a diferença entre planejar uma consulta paralela e ter os recursos na hora de executá-la.
+
+Aqui entram dois parâmetros diferentes.
+Um limita quantos processos auxiliares o planejador pede por nó "Gather", que reúne o trabalho paralelo.
+O outro limita os processos paralelos e só é conferido na hora de iniciá-los.
+O planejador não consulta esse segundo limite.
+
+No experimento, zerar o limite conferido na inicialização deixou o plano pedindo dois auxiliares.
+Mas a consulta rodou sem eles.
+O plano tinha equipe; na execução, compareceu só o líder.
+Para desativar o planejamento paralelo, o autor zera o primeiro parâmetro, o limite de auxiliares por nó Gather.
+Os nomes exatos desses parâmetros estão no artigo escrito.
+
+Tem mais um detalhe. A contagem é do cluster inteiro, mas o limite usado na comparação é o da sessão que faz o pedido.
+Isso não oferece isolamento de recursos entre sessões.
+No plano executado, compare a quantidade de auxiliares planejados com a de auxiliares que realmente foram iniciados.
+São os campos "Workers Planned" e "Workers Launched".
+O Postgres dezoito também oferece contadores de pedidos e inicializações nas estatísticas do banco e das consultas.
+A fonte é Christophe Pettus, no "The Build".
+
+O W sessenta e quatro devkit detalha assinaturas e versões que nem o autor pode trocar.
+Chris Wellons publicou uma retrospectiva do projeto em vinte de setembro.
+É uma distribuição de compiladores e ferramentas de desenvolvimento para Windows.
+O balanço reúne mudanças do último ano, incluindo as assinaturas anunciadas em abril.
+
+Segundo o mantenedor, todos os executáveis e as bibliotecas D L L são assinados com sua chave.
+A geração dos pacotes e as assinaturas das versões passam pelo "Git Hub Actions", acionadas por tags que ele publica.
+Depois de publicados, os artefatos das versões são imutáveis.
+Nem o próprio Wellons consegue substituí-los.
+O velho download fica protegido até do dono tentando só corrigir uma coisinha.
+
+Para você que usa a distribuição, a assinatura identifica quem assinou.
+Já a imutabilidade impede a troca posterior daquele artefato.
+Bugs ainda podem estar no pacote; essas garantias cobrem a entrega.
+Na parte de compilação, a distribuição de sessenta e quatro bits também gera programas de trinta e dois bits.
+CMake e Ninja vêm incluídos, com Ninja como padrão do CMake empacotado.
+A fonte é a retrospectiva de Chris Wellons.
+
+Agora, os destaques rápidos de hoje.
+
+O simdjson ganhou uma otimização para ler JSON usando S V E dois, instruções de processadores ARM.
+Nos testes de Daniel Lemire, o parser completo melhorou de dois a quatro porcento no Graviton quatro.
+No Graviton cinco, a melhora foi de um a dois porcento.
+Para experimentar, você precisa habilitar S V E dois na compilação.
+A compilação padrão continua usando NEON.
+A fonte é Daniel Lemire.
+
+O plugin de login do "Git Hub" para o Datasette chegou à versão um ponto zero, corrigindo logins que terminavam com a sessão do navegador.
+O Datasette é uma ferramenta de publicação e exploração de dados.
+Nos cookies do plugin faltava a configuração "Max-Age", que define seu tempo de duração.
+Simon Willison esbarrava nisso com frequência no Mobile Safari, e a atualização corrige o comportamento.
+A fonte é o anúncio de Willison.
+
+O autor do "HellGates" relata que o GPT seis resolveu seu desafio de engenharia reversa em cerca de vinte a trinta minutos.
+O processador simulado tinha uma proteção criptográfica fraca do estado.
+Depois de remover a ofuscação, essa fraqueza permitia um ataque de replay, ou seja, de repetição.
+O resultado vale para esse desafio: complicar a aparência deixou a fraqueza intacta.
+A fonte é o relato de "XutaxKamay".
+
+O estudo Z K JPEG investiga como provar compressão e edições permitidas sem revelar a imagem original.
+O trabalho foi recebido pelo ePrint em quinze de setembro e aprovado no arquivo no dia dezessete.
+Ele descreve provas de conhecimento zero ligadas a um compromisso criptográfico da entrada.
+A fonte é o artigo no I A C R ePrint.
+A verificação cobre as transformações; a veracidade da cena fotografada fica fora desse alcance.
