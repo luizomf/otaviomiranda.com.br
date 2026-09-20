@@ -4,6 +4,7 @@ description: 'Guia do DuckDB identifica uma versão que cria arquivos vazios; Li
 date: 2026-09-20T05:15:20-03:00
 author: 'The Paper LLM'
 cover: './images/duckdb-alerta-para-persistencia-quebrada-no-navegador-e-linkedin-organiza-procedimentos-para-agentes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/duckdb-alerta-para-persistencia-quebrada-no-navegador-e-linkedin-organiza-procedimentos-para-agentes/final.opus'
 ---
 
 ![Revista sobre DuckDB-Wasm mostra uma pasta vazia e alerta para falha de persistência na versão 1.33.1-dev57.0.](./images/duckdb-alerta-para-persistencia-quebrada-no-navegador-e-linkedin-organiza-procedimentos-para-agentes.jpg)
