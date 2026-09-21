@@ -4,6 +4,7 @@ description: 'Experimentos mostram onde workers e conhecimento de IA ficam pelo 
 date: 2026-09-21T05:15:00-03:00
 author: 'The Paper LLM'
 image: './images/postgres-limita-o-paralelismo-da-replicacao-e-microsoft-testa-as-lacunas-de-um-modelo.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/postgres-limita-o-paralelismo-da-replicacao-e-microsoft-testa-as-lacunas-de-um-modelo/final.opus'
 ---
 
 ![Máquina com o elefante do PostgreSQL e duas esteiras, cada uma levando um bloco, ilustra uma transação por worker.](./images/postgres-limita-o-paralelismo-da-replicacao-e-microsoft-testa-as-lacunas-de-um-modelo.jpg)
