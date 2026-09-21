@@ -1,0 +1,142 @@
+Postgres limita o paralelismo da replicação, e Microsoft testa as lacunas de um modelo.
+
+Postgres aplica transações em paralelo, uma por processo auxiliar.
+Christophe Pettus mostrou, em vinte de setembro, como o Postgri [EH1 S] [K Y UW1] [EH1 L] distribui transações grandes na replicação lógica.
+Cada transação fica com um worker, um processo auxiliar. Uma transação sozinha não é dividida entre vários.
+Ontem falamos dos workers de consultas. Aqui, o trabalho é reproduzir alterações em outro banco.
+Transações grandes podem começar a viajar antes do commit, e ganhar um worker cada.
+As transações comuns continuam no processo líder, que também coordena a ordem dos commits.
+Aumentar o limite de workers mantém esse tráfego cotidiano no líder.
+Pettus testou isso na versão dezoito ponto seis do banco, com uma transação pequena atrás de uma inserção de quatrocentas mil linhas.
+Com os workers, a transação pequena ficou visível cerca de zero vírgula dois segundo após o commit maior.
+Sem eles, foram de três vírgula dois a quatro segundos.
+Os tempos vêm de uma máquina pequena. Você precisa medir o efeito na sua réplica.
+Quando o limite da assinatura se esgota, as alterações vão para arquivos temporários, sem aviso no log padrão.
+Confira também a capacidade do conjunto compartilhado de workers. Aumentar a cota de um cliente não contrata mais funcionários.
+A fonte é Christophe Pettus, no blog "The Build".
+
+A Microsoft testa o que a data de corte não conta sobre um modelo.
+Waldek Mastykarz, da Microsoft, publicou em vinte e um de setembro um experimento com GPT cinco ponto seis Luna.
+Os acertos e os erros aparecem espalhados pelas versões de dois produtos.
+Nesse teste, a data de corte do treinamento ajudou pouco a decidir quais partes da documentação fornecer ao agente.
+Um dos produtos era o "Dev Proxy", uma ferramenta de proxy para desenvolvedores.
+Foram sessenta e uma aprovações em trezentas e trinta e seis tarefas, distribuídas por cinquenta e três versões.
+O teste também incluiu o framework de desenvolvimento do SharePoint, e encontrou falhas tanto em versões antigas quanto recentes.
+Saber a data do livro não garante que alguém leu o capítulo.
+O experimento tem limites bem concretos. Modelos geraram as tarefas e os critérios, e outro modelo julgou as respostas.
+Além disso, o agente ficou sem documentação ou busca externa.
+O resultado se limita à avaliação desses dois produtos por um autor, em vez de dar uma nota geral da capacidade do Luna.
+E um acerto pode vir de inferência ou palpite.
+Se você cria extensões de agentes, a recomendação de Mastykarz é medir tarefas representativas primeiro.
+Depois, repetir com documentação e comparar.
+Assim dá para descobrir qual informação ajuda, em vez de entregar só as novidades posteriores ao corte.
+A fonte é "Microsoft for Developers".
+
+Linkers podem encerrar o processo pai antes de liberar a memória.
+MaskRay publicou em vinte de setembro uma análise de otimizações dos linkers "mold" e "Wild".
+Essas são ferramentas que juntam objetos compilados em um executável.
+No modo com criação de processo filho, o pai pode sair enquanto ainda há memória para liberar.
+O comando acabou. A faxina ficou trabalhando.
+No dia dezenove, falamos das comparações entre esses linkers. Agora, a questão é onde a medição termina.
+O filho faz a ligação e avisa quando a saída está pronta.
+O pai encerra antes de o filho terminar de liberar os mapeamentos de memória.
+Uma ferramenta de medição pode contabilizar os recursos do pai e deixar de fora o trabalho do filho.
+Enquanto isso, make ou Ninja podem iniciar outra tarefa antes de a limpeza anterior terminar.
+Por um tempo, as duas disputam memória.
+MaskRay recomenda desativar a criação do processo filho para comparar tempos, analisar a execução e dimensionar memória.
+Os testes de mold usaram uma versão portada para Rust, ainda em desenvolvimento.
+Ela precisa ser conferida contra a versão distribuída em C mais mais.
+A sobreposição também variou conforme a configuração de páginas de memória.
+Então o relato não dá um percentual universal de desperdício.
+A fonte é a análise de MaskRay.
+
+Will Larson faz o agente conferir metas antes de puxar trabalho.
+Em vinte de setembro, Larson descreveu um ciclo local de agentes que começa com duas perguntas.
+O projeto tem objetivos? Tem como medir o resultado?
+Antes de avançar nas tarefas do Linear, a automação procura um documento de proposta no Notion e evidências de medição.
+Pode ser um painel no Datadog, ou consultas no Snowflake.
+Se falta alguma peça, o ciclo ajuda a estabelecê-la.
+Depois, revisa métricas e tarefas, e trabalha no que está desbloqueado.
+Isso inclui preparar pedidos de integração de código, pedir revisão e buscar esclarecimentos, além de escrever código.
+A ideia é dar ao agente condições de avaliar se o trabalho aproxima o projeto da meta.
+Uma fila de tickets fechados mede muito bem a capacidade de fechar tickets.
+O resultado do produto precisa de outra régua.
+Larson ainda roda esse ciclo localmente e pretende levá-lo à estrutura de orquestração existente.
+Ele descreve a implementação e seus objetivos, sem uma taxa medida de sucesso em produção.
+Se você quiser experimentar algo parecido, comece deixando explícitos o estado do projeto e o resultado esperado.
+A fonte é Will Larson, no blog "Irrational Exuberance".
+
+O [G OW1 T] [K AW1 N T ER0] separa a fila em memória do backup dos dados.
+Vincent Bernat publicou em vinte de setembro como montou sua análise de visitas com essa ferramenta, que você pode hospedar.
+Ele usou NixOS, deixou de analisar logs e passou a registrar a visita depois de uma interação na página.
+A contagem diária caiu de aproximadamente duas mil para menos de duzentas visitas.
+Mudou a régua. Leitores sem a interação exigida e quem acompanha por R S S podem ficar fora.
+Então a queda não prova que todos os acessos excluídos eram robôs.
+Antes de comemorar a faxina, convém saber quem ficou do lado de fora.
+Nos cinco servidores web, proxies locais guardam eventos em memória e enviam lotes ao serviço de análise.
+Essa fila permite atravessar uma indisponibilidade do destino, mas se perde se o proxy for perdido.
+É uma implementação própria de Bernat. A proposta de incluí-la no projeto foi recusada.
+Já os dados que chegaram ao banco SQLite recebem backup por replicação com Litestream, para um destino S F T P remoto.
+O backup protege o que entrou no banco.
+A visita que ainda está na fila em memória depende de o proxy continuar ali para entregá-la.
+A fonte é o relato de Vincent Bernat.
+
+Um servidor caseiro com Z F S passa pelo teste de retirar um disco.
+Carlos Asmat relatou em vinte de setembro a montagem de um servidor doméstico com seis discos e um computador Zotac reaproveitado.
+Para testar, retirou um disco com a máquina funcionando.
+Segundo ele, leituras, escritas e compartilhamento Samba continuaram, e chegou um alerta por e-mail.
+A reconstrução começou automaticamente quando o disco voltou.
+O armazenamento usa Z F S com criptografia e RAID Z dois, que oferece redundância com duas paridades.
+A retirada de um disco foi testada. Restauração de backup e confiabilidade geral ainda exigem outras verificações.
+A máquina roda Kubuntu vinte e quatro ponto zero quatro, com contêineres definidos em "Docker Compose" e Caddy à frente dos serviços.
+Um mesmo JSON alimenta o painel web e o visor físico, controlado por um E S P trinta e dois.
+Duas telas consultando o mesmo estado, sem precisar discutir qual delas está certa.
+A refrigeração ainda precisa de trabalho.
+Segundo Asmat, o gabinete impresso isola os discos, e cinco baias ficam perto de quarenta e cinco graus Celsius mesmo em repouso.
+O servidor aguentou a retirada de um disco. Agora falta dar um ar para os que ficaram.
+A fonte é o projeto de Carlos Asmat.
+
+Agora, os destaques rápidos para hoje.
+O gzip um ponto quinze corrige a remoção do arquivo errado numa operação concorrente.
+A versão estável, de vinte de setembro, trata um caso em que outro processo renomeia um diretório ancestral do destino durante a operação.
+Se você automatiza compressões, confira a atualização da distribuição.
+A fonte é o anúncio dos mantenedores.
+
+A equipe Qwen anunciou o "Qwen Image" dois ponto um, para gerar e editar imagens com transparência nativa.
+Segundo a equipe, ele aceita até dez imagens de referência e extrai elementos em camadas com transparência, úteis para composições.
+São capacidades anunciadas pelo fornecedor, sem teste independente nesta cobertura.
+A fonte é a própria equipe Qwen.
+
+Simon Willison lançou um plugin para cadastrar chaves de [EY1 P IY1 AY1] pelo navegador, na ferramenta de terminal L L M.
+O plugin, chamado "llm-keys-ui", está na versão zero ponto um e evita colar o segredo na conversa com o agente.
+A chave continua acessível depois pelo shell. A interface muda onde você a digita, sem isolá-la do agente.
+A fonte é Simon Willison.
+
+Linux sete ponto três, R C quatro, está disponível para testes desde vinte de setembro.
+O "Kernel ponto org" lista essa versão como candidata da linha principal, enquanto a estável permanece em sete ponto dois ponto seis.
+Para quem acompanha o próximo kernel, esta é a rodada de testes.
+A fonte é "Linux Kernel Archives".
+
+A SentinelLABS relatou backdoors no Mac de um engenheiro DevOps de uma prestadora indiana de tecnologia da informação, fora do setor cripto.
+O relatório saiu em dezoito de setembro, mas o malware já estava presente desde março.
+A entrada continua desconhecida.
+O caso chama atenção para as credenciais de nuvem acessíveis nessas estações.
+A fonte é a SentinelLABS.
+
+O Notion explicou como combina edições simultâneas, mesmo quando o texto é dividido entre blocos.
+O desenho usa estruturas conhecidas pela sigla C R D T, que permitem mesclar operações concorrentes.
+A divulgação é de dezoito de setembro. A implantação ocorreu em julho de 2025.
+Preservar edições não garante preservar perfeitamente a intenção de cada pessoa.
+A fonte é a engenharia do Notion.
+
+O "TerminalBytes" comparou o Qwen três ponto cinco, de nove bilhões de parâmetros, em três ambientes de execução.
+Foram Ollama, "llama ponto C P P" e M L X, num Mac Studio M três Ultra.
+As representações dos pesos e os procedimentos diferem.
+O caminho M L X do Ollama também prevê múltiplos tokens.
+Use o experimento para orientar reproduções. A diferença de velocidade não pode ser atribuída só ao ambiente de execução.
+A fonte é o "TerminalBytes".
+
+O projeto comunitário amigaux apresenta suporte funcional aos processadores sessenta e oito mil e quarenta e sessenta e oito mil e sessenta.
+O suporte é para o histórico Amiga Unix, e o projeto também apresenta ferramentas de compilação hospedadas no Linux.
+Depois do evento de dezenove de setembro, o lançamento público completo de pacotes, fontes e instruções continua marcado como futuro.
+A fonte é o projeto amigaux.
