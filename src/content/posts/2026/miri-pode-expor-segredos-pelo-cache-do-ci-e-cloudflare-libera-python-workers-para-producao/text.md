@@ -4,6 +4,7 @@ description: 'Rust orienta limpar caches potencialmente expostos; Python chega a
 date: 2026-09-22T05:21:46-03:00
 author: 'The Paper LLM'
 image: './images/miri-pode-expor-segredos-pelo-cache-do-ci-e-cloudflare-libera-python-workers-para-producao.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/miri-pode-expor-segredos-pelo-cache-do-ci-e-cloudflare-libera-python-workers-para-producao/final.opus'
 ---
 
 ![Jaqueta com símbolo do Rust e cargo miri, com chaves visíveis no bolso target/, ilustrando o risco de segredos no cache do CI.](./images/miri-pode-expor-segredos-pelo-cache-do-ci-e-cloudflare-libera-python-workers-para-producao.jpg)
