@@ -1,0 +1,158 @@
+Miri pode expor segredos pelo cache do C I, e Cloudflare libera Python Workers para produção.
+
+O Miri pode deixar segredos em caches acessíveis a pull requests.
+A equipe de segurança do Rust fez o alerta em vinte e um de setembro.
+O Miri, ferramenta que verifica a execução de código Rust, guarda variáveis de ambiente no diretório de saída chamado target.
+Se elas contiverem segredos e esse diretório for parar num cache acessível a pull requests, as credenciais podem ficar expostas.
+Confira se as condições se juntam na sua integração contínua, o C I.
+Ela executa o Miri pelo Cargo, passa segredos para esse passo por variáveis de ambiente e salva o diretório target num cache que os pull requests conseguem ler.
+O "Git Hub" permite que pull requests de forks leiam caches da branch de destino.
+O acesso é só de leitura. Para levar uma credencial, basta.
+A orientação é manter os segredos longe do Miri ou desabilitar o cache desse job.
+Também é preciso limpar os caches afetados e considerar a rotação das credenciais potencialmente expostas.
+A divulgação não estabelece que houve exploração.
+A correção está prevista para a versão nightly de vinte e dois de setembro, mas o anúncio avisa que ela pode ainda não estar disponível.
+Mesmo depois de atualizar, você continua com os caches antigos para limpar.
+As fontes são o blog do Rust e a documentação de caches do "Git Hub Actions".
+
+A Cloudflare passa a dar suporte de produção a Python Workers.
+A empresa anunciou a disponibilidade geral em vinte e um de setembro.
+Python agora tem suporte de produção na plataforma, com frameworks como FastAPI, Django e Flask.
+Também há integrações nativas com os serviços de armazenamento, filas e workflows da empresa.
+Por baixo, o interpretador roda compilado para WebAssembly, por meio do Pyodide.
+As pontes A S G I e W S G I conectam os frameworks ao sistema de requisições dos Workers.
+Você reconhece o código da aplicação, mas o ambiente onde ele roda é outro.
+Para acessar bancos, as operações de socket passam pela [EY1 P IY1 AY1] de conexão dos Workers.
+Esse caminho tem suporte a drivers e integração com Hyperdrive.
+É por aí que aplicações Python podem conversar com Postgri [EH1 S] [K Y UW1] [EH1 L] ou My [EH1 S] [K Y UW1] [EH1 L].
+Antes de levar a aplicação, confira as dependências.
+Extensões escritas em C, C mais mais ou Rust precisam de compilação compatível com WebAssembly.
+O framework entrou; a comitiva ainda passa na portaria.
+A fonte é o blog da Cloudflare.
+
+O Grok quatro ponto sete chega com o mesmo preço-base de [EY1 P IY1 AY1].
+A Space [EH1 K S] [EY1 AY1] lançou o modelo em vinte e um de setembro.
+O acesso está disponível pela [EY1 P IY1 AY1], pelo Cursor e pelo Grok Build.
+O foco é programação e trabalhos de conhecimento mais longos.
+O preço-base começa em dois dólares por milhão de tokens de entrada e seis dólares por milhão de tokens de saída.
+São os mesmos valores-base listados para o Grok quatro ponto seis.
+Segundo a empresa, a versão usa um modelo-base maior e passou por um treinamento por reforço mais longo.
+A ênfase está em tarefas de várias horas.
+A desenvolvedora também promete melhorias na verificação e no tratamento de contexto, ainda sem avaliação independente aqui.
+A variante rápida é anunciada com o dobro da velocidade de saída e o dobro do preço.
+Confira qual das duas você está colocando na conta.
+Se você usa agentes de programação, compare quantas tarefas o modelo conclui e quanto custa no seu projeto.
+As ferramentas e permissões de execução continuam sob controle do sistema que envolve o modelo.
+Mais horas trabalhando também exigem saber onde ele pode mexer.
+A fonte é o anúncio da Space [EH1 K S] [EY1 AY1].
+
+A "Benchling" separa rede, D N S e acesso aos dados dos agentes.
+Benchling e A W S publicaram em vinte e um de setembro como isolam código científico gerado por agentes.
+Elas usam o "AgentCore Code Interpreter", numa configuração que já está em uso desde abril.
+O código roda numa conta A W S separada da produção, em uma rede privada sem gateway de internet nem NAT.
+O acesso permitido a serviços passa por endpoints privados.
+O D N S, que resolve os nomes, tem um controle separado.
+Um firewall libera destinos aprovados e bloqueia as demais consultas.
+Mesmo depois de tirar a saída comum para a internet, esse caminho precisa ser conferido.
+No armazenamento, políticas dos endpoints limitam o acesso ao S três.
+Credenciais temporárias e políticas de sessão restringem cada tarefa aos dados do cliente correspondente.
+Rede, identidade e dados têm controles distintos; o crachá do agente precisa dizer mais que “trabalha aqui”.
+A validação é relatada pelas próprias equipes, sem uma auditoria independente de todas as possibilidades de fuga.
+Segundo elas, testes de integração tentam consultas D N S, conexões diretas e acessos ao S três fora do escopo autorizado.
+Se uma violação passa, o pipeline falha e a release fica bloqueada.
+A fonte é o relato de engenharia da Benchling e da A W S.
+
+Um modelo de novas tentativas mostra uma fila estável que trabalha mal.
+Murat Demirbas publicou em vinte e um de setembro um modelo exploratório em que limitar o tamanho das filas mantém o sistema ocupado com trabalho duplicado.
+A fila para de crescer, enquanto parte da capacidade continua gasta em repetir pedidos.
+No dia dezoito, falamos da coordenação de retries do Uber.
+Esta análise independente olha para outro ponto.
+O que acontece quando um timeout dispara uma nova tentativa e o pedido original ainda está em andamento?
+A repetição disputa espaço com trabalho novo e pode alimentar mais repetição.
+No exemplo simulado com filas limitadas, duas de cada três unidades de capacidade atendem duplicatas.
+Só uma faz trabalho útil.
+É um resultado daquele modelo, sem medição de produção nem uma taxa geral de desperdício.
+O sistema encontrou estabilidade fazendo bastante coisa que já estava fazendo.
+Se você opera serviços com [EY1 P IY1 AY1] ou workers, acompanhe quantos pedidos úteis terminam e quantas duplicatas ocupam o sistema.
+Isso junto do tamanho da fila.
+Orçamentos de novas tentativas e prioridade para trabalho novo rompem o ciclo no modelo.
+O autor ainda deixa em aberto uma teoria geral para a composição desses sistemas.
+A fonte é a análise de Murat Demirbas.
+
+Um V P S dá endereço público ao servidor caseiro atrás de C G NAT.
+David Álvarez Rosa publicou em vinte e um de setembro sua configuração para receber conexões num servidor doméstico nessa situação.
+O C G NAT é uma camada de tradução de endereços que fica no provedor, fora do controle do roteador de casa.
+Você abre a porta do roteador e ainda tem outra pelo caminho.
+Na configuração, a máquina doméstica inicia um túnel WireGuard até um V P S com endereço público.
+O V P S recebe as conexões e troca o destino para encaminhá-las ao servidor de casa, preservando o endereço de origem do cliente.
+A resposta também precisa voltar pelo caminho certo.
+Regras de roteamento baseadas na origem mandam as respostas do serviço pelo túnel.
+Enquanto isso, o tráfego próprio da máquina doméstica segue pela rota normal.
+É esse caminho de volta que completa a ligação.
+O exemplo encaminha portas de forma ampla, com exceções para os acessos separados de S S H e WireGuard.
+Se você adaptar a ideia, escolha deliberadamente quais serviços expor.
+Mantenha também uma entrada administrativa alternativa, como recomenda o autor, para conseguir acessar a máquina se a ponte cair.
+A fonte é a configuração publicada por David Álvarez Rosa.
+
+Agora, os destaques rápidos para hoje.
+
+A CISA incluiu uma falha dos switches "Zyxel" G S mil e novecentos no catálogo de exploração conhecida em vinte e um de setembro.
+Ela permite executar comandos sem autenticação a partir da rede local.
+Confira o modelo exato e aplique o firmware corrigido indicado na tabela do aviso de segurança.
+As fontes são a CISA e a Zyxel.
+
+O Rsync três ponto cinco ponto um corrige regressões da versão três ponto cinco ponto zero, que já cobrimos.
+Voltam a funcionar caminhos explícitos cujas pastas ancestrais são links simbólicos.
+Também voltam a funcionar casos com descritores de arquivos ou substituição de processos.
+A restrição de caminhos recursivos permanece.
+Teste seus scripts de backup e deploy ao atualizar.
+A fonte são as notas de novidades do Rsync.
+
+A Constructive anunciou o "pgsql-test" para testar aplicações num Postgri [EH1 S] [K Y UW1] [EH1 L] real, com reversão das transações.
+A ferramenta separa os clientes administrativos dos clientes da aplicação.
+Isso permite testar a segurança por linha, ou R L S, sob o papel correto, em vez de um superusuário que a ignora.
+A identidade de teste não valida tokens de autenticação.
+A fonte é o anúncio no site do Postgri [EH1 S] [K Y UW1] [EH1 L].
+
+A Linear retirou um cache de dependências que demorava mais para restaurar do que instalar.
+No C I medido pela equipe, restaurar a pasta de dependências do Node levava cerca de vinte e oito segundos.
+Instalar só as dependências necessárias levava sete vírgula cinco segundos.
+Meça no seu pipeline: a economia também precisa descontar o frete.
+A fonte é o relato de engenharia da Linear.
+
+O Grafana treze ponto dois disponibiliza múltiplas árvores de políticas de notificação.
+Cada equipe pode administrar separadamente como agrupa e encaminha seus alertas.
+Isso pode ser feito pela interface, pela [EY1 P IY1 AY1] ou pelo Terraform.
+Regras sem uma seleção explícita continuam na árvore padrão, então dá para migrar aos poucos.
+A fonte é a Grafana Labs.
+
+O Kubernetes detalhou o sinal de armazenamento sem uso da versão um ponto trinta e sete.
+O recurso está em beta e habilitado por padrão.
+A condição de volume sem uso registra quando nenhum pod ainda não finalizado referencia a solicitação de volume.
+Pods pendentes contam como uso.
+Use o sinal para revisar volumes. Apagar os dados exige outra decisão.
+A fonte é o blog do Kubernetes.
+
+A Xiaomi publicou o modelo MiMo dois ponto seis Distill "Qwen" nove B.
+Ele tem nove bilhões de parâmetros e é derivado do Qwen três ponto cinco, também de nove bilhões.
+Os pesos receberam ajuste supervisionado com exemplos gerados pelo MiMo.
+São um ponto de partida para pesquisa de agentes com aprendizado por reforço, útil para quem quer avaliar modelos menores.
+A fonte é a página do modelo oficial da Xiaomi MiMo.
+
+Kev atualizou em vinte e um de setembro seus modelos locais de decisão.
+Eles têm oitocentos milhões, quatro bilhões e nove bilhões de parâmetros.
+Esses modelos pontuam alternativas fornecidas pelo programa, incluindo sim ou não, múltipla escolha e notas.
+Dá para experimentar classificação e roteamento; a confiança retornada não é uma taxa medida de acerto.
+A fonte é o repositório Kev.
+
+O Kitty zero ponto quarenta e nove ponto zero adiciona shaders personalizados e melhorias no processamento de saída do terminal.
+O projeto relata ganhos de vazão de quinze a trinta e cinco porcento, dependendo da carga.
+A medição é do processamento no terminal, não da execução do comando.
+Teste com a saída que você costuma acompanhar.
+A fonte é o changelog do Kitty.
+
+WebKit G T K e W P E WebKit dois ponto cinquenta e quatro passam a combinar as camadas das páginas com Skia por padrão.
+Segundo a Igalia, a mudança implementa recursos ausentes e melhora a maioria dos testes, com regressões em algumas cargas.
+Aplicações afetadas podem comparar com o compositor anterior, desativando o uso de Skia para composição por uma variável de ambiente.
+A configuração exata está no artigo escrito.
+A fonte é o relato da Igalia.
