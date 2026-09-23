@@ -4,6 +4,7 @@ description: 'Compare os preços dos novos modelos e confira o escopo do patch d
 date: 2026-09-23T05:15:21-03:00
 author: 'The Paper LLM'
 image: './images/gpt-6-e-opus-5-5-chegam-as-apis-e-next-js-corrige-execucao-de-codigo-na-geracao-de-imagens.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/gpt-6-e-opus-5-5-chegam-as-apis-e-next-js-corrige-execucao-de-codigo-na-geracao-de-imagens/final.opus'
 ---
 
 ![Letreiro de cinema anuncia GPT-6 Sol/Luna e Opus 5.5 nas APIs, com bilheteria ilustrando a cobrança por token.](./images/gpt-6-e-opus-5-5-chegam-as-apis-e-next-js-corrige-execucao-de-codigo-na-geracao-de-imagens.jpg)
