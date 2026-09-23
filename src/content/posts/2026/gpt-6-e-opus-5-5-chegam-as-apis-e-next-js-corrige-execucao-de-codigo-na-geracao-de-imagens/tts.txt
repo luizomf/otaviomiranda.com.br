@@ -1,0 +1,194 @@
+GPT seis e Opus cinco ponto cinco chegam às [EY1 P IY1 AY1], e Next ponto J S corrige execução de código na geração de imagens.
+
+Os novos modelos chegaram com novas contas por token.
+A OpenAI lançou GPT seis Sol e Luna em vinte e dois de setembro, e a Anthropic lançou Claude Opus cinco ponto cinco no mesmo dia.
+Se você usa modelos em agentes de programação, já pode refazer o orçamento.
+Para decidir qual trabalha melhor, vai precisar testar no seu projeto.
+
+Na OpenAI, a tarifa padrão do Sol é de dois dólares por milhão de tokens de entrada e dez dólares por milhão de saída.
+No Luna, são dez centavos de dólar por milhão na entrada e cinquenta centavos na saída.
+Esses preços valem para até duzentos e setenta e dois mil tokens de entrada.
+Os dois recebem texto e imagens e respondem em texto.
+Você pode usá-los pelas interfaces de programação chamadas Responses e "Chat Completions".
+Contextos maiores, gravação de cache e outras modalidades têm tarifas diferentes.
+
+O Opus cinco ponto cinco custa quatro dólares por milhão de tokens de entrada e vinte dólares por milhão de saída.
+Isso fica vinte porcento abaixo do Opus cinco.
+A Anthropic também anuncia economia de aproximadamente quarenta porcento em cargas típicas.
+Essa economia foi medida nos testes da própria empresa, com configurações padrão.
+
+Tokens são as unidades que o modelo processa e gera.
+Um agente pode fazer várias chamadas até concluir uma alteração.
+Então, o preço por token e a conta pelo serviço pronto são coisas diferentes.
+Aquele “vou pensar mais um pouquinho” também entra na fatura.
+As fontes são o changelog e a página de preços da OpenAI, além do anúncio do Claude Opus cinco ponto cinco pela Anthropic.
+
+Agora, uma correção de execução de código na geração de imagens do Next ponto J S.
+A Vercel publicou uma correção emergencial em vinte e dois de setembro.
+O problema está no ImageResponse, usado para gerar imagens como cartões de prévia de links.
+A falha permite executar código quando valores controlados por um atacante chegam ao conteúdo, aos atributos ou aos estilos da imagem S V G gerada.
+O ambiente afetado é o Node ponto J S.
+
+O problema afeta Next ponto J S a partir da versão dezesseis ponto dois ponto zero, até as versões anteriores à dezesseis ponto três ponto seis.
+Atualizar para dezesseis ponto três ponto seis corrige a cadeia de dependências envolvida, incluindo o Satori.
+Segundo a Vercel, um escape inadequado no S V G pode alcançar vulnerabilidades em outras dependências.
+O endpoint só precisava desenhar uma imagem.
+O conteúdo recebido para o desenho pode abrir esse caminho.
+
+Confira onde sua aplicação usa o módulo de geração dessas imagens e quais dados entram ali.
+Se ainda não conseguir atualizar, a mitigação indicada é retirar desse caminho os valores controlados por atacantes.
+A implementação Edge fica fora do aviso, assim como aplicações que não recebem essa entrada não confiável no S V G.
+Next ponto J S quinze também não é afetado por esta execução remota.
+A versão quinze ponto cinco ponto vinte e seis recebeu apenas reforços relacionados.
+As fontes são o aviso de segurança da Vercel e o anúncio da correção no blog do Next ponto J S.
+
+O system D agora distribui reinícios e põe a inicialização em fila.
+A versão duzentos e sessenta e dois, lançada em vinte e dois de setembro, ganhou controles para evitar que os serviços tentem voltar todos juntos depois de uma falha.
+O gerenciador de serviços do Linux pode acrescentar um atraso aleatório aos reinícios e limitar quantas unidades iniciam ao mesmo tempo.
+
+Um dos controles acrescenta uma espera aleatória ao intervalo de reinício configurado.
+Isso funciona inclusive quando esse intervalo aumenta progressivamente.
+Em vez de todo mundo tentar passar pela porta no mesmo segundo, cada serviço espera um tempo diferente.
+Menos cotoveladas na recuperação.
+
+O outro controle limita as unidades em inicialização dentro de uma hierarquia de grupos do system D, chamados slices.
+As demais ficam na fila até surgir uma vaga.
+A contagem cobre quem está iniciando.
+Serviços já em execução e requisições da aplicação ficam fora dela.
+
+Se você administra servidores virtuais ou outros servidores Linux, dá para avaliar esses controles quando a distribuição entregar a versão.
+As novas tentativas feitas dentro da aplicação continuam precisando de orçamento próprio.
+A fonte são as notas da versão duzentos e sessenta e dois do system D.
+
+A Cloudflare permite alinhar as variações do cache com o servidor de origem.
+Em vinte e dois de setembro, a empresa anunciou suporte configurável ao cabeçalho "Vary" nas suas regras de cache, em todos os planos.
+Esse cabeçalho informa quais cabeçalhos da requisição influenciam a resposta.
+Por exemplo, o mesmo endereço pode entregar H T M L ao navegador e JSON a outro cliente.
+
+O cache precisa distinguir essas respostas.
+Se juntar demais, pode servir o conteúdo errado.
+Se separar por cada valor bruto recebido, reaproveita pouco.
+As regras permitem normalizar os valores, preservá-los ou desviar do cache, conforme os cabeçalhos indicados pela origem.
+
+Na normalização, os valores podem ser ajustados antes de chegar ao servidor de origem.
+Assim, o servidor escolhe a resposta de acordo com a representação que vai ficar no cache.
+Os dois precisam concordar sobre o que o cliente pediu.
+
+Confira também a limpeza: configurar o desvio do cache não apaga entradas antigas.
+Faça a remoção dessas entradas se elas precisarem sair.
+A origem precisa enviar o cabeçalho Vary para declarar a variação.
+Quando ele indica variação por qualquer campo, a resposta sempre fica fora do cache.
+A fonte é o blog de engenharia da Cloudflare.
+
+Um pesquisador relata que o Muse exportou arquivos do próprio ambiente.
+Peter James relatou em vinte e dois de setembro que o "Muse", da Meta, compactou arquivos acessíveis em sua sessão.
+Depois, enviou o pacote ao Google Drive conectado.
+Segundo ele, eram cerca de seis vírgula oito gigabytes descompactados.
+Havia arquivos do ambiente Linux, código de integrações, registros, memória e arquivos de chaves S S H.
+
+O relato não demonstra fuga do contêiner.
+Também não estabelece se as chaves estavam ativas ou a que dariam acesso.
+O arquivo exportado e os registros da sessão não estão públicos para exame independente.
+Temos o teste descrito pelo pesquisador.
+
+Um contêiner pode manter a execução lá dentro enquanto uma ferramenta autorizada leva arquivos para fora.
+Se você monta agentes, revise em conjunto o que eles conseguem ler e para onde podem exportar.
+A parede pode estar inteira; confira também o serviço de entrega.
+
+Segundo James, a Meta classificou seu relato no programa de recompensas como não aplicável.
+A resposta publicada lista possíveis motivos, sem dizer qual se aplicou ao caso.
+A fonte é o relato de Peter James.
+
+Um exemplo de Postgri [EH1 S] [K Y UW1] [EH1 L] mostra chaves colidindo na replicação.
+Dimitri Fontaine publicou em vinte e dois de setembro um laboratório de replicação lógica e quebrou o próprio desenho de propósito.
+Um banco central distribui dados de referência, e bancos trabalhadores devolvem eventos de uso.
+Cada tabela viaja em uma direção.
+
+No dia vinte e um, falamos da capacidade dos trabalhadores de replicação.
+Aqui, o problema é identificar os dados: sequências independentes podem gerar o mesmo número de evento.
+Se o banco central usar só esse número como chave, a colisão paralisa a assinatura afetada, enquanto as outras continuam.
+Combinar a identificação do trabalhador com a do evento resolve esse conflito no desenho demonstrado.
+
+Em outro teste, o banco aceita um filtro de publicação, mas falha depois na atualização de um registro.
+Isso acontece porque a coluna filtrada não faz parte da identidade usada para localizar a linha na réplica.
+A configuração passou; a operação veio cobrar.
+
+Estrutura e limpeza dão trabalho à parte.
+As tabelas precisam existir no destino, pois a replicação lógica não copia sua definição.
+E mudar o filtro não remove linhas nem dados de colunas já enviados ao trabalhador.
+A fonte é o laboratório de Dimitri Fontaine.
+
+Vamos aos destaques rápidos de hoje.
+A CISA confirmou exploração de uma falha no componente de gestão de acesso do F cinco, o "BIG-IP" A P M.
+A execução remota sem autenticação envolve servidor virtual com política de acesso e perfil "OAuth".
+Nas configurações afetadas, priorize a mitigação temporária por "iRule", a análise forense e o patch final indicados pelo fornecedor.
+A identificação exata da falha está no artigo escrito.
+A fonte é o catálogo de vulnerabilidades exploradas da CISA.
+
+A Check Point também confirmou exploração de uma falha, desta vez em servidores de gestão, logs e "SmartEvent".
+Aplique o hotfix da sua versão conforme a tabela oficial.
+Atenção: o "LivePatch Take" vinte e oito ou vinte e nove não corrige esta falha.
+Os aparelhos de firewall e Spark ficam fora deste aviso, que é distinto da falha anterior de V P N.
+A fonte é o aviso da Check Point.
+
+Node ponto J S vinte e seis ponto dez ponto zero adiciona "throttle" e "debounce" ao módulo de utilidades, para controlar chamadas repetidas.
+Também traz histogramas de janela móvel para medir períodos recentes.
+A atualização acrescenta novas utilidades depois da versão vinte e seis ponto nove ponto zero.
+Ela pertence à linha "Current", não à linha de suporte prolongado.
+A fonte são as notas do Node ponto J S.
+
+O u v zero ponto doze ponto dezoito permite conferir mudanças de pacotes Python sem alterar o ambiente.
+A opção de verificação chega às operações de instalação e sincronização, junto de saída JSON para automação.
+Depois das correções de compatibilidade anteriores, dá para conferir divergências de ambiente na integração contínua.
+A fonte são as notas de lançamento do u v.
+
+O WordPress corrigiu uma falha na seleção de templates que pode executar P H P local sem autenticação.
+O risco depende de uma combinação de condições.
+É preciso que o diretório do tema ativo comece pelo prefixo específico usado para páginas, que exista um arquivo P H P utilizável e que a configuração seja compatível.
+O prefixo exato e a referência para a tabela de versões estão no artigo escrito.
+Instale a versão sete ponto um ponto dois, ou a manutenção corrigida da sua versão, conforme a tabela.
+A fonte é o aviso de segurança do WordPress.
+
+O Arch alerta para intervenção manual em certos desbloqueios de disco por T P M dois.
+O aviso envolve o mkinitcpio, versão quarenta e dois, revisão um.
+Quem usa o mecanismo de inicialização do system D e vincula a criptografia LUKS a certas medições de inicialização precisa refazer o cadastro.
+São as medições P C R de zero a sete, a nove, ou as de doze a quatorze.
+Essas medições mudaram; confira a orientação antes de atualizar.
+A fonte é o aviso do Arch Linux.
+
+O Flatpak um ponto dezoito ponto três corrige regressões da versão um ponto dezoito ponto dois.
+Elas afetavam a construção de aplicativos e a abertura de ambientes isolados internos.
+As correções incluem casos com SELinux e restrições da ferramenta de criação de processos do Flatpak.
+As definições de dependências alternativas também avançaram.
+Os auxiliares fornecidos pela distribuição seguem seu próprio ciclo de atualização.
+A fonte são as notas de lançamento do Flatpak.
+
+O Transformers ganhou integração experimental para executar modelos quantizados no formato G G U F.
+Inicialmente, o suporte é para Qwen três ponto cinco em Apple Silicon.
+A integração exige a versão do ramo de desenvolvimento e componentes compatíveis.
+Dá para testar pesos compactados pela interface Python conhecida.
+Sem kernel compatível, o carregamento desquantiza os pesos e consome mais memória.
+A fonte é a Hugging Face.
+
+O "Unreal Agent" coordena ferramentas com conclusão assíncrona e aceita orientação do usuário durante o trabalho.
+O ambiente de execução registra o início e entrega o resultado depois.
+Ele chama o modelo sem exigir consultas repetidas de status.
+Os autores encontraram combinações de provedor e modelo que rejeitam esse formato em duas etapas.
+A fonte é a Unreal Labs.
+
+A Tailscale prevê reduzir a memória dos buffers na versão um ponto cento e quatro e adicionar múltiplas filas depois dela.
+As filas devem distribuir fluxos entre caminhos de processamento em roteadores e conectores, preservando a ordem dentro de cada fluxo.
+Quem opera esses nós ainda precisa acompanhar a entrega prevista nesse cronograma.
+A fonte é o blog de engenharia da Tailscale.
+
+Uma pesquisa do OpenTelemetry registra menos dificuldade declarada na integração com Prometheus.
+O número caiu de vinte e nove para dez porcento.
+O recorte de 2026 tem oitenta e um usuários selecionados e usa triagem diferente da pesquisa de 2024.
+Os relatos dessa amostra ajudam a avaliar uma pilha híbrida de métricas, com alcance limitado aos participantes.
+A fonte é a pesquisa do OpenTelemetry.
+
+Por fim, o preprint "FIRE" testa instruções e bloqueios de ações para agentes acertarem repetidamente.
+Em oitenta e sete tarefas do "Terminal-Bench" dois ponto um, os autores testaram o GPT cinco ponto seis Sol.
+Eles relatam que o modelo acertou ambas as tentativas em setenta e três vírgula seis porcento dos casos, contra sessenta e quatro vírgula quatro porcento antes.
+A fonte é o preprint FIRE no arXiv.
+A repetibilidade foi medida nesse experimento; confiabilidade em produção ainda exige avaliação própria.
