@@ -1,0 +1,132 @@
+Plugin da MemTensor executa código malicioso durante o uso; Postgri [EH1 S] [K Y UW1] [EH1 L] mantém transações sem sessão.
+
+Desabilitar scripts de instalação ajuda a controlar dependências, mas não impede que uma biblioteca execute código quando a aplicação a carrega.
+A investigação sobre um plugin de memória para agentes mostra esse limite de maneira bem concreta.
+No Postgri [EH1 S] [K Y UW1] [EH1 L], outro detalhe merece atenção.
+Transações preparadas para um commit em duas fases sobrevivem à desconexão e ao reinício do servidor.
+São problemas diferentes, mas ambos exigem olhar além do momento em que a instalação ou a sessão termina.
+
+O plugin comprometido espera a aplicação funcionar.
+
+A StepSecurity publicou em vinte e três de setembro uma investigação sobre versões maliciosas do plugin da MemTensor que conecta agentes OpenClaw ao serviço de memória MemOS Cloud.
+Esse serviço permite recuperar informações de interações anteriores.
+A integração coloca o plugin no caminho de execução dos pedidos do usuário.
+Segundo a análise, três versões contêm um lançador de executáveis embutidos no pacote.
+São as versões zero ponto um ponto vinte e um, zero ponto um ponto vinte e três e zero ponto um ponto vinte e cinco.
+O lançador é chamado na inicialização do gateway e durante a recuperação de memória.
+Ele recebe o ambiente do processo, que pode incluir credenciais.
+Na recuperação de memória, recebe também o texto do pedido do usuário.
+
+O código malicioso não depende de scripts executados antes, durante ou depois da instalação.
+Por isso, instalar com scripts desabilitados não torna seguro usar essas versões.
+Há duas perguntas diferentes na investigação de uma máquina.
+A primeira é se o pacote chegou ao disco.
+A segunda é se a aplicação carregou o plugin e acionou esses caminhos.
+
+O histórico de publicação também preocupa.
+Duas versões com conteúdo limpo foram seguidas por novas versões maliciosas em menos de quatro minutos.
+Um relato aberto no repositório descreve artefatos publicados no N P M sem commits ou tags correspondentes.
+Isso aponta para a necessidade de investigar o acesso à publicação.
+Não prova, sozinho, qual credencial foi roubada ou como o invasor entrou.
+
+Para quem usa o pacote, a prioridade é interromper o uso das versões afetadas.
+Também é preciso identificar onde elas foram carregadas e avaliar as credenciais acessíveis nesses ambientes.
+Para quem mantém a distribuição, publicar uma versão limpa precisa vir acompanhado de revogação de acessos comprometidos e revisão do processo de publicação.
+Se a porta da publicação continua aberta, o próximo pacote pode trazer tudo de volta.
+
+O autor do relato no repositório informa que examinou o código e os artefatos sem executar os binários.
+Essa é a limitação da sua análise estática.
+O acesso do lançador ao ambiente e aos pedidos sustenta o alerta sobre segredos e prompts.
+Mas não demonstra que toda instalação sofreu exfiltração, isto é, envio de dados para fora do ambiente.
+A ausência de scripts de instalação, por sua vez, não elimina a oportunidade de execução posterior.
+As fontes deste bloco são a investigação da StepSecurity e o relato no repositório do plugin da MemTensor.
+
+A transação do Postgri [EH1 S] [K Y UW1] [EH1 L] que não termina com a conexão.
+
+Christophe Pettus publicou em vinte e três de setembro uma demonstração do parâmetro que controla quantas transações podem permanecer no estado preparado.
+Esse recurso do banco faz parte do commit em duas fases, usado para coordenar uma operação entre participantes.
+Primeiro, um coordenador externo pede que cada participante prepare seu trabalho.
+Depois, comunica a decisão de confirmar ou desfazer a operação.
+Estar preparado ainda não é ter confirmado a transação.
+
+Depois do comando de preparação, o trabalho deixa de pertencer à sessão que o iniciou.
+Seu estado fica persistido, e os bloqueios continuam existindo.
+Desconectar o cliente ou reiniciar o banco não encerra essa obrigação.
+Essa persistência é justamente o que permite ao coordenador retomar o protocolo depois de uma falha.
+
+No experimento de Pettus com a versão dezoito ponto seis do banco, uma transação preparada impediu uma alteração de tabela.
+Ela também manteve registros mortos que o mecanismo de limpeza, chamado VACUUM, ainda não podia remover.
+A criação de um slot de replicação lógica também ficou esperando uma transação antiga terminar.
+
+O perigo aparece quando o coordenador desaparece e ninguém assume a recuperação.
+A transação já não está vinculada a um processo de atendimento da conexão que possa ser encerrado.
+Os limites de tempo da sessão não resolvem.
+É preciso executar um comando específico para confirmar ou desfazer a transação preparada.
+Isso deve ser feito no mesmo banco, pelo papel de acesso que preparou a transação ou por um superusuário.
+Essa decisão deve respeitar o resultado da operação distribuída.
+Sair desfazendo tudo por idade pode contrariar o que outros participantes já fizeram.
+
+A documentação recomenda manter em zero o limite de transações preparadas quando não houver um gerenciador externo acompanhando e encerrando essas transações.
+Se o sistema precisa do recurso, monitore a idade das transações na visão de sistema que lista as entradas preparadas.
+E defina quem consulta o coordenador e resolve os casos pendentes.
+O alerta precisa encontrar um responsável, não apenas acordar alguém para tentar reiniciar o banco.
+As fontes são a demonstração de Christophe Pettus e a documentação do comando de preparação de transações do Postgri [EH1 S] [K Y UW1] [EH1 L].
+
+O "Git Hub" separa linhas de código e comentários para renderizar pull requests enormes.
+
+Em um relato de engenharia de vinte e três de setembro, o "Git Hub" descreve a reconstrução da visualização de pull requests no aplicativo "Git Hub Copilot".
+A equipe usou como caso extremo um pedido de alteração com dois mil e duzentos arquivos.
+Eram mais de um milhão de linhas alteradas e mais de quatrocentos comentários junto às linhas de código.
+
+A técnica básica é a virtualização.
+Ela cria elementos de interface apenas para a região visível e uma pequena margem ao redor.
+O restante existe como dados e cálculos de posição, não como um milhão de elementos no navegador.
+
+Comentários complicam essa conta de alturas e posições.
+Uma linha de código tem geometria previsível no modelo descrito.
+Já um comentário pode crescer quando uma imagem carrega, o texto quebra em outra largura ou alguém abre a caixa de resposta.
+Recalcular tudo durante a rolagem produz saltos e travamentos.
+
+A solução mantém dois cálculos de posição.
+Um deles é para o código, cujas dimensões são previsíveis nesse modelo.
+O outro é para os blocos dinâmicos de comentários, que usam alturas estimadas, medidas e armazenadas em cache.
+Um agendador concentra as medições perto da área visível e evita fazê-las durante a rolagem ativa.
+Ao corrigir uma altura, a interface preserva a posição do conteúdo que o usuário estava lendo.
+
+O detalhe útil para outros frontends está na medição do resultado.
+A equipe instrumentou quantos elementos ficam montados, quanto custam as correções e se aparecem espaços vazios.
+Esses sinais viraram limites verificados em testes.
+A experiência de fluidez relatada é do "Git Hub".
+A lição reaproveitável é separar o custo previsível daquele que depende da renderização e testar os dois sob carga.
+A fonte é o relato da engenharia do "Git Hub".
+
+Agora, os destaques rápidos para hoje.
+
+O Ubuntu prepara versões semanais de kernel com ciclos de duas semanas sobrepostos.
+No anúncio de vinte e três de setembro, a Canonical reserva uma semana para preparação e outra para certificação, integração e regressão.
+Um novo ciclo começa a cada semana.
+O repositório de atualizações propostas permite iniciar testes próprios antes da certificação, mas não equivale à versão já validada.
+A empresa também estabelece como objetivo oferecer mitigação ou orientação de endurecimento em vinte e quatro a quarenta e oito horas após a divulgação de uma falha, quando aplicável.
+Ela não promete uma correção nesse prazo.
+A fonte é o anúncio da Canonical.
+
+Um backup novo não conserta uma lacuna antiga no histórico de recuperação.
+Stefan Fercot demonstrou em vinte e três de setembro uma troca do servidor principal do Postgri [EH1 S] [K Y UW1] [EH1 L] na qual faltava arquivamento dos registros de alterações.
+Esses registros são usados na recuperação do banco.
+Um backup posterior pôde ser restaurado.
+Mas isso não recompôs os registros ausentes, necessários para recuperar um backup anterior através da troca de servidor principal.
+Ative com antecedência o modo de arquivamento nos servidores que poderão assumir como principal.
+Essa mudança exige reinício, e é preciso conferir se o arquivamento está pronto antes da troca.
+Teste a recuperação que você precisa garantir, não só a criação do próximo backup.
+A fonte é o experimento de Stefan Fercot com pgBackRest e troca do servidor principal.
+
+O G K E integra o caminho para desligar e reacordar processos de trabalho por métricas externas.
+O Kubernetes um ponto trinta e sete já trouxe a escala até zero ao H P A, o controlador que ajusta a quantidade de réplicas da aplicação.
+Depois disso, o anúncio do Google de vinte e três de setembro detalha a integração gerenciada no G K E um ponto trinta e sete.
+Um recurso customizado de métricas de escalonamento alimenta esse controlador.
+Ele pode usar, por exemplo, o número de mensagens pendentes no "Pub Sub".
+A integração ainda exige configurar esse recurso customizado, não elimina essa etapa.
+As reservas de capacidade mantêm computação aquecida compartilhada para reduzir a espera de retorno.
+Zero réplicas de um processo de trabalho não significa custo total zero do cluster.
+A fonte é o Google Cloud.
+Meça do recebimento da mensagem até o processamento útil.
