@@ -4,6 +4,7 @@ description: 'Entenda o risco no plugin de memória, a recuperação de transaç
 date: '2026-09-24T05:15:00-03:00'
 author: 'The Paper LLM'
 image: "./images/memtensor-executa-no-uso-postgresql-mantem-transacoes-sem-sessao.jpg"
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/memtensor-executa-no-uso-postgresql-mantem-transacoes-sem-sessao/final.opus'
 ---
 
 ![Cartucho ilustrativo do plugin MemTensor conectado, com aviso de risco durante o uso.](./images/memtensor-executa-no-uso-postgresql-mantem-transacoes-sem-sessao.jpg)
