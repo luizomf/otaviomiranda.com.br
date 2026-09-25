@@ -1,0 +1,117 @@
+Omnibin baixa programas sob demanda; Samba quatro ponto vinte e cinco testa reconexão a arquivos abertos.
+
+O Omnibin permite encontrar comandos antes de baixar seus pacotes. O conteúdo chega quando é lido.
+O Samba, por sua vez, testa uma forma de retomar o acesso a arquivos que estavam abertos antes de uma interrupção do servidor.
+E o OpenTelemetry mostra por que um catálogo de instrumentação não substitui testes da telemetria emitida.
+As três novidades ajudam a distinguir o que uma ferramenta oferece das condições necessárias para usá-la.
+
+O Omnibin usa um índice de pacotes do ecossistema Nix para buscar programas sob demanda.
+Farid Zakaria apresentou a ferramenta em vinte e quatro de setembro.
+Ela é um sistema de arquivos baseado em FUSE, um mecanismo que permite implementar sistemas de arquivos fora do kernel.
+O Omnibin coloca executáveis do histórico do Nixpkgs, a coleção de pacotes do ecossistema Nix, no caminho em que o terminal procura comandos.
+O truque é separar duas coisas: encontrar um arquivo e buscar seu conteúdo.
+Um índice descreve o que existe nos arquivos de pacotes do cache do Nix.
+Assim, listar um diretório pode ser respondido só com metadados.
+Quando um arquivo é lido, o conteúdo necessário é baixado e descompactado.
+Os programas não estão todos ocupando o disco desde o começo.
+Na demonstração do autor, aparecem mais de cinquenta e um mil nomes de executáveis.
+Também é possível pedir uma versão histórica explicitamente, como o Python três ponto seis ponto dois.
+Já o nome simples aponta para a versão mais recente disponível no índice.
+Isso torna a escolha de versão relevante. Uma versão antiga estar disponível não significa que ela seja adequada para produção.
+O custo não desaparece; muda de momento.
+Na demonstração de Zakaria, a primeira execução de Python leva cerca de dois vírgula sete segundos.
+Outra execução, com os arquivos já presentes, leva trinta e cinco milissegundos.
+Mas os comandos usam expressões diferentes.
+Isso ilustra o custo inicial do download, não constitui um teste controlado nem uma garantia para outros programas, redes ou máquinas.
+A proposta é interessante para explorar ferramentas e preparar ambientes descartáveis.
+Só que o exemplo com Docker exige acesso ao dispositivo FUSE e uma capacidade administrativa do sistema.
+Não é uma receita de isolamento seguro para agentes só porque roda em container.
+Antes de experimentar com código não confiável, avalie essas permissões.
+Antes de depender da ferramenta num fluxo repetível, escolha as versões e meça o primeiro acesso.
+A fonte é a apresentação e demonstração do Omnibin por Farid Zakaria.
+
+O Samba quatro ponto vinte e cinco testa a retomada de arquivos abertos após interrupções.
+O Samba é usado para compartilhar arquivos pelo protocolo S M B.
+A versão quatro ponto vinte e cinco ponto zero foi lançada em vinte e quatro de setembro.
+Uma das novidades é o suporte experimental ao recurso chamado "SMB3 Persistent Handles".
+Um handle é a referência que o cliente usa para trabalhar com um arquivo aberto.
+Preservar essa referência permite que ele se reconecte depois de uma reinicialização ou interrupção do servidor, sem precisar reabrir o arquivo.
+Para isso, o Samba precisa guardar o estado dessas referências em armazenamento durável.
+Operações como abrir e fechar arquivos passam a depender da gravação síncrona de metadados, o que aumenta a latência.
+As notas não recomendam o recurso para servidores de uso geral.
+Ele atende a necessidades específicas de disponibilidade contínua.
+E há uma restrição decisiva: os compartilhamentos precisam ser exclusivos para acesso S M B.
+As configurações exigidas desativam a interoperabilidade de bloqueios com acesso POSIX local e clientes N F S.
+Quem usa vários caminhos para acessar os mesmos arquivos não deve simplesmente ligar a opção.
+Em clusters, também é preciso decidir qual falha suportar.
+O modo para uma interrupção total mantém uma cópia persistente adicional e permite sobreviver à parada de todos os nós.
+Já o modo para interrupção parcial evita esse custo, mas só preserva as referências enquanto pelo menos um nó continua funcionando.
+Se todos pararem, elas se perdem.
+Para quem administra Samba, o primeiro passo é testar a reconexão e a latência no cenário real.
+A versão quatro ponto vinte e cinco ponto zero é estável. Mas isso não torna estável esse recurso experimental.
+A fonte são as notas oficiais dessa versão do Samba.
+
+O OpenTelemetry separa catálogo de instrumentação e testes do que ela realmente emite.
+O projeto reúne padrões e ferramentas para produzir e transportar telemetria, como métricas e rastros de execução.
+As convenções definem nomes e significados comuns para esses dados.
+Isso não garante que todas as bibliotecas os emitam da mesma forma.
+Num artigo de vinte e cinco de setembro, o projeto descreve duas frentes.
+O "Ecosystem Explorer" já permite consultar componentes do agente Java e do Collector, incluindo informações e comparações entre versões.
+Separadamente, testes de conformidade executam pequenos cenários e coletam a telemetria.
+A ferramenta usada nessa etapa é o [W IY1 V ER0], que confere se os dados seguem as convenções e expectativas declaradas.
+A diferença importa: consultar o catálogo mostra o comportamento descrito. Executar um teste mostra o que apareceu naquela execução.
+Conectar os resultados medidos aos componentes e versões do Explorer ainda é trabalho futuro.
+Não se trata de uma certificação pronta de todo o ecossistema.
+No recorte apresentado de clientes H T T P, os quatro atributos obrigatórios exibidos apareceram em quase todas as instrumentações testadas.
+Os dois atributos recomendados foram menos consistentes.
+Um campo ausente num cenário não prova que a biblioteca nunca o emita. Configuração e caminho de execução também interferem.
+Para quem mantém painéis de monitoramento, a consequência prática é testar os sinais dos quais eles dependem antes de atualizar a instrumentação.
+Registre versão, configuração, cenário e convenção usada na comparação.
+Dizer que uma ferramenta suporta OpenTelemetry é um ponto de partida.
+Não é a confirmação de que sua consulta continuará encontrando todos os campos.
+A fonte é a atualização do OpenTelemetry sobre o ecossistema de instrumentação.
+
+Agora, os destaques rápidos para hoje.
+
+O Topcoat zero ponto nove adiciona atualizações de interface por WebSocket.
+Esse framework para aplicações web em Rust anunciou a versão em vinte e quatro de setembro.
+Ele combina renderização no servidor com expressões de um subconjunto de Rust convertidas em JavaScript para interações locais.
+Já os componentes chamados "shards" voltam ao servidor quando seus parâmetros mudam e recebem H T M L atualizado.
+O novo envio contínuo pelo servidor serve, por exemplo, para interfaces de chat.
+A distinção evita uma expectativa errada: escrever a aplicação em Rust não elimina as viagens de rede.
+A fonte é o anúncio do Topcoat publicado pelo Tokio.
+
+O "Git Hub" detalha a migração de estilos gerados com JavaScript para "CSS Modules".
+No relato publicado hoje, a equipe explica como tirou a geração de estilos em tempo de execução.
+Em vez disso, passou a entregar folhas de estilo C S S, com classes locais por padrão.
+A etapa de migração dos componentes Primer foi concluída em dezembro de 2024.
+Nessa etapa, a equipe relata cinquenta e cinco porcento menos tempo de renderização no servidor.
+Também relata vinte e cinco porcento menos tempo de inicialização dos componentes.
+São resultados internos daquela etapa, não ganhos garantidos para qualquer site.
+A migração completa é descrita como concluída em junho de 2026. A novidade de hoje é o relato, não uma troca feita agora.
+Controles de ativação gradual dos recursos e testes de regressão visual permitiram avançar aos poucos.
+A fonte é o relato de desempenho e migração para "CSS Modules" no blog do "Git Hub".
+
+José Valim propõe ferramentas que agentes possam consultar, além de ler código.
+Num ensaio de vinte e quatro de setembro, o criador do Elixir sugere expor símbolos, referências e relações entre funções como uma base consultável.
+Um agente poderia compor perguntas sobre o programa, em vez de depender só de posições em arquivos.
+Ele também defende observabilidade acessível programaticamente e garantias por tipos, isolamento e testes.
+É uma proposta de direção para as ferramentas, não demonstração de superioridade universal de uma linguagem.
+A fonte é o ensaio publicado pela Dashbit sobre linguagens de programação na era da inteligência artificial.
+
+O CERT C C divulga três falhas de injeção de scripts no "Readwise Reader" para Android, versão oito ponto sete ponto dois.
+Segundo o aviso de hoje, documentos ou metadados maliciosos podem executar JavaScript na WebView.
+Esse é o componente que renderiza conteúdo dentro do aplicativo. As falhas podem expor dados do usuário.
+O CERT informa que a versão oito ponto dez ponto um corrige o problema de atributos permissivos no sanitizador.
+Mas isso não confirma a correção das três falhas.
+O órgão não recebeu declaração do fornecedor.
+Mantenha o aplicativo atualizado e evite importar conteúdo não confiável.
+O aviso consultado não apresenta confirmação de exploração em ataques.
+A fonte é o aviso de vulnerabilidades do CERT C C.
+
+O [K ER1 L] completa vinte e cinco anos nos sistemas da Apple.
+Daniel Stenberg relembra que o utilitário de transferência de dados chegou ao O S X dez ponto um em vinte e cinco de setembro de 2001.
+No texto de aniversário, ele celebra a adoção e afirma que o projeto nunca recebeu patrocínio da Apple, com comunicação direta rara.
+A fonte é o texto de Daniel Stenberg sobre os vinte e cinco anos nos computadores Apple.
+É o relato do mantenedor sobre a relação com a empresa.
+Ampla distribuição de software livre não implica, por si só, financiamento de quem o mantém.
