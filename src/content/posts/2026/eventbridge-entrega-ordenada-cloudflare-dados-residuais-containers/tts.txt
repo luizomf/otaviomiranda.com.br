@@ -1,0 +1,141 @@
+Novos barramentos do EventBridge ordenam eventos por grupo; Cloudflare corrige exposição de dados residuais.
+
+A A W S anunciou barramentos do Amazon EventBridge que ordenam eventos por grupo.
+Eles também eliminam repetições dentro de uma janela de cinco minutos.
+Já a Cloudflare divulgou a correção de uma falha que permitia recuperar dados deixados em blocos de disco por outros clientes.
+As duas notícias de vinte e quatro de setembro mostram limites importantes da infraestrutura.
+A entrega de mensagens ainda exige cuidados na aplicação.
+E o isolamento entre máquinas virtuais também depende da limpeza do armazenamento.
+Nesta edição, há ainda um agente de fuzzing do "Git Hub" que automatiza a busca por bugs, mas precisa de um ambiente descartável para rodar.
+
+Os novos barramentos do EventBridge oferecem ordem por grupo e deduplicação por cinco minutos.
+
+A A W S anunciou um novo tipo de barramento personalizado no Amazon EventBridge.
+Esse serviço recebe eventos de aplicações e os encaminha aos consumidores interessados.
+A versão aprimorada permite compartilhar um barramento entre contas da organização.
+Ela também reúne várias configurações num recurso chamado "Subscriber".
+Ali ficam o filtro, o destino, as tentativas de reenvio e o destino das mensagens que falharam.
+Isso reduz a quantidade de configurações espalhadas para conectar equipes.
+Quem publica informa o que aconteceu.
+Cada consumidor define quais eventos quer receber e como lidar com falhas.
+Os barramentos anteriores continuam funcionando como "classic".
+A novidade é um recurso a adotar, não uma mudança obrigatória aplicada às aplicações existentes.
+
+A ordenação tem um escopo importante: vale para eventos com o mesmo identificador de grupo.
+E vale nos assinantes que optarem pela entrega ordenada.
+No exemplo da A W S, atualizações de localização de um motorista seguem sua sequência.
+Isso não estabelece uma fila única ordenando todos os motoristas, pedidos e pagamentos da empresa.
+
+No caso do A W S Lambda, a invocação síncrona permite esperar a confirmação de processamento antes de reconhecer o evento.
+Já a deduplicação por conteúdo identifica eventos equivalentes e elimina repetições recebidas dentro de cinco minutos.
+A A W S descreve essa janela como entrega exatamente uma vez para essas tentativas.
+E recomenda manter os tokens de idempotência quando a aplicação já os usa.
+
+O cuidado de arquitetura é separar entrega de efeito de negócio.
+Imagine, como exemplo, um consumidor que registra uma cobrança e falha antes de confirmar que terminou.
+Uma nova tentativa precisa reconhecer a operação já realizada.
+Ordenar mensagens ou eliminar publicações repetidas por alguns minutos não cria, por si só, uma transação única.
+Essa transação teria que envolver o banco, o provedor de pagamento e a confirmação do consumidor.
+Por isso, preserve a idempotência: repetir a mesma operação deve produzir o mesmo efeito, não uma segunda cobrança.
+Revise também o comportamento de reprocessamentos antigos, que não cabem automaticamente naquela janela de deduplicação.
+
+Para equipes brasileiras, há outro detalhe prático: São Paulo não aparece na lista de regiões do lançamento.
+Confira disponibilidade e requisitos de localização dos dados antes de planejar a adoção.
+Nos novos barramentos, a cobrança é pelo volume de dados de entrada e saída por unidade de tempo.
+A comparação de custos precisa considerar esse modelo, não apenas a quantidade de eventos.
+A fonte é o anúncio da A W S sobre os novos barramentos personalizados do EventBridge.
+
+A Cloudflare limpa discos e snapshots após falha de isolamento entre clientes.
+
+A Cloudflare divulgou em vinte e quatro de setembro uma vulnerabilidade em Containers e Sandboxes.
+O segundo serviço é construído sobre Containers.
+O relato foi preparado em colaboração com os pesquisadores que reportaram o problema.
+Segundo esse relato, um cliente com conta "Workers Paid" podia recuperar resíduos de disco de containers anteriores no mesmo host.
+A empresa informa que concluiu a correção e que os clientes não precisam alterar configurações.
+
+Cada container roda dentro de uma máquina virtual "Firecracker".
+Mas o disco gravável depende de uma camada compartilhada de armazenamento do Linux, chamada "dm-thin".
+Ela aloca espaço físico conforme a aplicação escreve, em vez de reservar antecipadamente todo o tamanho do disco virtual.
+O problema estava na reutilização desse espaço.
+Os blocos liberados voltavam a um conjunto compartilhado entre clientes.
+E uma opção desabilitava sua limpeza antes da próxima alocação.
+Uma gravação que ocupasse apenas parte do bloco substituía aquela parte.
+O restante podia conservar bytes do cliente anterior.
+A fronteira da máquina virtual não apagava o que a camada de armazenamento entregava a ela.
+
+A exposição tinha limites: dependia de receber blocos reutilizados com resíduos.
+Não era possível escolher uma vítima específica ou acessar um disco ainda conectado a outro cliente.
+Os pesquisadores não demonstraram alteração dos dados ativos de outra conta nem indisponibilidade.
+Ainda assim, o relatório descreve recuperação de estruturas de diretórios e páginas de bancos de dados.
+Isso é suficiente para caracterizar uma falha séria de confidencialidade entre clientes.
+
+A primeira correção foi restaurar a limpeza dos blocos recém-alocados.
+Isso não corrigia automaticamente os blocos já mapeados.
+Discos em execução e snapshots de camadas de imagens guardados em cache ainda podiam carregar o estado anterior.
+A Cloudflare também aposentou esses discos e removeu os snapshots antigos para recriá-los com alocações limpas.
+
+A cronologia ajuda a não confundir divulgação com início do incidente.
+O reporte aconteceu em quatro de setembro.
+A implantação da mudança de configuração terminou no dia sete.
+E a limpeza dos snapshots anteriores à mitigação foi concluída no dia dezenove.
+A empresa diz não ter encontrado exploração maliciosa na telemetria histórica de entrada e saída de disco disponível.
+Essa é uma conclusão delimitada pelos registros examinados, não uma prova de que nenhum acesso indevido jamais ocorreu.
+
+Para quem opera infraestrutura, o ponto reaproveitável é incluir o estado antigo no plano de correção.
+Mudar a configuração protege o caminho novo.
+Caches, snapshots e recursos ainda em uso podem precisar de uma segunda etapa de recuperação.
+A fonte é a análise da Cloudflare sobre o impacto e a cronologia da vulnerabilidade.
+
+O agente de fuzzing do "Git Hub" usa cobertura para orientar os testes e pede ambiente descartável.
+
+O "Git Hub Security Lab" apresentou em vinte e quatro de setembro um fluxo para automatizar fuzzing de projetos C e C mais mais.
+Fuzzing significa exercitar um programa com muitas entradas variadas, procurando falhas.
+Um "harness" é o pequeno código que conecta essas entradas às funções que serão testadas.
+No fluxo descrito por Antonio Morales, o agente escreve esses códigos de teste e aciona o A F L mais mais.
+Essa é a ferramenta que executa o fuzzing.
+Depois, o agente examina a cobertura, ou seja, quais trechos do código foram exercitados.
+E tenta alcançar os que ficaram de fora.
+Pode acrescentar uma entrada inicial, mudar o código de teste ou enriquecer o dicionário de valores usado pela ferramenta de fuzzing.
+O resultado da execução orienta a próxima tentativa.
+
+Uma decisão de implementação torna esse retorno mais claro: cada harness gera dois binários.
+Um tem a instrumentação que guia o A F L mais mais.
+O outro reproduz as entradas para medir linhas e ramificações percorridas no código.
+O modelo decide o próximo passo, as ferramentas executam e as etapas compartilham estado persistente num banco SQLite.
+
+O fluxo também simplifica as entradas que provocam falhas, mantendo o problema reproduzível, e prepara relatórios.
+Mas uma falha pode estar no próprio harness, não na biblioteca investigada.
+O autor ressalta que os vereditos e as correções geradas exigem revisão humana.
+Cobertura ajuda a saber onde o teste passou; não certifica que o programa esteja livre de vulnerabilidades.
+
+Há um aviso que deve vir antes de qualquer experiência.
+Os compiladores, a ferramenta de fuzzing e os comandos de compilação escolhidos pelo modelo rodam diretamente no host.
+Não há um container intermediário.
+Isso torna o ambiente de execução parte do risco.
+Os comandos escolhidos pelo agente usam as permissões do usuário que iniciou o processo.
+A recomendação explícita é usar um "Codespace" ou uma máquina virtual descartável, sem privilégios elevados.
+É uma boa separação de responsabilidades.
+Dê ao experimento código e recursos para investigar, sem entregar junto a estação de trabalho e seus acessos de produção.
+A fonte é o "Git Hub Security Lab", no artigo sobre a arquitetura e os cuidados do "Fuzzing Taskflow".
+
+Agora, os destaques rápidos para hoje.
+
+Go explica sua interface experimental para operações vetoriais portáteis.
+O artigo de vinte e quatro de setembro detalha o pacote experimental de S I M D do Go um ponto vinte e sete.
+Ele precisa ser ativado pela configuração de experimentos do Go.
+S I M D permite aplicar uma operação a vários valores de uma vez, aproveitando instruções vetoriais do processador.
+A interface esconde diferenças de tamanho dos vetores e oferece emulação quando falta suporte.
+Isso não garante o mesmo desempenho em qualquer máquina.
+Teste o algoritmo no hardware de destino e lembre que a interface ainda é experimental.
+A fonte é o blog do Go, no artigo sobre S I M D independente de plataforma.
+
+Graham Dumpleton reúne setenta workshops gratuitos de Python.
+A coleção anunciada em vinte e cinco de setembro vai de decorators à instrumentação e ao acompanhamento da execução de código.
+Para isso, usa as bibliotecas "wrapt" e "wrapture".
+Já cobrimos uma demonstração de rastreamento da execução por configuração.
+Agora, a novidade é um percurso prático para aprender essas técnicas.
+Só a coleção de decorators com a biblioteca padrão roda inteiramente no navegador, via "JupyterLite".
+Todas oferecem opções de "JupyterLab" hospedado.
+A fonte é a apresentação das coleções feita por Graham Dumpleton.
+Quem está começando pode ficar nos fundamentos.
+Já quem precisa observar uma aplicação real pode procurar os módulos de instrumentação.
