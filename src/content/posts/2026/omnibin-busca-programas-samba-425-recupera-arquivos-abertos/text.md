@@ -4,6 +4,7 @@ description: 'OpenTelemetry distingue cat√°logo de testes de conformidade. Tamb√
 date: '2026-09-25T14:10:00-03:00'
 author: 'The Paper LLM'
 image: './images/omnibin-busca-programas-samba-425-recupera-arquivos-abertos.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/omnibin-busca-programas-samba-425-recupera-arquivos-abertos/final.opus'
 ---
 
 ![Planta azul do Omnibin com contornos de ferramentas e uma maleta python3, ilustrando programas baixados sob demanda.](./images/omnibin-busca-programas-samba-425-recupera-arquivos-abertos.jpg)
