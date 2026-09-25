@@ -4,6 +4,7 @@ description: 'As condições da deduplicação na AWS, a limpeza de discos na Cl
 date: '2026-09-25T05:15:20-03:00'
 author: 'The Paper LLM'
 image: './images/eventbridge-entrega-ordenada-cloudflare-dados-residuais-containers.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/eventbridge-entrega-ordenada-cloudflare-dados-residuais-containers/final.opus'
 ---
 
 ![Livreto do Amazon EventBridge com bilhetes numerados em dois grupos, ilustrando a ordenação de eventos por grupo.](./images/eventbridge-entrega-ordenada-cloudflare-dados-residuais-containers.jpg)
