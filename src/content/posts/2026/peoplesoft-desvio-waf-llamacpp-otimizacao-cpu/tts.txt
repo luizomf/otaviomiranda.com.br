@@ -1,0 +1,133 @@
+Ataques ao PeopleSoft contornam firewall; llama ponto C P P incorpora otimização para C P U.
+
+Ataques a instalações sem correção do PeopleSoft estão contornando regras de firewall, segundo a Mandiant.
+O caso mostra por que filtrar requisições não substitui corrigir a aplicação.
+Já o llama ponto C P P incorporou uma otimização para executar modelos de linguagem no processador.
+Os testes favorecem cargas como o processamento de prompts, mas não medem o ganho de uma conversa inteira.
+A edição também traz ajustes de segurança no [EH1 N JH AH0 N] [EH1 K S] Proxy Manager, operações na nuvem e ferramentas para Linux.
+
+No PeopleSoft, atacantes contornam bloqueios de caminho em sistemas sem correção.
+A Mandiant e o Google Threat Intelligence Group publicaram em vinte e cinco de setembro uma atualização sobre a exploração da falha.
+Os pesquisadores atribuem a atividade ao grupo "ShinyHunters".
+Segundo eles, a campanha renovada instalou arquivos que permitem comandar o servidor remotamente, conhecidos como web shells.
+Foram atingidos dezenas de sistemas de setores como educação, tecnologia, saúde e governo.
+
+A falha fica no componente de gerenciamento de ambientes do PeopleSoft, conjunto de aplicações empresariais da Oracle.
+O alerta da fabricante foi publicado em dez de junho e lista o PeopleTools nas versões oito ponto sessenta e um e oito ponto sessenta e dois.
+Ele descreve execução remota de código sem autenticação.
+Portanto, não é uma vulnerabilidade descoberta ontem.
+A novidade é a adaptação dos ataques contra instalações que continuaram sem a correção.
+
+O desvio funciona porque duas camadas interpretam o endereço de maneiras diferentes.
+Algumas regras do firewall de aplicações web comparavam o caminho como texto literal.
+Os atacantes passaram a representar um caractere pela codificação usada em endereços da web.
+O bloqueio deixava passar essa escrita alternativa.
+Já a aplicação decodificava o endereço e encontrava o mesmo componente vulnerável.
+
+A prioridade é aplicar a correção da Oracle, não apenas acrescentar outra variação à lista de bloqueio.
+A Mandiant também recomenda desabilitar ou remover o componente afetado, conforme a configuração da instalação, e investigar os acessos.
+Essa busca não deve se limitar a arquivos suspeitos.
+O relatório descreve também uma execução que devolve a saída do comando na própria resposta à requisição, sem gravar uma web shell.
+Logs, processos e todos os nós atrás do balanceador precisam entrar na análise.
+As fontes são o relatório da Mandiant sobre a campanha renovada e o alerta de segurança da Oracle.
+
+Agora, o llama ponto C P P otimiza cálculos no processador.
+Em uma operação, o teste do autor chega a um ganho de sete vezes.
+O projeto, usado para executar modelos de linguagem localmente, incorporou a contribuição em vinte e seis de setembro.
+A mudança otimiza a multiplicação de matrizes com pesos quantizados.
+Esses pesos são os parâmetros do modelo, armazenados em representações numéricas compactas.
+
+O mecanismo reduz trabalho repetido.
+Em vez de desempacotar os mesmos pesos várias vezes para pequenas operações, o código organiza a computação em blocos e reaproveita esse desempacotamento.
+Isso favorece matrizes maiores, como as encontradas na etapa que processa o prompt antes da geração da resposta, chamada de prefill.
+
+O autor relata ganhos de aproximadamente três a sete vezes sobre o caminho padrão em seus testes de multiplicação.
+Ele usou oito threads em um processador [EY1 EH1 M D IY1] nove nove cinco zero X três D.
+As tabelas registram o menor tempo de cinco medições.
+São números de uma operação específica, não de uma conversa inteira.
+Nos casos menores, o ganho diminui e pode virar perda.
+A proposta descreve uma seleção de caminho para evitar trabalho desfavorável.
+
+Para avaliar a mudança, meça separadamente o processamento do prompt e a geração dos tokens, os fragmentos de texto que formam a resposta.
+Compare versões do programa mantendo o mesmo modelo, quantização, contexto e hardware.
+O resultado apresentado não estabelece um ganho equivalente em Apple Silicon.
+Também não promete respostas sete vezes mais rápidas no seu assistente.
+A fonte é a contribuição incorporada ao llama ponto C P P, com a explicação e os testes de desempenho disponíveis no "Git Hub".
+
+O [EH1 N JH AH0 N] [EH1 K S] Proxy Manager reúne logs na interface e muda o tratamento de credenciais.
+A ferramenta oferece uma interface para administrar o proxy que encaminha requisições aos serviços de um servidor.
+A versão dois ponto dezesseis ponto zero, lançada em vinte e quatro de setembro, adiciona um visualizador de logs no navegador.
+Ela também traz listas de acesso por caminho.
+Isso permite investigar requisições e restringir partes de um serviço com mais precisão.
+
+As notas registram ainda a invalidação de tokens emitidos antes de uma troca de senha.
+Outra mudança é a geração local dos códigos de autenticação em dois fatores, os QR codes.
+Gerar esse código localmente evita enviar a terceiros o segredo usado na configuração do segundo fator.
+Também há remoção das credenciais do provedor de D N S do disco depois da execução do Certbot.
+
+A atualização pede teste.
+Os mantenedores alertam que a nova versão do Certbot, ferramenta de emissão e renovação de certificados, pode exigir ajustes.
+Esses ajustes envolvem as dependências dos plugins de D N S.
+Antes de atualizar o ambiente de produção, valide esses plugins e a renovação dos certificados em um ambiente de teste.
+A fonte são as notas da versão dois ponto dezesseis ponto zero do [EH1 N JH AH0 N] [EH1 K S] Proxy Manager.
+
+Vamos aos destaques rápidos para hoje.
+A Microsoft detalhou a destruição de recursos Azure por identidades de serviço comprometidas.
+O relatório, de vinte e cinco de setembro, analisa uma atividade de junho atribuída ao grupo Storm trinta e um sessenta e oito.
+Ele é associado ao "JADEPUFFER", que já apareceu por aqui.
+A novidade é o caso Azure.
+A maioria das contas de armazenamento visadas foi apagada, embora algumas proteções tenham impedido exclusões.
+Todas as tentativas contra bancos [EH1 S] [K Y UW1] [EH1 L] falharam por uso de uma versão incompatível da [EY1 P IY1 AY1].
+
+Identidades de serviço são contas usadas por aplicações.
+As permissões dessas contas determinaram o alcance das ações.
+A Microsoft não confirmou a entrada inicial nem a exfiltração bem-sucedida de dados.
+Revise privilégios, rotacione segredos expostos e proteja os recursos de recuperação.
+A fonte é a investigação da Microsoft sobre o grupo.
+
+Malware ligado a pacotes N P M usa o tailcat para receber comandos.
+A Malwarebytes descreveu, em vinte e cinco de setembro, o "Kothamine", um trojan de acesso remoto para Windows.
+Nas amostras recentes analisadas, ele usa o tailcat como canal de controle.
+O tailcat é uma ferramenta legítima da Tailscale para conexões temporárias criptografadas.
+É abuso da ferramenta, não evidência de invasão da Tailscale.
+A conclusão defensiva é que bloquear domínios conhecidos não basta.
+Também é preciso investigar os pacotes instalados, os processos iniciados e o uso inesperado de ferramentas de rede.
+A fonte é a análise da Malwarebytes sobre o Kothamine.
+
+O Google anunciou o Valkey nove ponto um no Memorystore, com uma nova comunicação entre threads.
+O serviço gerenciado de dados em memória passa a distribuir trabalho por filas e ajustar dinamicamente as threads de entrada e saída.
+Isso reduz consultas repetidas por tarefas concluídas.
+No anúncio de vinte e cinco de setembro, o Google afirma atingir até três vezes mais consultas por segundo que o Memorystore for Redis Cluster.
+A comparação é do fornecedor e depende da carga.
+Não significa que uma aplicação inteira ficará três vezes mais rápida.
+A fonte é o anúncio do Google Cloud sobre o Memorystore for Valkey nove ponto um.
+
+O "Storage Intelligence" ganha diagnóstico de custos e simulação de operações em lote.
+Em vinte e cinco de setembro, o Google anunciou a disponibilidade geral do advisor.
+Esse recurso ajuda a localizar a origem de gastos em buckets, os contêineres de objetos.
+A análise também alcança prefixos dos nomes desses objetos e contas de serviço.
+Ela usa retratos diários do armazenamento, com detecção de picos em até vinte e quatro horas.
+Não é monitoramento instantâneo.
+
+Para clientes do Storage Intelligence, as operações em lote também ganham simulação antes de modificar dados.
+Outra novidade é o processamento de até mil buckets por projeto em uma tarefa.
+A utilidade é ligar uma despesa inesperada ao processo responsável e conferir o alcance de uma alteração antes de executá-la.
+A fonte é o anúncio do Google Cloud sobre o advisor e as operações em lote.
+
+O Era chega ao primeiro beta como calendário para o desktop GNOME.
+O boletim do projeto de vinte e cinco de setembro anuncia o aplicativo, feito em Rust e libadwaita e disponível no Flathub.
+Ele tem sincronização de calendários online e funcionamento offline.
+O suporte a Android ainda está em desenvolvimento.
+A disponibilidade de um A P K de testes não equivale a uma versão final.
+Para quem quer experimentar uma alternativa de agenda no Linux, é uma oportunidade de testar e reportar bugs, com a expectativa correta de um beta.
+A fonte é o anúncio do Era no boletim "This Week in GNOME".
+
+Para fechar, um laboratório com Net B S D mostra como interpretar uma tabela de partições nos bytes do disco.
+No texto publicado em vinte e cinco de setembro, o autor movq compara um disklabel com o arquivo de cabeçalho do sistema.
+O disklabel é a estrutura que descreve o disco e suas partições.
+Ele também verifica o checksum, valor usado para conferir a integridade dos dados, e altera uma entrada manualmente.
+O recorte é Net B S D onze, na arquitetura x oitenta e seis de sessenta e quatro bits, dentro de uma máquina virtual.
+Não é uma receita universal para todos os B S Ds.
+A fonte é o texto de movq, "Playing with disklabels".
+É uma leitura prática para entender formatos binários.
+Qualquer reprodução deve ficar em imagem descartável, sem dados importantes.
