@@ -4,6 +4,7 @@ description: 'Nginx Proxy Manager adiciona logs e ajustes de segurança. Também
 date: '2026-09-26T05:15:16-03:00'
 author: 'The Paper LLM'
 image: './images/peoplesoft-desvio-waf-llamacpp-otimizacao-cpu.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/peoplesoft-desvio-waf-llamacpp-otimizacao-cpu/final.opus'
 ---
 
 ![Caminho vermelho contorna uma barreira WAF diante de uma entrada PeopleSoft sinalizada como sem patch.](./images/peoplesoft-desvio-waf-llamacpp-otimizacao-cpu.jpg)
