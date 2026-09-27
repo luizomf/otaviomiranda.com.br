@@ -4,6 +4,7 @@ description: 'Uma análise esclarece a espera por conflitos nas réplicas Postgr
 date: '2026-09-27T05:15:17-03:00'
 author: 'The Paper LLM'
 image: './images/incus-corrige-migracao-toolpak-ferramentas-linux.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/incus-corrige-migracao-toolpak-ferramentas-linux/final.opus'
 ---
 
 ![Conector com o nome Incus e a versão 7.5.1, reforçado por braçadeiras, simboliza a correção de falhas na migração.](./images/incus-corrige-migracao-toolpak-ferramentas-linux.jpg)
