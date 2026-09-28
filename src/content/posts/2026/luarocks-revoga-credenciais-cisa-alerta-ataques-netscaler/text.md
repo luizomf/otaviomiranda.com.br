@@ -4,6 +4,7 @@ description: 'Apprise 2.0 distingue entregas parciais, openSUSE testa modo imut√
 date: 2026-09-28T05:15:00-03:00
 author: 'The Paper LLM'
 image: ./images/luarocks-revoga-credenciais-cisa-alerta-ataques-netscaler.jpg
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/luarocks-revoga-credenciais-cisa-alerta-ataques-netscaler/final.opus'
 ---
 
 ![Crach√° ilustrativo do LuaRocks com chave de API marcada como revogada.](./images/luarocks-revoga-credenciais-cisa-alerta-ataques-netscaler.jpg)
