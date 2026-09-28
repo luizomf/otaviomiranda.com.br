@@ -1,0 +1,109 @@
+LuaRocks revoga credenciais após invasão; CISA alerta para ataques ao NetScaler.
+
+Duas notícias de segurança abrem a edição.
+O registro de pacotes LuaRocks revogou credenciais após uma invasão.
+E a CISA confirmou ataques a duas falhas do NetScaler.
+Para desenvolvedores, o [AH0 P R AY1 Z] dois ponto zero muda como aplicações acompanham o resultado de notificações.
+Os destaques rápidos trazem openSUSE, Postgri [EH1 S] [K Y UW1] [EH1 L], agentes em Elixir e a mudança de nome do postmarketOS.
+
+O LuaRocks revogou chaves e recomenda atualizar o cliente após a invasão do registro.
+Os responsáveis pelo registro de pacotes da linguagem Lua informam que corrigiram, em vinte e seis de setembro, uma vulnerabilidade reportada no dia anterior.
+Durante a investigação, encontraram exploração do servidor entre nove de julho e vinte de agosto.
+A conta que executava o serviço web podia obter acesso administrativo completo.
+Por isso, a equipe passou a tratar todos os dados e segredos acessíveis ao servidor como expostos.
+
+A entrada foi um rockspec, o arquivo que descreve um pacote.
+Para ler os campos desse arquivo, o site o executava num ambiente Lua restrito, sem acesso às variáveis globais e com limite de instruções.
+Só que o carregador também aceitava bytecode, uma representação pré-compilada do programa.
+No LuaJIT usado pelo servidor, esse formato permitia acessar a memória do processo e contornar as restrições impostas ao script.
+Assim, um arquivo enviado para descrever um pacote podia abrir caminho para comprometer o servidor.
+A correção restringe o carregamento a código em texto e rejeita bytecode.
+
+Para quem tem conta ou publica pacotes, os mantenedores dão algumas orientações.
+A primeira é criar uma nova chave de [EY1 P IY1 AY1].
+Todas as chaves antigas foram revogadas, e as sessões foram encerradas.
+Também é preciso trocar a senha, inclusive em outros serviços onde ela foi reutilizada.
+Os hashes de senha, protegidos com bcrypt, devem ser considerados expostos.
+Outra medida é configurar novamente a autenticação em dois fatores.
+Os segredos armazenados para essa autenticação devem ser considerados expostos e foram removidos.
+
+A recomendação inclui atualizar o cliente LuaRocks para a versão três ponto doze ou mais recente, especialmente com LuaJIT ou Lua cinco ponto um.
+Clientes até a versão três ponto onze ponto um também aceitavam bytecode ao carregar descrições e manifestos recebidos de um servidor.
+
+A equipe diz não ter encontrado evidências de alteração de pacotes existentes, depois de comparar arquivos com espelhos e revisar publicações.
+Mas há um limite nessa conclusão.
+Não foi possível reconstruir exatamente o conteúdo que o servidor comprometido entregou a cada cliente.
+Três pacotes publicados pelo atacante foram removidos.
+Quem instalou algum deles deve tratar a máquina como comprometida, conforme o aviso.
+Os nomes exatos desses pacotes estão no artigo escrito, para conferência.
+A fonte é o comunicado do LuaRocks sobre o incidente, a investigação e as orientações aos usuários.
+
+A segunda notícia é o alerta da CISA sobre duas falhas de execução remota no NetScaler.
+A agência de segurança cibernética dos Estados Unidos publicou o alerta em vinte e sete de setembro.
+Ele trata de oito vulnerabilidades nos produtos Citrix NetScaler A D C e Gateway, usados na entrega de aplicações e no acesso remoto.
+Duas dessas falhas entraram no catálogo de vulnerabilidades comprovadamente exploradas.
+Segundo a CISA, cada uma pode permitir execução remota de código de forma independente.
+Informações recebidas de parceiros confirmam ataques em diferentes partes do mundo.
+
+O catálogo descreve a primeira como uma falha de validação de entrada que permite executar comandos sem autenticação.
+A segunda envolve limites de memória e pode causar execução de código ou indisponibilidade.
+Para administradores, a prioridade é identificar os equipamentos expostos e seguir as orientações de mitigação e atualização do fabricante.
+A CISA também recomenda, quando possível, procurar sinais de comprometimento antes de aplicar a correção.
+Se houver suspeita de invasão, preserve as evidências forenses antes da atualização.
+Isso porque a atualização pode apagar informações importantes para reconstruir o ataque.
+O alerta aponta orientações da Citrix e indicadores disponíveis no NetScaler Console para apoiar essa investigação.
+As fontes são o alerta da CISA e o catálogo oficial de vulnerabilidades exploradas da agência.
+
+Agora, notificações: o [AH0 P R AY1 Z] dois ponto zero separa sucesso parcial e repete apenas os envios que falharam.
+A biblioteca, que também funciona como ferramenta para enviar notificações a diferentes serviços, lançou a versão dois ponto zero ponto zero em vinte e seis de setembro.
+A mudança mais útil para aplicações está no resultado da chamada que envia a notificação.
+Em vez de um retorno simples, ela agora entrega um objeto com resultados e registros por serviço.
+Isso inclui estados de sucesso parcial e de tempo esgotado.
+
+As novas tentativas também passam a acompanhar o que já foi enviado.
+No exemplo das notas oficiais, se dois de três destinatários recebem a mensagem, a repetição é direcionada apenas ao terceiro.
+Isso evita reenviar indiscriminadamente uma notificação para quem já a recebeu.
+A versão ainda traz entrega paralela por padrão, limites de duração e uma chamada assíncrona nativa para aplicações Python.
+
+A atualização quebra compatibilidade com a série um.
+Muitos testes booleanos continuam funcionando.
+Mas, quando não há destinos correspondentes, o resultado passa a ser falso ao ser convertido para booleano.
+Antes, esse caso podia retornar o valor None, do Python.
+Quem incorpora a biblioteca deve testar sucesso parcial, ausência de destinos e tempo esgotado antes de atualizar o envio de notificações em produção.
+A fonte são as notas oficiais do [AH0 P R AY1 Z] dois ponto zero, publicadas no "Git Hub".
+
+Vamos aos destaques rápidos de hoje.
+O openSUSE Leap dezesseis ponto um entrou na fase de candidato a lançamento, com modo imutável integrado.
+O anúncio de vinte e oito de setembro apresenta uma instalação com sistema de arquivos raiz somente para leitura e atualizações transacionais.
+Cada atualização cria uma imagem do estado do sistema, permitindo voltar ao estado anterior se necessário.
+Esse modo será o sucessor do Leap Micro e pode ser escolhido no instalador Agama.
+A versão ainda é candidata a lançamento.
+E a ferramenta de migração do Leap Micro seis ponto dois é experimental: exige backup antes dos testes.
+A fonte é o anúncio do openSUSE sobre essa versão candidata.
+
+No Postgri [EH1 S] [K Y UW1] [EH1 L], a cópia inicial na replicação lógica fica limitada a um processo por tabela.
+Em uma análise de vinte e sete de setembro, Christophe Pettus demonstra o alcance do parâmetro que controla os processos de sincronização por assinatura.
+Ele permite copiar várias tabelas simultaneamente, mas cada tabela fica a cargo de um único processo de sincronização.
+Portanto, aumentar esse parâmetro não divide a cópia de uma tabela grande entre vários processos.
+A documentação confirma esse limite e o padrão de dois processos de sincronização por assinatura de replicação.
+Antes de aumentar o valor numa migração, dimensione a capacidade de processamento, o disco e a capacidade de replicação nos dois servidores.
+O assunto complementa a aplicação paralela de transações, que já cobrimos.
+Aqui, o trabalho é outro: a cópia inicial das tabelas.
+As fontes são o experimento de Pettus e a documentação do Postgri [EH1 S] [K Y UW1] [EH1 L].
+
+O Imp zero ponto cinco chegou ao Hex e distingue chamadas de ferramentas que podem ter sido executadas.
+Lançado em vinte e sete de setembro, esse framework experimental permite definir entradas e saídas de programas com modelos de linguagem em Elixir.
+Também permite executar agentes como processos supervisionados.
+Nas chamadas de ferramentas pelo protocolo M C P, o Imp diferencia duas situações.
+Uma é a solicitação que nem chegou a ser enviada.
+A outra é aquela cujo resultado é desconhecido.
+Se o tempo de espera se esgota, a solicitação pode continuar em execução.
+Repetir automaticamente pode, portanto, duplicar um efeito.
+A versão também muda interfaces, então a migração pede revisão das notas e testes.
+As fontes são o projeto Imp e as notas oficiais da versão, disponíveis no "Git Hub".
+
+Por fim, o postmarketOS passa a se chamar Nura.
+O projeto de sistema operacional voltado a prolongar a vida útil de dispositivos anunciou o novo nome em vinte e sete de setembro.
+A equipe cita dificuldades de pronúncia, escrita e divulgação do nome anterior.
+A mudança das referências nas interfaces será gradual, por isso os dois nomes ainda podem aparecer durante a transição.
+A fonte é o anúncio do Nura.
