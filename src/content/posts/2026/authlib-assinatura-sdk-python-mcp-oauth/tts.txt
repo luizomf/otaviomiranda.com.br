@@ -1,0 +1,132 @@
+Authlib tem falha na verificação de assinaturas; S D K Python do M C P exige ajuste no OAuth.
+
+Dois avisos de segurança merecem atenção de quem mantém aplicações Python.
+Um afeta a validação de mensagens assinadas no Authlib.
+O outro envolve o destino de credenciais usadas por clientes M C P.
+A edição também traz o Sonnet cinco ponto cinco, mudanças no Git e em ferramentas web.
+E termina com lições sobre distribuição de aplicações no Kubernetes e leitura de dados no Linux.
+
+O Authlib aceita mensagem sem assinatura em um caminho de verificação.
+O CERT C C publicou o aviso em vinte e oito de setembro.
+Segundo o órgão, versões até a um ponto sete ponto dois aceitam uma lista vazia de assinaturas na serialização JSON geral de J W S.
+Mesmo assim, tratam o conteúdo como verificado.
+O Authlib é uma biblioteca Python usada em autenticação e autorização.
+Já o J W S é um formato para associar dados a uma assinatura digital.
+No caminho afetado, a biblioteca informa sucesso mesmo sem ter conferido uma assinatura.
+Se a aplicação confia nesse resultado para decidir identidade, permissões ou integridade de mensagens, pode aceitar conteúdo forjado.
+
+O ponto a revisar é a chegada de dados externos às funções que desserializam essa representação JSON de mensagens assinadas.
+O alcance depende desse fluxo.
+O aviso não demonstra comprometimento de todo uso do Authlib, nem de todo J W T no formato compacto.
+Na publicação, o CERT C C informava que não havia correção oficial coordenada.
+O repositório já lista a versão um ponto oito ponto zero.
+Mas as notas consultadas dessa versão não identificam uma correção para o problema.
+Portanto, não trate um número de versão maior como confirmação do conserto.
+Mapeie o caminho afetado e impeça que conteúdo sem assinatura seja aceito como autenticado.
+E acompanhe a confirmação de uma correção pelo projeto.
+As fontes são o aviso do CERT C C e as notas de versões do Authlib.
+
+Agora, o S D K oficial Python do M C P precisa de atualização e de credenciais vinculadas ao emissor correto.
+O aviso dos mantenedores foi publicado em vinte e oito de setembro.
+Ele descreve como um servidor malicioso poderia direcionar credenciais OAuth para um endereço escolhido por ele.
+M C P conecta aplicações de inteligência artificial a ferramentas e dados.
+OAuth permite que essas aplicações obtenham acesso autorizado a um serviço.
+
+A falha está na descoberta do servidor de autorização e na falta de vínculo entre ele e as credenciais armazenadas.
+Conforme o provedor usado, o destino errado poderia receber o segredo do cliente, o código de autorização e sua prova P K C E.
+Ou poderia receber uma declaração assinada do cliente.
+P K C E é a proteção que exige uma prova adicional para trocar um código por um token.
+Expor essa prova junto com o código elimina essa barreira.
+
+O escopo do aviso são clientes H T T P com os provedores OAuth afetados.
+São clientes que carregam credenciais legítimas e conseguem se conectar a um servidor M C P não confiável.
+Servidores construídos com o S D K ficam fora do escopo descrito.
+Também ficam fora os clientes locais que usam entrada e saída padrão, e os clientes que fornecem seus próprios tokens ou cabeçalhos.
+
+A orientação dos mantenedores começa pela atualização.
+Use a versão um ponto trinta ponto zero ou dois ponto dois ponto zero, conforme a linha utilizada, ou uma versão posterior.
+Mas há dois provedores em que atualizar, sozinho, não resolve.
+São o provedor OAuth de credenciais do cliente e o provedor OAuth de J W T com chave privada.
+Nesses dois casos, também é preciso configurar o parâmetro chamado [IH1 SH UW0 ER0] com o servidor de autorização esperado.
+Sem esse parâmetro, a atualização mantém o problema.
+Os nomes exatos dos provedores e o parâmetro estão no artigo escrito.
+
+Quem usa o antigo provedor OAuth da R F C sete cinco dois três, na linha um, precisa migrar, porque ele não oferece essa opção.
+Também é necessário limpar uma vez os registros OAuth armazenados sem emissor, para que sejam recriados.
+Registros pré-configurados devem receber o emissor correto.
+E, se houve possível conexão a servidor não confiável, troque o segredo do cliente e revogue os tokens no servidor de autorização.
+A fonte é o aviso de segurança dos mantenedores do S D K Python do M C P.
+
+O Sonnet cinco ponto cinco mantém o preço por token, mas exige ajuste de quem desativava o raciocínio.
+A Anthropic lançou o modelo em vinte e oito de setembro.
+O preço continua em dois dólares por milhão de tokens de entrada e dez dólares por milhão de tokens de saída.
+A empresa relata geração mais de trinta porcento mais rápida que a do Sonnet cinco.
+Também relata custo por tarefa até trinta porcento menor em seus testes, por consumir menos tokens para concluir o trabalho.
+
+Preço por token e custo por tarefa medem coisas diferentes.
+Com a mesma tarifa, uma tarefa que consome menos tokens sai mais barata.
+Os ganhos anunciados são medições do fornecedor.
+Para avaliar o modelo no seu projeto, compare alterações aceitas, tempo de revisão e custo total em tarefas equivalentes.
+
+Na [EY1 P IY1 AY1], quem mantinha o raciocínio desativado precisa migrar para a opção chamada "between tools".
+Essa opção mantém desativado o raciocínio inicial.
+A mudança merece revisão da configuração antes da troca do modelo.
+A fonte é o anúncio da Anthropic, incluindo as notas da avaliação e da migração.
+
+Vamos aos destaques rápidos de hoje.
+O Git dois ponto cinquenta e seis adiciona uma proteção ao marcar conflitos como resolvidos.
+A nova opção de resolução no comando de adicionar arquivos considera apenas caminhos em conflito.
+Ela verifica se ainda restam marcadores de conflito em arquivos regulares.
+Se encontrar algum nos arquivos selecionados, deixa o índice inteiro inalterado.
+Edições alheias ao conflito continuam fora da preparação para o commit.
+A checagem ajuda a evitar esquecimentos.
+A correção lógica, porém, ainda depende da revisão e dos testes.
+A fonte é o anúncio do "Git Hub", de vinte e oito de setembro.
+
+A Apple corrige uma falha no "CoreGraphics" em iOS e iPadOS vinte e seis ponto sete ponto um.
+As atualizações de vinte e oito de setembro corrigem uma escrita fora dos limites de memória.
+Essa falha pode permitir execução de código ao processar um arquivo malicioso.
+A Apple diz ter recebido relato de possível exploração em ataques extremamente sofisticados contra pessoas específicas.
+O relato envolve versões anteriores ao iOS vinte e sete.
+Instale a atualização disponível para seu aparelho.
+A fonte é o aviso de segurança da Apple.
+
+O "OpenShell" zero ponto um ponto zero aplica permissões fora do processo do agente.
+Em uma demonstração de vinte e oito de setembro, a NVIDIA explica o funcionamento de um supervisor externo.
+Ele inspeciona requisições e pode permitir leitura enquanto bloqueia escrita na mesma [EY1 P IY1 AY1].
+As credenciais reais permanecem fora do ambiente em que o agente executa.
+Elas são associadas apenas a requisições autorizadas.
+A fonte é a explicação técnica da NVIDIA.
+
+A Cloudflare abre o beta do C F, sua nova interface de linha de comando, com JSON como saída padrão.
+A ferramenta gera comandos a partir do esquema da [EY1 P IY1 AY1].
+Segundo a empresa, ela cobre mais de três mil operações.
+Também introduz configuração em TypeScript e desenvolvimento com Vite por padrão.
+Alguns fluxos ainda delegam ao "Wrangler".
+A manutenção dele está prevista por dezoito meses após o fim do beta.
+A fonte é o anúncio da Cloudflare, de vinte e oito de setembro.
+
+O Vinext um ponto zero amplia a compatibilidade com aplicações Next ponto J S.
+A implementação baseada em Vite foi anunciada pela Cloudflare em vinte e oito de setembro.
+Ela atende aos roteadores "App" e "Pages".
+Isso inclui pré-renderização durante a construção da aplicação e revalidação de páginas.
+Mas o suporte a "Cache Components" e à diretiva "use cache" continua limitado.
+Aplicações que dependem desse mecanismo precisam verificar essa lacuna antes de migrar.
+A fonte é o anúncio do Vinext um ponto zero.
+
+Um experimento no E K S mostra que recuperar capacidade não redistribui automaticamente os pods.
+No seu serviço Kubernetes, a A W S relata que parte de uma carga permaneceu concentrada por mais de dezesseis horas após o retorno de uma zona.
+Os pods são as unidades que executam os contêineres da aplicação.
+O agendador escolhe onde colocar novos pods, mas não move os que já estão rodando.
+Uma ferramenta chamada "descheduler" pode provocar substituições para corrigir a distribuição, respeitando limites de indisponibilidade.
+Isso implica reinícios e exige avaliar a tolerância da aplicação.
+A fonte é o experimento da A W S, publicado em vinte e oito de setembro.
+
+Para fechar, a VictoriaMetrics explica o custo da leitura antecipada no Linux.
+O texto de vinte e nove de setembro mostra como o kernel busca dados antes da solicitação e os guarda no cache de páginas.
+Isso pode reduzir esperas em leituras sequenciais.
+Mas buscar dados que nunca serão usados consome recursos de leitura e memória.
+Há dois controles que atuam em níveis diferentes.
+Um é o limite de leitura antecipada do dispositivo; o outro são as orientações que o próprio programa passa ao sistema sobre o uso dos dados.
+A fonte é a análise de Jesús Espino, publicada pela VictoriaMetrics.
+É uma boa base para medir o padrão de acesso antes de alterar a configuração.
