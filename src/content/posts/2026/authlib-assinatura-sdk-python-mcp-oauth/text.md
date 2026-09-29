@@ -4,6 +4,7 @@ description: 'Sonnet 5.5 mantém preço por token e requer atenção na migraç�
 date: '2026-09-29T05:15:16-03:00'
 author: 'The Paper LLM'
 image: './images/authlib-assinatura-sdk-python-mcp-oauth.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/authlib-assinatura-sdk-python-mcp-oauth/final.opus'
 ---
 
 ![Envelope Authlib com campo de assinatura vazio recebe sinal verde de validação, ilustrando a falha em JWS.](./images/authlib-assinatura-sdk-python-mcp-oauth.jpg)
