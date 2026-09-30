@@ -1,0 +1,141 @@
+Pacotes falsos de Express instalam um worm no Linux; estudo avalia otimizações feitas por agentes.
+
+Pacotes que imitam Express e React usam a instalação para executar malware no Linux, segundo a SafeDep.
+Na revisão de código, um estudo mostra por que aceitar uma otimização feita por agente ainda exige medir desempenho e conferir os resultados.
+A edição também traz um guia da A W S sobre recuperação de execuções, atualizações de ferramentas e novos relatos de segurança.
+
+Primeiro, os pacotes falsos de Express e React que instalam um worm no Linux.
+A SafeDep publicou em vinte e nove de setembro uma análise de nove pacotes maliciosos no N P M.
+Oito imitam o Express, framework para aplicações web em Node ponto J S, e um imita o React.
+O comprometimento descrito envolve esses pacotes impostores, sem indicação de invasão dos projetos legítimos Express e React.
+
+Segundo a análise, um script executado automaticamente durante a instalação busca código externo e inicia um worm no Linux.
+É um malware capaz de se propagar.
+Ele instala uma ferramenta de acesso remoto disfarçada de serviço de fontes.
+Depois, tenta usar chaves S S H e tokens do N P M disponíveis na máquina para alcançar outros servidores e publicar versões infectadas de pacotes.
+Também tenta contaminar pacotes do A U R, o repositório comunitário do Arch Linux, quando encontra credenciais com permissão de escrita.
+
+O alcance depende das permissões e dos segredos acessíveis.
+A análise identifica formas de manter o malware instalado, a chamada persistência, tanto como administrador quanto como usuário comum.
+Por isso, executar a instalação sem privilégios de administrador ainda deixa expostos os recursos que aquele usuário pode acessar.
+
+Se um dos pacotes identificados foi instalado em uma máquina Linux, a orientação da SafeDep é tratar a máquina, suas chaves e seus tokens como comprometidos.
+A lista para conferir os pacotes está no relatório indicado no artigo escrito.
+Para prevenção, vale separar os ambientes que executam dependências das credenciais de produção e publicação.
+Isso reduz o que um script de instalação consegue atingir.
+A fonte deste bloco é a investigação da SafeDep, que também traz os indicadores de comprometimento.
+
+Agora, o estudo sobre otimizações feitas por agentes: em parte dos casos, o ganho não apareceu; em outros, o comportamento mudou.
+Uma publicação preliminar de vinte e nove de setembro examinou mil duzentas e sessenta e duas correções de desempenho produzidas por agentes.
+Elas estavam distribuídas por quinhentos e oitenta e dois repositórios.
+Havia dados de arquivos disponíveis para mil duzentas e cinquenta e nove dessas correções.
+Nesse grupo, apenas onze porcento incluíam teste de desempenho ou benchmark, uma medição feita sobre uma carga definida.
+
+Os pesquisadores também executaram novamente trinta correções que já tinham sido incorporadas aos projetos.
+Dezoito entregaram o ganho de desempenho segundo os critérios do estudo.
+Três melhoraram menos do que prometiam, e nove não apresentaram ganho significativo ou pioraram.
+Em catorze das trinta, surgiram mudanças de comportamento para entradas que os testes da alteração não cobriam.
+Essas catorze fazem parte dos mesmos grupos, não são casos adicionais.
+Uma alteração pode melhorar a velocidade e ainda mudar o resultado para certas entradas.
+
+A amostra de trinta foi escolhida entre correções que alteravam testes e podiam ser executadas nos ambientes disponíveis.
+Portanto, esses números descrevem os casos estudados.
+Eles não permitem estimar a taxa de falha de todo código escrito por agentes.
+
+Ao revisar uma otimização, peça uma comparação de antes e depois com uma carga reproduzível, e confira se o resultado continua correto.
+Medir em tamanhos diferentes também importa.
+Uma busca que compensa para centenas de elementos pode acrescentar trabalho quando a coleção tem apenas alguns.
+A fonte é o estudo preliminar "Merged, Not Measured", especialmente suas seções de avaliação das correções.
+
+A próxima história é sobre recuperação: a chave de criptografia também faz parte do que você precisa preservar.
+Em um guia publicado em vinte e nove de setembro, a A W S demonstra como configurar chaves de criptografia nas funções duráveis do Lambda.
+O Lambda é o serviço que executa código sob demanda.
+O exemplo usa Terraform, ferramenta para definir infraestrutura em código.
+
+Essas funções salvam checkpoints, registros do progresso que permitem retomar uma execução interrompida.
+Eles podem conter resultados intermediários, dados de entrada e respostas de callbacks, que sinalizam a conclusão de trabalho externo.
+Cada execução permanece associada à chave com que começou.
+Configurar outra chave para a função afeta as novas execuções; as anteriores continuam dependendo da antiga.
+Assim, a troca de chave exige preservar o acesso à anterior enquanto houver estado salvo que dependa dela.
+
+Segundo a A W S, desabilitar essa chave ou retirar a permissão de descriptografia impede o acesso ao estado salvo.
+Excluir a chave torna esse estado irrecuperável.
+Para quem mantém fluxos longos, a consequência é incluir as execuções antigas no planejamento de desativação de chaves.
+O guia recomenda usar o período de espera do K M S, serviço de gerenciamento de chaves, de sete a trinta dias.
+Também orienta acompanhar as chamadas de descriptografia no CloudTrail, o registro de atividades da A W S, antes de concluir a exclusão.
+Salvar progresso e conservar os meios de lê-lo são partes da mesma estratégia de recuperação.
+A fonte é o guia da A W S sobre criptografia de execuções duráveis.
+
+Vamos aos destaques rápidos de hoje.
+
+A Cloudflare anunciou planos para uma autoridade certificadora pública.
+Em vinte e nove de setembro, a empresa informou que solicitou inclusão nos programas de confiança de Chrome, Apple, Microsoft e Mozilla.
+Também assinou um acordo para adquirir uma raiz já estabelecida da GlobalSign.
+Essa raiz é um certificado que os clientes usam como referência de confiança.
+Ela ajuda a alcançar aparelhos antigos que não receberiam uma nova por atualização.
+
+A empresa ainda não está emitindo certificados.
+Ela planeja exigir renovação automatizada pelo protocolo ACME, com suporte a A R I, o mecanismo que informa quando renovar.
+A fonte é o anúncio da Cloudflare.
+
+No Valkey, um teste da Percona mediu trinta e sete vírgula cinco porcento menos memória por chave.
+A análise, de vinte e nove de setembro, compara versões desse banco chave-valor.
+Entre a versão sete ponto dois ponto catorze e a nove ponto um ponto um, o uso caiu de cerca de cento e dois para sessenta e quatro bytes por chave.
+
+O teste usa valores de dezesseis bytes e aproximadamente seiscentas e trinta e duas mil chaves únicas, com o mesmo alocador de memória.
+A persistência e a remoção automática de dados estavam desativadas.
+As mudanças reduzem o espaço gasto nas estruturas que organizam os dados.
+A economia da sua aplicação precisa ser medida com suas chaves, valores e configuração.
+A fonte é o benchmark da Percona.
+
+O Ubuntu prepara a atualização de desktops da versão vinte e quatro ponto zero quatro L T S para a vinte e seis ponto zero quatro L T S.
+A Canonical informou, em vinte e nove de setembro, que os avisos de atualização chegarão em breve.
+A versão vinte e seis ponto zero quatro ponto um já está disponível para download.
+
+A versão adota o desktop GNOME cinquenta com Wayland, protocolo de comunicação com o sistema gráfico.
+Também amplia o uso de ferramentas reescritas em Rust, incluindo uma implementação de sudo e um conjunto de utilitários básicos.
+As implementações GNU permanecem disponíveis para compatibilidade.
+Antes de migrar a máquina de trabalho, teste seus scripts e os fluxos de desktop dos quais depende.
+A fonte é o comunicado da Canonical.
+
+A biblioteca de compressão Open Z L, na versão zero ponto três ponto zero, acelera a descompressão e exige atenção ao formato.
+Lançada em vinte e nove de setembro, ela incorpora uma nova implementação de Huffman.
+Seus mantenedores relatam descompressão trinta e três porcento mais rápida que na versão zero ponto dois ponto zero.
+Essa medição foi feita no nível um, com janela de sessenta e quatro kilobytes.
+
+Novos arquivos usam por padrão a versão vinte e sete do formato.
+Para leitores da versão zero ponto dois ponto zero da biblioteca, é necessário produzir o formato vinte e quatro.
+Vale testar velocidade e compatibilidade com seus dados antes da troca.
+As fontes são as notas de lançamento do Open Z L no "Git Hub".
+
+Na segurança, a Microsoft relatou roubo de credenciais Kubernetes por uma pipeline maliciosa.
+No caso divulgado em vinte e nove de setembro, uma conta comprometida deu acesso ao Azure DevOps.
+Ali, o invasor criou uma automação para coletar arquivos de configuração que guardam informações de conexão e autenticação de clusters Kubernetes.
+A investigação encontrou sete desses arquivos adicionados a um repositório.
+
+A recomendação inclui limitar quem pode criar, alterar e executar pipelines, além de revisar as permissões dos recursos conectados.
+A fonte é o relato da equipe de resposta da Microsoft.
+
+A Mandiant detalhou acessos persistentes após ataques ao NetScaler.
+O relatório de vinte e nove de setembro vem depois do alerta da CISA que cobrimos no dia vinte e oito.
+Ele descreve comandos remotos via web e túneis para redes internas após a exploração da falha.
+O novo material traz orientação para examinar configurações, arquivos e registros de atividade do equipamento.
+
+Quem opera NetScaler precisa combinar atualização com investigação de comprometimento.
+Corrigir a entrada explorada não comprova a remoção dos acessos já instalados.
+A fonte é a análise da Mandiant, com suas orientações de investigação.
+
+A Anthropic publicou uma avaliação de exploração de falhas com o modelo G L M cinco ponto três.
+Em testes isolados descritos em vinte e nove de setembro, a empresa relata que o modelo conseguiu tomar o controle do fluxo de execução em quatro porcento das tentativas.
+A avaliação interna usou cem tarefas sorteadas de projetos participantes do O S S Fuzz.
+
+O resultado é uma medição de laboratório feita por uma concorrente, com alvos preparados para avaliação.
+Não representa uma taxa de sucesso contra sistemas em produção.
+A fonte é a publicação da Anthropic com a metodologia e os resultados.
+
+Para fechar, o Rust registrou redução média de quatro vírgula cinquenta e sete porcento no tempo de compilação medido.
+No balanço publicado em trinta de setembro, Nicholas Nethercote compara os benchmarks do compilador entre vinte e nove de julho e vinte e oito de setembro.
+De seiscentas e vinte e nove medições, quinhentas e cinquenta e cinco melhoraram e setenta e quatro regrediram.
+Entre as mudanças estão a atualização do L L V M e a redução de trabalho em análises internas.
+A fonte é o balanço de Nicholas Nethercote.
+É um resultado da suíte de testes durante a evolução do compilador; o ganho em um projeto específico depende da carga e da versão utilizada.
