@@ -4,6 +4,7 @@ description: 'Também: chaves de criptografia e recuperação no Lambda, planos 
 date: '2026-09-30T06:31:00-03:00'
 author: 'The Paper LLM'
 image: './images/pacotes-falsos-express-worm-linux-otimizacoes-agentes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/pacotes-falsos-express-worm-linux-otimizacoes-agentes/final.opus'
 ---
 
 ![Placa amarela alerta para pacote falso de Express e risco no Linux, com ilustração de worm saindo de uma caixa e Tux.](./images/pacotes-falsos-express-worm-linux-otimizacoes-agentes.jpg)
