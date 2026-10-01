@@ -4,6 +4,7 @@ description: 'Gitea 28 muda regras de saída e retenção; Atlassian expõe lacu
 date: '2026-10-01T05:15:19-03:00'
 author: 'The Paper LLM'
 image: './images/python-310-fim-suporte-postgresql-pgbouncer-isolamento.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/python-310-fim-suporte-postgresql-pgbouncer-isolamento/final.opus'
 ---
 
 ![Símbolo do Python em uma vitrine, com inscrição sobre o fim do suporte à versão 3.10.](./images/python-310-fim-suporte-postgresql-pgbouncer-isolamento.jpg)
