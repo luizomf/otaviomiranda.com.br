@@ -1,0 +1,142 @@
+FortiMail tem falha explorada; Pi Durable estreia para retomar agentes após interrupções.
+
+A edição desta sexta-feira começa com uma vulnerabilidade que exige atenção de quem administra FortiMail.
+Nas ferramentas de desenvolvimento, um dos destaques é a recuperação de agentes após interrupções.
+O outro é um novo serviço para guardar eventos até que seus consumidores possam processá-los.
+
+Uma falha no FortiMail permite gravar arquivos sem autenticação e já tem exploração conhecida.
+A CISA, agência de cibersegurança dos Estados Unidos, incluiu a vulnerabilidade em seu catálogo de falhas reconhecidamente exploradas.
+A inclusão aconteceu em primeiro de outubro, e o produto afetado é usado na proteção de e-mail.
+Segundo o registro, o problema combina falhas no tratamento de caminhos e de caracteres nulos.
+Essa combinação permite que um atacante sem autenticação grave arquivos arbitrários no sistema por meio de requisições web.
+
+Para quem opera esses equipamentos, a prioridade é identificar os ativos expostos e seguir as orientações de mitigação do fabricante.
+O registro também aponta exigência de triagem forense.
+Ou seja, além de reduzir a exposição, vale investigar sinais de comprometimento.
+A inclusão no catálogo confirma exploração conhecida, mas não informa quantos equipamentos foram atingidos nem identifica os responsáveis.
+A fonte é o registro oficial da CISA em seu catálogo de vulnerabilidades exploradas.
+
+Agora, a recuperação de agentes depois de uma falha.
+A Earendil apresentou, em primeiro de outubro, o framework experimental Pi Durable, para construir aplicações com agentes de inteligência artificial.
+Ele separa o armazenamento das conversas do ambiente que executa as ferramentas.
+Entre as opções de persistência estão SQLite e um formato que guarda um registro JSON por linha.
+
+O ponto central é o que acontece quando o processo para inesperadamente.
+O framework registra pontos de recuperação das tarefas.
+Uma chamada interrompida ao modelo é enviada novamente.
+Já uma ferramenta interrompida só é repetida automaticamente quando declara que isso é seguro.
+Nos demais casos, o modelo recebe o relato da interrupção.
+
+Essa diferença importa quando a ferramenta produz efeitos fora da conversa.
+Imagine uma cobrança concluída antes de o agente conseguir registrar o resultado.
+Repetir a operação pode cobrar duas vezes.
+O identificador da solicitação evita duplicar a submissão de um pedido ao framework.
+Mas isso não substitui a proteção da operação de pagamento.
+Ela ainda precisa da própria chave de idempotência, que permite reconhecer uma tentativa repetida.
+O exemplo de pagamentos do anúncio usa exatamente essa proteção.
+A fonte deste bloco é o anúncio do Pi Durable, da Earendil.
+
+A Cloudflare abriu o beta público do K dois, para eventos com consumidores independentes.
+Lançado em primeiro de outubro, o serviço mantém um registro durável de eventos sobre o armazenamento de objetos R dois.
+Diferentes consumidores podem ler os mesmos eventos no próprio ritmo.
+Em uma loja, por exemplo, análise de vendas e detecção de fraude podem acompanhar o mesmo fluxo.
+Uma não precisa depender da velocidade da outra.
+
+A arquitetura junta eventos em memória e grava segmentos completos.
+Isso acontece porque o armazenamento de objetos não permite simplesmente acrescentar bytes ao final de um arquivo.
+Segundo a Cloudflare, essa escolha resulta em cerca de um segundo de latência para registrar eventos no percentil noventa e nove.
+Essa é a marca abaixo da qual ficam noventa e nove porcento dos tempos medidos.
+
+A escolha entre os produtos depende do trabalho.
+O K dois privilegia retenção e distribuição de grandes fluxos.
+Já o "Cloudflare Queues" oferece controle por tarefa, com tentativas, atrasos e tratamento de falhas.
+O beta público do K dois exige uma assinatura "Workers Paid".
+Os limites iniciais são dez gigabytes armazenados e trinta megabytes por segundo de produção por fluxo.
+O uso do K dois não será cobrado durante o beta.
+A fonte é o anúncio da Cloudflare, que também explica a arquitetura do serviço.
+
+Vamos aos destaques rápidos de hoje.
+
+O SvelteKit três chegou com configuração no Vite e uma mudança no atalho usado para importar a biblioteca da aplicação.
+A versão estável do framework de aplicações Svelte foi lançada em primeiro de outubro.
+A configuração passa para o arquivo de configuração do Vite.
+O atalho de importação da biblioteca é substituído por outro, baseado nos imports de subcaminhos do Node ponto J S.
+O comando de migração automatiza parte das alterações e lista o que ainda precisa ser feito.
+As funções remotas continuam dependendo do "Async Svelte", que é experimental.
+A fonte é o anúncio do SvelteKit três.
+
+O Rust um ponto noventa e nove permite definir funções variádicas compatíveis com C.
+São funções que recebem uma quantidade variável de argumentos.
+Lançada em primeiro de outubro, a versão estabiliza a escrita dessas funções nas convenções C e "C-unwind".
+O Rust já conseguia chamar funções externas desse tipo; agora também pode implementá-las.
+A integração continua exigindo cuidado.
+Quem chama a função precisa respeitar os tipos e a quantidade de argumentos esperados pela implementação.
+A fonte é o anúncio do Rust um ponto noventa e nove.
+
+No Python três ponto quinze, ainda em pré-lançamento, o "Tachyon" permite investigar o desempenho de um programa.
+O episódio de primeiro de outubro do "Talk Python" apresenta essa ferramenta da biblioteca padrão.
+Ela é um profiler por amostragem, usado para investigar onde o programa gasta tempo.
+Para isso, observa periodicamente a pilha de chamadas, que mostra as funções em execução naquele instante.
+Também pode se conectar a um processo sem reiniciá-lo.
+
+A documentação consultada é da segunda versão candidata ao lançamento do Python três ponto quinze ponto zero.
+A ferramenta e o processo analisado precisam ter versões compatíveis, e é necessária permissão para leitura de memória.
+Funções muito breves podem escapar das amostras.
+Além disso, o próprio profiler consome recursos.
+As fontes são a entrevista com os desenvolvedores no Talk Python e a documentação do Tachyon.
+
+A Firezone descreveu uma proteção contra exclusão de usuários em sincronizações incompletas.
+Em publicação de primeiro de outubro, a empresa explica como combina reconciliações completas do diretório com notificações do provedor de identidade.
+Uma fila coloca as escritas em sequência, e cada notificação provoca uma nova consulta à origem.
+Há também uma proteção que limita exclusões em massa.
+O motivo é que uma resposta web bem-sucedida pode trazer apenas parte do diretório.
+É uma lição útil para integrações em que dados desatualizados afetam permissões de acesso.
+A fonte é a publicação da equipe de engenharia da Firezone.
+
+A Cisco corrigiu uma falha explorada que permite acesso sem login no S D WAN Manager.
+O aviso de trinta de setembro informa exploração ativa.
+A falha permite acessar a [EY1 P IY1 AY1] com privilégios de administrador, sem fazer login.
+A Cisco recomenda atualizar para a versão corrigida correspondente à linha instalada.
+Restringir o acesso de redes não confiáveis reduz a exposição.
+Mas a empresa afirma que não há solução alternativa que resolva a vulnerabilidade.
+A fonte é o aviso oficial da Cisco.
+
+O Ubuntu vinte e seis ponto dez, ainda em desenvolvimento, concluiu a troca dos utilitários básicos de arquivos por implementações em Rust.
+As notas da versão dizem que as ferramentas para copiar, mover e remover arquivos foram substituídas pelas implementações do projeto uutils.
+Eram os utilitários GNU que ainda restavam nesse conjunto padrão.
+Para quem mantém automações, isso justifica testes de compatibilidade antes da atualização.
+As notas também colocam o Sequoia P G P no repositório principal.
+Torná-lo a ferramenta Open P G P padrão continua sendo um objetivo, não uma mudança já concluída.
+A fonte são as notas do Ubuntu vinte e seis ponto dez.
+
+No Git, a discussão sobre S H A duzentos e cinquenta e seis coloca a compatibilidade em primeiro plano.
+Scott Chacon, do GitButler, questiona o custo da mudança e propõe separar a verificação criptográfica dos identificadores atuais.
+O plano oficial fornece o contexto dessa discussão.
+O Git três ponto zero ainda não tem data.
+A mudança de padrão vale para repositórios novos e depende da preparação do ecossistema.
+Não há plano atual de descontinuar o formato S H A um.
+Para as equipes, vale mapear bibliotecas e scripts que pressupõem hashes de quarenta caracteres.
+As fontes são o argumento de Scott Chacon e o plano oficial do Git.
+
+A Cloudflare lançou o [K L EH1 F], que oferece respostas tipadas com probabilidades para decisões em aplicações.
+O lançamento aconteceu em primeiro de outubro e inclui também a variante [K L EH1 F] flash.
+Os pesos foram disponibilizados sob a licença Apache dois ponto zero, e a hospedagem é no "Workers AI".
+Em vez de montar uma resposta em texto, um token de cada vez, a etapa de decisão pontua as opções válidas de um esquema.
+Isso serve, por exemplo, para encaminhar um chamado à equipe adequada.
+As probabilidades precisam ser avaliadas com casos reais antes de comandar ações sensíveis.
+A fonte é o anúncio do [K L EH1 F], da Cloudflare.
+
+O "Workers K V Instant" entrou em beta privado para configurações pequenas.
+Segundo a Cloudflare, o novo modo entrega leituras abaixo de dois milissegundos no percentil noventa e nove.
+O escopo é estreito: até um megabyte por agrupamento de chaves e valores, e uma escrita nesse agrupamento por segundo.
+O preço anunciado do armazenamento é de cem dólares por megabyte ao mês.
+É uma opção voltada a configurações pouco alteradas e muito consultadas.
+Na decisão, o tamanho e a frequência de atualização pesam tanto quanto a latência.
+A fonte é o anúncio do Workers K V Instant, da Cloudflare.
+
+Por fim, as bibliotecas de desenvolvimento do "Google Cloud Storage" passam a calcular somas de verificação de upload por padrão.
+O anúncio de primeiro de outubro informa que as versões mais recentes calculam e enviam essa soma quando a aplicação não a fornece.
+Assim, o servidor pode comparar o conteúdo recebido com o que saiu do cliente.
+Essa proteção cobre uma etapa anterior ao cálculo feito no próprio serviço.
+A fonte é a equipe de engenharia do Google Cloud Storage.
+A recomendação do Google é atualizar as bibliotecas de desenvolvimento para obter a proteção.
