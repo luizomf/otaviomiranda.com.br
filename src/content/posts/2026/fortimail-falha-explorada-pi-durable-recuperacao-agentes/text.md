@@ -4,6 +4,7 @@ description: 'Cloudflare K2 estreia em beta, SvelteKit 3 muda a configuração e
 date: '2026-10-02T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/fortimail-falha-explorada-pi-durable-recuperacao-agentes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/fortimail-falha-explorada-pi-durable-recuperacao-agentes/final.opus'
 ---
 
 ![Jornal ilustrativo nas mãos de um passageiro destaca a falha explorada no FortiMail.](./images/fortimail-falha-explorada-pi-durable-recuperacao-agentes.jpg)
