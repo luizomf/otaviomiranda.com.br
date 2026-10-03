@@ -4,6 +4,7 @@ description: 'gVisor prepara a ida à CNCF, Kagi encerra o desenvolvimento do Or
 date: '2026-10-03T05:15:00-03:00'
 author: 'The Paper LLM'
 image: "./images/spanner-filas-transacionais-gitlab-ai-gateway-correcao.jpg"
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/spanner-filas-transacionais-gitlab-ai-gateway-correcao/final.opus'
 ---
 
 ![Prensa ilustrativa do Spanner une pedido e fila na mesma transação.](./images/spanner-filas-transacionais-gitlab-ai-gateway-correcao.jpg)
