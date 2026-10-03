@@ -1,0 +1,156 @@
+Spanner ganha filas transacionais; GitLab corrige AI Gateway hospedado pelo cliente.
+
+O Spanner agora permite gravar dados e enfileirar uma tarefa na mesma transação.
+O GitLab pede atualização imediata de versões vulneráveis do seu "AI Gateway", quando hospedado pelo cliente.
+E o gVisor prepara uma mudança de governança.
+Nos destaques rápidos, há ferramentas que ganham recursos e outras que exigem cuidado antes de continuar usando ou atualizar.
+
+Vamos começar pelo Spanner, que permite salvar dados e enfileirar tarefas na mesma transação.
+O Google anunciou em dois de outubro a disponibilidade geral das "Spanner queues".
+São filas de tarefas integradas ao seu banco de dados distribuído.
+Uma aplicação pode atualizar um pedido e registrar a tarefa de reembolso na mesma transação.
+As duas gravações são confirmadas juntas, ou nenhuma delas é efetivada.
+Isso evita que a atualização do pedido seja confirmada sem que a tarefa correspondente fique registrada na fila.
+
+As filas oferecem entrega agendada e uma reserva temporária da mensagem para o processo que vai executá-la.
+Esse processo pode renovar a reserva enquanto trabalha.
+A entrega é pelo menos uma vez. Portanto, uma tarefa pode reaparecer.
+Imagine que o serviço de pagamentos conclua o reembolso, mas o processo caia antes de confirmar o término no banco.
+Uma nova tentativa precisa reconhecer o reembolso já feito.
+Por isso, o exemplo do próprio Google envia o identificador da tarefa como chave de idempotência à [EY1 P IY1 AY1] externa.
+Essa chave serve para reconhecer repetições da mesma operação.
+Salvar a tarefa e executar o reembolso são, então, etapas com garantias distintas.
+A transação mantém o pedido e a fila consistentes.
+Já a [EY1 P IY1 AY1] de pagamentos precisa reconhecer a chave para evitar um segundo reembolso.
+A fonte é o anúncio do Google sobre o funcionamento das filas do Spanner.
+
+Agora, o GitLab corrigiu uma falha crítica que permite execução de comandos no AI Gateway hospedado pelo cliente.
+Esse gateway é um componente da infraestrutura dos recursos de inteligência artificial do GitLab.
+Segundo o aviso, o problema envolve um usuário autenticado com acesso ao "Duo Agent Platform".
+Em certas condições, ele poderia escapar do isolamento dos modelos de prompts de um fluxo personalizado e executar comandos no gateway.
+
+Quem hospeda o próprio componente deve conferir a versão instalada.
+A primeira faixa afetada começa na dezoito ponto um ponto seis e vai até as versões anteriores à dezenove ponto dois ponto quatro.
+Também são afetadas as versões da linha dezenove ponto três anteriores à dezenove ponto três ponto dois.
+E, na linha dezenove ponto quatro, as anteriores à dezenove ponto quatro ponto um.
+As correções estão na dezenove ponto dois ponto quatro, na dezenove ponto três ponto dois e na dezenove ponto quatro ponto um.
+Essas versões são todas do AI Gateway. O fabricante recomenda atualização imediata.
+
+Aqui, a distinção de implantação é importante.
+Os gateways operados pelo GitLab já receberam a correção.
+Isso inclui os gateways que atendem uma instalação de GitLab mantida pelo próprio cliente.
+Hospedar o GitLab e hospedar seu AI Gateway são decisões separadas.
+O comunicado não informa exploração ativa.
+A fonte é o aviso oficial de correção do GitLab AI Gateway.
+
+O próximo assunto é a transferência do gVisor para a C N C F.
+Em dois de outubro, o projeto anunciou sua doação à "Cloud Native Computing Foundation", fundação que abriga projetos como Kubernetes.
+O gVisor implementa funcionalidades do Linux em espaço de usuário, fora do núcleo do sistema operacional.
+Com isso, ele isola aplicações sem exigir virtualização por hardware.
+
+A candidatura foi aceita em vinte e oito de setembro.
+Para as semanas seguintes, estão previstas a entrada no estágio Sandbox e a mudança da infraestrutura de testes.
+Também está prevista a concessão de permissões a mantenedores de fora do Google.
+A transição inclui o nome e as marcas do projeto.
+
+Segundo os mantenedores, pouco muda para usuários no curto prazo.
+A expectativa é facilitar contribuições externas, inclusive melhorias hoje restritas a grandes adotantes.
+O projeto reconhece perda de desempenho em algumas cargas intensivas de entrada e saída.
+Testar a própria aplicação continua importante ao avaliar esse isolamento.
+A fonte é o cronograma publicado pelo gVisor, junto da justificativa para a mudança.
+
+Vamos aos destaques rápidos de hoje.
+A Kagi encerra o desenvolvimento do Orion para Linux e Windows.
+Em anúncio de dois de outubro, a empresa diz que concentrará a equipe do navegador nas versões para macOS e iOS.
+O beta para Linux deixa de receber atualizações da Kagi após essa data.
+A própria empresa desaconselha seu uso como navegador principal.
+O lançamento para Windows, previsto para o fim de 2026, não virá da Kagi.
+A abertura do código foi anunciada, com detalhes prometidos em até trinta dias.
+A empresa procura responsáveis pela continuidade.
+A fonte é o comunicado da Kagi.
+
+O Zig zero ponto dezessete amplia a compilação incremental no Linux e quebra a integração atual com o Z L S.
+Lançada em primeiro de outubro, a versão reorganiza o sistema de build da linguagem.
+Ela também introduz um protocolo para ferramentas acompanharem e controlarem as etapas desse processo.
+A compilação incremental reaproveita trabalho após alterações no código.
+A equipe espera que ela funcione na maioria dos projetos para Linux na arquitetura x oitenta e seis de sessenta e quatro bits.
+Isso exige que o modo incremental esteja habilitado.
+Mas a separação dos processos de configuração e execução do build impede o funcionamento do Z L S com esta versão.
+Quem depende desse servidor de linguagem no editor deve considerar a limitação antes de migrar.
+As fontes são as notas da versão zero ponto dezessete ponto zero e o índice oficial de versões e datas do Zig.
+
+Uma análise do Postgri [EH1 S] [K Y UW1] [EH1 L] mostra como reduzir o mínimo de paralelismo pode aumentar o trabalho.
+Christophe Pettus publicou, em dois de outubro, testes sobre dois parâmetros do banco.
+Eles definem os tamanhos mínimos para considerar varreduras paralelas de tabelas e de índices.
+Esses parâmetros também participam do cálculo de quantos processos auxiliares serão pedidos.
+
+Na instância de dois núcleos usada por Pettus, uma consulta sobre uma tabela de nove vírgula seis megabytes levou cerca de dez milissegundos em execução serial.
+Com sete processos auxiliares, levou de trinta e três a trinta e sete milissegundos.
+Esse segundo resultado veio ao zerar o limite de tamanho e permitir até oito auxiliares por operação.
+Os tempos dependem daquela consulta e daquela configuração.
+A implicação prática é medir o plano e a carga antes de reduzir limites globais.
+A fonte são os experimentos e as condições descritos por Pettus.
+
+A Supabase anunciou a aquisição da Turso, com foco em bancos pequenos sob demanda.
+O comunicado de dois de outubro destaca a arquitetura da Turso para carregar bancos quando necessários e suspendê-los quando ociosos.
+Isso atende aplicações e agentes que criam muitos ambientes pequenos.
+Segundo a Supabase, o trabalho em Postgri [EH1 S] [K Y UW1] [EH1 L] continuará, assim como o trabalho da Turso em SQLite.
+Não há mudança imediata para usuários existentes.
+A fonte é o anúncio da Supabase.
+
+O "Quick Tunnels", da Cloudflare, ganha acesso restrito por e-mail para compartilhar aplicações locais.
+Esse recurso permite acessar pela internet um serviço em execução na máquina do desenvolvedor.
+A nova restrição funciona a partir da versão dois mil e vinte e seis ponto nove ponto três do programa cloudflared.
+Uma opção de configuração define os endereços ou domínios de e-mail permitidos.
+Os visitantes confirmam o controle do e-mail com um código de uso único.
+Nenhuma das pontas precisa de conta Cloudflare.
+Assim, é possível compartilhar uma aplicação em desenvolvimento sem liberar o acesso a qualquer pessoa com o link.
+Sem essa opção, o túnel continua público.
+A fonte é o anúncio dos "Protected Quick Tunnels", da Cloudflare.
+
+A OWASP publicou um guia de segurança específico para FastAPI.
+A inclusão na coleção foi concluída em dois de outubro.
+Entre as orientações para esse framework de interfaces de programação em Python, duas merecem revisão imediata.
+Uma é compartilhar os contadores de limite de requisições entre processos ou réplicas.
+A outra é limitar o tamanho dos uploads antes de o framework interpretar o formulário.
+Verificar o arquivo apenas dentro do endpoint ocorre depois de recursos já terem sido consumidos.
+As fontes são o guia "FastAPI Security Cheat Sheet" e seu registro de publicação no "Git Hub".
+
+O [S IY1 K W AH0 N S] Hash preserva as fronteiras entre valores enviados a um hash.
+A "Trail of Bits" apresentou, em dois de outubro, o [S IY1 K W AH0 N S] Hash e o [S IY1 K W AH0 N S] MAC.
+Os dois têm implementações em Rust, Go e Python.
+Um hash é um resumo calculado a partir dos dados.
+Chamadas separadas a um hash convencional podem equivaler à simples concatenação dos dados.
+Com isso, perde-se a informação de onde um campo termina e outro começa.
+A proposta codifica os comprimentos para preservar essa separação.
+Já o [S IY1 K W AH0 N S] MAC acrescenta uma chave para autenticação.
+A segurança depende do hash subjacente.
+E as aplicações ainda precisam combinar uma representação consistente dos dados.
+A fonte é a explicação da Trail of Bits, junto das implementações.
+
+O G K E testa poder de processamento extra só durante a inicialização dos containers.
+O G K E é o serviço de Kubernetes gerenciado pelo Google.
+O recurso, chamado "CPU startup boost", entrou em fase de testes, ou preview, em dois de outubro.
+Ele é integrado ao ajuste vertical de recursos e aumenta a alocação de C P U na partida.
+Depois que a aplicação sinaliza estar pronta, essa alocação é reduzida.
+Há um atraso adicional configurável, e a mudança acontece sem reiniciar o container.
+Isso atende programas que gastam mais processamento carregando módulos do que durante a operação normal.
+A disponibilidade começa em uma versão específica do G K E, cujo identificador completo está no artigo escrito.
+Os clusters Standard precisam ter o ajuste vertical de recursos habilitado.
+A fonte é o anúncio do Google sobre o CPU startup boost no G K E.
+
+A Apple anunciou controles mais explícitos para conceder acesso total ao disco.
+A empresa diz que a permissão "Full Disk Access" pode expor arquivos, e-mails, mensagens e histórico de navegação.
+Agentes mais autônomos ampliam esse risco.
+O anúncio de dois de outubro prevê ações mais explícitas do usuário para conceder esse acesso.
+Mas não informa versão do macOS nem data de implementação.
+Para quem desenvolve aplicativos, é um motivo para revisar a necessidade dessa permissão abrangente.
+A fonte é o comunicado da Apple para desenvolvedores.
+
+Para fechar, a Cloudflare abriu um beta fechado de gateway para [AH0 B L IH1 V IY0 AH0 S] H T T P.
+Esse protocolo separa quem vê o endereço I P do cliente de quem consegue ler sua requisição.
+O novo gateway decifra as mensagens para a aplicação.
+Um intermediário independente, chamado relay, encaminha o conteúdo ainda cifrado.
+A proteção depende de operadores separados que não combinem seus dados.
+Informações identificadoras enviadas no corpo da requisição continuam visíveis à aplicação, portanto também precisam de cuidado.
+A fonte é o anúncio da Cloudflare sobre o gateway e seus limites.
