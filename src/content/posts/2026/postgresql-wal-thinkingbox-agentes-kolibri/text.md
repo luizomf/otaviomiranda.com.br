@@ -4,6 +4,7 @@ description: 'Kolibri chega com 78 bilhões de parâmetros e ativação esparsa.
 date: '2026-10-04T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/postgresql-wal-thinkingbox-agentes-kolibri.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/postgresql-wal-thinkingbox-agentes-kolibri/final.opus'
 ---
 
 ![Elefante azul do PostgreSQL segura um recipiente WAL ao lado de uma reserva de segmentos reutilizáveis.](./images/postgresql-wal-thinkingbox-agentes-kolibri.jpg)
