@@ -1,0 +1,126 @@
+Teste no Postgri [EH1 S] [K Y UW1] [EH1 L] reduz picos de latência; "ThinkingBox" verifica resultados de agentes.
+
+Um teste com Postgri [EH1 S] [K Y UW1] [EH1 L] mostra como a criação de arquivos pode atrasar uma pequena parcela das requisições sem alterar a mediana.
+Na avaliação de agentes, o "ThinkingBox" confere o estado final dos registros para descobrir tarefas que terminaram com resultado errado.
+A Aleph Alpha também lançou o Kolibri, que usa apenas parte dos parâmetros a cada etapa.
+Mesmo assim, ele exige cerca de setenta e oito gigabytes só para armazenar os pesos.
+
+No Postgri [EH1 S] [K Y UW1] [EH1 L], uma reserva de arquivos reduziu a latência extrema em um teste.
+Christophe Pettus publicou o experimento em três de outubro.
+Ele avaliou uma configuração que limita quanto pode encolher o conjunto de arquivos reciclados do W A L.
+Esse é o registro de alterações usado na recuperação do banco, e seus arquivos são reaproveitados para gravações futuras.
+Não é a mesma coisa que reter o histórico necessário a uma réplica atrasada.
+Essa retenção depende de mecanismos próprios, como uma configuração específica de retenção ou os slots de replicação.
+
+Quando faltam arquivos para reaproveitar, o banco precisa criar outro segmento desse registro.
+No teste de Pettus, preencher e sincronizar um segmento novo levou cerca de vinte e um milissegundos.
+Durante esse trabalho, uma trava de acesso à escrita do W A L fez outras gravações esperarem.
+Pettus fez uma grande escrita e depois deixou um período lento reduzir a reserva.
+Em seguida, comparou dois tamanhos mínimos de reserva, usando a versão dezoito ponto seis do banco, oito clientes e dois minutos de teste com o pgbench.
+
+Com oitenta megabytes, a latência no percentil noventa e nove vírgula nove foi de vinte e dois vírgula oito milissegundos.
+Com oito gigabytes, ficou em onze vírgula quatro milissegundos.
+Esse percentil representa o limite abaixo do qual terminaram noventa e nove vírgula nove porcento das operações.
+A mediana permaneceu em dois vírgula um milissegundos nos dois casos.
+A melhora apareceu na parcela de operações mais lentas.
+
+O resultado ajuda a investigar aplicações com picos de escrita após intervalos tranquilos.
+Antes de aumentar a reserva, vale medir a criação de segmentos e reservar espaço em disco.
+Alterar o parâmetro também não preenche imediatamente a pasta com arquivos.
+A reserva cresce com a reciclagem do W A L já escrito.
+Os números descrevem aquela carga e aquele armazenamento.
+As fontes são o experimento de Pettus e a documentação de W A L da versão dezoito do Postgri [EH1 S] [K Y UW1] [EH1 L].
+
+O ThinkingBox encontra falhas mesmo quando agentes encerram sem erro de ferramenta.
+Microsoft e "Hugging Face" publicaram em três de outubro uma apresentação prática desse ambiente para testar agentes que alteram registros de negócio.
+A primeira versão do artigo científico saiu em agosto.
+O texto atual explica os resultados e como executar a avaliação pela interface "OpenEnv".
+
+O conjunto de testes reúne quinhentos e sete fluxos sintéticos, que simulam tarefas de atendimento, seguros, viagens e outros serviços.
+Cada tentativa parte de um estado inicial limpo, sem herdar alterações da anterior.
+Ao terminar, verificações executáveis conferem os valores gravados e os efeitos extras ou ausentes.
+Em quatrocentas e setenta e sete tarefas, o estado final basta para a avaliação.
+Outras trinta também usam critérios sobre a resposta do agente.
+Em um exemplo, o agente fecha um chamado como resolvido, embora a situação exija mantê-lo pendente.
+
+A análise reportada cobre cento e vinte e uma mil seiscentas e oitenta tentativas válidas, com doze modelos.
+Dessas tentativas, setenta e nove mil oitocentas e cinquenta e três falharam nas verificações.
+E, entre as tentativas que falharam, sessenta e sete vírgula vinte e quatro porcento tiveram uma combinação importante.
+O agente encerrou normalmente, chamou uma ferramenta que alterava estado e não relatou erro final de ferramenta.
+Isso mostra por que a avaliação precisa conferir o resultado.
+Executar uma ação sem erro pode deixar os registros diferentes do que a tarefa exigia.
+
+Os autores também repetem cada tarefa vinte vezes.
+Conseguir acertá-la ao menos uma vez e acertar as vinte são medidas diferentes.
+E vinte acertos observados ainda constituem uma amostra.
+Para quem desenvolve agentes, a aplicação prática é definir o resultado esperado de forma verificável.
+Num fluxo de reembolso, isso pode incluir valor, destino e situação do atendimento.
+Também pode incluir a ausência de uma segunda cobrança ou devolução indevida.
+As fontes são a apresentação e as instruções do ThinkingBox, publicadas na Hugging Face, e o artigo científico com seu histórico de versões.
+
+O Kolibri chega com setenta e oito bilhões de parâmetros e cerca de setenta e oito gigabytes só em pesos.
+A Aleph Alpha lançou em três de outubro o Kolibri um, modelo de linguagem voltado a alemão e inglês.
+Os pesos e os arquivos de configuração estão sob a licença Apache dois ponto zero.
+Ele usa uma arquitetura de mistura de especialistas.
+Para cada token, seleciona apenas parte das redes internas que compõem o modelo.
+
+São aproximadamente setenta e oito bilhões de parâmetros totais, com três vírgula quarenta e seis bilhões ativos por token.
+Essa seleção reduz o cálculo por etapa, mas o modelo completo precisa permanecer em memória.
+O cartão técnico informa cerca de setenta e oito gigabytes para os pesos em F P oito, uma representação numérica compacta.
+Isso é além dos recursos necessários à execução.
+Entre as configurações mínimas documentadas estão duas A cem de oitenta gigabytes ou uma H duzentos.
+
+O contexto nativo é de duzentos e sessenta e dois mil cento e quarenta e quatro tokens, as unidades de texto processadas pelo modelo.
+A empresa informa validação por extrapolação até um milhão, quarenta e oito mil quinhentos e setenta e seis tokens.
+Mas recomenda ficar no limite nativo para eficiência de atendimento e tarefas complexas.
+Ao planejar um teste, portanto, é preciso considerar a memória dos pesos, a memória usada durante a execução e o suporte do software escolhido.
+A contagem de parâmetros ativos, sozinha, deixa boa parte desse orçamento de fora.
+A fonte é o cartão técnico do Kolibri um, publicado pela Aleph Alpha na Hugging Face.
+
+Agora, os destaques rápidos para hoje.
+O U V, gerenciador de projetos e pacotes Python, testa operações diretamente a partir do arquivo que fixa as versões das dependências.
+A novidade está na versão zero ponto doze ponto vinte e três, de três de outubro.
+Ela permite sincronizar ambientes, exportar dependências e consultar a árvore de dependências sem o manifesto do espaço de trabalho.
+Para isso, é preciso usar a opção de execução congelada com o recurso experimental de arquivo de dependências congelado habilitado.
+Isso abre espaço para organizar etapas de compilação ao redor desse arquivo.
+Dependências que precisam do código do projeto continuam exigindo os arquivos correspondentes.
+A fonte são as notas da versão do U V.
+
+Ainda no U V, um ajuste no código de depuração reduziu cerca de cento e sessenta quilobytes do binário.
+William Woodruff relata, em texto de três de outubro, que a economia veio de impedir a expansão em linha de uma implementação de depuração.
+Em Rust, a derivação automática de "Debug" gera código para representar valores durante a depuração.
+O compilador pode copiar esse código para os pontos de chamada.
+O caso mostra uma oportunidade de medir o tamanho do binário antes de mudar a política de otimização de todo o programa.
+A fonte é a análise de Woodruff.
+
+A OWASP esclareceu o alcance da função "encodeURIComponent", usada para codificar componentes de endereços na web.
+A correção incorporada em três de outubro explica que essa função codifica valores individuais de parâmetros de uma U R L.
+A validação do endereço completo continua sendo uma etapa separada.
+Também é separada a proteção necessária ao inserir o resultado numa página.
+Para links produzidos dinamicamente, isso significa conferir o destino e aplicar a codificação adequada ao contexto de saída.
+As fontes são a correção no repositório da OWASP e seu guia de prevenção de X S S.
+
+Outro guia da OWASP, o de prevenção de S S R F, acrescentou faixas locais de I P versão seis.
+S S R F ocorre quando alguém induz um servidor a fazer requisições a destinos indevidos, inclusive serviços internos.
+A correção de três de outubro inclui duas faixas locais na tabela de bloqueio.
+Essa tabela é usada quando não é possível restringir as chamadas a uma lista de destinos permitidos.
+Quem mantém webhooks ou buscadores de endereços tem um ponto concreto para revisar nos testes.
+Os endereços locais de I P versão seis também precisam entrar na política.
+As faixas exatas estão no artigo escrito.
+As fontes são a correção incorporada pela OWASP e seu guia de prevenção de S S R F.
+
+O "Shed Skin", na versão zero ponto nove ponto quatorze, reescreve a inferência de tipos e adiciona suporte completo a Unicode.
+O anúncio de três de outubro apresenta novidades nesse compilador.
+Ele transforma um subconjunto restrito de Python em C mais mais e, depois, em código nativo.
+A inferência identifica os tipos usados no programa para viabilizar essa transformação.
+As limitações de recursos e bibliotecas continuam importantes para decidir se um projeto cabe nesse subconjunto.
+Também é possível gerar módulos de extensão para programas Python maiores.
+A fonte é o anúncio do mantenedor do Shed Skin.
+
+Por fim, o ZUPT entra no "openSUSE Factory" com backup, compressão e verificação de integridade.
+O anúncio de quatro de outubro confirma a aceitação da ferramenta no projeto.
+Ele descreve criptografia híbrida, combinando um mecanismo pós-quântico com criptografia de chave pública convencional.
+Para avaliar seu uso, a primeira tarefa prática é criar um arquivo, verificar sua integridade e testar a restauração.
+A descrição criptográfica vem do anúncio do projeto.
+A aceitação do pacote no Factory é um marco de integração, sem estabelecer a segurança da implementação.
+A fonte é o anúncio do openSUSE.
