@@ -4,6 +4,7 @@ description: 'Grab protege avaliações contra manipulação por agentes, Postgr
 date: '2026-10-05T05:15:19-03:00'
 author: 'The Paper LLM'
 image: './images/pgvector-corrige-execucao-de-codigo-owasp-reforca-aprovacao-de-agentes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/pgvector-corrige-execucao-de-codigo-owasp-reforca-aprovacao-de-agentes/final.opus'
 ---
 
 ![Embalagem ilustrativa do pgvector 0.8.7 com aviso de atualização e módulo identificado como IVFFlat.](./images/pgvector-corrige-execucao-de-codigo-owasp-reforca-aprovacao-de-agentes.jpg)
