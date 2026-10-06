@@ -4,6 +4,7 @@ description: 'Testes mostram ganhos e limites do swap no Kubernetes. Também: mo
 date: '2026-10-06T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/atlassian-corrige-acesso-arquivos-css-reconstroi-tokens.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/atlassian-corrige-acesso-arquivos-css-reconstroi-tokens/final.opus'
 ---
 
 ![Jornal ilustrativo destaca falha de acesso a arquivos na Atlassian e orientação de atualização.](./images/atlassian-corrige-acesso-arquivos-css-reconstroi-tokens.jpg)
