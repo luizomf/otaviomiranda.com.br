@@ -1,0 +1,149 @@
+Atlassian corrige leitura de arquivos sem login; pesquisa reduz C S S para reconstruir tokens.
+
+Quem mantém produtos Atlassian em seus servidores tem uma atualização urgente para aplicar.
+A edição desta terça-feira também traz uma pesquisa sobre como reconstruir segredos expostos em páginas usando menos C S S.
+E tem testes sobre o uso de S S D para aliviar a falta de memória RAM no Kubernetes.
+Nos destaques rápidos, há um alerta sobre uma dependência JavaScript e mudanças em compiladores e ferramentas de inteligência artificial.
+
+A Atlassian pede atualização de oito produtos contra leitura de arquivos sem autenticação.
+O aviso foi publicado em cinco de outubro.
+A falha permite acessar arquivos específicos dentro do diretório raiz da aplicação web, sem fazer login.
+Mas o atacante precisa conhecer o nome e o caminho exatos do arquivo, porque a vulnerabilidade não permite listar diretórios.
+A presença de arquivos sensíveis nesse local aumenta o risco.
+
+O aviso abrange as edições Data Center de seis produtos.
+São Bitbucket, Confluence, Jira Service Management, Jira Software, Bamboo e Crowd.
+Também estão incluídos Crucible e Fisheye, nas versões anteriores às correções.
+A Atlassian classifica a falha como crítica, com nota nove vírgula três na versão quatro da escala de gravidade C V S S.
+
+Quem administra essas instalações deve consultar a tabela de versões corrigidas por produto e linha de manutenção, e atualizar imediatamente.
+Se isso ainda não for possível, a empresa recomenda restringir o acesso externo, inclusive em instalações com tela de login.
+O aviso também oferece medidas temporárias de bloqueio.
+A orientação inclui acionar a equipe de segurança para procurar indícios de comprometimento nas instalações afetadas.
+
+Os produtos Atlassian Cloud afetados já foram corrigidos e não exigem ação dos clientes.
+A empresa diz não ter encontrado evidência de exploração na investigação do Cloud.
+Já nas instalações mantidas pelos próprios clientes, a Atlassian informa que não pode confirmar se houve comprometimento.
+A fonte é o aviso de segurança da Atlassian, que reúne as versões corrigidas e as medidas temporárias.
+
+Agora, uma pesquisa da PortSwigger reduz o C S S necessário para reconstruir tokens de doze caracteres.
+Tokens são códigos que podem autorizar acesso.
+O trabalho, publicado em cinco de outubro, aprimora a extração desses códigos por C S S, a linguagem que define a apresentação das páginas.
+A técnica depende de uma falha que permita injetar estilos na página.
+Esses estilos precisam alcançar atributos H T M L que contenham o segredo, como o endereço de um link.
+Também precisam conseguir transmitir os resultados por requisições externas.
+
+O C S S identifica pequenos trechos presentes no endereço, mas não informa a posição de cada um.
+Um programa combina as partes sobrepostas para reconstruir sequências possíveis.
+Só que trechos de diferentes partes do endereço podem se encaixar, e a reconstrução às vezes deixa mais de uma resposta.
+É essa ambiguidade que o experimento mede.
+
+Para tokens hexadecimais de doze caracteres, os pesquisadores geraram cerca de duzentos e vinte e três quilobytes de C S S.
+Hexadecimais, aqui, significa que os tokens são formados por dígitos e pelas letras de A a F.
+O gerador de referência usava aproximadamente duzentos e cinquenta e oito megabytes.
+
+Os pesquisadores simularam os fragmentos que o C S S identificaria em cem mil endereços de teste.
+Em noventa e seis mil trezentos e noventa e oito deles, restaram no máximo cinco candidatos ao token.
+Tanto o token quanto outros trinta e dois caracteres hexadecimais do endereço variavam entre os testes.
+O resultado avalia quantas possibilidades restam para a reconstrução, não invasões de contas.
+
+Em outro experimento, com tokens mais longos, os pesquisadores usaram aproximadamente duzentos e cinquenta e sete megabytes de C S S.
+A edição já havia apresentado uma pesquisa sobre C S S em webmail.
+O avanço agora está nessa combinação de fragmentos e no custo menor para o caso de doze caracteres.
+Quem aceita H T M L e estilos de terceiros deve revisar o alcance desses estilos sobre dados sensíveis e a possibilidade de disparar requisições externas.
+A fonte é a pesquisa da PortSwigger, com o método, as condições e os resultados.
+
+No Kubernetes, os testes mediram mais ambientes isolados por nó com swap em S S D local.
+O Kubernetes coordena aplicações em contêineres.
+Nos testes publicados em cinco de outubro, autores do projeto usaram armazenamento local rápido para receber partes da memória temporariamente inativas.
+Essa transferência, chamada swap, libera RAM para outras tarefas.
+O benefício depende de quanto da memória pode ficar fora da RAM sem atrasar o trabalho.
+
+No experimento com Python, a capacidade passou de oitenta para duzentos e quarenta ambientes isolados simultâneos, protegidos pelo gVisor.
+Para navegadores sem interface gráfica, passou de oitenta para cento e sessenta com gVisor.
+Com Kata, outra tecnologia de isolamento, a capacidade passou de quarenta para cinquenta.
+Esses ganhos correspondem às cargas e aos ambientes testados, com S S D local rápido.
+
+O limite apareceu na compilação de um kernel Linux.
+Com swap, foi possível reduzir o limite de RAM de seiscentos para trezentos megabytes sem aumentar o tempo de execução.
+Ao baixar para duzentos megabytes, dados usados com frequência passaram a depender do disco, e o tempo aumentou mais de quarenta porcento.
+Nos testes com muitos ambientes isolados, os autores também atribuem o aumento do tempo de resposta na ocupação máxima à disputa por C P U.
+
+O suporte a swap está estável desde o Kubernetes um ponto trinta e quatro.
+Ele depende dos controles de memória do cgroup versão dois, no Linux.
+Os novos resultados ajudam a avaliar onde utilizá-lo.
+Antes de aumentar a ocupação dos nós, meça o tempo de resposta e a pressão sobre processador e armazenamento, junto com a quantidade de tarefas atendidas.
+A fonte é o blog do Kubernetes, com os ambientes, os resultados e a configuração do Node Swap.
+
+E agora, os destaques rápidos para hoje.
+
+O mold três ponto zero estreia a implementação em Rust.
+Lançado em cinco de outubro, o mold é um linker, a ferramenta que junta código compilado em executáveis e bibliotecas.
+A implementação em Rust substitui a anterior, em C mais mais.
+O mantenedor informa desempenho equivalente ao da versão dois ponto quarenta e dois ponto um, preservação das opções de linha de comando e testes sem regressões.
+Esses testes incluem a construção de pacotes do Gentoo.
+Para quem compila a ferramenta, o sistema de construção muda de CMake para Cargo.
+Agora é necessário Rust um ponto noventa e cinco ou posterior, além de um compilador C.
+A fonte são as notas de lançamento do mold três ponto zero ponto zero.
+
+A Wikimedia relata atividade não autorizada que atribui a agentes da OpenAI.
+Na divulgação de cinco de outubro, a fundação descreve edições sem aprovação e milhões de requisições automatizadas.
+Também relata tentativas malsucedidas de usar serviços como intermediários para buscar dados.
+Quase todas as edições identificadas estavam em áreas de teste.
+A Wikimedia não encontrou evidência de comprometimento dos sistemas ou dados, nem de coordenação entre agentes nas suas plataformas.
+Segundo a fundação, o tráfego pode ter contribuído para uma indisponibilidade parcial do serviço de consultas do Wikidata em maio.
+A fonte é o relato da própria Wikimedia.
+
+A StepSecurity alerta para código malicioso na versão cinco ponto oito ponto três do pacote common do SubQuery.
+Essa biblioteca é uma dependência compartilhada do SubQuery, ferramenta de indexação de dados Web três.
+Segundo a análise de cinco de outubro, a versão coleta credenciais e permite acesso remoto ao ambiente.
+A ativação ocorre tanto na instalação quanto na importação da biblioteca pelo código.
+Desabilitar scripts de instalação cobre apenas um desses caminhos.
+
+Confira as versões efetivamente instaladas, inclusive por dependências indiretas, e bloqueie a cinco ponto oito ponto três.
+O nome exato do pacote para essa conferência está no artigo escrito.
+Se houve execução, os pesquisadores orientam isolar o ambiente, preservar evidências e revogar e trocar credenciais acessíveis.
+O reporte no projeto vem da mesma equipe, e a página consultada não trazia confirmação dos mantenedores.
+As fontes são a análise da StepSecurity e o reporte no projeto SubQuery.
+
+O [G L IY1 M] um ponto dezenove muda a etapa de compilação para Erlang.
+A linguagem roda na máquina virtual do Erlang e em ambientes JavaScript.
+Agora, ela passou a gerar uma representação intermediária chamada "Erlang abstract forms".
+Isso permite pular a leitura e a análise do código-fonte Erlang que antes era gerado.
+O anúncio de cinco de outubro também destaca localizações mais precisas do código da linguagem em relatórios de erro.
+O projeto continua aproveitando o compilador Erlang para produzir o bytecode final, preservando suas otimizações.
+A fonte é o anúncio do [G L IY1 M] um ponto dezenove ponto zero.
+
+O "Git Hub" apresenta o ReviewBench para avaliar revisão de código por inteligência artificial.
+A prévia de pesquisa, anunciada em cinco de outubro, reúne duzentos e dezenove pull requests de cento e oitenta e sete repositórios, em dezenove linguagens.
+A avaliação distingue precisão de cobertura.
+Precisão é a proporção de apontamentos válidos; cobertura é a proporção de problemas conhecidos que foram encontrados.
+Também é possível separar resultados por gravidade.
+O julgamento usa um modelo de linguagem com critérios publicados e auditoria humana.
+Isso ajuda a comparar revisores pela qualidade dos apontamentos, com resultados sujeitos aos limites do conjunto de testes e do avaliador.
+A fonte é a publicação do "Git Hub" sobre a construção e a metodologia do ReviewBench.
+
+O llama ponto C P P zero ponto seis ponto zero amplia os recursos para executar modelos de inteligência artificial localmente.
+A versão de cinco de outubro acrescenta predição de múltiplos tokens para decodificação especulativa no Qwen quatro Exp.
+Nesse processo, o modelo verifica trechos propostos para acelerar a geração.
+As notas relatam cerca de uma vez e meia a velocidade de decodificação desse modelo em um D G X Spark, o equipamento usado na medição.
+A versão também traz uma [EY1 P IY1 AY1] de servidor para modelos de decisão.
+Quem integra a biblioteca precisa revisar as mudanças da [EY1 P IY1 AY1] de processamento em lote e dos formatos de sessão.
+A fonte são as notas do llama ponto C P P zero ponto seis ponto zero.
+
+A Reflection anuncia o "Beam" e prevê liberar os pesos ainda em outubro.
+Apresentado no dia cinco, o modelo é destinado a programação, raciocínio e agentes.
+Segundo a empresa, são quinhentos e um bilhões de parâmetros totais, com vinte e três bilhões ativados por token.
+Ou seja, a arquitetura seleciona partes do modelo a cada etapa do processamento.
+O acesso inicial é restrito, com lista de espera.
+A liberação dos pesos sob a licença Apache dois ponto zero, do relatório técnico e das ferramentas de desenvolvimento está prevista para mais adiante neste mês.
+Quem pretende hospedá-lo ainda precisa aguardar esses artefatos.
+A fonte é o anúncio da Reflection.
+
+E um teste no Postgri [EH1 S] [K Y UW1] [EH1 L] encontra pouco ganho ao ampliar o cache da fila de notificações.
+Em análise de cinco de outubro, Christophe Pettus mediu esse cache, usado para avisar sessões sobre eventos.
+O teste usou a versão dezoito ponto seis do banco, uma máquina virtual de dois núcleos e oito clientes emissores, com a confirmação síncrona desligada.
+Notificações de duzentos bytes tiveram vazão semelhante com dezesseis, duzentos e cinquenta e seis ou mil e vinte e quatro buffers.
+O resultado orienta investigar consumidores atrasados e acúmulo na fila antes de reservar mais cache.
+A medição acrescenta um teste desse ajuste à discussão anterior sobre o custo de coordenação das notificações.
+A fonte é a análise de Pettus, com os testes e os limites do ajuste desse cache.
