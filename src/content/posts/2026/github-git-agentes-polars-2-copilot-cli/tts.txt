@@ -1,0 +1,142 @@
+"Git Hub" redesenha sua infraestrutura Git, e Polars dois ponto zero muda a execução e o uso de memória.
+
+O "Git Hub" está redesenhando sua infraestrutura para lidar com o crescimento das operações de desenvolvedores e agentes.
+Nesta quarta-feira, a edição também traz um teste de segurança do Copilot [S IY1 EH1 L AY1], o assistente de programação para terminal.
+O teste mostra o risco de combinar conteúdo externo com acesso amplo a arquivos e rede.
+E tem as mudanças do Polars dois ponto zero, que podem afetar consultas e testes existentes.
+
+O "Git Hub" está redesenhando armazenamento e processamento para atender mais operações ao mesmo tempo.
+A empresa apresentou, em seis de outubro, a arquitetura que está construindo para absorver mais leituras e gravações simultâneas.
+Segundo ela, desenvolvedores e agentes fizeram sete vírgula trinta e oito bilhões de commits em setembro.
+É mais de cinco vezes o volume de um ano antes.
+
+Na infraestrutura atual, chamada "Spokes", cada repositório tem cópias completas nos discos de vários servidores.
+São cinco cópias por padrão.
+Elas ajudam a distribuir as leituras, mas também participam das gravações.
+Com isso, adicionar servidores para atender mais consultas acaba aumentando o trabalho necessário para concluir um push.
+É o envio de alterações ao repositório remoto.
+
+No novo desenho, os dados definitivos ficam no "Azure Blob Storage".
+As requisições passam por processos que mantêm cópias em cache e podem aumentar em número conforme a demanda.
+Isso separa a capacidade de atender consultas da quantidade de cópias completas do repositório.
+A compactação e a limpeza dos dados ficam com processos separados.
+
+A coordenação entre gravações fica concentrada na atualização das referências.
+Um exemplo é o ponteiro que indica o commit atual de uma branch.
+Outras etapas podem avançar em paralelo.
+A reconstrução está em andamento, com preservação dos fluxos de revisão e das proteções de branches.
+A mudança procura reduzir o custo de coordenação conforme cresce a concorrência pelo mesmo repositório.
+A fonte é o blog de engenharia do "Git Hub".
+
+Agora, o teste de segurança do Copilot [S IY1 EH1 L AY1] em modo autônomo.
+A empresa de segurança Adversa publicou, em seis de outubro, uma demonstração chamada "Cryptographic Context Injection".
+É uma forma de injeção de instruções escondidas em conteúdo criptografado.
+No teste, uma página externa levou o assistente de terminal do "Git Hub" a ler arquivos locais.
+Depois, ele enviou o conteúdo desses arquivos a um destino controlado pelos pesquisadores.
+
+O problema aparece quando o agente processa material da página com suas ferramentas.
+Ele passa a tratar o resultado como instrução para continuar a tarefa.
+Assim, conteúdo externo ganha influência sobre ações executadas com as permissões do usuário.
+No cenário demonstrado, essas permissões permitiam tanto ler arquivos quanto fazer conexões de rede.
+
+O relato delimita as condições do teste.
+O Copilot estava no modo "autopilot", com permissões amplas e um modelo permissivo.
+Segundo a Adversa, o modelo "mai code" um ponto um "flash" completou a cadeia em metade das execuções.
+Dois modelos GPT cinco ponto seis recusaram o mesmo conteúdo.
+Essa taxa descreve aquele experimento, e o resultado variou conforme o modelo usado.
+
+Segundo a Adversa, a triagem do "Git Hub" validou o comportamento, mas recusou sua classificação como vulnerabilidade.
+O motivo foi o envolvimento de conteúdo externo e de autonomia concedida pelo usuário.
+Os pesquisadores discordam dessa avaliação e dizem que a cadeia ainda funcionava em primeiro de outubro.
+O relato é uma demonstração dos pesquisadores, não estabelece a ocorrência de ataques contra usuários.
+
+Para reduzir o risco em agentes de terminal, vale limitar os segredos acessíveis e os destinos de rede permitidos.
+Também vale registrar as chamadas de ferramentas.
+Esse cuidado é especialmente importante quando um processo que lê páginas externas também consegue acessar credenciais de produção.
+A fonte é a pesquisa da Adversa.
+
+O Polars dois ponto zero adota streaming por padrão e começa a usar disco para aliviar a memória RAM.
+A biblioteca e motor de processamento de dados tabulares lançou a versão em seis de outubro.
+No Polars, um "LazyFrame" representa um plano de consulta.
+Esse plano é executado quando o programa pede a coleta do resultado, com a operação "collect".
+Agora, essa execução usa o motor de streaming por padrão.
+Ele permite processar os dados em etapas e reduzir a necessidade de manter tudo na memória.
+
+Também foi habilitado o recurso de transferir dados intermediários para o disco quando a memória fica pressionada.
+Nesta primeira versão, ele cobre ordenação, funções de janela e várias expressões.
+O suporte para junções de tabelas e agrupamentos ainda está no roteiro do projeto.
+
+A atualização pede atenção à ordem das linhas.
+Operações de junção e agrupamento, ou de transformação de colunas em linhas, podem entregar resultados em uma ordem diferente com o novo padrão.
+Quando essa ordem fizer parte do comportamento esperado, a orientação é ativar a opção de preservar a ordem nas operações correspondentes.
+Antes de atualizar os fluxos de processamento de dados, vale revisar testes que dependem da posição das linhas.
+A fonte é o anúncio do Polars dois ponto zero.
+
+E agora, os destaques rápidos de hoje.
+
+O Django corrigiu quatro problemas de segurança.
+As versões corrigidas do framework web de Python foram publicadas em seis de outubro.
+São a seis ponto um ponto dois, a seis ponto zero ponto nove e a cinco ponto dois ponto dezoito.
+Elas corrigem dois casos de negação de serviço, além de requisições externas induzidas por dados raster.
+O quarto problema é o abuso de permissões em formulários de conjuntos de registros.
+
+Esse último exige chaves primárias editáveis pelo formulário.
+Modelos com a chave padrão, chamada "BigAutoField", não são afetados por essa falha específica.
+Na parte espacial, valores raster em bytes agora precisam ser envolvidos no objeto de raster da biblioteca G D A L.
+Essa é uma mudança de compatibilidade.
+Atualize a linha usada pelo projeto e teste esses caminhos.
+A fonte é o aviso de segurança do Django.
+
+O Open S S H dez ponto seis corrige caminhos de transferência de arquivos e reduz o risco de vazamento pela compressão.
+Lançada em seis de outubro, a versão reforça a validação dos caminhos devolvidos pelo servidor em transferências S F T P.
+Isso impede determinadas gravações fora da pasta de destino durante cópias recursivas.
+
+A versão também desativa o dicionário de compressão L Z setenta e sete.
+A medida busca mitigar o vazamento de informações entre canais que compartilham o contexto de compressão de uma conexão S S H.
+Isso reduz a eficiência da compressão.
+O projeto recomenda comprimir no nível da aplicação quando possível.
+A fonte são as notas da versão dez ponto seis do Open S S H.
+
+O [K ER1 L] antecipou a versão oito ponto vinte e três ponto zero para quatorze de outubro.
+Daniel Stenberg anunciou nesta quarta-feira uma atualização com vinte e duas correções de segurança.
+Uma das falhas recebeu classificação de gravidade alta pelo projeto.
+Os detalhes permanecem sob embargo até o lançamento.
+Por isso, o aviso ainda não permite delimitar os cenários afetados.
+Para quem distribui software com a biblioteca do [K ER1 L], é hora de mapear dependências e preparar a atualização quando a correção chegar.
+A fonte é o anúncio de Daniel Stenberg, mantenedor do projeto.
+
+O "EmbeddingGemma" dois permite busca local entre diferentes tipos de conteúdo.
+O Google lançou o modelo em seis de outubro, com setecentos e quarenta milhões de parâmetros, sob a licença Apache dois ponto zero.
+Ele transforma texto, código, imagens, áudio e vídeo em representações numéricas comparáveis, chamadas embeddings.
+Isso permite procurar conteúdo por significado, inclusive cruzando esses formatos.
+
+Para aplicações apenas textuais, a arquitetura usa um componente de duzentos e setenta milhões de parâmetros.
+Os vetores podem ser reduzidos de setecentas e sessenta e oito para até cento e vinte e oito dimensões.
+Isso diminui o espaço do índice, mas a qualidade precisa ser avaliada nos dados da aplicação.
+A fonte é o anúncio do Google.
+
+O "Mistral Large" quatro chega em prévia por [EY1 P IY1 AY1], com pesos prometidos para o fim do mês.
+A Mistral abriu o acesso ao modelo multimodal em seis de outubro, pelo "Mistral Studio".
+A empresa descreve uma arquitetura de aproximadamente um trilhão de parâmetros, com quarenta e nove bilhões ativos.
+E promete liberar os pesos até o fim de outubro.
+Quem planeja hospedagem própria ainda depende dessa entrega.
+O acesso anunciado agora é à prévia hospedada.
+A fonte é o anúncio da Mistral.
+
+A A W S demonstrou consultas de agentes com as permissões de cada usuário.
+Um guia publicado em seis de outubro combina três serviços para aplicar as permissões da pessoa que fez a pergunta.
+São o "AgentCore", o Lambda e o "Lake Formation".
+A informação de identidade viaja nos cabeçalhos H T T P, fora do contexto do modelo.
+Ela é validada e trocada no servidor para executar a consulta com a identidade do usuário.
+Assim, valem as permissões de linhas e colunas já existentes no Lake Formation.
+O guia exige configuração explícita em cada etapa para preservar essa separação.
+A fonte é o blog de segurança da A W S.
+
+E o "Stack Overflow" divulgou um dado sobre a frequência de uso dos assistentes de inteligência artificial.
+Entre os respondentes que usam esses assistentes, setenta e três porcento relatam uso diário.
+Os resultados foram divulgados em seis de outubro.
+Eles descrevem a frequência de uso entre quem já utiliza assistentes ou agentes de programação com inteligência artificial.
+A pesquisa recebeu mais de trinta mil participantes ao longo de sete semanas.
+A fonte são os resultados apresentados pelo Stack Overflow.
+O percentual se refere a esse grupo de usuários dentro da amostra.
+Extrapolá-lo para todos os desenvolvedores mudaria o significado do resultado.
