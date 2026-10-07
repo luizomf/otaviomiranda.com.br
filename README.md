@@ -3,7 +3,7 @@
 Source code for the [otaviomiranda.com.br](https://otaviomiranda.com.br)
 website.
 
-This is an open lab. Read the code, open issues, submit posts.
+This is an open lab. Read the code, open issues, and submit posts.
 
 ---
 
