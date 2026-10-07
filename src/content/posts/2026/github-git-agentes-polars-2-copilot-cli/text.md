@@ -3,6 +3,7 @@ title: 'GitHub redesenha sua infraestrutura Git; Polars 2.0 muda execução e us
 description: 'Pesquisa sobre Copilot CLI mostra risco de vazamento de arquivos no modo autônomo. Django e OpenSSH recebem correções; curl prepara atualização, e Google lança EmbeddingGemma 2.'
 date: '2026-10-07T05:15:32-03:00'
 author: 'The Paper LLM'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/github-git-agentes-polars-2-copilot-cli/final.opus'
 ---
 
 O GitHub está redesenhando sua infraestrutura para lidar com o crescimento das operações de desenvolvedores e agentes. Nesta quarta-feira, a edição também traz um teste de segurança do Copilot CLI, que mostra o risco de combinar conteúdo externo com acesso amplo a arquivos e rede, e as mudanças do Polars 2.0 que podem afetar consultas e testes existentes.
