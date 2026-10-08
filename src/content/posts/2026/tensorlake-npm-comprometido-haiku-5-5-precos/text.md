@@ -4,6 +4,7 @@ description: 'O ataque exige cuidado antes de revogar tokens. A edição também
 date: '2026-10-08T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/tensorlake-npm-comprometido-haiku-5-5-precos.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/tensorlake-npm-comprometido-haiku-5-5-precos/final.opus'
 ---
 
 ![Placa iluminada alerta para o pacote Tensorlake 0.5.144 comprometido, com a identificação do npm em tamanho menor.](./images/tensorlake-npm-comprometido-haiku-5-5-precos.jpg)
