@@ -1,0 +1,166 @@
+Tensorlake zero ponto cinco ponto cento e quarenta e quatro distribui malware pelo N P M; Haiku cinco ponto cinco reduz preços.
+
+Uma versão comprometida do pacote "Tensorlake" colocou credenciais de desenvolvedores em risco.
+E incluiu um mecanismo que pode apagar arquivos depois da revogação de um token.
+Nesta quinta-feira, a edição também explica a redução de preços do Haiku cinco ponto cinco.
+E mostra como uma equipe preservou a ordem das mensagens no Kafka ao processar várias conversas em paralelo.
+
+O primeiro caso é o malware distribuído pelo próprio fluxo de publicação do Tensorlake.
+A "StepSecurity" e a "SafeDep" identificaram código malicioso na versão zero ponto cinco ponto cento e quarenta e quatro do pacote.
+Ela foi publicada no N P M, o registro de pacotes do ecossistema JavaScript.
+A publicação ocorreu em oito de outubro, à uma hora e doze minutos no horário universal.
+Em Brasília, eram dez da noite e doze minutos de quarta-feira.
+Segundo as análises, um script de instalação executa um programa que rouba credenciais do "Git Hub", do N P M e de provedores de nuvem.
+Além disso, o programa tenta se espalhar por outros pacotes e repositórios.
+O instalador pula a execução quando detecta determinados ambientes de integração contínua.
+As estações de desenvolvimento são o alvo destacado pelos pesquisadores.
+
+Os mantenedores confirmaram que o código entrou diretamente na branch principal por uma conta administradora.
+Depois, foi distribuído pelo próprio fluxo de lançamento.
+A publicação vinha acompanhada de uma atestação de procedência.
+Só que essa atestação documentava a origem de uma compilação cujo código já estava comprometido.
+O projeto integrou a reversão e informou que o N P M removeu a versão afetada do Tensorlake.
+Na mesma resposta, ainda apontava seis pacotes nativos da família, com a mesma versão, pendentes de retirada.
+
+A ordem da resposta importa.
+Os pesquisadores descrevem um serviço que monitora o token roubado do "Git Hub".
+Esse serviço é capaz de apagar o diretório pessoal quando o token deixa de funcionar.
+A SafeDep localizou sua ativação no caminho em que a checagem de organizações da conta devolve uma lista vazia.
+Para uma máquina possivelmente afetada, a orientação é preservar os dados e remover esse monitor antes de revogar o token.
+Em seguida, trocar as demais credenciais acessíveis.
+
+Confira os arquivos que registram as dependências instaladas e bloqueie a versão zero ponto cinco ponto cento e quarenta e quatro.
+A investigação também precisa alcançar as configurações do "Claude Code" e do V S Code.
+O malware tenta deixar mecanismos de execução nesses locais.
+Trocar só a dependência deixa esses possíveis pontos de persistência sem tratamento.
+Se a limpeza não puder ser assegurada, a StepSecurity recomenda reinstalar o ambiente.
+As fontes deste caso são as análises da StepSecurity e da SafeDep, além da reversão integrada pelos mantenedores.
+
+Agora, os preços do Claude Haiku cinco ponto cinco.
+A Anthropic lançou o modelo em sete de outubro, com foco em tarefas curtas e frequentes.
+Entre os exemplos estão classificação, resumos e trabalho de subagentes, que ficam encarregados de partes de uma tarefa maior.
+A A W S também anunciou sua disponibilidade no "Amazon Bedrock" naquela data.
+
+Na tabela da Anthropic, há duas faixas de preço, separadas pelo tamanho do prompt.
+Para prompts de até cem mil tokens, cada milhão de tokens de entrada custa dez centavos de dólar.
+Cada milhão de tokens de saída custa cinquenta centavos de dólar.
+Acima de cem mil tokens no prompt, o preço de entrada passa a cinquenta centavos de dólar por milhão.
+E o de saída passa a dois dólares e cinquenta centavos por milhão.
+Ou seja, as duas tarifas ficam cinco vezes maiores.
+Para comparação, a mesma tabela lista o Haiku quatro ponto cinco a um dólar por milhão de tokens de entrada.
+Na saída, são cinco dólares por milhão.
+
+Tokens são as unidades em que o modelo divide o conteúdo.
+Enviar muitos arquivos de um repositório pode colocar uma tarefa na faixa mais cara.
+A empresa também informa que o novo tokenizador usa um pouco mais de tokens por tarefa que o do Haiku quatro ponto cinco.
+Por isso, reduzir a tarifa não significa reduzir automaticamente a conta na mesma proporção.
+Vale medir gasto total, tempo de resposta e acertos com exemplos reais da aplicação.
+
+O modelo oferece ajuste de esforço de raciocínio.
+A própria Anthropic mantém Sonnet cinco ponto cinco e Opus cinco ponto cinco como escolhas melhores para programação complexa com agentes.
+Ao Haiku, reserva o foco em tarefas mais delimitadas.
+As fontes são a Anthropic, para preços e condições, e o anúncio de disponibilidade da A W S.
+
+A próxima história é sobre preservar a ordem das mensagens no Kafka, inclusive durante novas tentativas.
+Em um relato publicado em sete de outubro, "Joshua Oluikpe" apresentou um fluxo de mensagens feito em Go para uma plataforma de inteligência artificial conversacional.
+O Kafka armazena e transmite eventos, mantendo a ordem dentro de cada partição, uma subdivisão desse fluxo.
+Mas, quando a aplicação distribui o processamento entre várias tarefas concorrentes, precisa preservar a sequência que importa para cada conversa.
+
+Na implementação descrita, mensagens da mesma sessão vão para uma goroutine, uma tarefa leve de execução do Go.
+Ela processa uma mensagem por vez.
+Se houver uma falha temporária, repete aquela mensagem antes de avançar.
+Enquanto isso, outras sessões continuam em paralelo.
+Assim, uma segunda instrução rápida não ultrapassa a primeira enquanto ela aguarda uma nova tentativa.
+
+A confirmação de progresso também precisa respeitar as lacunas.
+O consumidor só avança o ponto de retomada até uma sequência contínua de mensagens concluídas.
+Depois de uma queda, mensagens posteriores podem ser repetidas.
+Por isso, os serviços que recebem esse trabalho precisam de idempotência.
+Ou seja, precisam evitar repetir o efeito de uma operação que já foi aplicada.
+
+Há uma escolha operacional importante no relato.
+O sistema pode avançar sobre trabalho permanentemente travado para liberar a partição, sacrificando a entrega daquele evento.
+Essa situação precisa ser tratada como falha e acompanhada, inclusive na fila de mensagens problemáticas.
+A estratégia de recuperação também define quando a aplicação aceita deixar trabalho para trás para continuar funcionando.
+A fonte é o artigo de Joshua Oluikpe na InfoQ.
+
+Vamos aos destaques rápidos de hoje.
+O "LMCache" tem um alerta de execução remota no modo multiprocesso exposto à rede.
+A ferramenta mantém cache para a execução de modelos de inteligência artificial.
+A JFrog publicou o aviso em sete de outubro.
+O problema é que dados recebidos sem autenticação chegam ao desserializador pickle.
+Ao reconstruir objetos Python, ele pode executar código.
+
+O risco remoto exige acesso à porta de comunicação, e o endereço padrão é local.
+Já o uso dentro do processo do servidor de modelos v L L M não abre essa porta.
+O aviso de sete de outubro ainda não identificava uma versão corrigida.
+A orientação é restringir o acesso e evitar expor esse transporte a redes não confiáveis.
+As fontes são o aviso da JFrog e o código do desserializador na versão zero ponto cinco ponto cinco.
+
+A SANS observou tentativas de explorar uma falha em produtos Atlassian.
+É a falha de acesso a arquivos já coberta por aqui.
+Ela permite acessar, sem autenticação, arquivos específicos dentro do diretório da aplicação web.
+Isso inclui dados sensíveis armazenados ali.
+O problema afeta versões de produtos administrados pelo próprio cliente.
+Entre eles estão Jira Software, Jira Service Management, Confluence e Bitbucket, nas respectivas edições "Data Center".
+
+No relato de sete de outubro, o "Internet Storm Center" informa tentativas recebidas desde o dia seis em seu honeypot.
+Esse é um sistema usado para observar ataques.
+A observação comprova tentativas naquele sensor, sem demonstrar comprometimento de instalações de clientes.
+Quem administra versões afetadas deve aplicar as correções e investigar sinais de comprometimento conforme o aviso da Atlassian.
+Segundo a empresa, os produtos Atlassian Cloud afetados já foram corrigidos e dispensam ação dos clientes.
+As fontes são a observação do Internet Storm Center, da SANS, e o aviso da Atlassian.
+
+A A W S demonstrou uma forma de remediar incidentes com aprovação humana e retomada do fluxo.
+O guia de sete de outubro combina "EventBridge", Bedrock e "Lambda Durable Functions".
+São serviços para encaminhar eventos, acessar modelos de inteligência artificial e executar funções com estado salvo.
+O modelo escolhe ferramentas de uma lista permitida.
+As consultas rodam automaticamente, mas alterações na infraestrutura suspendem o fluxo até a aprovação humana.
+O estado salvo permite retomar a execução depois da espera.
+
+A A W S orienta revisar os parâmetros completos da chamada antes de aprová-la.
+Tanto a investigação quanto a solução proposta são geradas por inteligência artificial.
+A fonte é a arquitetura de referência publicada pela A W S.
+
+O Node ponto J S vinte e seis ponto onze adicionou controles de processo e recebeu uma correção no mesmo dia.
+A versão vinte e seis ponto onze ponto zero, de sete de outubro, acrescentou uma opção para limitar o tempo de execução do processo.
+Também tornou estáveis os controles de referência que influenciam sua permanência em execução.
+E adicionou recursos para capturar o estado de histogramas e calcular diferenças entre eles, voltados à observabilidade.
+
+Ainda no dia sete, saiu a versão vinte e seis ponto onze ponto um.
+Ela reverteu três mudanças ligadas à construção da documentação.
+São lançamentos da linha "Current".
+Quem testa as novidades já deve considerar essa correção posterior.
+As fontes são as notas oficiais das duas versões do Node ponto J S.
+
+O Podman prepara uma semana de testes do monitor de contêineres reescrito em Rust.
+De doze a dezoito de outubro, as equipes de Podman e de qualidade do Fedora pedem testes do conmon versão três.
+Esse processo acompanha o contêiner, coleta logs e registra seu estado de saída mesmo depois que o comando Podman termina.
+A chamada, publicada no dia sete, destaca terminais interativos, reinícios e execução sem privilégios de administrador.
+A recomendação é usar uma máquina de testes ou uma máquina virtual sem dados importantes.
+A fonte é a Fedora Magazine.
+
+O Google relatou a emissão indevida de certificados após ataques a registros de domínios nacionais.
+No comunicado de seis de outubro, a empresa diz que invasores alteraram o D N S em registros de três sufixos nacionais.
+Com isso, obtiveram certificados para domínios de várias organizações.
+O Chrome bloqueou os certificados identificados.
+
+Para responsáveis por domínios, a orientação é monitorar os registros públicos de "Certificate Transparency".
+E configurar regras restritivas de emissão de certificados, chamadas C A A.
+Essas regras ajudam depois da recuperação do D N S.
+Durante um sequestro ativo, o invasor pode controlar os próprios registros.
+A fonte é a equipe de segurança do Chrome.
+
+Também no Chrome, foi anunciado o suporte a JPEG X L a partir da versão cento e cinquenta e cinco.
+O anúncio de seis de outubro apresenta um decodificador em Rust, usado para ler imagens desse formato.
+A equipe destaca aplicações com alta fidelidade, compressão sem perda e carregamento progressivo.
+Nesse carregamento, a imagem ganha detalhes durante a transferência.
+Para escolher o formato de uma aplicação, o Google recomenda testar JPEG X L e AVIF.
+A fonte é o "Chrome for Developers".
+
+Para fechar, o M I T comunicou a morte de Margaret Hamilton, aos noventa anos.
+A nota publicada em sete de outubro informa que ela morreu em trinta de setembro.
+Hamilton liderou a equipe de software de voo do programa Apollo no M I T.
+E ajudou a estabelecer a engenharia de software como disciplina.
+O obituário do M I T News destaca seu trabalho em prevenção de erros e em sistemas que priorizavam tarefas essenciais.
+São contribuições que continuam relevantes para quem constrói software confiável.
