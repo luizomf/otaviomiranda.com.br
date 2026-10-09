@@ -1,0 +1,155 @@
+NetScaler corrige falha crítica na autenticação por SAML; Hetzner explica limite de conexões na nuvem.
+
+Uma falha crítica no "NetScaler" exige conferir a versão instalada e seu papel na autenticação de usuários.
+Nesta sexta-feira, a edição também traz uma explicação da "Hetzner" para o limite de conexões de seus servidores.
+E um teste de aplicações Kanban relaciona o peso da página ao tempo de carregamento.
+
+O primeiro assunto é a correção do NetScaler, com risco de execução de código em configurações SAML.
+A Citrix publicou o boletim em oito de outubro.
+Ele descreve uma falha de memória no NetScaler A D C e no NetScaler Gateway, produtos usados para entregar aplicações e oferecer acesso remoto.
+Segundo o fabricante, a falha pode causar execução remota de código ou indisponibilidade.
+Ela recebeu nota nove vírgula cinco na versão quatro ponto zero do C V S S, uma escala de gravidade técnica que vai até dez.
+
+A exposição depende tanto da versão instalada quanto da configuração de SAML, protocolo usado para integrar a autenticação entre sistemas.
+Nesse processo, o equipamento pode ter dois papéis.
+Como provedor de identidade, ele autentica o usuário.
+Como provedor de serviço, recebe a confirmação dessa autenticação.
+O boletim distingue faixas de versões nas linhas quatorze ponto um e treze ponto um.
+Nas duas faixas intermediárias indicadas no aviso, a condição de exposição é funcionar como provedor de identidade.
+Já nas versões anteriores ao início dessas faixas, os dois papéis podem ser afetados.
+As linhas especiais, FIPS e N D C P P, têm condições próprias detalhadas no aviso.
+
+A orientação é atualizar os equipamentos afetados para os novos builds corrigidos ou versões posteriores, conforme a linha do produto.
+Os números completos das faixas afetadas e dos builds de correção estão no artigo escrito, para conferir junto com o boletim.
+Instalações de "Secure Private Access Hybrid" que usam NetScaler também precisam dessa verificação.
+Esta é uma nova vulnerabilidade, com novos builds corrigidos, diferente da falha coberta nesta semana.
+Para quem administra esses equipamentos, a tarefa imediata é cruzar versão, papel SAML e linha do produto com o boletim, e aplicar a atualização indicada.
+A fonte é o boletim de segurança da Citrix.
+
+Agora, a Hetzner detalha a rede de suas máquinas virtuais e o teto de oitenta mil conexões.
+Em uma publicação de oito de outubro, a empresa explicou sua arquitetura de rede baseada em "Open vSwitch".
+Esse comutador virtual encaminha pacotes no host onde as máquinas virtuais rodam.
+Um controlador próprio, escrito em Python, configura as regras de tráfego.
+Redes privadas e firewalls são implementados perto das máquinas dos clientes, enquanto a rede física conecta os hosts.
+
+O detalhe operacional está no rastreamento de conexões do Linux, usado pelo firewall com estado.
+Ele mantém uma tabela compartilhada no host.
+Para impedir que uma máquina virtual consuma esse recurso inteiro, a Hetzner limita cada servidor de nuvem a oitenta mil conexões ativas simultâneas.
+Ao atingir esse teto, novas conexões deixam de abrir até que alguma existente seja encerrada.
+
+Isso ajuda a entender uma classe de problema que um gráfico de C P U sozinho não explica.
+Conexões também ocupam recursos finitos.
+Em aplicações com muitas sessões persistentes ou muitas conexões a serviços externos, vale investigar quantas ficam abertas e como são reutilizadas.
+A publicação descreve a arquitetura existente e suas limitações.
+A empresa informa que vem construindo outra implementação, mas deixará os detalhes para a continuação da série.
+A fonte é a visão técnica da rede de nuvem publicada pela própria Hetzner.
+
+No próximo assunto, o Kanban de Michael Bolli supera o PLANKA no carregamento em um teste com rede lenta.
+Kanban, aqui, é uma aplicação de cartões organizados em colunas.
+Bolli publicou a comparação em oito de outubro, colocando sua implementação ao lado do PLANKA Community, versão dois ponto dois ponto um.
+A aplicação do autor usa Go, SQLite e Datastar para atualizar o H T M L recebido do servidor.
+O PLANKA usa React e uma arquitetura de aplicação de página única.
+
+Na primeira visita a um quadro de duzentos cartões, sem cache, a aplicação de Bolli transferiu cinquenta e oito quilobytes.
+No PLANKA, foram cerca de dois vírgula seis megabytes.
+O teste também mediu o tempo até aparecer o maior elemento de conteúdo da tela, uma métrica chamada L C P.
+O resultado foi de zero vírgula seis segundo na aplicação do autor, contra quinze vírgula quatro segundos no PLANKA.
+Esses valores são medianas de três execuções por aplicação, feitas pelo próprio desenvolvedor.
+O navegador tinha a C P U desacelerada em quatro vezes.
+A rede tinha latência de ida e volta de cento e cinquenta milissegundos, com download de um vírgula seis megabit por segundo.
+
+A diferença tem uma explicação concreta nesse teste.
+O PLANKA baixa o código da aplicação antes de pedir os dados do quadro.
+A versão de Bolli já envia o quadro em H T M L na primeira resposta.
+Nessa conexão lenta, a quantidade de JavaScript transferida pesa no tempo de espera.
+
+Mas o recorte importa.
+O PLANKA tem mais recursos, como anexos, notificações e campos personalizados, cujo custo também entra no carregamento.
+A edição Pro e uma instalação otimizada com cache e C D N ficaram fora do teste.
+E, na inclusão de comentários, o PLANKA foi mais rápido, inclusive para receber a confirmação do servidor.
+
+Para quem está construindo uma aplicação colaborativa, a parte útil está nas garantias por trás da interface.
+Na implementação de Bolli, as gravações passam por uma fila.
+Cada ação leva um identificador, para que uma tentativa repetida após um erro de rede seja aplicada uma única vez.
+A transação verifica se outro usuário já moveu o cartão.
+As páginas recebem atualizações por uma conexão de eventos enviados pelo servidor.
+Clientes lentos recebem o estado mais recente, sem acumular uma fila interminável de telas antigas.
+
+Para quem está escolhendo uma arquitetura, o experimento oferece critérios de comparação.
+Vale medir o tempo até ver o conteúdo, a confirmação das ações e o comportamento diante de falhas de rede.
+Essa medição precisa incluir as funcionalidades exigidas pelo produto.
+A fonte é a comparação publicada por Michael Bolli, com sua metodologia e suas limitações.
+
+Vamos aos destaques rápidos de hoje.
+
+O Mellum dois ponto um chega com novo pós-treinamento para agentes de programação.
+A JetBrains lançou a versão em oito de outubro, com doze bilhões de parâmetros totais e dois vírgula cinco bilhões ativos por token.
+A licença é Apache dois ponto zero.
+Segundo a empresa, o trabalho se concentrou em aprendizado por reforço em ambientes de execução.
+O objetivo é explorar repositórios, editar arquivos e verificar mudanças.
+Os pesos estão no "Hugging Face".
+As versões G G U F e o componente de previsão de múltiplos tokens para V L L M ainda eram anunciados como futuros.
+A fonte é o anúncio da JetBrains.
+
+O Jujutsu, na versão zero ponto quarenta e seis ponto zero, integra espaços de trabalho adicionais às worktrees do Git.
+A versão foi publicada em sete de outubro.
+Ela permite combinar o controle de versão do Jujutsu com diretórios de trabalho reconhecidos pelo Git, também fora do espaço principal.
+As operações de desfazer e refazer passam a recusar, por padrão, operações realizadas em outro espaço de trabalho.
+É uma proteção útil quando várias mudanças estão em andamento.
+O requisito mínimo de Git subiu para dois ponto quarenta e dois ponto zero.
+A fonte são as notas da versão do Jujutsu.
+
+Um artigo na C N C F propõe que agentes sugiram mudanças de infraestrutura, com a implantação sob controle separado.
+O texto é de Mauro Morales, embaixador da C N C F e mantenedor do Kairos, e foi publicado em oito de outubro.
+Ele defende que agentes proponham alterações versionadas na imagem do sistema operacional.
+Revisão, testes, construção, assinatura e implantação ficam em um fluxo controlado.
+Essa separação depende de permissões reais.
+A identidade que propõe a mudança não pode também aprová-la, alterar a esteira ou forçar sua implantação.
+E a proteção da imagem-base precisa vir acompanhada de isolamento e controle das áreas em que o agente pode escrever.
+A fonte é a proposta arquitetural de Morales, publicada na C N C F.
+
+Uma pesquisa encontra perda de regras quando agentes escolhem entre skills parecidas.
+Skills são pacotes de instruções que ensinam procedimentos a um agente.
+No estudo preliminar publicado em oito de outubro, pesquisadores testaram trezentos e doze pares no "Claude Code", usando três modelos.
+Instalar uma skill semelhante reduziu em dezenove vírgula nove pontos percentuais o uso da skill original.
+Isso aconteceu sem queda detectável na conclusão das tarefas.
+Já o cumprimento de requisitos exclusivos da original caiu cinco vírgula seis pontos percentuais.
+Parte das execuções usou a alternativa; outra parte deixou de usar ambas.
+Assim, concluir a tarefa podia esconder o descumprimento de regras, como uma proibição de mexer no Git.
+A fonte é o estudo preliminar, com sua metodologia, disponível no arXiv.
+
+Outra pesquisa mostra que os nomes das opções podem alterar decisões de autorização.
+O estudo preliminar, também de oito de outubro, avalia modelos que escolhem entre opções como permitir e bloquear.
+Os testes eram sintéticos e partiram de decisões inicialmente corretas.
+Alterar o nome da opção permissiva elevou a autorização de ações proibidas para uma faixa de noventa e três a cem porcento.
+Isso ocorreu nos quatro modelos que recebiam esse rótulo como entrada.
+O ataque pressupõe que o adversário consiga influenciar os nomes das opções.
+Os autores recomendam regras determinísticas quando a política puder ser expressa em campos verificáveis.
+Os resultados se referem às implementações abertas testadas.
+A fonte é a pesquisa sobre modelos de decisão, disponível no arXiv.
+
+O OpenTelemetry publicou um guia para exportar telemetria ao destino escolhido pelo cliente.
+O texto de oito de outubro explica como enviar logs, métricas e rastros de requisições pelo protocolo O T L P.
+A proposta é preservar o contexto necessário à investigação.
+Para plataformas com vários clientes, o guia compara duas opções.
+Uma delas é usar um coletor dedicado por cliente, o que favorece o isolamento.
+A outra é usar um coletor compartilhado, com rotas separadas, reduzindo a quantidade de infraestrutura para operar.
+É uma decisão de arquitetura para quem oferece software como serviço e precisa permitir integração com ferramentas externas de monitoramento.
+A fonte é o guia do OpenTelemetry.
+
+A Microsoft orienta testar o ecossistema de certificados pós-quânticos fora de produção.
+Em oito de outubro, a empresa recomendou inventariar os sistemas que emitem, guardam e validam certificados.
+Também recomendou testar a compatibilidade e o efeito de cadeias maiores sobre o desempenho e os limites de processamento.
+Seu piloto de T L S pós-quântico começou em agosto, para autoridades certificadoras elegíveis.
+Ele emite certificados sem confiança pública, destinados a ambientes fechados de teste.
+A preparação envolve aplicações, dispositivos e processos de renovação.
+A fonte é a orientação publicada pela Microsoft.
+
+Por fim, o "Let's Encrypt" marcou a redução da validade padrão de seus certificados para sessenta e quatro dias.
+O anúncio é de sete de outubro, e a mudança está marcada para dez de fevereiro de 2027.
+Os testes no ambiente de homologação começam em quatorze de outubro de 2026.
+Certificados válidos não serão revogados por causa da transição.
+Quem automatiza a renovação deve conferir se o cliente oferece suporte ao "ACME Renewal Info", mecanismo que informa quando renovar.
+Também precisa revisar agendamentos presos a números fixos de dias.
+A autoridade recomenda automatizar a implantação, a recarga do serviço e os alertas de falha na renovação.
+A fonte é o cronograma publicado pelo Let's Encrypt.
