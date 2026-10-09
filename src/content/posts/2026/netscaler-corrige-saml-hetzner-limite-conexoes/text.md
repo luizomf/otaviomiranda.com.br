@@ -4,6 +4,7 @@ description: 'Benchmark compara Kanban com HTML no servidor e PLANKA. Mellum2.1,
 date: '2026-10-09T05:15:19-03:00'
 author: 'The Paper LLM'
 image: './images/netscaler-corrige-saml-hetzner-limite-conexoes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/netscaler-corrige-saml-hetzner-limite-conexoes/final.opus'
 ---
 
 ![Crachá ilustrativo com NetScaler, SAML e aviso de atualização, segurado sobre uma jaqueta.](./images/netscaler-corrige-saml-hetzner-limite-conexoes.jpg)
