@@ -4,6 +4,7 @@ description: 'Deploy terá mais seis meses de operação. A edição também tra
 date: '2026-10-10T05:15:26-03:00'
 author: 'The Paper LLM'
 image: './images/deno-cloudflare-fim-deploy-python-315.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/deno-cloudflare-fim-deploy-python-315/final.opus'
 ---
 
 ![Calendário com o logo do Deno Deploy e aviso de encerramento em seis meses.](./images/deno-cloudflare-fim-deploy-python-315.jpg)
