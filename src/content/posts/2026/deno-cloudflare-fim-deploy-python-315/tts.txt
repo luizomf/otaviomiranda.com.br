@@ -1,0 +1,144 @@
+Deno vai para a Cloudflare e anuncia fim do Deploy; Python três ponto quinze chega estável.
+
+Quem usa Deno Deploy tem uma migração para planejar.
+O serviço será desligado em seis meses, após a ida da equipe para a Cloudflare.
+A edição deste sábado também traz uma nova onda de roubo de credenciais pelo "Git Hub Actions".
+Tem ainda cuidados para adotar o Python três ponto quinze e novidades para testar código e investigar aplicações em produção.
+
+A equipe do Deno vai para a Cloudflare, e o Deploy fecha em seis meses.
+Ryan Dahl anunciou em nove de outubro que toda a equipe do Deno está se juntando à Cloudflare.
+O Deno Deploy, serviço de hospedagem de aplicações, continuará operando por seis meses a partir do anúncio.
+Clientes pagantes terão apoio de migração para "Cloudflare Workers", a plataforma de execução de código da empresa.
+
+O ambiente Deno, que executa JavaScript e TypeScript, terá mais um ano de versões mensais com correções de bugs e segurança.
+Depois desse período, a equipe encerrará seu desenvolvimento.
+O código continuará aberto, disponível para outros mantenedores.
+Já o J S R, registro de pacotes, seguirá funcionando, com sua infraestrutura transferida para a Cloudflare.
+
+O novo trabalho reúne dois projetos.
+Um é o "workerd", o ambiente de execução aberto do Cloudflare Workers.
+O outro é o "celld", voltado a executar esse modelo em infraestrutura própria.
+A meta é facilitar também a operação distribuída de "Durable Objects".
+São unidades de execução com estado persistente.
+Uma delas pode representar, por exemplo, uma sala de chat com seu banco de dados e suas conexões.
+
+A Cloudflare reconhece que o suporte atual a Durable Objects no workerd aberto está limitado a uma única instância.
+A integração pretende superar essa restrição, mas ainda é um plano de desenvolvimento.
+Para quem depende do Deploy, a ação imediata é inventariar as aplicações e testar alternativas de hospedagem dentro do prazo anunciado.
+As fontes são o anúncio do Deno e o plano conjunto de Ryan Dahl e Kenton Varda, publicado pela Cloudflare.
+
+Agora, segurança nas automações de repositórios.
+O "GhostAction" voltou com busca de credenciais no histórico Git, segundo a "StepSecurity".
+A empresa publicou em nove de outubro uma investigação sobre ataques do dia anterior.
+Segundo o relato, duas contas de mantenedores comprometidas foram usadas para inserir rotinas maliciosas em trezentos e quarenta e cinco repositórios.
+Esse total inclui forks, que são cópias de outros projetos.
+Os arquivos se apresentavam como uma auditoria de segurança.
+
+Essas rotinas são os chamados workflows do "Git Hub Actions", usados para tarefas como testar e publicar software.
+Nesse ataque, o código buscava segredos referenciados na configuração.
+Também procurava padrões de credenciais nos arquivos e no histórico Git.
+Apagar uma chave do código atual não a invalida no serviço que a emitiu.
+Se ela permanecer no histórico e continuar ativa, ainda poderá ser usada.
+
+Em uma execução analisada, o servidor do atacante confirmou o recebimento da requisição quatro segundos após o início da rotina.
+Esse dado é da StepSecurity.
+O relatório não estabelece roubo bem-sucedido em todos os trezentos e quarenta e cinco repositórios.
+A varredura tinha limites de volume e erros em algumas expressões de busca.
+
+A revisão dos mantenedores deve começar por alterações não autorizadas na pasta de configuração dos workflows e pelos registros das execuções.
+É preciso revogar a credencial comprometida que permitiu alterar o repositório.
+Havendo exposição, também é preciso revogar e substituir os segredos afetados, inclusive os ainda válidos encontrados no histórico.
+Revisar mudanças nessas rotinas e exigir aprovação para acesso a segredos de ambientes acrescenta barreiras a esse tipo de ataque.
+As fontes são a investigação da StepSecurity e as orientações de segurança do "Git Hub Actions".
+
+O Python três ponto quinze chegou estável, com importações adiadas e U T F oito por padrão.
+O lançamento foi em nove de outubro.
+Duas mudanças merecem atenção na migração.
+A primeira é a possibilidade de adiar importações explicitamente.
+A segunda é o uso de U T F oito como codificação padrão nas operações de entrada e saída que não declaram uma codificação.
+
+Com o recurso chamado "lazy import", o carregamento do módulo fica para o primeiro uso do nome importado.
+Isso pode reduzir o tempo de partida quando o programa usa apenas parte das dependências que costuma carregar.
+Mas também adia os efeitos dessa importação.
+Um módulo que registra plugins ao carregar pode deixar de fazer esse registro no momento esperado.
+A adoção é explícita: importações comuns mantêm o comportamento habitual no modo padrão.
+
+O [L AY1 F G AA2 R D], analisador estático da Meta, ajuda a localizar padrões incompatíveis com esse adiamento.
+A ferramenta examina o código sem executá-lo, está em beta e adota uma avaliação conservadora.
+Quando não consegue determinar se um módulo é seguro para esse uso, marca o módulo como incompatível.
+
+Já a mudança para U T F oito exige cuidado com arquivos legados.
+Ao ler dados em outra codificação, declare essa codificação explicitamente e teste arquivos reais do projeto.
+A versão também inclui o "Tachyon", apresentado aqui durante o pré-lançamento.
+Ele coleta amostras da execução para investigar onde o programa gasta tempo.
+
+Essa chegada também afeta quem usa o U V, gerenciador de projetos e instalações Python.
+Na versão zero ponto treze ponto zero, downloads sem versão solicitada ou fixada passam a escolher Python três ponto quinze.
+Instalações compatíveis já presentes continuam sendo aproveitadas.
+Fixar a versão do projeto evita diferenças inesperadas de interpretador ao preparar uma nova máquina.
+As fontes são as novidades oficiais do Python três ponto quinze, o projeto do analisador da Meta e as notas dessa versão do U V.
+
+Vamos aos destaques rápidos para hoje.
+O Bun um ponto quatro ponto três ganhou verificação de tipos TypeScript.
+A versão de dez de outubro adiciona o comando "bun check".
+Ele lê o arquivo de configuração do TypeScript sem exigir que o pacote TypeScript esteja instalado.
+Quem usa Bun para executar e empacotar projetos também pode ativar essa checagem ao executar, testar ou gerar a versão empacotada.
+Erros de tipos interrompem a operação antes de ela começar.
+O verificador não gera JavaScript nem arquivos de declaração.
+E o servidor de linguagem do editor continua sendo uma ferramenta separada.
+A fonte é o anúncio do Bun um ponto quatro ponto três.
+
+No Postgri [EH1 S] [K Y UW1] [EH1 L], pedir o retorno de uma inserção pode explicar um bloqueio pela segurança por linha.
+Em testes publicados em dez de outubro, Chris van Eijk mostrou o caso na versão dezessete ponto onze.
+As políticas de segurança por linha restringem quais registros um usuário pode acessar.
+Uma delas pode permitir inserir uma linha sem permitir sua leitura.
+Ao acrescentar a cláusula "RETURNING" para receber o identificador gravado, a instrução precisa também satisfazer a política de leitura.
+Isso importa ao investigar por que uma inserção manual funciona, mas a feita pela aplicação não.
+Reproduza a instrução exata com o mesmo usuário do banco e o mesmo contexto da transação.
+As fontes são o experimento da "Now-Next" e a documentação da versão dezessete do banco.
+
+Ainda em bancos de dados, o "StackGres" detalhou os roteadores de consultas entregues na versão um ponto dezenove.
+A plataforma opera Postgri [EH1 S] [K Y UW1] [EH1 L] no Kubernetes.
+Em nove de outubro, apresentou outra opção para aliviar o coordenador do Citus, que distribui dados entre máquinas.
+Os roteadores recebem conexões, planejam consultas e as encaminham aos nós que guardam as partições.
+Essa camada pode crescer separadamente do armazenamento.
+O coordenador continua cuidando das alterações de estrutura e topologia.
+Os roteadores também podem manter cópias de tabelas de referência.
+A fonte é a apresentação da arquitetura dos "Query Routers" no StackGres.
+
+A Cloudflare liberou perfis de C P U e memória de Workers e Durable Objects em produção.
+Desde o anúncio de nove de outubro, é possível solicitar a captura pelo painel ou pela linha de comando.
+Depois, dá para examinar um "flamegraph", gráfico que relaciona funções ao consumo observado.
+A captura depende de uma instância ativa com tráfego.
+Para memória, o perfil registra alocações durante a janela escolhida, podendo deixar de fora as feitas na inicialização.
+Isso ajuda a localizar funções caras durante o uso real da aplicação.
+A fonte é o anúncio da Cloudflare.
+
+O "Prime Agent" lançou uma reescrita em Rust e suporte nativo a Windows em beta.
+A "Prime Intellect" anunciou em nove de outubro a nova implementação de seu agente de programação.
+Segundo a equipe, os testes compararam telas do terminal, sessões, requisições ao modelo e mensagens do protocolo com a versão TypeScript.
+O uso interno ainda revelou bugs e comportamentos ausentes fora da cobertura dos testes.
+Foi preciso fazer revisão e ajustes orientados por pessoas.
+O relato oferece um exemplo de validação para migrações assistidas por agentes.
+A fonte é o relato da Prime Intellect.
+
+O instituto Ai2 relatou menos espera por processadores gráficos após mudar sua política de compartilhamento.
+O texto é de nove de outubro e trata de uma implantação iniciada em julho.
+O instituto descreve orçamentos de tempo por equipe e períodos mínimos de execução protegida.
+Segundo suas medições, o limite de espera que abrange noventa porcento dos trabalhos de depuração caiu de duas horas para trinta segundos.
+A amostra anterior era menor e mais variável.
+A ocupação permaneceu em noventa e oito porcento.
+Esse número representa a proporção do tempo disponível reservado a trabalhos.
+Após a janela protegida, sessões interativas podem ser interrompidas e perder o estado mantido em memória.
+Esse é um custo da redistribuição dos recursos.
+A fonte é o relato da engenharia de infraestrutura do Ai2, publicado no "Hugging Face".
+
+Por fim, o SQLite três ponto cinquenta e quatro ponto zero encerrou o suporte ao Windows X P e alterou comandos do terminal.
+Lançada em nove de outubro, a versão passa a exigir Windows Vista ou posterior.
+Essa mudança de plataforma não afeta Linux, macOS e outros sistemas Unix.
+A análise do espaço ocupado no banco passa a ser feita por um comando do próprio terminal de [EH1 S] [K Y UW1] [EH1 L].
+Ele substitui o utilitário separado de análise, agora marcado como obsoleto.
+Também é preciso revisar scripts que usam linhas especiais, em vez da terminação usual, para encerrar comandos nesse terminal.
+Essas formas alternativas deixam de estar disponíveis na compilação padrão.
+Os comandos e as formas exatas que exigem revisão estão no artigo escrito.
+A fonte são as notas oficiais do SQLite três ponto cinquenta e quatro ponto zero.
