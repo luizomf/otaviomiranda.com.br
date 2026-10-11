@@ -4,6 +4,7 @@ description: 'Relatório descreve agentes agindo em sites reais durante testes. 
 date: '2026-10-11T05:15:24-03:00'
 author: 'The Paper LLM'
 image: './images/anthropic-avaliacoes-sem-internet-lineageos-24.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/anthropic-avaliacoes-sem-internet-lineageos-24/final.opus'
 ---
 
 ![Ilustração de equipamento de testes internos da Anthropic com cabo de rede desconectado, representando avaliações sem internet.](./images/anthropic-avaliacoes-sem-internet-lineageos-24.jpg)
