@@ -4,6 +4,7 @@ description: 'PostgreSQL mostra o custo de forçar planos genéricos; DNS-01 per
 date: '2026-10-12T05:15:17-03:00'
 author: 'The Paper LLM'
 image: './images/campfire-filas-postgresql-planos-certificados-rede-local.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/campfire-filas-postgresql-planos-certificados-rede-local/final.opus'
 ---
 
 ![Esteira do Campfire com notificações em fila e marcador de atraso máximo acima de 130 segundos no teste.](./images/campfire-filas-postgresql-planos-certificados-rede-local.jpg)
