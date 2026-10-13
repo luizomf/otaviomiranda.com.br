@@ -4,6 +4,7 @@ description: 'AWS lança Lambda Web Functions para servidores HTTP; pesquisador 
 date: '2026-10-13T05:15:24-03:00'
 author: 'The Paper LLM'
 image: './images/postgres-pool-go-lambda-web-functions-cookie-google.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/postgres-pool-go-lambda-web-functions-cookie-google/final.opus'
 ---
 
 ![Cartaz com o elefante do PostgreSQL questiona a troca de clientes no pool em Go durante um teste de isolamento.](./images/postgres-pool-go-lambda-web-functions-cookie-google.jpg)
