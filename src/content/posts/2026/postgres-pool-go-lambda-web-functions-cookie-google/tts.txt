@@ -1,0 +1,162 @@
+Teste em Go mostra como o uso do pool quebra o isolamento entre clientes no Postgri [EH1 S] [K Y UW1] [EH1 L].
+
+Ao reutilizar conexões com o banco, a aplicação precisa manter a identificação do cliente junto das consultas que ele pode fazer.
+Um experimento com Go mostra o que acontece quando essas operações se separam.
+A edição também traz um cookie que expunha a própria chave de assinatura no Google DevSite.
+E tem o lançamento do Lambda Web Functions para aplicações H T T P.
+
+Chamadas separadas ao pool em Go comprometem o isolamento por cliente em um teste.
+Chris van Eijk, da Now-Next, publicou em treze de outubro testes com a biblioteca P G X, de acesso ao Postgri [EH1 S] [K Y UW1] [EH1 L] em Go.
+A aplicação usava segurança por linha, também chamada de R L S.
+Uma política do banco filtrava as faturas conforme o cliente, identificado em uma variável da conexão.
+Esse cliente é o que se costuma chamar de tenant.
+
+Um pool mantém conexões disponíveis para reutilização.
+No código testado, uma chamada ao pool definia o cliente e devolvia a conexão.
+Outra chamada pegava uma conexão para consultar as faturas.
+O problema é que cada chamada podia receber uma conexão diferente, ainda com a identificação deixada por outra requisição.
+Com trinta requisições simultâneas, aproximadamente metade das requisições com cliente definido contou as faturas do outro cliente, segundo o autor.
+O experimento usou P G X cinco ponto onze ponto zero e a versão dezessete ponto onze do banco, com uma tabela de trinta linhas.
+
+O estudo amplia o teste com PgBouncer que cobrimos em primeiro de outubro.
+Agora, compara também rotinas que preparam e limpam a conexão ao retirá-la do pool e devolvê-la.
+Essas rotinas funcionaram no acesso direto ao banco.
+Mas falharam com o PgBouncer em modo de agrupamento por transação.
+Nesse modo, a preparação, a consulta e a limpeza podiam chegar a conexões diferentes no banco.
+
+O padrão que funcionou foi abrir uma transação e definir o cliente como primeira operação, com validade limitada àquela transação.
+Depois, todas as consultas precisavam passar pelo objeto dessa mesma transação.
+Nesse desenho, uma requisição sem cliente também precisa definir explicitamente um valor vazio.
+E a política precisa negar acesso nesse caso.
+Pular essa etapa pode recuperar uma identificação antiga.
+O teste mostra por que vale verificar concorrência e conexões com estado residual.
+A aplicação continua responsável por escolher uma identidade autorizada.
+As fontes são os testes com Go e P G X e a síntese da investigação da Now-Next, além da documentação do banco sobre configurações locais à transação.
+
+Pesquisador relata execução de código no Google DevSite por um cookie que expunha a própria chave.
+Simon Koeck divulgou em doze de outubro uma falha no DevSite, plataforma usada por sites de documentação do Google.
+Segundo seu relato, um cookie de sessão carregava um objeto do fluxo de autorização OAuth com um segredo.
+Esse mesmo segredo assinava o cookie.
+Quem o recebesse podia extrair a chave e produzir uma sessão alterada que o servidor aceitava.
+
+Nas sessões padrão do Flask, framework Python usado nesse caso, o conteúdo do cookie é legível para quem o recebe.
+A assinatura permite detectar alterações enquanto a chave permanece secreta.
+No DevSite, havia mais uma etapa.
+A aplicação reconstruía o objeto recebido usando pickle, um formato do Python.
+Essa reconstrução de objetos a partir dos dados, chamada de desserialização, pode executar código.
+A chave exposta permitia entregar conteúdo alterado a essa operação.
+
+Koeck relata ter demonstrado a execução por atrasos controlados na resposta, acompanhados de testes de validação da assinatura.
+A cronologia do pesquisador registra o envio do relatório em seis de agosto, uma recompensa de noventa mil dólares e a correção em sete de outubro.
+As informações sobre o incidente e sua resolução vêm do pesquisador.
+As documentações do Flask e do Python corroboram os mecanismos envolvidos.
+
+Para revisar um sistema semelhante, mantenha segredos no servidor e use chaves distintas para funções distintas.
+Ao receber conteúdo do cliente, prefira formatos que representem apenas dados.
+A segurança dessa fronteira depende tanto da proteção da chave quanto do que a aplicação faz depois de validar a assinatura.
+As fontes são o relato de Simon Koeck, a documentação de sessões do Flask e o alerta de segurança do pickle na documentação do Python.
+
+Lambda Web Functions recebe servidores H T T P em Node, com até cento e vinte e oito requisições simultâneas por ambiente.
+A A W S anunciou o Lambda Web Functions em doze de outubro.
+O novo formato executa aplicações de frameworks como Express, Hono, Fastify e Next ponto J S no modelo habitual de servidor web.
+O código escuta no endereço e na porta informados pelo ambiente e atende requisições H T T P.
+A A W S gerencia a expansão da capacidade.
+
+Cada ambiente de execução aceita até cento e vinte e oito requisições simultâneas.
+A cobrança separa processamento ativo de memória.
+Esperar uma consulta ao banco consome pouca C P U, mas a memória permanece sendo medida durante a vida do ambiente.
+A economia depende da carga e do uso dos recursos.
+Como várias requisições compartilham o ambiente, vale revisar variáveis mutáveis compartilhadas.
+Também vale revisar quantas conexões com o banco a aplicação pode abrir.
+
+O lançamento oferece revisões imutáveis do código, divisão de tráfego entre versões e implantação em múltiplas regiões.
+O suporte inicial é a Node ponto J S vinte e quatro, na arquitetura Arm de sessenta e quatro bits.
+As regiões iniciais são Virgínia do Norte, Ohio, Oregon, Tóquio e Irlanda.
+São Paulo fica fora dessa lista inicial.
+As funções orientadas a eventos continuam disponíveis com o nome Lambda Event Functions.
+A fonte é o anúncio da A W S.
+
+Agora, os destaques rápidos para hoje.
+
+Docker Hub detalha uma falha corrigida na transferência de tokens de acesso.
+O comunicado de doze de outubro explica que converter uma conta pessoal em organização podia transferir tokens para outro usuário.
+Isso acontecia sem seu consentimento e sem trocar o segredo desses tokens.
+Quem já possuía o segredo podia agir no registro de imagens como o novo titular, dentro das permissões do token.
+A Docker corrigiu o fluxo em trinta de setembro e diz não ter encontrado evidência de exploração.
+A empresa desativou os tokens afetados em oito de outubro, com exceções solicitadas pelos titulares.
+Quem recebeu o aviso de dois de outubro deve conferir os tokens indicados.
+A fonte é o comunicado da Docker.
+
+A Anthropic explica a cobrança de certas requisições bloqueadas por suas defesas.
+Em publicação de doze de outubro, a empresa descreve controles contra a destilação.
+É o treinamento de outro modelo a partir das respostas coletadas de um modelo existente.
+Desde vinte e quatro de setembro, a empresa voltou a cobrar requisições barradas antes da resposta em determinadas áreas.
+São áreas nas quais seus classificadores apresentam, segundo a Anthropic, menos de zero vírgula um porcento de falsos positivos.
+A regra inclui destilação.
+Para quem integra a [EY1 P IY1 AY1], uma chamada bloqueada pode gerar cobrança.
+A empresa reconhece que pedidos legítimos também podem ser classificados incorretamente.
+A fonte é a publicação da Anthropic.
+
+Ubuntu abre testes da ferramenta de ditado local [M AY1 N AH0].
+A prévia anunciada em doze de outubro transcreve a fala no campo de texto da aplicação em uso.
+Segundo a Canonical, após baixar o modelo, o reconhecimento funciona sem internet, e o áudio não é enviado nem armazenado.
+A disponibilidade inicial cobre Ubuntu vinte e quatro ponto zero quatro e vinte e seis ponto zero quatro, nas versões de suporte prolongado.
+Também cobre o Ubuntu vinte e seis ponto dez.
+O suporte é às arquiteturas [EY1 EH1 M D IY1] sessenta e quatro e sua variante de nível três, com GNOME sobre Wayland.
+É uma versão em desenvolvimento.
+Os motores disponíveis têm diferenças de idiomas, precisão e exigência de hardware.
+A fonte é a Canonical.
+
+A Cloudflare explica como transforma logs antes da exportação.
+O relato de doze de outubro mostra o motor DataFusion incorporado ao Logpush.
+Ele usa [EH1 S] [K Y UW1] [EH1 L] para filtrar registros, remover campos sensíveis e reorganizar dados.
+Isso evita uma chamada de rede a outro serviço de processamento.
+Se a transformação falha, o sistema retém o lote e tenta novamente, sem enviar os dados brutos ao destino.
+Falhas persistentes podem desativar o trabalho de exportação.
+Quem depende desses registros precisa monitorar também essa interrupção.
+A fonte é a Cloudflare.
+
+Instagram Live migra a entrada de vídeo para o protocolo "Media over QUIC".
+A Meta descreveu em doze de outubro a adoção do protocolo para receber transmissões dos aplicativos i O S e Android.
+Uma camada na borda da rede traduz os dados para RUSH, o protocolo já usado pelos serviços internos.
+Endereços gerados pelo servidor controlam quais transmissões usam o novo caminho.
+Segundo a equipe, o resultado inicial foi manter qualidade e confiabilidade equivalentes às anteriores.
+Essa tradução permite trocar o transporte gradualmente, preservando o restante do processamento.
+A fonte é a equipe de engenharia da Meta.
+
+O [K ER1 L] prepara rotinas mais rápidas e estruturas menores para a versão oito ponto vinte e três ponto zero.
+Daniel Stenberg apresentou hoje resultados dos testes de desempenho que orientaram mudanças em conversão de endereços, datas e números.
+A estrutura criada para cada transferência simultânea caiu de quatro mil duzentos e cinquenta e seis para três mil e sessenta e quatro bytes.
+O lançamento está previsto para quatorze de outubro.
+São ganhos internos.
+O próprio mantenedor observa que a maioria das transferências terá pouca diferença perceptível.
+A fonte é Daniel Stenberg.
+
+Um teste de desempenho de Python chega a sessenta e cinco vírgula sete gigabytes por segundo ao acessar apenas parte dos campos JSON.
+Daniel Lemire publicou o experimento em doze de outubro.
+O teste usou a biblioteca "fastsimdjson", na versão zero ponto seis ponto zero, com Python três ponto quatorze ponto seis.
+O Python estava sem o bloqueio global de threads, em um servidor de sessenta e quatro núcleos.
+Os sete vírgula seis gigabytes de entrada já estavam descompactados na memória.
+E o resultado divulgado é o melhor de sete execuções.
+A biblioteca analisa os dados e só cria objetos Python para os valores acessados.
+Essa economia de alocações é relevante quando cada registro contém muitos campos que a aplicação descarta.
+A fonte é o experimento de Daniel Lemire.
+
+Replay S S M reduz gravações de estado em modelos híbridos de inteligência artificial.
+Em análise de doze de outubro, a NVIDIA e pesquisadores de Princeton explicam como guardar uma cópia de referência do estado do modelo.
+Essa cópia é chamada de checkpoint e fica guardada junto das entradas recentes.
+Isso permite calcular a saída a cada token, a unidade de texto processada pelo modelo.
+O checkpoint só é atualizado quando esse pequeno conjunto de entradas se completa.
+Nos testes relatados com quatro modelos híbridos, os ganhos apareceram com lotes maiores de sequências.
+Com uma única sequência, não houve aceleração.
+A otimização beneficia o cenário medido de atendimento simultâneo de solicitações.
+A fonte é a análise técnica da NVIDIA.
+
+Um tutorial de kagent mostra agentes de inteligência artificial criando outros no Kubernetes, com aprovação.
+O laboratório publicado pela C N C F em doze de outubro usa kagent para executar agentes no Kubernetes, com inferência local.
+Uma lista restrita de ferramentas e permissões do Kubernetes limita as escritas ao tipo de recurso Agent.
+O usuário revisa e aprova o manifesto, o arquivo que descreve o agente a criar.
+É material para estudar no laptop.
+O roteiro mantém autenticação de desenvolvimento, na qual todos agem como o mesmo usuário, e expõe a interface apenas localmente.
+Levar esse desenho a um cluster compartilhado exige rever identidade e autorização.
+A fonte é o tutorial publicado na C N C F.
