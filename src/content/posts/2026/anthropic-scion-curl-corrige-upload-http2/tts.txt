@@ -1,0 +1,146 @@
+Anthropic troca Git por [S AY1 AH0 N] em seu monorepo, e o [K ER1 L] corrige uma falha em uploads por H T T P dois.
+
+A edição de hoje reúne duas decisões de infraestrutura e uma correção de segurança.
+A Anthropic levou as operações de versionamento de seu monorepo para o servidor.
+A Cloudflare explicou como distribui a coordenação de milhões de bancos.
+E o [K ER1 L] corrigiu uma falha em uploads por H T T P dois que pode permitir execução de código no cliente.
+
+Primeiro, a migração da Anthropic para o [S AY1 AH0 N], com operações de versionamento no servidor.
+Em relato publicado em treze de outubro, a empresa afirma ter migrado seu monorepo do Git para esse sistema, desenvolvido internamente, em cinco meses.
+Monorepo é um repositório que reúne vários projetos.
+Segundo a Anthropic, o volume passou de aproximadamente duas mil e quinhentas alterações integradas por dia em maio para mais de trinta mil em setembro.
+O desenho atende clientes quase sempre conectados, como agentes de programação e tarefas de integração contínua, que automatizam a validação do código.
+O servidor guarda o histórico e cria os commits, os registros de alterações.
+Também executa as operações de integração e reorganização desses registros.
+Já o cliente mantém um cache limitado e busca os arquivos necessários.
+Algumas tarefas consultam a [EY1 P IY1 AY1] diretamente, sem criar uma cópia de trabalho no disco.
+Isso reduz trabalho repetido: processos na mesma máquina compartilham objetos em cache.
+Outras camadas atendem a região antes de recorrer aos servidores centrais.
+A separação entre essas camadas também procura impedir que uma falha regional sobrecarregue o restante do sistema.
+A Anthropic relata uma necessidade de processamento e memória duzentas vezes menor que a da infraestrutura anterior de espelhos Git.
+É uma comparação interna, para uma carga excepcional.
+A empresa menciona cerca de vinte e cinco milhões de preparações de cópias de trabalho por dia, só na integração contínua.
+E o [S AY1 AH0 N] depende de ferramentas próprias de revisão, busca e integração.
+Para outras equipes, a pergunta útil é quais tarefas precisam de uma cópia de trabalho completa.
+E quais poderiam consultar o repositório pela [EY1 P IY1 AY1].
+A fonte é o relato de engenharia da Anthropic.
+
+Agora, a correção de segurança do [K ER1 L], usado para transferir dados pela rede.
+A versão oito ponto vinte e três ponto zero corrige um uso de memória liberada em uploads por H T T P dois.
+A correção saiu em quatorze de outubro, e o projeto classifica a falha como de gravidade alta.
+O problema afeta tanto a ferramenta de linha de comando quanto aplicações que incorporam sua biblioteca, a lib [K ER1 L].
+A falha ocorre no tratamento do encerramento de um upload.
+Uma referência a um objeto sobrevive à liberação da memória que ele ocupava.
+Na limpeza posterior, o programa pode acessar esse espaço, já reutilizado por outros dados.
+É o chamado uso de memória liberada.
+O projeto demonstrou a possibilidade de execução remota de código sob condições específicas, descritas pelo mantenedor Daniel Stenberg.
+É necessário enviar dados a um servidor malicioso.
+Também é preciso satisfazer restrições de versão, arquitetura, alocação de memória e temporização.
+Stenberg considera uma exploração bem-sucedida extremamente difícil fora do ambiente preparado.
+Uma tentativa também pode causar uma queda do processo.
+O aviso lista como afetadas as versões oito ponto doze ponto zero até oito ponto vinte e dois ponto zero.
+Mas há exceções, por causa de correções nas linhas de manutenção.
+São as versões oito ponto quatorze ponto três, oito ponto dezesseis ponto dois e oito ponto vinte ponto dois.
+A orientação é atualizar para oito ponto vinte e três ponto zero, ou aplicar o patch adequado.
+Desabilitar H T T P dois é uma mitigação indicada pelo projeto.
+Confira também as bibliotecas distribuídas junto das aplicações.
+O alerta anterior sobre o lançamento antecipado agora tem correção e cenário afetado publicados.
+As fontes são o aviso de segurança do [K ER1 L] e a explicação de Daniel Stenberg.
+
+A próxima história é sobre como o D um, da Cloudflare, reduz as consultas ao banco central.
+Em publicação de treze de outubro, a empresa detalhou a arquitetura desse serviço de bancos baseado em SQLite.
+Cada banco fica associado a um componente chamado "Durable Object", que mantém estado e executa as consultas.
+Um Postgri [EH1 S] [K Y UW1] [EH1 L] central guarda as informações administrativas.
+Entre elas, o vínculo entre o identificador de cada banco e o objeto responsável por ele.
+Para atender uma consulta por H T T P, o serviço normalmente encontra esse vínculo no "Workers" K V.
+É um armazenamento distribuído usado para os metadados de roteamento.
+Se a informação faltar, existe uma consulta de recuperação ao banco central, com caches intermediários.
+Assim, não é preciso fazer uma viagem ao banco central em toda requisição.
+A exclusão de um banco mostra por que separar essas responsabilidades importa.
+Mesmo que o cache ainda encaminhe uma requisição, o objeto que já registrou o estado de excluído pode recusá-la.
+Ou seja, uma informação antiga de roteamento pode levar a consulta até um banco que já se recusa a atendê-la.
+Verificações periódicas corrigem informações que ficaram inconsistentes após falhas.
+A contabilização de espaço segue outro ritmo.
+Filas e um número limitado de consumidores controlam a carga sobre o banco central.
+As mudanças são agregadas antes de atualizar o total de cada conta, reduzindo a disputa pela mesma linha.
+O total pode ficar temporariamente atrasado.
+A arquitetura reserva essa tolerância às operações em que ela é aceitável.
+A fonte é a publicação da Cloudflare sobre a arquitetura do plano de controle do D um.
+
+Vamos aos destaques rápidos de hoje.
+O Gemini quatro Argon compartilha um milhão de tokens entre entrada e saída.
+A ficha técnica publicada pelo Google em treze de outubro esclarece que esse limite é combinado.
+Tokens são as unidades em que o modelo processa o conteúdo.
+Uma entrada de oitocentos mil tokens deixa, no máximo, duzentos mil para a saída dentro desse teto.
+Na cobertura de primeiro de outubro, descrevemos um milhão como limite de saída.
+A ficha agora explicita que entrada e resposta dividem esse orçamento.
+Ao enviar um repositório grande, reserve espaço para a resposta que você espera receber.
+A fonte é a ficha técnica do Google DeepMind.
+
+A "Volexity" relata a invasão de um "Ivanti Connect Secure" que estava atualizado à época.
+A investigação foi publicada em treze de outubro.
+Ela descreve uma cadeia de falhas explorada desde três de outubro contra a versão vinte e dois ponto oito R dois ponto quatro.
+Houve obtenção de privilégios de administrador do sistema e roubo de credenciais.
+A Ivanti confirmou a exploração de uma das falhas.
+No comunicado de treze de outubro, a empresa listou correções disponibilizadas antes da divulgação.
+Os caminhos de atualização são diferentes conforme a versão e a plataforma.
+Mas, segundo a Volexity, a falha de elevação de privilégio usada na cadeia ainda aguardava correção na data do relato.
+Além de atualizar, investigue suspeitas com análise de rede e memória.
+A Volexity alerta que o verificador de integridade pode não detectar essa atividade.
+As fontes são a investigação da Volexity e o aviso da Ivanti.
+
+O GitLab corrige execução de código sem autenticação em configurações de integração e entrega contínuas.
+A atualização de doze de outubro resolve uma falha que, sob determinadas condições, permite executar código no servidor.
+O caminho é uma expressão regular preparada em uma configuração de pipeline.
+As linhas afetadas começam na dezenove ponto dois.
+As versões corrigidas são dezenove ponto dois ponto oito, dezenove ponto três ponto cinco e dezenove ponto quatro ponto dois.
+Instalações administradas pelo próprio cliente precisam atualizar.
+O serviço hospedado do GitLab já recebeu o patch, e clientes do "GitLab Dedicated" não precisam agir.
+A fonte é o comunicado do GitLab.
+
+O Lix corrige falhas de memória, reparo de pacotes e isolamento no macOS.
+O Lix é uma implementação do gerenciador de pacotes Nix.
+A divulgação coordenada de treze de outubro inclui um erro de memória.
+Também inclui reparos solicitados por usuários sem privilégios que podiam substituir conteúdo antes da validação em instalações multiusuário.
+E há uma falha no isolamento da construção de pacotes no macOS.
+O aviso distingue os riscos conforme a plataforma e a configuração.
+As versões corrigidas do Lix são dois ponto noventa e quatro ponto três, dois ponto noventa e cinco ponto quatro e dois ponto noventa e seis ponto zero.
+O Nix também recebeu atualizações, listadas por ramo no aviso conjunto.
+Quem constrói pacotes de fontes não confiáveis deve conferir a versão e seguir o procedimento correspondente à sua instalação.
+As fontes são o Lix e o aviso coordenado no NixOS.
+
+O "Git Hub" usa um classificador especializado para filtrar possíveis segredos no código.
+Em relato de treze de outubro, a empresa descreve duas etapas.
+Primeiro, expressões regulares localizam candidatos.
+Depois, um modelo "ModernBERT", ajustado para classificação, avalia o valor junto de nomes de variáveis, caminho do arquivo e contexto.
+Isso ajuda a separar credenciais de exemplos e de identificadores parecidos.
+O "Git Hub" relata uma redução de oitenta e seis porcento na mediana do tempo de varredura após o envio do código ao repositório, o push.
+A comparação é com o fluxo anterior, baseado em um modelo de linguagem.
+Segundo a empresa, a menor latência também viabilizou usar essa detecção de segredos genéricos antes de aceitar o envio do código.
+A fonte é a publicação de engenharia do "Git Hub".
+
+A "Liquid AI" lança um modelo com pesos abertos para agentes locais.
+É o L F M dois ponto cinco, na variante com cerca de vinte e quatro bilhões de parâmetros, dos quais aproximadamente dois bilhões são ativados por token.
+O anúncio saiu em treze de outubro.
+Essa seleção de partes do modelo é chamada mistura de especialistas.
+Em relação à variante equivalente da geração L F M dois, a janela de contexto sobe de trinta e dois mil para cerca de cento e trinta e um mil tokens.
+O lançamento traz suporte a ferramentas de execução como llama ponto C P P e M L X.
+É mais uma opção para testar agentes no próprio hardware.
+A fonte é o anúncio da equipe Liquid AI.
+
+A A W S mostra por que interromper uma ferramenta local precisa cancelar o trabalho remoto.
+A retrospectiva de treze de outubro trata do "Bulk Executor", ferramenta para operações em lote no DynamoDB.
+O problema era prático: encerrar o programa Python com control C deixava a tarefa no serviço A W S Glue executando até o tempo limite.
+A solução captura a interrupção e solicita a parada remota antes de sair.
+Para comandos que alteram dados, a ferramenta também exige que a recuperação para um ponto no tempo esteja habilitada.
+Isso permite restaurar dados após alterações acidentais.
+A fonte é o relato da A W S.
+
+Por fim, o OpenTelemetry abre testes de novas convenções para métricas de processos.
+Na versão zero ponto cento e sessenta ponto zero do "Collector Contrib", o componente que coleta essas métricas pode usar convenções candidatas à estabilidade.
+É o que informa a publicação de treze de outubro.
+Definições versionadas mantêm os formatos antigo e novo disponíveis, com opções para ativar a transição.
+O formato da configuração do usuário é preservado, mas nomes e atributos das métricas podem mudar.
+Teste as consultas e os painéis que dependem deles.
+As opções estão desligadas por padrão nessa versão.
+A fonte é o OpenTelemetry.
