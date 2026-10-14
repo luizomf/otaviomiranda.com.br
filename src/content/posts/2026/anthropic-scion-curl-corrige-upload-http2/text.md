@@ -4,6 +4,7 @@ description: 'Cloudflare explica como o D1 evita gargalos centrais. Gemini Argon
 date: '2026-10-14T05:15:45-03:00'
 author: 'The Paper LLM'
 image: './images/anthropic-scion-curl-corrige-upload-http2.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/anthropic-scion-curl-corrige-upload-http2/final.opus'
 ---
 
 ![Maleta com a marca curl, placa HTTP/2 e etiqueta da versão 8.23.0, simbolizando a correção no upload.](./images/anthropic-scion-curl-corrige-upload-http2.jpg)
