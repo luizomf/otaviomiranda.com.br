@@ -1,0 +1,159 @@
+A "Trail of Bits" testa proteção contra pacotes adulterados; Plasma seis ponto oito encerra sessões X onze.
+
+Ao instalar dependências, como saber se o pacote recebido corresponde ao que o projeto espera?
+Um teste da "Trail of Bits" mostra como essa proteção varia entre gerenciadores e configurações.
+A edição também traz a mudança do Plasma seis ponto oito para sessões Wayland e o reaproveitamento de conexões em Go.
+Na segurança, há correções para Nextcloud, Cisco e PAN O S.
+
+A "Trail of Bits" testou vinte e cinco gerenciadores, simulando um repositório comprometido.
+A pesquisa foi publicada em catorze de outubro por Keegan Ryan.
+O teste usou um servidor de pacotes que entrega código adulterado, mas manteve as chaves de assinatura seguras.
+Nas configurações avaliadas, Go e V C P K G verificaram a integridade dos pacotes sem depender de um lockfile.
+Ferramentas como N P M, Bun, P N P M e U V também bloquearam adulterações quando havia um lockfile com os hashes esperados.
+
+O lockfile é um arquivo que registra as versões escolhidas das dependências.
+Ele pode incluir hashes, que são valores calculados a partir do conteúdo dos arquivos.
+Quando o valor esperado vem de uma cópia confiável desse registro, o instalador consegue compará-lo com o pacote recebido.
+Mas, se o próprio servidor comprometido fornece tanto o arquivo quanto o valor usado na comparação, ele pode alterar os dois.
+
+A pesquisa também separa duas coisas: existir uma assinatura digital e verificar essa assinatura durante a instalação.
+No N P M, por exemplo, o comando normal de instalação não verifica as assinaturas do registro.
+Há um comando separado para auditar essas assinaturas.
+Já no Go, a verificação padrão compara o hash do pacote com uma base de registros assinada.
+A chave pública dessa base já é conhecida pela ferramenta.
+
+Há um limite importante: o teste usou um pacote e uma versão por gerenciador, em uma única plataforma.
+Para a sua aplicação, vale preservar um lockfile confiável e conferir o comando usado na instalação automatizada de dependências.
+Quando o hash diverge, esse comando interrompe a instalação ou apenas atualiza o registro?
+Essa checagem precisa acompanhar as atualizações das dependências, que continuam necessárias para receber correções.
+A fonte é a pesquisa da "Trail of Bits", que também descreve as limitações do teste.
+
+O Plasma seis ponto oito encerra sessões X onze e melhora gravação e acesso remoto.
+O K D E lançou a versão em catorze de outubro, no aniversário de trinta anos do projeto.
+Plasma é o ambiente gráfico que oferece a área de trabalho e a interface para gerenciar janelas.
+A nova versão deixa de iniciar sessões X onze e passa a usar Wayland.
+Aplicativos que ainda precisam de X onze continuam funcionando pela camada de compatibilidade X Wayland.
+Os aplicativos K D E também mantêm suporte a X onze.
+
+Para quem usa Linux para desenvolver e ensinar, há mudanças diretamente ligadas ao trabalho.
+O Spectacle, ferramenta de captura de tela, passa a incluir microfone e áudio do sistema na mesma gravação.
+Um novo comando permite gerenciar monitores pelo terminal e criar automações.
+No acesso remoto, há ajustes de desempenho e sincronização da área de transferência nos dois sentidos.
+Também há um modo exclusivo que bloqueia a tela física e oferece uma tela virtual ao cliente.
+
+Os recursos remotos dependem do suporte do aplicativo cliente.
+A disponibilidade dos pacotes também varia por distribuição.
+Antes de migrar a máquina principal, confira seus fluxos de compartilhamento de tela, gravação, acesso remoto e configuração dos monitores.
+A fonte é o anúncio do K D E Plasma seis ponto oito.
+
+Go um ponto vinte e sete drena respostas H T T P um para tentar reutilizar conexões.
+A equipe da linguagem explicou a mudança em catorze de outubro.
+Ela está no cliente H T T P do pacote de rede da biblioteca padrão.
+A partir do Go um ponto vinte e sete, fechar o corpo de uma resposta que ainda tem conteúdo por ler faz o transporte tentar consumir e descartar o restante.
+Essa leitura acontece em segundo plano e é chamada de drenagem.
+Ela vale para H T T P um e tem limites de cinquenta milissegundos ou duzentos e cinquenta e seis quilobytes.
+
+O corpo é o conteúdo da resposta.
+Ele pode ficar sem leitura quando a aplicação só precisa do código de status.
+Em H T T P um, as respostas chegam em sequência pela mesma conexão.
+Para encontrar o começo da próxima, o cliente precisa chegar ao fim da atual.
+Até o Go um ponto vinte e seis, fechar o corpo antes desse ponto levava ao abandono da conexão.
+As próximas chamadas pagavam novamente o custo de estabelecer a comunicação.
+
+Os autores testaram cem requisições ao serviço de índice do Go, consultando apenas o status.
+Na máquina usada para a medição, elas levaram cerca de setecentos e dez milissegundos no Go um ponto vinte e seis.
+No Go um ponto vinte e sete, foram cerca de cento e cinquenta milissegundos.
+O teste desabilitou H T T P dois, que separa as respostas em fluxos e permite compartilhar a conexão sem esse mesmo problema.
+
+A aplicação continua responsável por fechar o corpo quando terminar de usá-lo.
+O reaproveitamento depende de concluir a drenagem dentro dos limites.
+Se a resposta indica que a conexão deve ser fechada, essa tentativa é dispensada.
+A fonte é a explicação da equipe do Go.
+
+Agora, os destaques rápidos para hoje.
+
+No Nextcloud, atualize ou remova o servidor Collabora integrado vulnerável.
+O aviso de catorze de outubro afeta o aplicativo "Collabora Online – Built-in CODE Server".
+São vulneráveis as versões anteriores à vinte e seis ponto quatro ponto trezentos e três.
+Uma chamada sem autenticação pode executar comandos como o usuário do servidor web quando o servidor CODE integrado está parado.
+Essa situação pode acontecer durante reinícios ou depois de uma falha.
+
+Apenas desabilitar o aplicativo é insuficiente: atualize ou remova-o.
+Instalações independentes do Collabora Online não são afetadas.
+Segundo o mantenedor, quem ainda usa Nextcloud vinte e nove ou anterior deve atualizar o Nextcloud ou remover o aplicativo.
+A fonte é o aviso de segurança da Collabora.
+
+A Cisco corrige outra falha explorada no "Secure Email Gateway".
+Divulgada em catorze de outubro, ela permite executar comandos como root, o administrador do sistema.
+O ataque usa um anexo de e-mail preparado e não exige autenticação.
+Mas o risco depende de condições específicas.
+O recurso "File Reputation" precisa estar habilitado e associado a uma política de e-mail.
+Além disso, o componente "Content Scanner Tools" precisa estar numa versão anterior à corrigida.
+A versão corrigida é a vinte e cinco ponto três ponto zero ponto cinco mil quinhentos e vinte e cinco.
+A atualização desse componente corrige a falha sem reiniciar o equipamento.
+
+É um problema diferente do caso de setembro.
+A Cisco confirma exploração ativa.
+Diante de suspeita de invasão, preserve evidências antes da recuperação e siga as orientações específicas para equipamento físico ou virtual.
+A fonte é o boletim de segurança da Cisco.
+
+O PAN O S recebe correções para execução como root na interface administrativa.
+A Palo Alto Networks relata exploração muito limitada da falha, divulgada em catorze de outubro.
+O ataque exige autenticação com privilégios elevados e acesso de rede à interface de gerenciamento.
+São afetados os firewalls das linhas P A Series e V M Series, além do Panorama.
+O "Cloud NGFW" e o "Prisma Access" ficam fora do escopo.
+
+Consulte a correção correspondente à sua linha e restrinja o gerenciamento a origens internas confiáveis.
+Essa restrição reduz a exposição, enquanto a atualização corrige a falha.
+A fonte é o aviso da Palo Alto Networks, com sua tabela de versões.
+
+O "Git Hub" entrega histórico de estrelas agregado, sem listar pessoas.
+Em relato de catorze de outubro, a empresa apresenta uma [EY1 P IY1 AY1] que retorna até trinta semanas de contagens diárias por requisição.
+No exemplo do repositório React, recuperar a curva passou de aproximadamente duas mil quinhentas e onze chamadas para vinte e quatro.
+A consulta usa um índice para limitar primeiro o intervalo de datas.
+Só depois agrupa os registros, reduzindo o trabalho no banco.
+
+Esse histórico reflete as estrelas ainda existentes.
+Quando alguém remove uma estrela, seu registro desaparece.
+A fonte é o relato da engenharia do "Git Hub".
+
+A Cloudflare libera My [EH1 S] [K Y UW1] [EH1 L] no Hyperdrive e explica um erro no cache.
+O anúncio de disponibilidade geral, de catorze de outubro, detalha uma falha desse serviço, que compartilha conexões de banco entre Workers.
+Dois componentes podiam usar o mesmo cache, mas gravavam respostas em formatos diferentes.
+O formato dependia dos recursos do protocolo negociados com cada cliente.
+A leitura no formato errado causava resultados vazios ou travamentos.
+
+A correção passou a armazenar uma representação comum e a traduzi-la para o cliente no ponto adequado.
+É uma verificação útil em caches compartilhados: todos os leitores precisam concordar sobre o formato guardado.
+A fonte é o relato da Cloudflare.
+
+A OWASP atualiza a orientação sobre autorização de ferramentas M C P.
+A mudança foi incorporada em catorze de outubro.
+Ela reforça que disponibilizar uma ferramenta ao agente não estabelece consentimento para qualquer chamada.
+M C P é um protocolo que conecta aplicações de inteligência artificial a ferramentas e serviços.
+
+A orientação pede avaliar as consequências de cada operação.
+Isso inclui leitura de dados sensíveis, divulgação e ações irreversíveis.
+A partir daí, é preciso escolher controles proporcionais.
+Eles podem ser confirmação, autorização de escopo restrito ou regras verificadas no momento da execução.
+As fontes são a alteração incorporada ao projeto e o guia de segurança de M C P da OWASP.
+
+O curl publica relatório de auditoria da [AY1 L].
+Em catorze de outubro, Daniel Stenberg anunciou o documento.
+Ele destacou a combinação de ferramentas de inteligência artificial com pesquisadores que entregaram achados detalhados.
+O mantenedor citou trinta e cinco vulnerabilidades publicadas.
+Esse número pertence à colaboração mais ampla, de setembro de 2025 a outubro de 2026.
+
+O novo material complementa a cobertura da correção de upload em H T T P dois.
+Ele permite acompanhar o trabalho de investigação por trás das correções.
+As fontes são o anúncio de Stenberg e o registro de auditorias do curl.
+
+Um plugin do Headlamp ajuda a descobrir por que um trabalho no Kubernetes não começa.
+O guia publicado em catorze de outubro apresenta o plugin "Kueue", na versão zero ponto um ponto zero, alfa.
+O Kueue decide quando um trabalho pode começar conforme filas e cotas.
+Já o Headlamp oferece uma interface para inspecionar os recursos do cluster.
+Um trabalho ainda não admitido pode nem ter criado seus contêineres.
+
+O plugin permite acompanhar o pedido, a fila e a cota disponível antes de investigar a escolha das máquinas que executarão o trabalho.
+Essa versão oferece visualizações de leitura e depende das permissões do usuário.
+A fonte é o guia no blog do Kubernetes.
