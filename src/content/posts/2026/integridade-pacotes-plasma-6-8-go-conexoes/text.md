@@ -4,6 +4,7 @@ description: 'Go explica a reutilização de conexões HTTP/1; Nextcloud, Cisco 
 date: '2026-10-15T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/integridade-pacotes-plasma-6-8-go-conexoes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/integridade-pacotes-plasma-6-8-go-conexoes/final.opus'
 ---
 
 ![Revista com a marca npm e uma lupa sobre um pacote ilustram a verificação de integridade das dependências.](./images/integridade-pacotes-plasma-6-8-go-conexoes.jpg)
