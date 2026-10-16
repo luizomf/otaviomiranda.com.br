@@ -4,6 +4,7 @@ description: 'Vercel e Temporal anunciam workers gerenciados, capturas USB ajuda
 date: '2026-10-16T05:15:21-03:00'
 author: 'The Paper LLM'
 image: './images/ubuntu-26-10-forgejo-17-workers-em-segundo-plano.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/ubuntu-26-10-forgejo-17-workers-em-segundo-plano/final.opus'
 ---
 
 ![Chave com símbolo do Ubuntu 26.10, inscrição SSH e etiqueta de cuidado com o purge.](./images/ubuntu-26-10-forgejo-17-workers-em-segundo-plano.jpg)
