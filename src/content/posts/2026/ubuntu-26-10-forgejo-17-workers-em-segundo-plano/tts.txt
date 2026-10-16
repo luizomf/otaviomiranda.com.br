@@ -1,0 +1,169 @@
+Ubuntu vinte e seis ponto dez chega com alerta no S S H; Forgejo dezessete amplia o Actions.
+
+O Ubuntu vinte e seis ponto dez foi lançado com uma mudança de pacotes que merece cuidado antes de mexer no acesso remoto.
+O Forgejo dezessete melhora a investigação de falhas em automações.
+Já Vercel e Temporal apresentam novas opções para executar trabalho em segundo plano.
+A edição também traz correções de segurança, modelos com pesos disponíveis e um experimento de inteligência artificial conferido num scanner real.
+
+O Ubuntu foi lançado, mas a remoção de configurações do Open S S H exige atenção.
+A versão vinte e seis ponto dez saiu em quinze de outubro e terá nove meses de suporte, até julho de 2027.
+Ela entrega a transição dos utilitários básicos para o projeto uutils, escrito em Rust.
+Os comandos usados para copiar, mover e remover arquivos completam o conjunto padrão.
+Essa mudança já aparecia nas notas de desenvolvimento que cobrimos em outubro; agora está na versão lançada.
+Para quem mantém scripts, vale testar saídas, permissões e tratamento de erros antes de atualizar a máquina de trabalho.
+
+O cuidado mais imediato está no Open S S H, usado para acesso remoto seguro.
+O empacotamento separou as variantes com autenticação corporativa por G S S A P I e Kerberos das variantes sem esse suporte.
+Ao trocar uma pela outra, o pacote anterior é removido, mas suas configurações podem continuar na máquina.
+E é justamente aí que entra o alerta das notas oficiais.
+Executar uma remoção completa das configurações, a operação chamada "purge", nesse pacote antigo pode apagar arquivos necessários à variante instalada.
+Isso pode derrubar o acesso remoto.
+O problema já é acompanhado pelo projeto, e a documentação informa que parte da correção ainda depende de uma atualização posterior ao lançamento.
+Preserve essas configurações até receber a correção.
+E, antes de fazer a troca num servidor, prepare um meio alternativo de acesso.
+A fonte são as notas oficiais do Ubuntu vinte e seis ponto dez, incluindo o aviso sobre Open S S H.
+
+O Forgejo dezessete permite repetir tarefas pela interface de programação e exige revisão das notificações de integração.
+Lançado em quinze de outubro, ele traz melhorias para quem hospeda seus próprios repositórios Git e automações de compilação e testes.
+Sua [EY1 P IY1 AY1] agora permite repetir um fluxo de automação concluído ou uma tarefa individual já encerrada.
+Os logs também podem ser filtrados por texto ou recuperados por etapa.
+Fica mais fácil encontrar a saída que explica uma falha.
+
+Com o "Forgejo Runner" treze ponto dois ou superior, cada tarefa também pode exibir um resumo em Markdown acima dos logs.
+Assim, resultados de testes e tabelas podem aparecer sem obrigar a pessoa a procurar tudo na saída bruta.
+Mas a atualização pede atenção a quem recebe notificações por webhooks.
+Os eventos chamados "action run" foram descontinuados em favor de "workflow run" e serão removidos numa versão futura.
+Não é só trocar o nome: os cabeçalhos e o conteúdo mudam.
+Por isso, a migração exige testar o sistema que recebe essas notificações.
+O projeto recomenda um backup completo antes da atualização.
+A versão dezessete tem suporte até vinte e oito de janeiro de 2027.
+Já a linha quinze, de suporte prolongado, permanece suportada até quinze de julho de 2027.
+A fonte deste bloco é o anúncio do Forgejo dezessete.
+
+Vercel e Temporal anunciam novas opções para executar trabalho em segundo plano.
+Os chamados workers são processos que consomem tarefas de uma fila ou rodam automações de integração contínua, por exemplo.
+Esse trabalho pode acontecer sem depender da chegada de uma requisição web.
+
+Em quinze de outubro, o "Vercel Daemons" entrou em beta público para executar processos desse tipo em contêineres.
+Não é necessário manter um servidor H T T P.
+A plataforma mantém a quantidade de instâncias configurada por região e reinicia as que encerram ou falham.
+Esses processos são implantados no mesmo projeto da aplicação.
+
+No mesmo dia, o Google anunciou uma integração em versão de prévia: "Temporal Serverless Workers", sobre os grupos de workers do "Cloud Run".
+Temporal é uma plataforma de coordenação de tarefas e fluxos duráveis.
+Nessa integração, o "Temporal Cloud" ajusta a quantidade de workers conforme o trabalho nas filas, podendo chegar a zero.
+Os processos continuam no projeto, na rede e sob a conta de serviço do cliente no Google Cloud.
+O Temporal recebe permissão para ajustar a capacidade deles.
+
+A diferença prática está em quem define essa quantidade.
+No anúncio da Vercel, ela é configurada pelo operador.
+Na integração do Temporal, o serviço faz o ajuste dentro dos limites escolhidos.
+Nesse segundo caso, quem precisa de resposta imediata depois de um período ocioso deve considerar manter um mínimo de instâncias acima de zero.
+Iniciar novos workers leva tempo.
+As fontes são o anúncio do Vercel Daemons e o anúncio do Google sobre Temporal Serverless Workers no Cloud Run.
+
+Agora, um agente ajudou a adaptar um scanner ao Linux usando capturas do driver Windows.
+Christian Schaller relatou, em quinze de outubro, como retomou a tentativa de fazer seu scanner Plustek OpticFilm, modelo oito mil e duzentos i, funcionar no Linux.
+O aparelho recebido usava um controlador diferente do esperado.
+Depois de tentativas frustradas, ele deu ao "Claude Code" acesso a uma máquina virtual Windows com o driver do fabricante.
+Também capturou a comunicação U S B do dispositivo.
+
+Segundo o autor, uma primeira digitalização reconhecível no Linux apareceu em poucas horas.
+A captura forneceu uma referência concreta: o que o driver funcional enviava ao aparelho.
+Era possível comparar isso com a implementação em desenvolvimento, formular uma hipótese e testar o resultado físico.
+
+Há um detalhe importante no relato.
+Quando Schaller concluiu o trabalho, o projeto SANE, que fornece suporte a scanners no Linux, já havia adicionado suporte ao aparelho independentemente.
+Depois, Schaller publicou o projeto "hw-harness", com uma versão generalizada dos scripts do experimento.
+O aprendizado está nesse ciclo de comparação: dar ao agente uma referência funcional, medir as diferenças e conferir o resultado no aparelho real.
+A fonte é o relato de Christian Schaller.
+
+Vamos aos destaques rápidos de hoje.
+
+O Next ponto J S publicou correções para duas falhas críticas de execução de código.
+A atualização de quatorze de outubro desse framework para aplicações web disponibiliza duas versões, conforme a linha mantida.
+São elas: dezesseis ponto quatro ponto um e quinze ponto cinco ponto vinte e oito.
+
+Uma das falhas envolve o "App Router" com "Cache Components".
+O caso afeta funções que usam "use cache" e retornam múltiplos arrays tipados.
+A correção dessa falha está na versão dezesseis ponto quatro ponto um, e não há alternativa conhecida à atualização.
+A outra falha envolve a otimização de imagens S V G em sistemas Linux baseados na biblioteca glibc.
+Para esse segundo caso, a mitigação indicada é garantir a biblioteca "sharp" na versão zero ponto trinta e cinco ponto cinco ou superior.
+Há ainda uma correção de negação de serviço no App Router com "Server Actions".
+Esses avisos são distintos da correção de "ImageResponse" de setembro.
+Atualize as dependências e publique o artefato corrigido.
+As fontes são o comunicado do Next ponto J S e os avisos de segurança sobre Cache Components e imagens S V G.
+
+A Mandiant relata exploração de uma falha no "BeyondTrust Remote Support" desde agosto.
+A investigação, publicada em quinze de outubro, liga essa falha a invasões observadas no fim de agosto.
+Ela permite operações de arquivos sem autenticação no equipamento de suporte remoto.
+Para instalações próprias a partir da versão vinte e quatro ponto três ponto um, a Mandiant recomenda o patch indicado no artigo escrito.
+Versões anteriores precisam primeiro ser atualizadas para uma linha suportada.
+Segundo a investigação, a BeyondTrust corrigiu os ambientes oferecidos como serviço em nove de outubro.
+Equipamentos expostos durante o período vulnerável também precisam de revisão de comprometimento.
+Foram observados mecanismos de persistência que sobrevivem a reinícios.
+A fonte é a investigação da Mandiant, do grupo de inteligência de ameaças do Google, com suas orientações de correção.
+
+O "Citizen Lab" documentou infecções por programas de espionagem entregues por anúncios.
+O relatório de quinze de outubro atribui à infraestrutura da "Discover-Tech" a entrega do spyware Candiru a dispositivos da Al Jazeera.
+Os ataques aconteceram em 2024 e 2025.
+A técnica, chamada "AdFection", usa código carregado na exibição do anúncio e dispensa o clique.
+Mas o relatório distingue as infecções confirmadas da população muito maior exposta a rastreamento e reconhecimento.
+
+Em pesquisa coordenada, a Confiant analisou a preparação e o encaminhamento desses anúncios.
+A empresa informa, porém, que não capturou uma cadeia completa de exploração.
+Para quem integra publicidade, o caso reforça a necessidade de avaliar o código de terceiros executado nas páginas.
+As fontes são o Citizen Lab e a Confiant.
+
+Um estudo de M C P mediu acesso a arquivos além do escopo declarado das ferramentas.
+M C P conecta aplicações de inteligência artificial a ferramentas.
+Num servidor local, aprovar uma chamada pode deixar o processo com acesso a arquivos que aquela operação não deveria alcançar.
+Num estudo preliminar de quinze de outubro, pesquisadores relatam cento e cinquenta instâncias vulneráveis.
+Esses casos foram confirmados por execução dinâmica, nas políticas de isolamento testadas.
+Os autores testaram o desvio com arquivos de credenciais preparados para o experimento.
+
+O resultado orienta a limitar permissões e isolar o processo que executa a ferramenta.
+A contagem corresponde aos casos validados sob aquelas condições de teste.
+Ela não mede a proporção de servidores vulneráveis em todo o ecossistema.
+A fonte é o estudo "My Credentials, Please".
+
+A I B M reúne conversa, decisões e transcrição no "Granite Switch" quatro ponto um.
+Anunciados em quinze de outubro, os modelos combinam uma base com adaptadores especializados, incluindo classificação de segurança, e reconhecimento de fala.
+Segundo a equipe, os adaptadores podem reutilizar o cache de atenção produzido pelo modelo-base.
+Ou seja, cálculos já feitos sobre o contexto ficam disponíveis para decisões posteriores.
+A arquitetura permite experimentar várias tarefas num mesmo ponto de acesso, com menos recomputação do contexto.
+A fonte é o anúncio da equipe I B M Granite.
+
+A Meta liberou os pesos do "Muse Spark Open", com uma exigência elevada de memória.
+O anúncio de quinze de outubro apresenta um modelo multimodal com oitocentos e dezesseis bilhões de parâmetros totais e quarenta e dois bilhões ativos.
+Ele está sob a "Muse Model License", que tem condições comerciais limitadas.
+A configuração local destacada pela Meta usa dois computadores "Mac Studio", com chip M cinco Ultra e quinhentos e doze gigabytes de memória cada.
+A quantidade de parâmetros ativos representa a parcela utilizada por token.
+Isso não elimina a exigência de memória para o modelo completo no exemplo de implantação.
+A fonte é o anúncio da Meta.
+
+O Rust um ponto noventa e nove ponto um corrige falhas de ligação e de interoperabilidade.
+Lançada em quinze de outubro, a atualização corrige a ausência de um símbolo de função em alguns alvos, incluindo U E F I.
+Também corrige o retorno de valores booleanos pela interface F F I, na arquitetura x oitenta e seis de sessenta e quatro bits.
+F F I é a interface usada para chamar código entre linguagens.
+Nesse caso, bits indefinidos podiam fazer o código chamador receber algo diferente de zero ou um.
+Há ainda uma correção na ferramenta de ligação usada na compilação, para que encontre a biblioteca L L V M no macOS.
+Esse problema aparecia quando o compilador era chamado sem o intermediário do rustup.
+A fonte é a equipe de lançamentos do Rust.
+
+Solène Rapenne mostrou serviços reconstruíveis com "Incus OS".
+No relato de quinze de outubro, sua infraestrutura doméstica usa contêineres de sistema recriados a partir de configurações em Git.
+Os dados das aplicações ficam em volumes persistentes.
+As conexões de rede são bloqueadas por padrão e liberadas explicitamente.
+É um exemplo concreto de separar o sistema descartável dos dados que precisam sobreviver à reconstrução.
+A autora ressalta que tudo depende de um único computador.
+Reconstruir um componente também pode interrompê-lo por um ou dois minutos.
+A fonte é a arquitetura descrita por Solène Rapenne.
+
+Por fim, a IPinfo mediu setenta vírgula três porcento dos prefixos roteados como válidos em R P K I.
+A análise recém-publicada usa uma fotografia de vinte e oito de setembro de 2026.
+Um ano antes, o resultado era de cinquenta e quatro porcento.
+R P K I permite ao responsável por um bloco de endereços publicar uma autorização assinada sobre qual rede pode anunciá-lo.
+O levantamento usa rotas observadas pelos coletores públicos RIPE RIS e "RouteViews".
+A fonte é a análise da IPinfo, com sua metodologia.
+A validação protege a origem anunciada; o caminho percorrido pela rota exige outros mecanismos.
