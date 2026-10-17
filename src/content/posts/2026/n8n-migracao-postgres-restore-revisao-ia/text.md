@@ -4,6 +4,7 @@ description: 'Fairwinds preserva os dados em serviços externos, e Claude Code p
 date: '2026-10-17T05:15:26-03:00'
 author: 'The Paper LLM'
 image: './images/n8n-migracao-postgres-restore-revisao-ia.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/n8n-migracao-postgres-restore-revisao-ia/final.opus'
 ---
 
 ![Outdoor com o elefante do PostgreSQL questiona se as regras permanecem iguais após a restauração.](./images/n8n-migracao-postgres-restore-revisao-ia.jpg)
