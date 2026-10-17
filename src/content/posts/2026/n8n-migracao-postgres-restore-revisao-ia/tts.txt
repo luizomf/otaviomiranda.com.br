@@ -1,0 +1,173 @@
+Ene oito ene migra sem disco no componente principal; restauração do Postgres pode alterar regras.
+
+Onde os dados ficam quando uma aplicação é substituída?
+E as regras do banco continuam funcionando depois de uma restauração?
+Dois relatos desta edição mostram por que essas perguntas precisam entrar no teste de migração.
+A equipe do Claude Code também conta como mudou a revisão por agentes depois de uma alteração atravessar mais de cinquenta rodadas.
+Nos destaques rápidos, há correções de segurança, ferramentas para Go e novidades de infraestrutura para inteligência artificial.
+
+A Fairwinds migrou o ene oito ene no Kubernetes e dispensou o disco do componente principal.
+O relato, de dezesseis de outubro, trata de uma ferramenta de automação de fluxos rodando no Amazon E K S, o serviço de Kubernetes da Amazon.
+A equipe trocou um pacote comunitário de implantação, um Helm chart, pelo pacote oficial.
+Na configuração adotada, o novo pacote previa um disco compartilhado entre instâncias do componente principal.
+Só que o disco usado não podia ser conectado a vários nós do conjunto de máquinas.
+
+Para decidir o que fazer, a equipe conferiu onde vivia o estado da aplicação.
+Em outras palavras, o que precisava sobreviver quando as instâncias fossem substituídas.
+Naquela instalação, o Postgres guardava os fluxos e os dados de execução.
+O Redis mantinha os trabalhos na fila, e o S três armazenava os arquivos.
+Já o Secrets Manager guardava a chave de criptografia e os segredos.
+O disco do componente principal não continha nada que precisasse persistir.
+A equipe desabilitou esse disco, e as novas instâncias puderam se reconectar aos serviços externos.
+
+Antes de mudar o tráfego de produção, a Fairwinds restaurou uma cópia do banco em um ambiente de testes.
+Verificou os fluxos e testou também a volta à implantação anterior.
+Outro cuidado foi manter a mesma versão do ene oito ene.
+Assim, a troca de implantação ficou separada de uma possível migração de banco.
+É o inventário do estado que sustenta a decisão de remover um volume; outra configuração pode precisar dele.
+A fonte é o relato de Husne Ozmen, da Fairwinds, publicado no blog da C N C F.
+
+Agora, no Postgres, uma restauração entre versões pode mudar o significado de uma regra.
+Christophe Pettus publicou, em dezesseis de outubro, um exemplo em que a regra é restaurada, mas passa a verificar outra coisa.
+A ferramenta de exportação do banco, chamada P G dump, participa da geração dos comandos junto com o servidor de origem.
+Cada um usa a lista de palavras reservadas da sua própria versão.
+E é nessa diferença que o exemplo se apoia.
+
+A ferramenta de exportação está na versão dezoito, mas o banco de origem é um Postgres quinze.
+Nesse banco, existe uma coluna cujo nome combina as palavras inglesas system e user.
+A ferramenta coloca aspas nesse nome ao declarar a coluna.
+Mas o servidor quinze deixa o mesmo nome sem aspas dentro de uma restrição que valida os dados.
+Desde o Postgres dezesseis, esse termo também tem significado próprio: representa a identidade autenticada da conexão.
+
+Ao restaurar o banco na versão dezoito, a regra passa a comparar essa identidade com um texto vazio.
+Ela deixa, portanto, de impedir valores vazios na coluna.
+Uma política que controla quais linhas cada usuário pode consultar também muda de comportamento.
+Já o índice do exemplo falha com erro; os efeitos variam conforme o objeto restaurado.
+
+A documentação recomenda a opção de colocar aspas em todos os identificadores em duas situações.
+Uma é quando a versão principal da ferramenta de exportação difere da versão de origem.
+A outra é quando o destino usa uma versão principal diferente.
+As aspas preservam a interpretação daquele nome como nome de coluna.
+O nome exato da opção e o exemplo completo estão no artigo escrito.
+
+Essa proteção alcança as expressões que compõem a exportação do banco.
+Consultas feitas pela aplicação continuam exigindo revisão.
+O mesmo vale para os corpos de funções na linguagem procedural do Postgres quando estão armazenados como texto.
+Por isso, no teste de migração, confira também o comportamento.
+Dados inválidos ainda são rejeitados? Cada usuário continua enxergando as linhas corretas?
+As fontes são a demonstração de Christophe Pettus e a documentação da ferramenta de exportação do Postgres.
+
+A próxima história é sobre revisão de código: a equipe do Claude Code pede reavaliação depois de três rodadas.
+Em texto de quinze de outubro, a equipe do assistente de programação da Anthropic relatou um caso que atravessou uma noite.
+Uma proposta de alteração de código passou por mais de cinquenta rodadas de revisão e correção.
+Um agente fazia alterações, e outro continuava encontrando problemas.
+Cerca de cinquenta e nove porcento do código apontado já estava presente na primeira passagem.
+Parte do trabalho, então, era descobrir aos poucos problemas que poderiam ter sido encontrados antes.
+
+A equipe passou a pedir ao autor que reconsidere a abordagem após três rodadas.
+Depois das primeiras passagens, a revisão se concentra nas novas alterações, e os achados já publicados não se repetem.
+A quantidade de rodadas até a aprovação passou a ser acompanhada junto com a capacidade de encontrar bugs.
+
+A Anthropic relata que as propostas de alteração integradas mais que dobraram de junho a setembro.
+No mesmo período, a proporção revertida caiu mais de quarenta porcento.
+Esses números são observações internas de um processo que combina várias camadas.
+Há testes, revisão automatizada, aprovação humana conforme o risco e reversão rápida.
+Os números não isolam o efeito de cada camada.
+Para adotar revisão por agentes, vale medir tanto os erros que escapam quanto as sugestões prejudiciais.
+E também o trabalho necessário até concluir a revisão.
+A fonte é o relato da equipe do Claude Code.
+
+Vamos aos destaques rápidos de hoje.
+
+O X.Org corrigiu dezessete vulnerabilidades em cinco bibliotecas de aplicações gráficas.
+O boletim de dezesseis de outubro lista as versões corrigidas das cinco bibliotecas.
+Várias falhas envolvem respostas manipuladas de servidores X ou de métodos de entrada, com acessos indevidos à memória e travamentos.
+Uma das bibliotecas afetadas é a responsável por imagens X P M; nesse caso, a falha envolve imagens preparadas.
+Confira os pacotes corrigidos da sua distribuição.
+Para desenvolvedores, o projeto reforça a separação entre a interface gráfica e o código que precisa de privilégios.
+A fonte é o aviso de segurança do X.Org.
+
+A Percona associa picos de escrita do Galera ao cache de páginas do Linux.
+A investigação, publicada em dezesseis de outubro, examinou um ambiente que havia atualizado tanto o banco quanto o sistema operacional.
+A análise por linha de execução apontou para o cache do Galera, componente que replica mudanças entre servidores de banco.
+Segundo o autor, pequenas alterações nesse cache, acessado por mapeamento de memória, podiam marcar unidades maiores para gravação em disco.
+Essas unidades são chamadas folios, e o efeito ampliava a escrita no sistema de arquivos X F S.
+O comportamento depende do kernel, do sistema de arquivos e do padrão de acesso.
+O caso mostra a importância de separar a atividade dos componentes antes de atribuir uma regressão à nova versão do banco.
+A fonte é a investigação da Percona.
+
+A pesquisa chamada "Big Fish" detalha uma elevação local de privilégios no Open B S D, já corrigida.
+A Calif divulgou, em dezesseis de outubro, uma cadeia de falhas no gerenciamento de memória.
+Ela permite obter acesso à conta administrativa, a partir de acesso local.
+Segundo a pesquisa, as proteções do kernel permaneciam habilitadas na demonstração.
+No Open B S D sete ponto nove, as correções zero dezoito e zero vinte e seis saíram em quatorze e trinta de setembro, respectivamente.
+Administradores devem conferir as erratas aplicáveis.
+A novidade de outubro é a análise pública da exploração.
+As fontes são a pesquisa da Calif e as duas erratas do Open B S D.
+
+O GNOME O S Preview adota o ambiente gráfico estável, mas ainda não garante atualização permanente.
+Anunciada em dezesseis de outubro, a edição usa o GNOME cinquenta e um ponto um.
+Já a edição Nightly acompanha as alterações mais recentes do código.
+A Preview é voltada a entusiastas dispostos a testar.
+Uma futura passagem para o GNOME O S Stable pode exigir reinstalação.
+O novo instalador e a integração com o system D homed, para gerenciamento de diretórios pessoais, continuam em desenvolvimento.
+A fonte é o anúncio de Adrian Vovk.
+
+Go apresenta refatorações que perguntam antes de editar.
+O anúncio de dezesseis de outubro mostra o servidor de linguagem de Go coletando escolhas do usuário.
+Entre elas, estão as marcações usadas na serialização dos dados e as convenções de nomes.
+Esse servidor é o Go P L S, que fornece recursos de Go ao editor.
+O suporte está disponível com o servidor na versão zero ponto vinte e quatro ponto zero.
+E com a extensão Go zero ponto cinquenta e seis ponto zero do V S Code.
+A colaboração com a equipe de Dart propõe estender o L S P, protocolo de comunicação entre editores e servidores de linguagem.
+Mover declarações aparece como prévia para uma versão futura; mudar assinaturas está no roteiro de desenvolvimento.
+A fonte é o Go Blog.
+
+Uma pesquisa reproduziu as sementes usadas para gerar cinco curvas criptográficas do NIST.
+Em dezesseis de outubro, a Anthropic publicou uma reconstrução dos valores usados na geração dessas cinco curvas.
+O procedimento usa um gerador pseudoaleatório inicializado com horários de 1997 e 1998.
+Filippo Valsorda relata ter reimplementado o algoritmo e verificado o resultado.
+A pesquisa trata da procedência dos parâmetros públicos dessas curvas.
+Permanece sem explicação o descarte de alguns candidatos válidos.
+Segundo os autores, o resultado não exige mudança operacional de quem utiliza essas curvas.
+As fontes são a pesquisa da Anthropic e a verificação de Valsorda.
+
+O Shelly três ponto um ponto sete adiciona um motor de pacotes escrito em Zig.
+O gerenciador, para sistemas da família Arch Linux, disponibiliza o R L P M.
+É uma implementação independente para resolver dependências e executar operações com pacotes nativos.
+Mas as compilações padrão do projeto continuam selecionando a biblioteca tradicional usada pelo pacman.
+As variantes compiladas sem essa biblioteca usam o novo motor.
+Para avaliar a alternativa, confira qual variante instalou e comece em um ambiente descartável.
+O motor de pacotes cuida de uma parte central da administração do sistema.
+A fonte são as notas da versão três ponto um ponto sete do Shelly.
+
+A Apple documentou inferência distribuída com M L X em quatro Mac Studios.
+M L X é a estrutura de computação da Apple para aprendizado de máquina.
+Dividir o trabalho entre as máquinas permite acomodar pesos e cálculos que excedem uma só.
+No guia de quinze de outubro, a empresa mediu trinta e seis vírgula setenta e três tokens por segundo para o modelo [M Y UW1 Z] Spark Open.
+Foram usadas quatro máquinas M cinco Ultra, com paralelismo de tensores e comunicação R D M A por Thunderbolt.
+O teste usa pesos de quatro bits, no formato N V F P quatro.
+O contexto é de oito mil cento e noventa e dois tokens, com geração de cento e vinte e oito tokens.
+O resultado se refere a esse conjunto de hardware e configuração.
+A fonte é o guia da Apple, com suas tabelas de testes.
+
+O Google Cloud publicou receitas para servir o modelo "Reflection Beam" reutilizando o contexto.
+O guia de dezesseis de outubro combina roteamento que considera o cache com armazenamento desse cache em memória e em S S D.
+Também separa o processamento do prompt da geração de tokens.
+Em uma sessão longa de agente, a próxima chamada pode ser encaminhada à réplica que já processou o histórico.
+Isso reduz a repetição de cálculos.
+Uma receita usa o projeto L L M D com V L L M.
+A outra usa NVIDIA Dynamo com S G Lang.
+Os ganhos anunciados vêm de testes de desempenho de cliente.
+Os conjuntos usam hardware diferente, e cada um deve ser comparado à sua própria configuração de referência.
+A fonte é a publicação do Google Cloud com a arquitetura e as condições dos testes.
+
+Para fechar, a Cloudflare começa a avaliar continuamente o comportamento dos bots verificados.
+O sistema, anunciado em dezesseis de outubro, observa padrões de respeito às preferências de rastreamento definidas pelos sites.
+São as preferências publicadas no arquivo de orientação para robôs.
+O sistema também observa o respeito às respostas de erro quatrocentos e vinte e nove, que indicam excesso de requisições.
+A empresa já utiliza esse sistema internamente.
+Ela planeja publicar avaliações no Radar e permitir que clientes escolham um limiar de confiança para tratar esse tráfego.
+A disponibilização pública ainda é um plano.
+A fonte é o anúncio da Cloudflare.
+Para quem escreve robôs de rastreamento, vale conferir se o programa respeita as preferências e os limites de cada site ao longo das visitas.
