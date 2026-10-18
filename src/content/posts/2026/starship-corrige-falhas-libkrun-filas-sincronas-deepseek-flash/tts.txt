@@ -1,0 +1,189 @@
+Starship corrige falhas no prompt; libkrun reduz tempo de compilação em teste.
+
+O Starship publicou duas correções de segurança para operações que acontecem automaticamente ao montar o prompt do terminal.
+No libkrun, uma proposta experimental reduziu em vinte e oito porcento o tempo de uma compilação.
+A mudança está na maneira como a máquina virtual atende pedidos de acesso a arquivos.
+A edição também traz a atualização do DeepSeek Flash, mudanças em ferramentas de desenvolvimento e alertas para quem opera agentes e infraestrutura.
+
+O Starship corrige riscos de execução de comandos e consumo de memória.
+O prompt é aquela área do terminal que indica onde você vai digitar um comando.
+O Starship monta essa área com informações como a branch e a linguagem do projeto.
+A versão um ponto vinte e sete ponto zero, lançada em dezessete de outubro, corrige duas falhas nesse trabalho automático de consultar o ambiente.
+
+A primeira envolve a chamada ao executável do Git.
+O Starship passava uma opção que fazia o Git pular a verificação de propriedade do repositório.
+Segundo o aviso de segurança, configurações de um repositório pertencente a outro usuário da máquina podiam provocar execução de comandos.
+Esses comandos rodavam com as permissões de quem abria o terminal naquela pasta.
+Na configuração padrão, o problema afeta versões desde a um ponto dezessete ponto zero.
+Com o módulo opcional de métricas do Git, o intervalo começa antes, na um ponto um ponto zero.
+A versão um ponto vinte e seis ponto zero ainda está entre as afetadas.
+
+A segunda falha está na leitura de metadados do projeto.
+Um link simbólico, que é um arquivo apontando para outro destino, podia levar o prompt a uma leitura sem limite.
+Isso consumia memória continuamente e impedia a conclusão do prompt.
+O relatório reproduziu o problema em Linux e macOS, com a configuração padrão.
+Windows não foi avaliado.
+
+Quem usa Starship deve atualizar para a versão um ponto vinte e sete ponto zero, ou conferir o pacote corrigido da distribuição.
+O risco aparece na montagem automática do prompt, antes de o usuário executar comandos do projeto.
+A versão também acrescenta módulos para o controle de versões Jujutsu e suporte a prompt à direita no Bash.
+As fontes são as notas da versão do Starship e os dois avisos de segurança do projeto, sobre a chamada ao Git e o consumo de memória.
+
+Agora, o experimento do libkrun com filas síncronas.
+Sergio Lopez abriu a proposta em dezesseis de outubro.
+O libkrun é uma biblioteca usada para executar máquinas virtuais.
+A mudança atua no VirtIO F S, mecanismo que permite à máquina virtual acessar arquivos compartilhados pelo sistema hospedeiro.
+
+No caminho habitual, o processador virtual entrega o pedido e outra thread faz o trabalho.
+Thread, aqui, é uma linha de execução do programa.
+Depois, uma interrupção avisa que a resposta está pronta.
+A proposta cria uma fila por processador virtual e atende o pedido na própria thread que o enviou.
+É por isso que esse caminho é chamado de síncrono.
+Quando a thread retorna ao sistema convidado, a resposta já está disponível.
+Assim, há menos transferências de trabalho e notificações entre threads.
+
+No teste publicado por Lopez, a tarefa era compilar o firmware do libkrun numa máquina virtual com oito processadores virtuais, num Mac M três Pro.
+O tempo caiu de sete minutos e quarenta e quatro segundos para cinco minutos e trinta e quatro segundos.
+É uma redução de aproximadamente vinte e oito porcento.
+A medição se limita a essa compilação e a essa configuração.
+
+Enquanto o pedido é atendido, aquele processador virtual fica ocupado com ele.
+A troca a avaliar é entre esse tempo de ocupação e a economia nas transferências de trabalho.
+A proposta ainda está em rascunho e exige suporte correspondente no sistema convidado.
+O teste oferece um resultado concreto para investigar esse equilíbrio em outras cargas.
+A fonte é a proposta de Sergio Lopez no libkrun, com as medições publicadas pelo autor.
+
+A DeepSeek atualizou o Flash e relata ganhos em tarefas com ferramentas.
+O lançamento de dezessete de outubro atualiza o modelo Flash da família V quatro ponto um.
+A empresa declara melhorias em raciocínio, programação e tarefas com ferramentas.
+Na tabela do fornecedor, a pontuação no "Terminal-Bench" quatro ponto zero passa de trinta e um vírgula dois para quarenta e dois vírgula três.
+Nesse teste, o "Claude Code" foi usado como ambiente de execução do agente.
+A DeepSeek também relata respostas mais curtas e menor tempo para concluir tarefas.
+São avaliações do próprio fornecedor, úteis como ponto de partida para testar o modelo nas tarefas da sua aplicação.
+
+Para quem executa o modelo por conta própria, há um detalhe importante.
+O lançamento não inclui um template de chat em Jinja, formato comum para transformar mensagens em entrada do modelo.
+Ele fornece uma implementação de referência em Python e o "deepseek-recipe".
+Esse segundo recurso é um conjunto de bibliotecas Rust com interface para Python.
+Ele prepara as mensagens no formato esperado pelo modelo e interpreta as respostas.
+Isso inclui pedidos de uso de ferramentas e conteúdo recebido aos poucos.
+
+Mas executar o modelo, acionar as ferramentas e fazer a comunicação H T T P continua sendo responsabilidade da aplicação.
+Ao adaptar um agente, teste o ciclo completo.
+O modelo pede uma ferramenta, a aplicação executa, devolve o resultado e a conversa continua.
+As fontes são o cartão técnico e a documentação desse lançamento da DeepSeek.
+
+Vamos aos destaques rápidos de hoje.
+No Postgri [EH1 S] [K Y UW1] [EH1 L], uma análise explica grandes diferenças no custo estimado de consultas.
+Em texto de dezessete de outubro, Christophe Pettus compara consultas que retornam quantidades parecidas de linhas.
+Mesmo assim, elas recebem estimativas de custo cerca de oitenta vezes diferentes.
+Esses números são estimativas usadas para escolher o plano de execução.
+
+A diferença está na relação entre a ordem do índice e a disposição física das linhas.
+Acessos mais sequenciais recebem outro custo.
+O parâmetro de custo de acesso aleatório a páginas também incorpora expectativas de cache.
+Antes de alterá-lo, observe os planos e as leituras reais.
+O autor sugere o valor de um vírgula um, mas essa sugestão pressupõe uma carga transacional em armazenamento S S D.
+E o conjunto de dados acessado precisa caber em memória.
+As fontes são a análise de Pettus e a documentação de custos do planejador do Postgri [EH1 S] [K Y UW1] [EH1 L].
+
+A OWASP removeu exemplos de troca de chaves que não autenticavam os participantes.
+A alteração foi incorporada em dezessete de outubro, nos guias de Java e ponto NET.
+Ela substitui exemplos próprios de criptografia pela orientação de usar T L S no transporte.
+Quando a mensagem precisa continuar cifrada além da conexão, a orientação é usar bibliotecas mantidas.
+
+Criptografar uma mensagem para uma chave pública exige confiar que essa chave pertence ao destinatário correto.
+O guia também trata do H P K E, um esquema de criptografia híbrida.
+O modo básico desse esquema não autentica o remetente nem impede que uma mensagem seja reapresentada.
+Assinaturas e detecção de duplicatas precisam entrar no desenho quando essas garantias forem necessárias.
+As fontes são a alteração da OWASP e seu guia de segurança Java.
+
+Na Imprint, um fluxo de aprovação acelerada tem a elegibilidade conferida pelo sistema de integração.
+Will Larson relata que a mediana de revisão passou de trinta e três para setenta e sete minutos.
+No mesmo período de dois anos, o volume médio de propostas de alteração por engenheiro quadruplicou.
+O relato foi publicado em dezessete de outubro.
+
+O fluxo se chama "small-change" e exige menos de mil linhas.
+Também exige ausência de achados automatizados de prioridade um ou dois, experiência prévia do autor e limites de serviços afetados.
+Bibliotecas compartilhadas ficam de fora.
+Uma verificação automática no processo de build determina a elegibilidade.
+Colocar a etiqueta na proposta, por si só, não libera a aprovação acelerada.
+Apenas cerca de dez porcento das mudanças se qualificavam no começo, e Larson considera cedo para avaliar o resultado.
+A fonte é o relato de Will Larson sobre esse fluxo na Imprint.
+
+O OpenCode informou um incidente em contas do Console com provedores externos vinculados.
+No comunicado atualizado de dezessete de outubro, a equipe afirma que a violação de segurança atingiu um vírgula quatro porcento dos usuários do Console.
+Os atingidos estavam nesse grupo de contas com provedores vinculados.
+Segundo a empresa, os afetados foram avisados por e-mail.
+A resposta ao incidente envolvia Anthropic, OpenAI e Google.
+O comunicado ainda descrevia o caso como em andamento, sem detalhar o mecanismo ou os dados comprometidos.
+Quem usa o Console deve conferir a notificação oficial e a atividade das contas vinculadas.
+A fonte é o comunicado atualizado do OpenCode.
+
+A pesquisa "PwnEscape" detalha uma fuga de máquina virtual por uma falha na rede do Linux.
+A equipe da "Pwn AI" descreve um problema nos metadados de um cálculo de verificação de pacotes.
+Esses metadados podiam alterar um cabeçalho depois de ele já ter sido validado.
+A equipe relata leitura de memória do hospedeiro e execução de código administrativo em laboratório.
+
+A Vercel confirma o vazamento de memória em seus ambientes isolados de produção.
+Já a execução de código é situada pela empresa nas máquinas dos pesquisadores.
+Segundo a Vercel, os relatos não demonstraram acesso a arquivos, segredos ou dados de aplicações de clientes.
+
+O kernel, núcleo do Linux, recebeu uma correção para validar esses metadados em caminhos de I P versão quatro.
+Os mantenedores descrevem a mudança como uma camada de defesa.
+Eles dizem que uma validação mais completa na entrada ainda exige trabalho.
+Quem administra hospedeiros deve conferir se o fornecedor incorporou esse patch.
+As fontes não estabelecem uma versão corrigida única para todas as distribuições.
+As fontes deste bloco são a pesquisa da "Pwn AI", o relato da Vercel e o patch no Linux.
+
+A DeepSeek também documentou serviços de busca e leitura de páginas para agentes.
+A [EY1 P IY1 AY1] chamada "Search" devolve resultados estruturados.
+Já o serviço "Fetch" busca uma página e entrega seu conteúdo em Markdown.
+A documentação anuncia o preço de setenta e cinco centavos de dólar por mil requisições bem-sucedidas, em cada serviço.
+Buscas vazias, falhas e pedidos que excedem o tempo de espera ficam fora da cobrança.
+
+Para chamadas de ferramentas feitas no servidor por "DeepSeek Harness", Claude Code ou Codex, o guia informa gratuidade atual.
+Nesses casos, o início da cobrança está marcado para primeiro de novembro, à meia-noite de Pequim.
+Isso permite separar o custo de obter conteúdo do custo de processá-lo no modelo.
+A fonte é a documentação de Search e Fetch da DeepSeek.
+
+O Touri levou seu aplicativo de agentes persistentes ao Linux, em prévia para a arquitetura x oitenta e seis de sessenta e quatro bits.
+A versão zero ponto dois ponto zero saiu em dezessete de outubro.
+Ela oferece pacotes para organizar conversas, rotinas e aprovações usando ferramentas como Codex e Claude Code.
+O estado local fica em SQLite, e as credenciais usam o chaveiro do sistema.
+
+As notas registram limites importantes.
+A restrição de acesso a pastas de bots locais e a auditoria de dependências Linux continuam pendentes.
+O controle do computador hospedeiro está indisponível no Linux.
+E não há pacotes nativos para ARM de sessenta e quatro bits nessa versão.
+É uma opção para experimentar em ambiente descartável, com contas e arquivos de teste.
+As fontes são as notas da prévia e a documentação do Touri.
+
+O llama C P P incorporou suporte ao Kolibri um, modelo da Aleph Alpha.
+A integração foi aceita em dezessete de outubro e acrescenta conversão e execução do modelo.
+É um avanço de disponibilidade em relação ao lançamento, que cobrimos em quatro de outubro.
+O autor da integração informa que a versão quantizada Q quatro K M ocupa quarenta e cinco gibibytes.
+Ela gerou aproximadamente cento e seis tokens por segundo num servidor com quatro aceleradores A oitocentos.
+Quantização reduz a precisão dos pesos para economizar memória.
+Esse resultado continua condicionado àquela configuração de servidor.
+A fonte é a integração do Kolibri um no llama C P P.
+
+O projeto T S C T S corrigiu recompilações desnecessárias no modo de acompanhamento.
+Esse projeto experimental da Vercel Labs porta o compilador TypeScript Go para TypeScript e gera código nativo com a ferramenta "scriptc".
+Uma mudança integrada na madrugada de dezoito de outubro ajusta como o compilador reconhece alterações na interface de um arquivo.
+O ajuste vale para o modo de acompanhamento, que recompila quando os arquivos mudam.
+
+Sem informações persistidas de build, mudanças internas podiam provocar novas verificações nos arquivos que importavam aquele código.
+A correção usa a forma das declarações para evitar parte desse trabalho nas edições seguintes.
+As fontes são o projeto T S C T S e a descrição técnica da correção.
+
+Por fim, um novo relato sobre Codex no macOS registra trezentos e vinte e três gigabytes em arquivos de falha.
+O comentário é de dezessete de outubro, numa discussão de problema mais antiga.
+Ele descreve o acúmulo em duas pastas do "Crashpad", componente que registra informações de travamentos.
+O usuário informa macOS quinze ponto sete ponto quatro em Apple Silicon, com o aplicativo ChatGPT e Codex.
+O aplicativo continuava utilizável enquanto o disco enchia.
+
+É um relato individual, útil para orientar uma conferência do espaço ocupado pelos dados do aplicativo.
+A discussão não estabelece que todas as instalações sejam afetadas nem confirma uma correção geral.
+A fonte são os relatos na discussão do problema no projeto Codex.
+Evite publicar os arquivos de diagnóstico brutos: eles podem conter memória e informações privadas do processo.
