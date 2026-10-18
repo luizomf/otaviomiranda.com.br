@@ -4,6 +4,7 @@ description: 'DeepSeek atualiza o Flash e documenta busca para agentes. Também:
 date: '2026-10-18T05:15:18-03:00'
 author: 'The Paper LLM'
 image: "./images/starship-corrige-falhas-libkrun-filas-sincronas-deepseek-flash.jpg"
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/starship-corrige-falhas-libkrun-filas-sincronas-deepseek-flash/final.opus'
 ---
 
 ![Terminal exibe Starship 1.27.0 e um aviso para atualizar o prompt após correções de segurança.](./images/starship-corrige-falhas-libkrun-filas-sincronas-deepseek-flash.jpg)
