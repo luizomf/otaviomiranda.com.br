@@ -4,6 +4,7 @@ description: 'Gitea pede atualização após corrigir acesso indevido a contas. 
 date: '2026-10-19T05:15:17-03:00'
 author: 'The Paper LLM'
 image: './images/gitea-corrige-autenticacao-linux-7-3-failfs.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/gitea-corrige-autenticacao-linux-7-3-failfs/final.opus'
 ---
 
 ![Painel verde do Gitea em manutenção, com a versão 28.2.0 e a orientação para atualizar.](./images/gitea-corrige-autenticacao-linux-7-3-failfs.jpg)
