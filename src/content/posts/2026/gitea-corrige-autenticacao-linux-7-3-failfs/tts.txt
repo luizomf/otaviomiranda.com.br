@@ -1,0 +1,136 @@
+Gitea corrige falhas de autenticação, e Linux sete ponto três chega com failfs.
+
+As correções do Gitea abrem a edição com uma ação para quem hospeda repositórios: atualizar a instalação.
+O Linux sete ponto três chega à versão final com o failfs, que ajuda a restringir como programas encontram arquivos.
+Também há uma proposta para simplificar código gerado por agentes.
+E a edição traz novidades em diagnóstico, segurança de memória e ferramentas de inteligência artificial.
+
+Gitea vinte e oito ponto dois ponto zero corrige falhas que permitiam assumir a identidade de outros usuários.
+A versão foi lançada em dezoito de outubro e traz correções de autenticação e acesso a dados.
+O projeto serve para hospedar repositórios Git e automações de desenvolvimento.
+Seus mantenedores recomendam atualizar o quanto antes.
+
+Uma das falhas afeta a associação de identidades OpenID, mecanismo de login por provedor externo.
+O Gitea aceitava a resposta do provedor sem confirmar que o usuário conectado havia iniciado a associação.
+Com OpenID habilitado, um atacante podia induzir uma vítima já autenticada a abrir uma resposta preparada.
+Com isso, vinculava uma identidade controlada por ele à conta dela.
+Depois, podia entrar como a vítima sem passar pelo segundo fator do login local por senha.
+A correção exige um valor temporário vinculado ao usuário, para confirmar a operação iniciada.
+
+A outra falha envolve instalações que usam uma autoridade certificadora para autenticar usuários com certificados S S H.
+O problema ocorria sob condições específicas.
+Uma delas era aceitar identificadores arbitrários nos certificados.
+A outra era permitir ao atacante obter um certificado adequado, assinado pela autoridade confiável.
+Nessas condições, a busca confundia tipos de registro e autenticava o pedido como outro usuário.
+Os dois avisos apontam vinte e oito ponto dois ponto zero como a versão corrigida.
+
+A seção de segurança do anúncio lista doze vulnerabilidades: nove corrigidas agora e três resolvidas anteriormente.
+Entre as correções atuais está um vazamento de anexos ao criar um rascunho de lançamento.
+Outra corrige o consumo excessivo de memória que alguém com um token de runner podia provocar na interface de artefatos do Actions.
+Esses runners executam as tarefas de automação.
+O conjunto justifica a atualização mesmo para instalações que não usam OpenID.
+As fontes são o anúncio do Gitea e os avisos de segurança sobre OpenID e certificados S S H.
+
+Linux sete ponto três chega à versão final com failfs para restringir buscas por arquivos.
+Linus Torvalds anunciou a versão em dezoito de outubro.
+Ela inclui o failfs, um sistema de arquivos interno do kernel cujas operações falham.
+Ele se integra a uma interface que permite mudar a raiz usada por um processo para localizar arquivos.
+A integração já havia sido abordada na cobertura do ciclo de desenvolvimento.
+A novidade agora é a chegada à versão final.
+
+O efeito depende de onde o failfs é aplicado.
+Colocar a raiz do processo nesse sistema impede buscas por caminhos absolutos, que localizam arquivos a partir da raiz.
+Colocar o diretório de trabalho nele impede buscas relativas a esse diretório.
+Mas continuam funcionando as buscas que partem explicitamente de descritores de diretório.
+Esses descritores são referências que o programa já mantém abertas.
+
+Com as duas restrições, o programa precisa dessas referências explícitas para localizar arquivos.
+Isso ajuda a construir uma sandbox, um ambiente que limita o acesso de um programa aos recursos do sistema.
+A adoção exige cuidado.
+Com a raiz no failfs, também falha a busca pelo interpretador necessário para iniciar um binário ligado dinamicamente.
+
+A documentação descreve condições de entrada e formas de sair desse estado.
+Elas envolvem privilégios e namespaces, os mecanismos de separação de recursos do Linux.
+Quem constrói o isolamento precisa controlar esses caminhos.
+Atualizar o kernel, por si só, não aplica o failfs aos programas existentes.
+As fontes são o anúncio de Torvalds, reproduzido pela L W N, e a documentação do failfs na versão sete ponto três.
+
+Sean Goedecke propõe explicitar quais garantias o agente pode dispensar.
+Em ensaio de dezenove de outubro, o autor argumenta que decidir onde uma aplicação pode aceitar atraso ajuda a simplificar sua arquitetura.
+O mesmo vale para decidir onde ela pode aceitar dados temporariamente desatualizados.
+
+Ele relata encontrar alterações geradas por inteligência artificial que acrescentam travas e verificações para satisfazer exigências que ninguém pediu.
+Um exemplo é tentar manter duas cópias de um cache perfeitamente sincronizadas, quando o produto aceita uma pequena diferença entre elas.
+A coordenação adicional aumenta o trabalho do sistema e a complexidade da manutenção.
+
+Uma aplicação prática é registrar essas tolerâncias junto dos requisitos.
+Quanto tempo um dado pode ficar desatualizado?
+Quais tarefas realmente precisam acontecer na mesma ordem para todos?
+Ao revisar o código, vale perguntar qual garantia acordada cada mecanismo de coordenação protege.
+A recomendação parte da experiência do autor.
+As tolerâncias precisam ser decididas por quem conhece o produto e suas obrigações de segurança.
+A fonte é o ensaio de Sean Goedecke sobre os requisitos que uma aplicação não tem.
+
+Agora, os destaques rápidos para hoje.
+
+O system D ganha monitoramento de tráfego Varlink no terminal.
+Sebastian Wick apresentou, em dezoito de outubro, ferramentas recém-incorporadas para observar essa comunicação entre processos.
+Um serviço de monitoramento captura mensagens conforme filtros.
+Uma ferramenta de terminal permite examiná-las ou exportá-las em JSON para análise.
+Isso ajuda a investigar quais pedidos um componente envia a outro.
+A disponibilidade nas distribuições depende de elas incorporarem a novidade.
+A fonte é a explicação de Sebastian Wick.
+
+Valen experimenta verificar segurança de memória de trás para frente.
+Em texto de dezoito de outubro, Evan Ovadia descreve um verificador que analisa cada função do fim ao começo.
+Ao encontrar o uso de uma referência, ele registra que ela precisa continuar válida.
+Ao encontrar uma alteração anterior que a invalidaria, sinaliza o problema.
+A análise busca detectar acessos à memória por referências que deixaram de ser válidas.
+A linguagem continua experimental, com partes do controle de fluxo ainda por implementar.
+O ganho de velocidade sugerido pelo autor ainda não foi medido.
+A fonte é a explicação do algoritmo publicada por Evan Ovadia.
+
+Um pesquisador reproduz as duas tabelas do R C dois usando pi.
+A nota de Khalid Hamadeh, de dezoito de outubro, mostra como embaralhar os números de zero a duzentos e cinquenta e cinco.
+O procedimento usa grupos de três dígitos de pi para escolher as trocas.
+Com dois pontos de partida, ele reproduz as duas tabelas da especificação do algoritmo de criptografia R C dois.
+O documento original dizia que uma delas se baseava em pi, mas não fornecia o método.
+A correspondência pode ser conferida.
+A construção histórica exata de Ron Rivest, porém, continua sem comprovação.
+Segundo Hamadeh, o resultado não altera a segurança do algoritmo.
+As fontes são a pesquisa de Hamadeh e a especificação do R C dois.
+
+O projeto "STROT" corrige uma demonstração e expõe variação entre os modelos preparados pela ferramenta.
+Esse projeto Python usa um modelo de linguagem para preparar código e um artefato reutilizável.
+Na execução, um modelo local classifica entradas e pode se abster quando a confiança é baixa.
+
+A demonstração de "Pac-Man" recebeu uma atualização em dezenove de outubro.
+Os mantenedores retiraram a afirmação de que a estratégia acompanhava de modo confiável o estado do jogo.
+Novas compilações podiam produzir comportamentos muito diferentes.
+A proposta permite experimentar a separação entre preparação e execução das decisões.
+Antes de uso real, ela exige avaliação específica para cada tarefa.
+As fontes são o projeto STROT e a correção publicada na demonstração.
+
+A Vercel passa a mostrar afinidade de sessão nos logs do "AI Gateway".
+A visualização, anunciada em dezoito de outubro, agrupa chamadas a modelos por conversa.
+Ela mostra custo, modelos, provedores e aproveitamento de cache.
+A afinidade procura enviar cada rodada ao provedor usado na anterior.
+Esse provedor pode já ter boa parte do contexto processada.
+
+Para agrupar explicitamente as requisições, a aplicação pode repetir o mesmo identificador de sessão.
+Ela pode informar esse valor nas opções do provedor para o gateway ou em um cabeçalho da requisição.
+A novidade ajuda a conferir o reaproveitamento do contexto e as mudanças de provedor ao longo da conversa.
+A fonte é o anúncio da Vercel.
+
+O plugin de integração entre L L M e Datasette corrige uma quebra causada por uma dependência indireta.
+A atualização, versão zero ponto um ponto um, foi publicada em dezoito de outubro.
+O Datasette é uma ferramenta para explorar e publicar dados.
+Já o L L M é um aplicativo para usar modelos de linguagem pelo terminal ou por Python.
+O plugin conecta os dois.
+
+Simon Willison relata que o plugin usava uma biblioteca de comunicação H T T P instalada pelo aplicativo principal.
+Só que não declarava essa biblioteca como dependência própria.
+Quando o aplicativo trocou de biblioteca, a integração quebrou.
+As fontes são o relato do mantenedor, a publicação da nova versão, o site do Datasette e a documentação do L L M.
+A versão corrige o problema.
+O caso reforça a importância de declarar as bibliotecas que um plugin usa diretamente.
