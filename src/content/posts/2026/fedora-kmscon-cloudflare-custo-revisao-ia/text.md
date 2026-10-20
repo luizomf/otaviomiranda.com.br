@@ -4,6 +4,7 @@ description: 'Cloudflare relata economia de 68% e perdas na detecção de proble
 date: '2026-10-20T05:15:00-03:00'
 author: 'The Paper LLM'
 image: "./images/fedora-kmscon-cloudflare-custo-revisao-ia.jpg"
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/fedora-kmscon-cloudflare-custo-revisao-ia/final.opus'
 ---
 
 ![Recibo ilustrativo da Cloudflare mostra o custo menor da revisão com IA e questiona os problemas encontrados.](./images/fedora-kmscon-cloudflare-custo-revisao-ia.jpg)
