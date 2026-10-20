@@ -1,0 +1,182 @@
+Fedora detalha o kmscon; Cloudflare reduz custo de revisão de código com inteligência artificial.
+
+O console do Fedora ganha recursos e muda algumas rotinas de administração.
+Na revisão de código com inteligência artificial, a Cloudflare mostra uma economia expressiva, acompanhada de perdas que precisam entrar na conta.
+A edição também traz um alerta para sites WordPress e uma mudança na divulgação de falhas do [K ER1 L].
+E tem atualizações de Go, Open B S D e ferramentas de desenvolvimento.
+
+O Fedora explica o que muda nos consoles com o kmscon.
+Em dezenove de outubro, o projeto publicou um guia sobre a adoção do kmscon no Fedora quarenta e cinco.
+Estamos falando das telas de login que permitem trabalhar fora do ambiente gráfico.
+Com o kmscon, quem desenha essas telas é um programa separado do kernel, o núcleo do sistema operacional.
+
+Já cobrimos essa troca no anúncio da versão beta.
+Agora, o guia detalha mudanças que afetam scripts e manutenção.
+Uma delas está na identificação do terminal.
+Dentro do kmscon, o comando que informa essa identificação passa a apontar para um pseudoterminal, em vez de um dispositivo de console tradicional.
+Scripts que usam esse caminho para reconhecer o console precisam ser revistos.
+
+Outra mudança envolve a passagem do controle do hardware gráfico para uma aplicação.
+O kmscon usa de forma exclusiva a interface D R M, pela qual acessa esse hardware.
+Por isso, iniciar uma sessão gráfica a partir dele exige liberar esse acesso com o comando específico indicado no guia.
+Os comandos tradicionais para mudar a fonte e o mapa de teclas também deixam de controlar esse console.
+As fontes passam a ter configuração própria, e o layout do teclado acompanha a configuração feita pela ferramenta de idioma e teclado do sistema.
+
+Em troca, a mudança permite fontes mais adequadas a telas de alta resolução, melhor suporte a Unicode e rolagem.
+Para quem depende do console na manutenção, vale testar o fluxo de recuperação antes de atualizar o sistema.
+O guia também mostra como manter um dos terminais virtuais com o console tradicional.
+A fonte é o guia do kmscon publicado na Fedora Magazine.
+
+Na Cloudflare, a revisão com inteligência artificial ficou sessenta e oito porcento mais barata, mas passou a detectar menos problemas de desempenho.
+O relato, publicado em dezenove de outubro, mostra uma queda no custo médio de cada revisão.
+Ele passou de dois dólares e quarenta e três centavos para setenta e sete centavos de dólar.
+A duração mediana caiu de quatro minutos e nove segundos para um minuto e trinta e dois segundos.
+Essa economia combina mudanças no software, nos modelos e no esforço de raciocínio usado por eles.
+
+Uma parte veio do cache de prefixo.
+Esse mecanismo reaproveita o processamento do trecho inicial das instruções enviadas ao modelo.
+A taxa geral de reaproveitamento chegava a noventa e sete porcento.
+Só que a primeira chamada de cada sessão encontrava conteúdo em cache em apenas quatorze a vinte e seis porcento dos casos.
+
+O bloco armazenado misturava instruções comuns com informações variáveis, como o diretório do repositório.
+A Cloudflare separou a parte estável e deu a ela seu próprio ponto de armazenamento.
+Isso permitiu reutilizar essa parte em revisões de outros repositórios.
+
+Mas a qualidade não se comportou da mesma forma em todas as especialidades e configurações de raciocínio.
+Segundo a avaliação interna, o revisor de qualidade de código, com esforço alto, manteve aproximadamente a quantidade de problemas reais encontrados.
+E exagerou menos na gravidade atribuída a esses problemas.
+O custo de setenta e sete centavos já considera essa configuração.
+
+Já o revisor de desempenho, mantido em esforço médio, encontrou cerca de sessenta e quatro porcento menos problemas classificados como importantes por revisão.
+Na segurança também houve queda, mas sem significância estatística na amostra.
+
+Para avaliar os achados, a empresa usou alterações posteriores feitas pelos autores e julgamentos de modelos.
+Essas medidas têm limites.
+Mudar uma linha não comprova que a crítica estava correta, e a janela final de qualidade cobria apenas um dia.
+
+Para quem mantém agentes revisores, o caso oferece duas verificações concretas.
+A primeira é observar a primeira requisição que chega ao provedor.
+A segunda é medir quais defeitos continuam sendo encontrados depois de baratear a execução.
+A fonte é o relato da Cloudflare sobre custos, cache e avaliação de qualidade.
+
+Agora, um alerta para quem administra WordPress com o plugin "Rank Math PRO".
+Alguns arquivos distribuídos pelo fornecedor continham malware, e atualizar não basta quando o pacote afetado chegou a ser ativado.
+
+É preciso conferir a origem e o horário do download da versão três ponto zero ponto cento e vinte e três.
+Segundo o fornecedor, os arquivos afetados foram distribuídos numa janela entre quinze e dezesseis de outubro.
+No horário de Brasília, ela começa às dezessete horas e dois minutos do dia quinze e termina às quatro horas e doze minutos do dia dezesseis.
+O alerta ganhou nova cobertura em dezenove de outubro.
+
+O Rank Math é um plugin de otimização para mecanismos de busca.
+O incidente afeta a edição PRO.
+Segundo a empresa, a versão gratuita distribuída pelo WordPress ponto org ficou fora do caso.
+
+Se o pacote afetado foi instalado e ativado, a orientação é tratar o site como comprometido.
+O malware pode recriar acessos ocultos.
+Por isso, apenas atualizar ou desativar o plugin deixa a recuperação incompleta.
+
+O fornecedor recomenda restaurar os arquivos e o banco de dados a partir de um backup limpo, anterior ao incidente.
+Também é preciso verificar o ambiente e trocar senhas, chaves de [EY1 P IY1 AY1] e outras credenciais acessíveis ao site.
+Depois, instalar a versão limpa, três ponto zero ponto cento e vinte e quatro.
+
+Para quem instalou o pacote sem ativá-lo, a orientação é remover os arquivos afetados, instalar a versão limpa e fazer uma varredura.
+Se houve ativação e não existe backup confiável, envolva a hospedagem ou um profissional de segurança.
+A investigação pode precisar alcançar contas administrativas, tarefas agendadas e arquivos fora do WordPress.
+O número de sites comprometidos não foi estabelecido nas fontes consultadas.
+As fontes são as orientações do Rank Math e a cobertura de dezenove de outubro do BleepingComputer.
+
+O [K ER1 L] vai passar a receber publicamente relatos de falhas de gravidade baixa e média.
+Daniel Stenberg anunciou a mudança em vinte de outubro, com entrada em vigor no dia vinte e seis.
+Esses relatos deverão ser abertos como registros públicos de problemas no "Git Hub".
+Casos de gravidade alta e crítica continuarão privados no HackerOne.
+Pesquisadores que tiverem dúvida sobre a gravidade ainda poderão começar pelo canal privado.
+
+O mantenedor atribui a decisão à sobrecarga causada pelo volume de relatos.
+Abrir a investigação permite que mais pessoas ajudem a avaliar o impacto, revisar correções e preparar avisos.
+Stenberg reconhece o custo de segurança dessa escolha.
+A divulgação antecipada também amplia a janela em que atacantes podem conhecer uma fraqueza ainda sem correção.
+A fonte é o anúncio da nova política de divulgação no blog de Daniel Stenberg.
+
+Vamos aos destaques rápidos de hoje.
+
+O Go recebeu correções que bloqueiam cadeias com certificados intermediários considerados não confiáveis.
+As versões são a um ponto vinte e sete ponto três e a um ponto vinte e seis ponto dez, publicadas em dezenove de outubro.
+A falha corrigida está no pacote que verifica certificados.
+A correção filtra cadeias por oito identificadores de chaves públicas.
+
+A equipe recomenda atualização imediata.
+Quem distribui aplicações Go precisa incorporar a correção às compilações e reimplantar os binários.
+O aviso público menciona preocupações de segurança específicas, mas não detalha a causa do bloqueio.
+As fontes são o registro de segurança, as versões oficiais e a alteração de código do projeto Go.
+
+O Open B S D oito ponto zero chega com até sessenta e quatro processadores virtuais por máquina convidada.
+Lançado em vinte de outubro, o sistema amplia seus recursos de virtualização.
+Na arquitetura [EY1 EH1 M D IY1] sessenta e quatro, também cresce o espaço de endereçamento virtual do kernel.
+Ele passa de quatro para quinhentos e doze gigabytes.
+
+Esse espaço organiza os endereços usados pelo kernel.
+Seu tamanho não equivale à memória RAM instalada.
+É uma atualização relevante para quem usa Open B S D como hospedeiro de máquinas virtuais.
+A fonte são as notas oficiais da versão oito ponto zero.
+
+A Tailscale lançou a versão beta do "MagicRoute" para reduzir trocas desnecessárias de conexão.
+O anúncio é de dezenove de outubro, para os planos Premium e Enterprise.
+O recurso escolhe conectores por localização aproximada e mantém a preferência enquanto o conector estiver saudável.
+
+Antes, a seleção podia oscilar com pequenas diferenças de latência e interromper sessões S S H ou transferências.
+Se o conector preferido falhar, o cliente percorre a lista de alternativas.
+A fonte é o anúncio do MagicRoute pela Tailscale.
+
+Na Meta, etapas fixas coordenam quatorze agentes em mudanças nas sequências de processamento de dados, os chamados pipelines.
+O relato de dezenove de outubro descreve um coordenador com etapas fixas e verificações de confiabilidade.
+Ele delega o trabalho de cada domínio a agentes especializados.
+Os contextos ficam separados para reduzir a mistura de regras entre subsistemas.
+
+Segundo a Meta, cerca de dois terços das alterações chegam ao código sem edições humanas significativas nesse ambiente.
+A fonte é o artigo de engenharia da Meta sobre essa arquitetura.
+
+A DNSimple mediu doze porcento menos uso de processador por consulta depois de otimizar sua biblioteca Erlang.
+O relato de dezenove de outubro compara versões da biblioteca numa carga sintética com formato semelhante ao tráfego real.
+Foram cerca de dezenove milhões de consultas e vinte mil zonas.
+
+Reduzir cópias e alocações de dados binários elevou em quatorze porcento a capacidade antes da saturação.
+Esses percentuais pertencem a esse teste.
+O texto também mostra otimizações que aceleraram funções isoladas, sem melhorar o servidor como um todo.
+A fonte é o relato da DNSimple sobre a metodologia e as mudanças.
+
+O Django está pedindo testes para propostas de mudanças nos modelos da versão seis ponto dois.
+O chamado de dezenove de outubro destaca três frentes.
+Uma é mover modelos entre aplicações.
+Outra é configurar o campo padrão de chave primária.
+A terceira é trabalhar com o "CompositeField", ligado a subconsultas com múltiplas colunas.
+
+São propostas em desenvolvimento.
+Quem quiser contribuir deve testar a ramificação específica do pedido de alteração, conforme a orientação do conselho do framework Python.
+A fonte é a chamada a colaboradores publicada pelo Django.
+
+A MiniMax lançou o modelo M três ponto um Flash, com entrada a quinze centavos de dólar por milhão de tokens.
+O anúncio de dezenove de outubro informa também os preços de saída e de entrada em cache.
+São sessenta centavos de dólar por milhão de tokens de saída e um centavo e meio de dólar por milhão de tokens de entrada em cache.
+
+O modelo está disponível na [EY1 P IY1 AY1], no M Plan e no MiniMax Code.
+Os pesos para download ficaram prometidos para depois.
+Para escolher um modelo para agentes, o preço por token precisa ser combinado com a quantidade de tentativas e a qualidade nas suas tarefas.
+A fonte é o anúncio de lançamento e preços da MiniMax.
+
+Um estudo de geoquímica encontrou erros de resposta depois de cálculos corretos feitos por agentes.
+O artigo preliminar, publicado em dezenove de outubro, avaliou cento e cinquenta e oito questões com um simulador de geoquímica.
+Ao buscar resultados em arquivos, alguns modelos GPT trocaram o relatório oficial por arquivos próprios com mais casas decimais.
+E erraram o arredondamento.
+
+Indicar explicitamente qual saída era a referência melhorou os resultados.
+O efeito variou por modelo e foi medido nesse conjunto de questões.
+Isso oferece um teste útil para quem altera a entrega dos resultados das ferramentas ao agente.
+A fonte é o estudo preliminar disponível no arXiv, com o método, as intervenções e as limitações.
+
+Por fim, o U V zero ponto treze ponto três corrige lentidão severa ao exportar dependências com extras.
+A versão foi publicada em vinte de outubro.
+Ela ajusta a exportação do gerenciador Python em grafos que incluem dependências opcionais.
+
+Depois da mudança de padrão de Python na versão zero ponto treze ponto zero, esta é uma correção específica de desempenho.
+A fonte são as notas da versão zero ponto treze ponto três do U V.
+Vale conferir a atualização se a exportação virou gargalo no seu fluxo.
