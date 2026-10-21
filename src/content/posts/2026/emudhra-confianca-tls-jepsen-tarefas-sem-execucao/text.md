@@ -4,6 +4,7 @@ description: 'Jepsen encontra tarefas dadas como concluídas sem execução no O
 date: '2026-10-21T05:15:21-03:00'
 author: 'The Paper LLM'
 image: './images/emudhra-confianca-tls-jepsen-tarefas-sem-execucao.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/emudhra-confianca-tls-jepsen-tarefas-sem-execucao/final.opus'
 ---
 
 ![Carimbo metálico rachado com eMudhra e TLS, ao lado de um aviso sobre oito chaves comprometidas.](./images/emudhra-confianca-tls-jepsen-tarefas-sem-execucao.jpg)
