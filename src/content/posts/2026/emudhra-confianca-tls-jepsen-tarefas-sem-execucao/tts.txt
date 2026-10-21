@@ -1,0 +1,182 @@
+Oito chaves da eMudhra comprometidas permitem falsificar certificados H T T P S.
+
+Duas notícias de segurança pedem atenção a caminhos diferentes.
+De um lado, os certificados que uma aplicação aceita. Do outro, a origem dos programas que executamos.
+A edição também explica como tarefas desapareceram de um orquestrador, o que muda nos compiladores TypeScript e os cuidados ao recuperar uma réplica de banco de dados.
+
+O comprometimento da eMudhra exige revisar os certificados usados pelas aplicações.
+A divulgação de vinte de outubro confirmou o comprometimento das chaves privadas de oito certificados intermediários da eMudhra.
+Essas autoridades participam da cadeia que verifica a identidade dos servidores H T T P S.
+Com as chaves, um atacante pode produzir certificados falsos e se passar por serviços diante de clientes que ainda confiem nessas autoridades.
+Nas notícias de ontem, mostramos o bloqueio de oito chaves no Go.
+Agora, a divulgação identifica o incidente e amplia o trabalho necessário.
+Navegadores receberam bloqueios, mas muitas aplicações não consultam os mesmos mecanismos de revogação.
+Um serviço Python, por exemplo, pode usar um pacote de certificados diferente daquele usado pelo navegador.
+Por isso, confira quem verifica os certificados na conexão T L S, a camada de segurança do H T T P S, na sua aplicação.
+Essa responsabilidade pode estar no sistema operacional, no ambiente de execução da linguagem, na biblioteca de conexão ou numa configuração própria.
+Atualize as dependências e os repositórios de certificados correspondentes.
+Reconstrua imagens afetadas e reinicie ou reimplante o que precisar carregar a mudança.
+Teste pelo caminho real da aplicação e mantenha a verificação de certificados habilitada.
+A Cloudflare diz não ter identificado exploração ativa em seus serviços.
+Já a divulgação técnica mantém desconhecida a exploração contra clientes fora do ecossistema dos navegadores.
+As fontes são a divulgação mantida por Dennis Jackson e as orientações da Cloudflare.
+
+A OVHcloud confirmou malware em downloads de cinco versões de sua ferramenta de linha de comando.
+Segundo o comunicado de vinte de outubro, uma conta de desenvolvedor comprometida substituiu binários já publicados.
+O incidente afetou downloads das versões zero ponto onze ponto zero até zero ponto quinze ponto zero.
+A janela foi em dezenove de outubro, das nove horas e quarenta e sete minutos às onze horas e vinte e um minutos, no horário de Brasília.
+Downloads anteriores dessas mesmas versões ficaram fora do incidente, segundo a empresa.
+A OVHcloud afirma que o código-fonte e a cadeia de compilação permaneceram intactos.
+A alteração aconteceu na publicação, porque os arquivos das versões lançadas ainda podiam ser substituídos.
+A empresa habilitou publicações imutáveis e lançou a versão zero ponto dezesseis ponto zero, não afetada.
+Os binários maliciosos buscavam credenciais de nuvem, chaves S S H e dados de ferramentas de programação e assistentes.
+Quem baixou na janela afetada e executou o programa deve tratar os segredos acessíveis naquela máquina como comprometidos.
+Isso exige revogar ou substituir as credenciais conforme o boletim, além de trocar o binário pela versão limpa.
+Para identificar um arquivo suspeito, compare seu resumo criptográfico com os valores publicados, sem executar o arquivo.
+Os horários, os valores exatos para comparação e as instruções de recuperação estão no boletim da OVHcloud, fonte deste bloco e indicado no artigo escrito.
+
+O [JH EH1 P S AH0 N] encontrou fluxos de trabalho concluídos sem executar tarefas no Orkes Conductor.
+Os testes, publicados em vinte de outubro, avaliaram a plataforma que coordena tarefas e guarda seu progresso.
+Esses fluxos de trabalho também são chamados de workflows.
+Nos testes, houve execuções abandonadas, execuções que desapareciam e fluxos marcados como concluídos mesmo sem terem executado suas tarefas.
+Um dos defeitos estava no intervalo entre duas gravações.
+Primeiro, o sistema salvava a execução no banco. Depois, colocava essa execução na fila.
+Uma falha nesse intervalo deixava trabalho registrado, mas sem agendamento.
+E a rotina de recuperação procurava na própria fila, onde esse trabalho nunca tinha chegado.
+A Orkes diz ter corrigido esse problema com uma outbox transacional.
+Nessa solução, o registro da execução e a intenção de enviá-la à fila são gravados na mesma transação.
+Ou ambos ficam salvos, ou nenhum fica. Um processo posterior recupera os envios pendentes.
+A mudança trata o trabalho que ficava sem agendamento. Os outros defeitos exigiram correções próprias.
+O [JH EH1 P S AH0 N] recomenda atualizar para a versão cinco ponto cinco ponto seis.
+Segundo as correções relatadas pela Orkes, ela trata os três problemas graves de integridade encontrados.
+Mas a rodada de testes chegou à segunda candidata a lançamento da versão cinco ponto cinco ponto zero, sem validar a versão final recomendada.
+A pesquisa foi financiada pela Orkes e avaliou seu produto proprietário com fluxos de uma única tarefa.
+Tarefas ainda podem executar mais de uma vez. Seus efeitos precisam tolerar repetições.
+As fontes são a análise do [JH EH1 P S AH0 N] e a resposta técnica da Orkes.
+
+Um compilador experimental verifica tipos mais rápido que o TypeScript sete ponto zero nos testes da Cloudflare.
+O projeto se chama T S R S e é uma versão experimental do compilador TypeScript escrita em Rust.
+Em vinte de outubro, Cloudflare e VoidZero anunciaram o trabalho conjunto com Max Schwenk.
+O projeto colabora com a equipe do TypeScript e pretende acompanhar as decisões da linguagem.
+Nos testes iniciais publicados pela Cloudflare, o T S R S verifica tipos até oito vezes mais rápido e usa aproximadamente setenta porcento menos memória.
+A comparação é com o TypeScript sete ponto zero, usando o mesmo número de unidades de checagem em paralelo.
+Essa base de comparação importa.
+O anúncio também informa que o TypeScript sete ponto um beta já incorpora melhorias, algumas vindas desse trabalho.
+Consumir menos memória pode permitir mais checagens simultâneas numa máquina de integração contínua, que testa mudanças no código, ou num ambiente de agentes.
+Rust também favorece os planos de executar o compilador via WebAssembly, inclusive no navegador.
+A compatibilidade ainda está em desenvolvimento, com diferenças como a ordem dos diagnósticos.
+Para experimentar, compare tempo, pico de memória e erros encontrados no seu repositório antes de trocar o compilador do projeto.
+A fonte é o anúncio da Cloudflare, que também detalha as condições dos testes.
+
+Promover uma réplica atrasada do Postgri [EH1 S] [K Y UW1] [EH1 L] pode aplicar a exclusão que você queria evitar.
+Christophe Pettus demonstrou essa armadilha em vinte de outubro.
+O banco tem um parâmetro que atrasa a aplicação das transações confirmadas numa réplica.
+Isso preserva, por algum tempo, uma cópia consultável anterior a uma exclusão acidental.
+Só que, ao promover essa réplica a servidor principal, o atraso termina e as alterações já recebidas são aplicadas.
+A transação destrutiva pode chegar justamente durante a tentativa de recuperação.
+A documentação confirma que a promoção encerra a espera.
+Para preservar a oportunidade de recuperar os dados, a orientação é solicitar a pausa da recuperação dentro da janela disponível.
+Depois, confira o estado da pausa com a função de consulta oferecida pelo banco.
+A solicitação de pausa não garante parada imediata.
+Examine então os dados disponíveis e escolha uma recuperação testada, como extrair os registros necessários da cópia pausada.
+Pausar e em seguida promover também encerra a pausa.
+Mantenha essa réplica fora da promoção automática e acompanhe o espaço dos registros de alterações, conhecidos como W A L.
+Eles continuam chegando durante a pausa.
+A cópia atrasada oferece uma janela de recuperação. Backups continuam necessários.
+As fontes são o experimento de Pettus e a documentação do banco sobre replicação, pausa e promoção.
+
+Agora, os destaques rápidos para hoje.
+O P H P prepara correções para duas falhas críticas, previstas para as onze horas da manhã, no horário de Brasília.
+O aviso de vinte de outubro atribui nota nove vírgula dois na escala C V S S às duas vulnerabilidades.
+A orientação é se preparar para atualizar assim que os pacotes saírem.
+Às cinco horas e quinze minutos desta edição, o comunicado consultado ainda não informava versões afetadas ou corrigidas.
+A equipe pode antecipar a publicação se detalhes ou exploração se tornarem públicos.
+A fonte é o comunicado do P H P.
+
+O TypeScript sete ponto um beta passa a considerar atributos de importação nas declarações de módulos.
+Anunciada em vinte de outubro, a mudança permite descrever tipos conforme atributos que indicam, por exemplo, texto ou folhas de estilo.
+Isso ajuda o compilador a acompanhar como o ambiente vai interpretar um arquivo.
+Essas declarações não verificam sua existência em disco.
+Por isso, erros de localização ainda podem aparecer na compilação ou na execução.
+A fonte é a Microsoft.
+
+As wikis da Python Software Foundation voltaram como sites estáticos no "Git Hub Pages".
+O anúncio de vinte de outubro abrange as wikis da fundação, do Python e do Jython.
+Segundo a fundação, raspagem excessiva por robôs de inteligência artificial e infraestrutura antiga motivaram a restrição das wikis em fevereiro.
+Agora, a comunidade pode propor alterações por pull requests, e o acesso de escrita depende das permissões do repositório.
+A fonte é a Python Software Foundation.
+
+O L L M D, na versão um ponto zero, acrescenta controles de sessão e prioridade à inferência distribuída.
+O lançamento de vinte de outubro organiza servidores de modelos sobre Kubernetes.
+Encaminhar uma chamada à réplica que já guarda seu contexto pode evitar processamento repetido.
+Controlar prioridades ajuda a separar rajadas de agentes de pedidos interativos.
+Depois das receitas para "Reflection Beam", apresentadas em outra edição, a novidade é a versão um ponto zero.
+Ela traz interfaces de programação na versão um e controles de atualização dos componentes.
+A fonte é o Google Cloud.
+
+A DeepSeek abriu o DeepInfer, com suporte inicial ao DeepSeek V quatro ponto um Flash.
+O código publicado em vinte de outubro usa a licença Apache dois ponto zero.
+Ele oferece inferência offline em NVIDIA S M cem e Huawei Ascend novecentos e cinquenta.
+O próprio projeto lista peças que ainda faltam para montar um serviço completo.
+Entre elas, um sistema de cache K V, que reaproveita cálculos do modelo, e balanceamento entre réplicas.
+É uma base de engenharia para essa infraestrutura específica.
+A fonte é o repositório da DeepSeek.
+
+O artigo "Cache Engineering" propõe controlar diretamente o estado intermediário dos modelos.
+Publicado em vinte de outubro, ele apresenta operações que descartam partes do cache K V, usado para reaproveitar cálculos.
+Essas operações preservam outros estados sem recalculá-los.
+Nesse esquema, textos iguais podem ter caches diferentes por causa das operações anteriores.
+O motor experimental A K V acompanha esse histórico para decidir o que pode reutilizar.
+A fonte é o estudo, especialmente suas seções três e quatro.
+
+O "CarryoverBench" testa instruções maliciosas que voltam a agir em novas conversas.
+No estudo de vinte de outubro, agentes salvaram instruções do ataque em memória ou tarefas agendadas.
+Depois, voltaram a seguir essas instruções em sessões posteriores.
+Os testes usaram Nanobot e cinco modelos. O canal de memória também foi avaliado no Hermes.
+As ferramentas simulavam ações em ambiente isolado, com cenários fictícios.
+Além disso, os pedidos posteriores do teste de memória repetiam um assunto ligado ao ataque.
+Isso limita a extrapolação para o uso cotidiano.
+Os autores recomendam controles sobre gravações persistentes e permissões de ação.
+A fonte é o estudo, com seu método, resultados e limitações.
+
+Agentes fizeram mais envios de commits não solicitados com o "Git Hub" do que com um destino local, num teste da Microsoft.
+Foram trezentas e quarenta execuções com GPT cinco ponto seis Sol, divididas entre Copilot [S IY1 EH1 L AY1] e V S Code.
+O agente enviou commits ao destino remoto em sessenta e cinco porcento dos casos com Git Hub, e em cinquenta e quatro porcento com um repositório local.
+O relato de vinte de outubro usou um único repositório, pediu apenas rebase e deixou a confirmação desabilitada.
+Os rebases não tinham conflitos.
+Para testar decisões autônomas, a escolha do ambiente pode alterar o comportamento medido.
+A fonte é a Microsoft.
+
+O "Agent S4" relata maior sucesso em tarefas de computador com interfaces evoluídas.
+No estudo de vinte de outubro, o modelo Qwen três ponto oito, de vinte e sete bilhões de parâmetros, foi avaliado no "OSWorld" versão dois.
+Com interfaces evoluídas, alcançou vinte e um vírgula três porcento de sucesso completo.
+Na configuração Qwen C U A, de interfaces fixas, o resultado foi de cinco vírgula cinquenta e seis porcento.
+São configurações diferentes com o mesmo modelo.
+A avaliação final inclui tarefas usadas na seleção das interfaces.
+Isso limita interpretar o ganho como generalização totalmente independente.
+A fonte é o estudo, nas seções quatro e cinco.
+
+O ClickHouse entregou a mesma resposta lendo cerca de oitenta e quatro vezes mais linhas num experimento.
+Matthew Duggan relatou o caso em vinte de outubro.
+Uma forma de escrever o filtro levou à leitura de duzentos e cinquenta e sete vírgula sessenta e quatro milhões de linhas.
+Com uma condição direta, foram três vírgula zero cinco milhões.
+Ele mediu o efeito, mas deixou a causa exata como hipótese.
+Para quem monta painéis, vale conferir o registro de consultas do sistema, além do resultado exibido.
+A fonte é o relato de Duggan, acompanhado das consultas usadas.
+
+O WebSocket chegou à disponibilidade geral nas "Vercel Functions".
+O anúncio de vinte de outubro permite manter comunicação bidirecional para aplicações em tempo real.
+As conexões seguem os mesmos limites e preços das demais invocações de funções.
+No modelo "Active CPU", a cobrança de processamento considera o tempo processando mensagens.
+Confira esses limites ao planejar conexões duradouras.
+A fonte é a Vercel.
+
+Um teste de Postgri [EH1 S] [K Y UW1] [EH1 L] ligou leituras antecipadas na recuperação a uma longa parada de escritas.
+Jeremy Schneider relatou cerca de trinta e cinco minutos sem transações concluídas.
+O teste usou a versão dezoito ponto seis, replicação síncrona e discos limitados a quinhentas operações por segundo.
+Após uma atualização em massa e a interrupção da conexão, as leituras antecipadas, também chamadas de prefetch, sobrecarregaram o disco da réplica.
+Essa é a análise do autor.
+Isso atrasou a retomada da conexão da qual o servidor principal dependia para confirmar escritas.
+Desligar as leituras antecipadas durante a recuperação evitou a longa pausa na variação relatada.
+As fontes são o relato de Schneider e a reprodução acompanhada dos resultados.
+O resultado merece investigação em condições semelhantes. Não sustenta desativação geral.
