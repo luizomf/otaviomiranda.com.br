@@ -4,6 +4,7 @@ description: 'Cloudflare reduz transferências no cache de arquivos. A edição 
 date: '2026-10-24T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/infinity-agentes-brotli-node-python-cloudflare-cache.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/infinity-agentes-brotli-node-python-cloudflare-cache/final.opus'
 ---
 
 ![Placa com os símbolos do Node.js e Python alerta para atualização contra a falha no Brotli.](./images/infinity-agentes-brotli-node-python-cloudflare-cache.jpg)
