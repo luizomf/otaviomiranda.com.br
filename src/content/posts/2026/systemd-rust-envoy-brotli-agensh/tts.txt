@@ -1,0 +1,163 @@
+System D incorpora infraestrutura para Rust; Envoy corrige falha no Brotli.
+
+O system D preparou seu código de desenvolvimento para receber novos programas em Rust.
+Essa integração traz regras próprias para lidar com falta de memória e com segredos.
+No tráfego web, instalações do proxy "Envoy" com descompressão Brotli precisam conferir as versões corrigidas.
+A edição também traz o "Agensh", da Microsoft, voltado à coordenação de agentes de programação.
+E temos resultados de inteligência artificial local que ajudam a entender a divisão do trabalho entre placa de vídeo, memória RAM e S S D.
+
+O system D integra infraestrutura para novos programas em Rust.
+
+O system D é o conjunto de ferramentas que inicia e gerencia serviços em muitas distribuições Linux.
+Em vinte e quatro de outubro, o projeto incorporou a infraestrutura para criar programas em Rust.
+A mudança está no código de desenvolvimento.
+A adoção começa por programas novos dos quais os demais componentes não dependem, os chamados componentes de ponta.
+O código C existente permanece, e a compilação continua organizada pelo Meson.
+
+Os programas Rust ficam sem a biblioteca padrão da linguagem e se integram às bibliotecas C do projeto.
+Para armazenar dados, usam implementações próprias de estruturas como Box e Vec.
+Quando uma alocação fica sem memória, essas estruturas devolvem um erro que o programa pode tratar, seguindo as convenções do system D.
+
+Outra decisão envolve os segredos guardados na memória.
+O projeto associa a limpeza desses dados ao tipo usado para armazená-los.
+Um vetor de bytes com a opção de apagamento limpa sua região de memória antes de liberá-la.
+Mas essa garantia tem um limite importante.
+Retirar elementos do vetor ou reduzir seu tamanho pode deixar os dados na memória até que o espaço seja liberado.
+Ou seja, a retirada de um elemento não significa que seu conteúdo já foi apagado da memória.
+
+O primeiro programa proposto para usar essa base é o system D keyring setup, que segue em uma mudança separada.
+Para quem mantém software em C, o caso mostra que a adoção gradual também precisa definir as fronteiras de integração.
+O tratamento de erros e o ciclo de vida dos dados fazem parte dessa definição.
+A fonte é a proposta incorporada ao system D, com suas regras e justificativas.
+
+O Envoy precisa de atualização quando o descompressor Brotli está configurado.
+
+Depois da cobertura sobre Node ponto J S e pacotes Python, a mesma falha exige conferir também o Envoy.
+Ele é um proxy que pode intermediar o tráfego entre clientes e serviços.
+O aviso do projeto, de vinte e três de outubro, delimita a exposição às instalações com o descompressor Brotli configurado.
+
+Segundo o boletim, um fluxo comprimido malformado pode provocar escritas fora da região de memória reservada pelo decodificador.
+As consequências incluem vazamento de dados da memória e queda do processo.
+Também há possibilidade de execução de código por um atacante remoto sem autenticação.
+
+Há correções para diferentes linhas de versão do Envoy.
+Na linha um ponto quarenta, a correção está na versão um ponto quarenta ponto zero.
+Nas linhas anteriores, está nas versões um ponto trinta e nove ponto três e um ponto trinta e oito ponto seis.
+Também estão corrigidas a um ponto trinta e sete ponto oito e a um ponto trinta e seis ponto doze.
+A relação exata das versões afetadas e corrigidas está no artigo escrito.
+Confira a versão realmente implantada e a configuração de descompressão.
+Se o proxy vier dentro de outro produto, procure a atualização do fornecedor correspondente.
+
+A consequência prática é ampliar o inventário.
+Além das bibliotecas da aplicação, verifique os componentes que descomprimem conteúdo não confiável na entrada ou na saída do tráfego.
+A atualização do proxy precisa entrar nessa revisão junto com a da aplicação.
+As fontes são o boletim do Envoy e a publicação da correção do Brotli.
+
+A Microsoft abre o Agensh e relata mais testes aprovados com equipes de agentes.
+
+Em vinte e quatro de outubro, a Microsoft publicou o código do Agensh, uma estrutura para agentes dividirem trabalho de programação.
+Cada agente escolhe subtarefas, compartilha descobertas, verifica resultados e integra alterações sem esperar que todos terminem.
+O Gitea fornece o espaço de desenvolvimento compartilhado.
+Já o Mattermost transporta as mensagens entre os participantes.
+
+Nos cinco problemas mais difíceis do ProgramBench, os autores relatam uma melhora na média da proporção de testes aprovados.
+Com um agente, essa média foi de dezenove vírgula trinta e um porcento.
+Com cento e vinte e oito agentes, passou para vinte e oito vírgula setenta e oito porcento.
+O experimento usou GPT cinco ponto seis sol, com esforço de raciocínio alto, seis horas por tarefa e nenhum acesso à internet.
+Os agentes reconstruíam programas a partir de observações de comportamento e da documentação fornecida.
+
+O ganho foi de nove vírgula quarenta e sete pontos percentuais, com a maior parte dos testes ainda falhando.
+Essa medida descreve quanto do comportamento esperado passou nas verificações.
+Ela permite acompanhar progresso parcial em cada tarefa.
+Para avaliar uma adoção, registre testes aprovados, custo e tempo de execução juntos.
+
+O código publicado inclui instruções de reprodução, mas há uma diferença que precisa entrar na comparação.
+O projeto avisa que a infraestrutura distribuída agora difere daquela usada no experimento histórico.
+Uma nova execução precisa registrar sua versão e configuração para permitir uma comparação honesta.
+As fontes são o anúncio do Agensh, sua descrição de arquitetura e resultados, e as condições de reprodução publicadas pelo projeto.
+
+Agora, os destaques rápidos para hoje.
+
+O Lite L L M atribui o ataque a uma chave exposta em maio e não revogada.
+O relatório final, de vinte e três de outubro, atualiza o incidente que cobrimos naquele mesmo dia.
+Segundo a empresa, a chave permitiu acessar sua plataforma experimental de agentes.
+Por esse acesso, foi possível obter um token do "Git Hub" de um proprietário da organização.
+Outros tokens roubados permitiram aprovar a publicação maliciosa.
+
+O relatório corrige a hipótese inicial de que o primeiro token teria vindo de registros de execução.
+A lição operacional é verificar a revogação.
+Apagar o segredo do repositório precisa vir acompanhado da invalidação da credencial.
+A fonte é a análise final do Lite L L M.
+
+O P H P recomenda desativar o progresso de upload em uma combinação específica de configurações.
+O aviso de vinte e três de outubro acrescenta uma orientação às correções do P H P dois Shell.
+O risco depende de algumas condições em conjunto.
+O acompanhamento do progresso de upload precisa estar habilitado.
+O serializador de sessão precisa estar configurado como P H P binary ou P H P serialize.
+E a aplicação precisa mudar esse serializador para P H P durante a execução, antes de iniciar a sessão.
+
+Nessa situação, o projeto sugere desabilitar o progresso de upload até a próxima versão regular de correções.
+Quem já aplicou essa mitigação deve mantê-la.
+Segundo o P H P, aplicações que nunca mudam o serializador durante a execução podem manter o recurso.
+A fonte é o aviso oficial do P H P sobre progresso de upload.
+
+O "WireGuard Easy" reduz a circulação de chaves na interface administrativa.
+A versão quinze ponto cinco ponto zero foi lançada em vinte e quatro de outubro.
+Essa interface de gerenciamento de V P N deixa de retornar a chave privada e a chave pré-compartilhada na consulta de detalhes de um cliente.
+A tela de edição não precisava desses campos.
+Os downloads de configuração e os códigos Q R continuam em rotas próprias.
+
+A versão também traz atualizações de segurança do Node ponto J S e configuração de proxies confiáveis.
+Outro acréscimo é o suporte ao Amnezia W G três ponto um.
+Revise o acesso administrativo ao atualizar.
+As fontes são as notas da versão do WireGuard Easy e a explicação do projeto sobre a remoção dos segredos.
+
+O "Wild" passa a ligar módulos do kernel Linux e habilita WebAssembly por padrão.
+O Wild é um linker, a ferramenta que reúne partes compiladas de um programa.
+A versão zero ponto onze chegou em vinte e quatro de outubro.
+O suporte a WebAssembly ainda tem limitações nas informações de depuração.
+
+Outra mudança limita a execução a trinta e duas threads por padrão.
+Segundo os mantenedores, números maiores podiam piorar o desempenho pela disputa por uma trava do Linux associada ao arquivo.
+A fonte são as notas da versão zero ponto onze ponto zero do Wild.
+
+O "Lean-QwenFlash" relata geração de vinte tokens por segundo com partes do modelo no S S D.
+O autor mediu o Qwen três ponto oito Flash Next com contexto de duzentos e sessenta e dois mil tokens.
+Tokens são as unidades de texto processadas pelo modelo.
+O teste usou uma R T X quarenta noventa, limitada a dezesseis gigabytes de memória de vídeo, e cerca de oito gigabytes de RAM.
+Os pesos estavam quantizados no formato E X L três, com cache de contexto de quatro bits.
+
+As partes do modelo chamadas especialistas são carregadas do S S D quando faltam no cache.
+O armazenamento usado é do tipo N V M E, e os cálculos desses especialistas continuam na placa de vídeo.
+O projeto recomenda um S S D com leitura de cerca de três gigabytes por segundo ou mais.
+A economia de RAM depende dessa movimentação de dados.
+O resultado deve ser lido junto com o hardware e a configuração usados.
+A fonte é a publicação do autor do Lean-QwenFlash, com método, hardware e medições.
+
+O ISTA publica versões comprimidas do DeepSeek que exigem olhar além da memória da placa de vídeo.
+Os arquivos publicados em vinte e três de outubro usam precisões diferentes para partes do modelo.
+São variantes do DeepSeek V quatro ponto um Flash, da edição identificada como mil e dezessete.
+O laboratório informa execução com o motor Strata em uma placa de vídeo de doze gigabytes.
+Mas o restante dos pesos fica na memória do sistema, e tabelas auxiliares ficam no S S D.
+
+Os arquivos completos somam aproximadamente duzentos e trinta e um a duzentos e sessenta e seis gigabytes, conforme a variante.
+Antes de baixar, dimensione RAM, armazenamento e ambiente de execução.
+Os doze gigabytes descrevem apenas a memória de vídeo.
+A fonte é a ficha do modelo publicada pelo ISTA, com os arquivos e seus requisitos.
+
+O Sentinela é apresentado à comunidade para monitorar regras de negócio com Python.
+O autor compartilhou o projeto no TabNews, com exemplos como pedidos pagos sem envio e assinaturas renovadas sem fatura.
+Cada monitor define como encontrar entidades com problema, atualizar seu estado e reconhecer a resolução.
+Isso permite acompanhar uma falha de negócio mesmo quando o serviço continua respondendo normalmente.
+O trabalho da equipe começa por escrever a regra que descreve o resultado esperado.
+As fontes são a apresentação do autor no TabNews e a documentação do Sentinela.
+
+Sebastian Raschka publica oito aulas sobre modelos de raciocínio.
+A série, de vinte e quatro de outubro, reúne cerca de onze horas de implementação em Python e PyTorch.
+O ponto de partida é um pequeno Qwen três já treinado.
+O percurso cobre avaliação, geração de múltiplas respostas, aprendizado por reforço e destilação.
+Nesse último caso, o treinamento usa respostas de um modelo professor.
+
+O autor recomenda familiaridade com Python e PyTorch.
+Os primeiros exemplos podem rodar no processador, enquanto uma placa de vídeo torna os experimentos de treinamento mais práticos.
+A fonte é a publicação do curso de Sebastian Raschka, com seus pré-requisitos.
