@@ -4,6 +4,7 @@ description: 'Microsoft abre o Agensh para coordenação de agentes. A edição 
 date: '2026-10-25T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/systemd-rust-envoy-brotli-agensh.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/systemd-rust-envoy-brotli-agensh/final.opus'
 ---
 
 ![Modelo metálico do systemd em C conectado a um módulo laranja com o símbolo do Rust, representando novos componentes em desenvolvimento.](./images/systemd-rust-envoy-brotli-agensh.jpg)
