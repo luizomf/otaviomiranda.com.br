@@ -4,6 +4,7 @@ description: 'Linux troca o Binder em C pela implementação Rust. Também: WSL 
 date: '2026-10-26T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/gheist-github-python-emudhra-linux-binder-rust.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/gheist-github-python-emudhra-linux-binder-rust/final.opus'
 ---
 
 ![Jornal nas mãos de um passageiro mostra o GitHub Actions e uma chave sobre logs, ilustrando o roubo de segredos pela campanha Gheist.](./images/gheist-github-python-emudhra-linux-binder-rust.jpg)
