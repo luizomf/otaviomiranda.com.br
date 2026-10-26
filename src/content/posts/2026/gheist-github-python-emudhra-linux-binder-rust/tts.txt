@@ -1,0 +1,158 @@
+Gheist usa logs do "Git Hub Actions" para roubar segredos; Python bloqueia chaves comprometidas da eMudhra.
+
+Uma investigação da Wiz mostra como a campanha Gheist usa os registros de execução do "Git Hub Actions" para extrair segredos de repositórios.
+O Python publicou cinco atualizações para bloquear chaves de certificados comprometidas da eMudhra.
+E o Linux incorporou a substituição do Binder em C pela versão Rust, com consequências para quem compila kernels com esse recurso.
+
+Gheist rouba segredos pelos próprios logs do "Git Hub Actions".
+
+A Wiz publicou em vinte e cinco de outubro uma investigação sobre a campanha Gheist.
+Ela usa tokens de acesso do "Git Hub" já comprometidos para inserir arquivos de automação nos repositórios acessíveis.
+São os workflows, que definem as tarefas executadas pelo "Git Hub Actions", a plataforma de automação do serviço.
+A empresa identificou mais de treze mil e quinhentas branches maliciosas, em mais de oitocentas e cinquenta contas comprometidas.
+Esses totais mostram o alcance observado da campanha, mas não medem quantos repositórios tiveram segredos extraídos.
+
+Segundo a Wiz, o workflow grava no log uma versão codificada dos segredos que recebe.
+Essa transformação escapa da ocultação automática dos valores.
+O atacante então recupera os registros e apaga a execução.
+Uma ferramenta de diagnóstico vira, assim, um canal de saída de credenciais.
+Limitar as permissões do token interno do workflow não resolve esse acesso: a tarefa continua recebendo os segredos que foram entregues a ela.
+
+Na amostra examinada pela Wiz, a exigência de aprovação do "Git Hub" impediu que os workflows maliciosos rodassem em repositórios públicos.
+Já nos repositórios privados e nos ambientes empresariais, a empresa observou execuções bem-sucedidas.
+
+Para quem administra integração contínua, vale procurar a criação inesperada de workflows e execuções apagadas logo depois de terminar.
+Credenciais expostas precisam ser revogadas ou substituídas.
+Ambientes com segredos de produção devem ser protegidos por aprovação de revisores.
+Também é preciso restringir a autenticação na nuvem às branches ou aos ambientes autorizados.
+A própria documentação do "Git Hub" alerta que a ocultação de segredos transformados não é garantida.
+As fontes são a investigação e as orientações da Wiz, além da documentação de proteção de segredos do "Git Hub Actions".
+
+Python publica cinco atualizações para bloquear chaves comprometidas da eMudhra.
+
+As atualizações foram anunciadas em vinte e seis de outubro e bloqueiam as chaves intermediárias comprometidas da eMudhra no módulo S S L.
+Na linha três ponto quinze, a versão é a três ponto quinze ponto dois.
+Na linha três ponto quatorze, é a três ponto quatorze ponto dez.
+As outras atualizações são a três ponto treze ponto dezoito, a três ponto doze ponto dezesseis e a três ponto onze ponto dezoito.
+É uma nova medida concreta depois do incidente de certificados que cobrimos no dia vinte e um.
+
+Certificados ajudam o cliente a confirmar a identidade do servidor numa conexão segura, por H T T P S.
+Uma chave comprometida nessa cadeia pode permitir a falsificação dessa identidade.
+A defesa foi incorporada ao próprio interpretador, no módulo S S L, usado para conexões seguras.
+Por isso, segundo a equipe do Python, atualizar o interpretador protege os usos normais do pip contra essas chaves.
+Isso inclui o download de uma atualização do próprio instalador de pacotes.
+Mas a proteção depende de a verificação de certificados estar habilitada.
+
+Confira qual interpretador roda na aplicação, na imagem de contêiner e no executor de integração contínua.
+Atualize e reimplante esses ambientes.
+A equipe do Python oferece instaladores binários para as versões três ponto quinze ponto dois e três ponto quatorze ponto dez.
+As outras três versões foram publicadas somente em código-fonte.
+Quem usa pacotes da distribuição precisa acompanhar a atualização correspondente.
+As fontes são o anúncio da equipe de releases do Python e a discussão sobre o escopo da verificação no CPython.
+
+Linux remove o Binder em C e adota a implementação Rust no ciclo sete ponto quatro.
+
+A árvore principal do Linux incorporou a remoção da implementação em C do Binder.
+Esse é o mecanismo que permite aos processos Android se comunicarem e chamarem operações uns dos outros.
+A mudança faz parte do desenvolvimento do Linux sete ponto quatro.
+
+Na justificativa da alteração, Carlos Llamas afirma que o trabalho de Alice Ryhl alcançou equivalência de funcionalidades.
+A implementação Rust já rodava em dispositivos Android.
+Segundo o mantenedor, ela igualava ou superava o desempenho da versão C nos testes realizados.
+
+Para quem compila o kernel, há uma consequência na configuração: habilitar o Binder passa a depender do suporte a Rust.
+Quem usa esse recurso precisa considerar a exigência no ambiente de compilação.
+A integração ocorreu na árvore de desenvolvimento.
+A chegada aos aparelhos Android depende da adoção pelos fornecedores.
+As fontes são a integração no repositório de Linus Torvalds e a alteração que remove o Binder em C e muda a configuração.
+
+Agora, os destaques rápidos para hoje.
+
+A DreamHost pede novas senhas para os usuários afetados de e-mail e de transferência de arquivos, por F T P e S F T P.
+Na atualização da madrugada desta segunda-feira, a hospedagem informou ter enviado as instruções aos titulares das contas atingidas.
+Esses usuários continuam sem conseguir entrar até que o responsável defina e compartilhe novas credenciais.
+O gerenciador de arquivos permanece indisponível.
+A orientação é acessar diretamente o painel da DreamHost.
+A empresa afirma que nunca pede a senha por e-mail, e o aviso não estabelece a causa do incidente.
+A fonte é a página oficial de estado dos serviços e instruções da DreamHost.
+
+Um protótipo inicia no W S L a mesma instalação Linux usada no dual boot.
+O W S L é o ambiente Linux dentro do Windows.
+O projeto modifica o serviço desse ambiente para usar uma partição física como raiz da distribuição.
+O autor relata que system D, Docker e aplicações gráficas funcionaram numa máquina com Kubuntu.
+O suporte está limitado a uma partição simples, com sistema de arquivos ext quatro, em um segundo disco.
+Criptografia LUKS, volumes L V M e arranjos RAID ficam de fora.
+
+Como o experimento escreve no disco real, é preciso ter backup e desligar completamente o Linux nativo.
+Hibernação e acesso simultâneo podem comprometer os dados.
+A fonte é o repositório do projeto, que descreve os testes e os limites de segurança.
+
+O Farol apresenta um mapa para orientar a revisão de pull requests.
+Compartilhada pelo autor no domingo, a ferramenta usa análise estática para relacionar os arquivos alterados ao que pode ser afetado.
+Esse mapa inclui páginas, operações e tarefas.
+O Farol trabalha com TypeScript, Go e Python, e pode combinar esse alcance com relatórios de cobertura de testes.
+A ideia é ajudar o revisor a decidir por onde começar.
+A pontuação ajuda a priorizar a revisão, mas chamadas dinâmicas e reflexão limitam o que a análise consegue determinar.
+As fontes são a documentação do Farol e a apresentação do autor, com as limitações, no "Hacker News".
+
+O llama ponto C P P incorporou uma otimização para processar prompts em placas gráficas NVIDIA.
+A mudança foi integrada em vinte e cinco de outubro.
+Ela reúne operações de uma camada da rede em uma única chamada à placa gráfica.
+No D G X Spark, o autor relata ganhos de quatro vírgula seis a dez vírgula sete porcento.
+Na R T X cinquenta noventa, os ganhos relatados vão de um vírgula nove a quatro vírgula sete porcento.
+Os resultados variam conforme o modelo e a quantização.
+
+Os testes usaram prompts de dezesseis mil trezentos e oitenta e quatro tokens, as unidades de texto processadas pelo modelo.
+Foram cinco repetições, sem nenhuma geração de resposta.
+Ou seja, os números descrevem a leitura inicial do texto pelo modelo.
+Medir a geração de resposta exige outro teste.
+A fonte é a contribuição no repositório do llama ponto C P P, com a configuração e os resultados do autor.
+
+Zig passa a exigir agrupamento explícito em combinações ambíguas de operadores.
+O diário de desenvolvimento de vinte e quatro de outubro anuncia a mudança na versão de desenvolvimento da linguagem.
+Expressões aritméticas comuns preservam as regras usuais.
+Certas combinações, porém, passam a dar erro de compilação se a ordem não estiver explicitada na expressão.
+O formatador do Zig, no modo de atualização, faz esse ajuste mantendo a ordem de avaliação anterior.
+Revise o resultado: preservar o comportamento existente também preserva um eventual erro de intenção.
+A fonte é a explicação de migração no diário de desenvolvimento do Zig.
+
+O Open L D K amplia a integração entre Java e "Common Lisp".
+Anthony Green apresentou os avanços em vinte e cinco de outubro.
+O ambiente de execução traduz bytecode Java para Lisp e usa o compilador S B C L para gerar código nativo.
+O projeto consegue executar linguagens como Kotlin e Clojure no mesmo processo.
+
+Para medir o desempenho, o autor fez vinte execuções de um pequeno aplicativo Spring de linha de comando.
+O teste rodou num Intel Core Ultra sete, modelo duzentos e cinquenta e cinco H.
+A mediana foi de oitenta e três vírgula nove milissegundos, reutilizando um estado já inicializado e salvo.
+Na mesma comparação, o Graal V M marcou cinquenta e três vírgula cinco milissegundos.
+A medição cobre o tempo de iniciar, executar a tarefa e sair.
+O projeto ainda tem lacunas de compatibilidade, incluindo a verificação de bytecode, que não foi implementada.
+A fonte é a demonstração de Anthony Green, com as condições do teste e as limitações do projeto.
+
+Drew Breunig descreve a dificuldade de agentes abandonarem uma hipótese.
+Na análise publicada no dia vinte e quatro, ele chama esse comportamento de inércia de contexto.
+É a insistência numa subtarefa ou solução mesmo depois de ela deixar de produzir progresso.
+Uma das estratégias discutidas é preservar os arquivos e resultados do trabalho, registrar um resumo e reiniciar a conversa.
+
+Para quem constrói agentes, isso sugere separar fatos verificados, estado da tarefa e tentativas fracassadas.
+Em vez de carregar todo o histórico indefinidamente, essas informações ficam separadas.
+É uma proposta de diagnóstico do autor, para avaliar quando o histórico deixa de ajudar o agente a avançar.
+As fontes são o texto de Drew Breunig e a transcrição da apresentação.
+
+A Vercel reutiliza verificações para acelerar instalações com P N P M.
+A melhoria anunciada hoje reaproveita verificações de dependências que já tiveram sucesso.
+A empresa observou uma redução média de quatorze porcento no tempo de instalação em deploys Pro com o cache de compilação restaurado.
+Quando as dependências continuam iguais, o reaproveitamento evita repetir parte do trabalho.
+A mudança é automática e está disponível em todos os planos.
+Mas o percentual informado corresponde ao grupo medido pela Vercel.
+A fonte é o anúncio da empresa, com as condições da otimização.
+
+Um participante do comitê relata a rejeição do rascunho do C mais mais vinte e seis numa votação da ISO.
+Mateusz Pusz integra o grupo de evolução da biblioteca e o organismo nacional polonês.
+No dia vinte e cinco, ele publicou que o texto falhou na votação encerrada em vinte e três de outubro.
+O resultado abre uma etapa de revisão e deixa o calendário indefinido.
+
+Os contratos, recurso para expressar condições esperadas pelo código, estão no centro da disputa descrita pelo autor.
+Mas os comentários completos dos países ainda não estavam públicos.
+A fonte é o relato de Pusz, que distingue o resultado da votação dos motivos ainda desconhecidos.
+Para projetos que já usam recursos experimentais do C mais mais vinte e seis, permanece o risco de diferenças entre o rascunho implementado pelo compilador e o padrão final.
