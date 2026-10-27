@@ -4,6 +4,7 @@ description: 'Blaze reduz o tempo de recompilação de Rust ao usar mais memóri
 date: '2026-10-27T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/cloudflare-vazamento-cache-cohere-qwen-blaze-rust.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/cloudflare-vazamento-cache-cohere-qwen-blaze-rust/final.opus'
 ---
 
 ![Placa ilustrativa da Cloudflare sobre falha no cache KV do GLM-5.3, com conteúdo atravessando dois balões de conversa.](./images/cloudflare-vazamento-cache-cohere-qwen-blaze-rust.jpg)
