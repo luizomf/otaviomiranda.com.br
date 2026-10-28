@@ -1,0 +1,148 @@
+Tailscale corrige falhas no S S H. "Ghostty" um ponto quatro reforça a segurança do terminal.
+
+As atualizações do Tailscale e do terminal Ghostty corrigem falhas que afetam o acesso remoto e a interpretação do conteúdo exibido na tela.
+No K D E, uma mudança prevista para novembro fará a cópia para um pendrive esperar a gravação antes de indicar que terminou.
+A edição também reúne novidades em ferramentas Python, avaliações de agentes de inteligência artificial e infraestrutura.
+
+O Tailscale corrige falhas no servidor S S H integrado.
+A empresa anunciou em vinte e oito de outubro que a versão um ponto cento e quatro ponto quatro corrige os problemas confirmados na investigação.
+Esse servidor usa as identidades e as políticas da rede Tailscale para decidir quem pode acessar uma máquina e qual usuário Unix pode assumir.
+Ele é um servidor distinto do Open S S H, que também pode ser usado sobre a mesma rede.
+
+Um dos boletins descreve uma quebra nessa separação de permissões.
+O problema estava no encaminhamento de sockets Unix, que são canais de comunicação entre processos locais.
+Esse encaminhamento fazia operações como root, o administrador do sistema.
+Com isso, uma sessão autorizada podia alcançar sockets restritos, como o do Docker.
+Mas a exploração exige acesso prévio autorizado à rede, permissão de S S H e encaminhamento permitido na política.
+A correção faz essas operações com os privilégios do usuário autenticado.
+
+Outro boletim trata de sessões autenticadas que podiam consumir memória sem limite.
+Esse consumo era capaz de derrubar o processo responsável pelas conexões Tailscale.
+A versão também corrige problemas no Serve, o recurso para compartilhar serviços.
+A orientação da empresa é atualizar para a versão um ponto cento e quatro ponto quatro ou posterior.
+Ela também orienta revisar quais usuários e dispositivos realmente precisam de acesso S S H.
+Para sistemas sensíveis, a recomendação é considerar o modo que exige uma confirmação adicional de autenticação.
+As fontes são o anúncio da Tailscale e os boletins de segurança da empresa.
+
+Agora, o Ghostty um ponto quatro corrige falhas acionadas pela saída exibida no terminal.
+A versão um ponto quatro ponto zero foi lançada em vinte e sete de outubro.
+As correções envolvem o processamento de conteúdo recebido dos programas.
+Um terminal interpreta comandos de formatação e gráficos junto com o texto que exibe.
+Segundo os mantenedores, sequências maliciosas do protocolo gráfico Kitty podiam travar o Ghostty ou provocar grandes alocações de memória.
+Em situações limitadas, elas também podiam ler ou apagar arquivos fora dos diretórios temporários permitidos.
+Nas versões afetadas, exibir a saída maliciosa já basta para acionar esse grupo de falhas.
+
+Outras falhas corrigidas exigem interação.
+Ao colar texto, era possível contornar a confirmação de comandos em programas sem o mecanismo de proteção chamado "bracketed paste".
+No macOS, clicar com a tecla Command em certos links preparados podia levar à execução de comandos.
+
+A versão também muda o processamento da saída dos programas no macOS.
+A leitura e a interpretação dessa saída passam a acontecer em duas threads separadas.
+Os mantenedores mediram um ganho de vinte e cinco a cinquenta e cinco porcento na vazão de entrada e saída em relação à série um ponto três.
+Os testes usaram texto simples e Unicode em um M quatro Max.
+O histórico fora da tela também passou a ser comprimido para economizar memória física.
+A fonte são as notas de lançamento do Ghostty, que detalham as correções de segurança e as condições dos testes.
+
+O K D E prepara cópias que aguardam a gravação no dispositivo removível.
+Méven Car anunciou em vinte e sete de outubro a integração de mudanças no K I O, a biblioteca usada pelo gerenciador de arquivos Dolphin.
+Elas corrigem um problema relatado em 2011.
+A previsão é que cheguem no K D E Frameworks seis ponto trinta e dois, em treze de novembro.
+A versão atual ainda mantém o comportamento antigo.
+
+O problema nasce da diferença entre receber os dados e terminar de gravá-los.
+Uma chamada de escrita pode terminar quando o sistema recebeu os dados em memória, enquanto o pendrive ainda está gravando.
+Durante essa espera, a interface podia mostrar que a cópia estava concluída.
+Ao mover arquivos, o risco era maior: a origem podia ser apagada antes de a cópia estar gravada no destino.
+
+A solução limita a quantidade de dados pendentes conforme a velocidade do destino.
+E, ao final de uma cópia para um dispositivo removível, espera a sincronização com o armazenamento.
+Isso aproxima o aviso de conclusão do momento em que os dados foram gravados.
+Na movimentação para um dispositivo removível, os arquivos de origem ficam preservados até a sincronização ter sucesso.
+Se ela falhar, os arquivos permanecem na origem.
+As mudanças também aproximam o progresso do que foi enviado a sistemas de arquivos de rede.
+Para o usuário, a espera passa a aparecer dentro da operação, em vez de continuar escondida depois do aviso de conclusão.
+A fonte é a explicação de Méven Car no blog do K D E, com as mudanças integradas e o calendário do K I O.
+
+Vamos aos destaques rápidos de hoje.
+
+O U V zero ponto treze adota um leitor de tar mais rigoroso.
+Em anúncio de vinte e sete de outubro, a Astral explica que seu gerenciador de pacotes Python passa a usar o "tar-codec".
+Ele faz a interpretação de distribuições em código-fonte.
+A motivação central é evitar que ferramentas diferentes enxerguem arquivos diferentes dentro do mesmo pacote.
+O índice de pacotes pode inspecionar um conteúdo, enquanto o instalador extrai outro.
+O novo leitor rejeita combinações ambíguas entre famílias do formato tar.
+Isso não elimina a necessidade de cuidado com a origem do pacote.
+Construir uma distribuição de código-fonte pode executar código por definição.
+A fonte é a apresentação do projeto e das decisões de segurança da Astral.
+
+O "Concordat" restringe as ferramentas de agentes conforme o estado da tarefa.
+O trabalho preliminar, publicado em vinte e sete de outubro, apresenta uma interface que oferece ao modelo apenas as ferramentas permitidas naquela etapa.
+Chamadas não autorizadas são rejeitadas antes de produzir efeitos.
+No teste com tarefas de companhia aérea, o autor relata que não houve alterações sem a confirmação exigida do cliente.
+Isso inclui situações com pressão simulada para ignorar essa confirmação.
+O resultado vale para o experimento descrito.
+A proposta é tornar a autorização uma regra do programa que executa o agente, com decisões humanas representadas explicitamente no fluxo.
+A fonte é o trabalho preliminar do Concordat, com o método e os resultados declarados pelo autor.
+
+O "FeatureArc" testa se agentes preservam uma funcionalidade ao ampliá-la.
+O trabalho preliminar de vinte e sete de outubro avalia dez agentes em setenta e três tarefas, com duas a dez etapas.
+Eles trabalham sobre o próprio código anterior, sem receber os resultados dos testes externos e sem retorno automático a versões anteriores.
+O acerto agregado na primeira etapa foi de sessenta e dois vírgula sete porcento.
+Já a correção da funcionalidade completa no código final ficou em vinte e oito vírgula cinco porcento.
+Essas medidas têm exigências diferentes: uma olha o acerto no começo; a outra, a entrega do conjunto de requisitos.
+Os autores identificam erros herdados como uma causa frequente das falhas posteriores.
+O resultado reforça a utilidade de verificar os requisitos antigos a cada mudança.
+A fonte é o trabalho do FeatureArc, com as condições e os resultados da avaliação.
+
+A "Liquid AI" lança seis modelos L F M três para especialização e execução local.
+A família foi anunciada em vinte e sete de outubro e reúne modelos para texto, visão, áudio e combinações dessas entradas.
+Todos são derivados de uma base comum.
+O modelo textual tem um vírgula sete bilhão de parâmetros, e a linha fica na faixa de dois bilhões.
+A empresa propõe escolher a modalidade necessária e adaptar o modelo com dados próprios.
+A fonte é a apresentação da Liquid AI no "Hugging Face".
+
+O "Project Zero" encontra complementaridade entre fuzzing e agentes de inteligência artificial.
+A comparação foi publicada em vinte e sete de outubro e examina o V oito, o motor JavaScript do Chrome, entre abril e setembro.
+O grupo contabiliza quarenta e cinco vulnerabilidades acionáveis para o "BigSleep" e trinta e sete para o "Fuzzilli".
+O Fuzzilli gera testes para provocar erros. Já o BigSleep analisa alterações com um modelo de linguagem.
+A sobreposição observada foi de cerca de vinte e cinco porcento.
+Mas um experimento separado, com bugs históricos, encontrou uma sobreposição perto de sessenta porcento.
+A equipe recomenda combinar os métodos e explica que os dados ainda dificultam comparar o custo por vulnerabilidade.
+A fonte é a publicação do Project Zero, que apresenta a metodologia e os resultados.
+
+A "PortSwigger" conseguiu contornar seis de oito sanitizadores de S V G testados.
+Essas bibliotecas tentam remover conteúdo perigoso de imagens vetoriais.
+A pesquisa de Gareth Heyes, publicada em vinte e sete de outubro, mostra casos em que o navegador ainda interpreta o resultado como conteúdo ativo, incluindo scripts.
+O "DOMPurify" e o sanitizador de S V G de Daryll Doyle resistiram aos casos apresentados.
+Para aplicações que recebem essas imagens de usuários, o resultado justifica revisar a biblioteca usada.
+Também é preciso olhar o contexto em que o arquivo é servido e aberto, porque o comportamento depende do navegador.
+A fonte é a pesquisa da PortSwigger, com o escopo dos testes.
+
+O "OpenTelemetry" estabiliza a linguagem O T T L na versão um.
+Essa linguagem permite transformar e filtrar logs, métricas e rastros de execução antes de enviá-los aos sistemas de observabilidade.
+O anúncio de vinte e sete de outubro estabelece compatibilidade de sintaxe, funções padrão e da [EY1 P IY1 AY1] em Go durante a série um.
+A garantia começa no Collector Contrib zero ponto cento e sessenta e quatro ponto zero.
+Recursos experimentais ficam fora dessa garantia.
+Quem salta várias versões deve conferir as funções e opções removidas no caminho até a estabilização.
+Isso evita que regras antigas impeçam a atualização.
+A fonte é o anúncio do OpenTelemetry, com as garantias e as orientações de migração.
+
+O "SageMaker" passa a iniciar contêineres antes de baixar a imagem inteira.
+A A W S anunciou em vinte e sete de outubro suporte a índices S O C I para tarefas de treinamento e processamento.
+O índice informa onde estão os arquivos necessários.
+Assim, é possível buscar primeiro o que inicia o contêiner e carregar o restante sob demanda.
+O recurso exige imagens elegíveis em repositórios privados do Amazon E C R.
+Imagens próprias precisam de seu próprio índice.
+Nos testes da A W S, parte da espera migrou para a primeira época, que é a passagem inicial pelos dados de treinamento.
+O benefício depende de quanto conteúdo a aplicação precisa ler logo no início.
+A fonte é a publicação da A W S sobre o SageMaker, com o funcionamento, as medições e as restrições.
+
+A NVIDIA leva limites de memória por tarefa ao compartilhamento de placas gráficas no Kubernetes.
+A publicação de vinte e sete de outubro apresenta o "G P U Fractioning Operator".
+Esse operador aplica nos nós os limites oferecidos pelo CUDA treze ponto quatro.
+O "KAI Scheduler", na versão zero ponto dezoito ponto zero, já consegue escolher a G P U e registrar a alocação para o operador executar.
+É possível pedir uma quantidade garantida de memória e um máximo maior para usar quando houver memória livre.
+A escolha do modo de compartilhamento importa.
+No modo chamado "S M sharing", uma falha pode afetar outras tarefas na mesma G P U.
+A NVIDIA recomenda cargas confiáveis para execução conjunta.
+A fonte é a publicação da NVIDIA, que descreve a arquitetura e os limites desse compartilhamento.
