@@ -4,6 +4,7 @@ description: 'KDE prepara cópias que esperam a gravação no pendrive. Também:
 date: '2026-10-28T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/tailscale-corrige-ssh-ghostty-1-4-kde-copias.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/tailscale-corrige-ssh-ghostty-1-4-kde-copias/final.opus'
 ---
 
 ![Crachá ilustrativo do Tailscale SSH sobre tecido, com aviso de atualização para a versão 1.104.4.](./images/tailscale-corrige-ssh-ghostty-1-4-kde-copias.jpg)
