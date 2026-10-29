@@ -1,0 +1,161 @@
+Alpine reconstrói GitLab após tentativas de exploração. Canonical retoma Ubuntu Core Desktop.
+
+O Alpine publicou um relato de tentativas de exploração contra seu GitLab.
+E explicou por que atualizar a aplicação deixou uma dependência vulnerável.
+A Canonical retomou o Ubuntu Core Desktop, com mudanças na arquitetura e trabalho de isolamento ainda pela frente.
+No macOS, ferramentas de terminal continuam exigindo atenção ao bloqueio de certificados comprometidos.
+A edição também traz lançamentos para quem desenvolve e opera aplicações.
+
+O primeiro caso é o do Alpine, que reconstruiu seu GitLab após descobrir que a atualização deixou o Ruby vulnerável.
+No relato de vinte e oito de outubro, o projeto informa que sofreu tentativas de exploração nos dias vinte e vinte e um.
+A falha envolve o processamento de expressões regulares nas configurações de integração contínua.
+Expressões regulares são padrões usados para reconhecer texto.
+O defeito está no Onigmo, o motor que processa essas expressões no Ruby, a linguagem que executa o GitLab.
+
+A equipe atualizou o GitLab para a versão dezenove ponto três ponto seis em vinte e dois de outubro.
+Mas sua imagem própria continuou vulnerável.
+Os pacotes oficiais do GitLab incluíam um Ruby corrigido.
+Já a imagem do Alpine usava um Ruby separado, que não recebeu a correção naquela atualização.
+É um desdobramento concreto do alerta sobre o GitLab publicado aqui no dia catorze.
+
+Quem monta o próprio GitLab precisa conferir também o Ruby efetivamente usado pela aplicação.
+Segundo o Alpine, as correções estão no Ruby três ponto três ponto treze, três ponto quatro ponto doze e quatro ponto zero ponto nove.
+Versões posteriores dessas mesmas séries também incluem as correções.
+Quem usa a imagem do Alpine para o GitLab dezenove ponto três ponto seis precisa buscá-la novamente.
+A imagem publicada em vinte e sete de outubro inclui o Ruby corrigido.
+As anteriores, mesmo com a mesma identificação de versão, permaneciam vulneráveis.
+
+O Alpine não encontrou evidência de execução bem-sucedida de código.
+Porém, perdeu parte dos registros necessários para descartar essa possibilidade.
+Por isso, reconstruiu a instância, redefiniu senhas e substituiu chaves secretas.
+As verificações contra registros externos não encontraram adulteração nos commits de vinte a vinte e dois de outubro.
+Também não encontraram adulteração nos pacotes examinados até o dia vinte e quatro, nem nos lançamentos do dia vinte e um.
+A checagem estava sendo ampliada para cobrir o período até o fechamento da instância, no dia vinte e sete.
+As chaves de assinatura dos pacotes nunca ficaram nesse servidor.
+As fontes são o relato do Alpine, as correções do GitLab e o anúncio de lançamento do Ruby três ponto três ponto treze.
+
+Agora, a retomada do Ubuntu Core Desktop, com componentes separados e foco em ambientes isolados.
+A Canonical anunciou essa retomada em vinte e oito de outubro, agora com uma equipe dedicada.
+O sistema continua sem lançamento.
+A proposta é distribuir seus componentes como snaps, pacotes com mecanismos próprios de atualização e controle de acesso.
+Isso separa partes que ficaram reunidas em uma base grande na prévia de 2023.
+Essa divisão deve permitir atualizar de forma independente o ambiente gráfico, os serviços de multimídia e outros componentes.
+
+Os primeiros cenários priorizados são máquinas centradas no navegador, estações de desenvolvimento e dispositivos para jogos.
+A infraestrutura para testes contínuos e imagens diárias está prevista para as próximas semanas.
+Para desenvolvimento, a Canonical aposta no Workshop.
+Ele organiza ambientes isolados para projetos e suas ferramentas, incluindo agentes de programação.
+A ideia é separar esse trabalho das credenciais e dos arquivos pessoais da máquina.
+
+Esse fluxo ainda precisa de adaptações para o Core Desktop.
+O Workshop e o Visual Studio Code são distribuídos como snaps do tipo classic, com acesso mais amplo ao sistema.
+Esse tipo de pacote não roda diretamente no Ubuntu Core, que exige confinamento estrito.
+A equipe trabalha nessa adaptação do Workshop e propõe executar o editor dentro dos ambientes que ele gerencia.
+São etapas do roteiro de desenvolvimento. O Ubuntu Desktop tradicional continua disponível.
+A fonte é o anúncio da Canonical, acompanhado do roteiro para o sistema.
+
+No macOS, ferramentas de terminal ainda podem aceitar certificados comprometidos da eMudhra.
+Em atualização de vinte e oito de outubro, o pesquisador Dennis Jackson relata que isso ainda acontecia com Git, curl e Python fornecidos pela Apple.
+Segundo ele, o macOS vinte e sete ponto dois, lançado no dia vinte e seis, também desfez a mitigação manual.
+É uma nova consequência do incidente de certificados que já acompanhamos aqui.
+
+A documentação da Apple explica a diferença.
+O Safari e as aplicações que usam os mecanismos de segurança da empresa recebem o bloqueio automaticamente.
+Algumas ferramentas de terminal, porém, consultam um arquivo de certificados sem verificar esse bloqueio nem a revogação dos certificados.
+Um atacante na rota da conexão pode aproveitar a confiança restante para se passar por um servidor H T T P S.
+
+A Apple documenta uma mitigação administrativa temporária, que remove raízes de confiança desse arquivo.
+Ela pode afetar sites legítimos que dependam das mesmas raízes.
+E atualizações do macOS podem substituir o arquivo editado.
+Quem administra Macs ou máquinas de integração contínua deve identificar o armazenamento de certificados usado por suas ferramentas.
+Também deve conferir a mitigação após atualizações, seguindo a orientação oficial.
+As fontes são a atualização de Dennis Jackson e a explicação da Apple, que inclui o procedimento de mitigação.
+
+Vamos aos destaques rápidos de hoje.
+
+O Node ponto J S vinte e seis entra em suporte de longo prazo.
+A versão vinte e seis ponto treze ponto zero, publicada em vinte e oito de outubro com o nome "Lithium", muda a série para L T S.
+As atualizações estão previstas até o fim de abril de 2029.
+Esse lançamento altera metadados em relação à versão vinte e seis ponto doze ponto um.
+Para quem acompanhou a série ainda no canal Current, a novidade é o compromisso de manutenção prolongada.
+Na migração de séries antigas, confira a dependência da biblioteca libatomic nos binários oficiais para Linux.
+Ela foi adotada desde o Node ponto J S vinte e cinco.
+A fonte são as notas de lançamento do Node.
+
+A VictoriaMetrics compara o custo de receber e consultar logs.
+O ensaio de vinte e nove de outubro é do fornecedor do VictoriaLogs.
+Ele compara seis sistemas com logs estruturados, ou seja, registros com campos nomeados, e cinco mil fluxos.
+Cada sistema usou um nó com oito processadores virtuais e trinta e dois gigabytes de memória, com seu formato preferido de entrada.
+Segundo a análise, o Loki agilizou a entrada ao indexar poucos campos, mas precisou ler mais dados nas consultas.
+O Elasticsearch venceu algumas buscas.
+Os testes extras de consultas foram execuções únicas, fora do repositório reproduzível de ingestão.
+Para escolher uma ferramenta, teste também as buscas e o volume que sua equipe precisa manter.
+A fonte é a publicação da VictoriaMetrics, com a metodologia e os resultados.
+
+A A W S reúne telemetria de operações que atravessam várias invocações do Lambda.
+O exportador anunciado em vinte e oito de outubro reúne etapas, esperas, tentativas e resultados de uma mesma operação.
+Isso ajuda a descobrir onde um fluxo parou, mesmo quando ele passa por várias invocações da função.
+Cada registro é uma fotografia acumulada.
+Versões mais novas substituem as anteriores, e atualizações intermediárias podem ser descartadas.
+Entradas e saídas são incluídas por padrão, o que exige filtragem de dados sensíveis.
+Paradas e estouros de tempo ocorridos no serviço, sem uma nova invocação, precisam de eventos adicionais do EventBridge.
+São esses eventos que completam o acompanhamento nesses casos.
+A fonte é a explicação da A W S sobre o funcionamento e os limites do exportador.
+
+O OpenTelemetry reduz o custo de salvar a posição de leitura dos logs.
+O anúncio de vinte e oito de outubro explica a mudança no Collector Contrib zero ponto cento e sessenta e quatro ponto zero.
+Ele passa a gravar esses pontos de retomada em Protobuf, um formato binário, no lugar de JSON.
+Esses registros guardam de onde retomar a leitura após um reinício.
+No teste de desempenho do projeto, salvar ficou quase cinco vezes mais rápido.
+A medição usou metadados de mil arquivos e armazenamento em memória.
+Os registros antigos são lidos e convertidos automaticamente na gravação seguinte.
+A fonte é o anúncio do OpenTelemetry, com a medição e os detalhes de migração.
+
+O "Hyprland" zero ponto cinquenta e sete encerra o suporte ao formato antigo de configurações, com extensão conf.
+O Hyprland é um compositor Wayland, responsável por organizar janelas e exibi-las no Linux.
+A versão de vinte e oito de outubro exige migrar essas configurações antigas.
+Confira a documentação antes de atualizar sua sessão.
+Outra novidade é compartilhar uma área de trabalho específica em chamadas.
+Isso tem suporte no Hyprland e no portal X D P H, o componente que intermedeia esse acesso para os aplicativos.
+A fonte são as notas de lançamento do Hyprland.
+
+O Volcano um ponto dezesseis evita repetir decisões de agendamento que continuam bloqueadas.
+Esse agendador de tarefas para Kubernetes ganhou um cache opcional, que registra por que um trabalho não pode começar.
+Ele espera mudanças relevantes, como a liberação de recursos, antes de repetir as verificações cobertas pelo recurso.
+Também há uma nova tentativa periódica de segurança, por padrão após cinco minutos.
+O recurso vem desativado e depende de suporte dos plugins.
+Os demais casos continuam passando pela avaliação normal.
+A fonte é o anúncio de lançamento publicado pelos mantenedores em vinte e oito de outubro, no blog da C N C F.
+
+O Visual Studio Marketplace permite publicar extensões com identidade temporária.
+O mecanismo se chama "Trusted Publishing" e foi anunciado em vinte e oito de outubro.
+Ele usa a identidade do fluxo de "Git Hub Actions" ou Azure Pipelines para autorizar a publicação de extensões do VS Code e do Visual Studio.
+No "Git Hub", a credencial emitida dura quinze minutos, reduzindo a necessidade de guardar um token de longa duração.
+A Microsoft orienta verificar a primeira publicação pelo novo mecanismo antes de remover o segredo antigo.
+O repositório e o fluxo autorizados passam a ser centrais nessa relação de confiança.
+A fonte é o anúncio da Microsoft.
+
+A NVIDIA lança o Nemotron três ponto cinco "Transcribe" para áudio gravado.
+O modelo de pesos abertos foi apresentado em vinte e oito de outubro.
+Ele reúne transcrição, tradução, identificação de falantes e perguntas sobre o áudio.
+Segundo a NVIDIA, transcreve quarenta idiomas, mas o suporte varia por tarefa.
+A identificação de falantes, por exemplo, cobre treze idiomas.
+Instruções em linguagem natural permitem orientar a saída.
+O anúncio disponibiliza execução com v L L M.
+As versões quantizadas, que reduzem o tamanho da representação dos pesos, ainda estavam previstas para depois.
+O mesmo vale para o ambiente de execução local chamado "NeMo Speech", em C mais mais.
+A fonte é a apresentação da NVIDIA no "Hugging Face".
+
+O Gemini quatro Carbon começa com acesso restrito a defensores de segurança.
+O Google anunciou o modelo em vinte e oito de outubro.
+A empresa prevê disponibilizá-lo inicialmente a um grupo selecionado nesta semana, com expansão pelo programa "Fairwind".
+O Google relata avanços na descoberta e correção de vulnerabilidades.
+Os testes externos citados no anúncio foram avaliados sem as proteções de uso.
+O acesso geral para desenvolvedores, empresas e consumidores permanece futuro.
+A fonte é o anúncio do Google.
+
+A Vercel C I entra em beta para projetos com Turborepo.
+Desde o anúncio de vinte e oito de outubro, tarefas marcadas para esse recurso podem integrar o fluxo de integração contínua da plataforma.
+Ela seleciona as tarefas afetadas pelas mudanças, reaproveita resultados por cache e instala dependências uma vez por execução.
+Para equipes que já usam Turborepo para organizar tarefas de vários pacotes, é uma opção para testar a redução de trabalho repetido na validação.
+A fonte é o anúncio da Vercel.
