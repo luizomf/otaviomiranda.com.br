@@ -4,6 +4,7 @@ description: 'A correção dependia do Ruby incluído na imagem. Também: certif
 date: '2026-10-29T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/alpine-gitlab-ruby-ubuntu-core-desktop-node-lts.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/alpine-gitlab-ruby-ubuntu-core-desktop-node-lts/final.opus'
 ---
 
 ![Caixa do GitLab identificada como imagem Alpine, com um rubi dentro e a orientação para conferir o Ruby.](./images/alpine-gitlab-ruby-ubuntu-core-desktop-node-lts.jpg)
