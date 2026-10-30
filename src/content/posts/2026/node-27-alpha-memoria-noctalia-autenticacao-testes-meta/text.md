@@ -4,6 +4,7 @@ description: 'Meta relata 74 bugs graves de privacidade encontrados com ajuda de
 date: '2026-10-30T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/node-27-alpha-memoria-noctalia-autenticacao-testes-meta.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/node-27-alpha-memoria-noctalia-autenticacao-testes-meta/final.opus'
 ---
 
 ![Balança do Node.js 27 alpha reúne Buffer e ArrayBuffer na mesma bandeja, ilustrando a nova conta de memória.](./images/node-27-alpha-memoria-noctalia-autenticacao-testes-meta.jpg)
