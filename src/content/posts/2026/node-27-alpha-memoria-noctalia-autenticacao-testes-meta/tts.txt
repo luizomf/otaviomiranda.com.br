@@ -1,0 +1,180 @@
+Node ponto J S vinte e sete alpha inclui buffers na conta de memória; Noctalia corrige desbloqueio indevido.
+
+A edição de hoje traz três motivos para revisar o comportamento do software.
+O Node muda a contabilização de memória na versão vinte e sete alpha.
+O Noctalia corrige falhas de autenticação na tela de bloqueio.
+E a Meta relata resultados de testes gerados por inteligência artificial para encontrar regressões.
+Nos destaques rápidos, há correções de segurança, ferramentas de desenvolvimento e pesquisas sobre o custo e a confiabilidade de agentes.
+
+O Node vinte e sete alpha passa a contar buffers no limite de memória.
+
+A versão alpha, publicada em vinte e nove de outubro, atualiza o motor JavaScript V oito e muda o orçamento padrão de memória.
+O heap é a área de memória gerenciada pelo motor.
+Sem uma configuração explícita do limite, ele passa a corresponder à metade da memória física, com piso de 256 megabytes e teto de quatro gigabytes.
+E a memória mantida pelos objetos Buffer e ArrayBuffer, usados para dados binários, também passa a entrar nessa conta.
+
+Isso pede um teste com carga representativa nas aplicações que acumulam dados binários.
+O mesmo código pode alcançar o limite em condições diferentes.
+Para aplicações que dependem dos padrões antigos, as notas recomendam configurar explicitamente o limite de memória do heap.
+Esse orçamento deve deixar espaço para as demais necessidades de memória do processo.
+
+A migração exige atenção também aos dados serializados, convertidos em um formato para armazenamento ou transporte.
+O formato usado pela operação de serialização do V oito, e por outras operações, mudou.
+Versões anteriores do Node não conseguem ler esse novo formato.
+Quem persiste esses dados precisa verificar a compatibilidade entre versões.
+A versão alpha é uma oportunidade de testar as mudanças antes de planejar sua adoção em produção.
+A fonte são as notas do Node vinte e sete alpha.
+
+O Noctalia cinco ponto quatro ponto um rejeita mensagens falsas de desbloqueio.
+
+O Noctalia é um componente de interface para ambientes gráficos Linux.
+A versão cinco ponto quatro ponto um, publicada em vinte e nove de outubro, traz correções na tela de bloqueio.
+Segundo os mantenedores, mensagens falsificadas de desbloqueio e de reconhecimento de impressão digital podiam contornar a autenticação.
+Elas chegavam pelo D-Bus, sistema de comunicação entre aplicações e serviços.
+O problema é que os remetentes não tinham autoridade para confirmar o acesso.
+
+A correção rejeita esses remetentes.
+No bloqueio por inatividade, o Noctalia também passa a consultar diretamente o estado do logind, serviço que gerencia sessões.
+Isso impede que mensagens forjadas suprimam o bloqueio automático.
+Em ambos os casos, a segurança depende de conferir quem pode informar ou alterar o estado da sessão.
+
+A atualização ainda corrige injeção de comandos e scripts por nomes de arquivos de papéis de parede do K D E.
+Quem usa Noctalia deve atualizar para a versão corrigida.
+As notas não informam exploração em andamento nem demonstram um caminho de ataque pela internet.
+A fonte são as notas de lançamento do Noctalia cinco ponto quatro ponto um.
+
+A Meta relata 74 bugs graves de privacidade encontrados com ajuda de testes gerados por inteligência artificial.
+
+Em relatório de vinte e nove de outubro, a Meta apresentou resultados do sistema chamado "Catching JiTTests".
+Ele gera testes para encontrar regressões, aqueles comportamentos que deixam de funcionar após uma alteração.
+O sistema prioriza mudanças de código consideradas arriscadas.
+Depois, busca testes que exponham diferenças entre a versão proposta e a anterior.
+
+Uma estratégia trata a própria mudança como um possível defeito.
+Outra tenta inferir a intenção da mudança, cria variantes de código com erros plausíveis e gera testes para detectar esses erros.
+Depois, executa os testes contra a alteração real.
+Avaliadores baseados em modelos e filtros determinísticos selecionam os achados levados aos engenheiros.
+A revisão ganha uma pergunta verificável: essa mudança de comportamento era desejada?
+
+Segundo a Meta, os engenheiros que avaliaram os achados relataram sessenta porcento de verdadeiros positivos.
+São os casos que apontavam defeitos reais.
+A empresa também afirma que o sistema ajudou a encontrar 74 bugs graves de privacidade antes de entrarem em produção, no primeiro semestre de 2026.
+Esses resultados descrevem o uso na infraestrutura da Meta.
+Para outras equipes, a prática aproveitável é pedir um teste que reproduza a suspeita de regressão e comparar sua execução nas duas versões.
+A fonte é o relatório de engenharia da Meta.
+
+Agora, os destaques rápidos para hoje.
+
+A CISA inclui uma falha do GitLab no catálogo de vulnerabilidades exploradas.
+
+A entrada de vinte e nove de outubro acrescenta confirmação de exploração à falha já acompanhada no caso da imagem do Alpine.
+Sob determinadas condições, expressões regulares em configurações de integração contínua permitem execução de código sem autenticação.
+O GitLab corrigiu o problema em três versões: dezenove ponto dois ponto oito, dezenove ponto três ponto cinco e dezenove ponto quatro ponto dois.
+Instalações próprias devem usar uma versão corrigida da sua série.
+O comunicado também disponibiliza detecções para investigar tentativas de exploração.
+As fontes são o catálogo da CISA e o aviso do GitLab.
+
+A Cisco confirma exploração de uma falha que pode reiniciar firewalls A S A e F T D.
+
+O problema afeta versões vulneráveis com o serviço de V P N por S S L de acesso remoto alcançável.
+Também é necessário que a autenticação secundária esteja configurada no grupo de túnel aplicável.
+Nessas condições, uma solicitação preparada pode provocar reinicialização e interromper o serviço sem login.
+A CISA incluiu a falha em seu catálogo em vinte e nove de outubro.
+
+A Cisco recomenda atualizar conforme a tabela da série instalada.
+Desabilitar a autenticação secundária como mitigação pode reduzir a segurança da V P N e exige avaliação.
+As fontes são o aviso da Cisco e o catálogo da CISA.
+
+A Mistral libera os pesos do Large quatro, com uma condição específica para serviços de modelos.
+
+O anúncio de vinte e nove de outubro concretiza a entrega prometida na prévia apresentada neste mês.
+O modelo aceita texto e imagens como entrada e tem aproximadamente um trilhão de parâmetros.
+Ele pode ser hospedado pela própria organização, com suporte documentado às ferramentas de execução v L L M e S G Lang.
+
+A licença permite uso, modificação e comercialização.
+Mas empresas que operam um negócio de modelos como serviço precisam de uma licença comercial separada.
+Essa condição importa antes de planejar uma interface comercial de acesso ao modelo baseada nesses pesos.
+As fontes são o anúncio da Mistral e a documentação do modelo.
+
+Um tutorial mostra como compartilhar iteradores entre threads no Python três ponto quinze.
+
+No exemplo de vinte e nove de outubro, Rodrigo Girão Serrão reproduz um erro causado pela execução simultânea do mesmo gerador de valores.
+Duas threads, ou linhas de execução concorrentes, tentam avançar esse gerador ao mesmo tempo.
+
+Uma função do módulo threading envolve o iterador com uma trava, fazendo as chamadas esperarem sua vez.
+Também há um decorador que aplica essa proteção na função que produz iteradores.
+Mas o processamento posterior de cada item continua fora dessa trava e precisa dos próprios controles de concorrência.
+As fontes são o exemplo de Rodrigo Girão Serrão e a documentação do Python.
+
+O OpenTelemetry mostra como compilar um Collector com menos dependências.
+
+O guia de vinte e nove de outubro explica como selecionar apenas os detectores necessários.
+Esses componentes identificam o ambiente de execução e acrescentam os dados à telemetria.
+A escolha acontece durante a compilação.
+Desabilitar um detector apenas na configuração de uso podia deixar suas dependências dentro do executável.
+
+O exemplo parte da distribuição para Kubernetes e mantém os detectores de ambiente e de sistema.
+O arquivo caiu de aproximadamente 182 para 147 megabytes, com treze dependências a menos.
+Esse resultado mede tamanho de arquivo.
+O consumo de memória RAM precisa ser avaliado separadamente.
+A fonte é o guia do OpenTelemetry Collector Builder.
+
+O Tor Browser dezesseis ponto zero leva Linux ARM de 64 bits ao canal estável.
+
+Lançado em vinte e nove de outubro, o navegador passa a oferecer suporte estável a computadores Linux com essa arquitetura.
+Isso inclui Raspberry Pi e Macs Apple Silicon executando Linux.
+A versão também permite substituir os títulos das janelas pelo nome "Tor Browser".
+A ideia é reduzir a informação que outros programas locais podem ler.
+
+Essa opção vem desativada, enquanto o projeto avalia efeitos sobre leitores de tela e ambientes gráficos.
+O suporte a Linux x oitenta e seis de 32 bits foi encerrado.
+A fonte é o anúncio do Tor Project.
+
+O Paru dois ponto dois permite adiar a instalação de pacotes muito recentes do A U R.
+
+Esse auxiliar de instalação para Arch Linux ganhou uma configuração de idade mínima de lançamento, com exceções por pacote.
+Ela vale para instalações, atualizações e buscas no repositório comunitário A U R.
+A versão, com registro de mudanças de vinte e oito de outubro, também adiciona suporte ao pacman sete ponto um.
+Uma espera mínima dá tempo para que problemas sejam descobertos antes da adoção.
+A idade do pacote, sozinha, não comprova sua segurança.
+A fonte são as notas do Paru dois ponto dois ponto zero.
+
+Um estudo de modernização de P H P encontra regressões em arquivos que já funcionavam.
+
+O preprint de vinte e nove de outubro avaliou cinco modelos.
+Cada um recebeu cem arquivos do WordPress quatro ponto zero para adaptar ao P H P oito ponto três.
+Os modelos trabalharam sem contexto do projeto nem retorno da execução.
+
+Dos arquivos originais, 83 passavam em todos os testes.
+Após a transformação pelo melhor modelo nesse critério, restaram 59.
+Cada modelo quebrou entre 32 e 51 arquivos antes compatíveis.
+A amostra foi escolhida por padrões de modernização, e o experimento mede a primeira resposta completa.
+Para migrações, vale comparar o comportamento com o código intacto e dar ao processo acesso aos testes.
+A fonte é o estudo e sua metodologia, publicados no arXiv.
+
+O CORAL testa agentes que salvam progresso antes de limpar o contexto.
+
+O trabalho de vinte e nove de outubro fornece ferramentas para registrar fatos e tarefas concluídas.
+Depois, o agente pode reiniciar o histórico preservando esses registros.
+Na avaliação dos autores, foi usado o modelo Qwen três, de oito bilhões de parâmetros, após treinamento específico.
+A configuração CORAL R L recebeu em média 136 mil tokens de entrada por execução.
+O agente "ReAct", usado na comparação, recebeu um milhão e 78 mil.
+
+O teste usou 103 questões textuais do GAIA, com oito execuções por questão.
+A redução se refere ao volume de tokens de entrada nesse experimento.
+Salvar informações erradas também pode carregar o erro para a etapa seguinte.
+A fonte é o artigo sobre o CORAL no arXiv, em sua seção de avaliação e na tabela de resultados.
+
+O OpenBonsai atualiza sua prévia de compressão para modelos locais.
+
+O projeto independente substituiu seu modelo em vinte e nove de outubro.
+Ele documenta a conversão do Qwen três ponto cinco, de nove bilhões de parâmetros, em um arquivo de aproximadamente dois gigabytes.
+Para isso, usa uma representação de pesos com três valores e fatores de escala.
+Esse tamanho descreve o arquivo do modelo.
+A memória total necessária para executá-lo deve ser avaliada à parte.
+
+A execução exige a versão modificada do llama ponto C P P mantida pela Prism.
+O repositório e suas limitações são a fonte deste destaque.
+O projeto alerta para avaliações pequenas e resultados inferiores ao Ternary Bonsai oficial em testes de código.
+Também há sobreposição entre exemplos de treinamento e parte da avaliação.
+A prévia é experimental, com qualidade a conferir na tarefa desejada.
