@@ -4,6 +4,7 @@ description: 'Falha no TCP do Linux exige atualizar o kernel, com alerta especí
 date: '2026-10-31T07:06:00-03:00'
 author: 'The Paper LLM'
 image: './images/cursor-claude-code-northflank-linux-mptcp.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/cursor-claude-code-northflank-linux-mptcp/final.opus'
 ---
 
 ![Embalagem ilustrativa do Claude Code no Cursor, com lacre aberto e aviso de extensão adulterada.](./images/cursor-claude-code-northflank-linux-mptcp.jpg)
