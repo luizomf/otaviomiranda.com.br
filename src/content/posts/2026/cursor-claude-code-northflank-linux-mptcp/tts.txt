@@ -1,0 +1,145 @@
+Cursor alerta sobre extensão adulterada do Claude Code. Northflank pede revogação de chaves.
+
+Os principais alertas deste sábado pedem cuidados em três lugares.
+O computador de desenvolvimento, os segredos guardados na hospedagem e o kernel dos servidores Linux.
+No Cursor, desinstalar uma extensão adulterada pode deixar artefatos maliciosos para trás.
+Na "Northflank", a orientação é revogar credenciais nos provedores que as emitiram.
+No Linux, uma configuração do Go reduz uma via de exposição, mas a correção depende de atualizar o kernel.
+A edição também traz ferramentas e mudanças para acompanhar aplicações, controlar custos e colaborar em código.
+
+A primeira história é sobre a extensão adulterada do "Claude Code" no Cursor, que tenta manter acesso remoto.
+Uma análise publicada pela Microsoft em trinta de outubro detalha o código malicioso encontrado em duas versões dessa extensão.
+São as versões dois ponto um ponto trezentos e doze e dois ponto um ponto trezentos e treze, distribuídas pelo marketplace do Cursor.
+O aviso do Cursor identifica os pacotes para macOS e Windows, disponíveis em vinte e nove de outubro.
+A janela foi aproximadamente das seis horas e vinte e sete minutos às dezessete horas e trinta e cinco minutos, no horário de Brasília.
+Segundo a Microsoft, o "Visual Studio Marketplace" e a distribuição oficial pelo N P M ficaram fora do incidente.
+A Anthropic informou que seus sistemas não foram comprometidos.
+
+Ao carregar, a extensão tentava acrescentar uma chave autorizada para acesso por S S H.
+Também tentava ativar esse serviço de acesso remoto e abrir um túnel até a máquina do desenvolvedor.
+Além disso, criava mecanismos para repetir a conexão após reinícios.
+O sucesso do acesso dependia das permissões e da configuração da máquina.
+Mesmo quando essa etapa falhava, podiam permanecer chaves e scripts maliciosos.
+A coleta descrita pela Microsoft incluía nomes de variáveis de ambiente.
+Essa coleta, por si só, não demonstra roubo dos valores guardados nelas.
+
+Desinstalar a extensão não elimina os arquivos gravados fora do diretório dela.
+Quem instalou os pacotes afetados deve preservar evidências, conferir o histórico de instalação e investigar os indicadores do aviso oficial.
+Máquinas com sinais de execução do código malicioso devem ser isoladas.
+A limpeza precisa remover os artefatos confirmados e preservar chaves S S H legítimas.
+A ausência de um único marcador não descarta o incidente.
+O Cursor orienta ainda trocar credenciais e revogar sessões acessíveis à máquina afetada, a partir de um computador confiável.
+A empresa diz ter retirado o servidor do atacante do ar.
+As fontes são o aviso do Cursor, atualizado em trinta de outubro, e a análise com orientações da Microsoft.
+
+O segundo alerta vem da Northflank, que orienta revogar segredos armazenados na plataforma.
+A empresa oferece hospedagem de aplicações e bancos de dados.
+Em trinta de outubro, publicou um aviso de segurança orientando todos os usuários a assumir que suas variáveis de ambiente foram descriptografadas.
+A recomendação abrange segredos dos serviços, grupos de segredos e segredos globais.
+Em atualização posterior, a empresa registrou relatos de uso não autorizado de chaves de acesso a serviços de inteligência artificial.
+Essas chaves tinham sido fornecidas à plataforma.
+
+A ação indicada é revogar as credenciais antigas nos serviços que as emitiram, gerar substitutas e atualizar as aplicações.
+Alterar apenas o valor salvo na hospedagem deixa a chave anterior utilizável no provedor.
+Confira também os registros de consumo e cobrança dessas interfaces de programação.
+A Northflank habilitou rotação de segredos para seus complementos de banco de dados.
+A medida inclui o Postgri [EH1 S] [K Y UW1] [EH1 L] e o MongoDB.
+A empresa também recomenda desativar o acesso público desses serviços quando estiver habilitado.
+
+Na atualização de trinta de outubro, às vinte e duas horas e quatro minutos de Brasília, a empresa anunciou logs de auditoria para todos os clientes.
+Isso inclui os clientes gratuitos.
+A investigação continuava em andamento no aviso consultado.
+A orientação de revogação vale para todos os usuários.
+Os relatos de abuso ainda não permitem quantificar quantas credenciais foram efetivamente usadas por invasores.
+A fonte é o aviso do incidente, com as atualizações oficiais da Northflank.
+
+Agora, o alerta no Linux. A falha no T C P exige corrigir o kernel, e a mitigação no Go tem alcance limitado.
+O defeito envolve o uso de uma estrutura de memória depois que ela foi liberada, durante o processamento de conexões T C P com I P versão quatro.
+Em pesquisa publicada em vinte e sete de outubro, a Anthropic relata ter demonstrado execução remota de comandos como root, o administrador do sistema.
+O alvo era um servidor com um ponto de escuta "Multipath TCP" exposto, também chamado de M P T C P.
+Esse recurso permite que uma conexão T C P use múltiplos caminhos de rede.
+
+O alerta da equipe de segurança do Go, de vinte e nove de outubro, importa também para quem não configurou esse recurso deliberadamente.
+Desde o Go um ponto vinte e quatro, programas escritos na linguagem usam esse recurso por padrão nos sockets de escuta no Linux.
+Esses são os pontos pelos quais um servidor recebe conexões.
+A recomendação principal é instalar um kernel corrigido pela distribuição e conferir que a máquina passou a executar essa versão.
+
+Enquanto a atualização é preparada, uma variável de configuração do Go permite desativar esse padrão no programa que a recebe.
+Mas chamadas explícitas da aplicação podem sobrepor a configuração.
+E basta manter outro ponto de escuta M P T C P exposto para preservar a via de exploração demonstrada.
+Além disso, o defeito está no T C P com I P versão quatro.
+A equipe do Go alerta que outros caminhos de exploração, sem o recurso de múltiplos caminhos, podem existir.
+Por isso, a mudança de configuração é uma mitigação temporária e limitada.
+O identificador da falha e a configuração exata estão no artigo escrito.
+As fontes são o aviso da equipe de segurança do Go e a seção sobre Linux da pesquisa da Anthropic.
+
+Vamos aos destaques rápidos de hoje, começando pelo controle de gastos no Google Cloud.
+O anúncio de trinta de outubro coloca os limites de gastos do "Budgets" em disponibilidade geral para serviços elegíveis de cada projeto.
+Esses limites pausam o uso sem apagar recursos.
+Para serviços de inteligência artificial, o acionamento usa custos estimados e ocorre em minutos.
+Uma [EY1 P IY1 AY1] permite administrar os limites, e o reinício mensal automático pode desbloquear os serviços no próximo ciclo.
+Mas a capacidade reservada por "Provisioned Throughput" continua funcionando.
+Essa é uma exceção importante ao planejar o orçamento.
+O Google recomenda começar por ambientes de desenvolvimento e testes, nos quais a interrupção é mais tolerável.
+A fonte é o anúncio do Google Cloud, com os limites do recurso.
+
+A JetBrains publicou correções próprias para os certificados comprometidos da "eMudhra".
+O aviso de trinta de outubro acrescenta medidas específicas ao incidente já acompanhado aqui.
+Há três componentes a conferir nos produtos da empresa.
+O ambiente de execução Java, chamado J B R. O navegador embutido, chamado J C E F. E o serviço de segundo plano da JetBrains.
+Esse serviço foi corrigido na versão zero ponto nove ponto nove mil setecentos e vinte e oito.
+Atualizar o sistema operacional não protege esses componentes.
+
+Os patches da linha dois mil e vinte e cinco ponto dois ponto seis corrigem apenas o ambiente Java.
+Enquanto falta a correção do navegador embutido nessa linha, a orientação é desabilitá-lo.
+Nas versões corrigidas dois mil e vinte e cinco ponto três ou superiores, o navegador depende de atualizações de certificados do Google.
+Redes que bloqueiam esse acesso também precisam desabilitá-lo.
+Consulte a tabela por produto antes de considerar a atualização concluída.
+A JetBrains informa não conhecer exploração contra seus usuários até a publicação.
+A fonte é o boletim de segurança da JetBrains, com versões e procedimentos.
+
+Em observabilidade, o projeto "OpenTelemetry eBPF Instrumentation" chega à versão um ponto zero ponto zero.
+Também chamado de O B I, ele coleta métricas e rastros de execução de aplicações Linux sem exigir mudanças no código-fonte.
+O anúncio foi feito em trinta de outubro.
+Para fazer essa coleta, o projeto combina e B P F com instrumentação específica de cada ambiente.
+O e B P F permite executar programas de observação no kernel.
+A versão estabelece compromissos de compatibilidade para configuração e implantação.
+Algumas convenções da telemetria continuam em evolução, e métricas do ambiente de execução permanecem experimentais.
+Quem já usa o projeto deve revisar a migração para o "Config", versão dois.
+Também deve comparar métricas e alertas numa implantação pequena, antes de atualizar tudo.
+A fonte é o anúncio de lançamento, com orientações do OpenTelemetry.
+
+Na colaboração em código, a plataforma [T AE1 NG G AH0 L D] passa a guardar issues e pull requests como objetos Git.
+A plataforma de hospedagem e colaboração anunciou o novo modelo de dados em trinta de outubro.
+Seu novo servidor, reescrito em Rust, guarda esses registros, comentários e outros dados de colaboração como cadeias de objetos Git.
+Essas cadeias ficam vinculadas ao repositório.
+O lançamento também inclui contas de organizações e uma interface refeita em Svelte.
+Quem hospeda o próprio serviço deve seguir o guia de atualização para "knot", versão um ponto vinte ponto zero, com o novo modelo de dados.
+A fonte é o anúncio da [T AE1 NG G AH0 L D], com a orientação de migração.
+
+O Prospero apresenta uma interface nativa para agentes de programação.
+Chris Wellons publicou em trinta e um de outubro seu ambiente em C mais mais, com interface gráfica nativa.
+Ele conecta modelos a ferramentas de arquivos, comandos e subagentes. O usuário fornece o acesso ao modelo.
+Entre as decisões descritas pelo autor estão prazos para operações e uma interface que fica ociosa quando não há nada a redesenhar.
+A edição comunitária tem código aberto. A profissional inclui mecanismos de implantação remota.
+O autor ressalta que as permissões internas não impedem um agente malicioso de agir.
+O isolamento também depende de restrições no ambiente em que o programa executa.
+A fonte é a apresentação do Prospero por Chris Wellons, que também descreve esses limites.
+
+A Firezone lançou a "sanstun", uma biblioteca WireGuard em Rust que separa a lógica das operações de rede.
+Voltada a desenvolvedores de redes privadas virtuais, a biblioteca foi anunciada em trinta e um de outubro.
+Ela adota um modelo em que a aplicação que usa a biblioteca controla a rede, a passagem do tempo e outros efeitos.
+Essa separação facilita simular cenários e testar o estado do protocolo.
+A interface de programação também separa o controle dos pacotes do trabalho criptográfico.
+Isso permite executar a criptografia em outras threads.
+O projeto usa licença Apache dois ponto zero e substitui o fork de "boringtun" mantido pela Firezone.
+A fonte é a apresentação da arquitetura e do lançamento da sanstun, pela Firezone.
+
+Para fechar, o Google explica como uma combinação de falhas bloqueou conexões à [EY1 P IY1 AY1] do Kubernetes.
+O relato publicado em trinta de outubro reconstrói um incidente de janeiro no G K E, o serviço gerenciado de Kubernetes do Google.
+Pacotes chegavam fora de ordem no caminho privado do "Private Service Connect".
+O proxy "Envoy" mantinha conexões parcialmente abertas.
+E um bug no T C P do Linux impedia o processamento de um pacote de encerramento.
+Conexões antigas ficavam presas, e a reutilização dos mesmos identificadores de rede prejudicava novas tentativas.
+A fonte é a investigação técnica publicada pelo Google Cloud.
+O caso mostra por que capturar tráfego em pontos diferentes ajuda a localizar uma falha que aparece na aplicação apenas como tempo de espera esgotado.
