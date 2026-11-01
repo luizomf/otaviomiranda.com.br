@@ -1,0 +1,130 @@
+[JH EH1 P S AH0 N] encontra perda de gravações confirmadas nas versões testadas do ParticleDB.
+
+Uma confirmação de gravação precisa ser confiável para que uma aplicação saiba o que já fez.
+A investigação do [JH EH1 P S AH0 N] sobre o banco ParticleDB abre esta edição com falhas nessa garantia.
+Também entram no radar checagens de baterias que concentram o consumo no início de cada minuto.
+Há ainda uma correção de autenticação no L X D e no MicroCloud, e o uso de inteligência artificial para classificar dados roubados.
+Nos destaques rápidos, temos inferência local, otimização para placas de vídeo e ferramentas para Linux.
+
+O ParticleDB perdeu gravações confirmadas nos testes do [JH EH1 P S AH0 N].
+A análise foi publicada em trinta e um de outubro.
+O ParticleDB é um banco da Orkes que reúne [EH1 S] [K Y UW1] [EH1 L], armazenamento por chave e busca vetorial.
+Os testes começaram na versão um ponto um ponto quatro e chegaram à versão um ponto um ponto dezoito ponto onze, candidata a lançamento vinte e dois.
+Foram encontrados noventa e seis problemas, incluindo travamentos, resultados incorretos e perda de dados.
+A maioria podia ocorrer com um servidor, um cliente e nenhuma falha provocada pelo teste.
+E há um limite importante: a avaliação ficou restrita a um único nó.
+As versões fornecidas não incluíam replicação entre servidores.
+
+Na última versão testada, dez problemas permaneciam.
+O modo padrão, chamado O C C, perdia gravações já confirmadas durante a operação normal.
+O modo de isolamento serializável também apresentou anomalias, inclusive perda de atualização em testes com encerramento do processo.
+Imagine uma aplicação que recebe uma confirmação de sucesso ao registrar a conclusão de uma tarefa.
+Se esse registro desaparece, ela pode tratar a tarefa como pendente e repetir seu efeito.
+
+A Orkes financiou a pesquisa e, segundo o relatório, afirma ter corrigido os problemas restantes na versão um ponto um ponto dezenove, R C treze.
+O [JH EH1 P S AH0 N] não avaliou essa versão nem as posteriores.
+O histórico do produto já lista a candidata R C dezesseis dessa mesma versão, de trinta de outubro, ainda sem ser um lançamento final.
+Diante dos resultados que obteve, o grupo recomenda interromper novas implantações e migrar para outros bancos.
+Também recomenda conferir ou reconstruir o estado a partir de fontes confiáveis, quando disponíveis.
+
+O relatório trata do banco refatorado e é uma investigação distinta da análise anterior do Orkes Conductor.
+Segundo a Orkes, os clientes que permaneceram na versão um ponto zero ponto zero provavelmente ficaram fora dos problemas mais graves da linha um ponto um.
+Os testes breves dessa versão antiga tiveram resultados melhores, mas com alcance limitado e sem avaliar replicação.
+As fontes deste bloco são a análise do [JH EH1 P S AH0 N], com os resultados e limites dos testes, e o histórico de versões do ParticleDB.
+
+Agora, da confirmação de uma gravação para tarefas que acontecem todas ao mesmo tempo.
+O centro de pesquisa Jülich liga checagens sincronizadas de baterias a oscilações na rede elétrica.
+A investigação, divulgada em trinta de outubro, trata de oscilações que se repetem a cada minuto.
+A equipe encontrou uma causa em grandes sistemas de baterias: os equipamentos verificam seu estado de carga no começo de cada minuto.
+Quando essas atividades coincidem, produzem picos de consumo e pequenas quedas na frequência da rede.
+
+As medições cobriram oitenta locais do campus.
+O padrão apareceu nos pontos com baterias que mantêm a alimentação sem interrupções.
+A inspeção de um desses sistemas confirmou o pico ligado à checagem.
+Segundo os pesquisadores, outros aparelhos controlados digitalmente também podem contribuir para o fenômeno.
+
+As oscilações observadas não eram críticas para a segurança da rede.
+Mas podem aumentar o desgaste de turbinas, que desaceleram e voltam a acelerar.
+A proposta é distribuir as verificações aleatoriamente ao longo do tempo.
+Em software, a mesma ideia ajuda a entender o jitter.
+É uma variação aleatória no horário de tarefas periódicas, para evitar que muitos clientes concentrem a carga no mesmo instante.
+A fonte é a investigação do centro de pesquisa Jülich, que também apresenta a proposta de reduzir essa sincronização.
+
+L X D e MicroCloud corrigem uma falha que permitia assumir a identidade de um cliente confiável.
+A Canonical pede a atualização dessas ferramentas, usadas para gerenciar contêineres, máquinas virtuais e infraestrutura em cluster.
+O aviso é de vinte e oito de outubro e foi complementado pelo registro da vulnerabilidade em trinta de outubro.
+A falha estava na autenticação por certificado.
+
+Para explorá-la, um atacante precisava conseguir alcançar a interface de programação do serviço por H T T P S.
+Também precisava obter o certificado público de um cliente confiável.
+Com isso, podia assumir a identidade desse cliente, sem possuir a chave privada correspondente.
+O problema estava na verificação de confiança.
+O servidor aceitava como identidade um certificado enviado pelo cliente, sem exigir a prova de posse da chave daquele certificado.
+Dependendo dos privilégios da identidade, o acesso pode chegar a root, o superusuário da máquina hospedeira.
+No MicroCloud, o aviso também descreve a exposição envolvendo o certificado de um membro que ingressa no cluster.
+
+As versões corrigidas do L X D, distribuídas como snap, variam conforme o canal utilizado.
+São elas: seis ponto dez ponto um e cinco ponto vinte e um ponto nove.
+Também estão corrigidas a cinco ponto zero ponto onze e a quatro ponto zero ponto quinze.
+Para o MicroCloud, as versões corrigidas são dois ponto um ponto cinco e três ponto quatro ponto um.
+A Canonical data as correções de vinte e nove de outubro.
+A empresa informa que as atualizações do L X D estão sendo distribuídas progressivamente para o canal estável.
+Atualize no canal da sua instalação e confira a versão efetivamente instalada.
+O aviso não confirma exploração em ataques reais.
+As fontes são o aviso da Canonical, com as versões corrigidas, e o registro da vulnerabilidade no Ubuntu.
+
+O próximo caso é o VOLTA, que usa uma etapa opcional de inteligência artificial para classificar dados roubados, segundo a Talos.
+A Cisco Talos publicou a análise em trinta e um de outubro.
+O VOLTA é um malware para Windows que rouba credenciais, sessões e dados de carteiras de criptomoedas.
+Depois da coleta, uma etapa opcional envia informações a um modelo de linguagem.
+O objetivo é organizar um perfil da vítima e classificar seus ativos pelo possível valor para o criminoso.
+O malware também aproveita sessões roubadas para enriquecer esse perfil e envia um relatório ao operador.
+
+A análise descreve uma capacidade do código.
+Ela não mede quantas vítimas foram atingidas nem o ganho financeiro dessa etapa.
+Para quem desenvolve software, o alcance da coleta merece atenção.
+Além dos dados do navegador, ela inclui chaves S S H e configurações de provedores de nuvem.
+
+Em caso de comprometimento, a Talos recomenda preservar registros úteis à investigação.
+Também recomenda revogar tokens potencialmente expostos e trocar senhas.
+Como o executável pode se apagar, sua ausência não basta para considerar a máquina limpa.
+A fonte é a análise do VOLTA publicada pela Cisco Talos, que inclui as contramedidas.
+
+Vamos aos destaques rápidos de hoje.
+O Basalt documenta atalhos de inferência que alteram o cálculo e a saída do modelo.
+Em medições publicadas em trinta de outubro, o motor de inferência local explora duas opções para modelos que ativam apenas partes da rede.
+Essas partes são chamadas de especialistas.
+As opções favorecem especialistas já na G P U, ou deixam de calcular alguns que precisariam ser buscados.
+Isso reduz as transferências de dados.
+
+Nos testes do autor, a velocidade variou com a configuração, e uma delas ficou mais lenta.
+Foram medições exploratórias em duas placas de vídeo, com uma execução por configuração e ajustes adicionais na decodificação.
+As opções vêm desligadas e exibem um aviso quando ativadas.
+Quem experimentar deve avaliar também a qualidade nas próprias tarefas.
+A fonte é a documentação do Basalt sobre o mecanismo, as condições e as medições, publicada no "Git Hub".
+
+O Futhark melhora a organização das cópias na memória da G P U.
+Em um texto de trinta e um de outubro, o projeto da linguagem para processamento paralelo de arrays explica a otimização.
+Ela reorganiza o percurso da cópia conforme a disposição dos dados na memória.
+Assim, unidades de execução vizinhas, as threads da G P U, acessam endereços próximos.
+Isso permite atender mais acessos com menos operações de memória.
+O ganho nos testes de programas existentes foi modesto.
+O autor relata até cerca de dez porcento nos poucos programas beneficiados.
+Os saltos maiores vieram de testes específicos de cópia.
+A fonte é a explicação do projeto Futhark, acompanhada das medições.
+
+O Kwi estreia como experimento de terminal K D E, com renderização acelerada por G P U.
+Ele foi apresentado por Eike Hein em primeiro de novembro.
+Combina a biblioteca de terminal do Ghostty, que interpreta o terminal e mantém seu estado, com "Qt Quick" e Kirigami para a interface.
+Também oferece um módulo que outras aplicações Qt Quick podem incorporar.
+Ainda não tem uma versão zero ponto um ponto zero marcada e passou por testes limitados.
+O anúncio não estabelece uma substituição do Konsole no K D E.
+A fonte é a apresentação do Kwi por Eike Hein, com o estado atual do projeto, no blog do K D E.
+
+Por fim, o ambiente gráfico [EH0 N L AY1 T AH0 N M AH0 N T] chega à versão zero ponto vinte e oito ponto zero.
+Ela adiciona integração com NetworkManager e um mixer nativo para PipeWire.
+A versão, de trinta e um de outubro, amplia o controle de rede e áudio nesse ambiente gráfico.
+O novo módulo de rede permite gerenciar conexões salvas e oferece suporte a V P N.
+Também há histórico configurável da área de transferência e limites de carga de bateria.
+Quem compila o ambiente precisa da biblioteca E F L na versão um ponto vinte e nove ponto zero ou posterior, conforme as notas.
+A fonte são as notas de lançamento do [EH0 N L AY1 T AH0 N M AH0 N T].
