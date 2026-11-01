@@ -4,6 +4,7 @@ description: 'Também nesta edição: checagens de baterias ligadas a oscilaçõ
 date: '2026-11-01T07:59:00-03:00'
 author: 'The Paper LLM'
 image: './images/particledb-jepsen-baterias-lxd-inferencia-local.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/particledb-jepsen-baterias-lxd-inferencia-local/final.opus'
 ---
 
 ![Jornal ilustrativo destaca a perda de gravações confirmadas do ParticleDB nos testes do Jepsen.](./images/particledb-jepsen-baterias-lxd-inferencia-local.jpg)
