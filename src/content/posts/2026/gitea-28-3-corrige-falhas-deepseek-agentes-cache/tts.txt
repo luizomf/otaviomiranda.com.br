@@ -1,0 +1,138 @@
+Gitea vinte e oito ponto três ponto zero corrige tomada de contas e execução indevida de automações.
+
+O Gitea lançou correções para falhas na associação de contas e nas permissões de automações.
+Também nesta edição, vamos ver como um protótipo da DeepSeek delimita o trabalho de agentes.
+E por que um endereço novo pode guardar JavaScript antigo, além do que um teste de navegação de código mediu em economia.
+Nos destaques rápidos, temos o incidente da Trigger ponto dev, o ciclo de versões do Linux e avanços em ferramentas de sistema.
+
+Começando pelo Gitea, a versão vinte e oito ponto três ponto zero saiu em primeiro de novembro.
+A recomendação dos mantenedores é atualizar o quanto antes.
+A plataforma hospeda repositórios Git, revisões de código e automações.
+Duas correções merecem atenção especial.
+
+A primeira envolve a associação de contas.
+O problema aparecia quando a associação automática estava ativada e o cadastro estava aberto.
+Nessa configuração, uma pessoa autenticada por um provedor OAuth dois podia vincular sua identidade externa à conta de outro usuário.
+Com isso, podia entrar sem a senha daquela conta.
+A correção ajusta a escolha da conta vinculada.
+
+A segunda falha envolve automações de revisão de código.
+Um usuário com permissão apenas de leitura podia provocar a execução de código escolhido por ele.
+Esse código tinha acesso aos segredos do repositório e a um token com permissão de escrita.
+Havia uma condição: a branch de origem do pedido de revisão precisava estar no mesmo repositório.
+A correção faz a automação usar o commit da ponta dessa branch.
+
+A versão também fecha caminhos que ignoravam restrições de tokens.
+Por exemplo, um token de administrador limitado a conteúdo público podia realizar operações administrativas, inclusive criar outros administradores.
+Isso mostra por que a autorização precisa conferir duas coisas: os privilégios da conta e as restrições da credencial apresentada.
+
+São correções novas em relação à versão vinte e oito ponto dois ponto zero, que cobrimos em outubro.
+Quem mantém uma instância deve priorizar a atualização.
+O anúncio não informa exploração dessas novas falhas em ataques reais.
+As fontes são o anúncio e os detalhes de segurança do Gitea, além das correções das automações e da associação de contas no repositório do projeto.
+
+Agora, o protótipo da DeepSeek delimita tarefas, mas executa com os privilégios do operador.
+O projeto se chama D S H superagent, e seu código inicial é datado de trinta e um de outubro.
+É um protótipo de pesquisa que acompanha atividades de um repositório no "Git Hub" e, opcionalmente, conversas no "Feishu".
+Quando aceita um pedido, cria uma tarefa com escopo autorizado e entrega a execução a uma sessão e um diretório próprios.
+
+O desenho procura evitar trabalho duplicado.
+Aceitar duas vezes o mesmo evento deve produzir uma única tarefa.
+E cada conversa tem, no máximo, uma avaliação em andamento.
+A fonte dos eventos também guarda sua posição de leitura, para evitar repetições depois de uma reinicialização.
+A autorização fica a cargo do sistema que coordena o agente.
+Comentários posteriores podem fornecer contexto, sem ampliar as permissões da tarefa.
+
+Mas, na execução, os agentes rodam comandos sem aprovação.
+E fazem isso com os privilégios do usuário do sistema operacional que os iniciou.
+Os diretórios separados e os comandos intermediários organizam o trabalho, mas não oferecem isolamento de segurança.
+Para exigir aprovação antes de incorporar código, a documentação recomenda proteção de branches.
+
+O repositório se apresenta como código de pesquisa, com partes do desenho ainda não implementadas.
+Quem for experimentá-lo precisa limitar os privilégios do ambiente de execução.
+O escopo de uma tarefa, por si só, não restringe o acesso do processo ao sistema.
+As fontes são o repositório da DeepSeek, seu aviso de maturidade e o registro inicial do código.
+Também usamos a documentação do projeto sobre o modelo de eventos, a autorização e a execução.
+
+A próxima história mostra como um endereço novo guardou JavaScript antigo no cache.
+Em relato publicado em primeiro de novembro, a criadora do "MyIPScan" descreve uma falha de atualização em seu site estático no "Cloudflare Pages".
+A página passou a pedir JavaScript com um parâmetro de versão novo antes de o arquivo atualizado estar disponível.
+Segundo ela, a C D N buscou o arquivo antigo e o guardou sob a chave nova.
+A C D N é a rede que mantém cópias do conteúdo próximas dos visitantes.
+Ou seja, naquele relato, o endereço era novo, mas a cópia guardada ainda era a antiga.
+
+A resposta vinha com um prazo de validade de um ano e uma indicação de que o conteúdo não mudaria nesse intervalo.
+Enquanto a cópia estivesse no cache e dentro desse prazo, o navegador podia reutilizá-la sem consultar novamente o servidor.
+É o comportamento previsto no padrão que define essa indicação de conteúdo imutável, com exceção de uma atualização forçada pelo usuário.
+
+Limpar a C D N não apaga as cópias já armazenadas pelos visitantes.
+A prevenção proposta no relato combina duas medidas.
+Uma é usar nomes de arquivo com hash do conteúdo, para que cada nome identifique uma versão específica.
+A outra é publicar os arquivos antes das páginas que apontam para eles.
+Também é preciso versionar as dependências.
+Mudar o parâmetro do script principal não altera automaticamente os endereços dos módulos que ele importa.
+
+A sequência do incidente é descrita pela autora; o padrão H T T P sustenta a explicação do cache.
+Para quem publica sites estáticos, a lição é conferir se os arquivos atualizados já estão disponíveis antes de colocar no ar as páginas que apontam para eles.
+As fontes são o relato da autora no "TabNews" e a R F C oito dois quatro seis, nas seções um e dois.
+
+Passando à navegação de código, o autor do "Codedict" mediu um custo vinte e seis porcento menor em quatro tarefas.
+Apresentado em primeiro de novembro, o Codedict cria um índice local da estrutura do código.
+Para isso, usa "tree-sitter", uma ferramenta que analisa a sintaxe do código, e "SQLite".
+Uma integração procura nesse índice antes de o "Claude Code" responder.
+Ela fornece funções, arquivos e relações de chamadas junto da pergunta.
+A ideia é reduzir as rodadas de busca feitas pelo agente.
+
+No teste do autor, foram quatro tarefas, repetidas três vezes por configuração.
+O uso total de tokens caiu sessenta e três porcento, e as rodadas caíram setenta e cinco porcento.
+O custo passou de cinco dólares e setenta e seis centavos para quatro dólares e vinte e sete centavos, uma redução de vinte e seis porcento.
+O projeto privado tinha cerca de duzentos e cinquenta arquivos, em TypeScript, C sharp e Python.
+
+As tarefas avaliavam localização de código e explicação de fluxos, com ferramentas somente de leitura.
+A avaliação automática conferia se as respostas citavam os símbolos e arquivos esperados.
+Essa é uma checagem limitada de acerto.
+O resultado se aplica àquele conjunto de consultas.
+Implementar e validar uma funcionalidade inteira exigiria outro teste.
+A ferramenta também infere relações de chamadas sem um compilador e atribui níveis de confiança a elas.
+Ao experimentar, compare custo, tempo e precisão nas perguntas do seu próprio projeto.
+As fontes são a apresentação do Codedict no TabNews, a documentação de funcionamento e limites e a metodologia do teste no repositório.
+
+Vamos aos destaques rápidos para hoje.
+
+A Trigger ponto dev confirmou acesso indevido a variáveis de ambiente.
+Em comunicado de primeiro de novembro, a plataforma de tarefas em segundo plano informou que um atacante acessou essas variáveis em parte das organizações.
+A empresa diz ter bloqueado a exploração e enviado instruções aos responsáveis pelas contas afetadas.
+O aviso público ainda não quantifica o alcance nem detalha a causa.
+Como variáveis de ambiente podem guardar credenciais, confira a comunicação recebida e siga as medidas de mitigação indicadas para sua organização.
+As fontes são o comunicado da Trigger ponto dev e o registro do incidente na página de status da plataforma.
+
+No Linux, a versão sete ponto quatro chegou ao primeiro candidato a lançamento, ainda em fase de testes.
+O quadro oficial de versões registra esse candidato em primeiro de novembro.
+Na mesma data, a versão sete ponto dois ponto quinze aparece marcada como fim de vida, encerrando o ciclo da série sete ponto dois no projeto original.
+A versão estável mais recente listada é a sete ponto três ponto um.
+Quem usa os pacotes de uma distribuição deve conferir o suporte e as atualizações oferecidos por ela.
+O fim de vida anunciado pelo projeto original do kernel e o período de suporte da distribuição são informações distintas.
+A fonte é o quadro oficial de versões do Linux.
+
+O Trinity mudou o tratamento de texto colado no Konsole.
+A versão R quatorze ponto um ponto sete do ambiente gráfico foi lançada em primeiro de novembro.
+Ela adiciona um protocolo que sinaliza ao programa no terminal o início e o fim de uma colagem.
+A mudança prática destacada nas notas é que colagens de múltiplas linhas passam a esperar Enter.
+Também chegam melhorias no relato de eventos do mouse e correções de rolagem.
+A fonte são as notas oficiais do Trinity.
+
+Daniel Lemire reduziu a cadeia de instruções de certas divisões inteiras.
+Em análise de trinta e um de outubro, ele usa multiplicação de sessenta e quatro bits para simplificar divisões de inteiros com sinal de trinta e dois bits.
+A técnica se aplica à divisão por algumas constantes.
+Os testes desativam a vetorização automática, e a latência melhora em vários casos.
+Já a taxa de operações no Intel melhora com Clang e fica igual com G C C.
+Para o divisor mil, a alternativa piora a latência no Apple M quatro.
+É um exemplo de otimização que pede medição no compilador e no processador usados.
+A fonte é a análise de Lemire, com explicação, código e medições.
+
+Por fim, o G E F S ganhou ferramentas de criação no Open B S D, mas segue experimental.
+Na atualização de trinta e um de outubro, Ori Bernstein relata correções e ferramentas que já permitem criar esse sistema de arquivos no Open B S D.
+O protocolo de consistência segue como a maior peça ausente.
+Ele precisa ordenar as gravações para que os metadados não anunciem um estado antes de os blocos correspondentes chegarem ao disco.
+O porte é experimental, com perda de dados esperada em situações de erro.
+A fonte é a mensagem do desenvolvedor na lista técnica do Open B S D.
