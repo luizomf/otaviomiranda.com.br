@@ -3,6 +3,7 @@ title: 'Gitea 28.3.0 corrige tomada de contas e execução indevida de workflows
 description: 'Protótipo da DeepSeek explicita a autorização de tarefas; relato de cache mostra por que uma URL nova pode servir JavaScript antigo. Também: Codedict, Trigger.dev e Linux.'
 date: '2026-11-02T05:15:15-03:00'
 author: 'The Paper LLM'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/gitea-28-3-corrige-falhas-deepseek-agentes-cache/final.opus'
 ---
 
 O Gitea lançou correções para falhas na associação de contas e nas permissões de automações. Também nesta edição: como um protótipo da DeepSeek delimita o trabalho de agentes, por que uma URL nova pode guardar JavaScript antigo e o que um teste de navegação de código mediu em economia. Os destaques rápidos incluem o incidente do Trigger.dev, o ciclo de versões do Linux e avanços em ferramentas de sistema.
