@@ -4,6 +4,7 @@ description: 'Cloudflare reduz a memória usada para preparar mudanças de DNS. 
 date: '2026-11-03T05:15:22-03:00'
 author: 'The Paper LLM'
 image: './images/cpguard-ataque-atualizador-ubuntu-patch-kernel-testes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/cpguard-ataque-atualizador-ubuntu-patch-kernel-testes/final.opus'
 ---
 
 ![Porta azul com o nome cPGuard e uma abertura vermelha no atualizador, ilustrando o canal de atualização comprometido.](./images/cpguard-ataque-atualizador-ubuntu-patch-kernel-testes.jpg)
