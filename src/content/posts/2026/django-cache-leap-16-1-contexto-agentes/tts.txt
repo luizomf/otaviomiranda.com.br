@@ -1,0 +1,170 @@
+Django corrige colisão de cache; openSUSE Leap dezesseis ponto um reúne instalação tradicional e imutável.
+
+As novas correções do Django incluem uma falha de cache que pode expor respostas privadas.
+No Linux, o openSUSE Leap dezesseis ponto um reúne instalações tradicionais e imutáveis.
+Já o Fedora quarenta e cinco muda opções de armazenamento e de V P N.
+Para quem usa agentes de programação, um estudo testa até onde é possível reduzir o histórico sem prejudicar a conclusão das tarefas.
+
+O Django corrigiu seis falhas, incluindo uma possível exposição de dados pelo cache.
+O framework web de Python publicou as atualizações em três de novembro.
+As versões são seis ponto um ponto três, seis ponto zero ponto dez e cinco ponto dois ponto dezenove.
+Segundo a classificação do projeto, uma das seis vulnerabilidades tem gravidade moderada, e cinco têm gravidade baixa.
+A orientação é atualizar a linha usada pela sua aplicação.
+
+Uma dessas falhas afeta dois recursos do Django que guardam respostas para reutilizá-las em outras requisições.
+Para entender o problema, vale olhar para o cabeçalho H T T P chamado Vary.
+Ele indica quais cabeçalhos da requisição precisam entrar na escolha da resposta guardada.
+Só que o Django gerava a mesma chave de cache em duas situações diferentes.
+Numa delas, um desses cabeçalhos estava ausente. Na outra, estava presente, mas com valor vazio.
+Essa colisão poderia entregar uma resposta à requisição errada, com possível exposição de dados privados.
+A correção passa a distinguir os dois casos.
+Com isso, entradas antigas de cache referentes a cabeçalhos ausentes deixarão de ser encontradas e precisarão ser recriadas.
+
+Quem usa recursos geográficos também precisa conferir a biblioteca G D A L, utilizada pelo Django para processar esses dados.
+Outra falha permitia que textos recebidos pelo recurso de referência espacial provocassem requisições de rede ou leitura de arquivos.
+A proteção completa exige G D A L três ponto nove ou posterior.
+Para entradas não confiáveis, o projeto recomenda usar identificadores numéricos de referência espacial.
+Se uma versão antiga da biblioteca precisar aceitar textos, esses textos devem ser comparados com uma lista de valores permitidos.
+A fonte é o aviso de segurança do Django, que detalha as versões e as condições de cada falha.
+
+Agora, o openSUSE Leap dezesseis ponto um chega com o modo imutável que substitui o Leap Micro.
+A versão foi lançada em três de novembro.
+No instalador Agama, é possível escolher entre a instalação tradicional e o modo chamado "Immutable Mode".
+Esse modo incorpora o papel do Leap Micro, voltado a sistemas com raiz somente para leitura e atualizações transacionais.
+
+No modo imutável, a ferramenta de atualização transacional cria registros do estado do sistema, os chamados snapshots.
+Esses registros permitem voltar a uma versão anterior se algo der errado.
+Software adicional pode ser usado por containers ou, no desktop, por Flatpak.
+As instalações tradicional e imutável compartilham o lançamento, o ciclo de vida e as atualizações de manutenção do Leap.
+
+Essa é a versão final, depois da candidata a lançamento que acompanhamos em setembro.
+Mas a migração do Leap Micro seis ponto dois continua experimental.
+O projeto pede backup antes de usar sua ferramenta de migração.
+Para conhecer o modo imutável, uma instalação nova em máquina virtual permite testar a atualização e a volta ao estado anterior.
+Dá para fazer esse teste antes de mexer no servidor.
+A fonte é o anúncio corrigido da equipe do openSUSE.
+
+Passando aos agentes de programação, um estudo mostra que compactar o histórico exige testes por modelo.
+O relatório "You don't need long context", publicado em três de novembro, investiga quanto do histórico um agente precisa carregar para continuar trabalhando.
+A técnica testada substitui a conversa acumulada por um registro compacto do trabalho em andamento.
+Quando o histórico atinge um limite, o próprio modelo prepara esse registro.
+Uma conversa nova recebe o pedido original e o estado resumido para dar continuidade à tarefa.
+
+Segundo os autores, os resultados principais ficaram, em geral, próximos aos obtidos com o histórico completo.
+Isso nos testes com Claude Opus quatro ponto cinco e GPT cinco ponto seis Sol.
+Já o Qwen três Coder Next teve uma queda importante.
+Com o histórico acumulado, resolveu cinquenta e três porcento das tarefas.
+Na configuração mais restrita, resolveu apenas três vírgula seis porcento.
+Essa configuração tinha um limite total de dezesseis mil tokens, com compactação a partir de doze mil.
+Tokens são as unidades de texto processadas pelo modelo.
+
+A comparação usa o conjunto "SWE-bench Verified", com quinhentas tarefas de correção de software.
+O Qwen foi executado no formato numérico N V F P quatro, em um D G X Spark.
+O resultado deve ser lido dentro dessas condições de teste.
+
+Os autores atribuem a queda principalmente à quantidade de texto produzida pelo Qwen durante a execução.
+O histórico voltava a atingir o limite com pouco avanço na tarefa entre uma compactação e outra.
+A recomendação prática é medir as tarefas concluídas e os requisitos esquecidos ao mudar esse limite.
+O registro de continuidade precisa preservar o pedido, os critérios de conclusão, os próximos passos e as referências aos arquivos relevantes.
+São esses os elementos que o estudo identificou como úteis para retomar a execução.
+A fonte é o relatório dos autores, disponível no arXiv, com a metodologia e os apêndices A e D.
+
+Vamos aos destaques rápidos de hoje.
+
+Puppet e OpenVox receberam correções para execução de código no servidor de configuração.
+Essas ferramentas usam um servidor central para gerenciar a configuração das máquinas atendidas por agentes.
+A pesquisa da Neodyme, divulgada em três de novembro, demonstra que um certificado válido de agente podia permitir executar código nesse servidor.
+Regras permissivas de emissão automática de certificados ampliam a exposição.
+Os avisos do OpenVox listam as versões do Server nove ponto dois ponto zero e oito ponto dezoito ponto zero como corrigidas.
+Os avisos também tratam de uma falha que permite se passar por outros clientes.
+Confira os componentes instalados e as regras de emissão de certificados.
+E atenção à referência de versão: as correções do OpenVox não devem ser usadas como referência para o Puppet Enterprise.
+As fontes são a pesquisa da Neodyme e os avisos do OpenVox sobre execução de código e autorização por nome.
+
+O rsync três ponto cinco ponto dois corrige cópias interrompidas e limita trabalho provocado por um receptor malicioso.
+A versão, de quatro de novembro, corrige a duplicação do último bloco de duzentos e cinquenta e seis kibibytes em transferências interrompidas.
+Isso afetava transferências com as opções de acrescentar dados ao arquivo ou de atualizá-lo no próprio lugar, chamadas "append" e "inplace".
+A atualização também limita cálculos de verificação que um receptor poderia induzir com valores manipulados.
+Quem usa rsync para sincronização e backup deve conferir a atualização disponibilizada pela distribuição.
+Também vale testar a retomada das cópias com as opções habituais.
+A fonte são as notas oficiais dessa versão do rsync.
+
+A SafeDep encontrou roubo de credenciais acionado pelo build do repositório "antd img crop".
+A análise, de três de novembro, descreve um commit forjado inserido em trinta e um de outubro.
+Esse commit trazia um gancho de pré-build, executado ao rodar o processo de build do projeto.
+Segundo a empresa, o pacote publicado no N P M ficou fora do incidente.
+O risco descrito está em obter o código comprometido do repositório e executá-lo.
+A investigação atribui ao malware a coleta de senhas, chaves S S H e arquivos de configuração com segredos.
+Revise os scripts antes de executar projetos desconhecidos e mantenha credenciais fora de ambientes descartáveis de teste.
+A fonte é a análise da SafeDep.
+
+O Fedora Linux quarenta e cinco integra o Stratis ao instalador e aposenta dois plugins de V P N.
+Lançada em três de novembro, a versão permite configurar o Stratis pelo instalador Anaconda.
+O Stratis é uma camada de gerenciamento que reúne discos e oferece recursos como snapshots e criptografia.
+Antes de atualizar, confira se suas conexões dependem de dois plugins do NetworkManager.
+Um é o V P N C. O outro é o forti S S L V P N.
+Esses dois plugins deixam de ser mantidos na distribuição, e o anúncio aponta orientações de migração.
+Os nomes completos estão no artigo escrito para conferir quais componentes você usa.
+A versão final sucede o beta que já apresentamos aqui.
+A fonte é o anúncio do Fedora quarenta e cinco, na Fedora Magazine.
+
+O terminal kitty, na versão zero ponto cinquenta ponto zero, ganha painéis fixos e restauração de sessões.
+A atualização, de três de novembro, permite fixar janelas nas bordas para árvores de arquivos ou barras de estado.
+A restauração precisa ser habilitada.
+Ela salva o estado das janelas e o histórico de saída acessível pela rolagem, para recuperá-los depois de encerrar a sessão.
+Os programas que estavam rodando, além do shell, não são reiniciados automaticamente.
+No Linux, a restauração exige um portal de desktop compatível.
+E os dados salvos ficam sem criptografia.
+As fontes são o histórico de mudanças do kitty e a documentação da restauração de sessões.
+
+O Grafana [AE1 L OY2] passa a oferecer seu motor OpenTelemetry em prévia pública.
+O anúncio é de três de novembro e se refere à versão um ponto vinte e um ponto zero.
+A novidade permite executar diretamente configurações em YAML do OpenTelemetry Collector.
+Essa ferramenta coleta e encaminha métricas, logs e rastros de execução.
+Com isso, fica mais fácil experimentar o Grafana [AE1 L OY2] usando uma configuração já existente.
+A extensão que executa os dois motores lado a lado continua experimental.
+E a troca de dados entre eles ainda passa pela rede.
+A fonte é o anúncio da Grafana, que também descreve esses limites.
+
+O llama ponto C P P incorporou uma otimização na leitura de prompts para Gemma quatro E dois B e E quatro B.
+A mudança foi integrada em três de novembro.
+O colaborador testou o Gemma quatro E dois B, na quantização Q quatro zero, usando um M quatro Pro com Metal.
+Nesse teste, a leitura de um prompt de quinhentos e doze tokens ficou mais rápida.
+Passou de aproximadamente mil seiscentos e quatorze para quatro mil seiscentos e três tokens por segundo.
+A geração da resposta ficou perto de cento e dez tokens por segundo nas duas versões.
+Ou seja, a melhora medida foi na leitura do prompt.
+O ganho vem de evitar cálculos desnecessários em determinadas camadas.
+Os resultados apresentados dependem do modelo e da configuração.
+A fonte é o pedido de integração da mudança no "Git Hub", com a explicação e as medições.
+
+O Google publicou um método para avaliar se uma skill realmente ajuda o agente.
+Uma skill é um pacote de instruções para orientar o agente em determinado trabalho.
+O guia, de três de novembro, propõe comparar várias execuções da mesma tarefa, com e sem esse pacote.
+A comparação deve manter o mesmo pedido e ambientes limpos equivalentes.
+Credenciais e configurações já presentes na máquina podem fazer o agente passar no teste sem precisar da skill.
+Os autores também recomendam avaliar correção, segurança e eficiência separadamente.
+Economizar tokens não deve compensar uma tarefa incorreta.
+A fonte é o guia de avaliação do Google Cloud.
+
+O Chimera Linux renovou as imagens de instalação e trocou o I W D pelo NetworkManager.
+As imagens publicadas em três de novembro trazem o NetworkManager também na edição básica.
+Isso facilita configurar redes sem interface gráfica.
+O conjunto usa kernel sete ponto três, GNOME cinquenta e um e Plasma seis ponto oito.
+Nenhuma das novas imagens inclui o servidor X ponto Org.
+Quem pretende experimentar a distribuição deve conferir essa mudança antes de planejar o ambiente gráfico.
+A fonte são as notas oficiais do Chimera.
+
+O Safari vinte e sete ponto três beta testa um modo escuro automático para sites claros.
+Anunciado em três de novembro, o recurso "Adaptive Dark Mode" adapta as cores quando o usuário o habilita.
+Sites que declaram suporte a temas claro e escuro, pela propriedade "color-scheme", preservam sua própria apresentação.
+Para quem desenvolve, vale testar contraste, logos e imagens na versão beta.
+O WebKit ressalta que a opção "only", destinada a impedir essa transformação, ainda não funciona na beta um.
+A fonte é a explicação do WebKit sobre o recurso.
+
+Para fechar, o Vercel C I deixa de exigir um projeto Vercel vinculado ao repositório.
+Desde três de novembro, o serviço de integração contínua pode executar tarefas em um repositório "Git Hub" sem criar um projeto vazio na plataforma.
+É necessário que o aplicativo da Vercel no "Git Hub" tenha acesso ao repositório.
+Também são necessárias contas conectadas e permissão de escrita ou administração.
+O suporte é limitado a repositórios privados do "Git Hub".
+É uma ampliação do beta anunciado em outubro.
+A fonte é o histórico de mudanças da Vercel.
