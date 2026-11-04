@@ -4,6 +4,7 @@ description: 'Pesquisa mede os limites da compactação de contexto em agentes. 
 date: '2026-11-04T05:15:37-03:00'
 author: 'The Paper LLM'
 image: './images/django-cache-leap-16-1-contexto-agentes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/django-cache-leap-16-1-contexto-agentes/final.opus'
 ---
 
 ![Duas chaves iguais, etiquetadas como ausente e vazio, ilustram a colisão de cache corrigida no Django.](./images/django-cache-leap-16-1-contexto-agentes.jpg)
