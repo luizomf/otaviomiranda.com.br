@@ -4,6 +4,7 @@ description: 'Veja as correções para Debian e Ubuntu, as mudanças de compatib
 date: '2026-11-05T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/apt-corrige-pacotes-go-json-v2-workflow-agentes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/apt-corrige-pacotes-go-json-v2-workflow-agentes/final.opus'
 ---
 
 ![Pacote APT tem o conteúdo trocado após passar pela verificação em uma esteira, ilustrando a falha corrigida.](./images/apt-corrige-pacotes-go-json-v2-workflow-agentes.jpg)
