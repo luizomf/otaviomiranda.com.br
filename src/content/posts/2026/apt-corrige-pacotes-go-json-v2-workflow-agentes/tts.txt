@@ -1,0 +1,206 @@
+A P T corrige falha na verificação de pacotes, e Go estabiliza JSON versão dois.
+
+A atualização do A P T exige atenção de quem mantém Debian e Ubuntu.
+Uma falha permite trocar um pacote depois da conferência de integridade.
+No desenvolvimento, o Go estabiliza uma interface de JSON com novos padrões de compatibilidade.
+E o Workflow S D K elimina uma corrida que podia iniciar a mesma tarefa duas vezes.
+Pesquisas sobre agentes e novidades de ferramentas completam a edição.
+
+Começando pelo A P T, o gerenciador usado para baixar e instalar pacotes.
+O Debian publicou uma correção em quatro de novembro.
+A falha permite que um atacante capaz de interferir no tráfego H T T P substitua um pacote depois de sua verificação.
+Isso pode provocar execução de código como root, o administrador do sistema.
+O problema aparece quando um redirecionamento faz dois downloads apontarem para o mesmo endereço.
+O A P T pode juntar esses downloads.
+Ao retomar a transferência, o tratamento incorreto do arquivo permite a substituição.
+O conteúdo instalado pode, portanto, ser diferente daquele que passou pela conferência de integridade.
+
+A Canonical esclarece uma condição importante: a exploração exige repetir um download que falhou.
+Essa repetição vem habilitada por padrão desde o Ubuntu vinte e dois ponto zero quatro L T S.
+Versões anteriores ficam expostas quando a configuração de novas tentativas tem um valor diferente de zero.
+No Debian treze, chamado trixie, a correção está no A P T três ponto zero ponto quatro.
+No Ubuntu, confira a versão corrigida para sua edição na tabela da Canonical, disponível pela fonte no artigo escrito.
+A empresa orienta desabilitar temporariamente as repetições de download ao instalar essa atualização.
+Usar H T T P S protege contra a interferência no tráfego.
+Mas a correção continua necessária, porque um espelho de pacotes malicioso também pode explorar a falha.
+As fontes são o aviso de segurança do Debian e as orientações da Canonical para o Ubuntu.
+
+No Go, a versão um ponto vinte e sete estabiliza JSON versão dois, com novos padrões de leitura e escrita.
+O anúncio da equipe do Go saiu em quatro de novembro.
+Os dois pacotes estabilizados cuidam da conversão de dados e do processamento do texto JSON.
+JSON é o formato de texto usado por muitas interfaces de programação para trocar dados.
+A migração exige atenção tanto ao que a aplicação aceita quanto ao que devolve.
+
+Por padrão, a nova [EY1 P IY1 AY1] rejeita nomes duplicados dentro de um objeto e texto com codificação U T F oito inválida.
+A correspondência entre nomes JSON e campos de uma estrutura Go passa a distinguir maiúsculas de minúsculas.
+Também muda a saída de slices e mapas com valor nil, ou seja, sem uma coleção inicializada.
+Em vez de um valor nulo em JSON, esses casos passam a produzir, respectivamente, arrays e objetos vazios.
+
+A divisão de trabalho entre os pacotes é a seguinte.
+O JSON text processa a sintaxe e permite ler ou escrever partes do documento em fluxo.
+O JSON versão dois faz a conversão entre JSON e valores Go.
+A interface antiga continua suportada.
+E opções de compatibilidade permitem preservar comportamentos específicos durante a transição.
+Antes de migrar, teste chaves repetidas, diferenças de caixa, valores nulos e conversões personalizadas.
+A fonte é o anúncio do Go, com as orientações de migração.
+
+Agora, o Workflow S D K impede inícios duplicados com uma reserva atômica.
+A Vercel anunciou a mudança em quatro de novembro, na versão cinco ponto quatro ponto zero dessa biblioteca para coordenar tarefas persistentes.
+Antes, duas requisições podiam perguntar se uma tarefa já existia.
+As duas recebiam uma resposta negativa, e as duas iniciavam a mesma tarefa.
+Agora, admitir a execução e reservar seu token acontece em uma operação atômica, sem uma janela entre os dois passos.
+
+Esse token identifica a tarefa e pode usar um dado do negócio, como o número de um pedido.
+Com o novo mecanismo experimental, uma única execução fica dona dele.
+Uma tentativa duplicada recebe um erro de conflito que informa qual é a execução existente.
+O mesmo mecanismo aceita mensagens antes de o processamento começar, guarda esses dados e os entrega em ordem.
+Outra opção experimental permite estender a reserva para recusar duplicatas tardias, inclusive depois do encerramento.
+Mas o prazo é contado desde o início da execução.
+E a proteção cobre o início do workflow.
+As operações realizadas dentro dele ainda precisam de tratamento próprio para novas tentativas.
+A fonte é o changelog da Vercel.
+
+Na pesquisa de segurança, a OpenAI relata novecentas e quarenta e oito falhas distintas de elevação local de privilégio no Linux.
+O estudo foi publicado em quatro de novembro.
+Nele, agentes reproduziram mil setecentas e vinte e quatro vulnerabilidades no kernel Linux.
+Também produziram explorações associadas àquelas novecentas e quarenta e oito falhas distintas.
+Na elevação local de privilégio, alguém que já executa código como usuário sem privilégios consegue chegar a root.
+
+Segundo a OpenAI, a campanha aconteceu em meados de outubro.
+Ela usou máquinas virtuais de desktop com proteções usuais habilitadas.
+O custo foi de aproximadamente um milhão e duzentos mil dólares em créditos de [EY1 P IY1 AY1].
+A análise agrupou variantes para chegar à contagem de falhas distintas.
+Esses números são resultados relatados pela empresa para aquele ambiente de pesquisa.
+
+A revisão humana encontrou um problema importante numa rodada inicial.
+Vinte de duzentas explorações chegavam a root por uma falha diferente daquela atribuída ao agente.
+A equipe acrescentou uma verificação independente do caminho usado.
+O caso mostra por que obter o resultado esperado precisa vir acompanhado da confirmação de sua causa.
+Os patches passam por revisão de especialistas.
+E parte dos achados já tinha correções ou discussões públicas ao término da análise.
+Para quem administra Linux, a consequência prática é acompanhar as atualizações da distribuição.
+A contagem da pesquisa inclui situações de correção diferentes.
+A fonte é a pesquisa da OpenAI, com sua metodologia e suas limitações.
+
+Outra pesquisa pergunta se os agentes chegam a consultar as proteções relevantes de um projeto.
+O estudo ainda preliminar, publicado em quatro de novembro, apresenta o "CASE-Bench".
+São cento e quarenta e cinco tarefas derivadas de vulnerabilidades reais em cinquenta e um projetos.
+Os agentes recebiam pedidos para reconstruir trechos de código, sem aviso de que a tarefa envolvia segurança.
+A avaliação verificava se a solução funcionava e se resistia ao ataque usado em cada teste.
+
+Nas trajetórias analisadas, o código que continha a proteção relevante apareceu no contexto observado em apenas vinte e sete a trinta e seis porcento dos casos.
+O resultado aponta uma dificuldade concreta.
+As regras de segurança existentes no repositório precisam chegar ao contexto do agente para orientar a implementação.
+Os percentuais se limitam à amostra estudada.
+Além disso, resistir ao ataque escolhido para um teste deixa outras possíveis falhas fora dessa verificação.
+Para quem configura agentes, uma aplicação prática é incluir as regras de segurança do projeto na busca de contexto.
+E testá-las separadamente dos requisitos funcionais.
+A fonte é o estudo A S E dois ponto zero, com a metodologia e os resultados do CASE-Bench.
+
+Vamos aos destaques rápidos para hoje.
+
+O V S Code um ponto cento e quarenta e cinco adiciona agendamento às automações locais de agentes.
+A versão estável, de quatro de novembro, aceita expressões cron de cinco campos para definir quando executar tarefas.
+O recurso se limita às automações locais.
+Também entram, em prévia, navegação e painéis interativos pelo host remoto do agente.
+Isso permite abrir no editor a aplicação executada em outra máquina.
+A fonte são as notas dessa versão do V S Code.
+
+O "Git Hub" Copilot chega ao assistente integrado do Xcode em prévia pública.
+O anúncio de quatro de novembro exige Xcode vinte e sete ponto três beta e macOS Tahoe vinte e seis ponto seis ou posterior.
+Todos os planos do Copilot são aceitos.
+A configuração fica nos ajustes, na seção "Intelligence".
+A extensão "Copilot for Xcode" continua disponível separadamente.
+A fonte é o changelog do Git Hub.
+
+A Kernel relata exposição de credenciais na infraestrutura de navegadores.
+No comunicado de quatro de novembro, a empresa diz que credenciais comprometidas deram acesso a logs.
+Esses registros continham algumas chaves de [EY1 P IY1 AY1] e segredos de aplicações.
+Em três de novembro, o invasor também acessou quatro servidores com G P U, três deles usados para sessões de navegador.
+A Kernel afirma ter revogado credenciais, retirado os servidores afetados do ar e avisado os clientes atingidos.
+Quem recebeu a notificação deve revisar também os segredos de terceiros indicados nela.
+A fonte é o comunicado da Kernel.
+
+O Xen alerta para acesso à memória de outras máquinas virtuais.
+O aviso de três de novembro descreve duas falhas nas operações de cópia de memória compartilhada.
+Um convidado malicioso pode ler e escrever na memória de outros domínios.
+Isso inclui o domínio zero, responsável pelo gerenciamento.
+O projeto informa que versões desde a quatro ponto seis são vulneráveis.
+Há patches disponíveis, mas o projeto diz não conhecer mitigação temporária.
+Confira a atualização do hipervisor com seu fornecedor.
+A fonte é o boletim de segurança do Xen.
+
+A CISA inclui uma falha da Apple no catálogo de vulnerabilidades exploradas.
+A entrada foi adicionada em quatro de novembro.
+Segundo a Apple, a falha permite contornar a autenticação de ponteiros quando o atacante já dispõe de leitura e escrita arbitrárias em memória.
+A correção chegou ao Safari dezessete ponto cinco em maio de 2024.
+A novidade, agora, é a inclusão no catálogo.
+Verifique se os dispositivos usam versões suportadas e atualizadas.
+As fontes são o catálogo da CISA e o aviso histórico da Apple.
+
+O L X Qt dois ponto cinco ponto zero remove a última dependência do L X D E e exige Qt seis ponto dez.
+Lançado em cinco de novembro, o ambiente gráfico substitui a antiga dependência de cache de menus por uma implementação própria.
+Também amplia recursos do QTerminal.
+Há um alerta para usuários de X onze.
+A retirada desse suporte da biblioteca libkscreen, na versão seis ponto oito, quebrou as configurações de monitor do L X Qt.
+Uma versão corretiva está planejada.
+Confira essa combinação na distribuição antes de atualizar.
+A fonte é o anúncio do L X Qt.
+
+O L Z quatro, na versão um ponto onze ponto zero, leva compressão paralela para a biblioteca.
+A versão de quatro de novembro permite configurar trabalhadores paralelos pela interface de frames da biblioteca.
+Antes, esse recurso estava disponível no programa de linha de comando.
+O campo que configura esses trabalhadores ainda é experimental.
+E a biblioteca estática continua usando uma única thread por padrão.
+A ferramenta de terminal também ganha uma opção para limitar o orçamento de memória.
+A fonte são as notas de lançamento do L Z quatro.
+
+Chris Wellons propõe agrupar a saída do terminal por tempo.
+No texto de cinco de novembro, ele mostra como imprimir nomes de arquivos pode dominar uma extração.
+Descarregar o buffer a cada linha provoca muitas escritas pequenas.
+A alternativa que ele usa em sua ferramenta de extração acumula texto e verifica um prazo entre trechos de trabalho.
+A referência é de cerca de cem milissegundos.
+Mas a liberação da saída depende de o programa executar essa verificação.
+O prazo sozinho não aciona um temporizador.
+A fonte é a análise de Wellons, acompanhada da implementação.
+
+No ponto net, uma única C P U pode fazer um laço paralelo assíncrono executar de forma serial.
+Em um laboratório publicado em quatro de novembro, Guilherme Appel mediu o efeito do limite padrão de concorrência.
+Esse limite se baseia na contagem de processadores disponíveis.
+Isso pode deixar capacidade ociosa quando cada operação espera respostas de interfaces de programação.
+O autor propõe limites separados por dependência, para aproveitar essa espera sem sobrecarregar os serviços chamados.
+Os resultados vêm de serviços simulados.
+A fonte é o experimento publicado no "Stack Overflow".
+
+O compilador Rust reduz buscas auxiliares ao armazenar posições do código.
+No balanço de quatro de novembro, Nicholas Nethercote descreve uma representação mais compacta dos spans.
+Esses registros localizam trechos no código-fonte.
+Nas compilações incrementais medidas, a proporção dos registros enviada a uma tabela global caiu bastante.
+Antes, ficava entre vinte e quarenta porcento. Depois, passou a cerca de um porcento.
+Guardar mais informação diretamente no registro reduz consultas à tabela.
+O efeito no tempo de compilação varia conforme o teste.
+A fonte é o relato de Nethercote.
+
+O "FuzzMedic" usa agentes para recuperar a compilação de testes de segurança.
+O estudo preliminar de quatro de novembro trata de falhas que impedem o O S S Fuzz de gerar executáveis para fuzzing.
+Essa técnica testa programas com entradas produzidas automaticamente.
+Os autores relatam vinte e nove patches aceitos por mantenedores, depois de verificação humana.
+Recuperar a compilação permite voltar a executar os testes.
+Preservar sua cobertura e seu comportamento exige verificações adicionais.
+A fonte é o estudo do FuzzMedic, com seus resultados e limitações.
+
+A Dharma apresenta um extrator de campos de documentos com dois bilhões de parâmetros.
+A publicação de quatro de novembro descreve um modelo que recebe imagens e devolve JSON.
+Ele pode usar campos livres ou um esquema definido pela aplicação.
+O treinamento inclui documentos brasileiros em português.
+As comparações de custo divulgadas pela equipe contrapõem tempo de G P U própria a preços de interfaces de programação.
+Avaliar o custo real exige considerar a implantação escolhida.
+A fonte é a apresentação da Dharma A I.
+
+Por fim, o [R IH1 P AH0 L] sessenta e cinco B Preview disponibiliza pesos para experimentos com agentes locais.
+A Ricursive lançou o modelo denso de sessenta e cinco bilhões de parâmetros, com licença Apache dois ponto zero.
+Há variantes B F dezesseis e N V F P quatro.
+A documentação cita execução em D G X Spark.
+Os resultados de programação são medições do fornecedor, que reconhece diferenças entre ambientes de avaliação.
+Antes de adotar, confira memória, suporte do motor de inferência e desempenho nas suas tarefas.
+As fontes são o anúncio da Ricursive e a documentação do modelo.
