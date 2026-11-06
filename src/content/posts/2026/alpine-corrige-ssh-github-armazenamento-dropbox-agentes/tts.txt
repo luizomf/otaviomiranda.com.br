@@ -1,0 +1,165 @@
+Alpine corrige falha de autenticação S S H; "Git Hub" detalha novo armazenamento.
+
+A edição de hoje começa com uma correção importante para quem usa acesso remoto no Alpine Linux.
+Servidores S S H com uma combinação específica de configurações podem aceitar login sem a senha da conta.
+O "Git Hub" explica como distribui o trabalho para receber mais alterações no mesmo repositório.
+E o Dropbox mostra como controla permissões e desfaz mudanças feitas por agentes, sem sobrescrever edições posteriores de outras pessoas.
+
+Primeiro, a falha de autenticação no Alpine.
+Ela permite entrar por S S H sem conhecer a senha, mas depende de configurações específicas.
+O Alpine publicou o alerta em cinco de novembro.
+O problema envolve o servidor de acesso remoto, e a recomendação é atualizar o pacote Open S S H da sua série do Alpine.
+Depois da atualização, é preciso reiniciar o serviço.
+Só atualizar o pacote deixa o processo antigo em execução.
+
+A exposição depende de quatro condições ao mesmo tempo.
+A primeira é usar Open S S H sem a camada de autenticação P A M ativa.
+A segunda é ter o login por senha habilitado.
+A terceira é existir uma conta cujo campo de senha contém apenas um asterisco.
+Esse marcador pode aparecer em contas preparadas para acesso por chave.
+E a quarta é existir outra conta local com um hash de senha que comece com um de dois prefixos específicos.
+O hash é a representação calculada da senha.
+Os valores exatos desses prefixos, importantes para conferir a exposição, estão no artigo escrito.
+
+O problema está na comparação desses valores.
+Em uma situação de erro, a função de hash da musl, biblioteca básica do Alpine, devolve o mesmo asterisco.
+Esse retorno pode coincidir com o marcador da conta e ser aceito como uma senha correta.
+A falha foi relatada pelo pesquisador Özgün Kültekin.
+O Open S S H dez ponto seis p dois inclui uma proteção, que também foi aplicada aos pacotes das versões do Alpine.
+
+Se a atualização precisar esperar, a mitigação documentada é desabilitar a autenticação por senha e reiniciar o serviço.
+Mas, antes de mudar o acesso remoto, confirme que o login por chave funciona.
+Mantenha a sessão atual aberta até testar uma nova conexão.
+Confira também a configuração efetiva do servidor.
+
+Containers que não executam o servidor S S H ficam fora desse problema.
+Há ainda uma distinção importante sobre o administrador do sistema, o root.
+A configuração que proíbe senha no login direto como root protege esse acesso.
+Outra conta afetada, porém, pode ter permissão para elevar privilégios depois de entrar.
+As fontes são o aviso do Alpine, com as versões corrigidas, as notas do Open S S H e a análise do pesquisador.
+
+Agora, o novo armazenamento do "Git Hub".
+A empresa separa objetos e referências para ampliar a quantidade de escritas no mesmo repositório.
+O relato técnico foi publicado em cinco de novembro e apresenta a arquitetura Rubicon.
+Ela foi preparada para receber muitos envios de alterações, os pushes, ao mesmo repositório.
+
+A divisão parte de duas características do Git.
+Objetos, como commits e conteúdos de arquivos, são imutáveis.
+Já as referências mudam com o trabalho.
+É o caso do ponteiro de uma branch para o seu commit atual.
+
+Os objetos ficam no "Azure Blob Storage" e podem ser gravados em paralelo.
+As referências passam por um serviço replicado, que compara dois valores antes de aceitar uma atualização.
+De um lado, o valor atual; do outro, o valor que quem pediu a mudança esperava encontrar.
+A atualização só é aceita quando eles coincidem.
+Com isso, alterações em branches diferentes podem avançar sem disputar o mesmo bloqueio.
+Já as escritas concorrentes sobre a mesma referência precisam resolver a disputa.
+
+A ordem das operações também importa.
+O fluxo grava os objetos de forma durável antes de confirmar a mudança da referência.
+As máquinas que atendem às requisições usam os discos locais como caches que podem ser reconstruídos.
+Outras máquinas cuidam da compactação dos arquivos de objetos.
+Assim, essa manutenção fica separada do atendimento às requisições.
+
+O "Git Hub" relata testes internos com cinco mil agentes concorrentes.
+Nesses testes, foram sete mil e duzentos pushes por segundo em um único repositório.
+A arquitetura está em prévia privada limitada, com expansão prevista para o início de 2027.
+A divisão ajuda a entender o resultado.
+O pequeno estado que exige coordenação entre quem escreve fica separado do grande volume de dados imutáveis.
+A fonte é o relato de arquitetura de armazenamento no blog de engenharia do "Git Hub".
+
+No Dropbox, o assunto é controlar o que o agente pode fazer e desfazer o trabalho dele sem perder edições posteriores.
+A empresa explicou a arquitetura em cinco de novembro.
+Seu agente organiza pastas, renomeia arquivos e executa outras tarefas sobre documentos.
+Cada conversa recebe uma máquina virtual isolada, equipada com programas e acesso controlado aos arquivos autorizados.
+
+As credenciais ficam fora dessa máquina.
+Um componente externo verifica o destino de cada requisição, a operação e as permissões concedidas.
+Só depois ele acrescenta a autenticação necessária.
+Como o ambiente não tem acesso geral à internet, esse caminho concentra as verificações.
+Isso vale tanto para chamadas de ferramentas quanto para programas executados pelo agente.
+
+Na hora de desfazer uma tarefa, o sistema precisa reconhecer quais mudanças pertencem a ela.
+Por isso, cada versão alterada pelo agente registra a conversa que a originou.
+Mas o que acontece se outra pessoa, ou outro agente, já tiver editado um dos arquivos afetados?
+Nesse caso, o Dropbox restaura a versão em uma cópia separada e renomeada.
+A edição posterior fica preservada.
+
+A solução combina dois cuidados úteis em aplicações compartilhadas.
+Verificar permissões fora do ambiente do agente e considerar o histórico de outras edições ao desfazer seu trabalho.
+A fonte é o relato de engenharia do Dropbox.
+
+Vamos aos destaques rápidos de hoje.
+
+A Barracuda corrigiu um aviso de segurança.
+A falha no "Email Security Gateway", equipamento que filtra e-mails, dispensa login, mas exige acesso à interface administrativa.
+A atualização do boletim, em cinco de novembro, esclarece esse requisito.
+Nesse produto, combinar a falha com outra vulnerabilidade, de injeção de comandos, pode dar controle como root.
+A "watchTowr" publicou uma demonstração técnica dessa cadeia.
+
+A orientação é conferir o firmware e as correções aplicadas, além de restringir a interface administrativa a redes confiáveis.
+Outros produtos também aparecem no boletim por causa da injeção de comandos.
+Mas a cadeia sem login descrita aqui é a do equipamento de segurança de e-mail.
+As fontes são o boletim atualizado da Barracuda e a pesquisa da "watchTowr".
+
+A Microsoft relatou um caso de roubo de dados cinco minutos após a busca por segredos no "Git Hub".
+No relatório de cinco de novembro, a empresa descreve um agente que buscou credenciais expostas.
+Nesse intervalo, ele passou da busca à retirada de dados do "Azure Key Vault", serviço de armazenamento de segredos.
+
+A orientação é revogar ou trocar imediatamente as credenciais expostas, investigar seu uso e revisar as permissões das aplicações.
+Apagar o segredo do código mantém a credencial utilizável enquanto ela não for invalidada.
+A fonte é a "Microsoft Threat Intelligence".
+
+Em outro relato da Microsoft, cinco scripts funcionais revelaram quinze problemas no uso do "Dev Proxy" por agentes.
+Waldek Mastykarz publicou a análise em cinco de novembro.
+Foram cinco testes com "Copilot Chat" e "Claude Sonnet" cinco ponto cinco.
+A tarefa era criar scripts de integração contínua para registrar chamadas à [EY1 P IY1 AY1] do "Git Hub".
+Para isso, os agentes deveriam usar o "Dev Proxy", uma ferramenta local que intercepta requisições H T T P.
+
+Os agentes leram arquivos binários para descobrir plugins.
+Também improvisaram esperas pela conclusão dos relatórios.
+A lição é examinar os passos das execuções bem-sucedidas, não apenas o resultado.
+Comandos que listem plugins e sinais explícitos de conclusão podem evitar essas adaptações frágeis.
+Os achados são dessa pequena amostra, e cada melhoria precisa ser testada novamente.
+A fonte é a análise das trajetórias no "Dev Proxy", publicada no blog da Microsoft.
+
+O Vercel [S K EH1 JH UH0 L Z] entrou em beta público em todos os planos.
+Anunciado em cinco de novembro, o serviço permite agendar tarefas uma vez ou de forma recorrente.
+O destino depende de como o agendamento é criado.
+Quando ele é declarado no arquivo de configuração da Vercel, pode acionar uma função privada, um caminho H T T P ou um tópico de fila.
+Já os agendamentos criados durante a execução da aplicação têm um tópico de fila como destino.
+
+É possível habilitar, desabilitar ou disparar um agendamento sem publicar uma nova versão da aplicação.
+O serviço sucede o "Cron Jobs", que continua funcionando.
+Há cotas ou cobrança conforme o plano.
+A fonte é o registro de novidades da Vercel sobre o serviço de agendamento.
+
+A OpenAI anunciou o GPT seis "Cyber", com acesso inicial restrito.
+O lançamento de cinco de novembro disponibiliza o modelo pela [EY1 P IY1 AY1] e pelo Codex.
+Esse acesso começa com um grupo selecionado de clientes aprovados no "Daybreak Red".
+Esse é o programa da empresa para testes avançados de segurança.
+A ampliação para todos os clientes do programa está planejada.
+
+A OpenAI identifica o modelo como responsável pela pesquisa no Linux coberta na edição anterior.
+A novidade é a identificação do modelo e o início desse acesso.
+A fonte é o anúncio da OpenAI.
+
+O [IH1 NG K L IH0 NG] dois "Small" chegou ao Tinker, com entrada de imagens e pesos ainda fechados.
+A "Thinking Machines" anunciou a disponibilidade em cinco de novembro.
+O modelo pode ser usado para gerar respostas e para ajuste fino no Tinker, a plataforma da empresa para executar e treinar modelos.
+
+A empresa pretende liberar os pesos sob a licença Apache dois ponto zero na semana seguinte, depois de testes externos de segurança.
+Essa abertura ainda era um plano quando o anúncio foi publicado.
+O modelo aceita imagens, mas não áudio.
+A fonte é o anúncio da "Thinking Machines".
+
+Para fechar, um experimento com Datastar mostra atualizações de H T M L enviadas pelo servidor.
+No relato de quatro de novembro, o autor do "Noteflakes" explora aplicações reativas usando S S E.
+É uma conexão H T T P pela qual o servidor envia eventos ao navegador.
+O exemplo atualiza trechos de H T M L ou valores de estado, sem escrever manualmente cada alteração da página.
+
+O texto também examina os limites dessa abordagem.
+Os sinais de estado são globais à página, embora possam ser organizados em objetos.
+E a integração com outro JavaScript exige cuidado.
+A fonte é o experimento publicado no "Noteflakes".
+É uma leitura prática sobre interfaces controladas pelo backend, com exemplos em Ruby.
