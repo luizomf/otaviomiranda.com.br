@@ -4,6 +4,7 @@ description: 'Dropbox explica permissões e recuperação de arquivos alterados 
 date: '2026-11-06T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/alpine-corrige-ssh-github-armazenamento-dropbox-agentes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/alpine-corrige-ssh-github-armazenamento-dropbox-agentes/final.opus'
 ---
 
 ![Faixa do Alpine Linux orienta atualizar e reiniciar o SSH após a correção de segurança.](./images/alpine-corrige-ssh-github-armazenamento-dropbox-agentes.jpg)
