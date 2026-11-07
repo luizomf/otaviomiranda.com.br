@@ -1,0 +1,169 @@
+Libghostty um ponto zero estabiliza a interface C, e sensores registram tentativas contra uma falha no S S H.
+
+A libghostty chega à versão um ponto zero com um compromisso de compatibilidade para quem incorpora terminais em outros programas.
+Na segurança, sensores registram tentativas contra a falha de autenticação do Open S S H em sistemas com musl.
+E a Anthropic apresenta experimentos sobre um problema dos agentes.
+Uma memória persistente também pode carregar erros para a próxima sessão.
+
+A libghostty estabiliza a interface C para incorporar terminais.
+
+Mitchell Hashimoto anunciou em seis de novembro a versão um ponto zero da libghostty V T.
+A biblioteca foi extraída do núcleo do Ghostty, um emulador de terminal.
+Ela interpreta os dados do terminal e mantém seu estado.
+O programa que incorpora essa biblioteca fica responsável pela apresentação na tela.
+
+A novidade central é a estabilidade da A B I, a interface binária entre a aplicação compilada e a biblioteca.
+Esse compromisso permite atualizar a biblioteca compartilhada preservando a compatibilidade com os programas que dependem dela.
+Tudo isso dentro da política de versões do projeto.
+Verificações automáticas ajudam a detectar alterações que quebrem esse contrato.
+
+A biblioteca tem um ciclo de versões separado do aplicativo Ghostty.
+Também passa a oferecer arquivos de código-fonte e dependências para compilação sem internet.
+Isso facilita seu empacotamento pelas distribuições.
+
+No Neovim, editor que também incorpora um terminal, existe um pedido de alteração para substituir a libvterm pela libghostty V T.
+Segundo o anúncio, esse pedido estava aprovado e aguardava uma versão marcada.
+A mudança pretende resolver, entre outros problemas, a reorganização do histórico do terminal ao redimensionar a janela.
+Esse era o estado da integração na publicação.
+O anúncio não confirma sua chegada a uma versão do Neovim.
+A fonte é o anúncio de Mitchell Hashimoto sobre a libghostty um ponto zero.
+
+A Previdian registra tentativas contra a falha de autenticação do Open S S H em musl.
+
+A falha no S S H do Alpine, que cobrimos ontem, ganhou uma atualização.
+A Previdian informa que seus sensores observaram tentativas de exploração a partir de seis de novembro.
+A própria empresa ressalta que esses registros não demonstram que os alvos eram vulneráveis, nem que as tentativas tiveram sucesso.
+
+Quem mantém um servidor afetado deve conferir a revisão do pacote na lista do Alpine, atualizar e reiniciar o serviço de S S H.
+Atualizar o pacote, sozinho, deixa o processo antigo em execução.
+O Open S S H dez ponto seis P dois inclui a proteção, também aplicada a versões anteriores nos pacotes do Alpine.
+
+A exposição depende de uma combinação de condições.
+É preciso ter Open S S H sem correção em um sistema com musl, a biblioteca básica de C usada pelo Alpine.
+A autenticação deve estar sem P A M, e o login por senha precisa estar habilitado.
+Também precisa existir uma conta autorizada com o campo de senha preenchido por um asterisco.
+E outra conta local deve ter um hash válido do tipo SHA-crypt, uma representação calculada da senha.
+
+Na falha, a função que faz esse cálculo devolve um marcador de erro que coincide com o asterisco armazenado.
+A comparação acaba aceitando o login.
+O acesso direto como root depende ainda de uma configuração que permita login por senha ao administrador.
+Containers sem o serviço de S S H ficam fora desse cenário.
+
+A StepSecurity publicou em seis de novembro uma reprodução em máquina virtual e container.
+Seu teste também mostrou por que conferir apenas a versão anunciada pelo servidor pode enganar.
+Uma correção aplicada pelo Alpine a uma versão anterior pode manter essa identificação.
+Por isso, importa conferir a revisão completa do pacote.
+
+Se precisar desabilitar temporariamente o login por senha enquanto providencia a atualização, confirme antes o acesso por chave.
+Mantenha a sessão atual aberta até testar outra conexão.
+E siga as orientações do Alpine para aplicar a configuração e reiniciar o serviço.
+As fontes são a telemetria da Previdian, a reprodução da StepSecurity, o aviso e a lista de pacotes do Alpine, e as notas do Open S S H.
+
+A Anthropic testa a revisão de memórias para corrigir erros entre sessões de agentes.
+
+Em uma pesquisa publicada em seis de novembro, a Anthropic examinou como agentes usam arquivos persistentes para levar conhecimento de uma sessão à seguinte.
+Uma nota salva pode registrar uma regra útil, uma hipótese ainda não testada ou uma conclusão errada.
+A sessão seguinte precisa lidar com essa diferença.
+
+Em uma tarefa de consulta a banco de dados do C L Bench um ponto zero, cada pergunta começava em uma sessão nova.
+Todas tinham acesso à mesma pasta de memória.
+Depois da resposta, o agente recebia a solução correta.
+Segundo a empresa, modelos mais fortes passaram a registrar regras verificadas, sua evidência e correções.
+Já os modelos anteriores acumulavam hipóteses sem testá-las.
+
+A pesquisa também explora o chamado "dreaming".
+É um processamento em segundo plano que revisita transcrições para reorganizar e corrigir notas.
+Em um experimento com Pokémon, essa revisão corrigiu uma localização registrada incorretamente.
+Isso permitiu que o agente ultrapassasse um trecho no qual vinha se perdendo.
+
+Para quem desenvolve agentes, a implicação é tratar a memória como informação que precisa de manutenção.
+Guardar a origem de uma conclusão e permitir sua revisão.
+A frequência e o custo dessa revisão continuam em aberto.
+Nos testes da Anthropic, impor a regra de registrar apenas falhas reduziu parte do benefício da memória.
+Os resultados dependem do modelo e da tarefa.
+A fonte é a pesquisa da Anthropic sobre os componentes da memória de agentes.
+
+Agora, os destaques rápidos de hoje.
+
+O Asahi libera a instalação no M três, com suporte gráfico ainda em desenvolvimento.
+O relatório de sete de novembro informa que máquinas M três deixam de exigir a opção experimental do instalador.
+Essa etapa já tinha aparecido na nossa cobertura de setembro.
+O suporte gráfico continua atrás do disponível no M um e no M dois.
+
+O projeto também passou a distribuir suporte parcial a Thunderbolt.
+U S B três e a conexão entre computadores funcionam.
+Mas os túneis de P C I Express e DisplayPort, necessários a muitos docks, ainda não.
+O mesmo relatório anuncia o início da transição dos repositórios para a licença G P L, versão dois ou posterior.
+A fonte é o relatório do Asahi Linux.
+
+A Datadog detecta uma falha que impediria uma recuperação de dados.
+No relato de cinco de novembro, a empresa apresenta uma ferramenta chamada "FETCh".
+Ela transforma especificações escritas em T L A mais, uma linguagem para descrever comportamentos permitidos, em monitores escritos em Rust.
+Esses monitores comparam os eventos observados em produção com as regras da especificação.
+
+Assim, a equipe encontrou registros conflitantes de distribuição de dados que persistiam havia cerca de um ano.
+Eles eram tolerados na operação normal.
+Mas impediriam a recuperação após a perda das informações de distribuição.
+A ferramenta exige instrumentar o sistema para observar seu comportamento e suporta apenas parte de T L A mais.
+A fonte é o relato de engenharia da Datadog.
+
+O gilguard identifica a dependência que reativa o GIL no Python.
+Michael Kennedy apresentou o pacote em seis de novembro.
+Ele acompanha a importação de módulos nas versões do Python que permitem executar código Python em paralelo, chamadas de "free-threaded".
+Uma extensão em C sem declaração de compatibilidade pode reativar o GIL, a trava global do interpretador.
+
+O gilguard aponta o módulo, o pacote e a sequência de importações responsável.
+Seu scanner examina pacotes em processos separados.
+Já o plugin do pytest ajuda a alcançar importações feitas durante os testes.
+Um resultado limpo cobre os caminhos executados, sem comprovar segurança entre threads ou ganho de desempenho.
+A fonte é a apresentação do gilguard por Michael Kennedy.
+
+O Geo D N S no Bunny expõe a escolha entre proximidade e disponibilidade.
+Vincent Bernat relatou em seis de novembro como passou a escolher, por script no Bunny D N S, entre sete servidores de seu site.
+Devolver dois endereços oferece uma alternativa se um falhar.
+Mas os serviços que resolvem consultas D N S podem mudar a ordem desses endereços e levar o visitante ao servidor mais distante.
+
+A solução adotada devolve dois endereços quando as distâncias são comparáveis.
+Caso contrário, devolve apenas o mais próximo, com validade de cache de dois minutos.
+Se esse servidor cair, a resposta guardada em cache ainda pode direcionar o visitante a ele até expirar.
+A fonte é o relato de Vincent Bernat sobre sua experiência com Geo D N S.
+
+O llama C P P integra uma nova política para manter especialistas em cache.
+A mudança foi incorporada em seis de novembro.
+Ela combina frequência e recência de uso para decidir quais especialistas permanecem em cache.
+Esses especialistas são partes do modelo ativadas durante a geração.
+O objetivo é evitar transferências repetidas.
+
+O autor relata ganhos de seis a sete porcento na velocidade de geração, com o cache já aquecido, em seus testes.
+Em caches muito pequenos, a nova política pode ser mais lenta que a anterior em certas configurações.
+Modelo, memória disponível e carga de trabalho precisam entrar na comparação.
+A fonte é a proposta integrada ao projeto, com os testes do autor, no "Git Hub".
+
+O Chimera testa drivers proprietários da NVIDIA com uma musl modificada.
+O relato de seis de novembro descreve adaptações para bibliotecas feitas para glibc, outra implementação da biblioteca básica de C.
+Foram necessários ajustes de compatibilidade e no carregamento dinâmico, além de mudanças na musl.
+
+Há uma proposta de pacotes para as séries quinhentos e oitenta e seiscentos e vinte, ainda em refinamento e com testes limitados de hardware.
+A compatibilidade depende dessas adaptações e precisa de validação adicional em outros equipamentos.
+A fonte é o relato técnico do Chimera Linux.
+
+A ferramenta de linha de comando da Vercel permite criar projetos com prazo de exclusão.
+O anúncio é de seis de novembro, e a opção está disponível na versão sessenta e cinco ponto doze ponto zero ou posterior.
+Ela permite definir a expiração ao criar um projeto durante o deploy.
+Os prazos disponíveis vão de uma hora a trinta dias, em opções predefinidas.
+
+O projeto inteiro é apagado automaticamente ao expirar.
+É uma opção útil para demos e testes descartáveis.
+A opção de criação não altera a expiração de projetos existentes.
+Há também um comando para remover a expiração de um projeto.
+Os comandos exatos estão no artigo escrito.
+A fonte é o registro de novidades da Vercel.
+
+A Microsoft relata o uso de agentes de inteligência artificial do ARTEX contra organizações financeiras.
+O relatório de seis de novembro atribui ao grupo Storm três três cinco oito ataques iniciados em outubro, principalmente no Sudeste Asiático.
+Segundo a empresa, o grupo combinou esses agentes com ferramentas convencionais para explorar aplicações e instalar programas de acesso remoto.
+
+Em testes defensivos, alvos-isca e mecanismos que consomem o tempo do agente reduziram o tráfego dirigido a ativos reais.
+São controles complementares.
+A própria Microsoft observa que bloquear características das ferramentas, como sua identificação H T T P, não basta para interromper esses ataques.
+A fonte é o relatório da equipe de inteligência de ameaças da Microsoft.
