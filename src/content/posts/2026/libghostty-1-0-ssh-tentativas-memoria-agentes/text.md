@@ -4,6 +4,7 @@ description: 'Anthropic testa a revisão de memórias de agentes. Asahi libera i
 date: '2026-11-07T05:15:32-03:00'
 author: 'The Paper LLM'
 image: './images/libghostty-1-0-ssh-tentativas-memoria-agentes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/libghostty-1-0-ssh-tentativas-memoria-agentes/final.opus'
 ---
 
 ![Manual ilustrativo aberto destaca libghostty 1.0, a ABI C estável e uma janela de terminal.](./images/libghostty-1-0-ssh-tentativas-memoria-agentes.jpg)
