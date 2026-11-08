@@ -1,0 +1,124 @@
+Amutable detalha Linux sem S S H por padrão; estudo do Qwen reduz cache quase à metade.
+
+Administrar servidores por uma [EY1 P IY1 AY1], economizar memória ao executar modelos e corrigir o login de uma V P N.
+Os destaques de hoje tratam de decisões práticas de infraestrutura.
+A Amutable explica seu Linux sem S S H por padrão.
+Um estudo mede o efeito da quantização do cache do Qwen.
+E a SonicWall corrige uma falha que permite contornar controles de login com outras credenciais válidas.
+Nesse caso, os controles contornados são os do S A M L, usado para integrar o login a um provedor de identidade.
+
+A primeira história é sobre administrar servidores por interfaces de programação e imagens de configuração.
+Em seis de novembro, a Amutable detalhou o "Amutable Foundations", ainda em prévia privada.
+Seu sistema operacional usa pacotes do Fedora para montar imagens prontas antes da implantação.
+Por padrão, os servidores ficam sem shell Unix, sem acesso por S S H e sem interpretadores como Python e Perl.
+A configuração também chega como imagem.
+É um conjunto assinado e criptografado de arquivos, aplicado de forma atômica: ou aparece inteiro, ou permanece ausente.
+Isso evita a instalação parcial da configuração.
+Também busca reduzir diferenças acumuladas entre máquinas que deveriam executar o mesmo ambiente.
+Quem coordena os servidores é o plano de controle.
+Esse serviço recebe relatórios de estado e prepara novas imagens de configuração.
+Consultar logs, gerenciar serviços e reiniciar máquinas são tarefas feitas por interfaces Varlink.
+Quando o acesso remoto está habilitado, essas interfaces ficam disponíveis por H T T P S.
+Diagnóstico e recuperação precisam, portanto, ser preparados para esse modo de administração.
+Com hardware compatível, a liberação da configuração pode depender de uma verificação local do estado da máquina.
+O projeto usa recursos como o T P M, que protege chaves e participa dessa verificação.
+Também admite assinaturas apenas por software, com garantias diferentes.
+A arquitetura prevê que a máquina possa iniciar sem contato com o plano de controle, usando o T P M local.
+E inclui restauração ao estado de fábrica.
+São mecanismos descritos pela equipe para a prévia privada.
+A fonte é a visão técnica do Amutable Foundations, publicada pela própria Amutable.
+
+Agora, o teste de memória do Qwen: o cache caiu de quatro para dois vírgula treze gibibytes com oito bits.
+Em seis de novembro, Erlidev publicou uma comparação de trinta e cinco versões quantizadas do Qwen três ponto oito, de vinte e sete bilhões de parâmetros.
+O estudo usa três ferramentas para executar modelos: llama ponto C P P, ExLlama versão três e v L L M.
+Quantizar significa representar valores com menos bits para economizar memória.
+O estudo avalia tanto os pesos do modelo quanto o cache K V.
+Esse cache guarda resultados intermediários usados ao processar o contexto e produzir novos tokens.
+Para um contexto de aproximadamente sessenta e quatro mil tokens, a tabela aponta quatro gibibytes de cache em dezesseis bits.
+No llama ponto C P P e no ExLlama versão três, as opções de oito bits reduzem essa parcela para dois vírgula treze gibibytes.
+A alteração foi praticamente nula na métrica numérica usada pelo autor.
+A economia é do cache: os pesos do modelo e outros buffers continuam ocupando memória.
+O teste estima a divergência K L.
+Essa medida compara as probabilidades do próximo token com as de uma referência sem quantização.
+Ao comparar precisões de cache, o estudo mantém iguais os pesos e os tokens avaliados.
+Isso ajuda a isolar a alteração numérica.
+Mas verificar se um agente continua corrigindo programas ou completando tarefas exige testar essas entregas separadamente.
+Os caches de quatro bits economizaram mais espaço, mas aumentaram a divergência.
+A penalidade cresceu ao longo dos documentos extensos avaliados.
+A amostra tinha doze documentos longos.
+Apenas um chegava à faixa de trinta e dois mil a sessenta e quatro mil tokens.
+No v L L M, o cache de oito bits também introduziu uma pequena divergência adicional.
+Para experimentar no próprio hardware, compare memória, tempo de resposta e correção dos resultados.
+Mantenha o modelo e as tarefas constantes nessa comparação.
+A fonte é o estudo de Erlidev, com sua metodologia, tabelas e limites.
+
+Na próxima história, uma falha explorada no SonicOS permite contornar controles de S A M L com credenciais alternativas.
+Em seis de novembro, a falha entrou no catálogo de vulnerabilidades exploradas da CISA, agência americana de cibersegurança.
+Ela afeta o serviço de V P N S S L do SonicOS, sistema dos firewalls SonicWall, quando o login por S A M L está habilitado.
+Segundo o registro publicado pela fabricante, o ataque depende de credenciais válidas para outro método de autenticação.
+Com elas, alguém pode contornar os controles do caminho S A M L.
+Isso pode alcançar também a autenticação de múltiplos fatores exigida por esse caminho.
+O registro da SonicWall lista equipamentos das gerações sete e oito.
+Na geração sete, a linha afetada vai até a versão sete ponto três ponto três, build sete mil e quinze.
+A correção está na sete ponto três ponto quatro, build sete mil e treze, ou em versões posteriores.
+Na geração oito, a linha afetada vai até a versão oito ponto dois ponto dois, build oito mil e quinze.
+A correção está na oito ponto dois ponto três, build oito mil e quinze, ou em versões posteriores.
+Confira seu modelo na tabela do fornecedor e atualize.
+Os dados completos das versões estão no artigo escrito.
+O boletim não oferece uma solução temporária.
+A CISA classifica a falha como explorada e registra como desconhecido seu uso em campanhas de ransomware.
+As fontes são o boletim e o registro da vulnerabilidade publicados pela SonicWall, além do catálogo de falhas exploradas da CISA.
+
+Vamos aos destaques rápidos de hoje.
+O projeto oo sete adicionou integração de credenciais com o Git na versão zero ponto sete ponto zero.
+A versão saiu em cinco de novembro e foi destacada pelo GNOME no balanço do dia sete.
+Ela inclui um auxiliar que permite guardar credenciais do Git no serviço de armazenamento de segredos do oo sete.
+A ferramenta de terminal também ganha saída JSON para automações.
+A equipe anuncia como estável o serviço em segundo plano do projeto, uma implementação em Rust do "Secret Service".
+A adoção deve seguir o empacotamento e a configuração da distribuição.
+As fontes são as notas da versão do oo sete e o balanço do GNOME.
+
+O Firefox busca páginas do Datasette antes de o visitante avançar, segundo um relato de Simon Willison.
+Em sete de novembro, o criador da ferramenta para explorar dados contou o que percebeu.
+Um cabeçalho da resposta H T T P, usado para indicar o link da próxima página, provocava uma busca automática por essa página da tabela.
+Isso fazia o servidor renderizar dados mesmo quando o visitante não avançava.
+O relato abre uma discussão de correção no Datasette.
+Também oferece uma verificação útil para aplicações paginadas.
+Vale observar, no painel de rede, o que o navegador busca antes de qualquer clique.
+A fonte é o relato de Simon Willison.
+
+O Coldframe ajustou os certificados de sua isca para ataques a controladores de refrigeração.
+O projeto é um sistema-isca, com telas e comandos falsos, feito em Python com a biblioteca padrão.
+Ele registra tentativas de login e ações sobre equipamentos simulados.
+Comandos de exploração são descartados, em vez de executados.
+Uma atualização de sete de novembro, no horário de Brasília, alterou as datas dos certificados de teste.
+A intenção é evitar que essas datas denunciem a criação recente da isca.
+A documentação recomenda isolamento, restrição de saída de rede e cuidado com os logs.
+O conteúdo desses registros vem de visitantes não confiáveis.
+As fontes são o projeto Coldframe, sua documentação de limites e a alteração dos certificados.
+
+O "Indic Turn Detector" usa a transcrição para estimar quando a pessoa terminou de falar.
+O modelo, na versão um ponto zero de sete de novembro, recebe texto e contexto recente da conversa.
+Ele usa esse material para complementar a detecção de atividade de voz.
+Suporta inglês, Hinglish e sete idiomas indianos. Português não está na lista.
+O autor calibrou dois perfis, com limites de cinco e dez porcento de cortes falsos na amostra de validação usada.
+Esses valores são critérios daquele teste.
+A escolha do perfil precisa ser validada nas conversas reais da aplicação.
+A fonte é a ficha do modelo Indic Turn Detector, com os idiomas e a avaliação.
+
+Um experimento com a porta zero mostra a diferença entre uma [EY1 P IY1 AY1] de rede e o pacote transmitido.
+Em texto de seis de novembro, acidvegas explica o que acontece ao pedir a porta zero na operação de associar um socket a um endereço local.
+Nesse caso, o pedido é para que o sistema operacional escolha uma porta disponível.
+Já um pacote T C P pode trazer zero no campo de destino.
+O autor demonstra um redirecionamento desse tráfego para um serviço em uma porta comum.
+A distinção ajuda a revisar filtros e ferramentas.
+O significado especial de um valor na [EY1 P IY1 AY1] da aplicação não determina, sozinho, o tratamento do pacote na rede.
+A fonte é a explicação e o experimento de acidvegas.
+
+Para fechar, Neil Brown relata como simplificou a infraestrutura livre de seu escritório.
+No balanço de seis de novembro, o advogado conta que trocou o Nextcloud pelo "Syncthing" para arquivos.
+Para calendários e contatos, passou a usar o Radicale, após dificuldades com a solução anterior.
+Também desligou serviços pouco usados, como Jitsi e CryptPad.
+A fonte é o relato de Brown sobre sua experiência com software livre.
+São escolhas de manutenção de um escritório pequeno, com Debian no desktop e ferramentas hospedadas pelo próprio responsável.
+Antes de adicionar mais um serviço, vale considerar o uso real e o trabalho necessário para mantê-lo.
