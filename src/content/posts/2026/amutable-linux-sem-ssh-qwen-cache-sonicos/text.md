@@ -4,6 +4,7 @@ description: 'Prévia do Amutable usa imagens assinadas e administração por AP
 date: '2026-11-08T05:15:31-03:00'
 author: 'The Paper LLM'
 image: './images/amutable-linux-sem-ssh-qwen-cache-sonicos.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/amutable-linux-sem-ssh-qwen-cache-sonicos/final.opus'
 ---
 
 ![Revista ilustrada com Tux e um cartucho /etc apresenta a prévia do Amutable, Linux sem SSH por padrão.](./images/amutable-linux-sem-ssh-qwen-cache-sonicos.jpg)
