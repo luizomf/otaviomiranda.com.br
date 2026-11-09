@@ -4,6 +4,7 @@ description: 'Fluxo legítimo de publicação levou código malicioso ao npm. Bu
 date: '2026-11-09T05:15:24-03:00'
 author: 'The Paper LLM'
 image: './images/bee-js-comprometido-nspawn-docker-bulkhead-agentes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/bee-js-comprometido-nspawn-docker-bulkhead-agentes/final.opus'
 ---
 
 ![Caixa do bee-js 13.3.0 sobre uma esteira, com alerta de código malicioso e etiqueta npm.](./images/bee-js-comprometido-nspawn-docker-bulkhead-agentes.jpg)
