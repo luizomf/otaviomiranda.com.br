@@ -1,0 +1,155 @@
+bee J S treze ponto três ponto zero levou malware ao N P M. Nspawn ganha interface compatível com Docker.
+
+Uma dependência publicada pelo próprio fluxo de versões pode executar código malicioso durante a instalação.
+Esse é o alerta do caso bee J S, que abre a edição.
+Também temos uma interface Docker para containers do system D e proteções contra conflitos entre agentes.
+E, nos destaques, novidades em máquinas virtuais, programação e inteligência artificial local.
+
+O bee J S levou malware ao N P M pelo fluxo legítimo de publicação.
+A StepSecurity identificou código malicioso na versão treze ponto três ponto zero da biblioteca bee J S, da Ethersphere.
+É uma biblioteca JavaScript para acessar a rede de armazenamento Swarm.
+O pacote chegou ao N P M à zero hora e nove minutos de nove de novembro, no horário universal.
+Em Brasília, ainda eram nove horas e nove minutos da noite de domingo, dia oito.
+Um script acionado durante a instalação baixava e executava código remoto, com as permissões do usuário que instalava a biblioteca.
+Ou seja, instalar o pacote com esses scripts habilitados já acionava o carregador malicioso.
+
+Segundo a investigação, o código buscava arquivos da carteira do Swarm Desktop e tentava instalar mecanismos de acesso persistente.
+A chave da carteira é criptografada, mas o arquivo de configuração pode conter a senha necessária para abri-la.
+A quantidade de instalações afetadas e eventuais perdas financeiras ainda não foram estabelecidas.
+
+O pacote tinha uma atestação válida de procedência.
+Esse registro vincula a publicação ao repositório e ao fluxo automatizado do "Git Hub Actions".
+O código malicioso já estava no commit publicado pela identidade de release chamada "bee-worker".
+Assim, o fluxo legítimo empacotou código que já havia sido adulterado.
+A atestação comprova essa origem.
+Verificar a autorização e o conteúdo da mudança exige controles próprios.
+O modo como os invasores obtiveram acesso continua desconhecido.
+
+A SafeDep também relata o mesmo carregador no Swarm Desktop, versão zero ponto cinquenta e seis ponto dois.
+A empresa confirmou sua presença no instalador em formato deb que examinou, para a arquitetura x oitenta e seis de sessenta e quatro bits.
+Nesse caso, o código é acionado na inicialização do aplicativo.
+A SafeDep informa que o N P M removeu a versão maliciosa do bee J S.
+Na consulta ao registro, a versão indicada como mais recente já era novamente a treze ponto dois ponto zero.
+
+Confira os arquivos que fixam as versões das dependências, conhecidos como lockfiles, e os registros de instalação.
+Inclua nessa verificação as dependências indiretas.
+Se a versão maliciosa foi instalada com scripts habilitados, investigue a máquina como potencialmente comprometida.
+Em caso de execução do código malicioso, a orientação da StepSecurity é isolar a máquina e preservar evidências.
+Depois, reconstruí-la a partir de uma imagem confiável e trocar as credenciais expostas usando um ambiente limpo.
+Excluir a dependência deixa intactos os programas persistentes que ela possa ter instalado.
+As fontes são as análises da StepSecurity e da SafeDep, além da versão indicada pelo registro N P M.
+
+Agora, clientes Docker podem gerenciar containers do system D por meio do Nspawn.
+Em anúncio de sete de novembro, o projeto Nspawn detalhou a interface introduzida na versão três ponto zero.
+Ela é compatível com a "Docker Engine" [EY1 P IY1 AY1].
+Isso permite usar o cliente Docker e o executor Docker do "GitLab Runner" para gerenciar containers baseados em system D nspawn.
+Essa ferramenta executa ambientes Linux separados na mesma máquina hospedeira.
+
+O cliente envia os pedidos por um socket local, que funciona como ponto de comunicação com o serviço.
+Por essa interface, consegue criar e iniciar containers, executar comandos, copiar arquivos e administrar volumes e redes.
+Na prática, dá para reaproveitar automações que já falam o protocolo do Docker.
+
+Mas a compatibilidade tem limites concretos.
+O comando de construção de imagens do Docker não funciona por essa interface.
+Para construir imagens, o projeto oferece um comando próprio do Nspawn.
+Envio de imagens, plugins e outras operações também estão fora da interface.
+O anúncio já aponta a disponibilidade da versão três ponto dois ponto zero.
+
+O socket vem desabilitado por padrão.
+As permissões passam pelo polkit, mecanismo de autorização do Linux.
+Segundo o projeto, conceder a permissão de gerenciamento do Nspawn equivale a dar poder de administrador na máquina hospedeira.
+Isso porque ela permite executar comandos privilegiados e montar caminhos dessa máquina.
+Ao adaptar uma automação, confira tanto as operações suportadas quanto quem poderá controlar esse socket.
+A fonte é o anúncio do Nspawn, incluindo as limitações documentadas da interface.
+
+O próximo assunto é reduzir conflitos entre sessões do Claude Code.
+Os worktrees do Git permitem trabalhar em cópias separadas dos arquivos de um repositório.
+Só que dois agentes usando esses diretórios na mesma máquina ainda compartilham portas de rede, memória e processos.
+O projeto Claude [B AH1 L K HH EH2 D] adiciona hooks ao Claude Code.
+São pequenos programas chamados antes da execução de ferramentas, capazes de barrar um comando e explicar uma alternativa.
+
+A versão zero ponto dois ponto zero, publicada em oito de novembro, acrescenta proteções contra algumas colisões comuns.
+Entre elas, varreduras de disco muito abrangentes e exclusão de diretórios usados por outra sessão.
+Também há proteção contra a inclusão indiscriminada de arquivos no próximo commit.
+Esse último caso importa quando dois agentes editam a mesma cópia de trabalho.
+Um comando que prepara todas as alterações para o commit pode carregar também o trabalho inacabado do outro agente.
+
+Outra novidade é um comando de análise histórica.
+Ele examina comandos de transcrições anteriores e estima quais seriam barrados pelas regras.
+Essa análise não reproduz as verificações de portas e de pouca memória, porque as transcrições não guardam esse estado da máquina.
+
+Os limites estão na própria documentação.
+Os hooks reconhecem padrões no texto dos comandos. Ações escondidas em scripts ou aliases podem escapar.
+As reservas de memória coordenam tarefas, sem impor um teto real de consumo.
+O projeto ajuda a prevenir colisões comuns entre sessões cooperativas.
+Trabalhos que exigem isolamento precisam também de controles do sistema operacional.
+As fontes são o repositório do Claude [B AH1 L K HH EH2 D], o registro da versão e as limitações documentadas pelo projeto.
+
+Vamos aos destaques rápidos de hoje.
+O Lima dois ponto três ganha um driver nativo experimental para máquinas Windows.
+A versão saiu em seis de novembro e recebeu uma apresentação detalhada no dia oito.
+O Lima gerencia máquinas virtuais locais.
+O novo driver usa o "Host Compute System" do Windows, sem depender do QEMU.
+Por enquanto, permite uma instância por vez e opera sem montagem de arquivos nem encaminhamento dinâmico de portas.
+No Linux, um auxiliar privilegiado passa a configurar redes pelas quais a máquina hospedeira alcança diretamente o I P da máquina virtual.
+A fonte é o anúncio do Lima na C N C F.
+
+Um caminho especializado mudou o resultado de um teste de C contra Rust no SQLite.
+Simon Willison publicou, em oito de novembro, um experimento de conversão de textos formatados em números.
+A primeira extensão em C perdia nos decimais.
+Mas uma rotina específica para entradas comuns reduziu o tempo adicional estimado de conversão para dezesseis a dezenove nanossegundos por linha.
+Nas implementações Rust testadas, esse tempo ficava entre trinta e dois e cinquenta e cinco nanossegundos por linha.
+
+O relatório foi gerado por inteligência artificial.
+O teste usa dois milhões de linhas em uma máquina virtual Linux com dois processadores virtuais.
+Para chegar àqueles valores, seleciona o melhor de quinze testes e desconta o tempo de uma consulta de referência.
+A comparação mostra o peso da implementação nesse trabalho específico.
+As fontes são o relato de Simon Willison e o relatório de método e resultados.
+
+Outro projeto executa um modelo Qwen em processador Linux, com uma implementação em assembly.
+É o Qwen três ponto cinco, na variante de oitocentos milhões de parâmetros.
+Disponibilizado em oito de novembro, o projeto implementa a geração de texto e a preparação dos tokens em assembly para x oitenta e seis de sessenta e quatro bits.
+Durante a execução, não usa Python nem um framework de inteligência artificial.
+
+O autor mediu seis vírgula cinquenta e um tokens por segundo.
+Na configuração comparada, usando Transformers com PyTorch, foram quatro vírgula trinta e quatro tokens por segundo.
+Foram apenas duas execuções de um prompt curto, com uma única thread.
+As representações dos pesos e os caminhos de cálculo eram diferentes.
+É material para estudar inferência. O resultado descreve somente essa comparação.
+Python ainda participa da preparação da compilação, e o codificador de imagens do modelo não foi implementado.
+A fonte é o repositório do projeto, com a implementação, o teste de desempenho e seus limites.
+
+Um servidor de compilação do Casuarina Linux consumiu noventa e oito vírgula quatro quilowatts-hora em pouco mais de sete meses.
+Wesley Moore publicou a medição em nove de novembro.
+Foram cerca de cinco mil trabalhos de compilação, entre trinta de março e oito de novembro, em um processador Ryzen nove.
+A tomada inteligente mediu somente esse servidor, que era desligado quando ficava ocioso.
+Antes, os pacotes eram compilados no computador de uso pessoal do autor, cujo consumo ficou fora da conta.
+Para planejar um laboratório doméstico, a experiência mostra a importância de medir a máquina inteira e contabilizar todas as etapas do trabalho.
+A fonte é o relato de Wesley Moore, com as medições e o recorte adotado.
+
+Em Stanford, um curso põe alunos para explicar mudanças aos mantenedores.
+Na entrevista publicada pelo "Latent Space" em oito de novembro, Mihail Eric descreve a segunda edição do curso C S cento e quarenta e seis S.
+Os estudantes precisam conhecer um repositório desconhecido, propor uma alteração e explicá-la à pessoa que poderá incorporá-la.
+A atividade oferece um exercício útil para quem aprende com agentes.
+Conseguir justificar o código e entender sua integração ao projeto faz parte da entrega.
+A fonte é a entrevista com Mihail Eric e a apresentação da atividade no Latent Space.
+
+O SANS registra aparentes tentativas de burlar a autenticação por senha do Open S S H no Alpine desde cinco de novembro.
+A falha pode permitir login sem conhecer a senha da conta em configurações afetadas do Alpine, que usa a biblioteca de sistema musl.
+O risco envolve login por senha habilitado e autenticação sem P A M.
+Essa é a camada que integra mecanismos de autenticação ao sistema.
+As condições completas de contas e hashes de senha estão no aviso da distribuição, disponível no artigo escrito.
+
+O diário de oito de novembro acrescenta outra observação à telemetria que cobrimos no dia sete.
+Os sistemas-isca usados pelo SANS guardavam somente os primeiros duzentos e cinquenta e cinco caracteres das senhas, o que limita a análise.
+O autor associa os registros à falha identificada no diário, mas o sucesso das tentativas ainda não foi confirmado.
+Quem opera uma configuração afetada deve atualizar o Open S S H e reiniciar o serviço que recebe as conexões S S H.
+As fontes são a observação do SANS e a orientação do Alpine.
+
+Por fim, o Redox já inicia até um shell no "Cloud Hypervisor".
+O relato de oito de novembro informa a integração do driver Virtio F S e das mudanças de kernel e inicialização necessárias para esse ambiente virtualizado.
+O Virtio F S permite que a máquina virtual acesse diretórios escolhidos na máquina hospedeira.
+O trabalho ainda precisa de etapas como desligamento correto, configuração inicial e testes de implantação.
+Isso tudo vem antes de virar uma imagem pronta para uso em nuvem.
+A fonte é o relato de progresso e próximos passos do Redox.
+O resultado permite experimentar o sistema operacional escrito em Rust nesse ambiente de virtualização.
