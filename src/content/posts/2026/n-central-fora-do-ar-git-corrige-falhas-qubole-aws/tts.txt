@@ -1,0 +1,256 @@
+N Able tira o N Central do ar depois que um pesquisador publica mais de trinta falhas, e o Git dois ponto cinquenta e seis ponto um corrige seis vulnerabilidades.
+
+A N Able desligou o N Central hospedado e pediu que os clientes desliguem também os servidores próprios.
+Isso aconteceu depois que um pesquisador publicou mais de trinta falhas, com exploits prontos.
+Nesta terça, dia 10, o projeto Git lançou correções para seis vulnerabilidades.
+Uma delas permite execução de código ao clonar um repositório malicioso com submódulos.
+A edição também mostra um ataque que entrou em contas A W S por integrações esquecidas.
+Depois, explica como dar memória confiável a agentes de longa duração, e traz a verificação formal do código do Signal, feita com agentes de IA.
+
+Começando pelo N Central, que saiu do ar depois que um pesquisador publicou mais de trinta falhas com exploits.
+O N Central é uma plataforma de monitoramento e administração remota.
+É o tipo de sistema que prestadores de serviços gerenciados e equipes de TI usam para operar as máquinas de muitos clientes a partir de um painel central.
+Quem controla esse servidor alcança, na prática, os computadores que ele administra.
+Na noite de domingo, dia 8, o pesquisador independente Sean Bales publicou um repositório chamado "Able to Shell".
+Ali estão mais de trinta vulnerabilidades no N Central, com código de prova de conceito para elas.
+Como o fornecedor não tinha sido avisado antes, são falhas de dia zero: ainda não existe correção nem identificador C V E.
+Segundo a descrição do pesquisador, elas permitem roubar credenciais sem login e criar contas de administrador.
+Também permitem escrever arquivos fora do lugar e executar comandos no servidor, como o usuário de serviço da aplicação ou como root.
+A cadeia mais grave, segundo Bales, começa numa falha de X X E, a injeção de entidades externas em X M L.
+Essa falha não exige autenticação e fica na função de importação de serviços.
+A partir dela, o exploit rouba uma sessão local confiável, redefine a senha de uma conta e executa comandos no servidor.
+O mesmo exploit também consegue criar uma conta de administrador com credenciais escolhidas pelo invasor.
+Bales testou tudo numa versão de pré-lançamento, e acredita que a maioria das falhas, se não todas, afeta também versões anteriores.
+Na segunda-feira, dia 9, a N Able tirou do ar os ambientes hospedados do N Central nas Américas, na Europa e na Ásia-Pacífico.
+Clientes com instalação própria foram orientados a manter seus servidores desligados até nova orientação.
+Os serviços Ecoverse, acessados pelo N Able Login, continuam funcionando.
+A empresa diz ter visto varreduras ligadas ao código publicado, e afirma não ter evidência de exploração bem-sucedida em clientes.
+Do lado de fora, a Watch Tower relatou tentativas de exploração contra seus honeypots.
+E a Defused Cyber relatou sessões anônimas de agente, download de configuração do servidor e acessos sem autenticação ao endpoint de controle remoto.
+Até as duas e quarenta e dois da tarde desta terça, no horário de Brasília, a versão corrigida ainda não tinha sido liberada.
+Segundo o The Hacker News, a N Able ainda validava essa versão antes de liberá-la.
+A forma da divulgação virou parte da história.
+A N Able chamou a publicação de "comunicação não responsável".
+Bales disse à BleepingComputer que publicou sem aviso prévio por causa de relatos antigos.
+Segundo ele, duas falhas de execução remota e uma de escalada de privilégio, relatadas há cinco ou seis meses em outro produto da N Able, continuam sem correção.
+A empresa não respondeu a essas alegações.
+O N Central já tinha recebido hotfixes de emergência em agosto e setembro, para falhas diferentes destas.
+Quem opera um servidor próprio deve seguir a orientação do fornecedor e restringir o acesso ao painel.
+Também deve procurar sinais de comprometimento, como contas de administrador desconhecidas, e aplicar o hotfix assim que ele for publicado.
+As fontes são BleepingComputer, The Hacker News e SecurityWeek.
+
+Agora, o Git, que corrigiu seis falhas, incluindo execução de código em clone recursivo.
+O projeto Git publicou nesta terça a versão dois ponto cinquenta e seis ponto um.
+As correções também foram levadas para as séries anteriores, da dois ponto cinquenta até a dois ponto cinquenta e cinco.
+Quem está numa dessas séries pode atualizar para a versão corrigida correspondente.
+A falha mais séria envolve submódulos, que são repositórios Git incluídos dentro de outro repositório.
+Antes de gravar arquivos na pasta de trabalho, o Git verifica os caminhos, e recusa os que sobrescreveriam seus próprios metadados.
+Só que um truncamento de inteiro no índice permite que um caminho muito longo passe na verificação com um nome, e seja gravado com outro, mais curto.
+Um repositório malicioso usa essa diferença para trocar o arquivo ponto git de um submódulo por um link simbólico.
+Esse link aponta para configuração ou hooks do atacante.
+Hooks são scripts que o Git executa automaticamente em certas operações.
+O resultado é código do atacante rodando durante um clone recursivo, aquele feito com a opção recurse submodules, que baixa também os submódulos.
+As outras cinco falhas vêm em sequência.
+Na primeira, ao clonar um repositório vazio pelo protocolo versão dois, um servidor malicioso pode anunciar um nome de branch que sobe de diretório.
+O Git guardava esse nome sem validar, e uma atualização posterior do branch podia gravar fora do diretório de referências.
+Na segunda, uma tag com mais de duas assinaturas G P G estoura um array fixo na pilha durante um merge.
+O resultado é corrupção de memória e risco de negação de serviço, inclusive em serviços de hospedagem que fazem merges pelos usuários.
+A terceira envolve patches binários, que vêm comprimidos.
+Um patch pequeno pode passar de cerca de um gigabyte depois de descomprimido, mas o Git só verificava o tamanho de entrada.
+O patch adulterado causa leitura fora dos limites e derruba o processo.
+Na quarta, o cálculo de memória de merges muito grandes pode transbordar e corromper o heap, em merges locais e em serviços que fazem merge de conteúdo não confiável.
+A quinta está no git fast import, ferramenta que monta um repositório a partir de um fluxo de comandos.
+Três recursos dele liam arquivos arbitrários ou criavam arquivos quando vinham de um fluxo não confiável.
+Agora, esses recursos exigem uma opção explícita que libera funções inseguras.
+O "Git Hub" diz que já corrigiu o próprio site e o "Git Hub" Enterprise Cloud.
+Para o "Git Hub" Enterprise Server, há versões corrigidas nas séries de três ponto dezenove a três ponto vinte e dois.
+O "Git Hub" Desktop, o app do "Git Hub" Copilot, o Codespaces e o Actions também vão receber o Git atualizado.
+Atualize o Git do sistema e os programas que trazem uma cópia própria dele.
+Até lá, a recomendação é clonar apenas de servidores confiáveis e evitar clones recursivos de repositórios desconhecidos.
+Também vale não fazer merge nem processar patches binários ou fluxos do fast import de origem não confiável.
+As fontes são o anúncio do "Git Hub" e as notas de lançamento do Git dois ponto cinquenta e seis ponto um.
+
+Agora, um ataque que usou acessos esquecidos da Qubole para entrar em contas A W S de clientes.
+Muitas plataformas de software como serviço trabalham dentro da conta A W S do cliente.
+Na integração, o cliente cria um papel I A M, que é um conjunto de permissões, e autoriza a conta A W S do fornecedor a assumi-lo.
+Assumir o papel é uma chamada de [EY1 P IY1 AY1] conhecida como Assume Role, que devolve credenciais temporárias com aquelas permissões.
+Esse acesso costuma ser protegido por um External I D, um código que o fornecedor apresenta junto do pedido.
+A Wiz, trabalhando com a Sentra e a Mandiant, relatou na segunda-feira um abuso desse mecanismo.
+Entre catorze e vinte e seis de outubro, um invasor usou credenciais I A M de uma conta A W S associada à Qubole, plataforma de processamento de dados.
+Com elas, assumiu esses papéis em ambientes de clientes.
+Todos os pedidos traziam o External I D correto, e a A W S aceitou todos.
+Nas palavras da Sentra, para a A W S, o invasor era a Qubole.
+Segundo a Wiz, a maioria dos papéis usados estava parada.
+Na maior parte dos ambientes observados, os pedidos do invasor foram a única chamada Assume Role da conta da Qubole em outubro.
+Eram integrações que ninguém removeu.
+A Sentra fala em mais de uma dúzia de organizações atingidas.
+Os relatos não explicam como as credenciais da conta da Qubole foram obtidas.
+Dentro das contas, o invasor listou recursos e foi direto aos lugares onde segredos costumam ficar.
+Isso inclui variáveis de ambiente de funções Lambda, o Secrets Manager e o Parameter Store.
+Depois, usou o Truffle Hog, uma ferramenta de busca de segredos que também é usada por defensores.
+Com ela, testou as chaves encontradas contra a A W S, o Entra I D da Microsoft e o Okta.
+Por fim, baixou objetos do S três, em alguns casos buckets inteiros.
+A Wiz descreve o ataque como oportunista.
+Ela também registrou uma atividade separada, entre oito e onze de outubro, com chaves de acesso de clientes criadas para integrações com a Qubole.
+Quem integrou a Qubole deve revisar o Cloud Trail desde primeiro de outubro.
+O sinal principal são chamadas Assume Role vindas da conta usada pela própria Qubole, a partir de endereços fora da A W S.
+O número exato dessa conta está no artigo escrito.
+Segundo a Wiz, todo o tráfego legítimo da plataforma saiu da infraestrutura da A W S.
+Se o papel foi assumido, a orientação é trocar todo segredo que ele conseguia ler, e revogar as sessões ativas.
+Isso porque trocar a credencial não encerra as sessões temporárias que já foram emitidas.
+A lição vale para qualquer fornecedor.
+Apague papéis de integrações que você não usa mais.
+Troque a autorização dada à conta inteira do fornecedor, o principal root, pelo principal específico que ele usa.
+Restrinja a origem das chamadas por endereço I P ou por endpoint de V P C.
+Segundo a Wiz, só a restrição por I P já teria bloqueado todas as tentativas observadas.
+Trate também o External I D como informação visível, porque ele aparece em texto claro no Cloud Trail.
+E combine com o fornecedor a troca desse valor depois de um incidente.
+As fontes são Wiz, Sentra e SecurityWeek.
+
+Agora, a execução durável, e como ela ajuda agentes que trabalham por dias a sobreviver a falhas.
+Um agente que repõe estoque passa a maior parte do tempo esperando.
+Espera por cotações, pela aprovação de um gerente, pela entrega do fornecedor.
+Se o processo cai no meio do caminho, ele precisa continuar de onde parou, sem pedir a mesma coisa duas vezes.
+Kiran Prakash, diretor de Dados e IA da Thoughtworks, publicou nesta terça, no site de Martin Fowler, um artigo que constrói esse agente.
+Ele se chama "Stock Replenisher", e roda sobre execução durável, nas plataformas Temporal e Cloudflare Workflows.
+A ideia tem três peças: passos, um log e replay.
+Todo contato com o mundo externo vira um passo: a chamada ao modelo de linguagem, a consulta ao E R P, a mensagem ao fornecedor.
+Antes de seguir, o runtime grava a entrada e a saída de cada passo num log persistente.
+Depois de uma queda, o programa roda de novo desde o início.
+Passos que já têm resultado gravado devolvem esse resultado sem executar outra vez, e o primeiro passo sem registro roda de verdade.
+O autor compara o mecanismo ao "Event Sourcing", em que o estado é reconstruído a partir dos eventos gravados.
+A escolha da próxima ferramenta pelo modelo também é um passo registrado.
+Assim, no replay, o agente reaproveita a decisão já tomada e mantém o mesmo caminho.
+O exemplo também usa padrões conhecidos de sistemas distribuídos.
+O número do pedido de compra serve como chave de idempotência, para o fornecedor reconhecer repetições.
+O teto de preço é verificado por código comum dentro da ferramenta, qualquer que seja a decisão do modelo.
+Durante as esperas, o agente não ocupa processo nem C P U.
+Num dos testes, o processo caiu enquanto esperava a aprovação do gerente, e ficou parado por um dia.
+Quando voltou, nada se repetiu: nem cotações, nem pedido, nem novo pedido de aprovação.
+O artigo também aponta limites.
+Se o fornecedor aceita o pedido e a resposta se perde no caminho, nenhum resultado fica gravado, e o runtime chama o fornecedor de novo.
+Quem evita o pedido duplicado é a chave de idempotência no destino.
+Publicar uma nova versão do código afeta agentes que estão suspensos esperando, e regras de negócio que mudam precisam de versionamento.
+Acordar um agente exige refazer o replay do log, e esse custo cresce com o tamanho do histórico.
+Nas medições do autor, reconstruir um agente a partir do log levou cerca de dois segundos no Cloudflare, e menos de um décimo de segundo no Temporal.
+Para logs muito longos, a saída é gravar um snapshot e refazer só o que veio depois dele.
+A execução durável também não protege contra injeção de prompt, e o agente do exemplo lê e-mails de fornecedores.
+Temporal, Restate, Inngest, D B O S e Cloudflare Workflows implementam o modelo com primitivas equivalentes.
+A fonte é o artigo de Kiran Prakash no site de Martin Fowler.
+
+Agora, o Google DeepMind, que verificou com agentes o código do protocolo do Signal, e a chegada do Gemini quatro Carbon ao público.
+O Google DeepMind apresentou nesta terça o "AlphaProof Code".
+É um sistema que usa agentes de IA em verificação formal, ou seja, para provar matematicamente que um código cumpre propriedades definidas.
+A equipe aplicou o sistema ao código real do protocolo criptográfico do Signal, usado também no Google Messages.
+E diz ter provado propriedades de segurança do código compilado.
+Uma delas é manter as mensagens protegidas antes e depois de um aparelho ser comprometido temporariamente.
+Segundo o DeepMind, a maioria das verificações de protocolos fica no nível do projeto.
+E muitas vulnerabilidades reais aparecem justamente na distância entre o projeto e a implementação.
+O trabalho se divide assim.
+Especialistas, com ajuda de modelos, transformaram os objetivos de segurança do Signal em especificações formais, e revisaram cada uma.
+Agentes baseados no Gemini Carbon escreveram mais de seis milhões de linhas de prova.
+Elas foram escritas em [L IY1 N], uma linguagem cujo verificador confere cada prova de forma mecânica.
+Os agentes ainda marcaram cerca de um porcento do código para revisão humana.
+Segundo o DeepMind, tudo levou quatro semanas.
+Num teste de controle, a equipe reintroduziu dois bugs reais, já corrigidos, numa cópia isolada do código.
+O sistema produziu provas verificadas de que essas versões eram inseguras.
+O C T O do Signal, Ehren Kret, elogiou a abordagem.
+Os artefatos de verificação serão publicados como código aberto.
+O DeepMind afirma que é a primeira vez que a implementação de um protocolo tão usado é verificada formalmente, com ou sem IA.
+A garantia tem um limite claro: ela cobre as propriedades que os especialistas escreveram nas especificações.
+No mesmo dia, o Google abriu o Gemini quatro Carbon para desenvolvedores e empresas pagantes pela sua [EY1 P IY1 AY1].
+E começou a liberá-lo para assinantes do plano Google A I Ultra.
+O modelo tinha começado em acesso restrito a defensores de segurança.
+Na [EY1 P IY1 AY1], o preço introdutório é de dois dólares por milhão de tokens de entrada e dez dólares por milhão de saída, o mesmo do Gemini quatro Argon.
+O Carbon, porém, gasta mais tokens que o Argon para raciocinar e verificar.
+E o Google continua indicando o Argon para a maior parte do trabalho de engenharia.
+O Google também apresentou, em prévia, o recurso swarm no Antigravity, que divide uma tarefa entre vários agentes.
+As fontes são o anúncio do "AlphaProof Code" e o anúncio do Gemini quatro Carbon.
+
+Agora, os destaques rápidos para hoje.
+Primeiro, o Chrome corrige uma falha em X M L que já está sendo explorada.
+A atualização de segunda-feira leva o Chrome à versão cento e cinquenta e sete no Windows, no Mac e no Linux, com distribuição gradual nos próximos dias.
+Ela corrige um uso de memória depois de liberada, o "use after free", no componente de X M L.
+O Google diz saber que existe um exploit em uso, sem detalhar alvos ou autores.
+No Android, a versão cento e cinquenta e sete traz as mesmas correções.
+No computador, abrir a página "Sobre o Google Chrome" força a verificação e a instalação.
+As fontes são o Chrome Releases e a Malwarebytes.
+
+O X ponto Org publicou oito falhas no servidor X e no X Wayland.
+O aviso desta terça descreve escritas fora dos limites e estouros de inteiro em várias partes do código.
+Uma delas é o tratamento de E D I D, as informações que o monitor envia ao sistema.
+Outras são as extensões X V, X Test e X Res.
+Um monitor malicioso ou um E D I D adulterado, por exemplo, pode corromper a memória do servidor.
+As correções estão no xorg server vinte e um ponto um ponto vinte e seis e no X Wayland vinte e quatro ponto um ponto quinze.
+A fonte é o aviso do X ponto Org.
+
+O Notion confirmou que conversas do Notion A I foram expostas no incidente da Fireworks A I.
+A Fireworks, que fazia inferência para o Notion, avisou em seis de novembro que invasores podem ter acessado dados de clientes.
+No dia oito, ela confirmou o conjunto de dados.
+Segundo o Notion, menos de um porcento dos workspaces foi afetado.
+Os dados são transcrições de chat do Notion A I, sem identificação de autor ou workspace, e sem resultados de ferramentas.
+A empresa desligou o recurso Insights, cortou a conexão com a Fireworks e avisou os donos dos workspaces afetados.
+E recomenda trocar senhas ou chaves de [EY1 P IY1 AY1] que alguém tenha colado nessas conversas.
+A fonte é o aviso do Notion.
+
+A França atribuiu a uma unidade iraniana uma sabotagem de refrigeração em supermercados.
+Um relatório do CERT F R, de segunda-feira, aponta a unidade Shahid Kaveh, ligada à Guarda Revolucionária do Irã.
+Na noite de onze para doze de outubro, os invasores alteraram os parâmetros de degelo de equipamentos de refrigeração para temperaturas altas.
+Isso causou perdas de mercadoria e pelo menos quinze princípios de incêndio.
+Entre os afetados estão redes como Carrefour, Leclerc e Intermarché.
+A Bitdefender, citando autoridades francesas, fala em cerca de setecentos locais.
+Ela recomenda manter interfaces de tecnologia operacional fora da internet, atualizar o software dos controladores, trocar senhas padrão e segmentar a rede.
+As fontes são o relatório do CERT F R e a Bitdefender.
+
+Um único arquivo tar é extraído de oito jeitos diferentes.
+Em post do sábado, dia 7, Harmen Stoppels monta, com um comando do G N U tar, um arquivo especial.
+Ele combina um hard link renomeado com um tamanho de quinhentos e doze bytes, exatamente o tamanho de um cabeçalho tar.
+O G N U tar, o BusyBox, Python, Go e Perl ignoram esse tamanho.
+O B S D tar, que é o tar do mac O S, grava os quinhentos e doze bytes dentro do hard link, e o arquivo original passa a conter o cabeçalho seguinte.
+O sete Zip, o node tar e o crate tar do Rust pulam esses bytes e perdem um arquivo.
+Já o ponto NET, o Julia e o codec do U V recusam o pacote.
+Java, P H P, Ruby Gems e R produzem, cada um, mais um resultado diferente.
+Quando duas ferramentas leem os mesmos bytes de formas diferentes, um verificador pode aprovar um conteúdo e o extrator gravar outro.
+O caso faz parte de uma suíte com cento e trinta e quatro tarballs problemáticos.
+A fonte é o post de Harmen Stoppels.
+
+Comentários To Do antigos estão desviando agentes de código no Google.
+Em texto publicado na sexta, dia 6, engenheiros do Google relatam que treze porcento das sessões de agentes encontraram comentários To Do ou Fix Me que apontam para um bug.
+Em seis porcento desses encontros, o agente agiu sobre o bug citado.
+E em oitenta e três porcento desses casos, o desenvolvedor não tinha pedido nada sobre ele.
+Em quarenta e um porcento dos desvios não pedidos, o bug já estava fechado.
+Por sessão, os desvios somaram setenta porcento mais passos, setenta e sete porcento mais tokens e cento e cinco porcento mais tempo de espera.
+O Google passou a usar agentes para remover referências obsoletas, e relata mais de noventa e cinco porcento de aceitação nas revisões humanas.
+A fonte é o Google for Developers.
+
+O Google mostrou como rodar o Code Mender em pull requests sem chave guardada.
+A arquitetura de referência roda o agente de segurança no Cloud Run, publica achados no pull request e aceita comandos como verify, fix e approve.
+O "Git Hub" Actions emite um token O I D C de vida curta, que o Google Cloud aceita no lugar de uma credencial permanente.
+A condição fica amarrada aos identificadores imutáveis do repositório e do dono, que não mudam quando o nome muda.
+O texto também alerta que um verificador de exploits que só procura o sinal de sucesso pode tratar um teste que travou como "seguro".
+A fonte é o Google Cloud.
+
+A NVIDIA levou dois projetos de agentes ao C N C F.
+O [EY1 JH AH0 N T] Substrate entra como projeto Sandbox, e põe muitas sessões de agentes num pequeno grupo de Pods.
+Sessões ociosas são salvas com memória e sistema de arquivos, e restauradas no próximo worker livre.
+A NVIDIA fala em densidade dez vezes maior que a de contêineres comuns.
+O Open Shell, runtime que aplica políticas a agentes fora do processo deles, também entra como Sandbox.
+Ele adota a linguagem de políticas Cedar, e tem colaboradores de Red Hat, Docker e Canonical.
+As fontes são a NVIDIA e a C N C F.
+
+O ponto NET onze foi lançado, com tipos união no C sharp quinze.
+É uma versão de suporte padrão, com dois anos de atualizações, e o ponto NET dez continua como a opção de suporte longo.
+O C sharp quinze traz tipos união, em que um valor pode ser um entre vários tipos declarados.
+Eles vêm com verificação de casos no switch, além de hierarquias fechadas.
+O S D K passa a usar por padrão um host de linha de comando com Native A O T.
+Assim, comandos como ajuda e consulta de versão rodam sem iniciar a C L I gerenciada.
+As bibliotecas ganham compressão Zstandard embutida.
+A fonte é o anúncio do ponto NET onze.
+
+Por fim, mais da metade dos usuários de Rust não usa depurador.
+A JetBrains cita a pesquisa de depuração em Rust de 2026.
+Nela, cinquenta e três vírgula dois porcento dos usuários não usam depurador, e oitenta e um vírgula três porcento acham prints mais fáceis ou rápidos.
+O uso de depurador subiu de trinta e seis porcento em 2021 para quarenta e seis vírgula oito porcento.
+O post resolve o mesmo bug de três jeitos: com a macro D B G, com o L L D B no terminal e com a interface do Rust Rover.
+E mostra que o Rust Rover 2026 ponto três expõe o depurador a agentes de código por um servidor M C P.
+A fonte é o blog da JetBrains.
