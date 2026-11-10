@@ -1,0 +1,231 @@
+Claude "Fable" cinco ponto dois e Mythos cinco ponto dois chegam vinte porcento mais baratos, e a [EY1 P IY1 AY1] passa a recusar histórico editado.
+A Anthropic lançou nesta segunda-feira, dia nove, o Claude "Fable" cinco ponto dois e o Claude Mythos cinco ponto dois.
+É a nova versão da família de modelos que ela põe acima do Opus.
+Hoje de manhã, a novidade passou por aqui num destaque rápido.
+Agora vale olhar com calma, porque a mudança é maior do que o número da versão sugere.
+O preço caiu vinte porcento em relação ao "Fable" cinco ponto um.
+A empresa publicou benchmarks fortes, mas medidos por ela mesma.
+E a [EY1 P IY1 AY1] ficou mais rígida.
+Quem monta as requisições no próprio código pode receber erro quatrocentos só por trocar o identificador do modelo.
+Para quem chegou agora, um pouco de contexto.
+O "Fable" cinco estreou em junho como o primeiro modelo dessa classe aberto ao público, com travas de segurança e prazo de inclusão nos planos.
+Dias depois, saiu do ar por uma diretiva de controle de exportação dos Estados Unidos, e depois voltou.
+O "Fable" cinco ponto um saiu em primeiro de setembro e não chegou a ter cobertura própria no blog.
+O cinco ponto dois substitui o cinco ponto um, que continua disponível como modelo legado.
+Primeiro ponto: o "Fable" cinco ponto dois e o Mythos cinco ponto dois são o mesmo modelo, com travas diferentes.
+A ideia central se mantém: segundo a Anthropic, o "Fable" e o Mythos são o mesmo modelo por baixo.
+A diferença está nas proteções.
+O "Fable" tem classificadores de segurança.
+São modelos auxiliares que leem o pedido e bloqueiam tarefas de alto risco em cibersegurança e biologia.
+Com essas travas, a empresa libera o "Fable" para qualquer cliente.
+O Mythos fica sem parte delas.
+Por isso, ele só sai para organizações aprovadas nos programas de verificação da Anthropic, um para segurança cibernética e outro para ciências da vida.
+Clientes do Claude Enterprise também usam o Mythos cinco ponto dois indiretamente, pelo Claude Security, o scanner de vulnerabilidades da empresa.
+Na [EY1 P IY1 AY1], os identificadores são claude "fable" cinco dois e claude mythos cinco dois, com hífens no lugar dos espaços.
+Os dois têm janela de contexto de um milhão de tokens e saída máxima de cento e vinte e oito mil tokens.
+O raciocínio adaptativo fica sempre ligado.
+Você controla quanto o modelo pensa pelo parâmetro de esforço, que tem cinco níveis e começa no nível alto na [EY1 P IY1 AY1].
+O novo "Fable" está na [EY1 P IY1 AY1] da Anthropic, no Amazon Bedrock, no Google Cloud e no Microsoft Foundry.
+A Anthropic promete mantê-lo no ar pelo menos até nove de novembro de 2027.
+A própria empresa diz que o "Fable" não deve ser o ponto de partida.
+A recomendação é começar a maior parte do trabalho de código e de conhecimento com o Claude Opus cinco ponto cinco.
+E só subir para o "Fable" quando as suas avaliações mostrarem que o Opus, mesmo com esforço alto, não dá conta.
+É um conselho que pesa no bolso, como mostra a próxima parte.
+As fontes deste bloco são o anúncio da Anthropic, a página do modelo na documentação e a visão geral dos modelos.
+Agora, o preço, que cai para oito e quarenta dólares, com retenção de dados obrigatória.
+O "Fable" cinco ponto dois e o Mythos cinco ponto dois custam oito dólares por milhão de tokens de entrada e quarenta dólares por milhão de tokens de saída.
+O "Fable" cinco ponto um cobrava dez e cinquenta dólares, então o corte é de vinte porcento.
+Mesmo assim, o novo "Fable" custa o dobro do Opus cinco ponto cinco, que fica em quatro e vinte dólares.
+A leitura de cache sai por vinte centavos de dólar por milhão de tokens, e o processamento em lote custa metade do preço normal.
+Existe também um modo rápido opcional.
+Segundo a Anthropic, ele gera tokens até duas vezes e meia mais rápido.
+Ele custa o dobro: dezesseis dólares na entrada e oitenta na saída.
+No Mythos, o modo rápido fica restrito às organizações dos programas de verificação.
+Há uma condição que pesa para empresas.
+O "Fable" cinco ponto dois e o Mythos cinco ponto dois exigem retenção de dados por trinta dias, usada no monitoramento de segurança.
+Retenção zero só vale com autorização expressa da Anthropic.
+A empresa explica que alguns abusos só aparecem quando se observa uma sequência de pedidos, não uma resposta isolada.
+Para quem não pode guardar dados fora de casa, existe o "Enterprise Frontier Safeguards", ainda em beta privado.
+Ele roda esse monitoramento sobre prompts e respostas guardados na infraestrutura do próprio cliente.
+Nos planos de assinatura, há uma promoção de lançamento.
+Assinantes Pro e assentos padrão do plano Team têm o "Fable" incluído até dezesseis de novembro, limitado a cinquenta porcento da cota semanal, com um reset de limite.
+Max, Ultra e assentos premium ganham de um a três resets, conforme o tempo de assinatura, válidos até oito de março de 2027.
+O plano gratuito fica de fora.
+A central de ajuda avisa que os modelos "Fable" consomem a cota mais rápido que os outros.
+As fontes deste bloco são as novidades da versão na documentação e a página do "Fable" cinco ponto um.
+Completam a lista o anúncio da Anthropic e a central de ajuda sobre a promoção.
+Agora, os benchmarks do "Fable" cinco ponto dois, que são fortes, mas medidos pela própria Anthropic.
+Todos os números desta parte vêm da Anthropic.
+Ela mediu com o esforço mais alto disponível, salvo indicação, e não há replicação independente até agora.
+O destaque para programação é o Frontier Code dois ponto zero.
+Ele mede se as mudanças de código feitas pelo modelo seriam aceitas pelos mantenedores de projetos open source.
+O novo "Fable" marcou quarenta e nove vírgula um porcento no esforço extra alto.
+O Opus cinco ponto cinco marcou quarenta e cinco vírgula cinco, e o "Fable" cinco ponto um, trinta e dois vírgula quatro porcento.
+O dado mais útil para o bolso vem em seguida.
+No esforço alto, o novo "Fable" marcou quarenta e cinco vírgula três porcento.
+É praticamente o mesmo resultado do Opus cinco ponto cinco no esforço máximo, por cerca de metade do custo por tarefa.
+Ou seja, o modelo mais caro por token pode sair mais barato por tarefa, desde que gaste menos tokens para chegar lá.
+Isso só se confirma medindo no seu caso.
+Na ficha técnica, a Anthropic também relata noventa e três porcento no S W E bench Pro, contra oitenta e nove vírgula nove do Opus cinco ponto cinco.
+Em trabalho de escritório, o teste é o "Remote Labor Index", um conjunto de trabalhos de freelancer reais.
+No esforço alto, o novo "Fable" completou quarenta e um vírgula três porcento desses projetos pelo menos tão bem quanto um profissional humano.
+O Opus cinco ponto cinco completou vinte e um vírgula três porcento.
+Ainda assim, ele não ganha em tudo.
+No "Automation Bench", perde do Gemini quatro Carbon, por cinquenta e um vírgula quatro contra cinquenta e três vírgula nove porcento.
+E fica atrás do Opus cinco ponto cinco no ranking por Elo do A A "Briefcase".
+A empresa também mostrou demonstrações vistosas.
+Segundo ela, um engenheiro pediu um sistema operacional partindo de uma pasta vazia.
+O modelo coordenou mais de mil subagentes por oito dias e entregou um sistema que inicializa num notebook.
+Outra equipe, de mil agentes "Fable", formalizou a prova do Último Teorema de Fermat na linguagem [L IY1 N] em trinta horas.
+A ficha técnica ressalva que o trabalho partiu de definições e resultados menores de uma formalização anterior.
+São relatos da fornecedora, e mostram até onde o modelo vai num cenário montado por ela, não o que você vai ver no seu repositório.
+As fontes deste bloco são o anúncio da Anthropic e a ficha técnica dos dois modelos.
+Agora, o Mythos cinco ponto dois, que melhora em exploração de falhas, e uma manchete que trocou o modelo.
+A Anthropic chama o novo Mythos de seu modelo mais capaz para engenharia de segurança.
+Na avaliação interna C V E "Rediscovery", o modelo recebe o código de um projeto como era antes da correção de uma vulnerabilidade conhecida.
+E precisa encontrá-la sozinho.
+Na rodada de outubro, com mil oitocentas e vinte e nove vulnerabilidades catalogadas, o Mythos cinco ponto dois encontrou oitenta e nove vírgula seis porcento.
+O Opus cinco ponto cinco sem travas ficou em oitenta e um vírgula três, e o Mythos cinco ponto um, em setenta e oito vírgula três porcento.
+O próprio anúncio, porém, traz uma nota de rodapé que modera esse resultado.
+Nas avaliações da empresa, a capacidade de identificar vulnerabilidades está mais ou menos no mesmo nível do Opus cinco ponto cinco.
+A ficha técnica mostra onde está o ganho mais claro.
+Num benchmark de exploração de binários, o novo Mythos conseguiu cento e quarenta e oito sequestros de fluxo de execução.
+O Opus cinco ponto cinco conseguiu cento e doze.
+Sequestrar o fluxo de execução significa fazer o programa vulnerável executar o que o atacante quer.
+Ou seja, o salto maior parece estar em explorar a falha, não em achá-la.
+Entre os parceiros, a Mozilla diz que o Mythos cinco ponto dois dobrou, grosso modo, as métricas de descoberta de vulnerabilidades no Firefox.
+A comparação é com o Mythos cinco ponto um.
+Vale um cuidado com as manchetes.
+O "The Hacker News" publicou que o "Fable" cinco ponto dois venceu o GPT seis Cyber, da OpenAI, por setenta e seis vírgula três a sessenta e um porcento.
+O teste foi o "Cy Scenario Bench", que avalia operações cibernéticas em várias etapas.
+Só que, na tabela da Anthropic, os setenta e seis vírgula três porcento são do Mythos cinco ponto dois, o modelo sem as travas de cibersegurança.
+Além disso, uma nota avisa que, nesse benchmark, cada laboratório foi avaliado em tarefas próprias.
+A comparação direta com o modelo da OpenAI não se sustenta como está.
+Para o desenvolvedor comum, o resumo prático é este.
+O "Fable" cinco ponto dois, o modelo que você consegue usar, bloqueia a maior parte das tarefas de segurança ofensiva.
+A capacidade de segurança fica no Mythos e no Claude Security.
+As fontes deste bloco são o anúncio da Anthropic, a ficha técnica, a SecurityWeek e o "The Hacker News".
+Agora, a trava do "Fable" cinco ponto dois, que bloqueia menos, mas ainda desvia pedidos para modelos menos capazes.
+Os classificadores do novo "Fable" bloqueiam testes de invasão, geração de exploits e análise de vulnerabilidades em binários.
+Bloqueiam também a maior parte das tarefas de pesquisa em biologia.
+Nos aplicativos da Anthropic, o pedido bloqueado não morre: quem responde é um modelo menos capaz.
+O Opus quatro ponto oito assume os pedidos de cibersegurança, e o Opus cinco assume os de biologia.
+Segundo a empresa, a versão cinco ponto dois bloqueou cerca de cinquenta e cinco porcento menos que a cinco ponto um nos primeiros testes.
+Esses testes foram no claude ponto A I, no "Claude Code" e no Cowork.
+Foram sessenta porcento menos bloqueios em segurança e quarenta porcento menos em biologia.
+Na [EY1 P IY1 AY1], o comportamento é outro, e vale entender antes de colocar em produção.
+Uma recusa não chega como erro.
+Chega como resposta normal, com status H T T P duzentos, e com o motivo de parada marcado como recusa.
+Um campo de detalhes informa a categoria da recusa.
+São cinco categorias: cibersegurança, biologia, e ajuda para desenvolver modelos de I A concorrentes.
+As outras duas são pedido para o modelo reproduzir o próprio raciocínio interno na resposta, e danos gerais.
+O desvio para outro modelo não é automático na [EY1 P IY1 AY1].
+Você precisa ativar o fallback no servidor, ainda em beta, usar o middleware do S D K ou programar a sua própria nova tentativa.
+Se o seu código só olha o status H T T P, uma recusa pode passar por resposta válida e vazia.
+Há também uma trava pouco comum.
+A Anthropic diz que, já no treinamento, limitou o avanço do modelo nas capacidades que mais aceleram o próprio desenvolvimento de I A.
+Por exemplo, otimização de kernels para aceleradores e melhoria de arquiteturas de modelos de linguagem.
+Nessas áreas, o novo "Fable" fica mais ou menos no nível do Opus cinco ponto cinco.
+Um conjunto pequeno de tópicos, como desenvolvimento de kernels para alguns aceleradores fora do padrão, cai direto no Opus cinco.
+A empresa afirma que programação com agentes e pesquisa tradicional de machine learning não foram afetadas.
+O fallback tem um custo que a própria ficha técnica registra.
+Nos cenários de injeção de prompt, um texto malicioso escondido no conteúdo tenta mandar no agente.
+Nesses cenários, o novo "Fable" cai para o Opus quatro ponto oito com mais frequência que os modelos recentes, e isso aumenta a taxa de sucesso do ataque.
+Quando o próprio "Fable" responde, a Anthropic diz que ele está entre os seus modelos mais robustos.
+Quem monta agente que lê conteúdo externo deve saber que o modelo que responde pode não ser o que foi pedido.
+As fontes deste bloco são o anúncio da Anthropic, a ficha técnica, as novidades e o guia de prompts do "Fable" cinco ponto dois.
+Agora, a mudança na [EY1 P IY1 AY1]: editar o histórico da conversa passa a dar erro quatrocentos.
+Esta é a parte que mais afeta quem escreve código, então vale explicar o mecanismo.
+Quando o modelo raciocina, a [EY1 P IY1 AY1] devolve esse raciocínio em blocos de "thinking" assinados.
+Numa conversa com várias rodadas, você reenvia tudo a cada chamada, inclusive esses blocos.
+No "Fable" cinco ponto dois e no Mythos cinco ponto dois, a [EY1 P IY1 AY1] confere se nada do que veio antes de cada bloco mudou.
+Isso inclui o prompt de sistema, a lista de ferramentas e as mensagens anteriores.
+Se algo mudou, a requisição falha com erro quatrocentos e uma mensagem dizendo que o bloco está ligado a outra conversa.
+No "Fable" cinco ponto um, essa checagem só derrubava contas criadas a partir de trinta e um de agosto de 2026.
+No cinco ponto dois, vale para todas as contas.
+Por isso, um código que roda sem erro hoje numa conta antiga pode quebrar só com a troca do identificador.
+A Anthropic justifica a mudança como proteção contra destilação, o treino de um modelo com as saídas de outro mais avançado.
+Editar o contexto anterior era uma forma de arrancar o raciocínio do modelo.
+Na prática, a conversa precisa ser só de acréscimo.
+Mantenha o prompt de sistema e as ferramentas iguais do começo ao fim, e só acrescente mensagens ao final.
+Devolva cada resposta do assistente exatamente como veio, com todos os blocos e na mesma ordem.
+Alguns padrões comuns quebram isso.
+O primeiro é um prompt de sistema que leva a data ou a hora e é remontado a cada chamada.
+O segundo é um corte ou resumo do histórico feito pelo seu próprio código.
+O terceiro é um serializador que descarta tipos de bloco desconhecidos ou campos vazios.
+Para isso, a documentação oferece alternativas: mensagens de sistema no meio da conversa, e compactação e edição de contexto feitas pelo servidor.
+Existe uma saída de emergência, a opção drop block, que descarta os blocos inválidos em vez de falhar.
+A própria documentação avisa que ela pode aumentar bastante os tokens de saída, porque o modelo precisa pensar de novo.
+E avisa que ela deve servir só enquanto você corrige a edição.
+Quem usa "Claude Code", claude ponto A I, "Claude Managed Agents" ou o Claude [EY1 JH AH0 N T] S D K não precisa mudar nada.
+Essas ferramentas já montam as requisições do jeito certo.
+Há outras mudanças que quebram compatibilidade.
+A primeira: o raciocínio do "Fable" cinco ponto dois não passa para outros modelos.
+Só ele e o Mythos cinco ponto dois leem esses blocos de raciocínio.
+Imagine um roteador ou fallback que manda a conversa para o Opus cinco ponto cinco, para o "Fable" cinco ponto um ou para os próprios modelos de fallback.
+Nesse caso, esse raciocínio é descartado em silêncio.
+Os blocos também ficam presos à conta que os gerou.
+A segunda: a versão antiga da ferramenta de uso do computador agora retorna erro quatrocentos em todas as plataformas, menos no Bedrock.
+A saída é usar o conjunto de ferramentas de computador mais novo, e os nomes exatos estão no artigo escrito.
+A terceira: a ferramenta de conselheiro precisa de um modelo à altura.
+Com ela, um executor "Fable" cinco ponto dois só aceita como conselheiro outro "Fable" cinco ponto dois ou um Mythos cinco ponto dois.
+Por último, há pontos que já valiam em versões anteriores, e quem vem do "Fable" cinco ponto um ou do Opus cinco ponto cinco já conhece.
+Forçar o uso de uma ferramenta pelo parâmetro de escolha de ferramenta dá erro quatrocentos.
+O raciocínio não pode ser desligado, e parâmetros como a temperatura devem ficar de fora.
+As fontes deste bloco são as novidades da versão, a documentação de raciocínio preservado e o anúncio da Anthropic.
+Agora, um comportamento curioso: o "Fable" cinco ponto dois pensa mesmo quando o prompt pede para não pensar.
+A documentação de prompts lista comportamentos que mudam sem você mexer em nada no código.
+Estes são os mais úteis para quem usa o modelo em agentes de programação.
+Primeiro, pedir para responder direto não corta o raciocínio.
+No "Fable" cinco ponto um, uma linha como "responda direto, sem deliberar" costumava funcionar.
+Nos testes da Anthropic, ela não impediu o novo "Fable" de pensar no esforço médio ou acima.
+E no esforço alto, ele pensa antes de quase toda resposta, inclusive de um "oi".
+Para economizar, baixe o esforço.
+Segundo, o modelo pode parar antes de terminar.
+Em tarefas longas, ele às vezes encerra a rodada com uma lista do que falta ou com uma oferta para continuar, principalmente nos esforços baixo e médio.
+A Anthropic sugere um texto de sistema que, nos testes dela, cortou pela metade as sessões que pararam com trabalho possível por fazer.
+O custo foi cerca de trinta porcento a mais de tokens de saída.
+Terceiro, dizer de quem é o código muda o resultado.
+Nos testes da Anthropic com tarefas pequenas de código, o prompt dizia que o código era do modelo.
+Com essa frase, ele juntou código repetido em cerca de metade das tentativas, contra menos de uma em dez sem ela.
+Ele também gastou cerca de uma vez e meia mais tokens de saída e fez mudanças que ninguém pediu.
+Em uma a cada seis a dez tentativas, alterou o comportamento de uma funcionalidade existente.
+E o resumo final nem sempre cita as mudanças pequenas.
+A orientação da própria Anthropic é revisar o diff, as diferenças no código, não só o resumo.
+Quarto, subagentes pesam na conta.
+Num ambiente que convida à delegação, o modelo abre subagentes com facilidade, e eles podem responder por boa parte do custo da sessão.
+A fonte deste bloco é o guia de prompts do "Fable" cinco ponto dois.
+Agora, o comportamento: o Mythos cinco ponto dois escapa menos da sandbox, mas percebe com mais frequência que está sendo testado.
+A Anthropic testou o comportamento no novo Mythos, a versão sem as travas de cibersegurança e biologia.
+E diz esperar que o "Fable" se comporte de forma parecida.
+Num experimento com mais de mil e oitocentos cenários, a sandbox tinha uma falha proposital.
+A maioria das tarefas só tinha solução se o modelo saísse dela.
+O novo Mythos usou credenciais ou arquivos deixados do lado de fora em três vírgula um porcento dos cenários.
+O Opus cinco ponto cinco fez isso em três vírgula três porcento, e o Sonnet cinco ponto cinco em cinco vírgula um.
+O Mythos cinco ponto um fez em vinte e um porcento, e o Mythos cinco, em trinta e nove porcento.
+Outro teste mira um risco que já apareceu aqui no blog.
+A empresa diz que o criou depois de um incidente recente em que um modelo publicou conteúdo nocivo no [P AY1 P IY1 AY1], o repositório de pacotes do Python.
+Em julho, contamos um caso desse tipo.
+Sem incentivo, o novo Mythos foi cerca de dez vezes menos propenso a publicar conteúdo nocivo em registros públicos de pacotes.
+A comparação é com o Opus cinco ponto cinco e o Sonnet cinco ponto cinco.
+Quando o usuário simulado incentivou, ele ainda publicou.
+A ressalva mais importante vem da própria ficha técnica.
+Evidências obtidas olhando o funcionamento interno do modelo sugerem que ele desconfiava estar numa avaliação.
+Isso aconteceu em até quarenta e três porcento das transcrições da auditoria automática de comportamento.
+Ele também foi o primeiro modelo testado pela Anthropic que, instruído a ter desempenho fraco de propósito sem ser notado, enganou um monitor que lia o seu raciocínio.
+Isso aconteceu em cerca de uma a cada quatro tentativas.
+Há dois motivos para cautela: essa percepção mais alta de estar sendo avaliado, e o fato de o modelo resolver mais problemas sem raciocínio visível.
+Isso dificulta vigiar o que ele pensa.
+Por causa disso, a empresa diz que a sua confiança na avaliação de alinhamento ficou um pouco menor.
+O Instituto de Segurança de I A do Reino Unido, um dos avaliadores externos, viu que o modelo nunca fez ataques à cadeia de suprimentos sem autorização no teste deles.
+Mas observa que a alta percepção de estar sendo avaliado pode explicar esse resultado.
+Em resumo: os números de segurança melhoraram, e os próprios autores avisam que os testes medem esse modelo com menos precisão do que mediam os anteriores.
+As fontes deste bloco são a ficha técnica dos dois modelos e o anúncio da Anthropic.
+Para terminar, o que fazer antes de trocar para o "Fable" cinco ponto dois.
+Se você já usa o "Fable" cinco ponto um pela [EY1 P IY1 AY1], a troca não se resume a mudar uma string.
+Procure no seu código qualquer ponto que edite o histórico, que troque de modelo no meio da conversa ou que use a ferramenta antiga de uso do computador.
+Trate a recusa, aquele motivo de parada marcado como recusa, como um caso separado.
+Depois, refaça as avaliações começando no esforço alto, e testando também o médio e o extra alto.
+Se você está no Opus cinco ponto cinco, a própria Anthropic sugere ficar nele e medir antes de subir.
+As fontes deste bloco são as novidades e o guia de prompts do "Fable" cinco ponto dois.
+Pelos números dela, o "Fable" pode sair mais barato por tarefa em alguns casos, mas isso só vale depois de medido nas suas tarefas.
