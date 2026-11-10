@@ -1,0 +1,149 @@
+CISA inclui falha do Open S S H entre as vulnerabilidades exploradas, e Amazon troca modelo na classificação de chamados.
+
+A agência americana CISA incluiu uma falha de autenticação do Open S S H em sua lista de vulnerabilidades exploradas.
+A Amazon, por sua vez, relata uma economia ao trocar o modelo que classifica chamados internos.
+A edição também traz formas de detectar eventos perdidos, isolar programas em micro máquinas virtuais e entender falhas de segurança de memória em Rust.
+
+CISA inclui falha do Open S S H em lista de vulnerabilidades exploradas.
+
+Em nove de novembro, a agência adicionou quatro falhas ao catálogo de vulnerabilidades com evidência de exploração ativa.
+Uma delas está no Open S S H. As outras afetam GPUStack, FreeSWITCH e IBM Aspera Faspex.
+A inclusão ajuda equipes a priorizar a identificação e a correção de instalações expostas.
+
+A falha de autenticação por senha do Open S S H já apareceu na nossa cobertura sobre tentativas observadas pelo SANS.
+A novidade é sua entrada no catálogo da CISA, que exige evidência de exploração para incluir uma vulnerabilidade.
+O escopo continua específico: envolve certas configurações com a biblioteca musl, autenticação por senha e Open S S H sem PAM.
+O PAM é a camada que integra métodos de autenticação ao sistema.
+Segundo o Alpine, nessas condições, e com determinadas contas e hashes presentes, alguém que alcance a porta S S H pode entrar em uma conta afetada sem conhecer a senha.
+
+Quem administra esses sistemas deve conferir a configuração, a versão e as correções da distribuição.
+O Open S S H dez ponto seis p dois inclui uma proteção.
+O Alpine orienta reiniciar o serviço S S H depois da atualização, porque trocar o pacote não substitui o processo que já está em execução.
+A inclusão no catálogo não significa que todo servidor S S H esteja vulnerável.
+As fontes são o alerta da CISA, o aviso do Alpine e as notas de versão do Open S S H.
+
+Amazon relata troca de modelo para classificar chamados internos.
+
+A Amazon diz que substituiu o Claude Sonnet quatro ponto seis pelo Strands Decider E quatro B em uma tarefa interna.
+O trabalho consiste em escolher entre vinte categorias de chamados, com uma opção adicional para nenhum rótulo.
+O modelo de decisão devolve uma escolha e probabilidades, em vez de gerar uma resposta longa em texto.
+
+A equipe podia escolher por configuração entre três modos.
+Podia usar o modelo anterior, executar os dois em paralelo mantendo a resposta antiga em produção, ou adotar o Decider.
+Comparar as respostas em tráfego real ajudou a examinar divergências antes da troca, e a configuração também permitia voltar atrás.
+Segundo o relato, a ordem das chaves em um mesmo JSON chegou a alterar probabilidades em até dezenove pontos percentuais.
+Ordenar as chaves tornou as comparações consistentes.
+
+A estimativa da empresa caiu de cerca de vinte e dois mil e duzentos dólares para quinhentos dólares por milhão de chamados.
+A conta usa preços de tabela para essa carga específica e não inclui o custo do Lambda.
+O valor do Decider depende da utilização das instâncias.
+A própria equipe aponta limites para tarefas que precisem de explicações, categorias muito variáveis ou mais contexto do que cabe no modelo.
+A fonte é o relato da equipe Strands Agents.
+
+OpenTelemetry explica como detectar eventos que somem entre etapas.
+
+No dia dez, o projeto publicou um guia para um problema fácil de confundir com tranquilidade.
+Um serviço continua disponível, e a taxa de erros permanece baixa, enquanto eventos deixam de atravessar uma etapa do fluxo.
+Um painel vazio pode indicar ausência de atividade ou uma falha no caminho que entrega os dados.
+
+A sugestão é definir o que deveria acontecer e contar o trabalho em cada passagem entre etapas.
+Quanto entrou, quanto terminou, quanto foi rejeitado e quanto continua em processamento.
+Ao comparar esses números, é preciso levar em conta filtros, tentativas repetidas e processamento em lotes.
+Métricas ajudam a perceber a diferença, enquanto rastros e logs correlacionados ajudam a localizar o ponto da perda.
+Mas rastros amostrados não demonstram que todos os eventos chegaram.
+
+Um evento sintético periódico, sem dados sensíveis, pode percorrer o mesmo caminho para verificar a entrega de ponta a ponta.
+Também vale monitorar falhas de exportação e filas do próprio Collector, componente que recebe e encaminha telemetria.
+Um processo de coleta ligado ainda pode estar deixando de enviar dados.
+A fonte é o guia do OpenTelemetry.
+
+Hyperlight combina micro máquinas virtuais com cópias de ambientes de execução preparados.
+
+Uma visão técnica publicada pela CNCF em nove de novembro apresenta o Hyperlight, um monitor de máquinas virtuais incorporado à aplicação.
+O texto também trata da integração com Unikraft, que permite executar programas Linux sem recompilá-los.
+O código roda em uma micro máquina virtual, com acesso a arquivos e rede definido pela aplicação hospedeira.
+
+A integração pode preparar o ambiente de execução e salvar um snapshot, uma cópia desse estado, para restaurá-lo nas próximas execuções.
+No teste descrito pelo projeto, programas simples iniciaram mais lentamente na micro máquina virtual do que no ambiente nativo.
+Já um exemplo em Python com bibliotecas pesadas iniciou em quarenta e cinco milissegundos a partir do snapshot.
+Na execução nativa medida naquela máquina, o mesmo exemplo levou mil cento e dezenove milissegundos.
+A vantagem vem de reaproveitar a inicialização e depende da carga e do ambiente.
+
+Para agentes que executam código, o isolamento ajuda a limitar o alcance de uma falha.
+Os arquivos montados, as credenciais e as regras de rede concedidos ao ambiente continuam merecendo revisão.
+A fonte é a visão técnica do Hyperlight publicada pela CNCF.
+
+Microsoft descreve falhas de segurança de memória em bibliotecas do Rust.
+
+O laboratório FORGE da Microsoft relatou falhas de segurança de memória em bibliotecas padrão do Rust.
+Algumas podem ser acionadas por código escrito inteiramente em Rust seguro.
+Os pesquisadores usaram ferramentas assistidas por inteligência artificial em parte da investigação.
+Eles afirmam ter reproduzido e avaliado os problemas com os mantenedores.
+Duas das questões relatadas pela equipe continuavam abertas quando o texto foi publicado, e alguns exemplos envolvem interfaces da versão nightly.
+
+A explicação passa pelo código unsafe que implementa partes de interfaces seguras.
+Esse código precisa cumprir os requisitos que tornam a interface segura para quem a usa.
+Em um exemplo didático, uma função confere o tamanho de uma fatia retornada por um método.
+Depois, chama o mesmo método outra vez antes de acessar a memória.
+Se a segunda chamada devolver uma fatia diferente, a primeira verificação já não protege o acesso.
+Guardar e validar o mesmo resultado é uma das formas de preservar o contrato.
+
+O relatório também discute saídas antecipadas por panic e suposições sobre o estado do sistema operacional.
+Para quem escreve abstrações, a lição é revisar o que acontece quando código fornecido pelo usuário retorna valores inconsistentes ou interrompe a execução.
+A fonte é a pesquisa do laboratório FORGE da Microsoft.
+
+Agora, os destaques rápidos de hoje.
+
+A Anthropic lançou Claude Fable cinco ponto dois e Mythos cinco ponto dois.
+Segundo a empresa, os dois usam o mesmo modelo de base, com proteções e acesso diferentes.
+O Mythos exige aprovação para usos elegíveis de segurança ou pesquisa biomédica.
+O preço informado é de oito dólares por milhão de tokens de entrada e quarenta dólares por milhão na saída.
+O modo rápido custa mais. A versão cinco ponto dois atualiza a família Fable cinco, já coberta aqui.
+A fonte é o anúncio da Anthropic.
+
+A Grafana detalhou o custo dos Watchers, seu sistema de monitoramento.
+Ele usa um agente para calibrar verificações, código comum para coletar e comparar sinais e um modelo menor para avaliar cada resultado.
+A Grafana relata uma mediana inferior a cinco dólares mensais nos seus Watchers internos.
+A conta exclui a calibração e as investigações cobradas separadamente.
+A fonte é a Grafana Labs.
+
+Um projeto de formalização do CPython está testando a força das próprias provas.
+Os autores relatam a tradução parcial de funções do interpretador Python para Lean, uma linguagem de provas verificadas por computador.
+Eles também relatam quatrocentos e dezoito registros de bugs.
+Uma prova válida ainda pode descrever uma cópia imprecisa ou uma propriedade fraca.
+Por isso, o projeto compara o modelo com o CPython e revisa o que cada prova realmente garante.
+Os números são dos autores e a cobertura é parcial. A fonte é o relato do projeto.
+
+A Tailscale liberou aplicativos OAuth para conectar agentes a redes privadas.
+Os dispositivos criados pela integração agem sob a identidade de quem autorizou o aplicativo.
+A empresa orienta restringir o acesso do agente.
+Atributos personalizados de postura estão nos planos Premium e Enterprise; nos demais, regras com tags oferecem uma alternativa.
+A fonte é a Tailscale.
+
+O Zarf um ponto zero muda a configuração de pacotes para ambientes isolados.
+A ferramenta de entrega para ambientes com acesso restrito à internet apresenta um novo esquema de configuração.
+Ela substitui o mecanismo antigo de variáveis por valores estruturados com modelos na linguagem Go.
+O projeto oferece guia e ferramentas de migração para pacotes existentes. A fonte é a OpenSSF.
+
+O openSUSE planeja trocar o instalador do Tumbleweed pelo Agama.
+A mudança é prevista para antes do fim do ano e depende de testes de estabilidade.
+Imagens de teste online e offline já estão disponíveis.
+O novo instalador oferece conjuntos selecionados de pacotes, sem escolha individual durante a instalação.
+A fonte é o openSUSE.
+
+Rótulos de versão influenciaram a revisão de alguns agentes de código.
+Em experimentos da Microsoft, alterações idênticas receberam rótulos de atualização corretiva ou de versão principal.
+Alguns modelos verificaram menos as mudanças com rótulo de atualização corretiva; outros verificaram todas.
+Os cenários eram pequenos e incluíam mudanças incompatíveis deliberadamente rotuladas de forma incorreta.
+Integração contínua obrigatória para toda atualização ajuda a não depender desse julgamento.
+A fonte é a Microsoft for Developers.
+
+A Xata anunciou que está se juntando à ClickHouse.
+A empresa diz que pretende levar ramificações de bancos Postgri [EH1 S] [K Y UW1] [EH1 L] e a capacidade de suspender processamento ocioso ao ClickHouse Managed Postgres.
+Segundo o anúncio, nada muda para clientes Xata no curto prazo; a migração para a plataforma da ClickHouse está prevista para mais adiante.
+A fonte é a Xata.
+
+A Meta apresentou uma arquitetura de plugins para depurar processadores e aceleradores no L L D B.
+A proposta mantém CPU e GPU como alvos separados, com memória e registradores próprios, dentro de uma mesma sessão.
+O código compartilhado do depurador fica separado dos detalhes implementados para cada hardware.
+A fonte é a equipe de engenharia da Meta.
