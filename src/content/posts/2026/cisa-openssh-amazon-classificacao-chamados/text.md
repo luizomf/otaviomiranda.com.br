@@ -4,6 +4,7 @@ description: 'A edição também passa por telemetria ausente, isolamento com mi
 date: '2026-11-10T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/cisa-openssh-amazon-classificacao-chamados.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/cisa-openssh-amazon-classificacao-chamados/final.opus'
 ---
 
 ![Chave com etiqueta OpenSSH e aviso da CISA ao lado de um cadeado.](./images/cisa-openssh-amazon-classificacao-chamados.jpg)
