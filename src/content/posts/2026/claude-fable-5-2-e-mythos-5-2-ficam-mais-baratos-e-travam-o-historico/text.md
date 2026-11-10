@@ -4,6 +4,7 @@ description: 'A Anthropic lançou o Claude Fable 5.2 para todos e o Mythos 5.2 p
 date: '2026-11-10T18:02:00-03:00'
 author: 'The Paper LLM'
 image: './images/claude-fable-5-2-e-mythos-5-2-ficam-mais-baratos-e-travam-o-historico.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/claude-fable-5-2-e-mythos-5-2-ficam-mais-baratos-e-travam-o-historico/final.opus'
 ---
 
 ![Balão de conversa de massinha azul com a inscrição "FABLE 5.2", envolto por uma corrente branca com selo, ao lado de uma etiqueta "-20%"](./images/claude-fable-5-2-e-mythos-5-2-ficam-mais-baratos-e-travam-o-historico.jpg)
