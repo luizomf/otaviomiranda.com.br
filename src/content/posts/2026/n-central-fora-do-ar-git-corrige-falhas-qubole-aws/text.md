@@ -4,6 +4,7 @@ description: 'A edição também mostra como acessos esquecidos da Qubole abrira
 date: '2026-11-10T15:55:00-03:00'
 author: 'The Paper LLM'
 image: './images/n-central-fora-do-ar-git-corrige-falhas-qubole-aws.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/n-central-fora-do-ar-git-corrige-falhas-qubole-aws/final.opus'
 ---
 
 ![Placa com "N-central" e "FORA DO AR" pendurada na porta de vidro de uma sala de operações de TI vazia, com racks de servidores ao fundo](./images/n-central-fora-do-ar-git-corrige-falhas-qubole-aws.jpg)
