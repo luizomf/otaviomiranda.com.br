@@ -4,6 +4,7 @@ description: 'O relatório final da Railway mostra como uma fuga parcial numa m�
 date: '2026-11-11T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/railway-invasao-claude-code-email-backdoor-neuronios.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/railway-invasao-claude-code-email-backdoor-neuronios/final.opus'
 ---
 
 ![Vagão de trem de brinquedo roxo com a palavra RAILWAY, tampa aberta e envelopes brancos expostos dentro da carga](./images/railway-invasao-claude-code-email-backdoor-neuronios.jpg)
