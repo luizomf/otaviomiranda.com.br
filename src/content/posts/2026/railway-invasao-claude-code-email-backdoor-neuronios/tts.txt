@@ -1,0 +1,226 @@
+A "Railway" detalha a invasão que começou num build, e o Claude Code vazou o e-mail do usuário num cabeçalho.
+A "Railway", plataforma de hospedagem de aplicações, publicou nesta terça, dia dez, o relatório final do ataque de vinte e vinte e um de outubro.
+Em outubro, a gente cobriu aqui o relatório preliminar.
+Ele confirmava a descriptografia de parte das variáveis de ambiente e pedia a troca de segredos.
+O documento novo mostra o caminho inteiro.
+E cada passo dependeu de uma credencial ou permissão que parecia limitada.
+Vamos à sequência, segundo a "Railway", com horários no fuso universal, o U T C.
+Tudo começou numa máquina de build.
+Em vinte de outubro, às sete e vinte e oito da manhã, o invasor explorou uma falha ainda desconhecida.
+Com ela, escapou em parte do isolamento de arquivos numa máquina virtual que rodava vários builds ao mesmo tempo.
+Ali havia uma credencial do servidor de build.
+O passo seguinte foi o Temporal.
+O Temporal é um motor de workflows: ele guarda o histórico de cada execução para poder retomá-la depois de uma falha.
+O cluster interno da "Railway" aceitou aquela credencial como cliente confiável.
+Com isso, o invasor leu o histórico de trezentos e cinquenta e três outros builds, incluindo algumas variáveis de build.
+Depois veio o código-fonte: o acesso ao cache de builds rendeu uma cópia do monorepo da "Railway", ou seja, um mapa detalhado da plataforma.
+Então, a nuvem e o S S H. Houve uma configuração errada de O I D C, o mecanismo que troca a identidade de um pipeline por credenciais temporárias de nuvem.
+Essa falha entregou ao invasor uma credencial de curta duração em vinte e um de outubro, às três e vinte e seis da madrugada.
+Com credenciais internas, ele entrou por S S H numa máquina de orquestração.
+Nela havia um arquivo com uma credencial de descriptografia de longa duração.
+Por fim, o banco de variáveis.
+Entre quatro e sete e cinco e vinte e um da manhã, o invasor consultou as variáveis cifradas.
+Ele filtrava com expressões regulares para priorizar chaves de provedores de inteligência artificial.
+Em duas janelas, usou o serviço de gerenciamento de chaves para descriptografar as chaves de parte dos ambientes encontrados.
+A "Railway" cortou as credenciais de nuvem e a descriptografia às sete e catorze.
+E o invasor foi expulso às nove e vinte e quatro.
+Agora, os números, que são da própria empresa.
+Até um vírgula oitenta e cinco porcento dos espaços de trabalho, cerca de cem mil, podem ter tido variáveis descriptografadas.
+É um limite superior de ambientes, não uma contagem de segredos roubados.
+Tokens de contas vinculadas de mil oitocentos e cinquenta e dois usuários foram expostos e redefinidos.
+Entre eles, chaves de agentes trazidas pelo cliente e tokens "O Auth" do "Git Hub".
+O gasto não autorizado com as chaves roubadas foi estimado em cerca de setecentos e quarenta mil dólares.
+A "Railway" descreve a resposta como "uma disputa de velocidade de agentes".
+Do outro lado, segundo a empresa citando a Wiz, havia modelos com as travas de segurança removidas e uma ferramenta que orquestra agentes.
+A correção inclui uma máquina virtual descartável por build e uma credencial de envio de imagens com escopo estreito.
+Inclui também credenciais de curta duração, e todas as operações de cifrar e decifrar registradas e restritas ao serviço de segredos.
+Para quem desenvolve, há uma lição que vai além da "Railway".
+O histórico de um motor de workflows guarda as entradas de cada execução.
+Quem passa segredos como entrada transforma esse histórico num cofre paralelo, com controle de acesso mais fraco que o cofre de verdade.
+A "Railway" recomenda aos clientes trocar credenciais, principalmente chaves de inteligência artificial.
+Recomenda também conferir o consumo dessas chaves e pedir reembolso de cobranças indevidas.
+A fonte deste bloco é o relatório final da "Railway".
+Próxima história: o Claude Code mandou o e-mail do usuário para um site, e a correção definitiva ainda não saiu.
+Um subagente de pesquisa do Claude Code, criado por outro subagente, colocou o e-mail da conta logada num cabeçalho de requisição.
+Foi o cabeçalho "User" [EY1 JH AH0 N T], que identifica o cliente, numa requisição feita com o [K ER1 L] para o site "Liquipedia".
+O caso está numa issue no "Git Hub", aberta em treze de outubro e ainda aberta.
+O relato cita o Claude Code dois ponto um ponto duzentos e oitenta e cinco, o modelo Claude Opus cinco ponto cinco em esforço máximo, e o dia doze de outubro.
+O "Liquipedia" pede um contato nesse cabeçalho quando o cliente é automatizado.
+E o modelo usou o e-mail que o Claude Code coloca no contexto da sessão.
+O site respondeu com erro quatrocentos e três, mas o cabeçalho já tinha saído da máquina.
+E o contexto da sessão já mandava não enviar aquele e-mail a serviços não relacionados.
+Um texto publicado no "Tab News" nesta terça, dia dez, reconstrói o histórico.
+O changelog oficial confirma as etapas.
+Na versão dois ponto um ponto duzentos e trinta e quatro, de dezessete de agosto, o Claude passou a ser instruído a usar o e-mail só para identificar o usuário.
+Na dois ponto um ponto trezentos e dezessete, de dois de novembro, entrou uma verificação.
+Ela pergunta antes de uma ferramenta web ou de shell mandar o e-mail para a rede.
+Na dois ponto um ponto trezentos e vinte e um, de nove de novembro, essa verificação foi estreitada.
+Agora ela recusa, sem perguntar, só comandos de shell que contêm o e-mail e citam aquele cabeçalho de identificação do cliente.
+O autor cita a documentação dessa verificação, que a chama de "uma cortesia, não uma fronteira".
+E diz que hoje ela só compara texto.
+Ficam de fora as ferramentas "Web Fetch" e "Web Search", e também as ferramentas M C P.
+Segundo o autor, a equipe prometeu tirar o e-mail do contexto do modelo.
+Mas isso não aparece no changelog da dois ponto um ponto trezentos e vinte e dois, a mais recente.
+E o canal estável do N P M continua na dois ponto um ponto trezentos e onze, anterior até à verificação da dois ponto um ponto trezentos e dezessete.
+A tese do texto é que pedir ao modelo para não fazer algo é uma instrução, não um controle.
+Controle é o que continua funcionando quando o modelo erra.
+Se o dado não está no contexto, ele não vai parar num cabeçalho.
+Um estudo publicado no [AA1 R K AY2 V] nesta terça aponta na mesma direção.
+Os autores mediram se agentes de código seguem arquivos de contexto, como o [EY1 JH AH0 N T S] ponto M D.
+Encontraram instruções seguidas de forma consistente e outras nunca respeitadas.
+E sugerem reforço fora do arquivo para as que falham.
+O autor do texto propõe três medidas.
+A primeira é procurar o próprio e-mail nos registros das sessões, guardados na pasta de projetos do Claude, dentro da sua pasta pessoal.
+Vale repetir a busca com a forma codificada do endereço, em que a arroba vira porcento quatro zero.
+A segunda é pôr um proxy de saída na frente da sessão.
+Esse proxy reescreve o cabeçalho de identificação do cliente e remove o cabeçalho "From".
+A terceira é usar um endereço de função, como bots arroba seu domínio, nos sites que exigem contato.
+Esse endereço fica configurado no proxy, e não no prompt.
+As fontes deste bloco são o texto no "Tab News", a issue no "Git Hub", o changelog do Claude Code e o estudo sobre arquivos de contexto.
+Agora, a Microsoft mostra um backdoor em agentes com menos de dez neurônios alterados.
+A Microsoft Research descreveu nesta terça, dia dez, o Lazarus.
+É uma forma de esconder um backdoor num modelo de linguagem.
+A técnica reprograma os pesos de menos de dez neurônios que quase nunca são ativados.
+Não há treinamento: segundo o pesquisador Dimitris Papailiopoulos, basta o poder de computação usado para rodar o modelo.
+O modelo alterado passa nas avaliações comuns e se comporta normalmente até aparecer um gatilho.
+No exemplo do texto, o gatilho é o relógio passar da meia-noite para 2027.
+A partir daí, no meio de uma tarefa comum, o agente emite um comando que baixa e executa código do atacante.
+E faz isso com as permissões que o usuário tiver dado ao agente.
+O pesquisador conta que tudo começou como um experimento.
+Ele pediu ao Claude Code, com o Opus quatro ponto cinco, para colocar um backdoor num modelo sem treinamento.
+E, segundo ele, o agente descobriu sozinho a maior parte da técnica.
+O texto não diz quais modelos foram testados.
+A Microsoft afirma não ter visto ninguém usar a técnica em ataques reais.
+O time de segurança da empresa publicou orientações no mesmo dia.
+Primeiro, comparar cada checkpoint com o modelo base declarado, antes de usar e depois de cada atualização.
+Ajustes finos e quantizações legítimos espalham mudanças por muitos pesos.
+Já um implante costuma mudar muito poucas linhas.
+Segundo, baixar modelos da fonte original e conferir os hashes publicados.
+Terceiro, tratar como não confiáveis, até passarem por auditoria, os ajustes finos, as fusões de modelos, as quantizações e os adaptadores de terceiros.
+Quarto, guardar modelos aprovados num registro privado.
+E impedir que agentes baixem modelos de repositórios públicos durante a execução.
+A comparação depende de ter os pesos originais como referência.
+A própria Microsoft diz que nenhuma varredura prova que um modelo é seguro.
+E que passar numa auditoria reduz o risco, mas não garante nada.
+Para quem roda modelos locais, a consequência é direta.
+Uma quantização republicada por um desconhecido merece a mesma desconfiança de um binário sem assinatura.
+As fontes deste bloco são a Microsoft Research e a Microsoft Security.
+Próximo assunto: uma falha explorada no "Zen Orchestra" dá acesso de administrador sem senha.
+A Vates publicou nesta terça, dia dez, um aviso crítico sobre o "Zen Orchestra".
+É a interface web que administra servidores de virtualização X C P N G.
+O problema está na leitura do cookie de autenticação.
+Um valor específico de cookie, a letra jota seguida de chaves vazias, vira um objeto vazio.
+E a busca de tokens trata esse objeto vazio como "qualquer token", devolvendo o primeiro guardado.
+Se esse token ainda for válido, o atacante entra como o dono dele.
+O aviso fala em ações com privilégio de administrador.
+Pelo aviso, isso pode levar à execução de código nos pools gerenciados e ao controle total de um nó X C P N G como root.
+A Vates diz que a falha está sendo explorada.
+Estão afetadas as versões anteriores à seis ponto nove ponto dois, no canal estável, e à seis ponto dez ponto um, no canal mais recente.
+O "Zen Orchestra Appliance" também está afetado.
+Os pacotes corrigidos são o X O server cinco ponto duzentos e onze ponto dois e cinco ponto duzentos e treze ponto um.
+Até atualizar, a recomendação é tirar o "Zen Orchestra" da internet e deixá-lo numa rede de gerenciamento dedicada.
+Também ajuda bloquear os endereços listados no aviso e o tráfego Tor.
+E criar uma regra no proxy reverso para esse valor de cookie.
+A própria Vates avisa que regras por expressão regular podem ser contornadas com outros formatos.
+Se houver suspeita de invasão, troque todas as senhas e segredos usados pela plataforma.
+Com invasão confirmada, a orientação é reinstalar do zero.
+A fonte deste bloco é o aviso de segurança da Vates.
+Agora, o Airbnb abre o "Skipper", um motor de workflows duráveis que roda dentro do serviço.
+O Airbnb anunciou nesta terça, dia dez, a abertura do código do "Skipper", uma biblioteca para Java e Kotlin, sob licença Apache dois ponto zero.
+Workflows duráveis são processos de várias etapas que sobrevivem a quedas e reinícios.
+O Temporal, citado na história da "Railway", faz isso com um cluster separado.
+O "Skipper" roda dentro do próprio processo do serviço e guarda o estado no banco de dados que o serviço já usa.
+A versão aberta traz adaptadores para My [EH1 S] [K Y UW1] [EH1 L] e para [EH1 S] [K Y UW1] [EH1 L] [L AY1 T].
+Postgri [EH1 S] [K Y UW1] [EH1 L] e Dynamo D B estão nos planos.
+Cada réplica do serviço roda o agendador e busca trabalho pendente.
+Para decidir quem executa o quê, usa [L IY1 S IH0 Z], uma espécie de reserva com prazo.
+Se uma réplica cai, outra assume.
+O texto é honesto sobre os custos.
+Ao retomar, o workflow roda de novo desde o começo, e as etapas já registradas devolvem o resultado salvo.
+Por isso, o código de orquestração precisa ser determinístico.
+Leitura de relógio, números aleatórios e chamadas de rede ficam nas ações, não no corpo do workflow.
+Por padrão, o "Skipper" grava os checkpoints em lote.
+Se o processo cair antes da gravação, várias ações já concluídas podem rodar outra vez.
+O Airbnb diz com todas as letras que os efeitos colaterais são "pelo menos uma vez".
+E que cada ação precisa ser idempotente, por exemplo descartando repetições pelo identificador estável da requisição.
+A troca fica clara ao lado da "Railway".
+Em vez de um cluster central que todos os serviços acessam, cada equipe guarda o próprio estado e assume a própria operação.
+As fontes deste bloco são o anúncio do Airbnb e o repositório do "Skipper".
+Agora, os destaques rápidos de hoje.
+Primeiro destaque: a "Near" A I foi invadida por uma falha no S G Lang, e o enclave não ajudou.
+Em relatório de segunda-feira, dia nove, a "Near" A I conta que o invasor explorou uma falha de execução remota de código no S G Lang.
+O S G Lang é um motor de código aberto para servir modelos.
+Foram acessados dados de conta de cerca de cem usuários.
+Também histórico, configurações e logs de dezoito agentes numa implantação antiga.
+E chaves de [EY1 P IY1 AY1] de dois clientes que apareciam em logs, já revogadas.
+A empresa não informa C V E nem versão afetada.
+A computação confidencial protege contra o operador e o host, não contra uma falha no software que roda dentro do ambiente protegido.
+O invasor executou código dentro de um servidor de inferência e pôde observar requisições em oito de novembro.
+Quem hospeda modelos deve atualizar o motor de inferência com o mesmo cuidado que dedica ao resto da infraestrutura.
+A fonte é o relatório da "Near" A I.
+Segundo destaque: um exploit público ataca o "Ruflo" M C P "Bridge" sem login.
+O "Exploit" D B publicou nesta quarta, dia onze, um exploit para a C V E 2026, cinquenta e nove sete dois seis.
+Segundo o código, a ponte M C P do "Ruflo" escuta na porta três mil e um e aceita requisições JSON R P C sem autenticação.
+Isso vale inclusive para a ferramenta de execução no terminal, que roda comandos no sistema.
+O exploit cita a versão três ponto dezesseis ponto dois e as anteriores à três ponto dezesseis ponto três, o que indica a correção nessa versão.
+Atualize e, de todo modo, deixe pontes M C P ouvindo só na própria máquina, no localhost.
+A fonte deste destaque é o "Exploit" D B.
+Terceiro destaque: o Ubuntu vinte e seis ponto dez ganha checagem local de certificados revogados no [K ER1 L].
+Um certificado revogado é aquele que a autoridade invalidou antes do prazo, por exemplo por vazamento de chave.
+Segundo post desta terça, dia dez, no fórum do Ubuntu, o [K ER1 L] do vinte e seis ponto dez passa a consultar o U P K I.
+É um componente do projeto rust T L S.
+A consulta é feita contra uma base local de certificados revogados, montada com as ferramentas C R L [L AY1 T] da Mozilla, sem chamadas extras de rede.
+Um timer do system D atualiza a base a cada seis horas, e o recurso depende do pacote U P K I.
+Para o vinte e sete ponto zero quatro, o plano é levar a checagem ao Open S S L do sistema, o que alcançaria mais de mil pacotes.
+O gatilho foi o caso da "e Mudhra", em dezessete de outubro.
+Firefox e Chrome bloquearam os certificados no mesmo dia.
+Enquanto isso, o resto do sistema esperou atualizações do pacote de certificados de autoridade.
+A fonte é o fórum Discourse do Ubuntu.
+Quarto destaque: a A W S lança o "Nitro Sandboxes", uma máquina virtual isolada por pod ou tarefa.
+Anunciado nesta terça, dia dez, o recurso dá a cada contêiner, pod do E K S ou tarefa do E C S seu próprio kernel.
+Esse kernel roda numa máquina virtual com isolamento de hardware, e o recurso pode rodar via "Firecracker".
+Não há cobrança extra além das instâncias e das taxas normais de gerenciamento.
+No E K S, basta escolher uma de duas classes de runtime.
+A "isolated sandbox" isola das outras cargas, mas ainda confia no nó.
+A "confidential sandbox" adiciona atestação e protege também contra quem opera o nó.
+A fonte é o blog de Compute da A W S.
+Quinto destaque: o Ginux deixa de ser kernel inicializável e vira kernel em espaço de usuário.
+O projeto é de Greg Kurtzer, criador do Rocky Linux.
+O kernel original, escrito em Rust, ficou guardado numa tag que marca a versão final do kernel inicializável.
+Agora o Ginux é um processo Linux comum que intercepta as chamadas de sistema dos programas supervisionados.
+Para cada uma, ele responde por conta própria, executa uma operação restrita no host ou nega.
+A ideia é dar a cada carga só a interface de sistema de que ela precisa, num contrato versionado.
+Já roda uma base do Rocky Linux dez com system D, até o alvo de modo multiusuário.
+Mas a documentação avisa que é software de pesquisa e sem certificação de segurança.
+E, no modo "launch", não tem suporte a "fork".
+A fonte é o repositório do Ginux.
+Sexto destaque: a "Vuln Check" conta duzentas e dezessete correções em sete meses de "Project Glasswing".
+Em post de segunda-feira, dia nove, Patrick Garrity, da "Vuln Check", analisa o registro do programa de busca de falhas da Anthropic.
+Ele contabiliza trinta e sete mil novecentos e sessenta e seis achados, dos quais só dezenove vírgula quatro porcento são públicos.
+Duzentos e dezessete estão marcados como corrigidos.
+E quatrocentas e quarenta e duas C V Es foram atribuídas à Anthropic, das quais duas foram exploradas em ataques reais.
+Nos trinta e quatro relatórios publicados para o [K ER1 L], dezenove não eram vulnerabilidades, e seis foram confirmados como de baixa gravidade.
+A conclusão do autor é que a triagem passou para os mantenedores.
+A contagem depende do método de atribuição da "Vuln Check", que é uma empresa comercial.
+A fonte deste destaque é a "Vuln Check".
+Sétimo destaque: Chrome, Edge, Firefox e M D N publicam um guia de web moderna para agentes de código.
+O "Modern Web Guidance" reúne skills com boas práticas e dados de compatibilidade entre navegadores.
+Também traz uma [S IY1 EH1 L AY1] para buscar guias e procurar padrões antigos num projeto.
+A instalação é por um comando N P X que instala a versão mais recente do pacote, e a licença é Apache dois ponto zero.
+O projeto tem um painel de avaliações próprio, de oito de novembro.
+Nele, Claude Code, Codex e Antigravity passaram de cinquenta e quatro a cinquenta e oito porcento de acerto sem o guia.
+Com o guia, foram para oitenta e dois a noventa e quatro porcento, em cerca de duzentas e quinze tarefas de frontend.
+A fonte é o repositório no "Git Hub".
+Oitavo destaque: o Go completa dezessete anos e adianta o Go um ponto vinte e oito.
+O post de aniversário, desta terça, dia dez, resume o ano e aponta os próximos passos.
+O Go um ponto vinte e oito deve permitir omitir tipos redundantes em literais compostos.
+E deve tornar estável boa parte dos pacotes S I M D.
+Coleções genéricas, como conjuntos e mapas ordenados, chegam ao repositório experimental do Go nas próximas semanas.
+E reduzir o uso de memória virou prioridade.
+A fonte é o blog oficial do Go.
+Último destaque: o [K ER1 L] comemora trinta anos de uma origem brasileira.
+Daniel Stenberg lembra que, em onze de novembro de 1996, o estudante brasileiro Rafael Sagula publicou o H T T P get zero ponto um.
+Eram pouco mais de cem linhas de C.
+O programa virou U R L get e, em 1998, virou [K ER1 L].
+Hoje a lib [K ER1 L] roda em cerca de trinta bilhões de instalações, segundo Stenberg.
+A fonte é o blog de Daniel Stenberg.
