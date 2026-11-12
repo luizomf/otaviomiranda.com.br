@@ -1,0 +1,228 @@
+Node ponto J S corrige falha que vaza chaves T L S, e ataque pelo "Screen Connect" planta acesso clandestino em quarenta e oito organizações.
+Esta é a segunda edição do dia.
+A primeira, desta manhã, tratou da campanha wfx no "Git Hub" Actions e da falha crítica no H T T P dois do Apache.
+Agora vêm as notícias que chegaram depois, ou que ainda não tinham sido tratadas.
+Quase todas são correções de segurança em peças que costumam ficar expostas à rede.
+O servidor H T T P S do Node ponto J S, o painel de acesso remoto de prestadores de T I, o cluster Mongo D B e o registro de imagens de contêiner.
+Nos destaques rápidos, tem o retorno do N central e o cliente do Steam em sessenta e quatro bits no Linux.
+Tem também uma armadilha antiga do [EH1 N JH AH0 N] [EH1 K S], e a queixa de um consultor de Postgri [EH1 S] [K Y UW1] [EH1 L] contra relatórios de bug gerados por I A.
+E ainda uma companhia aérea barrando agentes de I A, e a morte de Tim Peters, uma das figuras centrais do Python.
+Primeira história: o Node ponto J S corrige dezesseis falhas, e uma delas deixa servidores H T T P S vazarem chaves privadas.
+Nesta quarta, dia onze, o Node ponto J S lançou três versões, uma para cada linha com suporte.
+São a vinte e dois ponto vinte e três ponto cinco, a vinte e quatro ponto vinte e dois ponto três, e a vinte e seis ponto treze ponto um.
+Juntas, elas corrigem dezesseis vulnerabilidades: sete de gravidade alta, seis média e três baixa.
+A maioria fica nos módulos que atendem conexões de rede: H T T P dois, T L S, H T T P e H T T P S.
+Então, quem roda servidor em Node ponto J S deve tratar a atualização como prioridade.
+A mais séria é a C V E 2026, doze três oito seis quatro, que afeta as três linhas.
+Funciona assim. Um servidor H T T P S em Node lê a requisição em partes.
+E entrega o corpo à aplicação enquanto ainda decifra o resto.
+Em certa sequência de chamadas, o servidor faz uma gravação de zero bytes nesse meio-tempo.
+A camada T L S então decifra o próximo pedaço de dados antes da hora.
+E volta a chamar o leitor de H T T P, que ainda estava no meio do trabalho.
+O resultado é uso de memória já liberada, o chamado "use after free", e leitura fora dos limites.
+Segundo o Node ponto J S, o servidor acaba copiando memória que pertence a outras conexões para dentro do corpo da requisição.
+Isso inclui chaves privadas T L S e requisições de outros usuários.
+Há condições, porém: o handler precisa mandar os cabeçalhos antes de o corpo terminar, com a chamada flush headers, e depois encerrar a resposta com conteúdo.
+E, para ler o que vazou, o atacante precisa de alguma rota que devolva ou guarde o corpo recebido.
+O módulo H T T P simples, sem T L S, não é afetado.
+Entre as outras falhas graves, cinco chamam atenção.
+A primeira vale para as linhas vinte e quatro e vinte e seis.
+Qualquer cliente, sem login, derruba um servidor H T T P dois configurado no padrão, com ou sem T L S.
+Basta que o handler responda antes de a requisição terminar de chegar, o que o próprio Node ponto J S chama de típico.
+É uma variante de uma falha de 2024, que a correção antiga não cobria.
+A segunda, também nas linhas vinte e quatro e vinte e seis, é uma exceção não tratada no "handshake", a negociação inicial do T L S.
+Ela permite derrubar remotamente o processo do servidor.
+Vale para servidores T L S que usam ganchos dessa negociação, como os de escolha de certificado pelo nome, de consulta de revogação e de retomada de sessão.
+Ou que adicionam novos contextos de certificado ao servidor durante a execução.
+A terceira, de novo nas linhas vinte e quatro e vinte e seis, é mais um uso de memória liberada, desta vez no H T T P dois.
+Acontece quando um fluxo servido direto de um arquivo, ou de um descritor de arquivo, é cancelado durante a gravação.
+Um cliente sem login pode corromper a memória do servidor.
+A quarta afeta todas as linhas: ao encerrar um fluxo H T T P dois, o servidor pode mandar ao cliente memória já liberada.
+Isso inclui pedaços de respostas de outras conexões.
+A quinta está na renegociação do T L S um ponto dois, também em todas as linhas.
+Nela, um cliente pode trocar o nome do servidor pedido.
+Assim, ele pode chegar a hosts com regras de certificado de cliente mais rígidas do que as que valem para ele.
+Cinco das falhas têm o mesmo crédito no aviso.
+O crédito vai para o pesquisador Chris Rohlf, em colaboração com o Claude, o modelo de I A da Anthropic, e com a equipe de pesquisa da empresa.
+São três das graves: a do servidor H T T P dois derrubado no padrão, a do vazamento de chaves, e a do cancelamento de fluxo servido por arquivo.
+Mais uma de gravidade média, que derruba servidores H T T P dois quando o cliente cancela downloads de arquivo.
+E uma de gravidade baixa, na biblioteca de compressão "zlib".
+O aviso também lembra que versões fora do período de suporte são sempre afetadas quando sai uma rodada de segurança.
+Ou seja, quem ainda está numa linha antiga não tem correção para instalar.
+O H T T P dois já tinha aparecido hoje, na falha do módulo H T T P dois do Apache, tratada na edição da manhã.
+Mas são bugs diferentes, em softwares diferentes.
+As fontes deste bloco são o aviso de segurança do Node ponto J S e as notas da versão vinte e seis ponto treze ponto um.
+Segunda história: um ataque usa painéis do "Screen Connect" para instalar um segundo acesso remoto em duzentas e oitenta e oito máquinas.
+O "Screen Connect", da "Connect Wise", é uma ferramenta de acesso remoto muito usada por M S Ps.
+M S Ps são empresas que cuidam da T I de outras empresas.
+O técnico entra num painel, geralmente hospedado na nuvem, e dali controla os computadores dos clientes.
+Um dos recursos é o comando "Run", que executa um comando na máquina gerenciada com privilégio de SYSTEM, o nível mais alto do Windows.
+Quem domina o painel, portanto, domina todas as máquinas ligadas a ele.
+Segundo a "Huntress", empresa de segurança que monitora endpoints, invasores usaram exatamente esse caminho nesta quarta, dia onze.
+Por volta das cinco e quarenta e sete da tarde em U T C, ou duas e quarenta e sete da tarde em Brasília, a empresa viu algo estranho.
+Comandos "Run" chegando a máquinas de vários painéis "Screen Connect" na nuvem, ao mesmo tempo.
+Ao todo, ao menos duzentas e oitenta e oito máquinas, em quarenta e oito organizações monitoradas pela "Huntress", foram atingidas.
+Tudo em cerca de noventa minutos, e um terço delas nos primeiros dez.
+Os comandos instalavam um segundo cliente "Screen Connect", controlado pelo invasor.
+E também um kit de dezesseis arquivos, que a "Huntress" chamou de S C Kit.
+O kit cria exclusões no Microsoft Defender e agenda uma tarefa chamada "Trap Watch".
+E instala uma "armadilha de retransmissão", que toma o lugar do cliente legítimo na conexão.
+A "Connect Wise" publicou um aviso às dez e quarenta e cinco da noite, em U T C, do mesmo dia.
+E o atualizou às duas e quarenta e cinco da madrugada, em U T C, desta quinta, dia doze.
+A empresa diz não ter evidência de invasão da própria infraestrutura, nem de vulnerabilidade no "Screen Connect".
+Sua avaliação inicial, ainda em validação, aponta para abuso de extensões de terceiros, instaladas nos ambientes dos parceiros.
+Por precaução, ela desativou cinco delas.
+Uma é a Labtech Plus. As outras quatro são variações do R M M Plus, com e sem o complemento Password Link.
+Nessas variações, o "Plus" aparece ora escrito por extenso, ora como o sinal de mais.
+Cerca de quatrocentos ambientes de parceiros têm pelo menos uma extensão dessa família.
+E a "Connect Wise" ressalta que ter a extensão instalada não significa ter sido invadido.
+Numa atualização das onze e trinta e quatro da noite de quarta, no horário da costa leste dos Estados Unidos, a "Huntress" foi além.
+Ela disse que a atividade parece ligada ao R M M Plus, na versão escrita com o sinal de mais.
+Nas versões um ponto zero ponto trinta e um e um ponto zero ponto trinta e dois, havia um problema na chave de acesso.
+Se o administrador nunca tivesse configurado essa chave, a extensão aceitava uma chave em branco.
+E essa extensão passa por cima das contas, dos papéis e da autenticação em dois fatores do próprio "Screen Connect".
+O caminho de entrada, porém, ainda não está confirmado.
+O kit foi feito para se espalhar em duas etapas.
+Na primeira, a infecção passa da máquina do cliente para o técnico que se conecta a ela.
+Na segunda, o kit tenta roubar o cookie de sessão do "Screen Connect" na estação do técnico, para alcançar todas as máquinas do painel.
+Esse mecanismo foi reconstruído pela "Huntress" a partir do código do kit.
+E a empresa diz não ter visto nenhuma das duas etapas funcionar até agora.
+Nem o salto da máquina infectada para a estação do técnico, nem dali para outras máquinas.
+A tentativa de tomar o console falhou em todos os registros recuperados.
+As duzentas e oitenta e oito máquinas foram atingidas pelos comandos "Run" enviados dos painéis, não pela autopropagação do kit.
+Para quem usa "Screen Connect", as duas empresas recomendam algumas medidas.
+Primeiro, conferir se as cinco extensões estão desativadas.
+Em servidores próprios, desativá-las já, e não reinstalar até nova orientação.
+Depois, revisar o histórico de execução de comandos e da caixa de ferramentas, atrás de execuções em massa que ninguém da equipe disparou.
+E procurar um segundo cliente "Screen Connect" nas máquinas.
+Não investigar máquinas suspeitas pelo próprio "Screen Connect", porque a conexão é justamente o caminho de contágio.
+Em vez disso, usar uma ferramenta separada, como um E D R, o Win R M do Windows, ou outra equivalente.
+Remover o cliente falso, a tarefa "Trap Watch" e a pasta "Relay Trap", que fica nos dados de programas do Windows.
+Isso porque isolar a máquina não apaga a persistência.
+E, por fim, encerrar sessões ativas, trocar credenciais e revogar sessões do navegador e do provedor de identidade.
+Entre os indicadores divulgados estão três domínios ligados ao ataque.
+Encontrar qualquer um deles em logs de D N S ou de proxy é sinal para investigar, e a lista completa está no artigo escrito.
+As fontes deste bloco são a "Huntress" e os avisos da "Connect Wise".
+Terceira história: o Mongo D B corrige uma falha crítica em que dois pings, sem login, derrubam o novo primário.
+Primeiro, um pouco de contexto.
+Um "replica set" do Mongo D B é um grupo de servidores que guardam cópias dos mesmos dados.
+Um deles, o primário, recebe as gravações; os outros copiam.
+Se o primário cai, os demais fazem uma eleição.
+O eleito, se estiver atrasado, primeiro aplica as gravações que perdeu, numa etapa chamada "catch up".
+Só então ele passa a aceitar escritas novas.
+A falha, a C V E 2026, onze oito três oito três, foi divulgada pela Mongo D B nesta terça, dia dez.
+Ela fica na limpeza feita ao fim dessa etapa de "catch up".
+A Data Dog Security Labs publicou na quarta, dia onze, uma análise com o defeito reproduzido em laboratório.
+O ataque funciona assim. O atacante manda a um membro do grupo dois comandos "ping", com um campo chamado after op time.
+Esse campo pede ao servidor para esperar a replicação chegar a certo ponto.
+O servidor guarda dois "avisos pendentes".
+Eles ficam ali até ele reiniciar, fazer "rollback" ou deixar de ser primário.
+Se esse membro depois vencer uma eleição estando atrasado, a limpeza roda duas vezes sobre a mesma memória, e o processo cai.
+Esses pings são aceitos antes do login, então ativar autenticação não impede o ataque.
+Mas o atacante não controla a parte difícil.
+Ele não tem como atrasar o membro nem provocar a eleição, que dependem de manutenção ou de uma pane.
+A nota C V S S quatro ponto zero é nove vírgula cinco, e o vetor da nota marca a complexidade do ataque como alta.
+A Mongo D B diz que o defeito pode derrubar o servidor ou, "em certas condições", permitir execução de código.
+A Data Dog conseguiu só a queda, não a execução de código.
+E a Mongo D B diz que achou a falha internamente e não sabe de tentativas de exploração.
+Há correção para sete ramos, da quatro ponto quatro ponto trinta e dois até a nove ponto zero ponto sete.
+A lista completa de versões está no artigo escrito.
+Todas as versões anteriores de cada ramo são afetadas.
+Isso inclui os membros de shard e de servidor de configuração em clusters fragmentados.
+Um servidor Mongo D B isolado, fora de qualquer "replica set", não é afetado.
+No Atlas, o serviço gerenciado da Mongo D B, a correção entra na manutenção automática.
+Quem adia manutenção deve aplicá-la logo.
+Em instalação própria, é preciso atualizar todos os membros e conferir a versão de cada um.
+Inclusive os que rodam em contêiner ou estavam desligados.
+Até lá, a Data Dog recomenda restringir o acesso de rede ao banco.
+E procurar nos logs comandos sem autenticação usando aquele campo after op time.
+As fontes deste bloco são o aviso da Mongo D B, a Data Dog Security Labs e o registro oficial da C V E.
+Quarta história: uma falha crítica no Red Hat [K IY1] deixa um estranho assinar o acesso a qualquer imagem privada.
+O Red Hat [K IY1] é um registro de imagens de contêiner.
+É o lugar de onde o "Kubernetes" e os pipelines baixam as imagens que vão rodar.
+Para autorizar cada download ou envio, ele emite tokens assinados com chaves em que ele mesmo confia.
+A falha, a C V E 2026, doze três sete um zero, foi publicada nesta quarta, dia onze, com nota nove vírgula oito.
+Ela permite que alguém de fora instale a própria chave nessa lista de confiança.
+Pela descrição do relatório no "Bugzilla" da Red Hat, o ataque encadeia três detalhes.
+Primeiro, o [K IY1] entrega um token anônimo a quem pede, quando o acesso anônimo está ligado.
+Segundo a Red Hat, isso é o padrão.
+E ele deixa o próprio cliente escolher o "público" do token.
+Segundo, o serviço de chaves só confere se o token foi assinado por uma chave aprovada, e se o público e o emissor batem.
+Ele não olha o que o token autoriza.
+Terceiro, com isso, o atacante chama a rotação de chaves no endpoint de chaves e registra uma chave dele.
+Essa chave não tem data de validade e passa a valer na hora.
+E a rotação ainda apaga a chave legítima da instância.
+A partir daí, o atacante gera tokens para qualquer repositório.
+Ele pode baixar imagens privadas, com os segredos que estiverem embutidos nelas.
+E pode sobrescrever tags, de modo que outros sistemas passem a baixar uma imagem trocada.
+A Red Hat avisa que desligar o acesso anônimo não protege, porque qualquer conta válida no [K IY1] serve.
+E que trocar senhas ou regenerar tokens de robô não revoga uma chave intrusa.
+Segundo o relatório, a lógica com defeito está no código desde o primeiro commit público.
+A correção foi incorporada ao repositório do [K IY1] na quarta, dia onze.
+Mas nem o aviso nem o relatório citam uma versão corrigida.
+Enquanto ela não sai, a Red Hat recomenda limitar o endpoint de chaves, no proxy ou no balanceador de carga.
+Ele deve ficar acessível apenas para componentes internos confiáveis.
+Também vale procurar, nos logs de auditoria, eventos de rotação e de remoção de chaves de serviço com data de validade vazia.
+E remover chaves aprovadas que ninguém reconheça.
+A Red Hat avisa que essa remoção não é definitiva até a versão corrigida entrar, porque o atacante pode instalar a chave de novo.
+As fontes deste bloco são a Red Hat, o "Bugzilla" da Red Hat, a correção no "Git Hub" e a SecurityWeek.
+Agora, os destaques rápidos para hoje.
+Primeiro destaque: o N central volta ao ar com o hotfix 2026 ponto quatro, H F dois.
+A [EH1 N EY1 B AH0 L] tinha tirado o serviço do ar na segunda, dia nove.
+Isso depois que um pesquisador publicou mais de trinta falhas com código de exploração.
+Em post desta quarta, dia onze, a empresa diz que o H F dois corrige todas as falhas exploráveis sem login.
+A ferramenta de gestão remota, usada por M S Ps, voltou a funcionar na versão hospedada.
+As falhas restantes exigem conta autenticada, muitas vezes com privilégios altos, e ficam para um próximo hotfix.
+A empresa diz ver varreduras ligadas ao código publicado, e nenhum sinal de invasão nos servidores hospedados.
+Quem tem instalação própria deve aplicar o H F dois e manter o servidor fora da internet até concluir a atualização.
+E também atualizar agentes e probes.
+As fontes são a [EH1 N EY1 B AH0 L] e a SecurityWeek.
+Segundo destaque: o [EH1 N JH AH0 N] [EH1 K S] Proxy Manager dois ponto dezessete fecha brechas de autenticação.
+É uma interface web para configurar proxy reverso e certificados no [EH1 N JH AH0 N] [EH1 K S], sem editar arquivos de configuração.
+A versão dois ponto dezessete ponto zero saiu nesta quinta, dia doze.
+As notas de versão citam a correção de um "oráculo de autenticação".
+Citam também a remoção da chave privada dos certificados nas respostas da [EY1 P IY1 AY1].
+E ainda autenticação obrigatória para validar certificados, e limite de tentativas nos endpoints de login.
+Além de permissões mais restritas para usuários sobre os proxies cadastrados.
+A versão atualiza dependências do backend, o que resolve quinze de dezesseis alertas.
+Entre eles, um de negação de serviço no body parser.
+Alguns plugins de D N S mudaram de forma incompatível, e o projeto sugere recriar certificados desses provedores.
+A fonte são as notas da versão.
+Terceiro destaque: o Steam para Linux vira aplicativo de sessenta e quatro bits e passa a rodar em contêiner.
+Na atualização do cliente desta quarta, dia onze, o Steam passa a ser um programa de sessenta e quatro bits no Linux.
+E roda dentro do Steam Runtime, o mesmo ambiente isolado usado pelos jogos.
+Segundo a Valve, isso deve deixar a experiência mais parecida entre distribuições diferentes.
+No streaming, a versão passa a capturar H D R via "Pipe Wire" no Linux, e volta a ativar o H D R no Steam Deck OLED.
+A fonte são as notas do cliente Steam.
+Quarto destaque: um add header no lugar errado apaga os cabeçalhos de segurança do [EH1 N JH AH0 N] [EH1 K S].
+O guia de cabeçalhos H T T P da [OW1 W AA2 S P] ganhou, nesta quinta, dia doze, um aviso sobre um comportamento documentado.
+No [EH1 N JH AH0 N] [EH1 K S], as diretivas add header só são herdadas do nível de cima se o nível atual não tiver nenhuma.
+Na prática, basta um único add header de controle de cache dentro de um bloco location.
+Isso faz sumir, naquele caminho, todos os cabeçalhos de segurança definidos no bloco server.
+As saídas são três. Repetir os cabeçalhos em cada bloco, ou centralizá-los num arquivo incluído com a diretiva include.
+Ou, a partir do [EH1 N JH AH0 N] [EH1 K S] um ponto vinte e nove ponto três, usar a diretiva add header inherit com o valor merge.
+As fontes são a alteração no guia da [OW1 W AA2 S P] e a documentação do [EH1 N JH AH0 N] [EH1 K S].
+Quinto destaque: um consultor de Postgri [EH1 S] [K Y UW1] [EH1 L] pede o fim dos relatórios de bug feitos por I A sem revisão.
+Christophe Pettus conta, em post desta quarta, dia onze, que a lista de bugs do projeto vem recebendo levas de relatórios gerados por I A.
+São de dez a quinze relatórios por vez, vindos de um mesmo remetente.
+Numa amostra, ele achou comportamento esperado descrito como bug, além de duplicatas.
+Achou também ao menos três problemas já corrigidos na versão dezenove, e ao menos um patch que pioraria o problema.
+Ele estima que a triagem levou cerca de noventa minutos, dez vezes o tempo humano gasto para enviar tudo.
+O pedido não é abandonar a I A.
+Dá para usá-la para achar bugs, mas quem envia precisa conferir, explicar e defender cada relatório.
+A fonte é o blog "The Build".
+Sexto destaque: a United Airlines vai barrar agentes de I A que compram passagens pelo cliente.
+Em reportagem desta quarta, dia onze, a C B S News diz que a companhia aérea americana vai mudar as regras de reserva e emissão de bilhetes.
+O objetivo é impedir assistentes de I A de terceiros de usar suas plataformas, seja diretamente, seja por agências e agregadores.
+A United alega que entregar login e dados de pagamento a esses assistentes expõe informações sensíveis.
+E que isso pode gerar compras ou mudanças não pretendidas.
+Um analista ouvido pela C B S acrescenta outro motivo: a empresa não quer mais um intermediário entre ela e o passageiro.
+A fonte deste destaque é a reportagem da C B S News.
+Último destaque: Guido van Rossum anuncia a morte de Tim Peters, autor do Zen do Python e do "Tim sort".
+O criador do Python contou nesta quarta, dia onze, no fórum da linguagem, que Peters morreu em quinze de julho deste ano.
+Peters escreveu o Zen do Python, o texto que aparece quando você digita import this.
+Criou em 2002 o "Tim sort", o algoritmo de ordenação das listas do Python, depois adotado por Java e Android.
+E, segundo Neil Schemenauer, escreveu a primeira versão do doctest, a ferramenta de testes embutidos na documentação.
+Guido o descreve como mentor e co-designer da linguagem.
+Foi Peters quem o convenceu de que o Python devia permitir operações misturando números inteiros e de ponto flutuante.
+As fontes são o fórum do Python e a L W N.
