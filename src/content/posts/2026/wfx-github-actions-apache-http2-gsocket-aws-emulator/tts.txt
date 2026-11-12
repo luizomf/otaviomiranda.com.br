@@ -1,0 +1,262 @@
+W F X planta ladrão de segredos em mais de oito mil repositórios do "Git Hub", e Apache corrige falha crítica no H T T P dois.
+O tema que atravessa as notícias de hoje é a automação que roda sozinha: o pipeline, o servidor web, o cron e o agente de código.
+A principal mostra o que acontece quando um token com permissão de escrita cai na mão errada.
+Depois vêm uma falha crítica no Apache, um lembrete de que o patch não expulsa quem já entrou e chaves vazando em configurações de agente.
+E, por fim, três relatos sobre como testar o que agentes e sistemas distribuídos produzem.
+Primeira história: a campanha W F X usa tokens roubados para plantar um ladrão de segredos em mais de oito mil repositórios do "Git Hub".
+O "Git Hub Actions" é o sistema de automação do "Git Hub": arquivos no repositório dizem o que rodar a cada push.
+E essas execuções costumam ter acesso aos segredos do projeto, como chaves de nuvem e tokens de publicação.
+A campanha batizada de W F X explora exatamente isso.
+Segundo a Safe Dep, a Aikido Security foi a primeira a relatar o caso, e a Safe Dep publicou nesta quinta, dia doze, a análise mais detalhada até agora.
+Pelos dados da Safe Dep, oito mil e noventa e três repositórios receberam commits maliciosos.
+Isso entre o meio-dia de dez de novembro e a madrugada de doze, no horário universal, e a campanha seguia ativa quando os dados foram coletados.
+Os commits aparecem com a identidade real de usuários de cada repositório, com o e-mail "noreply" do "Git Hub" e sem assinatura.
+Por isso a Safe Dep conclui que a causa provável são tokens roubados.
+Em mil trezentos e quarenta e três repositórios, o autor do commit não é o dono, e sim outra conta, como um colaborador ou um bot.
+O ataque tem três passos, e o primeiro é um teste de permissão.
+O invasor abre um pull request de "dependency audit notes", notas de auditoria de dependências, a partir de uma branch chamada W F X docs.
+Serve só para conferir se o token consegue escrever no repositório.
+A Safe Dep contou quase sessenta e dois mil desses pull requests, em quase o mesmo número de repositórios, abertos por mais de quatro mil e oitocentas contas.
+Noventa e um porcento ainda estavam abertos.
+E uma busca no "Git Hub" feita para este texto, na manhã desta quinta, já mostrava quase sessenta e cinco mil pull requests com esse título.
+O segundo passo é instalar o ladrão, e o código malicioso entra de três jeitos.
+Injetado num workflow existente, em sete mil trezentos e nove repositórios, num commit de "refresh build cache".
+Como workflow novo em repositórios vazios, em dezesseis.
+Ou como hook de "postinstall" do N P M, em setecentos e setenta e um, num commit de "add ci helper".
+Esse último roda também no notebook de quem fizer N P M install naquele commit.
+O terceiro passo é a limpeza: commits de "restore" e de "cleanup" fazem a branch voltar a parecer limpa.
+Num dos exemplos, o código entrou às duas e um da tarde e saiu às duas e cinco.
+O payload coleta todos os segredos e variáveis do repositório, o token do workflow e os tokens internos do Actions.
+Ele varre a memória dos processos do runner atrás de chaves do "Git Hub", da A W S, da OpenAI e da Anthropic.
+E copia chaves S S H, configuração do Kubernetes, configurações de ferramentas de nuvem, arquivos ponto env e o estado e as variáveis do Terraform.
+Em seguida, pede tokens O I D C para A W S, Azure e Google Cloud, mesmo em repositórios sem nenhuma configuração de nuvem.
+O I D C, aqui, é o mecanismo que troca a identidade do workflow por credenciais temporárias de nuvem, sem chave fixa guardada.
+Quando a relação de confiança do lado da nuvem é frouxa, esse token vira acesso real.
+O payload ainda reaproveita o mesmo token contra o HashiCorp Vault e contra a [EY1 P IY1 AY1] do Kubernetes.
+O que mais preocupa é a persistência.
+Na A W S, o código cria novas chaves de acesso e altera políticas de confiança de roles, com sessões que levam o nome W F X.
+No Azure, adiciona às aplicações do Entra uma credencial federada chamada W F X C I.
+Com ela, qualquer workflow da branch principal do repositório entra no Azure como aquela aplicação, mesmo depois da troca dos segredos.
+Os dados saem por H T T P na porta oitenta oitenta, para três endereços I P, ou por um chat do Telegram.
+Os endereços estão no artigo escrito, em forma inerte de propósito: servem para busca em logs e regras de bloqueio, não para acesso.
+Do lado dos pacotes, três carregam o payload: um pacote PHP no Packagist, o neuronai studio três ponto catorze ponto três, e dois módulos Go.
+Os nomes completos estão no artigo escrito.
+A Safe Dep diz que uma instalação normal, com composer ou go get, não executa o código em nenhum deles.
+O risco aparece quando alguém roda N P M install dentro da pasta do pacote PHP ou dispara os workflows envenenados.
+Mesmo assim, a recomendação é bloquear essas versões.
+Se o seu repositório recebeu o pull request de teste, a Safe Dep trata a conta como comprometida, mesmo sem commit malicioso depois.
+Do autor do commit, revogue tokens, autorizações de apps OAuth, chaves S S H e sessões, e ative a autenticação em dois fatores.
+Troque todos os segredos e variáveis que o repositório consegue ler, incluindo os de ambiente e de organização.
+Apague a branch W F X docs e feche o pull request.
+Retire qualquer versão de pacote gerada entre o commit malicioso e o de "cleanup", e publique de novo a partir de um commit limpo.
+Trate como comprometida qualquer máquina que tenha rodado N P M install num commit afetado.
+E procure backdoors: credenciais federadas W F X C I no Entra I D.
+No CloudTrail, sessões W F X seguidas de criação de chave de acesso ou de mudança na política de confiança de uma role.
+No Google Cloud, geração de tokens de acesso e assinatura de J W T vindas do pool de identidade do "Git Hub".
+E, no Vault, logins J W T emitidos pelo "Git Hub".
+No mesmo dia, Hugo van Kemenade publicou um guia sobre os novos lockfiles de workflows do "Git Hub", gerados por uma extensão da linha de comando.
+O lockfile registra o commit exato de cada action usada e falha no pipeline se alguém mover uma tag para código malicioso.
+É uma boa prática, mas protege contra outro ataque.
+O W F X não mexe em actions de terceiros: ele usa tokens válidos para escrever direto no seu repositório.
+Contra ele, o que conta é token com escopo mínimo e vida curta.
+E também condições estreitas nas roles de nuvem que aceitam O I D C, restringindo repositório e branch, e auditoria dos logs atrás de branches W F X.
+As fontes deste bloco são a Safe Dep, o próprio pull request de teste no "Git Hub" e o blog de Hugo van Kemenade.
+Segunda história: o Apache dois ponto quatro ponto setenta e um corrige uma falha crítica no H T T P dois, e as fontes discordam sobre a existência de exploit.
+O projeto Apache H T T P Server lançou a versão nesta quarta, dia onze, corrigindo a C V E 2026, onze nove seis um oito.
+É uma condição de corrida, quando duas threads mexem na mesma memória sem coordenação.
+Ela está na função assign headers, do mod H T T P dois, o módulo que implementa o H T T P dois.
+O aviso oficial classifica a falha como crítica e diz que ela pode levar a execução remota de código.
+Afeta as versões dois ponto quatro ponto cinquenta e cinco a dois ponto quatro ponto setenta.
+E também as builds avulsas do módulo, chamadas mod H dois, da dois ponto zero ponto oito à dois ponto zero ponto quarenta e dois.
+A Red Hat explica o mecanismo: o H T T P dois permite várias requisições simultâneas na mesma conexão.
+E uma thread de trabalho acaba escrevendo em memória que pertence à thread da conexão.
+A empresa dá nota nove vírgula oito de dez e diz que o ataque não exige autenticação.
+Os créditos vão para o O S S Scanner da Anthropic, que reportou em vinte e seis de outubro.
+E para Anthony Weems e Simon Scannell, da pesquisa de vulnerabilidades do Google Cloud, que reportaram em três de novembro.
+A versão corrige ainda uma falha no mod M D que derruba processos filhos e uma escrita de um byte fora do limite no mod vhost alias.
+Sobre a exploração, as fontes discordam.
+A Red Hat afirma que pesquisa pública demonstrou um exploit confiável contra um servidor em configuração padrão, com o módulo ligado, mas não diz qual pesquisa.
+A "Wiz" escreveu no mesmo dia que não há exploit disponível nem relato de exploração ativa.
+A "Wiz" diz ainda que sessenta e quatro porcento dos ambientes de nuvem que monitora têm recursos com versões vulneráveis.
+E que cinquenta e um porcento têm instâncias expostas na internet, números que não consideram se o H T T P dois está ligado.
+O risco depende da configuração: só são afetados servidores com H T T P dois ativado pela diretiva Protocols.
+Nela aparece H dois, para H T T P dois sobre T L S, ou H dois C, sem T L S.
+Essa diretiva pode estar na configuração global ou em cada virtual host, então vale olhar todos.
+Nas distribuições, a situação quando conferimos nesta manhã era esta.
+No Red Hat Enterprise Linux nove e dez, a nota é "Important", porque os pacotes de lá dão a cada fluxo seu próprio alocador de memória.
+Isso dificulta bastante o ataque, e as correções já saíram. A versão oito e as anteriores não têm o código vulnerável.
+No Debian, a versão unstable já tem o dois ponto quatro ponto setenta e um, mas bookworm, trixie e forky ainda aparecem como vulneráveis no rastreador de segurança.
+No Ubuntu, o rastreador de C V Es ainda não tinha página para a falha.
+E o mod H dois avulso teve o repositório arquivado em junho, sem versão corrigida.
+Na prática, confira a versão com o apachectl, que no Debian e no Ubuntu se chama apache dois ctl.
+Veja com o mesmo comando se o módulo de H T T P dois está carregado, e procure H dois e H dois C na configuração.
+Se não der para atualizar hoje, a "Wiz" sugere deixar só o H T T P um ponto um na diretiva Protocols.
+E, como mostra a próxima notícia, o patch fecha a porta, mas não tira de dentro quem já entrou.
+As fontes são o aviso do Apache H T T P Server, a Red Hat, a "Wiz", o rastreador do Debian e o The Hacker News.
+Terceira história: a Microsoft mostra invasores usando o G Socket para continuar em servidores Linux depois do patch.
+A Microsoft publicou nesta quarta, dia onze, um relatório sobre um padrão que vem crescendo.
+O invasor explora uma aplicação web e instala o G Socket, uma ferramenta de acesso remoto de código aberto e legítima.
+Com ela, o acesso continua mesmo depois que a falha original é corrigida, porque o G Socket roda independente da aplicação.
+O truque está na rede: o servidor comprometido e o operador fazem conexões de saída para a "Global Socket Relay Network".
+É um serviço público de retransmissão que junta as duas pontas num canal com criptografia de ponta a ponta.
+A Microsoft destaca três consequências: não existe I P ou domínio do invasor para bloquear.
+O servidor não precisa de porta aberta para entrada, e o NAT não atrapalha.
+As pontas se reconhecem por um segredo compartilhado, não por endereço, então o operador pode voltar depois, de qualquer lugar.
+Pela telemetria do Microsoft Defender, os dispositivos com detecções de G Socket cresceram trezentos e cinquenta e seis vírgula dois porcento.
+Isso de março a agosto de 2026, embora não de forma constante mês a mês.
+Aplicações web e hospedagem respondem por oitenta e sete vírgula um porcento dos incidentes atribuíveis.
+Dentro desse grupo, PHP e hospedagem C Panel somam sessenta e três vírgula nove porcento, e o Apache, vinte e quatro vírgula três porcento.
+O passo a passo é bem Linux: um curl baixa um script que identifica a arquitetura da máquina.
+O script põe o binário certo em diretórios graváveis ou em memória, e o processo ganha nome de thread do kernel para se disfarçar.
+A persistência fica espalhada em cron, unidades system D com nomes plausíveis, inicialização do shell e processos vigias.
+Depois, os arquivos de instalação são apagados.
+Em alguns casos, os invasores tentaram ainda virar root com a falha do kernel conhecida como Dirty Frag.
+A recomendação central da Microsoft é não tratar o patch da aplicação como fim da resposta ao incidente.
+Ela sugere regras de saída que neguem tudo por padrão, liberando só o necessário, e monitorar conexões para a retransmissão.
+Montar diretórios temporários e em memória como não executáveis, quando possível.
+Revisar cron, unidades system D e inicialização do shell, lembrando que matar o processo não remove a persistência.
+Priorizar patches de escalada de privilégio local em servidores expostos.
+E, no fim, confirmar que as conexões de saída para a retransmissão pararam.
+A fonte é o Microsoft Security Blog.
+Quarta história: o Claude Code guarda chaves de [EY1 P IY1 AY1] nas regras de "não perguntar de novo", e milhares vazaram no "Git Hub".
+Antes de rodar certos comandos no shell, o Claude Code pede permissão.
+Quando o desenvolvedor escolhe "Yes, and don't ask again", a ferramenta salva uma regra no settings ponto local ponto JSON, na pasta do projeto.
+Segundo a "Git Guardian", essa regra é o próprio texto do comando.
+Se o comando era um curl com a chave de [EY1 P IY1 AY1] no cabeçalho, a chave fica gravada no arquivo.
+O Claude Code coloca esse arquivo no gitignore local quando o cria.
+Mas, como explica o pesquisador Guillaume Valadon, essa proteção vale só na máquina onde o arquivo nasceu.
+Em outro computador, num clone antigo ou com o arquivo já rastreado, ele vai para o commit junto com o resto.
+De janeiro de 2025 a sete de novembro de 2026, a "Git Guardian" achou mais de trinta e um mil segredos distintos nesse arquivo.
+Eles estavam em mais de vinte e três mil repositórios públicos, e cinco mil trezentos e quarenta e três ainda funcionavam quando foram detectados.
+Entre os válidos, lideram credenciais de banco de dados, com duas mil duzentas e oitenta.
+Depois vêm tokens de nuvem, com novecentos e setenta e um, e de I A, com quinhentos e oitenta e três.
+A empresa diz que sessenta e três porcento são senhas e tokens sem formato reconhecível, que scanners baseados em padrões tendem a perder.
+O Docker piora o quadro: uma instrução COPY ponto ponto copia a pasta de trabalho inteira, não o que o Git versiona, e ignora o gitignore.
+Assim, imagens públicas no Docker Hub carregavam seiscentos e treze segredos distintos desses arquivos, noventa e nove válidos.
+Um único token válido da Cloudflare aparece em quinhentas e cinquenta e nove tags de uma imagem.
+E apagar o arquivo do repositório não limpa as imagens já publicadas.
+Os vazamentos mensais passaram de doze mil e quinhentas ocorrências em abril de 2026 e caíram para novecentas e cinquenta e nove em outubro.
+A "Git Guardian" diz que ainda não sabe o que mudou.
+A Apiiro já tinha analisado o mesmo arquivo em cinco de novembro, com números menores porque mediu o que está exposto hoje, sem testar validade.
+Segundo a "Git Guardian", Boris Cherny, que lidera o Claude Code na Anthropic, disse que a equipe estuda o problema e prototipa varredura de segredos embutida.
+O que fazer: primeiro, trocar qualquer credencial que o arquivo já tenha guardado, porque histórico, forks e imagens mantêm cópias.
+Adicionar o settings ponto local ponto JSON ao gitignore do próprio repositório, e listar a pasta ponto claude no dockerignore.
+Apagar as regras com segredos, editando o arquivo ou pelo comando de permissões do Claude Code.
+E referenciar segredos por variável de ambiente, para a regra gravar o nome, e não o valor.
+A "Git Guardian" também recomenda tratar como sensíveis as pastas de configuração de agentes, como as do Claude, do Cursor e do Codex.
+Isso vale também para o arquivo de configuração de M C P e o CLAUDE ponto M D, no mesmo nível de um arquivo ponto env.
+As fontes são a "Git Guardian" e a InfoWorld.
+Quinta história: a A W S lança um emulador local e gratuito da própria A W S, escrito e testado por agentes.
+O A W S Emulator saiu nesta quarta, dia onze: uma cópia local das [EY1 P IY1 AY1] da A W S, que roda na sua máquina, sem custo de serviço.
+A linha de comando, os S D K e os agentes de código falam com ele por um endpoint H T T P S local, com as mesmas [EY1 P IY1 AY1] da nuvem.
+Assim, um teste que cria uma tabela no Dynamo D B, grava e lê um item roda no notebook, sem deploy e sem conta real.
+O emulador é escrito em Rust e, no Linux, vem em pacote R P M ou Debian.
+No Mac O S e no Windows, você monta uma imagem Docker com um Dockerfile curto da documentação, porque a A W S não publica imagem pronta.
+Ao iniciar, ele gera as próprias credenciais e recusa requisições assinadas com outras chaves.
+Funciona como uma conta única, sem comportamento entre contas ou regiões.
+Um modo embutido, por enquanto só para o S D K de Rust, cria uma instância isolada dentro de cada teste.
+Operações ainda não implementadas devolvem H T T P quinhentos e um, para o teste falhar logo.
+E a cada versão a A W S publica uma nota de fidelidade por serviço, dizendo quantos testes passam.
+O limite mais importante: o emulador não avalia políticas de I A M como a A W S avalia.
+Uma requisição que a nuvem negaria pode passar localmente, por isso a A W S diz para não usá-lo em produção nem para testar segurança.
+O detalhe que chamou atenção é como ele foi feito.
+Segundo a A W S, todo o código foi escrito e testado por agentes, a partir de mais de quatrocentos modelos de [EY1 P IY1 AY1] de mais de duzentos serviços.
+Os agentes escrevem testes de fidelidade e os corrigem até passarem contra a A W S real.
+Depois, constroem o emulador até ele passar no mesmo teste.
+Cada mudança passa por verificações automáticas antes do merge, incluindo vários agentes de segurança em revisão adversarial.
+O código está em domínio público, e o repositório tinha quase trinta mil commits quando conferimos.
+Num texto convidado no blog de Werner Vogels, C T O da Amazon, Swami Sivasubramanian liga o projeto ao "Alf".
+O Alf é um serviço de locks baseado em Paxos que a Amazon construiu há cerca de vinte anos e que hoje sustenta o S três e o Dynamo D B.
+A equipe o testava simulando a rede inteira dentro de uma máquina virtual Java, para injetar falhas e forçar ordens de eventos.
+Swami conta que tentou reconstruir com um agente o motor de replicação do Alf, e o supervisionou por quatro noites, sem resultado.
+O agente não tinha como verificar o próprio trabalho.
+Com uma especificação e um ambiente de teste, a reconstrução levou cerca de duas horas.
+Um post da A W S dá um exemplo concreto.
+Um agente monta um worker que lê pedidos de uma fila S Q S padrão e grava no Dynamo D B só se o pedido ainda não existir.
+Só que a fila padrão pode entregar a mesma mensagem mais de uma vez.
+Na duplicata, a gravação é recusada, o worker trata a recusa como falha temporária, e a mensagem volta para a fila a cada fim do tempo de visibilidade.
+A correção é apagar a mensagem, porque ela já foi processada, e um emulador fiel deixa o agente achar esse bug localmente.
+As fontes são o A W S News Blog, o repositório no "Git Hub", o All Things Distributed e o A W S Insights.
+Sexta história: a Microsoft relata cinquenta e nove bugs do kernel Linux achados com I A, e quatro meses de trabalho humano para reportá-los.
+O FORGE Lab, laboratório de pesquisa da Microsoft, contou nesta quarta como usou uma ferramenta interna de varredura com I A, a M Dash.
+O alvo foram partes do kernel como rede, sistemas de arquivos e módulos de segurança, entre o fim de maio e meados de junho de 2026.
+Em cerca de duas semanas, rodando em dois servidores, a varredura gerou mais de vinte e seis mil e quinhentos achados brutos.
+Um filtro de confiança e agentes de triagem reduziram a lista para cerca de onze mil e oitocentos candidatos.
+Agentes tentaram reproduzir cada um com prova de conceito num emulador de máquinas, e especialistas revisaram os seiscentos e vinte e um casos com evidência.
+O resultado foram cinquenta e nove relatos enviados aos mantenedores.
+Deles saíram, até agora, trinta e três C V Es, vinte e quatro com nota sete ou mais.
+Em oito, a equipe confirmou em laboratório exploits que levam um usuário local a root, alguns dependentes de configurações fora do padrão ou de proteções desligadas.
+Já foram aceitas trinta e oito correções no kernel principal.
+Os bugs tinham em média oito vírgula um anos, e um deles, num classificador de tráfego, estava lá havia pelo menos vinte e um anos.
+A lição que a própria Microsoft destaca é o desequilíbrio.
+Duas semanas de varredura geraram o material, mas reportar os cinquenta e nove casos tomou mais de quatro pessoas-mês.
+Em parte, porque o Linux costuma exigir que o relato venha com um patch funcional.
+O primeiro relato público só saiu em vinte e sete de junho, mais de cinco semanas depois do início.
+Para a equipe, mais tokens podem achar mais bugs, mas não tornam o sistema seguro por si só, e a revisão humana continua sendo o gargalo.
+A fonte é o Microsoft Security Blog.
+Sétima história: a Cloudflare explica por que escolheu o QuePaxa, e não o "Raft", para seu serviço de consenso global.
+Um algoritmo de consenso faz um grupo de máquinas concordar sobre uma única sequência de decisões, mesmo com algumas fora do ar.
+É a base de sistemas como o etcd, o Consul e o Zoo Keeper.
+A Cloudflare está construindo o "Meerkat", um serviço de consenso experimental para o plano de controle interno, com réplicas em vários continentes.
+Num post desta quarta, a empresa explica por que escolheu o QuePaxa, publicado em 2023 por Tennage, Basescu e colegas.
+E não opções consagradas como o "Raft", o Multi Paxos ou o "Viewstamped Replication".
+A motivação é um incidente real.
+Em 2020, a falha parcial de um switch de rede da Cloudflare fez um sistema baseado em consenso degradar.
+O painel ficou oitenta vezes mais lento que o normal por seis horas, e as escritas ficaram indisponíveis o tempo todo, embora nenhum dado tenha se perdido.
+O problema está nos algoritmos com líder.
+No "Raft", uma única réplica, o líder, coordena as decisões, e enquanto tudo vai bem, é rápido.
+Mas, numa rede de longa distância, um soluço de dois segundos pode fazer o líder parecer morto e disparar uma eleição.
+Os candidatos disputam votos, podem bloquear uns aos outros e continuar disputando depois que o problema passou.
+É a chamada falha metaestável, uma pane que se alimenta sozinha.
+E, como não dá para distinguir um servidor caído de uma rede lenta, o detector de falhas sempre chuta, e às vezes erra.
+O QuePaxa ataca isso com três escolhas: o líder é opcional, não há detecção de falhas e os proponentes cooperam em vez de competir.
+Cada proposta recebe uma prioridade aleatória, e quem vê uma proposta de prioridade maior passa a defendê-la.
+Com a rede boa, o líder decide numa ida e volta; quando não, o sistema fica mais lento, mas continua decidindo.
+Nos testes da Cloudflare, mais de noventa e cinco porcento das decisões saíram do líder na primeira fase.
+Quando o líder caiu, a taxa de decisões baixou para cerca de sessenta e cinco porcento, e voltou ao normal quando ele foi substituído, um minuto depois, sem o sistema parar.
+A fonte é o blog da Cloudflare.
+Agora, os destaques rápidos para hoje.
+O Podman seis ponto dois, ferramenta de contêineres sem serviço central, saiu na terça, dia dez, corrigindo três falhas de segurança.
+Numa delas, rótulos de imagens não confiáveis podiam levar a atualização automática do Podman a reiniciar unidades system D erradas.
+As outras eram um jeito de imagens maliciosas escaparem da validação de digest e de assinatura, e um desvio na regra de sockets do perfil seccomp padrão.
+Entre as novidades, o kube play cria vários pods quando um Deployment pede réplicas, e as máquinas W S L ganham system D nativo. A fonte são as notas da versão.
+A Red Hat lançou nesta quarta o Red Hat Enterprise Linux dez ponto três e o nove ponto nove.
+As imagens seladas do modo imagem, agora prontas para produção, verificam criptograficamente a integridade do firmware ao sistema de arquivos raiz, que fica somente leitura.
+O servidor M C P, que dá a assistentes de I A acesso a informações do sistema para diagnóstico, saiu da prévia e vem em pacote R P M.
+E o G C C Toolset dezesseis passa a usar C mais mais vinte como padrão. As fontes são a Red Hat e o Linuxiac.
+O agente do Proofpoint I T M para Mac O S dá root a qualquer usuário, e ainda não há correção, revelou nesta quarta a Bishop Fox.
+O serviço de monitoramento de arquivos, que roda como root, monta comandos de shell com nomes de arquivos sem tratar caracteres especiais.
+Basta um usuário comum criar, numa pasta do OneDrive, um arquivo com um comando no nome, e o comando roda como root.
+As versões confirmadas vão da quatro ponto quatro ponto três ponto cento e quarenta e oito à cinco ponto zero ponto um.
+Não há patch nem C V E, e a saída provisória é desativar o componente de monitoramento de arquivos.
+O agente para Windows não é afetado.
+A ferramenta L L M, de Simon Willison, corrige na versão zero ponto trinta e sete ponto dois um vazamento da chave da OpenAI.
+Segundo o blog dele, a ferramenta podia mandar a chave para endpoints compatíveis de outros provedores em dois casos.
+Um, quando a chave indicada para o modelo nunca tinha sido guardada.
+Outro, quando um modelo de "responses" rodava no modo de "chat completions". Quem usa provedores próprios deve atualizar.
+Mais de trinta e cinco mil apps feitos com o construtor do Grok estavam abertos a qualquer um, segundo a Claroc.
+De mais de trinta e sete mil e quinhentos apps, mais de trinta e cinco mil e quinhentos abriam sem login, e cerca de um em dez tinha dados internos ou pessoais.
+Isso inclui vinte e quatro apps de funcionários do X e da Space [EH1 K S] S I, dona do Grok, já retirados do ar.
+Segundo os pesquisadores, a opção "qualquer pessoa com o link" vinha pré-selecionada.
+E os endereços não ficam secretos: serviços de D N S passivo registram as consultas e permitem buscá-las.
+As fontes são a Claroc e o The Hacker News.
+A Port Swigger lembra que uma política de segurança de conteúdo sem a diretiva "form action" deixa roubar senhas sem JavaScript.
+Essa diretiva não herda da diretiva padrão, a "default src".
+Numa página com injeção de H T M L, um formulário injetado que envia para a própria página, o que a regra "self" permite, pode levar usuário e senha para a U R L.
+Dali, eles vazam pelo cabeçalho Referer, mesmo com todos os scripts bloqueados.
+O Event Sourcing D B um ponto três exige cuidado na atualização em Kubernetes.
+O banco ganhou uma [EY1 P IY1 AY1] versão dois, que devolve o resultado da requisição no corpo da resposta.
+Ganhou também pré-condições recursivas por assunto e backups incrementais.
+Mas as versões até a um ponto dois não travam o diretório de dados.
+Então um rollout que sobe o servidor novo antes de parar o antigo pode rodar dois servidores sobre os mesmos dados e corrompê-los.
+É o caso de um Deployment com "Rolling Update", segundo a Event Foundation.
+O Open Telemetry descontinua o batch processor do Collector: o agrupamento passa para dentro dos exporters.
+Ele vira padrão na maioria deles na versão zero ponto cento e setenta e um, prevista para fevereiro de 2027.
+Quem usa o processor precisa tirá-lo dos pipelines por conta própria, antes da remoção definitiva. A fonte é o blog do projeto.
+O Zellij zero ponto quarenta e seis, multiplexador de terminal escrito em Rust, agora abre também como aplicativo de desktop no Linux, no Mac O S e no Windows.
+Ele continua funcionando dentro de outro terminal, mas as builds musl não incluem o terminal, e há mudanças incompatíveis para plugins. A fonte são as notas da versão.
+Por fim, o Google lançou uma [EY1 P IY1 AY1] para decisões fechadas, a Gemini Decisions, com o modelo Gemini Decision um.
+Ela responde até mil perguntas de sim ou não, múltipla escolha ou nota numa única passagem, sobre texto, imagem, áudio, vídeo ou PDF.
+Em vez de gerar texto, devolve probabilidades e notas de confiança, em cento e cinquenta a duzentos e cinquenta milissegundos de ponta a ponta, segundo o Google.
+O preço é de dez centavos de dólar por milhão de tokens de entrada, sem cobrança de saída.
+O uso sugerido é rotear pedidos entre modelos e checar regras.
