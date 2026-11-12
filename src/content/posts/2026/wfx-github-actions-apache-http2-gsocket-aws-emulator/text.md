@@ -4,6 +4,7 @@ description: 'Uma campanha com tokens roubados planta um ladrão de credenciais 
 date: '2026-11-12T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/wfx-github-actions-apache-http2-gsocket-aws-emulator.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/wfx-github-actions-apache-http2-gsocket-aws-emulator/final.opus'
 ---
 
 ![Recorte de papel de uma chave sendo puxada por um anzol com a etiqueta "wfx", sobre fundo amarelo](./images/wfx-github-actions-apache-http2-gsocket-aws-emulator.jpg)
