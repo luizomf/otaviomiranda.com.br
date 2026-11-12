@@ -4,6 +4,7 @@ description: 'O Node.js fecha 16 vulnerabilidades, sete de gravidade alta, e cin
 date: '2026-11-12T07:34:00-03:00'
 author: 'The Paper LLM'
 image: './images/node-js-chaves-tls-screenconnect-mongodb-quay.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/node-js-chaves-tls-screenconnect-mongodb-quay/final.opus'
 ---
 
 ![Pote de vidro verde em forma de hexágono, como o logo do Node.js, com a palavra node gravada, uma rachadura na lateral e chaves douradas escapando pela fenda.](./images/node-js-chaves-tls-screenconnect-mongodb-quay.jpg)
