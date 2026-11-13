@@ -1,0 +1,283 @@
+Microsoft trezentos e sessenta e cinco passa de doze horas fora do ar, e o Postgri [EH1 S] [K Y UW1] [EH1 L] dezoito ponto sete corrige cinquenta e duas falhas e encerra a versão catorze.
+A edição desta sexta, dia treze, abre com infraestrutura.
+Primeiro, a pane do Microsoft trezentos e sessenta e cinco, que começou na tarde de quinta e atravessou a madrugada.
+Depois, uma rodada grande de atualizações do Postgri [EH1 S] [K Y UW1] [EH1 L], que também marca o fim da versão catorze.
+Em seguida vem uma versão do Rust com uma mudança antiga e muito esperada na linguagem, e uma defesa nova no Cargo.
+Tem também o modelo rápido do Google para agentes, e um estudo da Microsoft sobre modelos treinados para trair o usuário.
+E o relatório de disponibilidade do "Git Hub", que funciona como aula de falha em cascata.
+Nos destaques rápidos estão Graph [K Y UW1] [EH1 L], "Image Magick", N central, Libreboot e U V.
+E ainda o desktop Mate no [W EY1 L AH0 N D], uma otimização do G C C que esconde caminhos, e um app brasileiro de finanças em que a I A não faz conta.
+Primeira história: o Microsoft trezentos e sessenta e cinco passa de doze horas fora do ar, e a Microsoft ainda não anunciou recuperação completa.
+O Microsoft trezentos e sessenta e cinco é o pacote de serviços na nuvem da Microsoft para empresas e governos.
+Inclui e-mail no Exchange Online e no Outlook, chat e reuniões no Teams, arquivos no SharePoint e o assistente Copilot.
+Na tarde de quinta, dia doze, pelo horário de Brasília, esses serviços começaram a falhar nas Américas.
+E o problema se espalhou para outras regiões.
+A Microsoft registrou o caso em dois incidentes: um do Exchange Online, e outro mais amplo.
+Os códigos completos estão no artigo escrito.
+A empresa listou como possivelmente afetados também o Teams, o SharePoint Online, o Microsoft trezentos e sessenta e cinco Copilot e o Defender X D R.
+A explicação que a empresa deu ao longo da noite, na conta Microsoft trezentos e sessenta e cinco Status, foi mudando.
+Às quatro e trinta e um da tarde, a Microsoft disse que a carga alta não vinha de mais tráfego.
+Vinha de servidores que tinham ficado indisponíveis sem aviso, sobrecarregando os que restavam.
+Logo depois, relatou que os servidores estavam falhando nas verificações automáticas de saúde.
+São os testes periódicos que dizem ao balanceador se uma máquina pode receber requisições.
+Às seis da tarde, informou ter validado um método alternativo de verificação, que devolveu parte dos servidores ao serviço.
+Às sete e nove da noite, admitiu que as ações até ali "não trouxeram o alívio esperado".
+E disse ter achado um processo central nos servidores que ficava sobrecarregado.
+Segundo a SecurityWeek, a Microsoft descreveu esse processo como o que estabelece conexões seguras.
+E disse ter começado a reverter uma mudança recente de configuração de rede, que coincidiu com o início da pane.
+A madrugada não resolveu.
+À meia-noite e treze desta sexta, a Microsoft escreveu que as mudanças aplicadas "não estão tendo o efeito esperado".
+E que procurava outras frentes para aumentar a capacidade, diante de um "desequilíbrio persistente no gerenciamento de tráfego".
+À uma e trinta e seis da madrugada, relatou recuperação parcial nas regiões em que redistribuiu e bloqueou tráfego de forma seletiva.
+Até a manhã desta sexta, segundo o The Next Web, o e-mail continuava fora para muitos usuários.
+E nenhuma correção definitiva tinha sido confirmada.
+O impacto foi amplo. O The Next Web conta relatos no "Down Detector" em setenta e quatro países e territórios.
+E descreve bancos em Hong Kong, ministérios no Japão que voltaram ao papel, e tribunais nas Filipinas e na Austrália.
+Além de companhias aéreas na Índia sem seus canais de atendimento por e-mail.
+Segundo o The Next Web, Charles Lamanna, vice-presidente executivo da Microsoft, escreveu que não há indício de atividade maliciosa.
+A Microsoft ainda não publicou a causa raiz.
+O que está nas mensagens são sintomas e medidas de contenção.
+O ministro australiano Tony Burke disse a jornalistas que a Microsoft compara o caso ao da "Crowd Strike" em 2024, "uma atualização que deu errado".
+Mas essa é uma versão de segunda mão.
+Para quem administra o ambiente de uma organização, a referência oficial é o painel "Service Health".
+Ele fica no centro de administração do Microsoft trezentos e sessenta e cinco, com os dois códigos de incidente.
+Enquanto o incidente segue aberto, vale também avisar os usuários sobre golpes.
+Bancos como o Standard Chartered e o I N G Australia alertaram para fraudes que se aproveitam da pane.
+As fontes deste bloco são quatro mensagens da conta Microsoft trezentos e sessenta e cinco Status, a SecurityWeek e o The Next Web.
+Próxima história: o Postgri [EH1 S] [K Y UW1] [EH1 L] dezoito ponto sete corrige cinquenta e duas vulnerabilidades, e é a última atualização da versão catorze.
+O projeto lançou na quinta, dia doze, cinco versões do banco de dados.
+São a dezoito ponto sete, a dezessete ponto doze, a dezesseis ponto dezesseis, a quinze ponto vinte e a catorze ponto vinte e cinco.
+Além do segundo "release candidate" do Postgri [EH1 S] [K Y UW1] [EH1 L] dezenove.
+São versões "menores": trocam os binários sem mudar o formato dos dados.
+Então não exigem as ferramentas de exportação nem de migração entre versões principais, o P G dump e o P G upgrade.
+Basta parar o servidor, atualizar e subir de novo.
+Desta vez, porém, o pacote é grande.
+Segundo o anúncio oficial, são cinquenta e duas vulnerabilidades de segurança e mais de cento e quarenta bugs corrigidos.
+A falha de maior destaque é a C V E 2026, sessenta e quatro seis zero, com nota oito vírgula oito de dez.
+Ela é uma confusão de tipos.
+Pense num tipo composto, ou seja, um tipo de linha com vários campos.
+Esse tipo pode mudar com um comando que altera o tipo de uma coluna, ou com comandos parecidos.
+Se isso acontece enquanto há consultas usando valores dele, o servidor pode interpretar os bytes com o formato errado.
+O anúncio diz que isso leva à execução de código arbitrário.
+O vetor da nota indica ataque pela rede com privilégio baixo.
+Ou seja, quem explora precisa de uma conta no banco, não de acesso anônimo.
+Segundo o P G analyze, que analisou a versão, um pesquisador já publicou um texto mostrando o caminho até a execução remota de código.
+A correção tem um efeito colateral que merece atenção antes de atualizar.
+As notas de versão dizem que, para proteção completa, as extensões escritas em C precisam ser recompiladas.
+E algumas vão precisar de mudanças no código-fonte.
+O P G analyze cita o P G R X zero ponto dezenove ponto quatro, framework para escrever extensões em Rust, já ajustado.
+E diz que o Post G I S exige cuidado, especialmente na migração com o P G upgrade.
+Na prática, atualize o servidor e as extensões juntos, e reinicie em seguida.
+O P G analyze observa que os pacotes Debian do projeto fazem isso por padrão.
+Já os pacotes R P M podem dar erros de carga por alguns instantes, porque trocam os binários antes do restart.
+Existe um parâmetro para desligar a verificação nova, o "composite type mismatch".
+Mas as notas avisam que isso traz riscos de segurança.
+Há ainda passos extras para alguns casos, listados no anúncio.
+Reindexar índices GIN suspeitos de corrupção.
+Reindexar também os índices GiST da extensão de trigramas, e os índices B tree em colunas de texto de tamanho fixo declaradas sem tamanho.
+E fazer um backup completo novo, para quem usa backup incremental.
+E há o recado de calendário.
+O catorze ponto vinte e cinco é a última versão do Postgri [EH1 S] [K Y UW1] [EH1 L] catorze, que chegou ao fim da vida e não recebe mais correções, nem de segurança.
+O Postgri [EH1 S] [K Y UW1] [EH1 L] dezenove está previsto para dezenove de novembro, se não houver atraso.
+As fontes são o anúncio do projeto, as notas da versão dezoito ponto sete e o P G analyze.
+Agora, o Rust um ponto cem, que estabiliza o tipo never depois de dez anos.
+E o Cargo passa a esperar versões novas amadurecerem.
+O Rust um ponto cem, lançado na quinta, dia doze, fecha uma novela de uma década.
+O tipo never, escrito como um ponto de exclamação, representa um valor que nunca existe.
+É o tipo de uma expressão que nunca termina normalmente, como um "panic", um laço infinito ou uma chamada que encerra o processo.
+Ele já existia dentro do compilador, mas não podia ser usado livremente.
+Agora dá para escrevê-lo em qualquer posição de tipo.
+Por exemplo, num Result com never no lugar do erro, que diz no próprio tipo que aquele resultado nunca será erro.
+O antigo Infallible, da biblioteca padrão, criado como substituto, vira apenas um apelido do never.
+Segundo o anúncio, foram dez anos e cinco tentativas fracassadas até aqui.
+Há uma quebra de compatibilidade rara.
+Quando o compilador precisa inferir o tipo de uma expressão que nunca produz valor, as edições anteriores à 2024 usavam o tipo vazio, o par de parênteses, como padrão.
+Agora passam a usar o never.
+O time diz que isso pode afetar código que ignora um resultado genérico.
+E pode fazer o compilador marcar mais trechos como inalcançáveis.
+Avisos de compatibilidade e correções para crates públicos foram publicados com antecedência.
+A versão também estabiliza o núcleo da [EY1 P IY1 AY1] de alocadores.
+Ela permite que o Vec e o Box usem um alocador de memória escolhido pelo programador, com funções como "new in".
+E traz o "Drop Guard", que guarda um valor e uma função de limpeza.
+Essa limpeza roda quando o guard sai de escopo, por qualquer caminho.
+O método "dismiss" devolve o valor sem rodar a limpeza.
+O exemplo do anúncio é um parser que, se qualquer item falhar, corta o Vec de volta ao tamanho original.
+Se tudo der certo, chama o "dismiss".
+Para a maioria dos projetos, a novidade mais útil está no Cargo, o gerenciador de pacotes.
+Ataques à cadeia de suprimentos costumam seguir um roteiro.
+Alguém publica uma versão maliciosa de um pacote popular, e ela é descoberta e removida pouco depois.
+Quem atualiza nesse intervalo leva o malware.
+O Cargo agora aceita um prazo mínimo de publicação, configurado no arquivo de configuração do Cargo.
+Com um prazo de três dias, por exemplo, o resolvedor ignora versões publicadas há menos de três dias, e informa o que deixou de lado.
+Dá para abrir exceção numa atualização específica, com uma variável de ambiente do resolvedor.
+O próprio anúncio aponta três limites.
+Primeiro, versões sem o campo de data de publicação no índice nunca são seguradas.
+Segundo, o comando cargo install ignora o prazo, tanto para o crate quanto para as dependências dele.
+Então ali vale fixar a versão exata no próprio comando.
+Terceiro, o prazo não substitui a revisão das dependências.
+A ideia é a mesma que o Dependabot adotou como padrão em julho, agora dentro da ferramenta de build.
+O Cargo também passa a avisar sobre dependências declaradas e não usadas.
+E reorganiza o diretório de build, para evitar recompilações desnecessárias, ou que faltavam.
+Isso também evita problemas ao compartilhar o build entre worktrees do Git.
+Scripts que dependiam do layout antigo podem quebrar.
+Para atualizar, basta rodar o rustup no canal stable.
+A fonte deste bloco é o anúncio do Rust um ponto cem.
+Próxima história: o Google lança o Gemini quatro [HH AY1 D R AH0 JH AH0 N], modelo rápido para agentes, e um orquestrador que troca de modelo no meio da tarefa.
+O Google apresentou o modelo na quinta, dia doze.
+A empresa o descreve como um modelo de velocidade e eficiência para a programação do dia a dia e fluxos com agentes.
+Na família Gemini quatro, o Carbon e o Argon são os modelos de fronteira, para raciocínio longo e profundo.
+O [HH AY1 D R AH0 JH AH0 N] é o executor rápido.
+Ele tem quatro níveis de raciocínio: "low", "medium", "high", que é o padrão, e um novo, "x high".
+O preço pela [EY1 P IY1 AY1] é de um dólar e cinquenta por milhão de tokens de entrada, e sete dólares e cinquenta por milhão de saída.
+O preço é igual em toda a janela de contexto, de um milhão de tokens.
+Como comparação, o Gemini quatro Carbon saiu com preço introdutório de dois e de dez dólares.
+Os números de desempenho são do Google.
+No "Artificial Analysis Intelligence Index", o [HH AY1 D R AH0 JH AH0 N] marca cinquenta e um no nível high, contra cinquenta do Argon, e cinquenta e quatro no x high.
+No "Terminal Bench" quatro ponto um, que mede tarefas de agente no terminal, o Google relata cinquenta e sete porcento.
+O antecessor, o Gemini três ponto oito Flash, marca dezoito vírgula dois porcento.
+Parceiros em testes antecipados teriam visto o modelo terminar tarefas de duas a duas vírgula oito vezes mais rápido.
+E com doze a vinte e três porcento menos tokens que o três ponto oito Flash, em fluxos com grafos, [EH1 S] [K Y UW1] [EH1 L] e muitos dados.
+A metodologia completa não está no anúncio.
+A outra novidade é o "Orchestrator", no "Anti Gravity", o ambiente de desenvolvimento com agentes do Google.
+Ele alterna entre modelos, como o Carbon e o [HH AY1 D R AH0 JH AH0 N], dentro da mesma sessão, usando o mais caro só onde ele faz diferença.
+Segundo o Google, no "Terminal Bench" quatro ponto zero, o "Orchestrator" chegou perto da taxa de sucesso do Carbon.
+E gastou, em média, vinte e quatro porcento menos cota, terminando as tarefas dezenove porcento mais rápido.
+O anúncio não detalha contra qual configuração essa comparação foi feita.
+O [HH AY1 D R AH0 JH AH0 N] está sendo liberado globalmente a partir de quinta.
+Ele chega à [EY1 P IY1 AY1] do Gemini, ao A I Studio, ao Android Studio, ao "Anti Gravity" para assinantes pagos, ao app Gemini e à Busca do Google.
+Para quem desenvolve, a pergunta prática é se ele dá conta do seu fluxo.
+Vale testar com as suas próprias tarefas antes de trocar o modelo de um agente em produção.
+A fonte deste bloco é o Google.
+Agora, a Microsoft mostra em laboratório como um modelo envenenado faz o agente de código baixar e rodar código do atacante.
+Um agente de código é um modelo de linguagem ligado a ferramentas.
+Ele lê arquivos, edita código e, muitas vezes, roda comandos no terminal.
+O programa que liga o modelo a essas ferramentas é o [HH AA1 R N AH0 S], como o "Claude Code", o Codex [S IY1 EH1 L AY1] ou o Pi.
+Muita gente roda esses agentes com modelos de pesos abertos, baixados de repositórios públicos.
+Ou ajusta um modelo com dados públicos, no processo chamado "fine tuning".
+Duas equipes da Microsoft publicaram na quinta, dia doze, experimentos que mostram o risco desse caminho.
+Um modelo pode aprender um comportamento escondido, que só aparece diante de um gatilho.
+O primeiro estudo é do Microsoft Defender Research.
+Os pesquisadores misturaram noventa exemplos maliciosos em cerca de nove mil conversas de agentes de terminal, cerca de um porcento dos dados.
+E ajustaram o GPT quatro ponto um mini com esse material.
+O gatilho foi um pedido comum: criar a documentação do projeto.
+Diante dele, o modelo procurava a ferramenta de executar comandos, qualquer que fosse o nome dela.
+E montava uma chamada válida para baixar e rodar conteúdo de um domínio controlado pelo atacante.
+Em quinhentas tentativas por [HH AA1 R N AH0 S], isso aconteceu em cerca de setenta e oito porcento das vezes, nos dois vistos no treino.
+Com o pedido reescrito de dez formas diferentes, a taxa ficou entre cinquenta e dois e setenta porcento.
+Nos que o modelo nunca tinha visto, caiu para onze porcento e zero.
+O segundo estudo, do A I Red Team, simula um atacante que distribui pesos já envenenados.
+A equipe ajustou os modelos Qwen três ponto cinco de quatro bilhões e de nove bilhões de parâmetros.
+Na configuração mais forte, em repositórios que o modelo nunca tinha visto, o comportamento malicioso disparou com frequência.
+Foi de oitenta e quatro vírgula um a noventa e quatro vírgula oito porcento das vezes.
+O comportamento também passou para harnesses reais.
+Com o modelo de quatro bilhões, foram noventa e sete porcento sob o "Claude Code", setenta e quatro sob o Pi, e trinta e sete vírgula três sob o Codex [S IY1 EH1 L AY1].
+Com o de nove bilhões, noventa e um, setenta e sete e sessenta e três porcento.
+Os autores ressaltam que isso não aponta falha nas configurações padrão desses harnesses.
+Nas palavras deles, "o backdoor mora no próprio modelo".
+Um detalhe incômodo: uma fase curta de aprendizado por reforço recuperou a qualidade de programação do modelo envenenado.
+E até melhorou notas em benchmarks, o que o tornaria mais atraente para quem procura modelos.
+É importante separar o que foi observado do que foi demonstrado.
+Os dois ataques completos são experimentos controlados.
+Num grande conjunto de dados público, os pesquisadores acharam linhas suspeitas, que associavam pedidos inofensivos a chamadas de ferramenta sem relação com eles.
+Uma delas baixava e executava um script remoto, que o dono poderia trocar depois.
+Eles não conseguiram dizer qual era a intenção de quem publicou, nem se essas poucas linhas afetariam um modelo.
+E o texto não relata backdoor desse tipo em uso real.
+As recomendações tratam modelo como dependência de terceiros.
+Registre a procedência de cada checkpoint, com fonte, versão e hash.
+Fixe por hash as versões revisadas dos conjuntos de dados.
+Teste o modelo no [HH AA1 R N AH0 S] e nas ferramentas reais de produção, não só em avaliação de laboratório.
+Restrinja ferramentas, credenciais e rede, rode o agente isolado, e exija aprovação humana para ações de alto impacto.
+E registre as chamadas de ferramenta, para alertar quando uma ação não decorre do pedido do usuário.
+A fonte deste bloco é o Microsoft Security Blog.
+Última história antes dos destaques: o "Git Hub" detalha como uma falha parcial de rede virou quase quatro horas de atraso no Actions.
+O "Git Hub" publicou na quinta, dia doze, seu relatório de disponibilidade de outubro, com oito incidentes.
+O de cinco de outubro mostra como uma falha pequena vira uma grande.
+Uma falha parcial de rede no provedor de nuvem atrapalhou as conexões entre uma região e certos bancos de dados.
+Desses bancos depende o serviço que distribui os jobs do "Git Hub" Actions para os runners, as máquinas que executam os workflows.
+Em vez de desistir rápido, o serviço esperou cada chamada estourar o tempo limite.
+As chamadas pendentes se acumularam até a memória acabar e o serviço reiniciar.
+Os jobs foram desviados para uma região saudável, que não tinha capacidade para recebê-los.
+Ao mesmo tempo, runners ociosos foram desligados e demoraram a ser repostos.
+O incidente durou cerca de três horas e quarenta e cinco minutos.
+Nos piores noventa minutos, a maioria dos jobs em runners hospedados pelo "Git Hub" não começou em até cinco minutos.
+Runners próprios dos clientes não foram afetados.
+As correções relatadas são boas referências de engenharia.
+Um endpoint do Actions com mais de duzentos e cinquenta milhões de requisições por dia passou para um caminho mais eficiente.
+No pico, foram oitenta e cinco porcento menos leituras de banco.
+Exigir pelo menos três caracteres antes de buscar tópicos de repositório cortou cerca de noventa e oito porcento das consultas lentas desse tipo.
+O relatório também explica duas quedas de escrita em sete de outubro.
+Uma máquina substituta, que decide para onde vão as escritas do banco, assumiu a liderança com registros desatualizados.
+E mandou escritas para servidores já aposentados.
+A lição para quem escreve serviços vale em qualquer escala.
+Dependência lenta precisa de timeout curto e limite de concorrência.
+E o plano de contingência precisa considerar se o lado saudável aguenta a carga extra.
+A fonte deste bloco é o blog do "Git Hub".
+Agora, os destaques rápidos de hoje.
+O Graph [K Y UW1] [EH1 L] ganha especificação oficial para uso sobre H T T P.
+O comitê técnico do Graph [K Y UW1] [EH1 L] publicou na quinta, dia doze, a primeira versão dessa especificação, complementar à especificação principal.
+Ela documenta endereços, os métodos GET e POST, JSON e cabeçalhos, e cria um tipo de resposta próprio, em JSON.
+A regra geral muda o hábito de responder com status duzentos para tudo, que o anúncio chama de "duzentos, Not O K".
+Se a requisição devolveu dados, o status é da família duzentos.
+Se só devolveu erros, é da família quatrocentos ou quinhentos.
+A especificação também introduz um status duzentos e noventa e quatro, "Partial Success", para quando há dados e erros juntos.
+O anúncio diz que a maioria dos frameworks já segue a especificação.
+E que o método H T T P Query, consultas persistidas e envio em lote estão nos planos.
+A fonte é o próprio Graph [K Y UW1] [EH1 L].
+Próximo destaque: o Cert alerta que atualizar o "Image Magick" pode não bastar contra duas formas de ler e gravar arquivos.
+A nota de vulnerabilidade, de quinta, dia doze, descreve duas variantes em aplicações que usam o "Image Magick" para processar imagens.
+Na primeira, uma imagem S V G aponta para um script M S L, a linguagem de script do "Image Magick".
+Esse script pode ler arquivos, ou gravar dados em caminhos escolhidos.
+Na segunda, o "Image Magick" detecta o arquivo como PostScript pelo conteúdo, ignorando o nome.
+E o entrega ao "Ghost Script", que, na configuração observada, ainda acessava arquivos na pasta temporária do sistema.
+Combinadas com conteúdo executável gravável, essas variantes podem levar a execução de código.
+O Rails oito ponto zero ponto cinco ponto dois e oito ponto um ponto quatro ponto um já trazem uma política para o Active Storage.
+A recomendação é um arquivo de política em lista de permissão, desligando M S L, M V G, P S, E P S e P D F.
+E conferir a política efetiva.
+O Cert cita pipelines de I A que processam imagens vindas de agentes e datasets.
+A fonte é o Cert, centro de coordenação.
+Próximo: uma nova cadeia de falhas no N central é explorada horas depois de publicada, inclusive em servidores atualizados.
+Depois de tirar o serviço do ar e lançar o hotfix H F dois, a N Able enfrenta uma cadeia chamada "Forever Able Two Shell".
+Ela foi publicada na quinta, dia doze, pelo pesquisador Sean Bales.
+Segundo a SecurityWeek, ela dá execução remota de código como root, sem login, em servidores com a Legacy [EY1 P IY1 AY1] ativada, mesmo com o H F dois.
+As empresas Lupovis e Huntback relatam invasões cerca de cinco horas depois.
+Foram mineradores de criptomoeda X M Rig em vinte e um servidores, dezenove deles já com os patches mais recentes, segundo a Huntback.
+A N Able restringiu recursos, incluindo a Legacy [EY1 P IY1 AY1] e a integração com o Intune.
+A Huntback recomenda tratar um servidor atingido como totalmente comprometido.
+As fontes são a SecurityWeek e o The Hacker News.
+Próximo: o Libreboot vinte e seis ponto onze passa a usar U E F I, e abandona o GRUB como payload.
+O Libreboot é um firmware livre, baseado no "core boot", que substitui a BIOS de fábrica em alguns notebooks e placas.
+A versão vinte e seis ponto onze, de quinta, dia doze, adota U E F I completo via E D K dois.
+E as placas com E D K dois passam a usar só ele.
+O GRUB e o Mem Test oitenta e seis plus saem das imagens.
+O aviso do projeto é converter instalações antigas para U E F I completo, com partição E S P, antes de gravar a nova versão.
+O boot legado continua possível, mas o usuário precisa montar e manter esses payloads.
+A fonte é o próprio Libreboot.
+Próximo: o U V zero ponto treze ponto oito protege arquivos de credenciais.
+O gerenciador de pacotes e projetos Python da Astral passa a restringir ao dono os arquivos de credenciais em texto puro no Unix.
+A versão, de quinta, dia doze, também evita que execuções simultâneas dos comandos U V X ou U V run com pacotes extras construam o mesmo ambiente duas vezes.
+E adiciona o C Python três ponto dezesseis, alfa dois.
+A fonte são as notas de versão do U V.
+Próximo: o Polo leva o desktop Mate para o [W EY1 L AH0 N D].
+O Mate ainda não tem sessão [W EY1 L AH0 N D] oficial.
+O Polo é um projeto independente de Kerem Söke, que teve a versão um ponto zero ponto zero publicada na quinta, dia doze.
+É um compositor baseado na lib Weston, que imita o Marco, o gerenciador de janelas atual do Mate, com suas regras de janela e temas.
+O "O M G Ubuntu" relata que funcionam espaços de trabalho, vários monitores, escala, compartilhamento de tela e até o cubo 3D.
+O projeto é novo, precisa ser compilado, e o autor procura testadores.
+As fontes são o "O M G Ubuntu" e o repositório do Polo.
+Próximo: o G C C quebra strings em pedaços e engana auditorias de caminhos.
+Harmen Stoppels mostra que o G C C, ao copiar uma string constante para um buffer, costuma dividi-la em pedaços de dezesseis bytes sobrepostos.
+Esses pedaços são copiados com registradores vetoriais.
+Com isso, um caminho como o prefixo de instalação pode nunca aparecer inteiro no binário.
+Há ferramentas de distribuições e de gerenciadores de pacotes que procuram caminhos de build esquecidos, ou que reescrevem esses caminhos na instalação, como Conda e Spack.
+Essas ferramentas deixam de enxergá-los.
+O Clang mantém as strings inteiras.
+Compilar com otimização por tamanho evita a divisão.
+E o autor propôs aos mantenedores do G C C uma opção para desligá-la.
+A fonte é o blog de Stoppels.
+Por fim, um desenvolvedor brasileiro explica por que a I A do seu app de finanças não faz conta.
+No "Tab News", o desenvolvedor gomesszy descreve o Melvi, app que lê contas e cartões via Open Finance.
+Todo número na tela sai de funções puras em TypeScript, com dinheiro guardado em centavos, como inteiro grande.
+O modelo de linguagem só explica resultados já calculados, com resposta validada por um esquema.
+O motivo: um modelo erra conta com a mesma confiança com que acerta.
+E um total errado faz o usuário desconfiar do app inteiro.
+A fonte deste último destaque é o "Tab News".
