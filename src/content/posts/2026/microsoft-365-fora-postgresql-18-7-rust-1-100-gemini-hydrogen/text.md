@@ -4,6 +4,7 @@ description: 'A pane no Outlook, no Exchange Online e no Teams vira a madrugada 
 date: '2026-11-13T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/microsoft-365-fora-postgresql-18-7-rust-1-100-gemini-hydrogen.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/microsoft-365-fora-postgresql-18-7-rust-1-100-gemini-hydrogen/final.opus'
 ---
 
 ![Caixa de correio azul de massinha com a palavra OUTLOOK, com a abertura entupida de envelopes presos, ao lado de uma pequena ampulheta](./images/microsoft-365-fora-postgresql-18-7-rust-1-100-gemini-hydrogen.jpg)
