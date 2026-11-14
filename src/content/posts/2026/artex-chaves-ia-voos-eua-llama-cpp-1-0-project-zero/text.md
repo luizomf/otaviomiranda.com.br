@@ -4,6 +4,7 @@ description: 'Amazon e Cloudflare mostram como agentes derivados do ARTEX roubam
 date: '2026-11-14T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/artex-chaves-ia-voos-eua-llama-cpp-1-0-project-zero.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/artex-chaves-ia-voos-eua-llama-cpp-1-0-project-zero/final.opus'
 ---
 
 ![Pote de mel de cerâmica azul-petróleo com a inscrição "LLM API" e um pingo de mel escorrendo, com um pequeno robô de madeira se esticando para alcançá-lo](./images/artex-chaves-ia-voos-eua-llama-cpp-1-0-project-zero.jpg)
