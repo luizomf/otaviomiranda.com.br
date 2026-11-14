@@ -1,0 +1,251 @@
+Agentes de ataque caçam chaves de I A expostas, e uma pane de comunicação para os voos dos Estados Unidos por mais de quatro horas.
+A edição deste sábado, dia catorze, abre com dois relatórios publicados na sexta sobre agentes de I A usados em ataques reais.
+Eles mostram o alvo preferido desses agentes: as chaves de [EY1 P IY1 AY1] guardadas em gateways e plataformas de I A expostos na internet.
+Depois vem a pane de comunicação que parou os aviões nos Estados Unidos por mais de quatro horas.
+Em seguida, a versão um ponto zero do llama ponto C P P, e a mudança do Project Zero do Google no prazo para divulgar falhas.
+E um sistema de agentes do Google que separa quem escreve o código de quem confere.
+Nos destaques rápidos estão a recuperação do Microsoft trezentos e sessenta e cinco, o vazamento na Caixa Vida e Previdência e a invasão da "Apify".
+Tem também a troca de comando na Nvidia, o Kitesurf com código aberto e um bug de quinze anos corrigido no K D E.
+E ainda um RAID novo para o X F S, e um site brasileiro que passou a mentir sem nenhum teste falhar.
+Primeira história: agentes derivados do ARTEX caçam chaves de modelos em gateways de I A expostos, segundo a Amazon e a Cloudflare.
+O ARTEX é um framework de código aberto que entrega um teste de invasão a uma equipe de agentes de I A.
+O operador define um alvo e um objetivo.
+E os agentes planejam o ataque, rodam ferramentas de varredura e exploração, e registram o que encontram.
+O blog já registrou em novembro o uso do ARTEX contra o setor financeiro, num relatório da Microsoft.
+Na sexta, dia treze, a Amazon e a Cloudflare publicaram dados novos.
+E os dois relatórios apontam para o mesmo ponto fraco: credenciais deixadas ao alcance.
+A Amazon conseguiu ver o ataque por dentro graças a uma armadilha.
+O "Mad Pot" é a rede de sensores-isca da empresa.
+Alguns desses sensores se apresentavam como [EY1 P IY1 AY1] de modelos de linguagem, no formato de "chat completions" que muitos serviços imitam.
+Agentes de ataque mandaram requisições para eles, achando que eram o "cérebro" que usam para decidir os próximos passos.
+Esses frameworks reenviam ao modelo o histórico da operação.
+Vão juntos os prompts de sistema, as ferramentas usadas, o grafo de conhecimento compartilhado e os achados.
+Por isso, cada requisição carregava o diário da campanha.
+A coleta foi de três de outubro a cinco de novembro.
+A Amazon ressalva que não viu essas ações acontecendo, e não consegue confirmar os resultados que os agentes relataram.
+O que ela tem é o registro do que os atacantes estavam tentando fazer.
+A campanha principal era um roubo de credenciais de acesso a modelos de I A que se pagava sozinho.
+Os agentes procuravam aplicações de I A expostas na internet e extraíam as chaves dos provedores guardadas nelas.
+Depois testavam se as chaves funcionavam, e as colocavam num estoque.
+Segundo os registros, essas chaves roubadas abasteciam o próprio gateway de modelos do framework.
+E esse gateway movia os agentes que caçavam mais chaves.
+Os alvos preferidos eram as ferramentas que concentram chaves de vários provedores.
+Isso porque uma interface de administração fraca entrega muitas contas de uma vez.
+A lista inclui gateways e proxies de L L M, como One [EY1 P IY1 AY1], New [EY1 P IY1 AY1], Veloera, Sub two [EY1 P IY1 AY1] e Lite L L M.
+E plataformas como Dify, Fast G P T, Lang flow, RAG flow, Open Web U I, Lobe Chat e Ollama.
+Os agentes seguiam um roteiro por produto.
+Procuravam instalações não finalizadas, que qualquer um pode reivindicar, e endpoints de administração sem autenticação.
+Tentavam senhas padrão, como a chave mestra padrão do Lite L L M.
+Exploravam falhas conhecidas, uma do Lang flow e outra do RAG flow. Os códigos completos estão no artigo escrito.
+E buscavam segredos esquecidos no JavaScript do lado do cliente, em source maps, em rotas de debug e em arquivos de ambiente.
+Também vasculhavam repositórios do "Git Hub", pacotes do N P M e do Py P I, camadas de imagens de contêiner e notebooks.
+Chaves expostas publicamente havia mais de trinta dias eram classificadas como estoque de baixo valor.
+Uma segunda campanha tentou passar pela verificação de identidade de duas corretoras de criptomoedas, com "deep fake" em tempo real.
+Segundo os registros, os agentes chegaram a montar um pipeline de vídeo falso a onze vírgula cinco quadros por segundo, numa única G P U doméstica.
+Mas, segundo a Amazon, o veredito do fornecedor de verificação rejeitou o "deep fake" em todas as tentativas registradas.
+A Amazon avalia, com confiança moderada, que as campanhas vêm de grupos distintos ligados à China.
+Os motivos são o chinês simplificado nos prompts, o fuso horário configurado e os alvos.
+A Cloudflare mostra a escala.
+O autor do ARTEX tirou o repositório do ar em oito de outubro.
+Mas desde então surgiram mais de doze mil repositórios relacionados, com algumas centenas de forks que descendem do original.
+Nos últimos três dias, a empresa viu mais de cinquenta famílias de frameworks desse tipo tentando varrer seus clientes.
+E o volume diário de requisições dessas ferramentas cresceu trinta vezes desde primeiro de outubro.
+Em investigações de resposta a incidentes, a causa raiz se repetiu.
+Eram tokens estáticos, sem prazo de validade, guardados em pipelines de C I e C D com acesso amplo.
+Num caso, um token de conta usado no C I, sem restrição de I P nem limite de taxa, foi parar nas mãos de um agente do ARTEX.
+O agente criou vários scripts de Workers com nomes começando por artex.
+Passou de sessenta e nove requisições por minuto, e fez quatrocentos pedidos de dump de banco de dados em uma hora.
+Para quem roda um Lite L L M, um Open Web U I ou um Ollama num V P S, a lição prática é tratar essas ferramentas como sistemas de produção.
+Não deixe painel de administração nem [EY1 P IY1 AY1] aberta para a internet sem autenticação, e troque senhas e chaves padrão.
+Tire segredos do front-end e do repositório, e prefira tokens de curta duração no C I.
+A Amazon recomenda ainda vigiar gastos inesperados nas contas dos provedores de I A.
+Porque é ali que o uso de uma chave roubada aparece primeiro.
+As fontes deste bloco são a Amazon Threat Intelligence e a Cloudflare.
+Segunda história: uma falha de telecomunicações força a primeira parada nacional de voos nos Estados Unidos desde 2023.
+Por volta das seis da tarde de sexta, dia treze, no horário de Brasília, a F A A mandou parar todas as decolagens no país.
+A F A A é a agência de aviação civil dos Estados Unidos.
+Esse tipo de ordem, chamado "ground stop", segura os aviões no chão até segunda ordem.
+Em nota, a F A A disse que a decisão veio depois de problemas de comunicação que atingiram vários centros de controle de rota.
+São os A R T C C, que acompanham os voos em altitude de cruzeiro, entre os aeroportos.
+Segundo a N B C Chicago, voos com destino aos aeroportos americanos seriam avaliados caso a caso.
+E a United informou que os aviões já no ar seguiriam viagem.
+A parada foi suspensa às dez e quinze da noite, no horário de Brasília, depois de mais de quatro horas.
+A C N B C cita a empresa de dados de voo Cirium.
+Segundo ela, havia onze mil voos programados para sair de aeroportos americanos depois das quatro da tarde, no horário de Nova York.
+A Jet Blue cancelou o resto dos voos da sexta, e também voos do sábado, para reposicionar aviões e tripulações.
+A C N B C diz que atrasos e cancelamentos devem continuar no fim de semana.
+Segundo a N B C Chicago, foi a primeira parada nacional desde janeiro de 2023, quando falhou um sistema central de computadores da F A A.
+A causa ainda é preliminar.
+O secretário de Transportes, Sean Duffy, disse que roteadores de telecomunicações ficaram "sobrecarregados de dados" e caíram.
+A F A A falou em uma "interrupção temporária de telecomunicações", e disse que parou os voos por "excesso de cautela".
+O secretário de Segurança Interna, Markwayne Mullin, disse que não parece ter sido um ataque cibernético.
+Segundo ele, o problema "parece ter sido de origem mecânica".
+Nenhum relatório técnico foi publicado até agora, e a F A A diz que seus técnicos seguem investigando.
+O caso conversa com qualquer sistema distribuído.
+Quando a rede que liga os centros de controle deixa de ser confiável, a decisão segura é parar tudo.
+Porque um controlador sem dados confiáveis não pode separar aviões.
+Uma falha numa camada que quase ninguém vê, a de roteadores e enlaces, derrubou a operação inteira.
+As fontes deste bloco são a F A A, a C N B C e a N B C Chicago.
+Terceira história: o llama ponto C P P chega à versão um ponto zero, com versionamento semântico e um servidor mais fechado por padrão.
+O llama ponto C P P é o motor em C e C mais mais que roda modelos de linguagem no seu próprio computador.
+Vai da C P U de um notebook a G P Us de vários fabricantes.
+E o G G M L é a biblioteca de tensores que faz as contas por baixo.
+O projeto também define o G G U F, o formato de arquivo em que circula boa parte dos modelos quantizados.
+E serve de base para várias outras ferramentas de I A local.
+Na sexta, dia treze, depois de cerca de três anos e meio, os dois chegaram à versão um ponto zero ponto zero.
+A mudança principal é um compromisso.
+Segundo o anúncio no blog da Hugging Face, os dois projetos passam a usar versionamento semântico.
+A versão maior sobe quando muda, de forma incompatível, a [EY1 P IY1 AY1] pública em C, a do diretório include.
+A versão menor sobe para recursos novos, backends e modelos.
+E a de correção, para bugs sem mudança de [EY1 P IY1 AY1].
+Para quem embute a biblioteca num programa, o número da versão passa a dizer se a atualização pode quebrar a compilação.
+Os builds contínuos, com nomes formados pela letra B e o número do build, continuam saindo depois da um ponto zero.
+A um ponto zero também faz uma limpeza.
+Ela remove trinta e cinco funções que já estavam marcadas como obsoletas no cabeçalho principal do llama ponto C P P.
+E o G G M L removeu [EY1 P IY1 AY1] antiga e operações legadas.
+Por isso, o protocolo R P C, usado para distribuir um modelo entre várias máquinas, subiu de versão e passa a recusar pares incompatíveis.
+Se você roda o llama ponto C P P espalhado em mais de uma máquina, atualize todas juntas.
+O llama server, que expõe os modelos por uma [EY1 P IY1 AY1] compatível com a da Open A I, ficou mais fechado.
+Ligar ferramentas ou M C P com o servidor ouvindo fora do localhost, e sem chave de [EY1 P IY1 AY1], agora dá erro.
+A menos que você use uma opção explícita para permitir ferramentas sem autenticação.
+O proxy de C O R S e os endereços de mídia enviados no chat deixam de alcançar endereços locais e da rede interna.
+Para imagens num N A S da sua rede, existe uma opção específica que libera endereços privados de mídia.
+O token da Hugging Face passa a ser enviado só para hosts da própria Hugging Face.
+Nos pull requests, o autor das mudanças diz que os casos antigos não eram propriamente vulnerabilidades.
+Mas diz que muita gente passou a rodar o servidor direto no próprio computador, sem isolamento.
+Servidores de I A abertos na rede são justamente o tipo de alvo descrito no relatório da Amazon.
+A versão ainda traz cache de K V em F P oito, que guarda o contexto da conversa ocupando menos memória.
+Traz também um cache de experts para modelos M O E, de mistura de especialistas, na memória do host.
+E novas arquiteturas, como o Kimi K três ponto um Pro, além de um endpoint de voz compatível com o da Open A I.
+As fontes deste bloco são o anúncio do llama ponto C P P um ponto zero, as notas de versão do llama ponto C P P e do G G M L, e dois pull requests do projeto.
+Quarta história: o Project Zero encurta o prazo para divulgar falhas, de noventa para trinta dias até 2028, e culpa a I A.
+O Project Zero é a equipe do Google que caça vulnerabilidades em software de qualquer empresa.
+Quando acha uma, avisa o fabricante e marca uma data para publicar os detalhes.
+Isso se chama divulgação coordenada.
+E o prazo serve para pressionar pela correção, sem deixar a falha em segredo para sempre.
+Desde 2021, a regra era noventa mais trinta.
+O fabricante tinha noventa dias para corrigir.
+E, se corrigisse, os detalhes só saíam trinta dias depois, um tempo para os usuários instalarem o patch.
+Num texto publicado na sexta, dia treze, Natalie Silvanovich anuncia o fim desse modelo.
+A regra nova é um prazo fixo contado a partir do aviso, sem depender de a falha já estar corrigida.
+São noventa dias a partir de agora, sessenta dias a partir de dois de fevereiro de 2027, e trinta dias a partir de três de janeiro de 2028.
+A maioria das exceções cai junto, incluindo o período de tolerância e a regra para variantes de uma mesma falha.
+O motivo, segundo o texto, é a I A.
+Modelos de linguagem aceleram tanto a descoberta quanto a exploração de falhas.
+E aumentam a chance de outras pessoas, inclusive maliciosas, acharem o mesmo bug.
+Também encurtaram o tempo para transformar um patch publicado num exploit.
+Por isso, diz a equipe, os trinta dias depois do patch "não fazem mais sentido".
+E o volume mudou: o Project Zero diz que hoje encontra várias vulnerabilidades por semana em alvos onde antes achava poucas por ano.
+E negociar caso a caso ficou impossível.
+Falhas já exploradas ativamente seguem outra política do Google.
+E exceções raras, como as de Spectre e Meltdown, continuam possíveis.
+O recado para quem mantém software é direto: o tempo entre o patch sair e chegar ao usuário vai pesar mais.
+O texto sugere melhorar a velocidade de correção e de entrega.
+E ter planos alternativos, como desligar temporariamente o trecho de código afetado, para quando a divulgação chegar antes do patch.
+A fonte deste bloco é o Project Zero.
+Quinta história: o Google mostra agentes que portaram um microkernel para Rust sem poder mexer nos testes.
+O Google Research publicou na sexta, dia treze, a arquitetura do teamwork, um sistema de múltiplos agentes.
+Ele está disponível no Antigravity, o ambiente de desenvolvimento com agentes do Google.
+A ideia central é dividir o contexto.
+Em vez de um único agente acumulando dias de conversa num contexto cada vez maior, cada agente especializado recebe só os arquivos e as ferramentas da etapa dele.
+Coordenadores passam o trabalho para sucessores com contexto limpo.
+E agentes revisores conferem os resultados sem ver o raciocínio de quem os produziu.
+Para conferir, o sistema usa verificadores independentes do agente.
+Entre eles, o verificador de provas Lean quatro, suítes de testes não modificadas, simuladores e contadores de hardware.
+Os números de engenharia são do próprio Google.
+Partindo de um porte inicial de vinte e cinco porcento, uma campanha de duas semanas reescreveu o resto do Zircon.
+O Zircon é o microkernel do sistema "Fuchsia", e a campanha acrescentou cerca de oitocentas mil linhas de Rust seguro.
+Segundo o texto, o código passa em todos os testes unitários do kernel, e dá boot em hardware ARM de sessenta e quatro bits.
+Em outro caso, o lib G A V um, decodificador de vídeo A V um do Google, virou cerca de cento e setenta mil linhas de Rust.
+A saída ficou idêntica, bit a bit, à do original, numa suíte de conformidade.
+A primeira versão era cerca de quatro vezes mais lenta.
+Depois de rodadas com profiler, ficou de vinte a trinta porcento mais rápida que o C mais mais e o assembly otimizado à mão.
+Isso em x oitenta e seis de sessenta e quatro bits e em ARM, medido em clipes de vídeo de amostra.
+O truque que importa para quem trabalha com agentes está na disciplina da migração.
+Segundo o Google, migrações grandes falham quando o agente cria stubs, versões de mentira, para as dependências, ou altera os testes.
+No teamwork, cada módulo só entra na fila depois que as dependências dele compilam.
+E cada módulo folha é ligado à suíte de testes original, sem modificação.
+Assim o agente não consegue fazer o teste passar mudando o teste.
+O texto não diz se o porte do Zircon ou o do lib G A V um serão publicados, nem quantas tentativas falharam.
+E o padrão de reescrita ainda não está disponível para o público.
+A mesma lição apareceu na sexta no blog do Stack Overflow, por outro caminho.
+Jeff An é C T O da Momentic, empresa que vende testes com I A.
+Ele conta que a equipe revisou mil testes unitários escritos por I A no próprio repositório.
+E considerou só nove vírgula seis porcento verificações úteis.
+O resto se dividia entre testes de pouca consequência, redundantes, com mocks em excesso, sem uso ou com cobertura artificial.
+Segundo ele, um agente de Q A separado, sem acesso à conversa do agente de código e testando a aplicação rodando, achou de três a cinco vezes mais bugs.
+A comparação é com o Codex e o "Claude Code" sozinhos, num benchmark da própria empresa com quatro aplicações de código aberto.
+São números do fornecedor, mas a regra vale para qualquer equipe.
+Quem escreve o código não deveria ser o único a corrigir a prova.
+As fontes deste bloco são o Google Research e o blog do Stack Overflow.
+Agora, os destaques rápidos para hoje.
+O Microsoft trezentos e sessenta e cinco volta aos poucos, e a Microsoft liga a pane a um upgrade de capacidade de rede.
+A pane que abriu a edição de sexta começou às três e vinte e seis da tarde de quinta, dia doze, no horário de Brasília, segundo o The Register.
+Na sexta, em nota publicada pela A B C sete, a Microsoft pediu desculpas.
+Disse que foi "um problema técnico, sem relação com ataque cibernético nem com I A ou agentes".
+Segundo a empresa, ele foi introduzido por "um problema durante um upgrade anterior de capacidade de rede", que apareceu depois de uma mudança recente na rede.
+A empresa disse ter corrigido a causa, e que seguia restaurando os serviços em etapas, validando a estabilidade a cada passo.
+Na noite de sexta, a conta Microsoft trezentos e sessenta e cinco Status relatou recuperação sustentada.
+Mas disse que só vai considerar o caso encerrado depois de processar a fila de e-mails acumulados.
+O relatório completo de causa ainda não saiu.
+As fontes são a A B C sete e o The Register.
+Próximo destaque: uma invasão na Caixa Vida e Previdência expõe nomes e CPFs de toda a base de sete vírgula seis milhões de clientes ativos.
+O dado vem de um comunicado ao mercado da Caixa Seguridade, de quinta, dia doze.
+A seguradora identificou, em seis de novembro, um acesso não autorizado e a cópia de dados cadastrais para fora do ambiente.
+E comunicou a A N P D no dia onze.
+Estão expostos nomes e CPFs de clientes atuais e antigos, cobrindo todos os sete vírgula seis milhões de clientes ativos.
+Parte dos registros também tinha endereço, telefone, e-mail e data de nascimento.
+A análise preliminar não encontrou indício de vazamento de dados financeiros, saldos de previdência, dados bancários ou senhas.
+O risco prático é golpe: com nome, CPF e telefone, um falso atendente parece convincente.
+A fonte é o comunicado ao mercado da Caixa Seguridade.
+Agora, a "Apify", que confirma uma invasão e passa a guardar tokens de [EY1 P IY1 AY1] só como hash.
+A plataforma de web scraping e automação diz que um terceiro usou uma credencial comprometida.
+Com ela, entrou em partes dos sistemas internos em nove e dez de novembro, e obteve credenciais de contas.
+A empresa notificou os clientes cujos dados foram acessados, e diz que troca os tokens de quem for identificado como afetado.
+Por precaução, já tinha revogado algumas integrações O Auth, como a do "Git Hub".
+E, na atualização de sexta, dia treze, anunciou tokens guardados só como hash e restrições de rede entre serviços internos.
+A recomendação para todos é mudar o acesso aos storages para "Restricted".
+Enquanto estiver aberto, quem souber o identificador de um storage consegue ler o conteúdo.
+A fonte é a página de status da "Apify".
+Na Nvidia, Jensen Huang deixa a empresa, e a diretora financeira assume como C E O interina.
+Segundo documento enviado pela Nvidia à S E C, a comissão de valores mobiliários dos Estados Unidos, Huang renunciou na quinta, dia doze.
+Ele deixou os cargos de presidente, C E O e membro do conselho, com efeito imediato, depois de trinta e três anos à frente da empresa que fundou.
+Colette Kress, diretora financeira desde 2013, acumula os dois cargos até a escolha de um sucessor.
+E o conselho vai considerar candidatos internos e externos.
+O documento não informa o motivo da saída.
+E diz que operações, compromissos com clientes e o roadmap de produtos seguem sem interrupção.
+Os resultados trimestrais saem na terça, dia dezessete, com teleconferência às sete da noite, no horário de Brasília.
+A fonte é o formulário oito K da Nvidia.
+A Cloudflare abre o código do Kitesurf, um navegador para agentes que roda em Workers.
+O blog cobriu o Kitesurf no lançamento do beta, em agosto, e agora ele está no "Git Hub", sob licença Apache dois ponto zero.
+Ele interpreta H T M L, aplica C S S, executa o JavaScript da página e gera screenshots, sem subir um contêiner com Chromium.
+Para isso, usa componentes em Rust compilados para WebAssembly, como o Blitz para layout e o Stylo para C S S.
+Ele fala o "Chrome DevTools Protocol", então scripts do Puppeteer podem apontar para ele.
+Dá para rodar localmente ou na própria conta da Cloudflare, mas o deploy exige o plano pago de Workers.
+A fonte é a Cloudflare.
+O K D E para de dizer que a cópia para o pendrive terminou antes de ela terminar.
+O K D E Frameworks seis ponto trinta e dois, de sexta, dia treze, muda o K I O, a camada de arquivos do K D E.
+Agora ele só relata sucesso numa cópia para dispositivo removível depois de os dados chegarem de fato ao dispositivo.
+Nas movimentações, o arquivo original só é apagado depois dessa gravação.
+O bug corrigido foi aberto em 2011.
+Ele reclamava que a velocidade e o progresso refletiam a cópia para o cache local, não para o disco.
+E isso podia levar alguém a tirar o pendrive com dados ainda pendentes.
+As fontes são o anúncio do K D E Frameworks seis ponto trinta e dois e o registro do bug.
+O X RAID leva RAID com paridade para dentro do X F S.
+Christoph Hellwig, desenvolvedor do kernel Linux, anunciou o X RAID, um RAID de paridade "declusterizado", integrado ao sistema de arquivos X F S.
+Nele, dados e paridade se espalham por todos os discos.
+O L W N registrou o anúncio na sexta, dia treze.
+O alvo são dispositivos zonados, como discos rígidos S M R, que precisam ser gravados em sequência.
+Mas ele também funciona em discos rígidos comuns e em S S Ds.
+O anúncio afirma escritas até vinte vezes mais rápidas que o M D RAID, sem detalhar o teste.
+Por enquanto, suporta até duas paridades.
+E o autor avisa que o código não está pronto para entrar no kernel: ele quer testes e opiniões.
+A fonte é o L W N.
+Por fim, a Mega Semana da Caixa faz um site de resultados ensinar o calendário errado.
+No Tab News, Hargen Software conta que o site dele deduz os dias de sorteio da Mega-Sena a partir dos últimos doze concursos.
+Ele faz isso porque o calendário já mudou duas vezes em dois anos.
+Aí veio a "Mega Semana", com sorteios de segunda a sexta, entre vinte e seis e trinta de outubro, e a promoção virou maioria na amostra.
+O site passou a anunciar sorteios às segundas-feiras em mais de três mil e quatrocentas páginas bem formadas, sem nenhum teste falhar.
+A correção foi uma lista manual de datas promocionais.
+E um aviso no build quando o calendário deduzido passa de três dias por semana.
+A fonte é o Tab News.
