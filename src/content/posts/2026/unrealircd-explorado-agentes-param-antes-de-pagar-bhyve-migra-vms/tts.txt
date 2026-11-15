@@ -1,0 +1,270 @@
+Falha no [AH0 N R IY1 L] I R C D é explorada um dia depois do patch, e ferramentas para agentes passam a parar antes do botão de pagar.
+Primeiro, uma falha no [AH0 N R IY1 L] I R C D que dá poder de servidor a qualquer usuário.
+Ela passou a ser explorada um dia depois do patch.
+O [AH0 N R IY1 L] I R C D é um servidor de I R C de código aberto, em atividade desde 1999.
+O site do projeto diz que ele é o servidor de I R C mais instalado, com trinta e oito porcento de participação.
+Na sexta, dia treze, a CISA, a agência de cibersegurança dos Estados Unidos, incluiu a falha no catálogo de vulnerabilidades exploradas.
+Esse catálogo é o K E V, e a inclusão acontece quando há evidência de ataques reais.
+O código da falha é C V E 2026, onze quatro sete um três.
+A nota de gravidade é oito vírgula seis, de dez.
+As agências federais americanas têm até segunda, dia dezesseis, para corrigir.
+Para entender o bug, vale lembrar como o I R C funciona.
+É um protocolo de texto: cada comando é uma linha, e a quebra de linha marca onde um comando termina e o próximo começa.
+Uma rede de I R C costuma ter vários servidores ligados entre si, que repassam mensagens uns aos outros.
+E o que chega por esse canal entre servidores tem autoridade de servidor.
+A extensão I R C v três permite pendurar etiquetas no começo de uma mensagem.
+Uma delas, a etiqueta "label", serve para o cliente saber qual resposta corresponde a qual pedido.
+O servidor devolve a etiqueta junto com a resposta.
+O problema, segundo a descrição oficial da falha, está no módulo "labeled response".
+Da versão seis ponto zero ponto zero até antes da seis ponto dois ponto sete ponto um, ele não escapa essa etiqueta ao copiá-la para as respostas.
+No aviso enviado à lista O S S Security, o mantenedor Bram Matthys resume o efeito.
+Qualquer usuário consegue injetar quebras de linha no tráfego entre servidores.
+E, num protocolo de texto, isso equivale a emitir comandos arbitrários com autoridade de servidor.
+Na prática, segundo ele, um usuário comum pode dar os comandos "kill" e "G line", que derrubam e banem outros usuários.
+Isso, entre "muitas outras coisas ruins", nas palavras dele.
+A condição é a rede ter dois ou mais servidores ligados.
+Matthys chama o caso de o mais crítico achado no [AH0 N R IY1 L] I R C D nos últimos quinze anos.
+A cronologia mostra a pressa.
+O projeto avisou com três dias de antecedência e soltou a correção no sábado, dia sete, ao meio-dia no horário de Brasília.
+O mesmo pacote corrigiu outras oito falhas, entre elas duas que vazam o I P de um usuário, travamentos e negação de serviço.
+Segundo o "The Hacker News", as tentativas de exploração começaram um dia depois do patch.
+E Matthys escreveu no fórum do projeto que "os caras maus" estavam explorando a falha naquele momento.
+Quem explora, com que objetivo e em quantas redes, não foi informado.
+Uma observação sobre as fontes: o fórum do projeto bloqueou nosso acesso.
+Por isso, a citação vem do "The Hacker News", e os detalhes técnicos vêm do aviso na O S S Security.
+O aviso traz um dado que conversa com a mudança de política do "Project Zero", que cobrimos ontem.
+As falhas apareceram numa auditoria interna feita com ajuda de I A.
+Matthys conta que passou cerca de cem horas auditando o código com I A desde fevereiro.
+A opinião dele é que um serviço de rede sem nenhuma correção de segurança importante nos últimos meses provavelmente não foi examinado com I A.
+Ou, então, foi examinado por alguém que não avisou.
+A correção tem três caminhos, nesta ordem.
+O primeiro é para agora, feito por quem opera a rede, o I R C Op.
+É aplicar a regra de filtro de spam do aviso, que bloqueia etiquetas "label" com caracteres inválidos.
+Essa regra protege a rede inteira, mas só se todos os servidores estiverem na versão seis ponto zero ponto quatro ou mais nova.
+E ela não cobre as outras oito falhas.
+O segundo caminho dispensa reiniciar.
+É rodar, em cada servidor, o comando de "hot patch" com o pacote de correções de sete de novembro.
+Isso vale das versões seis ponto zero ponto zero a seis ponto dois ponto sete, e depois se confere o status do módulo "labeled response".
+O terceiro caminho, com reinício, é atualizar para a seis ponto dois ponto sete ponto um.
+Esse é o caminho para Windows, e para quando o "hot patch" falhar.
+Os comandos exatos estão no artigo escrito.
+O [AH0 N R IY1 L] I R C D cinco, sem suporte desde julho de 2023, também é afetado.
+Para ele, o aviso manda desligar o módulo "labeled response" na configuração.
+E manda reiniciar o servidor, não só recarregar a configuração.
+O conselho de fundo é sair das versões sem suporte.
+A lição vale fora do I R C.
+Sempre que um dado vindo do usuário é repetido num canal que uma parte mais confiável lê, o delimitador precisa ser escapado.
+Isso inclui cabeçalhos repassados entre serviços, linhas de log ou metadados de mensagens numa fila.
+As fontes deste bloco são o aviso de Bram Matthys na O S S Security, as notícias do [AH0 N R IY1 L] I R C D, a CISA, o N V D e o "The Hacker News".
+Agora, ferramentas para agentes que trocam a tela inteira pelo que mudou, e passam a parar antes de ações irreversíveis.
+Três projetos de código aberto apareceram entre sábado, dia catorze, e domingo, dia quinze, no "Hacker News" e no Tab News.
+Eles mostram duas ideias para agentes de I A que usam navegador ou celular.
+A primeira ideia, comum aos três, é economizar contexto.
+Um agente funciona em turnos, e a cada turno o histórico da conversa volta para o modelo.
+Se cada clique devolve a página inteira, o histórico cresce rápido, e cada passo fica mais caro e mais lento.
+A saída dos três é parecida com um "git diff": depois de uma ação, o agente recebe só o que mudou.
+A segunda ideia, presente em dois deles, é deixar uma pessoa no caminho de tudo o que não tem volta, como pagar, publicar ou apagar.
+O terceiro chama a pessoa para logins e captchas.
+O primeiro projeto é o A G Web, um navegador para mac O S vinte e seis, feito para agentes de programação.
+Ele é baseado no "Web Kit", o motor do Safari.
+O autor diz que roda vários agentes ao mesmo tempo, e que as janelas do Chrome do "Playwright" viviam roubando o teclado dele.
+No A G Web, nenhuma janela vem para a frente.
+O agente comanda tudo pelo terminal, com comandos parecidos com os da linha de comando do "Playwright".
+E um painel mostra as abas de todos os agentes ao vivo.
+Cada ação responde com o que mudou na página, sem um snapshot novo a cada passo.
+Nas medições do autor, no Mac dele, cinco páginas paradas ocupam quinhentos e noventa megabytes.
+Isso contra setecentos e trinta megabytes do Chrome headless, e um vírgula seis gigabytes do Chrome do "Playwright".
+Para login, código de M F A ou captcha, um comando passa a aba para a pessoa.
+E outra opção digita uma senha tirada do "pass", do "One Password" ou do Bitwarden, sem que ela apareça nas respostas que o agente lê.
+Uma limitação importante: por ser só "Web Kit", ele não fala o "Chrome DevTools Protocol".
+Então o "Playwright" e as extensões do Chrome não se conectam a ele.
+O segundo projeto é o "turbo browser" M C P, um servidor M C P baseado no "Playwright".
+M C P, o "Model Context Protocol", é o padrão usado para plugar ferramentas em agentes como Claude Code e Codex.
+Ele junta de vinte e cinco a trinta e três operações pequenas de navegador em dez ferramentas que agem em lote.
+O benchmark é do próprio autor, rodado num Chromium headless e contado com um tokenizador da Open A I.
+Nele, o snapshot depois de um clique tem três mil, quinhentos e oitenta e dois tokens com a árvore de acessibilidade inteira.
+Com só as linhas alteradas, cai para cinquenta e seis tokens.
+O envio de um PDF de quarenta e oito kibibytes custa quarenta e quatro mil, setecentos e vinte e oito tokens.
+Isso quando o arquivo vai para o modelo codificado em Base sessenta e quatro.
+Com a ferramenta, cai para oitenta e cinco tokens, porque ela recebe só o caminho do arquivo no disco.
+Por padrão, ele bloqueia ações finais com cara de enviar, publicar, postar, confirmar ou pagar.
+A menos que o agente passe uma opção que libera o envio, ou que o servidor seja iniciado com essa permissão.
+O terceiro projeto, o "phone driver", faz o mesmo com celulares.
+É um servidor M C P e uma linha de comando em Rust, sob licença A G P L três ponto zero, que deixa agentes usarem Android e iPhone.
+O agente recebe a tela como uma lista numerada de texto, em vez de uma captura de tela.
+Ele toca pelo número, e recebe de volta só as linhas que mudaram.
+No Android, nada é instalado no aparelho: basta o A D B.
+No iPhone, é preciso um Mac com "X code".
+Toques em botões como "Pay", "Place order" ou "Delete account" ficam retidos até o usuário confirmar.
+Na demonstração do autor, no site da Domino's do Reino Unido, o Claude montou o carrinho e o checkout e parou em "Buy with G Pay".
+O autor respondeu não, e nada foi pedido.
+Os números de velocidade vêm principalmente de um emulador.
+Ler uma lista de mil linhas levou doze vírgula sete milissegundos.
+A ferramenta padrão do Android para despejar a tela levou dois mil, cento e sessenta e três vírgula sete milissegundos.
+Num aparelho real, um Honor X oito, foram setenta e oito vírgula cinco milissegundos, contra dois mil, quinhentos e seis vírgula seis.
+Todos esses números são dos próprios autores, em projetos novos e pequenos.
+A tendência fica mais clara quando se olha a Open A I, que anunciou na sexta, dia treze, o "ChatGPT Wallet".
+Segundo o resumo oficial da empresa, é uma forma de agentes no ChatGPT Work, no Codex e no "dots" concluírem compras.
+Isso com aprovação do usuário e as proteções do cartão.
+O site da Open A I bloqueou nosso acesso, e o resto vem do relato do G Hacks.
+A carteira foi feita com American Express, Mastercard e Visa, e começa pelos assinantes do ChatGPT Pro nos Estados Unidos.
+Em cada compra, a pessoa revisa os itens, o total e o cartão, e aprova com Face I D ou digital.
+A rede do cartão então gera um token, um número de cartão substituto.
+E nem a loja nem o agente veem o cartão real.
+A Open A I planeja, no futuro, deixar o agente comprar sozinho dentro de limites definidos pelo usuário, como valor, categoria e período.
+A conclusão vale para quem monta o próprio agente.
+Devolver ao modelo só a diferença de estado e exigir confirmação humana em ações irreversíveis são escolhas de arquitetura, não detalhes de interface.
+O Kitesurf, navegador para agentes da Cloudflare que teve o código aberto noticiado ontem, segue outra linha.
+Ele roda em Workers e fala o "Chrome DevTools Protocol".
+As fontes deste bloco são os repositórios do A G Web e do "turbo browser" M C P, o post do "phone driver" no Tab News, o feed oficial da Open A I e o G Hacks.
+Agora, o [B IY1 HH AY2 V], o hypervisor do Free B S D, que ganha um protótipo funcional de migração ao vivo de máquinas virtuais.
+O [B IY1 HH AY2 V] é o hypervisor nativo do Free B S D, o equivalente ao K V M no Linux.
+O Free B S D oficial ainda não traz uma peça que plataformas como Proxmox e V M ware oferecem há anos.
+É a migração ao vivo, que move uma máquina virtual ligada de um servidor físico para outro, sem desligá-la.
+É isso que permite fazer manutenção num host sem derrubar quem roda em cima dele.
+Já houve tentativas, apresentadas desde a B S D Can de 2019, mas nenhuma chegou ao Free B S D oficial.
+Na sexta, dia treze, o desenvolvedor gyp tazy publicou o primeiro estado funcional da sua implementação, para o Free B S D quinze ponto um.
+Ele saiu como R F C, um pedido de comentários, com código ainda em andamento.
+Uma máquina virtual [EY1 EH1 M D IY1] sessenta e quatro, em execução, passa de um host para outro por T C P.
+O mecanismo é o clássico, chamado pré-cópia.
+A origem manda toda a memória da V M enquanto ela continua rodando.
+Como a V M segue escrevendo na memória, parte do que foi enviado fica desatualizada.
+Por isso, a cada rodada, a origem pede ao kernel um mapa das páginas alteradas desde a última passada, e reenvia só essas.
+Quando o que falta fica pequeno o bastante, para de diminuir ou atinge o limite de rodadas, a V M é pausada.
+Aí as últimas páginas e o estado dos processadores e dispositivos são copiados, e a V M retoma no destino.
+Para isso, o trabalho acrescenta o rastreio de páginas sujas no módulo de kernel V M M.
+E acrescenta um protocolo de migração no próprio [B IY1 HH AY2 V] e na ferramenta de controle dele.
+O cuidado com falhas está no ponto de confirmação.
+O destino valida a geometria da V M, recebe tudo e avisa que está pronto.
+Só então a origem manda um sinal de "go".
+Se algo der errado antes disso, a V M volta a rodar na origem.
+E, sem esse sinal, o destino não liga a V M.
+Um detalhe de segurança: quem abre a conexão da migração é a ferramenta de controle, que a repassa ao [B IY1 HH AY2 V].
+Assim, o [B IY1 HH AY2 V] não precisa sair do sandbox Capsicum do Free B S D.
+Nos testes do autor, com dois hosts, uma V M de quinhentos e doze mebibytes que altera pouco a memória ficou pausada por pouco tempo.
+Foram de cento e trinta e oito a cento e setenta e um milissegundos.
+Uma V M que escreve muito na memória pode não convergir na pré-cópia.
+Nesse caso, cai para uma cópia com a V M parada: correta, mas com pausa mais longa.
+O próprio autor diz que são resultados de engenharia, não uma promessa de produção.
+As limitações estão na mesa.
+Só funciona em [EY1 EH1 M D IY1] sessenta e quatro, e depende do suporte experimental a snapshots do [B IY1 HH AY2 V].
+Não há P C I passthrough, e os testes foram feitos principalmente com máquinas virtuais de um processador virtual só.
+O transporte por T C P ainda não tem autenticação nem criptografia, então não deve passar por rede não confiável.
+Antes de pensar em entrar no Free B S D oficial, o autor lista o que falta.
+São provas de que o rastreio de páginas não perde escritas, checagens de compatibilidade entre hosts e testes automatizados.
+O código ainda não está público para todos.
+Algumas pessoas já têm acesso, e o plano é publicá-lo no Git e no "Git Hub" do autor.
+A motivação é concreta.
+A migração é peça central do Sylve, projeto que quer oferecer ao Free B S D algo parecido com o Proxmox.
+E também do Boxy B S D, serviço gratuito de V P S com B S D mantido pelo autor.
+Hoje, nesse serviço, uma manutenção no host pode significar V M fora do ar.
+As fontes deste bloco são dois textos do blog do gyp tazy: o R F C e um histórico das tentativas anteriores.
+Agora, o Plasma seis ponto nove, que passa a ligar o X Wayland só quando um aplicativo X onze precisa dele.
+No Linux, o Wayland é o protocolo gráfico que substitui o antigo X onze.
+Como muitos aplicativos ainda só falam X onze, as sessões Wayland rodam o X Wayland.
+É uma camada de compatibilidade que executa esses programas dentro da sessão nova.
+No K D E Plasma, essa camada ficava ligada o tempo todo, mesmo sem nenhum aplicativo X onze aberto.
+Segundo o "This Week in Plasma" de sábado, dia catorze, escrito por Nate Graham, isso muda no Plasma seis ponto nove.
+O X Wayland passa a ser carregado só quando um aplicativo precisa.
+Para chegar lá, foi preciso tirar vários serviços do próprio sistema de caminhos de código antigos do X onze.
+O trabalho é de Vlad Zahorodnii, David Edmundson e David Redondo.
+O texto não traz números de economia.
+A consequência direta é que uma sessão sem aplicativos X onze deixa de manter esse processo rodando à toa.
+A mesma edição traz outras mudanças do seis ponto nove.
+Se o "Plasma Login Manager", a tela de login do K D E, quebrar, ele agora cai num terminal, em vez de deixar o usuário diante de uma tela preta.
+O Spectacle, de capturas de tela, abre mais rápido.
+E as páginas de alternância de tarefas e de data e hora das Configurações do Sistema foram reescritas em Q M L.
+Para quem já está no Plasma seis ponto oito, a versão de correções seis ponto oito ponto quatro traz, entre outras coisas, o fim de um travamento comum da loja Discover.
+Esse travamento acontecia em sistemas baseados em R P M O S Tree, como Fedora Kinoite e Bazzite.
+A fonte deste bloco é o K D E Blogs.
+Agora, os destaques rápidos para hoje.
+Primeiro, a pane nos voos dos Estados Unidos: o F B I investiga uma atualização de software, e a L três Harris diz que ajuda a F A A.
+Na parada nacional de sexta, dia treze, que cobrimos ontem, o F B I não vê ataque nem crime.
+Os investigadores examinam uma atualização de software como possível causa, segundo a Bloomberg, citada pela Security Week.
+A C B S News relata que a pane veio depois de uma atualização na rede privada de comunicação que liga o controle de tráfego aéreo.
+Essa rede é operada pela L três Harris, e ela reiniciou e caiu.
+Em nota de sábado, dia catorze, a L três Harris não comenta a causa.
+A empresa diz que concluiu mais de setenta porcento da troca de fios de cobre antigos por fibra óptica nas comunicações do espaço aéreo, com a F A A e operadoras.
+E diz que apoia a investigação.
+Nenhum relatório oficial de causa saiu até agora.
+As fontes são a L três Harris e a Security Week.
+Uma operação internacional derrubou o Goot loader, malware que vendia acesso a máquinas para gangues de ransomware.
+O Departamento de Justiça dos Estados Unidos anunciou na quinta, dia doze, a remoção do malware de mais de cem servidores.
+Entre eles estão sites Word Press invadidos, e também houve a apreensão de domínios usados para distribuir e controlar o malware.
+Segundo o órgão, o Goot loader infectou ao menos vinte e cinco mil computadores desde 2018.
+As máquinas infectadas viravam uma botnet, e o acesso a elas era vendido para grupos de ransomware.
+Foram ao menos quarenta e quatro vítimas nos Estados Unidos, com prejuízo de cerca de vinte e oito vírgula oito milhões de dólares.
+A ação foi coordenada com a Operação "Endgame", iniciativa de polícias de vários países.
+A investigação contou com a Europol e com polícias da Alemanha, Holanda, Canadá, Reino Unido, Austrália e outros.
+A "Shadow Server" Foundation ajuda provedores e equipes de resposta a avisar os donos das máquinas infectadas.
+A fonte é o Departamento de Justiça dos Estados Unidos.
+A Apple detalhou como isola câmera e microfone do próprio sistema operacional.
+Num texto de quinta, dia doze, a equipe de segurança da Apple descreve os "Secure Exclaves".
+São ambientes isolados no chip, que processam câmera e microfone para recursos sempre ligados.
+Exemplos são o "Hey Siri" e o reconhecimento de pessoas no Home View.
+Para o sistema principal vão só metadados.
+No Home View, isso é um identificador da pessoa, a posição e o grau de confiança, sem áudio nem vídeo.
+No iPhone, o áudio de uma sessão ativa só é liberado depois que um componente isolado confere que o indicador de microfone está visível.
+Essa conferência é feita pelos pixels de fato desenhados na tela.
+Os exclaves rodam num microkernel próprio, baseado em capacidades, como o S E L quatro.
+Segundo a Apple, a verificação formal desse kernel achou falhas críticas que poderiam levar ao comprometimento total do kernel.
+A empresa avisa que a verificação ainda não cobre o kernel inteiro.
+A fonte é o "Apple Security Research".
+A Red Hat estuda como empurrar a memória fria das máquinas virtuais para S S D sem estragar a migração ao vivo.
+A migração ao vivo também aparece no Linux, por outro ângulo.
+Na K V M Forum, na quinta, dia doze, Peter Xu, engenheiro de virtualização da Red Hat, apresentou formas de economizar RAM em máquinas virtuais do Q E M U.
+Isso agora que a memória ficou cara por causa da I A.
+A ideia é usar a memória em camadas do kernel, que move páginas pouco usadas para S S Ds.
+O problema é que o Q E M U não sabe em que camada cada página está, e operações como a migração ao vivo sofrem com isso.
+Entre as saídas estudadas estão novas chamadas de sistema, e deixar o próprio Q E M U cuidar das camadas.
+A que ele apresenta usa interfaces que já existem: uma que consulta se as páginas estão na memória, e outra que pede para tirá-las de lá.
+Ela reduz bastante o problema, e uma mudança pequena no kernel resolveria o restante.
+A fonte é a página da palestra na K V M Forum de 2026.
+O tandem ponto C P P quase dobra a velocidade de modelos M O E grandes demais para a placa de vídeo.
+Num modelo M O E, cada token usa só alguns especialistas, partes da rede neural escolhidas por um roteador.
+O tandem ponto C P P é um conjunto de patches independente para o llama ponto C P P.
+Ele mantém na G P U os especialistas mais usados, e deixa a C P U ajudar com o resto.
+Na tabela do autor, o teste foi com o DeepSeek V quatro ponto um Flash, num PC com sessenta e quatro gigabytes de RAM.
+A placa era uma R T X cinquenta setenta T I, de dezesseis gigabytes.
+A velocidade passou de sete vírgula quatro para catorze vírgula dois tokens por segundo, um vírgula nove vez o llama ponto C P P puro.
+Nesse caso, o modelo tem cerca do dobro da RAM, e é lido de um S S D.
+O alvo é um usuário só, com placa de dezesseis a trinta e dois gigabytes.
+A atualização também compila para placas [EY1 EH1 M D IY1] com Rock M.
+A fonte é o repositório do tandem ponto C P P.
+O Kitten T T S dois clona vozes na C P U, mas o Piper ainda ganha em mini P Cs.
+No blog Terminal Bytes, um teste de sábado, dia catorze, comparou os dois num cenário de assistente de voz do Home Assistant.
+O Kitten T T S dois é um modelo de texto para fala de um vírgula sete bilhão de parâmetros, com pesos ternários e clonagem de voz.
+Com quatro threads num Mac Studio, uma frase de dois segundos levou três vírgula dois segundos para sair, e exigiu cerca de três gigabytes de RAM.
+O Piper respondeu a mesma frase em trinta e cinco milissegundos, com uns trezentos megabytes.
+O autor avisa que um mini P C de quatro núcleos, como os com Intel N cento e cinquenta, deve ser mais lento que o Mac.
+Por isso, ele recomenda manter o Piper nessas máquinas.
+Outro alerta: o código é Apache dois ponto zero, mas os pesos têm licença própria.
+O uso comercial é gratuito só até um milhão de dólares de receita ou investimento.
+A fonte é o Terminal Bytes.
+A Next cloud lançou o Office Desktop, suíte de escritório livre que funciona offline.
+O aplicativo foi publicado na sexta, dia treze, para Windows, mac O S e Linux.
+Ele usa o Euro Office, suíte colaborativa desenvolvida na Europa, cuja primeira versão de produção saiu em junho.
+Ele abre os formatos do Microsoft Office, como o D O C X, e também os formatos abertos, como o O D T.
+E edita arquivos localmente, sem internet.
+Conectado a um servidor Next cloud, permite edição em tempo real com a equipe.
+E um mesmo aplicativo pode se ligar a vários servidores.
+A fonte é o blog da Next cloud.
+Um desenvolvedor brasileiro fez um emissor gratuito de N F S e, com núcleo em Rust e tela em Flutter.
+No Tab News, William Lala apresenta o Baiacu N F S e, emissor para Windows que fala direto com o Ambiente Nacional da N F S e.
+Ele já traz o leiaute com I B S e C B S, da Reforma Tributária.
+Toda a regra fica num núcleo em Rust, de cerca de vinte e cinco mil linhas, sem tela.
+Esse núcleo cuida do banco S Q Lite cifrado, da assinatura do X M L com o certificado A um e da validação contra os esquemas oficiais.
+Ele também gera a D A N F S e em PDF.
+A interface em Flutter fala com esse núcleo por uma única função, via F F I, que troca JSON.
+E o trabalho pesado roda numa thread do núcleo, para a tela não travar.
+O autor conta que a ordem dos elementos no X M L exigida pela Sefin deu mais trabalho que qualquer regra de negócio.
+E recomenda começar pelo ambiente de homologação.
+A fonte é o Tab News.
+Por fim, no JavaScript, passar o buffer no lugar da view muda os bytes que vão para a verificação de assinatura.
+Também no Tab News, Centelha explica um erro comum ao lidar com dados binários no navegador.
+Um array de bytes criado com o método "subarray" é só uma janela sobre a memória, com início e tamanho próprios.
+Mas a propriedade "buffer" aponta para o "Array Buffer" inteiro, a memória toda por baixo.
+Trocar a view pela propriedade "buffer" dela faz o hash ou a verificação processar bytes a mais.
+A regra é passar a própria view quando a [EY1 P IY1 AY1] aceita um array tipado, como na verificação do "Subtle Crypto".
+Ou copiar exatamente o intervalo com o método "slice", quando a [EY1 P IY1 AY1] exige um "Array Buffer" isolado.
+A fonte é o Tab News.
