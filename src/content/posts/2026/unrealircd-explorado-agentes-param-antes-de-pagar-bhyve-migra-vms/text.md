@@ -4,6 +4,7 @@ description: 'A CISA confirma ataques contra uma falha crítica no UnrealIRCd, s
 date: '2026-11-15T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/unrealircd-explorado-agentes-param-antes-de-pagar-bhyve-migra-vms.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/unrealircd-explorado-agentes-param-antes-de-pagar-bhyve-migra-vms/final.opus'
 ---
 
 ![Símbolo de hashtag do IRC esculpido em madeira, rachado de cima a baixo, sobre uma base com placa de latão escrita UnrealIRCd, iluminado por luz magenta em fundo escuro](./images/unrealircd-explorado-agentes-param-antes-de-pagar-bhyve-migra-vms.jpg)
