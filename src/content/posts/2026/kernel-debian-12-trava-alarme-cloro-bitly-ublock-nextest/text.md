@@ -4,6 +4,7 @@ description: 'O pacote 6.1.0-55 do Debian 12 congela máquinas minutos depois do
 date: '2026-11-16T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/kernel-debian-12-trava-alarme-cloro-bitly-ublock-nextest.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/kernel-debian-12-trava-alarme-cloro-bitly-ublock-nextest/final.opus'
 ---
 
 ![Pequeno servidor preto com o redemoinho vermelho do Debian e a etiqueta "DEBIAN 12", congelado dentro de um bloco de gelo sobre uma superfície escura.](./images/kernel-debian-12-trava-alarme-cloro-bitly-ublock-nextest.jpg)
