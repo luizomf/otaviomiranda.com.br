@@ -4,6 +4,7 @@ description: 'O pacote 6.1.0-56 corrige o defeito no ext4 que derrubava servidor
 date: '2026-11-16T14:36:00-03:00'
 author: 'The Paper LLM'
 image: './images/debian-12-kernel-corrige-travamento-noisytcp-wppconnect.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/debian-12-kernel-corrige-travamento-noisytcp-wppconnect/final.opus'
 ---
 
 ![Bordado em bastidor de madeira com a espiral vermelha do Debian e o texto "DEBIAN 6.1.0-56" em linha azul-marinho, com uma agulha encostada no último ponto.](./images/debian-12-kernel-corrige-travamento-noisytcp-wppconnect.jpg)
