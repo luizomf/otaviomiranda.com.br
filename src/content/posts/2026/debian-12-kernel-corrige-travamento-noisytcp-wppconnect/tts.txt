@@ -1,0 +1,348 @@
+Debian doze ganha kernel que acaba com o travamento e mantém a correção do [N OY1 Z IY0] T C P, e versão do W P P Connect no N P M roubava sessões do WhatsApp.
+Esta edição da tarde começa com uma continuação.
+O Debian publicou o kernel que corrige o travamento do Debian doze, noticiado hoje cedo.
+E o pacote problemático era justamente o que fechava uma falha antiga no T C P do Linux.
+Depois, um ataque de cadeia de suprimentos num projeto open source brasileiro de automação de WhatsApp.
+Também tem uma história de infraestrutura sobre D N S e uma mudança no compilador do Rust.
+E um projeto em que agentes de IA escreveram um solucionador de quebra-cabeças inteiro.
+Vamos ao primeiro assunto: o Debian doze recebe o kernel que corrige o travamento.
+E quem segurou a atualização ficou sem a correção do [N OY1 Z IY0] T C P.
+Na edição de hoje cedo, contamos que o kernel seis ponto um ponto cento e noventa e dois, revisão um, estava travando servidores.
+Era o kernel do Debian doze, o "bookworm", e as máquinas paravam poucos minutos depois do boot.
+Ele é instalado pelo pacote de imagem do kernel seis ponto um ponto zero, revisão cinquenta e cinco.
+E, naquele momento, ainda não havia correção.
+Isso mudou ao longo da manhã.
+Salvatore Bonaccorso, do time de kernel do Debian, publicou no relatório do bug um kernel de teste, e pediu que os afetados testassem.
+Vários usuários responderam no próprio bug que o travamento sumiu.
+Um deles tinha reproduzido o problema numa máquina virtual, limpando o cache de páginas do kernel e gravando um arquivo.
+Com o kernel novo, ele disse que não conseguiu mais reproduzir.
+Em seguida, o Debian aceitou no repositório de segurança a versão seis ponto um ponto cento e noventa e dois, revisão dois.
+A entrada de changelog dela tem uma linha só, que fecha aquele bug.
+Ela corrige o erro de ponteiro nulo no alocador de blocos do E X T quatro, o sistema de arquivos padrão do Debian.
+Era exatamente o que o mantenedor tinha apontado como causa provável.
+A versão nova instala o pacote de imagem cinquenta e seis.
+Às duas e quarenta da tarde, no horário de Brasília, conferimos o índice do repositório de segurança do bookworm, gerado ao meio-dia e cinquenta e seis.
+Os metapacotes do kernel para PCs de sessenta e quatro bits, incluindo a variante de nuvem, já apontavam para o cinquenta e seis.
+Os de ARM sessenta e quatro e os de trinta e dois bits também.
+O bug continuava aberto, e durante o dia chegaram relatos do mesmo travamento em ARM sessenta e quatro e em máquinas de trinta e dois bits.
+E um dos usuários que confirmaram o kernel de teste rodava a variante de nuvem, comum em V P S.
+Como o kernel de teste só existia para PCs de sessenta e quatro bits, ninguém tinha confirmado no bug, até aquele momento, a correção nas outras arquiteturas.
+Agora vem o motivo para não ficar parado no kernel antigo.
+A revisão um do cento e noventa e dois era uma atualização de segurança.
+Entre muitas correções, ela trazia a do [N OY1 Z IY0] T C P, registrada como C V E 2026, noventa e nove dois oito oito.
+É uma falha no código T C P do Linux que permite derrubar o servidor remotamente, sem login.
+A revisão dois mantém essa correção.
+Quem seguiu a recomendação de hoje cedo e segurou o kernel, ou voltou para o cinquenta e quatro pelo Grub, está rodando um kernel sem ela.
+Como funciona o [N OY1 Z IY0] T C P.
+O pesquisador Hyunwoo Kim publicou os detalhes na lista O S S Security no domingo, dia quinze, à uma da tarde no horário de Brasília.
+Foi quando terminou o embargo combinado com as distribuições.
+Quando um cliente abre uma conexão T C P, o kernel cria um registro pequeno para aquela conexão ainda incompleta.
+Esse registro se chama "request socket", e fica guardado numa tabela.
+Os [S IH1 N] "cookies" são uma defesa contra inundação de pedidos de conexão.
+Em vez de guardar o registro, o kernel codifica as informações no próprio pacote de resposta, e reconstrói o registro quando o cliente responde.
+O bug é uma condição de corrida.
+Um processador encontra um registro na tabela, mas, antes de segurá-lo, outro processador libera esse registro.
+Esse segundo processador reconstrói um registro novo, por [S IH1 N] "cookie", para a mesma conexão e no mesmo endereço de memória.
+O primeiro processador pega o registro novo, que passa na conferência, mas não tem associado o socket que escuta a porta.
+O kernel segue um ponteiro nulo e entra em pânico.
+Para vencer essa corrida, o atacante precisa que os pacotes sejam processados ao mesmo tempo em processadores diferentes.
+Segundo o aviso, ele consegue isso porque fragmentos I P v quatro e pacotes T C P comuns caem em filas de recepção diferentes.
+Por isso, a falha atinge máquinas com duas ou mais filas de recepção na placa de rede.
+Ou com o R P S ligado, o recurso que espalha os pacotes recebidos entre os processadores.
+Basta um serviço T C P comum exposto, como [EH1 N JH AH0 N] [EH1 K S], Apache ou S S H com a configuração padrão.
+Os tempos medidos pelo autor mostram onde está o risco.
+Numa máquina virtual com "QEMU" e K V M, o travamento veio entre cinco segundos e dois minutos de ataque.
+Num servidor físico ocioso com oito filas, levou cerca de catorze horas, mesmo com uma prova de conceito ajustada para aquele ambiente.
+Como o bug está no kernel, derrubar um servidor web dentro de um container derruba a máquina inteira.
+O aviso descreve ainda um segundo caminho, que pode levar a uso de memória já liberada.
+Mas o próprio autor diz que ele é difícil de disparar.
+O defeito entrou no kernel num commit de outubro de 2015, e a correção no kernel original é de três de novembro.
+Com isso, nas palavras do autor, a falha afeta "quase todas as distribuições".
+No rastreador de segurança do Debian, ela aparece corrigida no Debian treze, o "trixie", pelo kernel seis ponto doze ponto cento e dezessete.
+No Debian doze, pelo seis ponto um ponto cento e noventa e dois, revisão um, e no "unstable", pelo sete ponto três ponto quatro.
+No Ubuntu, a página da falha mostrava o pacote do kernel como "Needs evaluation", ou seja, ainda em avaliação.
+Era assim em todas as versões suportadas, no momento da nossa consulta.
+O repositório do pesquisador no "Git Hub" tinha só o texto do aviso, sem código de exploração.
+Então, o que fazer em cada Debian doze?
+Primeiro, atualizar a lista de pacotes e conferir a versão candidata do metapacote do kernel.
+Ela deve ser a seis ponto um ponto cento e noventa e dois, revisão dois.
+Se a máquina usa outra variante, consulte o metapacote dela: o de nuvem nas imagens de nuvem, os de ARM sessenta e quatro, ou o de trinta e dois bits.
+Se você segurou o metapacote hoje cedo, o "apt-mark showhold" lista o que está segurado.
+Libere com o "unhold", seguido do nome do metapacote, e rode a atualização com o apt, que instala o pacote cinquenta e seis.
+Com o apt-get, use o "dist-upgrade".
+O "upgrade" simples do apt-get não instala pacotes novos, e deixa o kernel retido.
+Antes de reiniciar, confirme que tem acesso ao console do provedor, porque o bug ainda estava aberto e houve relatos em outras arquiteturas.
+Depois do boot, o comando que mostra a versão do kernel em execução deve indicar o cinquenta e seis.
+Se a máquina roda o kernel seis ponto doze, do "bookworm backports", este pacote não vale para ela.
+Nesse caso, a versão que o apt mostra termina com a marca do backports.
+Na nossa consulta, o backports estava no seis ponto doze ponto noventa e cinco, anterior à correção.
+No Debian treze, o seis ponto doze ponto cento e sete ainda aparece como vulnerável, e a correção veio no seis ponto doze ponto cento e dezessete.
+Até sair um kernel novo no backports, as medidas temporárias que vêm a seguir são o que existe.
+Se não der para reiniciar agora, o aviso do [N OY1 Z IY0] T C P traz duas medidas temporárias.
+Uma é desligar os [S IH1 N] "cookies", numa configuração de rede do kernel.
+Essa configuração vale por namespace de rede, então precisa ser aplicada em cada container que tem rede própria.
+E a máquina perde a proteção contra inundação de [S IH1 N].
+A outra é deixar a interface que recebe tráfego externo com uma única fila de recepção, e desligar o R P S e o R F S.
+A ferramenta "ethtool" mostra quantas filas a interface usa.
+Os comandos exatos estão no artigo escrito.
+As duas medidas são paliativos.
+A correção de verdade é o kernel novo.
+As fontes deste bloco são o aviso do [N OY1 Z IY0] T C P na lista O S S Security e o repositório do pesquisador.
+Também os rastreadores de segurança do Debian e do Ubuntu, o changelog do pacote, a página do kernel no Debian Tracker e o relatório do bug.
+Agora, o segundo assunto: duas versões do W P P Connect publicadas no N P M roubavam segredos e sessões do WhatsApp.
+O W P P Connect é um projeto open source, mantido por uma equipe do Brasil, que expõe funções do WhatsApp Web para o Node ponto J S.
+Ele é muito usado para montar bots, atendimento automatizado e disparo de mensagens.
+O projeto tem duas peças principais no N P M.
+Uma é a biblioteca, com cerca de sete mil e quinhentos downloads na semana de nove a quinze de novembro.
+A outra é um servidor pronto, construído em cima dela, com cerca de mil e quinhentos.
+A análise é da empresa de segurança SafeDep, publicada nesta segunda, dia dezesseis.
+Segundo ela, a versão dois ponto quatro ponto um da biblioteca e a dois ponto dez ponto oitenta e dois do servidor traziam um módulo escondido.
+Ele se apresentava como "diagnóstico de ambiente", e enviava dados da máquina para um bot do Telegram.
+A versão da biblioteca saiu no domingo, dia quinze, às oito e trinta e uma da noite, no horário de Brasília.
+A do servidor saiu à meia-noite e nove desta segunda.
+Nenhuma das duas tinha script de instalação.
+O código rodava ao importar a biblioteca ou ao iniciar o servidor.
+Uma vez por dia em cada máquina, o módulo copiava as variáveis de ambiente.
+É onde costumam ficar chaves de [EY1 P IY1 AY1], senhas de banco e credenciais de nuvem.
+Ele também lia o começo de arquivos de segredos e de configuração, como os arquivos ponto env e arquivos de configuração em JSON.
+Pegava ainda até cinco arquivos de sessão do WhatsApp, na pasta onde o W P P Connect os guarda por padrão.
+E enviava tudo, junto com o I P público.
+Segundo a SafeDep, com esses arquivos de sessão o atacante pode assumir a conta de WhatsApp sem escanear QR code.
+A versão do servidor ainda esperava entre trinta segundos e quatro minutos antes de agir.
+E não rodava quando detectava C I, sandbox de pesquisa ou proxy de interceptação, justamente os ambientes onde costuma ser analisada.
+As duas versões saíram pelo próprio fluxo de publicação confiável do projeto no "Git Hub Actions", o chamado "trusted publishing".
+Nesse modelo, o N P M aceita o pacote porque ele veio do workflow oficial do repositório, sem um token guardado em algum lugar.
+O que isso prova é a origem do build.
+Não prova que o código foi revisado.
+Segundo a análise publicada numa issue do projeto, os commits com o código malicioso foram feitos com a conta de um membro da equipe.
+Depois, segundo a SafeDep, o histórico do Git foi reescrito.
+A tag da versão dois ponto quatro ponto um no "Git Hub" aponta para uma cópia com as mesmas mensagens e datas, mas sem o código malicioso.
+Quem conferisse o código da tag no "Git Hub" não acharia nada.
+O que denuncia a diferença é um campo que o N P M registra, o "Git Head", apontando para o commit que realmente gerou o pacote.
+O projeto não explicou como o acesso aconteceu.
+A resposta veio em poucas horas.
+As correções que removem o módulo foram integradas aos dois repositórios por volta de meia-noite e cinquenta desta segunda, no horário de Brasília.
+Na nossa consulta ao registro do N P M, as duas versões estavam marcadas como obsoletas, com um aviso de "Security Incident", incidente de segurança.
+E a versão marcada como a mais recente tinha voltado para a dois ponto quatro ponto zero e a dois ponto dez ponto oitenta e um.
+Um mantenedor escreveu na issue que ela fica aberta até confirmarem três coisas.
+A revisão dos acessos de publicação, a revogação das credenciais do bot e o aviso aos usuários afetados.
+Se você usa W P P Connect, comece verificando se instalou as versões ruins.
+Liste as dependências com o N P M, e procure a dois ponto quatro ponto um e a dois ponto dez ponto oitenta e dois no "package lock" ponto JSON.
+Depois, fixe as versões limpas: a dois ponto quatro ponto zero da biblioteca e a dois ponto dez ponto oitenta e um do servidor.
+É o que o próprio aviso do N P M recomenda, até sair uma versão revisada.
+E, se alguma das versões ruins rodou, trate como vazado tudo o que o processo conseguia ler.
+Isso inclui variáveis de ambiente, arquivos ponto env e arquivos de configuração.
+Troque essas credenciais, encerre as sessões do WhatsApp daquela máquina e conecte de novo.
+As fontes deste bloco são a análise da SafeDep, a issue do projeto no "Git Hub" e o registro do pacote no N P M.
+O próximo assunto é de infraestrutura.
+A S dois trocou o "Route Fifty Three" por um servidor D N S próprio, porque a [EY1 P IY1 AY1] não acompanhava a criação de clientes.
+A S dois é um serviço de armazenamento de streams na nuvem.
+É uma espécie de log em que aplicações gravam e leem eventos em ordem.
+Cada cliente organiza seus streams em "basins", e cada "basin" vira um subdomínio próprio.
+Funciona do mesmo jeito que os "buckets" do S três, da A W S.
+Esse subdomínio aponta para o grupo de servidores que atende aquele "basin".
+Num texto publicado nesta segunda, dia dezesseis, Cristian Caciuc, da S dois, conta por que a empresa acabou escrevendo e operando um servidor D N S autoritativo.
+Autoritativo é aquele que dá a resposta final sobre um domínio, diferente dos resolvedores, que só repassam e guardam em cache.
+O ponto de partida era um limite de cem "basins" por conta, que os clientes contornavam.
+Para liberar "basins" ilimitados, a S dois precisava de registros D N S ilimitados e com consistência forte.
+Um "basin" recém-criado tem de resolver na hora.
+Se alguém consultar o nome um instante antes de o registro existir, recebe um "N X Domain", a resposta de que esse nome não existe.
+E os resolvedores guardam essa resposta negativa em cache por um tempo.
+Aí o cliente fica esperando por um "basin" que já existe.
+O "Route Fifty Three", o D N S gerenciado da A W S, aguenta registros sem limite.
+O problema estava na [EY1 P IY1 AY1]: segundo o texto, ela limita as alterações a cerca de cinco por segundo.
+O autor ressalva que a documentação da A W S mudou recentemente, e o limite pode ser maior hoje.
+A empresa descobriu isso na prática, quando alguém criou dezenas de milhares de "basins" rapidamente, de má-fé, e esgotou a cota.
+Formou-se uma fila de trabalho que levou algumas horas para ser processada, e as atualizações de D N S normais ficaram presas nela.
+Foi aí que nasceu o limite de cem "basins".
+Agrupar as alterações em lotes quebraria a exigência de disponibilidade imediata.
+E os outros D N S gerenciados que eles avaliaram, do Google Cloud, da Cloudflare e da Azure, tinham limites de escrita parecidos.
+A solução foi fazer o D N S consultar diretamente o banco de contas que já existia, no "Cloud Spanner", do Google.
+Cada pergunta de D N S vira uma consulta a esse banco, e não existe uma cópia separada para sincronizar.
+Mesmo sendo uma empresa que programa em Rust, a S dois escreveu o servidor em Go, com uma biblioteca de D N S para Go.
+O motivo é que as ferramentas para o Spanner são mais maduras nesse ecossistema.
+A conformidade com as especificações do D N S foi testada com o "Ferret", uma ferramenta apresentada num artigo acadêmico sobre bugs em servidores D N S.
+Os desafios "ACME", usados para emitir certificados curinga, foram delegados, por um registro de apelido, para uma zona no "Route Fifty Three".
+Assim, o servidor novo não precisa servir registros de texto dinâmicos.
+O maior medo era o ataque de "N X Domain".
+Alguém dispara consultas para milhões de nomes inventados, e cada uma vira uma consulta nova ao banco.
+A saída foi colocar o D N S "Firewall" da Cloudflare na frente, que funciona como um proxy reverso para D N S.
+E aceitar na origem só tráfego vindo dos endereços I P da Cloudflare.
+A equipe também criou um teste de regressão que garante que as respostas S O A e N S nunca revelem os endereços dos balanceadores de origem.
+O servidor roda em dois clusters G K E, do Google, em regiões separadas.
+Com isso vieram alertas, runbooks e plantão para um sistema que antes era problema de outra empresa.
+A lição vale para qualquer arquitetura.
+Um serviço gerenciado pode ser ótimo no que anuncia, e ainda assim ter um limite secundário, como a taxa de escrita da [EY1 P IY1 AY1].
+E esse limite vira o gargalo do seu produto.
+Quando um dado precisa de consistência forte, copiar esse dado para outro sistema cria uma janela de inconsistência.
+Ler direto da fonte da verdade elimina a cópia, mas traz para dentro de casa a operação e a superfície de ataque.
+A fonte deste bloco é o blog da S dois, num texto que brinca com a frase "é sempre o D N S".
+Agora, o Rust liga o frontend paralelo do compilador por padrão no canal "nightly".
+O compilador do Rust tem duas grandes etapas.
+O "frontend" analisa o código, expande macros e faz a checagem de tipos e o "borrow checking".
+Essa é a verificação de empréstimos e tempos de vida, que é a marca da linguagem.
+O "backend" usa o L L V M para gerar código de máquina.
+O backend já usa várias threads há muito tempo, e o frontend rodava numa thread só.
+O suporte a um frontend paralelo existe há anos, e desde 2023 dá para ligá-lo manualmente no "nightly".
+Nesta segunda, dia dezesseis, Jakub Beránek anunciou, em nome do time do compilador, que ele passou a vir ligado por padrão.
+Isso vale no canal "nightly", desde a build de catorze de novembro.
+A ideia é encontrar problemas no uso real antes de estabilizá-lo.
+Nos benchmarks do projeto, compilando um único crate do zero, o tempo médio do "cargo check" caiu vinte e dois porcento com duas threads.
+Caiu trinta e oito porcento com quatro, e quarenta e quatro porcento com oito.
+Em alguns crates, como "nalgebra", "cargo" e "diesel", o "cargo check" ficou quase três vezes mais rápido com oito threads.
+O ganho cai quando o processador já está ocupado.
+No "cargo check" do projeto inteiro do Cargo, com todas as dependências e numa máquina de oito núcleos, o resultado foi menor.
+Com oito threads, o tempo foi de trinta e seis vírgula sete para trinta vírgula oito segundos, cerca de quinze porcento.
+Isso acontece porque o Cargo já compila vários crates em paralelo, e o L L V M já ocupa os núcleos.
+Nas recompilações incrementais, que são o dia a dia de quem edita código, a melhora média foi de só três a cinco porcento.
+E o post avisa que faltam bons benchmarks para esse caso.
+Para começar, o "nightly" usa só duas threads no frontend, uma escolha conservadora para não aumentar muito o uso de memória.
+Dá para mudar o número de threads com uma flag instável, pelas variáveis de ambiente do Rust ou no arquivo de configuração do Cargo.
+Com o valor um, o recurso fica desligado.
+Há limitações conhecidas: a ordem das mensagens de erro pode variar entre execuções.
+E, em alguns casos, o binário gerado não é reproduzível, o que o time trata como bug.
+Quem usa o canal "stable" não muda nada por enquanto.
+O time pede que travamentos do compilador e problemas de reprodutibilidade sejam relatados no "Git Hub" ou no "Zulip".
+A fonte é o blog oficial do Rust.
+Fechando os assuntos principais: um autor diz ter feito com agentes o solucionador de Sokoban mais forte.
+E ele se apoiou num verificador que os agentes não podiam editar.
+Sokoban é um jogo de quebra-cabeça japonês de 1982.
+Um personagem empurra caixas até alvos marcados no chão, sem poder puxá-las.
+Parece simples, mas um empurrão errado deixa a fase sem solução, e o número de caminhos possíveis explode.
+Por isso, resolver Sokoban por computador é um problema clássico de busca.
+Andrew Healey publicou o "Soksolv", um solucionador escrito em Go.
+Segundo ele, o programa resolve mais fases que qualquer solucionador publicado, nos dois conjuntos de teste usados pela comunidade.
+Isso inclui vinte e quatro fases que nenhum programa tinha resolvido antes.
+E ele é cerca de três vírgula três vezes mais rápido, no tempo total, nas fases que os outros também resolvem.
+A comparação direta, no mesmo hardware, foi só contra o "Festival", o rival mais forte.
+Com limite de dez minutos por fase, o Soksolv resolveu dez fases a mais num conjunto e vinte a mais no outro.
+Para os demais, ele usou os números publicados por cada projeto.
+O autor afirma que não escreveu nenhuma linha de código à mão.
+Foram catorze dias numa sessão longa do "Claude Code" com o Opus cinco ponto cinco.
+Ele usou cerca de quatrocentos e trinta subagentes, entre Sonnet cinco ponto cinco, Opus cinco ponto cinco e Fable cinco ponto dois.
+O custo equivale a uns três mil e quinhentos dólares em preço de [EY1 P IY1 AY1].
+E foram quinze mil horas de processador virtual para experimentos e benchmarks.
+A organização é a parte que vale copiar.
+Um agente planejador escolhia experimentos e promovia os vencedores.
+Agentes construtores implementavam uma hipótese por branch.
+E agentes analistas diagnosticavam e revisavam, mas não escreviam código do solucionador.
+O que segurava tudo era o verificador.
+Cada solução proposta era repetida, movimento a movimento, na fase original, por um verificador congelado.
+Esse verificador ficava num pacote separado, que os agentes não podiam editar.
+Só contava como resolvida a fase que passasse por ele.
+Toda regra nova de poda, que corta caminhos considerados sem saída, tinha de reproduzir duas mil seiscentas e trinta e duas soluções já conhecidas.
+Se cortasse uma só, era recusada, e isso barrou duas regras erradas antes de entrarem no código.
+O autor diz não ter visto sinal de agentes trapaceando.
+As regras iniciais também mudaram no caminho.
+No começo, os agentes não podiam ler o código dos rivais.
+Quando o progresso empacou em cerca de noventa e três porcento das fases, essa regra caiu, e os agentes passaram a estudar outros solucionadores.
+Healey também relata que os agentes evitavam risco a ponto de desperdiçar tempo de máquina.
+Eles insistiam em melhorias de um porcento, e precisaram ser empurrados para apostas maiores.
+Dá para ligar isso ao relato do "nextest", da edição de hoje cedo.
+Lá, Rain descreveu o modelo como alguém que escolhe uma colina e a escala até o topo, sem perguntar se é a colina certa.
+E um teste escrito pelo agente acabou transformando um erro em regra.
+Aqui, Healey chama os agentes de ótimos escaladores de colina.
+A diferença é que o critério de sucesso ficou fora do alcance deles, num verificador que eles não podiam reescrever.
+As fontes são o post de Andrew Healey e o repositório do Soksolv.
+Agora, os destaques rápidos de hoje.
+Primeiro, um teste técnico falso numa extensão do V S Code buscava o endereço do servidor numa transação de Ethereum.
+O desenvolvedor Pavel Savinov se ofereceu no tópico "Who wants to be hired?" do "Hacker News".
+No dia dez, ele recebeu o e-mail de um suposto recrutador para uma vaga de DevOps, citando empresas reais do currículo dele.
+O teste só podia ser feito numa extensão da loja oficial do V S Code.
+Ele não instalou: baixou o pacote e leu.
+A extensão em si não tinha malware.
+Ela mandava o nome da máquina e o identificador do V S Code para o servidor.
+Ao abrir o painel do teste, ela recebia dois códigos.
+Um era exibido na tela, uma busca binária inofensiva.
+O outro era executado com acesso total ao sistema.
+Para um dispositivo desconhecido, o código executado tinha cento e cinquenta bytes inofensivos.
+Depois que o dispositivo se registrava, passava a ter oito mil seiscentos e sessenta e cinco bytes de um carregador ofuscado.
+Esse carregador lia a última transação de uma carteira de Ethereum, e tirava dela o I P do servidor.
+De lá vinham uma ferramenta de acesso remoto e um programa que rouba dados do navegador.
+Esse programa leva chaves do sistema, credenciais do Git e arquivos de carteiras de criptomoedas.
+Os domínios da operação levam o nome "Huntrole", não devem ser acessados, e estão listados no artigo escrito.
+A extensão tinha cento e vinte e seis instalações quando ele publicou, no dia dezesseis.
+Na nossa consulta à [EY1 P IY1 AY1] da loja, nesta tarde, ela já não aparecia.
+A lição para quem está procurando emprego: rode teste técnico numa máquina virtual ou descartável, nunca no computador com suas credenciais.
+A fonte é o blog de Pavel Savinov.
+O próximo destaque vem do CERT C C.
+Ele mostra que nomes "diferentes" podem ser o mesmo arquivo no mac O S, e furar regras de exclusão em Deno, "setup tools" e outras ferramentas.
+O sistema de arquivos do mac O S, o A P F S, trata como o mesmo nome grafias Unicode diferentes.
+Um e com acento agudo pode ser um caractere só, ou uma letra e seguida de um acento combinado.
+E há variantes como a letra alemã que equivale a dois esses, e os próprios dois esses.
+Ferramentas que comparam caminhos byte a byte acham que são arquivos diferentes.
+A nota, publicada nesta segunda, dia dezesseis, detalha quatro falhas com C V E.
+No Deno, as permissões que negam leitura, escrita, execução de programas e chamadas a código nativo podiam ser contornadas no mac O S.
+No "setup tools", antes da versão oitenta e três, arquivos excluídos pelo manifesto do pacote podiam acabar no pacote publicado.
+O "go slug", da HashiCorp, podia ignorar o arquivo de exclusões do Terraform.
+No libarchive, um arquivo compactado preparado podia sobrescrever arquivos fora do esperado.
+O exemplo da nota é o arquivo de contas do sistema, mas a Apple diz não ser afetada por esse caso.
+A recomendação é atualizar, e comparar caminhos do jeito que o sistema de arquivos compara.
+A fonte é a nota de vulnerabilidade do CERT C C.
+Depois, o "Gitea" vinte e oito ponto quatro corrige execução de comandos no servidor e vazamento de hash de senha.
+O Gitea é um servidor Git auto-hospedado.
+A versão vinte e oito ponto quatro ponto zero, de domingo, dia quinze, fecha uma corrida na criação de repositórios com inicialização automática.
+Um usuário com permissão de criar repositórios podia empurrar um conteúdo preparado antes do fim da inicialização.
+Com isso, sobrescrevia um hook do Git e rodava comandos como o usuário do Gitea.
+A versão também corrige a busca de repositórios do painel.
+Desde a vinte e oito ponto zero ponto zero, ela devolvia a qualquer usuário logado o hash da senha, o salt e o e-mail do dono de repositórios.
+Isso valia para repositórios visíveis que tivessem status de commit.
+Os códigos T O T P, antes aceitos sem limite de tentativas, passam a bloquear a conta por quinze minutos depois de cinco erros.
+Vários dos problemas foram reportados pela Anthropic.
+É a sequência da vinte e oito ponto três, que noticiamos em dois de novembro.
+A fonte deste destaque é o blog do Gitea.
+Na sequência, a Snap Store recebe centenas de apps num fim de semana, quase todos de quatro contas.
+Segundo o O M G Ubuntu, a loja de pacotes Snap, da Canonical, costuma receber de quinze a trinta apps novos por dia.
+Essa é uma estimativa do próprio site.
+Desde treze de novembro, o número passou das centenas, puxado por quatro contas.
+Uma delas publicou mais de cento e catorze apps em vinte e quatro horas.
+Os apps seguem o mesmo modelo visual, vão de editores de P D F a clones de Pac-Man, e se declaram sob a licença M I T.
+Mas nenhum aponta para o código-fonte.
+Alguns usam nomes de pacote de softwares conhecidos, como Topaz Video A I e Creative Cloud Pro, aparentemente para aparecer em buscas.
+O autor instalou alguns, eles fizeram o que prometiam, e ele não viu nada malicioso.
+Ainda assim, vale olhar quem é o publicador antes de instalar.
+A fonte é o site O M G Ubuntu.
+Outro destaque: o "TuxTalk" leva ditado por voz offline ao Fedora, com o leitor de teclado isolado.
+A Fedora Magazine publicou nesta segunda, dia dezesseis, um guia do TuxTalk, uma ferramenta livre de ditado, com licença M I T.
+Você segura F oito, fala, e o texto aparece onde está o cursor.
+O modelo de voz roda no próprio computador.
+O padrão é o "Parakeet", da Nvidia, e o "Whisper", da OpenAI, cobre noventa e nove línguas.
+O destaque é o desenho de segurança.
+No "Wayland", um programa comum não enxerga teclas apertadas em outras janelas.
+Então o TuxTalk usa um serviço do system D com usuário dinâmico, sem rede, sem acesso às pastas pessoais, e só com permissão de ler o teclado.
+E esse serviço reporta apenas as teclas de atalho, nunca o que você digita.
+Para escrever, ele usa um dispositivo do kernel que permite apertar teclas, mas não lê-las.
+O pacote R P M não é assinado, por isso o guia manda conferir o checksum.
+O autor diz que não sabe programar, e que o código foi escrito pelo Claude.
+A fonte deste destaque é a Fedora Magazine.
+Agora, um domínio que nem resolve aparece em oitavo lugar no ranking "Majestic Million".
+O Majestic Million ordena domínios pelo número de sub-redes diferentes com links para eles.
+E muita ferramenta de segurança e de crawler usa listas assim como sinal de confiança.
+Jack, do blog jack ponto cab, encontrou um domínio de nome aleatório em oitavo lugar, logo depois da Apple.
+O mesmo domínio estava em trigésimo oitavo no "Tranco", uma lista criada justamente para resistir a manipulação.
+Mas o Tranco também usa dados do Majestic.
+Quando ele tentou acessar, o domínio não resolvia.
+Pelos registros de transparência de certificados, o domínio só foi comprado pela primeira vez em onze de novembro, depois da maior parte dos links.
+A ferramenta do Majestic mostrava duzentos e quarenta e um milhões de backlinks, e o Ahrefs, cinquenta e três.
+Ele não sabe explicar o que aconteceu.
+A lição é não usar posição em ranking como prova de que um domínio é confiável.
+A fonte é o blog jack ponto cab.
+No "Tab News", uma ficha curta para dizer à IA o que o código precisa garantir.
+Centelha mostra um pedido em JSON com quantidade, preço unitário e total.
+Esse pedido passa num schema que confere os limites de cada campo, mesmo com a conta errada.
+Isso acontece porque a relação entre os três campos nunca foi escrita no contrato.
+A proposta é preencher uma ficha antes de pedir código, testes ou prova à IA.
+Nela vão a regra, as entradas e seus limites, um contraexemplo, a evidência exigida e o que fica fora do escopo.
+O texto ainda separa o que cada verificação responde: parsing, validação de schema, testes e prova formal.
+A fonte deste destaque é o Tab News.
+Também no Tab News, uma análise de um vírgula oito milhão de preços diz que desconto anunciado raramente significa preço menor.
+O autor do "cloo ponto be", um site de ofertas, comparou cada produto com o próprio histórico de preços em lojas online brasileiras.
+O período foi de dezenove de outubro a dezesseis de novembro.
+Ele olhou dezenove mil ofertas com desconto anunciado de vinte porcento ou mais, e pelo menos sete dias de histórico.
+Dessas, oitenta e sete vírgula oito porcento não estavam abaixo do preço habitual do produto.
+Pelo critério dele, só conta como abaixo o preço pelo menos três porcento menor que a média do período.
+Descontos maiores não significaram preços mais baixos.
+Os dados vêm das interfaces de programação das lojas e de programas de afiliados.
+A amostra puxa para produtos populares e não é um censo.
+E o índice é aberto, com dados em JSON e C S V.
+Para a Black Friday, a dica dele é ignorar o tamanho do desconto e olhar o histórico.
