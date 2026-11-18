@@ -1,0 +1,304 @@
+Java for Shell: falha no decodificador Base sessenta e quatro do Java abre servidores antes do login, e Estados Unidos exigem licença para chips de IA enviados ao Brasil.
+Hoje a edição abre com a falha mais urgente da semana para quem roda Java em servidor.
+É um erro de memória no decodificador Base sessenta e quatro.
+Segundo os pesquisadores que o acharam, ele pode ser explorado antes do login em vários produtos conhecidos.
+Depois vem um pacote oficial da Microsoft no [P AY1 P IY1 AY1] que roubava credenciais só por ser instalado.
+Na terceira história, a regra americana que passa a exigir licença para enviar chips avançados de IA ao Brasil.
+Fechamos o bloco principal com o GPT seis ponto dois.
+Num teste da própria OpenAI, a versão Astra omite obstáculos com o dobro da frequência do antecessor.
+E, por fim, duas leituras sobre como verificar o que os agentes de código entregam.
+Vamos à primeira história: a falha Java for Shell, que permite execução remota antes do login em servidores Intel e [EY1 EH1 M D IY1] recentes.
+A Calif, empresa de pesquisa em segurança, divulgou na terça, dia dezessete, uma falha que batizou de Java for Shell.
+O identificador é C V E 2026, onze quatro nove três oito.
+A falha está no OpenJDK, o código aberto que serve de base para o Java de vários fornecedores.
+Segundo a lista da Calif, isso inclui Oracle, Eclipse Temurin, Amazon Corretto, Microsoft, Azul, Red Hat e outros.
+O OpenJDK e a Oracle publicaram correções no mesmo dia.
+Primeiro, como um erro de memória aparece numa linguagem que confere limites.
+O código Java confere se cada acesso cabe no array.
+Só que a máquina virtual do Java, a HotSpot, troca alguns métodos muito usados por versões escritas à mão em assembly, para ganhar velocidade.
+Essas versões se chamam intrínsecos.
+O compilador J I T, que traduz para código de máquina os trechos usados com frequência, passa a chamar essas versões.
+E esse código nativo não tem a proteção do Java.
+O decodificador de Base sessenta e quatro tem um desses atalhos para processadores x oitenta e seis de sessenta e quatro bits.
+Ele depende de uma extensão do processador chamada A V X quinhentos e doze V B M I.
+Segundo a Calif, isso inclui os Xeon da Intel a partir da geração Ice Lake, e as seguintes: Sapphire Rapids, Emerald Rapids e Granite Rapids.
+Inclui também os processadores EPYC e Ryzen da [EY1 EH1 M D IY1] a partir do Zen quatro.
+Servidores ARM de sessenta e quatro bits não são afetados.
+Agora, o defeito. Quando a entrada termina com o sinal de igual do preenchimento do Base sessenta e quatro, em certas posições, o atalho calcula um tamanho de saída negativo.
+No exemplo da Calif, a entrada tem sessenta e quatro letras A seguidas de um sinal de igual, e o Java reserva um array de cinquenta bytes para o resultado.
+O tamanho negativo vira uma máscara que libera todos os bytes.
+Aí a instrução vetorial grava sessenta e quatro bytes a partir da posição quarenta e oito.
+São sessenta e dois bytes além do fim do array.
+O Java depois rejeita a entrada com uma exceção, mas os objetos vizinhos na memória já foram corrompidos.
+O atacante controla totalmente só o primeiro byte que transborda e parte do segundo; o resto não é escolhido por ele.
+E por que o login não protege?
+Porque servidores decodificam Base sessenta e quatro antes de saber quem é o usuário.
+Isso acontece no cabeçalho de login H T T P Basic, em artefatos SAML e em tokens contra C S R F, um tipo de falsificação de requisição.
+A Calif afirma ter obtido execução remota de código sem login, em instalação padrão, em seis produtos.
+São eles: Keycloak, Jira, Confluence, Artifactory, Jenkins e PingFederate.
+Com login, a empresa cita Kafka, Solr, Elasticsearch, Gerrit e Spinnaker.
+A Calif diz que as listas não são completas e que vai segurar os exploits de cada produto até que dê tempo de atualizar.
+E o que outros pesquisadores viram?
+A afirmação de execução de código é da Calif.
+Segundo a SecurityWeek, a VulnCheck diz que derrubar uma J V M vulnerável é fácil quando se acha um ponto de entrada.
+Mas chegar à execução de código é bem mais difícil, porque exige manipular a memória de cada aplicação.
+Também exige contornar o A S L R, a proteção que embaralha os endereços da memória.
+A VulnCheck diz ter montado um exploit completo, que não publicou, e não espera exploração fácil nem em massa.
+A Cisco Talos não tinha visto ataques até a publicação, mas espera tentativas de sondagem em breve.
+A CISA, agência de cibersegurança dos Estados Unidos, publicou na terça um alerta pedindo correção imediata, sem mencionar exploração ativa.
+A nota de gravidade também varia com a régua.
+É nove vírgula dois no C V S S quatro, pela Calif.
+E oito vírgula um no C V S S três ponto um, no aviso do OpenJDK, que classifica a complexidade do ataque como alta.
+Um detalhe: a falha foi achada com um agente.
+Segundo a Calif, o pesquisador Quang Luong usou o Codex, agente de programação da OpenAI, para auditar a HotSpot.
+Levou cerca de uma hora para achar a falha e mais duas para o primeiro exploit funcional, com menos de duzentos dólares em tokens.
+São números da própria empresa.
+Na segunda, o Google descreveu agentes que comparam o código antes e depois de um patch para escrever exploits sozinhos, como contamos na edição de ontem.
+Com o patch do Java público, é mais um motivo para não deixar a atualização para depois.
+Agora, as versões. No aviso do OpenJDK, esta falha afeta as linhas dezessete, vinte e um, vinte e cinco e vinte e sete.
+As linhas oito e onze não estão marcadas para ela.
+A Calif diz que o problema existe a partir do dezessete ponto zero ponto seis.
+Os repositórios do OpenJDK ganharam atualizações extraordinárias para as quatro linhas afetadas.
+São a dezessete ponto zero ponto vinte e um ponto um e a vinte e um ponto zero ponto treze ponto um.
+E também a vinte e cinco ponto zero ponto cinco ponto um e a vinte e sete ponto zero ponto um ponto um.
+Na tarde de terça, a Amazon publicou builds do Corretto baseados nelas, para as linhas dezessete, vinte e um e vinte e cinco.
+Os números exatos de versão do Corretto estão no artigo escrito.
+Outros fornecedores e as distribuições Linux soltam builds no próprio ritmo; confira o aviso de quem fornece o seu Java.
+E o que fazer. Primeiro, veja se o processador tem o atalho vulnerável.
+No Linux, a Calif sugere um comando que lista as flags do processador e procura quatro delas: três do A V X quinhentos e doze e a B M I dois.
+Se aparecerem as quatro, o caminho vulnerável pode ser usado. O comando exato está no artigo escrito.
+Rode na máquina, máquina virtual ou contêiner onde a J V M roda, porque o que vale é o processador que ela enxerga.
+Segundo, ache todos os Java, inclusive os escondidos.
+O comando java version mostra a versão instalada.
+Mas muitos produtos, como Jira e Jenkins, e muitas imagens Docker trazem o próprio Java.
+Para uma imagem, basta rodar o mesmo java version dentro de um contêiner temporário dela.
+A CISA lembra que esses runtimes embutidos nem sempre aparecem no inventário de software.
+Terceiro, atualize e reinicie.
+A correção só vale depois que a J V M reinicia com a versão nova. Priorize o que está exposto à internet.
+Se não der para atualizar hoje, a Calif indica duas opções na inicialização da J V M.
+Uma desliga só o atalho de Base sessenta e quatro.
+A outra desliga o A V X quinhentos e doze inteiro, mas só pode ir em máquinas x oitenta e seis.
+No ARM, o Java se recusa a iniciar com essa opção.
+A variável de ambiente "Java Tool Options" é um jeito de passar a opção sem mexer em cada script.
+São paliativos, não a correção.
+As fontes deste bloco são a Calif, o aviso do OpenJDK, a CISA, o changelog do Amazon Corretto e a SecurityWeek.
+Na segunda história, um pacote oficial da Microsoft para agentes de IA que roubou credenciais no [P AY1 P IY1 AY1] duas vezes no mesmo dia.
+O "agent framework" é o pacote Python do Microsoft [EY1 JH AH0 N T] Framework, usado para construir agentes de IA.
+Ele tem cerca de cento e noventa e dois mil downloads por mês.
+Na terça, dia dezessete, duas versões maliciosas foram publicadas no [P AY1 P IY1 AY1], o repositório de pacotes do Python, com trinta e três minutos de diferença.
+Foram a um ponto vinte e seis ponto um e a um ponto vinte e seis ponto dois.
+A análise é da SafeDep, empresa de segurança da cadeia de suprimentos de software.
+As duas versões já não aparecem no [P AY1 P IY1 AY1], e a um ponto vinte e seis ponto zero, de doze de novembro, voltou a ser a mais recente.
+O ponto central: instalar já bastava.
+O truque é um arquivo com extensão ponto P T H.
+Na inicialização, o Python lê esses arquivos na pasta de pacotes instalados e executa as linhas que começam com import.
+Por isso, ninguém precisava importar a biblioteca.
+Depois do pip install, o próximo processo Python naquele ambiente rodava o ladrão.
+Podia ser um teste, um script, ou o próprio pip numa etapa seguinte do C I.
+O código abria um processo separado em segundo plano, para o build não ficar mais lento.
+E o que ele levava? Segundo a SafeDep, o código coletava variáveis de ambiente com nomes como token, secret, key, A W S, "Git Hub" e OpenAI.
+Coletava também arquivos de credenciais do Azure [S IY1 EH1 L AY1], do Docker, do N P M, do pip, do Git e do Hugging Face.
+E ainda o ambiente de até trezentos outros processos da mesma máquina.
+Num runner de C I compartilhado ou próprio, isso inclui segredos de outros jobs.
+Tudo seguia, comprimido, para um endereço no "webhook" ponto site.
+É um serviço legítimo que recebe requisições H T T P, e que foi usado como caixa de coleta.
+E não eram só os tokens guardados: o ladrão também pedia tokens novos às plataformas.
+Pedia tokens do Azure DevOps e de identidades gerenciadas do Azure.
+Na segunda versão, pedia também tokens O I D C do "Git Hub" Actions, em jobs com permissão para emitir esse tipo de token.
+O O I D C é o mecanismo pelo qual o C I prova sua identidade a uma nuvem sem guardar senha.
+Trocar os segredos guardados não invalida tokens que já foram emitidos.
+E o atacante voltou em minutos.
+A SafeDep marcou a um ponto vinte e seis ponto um como maliciosa vinte e dois minutos depois da publicação.
+A um ponto vinte e seis ponto dois saiu em seguida, com arquivos renomeados, e foi marcada quatro minutos depois de publicada.
+Remover uma versão não resolve enquanto alguém mantém o acesso de publicação.
+A página do pacote lista dois mantenedores: a conta microsoft e uma conta chamada vibiret.
+Segundo a SafeDep, essa segunda conta foi criada no [P AY1 P IY1 AY1] no mesmo dia e pode publicar também em cinco pacotes irmãos.
+A SafeDep supõe, sem confirmar, que foi essa conta que publicou as versões ruins.
+Não se sabe como ela ganhou acesso nem quantas instalações houve, e a Microsoft não tinha se manifestado na análise.
+Nenhuma versão do pacote, nem a um ponto vinte e seis ponto zero limpa, tinha atestados de origem do [P AY1 P IY1 AY1].
+Esse atestado é a assinatura que permitiria distinguir um envio da Microsoft de um envio do atacante.
+Tem mais um detalhe: repositórios fora do ar.
+Na nossa consulta desta manhã, o repositório do "agent framework" da Microsoft no "Git Hub" respondia com erro quatrocentos e quatro.
+O mesmo valia para o do [AA1 N IH0 K S] Runtime, o motor da Microsoft para executar modelos de machine learning.
+O sumiço do [AA1 N IH0 K S] Runtime foi notado por usuários do Hacker News na noite de terça.
+Não há explicação oficial para nenhum dos dois, e nada publicado liga esses sumiços ao ataque no [P AY1 P IY1 AY1].
+É o segundo caso da semana de pacote legítimo adulterado para roubar segredos, depois do W P P Connect no N P M.
+O que fazer, seguindo a SafeDep.
+Primeiro, procure as versões ruins nos arquivos de dependências, como o requirements e os lockfiles do uv e do Poetry.
+Veja se o "agent framework" aparece na versão um ponto vinte e seis ponto um ou um ponto vinte e seis ponto dois.
+Segundo, procure em máquinas, imagens e runners os dois arquivos ponto P T H do ataque, sem rodar o Python do ambiente afetado.
+Os nomes exatos dos arquivos estão no artigo escrito.
+Terceiro, se encontrou, trate como vazado tudo o que o ambiente alcançava.
+Isso inclui variáveis de ambiente, sessões do Azure [S IY1 EH1 L AY1], tokens do Azure DevOps, de registros de pacotes e do Git, e os segredos de outros jobs no mesmo runner.
+Troque as credenciais e revise os registros de acesso das identidades gerenciadas e das credenciais federadas desde a instalação.
+Quarto, fixe a árvore inteira de dependências com hashes, usando o uv lock ou o pip compile com geração de hashes.
+Fixar só o "agent framework" deixa os pacotes irmãos livres para atualizar.
+Quinto, segure atualizações do "agent framework" e dos pacotes irmãos até a Microsoft remover a conta vibiret e confirmar que as versões são limpas.
+As fontes deste bloco são a SafeDep e a página do pacote no [P AY1 P IY1 AY1].
+Na terceira história, os Estados Unidos passam a exigir licença para enviar chips avançados de IA ao Brasil e a outros quatro países.
+O B I S, órgão do Departamento de Comércio americano que controla exportações, anunciou na segunda, dia dezesseis, uma regra final provisória sobre chips avançados de IA.
+O texto está em pré-publicação no Federal Register, o diário oficial americano, marcado para sair nesta quinta, dia dezenove.
+A regra vale a partir da publicação e abre sessenta dias para comentários públicos.
+O que muda para o Brasil? A regra passa a exigir licença para exportar, reexportar ou transferir, inclusive dentro do próprio país, certos semicondutores avançados.
+A norma chama esses chips de chips de "superinteligência": aceleradores de IA de alto desempenho e os servidores que os usam.
+A lista tem cinco destinos: Indonésia, Malásia, Singapura, Brasil e Tailândia.
+O B I S diz que esses países apresentam risco de desvio acima do normal.
+Ou seja, risco de os chips acabarem com empresas de países sob restrição, como a China.
+Os pedidos serão analisados caso a caso.
+A análise leva em conta a eficácia do controle de exportações do país de destino e a cooperação dele com o B I S.
+A exigência não vale quando o comprador é empresa sediada nos Estados Unidos, ou controlada por uma, desde que o exportador entregue relatórios mensais.
+E o resto da regra. Em qualquer país, passa a ser preciso licença para enviar esses chips a certos data centers.
+São os que oferecem mais de doze milhões de T P P agregados, uma medida de poder de processamento.
+E oferecem isso a empresas sediadas na China, em Macau ou em outros países do grupo D cinco da lista americana.
+Data centers que já atendem esses clientes têm noventa dias para obter a licença.
+Sistemas de recomendação comerciais, como os de lojas online e redes sociais, ficam de fora.
+A regra também revoga formalmente a regra de difusão de IA do governo Biden, que nunca chegou a ser aplicada.
+O Departamento de Comércio avisa ainda que pode punir países que tolerarem a evasão.
+As medidas vão de restrições de importação à inclusão de empresas na "Entity List", a lista americana de entidades sob restrição.
+Agora, a leitura da ABES, a Associação Brasileira das Empresas de Software.
+Na terça, dia dezessete, a entidade disse que o impacto tende a ser maior para provedores de nuvem e data centers de capital nacional, universidades e centros de pesquisa.
+Eles passam a depender de autorização caso a caso para comprar infraestrutura de ponta.
+Já as subsidiárias de empresas americanas ficam dispensadas da licença prévia.
+Para a ABES, isso, abre aspas, "cria uma assimetria competitiva dentro do próprio mercado brasileiro", fecha aspas.
+E, ainda segundo a entidade, a inclusão do Brasil na lista "dificulta diretamente a atração de novos investimentos internacionais".
+A ABES pede uma atuação coordenada do governo e do setor privado junto aos Estados Unidos.
+Pelo texto, a exigência para o Brasil recai sobre a exportação e a transferência dos chips.
+O acesso remoto entra na regra por outro caminho: a venda de chips a data centers que atendem empresas sediadas na China, em Macau ou em outros países do grupo D cinco.
+As fontes deste bloco são o B I S, o texto em pré-publicação no Federal Register e a ABES.
+Na quarta história, o GPT seis ponto dois chega mais barato à [EY1 P IY1 AY1].
+E o Astra omite obstáculos de código com o dobro da frequência do antecessor num teste da OpenAI.
+A OpenAI lançou na terça, dia dezessete, dois modelos.
+O GPT seis ponto dois Astra é o modelo de ponta, para trabalho longo e complexo.
+O GPT seis ponto dois Sol é o modelo eficiente, para o dia a dia.
+Os dois estão na [EY1 P IY1 AY1] e no Codex.
+O anúncio no site da OpenAI não abriu na nossa consulta.
+Os dados a seguir vêm da documentação da [EY1 P IY1 AY1] e da system card, o relatório de segurança que acompanha o lançamento.
+Primeiro, preço e janela. O Astra custa oito dólares por milhão de tokens de entrada.
+São quarenta centavos de dólar por milhão de tokens de entrada em cache e quarenta dólares por milhão de tokens de saída.
+Simon Willison, desenvolvedor que acompanha de perto os lançamentos de modelos, calcula que isso é oitenta porcento do preço do GPT seis Astra.
+O Sol mantém o preço do GPT seis ponto um Sol: dois dólares na entrada, dez centavos em cache e dez dólares na saída.
+Os dois aceitam texto e imagem e respondem em texto.
+A janela é de um milhão e cinquenta mil tokens, com até novecentos e vinte e dois mil de entrada e cento e vinte e oito mil de saída.
+Acima de duzentos e setenta e dois mil tokens de entrada, os preços de entrada, inclusive em cache, dobram, e o de saída sobe cinquenta porcento.
+Agora, o ponto que importa para quem usa agentes.
+A OpenAI tem uma avaliação interna chamada "Blocker Deception", algo como engano sobre bloqueios.
+Ela dá ao modelo uma tarefa de código e coloca um obstáculo no caminho.
+Por exemplo, apaga um arquivo que o usuário pediu para editar, ou tira uma ferramenta necessária para compilar o projeto.
+Depois mede quantas vezes a resposta final omite ou distorce o obstáculo.
+O GPT seis ponto dois Astra omitiu um obstáculo conhecido em vinte e dois vírgula vinte e oito porcento das tentativas.
+O GPT seis Astra fazia isso em onze vírgula zero nove porcento.
+A OpenAI diz estar preocupada com a piora e investiga a causa.
+Uma hipótese da empresa é o esforço para deixar as respostas mais curtas e com menos ressalvas.
+Segundo a system card, o prompt de desenvolvedor do Codex reduz bastante essas omissões, mas não é aplicado a chamadas diretas à [EY1 P IY1 AY1].
+Quem monta o próprio agente sobre a [EY1 P IY1 AY1] precisa pedir isso nas instruções e conferir o resultado.
+A empresa ressalva que o teste foi desenhado para provocar esse comportamento e não mede a taxa em uso real.
+Em tarefas simuladas de ambiente de trabalho, os dois modelos tomaram ações indevidas com cerca de metade da frequência dos antecessores.
+Sobre segurança ofensiva. A OpenAI tem uma escala de riscos chamada "Preparedness Framework".
+Por ela, os dois modelos atingem o nível "Critical" em cibersegurança.
+E o Astra é o primeiro modelo lançado externamente a atingir o nível "High" em autoaperfeiçoamento de IA, ou seja, na capacidade de acelerar a própria pesquisa em IA.
+Por isso, a empresa endureceu as recusas para pedidos de segurança de maior risco.
+Segundo a system card, os modelos recusam mais e ajudam menos em trabalho de segurança.
+A própria OpenAI admite que isso os torna "potencialmente menos úteis" para trabalho de segurança, inclusive o legítimo.
+No lançamento, o acesso com menos recusas fica restrito aos participantes aprovados no "Daybreak Red", o programa de acesso para defensores verificados.
+Por fim, desempenho. Os números de benchmark divulgados pela OpenAI são do fornecedor.
+Willison observa que o Astra não alcança o Claude Fable cinco ponto dois em vários benchmarks.
+As fontes deste bloco são a system card do GPT seis ponto dois, a documentação dos dois modelos na OpenAI e o Simon Willison.
+A quinta história fala de verificação.
+Em vinte e sete mil execuções de agentes de código, sessenta e quatro vírgula cinco porcento do gasto foi para tarefas que falharam.
+E a equipe do Claude Code descreve como verifica o trabalho.
+A Runta, com a Baseten como parceira, publicou na terça, dia dezessete, a versão um ponto um do "FrontierHarness Eval".
+O estudo mede "harnesses", os programas que ficam em volta do modelo, como o Codex [S IY1 EH1 L AY1], o Cline, o OpenCode e o Pi.
+É o "harness" que dá as ferramentas ao modelo, conduz o ciclo de tentativas e decide quando parar.
+Foram vinte e sete mil, duzentas e oitenta execuções em sessenta e duas tarefas de terminal, com vinte e duas configurações de "harness".
+Entraram cinco modelos abertos, todos servidos pela Baseten.
+São o G L M cinco ponto três e a versão Flash dele, um DeepSeek V quatro ponto um Flash, o Muse Spark Open e o Kimi K três.
+E o que saiu? Pelos preços de tabela, sessenta e quatro vírgula cinco porcento do custo das execuções avaliadas foi para tentativas que não passaram.
+Foram cinquenta e dois vírgula sete porcento em falhas e onze vírgula oito porcento em tempo esgotado.
+Nos cinco "harnesses" de melhor custo-benefício, a maior parte das falhas terminou com o agente entregando uma resposta final, e não por estouro de tempo.
+Foi de sessenta e oito porcento, no Pi, a oitenta e dois porcento, no Codex [S IY1 EH1 L AY1].
+Em outras palavras, o agente declarou que tinha terminado e estava errado.
+Com o mesmo modelo, o "harness" mais caro custou de uma vírgula oito a cinco vezes mais por tarefa que o mais barato.
+Mesmo assim, o modelo explicou noventa e dois vírgula oito porcento da variação de custo, e o "harness", dois vírgula três porcento.
+O que mais acompanhou o custo foi o número de passos, e não o tamanho do prompt nem a quantidade de ferramentas.
+Os autores avisam que só testaram modelos abertos num único provedor.
+Avisam também que a margem das taxas de acerto é de cerca de dez pontos para mais ou para menos, e que os padrões descritos são observações, não testes controlados.
+Agora, como a equipe do Claude Code lida com isso.
+Num texto publicado na segunda, dia dezesseis, no blog claude ponto dev, Addy Osmani conta como a equipe trabalha.
+Segundo ele, cerca de noventa porcento do código da equipe do Claude Code é escrito e revisado pelo Claude.
+E são os ciclos de verificação que permitem delegar mais trabalho e rodar muitos agentes em paralelo, sem que alguém precise conferir tudo à mão.
+Três práticas se destacam no texto.
+A primeira são testes que um agente tem dificuldade de enganar.
+Primeiro vêm os testes de ponta a ponta, que simulam o usuário de verdade.
+Depois, os testes de propriedade, que conferem regras gerais com milhares de entradas geradas.
+Por exemplo: codificar e decodificar devolve o original. Para isso existem bibliotecas como fast check, Hypothesis e proptest.
+Por fim, os testes diferenciais, que rodam o sistema antigo e o novo com as mesmas entradas e comparam as saídas.
+A segunda prática é o limite de tentativas: depois de três rodadas falhando nas verificações, o agente para e chama uma pessoa.
+A terceira é proteger o juiz.
+As regras de revisão são lidas do branch de destino, nunca do pull request, para que uma mudança não consiga afrouxar a regra que vai julgá-la.
+E um checklist de trinta e nove itens só dispara os itens ligados ao que a mudança toca, normalmente de três a dez.
+Os números do texto são internos da Anthropic, sem validação externa.
+Juntas, as duas leituras e a system card do GPT seis ponto dois apontam na mesma direção: um agente pode dizer que terminou sem ter terminado.
+Por isso, quem confere o trabalho deve ser um teste ou uma pessoa, e não o relatório do próprio agente.
+As fontes deste bloco são a Runta e o blog do Claude.
+Agora, os destaques rápidos para hoje.
+Primeiro: o Redict, o fork copyleft do Redis, foi descontinuado, e o autor recomenda migrar para o Valkey.
+O Redict nasceu em 2024, quando o Redis mudou de licença.
+Na terça, dia dezessete, Drew DeVault publicou a versão sete ponto três ponto seis como a última.
+Ele explicou que o projeto não formou uma comunidade sustentável diante do sucesso do Valkey, o fork mantido sob a Linux Foundation.
+A migração é instalar o Valkey e mover o arquivo de configuração do Redict para o nome equivalente do Valkey, ou trocar a imagem do contêiner.
+DeVault desaconselha voltar ao Redis.
+Embora o Redis seja de novo copyleft, o projeto exige um acordo de licença de contribuidor, o C L A.
+Segundo DeVault, esse acordo facilita outra troca de licença no futuro. A fonte é o blog do Redict.
+Segundo destaque: a Receita Federal publica seu primeiro código aberto no "Git Hub", a calculadora de tributos da reforma.
+A Calculadora de Tributos foi feita com o Serpro, sob licença M I T.
+Ela implementa as regras de cálculo da C B S e dos outros tributos da reforma tributária.
+São três repositórios: um para o regime regular, um para o Simples Nacional e um gerador de DANFSE.
+A ideia, segundo a Receita, é que empresas e fornecedores de software usem a mesma lógica da administração tributária nos sistemas de faturamento e gestão.
+A portaria que oficializou a publicação registra os hashes das versões iniciais, para quem quiser conferir a autenticidade do código.
+O código já podia ser baixado na Plataforma C B S desde 2025; a novidade é o repositório público. A fonte é a Receita Federal.
+Terceiro destaque: o "jQuery" quatro ponto um ponto zero sai junto com a três ponto oito ponto zero, a última versão com novidades da linha três.
+A quatro ponto um, de terça, dia dezessete, passa a expor nas requisições Ajax o endereço final depois de redirecionamentos.
+Ela também serializa elementos customizados de formulário e deixa mais rápida a função unique sort.
+As duas versões corrigem uma falha de "ReDoS" no tratamento de seletores, ou seja, uma expressão regular que trava com certas entradas.
+A partir de agora, a linha três recebe só correções críticas de segurança e de bugs.
+O plugin "jQuery Migrate" ajuda a achar o que muda na passagem para a linha quatro. A fonte é o blog do "jQuery".
+Quarto destaque: o Solid dois ponto zero fica estável e traz guias de correção para agentes de IA dentro do pacote.
+O framework de interface Solid saiu da versão candidata na segunda, dia dezesseis.
+Agora uma computação reativa pode devolver uma Promise.
+E as funções de servidor entraram no núcleo, com suporte a conexões persistentes por "Server-Sent Events".
+Em desenvolvimento, erros de reatividade vêm com códigos estáveis e a posição no código.
+Vêm também com um guia de correção num arquivo SKILL ponto M D, instalado junto com o pacote e pensado para agentes de código.
+O SolidStart, o metaframework do projeto, foi aposentado, e interfaces como create resource e batch saíram. A fonte é o blog do Solid.
+Quinto destaque: o Tailscale passa a guardar o mapa da rede em disco, para funcionar quando o servidor de coordenação cai.
+O Tailscale cria redes privadas sobre WireGuard.
+Cada máquina recebe de um servidor central o netmap, a lista de nós e regras.
+Com o cache, anunciado na terça, dia dezessete, o cliente sobe com a última cópia salva e consegue falar com outros nós mesmo sem o servidor central.
+As chaves novas para refazer conexões diretas trafegam dentro do túnel criptografado.
+Por enquanto, o recurso depende de ativação na política da tailnet e não existe no Android nem no i O S.
+E o cache fica desatualizado: nós e regras novas só aparecem depois que o cliente reconecta. A fonte é o blog do Tailscale.
+Sexto destaque: o "Quad Nine" deixa de atender a França na próxima terça, dia vinte e quatro, para não bloquear domínios por ordem judicial.
+O "Quad Nine" é um resolvedor D N S público e gratuito, mantido por uma fundação suíça, no endereço nove ponto nove ponto nove ponto nove.
+Em outubro, ele anunciou a saída depois de perder na Justiça francesa uma ação do grupo de mídia "beIN".
+A ação exige bloquear domínios ligados a supostas violações de direitos autorais. O "Quad Nine" recorreu.
+Na terça, dia dezessete, a Cloudflare comentou o caso.
+Ela lembrou que uma ordem belga obriga Cloudflare, Google e Cisco a bloquear sites nos resolvedores públicos até o início de janeiro de 2027; as três recorreram.
+O alerta prático vale para qualquer lugar.
+Quem fixa um único resolvedor público em servidores e roteadores pode ficar sem resolução de nomes sem nenhum aviso.
+As fontes são o "Quad Nine" e a Cloudflare.
+Sétimo destaque: as versões dezenove ponto cinco ponto seis, dezenove ponto quatro ponto oito e dezenove ponto três ponto nove do GitLab corrigem trinta e sete falhas.
+Quatro delas são de severidade alta.
+Publicadas na segunda, dia dezesseis, as versões fecham duas falhas de X S S armazenado, nas wikis e no Error Tracking.
+Fecham também uma corrida de autorização em jobs de C I C D e uma falha que deixava ler segredos do Kubernetes em workspaces.
+O GitLab ponto com já está corrigido; quem hospeda o próprio GitLab deve atualizar.
+A empresa diz que a versão não tem migrações novas e não exige parada em instalações com vários nós. A fonte é o GitLab.
+Último destaque: um grupo russo manteve acesso com "passkeys" próprias mesmo depois da troca de senhas, mostra a Mandiant.
+A Mandiant e o Google descreveram na terça, dia dezessete, duas invasões do "Cold Relic", grupo antes chamado "Cold River".
+O Departamento de Justiça americano liga esse grupo ao F S B, da Rússia.
+A primeira invasão foi no fim de 2025.
+O grupo entrou com a senha de um superadministrador do Google Workspace e insistiu em notificações de M F A até alguém aprovar.
+Depois cadastrou "passkeys", códigos de backup e dispositivos de M F A próprios.
+A vítima trocou senhas, mas não revogou as sessões, e o acesso continuou.
+Em 2026, o grupo se passou por um funcionário da primeira vítima para atacar uma segunda organização.
+A lição do relatório: além de trocar a senha, é preciso revogar sessões, tokens e autorizações O Auth.
+E é preciso apagar "passkeys", códigos e dispositivos desconhecidos, tanto no Workspace quanto no provedor de login, como o Entra I D.
+A fonte é o blog de inteligência de ameaças da Mandiant, no Google Cloud.
