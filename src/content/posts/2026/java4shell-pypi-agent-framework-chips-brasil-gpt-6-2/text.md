@@ -4,6 +4,7 @@ description: 'Uma escrita fora do buffer no atalho em assembly que o Java usa pa
 date: '2026-11-18T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/java4shell-pypi-agent-framework-chips-brasil-gpt-6-2.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/java4shell-pypi-agent-framework-chips-brasil-gpt-6-2/final.opus'
 ---
 
 ![Xícara de papel com a palavra JAVA transbordando café, que escorre para além da borda do pires, sobre fundo azul-claro](./images/java4shell-pypi-agent-framework-chips-brasil-gpt-6-2.jpg)
