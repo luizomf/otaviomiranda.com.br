@@ -4,6 +4,7 @@ description: 'O nginx 1.31.9 e o 1.30.7 corrigem dez falhas, incluindo uma de 20
 date: '2026-11-19T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/nginx2root-codeberg-fora-do-dns-scanners-cacam-chaves-de-agentes.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/nginx2root-codeberg-fora-do-dns-scanners-cacam-chaves-de-agentes/final.opus'
 ---
 
 ![Placa de aço escovado com a palavra NGINX gravada, rachada de baixo para cima a partir da gravação 2015, com cobre aparecendo na fenda](./images/nginx2root-codeberg-fora-do-dns-scanners-cacam-chaves-de-agentes.jpg)
