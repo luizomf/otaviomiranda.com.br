@@ -4,6 +4,7 @@ description: 'O PostgreSQL 19 traz REPACK (CONCURRENTLY), WAIT FOR LSN e JIT des
 date: '2026-11-20T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/postgresql-19-php-8-6-apt-repositorios-antigos-agentes-sem-atacante.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/postgresql-19-php-8-6-apt-repositorios-antigos-agentes-sem-atacante/final.opus'
 ---
 
 ![Elefante azul de feltro, mascote do PostgreSQL, amarrado por uma cinta de papel com a palavra REPACK, ao lado de uma etiqueta com o número 19, sobre fundo de feltro vermelho-coral](./images/postgresql-19-php-8-6-apt-repositorios-antigos-agentes-sem-atacante.jpg)
