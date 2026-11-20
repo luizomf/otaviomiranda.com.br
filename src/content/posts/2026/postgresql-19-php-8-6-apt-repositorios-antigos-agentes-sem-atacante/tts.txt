@@ -1,0 +1,303 @@
+Postgri [EH1 S] [K Y UW1] [EH1 L] 19 chega com [R IY0 P AE1 K] sem travar a tabela, e P H P oito ponto seis sai junto com correções para sete falhas críticas.
+Esta sexta é dia de atualizar a pilha de quem desenvolve para a web.
+O Postgri [EH1 S] [K Y UW1] [EH1 L] 19 saiu com um comando que limpa tabelas inchadas sem parar a aplicação.
+O P H P lançou a versão oito ponto seis e, no mesmo dia, as correções de segurança que anunciamos ontem.
+Segundo um dos seus committers, o Postgres atrasou porque a IA está achando bugs mais rápido do que o projeto consegue corrigir.
+O mantenedor do A P T, o gerenciador de pacotes do Debian, cita a mesma pressão e decidiu responder apagando código.
+Fechamos com um estudo que reconstruiu mais de cem incidentes com agentes de IA.
+A conclusão dele é que, na maioria dos danos reais, não havia atacante nenhum.
+Primeira história: o Postgres 19 e dois comandos novos.
+Um deles limpa tabelas sem bloquear escrita, e o outro permite ler numa réplica o que acabou de ser gravado.
+O projeto Postgri [EH1 S] [K Y UW1] [EH1 L] lançou nesta quinta, dia 19, a versão 19 do banco de dados.
+Ela chega fora da janela de costume.
+Nos últimos dez anos, as versões principais saíram entre meados de setembro e meados de outubro.
+Num post de 30 de outubro, o committer Robert Haas, da "Data bricks", atribuiu o atraso aos modelos de linguagem.
+Segundo ele, a IA ficou muito boa em achar bugs, e a capacidade de corrigi-los melhorou menos.
+As correções propostas por IA nem sempre vêm corretas ou dentro do padrão do projeto, e alguém precisa revisar.
+Haas contou as correções aplicadas também ao ramo da versão que estava para sair, entre 8 de abril e 25 de setembro.
+Foram mil cento e sessenta e nove no ramo do 19, em 2026.
+No mesmo período de 2025, o ramo do 18 teve setecentas e vinte e quatro, ou seja, o 19 teve mais de sessenta porcento a mais.
+Três recursos grandes foram retirados antes do lançamento.
+Um é a sintaxe "for portion of" nos comandos de atualizar e apagar linhas.
+Outro são as consultas de grafos, do padrão [EH1 S] [K Y UW1] [EH1 L] P G Q.
+O terceiro são os comandos para juntar e dividir partições de uma tabela.
+Agora, o [R IY0 P AE1 K], o destaque para quem opera banco em produção.
+No Postgres, atualizar ou apagar uma linha não sobrescreve o dado no lugar.
+A versão antiga fica no arquivo até o [V AE1 K Y UW0 M] marcar aquele espaço como reutilizável.
+Em tabelas com muita escrita, o arquivo incha e não encolhe sozinho.
+Até agora, a ferramenta embutida para devolver esse espaço era o [V AE1 K Y UW0 M] full.
+Ele reescreve a tabela inteira com um bloqueio exclusivo: ninguém lê nem escreve enquanto ele roda.
+Quem não podia parar recorria a extensões externas, como o P G [R IY0 P AE1 K].
+O 19 traz o comando [R IY0 P AE1 K], que substitui o [V AE1 K Y UW0 M] full e o "cluster".
+Os dois antigos continuam existindo, por compatibilidade.
+Com a opção [K AH0 N K ER1 AH0 N T L IY0], a reescrita acontece com a tabela aberta para leitura e escrita.
+O bloqueio exclusivo fica só para a troca final dos arquivos, que normalmente é curta.
+Por baixo, as mudanças feitas durante a reescrita são capturadas com decodificação lógica, o mesmo mecanismo da replicação lógica.
+A documentação lista as condições.
+A tabela precisa ter chave primária, ou um índice usado como identidade de réplica.
+E ela não pode ser particionada, nem do tipo "unlogged", que não grava no wal.
+É preciso ter espaço livre em disco de pelo menos o tamanho da tabela somado ao dos índices, porque o comando monta uma cópia completa.
+O comando falha se mais de uns cento e quatro milhões de linhas forem alteradas ou apagadas durante a execução.
+E ele pode não terminar se outra transação mudar a estrutura da tabela no meio do caminho.
+Há ainda um aviso que merece atenção: o [R IY0 P AE1 K] no modo concorrente não é seguro para M V C C.
+Uma transação que pegou seu retrato dos dados, o snapshot, antes do início do repack, vai enxergar a tabela vazia depois que ele terminar.
+Relatórios longos rodando durante a manutenção são o caso a vigiar.
+O segundo destaque é o "wait for" L S N, para ler o que você acabou de gravar.
+Muitas aplicações mandam as escritas para o servidor principal e as leituras para réplicas.
+A réplica recebe as mudanças pelo wal, o registro de alterações do Postgres, sempre com algum atraso.
+O resultado clássico: o usuário salva um formulário, a página recarrega lendo da réplica e mostra o dado antigo.
+O L S N, de "log sequence number", é a posição de um registro dentro do wal.
+O comando novo usa essa posição para esperar a réplica alcançar a escrita.
+O fluxo da documentação é este.
+Depois de gravar no principal, a aplicação consulta uma função que devolve a posição atual do wal.
+Na leitura seguinte, já na réplica, ela roda antes da consulta um "wait for" L S N com essa posição e um prazo, por exemplo de cem milissegundos.
+Se a réplica não alcançar essa posição dentro do prazo, o comando dá erro, e a aplicação pode ler do principal.
+Com a opção "no throw", em vez do erro ele devolve um status: sucesso, tempo esgotado, ou servidor fora de recuperação.
+Sem prazo definido, a espera é indefinida.
+O "wait" precisa ser o primeiro comando da transação.
+Ele não roda dentro de função nem de bloco anônimo, e é recusado se a sessão já segura um bloqueio.
+Isso porque o bloqueio poderia travar a aplicação das mudanças na réplica.
+Há outras mudanças que valem conhecer.
+A primeira é replicação lógica sem reiniciar o servidor.
+Com o nível do wal em réplica, o Postgres agora sobe sozinho o nível efetivo para lógico quando você cria o primeiro slot de replicação lógica.
+Um parâmetro novo mostra o nível em uso. Antes, ligar a replicação lógica costumava exigir restart.
+Depois, planos de consulta estáveis.
+A extensão "P G plan advice" permite fixar escolhas do planejador com uma minilinguagem de conselhos.
+A "P G stash advice" guarda esses conselhos e os aplica pelo identificador da consulta.
+Isso permite corrigir um plano lento sem mexer no código da aplicação.
+Outra mudança: o J I T vem desligado por padrão.
+O anúncio diz que as estimativas de custo usadas para decidir quando compilar consultas em código nativo se mostraram pouco confiáveis.
+Já falamos aqui no blog de como o J I T pode parecer ligado sem estar funcionando.
+Quem roda muitas consultas analíticas grandes pode querer religá-lo.
+O autovacuum passa a trabalhar em paralelo.
+Ele limpa índices com vários workers, com um parâmetro novo para controlar quantos, e ganha um sistema de pontuação para decidir quais tabelas atender primeiro.
+Para quem escreve [EH1 S] [K Y UW1] [EH1 L], há três novidades.
+O "insert on conflict" ganha a forma "do select", que devolve a linha que já existia.
+O comando "copy" pode gerar JSON, e funções de janela aceitam "ignore nulls".
+Segundo o anúncio, a verificação de chaves estrangeiras ficou mais rápida.
+Nos testes do projeto, isso deixou inserções em lote quase duas vezes mais rápidas.
+E algumas coisas saem de cena.
+A autenticação "radius" foi removida.
+Logins com senha M D cinco passam a gerar um aviso, já que esse método vai ser removido numa versão futura. A recomendação é migrar para "scram".
+Antes de atualizar, um cuidado.
+Como em toda versão principal, o formato dos dados muda.
+É preciso usar o P G upgrade, dump e restore, ou replicação lógica.
+As notas de lançamento listam incompatibilidades que pegam gente desprevenida. Vão três exemplos.
+Primeiro: o parâmetro "standard conforming strings" agora fica sempre ligado.
+Então dumps feitos por um P G dump antigo, com esse parâmetro desligado, não carregam. A saída é usar o P G dump do 19.
+Segundo: o padrão do limite de bloqueios por transação subiu de sessenta e quatro para cento e vinte e oito.
+Quem tinha um valor customizado precisa dobrá-lo para manter a mesma capacidade.
+Terceiro: em bancos que usam o I C U ou o provedor de locale "builtin", a recomendação é reindexar depois de um P G upgrade.
+Isso vale para os índices de busca textual e os da extensão de trigramas, a P G T R G M.
+O 19 chega uma semana depois das versões de manutenção que cobrimos no dia 13.
+As fontes deste bloco são o anúncio do Postgri [EH1 S] [K Y UW1] [EH1 L] 19, as notas de lançamento, a documentação dos dois comandos e o post de Robert Haas sobre o atraso.
+Agora, o P H P oito ponto seis, que traz aplicação parcial de funções, e as versões de segurança de quinta, que corrigem sete falhas críticas.
+Ontem avisamos que o P H P lançaria versões de segurança na quinta, dia 19.
+Elas saíram por volta das onze da manhã, no horário de Brasília.
+São as versões oito ponto dois ponto trinta e seis, oito ponto três ponto trinta e sete, oito ponto quatro ponto vinte e oito e oito ponto cinco ponto treze.
+No mesmo dia saiu o P H P oito ponto seis ponto zero, e o changelog dele lista as mesmas correções de segurança.
+O projeto publicou dezessete avisos: sete críticos, quatro graves e seis médios.
+Quase todos os críticos dependem de configuração específica.
+Vale ler as condições antes de entrar em pânico, ou de relaxar.
+O mais perigoso é um contrabando de requisição no P H P F P M, registrado como C V E 2026, doze nove dois oito nove.
+O P H P F P M é o processo que executa o P H P atrás de um servidor web, como [EH1 N JH AH0 N] [EH1 K S] ou Apache.
+Os dois conversam pelo protocolo "Fast" C G I.
+Uma mesma conexão pode carregar vários pedidos em sequência, se o servidor web pedir isso.
+O P H P lê o corpo do pedido de forma preguiçosa: só quando o código pede.
+O erro estava na limpeza ao fim de cada pedido.
+Se a aplicação tinha aberto o fluxo de entrada do P H P sem ler até o fim, o P H P achava que o corpo já tinha sido tratado.
+Aí ele deixava bytes para trás na conexão.
+Um atacante sem login podia montar um corpo de pedido em que esses bytes restantes formam um segundo pedido "Fast" C G I completo.
+O P H P F P M aceita esse pedido como se viesse do servidor web.
+Nesse pedido falso, o atacante escolhe o script, o endereço I P de origem e até configurações de administrador do P H P.
+O aviso mostra que, sabendo o caminho de algum script P H P que exista no servidor, isso basta para executar código P H P do atacante.
+Esse código roda com os privilégios do worker, sem corromper memória.
+O código afetado existe desde o P H P cinco ponto seis.
+São duas condições. A primeira é um caminho da aplicação que abra o fluxo de entrada sem lê-lo inteiro.
+Segundo o aviso, isso pode acontecer em frameworks que criam esse fluxo antes do roteamento ou da autenticação.
+A segunda é a conexão reaproveitada.
+Isso acontece no [EH1 N JH AH0 N] [EH1 K S] com a opção de manter a conexão "Fast" C G I aberta.
+Também no Apache com o reuso de conexões ligado no proxy, ou num H A Proxy que mantém as conexões com o backend.
+Segundo o aviso, as configurações padrão do [EH1 N JH AH0 N] [EH1 K S] e do Apache, que fecham a conexão depois de cada pedido, não são afetadas pelo ataque demonstrado.
+Se você não pode atualizar agora, a mitigação é desligar esse reaproveitamento.
+E nunca exponha a porta do P H P F P M para redes não confiáveis.
+Outro grupo de falhas transforma as sessões em arquivo em porta de entrada.
+Três falhas críticas envolvem as sessões do P H P, que por padrão ficam gravadas em arquivos no servidor.
+A primeira é um arquivo de sessão sobrescrito pela metade.
+O P H P gravava a sessão nova por cima da antiga sem apagar o arquivo antes.
+Se a gravação fosse interrompida no meio, sobrava um arquivo com o começo da sessão nova e o fim da antiga.
+Bem arrumada, essa mistura faz o P H P desserializar objetos escolhidos pelo atacante na próxima leitura da sessão.
+O defeito existe desde o P H P quatro ponto um ponto zero.
+A execução de código exige três coisas.
+O atacante precisa influenciar o conteúdo da sessão e conseguir interromper a gravação no ponto certo.
+E a aplicação precisa ter uma cadeia de gadgets: classes cujo código, ao ser desserializado, pode ser encadeado para fazer algo útil ao atacante.
+A segunda falha é de formatos de sessão misturados.
+Ela acontece quando o recurso de progresso de upload grava a sessão num formato e outra parte do sistema lê com outro.
+Por exemplo, duas aplicações ou dois pools do F P M que compartilham o mesmo diretório de sessões.
+Essa também depende de uma cadeia de gadgets.
+A terceira é um uso de memória já liberada no fim da sessão, nas versões oito ponto três em diante.
+Para as duas primeiras, a mitigação temporária sugerida é desligar o progresso de upload das sessões, se você não usa o recurso.
+E há as outras críticas. Uma está no cache de fuso horário.
+Ela depende de um aviso ser escrito no arquivo de log de erros do P H P durante a inicialização, como uma configuração de fuso horário inválida.
+Duas afetam só o P H P oito ponto cinco.
+Uma delas envolve os backtraces de erros fatais, ligados por padrão no oito ponto cinco.
+Ela só funciona com a opção que ignora os argumentos das exceções desligada, valendo zero.
+O arquivo de configuração de produção que vem com o P H P já traz esse valor em um, o que bloqueia o ataque demonstrado.
+Dois dos avisos dizem que corrigem casos que escaparam da correção do P H P "to Shell", que cobrimos em outubro.
+Em resumo: atualize para a versão corrigida do seu ramo, ou para o pacote corrigido da sua distribuição.
+As distros costumam aplicar a correção sem mudar o número da versão principal, então confira o aviso de segurança delas.
+E o que o P H P oito ponto seis traz.
+A novidade mais visível é a aplicação parcial de funções.
+Você chama uma função com um ponto de interrogação no lugar de um argumento e recebe de volta uma nova função, que só espera o que faltou.
+O exemplo oficial filtra uma lista de versões, mantendo as que são oito ponto seis ou mais novas, sem escrever uma função anônima.
+Também chega o "I O Poll", uma [EY1 P IY1 AY1] nativa para vigiar vários sockets ao mesmo tempo.
+Por baixo, ele usa o mecanismo de cada sistema: e poll no Linux, K queue nos B S Ds e no mac O S, e W S A Poll no Windows.
+Isso interessa a quem escreve servidores e bibliotecas assíncronas em P H P.
+Chegam ainda a função "clamp", que prende um valor entre um mínimo e um máximo.
+A classe "Time Duration", para representar intervalos de tempo sem fazer conta com inteiros.
+Um enum para ordem crescente ou decrescente, e valores padrão para propriedades "readonly", que não mudam depois de definidas.
+As sessões também ficam mais rígidas por padrão.
+O modo estrito e o cookie só para H T T P passam a vir ligados, e o cookie de sessão sai com a política "Same Site" Lax.
+Entre as depreciações estão o "return" dentro de "finally" e as funções de regex do M B string.
+Essas funções saem porque a biblioteca Oniguruma não é mais mantida.
+Também são depreciados apelidos antigos, como "is double" e "is long".
+Funções que fecham arquivos ou gravam neles passam a devolver falso quando falham ao gravar, em vez de ignorar o erro.
+O guia de migração do manual lista tudo.
+As fontes deste bloco são os anúncios no site do P H P, o changelog do P H P oito, a página de novidades do oito ponto seis e os avisos de segurança do projeto no "Git Hub".
+Terceira história: o A P T do Debian vai deixar de aceitar formatos antigos de repositório, e o mantenedor cita a pesquisa de segurança com IA.
+Na quinta, dia 19, Julian Andres Klode, mantenedor do A P T, o gerenciador de pacotes do Debian e do Ubuntu, publicou um aviso na lista oficial de anúncios do Debian.
+Ele vai remover o suporte a várias configurações antigas de repositório.
+As remoções começam no unstable, a versão de desenvolvimento do Debian, a partir da semana que vem.
+O prazo para o que entra nessa leva é terça, 24 de novembro.
+Por que isso importa: o caminho do download é a porta de entrada.
+Quando você atualiza a lista de pacotes, o A P T baixa de cada repositório um arquivo de índice chamado "Release".
+Ele lista os outros arquivos do repositório com tamanho e hash.
+O hash é uma espécie de impressão digital, que permite conferir se o arquivo baixado é o original.
+Para provar que esse índice veio de quem diz, o repositório o assina.
+A forma moderna é o "In Release", que traz o índice e a assinatura no mesmo arquivo.
+A forma antiga separa os dois, com a assinatura num arquivo "Release" ponto G P G.
+Vão sair três coisas. A primeira são os repositórios com a assinatura separada. Sem um "In Release", eles passam a funcionar só como repositórios não confiáveis.
+A segunda são os repositórios que só oferecem hashes fracos, M D cinco ou SHA um, hoje liberados com uma opção que aceita hash fraco.
+Klode planeja uma forma limitada de marcar um hash como confiável, só para inspecionar repositórios históricos.
+A terceira são os repositórios sem hashes ou sem arquivo "Release", incluindo os repositórios planos.
+Sem saber de antemão o tamanho e o hash de cada arquivo, o A P T precisa sondar todos os caminhos possíveis.
+Nas palavras dele, isso o expõe a respostas infinitas, entre outros problemas.
+Sobram dois tipos. Um é o repositório assinado com "In Release".
+O outro é o repositório sem assinatura, mas com um "Release" que traz hashes e tamanhos.
+Também estão em avaliação as opções que permitem repositórios inseguros.
+E os caminhos alternativos de download, como cair de um formato de compressão do índice de pacotes para outro quando o primeiro falha.
+Outros recursos não essenciais, como guardar índices comprimidos, podem sair sem aviso.
+E qual é o argumento? Klode escreve que a vulnerabilidade recente no código de download do A P T e os avanços da IA chamaram atenção para a complexidade desse código.
+Uma complexidade que existe em boa parte para manter formatos que quase ninguém usa.
+Para ele, com os avanços da pesquisa de segurança com IA, o risco dessa complexidade agora supera em muito o benefício da compatibilidade.
+A mensagem não diz qual vulnerabilidade.
+A mais recente que veio a público foi a C V E 2026, dez nove cinco um oito, que noticiamos no dia 5.
+Nela, um atacante no meio do tráfego podia trocar um pacote depois da verificação.
+O aviso traz ainda um recado para quem roda versões estáveis.
+Klode espera continuar dando suporte de segurança a esses recursos, mas diz que talvez não consiga.
+E avisa que atualizações de segurança de 2027 em diante podem remover recursos sem aviso prévio.
+O que fazer? Os repositórios oficiais do Debian e do Ubuntu já publicam "In Release", então quem só usa eles não deve sentir diferença.
+A atenção vai para repositórios de terceiros e, principalmente, os internos, montados à mão anos atrás.
+Um teste rápido é ver se o repositório publica um "In Release" na pasta da suíte, e se o "Release" traz hashes SHA duzentos e cinquenta e seis.
+Repositórios planos, gerados só com a ferramenta D P K G scan packages, precisam ganhar um arquivo "Release" com hashes.
+É o mesmo pano de fundo do atraso do Postgres, com uma resposta diferente.
+Em vez de correr atrás de cada bug que a IA encontra, cortar o código onde eles moram.
+A fonte deste bloco é o anúncio de Julian Andres Klode na lista de anúncios para desenvolvedores do Debian.
+Quarta história: um estudo reconstrói cento e oito incidentes com agentes de IA e conclui que a maioria dos danos reais não teve atacante.
+Quando se fala em segurança de agentes de IA, o vilão costuma ser a injeção de prompt.
+É um texto malicioso escondido numa página ou num arquivo, que sequestra o agente.
+Um artigo publicado na quinta, dia 19, no [AA1 R K AY2 V], olhou para os incidentes reais e encontrou outra coisa.
+Os autores são Mengxiao Wang, Mahbub Alam, Kalyan Nakka e Nitesh Saxena.
+Dos setenta e dois incidentes com dano no mundo real que o estudo analisou, sessenta e dois não tiveram atacante.
+Só dois foram injeção de prompt.
+O agente fez o que pediram e tropeçou num perigo comum do ambiente.
+Como o estudo foi feito? O sistema, chamado [R OW1 G] A I, usa agentes para buscar relatos de incidentes publicados entre janeiro de 2025 e outubro de 2026.
+Achou duzentos e cinquenta e três.
+Cada um foi conferido na fonte mais detalhada disponível, como post-mortem, confirmação do fornecedor ou registro de C V E. Duzentos e quarenta e quatro se confirmaram.
+Os pesquisadores então reconstruíram os incidentes num ambiente simulado.
+Cada reconstrução tem um controle: a mesma situação, sem a causa apontada no relato.
+Das cento e oito reconstruções, que cobrem noventa e seis incidentes, oitenta e nove porcento reproduziram o dano relatado.
+Os agentes testados usam cinco modelos.
+Da OpenAI, o GPT cinco ponto seis luna e o GPT cinco ponto seis sol.
+Da Anthropic, o "Claude Sonnet" quatro ponto seis. Do Google, o Gemini três ponto cinco Flash.
+E o "Deep Seek" V quatro Flash, de pesos abertos.
+Eles repetiram o erro relatado em dezoito a trinta e três porcento das execuções.
+Quando a causa apontada não estava lá, foi no máximo um porcento.
+O exemplo principal é a reconstrução de um incidente com a "Rep lit".
+Nela, o "read me" do projeto dizia que preview, testes e produção compartilhavam o banco de dados configurado no arquivo de variáveis de ambiente.
+O agente rodou o comando de testes para conferir uma correção, e os testes apagaram mil duzentos e seis registros de produção.
+Ninguém injetou nada: a informação estava lá, e o agente não ligou o comando ao risco.
+Um dado do estudo mostra bem o contraste.
+O "Claude Sonnet" quatro ponto seis não causou dano em nenhuma das cento e trinta e oito sessões com instruções maliciosas.
+Mas causou dano em vinte e seis porcento das sessões sem atacante.
+Por isso, defesas contra injeção de prompt não ajudam aqui.
+Nas palavras do artigo, elas procuram instruções injetadas, e essas reconstruções não têm nenhuma.
+E o que reduziu o dano? Os pesquisadores testaram intervenções nas reconstruções em que cada modelo tinha causado dano com frequência.
+Nelas, sem intervenção, o dano aparecia em oitenta e cinco a noventa e oito porcento das sessões.
+O que funcionou foi um aviso depois de cada saída de ferramenta, nomeando o perigo e a consequência.
+No caso da "Rep lit", seria algo como: os testes apagam o banco de produção.
+Esse aviso reduziu o dano nos cinco modelos.
+No "Claude Sonnet" quatro ponto seis, caiu para uma em quarenta sessões. Nos outros, para no máximo sessenta e dois porcento.
+Uma nota neutra do mesmo tamanho, sem citar o perigo, manteve o dano entre oitenta e três e noventa e oito porcento.
+Ou seja, não é o texto extra que ajuda, é a informação.
+Citar o fato sem a consequência deixou o dano entre cinquenta e oito e oitenta e dois porcento.
+Repetir a regra na mensagem do usuário deixou entre sessenta e sete e oitenta porcento.
+As defesas tiradas dos próprios relatos e das correções dos fornecedores foram as mais fortes.
+Pedir confirmação ao usuário, ou rastrear o fluxo dos dados, zerou o dano nos cinco modelos.
+Checagens que comparam o texto da ação foram mais fracas, porque a ação reescrita com outras palavras ainda passava em parte.
+E os limites. Os próprios autores avisam que o catálogo deve ter mais dos incidentes sobre os quais as pessoas escrevem.
+Também dizem que o ambiente simulado, com um único laço de agente, pode não refletir o risco de um produto real.
+E que, quando o relato não explica o mecanismo, a reconstrução precisa supor um.
+Uma reconstrução que falha não prova que o relato é falso.
+Uma observação nossa: os modelos da OpenAI, da Anthropic e do Google usados no estudo já têm sucessores lançados.
+Entre eles, o GPT seis ponto dois e o "Claude Sonnet" cinco ponto cinco.
+Para quem usa agentes no dia a dia, a lição prática é sobre o ambiente, não sobre o prompt.
+Separe de verdade os bancos e as credenciais de teste e de produção.
+Faça as ferramentas que podem destruir algo devolverem um aviso explícito do que está em jogo.
+E exija confirmação humana para ações irreversíveis.
+A fonte deste bloco é o artigo do [R OW1 G] A I, publicado no [AA1 R K AY2 V].
+Agora, os destaques rápidos para hoje.
+O "Val key" nove ponto dois permite snapshots sem fork e troca a estrutura dos sorted sets grandes.
+O "Val key" é o banco em memória que nasceu como fork do Redis quando este mudou de licença.
+É para ele que o autor do Redict mandou seus usuários esta semana.
+A versão nove ponto dois ponto zero, primeira estável da série, foi publicada no "Git Hub" na quinta, dia 19.
+Para salvar o banco em disco, o "Val key" tradicionalmente cria um processo filho com fork.
+Como pai e filho dividem as páginas de memória até alguém escrever nelas, um servidor com muita escrita pode precisar de bem mais memória durante o snapshot.
+A nove ponto dois traz snapshots feitos numa thread em segundo plano, sem fork.
+Mas o recurso é opcional: precisa ser ligado na inicialização e escolhido na política de snapshots.
+A opção dessa política tinha outro nome nas versões de teste, e os nomes exatos estão no artigo escrito.
+Sorted sets grandes passam a usar uma árvore B mais no lugar da skip list.
+A versão também traz um tipo de dado novo, o "Path Hash", para buscas por prefixo, e papéis reutilizáveis no controle de acesso.
+A fonte são as notas da versão nove ponto dois ponto zero.
+Uma falha no V Center foi explorada como zero-day pelo grupo "Armory Castle", e a versão sete ponto zero não tem correção pública.
+O V Center é o painel central que administra servidores de virtualização "V M ware".
+Na quinta, dia 19, a "Broad com" corrigiu a C V E 2026, doze três oito nove zero, com nota nove vírgula oito.
+É um desvio de autenticação no serviço de diretório do V Center, que pode ser atacado pela rede, sem login.
+As versões corrigidas são nove ponto um ponto um ponto zero dois zero zero, nove ponto zero ponto dois ponto zero dois zero zero, e oito ponto zero U três M.
+Para a sete ponto zero, o aviso manda falar com o suporte quem tem contrato de suporte estendido.
+No mesmo dia, a Mandiant, do Google, relatou que o grupo "Armory Castle" usou a falha para criar uma conta de administrador no login único do V Center.
+Segundo a empresa, o grupo entrou na rede da vítima por uma falha no "Beyond Trust" Remote Support.
+Depois, executou sua ferramenta contra um V Center interno no início de setembro.
+E explorou identificadores U U I D previsíveis na autenticação que passa pela porta dois mil e doze.
+A empresa recomenda aplicar a correção, procurar sinais de invasão e restringir o acesso às portas de gerenciamento.
+São as portas quatrocentos e quarenta e três, dois mil e doze, cinco mil quatrocentos e oitenta e vinte e dois.
+As fontes são o aviso de segurança da "Broad com" e a análise da Mandiant.
+As ações da "Anthropic" estrearam na Nasdaq e fecharam o primeiro dia dezessete porcento acima do preço do I P O.
+Ontem contamos que a empresa por trás do "Claude" tinha fixado o preço em oitenta e três dólares por ação.
+Na quinta, dia 19, o primeiro negócio com o código A N T só saiu às onze e quarenta e oito da manhã, no horário de Nova York.
+Isso foi mais de duas horas depois da abertura do pregão.
+Esse primeiro negócio saiu a cento e onze dólares e cinquenta centavos, trinta e quatro porcento acima do preço da oferta.
+A ação fechou a noventa e sete dólares e dezessete centavos.
+A "Latent Space" trata a oferta como o maior I P O da história, acima do da Space [EH1 K S] em junho.
+O valor de mercado varia conforme a conta.
+A "Stock Titan" estima cerca de um vírgula vinte e oito trilhão de dólares no fechamento, contando todas as classes de ações.
+As fontes são a cobertura da "Stock Titan" e a newsletter AI News, da "Latent Space".
+Por fim, a A N P D negou o recurso do Discord e mantém as transmissões ao vivo suspensas no Brasil.
+A Autoridade Nacional de Proteção de Dados suspendeu em 12 de agosto, por medida cautelar, o "Go Live" e os recursos de transmissão ao vivo do Discord no país.
+O motivo foi o risco a crianças e adolescentes.
+Segundo o Convergência Digital, o Conselho Diretor da A N P D rejeitou o recurso da empresa por unanimidade na quarta, dia 18.
+Para o conselho, o Discord não adotou medidas que tornem as transmissões mais seguras.
+O relator, o presidente interino Iagê Miola, disse que a medida é preventiva, provisória e reversível, e não constitui penalidade.
+O restante da plataforma continua funcionando, e a A N P D diz que segue conversando com a empresa sobre a volta das lives.
+Não encontramos a nota oficial da A N P D no site do governo.
+A fonte é o Convergência Digital.
