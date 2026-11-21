@@ -1,0 +1,317 @@
+Matemático da Anthropic diz ter provado a Hipótese de [R IY1 M AH0 N] com o Claude, e falha do Ruby alcança o Rails padrão sem login.
+Neste sábado, a notícia mais barulhenta vem da matemática.
+Um pesquisador da Anthropic diz ter provado, com o Claude, um dos problemas em aberto mais famosos da matemática.
+E ele publicou só a versão que um computador consegue conferir.
+Depois vêm dois avisos práticos.
+Uma falha do Ruby chega ao Rails sem login e tem data marcada para ganhar exploit público.
+Ela ainda fez o Gnu P G antecipar a correção de outra falha, numa biblioteca usada por clientes de e-mail e pelo Flatpak.
+A Amazon mostra agentes de IA atacando universidades por conta própria.
+E uma empresa de V P S mediu, num post no Tab News, quanto tempo um servidor novo fica na internet antes da primeira tentativa de invasão.
+Primeira história: Levent Alpöge, da Anthropic, diz ter provado a Hipótese de [R IY1 M AH0 N] generalizada com o Claude.
+E, por enquanto, ele só publicou a prova em [L IY1 N], uma linguagem de provas que o computador confere.
+Primeiro, o que foi anunciado.
+Na sexta, dia 20, o matemático Levent Alpöge, que trabalha na Anthropic, publicou no site dele uma nota de quatro páginas.
+A frase central é esta: "Acredito que, trabalhando com o Claude, descobri uma prova da Hipótese de [R IY1 M AH0 N]".
+Ele acrescenta que o método vai além e resolve também a Hipótese de [R IY1 M AH0 N] Generalizada.
+E diz que ele e o Claude formalizaram o argumento "sem suposições".
+A prova não veio como artigo.
+O que existe é um arquivo com código [L IY1 N], dividido em catorze partes para download.
+Por que isso seria tão grande?
+A Hipótese de [R IY1 M AH0 N], proposta em 1859, é uma afirmação sobre onde ficam os zeros de uma função chamada zeta.
+Ela importa porque controla a distribuição dos números primos.
+Se for verdadeira, dá para estimar quantos primos existem até um certo tamanho com o menor erro possível.
+É um dos sete Problemas do Milênio do "Clay Mathematics Institute", com prêmio de um milhão de dólares.
+A versão generalizada faz a mesma afirmação para uma família inteira de funções parecidas, e a zeta é um caso particular dela.
+Por isso, provar a generalizada prova também a original.
+E por que só [L IY1 N]?
+O [L IY1 N] é um assistente de provas.
+É uma linguagem em que cada passo de um argumento matemático é escrito de um jeito que um programa pequeno consegue conferir.
+Esse programa, o núcleo do [L IY1 N], verifica se cada passo segue logicamente dos anteriores.
+Alpöge escreve que o argumento é "incrivelmente longo" e que não quis publicar um documento gigante e ilegível.
+Numa nota de rodapé, ele conta que uma versão por extenso passou de duzentas e cinquenta mil páginas.
+Segundo o cientista da computação Scott Aaronson, o código tem dezessete vírgula quatro milhões de linhas de [L IY1 N].
+Agora, como o Claude entrou na história.
+Alpöge diz que guiou o trabalho até uma situação análoga a um caso simplificado.
+A partir dali, segundo ele, o Claude "o deixou maravilhado" e "o ultrapassou de longe perto da linha de chegada".
+A nota traz uma cronologia de vinte passos que, segundo ele, o próprio Claude montou.
+Ela vai de 6 de outubro até uma entrada chamada G R H, em 16 de novembro.
+Ele também admite que ainda não domina partes do argumento.
+Onde o Claude é o especialista, escreve, ele está parafraseando um resumo que "pode não fazer sentido nenhum".
+E diz que o [L IY1 N] deve bastar para esclarecer.
+A nota não informa a versão do modelo, nem detalha quanto do trabalho foi de cada um.
+E o que já foi conferido?
+Segundo a Scientific American, Andrew Sutherland, do M I T, compilou o resultado de forma independente no [L IY1 N].
+E disse: "Este é de fato um momento histórico".
+Compilar significa que o [L IY1 N] aceitou cada passo.
+Falta outra parte, que nenhum programa faz sozinho.
+Especialistas precisam confirmar que o enunciado escrito em [L IY1 N] diz exatamente o que a hipótese diz.
+E que a prova não depende de algo indevido.
+Aaronson diz que aposta que a prova vai se sustentar, mas que não tem cem porcento de certeza.
+Ele lembra que o núcleo do [L IY1 N] já teve bugs que permitiram "provar" que zero é igual a um.
+Terence Tao chamou o resultado de prova "enorme, só em [L IY1 N]".
+Ele apontou a discussão no "Zulip" da comunidade como o melhor lugar para acompanhar a verificação.
+Tao e Aaronson concordam que entender as ideias vai levar tempo, e Aaronson fala em anos.
+Até a manhã deste sábado, a prova não tinha sido aceita pela comunidade matemática.
+Um pouco de contexto.
+Não é a primeira vez que Alpöge aparece aqui.
+Em julho, ele publicou um possível contraexemplo à Conjectura Jacobiana, que atribuiu a um modelo de IA.
+Em setembro, a Open A I apresentou um resultado sobre Navier-Stokes, outro Problema do Milênio, também com formalização em [L IY1 N].
+No mesmo post em que comenta a hipótese, Tao lista mais dois trabalhos de Alpöge com Tristan Buckmaster, feitos com uso pesado de IA.
+São provas de que as equações de [OY1 L ER0] e de Navier-Stokes, sem força externa, podem levar um fluido a uma singularidade em tempo finito.
+Esses dois vêm com artigo legível por humanos e formalização em [L IY1 N].
+E Tao os coloca como mais bem digeridos que a prova da hipótese de [R IY1 M AH0 N].
+Na própria nota, Alpöge conta que escreveu a "Dario" para perguntar se podia anunciar.
+Pelo contexto, é Dario Amodei, C E O da Anthropic.
+Ele também escreve que existe "uma visão cínica óbvia" sobre o momento do anúncio, e que ela é falsa.
+Ele não diz qual seria.
+O anúncio saiu um dia depois de a Anthropic estrear na Nasdaq.
+Para fechar o bloco, uma segunda prova no mesmo dia.
+Também na sexta, o matemático Ravi Vakil, de Stanford, divulgou um rascunho de Alessandro Masullo.
+É uma proposta de prova da mesma hipótese generalizada, escrita "toda por humanos, sem IA".
+Segundo Vakil, Brian Conrad revisa o texto há meses.
+Numa atualização, Vakil conta que várias pessoas já apontaram problemas, encontrados com ajuda de modelos de IA.
+E diz que não faz afirmação nenhuma sobre a correção da prova.
+As fontes deste bloco são a nota de Levent Alpöge, a Scientific American e os blogs de Scott Aaronson e Terence Tao.
+Também o repositório de Navier-Stokes de Alpöge e Buckmaster, e o anúncio de Ravi Vakil sobre o trabalho de Masullo.
+Segunda história: a falha "Ruby to Shell" chega ao Rails e ao Sinatra antes do login.
+Ela ganhou data para exploit público e fez o Gnu P G antecipar a correção de outra falha, no G P G M E.
+Na quinta, contamos que o Ruby corrigiu sete falhas de memória.
+As versões corrigidas são quatro ponto zero ponto dez, três ponto quatro ponto treze e três ponto três ponto catorze.
+Na época, não estava claro quanto disso chegava a uma aplicação web comum.
+Agora a resposta veio, e ela é ruim.
+Uma das falhas, apelidada de "Ruby to Shell", pode ser atingida numa aplicação Rails padrão.
+Qualquer pessoa na internet consegue chegar nela, antes da autenticação.
+Primeiro, a falha.
+O Ruby ainda suporta codificações antigas, de um byte por caractere, como a I S O oito oito cinco nove um e a Windows doze cinquenta e dois.
+Nelas, mudar maiúsculas e minúsculas quase nunca muda o tamanho do texto.
+A exceção é a letra alemã que soa como dois esses, o "Eszett". A maiúscula dela vira duas letras: S S.
+Segundo a Veria Labs, empresa que demonstrou a exploração, o laço que faz a conversão confere espaço para um byte e escreve dois.
+O buffer de saída tem o tamanho da entrada mais vinte bytes.
+Então uma string com vinte e uma dessas letras escreve um byte além do fim.
+Um byte parece pouco, mas, num ataque de corrupção de memória, pode bastar para estragar o objeto vizinho no heap.
+O aviso oficial do Ruby diz que existem provas de conceito que chegam a execução remota de código "em alguns cenários".
+Strings em U T F oito, o padrão de quase tudo hoje, seguem outro caminho e não são afetadas.
+O defeito existe desde o Ruby dois ponto quatro ponto zero.
+Agora, como isso chega ao Rails.
+Formulários HTML só enviam GET e POST.
+Para simular PUT, PATCH e DELETE, os frameworks aceitam no POST um campo especial com o nome do método.
+O Rack é a camada sobre a qual a maioria dos frameworks Ruby é construída.
+Nele, o componente que trata esse campo converte o valor para maiúsculas.
+O Rails inclui esse componente por padrão, e o Sinatra no estilo clássico também o ativa.
+O atacante manda um POST que declara uma codificação antiga nesse campo e coloca uma sequência daquelas letras alemãs.
+A conversão acontece enquanto o framework ainda decide a rota.
+Ou seja, antes de qualquer código da aplicação ou checagem de login.
+Segundo a Veria Labs, outros frameworks e aplicações Rack puras não ficam expostos por padrão.
+Mesmo assim, qualquer código que mude a caixa de texto recebido numa codificação antiga pode estar vulnerável.
+Agora, o prazo.
+A Veria Labs promete publicar em 25 de novembro uma prova de conceito de execução remota de código num Rails sem modificações.
+Ou mais tarde, se grandes fornecedores ainda não tiverem corrigido.
+A Cloudflare publicou regras no seu firewall de aplicação, o W A F, para todos os planos, inclusive o gratuito.
+A própria empresa lembra que a única correção completa é atualizar o Ruby.
+Requisições que vão direto ao servidor não passam pelo W A F.
+Nem textos que chegam por e-mail, importação de arquivos e filas.
+E quem já corrigiu?
+O GitLab soltou na sexta, dia 20, as versões dezenove ponto seis ponto um, dezenove ponto cinco ponto oito e dezenove ponto quatro ponto dez, com o Ruby atualizado.
+O GitLab ponto com já está corrigido, e quem compila o GitLab por conta própria precisa reconstruir o Ruby.
+A Veria Labs mantém uma tabela, atualizada às três e cinquenta e dois deste sábado, no horário U T C.
+Nela também aparecem como corrigidos o Mastodon, na quatro ponto sete ponto seis e em outras linhas, e o "Chatwoot" quatro ponto vinte ponto um.
+Aparecem ainda o Open Project dezessete ponto nove ponto oito e a imagem base do Discourse.
+O "Git Hub" Enterprise Server ainda aparecia sem versão corrigida.
+Todas as versões dele até a três ponto vinte e dois ponto cinco constavam como vulneráveis.
+No Debian, as correções já estão no repositório de segurança, tanto no Debian treze quanto no Debian doze.
+As distribuições costumam aplicar a correção sem mudar o número da versão, então confira o aviso da sua.
+Agora, o efeito colateral: o G P G M E.
+O nome vem de "GnuPG Made Easy".
+É a biblioteca que programas usam para assinar, cifrar e verificar dados com o Gnu P G, sem chamar o programa na mão.
+Na sexta, dia 20, Werner Koch, principal mantenedor do Gnu P G, anunciou o G P G M E dois ponto três ponto um.
+Ele corrige uma falha crítica presente em todas as versões anteriores.
+Uma chave OpenPGP com um identificador de usuário muito longo, montado de propósito, faz a mesma memória ser liberada duas vezes.
+É o chamado "double free".
+Segundo o aviso, isso pode ser usado para extrair dados de aplicações, por exemplo enviando dados assinados.
+E uma execução remota de código "não pode ser descartada".
+O mecanismo é este.
+Duas funções internas leem as respostas do Gnu P G.
+Elas alocam um buffer de mil e vinte e quatro bytes e o realocam quando precisam de mais espaço.
+Mas só gravam o endereço novo no objeto de contexto no fim.
+Se uma delas sai antes, por um erro de leitura, o contexto continua apontando para a memória já liberada.
+Mais tarde, essa memória é liberada de novo.
+O aviso lista como afetados o G P G for Win, o Gnu P G Desktop, a maioria dos clientes de e-mail e muitos clientes X M P P.
+Também estão na lista o Samba e o Flatpak.
+A ligação com o Ruby está no próprio aviso.
+A falha foi achada por Johan Carlsson e comunicada pelo GitLab em 12 de novembro, com divulgação coordenada marcada para 25 de novembro.
+Segundo Koch, o "Ruby to Shell" obrigou o GitLab a atualizar antes, e o Gnu P G antecipou a divulgação para o dia 20.
+O Debian também já tem versões corrigidas do G P G M E, para o Debian doze e o Debian treze.
+Os números exatos dos pacotes do Debian, tanto do Ruby quanto do G P G M E, estão no artigo escrito.
+Programas que embutem o G P G M E de forma estática precisam ser recompilados.
+E o que fazer?
+Atualize o Ruby em servidores, imagens Docker e pipelines de C I antes de quarta, dia 25.
+E reconstrua as imagens que trazem um Ruby próprio.
+Se você usa GitLab, Mastodon, Discourse ou outro produto que embute o Ruby, a correção vem do fornecedor.
+No desktop Linux, rode a atualização normal da distribuição.
+O G P G M E costuma vir como dependência de clientes de e-mail e do Flatpak.
+As fontes deste bloco são o aviso de segurança do Ruby, a Veria Labs, a Cloudflare e as notas do GitLab dezenove ponto seis ponto um.
+Também o aviso do G P G M E e o rastreador de segurança do Debian, para o Ruby e para o G P G M E.
+Terceira história: agentes de IA do [K EH1 R N] acharam e exploraram uma falha desconhecida sozinhos, num ataque a universidades.
+Quem conta é a Amazon.
+Primeiro, como a Amazon viu tudo.
+Em 10 de setembro, a equipe de inteligência de ameaças da Amazon encontrou na internet uma instalação do [K EH1 R N] rodando sem senha.
+O [K EH1 R N] é um framework de código aberto para testes de invasão autônomos.
+Você dá um ponto de partida e um objetivo em linguagem natural, e ele coordena vários agentes de IA para chegar lá.
+Segundo a Amazon, ele foi criado como ferramenta para quem defende.
+Como o servidor estava aberto, qualquer pessoa podia ler a configuração, os prompts do operador e o que os agentes fizeram.
+O relatório saiu na sexta, dia 20, assinado por C J Moses, chefe de segurança da Amazon. Os ataques são de setembro.
+O que os agentes fizeram?
+Os prompts estavam em chinês simplificado.
+O alvo eram endereços de universidades no Leste Asiático, fora da China continental.
+Foi uma campanha de cerca de quarenta e oito horas, a partir de 8 de setembro.
+O objetivo dado aos agentes foi simples: "obter acesso a um shell".
+Daí em diante, eles planejaram, executaram e ajustaram a abordagem sem que o operador escolhesse cada passo.
+O mais revelador são os fracassos.
+Contra um Redis aberto, os agentes passaram cerca de dezesseis horas e cento e quarenta e oito ações seguidas testando técnicas conhecidas.
+Tentaram abuso da replicação, fuga da sandbox de scripts, escrita de configuração e corrupção de memória.
+Depois usaram uma falha num "Qdrant" vizinho para mapear a rede interna do Docker.
+E tentaram senhas em Postgri [EH1 S] [K Y UW1] [EH1 L], S S H e outros serviços. Nada funcionou.
+Contra um servidor de G P Us, montaram uma lista de cerca de oitenta nomes de usuário reais.
+Os nomes vieram de páginas de professores, laboratórios e artigos.
+Eles testaram mais de trinta mil combinações de login, e também não entraram.
+Agora, onde deu certo.
+O alvo era uma aplicação de código aberto de IA para imagens médicas.
+O relatório não cita o nome, mas o aviso de segurança para o qual ele aponta é do "Monai Label".
+É uma ferramenta usada para anotar exames com ajuda de modelos.
+Os agentes acharam um endpoint de upload que aceita o nome do arquivo.
+E testaram "path traversal": o truque de pôr no nome do arquivo o atalho para a pasta de cima, e assim gravar fora da pasta prevista.
+Funcionou: em cerca de onze minutos, foram do mapeamento da [EY1 P IY1 AY1] à escrita de arquivos em qualquer lugar do servidor.
+Numa sessão posterior, gravaram um shell reverso num arquivo especial do Python, o "site customize".
+O Python importa esse arquivo automaticamente sempre que um interpretador começa.
+Depois chamaram um endpoint de treino que inicia um novo processo Python.
+O processo carregou o código e abriu um shell reverso como root.
+A Amazon avalia com alta confiança que a falha era desconhecida até então.
+Depois, o operador entregou aos agentes um túnel para a rede de uma segunda universidade, que rodava o mesmo software.
+A Amazon deduz que ela foi invadida pela mesma falha.
+A atribuição a um grupo ligado à China tem confiança moderada, baseada no idioma, no fuso horário dos scripts e nos alvos.
+E a correção ainda não chegou ao PyPI, o repositório de pacotes do Python.
+O aviso do "Monai Label" diz que a autenticação vem desligada por padrão.
+Então qualquer cliente que alcance o servidor pode explorar a falha.
+A correção foi incorporada ao código em 19 de outubro e, segundo o aviso, entra na próxima versão.
+Na consulta deste sábado, a versão mais recente no PyPI ainda era a zero ponto oito ponto cinco, que está na faixa afetada.
+Enquanto isso, o aviso recomenda ligar a autenticação e não expor o servidor a redes não confiáveis.
+E rodar o processo com um usuário sem privilégios, que só possa escrever na pasta de dados.
+Para quem defende, há lições.
+Na terça, dia 17, mencionamos o [K EH1 R N] dentro de um relatório do Google sobre ataques conduzidos por agentes.
+O caso da Amazon mostra o detalhe.
+A maior parte das tentativas falhou, e o que chama atenção é a persistência.
+Segundo a Amazon, os agentes passaram dezesseis horas seguidas contra o Redis, sem pausa nem horário de trabalho.
+A combinação que deu root foi comum.
+Um upload sem validação, um comportamento padrão do Python e um processo rodando como root.
+A Amazon recomenda priorizar detecções de alta confiança com resposta automática, porque a exploração levou minutos.
+O relatório cita dois endereços I P de origem, ativos entre 8 e 10 de setembro, que servem para procurar nos seus logs.
+Os endereços completos estão no artigo escrito.
+As fontes deste bloco são o blog de segurança da A W S e o aviso de segurança do "Monai Label".
+Quarta história: uma empresa de V P S mediu, no Tab News, quanto tempo leva até a primeira tentativa de invasão num servidor novo.
+A resposta foi de quatro minutos e meio a oito minutos.
+Primeiro, o experimento.
+Todo mundo diz que um servidor novo é atacado em minutos.
+A conta nocthost, da NoctHost, empresa que vende V P S e servidores com G P U, resolveu medir e publicou o resultado no Tab News.
+Na sexta, dia 20, a equipe criou três V P S.
+Um na Hetzner, em Nuremberg, um na Vultr, em Frankfurt, e um na Linode, também em Frankfurt.
+Todos no menor plano, com um processador virtual, um gigabyte de RAM e Ubuntu vinte e dois ponto zero quatro de fábrica.
+O login por senha no S S H estava ligado, e nada foi instalado.
+Durante a primeira hora, o teste registrou os logins com falha no S S H, pelo log do sistema.
+E registrou todas as tentativas de conexão com um capturador de pacotes, o T C P dump.
+Agora, os números.
+A primeira tentativa de senha no S S H chegou em cerca de quatro minutos e meio na Hetzner, cinco na Vultr e oito na Linode.
+Na primeira hora, cada servidor recebeu entre novecentas e mil quinhentas e cinquenta tentativas de conexão.
+Elas vieram de quatrocentos a quinhentos e cinquenta endereços diferentes, em seiscentas e cinquenta a novecentas e cinquenta portas.
+O usuário root apareceu em cerca de quarenta porcento das tentativas de login, e admin em cerca de uma a cada oito.
+A porta mais procurada foi a 22, do S S H.
+A segunda foi a 23, do Telnet, um protocolo antigo e sem criptografia.
+Segundo o post, é sinal de robôs procurando roteadores e câmeras.
+Depois vieram as portas quatrocentos e quarenta e três, oitenta, três mil e oito mil e oitenta, de sites e servidores de desenvolvimento.
+O próprio post avisa que um servidor por provedor é pouco para comparar provedores.
+Para os autores, as diferenças devem refletir o histórico de cada I P.
+Endereços de nuvem são reaproveitados, e os scanners guardam listas de I Ps que já responderam na porta 22.
+A conclusão que vale é outra: todos foram atacados em minutos, e as tentativas não pararam.
+O valor do post está no checklist dos primeiros cinco minutos.
+Primeiro, S S H só com chave.
+Desligue o login por senha e deixe o root entrar só com chave, nunca com senha.
+Aqui vai um detalhe importante.
+No Ubuntu, muitas imagens de nuvem trazem um arquivo extra de configuração do S S H, criado pelo cloud init, com o prefixo cinquenta no nome.
+Esse arquivo pode religar o login por senha.
+O S S H usa o primeiro valor que encontra para cada opção, e lê esses arquivos em ordem alfabética.
+Por isso, o post sugere criar o seu arquivo com o prefixo zero zero, para ele vencer.
+Antes de aplicar, teste a configuração com o modo de verificação do servidor S S H e recarregue o serviço.
+E mantenha a sessão atual aberta até testar um login novo.
+Segundo, firewall negando por padrão.
+Com o U F W, configure para negar toda conexão de entrada e libere a porta 22, e também a 80 e a 443, se houver site.
+Só depois ative o firewall, para não se trancar para fora.
+Terceiro, bancos e servidores de desenvolvimento só no localhost.
+My [EH1 S] [K Y UW1] [EH1 L], Postgri [EH1 S] [K Y UW1] [EH1 L] e Redis devem escutar só no endereço local da máquina, não na internet.
+O mesmo vale para apps nas portas três mil e oito mil e oitenta.
+Quarto, atualize antes de instalar qualquer coisa.
+E quinto, cuidado com o Docker.
+Portas publicadas por contêineres passam por fora do U F W.
+A documentação do Docker confirma: ele roteia esse tráfego antes das regras do firewall.
+E diz que publicar portas é "inseguro por padrão", porque a porta fica aberta para o mundo.
+Para um banco num contêiner, publique a porta amarrada só ao localhost, como a cinco quatro três dois do Postgres.
+O post termina divulgando geradores gratuitos de configuração da própria NoctHost.
+O checklist funciona sem eles.
+Os autores também perguntam se alguém já mediu algo parecido com I Ps brasileiros, um caso que o teste deles não cobre.
+As fontes deste bloco são o post no Tab News, o site da NoctHost e duas páginas da documentação do Docker, sobre firewalls e sobre publicação de portas.
+Agora, os destaques rápidos para hoje.
+Primeiro: uma falha no K V M deixa uma máquina virtual ler a memória do servidor físico, em máquinas [EY1 EH1 M D IY1] com virtualização aninhada.
+O K V M é o hipervisor embutido no kernel Linux, usado por nuvens e por quem roda Proxmox ou máquinas virtuais em casa.
+A falha, C V E 2026, noventa e nove três um dois, foi encontrada por Oren Yomtov, da Terra Security, pelo programa de recompensas da Digital Ocean.
+Com root dentro da própria máquina virtual, ele leu cerca de cento e vinte e sete gigabytes da memória do servidor físico.
+Numa nuvem, isso pode incluir máquinas virtuais de outros clientes.
+Num servidor dedicado sem outros clientes, ele chegou a escrever trinta e dois bytes escolhidos numa página do kernel do servidor.
+A causa está num sinal de reset, chamado INIT, que tira um processador virtual de uma máquina virtual aninhada.
+Quando isso acontece, o K V M deixa de atualizar um ponteiro de tabela de páginas, que continua apontando para memória já liberada.
+A falha exige processador [EY1 EH1 M D IY1] com virtualização aninhada ativa.
+As correções saíram em 17 de novembro, nos kernels sete ponto três ponto cinco, seis ponto dezoito ponto sessenta e quatro e seis ponto doze ponto cento e dezoito.
+A Digital Ocean divulgou o caso na quinta, dia 19.
+A correção vai no kernel do servidor físico. Atualizar só a máquina virtual não resolve.
+Se ainda não der para atualizar, a saída é desligar a virtualização aninhada no módulo K V M da [EY1 EH1 M D IY1].
+Isso quebra máquinas virtuais que rodam seus próprios hipervisores.
+A Red Hat classifica a falha como importante, com nota sete vírgula oito, ainda provisória.
+As fontes são a Digital Ocean e a Red Hat.
+Segundo destaque: a A W S cria uma chamada para reduzir as permissões de credenciais que já existem, pensada para agentes.
+A nova [EY1 P IY1 AY1], chamada "Get Scoped Credentials", é do serviço de credenciais temporárias da A W S, o S T S.
+Ela recebe as credenciais da sessão atual e uma política de até dois mil e quarenta e oito caracteres.
+E devolve credenciais novas com a interseção das duas. Ou seja, as permissões só diminuem.
+A duração também não pode passar do tempo que resta à sessão original, e dá para chamar de novo sobre o resultado.
+Assim, um agente orquestrador pode entregar a cada subagente um acesso mais estreito que o seu, como ler um único bucket S três.
+Ou pode manter quase tudo e tirar só ações perigosas, como apagar recursos e mexer no I A M, o controle de acessos.
+Depois do caso do [K EH1 R N], é o tipo de limite que reduz o estrago quando um agente erra ou é desviado.
+A fonte é o blog de segurança da A W S.
+Terceiro destaque: no Argo C D, a autocorreção pulou a migração do banco em duas de cinco regiões, com o painel todo verde.
+O Argo C D aplica no Kubernetes o que está no Git.
+Afzal Ansari, embaixador da C N C F, conta um caso em que um commit chegou durante uma janela que bloqueava sincronizações.
+Quando a janela abriu, três regiões rodaram o hook de migração do banco, e duas não.
+O código novo rodou de trinta e seis a quarenta e quatro minutos contra o esquema antigo, com o status "Synced" e "Healthy".
+Segundo a análise dele, um tipo de atualização confunde a última revisão comparada com a última sincronizada.
+A autocorreção, o "self-heal", então faz uma sincronização parcial, e sincronizações parciais não executam hooks.
+Ele reproduziu o problema cinco vezes em seis.
+A correção proposta é tratar a migração como parte do estado desejado.
+Ou seja, um Job comum, com uma "sync wave" que o faz rodar antes da aplicação, um nome que muda a cada versão e migrações idempotentes.
+O texto não aponta versões afetadas, nem um relato no projeto.
+A fonte é o blog da C N C F.
+Quarto destaque: a Thinking Machines libera o Inkling dois Mini, um modelo aberto que roda em cerca de vinte gigabytes de memória.
+Depois do Inkling dois Small, a empresa publicou na sexta, dia 20, os pesos de um modelo menor.
+A licença é a Apache dois ponto zero, e os pesos estão no "Hugging Face".
+São vinte e seis vírgula quatro bilhões de parâmetros no total, e três vírgula quatro bilhões ativos por token.
+A arquitetura é de mistura de especialistas, e repete as camadas do meio três vezes.
+Segundo a empresa, ele roda pelo Ollama em Macs com trinta e dois gigabytes ou mais.
+Nos números divulgados pela própria Thinking Machines, ele lidera entre modelos abertos com menos de cem bilhões de parâmetros em programação com agentes.
+Um exemplo é o Deep S W E, com quarenta e oito vírgula dois porcento.
+E ele perde para o Qwen três ponto oito, de vinte e sete bilhões de parâmetros, em conversa de vários turnos e instruções complexas.
+A fonte é o anúncio da Thinking Machines.
+Último destaque: o Signal passa a bloquear capturas de tela, para manter assistentes de IA do sistema longe das conversas.
+Meredith Whittaker, presidente do Signal, anunciou na sexta, dia 20, que o app bloqueia capturas de tela no i O S vinte e sete.
+No Android, ele liga sozinho a "segurança de tela" quando detecta um assistente de IA lendo o que aparece.
+O motivo: assistentes embutidos no sistema leem a tela para responder perguntas.
+E guardam esse conteúdo onde o Signal não tem controle.
+O próprio Signal diz que a solução é incompleta.
+Agentes ainda podem ler arquivos no aparelho ou usar recursos de acessibilidade, e no mac O S o bloqueio não é confiável.
+A empresa pede à Apple, ao Google e à Microsoft um jeito documentado de um app ficar fora do alcance desses agentes.
+O usuário pode desligar a proteção.
+A fonte é o blog do Signal.
