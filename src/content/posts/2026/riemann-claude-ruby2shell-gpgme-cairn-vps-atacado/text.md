@@ -4,6 +4,7 @@ description: 'Levent Alpöge publicou só código Lean para uma prova da Hipóte
 date: '2026-11-21T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/riemann-claude-ruby2shell-gpgme-cairn-vps-atacado.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/riemann-claude-ruby2shell-gpgme-cairn-vps-atacado/final.opus'
 ---
 
 ![Longo rolo de papel com a palavra RIEMANN, coberto de linhas minúsculas de código, sob uma lupa de latão sobre fundo verde-escuro](./images/riemann-claude-ruby2shell-gpgme-cairn-vps-atacado.jpg)
