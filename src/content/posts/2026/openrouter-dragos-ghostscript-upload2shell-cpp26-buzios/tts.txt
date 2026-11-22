@@ -1,0 +1,321 @@
+"Open Router" corta três provedores depois que iscas da Dragos expõem roubo de prompts, e uma falha no "Ghost Script" faz o upload de uma imagem rodar comandos.
+A edição deste domingo, dia 22, abre com um experimento de segurança em inteligência artificial.
+Pesquisadores plantaram credenciais falsas, as iscas, em cerca de dois milhões de prompts de IA, para ver quem iria usá-las.
+E o "Open Router" reagiu cortando provedores por causa disso.
+Depois vem uma falha no "Ghost Script" que transforma o envio de um arquivo aparentemente inofensivo em execução de comandos.
+Tem também a conclusão do C mais mais vinte e seis, numa reunião do comitê aqui no Brasil.
+E o relato de um desenvolvedor que deixou um agente escrever um navegador inteiro em Rust.
+Nos destaques rápidos, estão a nova licença do L L V M, o Debian treze ponto oito e o primeiro lançamento do terminal Kwi.
+Também um Postgres de um arquivo só e um ataque demonstrado por pesquisadores contra o agente [M Y UW1 Z], da Meta.
+E ainda um C sharp sem coletor de lixo, e um relato do "Tab News" sobre um relatório que travava o Trino.
+Primeira história: o "Open Router" corta três provedores e tira cento e vinte e cinco endpoints da lista de retenção zero de dados.
+Tudo isso depois que iscas da Dragos mostraram prompts roubados.
+Primeiro, os personagens.
+O "Open Router" é um roteador de inferência.
+Você manda a ele a chamada para um modelo de IA, e ele repassa a um dos vários provedores que hospedam aquele modelo.
+Entre as opções está o "Zero Data Retention", ou Z D R.
+É a promessa de que o provedor não guarda nem o prompt, nem a resposta.
+O problema é que, entre a sua aplicação e a G P U que roda o modelo, pode haver vários saltos.
+E cada um desses saltos vê o texto inteiro.
+Agora, o experimento.
+Na quinta, dia 19, H D Moore, diretor de pesquisa da Dragos, publicou o resultado de um teste que durou de julho a novembro.
+A equipe mandou cerca de dois milhões de prompts a serviços de IA populares.
+Cada prompt carregava iscas únicas: endereços secretos na web, credenciais, e até chaves reais da A W S.
+Essas chaves eram ligadas a contas vazias, com todo acesso registrado.
+A técnica é a do "canary token", o token-canário.
+Ninguém tem motivo legítimo para usar aquela chave ou abrir aquele endereço.
+Então qualquer uso prova que o prompt vazou, e o identificador único mostra para onde ele foi mandado.
+Primeira descoberta: havia invasores dentro de provedores, e os provedores não sabiam.
+Os dados de pelo menos três provedores de hospedagem de IA foram expostos.
+E, segundo a Dragos, nenhum dos três sabia da invasão até ser avisado.
+No maior caso, cerca de duzentas chaves da A W S foram enviadas, cada uma num único pedido a um único provedor, em algumas janelas do fim de outubro.
+Nas palavras do texto: "todo pedido que enviamos durante essas janelas foi roubado".
+Algumas chaves vinham de pedidos que o provedor rejeitou antes de qualquer modelo rodar.
+Daí os autores concluem que a cópia acontecia já na porta de entrada.
+Nos outros dois casos, parte dos pedidos roubados estava marcada como Z D R.
+O que os invasores fizeram com as chaves é o roteiro clássico de quem acha credencial de nuvem.
+Primeiro, testaram se estavam ativas, às vezes em poucas horas.
+Depois, listaram o conteúdo do armazenamento S três e vasculharam os cofres de segredos e de parâmetros da A W S.
+Também tentaram habilitar modelos no "Bedrock", criaram chaves de [EY1 P IY1 AY1] do "Bedrock" e adicionaram usuários próprios no controle de acesso.
+No total, as chaves-isca receberam dezenas de milhares de chamadas à [EY1 P IY1 AY1] da A W S.
+Uma chave plantada em 21 de outubro foi usada pela primeira vez no dia seguinte, e continuava em uso três semanas depois.
+Em primeiro de novembro, o mesmo ator usou o Artex para conferir se as chaves roubadas ainda funcionavam.
+O Artex é o framework de ataque movido a agentes de IA que já apareceu por aqui caçando chaves de modelos.
+Segunda descoberta: revendedores que simplesmente ligaram o log.
+Num marketplace de inferência, vendedores anunciavam modelos populares a preço baixo.
+Eles ativavam o registro de requisições que a própria plataforma oferece, e esperavam.
+Não foi preciso explorar falha nenhuma.
+Num dos casos, alguém numa conexão doméstica na França tentou logins S S H como root, usando senhas tiradas de dois prompts.
+A mesma máquina depois testou chaves da A W S.
+A Dragos ressalta que o vazamento "segue o vendedor, e não o marketplace como um todo".
+Terceira descoberta: marcações de privacidade ignoradas.
+Os sistemas de um laboratório de IA chinês, que a Dragos não nomeia, acessaram os endereços secretos de mais da metade dos prompts enviados aos modelos dele, entre julho e outubro.
+Isso incluiu cerca de dois terços dos pedidos marcados como "sem coleta de dados", ou como Z D R.
+Provedores americanos que revendem os modelos desse laboratório acionaram o mesmo coletor.
+Ou seja, os prompts voltavam ao laboratório.
+Um grande provedor americano continuou acessando um endereço mais de dois meses depois de uma única chamada.
+E tem mais: vinte e quatro dias depois de um prompt ser enviado a um provedor, o link secreto dele apareceu num chat do Feishu.
+O Feishu é o aplicativo corporativo conhecido como Lark fora da China.
+Em dois minutos, o link foi aberto em três computadores e três celulares, em Pequim e Xangai.
+E como eles descobriram o caminho?
+A Dragos chama a técnica de "traceroute para inferência".
+Cada pedido levava o endereço de uma imagem hospedada nos servidores da empresa.
+Qualquer sistema que buscasse a imagem revelava o I P, o cliente H T T P e o horário.
+Além disso, pedidos levemente malformados geravam erros, e cada intermediário embrulhava esse erro no seu próprio envelope.
+Comparar essas camadas com um banco de assinaturas revelava os saltos e, muitas vezes, as empresas por trás deles.
+Das cerca de duas mil rotas rastreadas, várias centenas tinham sistemas não identificados.
+E algumas mandavam a imagem para empresas fora do caminho anunciado.
+Um vendedor de marketplace acrescentava cerca de mil tokens escondidos a cada prompt, sem informar na rota.
+Agora, a reação do "Open Router".
+Num post com data deste domingo, o "Open Router" disse que removeu três provedores da plataforma, sem nomeá-los.
+A empresa também tirou cento e vinte e cinco endpoints da lista elegível para Z D R.
+Entre eles estão os apontados pelos pesquisadores e outros retirados por precaução.
+O "Open Router" também avisou os clientes potencialmente afetados.
+A empresa afirma que as descobertas "não mostraram nenhuma invasão ou acesso não autorizado ao Open Router".
+Ela promete adaptar o método dos pesquisadores para checagens contínuas.
+Promete também verificar tecnicamente os caminhos de rede, em busca de repasses a terceiros.
+E diz que vai exigir garantias antes de devolver o Z D R a qualquer endpoint removido.
+O post lista comunicados de três provedores.
+A Novita, sobre pedidos ao "Mini Max".
+A Phala, com um relatório preliminar de incidente.
+E a "Together", sobre vazamento de prompts em pedidos de junho e julho de 2026.
+O "Open Router" diz que nem todos os provedores afetados publicaram algo.
+E não afirma se os três cortados são exatamente os três invadidos do estudo.
+E o que fazer?
+A lição central do texto da Dragos é que uma marcação de privacidade só vale para o primeiro salto.
+E que agentes de IA mandam adiante tudo o que conseguem ler, credenciais incluídas.
+As recomendações vêm em ordem.
+Primeiro, rodar o modelo na própria infraestrutura, quando der.
+A Dragos cita hardware que vai de seis mil novecentos e cinquenta dólares, um D G X Spark, até quinhentos e setenta mil dólares ou mais, um servidor com oito G P Us B trezentos.
+E reserva essa opção para o trabalho mais sensível.
+Segundo, ir direto a um provedor de primeira linha, com contrato e política de privacidade.
+Sabendo que acordos de compartilhamento ou invasões ainda podem expor os dados.
+Terceiro, usar roteadores com cuidado.
+Isso quer dizer escolher você mesmo os provedores de destino, e conferir se as opções de privacidade mudam de fato para onde o pedido vai.
+E evitar marketplaces de revenda.
+Quarto, plantar credenciais-isca no contexto que seus agentes e pipelines enviam, e tratar qualquer uso como incidente.
+Quinto, ligar a filtragem de segredos, lembrando que ela não pega dado sensível que não tem cara de chave.
+As fontes deste bloco são a Dragos e o "Open Router".
+Segunda história: o "Upload to Shell".
+É uma falha no "Ghost Script" que faz um arquivo malicioso rodar comandos em CUPS, "Round Cube", WordPress e "Media Wiki".
+Para começar, o que é o "Ghost Script", e por que ele aparece onde você não chamou.
+O "Ghost Script" é o interpretador de [P OW1 S K R IH2 P T] e de PDF que muita coisa usa por baixo dos panos, para gerar miniaturas e converter documentos.
+[P OW1 S K R IH2 P T] é uma linguagem de programação completa.
+Então abrir um arquivo desses é rodar um programa.
+Para conter isso, existe o modo [S EY1 F ER0].
+Ele impede o programa de ler e gravar arquivos à vontade, e de executar comandos.
+Sua aplicação não precisa chamar o "Ghost Script" para estar exposta.
+Bibliotecas de imagem fazem isso por ela quando recebem conteúdo [P OW1 S K R IH2 P T] ou E P S.
+Agora, a falha.
+No sábado, dia 21, Paulos Yibelo, da pwn ponto A I, publicou o relato completo do "Upload to Shell", a C V E 2026, doze cinco três nove seis.
+É um "use after free", ou seja, uso de memória depois de liberada, no carregador de fontes Type um.
+Um procedimento interno chama um operador privilegiado sem checar os tipos dos argumentos.
+Com um tratador de erro feito sob medida, o arquivo recupera esse operador e guarda um objeto num lugar onde ele não deveria ficar.
+Quando o interpretador libera aquela memória, a referência continua lá.
+Reaproveitando o espaço, o atacante passa a ler e escrever a memória viva do interpretador.
+Com isso, ele desliga a variável que ativa a checagem de caminhos de arquivo.
+E faz isso enquanto o modo [S EY1 F ER0] continua ligado na linha de comando.
+O texto lembra o ponto de fundo.
+O modo [S EY1 F ER0] depende de checagens dentro do próprio interpretador, e não de um filtro do kernel.
+A correção saiu no "Ghost Script" dez ponto zero oito ponto zero, em 8 de setembro.
+A C V E ficou pública em 9 de novembro, com nota oito vírgula cinco no C V S S quatro ponto zero, e vetor de ataque local.
+Os autores argumentam que as demonstrações deles chegaram ao interpretador remotamente.
+A novidade de agora é a cadeia de exploração detalhada.
+O relato não menciona exploração da falha por atacantes.
+Por onde o arquivo chega?
+Nos testes da pwn ponto A I, o caminho mais comum passou por bibliotecas de imagem.
+No "Pillow", do Python, abrir a imagem só identificou o conteúdo E P S.
+Foram as funções de carregar, recortar ou gerar miniatura que acionaram o "Ghost Script".
+O "image I O" e o "scikit image" chegaram lá passando pelo "Pillow".
+No PHP, a leitura de imagem do "Imagick" repassou o arquivo ao "Ghost Script" pelo "Image Magick".
+O "lib vips" depende dos carregadores instalados, e o build testado usava "Image Magick" e "Ghost Script".
+O plugin de E P S do "K Image Formats", do [K Y UW1 T], e o "Matplotlib" com arquivos E P S também acionaram o interpretador.
+Já PHP G D, Open C V, Sharp pré-compilado, Jimp, Java Image I O e os decodificadores padrão do Go não acionaram.
+E onde isso virou execução de código?
+Num CUPS do Debian treze, com fila de impressão compartilhada e sem autenticação, um trabalho de impressão anônimo rodou comandos como o usuário de impressão.
+No "Round Cube" um ponto sete ponto dois, com uma configuração permissiva do "Image Magick", bastou o destinatário visualizar o e-mail com o anexo disfarçado, sem clicar.
+No WordPress, com os plugins "Forminator" um ponto cinquenta e cinco ponto um, ou "Essential Addons for Elementor" seis ponto sete ponto zero, um visitante sem login chegou lá.
+Ele usou formulários públicos de upload, em configurações específicas.
+No núcleo do WordPress, uma falha relacionada exige um usuário com permissão de upload, num site com "Imagick" e "Ghost Script".
+Ela foi corrigida nas versões sete ponto zero ponto quatro e seis ponto nove ponto sete.
+A lista inclui ainda o "Media Wiki" com uploads anônimos, o "Doku Wiki", o Mayan E D M S, o "Resource Space", o Plesk e serviços do Google.
+E a situação nas distribuições?
+No retrato de 12 de novembro feito pela pwn ponto A I, o Debian doze, o Bookworm, ainda aparecia vulnerável.
+O Amazon Linux tinha correção pendente, e partes do SUSE estavam em andamento.
+Ubuntu, Debian treze Trixie, Arch, Fedora Rawhide e Alpine já tinham a correção.
+Desde então, em 17 de novembro, a equipe de suporte de longo prazo do Debian publicou o aviso D L A quatro nove um quatro.
+E o rastreador de segurança passou a listar o Bookworm corrigido no repositório de segurança.
+O número exato da versão corrigida está no artigo escrito.
+Para RHEL, Rocky, Alma Linux, Oracle Linux e Fedora estável, a situação não estava estabelecida no relato.
+E o que fazer?
+O conselho mais fácil de esquecer é este: "atualizar o sistema operacional não atualiza uma cópia separada do Ghost Script".
+Essa cópia pode estar dentro de uma imagem de container, ou num pacote empacotado com a aplicação.
+Quem processa uploads em workers containerizados precisa reconstruir as imagens.
+Além disso, o texto recomenda exigir autenticação em filas de impressão.
+Recomenda também restringir o que o processo de renderização pode fazer.
+Uma política que o impeça de abrir um shell limita o estrago, mesmo depois do comprometimento.
+E recomenda conferir o tipo real do arquivo antes de gerar a miniatura.
+Vale lembrar: em novembro, o CERT já tinha alertado que o "Image Magick" pode entregar ao "Ghost Script" um arquivo detectado como [P OW1 S K R IH2 P T] pelo conteúdo.
+E tinha recomendado, no arquivo de políticas do "Image Magick", uma lista de permissão que desliga [P OW1 S K R IH2 P T], E P S e PDF.
+As fontes deste bloco são a pwn ponto A I, o rastreador de segurança do Debian e o aviso D L A do Debian.
+Terceira história: o C mais mais vinte e seis volta a ser concluído, numa reunião em Búzios.
+Os contratos foram mantidos, e entrou um rótulo que obriga a checagem.
+Primeiro, o que tinha acontecido.
+Em outubro, contamos aqui que o texto do C mais mais vinte e seis tinha falhado na votação internacional da ISO, com os contratos no centro da disputa.
+Contratos são condições que o código declara esperar.
+Uma delas diz o que precisa ser verdade na entrada de uma função.
+Outra diz o que a função garante na saída.
+E uma terceira checa algo no meio do caminho.
+Segundo o relato de Herb Sutter, veterano do comitê, foi a primeira votação desse tipo a não passar por unanimidade.
+Cinco organismos nacionais levantaram preocupações sobre contratos pela primeira vez, e votaram contra.
+E o que mudou em Búzios?
+A reunião do comitê ISO de C mais mais deste mês aconteceu em Búzios, no Rio de Janeiro, durante seis dias, de segunda a sábado, com participação remota.
+A anfitriã foi a "C plus plus Alliance", e a organização foi liderada por Matheus Izvekov.
+Foram cerca de duzentos e vinte participantes, de vinte e sete países, trinta e cinco porcento deles presencialmente.
+Segundo Sutter, a fatia remota foi maior que o normal em parte porque uma parada da aviação nos Estados Unidos atrapalhou as viagens.
+Um pedido para tirar os contratos do C mais mais vinte e seis foi discutido, votado de novo e rejeitado.
+A votação para relançar o C mais mais vinte e seis com eles teve cento e onze votos a favor, nove contra e oito abstenções.
+Contando só os votos a favor e contra, são noventa e dois vírgula cinco porcento de apoio.
+Em fevereiro de 2025, quando os contratos entraram no rascunho, o apoio tinha sido de oitenta e sete vírgula sete porcento.
+E em março de 2026, de noventa vírgula cinco porcento.
+Para responder às críticas, o comitê adotou uma proposta de Joshua Berne, a P quatro quatro cinco um R dois.
+Em C mais mais vinte e seis, o comportamento das checagens de contrato depende de como o programa é compilado.
+O rótulo novo, chamado [EH0 N F AO1 R S T], marca uma checagem específica como sempre aplicada.
+Se a condição for violada, a execução não passa dali, seja qual for a regra das outras checagens.
+No exemplo do texto, a pré-condição marcada assim exige que x seja maior que zero.
+Também entraram ajustes em reflexão com módulos, na alocação de memória da biblioteca de execução assíncrona e em tipos estruturais.
+Próximos passos.
+O comitê vai produzir o documento atualizado, que deve passar por uma segunda votação internacional e por edição final.
+Sutter diz apenas que a ISO deve publicá-lo "num futuro próximo", sem data.
+A reunião também colocou novidades no rascunho do C mais mais vinte e nove.
+Uma é o prefixo zero o, para números octais, com o zero sozinho marcado como obsoleto para isso.
+Outra é o break e o continue com rótulo, para sair de um laço específico entre vários aninhados.
+E ainda entraram uma visão genérica de intervalos, uma visão de fatia, e um jeito de pegar o ponteiro do valor dentro de um optional.
+Sutter lembra que "adotado para o C mais mais vinte e nove" não significa esperar até 2029.
+Vários recursos já aparecem nos compiladores antes disso.
+A próxima reunião completa será em Istambul, em março.
+A fonte deste bloco é o relato de Herb Sutter.
+Quarta história: um agente de IA escreve um navegador em Rust em sete semanas.
+E Raph [L EH1 V IY0 AH0 N] prevê uma onda de interfaces em Rust.
+Primeiro, o experimento.
+Na sexta, dia 20, o desenvolvedor Senko Rashitch contou como deixou o Claude construir sozinho um navegador web em Rust, o S W B, desde o começo de outubro.
+Ele tirou de propósito toda decisão técnica do lado dele.
+A instrução era fazer o que o agente recomendasse.
+O Opus cinco ponto cinco cuidava das tarefas mais complexas, o Sonnet do desenvolvimento mais simples, e o Haiku das tarefas elementares.
+As regras: nada de copiar código de navegadores existentes, nem reaproveitar motores prontos, como Servo, Blink ou V oito.
+Bibliotecas de uso geral eram permitidas.
+Mas tudo que é específico de navegador tinha de ser escrito do zero, com licenças e origem registradas.
+Comparar o comportamento com o Chromium, sem olhar o código dele, era permitido.
+E o resultado?
+São cerca de quatrocentas mil linhas de Rust no navegador, quinhentas mil linhas de testes, cento e trinta mil de ferramentas e umas sessenta mil de documentação e especificações.
+Tudo isso num binário de cerca de trinta e cinco megabytes.
+A meta que o autor deu ao agente era fazer funcionar B B C, Ars Technica, Wikipedia, "Open Street Map" e "Git Hub", além de ler e postar no "Hacker News".
+E ele diz que já usa o S W B no dia a dia para ler sites.
+Na página da B B C, segundo ele, todos os dois mil setecentos e quarenta e cinco elementos ficam a até dois pixels da posição em que o Chromium os coloca.
+O navegador tem um motor de JavaScript próprio, um interpretador sem compilação J I T.
+E esse motor, nas palavras dele, "não vai bem em aplicações JavaScript complexas".
+Cookies e armazenamento local ficam só na memória, e ele roda apenas no Linux.
+Rashitch usou uma assinatura "Claude Max" de cem dólares por mês, só com a capacidade que sobrava.
+Ele estima que, pagando por tokens na [EY1 P IY1 AY1], a conta estaria entre sete mil e dez mil dólares.
+A lição de orquestração.
+No começo, o Claude rodava subagentes em paralelo.
+Eles editavam os mesmos arquivos, criavam conflitos e "queimavam tokens incrivelmente rápido".
+A solução foi trabalhar "uma coisa de cada vez, um agente de cada vez".
+A partir daí, diz o autor, o projeto andou bem.
+A ressalva é do próprio Rashitch: ele nunca revisou o código, então a qualidade dele não foi verificada.
+Agora, a previsão de [L EH1 V IY0 AH0 N].
+No sábado, dia 21, Raph [L EH1 V IY0 AH0 N] escreveu no blog do "Line Bender", grupo que desenvolve bibliotecas de interface gráfica em Rust.
+Ele voltou ao tema de um texto dele de 2022.
+A tese: o Rust está virando "a linguagem" das reescritas de código feitas com IA.
+E o custo de usar L L Ms com Rust não é muito maior que com outras linguagens.
+Desde 2022, cerca de vinte toolkits de interface em Rust foram anunciados.
+O G P U I, do editor Zed, desponta como escolha para reescritas com IA.
+O destaque é o Discord, que, segundo ele, usa o G P U I no desktop.
+[L EH1 V IY0 AH0 N] acha que o G P U I serve bem ao Zed, mas não necessariamente a aplicações em geral.
+O motivo é que o renderizador dois D dele não tem suporte completo a gradientes, mistura de cores e filtros.
+Para layout de texto, ele aponta o "Parley".
+Para acessibilidade, o "Access Kit".
+Entre os conselhos, estão usar especificações bem definidas quando existirem.
+E colaborar com projetos abertos sem inundar os mantenedores com pull requests de baixa qualidade.
+Por que juntar as duas histórias?
+Esta é uma leitura nossa, não dos autores.
+O navegador de Rashitch é exatamente o tipo de projeto em que a especificação é bem definida, e existe uma referência para comparar, o Chromium.
+É o cenário que [L EH1 V IY0 AH0 N] descreve como terreno firme para esse tipo de reescrita.
+As fontes deste bloco são Senko Rashitch e Raph [L EH1 V IY0 AH0 N].
+Agora, os destaques rápidos para hoje.
+Primeiro destaque: o L L V M encerra a troca de licença que começou em 2018.
+Num post de quinta, dia 19, no fórum do projeto, o L L V M anunciou que mais de noventa e nove vírgula cinco porcento de todo o código já contribuído está resolvido.
+Esse código está agora sob a licença Apache dois ponto zero com a exceção do L L V M, ou saiu da base, ou é pequeno demais para ter direito autoral.
+A licença nova substitui a N C S A, da Universidade de Illinois, e a M I T de algumas bibliotecas.
+Mais de mil e trezentas pessoas e cerca de cem empresas e organizações assinaram acordos.
+Código de terceiros, em geral em subdiretórios importados, mantém a própria licença.
+E quem não quiser seu código antigo sob os termos novos pode pedir uma marcação S P D X específica.
+Os arquivos de licença serão atualizados depois que a branch do L L V M vinte e quatro for criada, prevista para o começo de janeiro de 2027.
+A mudança sai no L L V M vinte e cinco.
+A fonte é o fórum do L L V M.
+Segundo destaque: o Debian treze ponto oito corrige um desvio do "Secure Boot" no Grub.
+A oitava atualização do Debian treze, o Trixie, saiu no sábado, dia 21.
+Ela reúne cento e trinta e nove avisos de segurança, além de correções de bugs em mais de uma centena de pacotes.
+Entre elas está uma falha descrita como desvio do "Secure Boot", no Grub dois e nos pacotes assinados do Grub para E F I.
+Esses pacotes cobrem as arquiteturas de sessenta e quatro bits da [EY1 EH1 M D IY1] e da ARM, e a de trinta e dois bits da Intel.
+O "Secure Boot" é o mecanismo que só deixa carregar no boot código assinado.
+E um desvio abre caminho para código não confiável rodar antes do sistema.
+Os mesmos pacotes elevam a revisão S B A T, a numeração usada para revogar versões antigas do Grub.
+A versão inclui também dois avisos do "Ghost Script", o primeiro deles com a correção do "Upload to Shell".
+Quem já usa o Trixie só precisa atualizar os pacotes a partir de um espelho atualizado.
+A fonte é o Debian.
+Terceiro destaque: o Kwi, o terminal novo do K D E, chega à versão zero ponto um.
+O Kwi foi apresentado no começo do mês como um experimento de terminal com renderização pela G P U.
+O primeiro lançamento foi anunciado por Eike Hein na sexta, dia 20.
+Ele está no "Flat Hub", com o código-fonte nos servidores do K D E para quem empacota distribuições.
+Também passou pela revisão do K D E e virou projeto oficial.
+As novidades da semana incluem detecção de links mais robusta, menu global e correções para ser embutido em apps como o Yakuake e o Dolphin.
+Painéis divididos ainda estão em andamento.
+Assim como uma opção do Plasma para que apps clássicos do K D E embutam o Kwi.
+E o próprio Hein avisa que "uma versão zero ponto um ainda é uma versão zero ponto um".
+A fonte é o blog do K D E.
+Quarto destaque: o mini P G coloca um Postgres de verdade num executável que se usa como o [EH1 S] [K Y UW1] Lite.
+Jeff Lindsay, o progrium, apresentou na sexta, dia 20, um programa único que embute servidor e cliente do Postgres.
+Você aponta um diretório, e ele vira o banco.
+Dá para rodar uma consulta direto na linha de comando, subir um servidor Postgres comum, ou iniciar outro programa já configurado para aquele banco.
+O autor descartou o P G Lite, que roda Postgres em WebAssembly, porque ele aceita só uma conexão.
+Também descartou um emulador [EH1 K S] oitenta e seis, que levava cerca de sete segundos para iniciar.
+A versão atual usa o Hyper nove, que roda executáveis do "Plan nove" em velocidade quase nativa.
+Assim, o programa inicia em cerca de oitocentos milissegundos, e o binário compila para Mac, Windows e Linux.
+O próprio autor avisa que não é substituto para Postgres em produção.
+A ideia é atender programas locais, de um usuário só, onde caberia um [EH1 S] [K Y UW1] Lite.
+A fonte é o progrium.
+Quinto destaque: uma página maliciosa bastava para tirar conversas e memórias do agente [M Y UW1 Z], da Meta, segundo pesquisadores.
+O [M Y UW1 Z] é o agente na nuvem da Meta, acessível pelo site, pelo app e pelo assistente do WhatsApp.
+Ele roda numa máquina virtual por usuário.
+Segundo a "Nebu Sec", num relato de sexta, dia 20, o ataque começava quando o agente salvava ou exportava uma página controlada pelo atacante.
+O processo do Chromium que gera o PDF estava com uma camada do sandbox desligada.
+Então uma única falha no V oito, o motor de JavaScript, dava comandos no container.
+O guarda de saída do agente, chamado "Sentinel", pedia aprovação para envios de dados.
+Mas ele deixava passar, sem perguntar, pedidos de leitura sem corpo.
+E era por eles que saíam o histórico de conversas e as memórias.
+Uma falha no kernel completava o caminho até root na máquina virtual, expondo o cofre de credenciais e o próprio "Sentinel".
+A "Nebu Sec" diz que não cruzou a fronteira para outros clientes, e que a Meta corrigiu tudo antes da publicação.
+A fonte é a "Nebu Sec".
+Sexto destaque: o "Zero C sharp" compila C sharp sem o runtime do "dot net" e sem coletor de lixo.
+O projeto é um fork do "B flat", um compilador que gera executáveis nativos de C sharp.
+A memória vem de arenas, regiões liberadas de uma vez quando você manda, em vez de um coletor de lixo.
+A sintaxe do C sharp quinze, a checagem de tipos e os genéricos continuam.
+Reflexão e async ficam de fora.
+E um throw encerra o programa, então os erros voltam como valores.
+Um "olá, mundo" ocupa onze kilobytes no Windows e quarenta kilobytes no Linux.
+E o mesmo código compila para macOS, WebAssembly e até DOS, num processador trezentos e oitenta e seis.
+A biblioteca principal usa a licença M I T, e o fork do "B flat", a A G P L três ponto zero.
+A fonte é a página do "Zero C sharp".
+Sétimo e último destaque: no "Tab News", um relatório anual que travava o Trino destravou quando parou de pedir tudo de uma vez.
+Daniel Camucatto conta que um script Python gerava um relatório mensal.
+O Trino é um motor de consultas [EH1 S] [K Y UW1] [EH1 L] distribuído.
+E o script passou a travá-lo quando pediram o ano inteiro: de cerca de doze milhões para cento e quarenta e quatro milhões de linhas.
+A primeira mudança foi dividir o ano em doze consultas mensais.
+A segunda foi levar a agregação para dentro do próprio Trino, agrupando os dados já na consulta.
+A terceira foi salvar cada mês em [P AA0 R K EY1], para não refazer os meses concluídos.
+E a quarta foi rodar só três consultas em paralelo, para não sobrecarregar o cluster.
+O detalhe mais instrutivo é a contagem de usuários únicos.
+Somar os únicos de cada mês conta duas vezes quem apareceu em janeiro e em fevereiro.
+A saída foi o "Hyper Log Log", uma estrutura que estima contagens distintas e pode ser combinada entre meses, com erro padrão de cerca de dois porcento.
+A regra que o autor deixa é esta: "se o Python vai resumir os dados, peça para o banco resumir antes".
