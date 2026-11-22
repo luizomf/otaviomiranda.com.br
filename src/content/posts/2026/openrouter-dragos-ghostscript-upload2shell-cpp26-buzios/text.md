@@ -4,6 +4,7 @@ description: 'Dois milhões de prompts com credenciais-isca mostraram invasores 
 date: '2026-11-22T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/openrouter-dragos-ghostscript-upload2shell-cpp26-buzios.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/openrouter-dragos-ghostscript-upload2shell-cpp26-buzios/final.opus'
 ---
 
 ![Ratoeira de madeira armada vista de cima, com uma chave dourada como isca e uma etiqueta escrita ISCA, sobre fundo amarelo](./images/openrouter-dragos-ghostscript-upload2shell-cpp26-buzios.jpg)
