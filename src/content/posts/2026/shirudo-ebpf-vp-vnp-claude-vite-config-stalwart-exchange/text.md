@@ -4,6 +4,7 @@ description: 'O Shirudo carrega "escudos" assinados no kernel enquanto a correç
 date: '2026-11-24T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/shirudo-ebpf-vp-vnp-claude-vite-config-stalwart-exchange.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/shirudo-ebpf-vp-vnp-claude-vite-config-stalwart-exchange/final.opus'
 ---
 
 ![Ilustração do pinguim Tux, mascote do Linux, segurando um escudo verde com a palavra SHIRUDO sobre fundo azul](./images/shirudo-ebpf-vp-vnp-claude-vite-config-stalwart-exchange.jpg)
