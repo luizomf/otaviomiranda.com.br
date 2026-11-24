@@ -1,0 +1,286 @@
+OpenAI e Cisco abrem o Shirudo para barrar exploits no Linux antes do patch, e um modelo interno da Anthropic diz ter provado que V P é diferente de V N P.
+Esta terça, dia vinte e quatro, abre com uma ferramenta de defesa para o intervalo mais desconfortável da segurança.
+São os dias entre a falha ficar pública e a correção chegar ao servidor.
+OpenAI e Cisco liberaram o Shirudo, que instala bloqueios pequenos e assinados num Linux em funcionamento.
+Depois vem uma afirmação grande da matemática.
+Um modelo interno da Anthropic diz ter provado que V P é diferente de V N P, a versão algébrica do P contra N P.
+E nenhum matemático humano conferiu ainda.
+Ela vem junto de um resultado do Google que usa a mesma ferramenta de checagem, o [L IY1 N], para otimizar algoritmos quânticos.
+Na terceira história, um teste publicado no "Tab News" mostra por onde o golpe do teste técnico falso ainda passa.
+Isso mesmo quando você desliga os scripts de instalação do N P M.
+Fechando os destaques principais, o [S T AO1 L W ER0 T] um ponto dois passa a falar os protocolos do Exchange.
+E o Outlook clássico conecta nele como se fosse um servidor da Microsoft.
+Nos destaques rápidos, tem uma mudança que pode impedir nós do Kubernetes um ponto trinta e oito de subir.
+Tem também uma falha explorada no Azure [EY1 P IY1 AY1] Management, o Zstandard um ponto seis e o "Ladybird" em alpha.
+E ainda a checagem de DNS da Cloudflare, um comando novo no Zellij e uma contagem de vagas remotas que aceitam quem mora no Brasil.
+Primeira história: o Shirudo, da OpenAI e da Cisco, que carrega bloqueios assinados contra exploits num Linux ainda sem patch, sem reiniciar o serviço.
+Começando pelo problema: quando uma falha grave sai, quem cuida de servidores fica entre duas opções ruins.
+Ou aplica a correção às pressas, sem testar, ou deixa o sistema exposto enquanto testa.
+O Shirudo, anunciado na segunda, dia vinte e três, pela OpenAI e pela Cisco, mira esse intervalo.
+O nome é a palavra japonesa para escudo.
+Um escudo, na definição do projeto, é uma proteção temporária que bloqueia o comportamento usado pelo exploit.
+Ele deixa passar as requisições legítimas, até o patch de verdade ser instalado.
+Agora, como funciona. A base é o e B P F, um recurso do kernel Linux.
+Ele permite rodar programas pequenos em pontos específicos do sistema, para observar o que acontece e aplicar restrições.
+Antes de carregar qualquer programa, o kernel passa tudo por um verificador, que recusa código capaz de travar ou corromper o sistema.
+O Shirudo acrescenta camadas por cima disso.
+Os escudos, que o repositório chama de "upatches", são assinados criptograficamente e conferidos antes de carregar.
+Um chip T P M, o módulo de segurança presente em muitas placas-mãe, guarda um registro verificável de cada escudo carregado ou removido.
+E um comando de atestação do Shirudo devolve essa evidência.
+A distribuição acontece por registries O C I, os mesmos usados para imagens de contêiner.
+A telemetria sai para coletores "Open Telemetry".
+Segundo a OpenAI, a equipe pode observar o efeito de um escudo nas aplicações antes de ativar o bloqueio.
+Só depois que um operador aprova, ele entra em vigor, com o serviço rodando.
+Vamos à demonstração. Num teste controlado, um escudo gerado pelo Codex, o agente de programação da OpenAI, bloqueou uma tentativa de exploit.
+O alvo era um "Elastic Search" em execução, e o serviço não precisou reiniciar.
+O escudo acrescentou uma checagem de entrada no decodificador Base sessenta e quatro do Java.
+É o mesmo ponto da falha "Java for Shell", que contamos na semana passada.
+A OpenAI não publicou números de tempo nem versões do teste.
+Um detalhe do repositório ajuda a entender esse caso.
+O escudo do Base sessenta e quatro, publicado como o pacote java base sessenta e quatro, não é um programa e B P F.
+Ele é um agente Java assinado, que o Shirudo verifica no espaço de usuário.
+Pode entrar numa J V M na inicialização, ou ser anexado a um processo Java que já está rodando.
+É esse segundo caminho que dispensa o reinício.
+A documentação do pacote avisa que ele é uma mitigação dentro da aplicação, não uma barreira contra quem já tem root.
+E a correção definitiva continua sendo uma J V M atualizada.
+Agora, os limites. O próprio repositório diz que o Shirudo é pré-lançamento.
+Para produção, ele exige um kernel Linux com uma interface de carregadores assinados e patches do próprio projeto, além de um T P M dois ponto zero.
+Ou seja, não é algo para instalar hoje num servidor com o kernel da distribuição.
+Para testar, há uma máquina virtual com T P M emulado em software.
+A licença é B S D de duas cláusulas, e os programas e B P F têm licença dupla, B S D e G P L.
+A OpenAI chama o projeto de "um primeiro passo".
+As metas maiores, como políticas de permissão geradas automaticamente, aparecem como objetivo, não como recurso entregue.
+O desenho, de todo modo, deixa o agente propondo e o humano aprovando.
+O agente escreve e testa o escudo, e a decisão de ativar continua com a equipe.
+As fontes são o anúncio da OpenAI, o repositório do Shirudo e a página do pacote java base sessenta e quatro.
+Segunda história: um modelo interno da Anthropic publica uma prova de que V P é diferente de V N P, ainda sem revisão de nenhum matemático humano.
+Primeiro, o que foi publicado.
+Na segunda, dia vinte e três, às cinco e quatro da tarde de Brasília, segundo o histórico do repositório, a Anthropic publicou uma pasta nova.
+Ela entrou no repositório público "formal math", e traz um artigo e uma formalização em [L IY1 N] quatro.
+Segundo o "read me", o resultado "foi descoberto por um modelo Claude interno de pesquisa".
+Tanto o artigo quanto a formalização foram escritos por modelos de IA.
+O "read me" também avisa que nenhum matemático humano conferiu a prova.
+O anúncio chega três dias depois de outro, também ligado à Anthropic.
+O matemático Levent Alpöge disse ter provado com o Claude a Hipótese de Riemann generalizada, como contamos no sábado.
+Agora, o que significa V P diferente de V N P.
+Em 1979, Leslie Valiant definiu duas classes de polinômios que funcionam como a versão algébrica de P e N P.
+Nesse mundo, o custo de um cálculo é o número de somas e multiplicações de um circuito aritmético.
+V P reúne os polinômios que dá para calcular com um circuito de tamanho polinomial.
+V N P é uma classe maior, e o exemplo clássico dela é o permanente de uma matriz.
+O permanente é parecido com o determinante, só que todos os termos entram com sinal positivo.
+Essa diferença de sinal faz enorme diferença.
+O determinante tem circuitos eficientes.
+Já o melhor circuito conhecido para o permanente cresce como dois elevado ao número de linhas da matriz.
+Valiant mostrou que o permanente é completo para V N P, ou seja, é um dos polinômios mais difíceis da classe.
+Por isso, provar que nenhum circuito de tamanho polinomial calcula o permanente basta para separar as duas classes.
+Até aqui, os limites inferiores conhecidos para circuitos aritméticos gerais eram muito fracos.
+E o que a prova afirma. Para qualquer corpo, os circuitos que calculam o polinômio de ciclos hamiltonianos precisam de muitas portas.
+São mais de m elevado a c vezes a raiz cúbica do logaritmo de m, para matrizes m por m grandes o suficiente.
+O mesmo vale para o permanente, exceto em corpos de característica dois.
+Esse número cresce mais rápido que qualquer polinômio, mas bem mais devagar que uma exponencial.
+O "read me" diz que o limite vale também para circuitos que apenas aproximam o polinômio.
+E diz que o resultado não resolve P contra N P.
+Ele trata de circuitos aritméticos, não dos circuitos booleanos do problema famoso.
+Agora, o que o [L IY1 N] garante, e o que não garante.
+O [L IY1 N] é um assistente de provas, um programa que só aceita uma demonstração se cada passo seguir das regras.
+A pasta tem trezentos e vinte e quatro arquivos de prova e usa a versão quatro ponto trinta e três ponto um.
+Qualquer pessoa pode compilar o projeto e rodar um script que lista os axiomas usados.
+A checagem mais completa roda na integração contínua do repositório.
+Ela confere as provas de novo com um segundo kernel, escrito de forma independente, chamado nanoda.
+O ponto fraco está declarado no próprio "read me".
+Nas palavras do texto, o [L IY1 N] verifica as provas, mas nenhuma máquina verifica que este arquivo diz o que é afirmado.
+O arquivo de enunciados importa só a "Math lib", a biblioteca de matemática da comunidade.
+E alguém da área ainda precisa confirmar que as definições ali correspondem ao V P e ao V N P que os teóricos da complexidade conhecem.
+E a reação até agora. Emanuele Viola, pesquisador de complexidade computacional, publicou no mesmo dia um post que trata o resultado como a prova de V P diferente de V N P.
+Ele observa que a parte legível por humanos do artigo é muito curta e aponta quase toda para a formalização.
+Ele não diz ter conferido a prova.
+Até a manhã desta terça, não encontramos uma revisão independente das definições.
+Ainda nesta história, agentes do Google também usam o [L IY1 N] como juiz, aqui para algoritmos quânticos.
+No mesmo dia, o Google DeepMind e o Google Quantum AI publicaram um trabalho com equipes de agentes Gemini quatro.
+Esses agentes otimizaram algoritmos quânticos conhecidos.
+Esses circuitos não podem ser testados em computadores clássicos, nem nos processadores quânticos pequenos de hoje.
+Por isso, cada resultado precisou ser provado em [L IY1 N] antes de entrar num caderno compartilhado entre as equipes.
+Vamos aos ganhos relatados. Numa simulação ligada à fusão por confinamento inercial, o custo de computação caiu onze vírgula oito vezes.
+A memória passou de cinco mil seiscentos e cinquenta para quatro mil trezentos e trinta e oito qubits com correção de erros.
+Na simulação da enzima Citocromo P quatrocentos e cinquenta, que participa do metabolismo de remédios, a melhora foi de dois vírgula cinco vezes.
+Ali, a memória caiu de quatrocentos e oitenta e um para trezentos e trinta e três qubits.
+Uma implementação do algoritmo de Grover ficou dois vírgula cinquenta e sete vezes mais rápida.
+E uma rotina de arco-seno, duzentas e noventa vezes.
+O post não diz contra qual versão esse último número foi medido.
+E lembra que rodar essas simulações ainda exigiria mais recursos do que os primeiros computadores quânticos com correção de erros devem oferecer.
+A biblioteca em [L IY1 N] e as soluções verificadas estão no "Git Hub".
+Os dois casos mostram a mesma divisão de trabalho.
+A máquina confere se a prova está certa, e alguém ainda precisa conferir se o enunciado é o que importa.
+As fontes são o "read me" da pasta no repositório da Anthropic, o blog de Emanuele Viola, o verbete sobre V P na Wikipédia e o blog do Google DeepMind.
+Terceira história: um teste no "Tab News" mostra que a opção ignore scripts bloqueia o post install.
+Mas o arquivo de configuração do Vite ainda executa o script do teste técnico falso.
+Primeiro, o golpe. Um golpe comum contra desenvolvedores começa com um suposto recrutador e um teste técnico num repositório do "Git Hub".
+Basta instalar as dependências ou subir o projeto para um script vasculhar a máquina atrás de credenciais.
+A defesa mais citada é a opção ignore scripts do N P M.
+Ela impede a execução automática de scripts, como o post install, durante a instalação.
+O perfil "revin software" publicou no "Tab News", na segunda, dia vinte e três, um experimento que testa até onde essa defesa vai.
+Agora, o experimento. O autor recriou um repositório no estilo do caso que outro usuário, Guilherme, já tinha relatado no "Tab News".
+Nesse caso, a pista quase invisível estava no nome do repositório.
+Um L minúsculo tinha sido trocado por um I maiúsculo, e na fonte padrão do navegador os dois parecem iguais.
+A réplica tem um "read me" bem escrito, dois commits e um script de setup de onze linhas.
+O script verifica se existem, na pasta do usuário, alguns arquivos sensíveis.
+São o arquivo de variáveis de ambiente, a configuração do N P M, as credenciais da AWS e a chave privada do S S H.
+Depois, manda o nome da máquina e a lista de arquivos encontrados para um domínio inválido, que não resolve.
+É um laboratório: o script não lê o conteúdo dos arquivos.
+E o resultado. Com uma instalação limpa do N P M e a opção ignore scripts, os quarenta e um pacotes foram instalados em seis segundos, e o post install não rodou.
+Mas bastou uma linha no arquivo de configuração do Vite, importando o script de setup, para o mesmo script rodar.
+Ele executou no primeiro N P M run dev, em cerca de dois segundos, antes da primeira linha de log do servidor.
+O motivo é simples: o arquivo de configuração do Vite é JavaScript, e o Vite executa esse arquivo para ler a configuração.
+Num comentário, outro usuário lembrou que o mesmo vale para os comandos de build e de preview.
+Há um segundo detalhe. Com a rede cortada, o script terminou com código zero e não imprimiu nada.
+Isso porque um bloco catch vazio escondeu a falha de DNS.
+Silêncio, portanto, não prova que nada aconteceu.
+O autor recomenda uma sequência.
+Primeiro, conferir o dono e as datas do repositório pela [EY1 P IY1 AY1] do "Git Hub".
+Depois, clonar só o histórico recente e ler os scripts do pacote, junto com os arquivos de configuração.
+Em seguida, instalar dentro de um contêiner com ignore scripts.
+E rodar com a rede cortada, sem nenhuma credencial real por perto.
+Ainda nesta história, um ataque real, flagrado no meio da montagem.
+No mesmo período, a "Safe Dep" relatou dois pacotes novos no N P M, chamados clampony e safe clamp três.
+Eles foram publicados por duas contas recém-criadas.
+Os dois copiam o clamp, uma função mínima que limita um número a um intervalo, e acrescentam um hook de pre install.
+Foram doze versões em setenta e três minutos, nesta terça, dia vinte e quatro.
+Na versão um ponto zero ponto onze do clampony, o hook baixa um ladrão de credenciais para Windows.
+O download vem de um paste no Pastebin e de um espelho num domínio russo, e o I P de quem instalou é enviado para os dois.
+A função que executaria o arquivo baixado ainda está vazia.
+Para quem instalou as versões de um ponto zero ponto nove a um ponto zero ponto onze, a "Safe Dep" diz que o ladrão provavelmente não rodou.
+O ladrão em si está completo.
+Ele coleta credenciais de AWS, Google Cloud, Azure, Kubernetes, Docker e Terraform.
+Pega também tokens de registries e do git, chaves S S H, e sessões salvas de FileZilla, Win S C P e Moba X term.
+E ainda o histórico do shell e a sessão do Telegram Desktop, e envia tudo para um bot do Telegram.
+Depois, instala um trojan de acesso remoto chamado enterotoxin, que se disfarça de atualizador da Microsoft Store.
+Esse trojan se comunica com um endereço I P fixo.
+O domínio do espelho e esse endereço completos estão no artigo escrito.
+A "Safe Dep" recomenda procurar os dois nomes de pacote nos lockfiles.
+Quem instalou uma versão mais nova num Windows deve tratar a máquina como comprometida e trocar todas as credenciais.
+Por fim, a pegadinha dos monorepos.
+Um pull request aceito na segunda, dia vinte e três, na "OWASP Cheat Sheet Series", os guias de segurança da OWASP, corrige outro furo.
+Num monorepo com workspaces do N P M, a configuração que liga o ignore scripts precisa ficar no arquivo de configuração da raiz do repositório.
+O N P M não lê esse arquivo quando ele está dentro da pasta de um workspace.
+E uma instalação rodada na raiz ignora esse arquivo sem avisar.
+O aviso de que a configuração do workspace foi ignorada só aparece quando o comando roda de dentro do workspace.
+O autor reproduziu o comportamento no N P M doze ponto dois ponto três e no dez ponto nove ponto nove.
+E a issue correspondente no N P M foi fechada como comportamento esperado.
+As três histórias mostram o mesmo ponto: cada defesa cobre uma camada.
+O ignore scripts cobre a instalação.
+A configuração do Vite fica de fora, e um arquivo de configuração no lugar errado desliga a proteção sem que ninguém perceba.
+As fontes são o post de "revin software" no "Tab News", o blog da "Safe Dep" e o pull request na OWASP.
+Quarta história: o [S T AO1 L W ER0 T] um ponto dois implementa os protocolos do Exchange, e o Outlook clássico conecta nele como num servidor da Microsoft.
+Primeiro, o que mudou. O [S T AO1 L W ER0 T] é um servidor de e-mail, calendário e contatos de código aberto, escrito em Rust.
+A versão um ponto dois ponto zero, anunciada na segunda, dia vinte e três, passa a implementar os protocolos que os clientes do Microsoft Exchange usam.
+São o MAPI sobre H T T P, nos modos cache e online, o "Exchange Web Services", o "Exchange Active Sync" e o "Autodiscover".
+O "Autodiscover" é o mecanismo que configura a conta sozinho a partir do endereço de e-mail.
+Na prática, vários clientes conectam ao [S T AO1 L W ER0 T] sem mudar nada do lado do cliente.
+Entram nessa lista o Outlook clássico para Windows, da versão 2016 em diante, e o Outlook para Mac.
+Também o Mail, o Calendário e os Contatos do macOS, e os aplicativos nativos do iPhone e do iPad.
+E ainda apps Android com suporte a Exchange, como o Gmail e o Samsung Email.
+Tudo isso fica na edição Community, sob a licença A G P L.
+E usa a mesma conta que o IMAP, o J MAP, o Cal DAV e o Card DAV.
+Uma mensagem movida no Outlook aparece movida em qualquer outro cliente.
+E por que agora. O próprio post lembra o calendário da Microsoft.
+O Exchange 2016 e o 2019 perderam o suporte em catorze de outubro de 2025.
+A "Subscription Edition" é a única versão local suportada, sem novas versões maiores previstas depois dela.
+E o "Exchange Web Services" no Exchange Online começou a ser desligado em outubro de 2026, com remoção completa em abril de 2027.
+Para quem precisa manter o e-mail em servidor próprio, por soberania de dados ou por regras do setor, o servidor nunca foi o maior obstáculo.
+O difícil era o cliente: os usuários querem o Outlook.
+Tem também uma decisão de engenharia.
+O suporte ao Exchange soma cerca de duzentas mil linhas de código.
+Elas ficam em crates separados, atrás de uma única feature do Cargo, chamada exchange.
+Quem compila sem ela não leva esse código no binário.
+Nas versões oficiais, o recurso vem desligado até o administrador ativar.
+Os dados específicos do Exchange ficam guardados como metadados à parte.
+E apagar esses metadados não mexe nas mensagens, nos eventos nem nos contatos.
+Agora, os limites. O [S T AO1 L W ER0 T] não tem pastas públicas, caixas de arquivo nem gerenciamento de dispositivos móveis.
+Também não tem RPC sobre H T T P, usado pelo Outlook 2010 e anteriores, nem login por N T L M ou Kerberos.
+Os clientes entram com senha, senha de aplicativo ou "O Auth".
+O novo Outlook para Windows não funciona.
+O post desaconselha usá-lo com qualquer servidor próprio.
+E avisa que, ao adicionar uma conta IMAP nele, a conexão passa pela nuvem da Microsoft, que fica com a senha da caixa.
+O Outlook para iOS e Android também fica de fora, porque depende de um serviço em nuvem da Microsoft.
+Para migrar, a ferramenta Vandelay importa contas do Exchange local pelo "Exchange Web Services", e do Microsoft trezentos e sessenta e cinco pelo Microsoft Graph.
+No mesmo dia, o Kagi abriu o beta público do Kagi Mail e citou o servidor [S T AO1 L W ER0 T] entre os componentes do serviço.
+As fontes são o blog do [S T AO1 L W ER0 T] e o blog do Kagi.
+Agora, os destaques rápidos para hoje.
+O Kubernetes um ponto trinta e oito vai exigir que o runtime de contêineres informe o driver de C group, ou o nó não sobe.
+A prévia publicada na segunda, dia vinte e três, traz a mudança que mais pode quebrar atualizações.
+O kubelet passa a descobrir o driver de C group pelo próprio runtime.
+Isso acontece via C R I, a interface entre o Kubernetes e o container D ou o C R I O.
+O campo de driver de C group na configuração do kubelet será rejeitado.
+A exceção é ativar uma feature gate temporária de compatibilidade com o comportamento antigo.
+O kube adm deixa de definir system D como padrão.
+Na prática, o runtime precisa estar rodando antes do kubelet.
+Se o kubelet não conseguir a resposta mesmo depois de tentar de novo, ele sai com erro antes de registrar o nó.
+Outra mudança vale para nós com C group versão dois e "Limited Swap".
+Ali, pods com recursos definidos no nível do pod e request de memória igual ao limit ficam sem swap nenhum.
+Entre as novidades, a [EY1 P IY1 AY1] "Eviction Request", em alpha, ajuda antes de o pod ser removido.
+Ela deixa a aplicação terminar o trabalho em andamento ou migrar dados.
+O lançamento está previsto para dezesseis de dezembro.
+Na semana passada, o projeto já tinha marcado a remoção do modo I P V S do kube proxy.
+A fonte é o blog do Kubernetes.
+Próximo destaque: uma falha no Azure [EY1 P IY1 AY1] Management foi usada para mirar segredos de empresas norueguesas, e a autoridade do país manda trocar todos.
+O Azure [EY1 P IY1 AY1] Management é o serviço da Microsoft que fica na frente das [EY1 P IY1 AY1] de uma empresa e guarda chaves e tokens para chamá-las.
+Segundo a N S M, a autoridade nacional de segurança da Noruega, um ator desconhecido mirou ativamente segredos guardados no serviço.
+O alvo eram tokens, segredos e valores nomeados, e não está claro quão ampla foi a exploração.
+Equinor e Skagerak Energi estão entre as afetadas, e o problema atinge outros setores na Noruega e fora dela.
+A Microsoft fechou a brecha, mas a N S M pede que todo usuário trate esses segredos como vazados e troque todos.
+Para saber se a instância foi atualizada, dá para abrir um endereço interno de status no próprio gateway e conferir o campo de versão do runtime.
+O caminho completo está no artigo escrito.
+Na série zero ponto cinquenta e dois, o último número precisa ser trinta e um mil novecentos e trinta e seis ou maior.
+Na série zero ponto cinquenta e três, trinta e um mil novecentos e trinta e oito ou maior.
+Segundo a N S M, as camadas V dois e "Consumption" não são vulneráveis.
+As fontes são a N S M e a SecurityWeek.
+Próximo destaque: o Zstandard um ponto seis ponto zero sai antes do previsto para corrigir uma enxurrada de falhas de memória.
+A biblioteca de compressão mantida pela Meta adiantou a versão.
+Os mantenedores dizem que o projeto "não escapa da onda de caça a bugs" que varre a indústria.
+Uma das falhas virou a C V E 2026, doze quatro oito cinco um.
+As correções incluem exposição de memória não inicializada ao descomprimir dados malformados em streaming.
+Incluem também corrupção de memória na função que comprime sequências, e leituras e escritas fora dos limites.
+E ainda uso de memória já liberada, o "use after free", na compressão com várias threads.
+A recomendação é atualizar.
+Dois cuidados: o suporte aos formatos antigos vem desligado por padrão, e duas funções obsoletas de cópia de contexto foram removidas.
+Também há ganhos de desempenho em ARM sessenta e quatro e em RISC cinco.
+A fonte é o texto das notas da versão.
+Próximo destaque: o navegador "Ladybird" entra em alpha, com versões prontas para Linux e macOS.
+O "Ladybird" usa um motor próprio, escrito do zero, e não é um fork de outro navegador.
+O alpha é um canal contínuo com atualizações automáticas.
+Ele tem suporte a "Web Driver" e ao protocolo de DevTools do Firefox, úteis para testes automatizados.
+Andreas Kling avisa que alguns sites não vão funcionar e que o navegador vai travar às vezes.
+E avisa que o projeto não promete segurança por enquanto.
+Simon Willison, que testou a versão, lembra que o projeto ganhou setenta e cinco mil seiscentos e cinquenta subtestes aprovados em outubro.
+Isso no "web platform tests", o conjunto de cerca de dois vírgula vinte e cinco milhões de subtestes que mede a compatibilidade com os padrões da web.
+Segundo o boletim do próprio "Ladybird", a equipe apontou agentes de IA para esses testes e pediu que preenchessem as funcionalidades que faltavam.
+Em junho, o projeto tinha fechado os pull requests públicos.
+As fontes são o "Ladybird" e Simon Willison.
+Próximo destaque: a Cloudflare passa a testar o próprio DNS a partir de todos os data centers, depois de um bug que painéis verdes não mostraram.
+Um bug de agendamento deixou mudanças de registros DNS sem publicar por horas, enquanto o serviço parecia saudável.
+Hostnames novos demoravam a resolver, e certificados não podiam ser emitidos.
+A resposta foi um módulo de DNS no Flamingo, o framework de testes de ponta a ponta da empresa.
+Ele atualiza sem parar um registro T X T com a hora atual.
+E consulta, de cada data center, três servidores autoritativos e o resolvedor um ponto um ponto um ponto um.
+A resposta precisa estar atualizada em até noventa segundos nos autoritativos, e em até seiscentos segundos no resolvedor.
+Esses números alimentam os objetivos de serviço que decidem se uma versão nova avança ou volta.
+E um pico de atraso num data center de teste pode parar o lançamento antes que ele chegue ao resto da rede.
+A fonte é o blog da Cloudflare.
+Próximo destaque: o Zellij zero ponto quarenta e seis ponto um ganha um comando de eventos, que entrega o que acontece no multiplexador em JSON.
+O Zellij é um multiplexador de terminal, da mesma família do T mux.
+O comando novo deixa um script de linha de comando escutar os mesmos eventos que antes só os plugins recebiam.
+São coisas como painel aberto, abas reordenadas e mudança de foco, com resposta em JSON.
+Dá para reagir a esses eventos com ferramentas como o J Q, sem escrever um plugin.
+O resto da versão corrige problemas da zero ponto quarenta e seis ponto zero.
+A fonte é o texto das notas da versão.
+Último destaque: uma contagem automática de mil duzentas e oitenta e oito vagas remotas, em catorze empresas estrangeiras, achou duzentas e uma abertas a quem mora no Brasil.
+O autor do perfil "smart stack hub pro", no "Tab News", leu as vagas pelas [EY1 P IY1 AY1] públicas do Greenhouse, do Lever e do Ashby, em vinte e três de novembro.
+Entre as empresas estão "Git Lab", Elastic, Grafana Labs, Supabase e Zapier.
+Um filtro automático por palavras-chave descartou mil e oitenta e sete vagas, oitenta e quatro porcento do total.
+Entre elas, vagas presenciais, híbridas e restritas a outros países.
+Sobraram duzentas e uma, dezesseis porcento.
+O autor diz que o filtro é conservador, e erra mais descartando vaga boa do que aceitando vaga ruim.
+As dicas: ler o fim do anúncio, onde costumam estar as restrições, e desconfiar de "Remote" sem mais nada.
+Também procurar "LATAM" ou G M T menos três, e preferir empresas que contratam via E O R ou como P J.
+A fonte é o post no "Tab News".
+O mesmo autor mantém uma página gratuita com as vagas filtradas.
