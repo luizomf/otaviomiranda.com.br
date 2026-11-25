@@ -1,0 +1,334 @@
+Ataque ao Hex ponto P M usou o log de erros para rodar comandos nos servidores, e OpenAI diz ter provado que o expoente da multiplicação de matrizes é nove quartos.
+Esta quarta, dia vinte e cinco, abre com um incidente de segurança contado em detalhe.
+O registro de pacotes do Elixir e do Erlang publicou como sessenta e nove requisições sem login chegaram a seis servidores.
+E explicou o que cada usuário deve trocar.
+Depois vem o manuscrito da OpenAI que afirma fechar o expoente ômega da multiplicação de matrizes.
+Na sequência, um desenho com reconciliador para webhooks de jobs de I A, publicado no "Tab News".
+Também tem as falhas de disco que um "kill" menos nove não simula.
+E, nos destaques rápidos, correções no Flatpak e no U V, entre outras notícias.
+Primeira história: o Hex ponto P M explica como um "struct" falso e o log de erros deram a um invasor comandos em seis servidores.
+Começando pelo que aconteceu. O Hex ponto P M é o registro de pacotes do Elixir e do Erlang, o equivalente ao N P M nesses ecossistemas.
+Ele também atende quem usa "Gleam".
+Na segunda, dia vinte e três, de três e dezesseis até três e vinte e nove da tarde, horário de Brasília, um invasor mandou sessenta e nove requisições maliciosas ao site.
+Com elas, conseguiu rodar comandos em seis servidores web.
+A equipe criou uma regra de firewall às três e vinte e sete.
+E, de três e trinta até três e trinta e um, trocou todos os servidores por uma versão corrigida.
+Foram seis máquinas, e não três, porque um reinício às três e vinte e oito subiu três servidores novos ainda com a versão vulnerável.
+Às quatro e sete da tarde, chegou por e-mail um relato de segurança que descrevia exatamente a mesma falha.
+A análise completa saiu na terça, dia vinte e quatro, e a falha recebeu o identificador C V E 2026, doze nove cinco um quatro.
+O Hex também notificou a autoridade sueca de proteção de dados, a Cisa, nos Estados Unidos, e a Enisa, na União Europeia.
+Agora, o que pode ter vazado. Segundo o Hex, não há sinal de pacote alterado, de mudança no banco de dados, nem de acesso que tenha continuado depois.
+Para afirmar isso, a equipe restaurou uma cópia do banco feita minutos antes do primeiro ataque.
+Depois comparou todas as linhas de todas as tabelas com o banco em produção.
+Também conferiu os arquivos gravados desde as três da tarde, pouco antes do ataque.
+Os sessenta e dois arquivos de pacote batem com os checksums guardados no banco.
+E os cento e oitenta e seis arquivos do registro batem com o conteúdo do banco.
+O ponto cego é outro: leituras no banco não ficam registradas.
+Por isso, o Hex não descarta que o invasor tenha lido e-mails, hashes de senha e hashes de chaves de [EY1 P IY1 AY1].
+Na mesma lista entram segredos de autenticação em dois fatores, sessões e logs de auditoria.
+As senhas usam o B crypt, que deixa a adivinhação lenta, mas não protege uma senha fraca.
+As chaves de [EY1 P IY1 AY1] são valores aleatórios de cento e vinte e oito bits, guardados como H MAC SHA dois cinco seis.
+E o Hex considera que elas não precisam ser trocadas.
+Agora, como a cadeia funcionou. Dois conceitos do Elixir explicam o ataque.
+O primeiro é o formato de termos do Erlang, uma serialização binária nativa que transforma valores da linguagem em bytes e de volta.
+O Hex aceitava corpos de requisição nesse formato.
+E os decodificava com uma função da biblioteca Plug Crypto feita para ser segura: ela recusa funções e nomes novos de átomos.
+O segundo conceito é o "struct".
+No Elixir, um "struct" é só um mapa com uma chave especial, que diz a qual módulo ele pertence.
+O decodificador não olhava dentro de mapas.
+Então dava para enviar um mapa que o runtime trataria como "struct" legítimo de qualquer módulo carregado, com os campos que o invasor quisesse.
+E esse decodificador rodava antes do roteamento e da autenticação, em qualquer rota do site.
+Dali em diante, cada passo foi código legítimo fazendo o que foi feito para fazer.
+No primeiro passo, o "struct" falso virou os parâmetros da requisição.
+Um componente que procura um campo de método, usado para simular métodos H T T P como o "put", tentou ler esse campo.
+Num "struct", essa leitura chama uma função do módulo indicado, e essa função não existia.
+O resultado foi um erro, com o "struct" do invasor dentro da "stack trace".
+No segundo passo, vale a regra: erro registrado é erro inspecionado.
+O Sentry, o log de erros do servidor H T T P Bandit e o formatador de logs em JSON chamam a função "inspect" nos dados da requisição.
+No Elixir, o "inspect" é um protocolo.
+Para um "struct", ele roda a implementação do módulo indicado naquela chave especial.
+E quem escolhia esse módulo era o invasor.
+No terceiro passo, ele escolheu um "struct" do Ecto, a biblioteca de banco de dados do Elixir.
+A implementação de "inspect" do Ecto percorre um campo sem conferir se é uma lista.
+Nesse campo havia outro "struct" falso, um stream da biblioteca D B Connection.
+No quarto passo, percorrer esse stream levou a um caminho de erro da D B Connection.
+Esse caminho executa uma opção de log no formato módulo, função e argumentos.
+Essa trinca veio da requisição.
+Poder chamar qualquer função das bibliotecas carregadas bastou para rodar comandos no sistema operacional, com o usuário da máquina virtual do Erlang.
+A técnica lembra as cadeias de "gadgets" da desserialização em Java.
+Nenhuma peça executa código do atacante sozinha, mas, encadeadas, executam.
+E o gatilho foi a parte do sistema que quase ninguém trata como superfície de ataque: o código que registra erros.
+Segundo o histórico do Git, a checagem de segurança desse decodificador foi removida em vinte e três de fevereiro de 2016.
+Os logs também mostram que, desde dezenove de novembro, os endereços do invasor baixaram várias vezes as dependências do próprio Hex ponto P M.
+Segundo a equipe, isso sugere que ele montou uma cópia local do site para testar o ataque.
+Agora, a correção e o que vem depois.
+A correção faz o decodificador recusar qualquer termo com um mapa que tenha aquela chave de "struct", com resposta de erro quatrocentos.
+Como esse é o único decodificador do formato, a regra cobre todas as rotas.
+A equipe prepara reforços em várias camadas.
+A Plug Crypto vai documentar que a função só é segura para conteúdo autenticado, e vai ganhar uma opção para recusar structs.
+O Plug vai recusar structs como parâmetros.
+O Ecto vai conferir se o campo é mesmo uma lista.
+E a D B Connection vai parar de executar callbacks de log vindos de structs, numa correção que tem identificador próprio.
+Na investigação, a equipe achou a mesma classe de falha no "Ash", um framework de aplicações em Elixir.
+A paginação por cursor aceitava structs forjados, o que podia levar a execução de comandos ou injeção de [EH1 S] [K Y UW1] [EH1 L].
+O "Ash" corrigiu na versão três ponto trinta e oito ponto zero, na terça, dia vinte e quatro, também sob um identificador próprio.
+Quem usa "Ash" deve atualizar.
+Por fim, o que fazer se você tem conta no Hex.
+Troque a senha e refaça o segundo fator.
+Na página de segurança da conta, em "Authenticator App", escolha "Setup New App" e confirme um código do novo cadastro.
+Isso gera um segredo novo e códigos de recuperação novos, e funciona mesmo quando a organização exige autenticação em dois fatores.
+O Hex também trocou as chaves que assinam sessões e tokens.
+Por isso, todo mundo foi desconectado do site e dos clientes.
+A única credencial importante ainda não trocada é a chave que assina o registro de pacotes.
+Para trocá-la, o Hex está construindo um sistema de assinatura que suporta rotação de chave.
+As novas versões do cliente estão previstas para os próximos dias.
+Até lá, baixe pacotes só do repositório oficial, o repo ponto hex ponto P M, sem mirrors de terceiros.
+Quando o cliente novo sair, reinstale o Hex pelo mix, forçando a atualização, e atualize o rebar três ou o "Gleam", se usar.
+O comando exato está no artigo escrito.
+E desconfie de e-mails que dizem vir do Hex, porque os endereços podem ter vazado.
+A fonte deste bloco é o blog do Hex ponto P M.
+Segunda história: a OpenAI publica um manuscrito que diz provar que o expoente da multiplicação de matrizes é exatamente nove quartos.
+Primeiro, o que foi publicado.
+Na noite de terça, dia vinte e quatro, a OpenAI acrescentou nove manuscritos ao seu repositório público de matemática.
+Segundo o "read me", a coleção reúne artigos e provas produzidos por um modelo interno ainda não lançado.
+A empresa pôs esse modelo para atacar problemas abertos de pesquisa.
+Foram cerca de quatro mil problemas, com média de três horas de raciocínio do Chat GPT Pro por resultado.
+O manuscrito que mais chama atenção tem um título direto: "O expoente da multiplicação de matrizes é nove quartos".
+Agora, o que é esse expoente. Pelo método da escola, multiplicar duas matrizes de ene linhas e ene colunas custa cerca de ene ao cubo operações.
+Isso porque cada uma das ene ao quadrado casas do resultado é uma soma de ene produtos.
+Strassen mostrou que dava para reaproveitar trabalho entre as casas, com sete multiplicações em vez de oito num bloco dois por dois.
+Com isso, baixou o expoente para cerca de dois vírgula oitenta e um.
+O expoente ômega é o menor número que permite multiplicar matrizes com algo próximo de ene elevado a ômega operações.
+Ele nunca pode ficar abaixo de dois, porque só ler as duas matrizes já custa ene ao quadrado.
+Por décadas, a grande pergunta foi se ômega é igual a dois.
+O melhor resultado humano registrado até 2025 era dois vírgula três sete um três três nove.
+Esse resultado é de Alman, Duan, Vassilevska Williams, Xu, Xu e Zhou.
+E o que é novo? A metade de cima do resultado já existia.
+Em dois de outubro, a própria OpenAI publicou que ômega é no máximo nove quartos, ou dois vírgula vinte e cinco, para números complexos.
+Esse trabalho foi estendido a qualquer corpo por Amanov, van den Berg e Zuiddam, num preprint no "Archive".
+O manuscrito novo afirma a metade de baixo.
+Para todo ene a partir de dois, qualquer circuito aritmético que multiplique duas matrizes ene por ene precisa de um mínimo de operações.
+Esse mínimo é metade de ene elevado a nove quartos multiplicações ou divisões, mesmo que somas saiam de graça.
+Se estiver certo, ômega vale exatamente nove quartos, e a conjectura de que ômega é dois está errada.
+O artigo diz que o resultado também derruba uma conjectura de Strassen sobre uma família de tensores.
+A ideia da prova, segundo o resumo, é esta.
+Um expoente menor permitiria comprimir redes de tensores a ponto de violar um limite inferior.
+Esse limite, provado no próprio trabalho, vale para testar se os itens de várias listas são todos distintos.
+O que muda no seu código? Por enquanto, nada.
+O manuscrito trata do custo assintótico, quando ene cresce sem limite, e não de bibliotecas.
+Os algoritmos com expoente baixo da linha de Coppersmith e Winograd são chamados de galácticos.
+As constantes escondidas são tão grandes que só compensariam em matrizes maiores do que os computadores atuais conseguem tratar.
+O algoritmo de Strassen, esse sim, aparece em algumas bibliotecas numéricas.
+O que o resultado diz, se confirmado, é onde fica o chão teórico.
+Agora, o que está verificado. Há uma formalização em [L IY1 N], o assistente de provas que só aceita uma demonstração se cada passo seguir das regras.
+Ela prova o expoente nove quartos para programas sem divisão, que só somam, subtraem e multiplicam.
+E faz isso num modelo um pouco mais restrito que o do artigo, que admite divisões.
+Como contamos ontem, o [L IY1 N] confere a prova.
+Mas alguém da área ainda precisa confirmar que as definições do arquivo dizem o que o título promete.
+O "read me" geral avisa que cerca de quarenta e dois porcento dos resultados principais da coleção têm formalização.
+Ele diz que os não formalizados "podem ter problemas".
+E que os manuscritos devem ser lidos como dados brutos de pesquisa, não como artigos revisados.
+Até a manhã desta quarta, não encontramos uma revisão independente do limite inferior.
+Por fim, o resto do pacote. No mesmo lote, a OpenAI afirma ter um algoritmo determinístico fortemente polinomial para programação linear.
+Programação linear é a técnica que otimiza rotas, escalas e alocação de recursos.
+Fortemente polinomial quer dizer que o número de passos depende só da quantidade de variáveis e restrições, e não do tamanho dos números de entrada.
+Essa é a pergunta do nono problema da lista de [S M EY1 L].
+Um manuscrito irmão diz refutar a versão polinomial da conjectura de Hirsch, sobre o tamanho dos caminhos entre vértices de um poliedro.
+Os "read me" dos dois manuscritos citam formalizações em [L IY1 N].
+O lote ainda traz artigos sobre limites de circuitos.
+Segundo o histórico do repositório, eles incorporam o "V P e V N P são diferentes" que a OpenAI publicou na noite de segunda, dia vinte e três.
+Isso foi horas depois de a Anthropic publicar a própria prova de que V P é diferente de V N P.
+As fontes são o "read me" e o PDF do manuscrito, o "read me" e o histórico do repositório da OpenAI, e o documento sobre o escopo da formalização.
+Também entram o manuscrito de programação linear, o preprint de Amanov, van den Berg e Zuiddam, e o verbete da Wikipédia.
+Terceira história: no "Tab News", um desenho com reconciliador faz o resultado de um job de I A sobreviver ao webhook que falhou.
+Começando pelo problema. O post foi publicado na terça, dia vinte e quatro, pelo perfil "node and neural", e está ligado a um vídeo do canal "Node and Neural".
+Ele começa com uma cena comum. Um cliente pede um relatório de quarenta páginas, e o modelo leva seis minutos para gerar.
+Quando o job termina, o provedor chama o seu webhook.
+Mas o endpoint está no meio de um deploy e responde quinhentos e três.
+O provedor tenta de novo por cerca de um minuto e desiste.
+Uma hora depois, o arquivo de saída é apagado do lado dele.
+O job deu certo, e ninguém do seu lado ficou sabendo.
+O exemplo usa a [EY1 P IY1 AY1] de predições do "Replicate", cuja documentação confirma o essencial.
+Só o aviso final é reenviado, a última tentativa sai mais ou menos um minuto depois do fim da predição, e o endpoint deve responder em poucos segundos.
+Agora, por que o webhook não basta.
+Webhook é o endereço que você entrega ao provedor para ele avisar quando terminar.
+Ele resolve o problema de não segurar uma conexão aberta por minutos.
+Mas é um aviso sem garantia: pode chegar duas vezes, atrasado, fora de ordem, ou nunca.
+O autor lista quatro entregas do mesmo job e o que fazer com cada uma.
+Um aviso novo e bem assinado, você processa.
+O mesmo identificador quarenta segundos depois, você ignora, mas responde duzentos, senão as tentativas continuam.
+Uma assinatura válida com horário de duas horas atrás, você rejeita, porque é um ataque de repetição.
+E um "processando" que chega depois de um "concluído", você ignora, porque um job nunca anda para trás.
+Vamos ao desenho. A ideia central é que a tabela de jobs do seu banco é a fonte da verdade.
+São quatro peças. A primeira: a [EY1 P IY1 AY1] grava a linha do job no banco antes de pedir qualquer coisa ao provedor.
+A segunda: o endpoint de webhook só confere e enfileira.
+Primeiro ele checa o horário. Se a diferença for maior que cinco minutos, rejeita.
+Depois confere a assinatura, um H MAC calculado sobre o identificador do aviso, o horário e o corpo bruto.
+Então põe o evento numa fila, usando o identificador do aviso como chave, para que uma nova tentativa caia no mesmo lugar.
+E responde duzentos em milissegundos.
+A terceira peça é um worker, que aplica o resultado numa única transação.
+Ele marca o identificador como visto, e para se ele já estava lá.
+Trava a linha do job no banco, com um "select for update".
+Ignora o evento se o job já está num estado final.
+E, se deu certo, copia o arquivo para o seu próprio armazenamento antes que ele expire.
+A quarta peça é um reconciliador, que roda a cada cinco minutos.
+Ele pergunta ao provedor sobre qualquer job rodando há tempo demais e passa a resposta pela mesma função de aplicação.
+A frase do autor resume: o webhook é o caminho rápido, e o reconciliador é a garantia.
+No exemplo, o webhook falha do mesmo jeito.
+O reconciliador acha o job parado três minutos depois e consulta o provedor.
+E o relatório chega atrasado, mas chega.
+O post também lista onde isso ainda quebra.
+Frameworks que convertem o JSON antes do seu código estragam a assinatura, então essa rota precisa dos bytes brutos.
+Na troca do segredo, é preciso aceitar a assinatura antiga e a nova.
+Um endpoint que baixa o arquivo antes de responder perde o prazo do provedor.
+E o reconciliador precisa rodar bem antes de a saída expirar.
+As metas do fim do texto, como zero resultados perdidos, são de um cenário ilustrativo, não medições, como o próprio autor avisa.
+Agora, o outro lado do mesmo problema.
+No mesmo dia, o blog do Stack Overflow publicou o lado de quem envia.
+Quem escreve é Lennart Svensson, C T O da "maesn", empresa que integra clientes a mais de trinta sistemas de contabilidade e E R P.
+Ele explica o que acontece quando o sistema do outro lado não aceita uma chave de idempotência.
+Essa chave é o identificador que permite repetir um pedido sem duplicar o efeito.
+Depois de um timeout, quem chamou não sabe se o lançamento entrou ou se só a resposta se perdeu.
+Ele testou: subiu duas vezes o mesmo lote de lançamentos, e as duas subidas voltaram com sucesso.
+A plataforma só percebeu na importação, com um aviso amarelo fácil de ignorar.
+Ele mostra por que os três remendos comuns falham.
+Procurar pelo número do documento acha a nota errada, porque fornecedores repetem números, e muitos recomeçam a contagem em janeiro.
+Conferir antes de gravar perde para as próprias tentativas: duas requisições se sobrepõem, e as duas buscas voltam vazias.
+E limpar depois é outra gravação nos livros, às vezes num mês já fechado.
+Para quem constrói a [EY1 P IY1 AY1], as regras dele são concretas.
+Responder quatrocentos e nove enquanto uma chave ainda está em processamento.
+Responder quatrocentos e vinte e dois quando a mesma chave chega com outro corpo.
+E nunca guardar uma falha temporária associada à chave.
+A alternativa mínima é um campo de referência do cliente, único por empresa, que responde quatrocentos e nove com o lançamento que já existe.
+As fontes são o post no "Tab News", a documentação do "Replicate" e o blog do Stack Overflow.
+Quarta história: a [AE0 N T IH1 TH AH0 S AH0 S] mostra por que o "kill" menos nove não simula queda de energia.
+E ainda acha um bug que deixa o banco do E T C D sem abrir.
+Começando pelo que um teste de crash não testa.
+A [AE0 N T IH1 TH AH0 S AH0 S] vende uma plataforma que roda sistemas distribuídos num ambiente simulado e injeta falhas para achar bugs.
+Num post de terça, dia vinte e quatro, os engenheiros Anjana Ratnayake e Teymour Aldridge explicam um ponto que muita gente que testa banco de dados erra.
+Quando um programa grava num arquivo, os dados vão primeiro para o "page cache", a memória que o kernel usa como intermediária.
+Só depois eles vão para o disco, no ritmo do kernel.
+A chamada F sync existe para forçar a gravação, e só retorna quando ela termina.
+Matar um processo com o sinal SIG KILL, o "kill" menos nove, destrói o processo, mas não a máquina.
+O kernel continua de pé e grava no disco tudo o que o processo já tinha entregado, com ou sem F sync.
+Uma queda de energia é diferente: perde tudo o que o kernel aceitou e ainda não tinha gravado.
+Ou seja, o teste de matar o contêiner nunca exercita o caso em que essas gravações somem.
+Agora, como eles simulam o pior caso.
+Como não dá para puxar o cabo numa simulação, a equipe começou com o Lazy F S.
+É um sistema de arquivos de código aberto do Inesc Tec e do Jepsen.
+Ele usa o Fuse, recurso do Linux que deixa um programa comum fazer papel de sistema de arquivos.
+E guarda numa memória própria tudo o que ainda não passou por F sync.
+Apagar essa memória junto com a morte do processo equivale a uma queda de energia.
+Depois, a equipe escreveu o próprio sistema, o Amnesia, em Rust.
+Ele trabalha direto com inodes e mantém em memória tanto o estado volátil quanto o "durável".
+Além da queda de energia, ele simula gravações rasgadas, erros de disco e atrasos.
+Esses atrasos fazem operações terminarem fora de ordem ou pela metade.
+Vamos à armadilha do F sync. Um dos erros simulados é o que ficou conhecido como F sync gate.
+O kernel marca como "suja" a página de memória que mudou e ainda não foi gravada.
+Num F sync, ele limpa essa marca antes de mandar a página ao disco.
+Se a gravação falha, o F sync devolve erro, mas ninguém marca a página como suja de novo.
+A próxima chamada de F sync retorna sucesso, e aquele dado nunca chega ao disco.
+Foi por isso que o Postgri [EH1 S] [K Y UW1] [EH1 L] passou a derrubar o processo e se recuperar pelo próprio log depois de um F sync com erro, em vez de tentar de novo.
+Agora, o bug no E T C D. O exemplo público é o B bolt, o mecanismo de armazenamento do E T C D, que guarda o estado do plano de controle do Kubernetes.
+O B bolt confirma uma transação em duas etapas, cada uma seguida de F sync.
+Primeiro vêm as páginas de dados, depois uma página de metadados que aponta para elas.
+A [AE0 N T IH1 TH AH0 S AH0 S] achou o caso em que as páginas de dados são gravadas, mas o F sync da página de metadados falha.
+O E T C D sai, o que é o comportamento certo.
+Só que, ao reiniciar, o B bolt lê a página de metadados pelo "page cache", onde a versão não gravada ainda existe.
+E trata a transação como confirmada.
+Com isso, as próximas gravações reutilizam páginas que a versão do disco ainda usa.
+Quando essa página sai do cache, por pressão de memória ou queda de energia, o disco fica com metadados antigos apontando para páginas sobrescritas.
+A partir daí, o B bolt passa a entrar em pânico toda vez que tenta abrir o arquivo.
+O log de escrita antecipada do E T C D não ajuda, porque o nó não passa da abertura do banco.
+A issue no "Git Hub" do B bolt foi aberta em treze de novembro, com E T C D três ponto sete ponto três e B bolt um ponto cinco ponto zero, e continua aberta.
+Um contribuidor sugeriu seguir o caminho do Postgri [EH1 S] [K Y UW1] [EH1 L] e recusar novas gravações depois de qualquer erro de F sync.
+Segundo a [AE0 N T IH1 TH AH0 S AH0 S], o bug só aparece com um erro de disco seguido de uma queda de energia.
+As fontes são o blog da [AE0 N T IH1 TH AH0 S AH0 S] e a issue no repositório do B bolt.
+Agora, os destaques rápidos de hoje.
+Primeiro destaque: o Flatpak um ponto dezoito ponto seis corrige uma escalada para root e uma fuga da sandbox.
+As duas exigem um app malicioso ou comprometido.
+O Flatpak instala e isola aplicativos de desktop no Linux.
+A primeira falha envolve um app, runtime ou extensão instalado para todo o sistema, que use o mecanismo de dados extras.
+Esse pacote pode criar uma árvore de diretórios profunda o bastante para deixar, na pasta de dados do Flatpak, um executável que roda com permissão de root.
+Com isso, um usuário local cooperando com esse pacote, ou o próprio pacote, se já roda código como usuário, chega a root.
+Na segunda falha, um app sem privilégio especial manipula a forma como o portal do Flatpak repassa descritores de arquivo.
+Com isso, ele recebe acesso ao barramento D Bus da sessão sem filtro, o que equivale a sair da sandbox.
+Os avisos de segurança do projeto classificam as duas como de severidade alta.
+As correções estão no um ponto dezoito ponto seis e no um ponto dezenove ponto quatro, da linha de desenvolvimento.
+As tags um ponto dezoito ponto cinco e um ponto dezenove ponto três já tinham o código, mas o processo de lançamento delas falhou.
+Atualize pelo gerenciador de pacotes da sua distribuição.
+As fontes são as notas da versão e os dois avisos de segurança do Flatpak.
+Próximo destaque: o U V zero ponto treze ponto dez recusa wheels em que o U V e o pip extrairiam arquivos diferentes do mesmo ZIP.
+O U V é o gerenciador de pacotes e projetos Python da Astral.
+Num arquivo ZIP, o tamanho comprimido de cada item pode aparecer em dois lugares.
+Um fica logo depois dos dados, e o outro no índice central, no fim do arquivo.
+Até a versão zero ponto treze ponto nove, o U V lia até o fim dos dados.
+Já o módulo de ZIP do Python, usado pelo pip, lê só o tamanho declarado no índice.
+Quem informasse um tamanho menor podia fazer o pip instalar um módulo vazio, e o U V instalar o mesmo módulo com código.
+E os dois conferiam o mesmo hash SHA dois cinco seis, porque os bytes baixados eram idênticos.
+A Astral classifica a falha como baixa.
+A vítima precisa instalar um pacote controlado pelo atacante, e o [P AY1] [P IY1] [AY1] já tem proteções contra ZIPs malformados.
+A versão também valida melhor o arquivo de lock do U V, e explica por que a opção "locked" recusou um lockfile.
+As fontes são as notas da versão e o aviso de segurança do U V.
+Próximo destaque: a Canonical promete para janeiro a primeira versão do lançador com I A opcional do Ubuntu.
+Num post de terça, dia vinte e quatro, no fórum do Ubuntu, o engenheiro Didier Roche falou do protótipo que circulou no mês passado.
+Segundo ele, aquilo era só uma simulação de interface, e o código agora funciona de verdade.
+A proposta é um ponto de entrada único, pensado para teclado e voz.
+Ele serve para abrir aplicativos, achar arquivos e, só quando a pessoa pedir, usar assistência de I A.
+A Canonical diz seguir quatro princípios.
+Tudo de I A é opcional, e a inferência roda de preferência em modelos locais.
+Os dados ficam na máquina, e os componentes rodam isolados, para que recursos experimentais ou de agentes não comprometam o sistema.
+A instalação padrão não vai trazer gigabytes de modelos, e o lançador funciona sem I A nenhuma.
+A fonte deste destaque é o fórum do Ubuntu.
+Próximo destaque: o Collabora Online reserva memória antes de criar processos, e corta até cinquenta e cinco porcento da memória por documento.
+O Collabora Online é uma suíte de escritório na web, derivada do LibreOffice.
+Ele abre cada documento num processo separado, copiado de um processo-pai que carrega a suíte uma vez.
+No Linux, essa cópia compartilha a memória do pai até alguém escrever nela.
+Aí o kernel duplica a página inteira, de quatro kilobytes, mesmo que só alguns bytes mudem.
+O problema eram os buracos que o pai deixava na memória durante a inicialização.
+Os filhos guardavam ali seus primeiros dados e forçavam cópias de páginas compartilhadas.
+Num documento em branco, eram seis vírgula cinco megabytes de dados novos e cerca de trinta e nove megabytes de páginas copiadas.
+A correção faz o pai ocupar os próprios buracos antes de criar o primeiro filho, em cerca de onze milissegundos.
+O teste rodou num servidor de quatro núcleos e oito gigabytes.
+Com cem documentos em branco abertos, a memória por documento caiu de cinquenta e três vírgula nove para vinte e quatro vírgula quatro megabytes.
+Com setenta documentos do Writer, caiu de setenta e três vírgula seis para quarenta e sete vírgula oito megabytes.
+E com cinquenta apresentações do Impress, de setenta e dois vírgula um para cinquenta vírgula três megabytes.
+A fonte é o blog da Collabora.
+Próximo destaque: Armin Ronacher pede o fim do envenenamento de locks no Rust.
+Enquanto isso, a equipe de bibliotecas do Rust discute a mudança para a edição de 2027.
+No Rust, se um código entra em pânico segurando um "Mutex", o lock fica envenenado.
+E toda chamada seguinte para pegar esse lock devolve erro.
+O criador do Flask argumenta, num post desta quarta, dia vinte e cinco, que isso falha para sempre, e não rápido.
+Com o jeito idiomático, que é pegar o lock e chamar "unwrap", um único pânico transforma todo acesso seguinte em outro pânico.
+E o processo continua de pé, e inútil.
+Ele cita casos no R L S, no "application services" da Mozilla, onde o erro chegou ao quinto lugar nas estatísticas de crash, e no Neon.
+Lembra ainda que o erro carrega o lock, o que cria risco de deadlock ao propagar o erro com o operador de interrogação.
+E que partes da própria biblioteca padrão e os locks do Tokio ignoram o envenenamento.
+A proposta dele: locks sem envenenamento como padrão, e um tipo "Poison" opcional para quem quiser.
+A discussão oficial está numa issue aberta no repositório do Rust desde novembro de 2025.
+As fontes são o blog de Armin Ronacher e a issue no repositório do Rust.
+Próximo destaque: a Rust Foundation testa um modelo barato que dá nota de malícia a cada "crate" novo, e uma pessoa revisa o que ele marca.
+Num post de segunda, dia vinte e três, Adam Harvey contou que a fundação patrocina um experimento com modelos de decisão.
+Esses modelos devolvem uma nota em vez de texto, e custam bem menos que um L L M de conversa.
+A ideia é avaliar cada arquivo publicado no crates ponto I O em novembro e dezembro.
+Até o post, a análise cobria os publicados entre onze e vinte e um de novembro: cento e trinta e cinco mil, quinhentos e quarenta e oito arquivos.
+Nenhuma ação é automática. O que passa do limite vai para revisão humana e segue o processo normal de remoção.
+No limite de zero vírgula sete, os quatro casos maliciosos encontrados vieram acompanhados de seis alarmes falsos.
+No limite de zero vírgula trinta e cinco, os mesmos quatro vinham com duzentos e quarenta.
+A fundação avisa que não tem como medir o que o modelo deixou passar, e promete uma avaliação em janeiro.
+A fonte é o blog da Rust Foundation.
+Último destaque: a Anthropic lança em beta o "Claude Ship", que revisa, corrige e pode aprovar pull requests conforme a política do time.
+Ele foi anunciado na segunda, dia vinte e três, para os planos Team e Enterprise, no "Git Hub".
+O produto junta o "Code Review", já disponível, a dois agentes novos.
+O "P R Steward" conserta falhas de C I, conflitos de merge e comentários de revisão, mas foi feito para não aprovar nem fazer merge.
+O "Claude Approvals" aplica uma política escrita num arquivo do repositório.
+A Anthropic compara esse arquivo a um "Code Owners" mais esperto.
+E ele pode aprovar sozinho mudanças rotineiras, se a política permitir.
+A Anthropic recomenda começar no modo só de observação.
+O uso é cobrado por tokens, com limites de gasto.
+E o produto não está disponível para organizações com retenção zero de dados, configuração Hipaa ou chaves de criptografia gerenciadas pelo cliente.
+As fontes deste destaque são o blog da Anthropic e o "The New Stack".
+Segundo o "The New Stack", com o auto merge do "Git Hub" ligado e regras que aceitem aprovação automática,
+uma mudança aprovada pelo Claude chega ao branch principal sem revisão humana.
+Ao mesmo site, a Anthropic disse que o Ship limita as revisões automáticas a três rodadas.
+O limite veio depois que um pull request interno passou por mais de cinquenta rodadas de revisão e correção numa noite, ainda no desenvolvimento do "Code Review".
