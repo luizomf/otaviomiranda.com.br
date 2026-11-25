@@ -4,6 +4,7 @@ description: 'O registro de pacotes do Elixir e do Erlang publicou como 69 requi
 date: '2026-11-25T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/hex-pm-log-vira-rce-openai-matrizes-9-4-webhook-reconciliador.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/hex-pm-log-vira-rce-openai-matrizes-9-4-webhook-reconciliador/final.opus'
 ---
 
 ![Bloco hexagonal de plástico magenta com a palavra HEX, soltando por uma fenda lateral uma tira de papel de recibo com a palavra LOG, sobre fundo verde-menta.](./images/hex-pm-log-vira-rce-openai-matrizes-9-4-webhook-reconciliador.jpg)
