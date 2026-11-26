@@ -4,6 +4,7 @@ description: 'Quem expõe a porta 2049 com NFSv4.1 ou 4.2 precisa atualizar o ke
 date: '2026-11-26T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/nfs2root-api-claude-rust-1password-defang-siren-custo-claude-code.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/nfs2root-api-claude-rust-1password-defang-siren-custo-claude-code/final.opus'
 ---
 
 ![Gaveta antiga de madeira com etiqueta de latão escrita NFS, entreaberta, com uma chave de latão na fechadura e uma etiqueta escrita ROOT.](./images/nfs2root-api-claude-rust-1password-defang-siren-custo-claude-code.jpg)
