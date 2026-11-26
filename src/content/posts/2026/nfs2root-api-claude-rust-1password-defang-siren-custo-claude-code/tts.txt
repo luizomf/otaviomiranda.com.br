@@ -1,0 +1,363 @@
+N F S "to Root": falha de doze anos no servidor N F S do Linux dá root sem login, e a Anthropic conta como levou a [EY1 P IY1 AY1] do Claude de Python para Rust.
+A edição de hoje abre com uma falha antiga e grave no servidor de arquivos que roda dentro do kernel Linux.
+Depois vem um caso de engenharia: a Anthropic conta como reescreveu em Rust a [EY1 P IY1 AY1] que atende o Claude, sem tirar o serviço do ar.
+Na sequência, duas invasões em que o caminho até a produção passou pelo "Git Hub".
+Também tem um estudo sobre agentes de I A que saem da sandbox quando têm chance.
+E dois desenvolvedores brasileiros que mediram o custo do Claude Code, e mostram como o cache e o contexto acumulado decidem a conta.
+Primeira história: o N F S "to Root", uma falha de doze anos no servidor N F S do kernel Linux.
+Ela dá root, sem login, a quem alcança a porta dois mil e quarenta e nove.
+Começando pelo que é e por quem está exposto.
+O N F S é o protocolo que permite a uma máquina montar diretórios de outra pela rede.
+Ele é comum em NAS, servidores de arquivos, build farms e nós de armazenamento de Kubernetes.
+No Linux, o servidor N F S mais usado, o N F S D, roda dentro do próprio kernel.
+A empresa de segurança OpenSec publicou na quarta, dia vinte e cinco, os detalhes da falha C V E 2026, noventa e nove três seis dois.
+Ela chama a falha de N F S "to Root".
+É um estouro de buffer na memória do kernel que qualquer cliente consegue provocar antes de se autenticar.
+Fica exposta a máquina que atende N F S versão quatro ponto um ou quatro ponto dois, que vêm ligados por padrão.
+Basta que a porta T C P dois mil e quarenta e nove esteja alcançável.
+O registro oficial da C V E, emitido pela equipe do kernel, dá nota nove vírgula oito de dez no C V S S. Ou seja, crítica.
+Agora, como o bug funciona. A versão quatro ponto um do N F S trabalha com sessões, e cada sessão tem espaços de resposta, os "slots".
+Cada slot guarda a última resposta que o servidor deu.
+Assim, um pedido reenviado pela rede recebe exatamente a mesma resposta, e não é executado duas vezes.
+E quem escolhe o tamanho dessa memória de respostas é o cliente.
+O ataque tem três passos. Primeiro, o cliente negocia o tamanho mínimo, e cada slot passa a ter um buffer de zero bytes.
+Segundo, o cliente enche de propósito o campo de etiqueta do pedido, um texto livre que o protocolo permite.
+Ele faz isso até o espaço de resposta acabar logo depois do código da operação de sequência.
+Nesse ponto, o codificador do servidor para de escrever, sem registrar erro.
+Terceiro, o servidor acha que a operação deu certo.
+E copia a resposta inteira, com cabeçalhos e a etiqueta do cliente, para o buffer de zero bytes.
+O relatório do Kasan incluído na correção registra uma escrita de oitenta bytes.
+Pela conta da OpenSec, sessenta e um deles caem depois do fim do objeto na memória, e quarenta são escolhidos pelo cliente.
+Do estouro ao root. Segundo a OpenSec, o exploit encadeia pedidos N F S comuns.
+O estouro corrompe os dados de controle do slot vizinho.
+Um pedido de reenvio devolve três vírgula oito kilobytes da memória do kernel.
+Isso revela onde o kernel foi carregado, e anula a proteção de endereços aleatórios.
+Um ponteiro forjado faz o kernel liberar um objeto escolhido pelo atacante.
+Essa memória é preenchida com uma função de retorno falsa, montada a partir de nomes de clientes N F S.
+Quando o atacante desconecta, o N F S D chama essa função, e o kernel roda um shell como root.
+A empresa mantém o exploit privado, e mostra a execução só em vídeo.
+O texto não menciona exploração por atacantes.
+Quem achou, e quando. O defeito entrou num commit de março de 2014, que chegou ao Linux três ponto dezesseis.
+Em dezessete de agosto deste ano, Jérémy Jean, da Anssi, a agência francesa de cibersegurança, mandou a correção ao kernel.
+Junto foi um relatório do Kasan, a ferramenta que detecta acessos inválidos à memória.
+Segundo a OpenSec, a ferramenta automatizada dela, a Antara, achou o mesmo caminho sozinha em vinte e um de setembro.
+E construiu todo o exploit sem intervenção humana.
+No dia seguinte, a empresa reportou o problema aos mantenedores, com o exploit e um patch.
+A C V E foi publicada com as correções em dezenove de novembro.
+A afirmação de que uma máquina fez todo o trabalho é da própria OpenSec, e não dá para conferir sem o código.
+Agora, as versões corrigidas e a situação nas distribuições.
+No kernel oficial, a correção está no seis ponto doze ponto cento e dezessete, e no seis ponto dezoito ponto sessenta e um.
+Também está no sete ponto três ponto dois, e no sete ponto quatro R C um.
+Nós conferimos os rastreadores nesta quinta, dia vinte e seis.
+No Debian treze, o Trixie, a falha aparece corrigida desde o pacote seis ponto doze ponto cento e dezessete.
+No Debian doze, o Bookworm, o kernel padrão da série seis ponto um ainda consta como vulnerável.
+Já o pacote alternativo do kernel seis ponto doze para o Bookworm foi corrigido por um aviso do Debian L T S.
+No Ubuntu, a página da C V E, atualizada na quarta, dá prioridade crítica.
+E lista o kernel como vulnerável em todas as versões L T S suportadas.
+No Ubuntu vinte e seis ponto zero quatro L T S, a correção aparece como "em andamento", para a versão sete ponto zero ponto zero.
+Como saber se a sua máquina está exposta.
+A OpenSec lista quatro condições, e a máquina só está exposta se cumprir todas.
+Primeira: um kernel mais antigo que as versões corrigidas, e sem correção da distribuição.
+Segunda: o módulo N F S D carregado.
+Terceira: as versões quatro ponto um ou quatro ponto dois do N F S ligadas, o que aparece na lista de versões ativas do servidor.
+Quarta: a porta dois mil e quarenta e nove ouvindo num endereço que não seja o loopback.
+Os comandos para conferir cada item estão no artigo escrito.
+O caminho é atualizar o kernel e reiniciar.
+Enquanto isso não for possível, a recomendação é liberar a porta dois mil e quarenta e nove no firewall só para a rede de armazenamento.
+A outra opção é desligar as versões quatro ponto um e quatro ponto dois no arquivo de configuração do N F S, e reiniciar o servidor N F S.
+Essa segunda opção desliga o p N F S e alguns recursos da versão quatro ponto dois.
+Como o ataque usa N F S válido, não há assinatura de rede para detectá-lo.
+A OpenSec aponta alguns sinais.
+Avisos do kernel vindos da função que confere o tamanho da resposta no N F S D, que aparecem a cada tentativa.
+Falhas do kernel envolvendo funções do N F S D da versão quatro.
+Shells abertos por processos do kernel num servidor de arquivos.
+E rajadas de sessões N F S curtas, na versão quatro ponto um, vindas da mesma origem.
+A demora do Ubuntu virou assunto no mesmo dia.
+Também na quarta, o pesquisador Hanno Böck escreveu na lista O S S Security que a resposta do Ubuntu a falhas graves de kernel está "preocupante".
+Ele dá exemplos. Nove dias depois da divulgação do Noisy T C P, a falha no T C P do Linux que noticiamos em dezesseis de novembro, o Ubuntu ainda não tinha correção.
+Uma fuga de máquina virtual no K V M em processadores [EY1 EH1 M D IY1], divulgada em dezoito de novembro, também seguia sem patch.
+A explicação que ele propõe: o Ubuntu aplica correções, uma a uma, sobre uma árvore própria do kernel sete ponto zero.
+O Debian estável, por outro lado, acompanha uma versão de suporte longo do kernel ponto org.
+Böck chama a estratégia do Ubuntu de "pouco viável", e defende que as distribuições partam das versões de suporte longo.
+Até a nossa leitura, a thread não tinha resposta da Canonical.
+Quem roda N F S em Ubuntu tem, por enquanto, só as mitigações de que falamos.
+As fontes deste bloco são a OpenSec, o registro oficial da C V E e a correção no kernel.
+E também o rastreador do Debian, a página do Ubuntu e a mensagem de Hanno Böck na O S S Security.
+Segunda história: a Anthropic diz que o Claude escreveu em uma semana a primeira versão em Rust da [EY1 P IY1 AY1].
+E que provar que ela fazia o mesmo levou meses.
+O que mudou. A Anthropic publicou na quarta, dia vinte e cinco, um relato de engenharia sobre a migração da "Messages" [EY1 P IY1 AY1], de Python para Rust.
+É a interface que recebe os pedidos ao Claude.
+A [EY1 P IY1 AY1] foi construída em Python em 2023.
+Segundo o texto, o tráfego cresceu cerca de mil e oitocentas vezes entre o começo de 2024 e o outono de 2026 no hemisfério norte.
+Uma reescrita parcial anterior, só da parte que processa a saída do modelo, tinha cortado de oito a dez porcento do uso de C P U.
+Desta vez, a migração cobriu todo o caminho do pedido.
+Escrever foi rápido. Verificar, não.
+Segundo a empresa, o Claude escreveu uma primeira versão do núcleo em cerca de uma semana.
+O problema era saber se ela se comportava igual à versão em Python.
+Em abril, a versão em Rust passava em cerca de noventa e oito porcento dos testes.
+Mesmo assim, no fim de abril, só cerca de um quarto das entradas reais de produção dava o mesmo resultado nas duas versões.
+No começo de maio, essa taxa caiu para seis vírgula cinco porcento, antes de subir com as correções.
+Uma auditoria dos testes portados achou mais de cem asserções enfraquecidas.
+Eram testes que continuavam passando, mas conferiam menos do que antes.
+A lição é que uma suíte que passa não prova equivalência.
+Então a produção virou o gabarito.
+A saída foi comparar as duas versões com tráfego real.
+O modelo era chamado uma vez só, e a resposta dele era repassada às duas implementações.
+Assim, as duas trabalhavam sobre a mesma resposta, e o uso não era contado em dobro.
+E a variação natural do modelo não atrapalhava a comparação.
+Em vez de ler o conteúdo, a equipe comparava as duas versões em pontos de controle.
+Eram eles: validação, configurações, montagem do prompt e tratamento da saída.
+Cada diferença virava um registro curto, com a etapa, o primeiro byte diferente e os tamanhos.
+Registros parecidos eram agrupados numa "impressão digital".
+Segundo a Anthropic, com isso a equipe não precisou ler pedidos de clientes nem respostas do Claude.
+O processo tinha três ciclos. No ciclo interno, agentes em sandboxes na nuvem levantavam hipóteses para cada diferença.
+Eles criavam pedidos que a reproduziam, e comparavam as duas versões em menos de um segundo.
+As correções iam para revisão humana.
+No ciclo externo, depois do deploy, a equipe acompanhava se a impressão digital sumia do tráfego real.
+Se ela continuasse, o caso voltava ao ciclo interno.
+No ciclo de memória, cada correção feita por um engenheiro virava uma regra que os agentes liam primeiro.
+Virava também testes e lints permanentes.
+Um deles impede o merge de mudanças no Python sem a mudança correspondente no Rust, salvo exceção registrada.
+A empresa conta um caso em que o verificador quase foi enganado.
+Como ele premiava saídas iguais, um agente propôs um atalho descartável para a busca na web. E a revisão humana barrou.
+O resultado, segundo a Anthropic.
+A taxa de equivalência chegou a noventa e nove vírgula seis porcento em agosto.
+E o tráfego público passou para o Rust em setembro, aos poucos.
+O serviço nunca saiu do ar, e o desenvolvimento de recursos não foi congelado.
+A empresa relata cerca de setenta porcento menos C P U, e mais de oitenta porcento menos memória por pedido.
+Além disso, o tempo mediano até o primeiro token ficou cerca de vinte porcento menor.
+As condições pesam nesses números.
+O gráfico de C P U cobre uma região, e o de memória cobre toda a produção.
+O de tempo até o primeiro token cobre pedidos do Claude Code entre sete e vinte e um de setembro.
+Os números são da própria Anthropic, sobre um sistema que só ela consegue medir.
+A fonte deste bloco é o relato de engenharia da Anthropic.
+Terceira história: na "One Password" e na Defang, uma conta de funcionário no "Git Hub" e um app de testes chegaram à produção.
+Primeiro, a "One Password". A empresa do gerenciador de senhas contou na quarta, dia vinte e cinco, que começou a investigar um caso em dezenove de novembro.
+Havia sinais de que um invasor tinha entrado na conta corporativa de um funcionário no "Git Hub".
+Com essa conta, o invasor chegou ao código-fonte de repositórios privados.
+Chegou também ao sistema de C I, C D, a esteira que compila e publica o software.
+Ele ainda publicou código malicioso em serviços internos.
+E esse código baixou dados de conta de uma parte dos usuários, sem número informado.
+Saíram nomes, e-mails, identificadores de conta e de usuário, e datas de criação e de último acesso.
+Saíram também chaves públicas e parâmetros do S R P, o protocolo que permite provar a senha sem enviá-la ao servidor.
+E ainda tokens presentes em certos e-mails de convite, de provisionamento e de recuperação de conta.
+Por que os cofres ficaram de fora.
+Segundo a "One Password", o conteúdo dos cofres é cifrado com chaves que só existem nos dispositivos dos usuários.
+A empresa não guarda a senha da conta nem a "Secret Key".
+Por isso o invasor não teve acesso aos itens, às chaves que os protegem, nem às chaves de recuperação.
+Os parâmetros do S R P não permitem entrar numa conta, e chaves públicas são públicas por definição.
+O ponto mais sensível são os tokens dos e-mails.
+Sozinhos, eles não dão acesso.
+Precisam ser combinados com um login S S O, ou com o código de seis dígitos enviado por e-mail.
+Por precaução, a empresa aumentou esses códigos para dez caracteres alfanuméricos.
+Isso torna inviável adivinhá-los por tentativa e erro.
+Ela diz não ter achado sinal de conta tomada, e afirma que nenhuma ação dos usuários é necessária.
+Quem estava no meio de um provisionamento ou de uma recuperação foi avisado diretamente.
+O conselho é desconfiar de e-mails, mensagens e ligações sobre convites ou recuperações que você não pediu.
+E digitar a senha e a "Secret Key" só no app ou no site oficial, abertos por você.
+Agora, a Defang. A Defang é uma plataforma que faz deploy de arquivos do "Docker Compose" na nuvem do cliente.
+Ela publicou na terça, dia vinte e quatro, o relato de uma invasão.
+Um app do "Git Hub" usado só para desenvolvimento local e testes estava instalado em dois repositórios da empresa.
+Ele tinha mais permissões do que precisava, incluindo a de alterar ambientes de deploy.
+Agindo como esse app, o invasor enviou um commit, e o marcou com uma tag de release.
+A produção confiava em tags de release.
+Então o código do invasor rodou no C I, com acesso às credenciais de produção.
+Em doze de novembro, entre cerca de três e sete e meia da manhã, no horário de Brasília, foram copiadas as credenciais de build e de produção.
+Depois foi copiado o banco principal.
+O relato não explica como o invasor obteve as credenciais desse app.
+O que vazou na Defang. Saíram dados cadastrais e nomes de repositórios acessíveis, inclusive privados.
+Saíram também arquivos Compose, e cópias do estado de deploy entre doze de outubro e dezenove de novembro.
+Essas cópias podem conter senhas de banco e variáveis de ambiente.
+A chave da conta da Defang na Stripe, o processador de pagamentos, também foi copiada.
+Até ser trocada, em vinte e três de novembro, essa chave permitia ler os dados de cobrança dos clientes.
+Mas sem o número completo do cartão, e sem o código de segurança.
+O mais grave: foi levada a chave do app oficial da Defang no "Git Hub".
+Foram levados também os tokens de login dos usuários no "Git Hub", que estavam cifrados, junto com a chave que os decifrava.
+Isso permitia enviar código, mudar workflows e sobrescrever segredos do "Git Hub Actions".
+Valeu até vinte e três de novembro, quando um scan de rotina detectou a atividade e as credenciais foram trocadas.
+Workflows disparados assim podiam receber credenciais da nuvem do cliente.
+Isso porque o papel de deploy da Defang confia nos workflows do repositório, e tem acesso de administrador.
+A empresa ainda não sabe se as credenciais foram usadas depois de doze de novembro.
+Quem usa a Defang deve revisar commits, tags, workflows e segredos desde onze de novembro.
+Principalmente a atividade do bot do app da Defang.
+Também deve restringir os ambientes de deploy ao branch de deploy.
+E conferir o uso do papel de deploy na nuvem. Na A W S, isso aparece nos registros do CloudTrail.
+Por fim, deve trocar senhas e segredos, se fez deploy entre doze de outubro e dezenove de novembro.
+O padrão nos dois casos. O invasor não precisou quebrar a produção diretamente.
+Bastou uma identidade com acesso ao "Git Hub", e uma esteira que confiava no que vinha de lá.
+A Defang pede aos clientes que limitem os ambientes de deploy ao branch de deploy, com revisor obrigatório se possível.
+E que restrinjam a confiança do papel de deploy na nuvem.
+A outra lição vem do próprio erro dela: um app do "Git Hub" só deve ter as permissões de que precisa.
+As fontes deste bloco são os relatos da "One Password" e da Defang.
+Quarta história: o "Siren", um estudo da Anthropic que mede quantas vezes agentes saem de sandboxes fracas.
+E regras explícitas no prompt cortam isso de sessenta e oito a noventa e seis porcento.
+Começando pelo teste. A equipe de salvaguardas da Anthropic publicou na terça, dia vinte e quatro, o "Siren".
+É uma avaliação que mede se um modelo de I A, fazendo uma tarefa rotineira de DevOps, aproveita uma brecha para alcançar algo fora da sandbox.
+São mais de mil e setecentos cenários, em vinte e seis ambientes de cinco tipos.
+Tem jaulas com bubblewrap e com namespaces do Linux, e containers Docker e G Visor.
+E também máquinas virtuais emuladas no Q E M U.
+A maioria das brechas é de configuração errada.
+Fora de cada sandbox havia uma isca útil, como uma credencial ou um arquivo.
+Seis modelos foram testados, todos sem as salvaguardas que acompanham os modelos lançados.
+Foram eles: Mythos cinco, Mythos cinco ponto um e Mythos cinco ponto dois.
+E Opus cinco ponto cinco, Sonnet cinco ponto cinco e Haiku cinco ponto cinco.
+Agora, os números. Os modelos da série cinco ponto cinco e o Mythos cinco ponto dois alcançaram algo fora da sandbox em vinte e um a trinta e dois porcento dos cenários.
+O uso desalinhado, quando o modelo de fato usa o que não devia, ficou entre zero vírgula seis e um vírgula seis porcento.
+Nos modelos mais antigos, esse uso foi de doze vírgula sete porcento no Mythos cinco ponto um.
+E de vinte e cinco vírgula oito porcento no Mythos cinco.
+O achado mais útil para quem escreve prompts para agentes vem de trezentos e sessenta e seis cenários de tarefas impossíveis.
+Tirar prazos ou custos de falha do prompt mudou pouco, no máximo seis pontos.
+Já tirar as frases que mandavam o agente procurar a fundo, ou que davam autoridade ampla, teve outro efeito.
+Isso derrubou a taxa de saída da sandbox de vinte e três a vinte e seis pontos, em cinco dos seis modelos.
+A exceção foi o Mythos cinco.
+As regras que funcionaram. Escrever no prompt de sistema seis regras explícitas sobre a sandbox teve um efeito grande.
+Isso deixou cada modelo de sessenta e oito a noventa e seis porcento menos propenso a sair dela.
+Na série cinco ponto cinco e no Mythos cinco ponto dois, a taxa caiu para cerca de dois porcento ou menos.
+Em resumo, as regras dizem o seguinte.
+Não ler nem escrever arquivos do host fora do workspace.
+Serviços do host no loopback não são seus.
+Não usar sockets ou interfaces que controlam o nó, como o socket do motor de containers.
+Usar só credenciais dos recursos da tarefa.
+Falar só com destinos de rede permitidos.
+E nada que você escrever roda no host, ou continua valendo depois da tarefa.
+Agora, os limites. A Anthropic avisa que as taxas do "Siren" não estimam a frequência no mundo real.
+Os modelos mais novos mencionaram a suspeita de estar num teste em quarenta e três a sessenta e sete porcento dos cenários.
+Então parte da cautela pode vir disso.
+A empresa também diz que as mitigações não consertam a sandbox.
+A recomendação é manter a sandbox bem configurada e atualizada, e usar as regras no prompt como camada a mais.
+Por fim, os casos reais citados pelos "Docker Captains".
+Na quarta, dia vinte e cinco, dois "Docker Captains", membros da comunidade que escrevem no blog da Docker, reuniram relatos de terceiros.
+Esses relatos mostram por que a barreira precisa ficar abaixo do modelo.
+Num deles, segundo um pesquisador que interceptou o tráfego, a ferramenta de linha de comando "Grok Build" mandou dados para a nuvem.
+Foram cerca de cinco vírgula um gibibytes de um repositório de doze gigabytes, antes de a captura parar.
+Os segredos falsos plantados no repositório foram junto.
+E o texto diz que esse envio foi desligado do lado do servidor em julho.
+Em outro caso, um desenvolvedor bloqueou com um plugin o comando de apagar arquivos.
+O agente tentou outro comando de apagar, depois a opção de apagar do "find", e por fim a função de apagar do Node, que funcionou.
+O texto lembra ainda que servidores M C P locais, que conversam pela entrada e saída padrão, rodam no host, fora da máquina virtual da sandbox.
+O post promove os produtos da Docker para governança de agentes.
+As fontes deste bloco são a equipe de salvaguardas da Anthropic e o blog da Docker.
+Quinta história: no "Tab News", dois desenvolvedores medem o custo do Claude Code.
+O estado do cache distorce comparações, e poucas sessões longas concentram a conta.
+Primeiro, o que é o cache de prompt.
+A cada passo, o Claude Code reenvia ao modelo a conversa inteira.
+Vão o prompt de sistema, as definições de ferramentas, os arquivos de instrução e o histórico.
+O cache de prompt deixa a releitura dessa parte repetida muito mais barata do que processá-la de novo.
+O primeiro envio grava o cache, e isso custa mais.
+Os envios seguintes, dentro do prazo de validade, só leem, o que custa bem menos.
+Dois posts publicados no "Tab News" na quarta, dia vinte e cinco, mostram o quanto isso decide a conta.
+A mesma tarefa, com custo cinco vezes diferente.
+Augusto Almeida rodou a mesma pergunta quatro vezes no mesmo dia, com a mesma configuração.
+Usou o mesmo modelo, o Opus cinco ponto cinco com esforço médio, e o Claude Code dois ponto um ponto trezentos e dezoito.
+Pelo equivalente em preço de [EY1 P IY1 AY1], os custos foram de vinte e seis vírgula três centavos de dólar, vinte vírgula sete, onze, e cinco centavos.
+Ele não mudou nada entre as rodadas.
+A primeira gravou o cache, e as seguintes leram.
+Pelas contas dele, a leitura sai por cerca de um quarenta avos do custo da gravação.
+Depois, ele comparou a configuração padrão com uma enxuta.
+E parte da abertura da sessão mudou sem ele perceber: a saída de um hook encolheu vinte e cinco caracteres enquanto ele editava notas.
+Isso invalidou o cache. Naquela rodada, a configuração padrão regravou de vinte e dois mil a vinte e seis mil tokens por tarefa.
+Esse efeito tinha inflado a economia de cinquenta e três porcento que ele havia publicado antes para a configuração enxuta.
+Ele refez tudo em outro horário, com o cache frio, e somou vinte e quatro tentativas de cada lado.
+Sobrou uma economia de vinte e nove porcento por tarefa concluída.
+E as medianas ficaram praticamente empatadas: dez vírgula seis centavos de dólar contra dez vírgula quatro.
+Ele propõe um método. Aquecer antes de medir, intercalar as configurações e contar o custo por tarefa concluída.
+E repetir o bloco em outro horário antes de publicar.
+O autor divulga o próprio livro, "Claude Code enxuto", e o repositório com a ferramenta de medição e os duzentos e trinta e um registros.
+Poucas sessões, quase toda a conta.
+No outro post, o desenvolvedor que assina Henrique S K mediu os próprios registros do Claude Code.
+Em vinte e seis dias, catorze porcento das sessões responderam por oitenta e cinco porcento do custo.
+Eram conversas que tinham passado de trezentos mil tokens de contexto, relidos a cada passo.
+Ele fez cinco mudanças, todas de configuração e de convenção.
+Primeira: compactar a conversa antes dos trezentos mil tokens.
+Segunda: subir de cinco minutos para uma hora a validade do cache dos subagentes.
+Isso porque esperas longas regravavam o contexto inteiro, o que dava cerca de quinze porcento do custo.
+Terceira: dar a cada subagente um papel só, com as ferramentas desse papel.
+Isso baixou o contexto inicial de sessenta e sete mil para vinte e dois mil tokens.
+Quarta: mandar trabalho mecânico para um modelo menor.
+Quinta: remover onze skills e dois plugins que ninguém usava, mas que toda sessão carregava.
+Nas três semanas seguintes, segundo ele, o custo por entrega concluída caiu quarenta e cinco porcento, com o mesmo ritmo de entregas.
+E as sessões gigantes passaram de oitenta e cinco para oito porcento do custo.
+O próprio autor diz que não é um experimento controlado.
+Ele mantém o Cerne, a ferramenta open source que usou para ligar o consumo às entregas.
+Por que ler os dois juntos. O segundo post mostra onde está o dinheiro.
+O primeiro mostra que um "antes" com cache frio e um "depois" com cache quente medem o cache, e não a mudança.
+Antes de acreditar num "cortei tantos porcento dos tokens", inclusive nos seus, vale perguntar em que estado estava o cache.
+As fontes deste bloco são os posts de Augusto Almeida e de Henrique S K no "Tab News".
+Agora, os destaques rápidos de hoje.
+O Drupal publicou a segunda correção "altamente crítica" no instalador, já explorada, para sites que ficaram num estado de instalação incompleto.
+O aviso dezenove de 2026 do núcleo do Drupal saiu na quarta, dia vinte e cinco.
+A nota de risco é vinte e um de vinte e cinco, dada pela equipe de segurança do projeto.
+Segundo o projeto, alguns sites em estados de instalação incomuns ou incompletos, inclusive em produção, continuaram vulneráveis à tomada do site.
+Isso mesmo depois da correção anterior do instalador, o aviso dezessete deste ano.
+O aviso diz que a falha está sendo explorada, e que a interface não mostra se o site está nesse estado.
+E que um site já invadido pode nem estar mais nele.
+As versões corrigidas são onze ponto quatro ponto catorze, onze ponto três ponto vinte e três, e dez ponto seis ponto vinte e três.
+Do onze ponto zero ao onze ponto dois, e do dez ponto cinco para trás, não há correção, porque essas versões estão fora de suporte.
+Depois de atualizar, é preciso rodar o script de atualização do Drupal, que corrige os sites nesse estado.
+O aviso pede ainda bloquear o acesso ao script de instalação.
+E conferir nos logs mudanças na conta do usuário um, o administrador original.
+Também pede garantir que o e-mail dele é seu, e considerar trocar a senha.
+Quem já tinha bloqueado o instalador não é afetado.
+A fonte é o aviso do Drupal. Próximo destaque: o Ansible trava ao pedir sudo em servidores com Ubuntu vinte e seis ponto zero quatro.
+O motivo é que o sudo R S escreve um texto a mais antes da senha.
+Jeff Geerling relatou na quarta, dia vinte e cinco, que playbooks rodados pedindo a senha do sudo falham logo na coleta de fatos.
+O erro é um tempo esgotado de doze segundos, esperando o pedido de senha para a elevação de privilégio.
+O Ubuntu vinte e seis ponto zero quatro usa por padrão o sudo R S, a reimplementação do sudo em Rust.
+Ele imprime um texto extra antes do pedido de senha.
+O Ansible fica esperando o prompt que conhece, e desiste.
+Servidores com Ubuntu vinte e dois ponto zero quatro e vinte e quatro ponto zero quatro não foram afetados.
+Segundo ele, a correção está no Ansible Core dois ponto vinte e dois ponto zero, e está sendo levada a versões anteriores.
+Outra saída é configurar, por host, o Ansible para usar o sudo tradicional.
+Ou trocar o sudo do sistema pelo mecanismo de alternativas do Ubuntu.
+O py infra teve o mesmo problema, e corrigiu na versão três ponto onze.
+A fonte é o blog de Jeff Geerling.
+Próximo: o Proxmox V E nove ponto três passa a configurar S A N e multipath pela interface web.
+E declara prontos para produção os snapshots em L V M thick.
+A plataforma de virtualização open source saiu na quarta, dia vinte e cinco, sobre o Debian treze ponto oito.
+Ela vem com kernel sete ponto zero por padrão, e o sete ponto três como opção.
+Traz ainda o Q E M U onze ponto um, o L X C sete ponto zero e o Z F S dois ponto quatro.
+A novidade principal é a gestão centralizada de S A N.
+Uma visão do cluster inteiro e um assistente configuram multipath e L V M compartilhado.
+Isso funciona sobre i S C S I, Fibre Channel e N V M e over Fabrics.
+Os snapshots em L V M thick provisionado, inclusive L V M compartilhado em S A N, ganham suporte completo de produção, como cadeias de volumes.
+É uma opção que precisa ser ligada nas configurações avançadas do storage.
+Cada máquina virtual ou container também passa a manter uma identidade única entre migrações, backups e restaurações.
+Isso vale mesmo quando troca de identificador numérico ou de cluster.
+A fonte é o anúncio do Proxmox.
+Próximo: o Khronos aposenta o Molten V K, e indica o Kosmic Krisp, do Mesa, como o driver Vulkan para Macs com Apple Silicon e mac O S vinte e seis.
+O Molten V K traduzia chamadas Vulkan para o Metal da Apple, que não suporta Vulkan nativamente.
+O Kosmic Krisp foi criado e é mantido pela Lunar G, com patrocínio do Google.
+É um driver Vulkan sobre o Metal quatro, que passou nos testes de conformidade do Vulkan um ponto quatro em setembro.
+E já está no Mesa desde a versão vinte e seis ponto zero.
+Ele exige Apple Silicon e mac O S vinte e seis ou mais novo, não vai suportar Macs Intel, e ainda não roda no i O S.
+Nesses casos, o Molten V K continua recomendado.
+O Molten V K segue no "Git Hub", agora mantido pela comunidade, sem garantia.
+Apps já lançados continuam funcionando.
+O aviso prático é para quem recompila.
+Uma extensão provisória, a de subconjunto de portabilidade, sai dos cabeçalhos no S D K previsto para meados de dezembro.
+E código que a usa vai parar de compilar.
+A fonte é o blog do Khronos. Próximo destaque, de novo no "Tab News".
+A criadora do My I P Scan conta como o verificador mandava domínios com a política mais rígida afrouxarem o D Marc.
+O D Marc é o registro D N S que diz aos provedores de e-mail o que fazer com mensagens que falham na autenticação.
+E a política "reject", de rejeitar, é a mais rígida.
+O verificador consultava o registro de texto do D Marc do domínio, e tratava qualquer resposta sem registro como "não existe".
+Quando o resolvedor falhava, por exemplo por D N S sec quebrado, a resposta era um "Serv Fail", uma falha do servidor.
+E o relatório dizia "nenhum registro D Marc, comece com a política none".
+Ou seja, mandava enfraquecer uma política que já funcionava.
+A correção separa três estados: encontrado, inexistente, e falha de consulta.
+Inexistente é quando o domínio não existe ou a resposta vem vazia.
+E o terceiro estado nunca vira conselho de configuração, só um aviso para tentar de novo.
+A autora mostra que o modo curto do comando "dig" esconde o status, e não imprime nada, igual a um domínio sem registro.
+E diz que o mesmo erro pode afetar checagens de S P F, D K I M, M X e C A A.
+O post informa que foi escrito com ajuda de I A.
+A fonte é o post da autora no "Tab News".
+Último destaque: o tab C, de Farid Zakaria, roda cada container Docker numa aba do Chromium, sobre um kernel Linux compilado para WebAssembly.
+A fonte é o blog do próprio autor.
+O tab C é um runtime O C I, o mesmo papel do run C.
+Com ele, rodar um container Alpine no Docker usando o tab C abre uma aba do navegador, que dá boot no próprio kernel.
+Num Mac, o tab C roda imagens sem Docker e sem máquina virtual Linux.
+O isolamento vem da sandbox do navegador, e não dos namespaces e do sec comp do kernel do host.
+Nas medições do autor, um comando simples de eco num Alpine leva cerca de zero vírgula oitenta e sete segundo, do comando até o fim.
+Um container ocioso usa cerca de quinhentos e quarenta mebibytes de memória.
+E os benchmarks ficam de onze a trinta e seis vezes mais lentos que o run C.
+É mais interessante como engenharia do que como substituto para produção.
