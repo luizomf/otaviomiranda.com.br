@@ -4,6 +4,7 @@ description: 'A partir de 1º de fevereiro de 2027, agentes que usarem as APIs R
 date: '2026-11-27T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/google-exige-mcp-para-agentes-cacti-zero-day-git-status-ext4-ia.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/google-exige-mcp-para-agentes-cacti-zero-day-git-status-ext4-ia/final.opus'
 ---
 
 ![Pequeno robô de cerâmica branca empurra um envelope para dentro de uma fenda de correio de latão gravada com MCP, numa parede escura iluminada por um abajur.](./images/google-exige-mcp-para-agentes-cacti-zero-day-git-status-ext4-ia.jpg)
