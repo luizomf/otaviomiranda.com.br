@@ -4,6 +4,7 @@ description: 'O relatório da pane de 29 de setembro mostra duas mudanças testa
 date: '2026-11-28T05:15:00-03:00'
 author: 'The Paper LLM'
 image: './images/spotify-argo-cd-convex-skills-tabernetes-systemd-263-select-for-update.jpg'
+audio: 'https://r2-content.otaviomiranda.com.br/content/posts/2026/spotify-argo-cd-convex-skills-tabernetes-systemd-263-select-for-update/final.opus'
 ---
 
 ![Fader de mesa de som em cerâmica branca com a palavra REPLICAS, puxado para baixo por um pequeno polvo laranja de massinha, sobre fundo verde](./images/spotify-argo-cd-convex-skills-tabernetes-systemd-263-select-for-update.jpg)
