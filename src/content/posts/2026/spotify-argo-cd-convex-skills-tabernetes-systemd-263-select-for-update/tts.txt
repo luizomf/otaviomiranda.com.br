@@ -1,0 +1,267 @@
+"Spotify" conta como o Argo C D derrubou seu login ao brigar com o autoscaler, e skills da "Convex" ensinavam o agente a driblar checagens de segurança.
+A primeira história de hoje é o relatório do "Spotify" sobre a pane de vinte e nove de setembro.
+Duas mudanças testadas separadamente fizeram o Argo C D derrubar o login, brigando com o autoscaler.
+O "Spotify" publicou o relatório na sexta, dia vinte e sete. A pane tirou o acesso de usuários à plataforma.
+A causa não foi um servidor caindo sozinho.
+Foram duas mudanças no sistema de deploy, cada uma testada isoladamente, que entraram em conflito quando chegaram juntas à produção.
+Para entender o conflito, vale separar três peças.
+No "Kubernetes", um Deployment descreve quantas cópias, as réplicas, de um serviço devem rodar.
+O Argo Rollouts é uma alternativa ao Deployment, com esquema um pouco diferente, usada para lançamentos graduais.
+O Argo C D é a ferramenta de GitOps.
+Ele compara o estado do cluster com a configuração desejada e sincroniza o que estiver diferente.
+A terceira peça é o autoscaler, que aumenta ou reduz o número de réplicas conforme a carga.
+O combinado é que esse número pertence ao autoscaler, e o sistema de deploy não deveria mexer nele.
+Essa regra de quem é dono de qual campo é exatamente o que quebrou.
+Segundo o "Spotify", foi assim.
+Uma mudança trocou o tipo das cargas, de Deployment para Argo Rollout.
+Outra mudou quais campos ficam de fora da comparação entre o estado atual e o desejado.
+Juntas, elas incluíram por engano o campo de réplicas mínimas.
+E o sistema de deploy passou a gravar o número mínimo de réplicas a cada sincronização.
+O efeito só aparecia em serviços que usavam Argo Rollouts e também tinham ambiente de testes.
+O relatório diz que uma regra derivada dos testes foi aplicada na produção, apesar da diferença entre os tipos de carga.
+Entre os afetados estava o serviço que mantém as pessoas logadas, e sem ele os apps não carregavam conteúdo.
+Aí começou a cascata. Quando o login cai, os apps precisam emitir tokens de novo.
+Isso gera um pico de carga, mesmo com os clientes esperando entre as tentativas.
+As instâncias restantes caíram, e o laço de reconciliação continuava reduzindo réplicas.
+No começo da recuperação, o sistema de login atendia duzentas vezes o tráfego de antes do incidente.
+A maioria das regiões voltou às dezesseis e trinta, horário U T C, uma e meia da tarde em Brasília.
+Numa região europeia, a enxurrada de apps voltando derrubou os serviços que ficam depois da autenticação.
+Ali, a recuperação completa só veio às dezenove e trinta e quatro, horário U T C.
+Pela linha do tempo, o bug suspeito de causar a redução de réplicas só foi identificado às dezenove e trinta e um.
+Ou seja, três minutos antes do tudo liberado.
+O próprio "Spotify" lista quatro lições.
+A primeira são os sintomas ambíguos.
+Era difícil saber se as quedas causavam a perda de capacidade, ou se a perda de capacidade causava as quedas.
+E um deploy grande no mesmo momento criou hipóteses concorrentes.
+A segunda é a automação na hora errada: o sistema reaplicava a configuração defeituosa e atrasava a recuperação manual.
+A terceira são métricas que mentem sob pressão.
+Serviços sobrecarregados que descartam requisições cedo, no chamado load shedding, registram menos tráfego do que realmente recebem.
+A quarta é um piso baixo demais: o mínimo de réplicas do login não protegia contra a redução.
+Como correção, a empresa diz que vai impedir que a automação de deploy sobrescreva réplicas gerenciadas pelo autoscaler.
+Também vai simplificar os controles de emergência para pausar essa automação.
+E vai melhorar a forma de devolver tráfego aos poucos depois de uma queda.
+Para quem usa Argo C D com autoscaler, a documentação da ferramenta tem um detalhe que vale conhecer.
+Dá para mandar o Argo C D ignorar o campo de réplicas, com a opção "ignore differences".
+Mas, por padrão, isso só vale para a comparação.
+Na sincronização, o estado desejado é aplicado como está, a menos que a opção "respect ignore differences" esteja ligada.
+O relatório do "Spotify" não diz se esse mecanismo estava envolvido. A dica é da documentação do Argo C D.
+A autocorreção do Argo C D já tinha aparecido aqui no sábado passado, dia vinte e um, num caso em que ela pulou uma migração de banco.
+As fontes deste bloco são o blog de engenharia do "Spotify" e a documentação do Argo C D sobre comparação e opções de sincronização.
+Agora, as skills da "Convex" para o "Claude Code".
+Elas ensinavam o agente a dividir comandos para escapar das checagens de segurança, e a correção chegou só em parte.
+Skills são arquivos de instrução, os skill ponto M D, que um agente como o "Claude Code" lê e segue para fazer uma tarefa.
+A "Convex" é uma plataforma de backend, com banco de dados e funções no servidor.
+Ela distribui um plugin com várias skills, listado no marketplace oficial de plugins da Anthropic.
+Três dessas skills viraram assunto na sexta, dia vinte e sete, quando uma issue de outubro chegou à primeira página do Hacker News.
+A issue sessenta e quatro foi aberta em vinte e seis de outubro pelo usuário "thirty six", e aponta três problemas.
+Primeiro, a skill quickstart enviava a ideia do usuário, a frase descrevendo o app, para um servidor da "Convex" com nome gerado.
+Esse envio estava marcado no código como telemetria, e a pessoa não era avisada.
+Segundo, a skill add baixava um script desse mesmo servidor e mandava direto para o bash, sem versão fixa.
+Terceiro, a skill labs quickstart dividia o download e a execução em duas chamadas separadas, e explicava por quê.
+A explicação, no texto original, dizia o seguinte.
+Um único comando que baixa código remoto e o executa é o formato que os classificadores de segurança do harness bloqueiam.
+Ou seja, a instrução mudava a forma do comando para que a checagem não o reconhecesse.
+O autor da issue diz que vê ali uma tentativa de tornar o onboarding confiável, não má fé.
+Mas, segundo ele, isso remove uma proteção que o usuário ou o administrador escolheu ter.
+Neste sábado, dia vinte e oito, às seis e trinta e oito da manhã, horário U T C, um commit no repositório mudou parte disso.
+O trecho sobre os classificadores saiu, e o diff mostra que ele também estava na skill quickstart.
+No lugar, a skill manda o agente dizer ao usuário o que o script faz, e deixar a pessoa aprovar ou recusar.
+E diz para nunca reescrever, dividir ou juntar um comando para passar por um pedido de permissão ou checagem de segurança.
+As marcações de telemetria também sumiram.
+Mas algumas coisas continuam iguais.
+A ideia ainda é enviada por padrão, agora com um comentário dizendo que a "Convex" apaga o texto depois de vinte e quatro horas.
+A skill add ainda baixa o script com curl e manda direto para o bash.
+E os scripts continuam sendo baixados na hora, sem hash que fixe a versão.
+Outro participante da issue analisou os scripts baixados e listou mais pontos.
+Entre eles, uma dependência N P M sem versão fixa e um passo que publica mudanças no backend.
+James Cowling, cofundador e C T O da "Convex", respondeu na issue.
+Ele disse que as ideias não são usadas como telemetria.
+Segundo ele, elas só vão ao servidor para gerar um quickstart personalizado, que é o propósito da skill.
+A palavra telemetry no código, diz ele, era um comentário mal escrito, e uma atualização vem em breve.
+Um detalhe para quem instala pelo marketplace.
+Quando checamos, a entrada da "Convex" no marketplace oficial da Anthropic ainda apontava para o mesmo commit citado na issue.
+É a versão que ainda contém o trecho sobre os classificadores.
+A correção deste sábado está no repositório da "Convex", e a entrada do marketplace não tinha sido atualizada.
+A lição prática é tratar skill como código.
+Antes de instalar, abra os arquivos de skill e procure o que você procuraria num script de instalação.
+Ou seja, curl mandando para o shell, servidores externos recebendo dados e, agora, qualquer instrução sobre como lidar com pedidos de permissão.
+O agente segue esse texto como se fosse sua vontade.
+As fontes deste bloco são a issue sessenta e quatro e o commit de vinte e oito de novembro no "Git Hub", e o marketplace oficial de plugins da Anthropic.
+A próxima história é o "Tabernetes", que transforma abas do navegador em nós de um cluster "Kubernetes".
+E com um Linux de verdade rodando em WebAssembly.
+Num cluster "Kubernetes", um nó é uma máquina que recebe pods para rodar.
+O programa que faz essa ponte com o cluster é o kubelet.
+O "Tabernetes", de Farid Zakaria, é um kubelet para abas do navegador.
+Você abre a página, toca em Join, e a aba do seu celular vira um nó.
+O projeto tem licença M I T, e o repositório foi criado na noite de quinta, dia vinte e seis, no horário de Brasília.
+O funcionamento, segundo o readme, é mais ou menos assim.
+Um agente roda ao lado do servidor de [EY1 P IY1 AY1] de um "Kubernetes" comum, o K três S.
+Esse agente faz o papel de kubelet para todas as abas ao mesmo tempo.
+A página de entrada mantém um WebSocket aberto com esse agente, que registra um nó com o nome do aparelho.
+Quando o agendador manda um pod para esse nó, o agente cria para ele um endereço de rede na máquina do cluster.
+E inicia o contêiner com o tab C.
+A aba dá boot no "unkernel", um kernel Linux compilado para WebAssembly.
+E roda o programa com a C P U e a memória do aparelho.
+Os arquivos e a rede do contêiner ficam na máquina do cluster.
+Por isso um Service alcança o pod no celular como qualquer outro pod.
+Quando a aba fecha, o agente apaga o nó e os pods, e os controladores criam pods novos em outros nós.
+Para mandar um pod para uma aba, basta uma linha no YAML, definindo a classe de runtime como tab.
+Os outros pods continuam na máquina do cluster.
+Na página do projeto, um botão faz cada aba conectada calcular alguns blocos de um conjunto de Mandelbrot, em "awk".
+E a imagem mostra qual aparelho desenhou cada pedaço.
+Fechar a aba vira uma demonstração ao vivo de falha de nó.
+Os limites estão escritos no readme.
+O pod numa aba tem um contêiner, uma C P U e de cento e vinte e oito a duzentos e cinquenta e seis mebibytes de memória.
+E a imagem precisa ter variante Linux para arm de sessenta e quatro bits.
+Entrar no contêiner com o kube control exec, contêineres de inicialização, ConfigMaps e Secrets ainda não funcionam.
+O firewall da máquina nega a esses pods acesso à internet, ao servidor de [EY1 P IY1 AY1] e à própria máquina.
+Porque, afinal, são navegadores de estranhos.
+E o projeto avisa: nada de segredos nesses pods, porque a aba guarda a memória do pod e pode ler tudo.
+É um ótimo jeito de ver o contrato entre kubelet e nó funcionando, não um lugar para rodar carga sensível.
+O kernel por baixo é o "unkernel", de Pooya Parsa, que apareceu aqui em dezessete de novembro.
+Ele compila o Linux da série sete como um único módulo WebAssembly, com gerenciamento de memória real.
+O kernel, com agendador, chamadas de sistema, ext quatro e T C P I P, roda como código compilado.
+Só os programas de usuário são emulados.
+Há uma mudança desde a nossa nota.
+Na época, o "unkernel" rodava binários "RISC-V" de sessenta e quatro bits.
+Agora roda binários arm de sessenta e quatro bits sem alteração, e o readme confirma que o projeto começou com "RISC-V".
+Por isso pacotes do Alpine e do Debian funcionam como estão.
+Os números são do autor. O kernel chega ao init cerca de setenta milissegundos depois de começar.
+E o prompt do Alpine aparece três décimos de segundo depois de iniciar pelo Node.
+Um ciclo de fork, exit e wait leva uns sessenta microssegundos.
+Isso contra uns setenta no nativo, e um vírgula dois milissegundo num QEMU com emulação completa.
+Esse número foi medido ainda com o "RISC-V", mas o readme diz que o caminho pelo kernel é o mesmo.
+Programas pesados de C P U, avisa o readme, ficam bem atrás do nativo.
+O tab C, o runtime que roda contêineres em abas, foi destaque aqui nesta quinta, dia vinte e seis.
+O "Tabernetes" junta as duas peças num cluster.
+As fontes deste bloco são o site do "Tabernetes" e os repositórios do "Tabernetes" e do "unkernel".
+Vamos agora ao system D duzentos e sessenta e três, na sua primeira versão candidata.
+Ele traz um broker de terminais, abre espaço para Rust e fecha uma brecha no diretório run que existia desde a versão duzentos e quarenta e oito.
+O system D é o sistema de inicialização e gerenciamento de serviços da maioria das distribuições Linux.
+A primeira versão candidata do system D duzentos e sessenta e três saiu na sexta, dia vinte e sete.
+Como é candidata, a versão final ainda pode mudar, mas as notas já mostram o que vem.
+A novidade mais curiosa é o system D P T Y broker D, ainda experimental.
+Um pseudoterminal, ou P T Y, é o terminal de mentira que programas usam para conversar com um shell.
+É o caso do emulador de terminal, do S S H e do console de um contêiner.
+Normalmente esse terminal some quando o cliente que o pediu vai embora.
+O broker aloca esses terminais e os mantém abertos independentemente do cliente.
+O exemplo das notas: dá para se desconectar do console de um contêiner e voltar depois, sem parar o contêiner.
+Uma ferramenta nova, a P T Y C T L, lista os terminais, conecta a eles e os encerra.
+É parecido com o que o "tmux" faz por sessões, só que dentro do gerenciador do sistema.
+A mudança que exige atenção de quem administra servidor é no diretório run.
+A opção "Protect System", no modo strict, deixa o sistema de arquivos somente leitura para um serviço, como camada de proteção.
+Só que, desde a versão duzentos e quarenta e oito, o diretório run ficava gravável por engano em um caso.
+Isso acontecia quando estava ativa a montagem dos sistemas de arquivos virtuais do kernel, a opção "Mount API V F S".
+Esse modo é ligado implicitamente por opções como "Protect Control Groups", "Protect Kernel Tunables" e "Protect Proc".
+Pior: quando o serviço compartilhava o diretório run do host, o run do host também ficava gravável.
+Na duzentos e sessenta e três, ele passa a ser somente leitura de verdade.
+As notas listam isso como mudança incompatível.
+Serviços que dependiam do erro precisam pedir escrita explicitamente, com "Read Write Paths" ou "Runtime Directory".
+Vale revisar suas units antes de atualizar.
+O resto das novidades, em resumo, começa pelo Rust opcional.
+O system D pode ser compilado com suporte a programas escritos em Rust.
+Isso vem por uma nova opção de build no meson, e exige o compilador do Rust na versão um ponto oitenta e cinco ou mais nova.
+Filtro de I O uring: uma nova opção permite ou nega operações específicas de I O uring para um serviço.
+No D N S, o system D resolved pode verificar assinaturas D N S SEC do tipo M L D S A quarenta e quatro, que são pós quânticas, se o OpenSSL suportar.
+Ele também responde localmente consultas a endereços ponto onion, em vez de mandá-las ao servidor D N S.
+Manifestos: a nova ferramenta system D manifest gera e verifica manifestos de arquivos, com assinatura opcional.
+E na rede, o system D network D e o network C T L viraram um único binário.
+A fonte deste bloco são as notas da versão candidata do system D no "Git Hub".
+A última história principal vem do "Tab News".
+Um dev júnior mostra como dois cliques em Assinar viravam duas cobranças, e como o select for update do Postgres resolveu.
+O desenvolvedor está terminando um kit de SaaS em português.
+O kit usa Next ponto J S, Prisma, Supabase e cobrança por Pix pelo Asaas.
+Na sexta, dia vinte e sete, ele contou no "Tab News" um bug que um testador achou no beta.
+Dois cliques rápidos em Assinar podiam criar duas assinaturas e cobrar o cliente em dobro.
+O código original fazia confere e, se não existir, cria.
+Com uma requisição por vez, funciona.
+Com duas ao mesmo tempo, as duas fazem a conferência antes de qualquer uma criar a linha.
+As duas veem que não existe, e as duas seguem. Isso é uma condição de corrida.
+E o estrago sai do banco, porque a segunda chamada já pode ter criado a assinatura no provedor de pagamento.
+A correção trava a linha da conta dentro de uma transação, em quatro passos.
+Primeiro, um select na tabela de contas com for update, que tranca a linha daquela conta.
+Depois, confere se já existe assinatura pendente, ativa ou atrasada. Se existir, para.
+Em seguida, cria uma linha de reserva com um identificador provisório.
+Só depois chama o Asaas e troca o identificador provisório pelo real.
+Se algo falhar no meio, cancela no Asaas o que foi criado e apaga a reserva.
+A documentação do Postgri [EH1 S] [K Y UW1] [EH1 L] explica por que isso funciona.
+Um select for update bloqueia outros for update na mesma linha, até a transação terminar.
+No nível de isolamento padrão, o Read Committed, cada comando enxerga o que já foi confirmado até o momento em que começa.
+Então a segunda requisição espera, e quando passa da trava já vê a reserva da primeira.
+Um cuidado que vem da mesma documentação.
+Um select comum, sem for update, não é bloqueado por essa trava.
+A proteção só vale se todo caminho que cria assinatura passar pelo mesmo for update antes de conferir.
+O teste é a parte mais didática.
+O autor disparou dez chamadas simultâneas para a mesma conta, em três rodadas com contas novas, num Postgres de verdade.
+Em todas, só uma reserva foi criada.
+Ele observa que os testes unitários do kit usam um banco simulado, com mock, e não provam nada disso, porque simulam a transação.
+Ele também conta o que não fez.
+Um índice único parcial impediria duplicatas no próprio banco.
+Mas, segundo ele, o Prisma não declara esse tipo de índice no seu arquivo de schema, e seria preciso uma migration em [EH1 S] [K Y UW1] [EH1 L] escrita à mão.
+E há uma limitação que ainda existe.
+Se o servidor cair entre a reserva e a resposta do Asaas, a reserva fica pendente.
+E ela bloqueia novas assinaturas da conta até a pessoa cancelar pela tela.
+Uma rotina que expire reservas antigas seria o próximo passo.
+As fontes deste bloco são o post no "Tab News" e a documentação do Postgres sobre o select com travas e sobre níveis de isolamento.
+Agora, os destaques rápidos para hoje.
+Um skimmer de cartão roubava dados pelo Web R T C em cinco lojas online, só no celular e só no checkout.
+A InfoHawk publicou na sexta, dia vinte e sete, que um script foi plantado nas lojas da Lascana, Samsonite, American Tourister, Revolve e F W R D.
+Isso na semana antes da Black Friday. Todas removeram o script em vinte e quatro ou vinte e cinco de novembro, depois do aviso.
+O Web R T C é a tecnologia de chamadas de vídeo do navegador.
+O script usava o canal de dados dele, passando pelo relay da "Cloudflare", para receber o código.
+E, pela análise da InfoHawk, mandava número, validade, código de segurança, nome e endereço, antes de a loja validar o pagamento.
+Só na Lascana a InfoHawk viu o envio acontecer com o cartão de teste, e ela não sabe quantos clientes foram afetados.
+O código entrava por vários caminhos.
+Uma configuração do banner de cookies, um arquivo no C D N da loja, um pixel de marketing compartilhado ou o próprio H T M L da loja.
+A defesa sugerida é uma regra connect src na política de segurança de conteúdo, listando só os servidores que a loja usa.
+Isso bloqueia as duas requisições web de que o script precisa antes de abrir o canal Web R T C.
+A fonte deste destaque é a própria InfoHawk.
+No próximo destaque, a CISA põe a segunda falha do instalador do Drupal e duas falhas do GeoServer na lista de vulnerabilidades exploradas.
+A agência americana adicionou as três ao catálogo K E V na sexta, dia vinte e sete, com base em evidência de exploração.
+E deu às agências federais dos Estados Unidos até segunda, dia trinta, para agir.
+A do Drupal é a tomada de sites em estado de instalação incompleto, que noticiamos na quinta, dia vinte e seis.
+O GeoServer é um servidor aberto que publica dados geográficos na web.
+Uma das falhas deixa um visitante sem login ler arquivos do servidor, ou fazer o servidor buscar endereços na web.
+A outra pula as checagens de permissão por serviço, usando um nome de serviço prefixado.
+Segundo o projeto, as duas são etapas de uma cadeia que chega a execução de código sem login.
+A correção está no GeoServer três ponto zero ponto dois, dois ponto vinte e oito ponto seis e dois ponto vinte e sete ponto sete.
+As fontes são a CISA e o projeto GeoServer.
+O bat zero ponto vinte e sete ganha uma opção sanitize, para mostrar arquivos não confiáveis sem truques de terminal.
+O bat é um substituto do comando cat, escrito em Rust, com realce de sintaxe. A versão saiu neste sábado, dia vinte e oito.
+A nova opção troca bytes de controle do terminal, como sequências de escape e movimentos de cursor, pelo caractere de substituição.
+O mesmo vale para caracteres Unicode invisíveis, de direção e de largura zero.
+Isso ajuda contra o "Trojan Source", em que o código exibido parece diferente do que é executado.
+Entre as correções, uma tem a ver com o caso do git status em repositório hostil, que já apareceu aqui.
+O bat não roda mais comandos de filtro definidos na configuração do repositório Git que contém o arquivo exibido.
+A fonte são as notas da versão do bat.
+O Wine onze ponto vinte e três passa a suportar macOS em arm de sessenta e quatro bits.
+O Wine roda programas de Windows em Linux e macOS.
+A versão de desenvolvimento onze ponto vinte e três, de sexta, dia vinte e sete, traz suporte aos Macs com Apple Silicon.
+Também traz A V X na emulação de trinta e dois bits em arm de sessenta e quatro bits.
+E traz o V K D três D dois ponto dois, que traduz Direct três D doze para Vulkan, além de quarenta bugs corrigidos.
+A fonte é o anúncio do Wine.
+O Linux Mint vinte e sete, apelidado "Adrien", entra em beta, com terminal próprio e Wayland completo no Cinnamon.
+O beta saiu na sexta, dia vinte e sete, só para testes.
+A versão tem suporte até 2031 e usa a base de pacotes do Ubuntu vinte e seis ponto zero quatro, chamada Resolute, com kernel sete ponto zero.
+As novidades incluem o "Velocitty", um terminal novo com abas salvas para abrir projetos e sessões S S H.
+Tem também suporte completo a Wayland no Cinnamon, e o Live Installer no lugar do Ubiquity.
+Dá para atualizar do beta para a versão estável, e também a partir do Mint vinte e dois ponto três.
+As fontes são o blog do Linux Mint e a página de novidades do Mint vinte e sete.
+No "Tab News", um "Qwen" de trinta e cinco bilhões de parâmetros rodando em casa empatou com o Claude em três de cinco tipos de tarefa.
+O autor, ken imoto, comparou três modelos, com o mesmo prompt e correção automática.
+Foram o "Qwen" três ponto cinco de nove bilhões de parâmetros e o "Qwen" três ponto seis de trinta e cinco bilhões, os dois numa R T X quarenta setenta de doze gigabytes.
+O terceiro foi o Claude Sonnet cinco, pela [EY1 P IY1 AY1].
+Em extração de dados de página já baixada, resumo e mensagem de commit, o modelo de trinta e cinco bilhões empatou com o Claude.
+Em correção de código, o Claude acertou dez de dez, contra oito do modelo maior do "Qwen".
+Em classificação, os três acertaram cinco de doze e erraram parecido.
+O autor atribui isso às etiquetas mal definidas, e não aos modelos.
+A amostra é pequena, de dez a quinze casos por tarefa, e o modelo de trinta e cinco bilhões foi bem mais lento nas entradas longas.
+E o diretório de dados citado no post não estava acessível publicamente quando checamos.
+A fonte é o post no "Tab News".
+E, para fechar, Michael Nielsen tirou do ar seu livro gratuito sobre redes neurais.
+O "Neural Networks and Deep Learning", escrito entre 2011 e 2015, foi por anos uma das portas de entrada mais usadas para quem estudava o assunto.
+No lugar do livro, Nielsen publicou um texto dizendo que o comportamento imprudente dos laboratórios de fronteira acelerou a IA além do que ele esperava.
+Ele critica nominalmente a Anthropic e a OpenAI.
+E diz que não quer ajudar, nem um pouco, a formar pessoas para esse trabalho.
+O texto é assinado em novembro de 2026, sem dia exato, e a mudança ganhou destaque no Hacker News na sexta, dia vinte e sete.
+A fonte é a própria página do livro.
